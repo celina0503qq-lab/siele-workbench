@@ -9000,7 +9000,6 @@ window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(tr
 window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doPush();}});
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',activate);else activate();
-else activate();
 
 /* ================================================================
    独立云同步模块（GitHub Gist）
@@ -9297,6 +9296,13 @@ setInterval(function(){
     standaloneSync(false).catch(function(){});
   }
 }, 300000);
+
+// 暴露到全局（strict-mode IIFE内函数需手动挂载到window供inline onclick使用）
+window.openSyncSettings = openSyncSettings;
+window.closeSyncSettings = closeSyncSettings;
+window.standaloneSync = standaloneSync;
+window.exportData_ = exportData_;
+window.importDataPrompt_ = importDataPrompt_;
 
 })();
 
