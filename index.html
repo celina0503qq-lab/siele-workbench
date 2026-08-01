@@ -8610,13 +8610,15 @@ function showLoginOverlay(){
     '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#e08e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:28px;margin:0 auto 12px;box-shadow:0 6px 18px rgba(192,57,43,.4)">&Ntilde;</div>'+
     '<h1>西语备考工作台</h1>'+
     '<div class="sub">请登录你的账号以继续</div>'+
-    '<form id="wbLoginForm" onsubmit="return wbDoLogin(event)">'+
+    '<form id="wbLoginForm">'+
     '<div class="fld" id="wbLfU"><label>账号</label><input id="wbLoginUser" autocomplete="username" placeholder="邮箱或用户名"></div>'+
     '<div class="fld" id="wbLfP"><label>密码</label><input id="wbLoginPass" type="password" autocomplete="current-password" placeholder="请输入密码"><span class="err">密码错误</span></div>'+
     '<button class="btn-login" type="submit">登 录</button>'+
-    '<div class="links">还没有账号？<a onclick="wbGoRegister()">去注册 &rarr;</a></div>'+
+    '<div class="links">还没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></div>'+
     '</form></div>';
   document.body.appendChild(ov);
+  document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
+  document.getElementById('wbGoReg').addEventListener('click',function(){showLoginOverlay();openAdminPanel();});
 }
 function hideLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
@@ -8638,10 +8640,6 @@ async function wbDoLogin(e){
   hideLoginOverlay();
   activate();
   return false;
-}
-function wbGoRegister(){
-  showLoginOverlay();
-  openAdminPanel();
 }
 
 function activeUser(){var s=lsg(LSS,null),us=lsg(LSU,{});return (s&&s.u&&us[s.u])?s.u:null;}
