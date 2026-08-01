@@ -3332,7 +3332,7 @@ const SIELE_T2_BASE_DETAILS = {
 };
 Object.keys(SIELE_T2_BASE_DETAILS).forEach(function(id){var x=SIELE_ORAL_BANK[2].filter(function(q){return q.id===id;})[0],d=SIELE_T2_BASE_DETAILS[id];if(x){x.overview=d[0];x.place=d[1];x.mood=d[2];x.foreground=d[3];x.object=d[4];x.background=d[5];x.relationship=d[6];x.inference=d[7];x.conclusion=d[8];x.model=makeT2Model(x);x.sourceType='recall';x.sourceDoc='Tarea2 SIELE - Version recordada de preguntas reales';}});
 
-// ===== Tarea 2 题库扩充：基于用户提供的 2026.06.24 真题回忆 Word 文档（86 道场景）=====
+// ===== Tarea 2 题库扩充：基于用户提供的 2026.06.24 真题回忆 Word 文档（88 道场景）=====
 // sourceType: "real-exam" = 考生回忆真题；"raw" = 原图引用（46/70）；"similar" = 近似原题（76-79）
 var SIELE_T2_EXAM = [
 ['t2-reunion-1','Reunion de grupo','un grupo de personas que colaboran alrededor de una mesa','una sala de reuniones','colaboracion y concentracion','varias personas discuten mientras consultan documentos','los papeles, ordenadores y material de oficina','hay mas companeros, ventanas y mobiliario de oficina','son colegas o companeros de trabajo','estan planificando un proyecto o resolviendo un problema','la cooperacion en el entorno laboral','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','一群人在讨论(小组作业)'],
@@ -3450,7 +3450,10 @@ var SIELE_T2_EXAM = [
 ['t2-montana-119','En la cumbre','un montanero contemplando el paisaje','la cima de una montana','satisfaccion y contemplacion','el excursionista sonrie mirando el horizonte','la mochila y el baston','un paisaje espectacular de montanas','es un excursionista','ha alcanzado la cima tras el esfuerzo','la recompensa del esfuerzo','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','登山者站在山顶 看脚下 满足微笑'],
 ['t2-cafe-120','Reunion en la cafeteria','cinco personas en una cafeteria o restaurante','una cafeteria','conversacion y cotidianidad','un grupo habla animadamente con tazas sobre la mesa','las tazas vacias y la mesa','la decoracion del local','son amigos o familiares','estan charlando tras tomar cafe','las reuniones sociales','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','餐厅/咖啡店 五人 左边三人右边两人'],
 ['t2-jardin-121','Tarde de jardineria','una anciana regando sus plantas','un jardin','tranquilidad y conexion','la anciana riega mientras su gato duerme al sol','la regadera, las macetas y el gato','flores y plantas','es la duena del jardin','disfruta de su pasatiempo','la jardineria como terapia','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','老奶奶花园浇水 小猫睡一旁晒太阳'],
-['t2-deporte-122','Partido de baloncesto','jovenes jugando un partido de baloncesto','una cancha de baloncesto','energia y competicion','los jugadores disputan el balon con intensidad','el balon y las canastas','gradas con publico animando','son jugadores de dos equipos','estan compitiendo en un partido','el deporte como espectaculo','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','青少年篮球场比赛 观众加油助威']
+['t2-deporte-122','Partido de baloncesto','jovenes jugando un partido de baloncesto','una cancha de baloncesto','energia y competicion','los jugadores disputan el balon con intensidad','el balon y las canastas','gradas con publico animando','son jugadores de dos equipos','estan compitiendo en un partido','el deporte como espectaculo','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','青少年篮球场比赛 观众加油助威'],
+// ===== 补齐词：DOCX 遗漏条目 (2026.08.01) =====
+['t2-estudio-60','Grupo de estudio','cinco personas (cuatro mujeres y un hombre) reunidos alrededor de una mesa','una sala de estudio o biblioteca','concentracion y colaboracion','una persona escribe o explica mientras las demas revisan apuntes','los libros, cuadernos y boligrafos sobre la mesa','se ven mas mesas, estanterias y posiblemente una pizarra','son companeros de estudio o colegas','estan preparando un examen o resolviendo ejercicios juntos','el valor del aprendizaje en grupo','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','5个人(4女1男)坐在桌子旁边写题目讨论'],
+['t2-mercado-82','Paseo por el mercado','cuatro personas recorriendo un mercado al aire libre','un mercado tradicional','actividad y dinamismo','varias personas se mueven entre los puestos observando productos','los puestos, la fruta y las verduras expuestas','mas puestos, toldos y otros compradores al fondo','son vendedores y clientes que interactuan','estan comprando o comparando productos frescos','el mercado como espacio de encuentro social','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','集市上有四个人']
 ];
 // T2 场景图片映射：按类别 → 本地图片路径
 var T2_PHOTO_MAP = {
@@ -3671,8 +3674,22 @@ function editT2Model(id, currentText) {
   if (!box) return;
   var userModel = getUserT2Model(id);
   var text = userModel || currentText || '';
-  box.innerHTML = '<div style="margin-top:8px"><textarea id="soModelEditTA" style="width:100%;height:180px;font-size:12px;font-family:inherit;padding:8px;border:1px solid var(--bd);border-radius:6px;resize:vertical" placeholder="编辑或粘贴你的范文...">' + esc(text) + '</textarea><div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><button class="btn sm" onclick="saveT2ModelChanges(\'' + id + '\')">保存范文</button><button class="btn sm" onclick="resetT2Model(\'' + id + '\')">恢复默认</button><span style="font-size:11px;color:var(--am);align-self:center">' + (userModel ? '已自定义范文' : '使用自动生成范文') + '</span></div></div>';
+  var charCount = text.replace(/<[^>]*>/g,'').length;
+  var statusText = userModel ? '已自定义范文 · ' + charCount + ' 字符' : '自动生成范文 · ' + charCount + ' 字符';
+  box.innerHTML = '<div style="margin-top:8px;border:1px solid var(--ac);border-radius:8px;padding:10px;background:var(--bg)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;font-weight:600">编辑范文 / Editar modelo</span><span id="soModelEditStatus" style="font-size:11px;color:var(--am)">' + statusText + '</span></div><textarea id="soModelEditTA" style="width:100%;height:180px;font-size:12px;font-family:inherit;padding:8px;border:1px solid var(--bd);border-radius:6px;resize:vertical;line-height:1.6" placeholder="编辑或粘贴你的范文..." oninput="updateT2CharCount()">' + esc(text) + '</textarea><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center"><button class="btn sm ol" onclick="saveT2ModelChanges(\'' + id + '\')">保存范文</button><button class="btn sm" onclick="confirmResetT2Model(\'' + id + '\')">恢复默认</button><span id="soModelCC" style="font-size:11px;color:var(--am);margin-left:auto">' + charCount + ' 字符</span></div></div>';
   box.style.display = 'block';
+  // Save original model if not yet captured
+  var x = SIELE_ORAL_BANK[2].filter(function(q) { return q.id === id; })[0];
+  if (x) captureOriginalModel(x);
+}
+function updateT2CharCount() {
+  var ta = document.getElementById('soModelEditTA');
+  var cc = document.getElementById('soModelCC');
+  if (ta && cc) {
+    var n = ta.value.replace(/<[^>]*>/g,'').length;
+    cc.textContent = n + ' 字符';
+    cc.style.color = n < 80 ? 'var(--er)' : n > 300 ? 'var(--sc)' : 'var(--am)';
+  }
 }
 function saveT2ModelChanges(id) {
   var ta = document.getElementById('soModelEditTA');
@@ -3680,23 +3697,36 @@ function saveT2ModelChanges(id) {
   var text = ta.value.trim();
   if (text) {
     saveUserT2Model(id, text);
-    // Update the model in the oral bank for immediate rendering
     var x = SIELE_ORAL_BANK[2].filter(function(q) { return q.id === id; })[0];
     if (x) x.model = text;
+    flashToast('范文已保存 / Modelo guardado');
   } else {
     deleteUserT2Model(id);
+    flashToast('已清空自定义范文 / Modelo eliminado');
   }
-  // Refresh the model display
-  var modelEl = document.getElementById('soModel');
-  if (modelEl) {
+  // Refresh model text display (target soModelText, not entire soModel block)
+  var modelTextEl = document.getElementById('soModelText');
+  if (modelTextEl) {
     var x = getSieleOralItem();
     if (x) {
       var userM = getUserT2Model(id);
-      modelEl.innerHTML = (userM || x.model || '暂无范文');
+      modelTextEl.innerHTML = userM || x.model || '暂无范文';
+      // Update status badge
+      var statusEl = document.getElementById('soModelEditStatus');
+      if (statusEl) {
+        var cc = text.replace(/<[^>]*>/g,'').length;
+        statusEl.textContent = userM ? '已自定义范文 · ' + cc + ' 字符' : '自动生成范文 · ' + cc + ' 字符';
+      }
     }
   }
   var box = document.getElementById('soModelEditBox');
   if (box) box.style.display = 'none';
+}
+function confirmResetT2Model(id) {
+  if (confirm('恢复默认范文将丢弃当前自定义内容，确定继续？\n¿Restaurar el modelo por defecto?')) {
+    resetT2Model(id);
+    flashToast('已恢复默认范文 / Modelo restaurado');
+  }
 }
 function resetT2Model(id) {
   deleteUserT2Model(id);
@@ -3704,7 +3734,29 @@ function resetT2Model(id) {
   if (x && typeof x._originalModel === 'undefined') x._originalModel = makeT2Model(x);
   if (x) x.model = x._originalModel || makeT2Model(x);
   var ta = document.getElementById('soModelEditTA');
-  if (ta) ta.value = x ? (x._originalModel || makeT2Model(x)) : '';
+  if (ta) {
+    ta.value = x ? (x._originalModel || makeT2Model(x)) : '';
+    updateT2CharCount();
+  }
+  // Update model text display
+  var modelTextEl = document.getElementById('soModelText');
+  if (modelTextEl && x) {
+    modelTextEl.innerHTML = x.model || '暂无范文';
+  }
+}
+// Toast 闪烁提示
+function flashToast(msg) {
+  var t = document.getElementById('soToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'soToast';
+    t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--ac);color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;z-index:9999;transition:opacity 0.3s;pointer-events:none;opacity:0';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._to);
+  t._to = setTimeout(function() { t.style.opacity = '0'; }, 2000);
 }
 // 保存自动生成范本的原始值以便恢复
 function captureOriginalModel(x) {
