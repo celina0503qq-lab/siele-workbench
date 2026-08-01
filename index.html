@@ -732,6 +732,30 @@ async function wbHashPw(pw,salt){
 }
 
 let ST = load();
+// 一次性迁移：将旧 T2 独立练习日志合并到 ST.sieleOralScores
+(function(){
+  try{
+    var oldLog = JSON.parse(localStorage.getItem('siele_t2_practice_log') || '{}');
+    var hasData = false;
+    Object.keys(oldLog).forEach(function(id){
+      if(!oldLog[id]||!oldLog[id].length)return;
+      hasData=true;
+      if(!ST.sieleOralScores)ST.sieleOralScores={};
+      var ex=ST.sieleOralScores[id];
+      var dates={};
+      if(ex&&ex.history)ex.history.forEach(function(h){dates[h.date]=true;});
+      var add=[];oldLog[id].forEach(function(e){if(!dates[e.date]){add.push({score:e.score||0,date:e.date||'',words:0,text:'',content:0,fluency:0,vocab:0,grammar:0,task:0});dates[e.date]=true;}});
+      if(add.length>0){
+        var h=(ex&&ex.history)?ex.history.slice():[];h=h.concat(add);h.sort(function(a,b){return(a.date||'')<(b.date||'')?-1:1;});
+        if(h.length>20)h=h.slice(-20);
+        var best=h.reduce(function(m,a){return Math.max(m,a.score||0);},ex?ex.bestScore||0:0);
+        var last=h[h.length-1];
+        ST.sieleOralScores[id]={bestScore:best,count:h.length,lastDate:last?last.date:'',history:h,score:last?last.score:0,content:last?last.content:0,fluency:last?last.fluency:0,vocab:last?last.vocab:0,grammar:last?last.grammar:0,task:last?last.task:0,words:last?last.words:0,text:last?last.text:'',date:last?last.date:''};
+      }
+    });
+    if(hasData){save();localStorage.removeItem('siele_t2_practice_log');}
+  }catch(e){}
+})();
 function getDefaultState(){
   return {
     examDate: '', examType: 'dele', targetLevel: 'B2',
@@ -3628,7 +3652,8 @@ function startSieleOral(){var x=getSieleOralItem();if(!x)return;var SR=window.Sp
 function stopSieleOral(silent){clearInterval(_sieleOralTimer);if(_sieleOralRecognition)try{_sieleOralRecognition.stop();}catch(e){}if(_sieleOralRecording&&!silent)finishSieleOral();_sieleOralRecording=false;}
 function normalizeOral(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zñü\s]/g,' ').replace(/\s+/g,' ').trim();}
 function finishSieleOral(){if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
-function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var links=(normalizeOral(text).match(/\b(porque|ademas|aunque|sin embargo|por eso|mientras|cuando|si|para que|en definitiva)\b/g)||[]).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();if(_sieleOralTarea===2)logT2Practice(x.id,total);var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);}updateStreak();}
+function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var links=(normalizeOral(text).match(/\b(porque|ademas|aunque|sin embargo|por eso|mientras|cuando|si|para que|en definitiva)\b/g)||[]).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();
+var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);}updateStreak();}
 function oralBar(label,val){return '<div class="so-bar"><span>'+label+'</span><i><b style="width:'+val+'%"></b></i><strong>'+val+'</strong></div>';}
 function renderSieleScore(r,x){var improve=[];if(r.content<70)improve.push('补齐题目关键词：'+(x.keys||[]).join('、'));if(r.fluency<70)improve.push('延长回答并减少过短停顿，目标约 '+Math.max(20,Math.round((x.sec||60)*1.1))+' 词。');if(r.grammar<70)improve.push('加入 porque、aunque、por eso 等连接词，并检查过去/将来时。');if(!improve.length)improve.push('结构完整；下一次尝试加入更具体的例子和自我修正。');return '<div class="so-score"><div class="total">'+r.score+'</div><div class="so-bars">'+oralBar('内容',r.content)+oralBar('流利',r.fluency)+oralBar('词汇',r.vocab)+oralBar('语法',r.grammar)+oralBar('完成度',r.task)+'</div></div><div class="so-feedback"><b>识别：</b>'+esc(r.text||'未识别到有效西语')+'<br><b>改进：</b>'+improve.join('；')+'</div><button class="btn sm ol" style="margin-top:8px" onclick="showSieleModel()">显示范例与重点</button>';
 }
@@ -3764,42 +3789,61 @@ function captureOriginalModel(x) {
   if (typeof x._originalModel === 'undefined') x._originalModel = x.model;
 }
 
-// ===== 练习记录追踪 & 智能排题 =====
-function getT2PracticeLog() {
-  try { return JSON.parse(localStorage.getItem('siele_t2_practice_log') || '{}'); } catch(e) { return {}; }
+// ===== 练习记录追踪 & 智能排题 (统一数据源: ST.sieleOralScores) =====
+function mergeSieleOralScore(id, remoteEntry) {
+  // Merge remote oral score entry into local ST.sieleOralScores[id]
+  if (!remoteEntry) return;
+  var local = ST.sieleOralScores[id];
+  if (!local) { ST.sieleOralScores[id] = remoteEntry; return; }
+  // Merge history arrays by date (dedup)
+  var localHistory = local.history || [];
+  var remoteHistory = remoteEntry.history || [];
+  var dateMap = {};
+  localHistory.forEach(function(h) { dateMap[h.date] = h; });
+  remoteHistory.forEach(function(h) {
+    if (!dateMap[h.date]) { localHistory.push(h); dateMap[h.date] = h; }
+  });
+  // Sort by date and cap at 20
+  localHistory.sort(function(a, b) { return (a.date||'') < (b.date||'') ? -1 : 1; });
+  if (localHistory.length > 20) localHistory = localHistory.slice(-20);
+  // Recalculate aggregates
+  var bestScore = localHistory.reduce(function(m, a) { return Math.max(m, a.score || 0); }, 0);
+  bestScore = Math.max(bestScore, local.bestScore || 0, remoteEntry.bestScore || 0);
+  var lastEntry = localHistory[localHistory.length - 1];
+  ST.sieleOralScores[id] = {
+    bestScore: bestScore,
+    count: localHistory.length,
+    lastDate: lastEntry ? lastEntry.date : (local.lastDate || remoteEntry.lastDate || ''),
+    history: localHistory,
+    score: lastEntry ? lastEntry.score : local.score,
+    content: lastEntry ? lastEntry.content : local.content,
+    fluency: lastEntry ? lastEntry.fluency : local.fluency,
+    vocab: lastEntry ? lastEntry.vocab : local.vocab,
+    grammar: lastEntry ? lastEntry.grammar : local.grammar,
+    task: lastEntry ? lastEntry.task : local.task,
+    words: lastEntry ? lastEntry.words : local.words,
+    text: lastEntry ? lastEntry.text : local.text,
+    date: lastEntry ? lastEntry.date : local.date
+  };
 }
-function saveT2PracticeLog(log) {
-  localStorage.setItem('siele_t2_practice_log', JSON.stringify(log));
-}
-function logT2Practice(id, score) {
-  var log = getT2PracticeLog();
-  if (!log[id]) log[id] = [];
-  log[id].push({ date: todayStr(), score: score });
-  // 保留最近20次记录
-  if (log[id].length > 20) log[id] = log[id].slice(-20);
-  saveT2PracticeLog(log);
-}
-function getT2PracticeStats(id) {
-  var log = getT2PracticeLog();
-  var entries = log[id] || [];
-  if (!entries.length) return { count: 0, avgScore: 0, bestScore: 0, lastDate: '' };
+function getOralPracticeStats(id) {
+  var scores = ST.sieleOralScores || {};
+  var s = scores[id];
+  if (!s || !s.history || !s.history.length) return { count: 0, avgScore: 0, bestScore: 0, lastDate: '' };
   var sum = 0, best = 0;
-  entries.forEach(function(e) { sum += e.score; if (e.score > best) best = e.score; });
-  return { count: entries.length, avgScore: Math.round(sum / entries.length), bestScore: best, lastDate: entries[entries.length - 1].date };
+  s.history.forEach(function(e) { sum += e.score || 0; if (e.score > best) best = e.score; });
+  return { count: s.history.length, avgScore: Math.round(sum / s.history.length), bestScore: best, lastDate: s.lastDate || s.history[s.history.length - 1].date || '' };
 }
 function smartSieleOral() {
   var bank = SIELE_ORAL_BANK[_sieleOralTarea] || [];
   if (bank.length <= 1) { renderMain(); return; }
-  var log = getT2PracticeLog();
   // 分组：0=没练过, 1=低分(<60), 2=中分(60-80), 3=高分(>80)
   var groups = [[], [], [], []];
   bank.forEach(function(x, i) {
-    var entries = log[x.id] || [];
-    if (!entries.length) { groups[0].push(i); return; }
-    var sum = 0; entries.forEach(function(e) { sum += e.score; });
-    var avg = sum / entries.length;
-    if (avg < 60) groups[1].push(i);
-    else if (avg <= 80) groups[2].push(i);
+    var stats = getOralPracticeStats(x.id);
+    if (!stats.count) { groups[0].push(i); return; }
+    if (stats.avgScore < 60) groups[1].push(i);
+    else if (stats.avgScore <= 80) groups[2].push(i);
     else groups[3].push(i);
   });
   // 洗牌辅助
@@ -3842,7 +3886,7 @@ function renderSielePhoto(x){
   var hintPart = x.hintCn ? '<p style="margin-top:6px;font-size:11px;color:var(--tr)"><b>考生回忆：</b>'+esc(x.hintCn.slice(0,200))+'</p>' : '';
   return '<aside class="so-scene-card" aria-label="回忆场景观察提示"><span>回忆题场景 · 观察提示</span><strong>'+esc(x.title||'图片描述')+'</strong><p><b>重点：</b>'+esc((x.overview||'人物、地点和动作')+';'+(x.object||'画面细节')+'.')+'</p>'+hintPart+'<small>该题根据回忆版资料整理；练习时请围绕人物、空间、动作、氛围和谨慎推测展开。</small></aside>';
 }
-function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=SIELE_ORAL_BANK[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=_sieleOralTarea===2?getT2PracticeStats(x.id):null;var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else if(_sieleOralTarea===2){statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div><h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
+function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=SIELE_ORAL_BANK[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div><h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
 }
 
 // ===== PAGE: SIELE SPECIAL =====
@@ -8894,16 +8938,22 @@ function wbSnap(){
   delete c.quizSession;delete c.quizIdx;delete c.quizScore;delete c.quizAnswered;delete c.quizQuestionState;
   delete c.vocabMastery;delete c.flashMastery;
   c.pomodoro=Object.assign({},ST.pomodoro,{running:false});
-  // Trim sieleOralScores for sync: keep bestScore/count/lastDate + latest attempt only (not full history array)
+  // Trim sieleOralScores for sync: keep full history (capped at 20) + latest attempt snapshot
   if(c.sieleOralScores){
     var trimmed={};
     Object.keys(c.sieleOralScores).forEach(function(id){
       var s=c.sieleOralScores[id];
       if(!s){return;}
+      // Compact history: keep score+date only for older entries, full for last 3
+      var compactHistory=(s.history||[]).map(function(h,i,arr){
+        if(i>=arr.length-3) return h; // last 3: full detail
+        return {score:h.score||0, date:h.date||'', words:h.words||0}; // older: compact
+      });
       trimmed[id]={
         bestScore:s.bestScore||s.score||0,
         count:s.count||1,
         lastDate:s.lastDate||s.date||'',
+        history:compactHistory,
         score:s.score||0,content:s.content||0,fluency:s.fluency||0,vocab:s.vocab||0,grammar:s.grammar||0,task:s.task||0,
         words:s.words||0,text:(s.text||'').slice(0,500),date:s.date||''
       };
@@ -9299,7 +9349,7 @@ async function standaloneSync(showLog){
     if(remote.shadowScores) Object.keys(remote.shadowScores).forEach(function(k){
       if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0)) ST.shadowScores[k]=remote.shadowScores[k];
     });
-    if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(!ST.sieleOralScores[k]||(remote.sieleOralScores[k].score||0)>(ST.sieleOralScores[k].score||0))ST.sieleOralScores[k]=remote.sieleOralScores[k];});}
+    if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
     if(remote.sieleOralProgress&&(!ST.sieleOralProgress||((remote.ts||0)>=(SCFG.lastSync||0))))ST.sieleOralProgress=remote.sieleOralProgress;
     save(); saveBackup();
     if(merged>0) appendSyncLog('🔗 合并 '+merged+' 词掌握度','');
