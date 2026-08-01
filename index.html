@@ -9204,7 +9204,8 @@ function createGist(){
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, streak: ST.streak, totalStudy: ST.totalStudy,
-    examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel
+    examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
+    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
   });
   return ghApi('/gists','POST',JSON.stringify({
     description: '西语备考工作台 · DELE & SIELE · 数据同步',
@@ -9231,7 +9232,8 @@ function pushGist(){
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, streak: ST.streak, totalStudy: ST.totalStudy,
-    examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel
+    examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
+    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
   });
   return ghApi('/gists/'+SCFG.gistId,'PATCH',JSON.stringify({
     files: {'siele-wb-sync.json': {content: data}}
@@ -9351,6 +9353,18 @@ async function standaloneSync(showLog){
     });
     if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
     if(remote.sieleOralProgress&&(!ST.sieleOralProgress||((remote.ts||0)>=(SCFG.lastSync||0))))ST.sieleOralProgress=remote.sieleOralProgress;
+    // 合并全局已用邀请码（跨设备唯一性）
+    if(Array.isArray(remote.usedInvites) && remote.usedInvites.length){
+      try {
+        var syncedInvites = JSON.parse(localStorage.getItem('_siele_used_invites_sync') || '[]');
+        remote.usedInvites.forEach(function(c){ if(c && syncedInvites.indexOf(c)<0) syncedInvites.push(c); });
+        localStorage.setItem('_siele_used_invites_sync', JSON.stringify(syncedInvites));
+        // 同时更新 admin 的 LSI 键
+        var lsi = JSON.parse(localStorage.getItem('swa_used_invites_v1') || '[]');
+        remote.usedInvites.forEach(function(c){ if(c && lsi.indexOf(c)<0) lsi.push(c); });
+        localStorage.setItem('swa_used_invites_v1', JSON.stringify(lsi));
+      } catch(e) {}
+    }
     save(); saveBackup();
     if(merged>0) appendSyncLog('🔗 合并 '+merged+' 词掌握度','');
     // Push
@@ -9412,7 +9426,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashPronunciation:ST.flashPronunciation,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,dailyTasks:ST.dailyTasks,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashPronunciation:ST.flashPronunciation,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -9440,8 +9454,18 @@ function importDataPrompt_(){
         if(data.streak>ST.streak)ST.streak=data.streak;
         if(data.totalStudy>ST.totalStudy)ST.totalStudy=data.totalStudy;
         if(data.shadowScores)Object.keys(data.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(data.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=data.shadowScores[k];});
-        if(data.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(data.sieleOralScores).forEach(function(k){if(!ST.sieleOralScores[k]||(data.sieleOralScores[k].score||0)>(ST.sieleOralScores[k].score||0))ST.sieleOralScores[k]=data.sieleOralScores[k];});}
+        if(data.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(data.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,data.sieleOralScores[k]);});}
         if(data.sieleOralProgress)ST.sieleOralProgress=data.sieleOralProgress;
+        // 合并错词库
+        if(Array.isArray(data.dictationErrorBank)&&data.dictationErrorBank.length){
+          ST.dictationErrorBank=ST.dictationErrorBank||[];
+          var iexist={};
+          ST.dictationErrorBank.forEach(function(e){iexist[e.es+'_'+e.userAnswer]=true;});
+          data.dictationErrorBank.forEach(function(e){
+            if(e&&e.es&&!iexist[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);iexist[e.es+'_'+e.userAnswer]=true;}
+          });
+          if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
+        }
         save();saveBackup();
         appendSyncLog('✅ 导入完成: '+merged+' 词合并','ok');
         if(typeof renderMain==='function')renderMain();

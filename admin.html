@@ -537,20 +537,34 @@ const lsGet=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==nu
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){toast('本地存储失败：空间不足','err');return false;}};
 
 // ---- 邀请码（6个，每个仅可使用一次） ----
+// 跨设备唯一性：usedInvites 通过双通道云同步（admin cloudSync + 独立 standaloneSync）在设备间传播
 const INVITE_CODES=['SIELE-2026-VERDE','SIELE-2026-ROJO','SIELE-2026-AZUL','SIELE-2026-ORO','SIELE-2026-LUNA','SIELE-2026-SOL'];
+function getGlobalUsedInvites(){
+  // 合并本地 LSI + 从 standalone 同步来的全局列表
+  var local = lsGet(LSI, []);
+  try {
+    var standalone = JSON.parse(localStorage.getItem('_siele_used_invites_sync') || '[]');
+    standalone.forEach(function(c) { if (local.indexOf(c) < 0) local.push(c); });
+  } catch(e) {}
+  return local;
+}
 function isInviteValid(code){
   code=(code||'').trim().toUpperCase();
   if(!code)return false;
   if(INVITE_CODES.indexOf(code)<0)return false;
-  var used=lsGet(LSI,[]);
+  var used = getGlobalUsedInvites();
   if(used.indexOf(code)>=0)return false;
   return true;
 }
 function consumeInvite(code){
   code=(code||'').trim().toUpperCase();
-  var used=lsGet(LSI,[]);
-  if(used.indexOf(code)<0)used.push(code);
-  lsSet(LSI,used);
+  var used = getGlobalUsedInvites();
+  if(used.indexOf(code)<0) used.push(code);
+  lsSet(LSI, used);
+  // 同步写入全局键供 standalone sync 传播
+  localStorage.setItem('_siele_used_invites_sync', JSON.stringify(used));
+  // 同时写入当前用户 DB（如果有），供 admin cloudSync 传播
+  if (DB) { DB.usedInvites = DB.usedInvites || []; if (DB.usedInvites.indexOf(code) < 0) DB.usedInvites.push(code); }
 }
 
 // ---- 种子数据实例化 ----
@@ -558,7 +572,7 @@ function seedWords(){return SEED.words.map((w,i)=>({id:'sw'+i,es:w.es||'',zh:w.z
 function seedQuiz(){return SEED.questions.map((q,i)=>({id:'sq'+i,ex:q.ex||'siele',lvl:q.lvl||'A1',type:q.type||'grammar',q:q.q||'',opts:(q.opts||[]).slice(),ans:q.ans||0,fb:q.fb||'',done:false,correct:false,src:'seed',updatedAt:0}));}
 function blankData(withSeed){
   return {words:withSeed?seedWords():[],questions:withSeed?seedQuiz():[],reviews:[],plans:[],
-    settings:{examType:'siele',targetLevel:'B2',examDate:''},trash:{},
+    settings:{examType:'siele',targetLevel:'B2',examDate:''},trash:{},usedInvites:[],
     meta:{rev:0,lastSync:0,lastPushTs:0,lastBackup:0},syncCfg:null};
 }
 
@@ -1181,7 +1195,7 @@ function serializeCloud(){
   const seedW={},seedQ={},words=[],questions=[];
   DB.words.forEach(w=>{if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   DB.questions.forEach(q=>{if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null};
+  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null,usedInvites:DB.usedInvites||[]};
 }
 function mergeById(localArr,remoteArr,trash){
   const map={};
@@ -1220,6 +1234,23 @@ function mergeData(db,remote){
   db.plans=mergeById(db.plans,(remote.plans||[]),trash);
   if(remote.settings&&remote.ts>(db.meta.lastSync||0))db.settings=Object.assign({},db.settings,remote.settings);
   if(remote.wb&&(!db.wb||((remote.wb.ts||0)>(db.wb.ts||0))))db.wb=remote.wb;
+  // 合并全局已用邀请码
+  if(Array.isArray(remote.usedInvites) && remote.usedInvites.length){
+    db.usedInvites = db.usedInvites || [];
+    var localInvSet = {};
+    db.usedInvites.forEach(function(c){ localInvSet[c] = true; });
+    remote.usedInvites.forEach(function(c){ if(!localInvSet[c]){ db.usedInvites.push(c); localInvSet[c]=true; } });
+    // 同步回 localStorage 全局键
+    try {
+      var synced = JSON.parse(localStorage.getItem('_siele_used_invites_sync') || '[]');
+      db.usedInvites.forEach(function(c){ if(synced.indexOf(c)<0) synced.push(c); });
+      localStorage.setItem('_siele_used_invites_sync', JSON.stringify(synced));
+      // 同时更新旧 LSI 键
+      var lsi = JSON.parse(localStorage.getItem(LSI) || '[]');
+      db.usedInvites.forEach(function(c){ if(lsi.indexOf(c)<0) lsi.push(c); });
+      localStorage.setItem(LSI, JSON.stringify(lsi));
+    } catch(e) {}
+  }
 }
 
 // ---- 各云端 Provider ----
