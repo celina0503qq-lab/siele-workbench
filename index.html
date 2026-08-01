@@ -182,6 +182,26 @@
 .rd-quiz-item .rq-exp .es{color:var(--soft);font-style:italic}
 /* ===== NEW: 每日自动更新状态 ===== */
 .rd-update-info{font-size:11px;color:var(--soft);margin:6px 0;display:flex;align-items:center;gap:4px}
+/* ===== 登录覆盖层 ===== */
+.wb-login-overlay{position:fixed;inset:0;z-index:999999;background:linear-gradient(135deg,#7a1f12 0%,#c0392b 45%,#e08e0b 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+.wb-login-overlay.hide{display:none}
+.wb-login-card{background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(60,20,5,.35);width:100%;max-width:380px;padding:34px 28px;position:relative;overflow:hidden}
+.wb-login-card::after{content:"¡Hola!";position:absolute;right:-10px;bottom:-30px;font-size:90px;font-weight:800;opacity:.05;font-family:Georgia,serif;pointer-events:none}
+.wb-login-card h1{font-size:18px;text-align:center;font-weight:800;margin:0 0 4px}
+.wb-login-card .sub{text-align:center;font-size:12px;color:#6b5d4f;margin-bottom:20px}
+.wb-login-card .fld{margin-bottom:12px}
+.wb-login-card .fld label{display:block;font-size:12px;font-weight:700;color:#6b5d4f;margin-bottom:5px}
+.wb-login-card .fld input{width:100%;padding:10px 12px;border:1.5px solid #e7dccb;border-radius:9px;background:#fffdf8;font-size:14px;font-family:inherit;box-sizing:border-box}
+.wb-login-card .fld input:focus{outline:none;border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.1)}
+.wb-login-card .fld .err{font-size:11px;color:#b71c1c;margin-top:4px;display:none}
+.wb-login-card .fld.invalid input{border-color:#b71c1c}
+.wb-login-card .fld.invalid .err{display:block}
+.wb-login-card .btn-login{width:100%;padding:12px;background:#c0392b;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+.wb-login-card .btn-login:hover{background:#a93226}
+.wb-login-card .btn-login:disabled{opacity:.5;cursor:not-allowed}
+.wb-login-card .links{text-align:center;margin-top:14px;font-size:12px;color:#6b5d4f}
+.wb-login-card .links a{color:#c0392b;font-weight:700;cursor:pointer}
+.wb-login-card .links a:hover{text-decoration:underline}
 </style>
 <script src="./A1-B2西语备考工作台 · DELE &amp; SIELE_files/beacon_web.min.js.下载"></script>
 <script>
@@ -649,6 +669,19 @@ GRAMMAR_EXTRA.forEach(it => {
 // ===== STATE & STORAGE (v2: 双键备份 + 自动恢复) =====
 const STORE_KEY = 'dele_siele_wb_v3';
 const STORE_BACKUP_KEY = 'dele_siele_wb_v3_bak';
+
+// ---- 密码哈希（与 admin.html 一致） ----
+async function wbHashPw(pw,salt){
+  var txt=salt+'::'+pw+'::siele';
+  if(window.crypto&&crypto.subtle&&crypto.subtle.digest){
+    try{var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(txt));
+      return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}catch(e){}
+  }
+  var h1=0x811c9dc5,h2=0x1000193;
+  for(var i=0;i<txt.length;i++){h1=(h1^txt.charCodeAt(i))*16777619>>>0;h2=(h2*31+txt.charCodeAt(i))>>>0;}
+  return 'fb'+h1.toString(16)+h2.toString(16);
+}
+
 let ST = load();
 function getDefaultState(){
   return {
@@ -8566,6 +8599,51 @@ var mirKey=function(u){return 'swa_wb_mirror_v1_'+u;};
 
 var AU=null,ADB=null,MIR=null,SIG='',pushT=null,cloudT=null,syncing=false;
 
+/* ---------- 登录覆盖层 ---------- */
+function showLoginOverlay(){
+  var ov=document.getElementById('wbLoginOverlay');
+  if(ov){ov.classList.remove('hide');return;}
+  ov=document.createElement('div');
+  ov.id='wbLoginOverlay';
+  ov.className='wb-login-overlay';
+  ov.innerHTML='<div class="wb-login-card">'+
+    '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#e08e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:28px;margin:0 auto 12px;box-shadow:0 6px 18px rgba(192,57,43,.4)">&Ntilde;</div>'+
+    '<h1>西语备考工作台</h1>'+
+    '<div class="sub">请登录你的账号以继续</div>'+
+    '<form id="wbLoginForm" onsubmit="return wbDoLogin(event)">'+
+    '<div class="fld" id="wbLfU"><label>账号</label><input id="wbLoginUser" autocomplete="username" placeholder="邮箱或用户名"></div>'+
+    '<div class="fld" id="wbLfP"><label>密码</label><input id="wbLoginPass" type="password" autocomplete="current-password" placeholder="请输入密码"><span class="err">密码错误</span></div>'+
+    '<button class="btn-login" type="submit">登 录</button>'+
+    '<div class="links">还没有账号？<a onclick="wbGoRegister()">去注册 &rarr;</a></div>'+
+    '</form></div>';
+  document.body.appendChild(ov);
+}
+function hideLoginOverlay(){
+  var ov=document.getElementById('wbLoginOverlay');
+  if(ov)ov.classList.add('hide');
+}
+async function wbDoLogin(e){
+  e.preventDefault();
+  var u=document.getElementById('wbLoginUser').value.trim(),p=document.getElementById('wbLoginPass').value;
+  var fU=document.getElementById('wbLfU'),fP=document.getElementById('wbLfP');
+  fU.classList.remove('invalid');fP.classList.remove('invalid');
+  if(!u){fU.classList.add('invalid');return false;}
+  if(!p){fP.classList.add('invalid');return false;}
+  var users=lsg(LSU,{});
+  var rec=users[u];
+  if(!rec){fP.querySelector('.err').textContent='账号不存在，请先注册';fP.classList.add('invalid');return false;}
+  var h=await wbHashPw(p,rec.salt);
+  if(h!==rec.hash){fP.querySelector('.err').textContent='密码错误';fP.classList.add('invalid');return false;}
+  lss(LSS,{u:u,ts:Date.now()});
+  hideLoginOverlay();
+  activate();
+  return false;
+}
+function wbGoRegister(){
+  showLoginOverlay();
+  openAdminPanel();
+}
+
 function activeUser(){var s=lsg(LSS,null),us=lsg(LSU,{});return (s&&s.u&&us[s.u])?s.u:null;}
 function todayStr2(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 
@@ -8839,7 +8917,7 @@ function closeAdminPanel(){
 }
 window.addEventListener('message',function(ev){
   if(ev.origin!==location.origin)return;
-  if(ev.data&&ev.data.type==='siele-close-admin')closeAdminPanel();
+  if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();}
 });
 var _adminPanelStyle=document.createElement('style');
 _adminPanelStyle.textContent='#wbAdminPanel{display:none;position:fixed;inset:0;z-index:999999;background:#f3ebdd;flex-direction:column;padding-top:env(safe-area-inset-top)}#wbAdminPanel.show{display:flex}.wb-admin-bar{height:48px;flex:0 0 48px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#2b1810;color:#fff;font-family:system-ui,sans-serif}.wb-admin-bar button{border:1px solid rgba(255,255,255,.5);border-radius:7px;background:transparent;color:#fff;padding:8px 14px;cursor:pointer;font:inherit;font-size:13px;min-height:36px}#wbAdminFrame{width:100%;height:calc(100% - 48px);border:0;background:#f3ebdd;-webkit-overflow-scrolling:touch}@media(max-width:600px){.wb-admin-bar{padding:0 12px;font-size:14px}.wb-admin-bar button{padding:8px 10px;font-size:12px}}';
@@ -8900,9 +8978,10 @@ if(typeof renderDash==='function'){
 /* ---------- 激活 ---------- */
 function activate(){
   AU=activeUser();
-  if(!AU){setChip('nologin');return;}
+  if(!AU){showLoginOverlay();setChip('nologin');return;}
+  hideLoginOverlay();
   ADB=lsg(dataKey(AU),null);
-  if(!ADB){setChip('nologin');AU=null;return;}
+  if(!ADB){showLoginOverlay();setChip('nologin');AU=null;return;}
   MIR=lsg(mirKey(AU),{w:{},wbTs:0,qn:0});
   hydrate();
   SIG='';doPush(); // 把本机已有进度推入后台数据库
@@ -8922,7 +9001,7 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden&&AU&
 window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(true);});
 window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doPush();}});
 
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',activate);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',activate);else activate();
 else activate();
 
 /* ================================================================

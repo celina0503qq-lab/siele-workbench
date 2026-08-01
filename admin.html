@@ -1415,7 +1415,7 @@ async function genTransferCode(){
   out.innerHTML='<div class="note info">正在生成传输码…</div>';
   try{
     const users=lsGet(LSU,{});
-    const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,ts:Date.now()};
+    const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,wb:lsGet('dele_siele_wb_v3',null),ts:Date.now()};
     const r=await fetch('https://jsonblob.com/api/jsonBlob',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     if(r.status===429)throw new Error('云端请求过于频繁，请 1 分钟后重试');
     if(!r.ok)throw new Error('HTTP '+r.status);
@@ -1424,7 +1424,7 @@ async function genTransferCode(){
     if(!code)throw new Error('未获取到传输码');
     out.innerHTML='<div class="code-show" id="tcode">'+esc(code)+'</div>'+
       '<div style="display:flex;gap:8px"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+code+'\').then(()=>toast(\'已复制\',\'ok\'))">📋 复制</button></div>'+
-      '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「我有传输码」→ 粘贴此码。<b>24 小时内有效</b>，含账号与全部数据。</div>';
+      '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「换设备登录？」→ 粘贴此码。<b>24 小时内有效</b>，含账号、学习进度与全部数据。</div>';
   }catch(err){
     out.innerHTML='<div class="note err">生成失败：'+esc(err.message||err)+'。请检查网络后重试。</div>';
   }
@@ -1449,6 +1449,7 @@ async function transferIn(code){
     if(j.v===2&&j.cloud){mergeData(db,j.cloud);if(j.cloud.settings)db.settings=j.cloud.settings;if(j.syncCfg)db.syncCfg=j.syncCfg;}
     else if(j.data)db=j.data;
     lsSet(dataKey(j.user),db);
+    if(j.wb)lsSet('dele_siele_wb_v3',j.wb);
     toast('✅ 迁入成功，正在进入学习工作台…','ok');
     enter(j.user,true);
     gotoWorkbench();
