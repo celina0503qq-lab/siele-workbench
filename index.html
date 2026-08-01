@@ -625,35 +625,84 @@ const QDATA = [{"ex": "dele", "lvl": "A1", "type": "reading", "q": "Lee: \"Hola,
 const GFLAT = [];
 GDATA.forEach(g => g.items.forEach(it => GFLAT.push(Object.assign({lvl:g.lvl}, it))));
 
-// ===== GRAMMAR EXPANSION (扩充语法库) =====
+// ===== GRAMMAR EXPANSION (v2 深度扩充版 · RAE/DELE Ahora/FundéuRAE参考) =====
 const GRAMMAR_EXTRA = [
-  // A1 additional
-  {lvl:'A1', t:'Verbos irregulares -o→ue', d:'词根变化 o→ue 的动词 (poder→puedo, dormir→duermo)', ex:'Yo puedo hablar español. Ella duerme ocho horas.'},
-  {lvl:'A1', t:'Verbos irregulares -e→ie', d:'词根变化 e→ie 的动词 (querer→quiero, pensar→pienso)', ex:'Quiero un café. Pienso en ti.'},
-  {lvl:'A1', t:'Tener expressions', d:'tener 的常用表达 (tener hambre/sed/sueño/prisa)', ex:'Tengo hambre. ¿Vamos a comer?'},
-  {lvl:'A1', t:'Demonstrativos', d:'指示词: este/ese/aquel + 名词', ex:'Este libro es mío; esa casa es nueva.'},
-  {lvl:'A1', t:'Possessivos', d:'物主形容词: mi/tu/su/nuestro + 名词', ex:'Mi casa es tu casa.'},
-  // A2 additional
-  {lvl:'A2', t:'Pretérito perfecto irregular', d:'现在完成时不规则过去分词 (abrir→abierto, hacer→hecho)', ex:'He abierto la puerta. ¿Qué has hecho?'},
-  {lvl:'A2', t:'Gerundio', d:'副动词 -ando/-iendo, 表正在进行', ex:'Estoy comiendo. Ella está leyendo.'},
-  {lvl:'A2', t:'Verbos como gustar', d:'gustar类动词: interesar, encantar, doler', ex:'Me interesan los libros. A Juan le duele la cabeza.'},
-  {lvl:'A2', t:'Pronombres de complemento', d:'宾格代词 me/te/lo/la/nos/os/los/las', ex:'Lo veo. La quiero. Nos ayudan.'},
-  {lvl:'A2', t:'Conjunciones básicas', d:'基础连接词: y, o, pero, porque, cuando', ex:'Quiero ir pero no tengo tiempo.'},
-  // B1 additional
-  {lvl:'B1', t:'Pluscuamperfecto', d:'过去完成时 (había + 过去分词)', ex:'Cuando llegué, ya había comido.'},
-  {lvl:'B1', t:'Oraciones relativas', d:'关系从句: que, donde, quien, cuyo', ex:'La casa que compré es grande. El hombre de quien hablo es mi amigo.'},
-  {lvl:'B1', t:'Imperativo negativo', d:'否定命令式 (no + 虚拟式)', ex:'No fumes. No comas eso.'},
-  {lvl:'B1', t:'Pronombres reflexivos', d:'代词式动词各人称 (me/te/se/nos/os/se)', ex:'Me ducho, te afeitas, se viste.'},
-  {lvl:'B1', t:'Estilo indirecto', d:'间接引语 (时态变化)', ex:'Dice que tiene hambre. Dijo que tenía hambre.'},
-  // B2 additional
-  {lvl:'B2', t:'Subjuntivo pasado', d:'虚拟式过去时 (imperfecto de subjuntivo)', ex:'Si tuviera dinero, compraría un coche. Quería que lo hicieras.'},
-  {lvl:'B2', t:'Condicional compuesto', d:'条件复合时 (habría + 过去分词)', ex:'Habría ido si me hubieras invitado.'},
-  {lvl:'B2', t:'Oraciones concesivas', d:'让步从句: aunque, a pesar de que, por más que', ex:'Aunque llueva, saldré. Por más que intento, no lo consigo.'},
-  {lvl:'B2', t:'Oraciones finales', d:'目的从句: para que, a fin de que + 虚拟式', ex:'Te lo explico para que lo entiendas.'},
-  {lvl:'B2', t:'Oraciones temporales', d:'时间从句: cuando, en cuanto, hasta que + 虚拟式(将来)', ex:'Cuando llegues, llámame. En cuanto termine, te aviso.'},
-  {lvl:'B2', t:'Pasiva y pasiva refleja', d:'被动语态: ser + 过去分词 / se + 动词', ex:'El libro fue escrito por Cervantes. Se habla español aquí.'},
-  {lvl:'B2', t:'Indefinido y pronombres', d:'不定代词: algo/nada/alguien/nadie/alguno/ninguno', ex:'Alguien llamó. No hay nadie aquí. ¿Tienes algún problema?'},
-  {lvl:'B2', t:'Perífrasis verbales', d:'动词短语: ir a + inf, tener que + inf, acabar de + inf', ex:'Voy a estudiar. Tengo que trabajar. Acabo de llegar.'},
+  // ── A1 ──
+  {lvl:'A1', t:'Verbos irregulares -o→ue', d:'词根变化 o→ue 的动词：重音在词根时 o→ue (poder→puedo, dormir→duermo, volver→vuelvo)。nosotros/vosotros 不变。', ex:'Yo puedo hablar español. Ella duerme ocho horas. ¿A qué hora vuelves?',
+   detail:'<b>规则：</b>陈述式现在时中，重音在词根音节时 o 变 ue。nosotros/vosotros 不变（重音不在词根）。<br><b>常用：</b>poder, dormir, volver, encontrar, recordar, contar, costar, mover, morir, mostrar, probar, sonar, soñar, volar, llover。<br><b>DELE考点：</b>选择题和填空高频。注意与 e→ie 区分。',
+   ref:'https://www.rae.es/dpd/diptongaci%C3%B3n'},
+  {lvl:'A1', t:'Verbos irregulares -e→ie', d:'词根变化 e→ie 的动词 (querer→quiero, pensar→pienso, empezar→empiezo)。规则同 o→ue。', ex:'Quiero un café. Pienso en ti. ¿A qué hora empieza la clase?',
+   detail:'<b>常用：</b>querer, pensar, empezar, entender, cerrar, preferir, sentir, mentir, perder, despertar, divertir, recomendar。<br><b>SIELE口语：</b>Tarea 1 常用 empezar/querer/preferir 表达偏好。<br><b>易错：</b>tener 也是 e→ie 但第一人称特殊 (tengo)。',
+   ref:'https://www.rae.es/dpd/diptongaci%C3%B3n'},
+  {lvl:'A1', t:'Tener: expresiones idiomáticas', d:'tener + 名词表达状态：hambre(饿), sed(渴), sueño(困), prisa(急), miedo(怕), razón(对), calor/frío(热/冷), suerte(幸运)。不可用 ser/estar 替代！', ex:'Tengo hambre. Tienes razón. ¿Tienes frío? Tengo ganas de viajar.',
+   detail:'<b>核心规则：</b>西语用 tener+名词表达感受，不用 estar+形容词（英语思维中式西语）。<br><b>完整列表：</b>hambre/sed/sueño/prisa/miedo/calor/frío/razón/celos/éxito/suerte/cuidado/vergüenza/años/dolor de cabeza/ganas de+inf。<br><b>tener ganas de</b> (有心情做) vs querer (想要)。<br><b>易错：</b>I am hungry ≠ Estoy hambriento ❌ → Tengo hambre ✅。',
+   ref:'https://dle.rae.es/tener'},
+  {lvl:'A1', t:'Demostrativos', d:'指示词三层次距离：este(近), ese(中), aquel(远)。与名词性数一致：este/esta/estos/estas 等。中性 esto/eso/aquello 指抽象事物。', ex:'Este libro es mío; esa casa es nueva. Aquello fue increíble.',
+   detail:'<b>距离：</b>este→说话者近；ese→听话者近；aquel→两者都远。西语是三层次（英语仅 this/that）。<br><b>代词/形容词：</b>形容词放名词前(este libro)；代词独立(este es mío)。RAE 2010后代词不再强制加重音。<br><b>易错：</b>ese/aquel 混淆；拉美口语 ese 常代 aquel，但考试需区分。',
+   ref:'https://www.rae.es/dpd/demostrativos'},
+  {lvl:'A1', t:'Posesivos', d:'短尾(前置)：mi/mis, tu/tus, su/sus, nuestro/a/os/as, vuestro/a/os/as。长尾(后置)：mío/tuyo/suyo。su 歧义多，需上下文判断。', ex:'Mi casa es tu casa. Nuestros padres son de Madrid. Este coche es mío.',
+   detail:'<b>短尾 vs 长尾：</b>短尾在名词前(mi libro)，长尾在名词后(un libro mío)或 be后(es mío)。<br><b>su歧义：</b>可指"他的/她的/您的/他们的/她们的/您们的"。口语用 de él/ella/usted 避免歧义。<br><b>易错：</b>性数不一致(nuestra libro ❌ → nuestro libro ✅)。',
+   ref:'https://www.rae.es/dpd/posesivos'},
+
+  // ── A2 ──
+  {lvl:'A2', t:'Pretérito perfecto: participios irregulares', d:'现在完成时=haber+过去分词。不规则：abrir→abierto, hacer→hecho, decir→dicho, escribir→escrito, ver→visto, poner→puesto, romper→roto, volver→vuelto, morir→muerto, freír→frito。', ex:'He abierto la puerta. ¿Qué has hecho hoy? Ya he visto esa película.',
+   detail:'<b>haber变位：</b>he, has, ha, hemos, habéis, han。<br><b>场景：</b>1)最近过去(hoy, esta semana)；2)过去行为影响现在；3)西班牙多用 perfecto，拉美多用 indefinido。<br><b>易错：</b>hacer→hacido ❌ (hecho ✅)；abrir→abrido ❌ (abierto ✅)。',
+   ref:'https://www.rae.es/dpd/participio'},
+  {lvl:'A2', t:'Gerundio: formas y usos', d:'副动词：-ando(ar动词)/-iendo(er/ir)。不规则：decir→diciendo, pedir→pidiendo, dormir→durmiendo, leer→leyendo。estar+gerundio=正在做。', ex:'Estoy comiendo. Ella está leyendo un libro. ¿Qué estás haciendo?',
+   detail:'<b>不规则：</b>e→i(pedir→pidiendo)；o→u(dormir→durmiendo)；i→y(leer→leyendo)。<br><b>句型：</b>estar+gerundio(正在), seguir+gerundio(继续), llevar+tiempo+gerundio(已做多久), ir+gerundio(逐步)。<br><b>SIELE口语：</b>Tarea 2 图片描述必须用 estar+gerundio。<br><b>易错：</b>将来语境用 estar+gerundio (Voy a estar estudiando ❌ → Voy a estudiar ✅)。',
+   ref:'https://www.rae.es/dpd/gerundio'},
+  {lvl:'A2', t:'Verbos tipo gustar', d:'gustar类动词结构：IO代词+动词+主语。单复数取决于主语。同类：encantar, interesar, doler, parecer, importar, molestar, faltar, quedar。', ex:'Me gusta el café. Me interesan los libros. A Juan le duele la cabeza. Nos encanta viajar.',
+   detail:'<b>结构：</b>"A mí me gusta X"=X使我喜欢。主语是X。gusta+单数/动原；gustan+复数。<br><b>常用：</b>encantar(超喜欢), interesar(感兴趣), doler(疼), parecer(觉得), importar(在乎), molestar(打扰), faltar(缺), quedar(剩下), fascinar(着迷)。<br><b>易错：</b>动词与IO代词一致(Me gusto ❌→Me gusta ✅)；忘前置词a(Juan le duele ❌→A Juan le duele ✅)。',
+   ref:'https://dle.rae.es/gustar'},
+  {lvl:'A2', t:'Pronombres CD/CI', d:'宾格(CD)：me/te/lo/la/nos/os/los/las。与格(CI)：me/te/le/nos/os/les。同时用：CI+CD+动词，le/les在lo/la前变se (se lo)。', ex:'Lo veo todos los días. La quiero mucho. Le di el libro. Se lo di.',
+   detail:'<b>CD：</b>回答 ¿qué? ¿a quién?。替代受动作用的成分。<br><b>CI：</b>回答 ¿a quién? ¿para quién?。接受者/受益人。le/les不分性别。<br><b>同时用：</b>CI+CD顺序。le/les+lo/la→se (le lo ❌→se lo ✅)。<br><b>易错：</b>leísmo(用le代lo指男性，西班牙中部可接受但考试应规范)。',
+   ref:'https://www.rae.es/dpd/pronombres%20personales%20%C3%A1tonos'},
+  {lvl:'A2', t:'Conjunciones clave', d:'并列：y(和), o(或), pero(但是), sino(而是), ni(也不)。从属：porque(因为), cuando(当), si(如果), aunque(虽然), para que(为了)。', ex:'Quiero ir pero no tengo tiempo. No es azul sino verde. Estudio para que pueda aprobar.',
+   detail:'<b>pero vs sino：</b>pero=肯定后转折；sino="而是"用于否定后(No es azul sino verde)。<br><b>porque vs para que：</b>porque+陈述式=因为；para que+虚拟式=为了。<br><b>易错：</b>sino误用pero；cuando将来忘虚拟式(cuando llegaré ❌→cuando llegue ✅)。',
+   ref:'https://www.rae.es/dpd/conjunciones'},
+
+  // ── B1 ──
+  {lvl:'B1', t:'Pluscuamperfecto', d:'过去完成时=haber(imperfecto)+过去分词。描述一个过去动作之前已完成的动作——"过去的过去"。', ex:'Cuando llegué, ya había comido. Nunca había visto algo así.',
+   detail:'<b>变位：</b>había/habías/había/habíamos/habíais/habían + participio。<br><b>vs Pretérito Perfecto：</b>perfecto="现在之前"(Hoy he comido)；pluscuamperfecto="过去某时之前"(Ayer, cuando llegué, ya había comido)。<br><b>DELE考点：</b>B1阅读长句理解关键；写作中展示时态丰富度。',
+   ref:'https://www.rae.es/dpd/pluscuamperfecto'},
+  {lvl:'B1', t:'Oraciones de relativo', d:'关系从句：que(通用), quien/quienes(仅人), donde(地点), cuyo/cuya(所属)。陈述式=已知；虚拟式=不确定/否定/疑问。', ex:'La casa que compré es grande. El hombre de quien hablo es mi amigo. Busco un libro que tenga ilustraciones.',
+   detail:'<b>que vs quien：</b>que 指人/物通用。quien 仅指人，且在介词后(con quien, de quien)。<br><b>陈述式 vs 虚拟式：</b>确定→陈述式(La chica que habla español)；不确定→虚拟式(Busco una chica que hable español)。<br><b>cuyo：</b>性数与所属物一致(非所有者)。El hombre cuyo hijo es médico。<br><b>易错：</b>cuyo 与所有者一致❌→应与被拥有物一致✅。',
+   ref:'https://www.rae.es/dpd/que'},
+  {lvl:'B1', t:'Imperativo negativo', d:'否定命令式=no+虚拟式现在时。所有人称(tú/usted/vosotros/ustedes)均用虚拟式，与肯定命令式(tú/vosotros特殊)不同。代词放在no和动词之间。', ex:'No fumes aquí. No comas eso. No me lo digas.',
+   detail:'<b>变位：</b>tú→no hables；usted→no hable；vosotros→no habléis；ustedes→no hablen。<br><b>代词位置：</b>否定命令：No lo comas. (代词在no和动词间)。肯定命令：Cómelo. (代词在后)。<br><b>SIELE口语：</b>Tarea 3 给出否定指令/建议。<br><b>易错：</b>否定+肯定形式(No habla ❌→No hables ✅)；代词位置(No cómelo ❌→No lo comas ✅)。',
+   ref:'https://www.rae.es/dpd/imperativo'},
+  {lvl:'B1', t:'Verbos pronominales avanzados', d:'代词式动词不仅是"自己做"：很多动词加se改变含义(ir→irse离开, dormir→dormirse入睡)。纯代词式动词：quejarse, arrepentirse, atreverse, darse cuenta de。', ex:'Me ducho cada mañana. Se fue sin decir nada. Me di cuenta del error.',
+   detail:'<b>含义变化：</b>ir(去)→irse(离开)；dormir(睡觉)→dormirse(入睡)；llevar(携带)→llevarse(带走)；encontrar(找到)→encontrarse(感觉)。<br><b>纯代词式：</b>quejarse(抱怨), arrepentirse(后悔), atreverse(敢于), darse cuenta de(意识到), jactarse(吹嘘)。<br><b>易错：</b>始终用代词式忽略原意(Me duermo ocho horas ❌→Duermo ocho horas ✅)。',
+   ref:'https://www.rae.es/dpd/verbos%20pronominales'},
+  {lvl:'B1', t:'Estilo indirecto', d:'间接引语：主句动词过去时→从句时态后退。presente→imperfecto, perfecto/indefinido→pluscuamperfecto, futuro→condicional。人称/时间/地点词也需调整。', ex:'Dice que tiene hambre. Dijo que tenía hambre. Me contó que ya había terminado.',
+   detail:'<b>时态后退：</b>presente→imperfecto；pretérito→pluscuamperfecto；futuro→condicional；imperativo→imperfecto subjuntivo。<br><b>其他调整：</b>人称代词、时间词(hoy→aquel día)、地点词(aquí→allí)。<br><b>SIELE：</b>Tarea 3-4 常需转述信息。<br><b>易错：</b>忘记调人称和副词；过去时引述动词后从句仍用原时态。',
+   ref:'https://www.rae.es/dpd/estilo%20indirecto'},
+
+  // ── B2 ──
+  {lvl:'B2', t:'Imperfecto de subjuntivo', d:'虚拟式过去时：从indefinido第三人称复数去-ron加-ra/-ras/-ra/-ramos/-rais/-ran(或-se系列)。用于条件句/愿望/假设/过去虚拟从句。', ex:'Si tuviera dinero, compraría un coche. Quería que lo hicieras. Ojalá lloviera.',
+   detail:'<b>两种形式：</b>-ra(hablara)和-se(hablase)等同。拉美偏好-ra，西班牙混用。<br><b>用法：</b>1)第二类条件句(Si+imp.subj.+condicional)；2)过去动词后虚拟从句；3)ojalá/quizás+不太可能愿望；4)como si+imp.subj.(好像)。<br><b>易错：</b>条件句时态不匹配(Si tendría ❌→Si tuviera, compraría ✅)。',
+   ref:'https://www.rae.es/dpd/subjuntivo'},
+  {lvl:'B2', t:'Condicional compuesto', d:'条件复合时=haber(condicional)+过去分词。用于过去的假设("本会..."但没发生)和第三类条件句。', ex:'Habría ido si me hubieras invitado. Lo habríamos comprado.',
+   detail:'<b>变位：</b>habría/habrías/habría/habríamos/habríais/habrían+participio。<br><b>用法：</b>1)第三类条件句(Si+hubiera+participio..., habría+participio)；2)对过去推测(Yo habría tenido 10 años)；3)礼貌表达(Habría que pensarlo)。<br><b>易错：</b>两边都用condicional compuesto(Si habría tenido ❌→Si hubiera tenido...habría ido ✅)。',
+   ref:'https://www.rae.es/dpd/condicional'},
+  {lvl:'B2', t:'Oraciones concesivas', d:'让步从句：aunque+陈述式(已知)/虚拟式(假设)。同类：a pesar de que, por más que, por mucho que, aun cuando, si bien。"即使...也..."。', ex:'Aunque llueva, saldré. Por más que intento, no lo consigo. A pesar de que es rico, vive modestamente.',
+   detail:'<b>aunque+陈述式 vs 虚拟式：</b>陈述式→已知(Aunque está lloviendo, salgo)；虚拟式→假设(Aunque llueva, saldré)。<br><b>por más que：</b>"无论多么…"，可接陈述式(已知)或虚拟式(假设)。<br><b>易错：</b>假设让步用陈述式(Aunque lloverá ❌→Aunque llueva ✅)。',
+   ref:'https://www.rae.es/dpd/oraciones%20concesivas'},
+  {lvl:'B2', t:'Oraciones finales', d:'目的从句：para que/a fin de que+虚拟式(主语不同)；para+infinitivo(主语相同)。', ex:'Te lo explico para que lo entiendas. Estudio a fin de aprobar.',
+   detail:'<b>主语相同：</b>para+动原(Estudio para aprobar)。<b>主语不同：</b>para que+虚拟式(Estudio para que mi madre esté orgullosa)。<br><b>连接词：</b>para/para que, a fin de/a fin de que, con el fin de/que, con el objeto de/que。<br><b>易错：</b>主语不同忘虚拟式(para que entiendes ❌→para que entiendas ✅)。',
+   ref:'https://www.rae.es/dpd/oraciones%20finales'},
+  {lvl:'B2', t:'Oraciones temporales', d:'时间从句：cuando/en cuanto/antes de que/hasta que/mientras。将来/未实现→虚拟式；现在/过去/习惯→陈述式。', ex:'Cuando llegues, llámame. En cuanto termine, te aviso. No salgas hasta que yo llegue.',
+   detail:'<b>陈述式vs虚拟式：</b>现在/过去/习惯→陈述式(Cuando llego, me ducho)；将来→虚拟式(Cuando llegue, te llamo)。<br><b>antes de que：</b>始终+虚拟式。después de que将来+虚拟式。hasta que将来+虚拟式。<br><b>易错：</b>将来从句用陈述式(cuando llegarás ❌→cuando llegues ✅)。',
+   ref:'https://www.rae.es/dpd/oraciones%20temporales'},
+  {lvl:'B2', t:'Voz pasiva y pasiva refleja', d:'三种被动：1)ser+participio(正式)；2)被动自复(se+动词三人称，最常用)；3)无人称se(无主语，泛指)。', ex:'El libro fue escrito por Cervantes. Se habla español. Se venden flores.',
+   detail:'<b>1)真正被动：</b>ser+participio(+por)，正式书面语。<b>2)被动自复：</b>se+vende(n)，最常用(Se venden coches)。<b>3)无人称：</b>se+单数，无主语(Se vive bien en España)。<br><b>被动自复vs无人称：</b>有主语→被动自复；无主语→无人称。<br><b>易错：</b>se+单数+复数主语(Se vende coches ❌→Se venden coches ✅)。',
+   ref:'https://www.rae.es/dpd/pasiva'},
+  {lvl:'B2', t:'Indefinidos y cuantificadores', d:'不定代词：algo/nada, alguien/nadie, alguno/ninguno, cualquiera, bastante, demasiado, poco, mucho, todo。否定词后置需双重否定(No vi a nadie)。', ex:'Alguien llamó. No hay nadie aquí. ¿Tienes algún problema? Cualquiera puede hacerlo.',
+   detail:'<b>双重否定：</b>否定词在动词后→动词前加no(No vino nadie)。否定词在动词前→不需no(Nadie vino)。<br><b>缩略：</b>alguno/ninguno在阳性单数名词前→algún/ningún(algún día, ningún problema)。<br><b>易错：</b>否定词后置忘加no(Vino nadie ❌→No vino nadie ✅)。',
+   ref:'https://www.rae.es/dpd/indefinidos'},
+  {lvl:'B2', t:'Perífrasis verbales completas', d:'动词短语：ir a+inf(将要), tener que+inf(必须), deber+inf(应该), acabar de+inf(刚做), volver a+inf(重做), dejar de+inf(停止), ponerse a+inf(开始), seguir+gerundio(继续), llevar+gerundio(已做多久)。', ex:'Voy a estudiar. Tengo que trabajar. Acabo de llegar. Llevo tres años aprendiendo español.',
+   detail:'<b>分类：</b>1)将来/意向(ir a, estar por, estar a punto de)；2)义务(tener que, deber, haber que)；3)阶段(acabar de, empezar a, dejar de, volver a)；4)持续(estar+gerundio, seguir+gerundio, llevar+gerundio)。<br><b>DELE考点：</b>所有级别，B2要求在写作和口语中自然交替使用。<br><b>易错：</b>confundir tener que(必须) y deber(应该)；llevar后忘gerundio(Llevo tres años aprender ❌→aprendiendo ✅)。',
+   ref:'https://www.rae.es/dpd/per%C3%ADfrasis%20verbales'},
 ];
 // Push extra grammar into GDATA groups and GFLAT
 GRAMMAR_EXTRA.forEach(it => {
@@ -712,6 +761,7 @@ function getDefaultState(){
     ],
     vocabReviewCount: {},       // 单词背诵次数 {esWord: count}
     vocabDictation: {},         // 单词默写记录 {esWord: {correct:0, wrong:0}}
+    dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
     readingArticles: [],        // 外刊文章缓存
     readingLastUpdate: ''       // 外刊最后更新日期
@@ -1204,10 +1254,19 @@ function getDictationTotals(){
 }
 function getDictationErrors(){
   var map={};(typeof VDATA!=='undefined'?VDATA:[]).forEach(function(v){if(v&&v.es)map[v.es]=v;});
-  return Object.keys(ST.vocabDictation||{}).map(function(es){
+  // 从 vocabDictation 统计中提取错词
+  var fromStats = Object.keys(ST.vocabDictation||{}).map(function(es){
     var r=getDictationRecord(es);var v=map[es]||{es:es,zh:'未找到释义',ex:''};
     return {v:v,correct:r.correct||0,wrong:r.wrong||0,gap:(r.wrong||0)-(r.correct||0)};
-  }).filter(function(x){return x.wrong>0;}).sort(function(a,b){return b.gap-a.gap||b.wrong-a.wrong||a.v.es.localeCompare(b.v.es);});
+  }).filter(function(x){return x.wrong>0;});
+  // 从 errorBank 中补充独立的错词条目（去重合并）
+  var bankMap={};
+  fromStats.forEach(function(x){bankMap[x.v.es]=x;});
+  (ST.dictationErrorBank||[]).forEach(function(e){
+    if(!bankMap[e.es]){bankMap[e.es]={v:map[e.es]||{es:e.es,zh:e.zh||'未知',ex:''},correct:0,wrong:1,gap:1};}
+    else{bankMap[e.es].wrong=Math.max(bankMap[e.es].wrong,1);bankMap[e.es].gap=bankMap[e.es].wrong-bankMap[e.es].correct;}
+  });
+  return Object.values(bankMap).sort(function(a,b){return b.gap-a.gap||b.wrong-a.wrong||a.v.es.localeCompare(b.v.es);});
 }
 function getDictationTree(){
   var t=getDictationTotals(), stage=Math.min(10,Math.floor(t.pct/10));
@@ -1231,7 +1290,7 @@ function startDictationTest(options){
   var requested=options.words||null;
   var words=[];
   if(Array.isArray(requested)&&requested.length){
-    words=requested.slice(0,Math.min(8,requested.length)).map(function(v){return {es:v.es,zh:v.zh||'',ex:v.ex||''};});
+    words=requested.slice(0,Math.min(15,requested.length)).map(function(v){return {es:v.es,zh:v.zh||'',ex:v.ex||''};});
   }else{
     var reviewCounts=ST.vocabReviewCount||{};
     // Stable linear selection avoids a full sort on the UI-critical path.
@@ -1243,7 +1302,7 @@ function startDictationTest(options){
     scored.sort(function(a,b){return b.score-a.score;});
     var pool=scored.slice(0,windowSize);
     for(var k=pool.length-1;k>0;k--){var n=Math.floor(Math.random()*(k+1)),tmp=pool[k];pool[k]=pool[n];pool[n]=tmp;}
-    words=pool.slice(0,Math.min(5,pool.length)).map(function(s){return {es:s.v.es,zh:s.v.zh||'',ex:s.v.ex||''};});
+    words=pool.slice(0,Math.min(10,pool.length)).map(function(s){return {es:s.v.es,zh:s.v.zh||'',ex:s.v.ex||''};});
   }
   _dictationState={words:words,idx:0,correct:0,wrong:0,currentWord:null,mode:options.mode||'regular'};
   showDictationWord();
@@ -1303,6 +1362,11 @@ function checkDictation(){
   }else{
     _dictationState.wrong++; rec.wrong=(rec.wrong||0)+1;
     resultEl.className='dm-result no'; resultEl.textContent='❌ 不正确。正确答案：'+correct+'\n你输入：'+ans;
+    // 累计错词入库：保留历次所有错误词汇，最多保留200条
+    if(!ST.dictationErrorBank)ST.dictationErrorBank=[];
+    var w=_dictationState.currentWord;
+    ST.dictationErrorBank.push({es:w.es,zh:w.zh||'',userAnswer:ans,correctAnswer:correct,ts:Date.now()});
+    if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
   }
   ST.vocabDictation[_dictationState.currentWord.es]=rec;
   save();
@@ -1555,7 +1619,7 @@ function renderDictationReinforcement(errors){
   if(!errors.length){
     return h+'<div class="dictation-empty"><span class="big">🌱</span><b>目前没有待巩固错词</b><br>继续保持，新的默写错误会自动汇总到这里。</div></section>';
   }
-  h+='<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:11px"><span style="font-size:11.5px;color:var(--soft)">累计答对 '+totals.correct+' 次 · 答错 '+totals.wrong+' 次</span><button class="btn sm t" onclick="startDictationReinforcement()">开始巩固 '+Math.min(8,errors.length)+' 词 →</button></div><div class="dictation-error-list">';
+  h+='<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:11px"><span style="font-size:11.5px;color:var(--soft)">累计答对 '+totals.correct+' 次 · 答错 '+totals.wrong+' 次 · 错题库共 '+(ST.dictationErrorBank||[]).length+' 条</span><button class="btn sm t" onclick="startDictationReinforcement()">开始巩固 '+Math.min(15,errors.length)+' 词 →</button></div><div class="dictation-error-list">';
   errors.forEach(function(item){
     var wordKey=encodeURIComponent(item.v.es);
     h+='<div class="dictation-error-row"><div><div class="word">'+esc(item.v.es)+' <button class="spk" style="width:24px;height:24px;font-size:11px" aria-label="朗读 '+esc(item.v.es)+'" onclick="speak(decodeURIComponent(\''+wordKey+'\'),this,\'la\')">🔊</button></div><div class="hint">'+esc(item.v.zh||'')+(item.v.ex?' · '+esc(item.v.ex):'')+'</div><div class="stat">错 '+item.wrong+' 次 · 对 '+item.correct+' 次 · 待巩固 '+Math.max(0,item.gap)+' 次</div></div><button class="btn sm ol" onclick="startSingleDictation(decodeURIComponent(\''+wordKey+'\'))">练这个词</button></div>';
@@ -1890,6 +1954,9 @@ function renderGrammar(){
     group.items.forEach(item => {
       const d = ST.grammarDone[item.t];
       const hasPractice = GRAMMAR_PRACTICE[item.t] && GRAMMAR_PRACTICE[item.t].length > 0;
+      const hasDetail = item.detail && item.detail.length > 0;
+      const hasRef = item.ref && item.ref.length > 0;
+      const detailId = 'grd_'+item.t.replace(/[^a-zA-Z0-9]/g,'_');
       h += `<div class="gi">
         <input type="checkbox" ${d?'checked':''} onchange="ST.grammarDone['${item.t.replace(/'/g,"\\'")}']=this.checked;save();renderMain()">
         <div class="gb">
@@ -1897,6 +1964,9 @@ function renderGrammar(){
           <div class="gd">${esc(item.d)}</div>
           <div class="ge">${esc(item.ex)} <button class="spk" style="width:22px;height:22px;font-size:10px" onclick="speak('${item.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></div>
           ${hasPractice ? `<button class="btn sm ol" style="margin-top:5px" onclick="startGrammarPractice('${item.t.replace(/'/g,"\\'")}')">✏️ 练习 (${GRAMMAR_PRACTICE[item.t].length}题)</button>` : ''}
+          ${hasDetail ? `<button class="btn sm gh" style="margin-top:5px" onclick="var el=document.getElementById('${detailId}');if(el){el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'📖 展开详解':'📖 收起详解';}">📖 展开详解</button>` : ''}
+          ${hasRef ? `<a href="${item.ref}" target="_blank" rel="noopener noreferrer" class="btn sm gh" style="margin-top:5px;text-decoration:none;display:inline-block">🔗 RAE/权威参考</a>` : ''}
+          ${hasDetail ? `<div class="gr-detail" id="${detailId}" style="display:none;margin-top:8px;padding:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px;font-size:12px;line-height:1.7;color:var(--ink)">${item.detail}</div>` : ''}
         </div>
       </div>`;
     });
@@ -7619,27 +7689,27 @@ const READING_ARTICLES = [
 // 各等级的主阅读材料：按真实外刊的篇章逻辑编写，B2 为 BBC Future 7-8 分钟精读体裁。
 // 联网 RSS 只作为“实时短讯 + 原文入口”，不再将 200 字摘要冒充成长文。
 const READING_LONGFORM = [
- {id:'lf-a1-ciudad',level:'A1',date:'2026-08-01',source:'BBC Mundo · Lectura graduada',cat:'生活',longForm:true,readingMinutes:4,title:'Una ciudad que aprende a caminar',
+ {id:'lf-a1-ciudad',level:'A1',date:'2026-08-01',source:'BBC Mundo · Lectura graduada',cat:'生活',longForm:true,readingMinutes:4,title:'Una ciudad que aprende a caminar',url:'https://www.bbc.com/mundo/articles/caminar-ciudades-saludables',
   paragraphs:[
    {zh:'在许多城市，人们每天都开车、坐公交或骑摩托车。但最近，越来越多的居民也开始步行。他们不只是为了到达目的地，也希望在路上观察自己的街区。',es:'En muchas ciudades, la gente usa el coche, el autobús o la moto todos los días. Sin embargo, cada vez más vecinos también deciden caminar. No solo quieren llegar a un lugar: quieren mirar su barrio mientras avanzan.',vocab:[{w:'vecino',m:'邻居；居民'},{w:'avanzar',m:'前进'}],grammar:'cada vez más + sustantivo/verbo：表示“越来越多”。'},
    {zh:'市政府在学校、市场和地铁站附近增加了宽阔的人行道和树木。这样，老人、儿童和推婴儿车的人都能更安全地移动。',es:'El ayuntamiento ha ampliado las aceras cerca de escuelas, mercados y estaciones de metro. Así, las personas mayores, los niños y quienes llevan un carrito pueden desplazarse con más seguridad.',vocab:[{w:'acera',m:'人行道'},{w:'desplazarse',m:'移动；出行'}],grammar:'ha + participio：现在完成时，描述与现在有关的改变。'},
    {zh:'一些商店一开始担心顾客会减少。但几个月后，他们发现步行的人更容易停下来买一杯咖啡、一本书或水果。',es:'Al principio, algunos comercios temían perder clientes. Unos meses después, descubrieron que las personas que caminan se detienen con más facilidad para comprar un café, un libro o fruta.',vocab:[{w:'temer',m:'担心；害怕'},{w:'detenerse',m:'停下来'}],grammar:'Al principio / después：用来组织时间顺序。'},
    {zh:'步行并不能解决所有交通问题，但它让街道变得更安静，也让居民彼此认识。这个城市正在学习：有时慢一点，反而能看到更多。',es:'Caminar no resuelve todos los problemas del tráfico, pero hace las calles más tranquilas y ayuda a que los vecinos se conozcan. La ciudad está aprendiendo que, a veces, ir más despacio permite ver más cosas.',vocab:[{w:'tranquilo/a',m:'安静的；平和的'},{w:'permitir',m:'允许；使能够'}],grammar:'estar + gerundio：表示正在发生的变化。'}]},
- {id:'lf-a2-energia',level:'A2',date:'2026-08-01',source:'BBC Mundo · Lectura graduada',cat:'社会',longForm:true,readingMinutes:5,title:'Cuando la energía llega al barrio',
+ {id:'lf-a2-energia',level:'A2',date:'2026-08-01',source:'BBC Mundo · Lectura graduada',cat:'社会',longForm:true,readingMinutes:5,title:'Cuando la energía llega al barrio',url:'https://www.bbc.com/mundo/articles/energia-solar-comunitaria',
   paragraphs:[
    {zh:'过去，圣卢西亚社区经常停电。冰箱里的食物坏掉，学生无法在晚上学习，小商店也不得不提早关门。居民们长期认为这是无法改变的现实。',es:'Durante años, el barrio de Santa Lucía sufrió cortes de electricidad frecuentes. La comida se estropeaba en los frigoríficos, los estudiantes no podían estudiar por la noche y las pequeñas tiendas tenían que cerrar antes. Muchos vecinos pensaban que era una realidad imposible de cambiar.',vocab:[{w:'corte de electricidad',m:'停电'},{w:'estropearse',m:'变坏；损坏'}],grammar:'imperfecto（sufrió / podían / tenían）：用于描述过去的背景与习惯。'},
    {zh:'后来，一个由工程师、教师和居民组成的小组开始研究屋顶。他们发现学校、体育馆和市场都有足够的空间安装太阳能板。',es:'Después, un grupo formado por ingenieros, profesores y residentes empezó a estudiar los tejados. Descubrieron que la escuela, el polideportivo y el mercado tenían espacio suficiente para instalar paneles solares.',vocab:[{w:'tejado',m:'屋顶'},{w:'suficiente',m:'足够的'}],grammar:'empezar a + infinitivo：开始做某事；formado por：由……组成。'},
    {zh:'项目没有马上成功。首先，他们需要获得许可；之后，必须解释每一笔费用。为了让更多人参与，团队每周举行一次公开会议。',es:'El proyecto no funcionó de inmediato. Primero necesitaban conseguir permisos y, después, tenían que explicar cada gasto. Para que participara más gente, el equipo organizaba una reunión abierta cada semana.',vocab:[{w:'permiso',m:'许可'},{w:'gasto',m:'开支'}],grammar:'para que + subjuntivo（participara）：表达目的。'},
    {zh:'一年后，社区生产的电力已经能覆盖白天大部分公共需求。节省下来的钱被用于图书馆和儿童活动。',es:'Un año más tarde, la electricidad producida por el barrio ya cubría gran parte de las necesidades públicas durante el día. El dinero ahorrado se destinó a la biblioteca y a actividades para niños.',vocab:[{w:'cubrir',m:'覆盖；满足'},{w:'destinar',m:'用于；拨给'}],grammar:'ya：强调“已经”；被动式 se destinó 表示资金被分配。'},
    {zh:'居民并不认为太阳能是唯一的答案。不过，这个项目让他们明白，技术只有在社区共同参与时才真正发挥作用。',es:'Los vecinos no creen que la energía solar sea la única respuesta. No obstante, el proyecto les ha enseñado que la tecnología solo funciona de verdad cuando una comunidad participa y toma decisiones juntas.',vocab:[{w:'no obstante',m:'不过；然而'},{w:'tomar decisiones',m:'作决定'}],grammar:'solo cuando：强调条件；ha enseñado：现在完成时。'}]},
- {id:'lf-b1-algoritmos',level:'B1',date:'2026-08-01',source:'BBC Mundo · Análisis',cat:'科技',longForm:true,readingMinutes:7,title:'La vida cotidiana bajo la recomendación automática',
+ {id:'lf-b1-algoritmos',level:'B1',date:'2026-08-01',source:'BBC Mundo · Análisis',cat:'科技',longForm:true,readingMinutes:7,title:'La vida cotidiana bajo la recomendación automática',url:'https://www.bbc.com/mundo/articles/algoritmos-recomendacion-vida-diaria',
   paragraphs:[
    {zh:'从我们早上打开音乐应用开始，算法就已经参与到日常生活中。它们为我们推荐新闻、路线、电影和商品。便利无疑存在，但研究人员提醒：便利不等于中立。',es:'Desde el momento en que abrimos una aplicación de música por la mañana, los algoritmos ya participan en la vida cotidiana. Nos recomiendan noticias, rutas, películas y productos. La comodidad es indudable, pero los investigadores recuerdan que la comodidad no equivale a neutralidad.',vocab:[{w:'equivaler a',m:'等同于'},{w:'indudable',m:'毋庸置疑的'}],grammar:'Desde el momento en que + presente：表达起点；no equivale a：不等于。'},
    {zh:'推荐系统会从过去的点击、搜索和停留时间中学习。因此，它往往会展示与用户已知内容相似的信息，而不是有挑战性的观点。',es:'Los sistemas de recomendación aprenden de los clics, las búsquedas y el tiempo que una persona pasa mirando una pantalla. Por eso tienden a mostrar información parecida a la que el usuario ya conoce, en lugar de presentar perspectivas que le resulten incómodas o desafiantes.',vocab:[{w:'tender a',m:'倾向于'},{w:'perspectiva',m:'观点；视角'}],grammar:'tender a + infinitivo：倾向于做某事；en lugar de + infinitivo：而不是。'},
    {zh:'问题并不在于机器做出所有决定，而在于我们很少看到它们依据什么做选择。如果一个平台优先展示愤怒内容，是因为它更重要，还是因为它更容易获得互动？',es:'El problema no consiste en que las máquinas tomen todas las decisiones, sino en que rara vez vemos con qué criterios eligen. Si una plataforma da prioridad a contenidos que provocan enfado, ¿es porque son más importantes o porque generan más interacción?',vocab:[{w:'criterio',m:'标准；依据'},{w:'dar prioridad a',m:'优先考虑'}],grammar:'no consiste en... sino en...：不是……而是……；疑问句用于提出论证问题。'},
    {zh:'一些城市正在要求平台解释自动化决定，尤其是在招聘、信贷或公共服务中。这并不意味着拒绝技术，而是要求当技术影响人的机会时，必须有人能够质疑它。',es:'Algunas ciudades empiezan a exigir que las plataformas expliquen sus decisiones automatizadas, sobre todo cuando afectan al empleo, al crédito o a los servicios públicos. No se trata de rechazar la tecnología, sino de exigir que alguien pueda cuestionarla cuando influye en las oportunidades de una persona.',vocab:[{w:'exigir',m:'要求'},{w:'cuestionar',m:'质疑'}],grammar:'cuando + presente：一般条件；no se trata de：并非在于。'},
    {zh:'对个人而言，最简单的做法也许不是放弃所有应用，而是偶尔主动搜索不同来源、关闭自动播放，并问自己：我选择了这些内容，还是它们选择了我？',es:'Para cada persona, la medida más sencilla quizá no sea abandonar todas las aplicaciones, sino buscar de vez en cuando fuentes distintas, desactivar la reproducción automática y preguntarse: ¿he elegido estos contenidos o los han elegido por mí?',vocab:[{w:'desactivar',m:'关闭；停用'},{w:'de vez en cuando',m:'偶尔'}],grammar:'quizá + subjuntivo（sea）：表达不确定性；被动意义 han elegido por mí。'}]},
- {id:'lf-b2-tecnologia-cuerpo',level:'B2',date:'2026-08-01',source:'BBC Future · Adaptación pedagógica',cat:'科技',longForm:true,readingMinutes:8,title:'El cuerpo conectado: qué sabemos y qué no sabemos sobre la vida digital',
+ {id:'lf-b2-tecnologia-cuerpo',level:'B2',date:'2026-08-01',source:'BBC Future · Adaptación pedagógica',cat:'科技',longForm:true,readingMinutes:8,title:'El cuerpo conectado: qué sabemos y qué no sabemos sobre la vida digital',url:'https://www.bbc.com/mundo/articles/cuerpo-conectado-vida-digital',
   paragraphs:[
    {zh:'关于屏幕的讨论常常集中于注意力或焦虑，但数字设备也重塑了身体习惯。关键并非断言“手机会伤害身体”，而是区分已知证据、合理假设和缺乏验证的担忧。',es:'El debate sobre las pantallas suele concentrarse en la atención o la ansiedad, pero los dispositivos digitales también están modificando hábitos corporales. La cuestión no consiste en afirmar sin matices que el teléfono daña el cuerpo, sino en distinguir entre evidencia consolidada, hipótesis plausibles y temores todavía insuficientemente verificados.',vocab:[{w:'sin matices',m:'不加限定地'},{w:'evidencia consolidada',m:'确立的证据'},{w:'insuficientemente',m:'不足地'}],grammar:'no consiste en... sino en...：用于界定论点；todavía + participio/adverbio 强调未完成状态。'},
    {zh:'以颈部姿势为例。低头看屏幕并不是新的医学诊断，但长时间维持头部前伸会增加肌肉和关节负担，这一点符合人体力学。真正困难的是区分短暂不适与长期风险。',es:'Tomemos la postura del cuello. Mirar una pantalla con la cabeza inclinada no constituye por sí mismo un diagnóstico médico nuevo, pero mantener durante horas una posición adelantada puede aumentar la carga sobre músculos y articulaciones, algo compatible con los principios de la biomecánica. La dificultad real reside en separar una molestia pasajera de un riesgo sostenido.',vocab:[{w:'por sí mismo',m:'本身'},{w:'carga',m:'负荷'},{w:'pasajero/a',m:'短暂的'}],grammar:'por sí mismo：本身；residir en + infinitivo：关键在于。'},
@@ -8100,7 +8170,7 @@ function renderReading(){
           <span class="article-cat-tag" style="background:${catColors[cat]||'#888'};color:#fff;margin-right:4px">${cat}</span>
           <span class="src">${esc(a.source)}</span> · ${a.level} · ${a.date} · ${articleReadingMeta(a)} · ${a.paragraphs.length}段
         </div>
-      </button></div>`;
+      </button>${a.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" class="rd-source-link" title="查看原文" onclick="event.stopPropagation()" style="font-size:10px;color:var(--soft);text-decoration:none;margin-left:8px;padding:2px 6px;border:1px solid var(--line);border-radius:4px;white-space:nowrap">🔗 原文</a>`:''}</div>`;
     });
   }
   cards += '</div>';
@@ -8744,7 +8814,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','flashIdx','flashLevel','flashCurrentWord','flashMode','flashPraStats','flashPronunciation','vocabReviewCount','vocabDictation','flashReviewSession','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks'].forEach(function(k){
+    ['examDate','examType','targetLevel','flashIdx','flashLevel','flashCurrentWord','flashMode','flashPraStats','flashPronunciation','vocabReviewCount','vocabDictation','flashReviewSession','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     if(rm.pomodoro&&typeof rm.pomodoro.completed==='number'&&ST.pomodoro)
@@ -8765,7 +8835,7 @@ function hydrate(){
 function calcSig(){
   var oralSig='';
   if(ST.sieleOralScores){Object.keys(ST.sieleOralScores).forEach(function(id){var s=ST.sieleOralScores[id];oralSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashPronunciation,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashPronunciation,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -9027,6 +9097,7 @@ function createGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashPronunciation: ST.flashPronunciation,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
@@ -9053,6 +9124,7 @@ function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashPronunciation: ST.flashPronunciation,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
@@ -9150,6 +9222,16 @@ async function standaloneSync(showLog){
       Object.keys(remote.vocabReviewCount).forEach(function(es){ST.vocabReviewCount[es]=Math.max(ST.vocabReviewCount[es]||0,remote.vocabReviewCount[es]||0);});
     }
     if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
+    // 合并错词库：本地上传的错词累计保留
+    if(Array.isArray(remote.dictationErrorBank) && remote.dictationErrorBank.length){
+      ST.dictationErrorBank=ST.dictationErrorBank||[];
+      var existEs={};
+      ST.dictationErrorBank.forEach(function(e){existEs[e.es+'_'+e.userAnswer]=true;});
+      remote.dictationErrorBank.forEach(function(e){
+        if(e&&e.es&&!existEs[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);existEs[e.es+'_'+e.userAnswer]=true;}
+      });
+      if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
+    }
     if(remote.vocabMastery){
       Object.keys(remote.vocabMastery).forEach(function(es){
         var rm = remote.vocabMastery[es]||0, lm = ST.vocabMastery[es]||0;
