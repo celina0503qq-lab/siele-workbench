@@ -1,0 +1,38 @@
+{
+  "name": "西语备考工作台 · DELE & SIELE",
+  "short_name": "西语备考",
+  "description": "DELE/SIELE 西语考试备考工作台，含词汇、语法、跟读、测验、写作、口语、错题集、外刊阅读等模块",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3EBDD",
+  "theme_color": "#C0392B",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

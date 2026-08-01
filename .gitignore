@@ -1,0 +1,6 @@
+node_modules/
+*.log
+.env
+.DS_Store
+Thumbs.db
+# .github/ — explicitly included for Actions workflow
