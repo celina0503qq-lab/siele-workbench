@@ -625,85 +625,126 @@ const QDATA = [{"ex": "dele", "lvl": "A1", "type": "reading", "q": "Lee: \"Hola,
 const GFLAT = [];
 GDATA.forEach(g => g.items.forEach(it => GFLAT.push(Object.assign({lvl:g.lvl}, it))));
 
-// ===== GRAMMAR EXPANSION (v2 深度扩充版 · RAE/DELE Ahora/FundéuRAE参考) =====
+// ===== GRAMMAR EXPANSION (v3 权威扩充版 · RAE NGBLE/DLE + DELE Ahora + FundéuRAE + ProfeDeELE) =====
 const GRAMMAR_EXTRA = [
-  // ── A1 ──
+  // ══════ A1 (8 extra) ══════
+  {lvl:'A1', t:'Hay vs. Está(n)', d:'hay=存在(某处有某物); está(n)=位置(已知物在某处)。hay无冠词无复数; está(n)有冠词。', ex:'Hay un libro en la mesa. El libro está en la mesa. ¿Hay un banco por aquí?',
+   detail:'<b>hay:</b> 无人称，总有单数(haber 的 hay 形式)。Hay un perro / Hay dos gatos ✅。<b>está(n):</b> 已知事物在某处。El perro está en el jardín ✅。<br><b>否定:</b> No hay nada / No está aquí。<br><b>疑问:</b> ¿Hay...? 问存在；¿Dónde está...? 问位置。<br><b>易错:</b> Hay un libro está en la mesa ❌ (只能选一个)。',
+   ref:'https://dle.rae.es/haber'},
   {lvl:'A1', t:'Verbos irregulares -o→ue', d:'词根变化 o→ue 的动词：重音在词根时 o→ue (poder→puedo, dormir→duermo, volver→vuelvo)。nosotros/vosotros 不变。', ex:'Yo puedo hablar español. Ella duerme ocho horas. ¿A qué hora vuelves?',
    detail:'<b>规则：</b>陈述式现在时中，重音在词根音节时 o 变 ue。nosotros/vosotros 不变（重音不在词根）。<br><b>常用：</b>poder, dormir, volver, encontrar, recordar, contar, costar, mover, morir, mostrar, probar, sonar, soñar, volar, llover。<br><b>DELE考点：</b>选择题和填空高频。注意与 e→ie 区分。',
-   ref:'https://www.rae.es/dpd/diptongaci%C3%B3n'},
+   ref:'https://dle.rae.es/diptongar'},
   {lvl:'A1', t:'Verbos irregulares -e→ie', d:'词根变化 e→ie 的动词 (querer→quiero, pensar→pienso, empezar→empiezo)。规则同 o→ue。', ex:'Quiero un café. Pienso en ti. ¿A qué hora empieza la clase?',
    detail:'<b>常用：</b>querer, pensar, empezar, entender, cerrar, preferir, sentir, mentir, perder, despertar, divertir, recomendar。<br><b>SIELE口语：</b>Tarea 1 常用 empezar/querer/preferir 表达偏好。<br><b>易错：</b>tener 也是 e→ie 但第一人称特殊 (tengo)。',
-   ref:'https://www.rae.es/dpd/diptongaci%C3%B3n'},
+   ref:'https://dle.rae.es/diptongar'},
   {lvl:'A1', t:'Tener: expresiones idiomáticas', d:'tener + 名词表达状态：hambre(饿), sed(渴), sueño(困), prisa(急), miedo(怕), razón(对), calor/frío(热/冷), suerte(幸运)。不可用 ser/estar 替代！', ex:'Tengo hambre. Tienes razón. ¿Tienes frío? Tengo ganas de viajar.',
    detail:'<b>核心规则：</b>西语用 tener+名词表达感受，不用 estar+形容词（英语思维中式西语）。<br><b>完整列表：</b>hambre/sed/sueño/prisa/miedo/calor/frío/razón/celos/éxito/suerte/cuidado/vergüenza/años/dolor de cabeza/ganas de+inf。<br><b>tener ganas de</b> (有心情做) vs querer (想要)。<br><b>易错：</b>I am hungry ≠ Estoy hambriento ❌ → Tengo hambre ✅。',
    ref:'https://dle.rae.es/tener'},
+  {lvl:'A1', t:'Género de sustantivos', d:'名词阴阳性规则：-o多阳性(例外mano/moto/foto→阴性)，-a多阴性(例外día/mapa/problema→阳性)，-ción/sión/dad/tad/umbre→阴性。', ex:'El problema es grave. La mano está fría. La canción es bonita.',
+   detail:'<b>常见阳性词尾:</b> -o(例外:mano,foto,moto,radio), -aje, -or, -ema。<b>常见阴性词尾:</b> -a, -ción, -sión, -dad, -tad, -umbre, -ez。<br><b>同形异义词:</b> el cometa(彗星)/la cometa(风筝); el cura(神父)/la cura(治愈); el capital(资本)/la capital(首都)。<br><b>易错:</b> la problema ❌→el problema ✅；el canción ❌→la canción ✅。',
+   ref:'https://dle.rae.es/g%C3%A9nero'},
   {lvl:'A1', t:'Demostrativos', d:'指示词三层次距离：este(近), ese(中), aquel(远)。与名词性数一致：este/esta/estos/estas 等。中性 esto/eso/aquello 指抽象事物。', ex:'Este libro es mío; esa casa es nueva. Aquello fue increíble.',
    detail:'<b>距离：</b>este→说话者近；ese→听话者近；aquel→两者都远。西语是三层次（英语仅 this/that）。<br><b>代词/形容词：</b>形容词放名词前(este libro)；代词独立(este es mío)。RAE 2010后代词不再强制加重音。<br><b>易错：</b>ese/aquel 混淆；拉美口语 ese 常代 aquel，但考试需区分。',
-   ref:'https://www.rae.es/dpd/demostrativos'},
+   ref:'https://dle.rae.es/demostrativo'},
   {lvl:'A1', t:'Posesivos', d:'短尾(前置)：mi/mis, tu/tus, su/sus, nuestro/a/os/as, vuestro/a/os/as。长尾(后置)：mío/tuyo/suyo。su 歧义多，需上下文判断。', ex:'Mi casa es tu casa. Nuestros padres son de Madrid. Este coche es mío.',
    detail:'<b>短尾 vs 长尾：</b>短尾在名词前(mi libro)，长尾在名词后(un libro mío)或 be后(es mío)。<br><b>su歧义：</b>可指"他的/她的/您的/他们的/她们的/您们的"。口语用 de él/ella/usted 避免歧义。<br><b>易错：</b>性数不一致(nuestra libro ❌ → nuestro libro ✅)。',
-   ref:'https://www.rae.es/dpd/posesivos'},
+   ref:'https://dle.rae.es/posesivo'},
+  {lvl:'A1', t:'Interrogativos', d:'疑问词：qué(什么), quién/quiénes(谁), cuándo(何时), dónde(哪里), cómo(怎样), cuál/cuáles(哪个), cuánto/a/os/as(多少)。所有疑问词都带重音。', ex:'¿Qué quieres? ¿Quién es ella? ¿Cuándo llegas? ¿Dónde vives? ¿Cómo estás? ¿Cuál prefieres? ¿Cuántos años tienes?',
+   detail:'<b>qué vs cuál:</b> qué+名词(¿Qué libro?)；cuál+动词/单独(¿Cuál es tu libro?)。<br><b>cuánto性数一致:</b> cuánto dinero/cuánta leche/cuántos años/cuántas personas。<br><b>间接疑问:</b> No sé qué quieres / Dime dónde está。<br><b>易错:</b> 忘加重音(Que quieres ❌→Qué quieres ✅)；cuál后直接加名词(cuál libro ❌→qué libro ✅)。',
+   ref:'https://dle.rae.es/interrogativo'},
 
-  // ── A2 ──
+  // ══════ A2 (8 extra) ══════
   {lvl:'A2', t:'Pretérito perfecto: participios irregulares', d:'现在完成时=haber+过去分词。不规则：abrir→abierto, hacer→hecho, decir→dicho, escribir→escrito, ver→visto, poner→puesto, romper→roto, volver→vuelto, morir→muerto, freír→frito。', ex:'He abierto la puerta. ¿Qué has hecho hoy? Ya he visto esa película.',
    detail:'<b>haber变位：</b>he, has, ha, hemos, habéis, han。<br><b>场景：</b>1)最近过去(hoy, esta semana)；2)过去行为影响现在；3)西班牙多用 perfecto，拉美多用 indefinido。<br><b>易错：</b>hacer→hacido ❌ (hecho ✅)；abrir→abrido ❌ (abierto ✅)。',
-   ref:'https://www.rae.es/dpd/participio'},
+   ref:'https://dle.rae.es/participio'},
+  {lvl:'A2', t:'Ir a + infinitivo', d:'将来表达式：ir(现在时)+a+动词原形。表示近期计划/意图/即将发生。"voy a..."=我要...。比将来时更口语化。', ex:'Voy a estudiar español. ¿Vas a venir? Vamos a comer juntos.',
+   detail:'<b>ir变位:</b> voy, vas, va, vamos, vais, van + a + inf。<br><b>vs Futuro simple:</b> ir a+inf → 近期确定计划(Voy a viajar mañana)；futuro simple → 更远/不确定(Algún día viajaré a Japón)。<br><b>SIELE口语:</b> Tarea 1 常用 ir a 介绍计划。<br><b>易错:</b> a 不能省略(Voy estudiar ❌→Voy a estudiar ✅)。',
+   ref:'https://dle.rae.es/ir'},
   {lvl:'A2', t:'Gerundio: formas y usos', d:'副动词：-ando(ar动词)/-iendo(er/ir)。不规则：decir→diciendo, pedir→pidiendo, dormir→durmiendo, leer→leyendo。estar+gerundio=正在做。', ex:'Estoy comiendo. Ella está leyendo un libro. ¿Qué estás haciendo?',
    detail:'<b>不规则：</b>e→i(pedir→pidiendo)；o→u(dormir→durmiendo)；i→y(leer→leyendo)。<br><b>句型：</b>estar+gerundio(正在), seguir+gerundio(继续), llevar+tiempo+gerundio(已做多久), ir+gerundio(逐步)。<br><b>SIELE口语：</b>Tarea 2 图片描述必须用 estar+gerundio。<br><b>易错：</b>将来语境用 estar+gerundio (Voy a estar estudiando ❌ → Voy a estudiar ✅)。',
-   ref:'https://www.rae.es/dpd/gerundio'},
+   ref:'https://dle.rae.es/gerundio'},
+  {lvl:'A2', t:'Muy vs. Mucho', d:'muy+形容词/副词(不变)；mucho+名词(性数一致)/+动词(不变)。muy bonito, mucho dinero, hablo mucho。', ex:'Es muy guapa. Tiene mucho dinero. Corre mucho. Hay mucha gente.',
+   detail:'<b>muy:</b> 放形容词/副词前，永不变化。muy bien/muy grande/muy interesante ✅。<br><b>mucho/a/os/as:</b> 放名词前，性数一致。mucho tiempo/mucha agua/muchos libros/muchas personas。<br><b>动词后:</b> mucho 不变(Trabajo mucho, Comen mucho)。<br><b>易错:</b> Muy dinero ❌→Mucho dinero ✅；Es mucho bonito ❌→Es muy bonito ✅。',
+   ref:'https://dle.rae.es/muy'},
   {lvl:'A2', t:'Verbos tipo gustar', d:'gustar类动词结构：IO代词+动词+主语。单复数取决于主语。同类：encantar, interesar, doler, parecer, importar, molestar, faltar, quedar。', ex:'Me gusta el café. Me interesan los libros. A Juan le duele la cabeza. Nos encanta viajar.',
    detail:'<b>结构：</b>"A mí me gusta X"=X使我喜欢。主语是X。gusta+单数/动原；gustan+复数。<br><b>常用：</b>encantar(超喜欢), interesar(感兴趣), doler(疼), parecer(觉得), importar(在乎), molestar(打扰), faltar(缺), quedar(剩下), fascinar(着迷)。<br><b>易错：</b>动词与IO代词一致(Me gusto ❌→Me gusta ✅)；忘前置词a(Juan le duele ❌→A Juan le duele ✅)。',
    ref:'https://dle.rae.es/gustar'},
   {lvl:'A2', t:'Pronombres CD/CI', d:'宾格(CD)：me/te/lo/la/nos/os/los/las。与格(CI)：me/te/le/nos/os/les。同时用：CI+CD+动词，le/les在lo/la前变se (se lo)。', ex:'Lo veo todos los días. La quiero mucho. Le di el libro. Se lo di.',
    detail:'<b>CD：</b>回答 ¿qué? ¿a quién?。替代受动作用的成分。<br><b>CI：</b>回答 ¿a quién? ¿para quién?。接受者/受益人。le/les不分性别。<br><b>同时用：</b>CI+CD顺序。le/les+lo/la→se (le lo ❌→se lo ✅)。<br><b>易错：</b>leísmo(用le代lo指男性，西班牙中部可接受但考试应规范)。',
-   ref:'https://www.rae.es/dpd/pronombres%20personales%20%C3%A1tonos'},
+   ref:'https://dle.rae.es/pronombre'},
+  {lvl:'A2', t:'Preposiciones de lugar', d:'地点介词：en(在), sobre/encima de(在...上), debajo de(在...下), delante de(前), detrás de(后), al lado de(旁边), entre(之间), cerca/lejos de(近/远)。', ex:'El gato está encima de la mesa. La farmacia está al lado del banco. Vivo cerca del parque.',
+   detail:'<b>区别:</b> sobre=接触表面(El libro está sobre la mesa)；encima de=可在上方(El avión vuela encima de la ciudad)。<br><b>固定搭配:</b> al lado de(旁边), enfrente de(对面), alrededor de(周围)。<br><b>SIELE口语:</b> Tarea 2 图片描述大量使用。<br><b>易错:</b> enfrente de la farmacia ✅ vs en frente ❌。',
+   ref:'https://dle.rae.es/preposici%C3%B3n'},
   {lvl:'A2', t:'Conjunciones clave', d:'并列：y(和), o(或), pero(但是), sino(而是), ni(也不)。从属：porque(因为), cuando(当), si(如果), aunque(虽然), para que(为了)。', ex:'Quiero ir pero no tengo tiempo. No es azul sino verde. Estudio para que pueda aprobar.',
    detail:'<b>pero vs sino：</b>pero=肯定后转折；sino="而是"用于否定后(No es azul sino verde)。<br><b>porque vs para que：</b>porque+陈述式=因为；para que+虚拟式=为了。<br><b>易错：</b>sino误用pero；cuando将来忘虚拟式(cuando llegaré ❌→cuando llegue ✅)。',
-   ref:'https://www.rae.es/dpd/conjunciones'},
+   ref:'https://dle.rae.es/conjunci%C3%B3n'},
+  {lvl:'A2', t:'También vs. Tampoco', d:'también=也(肯定)；tampoco=也不(否定)。a mí también(我也是)/a mí tampoco(我也不)。注意 yo también vs a mí también 区别。', ex:'Me gusta el café. —A mí también. No me gusta el té. —A mí tampoco. Yo también estudio español.',
+   detail:'<b>también:</b> 用于肯定句后表同意。Yo también = 我也做(同主语)。A mí también = 我也喜欢/也觉得(不同主语结构)。<br><b>tampoco:</b> 用于否定句后。No voy → Yo tampoco。No me gusta → A mí tampoco。<br><b>易错:</b> 否定后误用 también(No me gusta. —A mí también ❌→A mí tampoco ✅)。',
+   ref:'https://dle.rae.es/tambi%C3%A9n'},
 
-  // ── B1 ──
-  {lvl:'B1', t:'Pluscuamperfecto', d:'过去完成时=haber(imperfecto)+过去分词。描述一个过去动作之前已完成的动作——"过去的过去"。', ex:'Cuando llegué, ya había comido. Nunca había visto algo así.',
+  // ══════ B1 (8 extra) ══════
+  {lvl:'B1', t:'Indefinido vs. Imperfecto', d:'indefinido=完成的动作(时间线上的一点)；imperfecto=未完成/背景/习惯(时间线上的一段)。最经典对比：Llovía cuando salí.', ex:'Ayer fui al cine (完成). Cuando era niño, jugaba en el parque (习惯). Mientras cocinaba, sonó el teléfono (背景+打断).',
+   detail:'<b>Indefinido标记词:</b> ayer, el mes pasado, en 2020, de repente, una vez。<br><b>Imperfecto标记词:</b> siempre, todos los días, mientras, de niño, antes。<br><b>叙事结构:</b> imperfecto=布景(estaba, hacía, era)；indefinido=事件(entró, dijo, pasó)。<br><b>易错:</b> 叙事件用 imperfecto(Ayer jugaba al fútbol ❌→Ayer jugué ✅)。',
+   ref:'https://www.rae.es/gram%C3%A1tica-b%C3%A1sica/'},
+  {lvl:'B1', t:'Pretérito pluscuamperfecto', d:'过去完成时=haber(imperfecto)+过去分词。描述一个过去动作之前已完成的动作——"过去的过去"。', ex:'Cuando llegué, ya había comido. Nunca había visto algo así.',
    detail:'<b>变位：</b>había/habías/había/habíamos/habíais/habían + participio。<br><b>vs Pretérito Perfecto：</b>perfecto="现在之前"(Hoy he comido)；pluscuamperfecto="过去某时之前"(Ayer, cuando llegué, ya había comido)。<br><b>DELE考点：</b>B1阅读长句理解关键；写作中展示时态丰富度。',
-   ref:'https://www.rae.es/dpd/pluscuamperfecto'},
+   ref:'https://dle.rae.es/pluscuamperfecto'},
   {lvl:'B1', t:'Oraciones de relativo', d:'关系从句：que(通用), quien/quienes(仅人), donde(地点), cuyo/cuya(所属)。陈述式=已知；虚拟式=不确定/否定/疑问。', ex:'La casa que compré es grande. El hombre de quien hablo es mi amigo. Busco un libro que tenga ilustraciones.',
    detail:'<b>que vs quien：</b>que 指人/物通用。quien 仅指人，且在介词后(con quien, de quien)。<br><b>陈述式 vs 虚拟式：</b>确定→陈述式(La chica que habla español)；不确定→虚拟式(Busco una chica que hable español)。<br><b>cuyo：</b>性数与所属物一致(非所有者)。El hombre cuyo hijo es médico。<br><b>易错：</b>cuyo 与所有者一致❌→应与被拥有物一致✅。',
-   ref:'https://www.rae.es/dpd/que'},
+   ref:'https://dle.rae.es/que'},
   {lvl:'B1', t:'Imperativo negativo', d:'否定命令式=no+虚拟式现在时。所有人称(tú/usted/vosotros/ustedes)均用虚拟式，与肯定命令式(tú/vosotros特殊)不同。代词放在no和动词之间。', ex:'No fumes aquí. No comas eso. No me lo digas.',
    detail:'<b>变位：</b>tú→no hables；usted→no hable；vosotros→no habléis；ustedes→no hablen。<br><b>代词位置：</b>否定命令：No lo comas. (代词在no和动词间)。肯定命令：Cómelo. (代词在后)。<br><b>SIELE口语：</b>Tarea 3 给出否定指令/建议。<br><b>易错：</b>否定+肯定形式(No habla ❌→No hables ✅)；代词位置(No cómelo ❌→No lo comas ✅)。',
-   ref:'https://www.rae.es/dpd/imperativo'},
+   ref:'https://dle.rae.es/imperativo'},
   {lvl:'B1', t:'Verbos pronominales avanzados', d:'代词式动词不仅是"自己做"：很多动词加se改变含义(ir→irse离开, dormir→dormirse入睡)。纯代词式动词：quejarse, arrepentirse, atreverse, darse cuenta de。', ex:'Me ducho cada mañana. Se fue sin decir nada. Me di cuenta del error.',
-   detail:'<b>含义变化：</b>ir(去)→irse(离开)；dormir(睡觉)→dormirse(入睡)；llevar(携带)→llevarse(带走)；encontrar(找到)→encontrarse(感觉)。<br><b>纯代词式：</b>quejarse(抱怨), arrepentirse(后悔), atreverse(敢于), darse cuenta de(意识到), jactarse(吹嘘)。<br><b>易错：</b>始终用代词式忽略原意(Me duermo ocho horas ❌→Duermo ocho horas ✅)。',
-   ref:'https://www.rae.es/dpd/verbos%20pronominales'},
+   detail:'<b>含义变化：</b>ir(去)→irse(离开)；dormir(睡觉)→dormirse(入睡)；llevar(携带)→llevarse(带走)；encontrar(找到)→encontrarse(感觉)。<br><b>纯代词式：</b>quejarse(抱怨), arrepentirse(后悔), atreverse(敢于), darse cuenta de(意识到), jactarse(吹嘘)。<br><b>易错：</b>始终用代词式忽略原意(Me dormí ocho horas ❌→Dormí ocho horas ✅)。',
+   ref:'https://dle.rae.es/pronominal'},
   {lvl:'B1', t:'Estilo indirecto', d:'间接引语：主句动词过去时→从句时态后退。presente→imperfecto, perfecto/indefinido→pluscuamperfecto, futuro→condicional。人称/时间/地点词也需调整。', ex:'Dice que tiene hambre. Dijo que tenía hambre. Me contó que ya había terminado.',
    detail:'<b>时态后退：</b>presente→imperfecto；pretérito→pluscuamperfecto；futuro→condicional；imperativo→imperfecto subjuntivo。<br><b>其他调整：</b>人称代词、时间词(hoy→aquel día)、地点词(aquí→allí)。<br><b>SIELE：</b>Tarea 3-4 常需转述信息。<br><b>易错：</b>忘记调人称和副词；过去时引述动词后从句仍用原时态。',
-   ref:'https://www.rae.es/dpd/estilo%20indirecto'},
+   ref:'https://dle.rae.es/estilo'},
+  {lvl:'B1', t:'Condicional simple', d:'简单条件式：-ía/-ías/-ía/-íamos/-íais/-ían。表示礼貌请求、愿望、过去将来、第二类条件句结果。', ex:'¿Podrías ayudarme? Me gustaría un café. Dijo que vendría. Si tuviera dinero, viajaría.',
+   detail:'<b>用法:</b> 1)礼貌(¿Podría...? Querría...); 2)愿望(Me gustaría...); 3)过去将来(Dijo que vendría); 4)第二类条件句(Si+imp.subj.+condicional)。<br><b>不规则词根:</b> decir→dir-, hacer→har-, poder→podr-, poner→pondr-, querer→querr-, saber→sabr-, salir→saldr-, tener→tendr-, venir→vendr-。<br><b>易错:</b> 规则变位忘ía重音(hablaria ❌→hablaría ✅)。',
+   ref:'https://dle.rae.es/condicional'},
+  {lvl:'B1', t:'Conectores discursivos (A2-B1)', d:'语篇连接词：además(此外), sin embargo(然而), por lo tanto(因此), en cambio(相反), es decir(即), por ejemplo(例如), en primer lugar(首先), para terminar(最后)。', ex:'Me gusta viajar; sin embargo, no tengo tiempo. Estudio mucho; por lo tanto, apruebo.',
+   detail:'<b>添加信息:</b> además, asimismo, incluso, también。<b>对比:</b> sin embargo, no obstante, en cambio, por el contrario。<b>因果:</b> por lo tanto, por consiguiente, así que, de modo que。<b>解释:</b> es decir, o sea, en otras palabras。<br><b>SIELE写作:</b> B1作文必须使用连接词展示篇章结构。<br><b>易错:</b> sin embargo 单独用忘前后逗号。',
+   ref:'https://dle.rae.es/conector'},
 
-  // ── B2 ──
+  // ══════ B2 (9 extra) ══════
   {lvl:'B2', t:'Imperfecto de subjuntivo', d:'虚拟式过去时：从indefinido第三人称复数去-ron加-ra/-ras/-ra/-ramos/-rais/-ran(或-se系列)。用于条件句/愿望/假设/过去虚拟从句。', ex:'Si tuviera dinero, compraría un coche. Quería que lo hicieras. Ojalá lloviera.',
    detail:'<b>两种形式：</b>-ra(hablara)和-se(hablase)等同。拉美偏好-ra，西班牙混用。<br><b>用法：</b>1)第二类条件句(Si+imp.subj.+condicional)；2)过去动词后虚拟从句；3)ojalá/quizás+不太可能愿望；4)como si+imp.subj.(好像)。<br><b>易错：</b>条件句时态不匹配(Si tendría ❌→Si tuviera, compraría ✅)。',
-   ref:'https://www.rae.es/dpd/subjuntivo'},
+   ref:'https://dle.rae.es/subjuntivo'},
+  {lvl:'B2', t:'Pluscuamperfecto de subjuntivo', d:'虚拟式过去完成时=hubiera/hubiese+过去分词。用于第三类条件句(过去假设)、过去愿望、como si结构。', ex:'Si hubiera estudiado, habría aprobado. Ojalá hubiera venido. Habla como si no hubiera pasado nada.',
+   detail:'<b>变位:</b> hubiera/hubieras/hubiera/hubiéramos/hubierais/hubieran + participio。<br><b>第三类条件句:</b> Si+hubiera+participio..., habría+participio (不可能实现的过去假设)。<br><b>其他用法:</b> como si+hubiera... (好像发生过)；ojalá+hubiera... (对过去的愿望)。<br><b>易错:</b> 两边都用 habría(Si habría estudiado ❌→Si hubiera estudiado...habría aprobado ✅)。',
+   ref:'https://dle.rae.es/pluscuamperfecto'},
   {lvl:'B2', t:'Condicional compuesto', d:'条件复合时=haber(condicional)+过去分词。用于过去的假设("本会..."但没发生)和第三类条件句。', ex:'Habría ido si me hubieras invitado. Lo habríamos comprado.',
    detail:'<b>变位：</b>habría/habrías/habría/habríamos/habríais/habrían+participio。<br><b>用法：</b>1)第三类条件句(Si+hubiera+participio..., habría+participio)；2)对过去推测(Yo habría tenido 10 años)；3)礼貌表达(Habría que pensarlo)。<br><b>易错：</b>两边都用condicional compuesto(Si habría tenido ❌→Si hubiera tenido...habría ido ✅)。',
-   ref:'https://www.rae.es/dpd/condicional'},
+   ref:'https://dle.rae.es/condicional'},
   {lvl:'B2', t:'Oraciones concesivas', d:'让步从句：aunque+陈述式(已知)/虚拟式(假设)。同类：a pesar de que, por más que, por mucho que, aun cuando, si bien。"即使...也..."。', ex:'Aunque llueva, saldré. Por más que intento, no lo consigo. A pesar de que es rico, vive modestamente.',
    detail:'<b>aunque+陈述式 vs 虚拟式：</b>陈述式→已知(Aunque está lloviendo, salgo)；虚拟式→假设(Aunque llueva, saldré)。<br><b>por más que：</b>"无论多么…"，可接陈述式(已知)或虚拟式(假设)。<br><b>易错：</b>假设让步用陈述式(Aunque lloverá ❌→Aunque llueva ✅)。',
-   ref:'https://www.rae.es/dpd/oraciones%20concesivas'},
+   ref:'https://dle.rae.es/concesivo'},
   {lvl:'B2', t:'Oraciones finales', d:'目的从句：para que/a fin de que+虚拟式(主语不同)；para+infinitivo(主语相同)。', ex:'Te lo explico para que lo entiendas. Estudio a fin de aprobar.',
    detail:'<b>主语相同：</b>para+动原(Estudio para aprobar)。<b>主语不同：</b>para que+虚拟式(Estudio para que mi madre esté orgullosa)。<br><b>连接词：</b>para/para que, a fin de/a fin de que, con el fin de/que, con el objeto de/que。<br><b>易错：</b>主语不同忘虚拟式(para que entiendes ❌→para que entiendas ✅)。',
-   ref:'https://www.rae.es/dpd/oraciones%20finales'},
+   ref:'https://dle.rae.es/final'},
   {lvl:'B2', t:'Oraciones temporales', d:'时间从句：cuando/en cuanto/antes de que/hasta que/mientras。将来/未实现→虚拟式；现在/过去/习惯→陈述式。', ex:'Cuando llegues, llámame. En cuanto termine, te aviso. No salgas hasta que yo llegue.',
    detail:'<b>陈述式vs虚拟式：</b>现在/过去/习惯→陈述式(Cuando llego, me ducho)；将来→虚拟式(Cuando llegue, te llamo)。<br><b>antes de que：</b>始终+虚拟式。después de que将来+虚拟式。hasta que将来+虚拟式。<br><b>易错：</b>将来从句用陈述式(cuando llegarás ❌→cuando llegues ✅)。',
-   ref:'https://www.rae.es/dpd/oraciones%20temporales'},
+   ref:'https://dle.rae.es/temporal'},
   {lvl:'B2', t:'Voz pasiva y pasiva refleja', d:'三种被动：1)ser+participio(正式)；2)被动自复(se+动词三人称，最常用)；3)无人称se(无主语，泛指)。', ex:'El libro fue escrito por Cervantes. Se habla español. Se venden flores.',
    detail:'<b>1)真正被动：</b>ser+participio(+por)，正式书面语。<b>2)被动自复：</b>se+vende(n)，最常用(Se venden coches)。<b>3)无人称：</b>se+单数，无主语(Se vive bien en España)。<br><b>被动自复vs无人称：</b>有主语→被动自复；无主语→无人称。<br><b>易错：</b>se+单数+复数主语(Se vende coches ❌→Se venden coches ✅)。',
-   ref:'https://www.rae.es/dpd/pasiva'},
+   ref:'https://dle.rae.es/pasivo'},
+  {lvl:'B2', t:'Todos los usos de "se"', d:'se的7种用法：1)代词式(se ducha), 2)相互(se aman), 3)被动自复(se venden), 4)无人称(se vive), 5)与格强调(se comió), 6)le→se转换(se lo di), 7)意外(se me olvidó)。', ex:'Se ducha cada día. Se aman mucho. Se venden flores. Se vive bien aquí. Se comió toda la paella. Se lo di. Se me olvidaron las llaves.',
+   detail:'<b>分类:</b> 1)Reflexivo(自己) 2)Recíproco(相互) 3)Pasiva refleja(被动) 4)Impersonal(无人称) 5)Dativo aspectual(强调完成) 6)Variante de le/les(le→se) 7)Accidental(非故意)。<br><b>SIELE B2口语:</b> 展示se多样性是加分项。<br><b>易错:</b> 混淆被动自复(有主语)和无人称(无主语)。',
+   ref:'https://dle.rae.es/se'},
   {lvl:'B2', t:'Indefinidos y cuantificadores', d:'不定代词：algo/nada, alguien/nadie, alguno/ninguno, cualquiera, bastante, demasiado, poco, mucho, todo。否定词后置需双重否定(No vi a nadie)。', ex:'Alguien llamó. No hay nadie aquí. ¿Tienes algún problema? Cualquiera puede hacerlo.',
    detail:'<b>双重否定：</b>否定词在动词后→动词前加no(No vino nadie)。否定词在动词前→不需no(Nadie vino)。<br><b>缩略：</b>alguno/ninguno在阳性单数名词前→algún/ningún(algún día, ningún problema)。<br><b>易错：</b>否定词后置忘加no(Vino nadie ❌→No vino nadie ✅)。',
-   ref:'https://www.rae.es/dpd/indefinidos'},
+   ref:'https://dle.rae.es/indefinido'},
   {lvl:'B2', t:'Perífrasis verbales completas', d:'动词短语：ir a+inf(将要), tener que+inf(必须), deber+inf(应该), acabar de+inf(刚做), volver a+inf(重做), dejar de+inf(停止), ponerse a+inf(开始), seguir+gerundio(继续), llevar+gerundio(已做多久)。', ex:'Voy a estudiar. Tengo que trabajar. Acabo de llegar. Llevo tres años aprendiendo español.',
    detail:'<b>分类：</b>1)将来/意向(ir a, estar por, estar a punto de)；2)义务(tener que, deber, haber que)；3)阶段(acabar de, empezar a, dejar de, volver a)；4)持续(estar+gerundio, seguir+gerundio, llevar+gerundio)。<br><b>DELE考点：</b>所有级别，B2要求在写作和口语中自然交替使用。<br><b>易错：</b>confundir tener que(必须) y deber(应该)；llevar后忘gerundio(Llevo tres años aprender ❌→aprendiendo ✅)。',
-   ref:'https://www.rae.es/dpd/per%C3%ADfrasis%20verbales'},
+   ref:'https://dle.rae.es/per%C3%ADfrasis'},
+  {lvl:'B2', t:'Correlación de tiempos', d:'时态呼应：从句时态取决于主句时态。主句现在/将来→从句可按需选；主句过去→从句一律后退(presente→imperfecto, futuro→condicional)。', ex:'Quiero que vengas (现在+虚拟现在). Quería que vinieras (过去+虚拟过去). Si tengo tiempo, voy (现在+陈述). Si tuviera, iría (虚拟+条件).',
+   detail:'<b>主句现在/将来:</b> 从句陈述式或虚拟式现在时。Creo que viene / Dudo que venga。<br><b>主句过去:</b> 从句陈述→imperfecto/pluscuamperfecto；虚拟→imperfecto subj.。Creía que venía(陈述)/Dudaba que viniera(虚拟)。<br><b>SIELE阅读:</b> 长句时态对应是B2理解关键。<br><b>易错:</b> 主句过去时从句仍用现在时(Dijo que viene ❌→Dijo que venía ✅)。',
+   ref:'https://www.rae.es/gram%C3%A1tica-b%C3%A1sica/'},
 ];
+
+
 // Push extra grammar into GDATA groups and GFLAT
 GRAMMAR_EXTRA.forEach(it => {
   const group = GDATA.find(g => g.lvl === it.lvl);
@@ -2001,20 +2042,26 @@ function renderGrammar(){
   h += `<div class="card" style="margin-top:16px;background:linear-gradient(135deg,#fef9f0,#fdf6e8);border-left:4px solid var(--tr)">
     <h3><span class="ic">🔗</span>权威语法资源 · Referencias Autorizadas</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-      <a href="https://www.rae.es/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
-        <span style="font-size:22px">📖</span><div><b>RAE</b><br><span style="font-size:11px;color:var(--soft)">Real Academia Española · 权威词典与语法</span></div>
+      <a href="https://www.rae.es/gram%C3%A1tica-b%C3%A1sica/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">📖</span><div><b>RAE · Nueva Gramática</b><br><span style="font-size:11px;color:var(--soft)">RAE-ASALE官方语法全书 · 29章完整在线</span></div>
       </a>
-      <a href="https://www.fundeu.es/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
-        <span style="font-size:22px">📝</span><div><b>FundéuRAE</b><br><span style="font-size:11px;color:var(--soft)">西班牙语规范使用指南</span></div>
+      <a href="https://www.fundeu.es/consultas/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">📝</span><div><b>FundéuRAE</b><br><span style="font-size:11px;color:var(--soft)">西班牙语规范使用指南 · 每日更新</span></div>
       </a>
-      <a href="https://deleahora.com/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
-        <span style="font-size:22px">🎯</span><div><b>DELE Ahora</b><br><span style="font-size:11px;color:var(--soft)">DELE备考语法专项练习</span></div>
+      <a href="https://deleahora.com/actividades/gramatica/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">🎯</span><div><b>DELE Ahora</b><br><span style="font-size:11px;color:var(--soft)">SIELE/DELE语法 · 703个在线练习</span></div>
       </a>
-      <a href="https://www.profedeele.es/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
-        <span style="font-size:22px">👨‍🏫</span><div><b>ProfeDeELE</b><br><span style="font-size:11px;color:var(--soft)">免费语法视频与练习</span></div>
+      <a href="https://www.profedeele.es/categoria/actividad/gramatica/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">👨‍🏫</span><div><b>ProfeDeELE</b><br><span style="font-size:11px;color:var(--soft)">免费语法讲解+视频+互动 · A1-C2</span></div>
+      </a>
+      <a href="https://dle.rae.es/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">📚</span><div><b>RAE · DLE</b><br><span style="font-size:11px;color:var(--soft)">Diccionario de la lengua española · 官方词典</span></div>
+      </a>
+      <a href="https://www.rae.es/dpd/" target="_blank" rel="noopener" class="res-card" style="padding:10px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px">
+        <span style="font-size:22px">❓</span><div><b>RAE · DPD</b><br><span style="font-size:11px;color:var(--soft)">Diccionario panhispánico de dudas · 常见疑难点</span></div>
       </a>
     </div>
-    <div style="margin-top:10px;font-size:11px;color:var(--soft)">💡 语法内容正在持续从以上权威资源补充完善中。如有疑问建议优先查阅RAE官网。</div>
+    <div style="margin-top:10px;font-size:11px;color:var(--soft)">💡 每条语法右上角「🔗 RAE/权威参考」可直接跳转到对应知识点官方页面。语法内容基于以上权威资源整理编写。</div>
   </div>`;
 
   return h;
