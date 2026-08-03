@@ -43,8 +43,8 @@ function parseSession(token) {
   if (sig.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
   try { const parsed = JSON.parse(Buffer.from(body, "base64url").toString("utf8")); return parsed.exp > Date.now() ? parsed : null; } catch (e) { return null; }
 }
-function issueSession(uid, username) {
-  return signSession({ uid, username, exp: Date.now() + TOKEN_TTL_SECONDS * 1000 });
+function issueSession(uid, username, role) {
+  return signSession({ uid, username, role: role || "learner", exp: Date.now() + TOKEN_TTL_SECONDS * 1000 });
 }
 function tokenHash(value) { return crypto.createHash("sha256").update(value).digest("base64url"); }
 function randomToken() { return "siele_sync_" + crypto.randomBytes(32).toString("base64url"); }
@@ -83,10 +83,10 @@ async function register(event) {
       const invite = await transaction.collection("invite_codes").where({ code: inviteCode }).limit(1).get();
       if (!invite.data.length || invite.data[0].status !== "unused") { const err = new Error("INVITE_USED"); err.code = "INVITE_USED"; throw err; }
       await transaction.collection("invite_codes").doc(invite.data[0]._id).update({ status: "used", usedBy: uid, usedAt: now() });
-      await transaction.collection("user_profiles").add({ uid, username, passwordSalt: salt, passwordHash: hash, inviteCode, createdAt: now(), lastLoginAt: now(), status: "active" });
+      await transaction.collection("user_profiles").add({ uid, username, passwordSalt: salt, passwordHash: hash, inviteCode, createdAt: now(), lastLoginAt: now(), status: "active", role: "learner" });
       await transaction.collection("security_audit").add({ type: "register", uid, username, inviteCode, at: now() });
     });
-    return response(true, "REGISTERED", { uid, username, sessionToken: issueSession(uid, username) });
+    return response(true, "REGISTERED", { uid, username, role: "learner", sessionToken: issueSession(uid, username, "learner") });
   } catch (e) { return response(false, e.code || "REGISTER_FAILED"); }
 }
 
@@ -100,7 +100,8 @@ async function login(event) {
   if (candidate.length !== user.passwordHash.length || !crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(user.passwordHash))) return response(false, "INVALID_CREDENTIALS");
   await db.collection("user_profiles").doc(user._id).update({ lastLoginAt: now() });
   await db.collection("security_audit").add({ type: "login", uid: user.uid, username, at: now() });
-  return response(true, "LOGGED_IN", { uid: user.uid, username: user.username, sessionToken: issueSession(user.uid, user.username) });
+  const role = user.role === "admin" ? "admin" : "learner";
+  return response(true, "LOGGED_IN", { uid: user.uid, username: user.username, role, sessionToken: issueSession(user.uid, user.username, role) });
 }
 
 async function createSyncToken(event) {

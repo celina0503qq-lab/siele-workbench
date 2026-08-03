@@ -8814,23 +8814,21 @@ function hideLoginOverlay(){
 }
 async function wbDoLogin(e){
   e.preventDefault();
-  var u=document.getElementById('wbLoginUser').value.trim(),p=document.getElementById('wbLoginPass').value;
-  var fU=document.getElementById('wbLfU'),fP=document.getElementById('wbLfP');
-  fU.classList.remove('invalid');fP.classList.remove('invalid');
-  if(!u){fU.classList.add('invalid');return false;}
-  if(!p){fP.classList.add('invalid');return false;}
-  var users=lsg(LSU,{});
-  var rec=users[u];
-  if(!rec){fP.querySelector('.err').textContent='账号不存在，请先注册';fP.classList.add('invalid');return false;}
-  var h=await wbHashPw(p,rec.salt);
-  if(h!==rec.hash){fP.querySelector('.err').textContent='密码错误';fP.classList.add('invalid');return false;}
-  lss(LSS,{u:u,ts:Date.now()});
-  hideLoginOverlay();
-  activate();
+  // 账号已迁移至 CloudBase：主工作台不再读取本浏览器的旧 localStorage 账号库。
+  // 统一在后台管理页进行云端登录，避免换设备或换浏览器出现“账号不存在”。
+  var fP=document.getElementById('wbLfP');
+  if(fP){
+    fP.querySelector('.err').textContent='请在后台管理页使用云端账号登录';
+    fP.classList.add('invalid');
+  }
+  openAdminPanel();
   return false;
 }
 
-function activeUser(){var s=lsg(LSS,null),us=lsg(LSU,{});return (s&&s.u&&us[s.u])?s.u:null;}
+function activeUser(){
+  var s=lsg(LSS,null),cloud=lsg('swa_cloud_session_v1',null),u=(cloud&&cloud.username)||(s&&s.u);
+  return u||null;
+}
 function todayStr2(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 
 /* ---------- 云端序列化 / 合并（与后台完全一致的数据形状） ---------- */

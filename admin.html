@@ -583,7 +583,7 @@ async function callSieleAuth(data){
 function cloudSession(){return lsGet(CLOUD_SESSION_KEY,null);}
 function saveCloudSession(session){
   if(!session||!session.uid||!session.username||!session.sessionToken)return false;
-  return lsSet(CLOUD_SESSION_KEY,{uid:session.uid,username:session.username,sessionToken:session.sessionToken,ts:Date.now()});
+  return lsSet(CLOUD_SESSION_KEY,{uid:session.uid,username:session.username,role:session.role||'learner',sessionToken:session.sessionToken,ts:Date.now()});
 }
 
 // ---- 种子数据实例化 ----
