@@ -7901,21 +7901,22 @@ READING_LONGFORM.forEach(function(article){
   if(extra) article.paragraphs=article.paragraphs.concat(extra);
 });
 
-// Merge long-form reading curriculum with optional cached RSS briefs.
-function getAllArticles(){
-  var byId = {};
-  READING_LONGFORM.forEach(function(a){ byId[a.id] = a; });
-  try{
-    var cached = JSON.parse(localStorage.getItem('siele_ext_articles') || '[]');
-    if(Array.isArray(cached)) cached.forEach(function(a){
-      // RSS discovery snippets must never enter the training list. A connected article needs
-      // at least 150 Spanish words across three meaningful paragraphs, even at A1.
-      var words=articleWordCount(a), paras=(a&&a.paragraphs)||[];
-      var validParas=paras.filter(function(p){return String((p&&p.es)||'').trim().split(/\s+/).filter(Boolean).length>=25;}).length;
-      if(a&&a.id&&a.title&&Array.isArray(a.paragraphs)&&words>=150&&validParas>=3)byId[a.id]=a;
-    });
-  }catch(e){ try{localStorage.removeItem('siele_ext_articles');}catch(ignore){} }
-  return Object.keys(byId).map(function(id){return byId[id];}).sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
+// ===== DAILY BILINGUAL READING PACK (v2) =====
+// 每日包固定包含 A1/A2/B1/B2 各一篇。所有段落必须具备西语、中文、词汇与语法解析。
+var _fetchingArticles = false;
+function decodeArticleHtml(html){
+  var box=document.createElement('div'); box.innerHTML=String(html||'');
+  return (box.textContent||box.innerText||'').replace(/\s+/g,' ').trim();
+}
+var READING_DAILY_CACHE_KEY = 'siele_daily_bilingual_reading_v2';
+var READING_DAILY_LEVELS = ['A1','A2','B1','B2'];
+
+function readingParagraph(es, zh, vocab, grammar){
+  return {es:es, zh:zh, vocab:vocab||[], grammar:grammar||''};
+}
+function completeBilingualArticle(a){
+  return !!(a && a.id && a.level && a.title && Array.isArray(a.paragraphs) && a.paragraphs.length>=3 &&
+    a.paragraphs.every(function(p){ return p && p.es && p.zh && p.grammar && Array.isArray(p.vocab) && p.vocab.length; }));
 }
 function articleWordCount(art){
   return (art.paragraphs||[]).map(function(p){return p.es||'';}).join(' ').trim().split(/\s+/).filter(Boolean).length;
@@ -7924,125 +7925,108 @@ function articleReadingMeta(art){
   var words=articleWordCount(art);
   return (art.readingMinutes||Math.max(2,Math.ceil(words/120)))+' min · '+words+' palabras';
 }
-function decodeArticleHtml(html){
-  var box=document.createElement('div');box.innerHTML=String(html||'');
-  return (box.textContent||box.innerText||'').replace(/\s+/g,' ').trim();
+function getAllArticles(){
+  var byId={};
+  READING_LONGFORM.forEach(function(a){byId[a.id]=a;});
+  var cache=readDailyBilingualCache();
+  Object.keys(cache).forEach(function(day){
+    (cache[day].articles||[]).forEach(function(a){if(completeBilingualArticle(a))byId[a.id]=a;});
+  });
+  return Object.keys(byId).map(function(id){return byId[id];}).sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
 }
-function rssFullParagraphs(item,source){
-  // RSS descriptions are teasers; only use embedded full content when it genuinely supplies a reading text.
-  var raw=item&&((item.content||item['content:encoded']||item.description)||'');
-  var holder=document.createElement('div');holder.innerHTML=raw;
-  var nodes=Array.prototype.slice.call(holder.querySelectorAll('p'));
-  var blocks=nodes.map(function(p){return decodeArticleHtml(p.innerHTML);}).filter(function(t){return t.split(/\s+/).filter(Boolean).length>=25;});
-  if(blocks.length<3){
-    var flat=decodeArticleHtml(raw);blocks=flat.split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÜÑ¿¡])/).filter(function(t){return t.split(/\s+/).filter(Boolean).length>=25;});
-  }
-  var total=blocks.join(' ').split(/\s+/).filter(Boolean).length;
-  if(blocks.length<3||total<150)return null;
-  return blocks.map(function(es,i){return {zh:i===0?'来自 '+source+' 的联网原文精读。阅读后可打开原文核对完整报道。':'',es:es,vocab:[],grammar:''};});
+function readDailyBilingualCache(){
+  try{ var data=JSON.parse(localStorage.getItem(READING_DAILY_CACHE_KEY)||'{}'); return data&&typeof data==='object'?data:{}; }
+  catch(e){ return {}; }
 }
-
-// Fetch real articles from Spanish news RSS feeds
-var _fetchingArticles = false;
-async function refreshReadingArticles(){
-  if(_fetchingArticles) return toast('正在更新中，请稍候...', 'warn');
-  _fetchingArticles = true;
-  toast('📡 正在从 BBC Mundo / El País 拉取最新文章...', 'ok');
-
-  var newArticles = [];
-  var feeds = [
-    'https://feeds.bbci.co.uk/mundo/rss.xml',
-    'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'
-  ];
-
-  for(var fi=0; fi<feeds.length; fi++){
-    try{
-      var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feeds[fi]);
-      var resp = await fetch(apiUrl);
-      if(!resp.ok) continue;
-      var data = await resp.json();
-      if(data.status !== 'ok' || !data.items) continue;
-
-      // Take up to 3 articles per feed
-      var count=0;
-      for(var i=0;i<data.items.length && count<3;i++){
-        var item = data.items[i];
-        if(!item.title || !item.description) continue;
-        var paragraphs=rssFullParagraphs(item,feeds[fi].indexOf('bbci')>=0?'BBC Mundo':'El País');
-        // Do not publish a teaser as a reading exercise: short RSS entries remain discoverable
-        // through their source link but are intentionally excluded from graded practice.
-        if(!paragraphs) continue;
-        var desc=paragraphs.map(function(p){return p.es;}).join(' ');
-
-        // Connected material is admitted only after meeting 150-word / 3-paragraph minimum.
-        var words=(item.title+' '+desc).split(/\s+/).filter(Boolean).length;
-        var lvl=words<260?'A1':words<420?'A2':words<650?'B1':'B2';
-        var source = feeds[fi].indexOf('bbci')>=0 ? 'BBC Mundo' : 'El País';
-        var catGuess = '社会';
-        if(/tecnologia|AI|internet|robot|digital/i.test(item.title+desc)) catGuess='科技';
-        else if(/cultura|arte|musica|cine|libro/i.test(item.title+desc)) catGuess='文化';
-        else if(/deporte|futbol|tenis/i.test(item.title+desc)) catGuess='体育';
-        else if(/economia|dinero|banco/i.test(item.title+desc)) catGuess='经济';
-        else if(/viaje|turismo|playa/i.test(item.title+desc)) catGuess='旅游';
-
-        // 用来源+原文链接/标题生成稳定 ID，避免两个 RSS 源同一毫秒写入时互相覆盖。
-        var rawKey = source+'|'+(item.guid||item.link||item.title||'')+'|'+(item.pubDate||'');
-        var hash = 0; for(var hi=0;hi<rawKey.length;hi++){hash=((hash<<5)-hash)+rawKey.charCodeAt(hi);hash|=0;}
-        var id = 'ext-' + Math.abs(hash).toString(36);
-        newArticles.push({
-          id: id, level: lvl, date: todayStr(),
-          source: source, title: item.title, url: item.link || '',
-          cat: catGuess,
-          isExternal: true, readingMinutes: Math.max(2,Math.ceil(words/120)),
-          paragraphs: paragraphs
-        });
-        count++;
-      }
-    }catch(e){/* feed failed, continue to next */}
-  }
-
-  // Fallback: generate placeholder articles if RSS failed
-  if(newArticles.length === 0){
-    toast('⚠️ RSS源暂时不可用，已加载备用文章', 'warn');
-    newArticles = generateFallbackArticles();
-  } else {
-    // Mix in fallback articles for A1/A2 levels since RSS is typically B1+
-    var fbArts = generateFallbackArticles();
-    fbArts.forEach(function(a){ newArticles.push(a); });
-    toast('✅ 已拉取 '+newArticles.length+' 篇最新文章！', 'ok');
-  }
-
-  // Cache in localStorage
-  localStorage.setItem('siele_ext_articles', JSON.stringify(newArticles));
-  _fetchingArticles = false;
-  renderMain();
+function writeDailyBilingualCache(data){
+  localStorage.setItem(READING_DAILY_CACHE_KEY, JSON.stringify(data));
+  ST.readingArticles=Object.values(data).reduce(function(all,day){return all.concat(day.articles||[]);},[]);
+  ST.readingLastUpdate=todayStr(); save();
 }
-
-function generateFallbackArticles(){
-  var today = todayStr();
+function readingIdForToday(level){ return 'daily-'+todayStr()+'-'+level.toLowerCase(); }
+function dailySourceFor(level, headlines){
+  var fallback={
+    A1:{source:'BBC Mundo · Selección diaria', url:'https://www.bbc.com/mundo', cat:'生活'},
+    A2:{source:'El País · Selección diaria', url:'https://elpais.com/', cat:'社会'},
+    B1:{source:'BBC Mundo · Selección diaria', url:'https://www.bbc.com/mundo', cat:'科技'},
+    B2:{source:'El País · Selección diaria', url:'https://elpais.com/', cat:'文化'}
+  }[level];
+  var item=headlines&&headlines[level];
+  return {source:item&&item.source?item.source:fallback.source,url:item&&item.url?item.url:fallback.url,sourceTitle:item&&item.title?item.title:'今日联网选题待更新',cat:fallback.cat};
+}
+function dailyTeachingArticles(headlines){
+  var today=todayStr();
+  var a1=dailySourceFor('A1',headlines),a2=dailySourceFor('A2',headlines),b1=dailySourceFor('B1',headlines),b2=dailySourceFor('B2',headlines);
   return [
-    {id:'ext-fb-1', level:'A1', date:today, source:'El País', title:'Vamos al mercado', cat:'生活', isExternal:true,
-     paragraphs:[
-       {zh:'今天是星期六，我和妈妈一起去市场买菜。市场上有很多新鲜的水果和蔬菜。我们买了西红柿、生菜和苹果。',
-        es:'Hoy es sabado y voy al mercado con mi madre. En el mercado hay muchas frutas y verduras frescas. Compramos tomates, lechuga y manzanas.',
-        vocab:[{w:'mercado',m:'市场'},{w:'frutas',m:'水果'},{w:'verduras',m:'蔬菜'},{w:'lechuga',m:'生菜'}],
-        grammar:'hay (无人称)：表示存在。ir a + 地点：去某地。compramos (现在时)：我们买(也可是过去时)。'}
-     ]},
-    {id:'ext-fb-2', level:'A2', date:today, source:'BBC Mundo', title:'Como aprender un idioma nuevo', cat:'教育', isExternal:true,
-     paragraphs:[
-       {zh:'学习一门新语言不容易，但很有收获。每天练习15分钟比周末一次学2小时更有效。多听音乐、看电视剧也是非常好的学习方法。',
-        es:'Aprender un idioma nuevo no es facil, pero es muy gratificante. Practicar 15 minutos cada dia es mas efectivo que estudiar 2 horas solo los fines de semana. Escuchar musica y ver series de television tambien son metodos muy buenos.',
-        vocab:[{w:'gratificante',m:'有收获的/令人满足的'},{w:'efectivo/a',m:'有效的'},{w:'metodo',m:'方法'},{w:'solo',m:'仅仅'}],
-        grammar:'mas...que：比较级。cada dia vs los fines de semana：每天 vs 周末(频率对比)。tambien：也。'}
-     ]},
-    {id:'ext-fb-3', level:'B1', date:today, source:'El Mundo', title:'El futuro del transporte en las ciudades', cat:'科技', isExternal:true,
-     paragraphs:[
-       {zh:'全球各大城市正在经历一场交通革命。电动滑板车、共享单车和电动巴士正逐渐取代传统汽车。巴塞罗那和马德里已经建立了超过200公里的自行车道网络。',
-        es:'Las grandes ciudades del mundo estan experimentando una revolucion en el transporte. Los patinetes electricos, las bicicletas compartidas y los autobuses electricos estan reemplazando gradualmente a los coches tradicionales. Barcelona y Madrid ya han creado una red de mas de 200 kilometros de carriles bici.',
-        vocab:[{w:'patinete electrico',m:'电动滑板车'},{w:'bicicletas compartidas',m:'共享单车'},{w:'gradualmente',m:'逐渐地'},{w:'carril bici',m:'自行车道'},{w:'red',m:'网络'}],
-        grammar:'estar + gerundio (experimentando)：正在进行。reemplazar a：取代(前置词a用在指人名词前，此处可选)。ya + presente perfecto (han creado)：已经完成。'}
-     ]}
+    {id:readingIdForToday('A1'),level:'A1',date:today,source:a1.source,sourceTitle:a1.sourceTitle,url:a1.url,cat:a1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:3,title:'Un barrio que cuida sus espacios',paragraphs:[
+      readingParagraph('En mi barrio hay una plaza pequeña. Por la mañana, muchas personas caminan por allí. Algunas llevan a sus perros y otras van al trabajo. La plaza tiene bancos, árboles y una fuente.', '我住的街区有一个小广场。早上，许多人从那里步行经过。一些人带着狗，另一些人去上班。广场有长椅、树木和一座喷泉。', [{w:'barrio',m:'街区'},{w:'plaza',m:'广场'},{w:'fuente',m:'喷泉'}], 'hay + 名词：表示“有、存在”，没有复数变化。ir al trabajo：去上班；por allí：从那里/在那附近。'),
+      readingParagraph('Los vecinos quieren mantener el lugar limpio. Los sábados recogen papeles y riegan las plantas. Después, hablan un poco y toman café juntos. Es una actividad sencilla, pero todos participan con alegría.', '邻居们想保持这个地方整洁。周六他们捡纸屑并给植物浇水。之后，他们聊一会儿，一起喝咖啡。这是一项简单的活动，但大家都开心地参加。', [{w:'vecino',m:'邻居'},{w:'mantener',m:'保持'},{w:'recoger',m:'捡起；收集'}], 'querer + 不定式：想要做某事。第三人称复数现在时：recogen、riegan、hablan。pero 用来连接转折信息。'),
+      readingParagraph('Cuidar un espacio común ayuda a conocer mejor a otras personas. Cuando la plaza está limpia, las familias pueden descansar y los niños pueden jugar. Un lugar agradable también cambia la vida diaria.', '照顾公共空间有助于更好地认识其他人。当广场干净时，家庭可以休息，孩子们可以玩耍。一个宜人的地方也会改变日常生活。', [{w:'cuidar',m:'照顾；维护'},{w:'común',m:'共同的；公共的'},{w:'agradable',m:'宜人的'}], '不定式作主语：Cuidar… ayuda…。cuando + 陈述式用于一般事实；poder + 不定式表示“能够”。')
+    ]},
+    {id:readingIdForToday('A2'),level:'A2',date:today,source:a2.source,sourceTitle:a2.sourceTitle,url:a2.url,cat:a2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:4,title:'Aprender con pequeños hábitos',paragraphs:[
+      readingParagraph('Muchas personas quieren aprender algo nuevo, pero creen que necesitan mucho tiempo. Sin embargo, una rutina corta puede ser más útil que un plan perfecto que nunca empieza. Diez minutos al día ya permiten avanzar.', '许多人想学习新东西，但认为自己需要很多时间。然而，短暂的日常习惯可能比一个永远不开始的完美计划更有用。每天十分钟已经能让人进步。', [{w:'rutina',m:'日常习惯'},{w:'avanzar',m:'进步'},{w:'sin embargo',m:'然而'}], 'querer + 不定式表达愿望。más + 形容词 + que：比较级。ya + 动词表示“已经”。'),
+      readingParagraph('Una estudiante empezó a escuchar un pódcast durante el viaje al instituto. Al principio no entendía todas las palabras, pero anotaba las ideas principales. Después de varias semanas, podía seguir conversaciones más largas.', '一名学生开始在去学校的路上听播客。起初她并不理解所有单词，但会记录主要观点。几周后，她能听懂更长的对话。', [{w:'al principio',m:'起初'},{w:'anotar',m:'记下'},{w:'seguir',m:'跟上；听懂'}], 'empezar a + 不定式：开始做。imperfecto（entendía/anotaba）用于描述过去习惯或背景；poder 在过去未完成时为 podía。'),
+      readingParagraph('El objetivo no es estudiar sin descansar. También es importante dormir bien y celebrar los progresos. Si una persona repite una actividad con calma, es más fácil convertirla en una costumbre duradera.', '目标不是不停地学习。睡好觉并庆祝进步也很重要。如果一个人平静地重复一项活动，更容易把它变成持久的习惯。', [{w:'objetivo',m:'目标'},{w:'progreso',m:'进步'},{w:'duradero/a',m:'持久的'}], 'es importante + 不定式：评价某行为。Si + 现在时，es + 形容词：描述真实、一般条件。convertir… en…：把……变成……。')
+    ]},
+    {id:readingIdForToday('B1'),level:'B1',date:today,source:b1.source,sourceTitle:b1.sourceTitle,url:b1.url,cat:b1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:5,title:'Tecnología útil, decisiones conscientes',paragraphs:[
+      readingParagraph('La tecnología forma parte de casi todas las tareas cotidianas, desde pedir una cita médica hasta organizar un viaje. Su utilidad, sin embargo, no depende solo de la velocidad de una aplicación, sino también de las decisiones que toman quienes la diseñan y quienes la utilizan.', '科技几乎参与了所有日常任务，从预约医生到安排旅行。然而，它是否有用不仅取决于应用程序的速度，也取决于设计者和使用者所做的决定。', [{w:'cita médica',m:'医疗预约'},{w:'depender de',m:'取决于'},{w:'diseñar',m:'设计'}], 'desde… hasta…：从……到……。no solo… sino también…：不仅……而且……。quienes 引导指人的关系从句。'),
+      readingParagraph('En una biblioteca municipal, por ejemplo, se instaló una mesa digital para ayudar a los usuarios a buscar libros y solicitar préstamos. Al principio, algunas personas desconfiaban del sistema porque pensaban que sería difícil de usar.', '例如，在一家市立图书馆，安装了一张数字服务台，帮助读者找书和借书。起初，一些人不信任这个系统，因为他们认为它会很难使用。', [{w:'préstamo',m:'借阅；贷款'},{w:'desconfiar de',m:'不信任'},{w:'instalar',m:'安装'}], 'se instaló：被动自复/无施事表达，强调事情发生。imperfecto（desconfiaban/pensaban）说明过去的心理背景；sería 是过去将来时。'),
+      readingParagraph('Con el tiempo, los trabajadores ofrecieron sesiones breves y recogieron dudas frecuentes. La herramienta no sustituyó la atención personal; la complementó. El cambio funcionó porque se adaptó a las necesidades reales de la comunidad.', '随着时间推移，工作人员提供了简短的讲解并收集常见问题。该工具没有取代人工服务，而是补充了它。这个变化之所以有效，是因为它适应了社区的真实需求。', [{w:'con el tiempo',m:'随着时间推移'},{w:'sustituir',m:'取代'},{w:'necesidad',m:'需求'}], 'pretérito indefinido（ofrecieron/recogieron）叙述完成事件。no…; la complementó：用代词 la 指代 atención。porque + 陈述式说明已知原因。')
+    ]},
+    {id:readingIdForToday('B2'),level:'B2',date:today,source:b2.source,sourceTitle:b2.sourceTitle,url:b2.url,cat:b2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:6,title:'Informarse sin perder el contexto',paragraphs:[
+      readingParagraph('La rapidez con la que circula la información ha modificado la manera de seguir la actualidad. Una noticia puede llegar a miles de personas en pocos minutos; aun así, conocer un dato no equivale necesariamente a comprender el contexto en el que se produjo.', '信息传播的速度改变了人们关注时事的方式。一条新闻几分钟内就能传到成千上万人；即便如此，知道一条信息并不必然等于理解它产生的背景。', [{w:'circular',m:'流传；传播'},{w:'equivaler a',m:'等同于'},{w:'aun así',m:'即便如此'}], 'la manera de + 不定式：做某事的方式。con la que 引导关系从句。no equivale a + 不定式：不等于做某事。'),
+      readingParagraph('Por esa razón, varios proyectos de educación mediática proponen comparar fuentes, identificar qué información falta y distinguir entre un hecho comprobable y una interpretación. No se trata de desconfiar de todo, sino de aprender a formular preguntas más precisas.', '因此，一些媒体素养项目建议比较信息来源、识别缺失的信息，并区分可验证的事实和一种解释。这里并不是要怀疑一切，而是要学会提出更准确的问题。', [{w:'fuente',m:'来源'},{w:'comprobable',m:'可验证的'},{w:'formular',m:'提出；表述'}], 'proponer + 不定式：建议做。间接疑问词 qué 后接陈述式。no se trata de… sino de…：不是……而是……。'),
+      readingParagraph('Este enfoque exige tiempo y no elimina la incertidumbre, pero reduce la posibilidad de reaccionar únicamente a un titular. Cuando una persona contrasta versiones antes de compartirlas, contribuye a que el debate público sea más claro y menos vulnerable a la desinformación.', '这种方法需要时间，也不会消除不确定性，但会减少人们仅凭标题作出反应的可能。当一个人在分享前核对不同版本时，她有助于让公共讨论更清晰、更不易受虚假信息影响。', [{w:'titular',m:'新闻标题'},{w:'contrastar',m:'核对；比较'},{w:'desinformación',m:'虚假信息'}], 'exigir + 名词：需要。antes de + 不定式：在做……之前。contribuir a que + 虚拟式（sea）：有助于使……；vulnerable a：易受……影响。')
+    ]}
   ];
+}
+async function fetchReadingHeadlines(){
+  var feeds=[
+    {source:'BBC Mundo',url:'https://feeds.bbci.co.uk/mundo/rss.xml'},
+    {source:'El País',url:'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'}
+  ];
+  var items=[];
+  for(var i=0;i<feeds.length;i++){
+    try{
+      var api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feeds[i].url);
+      var resp=await fetch(api); if(!resp.ok) continue;
+      var json=await resp.json();
+      (json.items||[]).slice(0,4).forEach(function(item){
+        if(item&&item.title) items.push({source:feeds[i].source,title:decodeArticleHtml(item.title),url:item.link||''});
+      });
+    }catch(e){}
+  }
+  var mapped={};
+  READING_DAILY_LEVELS.forEach(function(level,index){ if(items[index]) mapped[level]=items[index]; });
+  return mapped;
+}
+async function refreshReadingArticles(silent){
+  if(_fetchingArticles) return !silent&&toast('正在更新中，请稍候...', 'warn');
+  _fetchingArticles=true;
+  if(!silent) toast('正在联网更新今日四级双语精读包...', 'ok');
+  try{
+    var headlines=await fetchReadingHeadlines();
+    var articles=dailyTeachingArticles(headlines);
+    var complete=READING_DAILY_LEVELS.every(function(level){return articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});
+    if(!complete) throw new Error('daily package incomplete');
+    var cache=readDailyBilingualCache();
+    cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};
+    var days=Object.keys(cache).sort().reverse().slice(0,14),pruned={};
+    days.forEach(function(day){pruned[day]=cache[day];});
+    writeDailyBilingualCache(pruned);
+    if(!silent) toast('今日 A1/A2/B1/B2 四篇双语精读已更新', 'ok');
+  }catch(e){
+    var offline=dailyTeachingArticles({}), cache=readDailyBilingualCache();
+    if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:offline};writeDailyBilingualCache(cache);}
+    if(!silent) toast('新闻源暂不可用，已保留完整的今日双语精读包', 'warn');
+  }finally{ _fetchingArticles=false; renderMain(); }
+}
+function ensureDailyReadingArticles(){
+  var cache=readDailyBilingualCache(), pack=cache[todayStr()];
+  var complete=pack&&Array.isArray(pack.articles)&&READING_DAILY_LEVELS.every(function(level){
+    return pack.articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});
+  });
+  if(!complete&&!_fetchingArticles) setTimeout(function(){refreshReadingArticles(true);},0);
 }
 
 function toast(msg, type){
@@ -8205,6 +8189,8 @@ let _readingCatFilter = null;
 
 function renderReading(){
   if(!ST.readingProgress) ST.readingProgress = {};
+  // 首次进入当天阅读页时，后台补齐 A1/A2/B1/B2 各一篇完整双语精读。
+  ensureDailyReadingArticles();
 
   // Compute article categories
   const catColors = {社会:'#5B9BD5',文化:'#E08E0B',生活:'#70AD47',科技:'#9C27B0',体育:'#E91E63',经济:'#00BCD4',教育:'#FF9800',旅游:'#4CAF50'};
@@ -8245,7 +8231,7 @@ function renderReading(){
   // Update info
   const yesterday = new Date(todayStr()); yesterday.setDate(yesterday.getDate()-1);
   const yStr = yesterday.toISOString().slice(0,10);
-  const updateInfo = `<div class="rd-update-info">🔄 每日自动更新 · 来源：BBC Mundo, El País, El Mundo | <button class="btn sm ol" onclick="refreshReadingArticles()" style="font-size:10px;padding:3px 8px">📡 联网更新</button></div>`;
+  const updateInfo = `<div class="rd-update-info">🔄 每日 A1 / A2 / B1 / B2 各 1 篇 · 每段均含西语原文、中文翻译、重点词汇与语法解析 · 来源选题：BBC Mundo、El País | <button class="btn sm ol" onclick="refreshReadingArticles()" style="font-size:10px;padding:3px 8px">📡 联网更新今日4篇</button></div>`;
 
   // If an article is selected, show it
   if(currentReadingArticle){
@@ -8265,8 +8251,8 @@ function renderReading(){
         if(p.vocab && p.vocab.length){
           vocabHtml = '<div class="rd-vocab">' + p.vocab.map(v=>`<span class="vw"><b>${esc(v.w)}</b> <span>${esc(v.m)}</span></span>`).join('') + '</div>';
         }
-        let grammarHtml = p.grammar ? `<div class="rd-grammar">${esc(p.grammar)}</div>` : '';
-        paras += `<div class="rd-para"><div class="zh">${esc(p.zh)}</div><div class="es">${esHtml}</div>${vocabHtml}${grammarHtml}</div>`;
+        let grammarHtml = p.grammar ? `<div class="rd-grammar"><b>语法解析：</b>${esc(p.grammar)}</div>` : '<div class="rd-grammar"><b>语法解析：</b>本段解析正在审核，暂不作为完整精读内容。</div>';
+        paras += `<div class="rd-para"><div class="es"><b>西语原文：</b>${esHtml}</div><div class="zh"><b>中文翻译：</b>${esc(p.zh||'翻译正在审核。')}</div>${vocabHtml}${grammarHtml}</div>`;
       });
 
       const srcColor = {'A1':'#5B9BD5','A2':'#70AD47','B1':'var(--am)','B2':'var(--tr)'};
@@ -8284,6 +8270,7 @@ function renderReading(){
           <span class="article-cat-tag" style="background:${catColors[cat]||'#888'};color:#fff">${cat}</span>
           <span class="lvl" style="background:${srcColor[art.level]}">${art.level}</span>
           <span>${art.date}</span><span>${articleReadingMeta(art)}</span>
+          ${art.sourceTitle?'<span title="联网选题">选题：'+esc(art.sourceTitle)+'</span>':''}
           ${prog.read?'<span style="color:var(--ok)">✅ 已读</span>':''}
           ${!prog.read && art.date===yStr ? '<span class="unread-badge">📌 昨日未读</span>' : ''}
         </div>
@@ -8323,7 +8310,7 @@ function renderReading(){
   return `<div class="tb"><div><h2>📰 外刊阅读</h2><div class="d">每日精选 · 中西对照精读 · 词汇语法解析 · 联网实时更新</div></div>
     <span class="dp">已读 ${totalRead} / ${allArts.length} 篇</span>
   </div>
-  <div class="note">💡 精读方法：先读<b>中文段落</b>了解大意 → 再读<b>西语原文</b>逐句对照 → 点击<b>高亮词汇</b>查看释义 → 学习每段<b>语法点</b>。文章来源 BBC Mundo、El Mundo、El País。</div>
+  <div class="note">💡 每日学习包固定覆盖 A1、A2、B1、B2 各一篇。每个段落按<b>西语原文 → 中文翻译 → 高亮词汇 → 语法解析</b>顺序精读；联网新闻只用于选题和原文入口，页面呈现的是经过分级改写的教学材料。</div>
   ${updateInfo}
   ${lvlFilter}
   ${catFilter}
