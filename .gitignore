@@ -7,3 +7,4 @@ cloudfunctions/*-deploy.zip
 .DS_Store
 Thumbs.db
 .github/
+cloudbaserc.json

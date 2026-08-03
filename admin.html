@@ -345,6 +345,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <div class="ns">数据中心</div>
     <button class="ni" data-p="io" onclick="go('io')"><span class="ic">📦</span>导入 / 备份</button>
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
+    <div class="ns admin-only hide">系统管理</div>
+    <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
     <div class="ns">学习</div>
     <button class="ni" onclick="returnToWorkbench()"><span class="ic">🏠</span>进入学习工作台</button>
   </nav>
@@ -457,6 +459,16 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       <div id="lastBackupInfo" style="font-size:11px;color:var(--soft);margin-top:11px"></div>
     </div>
   </div>
+</section>
+
+<!-- ===== 用户管理（仅管理员） ===== -->
+<section class="page" id="pg-users">
+  <div class="tb">
+    <div><h2>👥 用户管理</h2><div class="d">仅管理员可查看账号、角色、注册来源与最近登录记录</div></div>
+    <div class="acts"><button class="btn sm t" onclick="renderAdminUsers()">⟳ 刷新列表</button></div>
+  </div>
+  <div class="card" style="margin-bottom:13px"><div style="font-size:12px;color:var(--soft);line-height:1.7">停用账号会立即禁止该账号继续登录，并撤销其全部独立同步令牌；恢复账号后需由用户重新登录并创建新的同步令牌。系统不会在此页面展示密码、密码哈希或同步令牌明文。</div></div>
+  <div id="adminUsersContent"><div class="empty">正在加载用户列表…</div></div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -697,11 +709,16 @@ function enter(u,persist,profile){
   const createdAt=profile&&profile.createdAt||users[u]&&users[u].createdAt;
   $('uSince').textContent=createdAt?'注册于 '+new Date(createdAt).toLocaleDateString():'已登录云端账号';
   refreshBadges();renderAll();updateSyncUI();
+  // 管理员专属导航：仅 role===admin 时显示
+  var isAdmin=false;
+  try{var cs=cloudSession();isAdmin=!!(cs&&cs.role==='admin');}catch(e){}
+  document.querySelectorAll('.admin-only').forEach(function(el){el.classList.toggle('hide',!isAdmin);});
   if(DB.syncCfg)setTimeout(()=>syncNow(true),600);
 }
 function doLogout(){
   if(!confirm('确定退出登录？本地学习数据仍会保留在此设备。'))return;
   localStorage.removeItem(LSS);localStorage.removeItem(CLOUD_SESSION_KEY);CUR=null;DB=null;
+  document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
   $('loginPass').value='';
@@ -720,6 +737,7 @@ function go(p){
   if(p==='plans')renderPlans();
   if(p==='io')renderIO();
   if(p==='sync')renderSyncPage();
+  if(p==='users')renderAdminUsers();
   window.scrollTo({top:0});
 }
 function toggleDrawer(open){$('sideBar').classList.toggle('open',open);$('drawerMask').classList.toggle('on',open);}
@@ -1493,6 +1511,103 @@ async function revokeCloudSyncToken(id){
     if(!result.ok)throw new Error(cloudAuthMessage(result.code));
     toast('同步令牌已撤销','ok');renderCloudTokenManager();
   }catch(err){toast('撤销失败：'+(err.message||err),'err');}
+}
+
+// ============ 管理员 · 用户管理 ============
+async function renderAdminUsers(){
+  var el=$('adminUsersContent');
+  if(!el)return;
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+    el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
+    return;
+  }
+  el.innerHTML='<div class="empty">正在加载用户列表…</div>';
+  try{
+    var result=await callSieleAuth({action:'adminListUsers',sessionToken:ses.sessionToken});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    var users=result.data&&result.data.users||[];
+    if(!users.length){
+      el.innerHTML='<div class="empty"><span class="big">📭</span>暂无注册用户</div>';
+      return;
+    }
+    // 统计栏
+    var activeCount=users.filter(function(u){return u.status==='active';}).length;
+    var adminCount=users.filter(function(u){return u.role==='admin';}).length;
+    var summaryHtml='<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
+      +'<div class="card" style="flex:1;min-width:120px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--ink)">'+users.length+'</div><div style="font-size:11px;color:var(--soft)">总用户</div></div>'
+      +'<div class="card" style="flex:1;min-width:120px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--tr)">'+activeCount+'</div><div style="font-size:11px;color:var(--soft)">活跃</div></div>'
+      +'<div class="card" style="flex:1;min-width:120px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:#8b5cf6">'+adminCount+'</div><div style="font-size:11px;color:var(--soft)">管理员</div></div>'
+      +'</div>';
+    // 用户表格
+    var rows=users.map(function(u){
+      var isAdmin=u.role==='admin';
+      var isActive=u.status==='active';
+      var roleBadge=isAdmin?'<span style="color:#8b5cf6;font-weight:700">管理员</span>':'<span style="color:var(--soft)">学习者</span>';
+      var statusBadge=isActive?'<span style="color:var(--tr);font-weight:600">● 正常</span>':'<span style="color:var(--bad);font-weight:600">● 已停用</span>';
+      var actions='';
+      if(isAdmin){
+        actions='<span style="color:var(--soft);font-size:11px">管理员账户</span>';
+      }else{
+        if(isActive){
+          actions='<button class="btn xs dgr" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\'disabled\')">停用</button> '
+            +'<button class="btn xs gh" onclick="adminRevokeTokens(\''+esc(u.uid)+'\',\''+esc(u.username)+'\')">撤销令牌</button>';
+        }else{
+          actions='<button class="btn xs t" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\'active\')">启用</button>';
+        }
+      }
+      return '<tr>'
+        +'<td style="font-weight:600">'+esc(u.username)+'</td>'
+        +'<td>'+roleBadge+'</td>'
+        +'<td>'+statusBadge+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">'+esc(u.inviteCode||'—')+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(u.createdAt)+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(u.lastLoginAt)+'</td>'
+        +'<td style="white-space:nowrap">'+actions+'</td>'
+        +'</tr>';
+    }).join('');
+    el.innerHTML=summaryHtml
+      +'<div class="card" style="overflow-x:auto;padding:0">'
+      +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+      +'<thead><tr style="border-bottom:2px solid var(--line)">'
+      +'<th style="text-align:left;padding:10px 12px">用户名</th>'
+      +'<th style="text-align:left;padding:10px 12px">角色</th>'
+      +'<th style="text-align:left;padding:10px 12px">状态</th>'
+      +'<th style="text-align:left;padding:10px 12px">邀请码</th>'
+      +'<th style="text-align:left;padding:10px 12px">注册时间</th>'
+      +'<th style="text-align:left;padding:10px 12px">最近登录</th>'
+      +'<th style="text-align:left;padding:10px 12px">操作</th>'
+      +'</tr></thead>'
+      +'<tbody>'+rows+'</tbody>'
+      +'</table></div>';
+  }catch(err){
+    el.innerHTML='<div class="note err">无法加载用户列表：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminUsers()">重试</button></div>';
+  }
+}
+async function adminToggleUserStatus(uid,status){
+  var label=status==='disabled'?'停用':'启用';
+  if(!confirm('确定'+label+'该用户账号？'+(status==='disabled'?'\n\n停用后该用户将无法登录，其所有同步令牌也会被立即撤销。':'')))return;
+  var ses=cloudSession();
+  try{
+    var result=await callSieleAuth({action:'adminSetUserStatus',sessionToken:ses.sessionToken,uid:uid,status:status});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    toast('已'+label+'用户账号','ok');
+    renderAdminUsers();
+  }catch(err){
+    toast(label+'失败：'+(err.message||err),'err');
+  }
+}
+async function adminRevokeTokens(uid,username){
+  if(!confirm('确定撤销用户「'+username+'」的全部同步令牌？\n\n撤销后该用户的所有设备将无法同步，直到重新登录并创建新令牌。'))return;
+  var ses=cloudSession();
+  try{
+    var result=await callSieleAuth({action:'adminRevokeUserSyncTokens',sessionToken:ses.sessionToken,uid:uid});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    toast('已撤销 '+result.data.count+' 个同步令牌','ok');
+    renderAdminUsers();
+  }catch(err){
+    toast('撤销令牌失败：'+(err.message||err),'err');
+  }
 }
 function pickProvider(k){selProvider=k;renderSyncPage();}
 function renderProviderForm(){

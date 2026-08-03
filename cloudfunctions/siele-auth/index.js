@@ -55,6 +55,13 @@ function requireSession(event) {
   if (!session) { const err = new Error("UNAUTHORIZED"); err.code = "UNAUTHORIZED"; throw err; }
   return session;
 }
+async function requireAdmin(event) {
+  const session = requireSession(event);
+  const result = await db.collection("user_profiles").where({ uid: session.uid, status: "active" }).limit(1).get();
+  const user = result.data[0];
+  if (!user || user.role !== "admin") { const err = new Error("FORBIDDEN"); err.code = "FORBIDDEN"; throw err; }
+  return user;
+}
 
 async function ensureInviteSeed() {
   for (const code of INVITE_CODES) {
@@ -138,6 +145,46 @@ async function pullLearning(event) {
   const result = await db.collection("learning_snapshots").where({ uid }).limit(1).get();
   return response(true, "LEARNING_DATA", { snapshot: result.data[0] || null });
 }
+async function adminListUsers(event) {
+  await requireAdmin(event);
+  const result = await db.collection("user_profiles").orderBy("createdAt", "desc").limit(100).get();
+  const users = result.data.map((user) => ({
+    id: user._id,
+    uid: user.uid,
+    username: user.username,
+    role: user.role === "admin" ? "admin" : "learner",
+    status: user.status === "disabled" ? "disabled" : "active",
+    inviteCode: user.inviteCode || "",
+    createdAt: user.createdAt || null,
+    lastLoginAt: user.lastLoginAt || null
+  }));
+  return response(true, "ADMIN_USERS", { users });
+}
+async function adminSetUserStatus(event) {
+  const admin = await requireAdmin(event);
+  const uid = String(event.uid || "");
+  const status = event.status === "disabled" ? "disabled" : "active";
+  if (!uid) return response(false, "INVALID_USER");
+  if (uid === admin.uid && status === "disabled") return response(false, "CANNOT_DISABLE_SELF");
+  const found = await db.collection("user_profiles").where({ uid }).limit(1).get();
+  if (!found.data.length) return response(false, "USER_NOT_FOUND");
+  await db.collection("user_profiles").doc(found.data[0]._id).update({ status, statusUpdatedAt: now() });
+  if (status === "disabled") {
+    const tokens = await db.collection("sync_tokens").where({ uid, revokedAt: null }).get();
+    await Promise.all(tokens.data.map((token) => db.collection("sync_tokens").doc(token._id).update({ revokedAt: now() })));
+  }
+  await db.collection("security_audit").add({ type: "admin_user_status", adminUid: admin.uid, targetUid: uid, status, at: now() });
+  return response(true, "USER_STATUS_UPDATED", { uid, status });
+}
+async function adminRevokeUserSyncTokens(event) {
+  const admin = await requireAdmin(event);
+  const uid = String(event.uid || "");
+  if (!uid) return response(false, "INVALID_USER");
+  const tokens = await db.collection("sync_tokens").where({ uid, revokedAt: null }).get();
+  await Promise.all(tokens.data.map((token) => db.collection("sync_tokens").doc(token._id).update({ revokedAt: now() })));
+  await db.collection("security_audit").add({ type: "admin_sync_tokens_revoked", adminUid: admin.uid, targetUid: uid, count: tokens.data.length, at: now() });
+  return response(true, "USER_SYNC_TOKENS_REVOKED", { uid, count: tokens.data.length });
+}
 async function pushLearning(event) {
   const uid = await syncAuth(event); if (!uid) return response(false, "INVALID_SYNC_TOKEN");
   const payload = event.payload;
@@ -168,6 +215,9 @@ exports.main = async (event) => {
     if (action === "createSyncToken") return await createSyncToken(input);
     if (action === "listSyncTokens") return await listSyncTokens(input);
     if (action === "revokeSyncToken") return await revokeSyncToken(input);
+    if (action === "adminListUsers") return await adminListUsers(input);
+    if (action === "adminSetUserStatus") return await adminSetUserStatus(input);
+    if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
     return response(false, "UNKNOWN_ACTION");
