@@ -672,6 +672,8 @@ async function doLogin(e){
       return false;
     }
     saveCloudSession(result);
+    // 新设备没有本地后台镜像时初始化空学习库；之后由独立同步 Token 拉取云端进度。
+    if(!lsGet(dataKey(result.username),null))lsSet(dataKey(result.username),blankData(true));
     toast('登录成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
     gotoWorkbench();
