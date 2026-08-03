@@ -1,6 +1,9 @@
 node_modules/
 *.log
 .env
+cloudfunctions/**/tcb_custom_login.json
+cloudfunctions/**/.env
+cloudfunctions/*-deploy.zip
 .DS_Store
 Thumbs.db
 .github/

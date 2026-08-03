@@ -7901,133 +7901,121 @@ READING_LONGFORM.forEach(function(article){
   if(extra) article.paragraphs=article.paragraphs.concat(extra);
 });
 
-// ===== DAILY BILINGUAL READING PACK (v2) =====
-// 每日包固定包含 A1/A2/B1/B2 各一篇。所有段落必须具备西语、中文、词汇与语法解析。
-var _fetchingArticles = false;
-function decodeArticleHtml(html){
-  var box=document.createElement('div'); box.innerHTML=String(html||'');
-  return (box.textContent||box.innerText||'').replace(/\s+/g,' ').trim();
-}
-var READING_DAILY_CACHE_KEY = 'siele_daily_bilingual_reading_v2';
-var READING_DAILY_LEVELS = ['A1','A2','B1','B2'];
+// ===== DAILY BILINGUAL READING PACK (v3) =====
+var _fetchingArticles=false;
+var READING_DAILY_CACHE_KEY='siele_daily_bilingual_reading_v3';
+var READING_DAILY_LEGACY_KEYS=['siele_daily_bilingual_reading_v2','siele_ext_articles'];
+var READING_DAILY_LEVELS=['A1','A2','B1','B2'];
+var READING_PARAGRAPH_MIN={A1:3,A2:3,B1:10,B2:15};
 
-function readingParagraph(es, zh, vocab, grammar){
-  return {es:es, zh:zh, vocab:vocab||[], grammar:grammar||''};
+function readingParagraph(es,zh,vocab,grammar){return {es:es,zh:zh,vocab:vocab||[],grammar:grammar||''};}
+function hasBilingualTeachingFields(a){
+  return !!(a&&a.id&&a.level&&a.title&&Array.isArray(a.paragraphs)&&a.paragraphs.length&&a.paragraphs.every(function(p){return p&&p.es&&p.zh&&p.grammar&&Array.isArray(p.vocab)&&p.vocab.length;}));
 }
 function completeBilingualArticle(a){
-  return !!(a && a.id && a.level && a.title && Array.isArray(a.paragraphs) && a.paragraphs.length>=3 &&
-    a.paragraphs.every(function(p){ return p && p.es && p.zh && p.grammar && Array.isArray(p.vocab) && p.vocab.length; }));
+  var min=READING_PARAGRAPH_MIN[(a&&a.level)||'']||3;
+  return hasBilingualTeachingFields(a)&&a.paragraphs.length>=min;
 }
-function articleWordCount(art){
-  return (art.paragraphs||[]).map(function(p){return p.es||'';}).join(' ').trim().split(/\s+/).filter(Boolean).length;
+function keepHistoricalBilingualArticle(a){
+  if(!hasBilingualTeachingFields(a))return false;
+  var min=READING_PARAGRAPH_MIN[a.level]||3;
+  if(a.paragraphs.length<min){
+    a.isHistoricalArchive=true;
+    a.archiveNote='历史双语精读：保留原有段落结构；新发布的 '+a.level+' 阅读将执行至少 '+min+' 段标准。';
+  }
+  return true;
 }
-function articleReadingMeta(art){
-  var words=articleWordCount(art);
-  return (art.readingMinutes||Math.max(2,Math.ceil(words/120)))+' min · '+words+' palabras';
+function articleWordCount(art){return (art.paragraphs||[]).map(function(p){return p.es||'';}).join(' ').trim().split(/\s+/).filter(Boolean).length;}
+function articleReadingMeta(art){var words=articleWordCount(art);return (art.readingMinutes||Math.max(2,Math.ceil(words/120)))+' min · '+words+' palabras';}
+function normalizeDailyCache(raw){
+  if(!raw||typeof raw!=='object'||Array.isArray(raw))return {};
+  var out={};
+  Object.keys(raw).forEach(function(day){
+    var pack=raw[day];
+    if(pack&&Array.isArray(pack.articles))out[day]={updatedAt:pack.updatedAt||'',articles:pack.articles.filter(keepHistoricalBilingualArticle)};
+  });
+  return out;
+}
+function readDailyBilingualCache(){
+  var current={};
+  try{current=normalizeDailyCache(JSON.parse(localStorage.getItem(READING_DAILY_CACHE_KEY)||'{}'));}catch(e){}
+  // v2 已有完整学习包迁移到 v3；旧 RSS 摘要不迁移，以防不完整内容被当作精读。
+  try{var legacy=normalizeDailyCache(JSON.parse(localStorage.getItem('siele_daily_bilingual_reading_v2')||'{}'));Object.keys(legacy).forEach(function(day){if(!current[day])current[day]=legacy[day];});}catch(e){}
+  return current;
+}
+function writeDailyBilingualCache(data){
+  // 日更阅读是学习档案：不按天数淘汰，只有用户主动清理浏览器数据才会删除。
+  var clean=normalizeDailyCache(data),days=Object.keys(clean).sort().reverse(),kept={};
+  days.forEach(function(day){kept[day]=clean[day];});
+  localStorage.setItem(READING_DAILY_CACHE_KEY,JSON.stringify(kept));
+  ST.readingArticles=Object.keys(kept).reduce(function(all,day){return all.concat(kept[day].articles||[]);},[]);
+  ST.readingLastUpdate=todayStr();save();
 }
 function getAllArticles(){
   var byId={};
   READING_LONGFORM.forEach(function(a){byId[a.id]=a;});
   var cache=readDailyBilingualCache();
-  Object.keys(cache).forEach(function(day){
-    (cache[day].articles||[]).forEach(function(a){if(completeBilingualArticle(a))byId[a.id]=a;});
-  });
+  Object.keys(cache).forEach(function(day){(cache[day].articles||[]).forEach(function(a){if(keepHistoricalBilingualArticle(a))byId[a.id]=a;});});
   return Object.keys(byId).map(function(id){return byId[id];}).sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
 }
-function readDailyBilingualCache(){
-  try{ var data=JSON.parse(localStorage.getItem(READING_DAILY_CACHE_KEY)||'{}'); return data&&typeof data==='object'?data:{}; }
-  catch(e){ return {}; }
+function readingIdForToday(level){return 'daily-'+todayStr()+'-'+level.toLowerCase();}
+function dailySourceFor(level,headlines){
+  var fallback={A1:{source:'BBC Mundo · Selección diaria',url:'https://www.bbc.com/mundo',cat:'生活'},A2:{source:'El País · Selección diaria',url:'https://elpais.com/',cat:'社会'},B1:{source:'BBC Mundo · Lectura avanzada',url:'https://www.bbc.com/mundo',cat:'科技'},B2:{source:'El País · Análisis avanzado',url:'https://elpais.com/',cat:'文化'}}[level];
+  var item=headlines&&headlines[level];return {source:item&&item.source?item.source:fallback.source,url:item&&item.url?item.url:fallback.url,sourceTitle:item&&item.title?item.title:'今日联网选题待更新',cat:fallback.cat};
 }
-function writeDailyBilingualCache(data){
-  localStorage.setItem(READING_DAILY_CACHE_KEY, JSON.stringify(data));
-  ST.readingArticles=Object.values(data).reduce(function(all,day){return all.concat(day.articles||[]);},[]);
-  ST.readingLastUpdate=todayStr(); save();
+function b1AdvancedParagraphs(){
+  return [
+    readingParagraph('La primera condición para que una herramienta resulte útil no es que sea novedosa, sino que responda a una necesidad concreta. Cuando una solución digital se implanta sin haber observado cómo trabajan las personas, suele añadir pasos en vez de simplificar procesos.', '一项工具要真正有用，首要条件不是新颖，而是回应具体需求。当数字方案在没有观察人们如何工作的情况下被引入时，它往往会增加步骤而不是简化流程。', [{w:'implantar',m:'引入；实施'},{w:'en vez de',m:'而不是'},{w:'proceso',m:'流程'}], 'no es que… sino que…：不是……而是……。cuando + 陈述式用于一般规律；sin + 不定式完成时表示“没有做过……”。'),
+    readingParagraph('Por ese motivo, algunos equipos empiezan con pruebas limitadas. Invitan a un grupo pequeño de usuarios, registran los obstáculos y modifican el diseño antes de extenderlo. Este método no garantiza el éxito, pero permite detectar errores que de otro modo permanecerían ocultos.', '因此，一些团队会先进行有限测试。他们邀请一小群用户，记录障碍，并在推广前修改设计。该方法不能保证成功，但能发现原本会被隐藏的错误。', [{w:'obstáculo',m:'障碍'},{w:'extender',m:'推广；扩大'},{w:'de otro modo',m:'否则'}], 'por ese motivo：因此。antes de + 不定式：在……之前。que de otro modo… 是关系从句，补充说明 errores。'),
+    readingParagraph('La accesibilidad ofrece un ejemplo claro. Un formulario con instrucciones ambiguas puede excluir a quienes leen despacio, usan lectores de pantalla o no están familiarizados con el vocabulario administrativo. Mejorarlo no beneficia únicamente a un grupo reducido: mejora la experiencia de todas las personas.', '无障碍性就是一个明确例子。说明含糊的表格可能排除阅读较慢、使用屏幕阅读器或不熟悉行政词汇的人。改进它并非只惠及小群体，而是改善所有人的体验。', [{w:'accesibilidad',m:'无障碍性'},{w:'ambiguo/a',m:'含糊的'},{w:'lector de pantalla',m:'屏幕阅读器'}], 'quienes + 动词：指“那些……的人”。no… únicamente：不仅仅不……；省略重复成分的并列结构。'),
+    readingParagraph('También conviene distinguir entre automatizar una tarea y trasladar una responsabilidad. Si un sistema propone una decisión, alguien debe poder explicar con qué información se ha formado esa propuesta y qué límites tiene. De lo contrario, la rapidez puede convertirse en una forma de opacidad.', '还应区分自动化一项任务和转移一项责任。如果系统提出一个决定，就应有人能够说明该建议基于哪些信息形成、又有什么局限。否则，速度可能变成一种不透明。', [{w:'trasladar',m:'转移'},{w:'límite',m:'限制'},{w:'opacidad',m:'不透明'}], 'conviene + 不定式：有必要。si + 现在时，debe + 不定式：真实条件下的义务。de lo contrario：否则。'),
+    readingParagraph('En la biblioteca, las sesiones presenciales revelaron otra cuestión: las dudas no eran idénticas. Algunas personas necesitaban aprender a buscar por autor; otras querían saber cómo renovar un préstamo. Diseñar una sola explicación para todos habría dejado sin respuesta necesidades importantes.', '在图书馆，线下讲解还揭示了另一个问题：人们的疑问并不相同。有些人需要学习如何按作者搜索；另一些人想知道怎样续借。为所有人设计一种单一说明本会让重要需求得不到回应。', [{w:'renovar',m:'续借；更新'},{w:'préstamo',m:'借阅'},{w:'dejar sin respuesta',m:'使得不到回应'}], 'no eran idénticas：未完成时描写背景。habría dejado：条件复合时，表达未发生的假设结果。'),
+    readingParagraph('A partir de esas observaciones, el equipo organizó materiales de distinta complejidad. La misma información se presentaba mediante un vídeo breve, una guía impresa y una explicación oral. No se trataba de repetir tres veces lo mismo, sino de ofrecer caminos alternativos hacia un objetivo común.', '基于这些观察，团队组织了不同复杂度的材料。同一信息通过短视频、印刷指南和口头说明呈现。这不是把同样内容重复三次，而是为共同目标提供不同路径。', [{w:'a partir de',m:'基于'},{w:'complejidad',m:'复杂度'},{w:'camino alternativo',m:'替代路径'}], 'se presentaba：被动自复，未完成时说明方式。no se trataba de… sino de…：不是……而是……。'),
+    readingParagraph('Los datos recogidos durante las primeras semanas fueron útiles, aunque no suficientes por sí solos. Mostraban qué funciones se utilizaban más, pero no explicaban por qué algunos usuarios abandonaban el proceso. Para comprenderlo, fue necesario combinar cifras con conversaciones.', '最初几周收集的数据很有用，但单靠它们并不足够。它们显示哪些功能使用更多，却无法解释为何一些用户放弃流程。为理解这一点，有必要把数字和访谈结合起来。', [{w:'por sí solo',m:'单靠自身'},{w:'abandonar',m:'放弃'},{w:'cifra',m:'数字；数据'}], 'aunque + 陈述式：已知让步事实。qué/por qué 引导间接疑问。fue necesario + 不定式：过去发生的必要性。'),
+    readingParagraph('Este tipo de evaluación exige paciencia, porque los resultados relevantes no siempre aparecen inmediatamente. A veces una modificación parece menor, pero reduce de forma considerable el número de errores. Otras veces una función muy visible apenas cambia el comportamiento real.', '这类评估需要耐心，因为重要结果并不总会立即出现。有时一项修改看似很小，却显著减少错误数量。另一些时候，一个非常显眼的功能几乎不会改变真实行为。', [{w:'evaluación',m:'评估'},{w:'considerable',m:'显著的'},{w:'apenas',m:'几乎不'}], 'no siempre：并非总是。parecer + 形容词：看起来……。de forma + 形容词：以……方式。'),
+    readingParagraph('La experiencia sugiere que la innovación más responsable no consiste en añadir funciones sin límite. Consiste en decidir qué problema merece atención, comprobar si la solución reduce una dificultad y corregirla cuando genera otra. Esa revisión continua es menos llamativa que un lanzamiento, pero suele ser más valiosa.', '经验表明，最负责任的创新不在于无限添加功能，而在于决定什么问题值得关注，验证方案是否减少困难，并在它造成新问题时加以修正。这种持续审查不如一次发布显眼，却通常更有价值。', [{w:'merecer',m:'值得'},{w:'corregir',m:'修正'},{w:'lanzamiento',m:'发布'}], 'consistir en + 不定式：在于做……。si + 现在时：条件。menos… que…：不如……。')
+  ];
 }
-function readingIdForToday(level){ return 'daily-'+todayStr()+'-'+level.toLowerCase(); }
-function dailySourceFor(level, headlines){
-  var fallback={
-    A1:{source:'BBC Mundo · Selección diaria', url:'https://www.bbc.com/mundo', cat:'生活'},
-    A2:{source:'El País · Selección diaria', url:'https://elpais.com/', cat:'社会'},
-    B1:{source:'BBC Mundo · Selección diaria', url:'https://www.bbc.com/mundo', cat:'科技'},
-    B2:{source:'El País · Selección diaria', url:'https://elpais.com/', cat:'文化'}
-  }[level];
-  var item=headlines&&headlines[level];
-  return {source:item&&item.source?item.source:fallback.source,url:item&&item.url?item.url:fallback.url,sourceTitle:item&&item.title?item.title:'今日联网选题待更新',cat:fallback.cat};
+function b2AdvancedParagraphs(){
+  return [
+    readingParagraph('La circulación acelerada de información ha alterado no solo la velocidad con la que conocemos los acontecimientos, sino también las expectativas que proyectamos sobre ellos. Se espera una reacción inmediata, aunque los datos disponibles sean parciales y las fuentes todavía estén reconstruyendo lo sucedido.', '信息的加速传播不仅改变了我们了解事件的速度，也改变了我们对事件投射的期待。人们期待即时反应，即使现有数据只是片面的、信息来源仍在重建事情经过。', [{w:'proyectar',m:'投射；施加'},{w:'parcial',m:'片面的'},{w:'reconstruir',m:'重建；还原'}], 'no solo… sino también…：不仅……而且……。aunque + 虚拟式（sean/estén）表示让步假设或不确定事实。'),
+    readingParagraph('Esta tensión explica por qué una rectificación posterior suele recibir menos atención que el mensaje inicial. No se debe necesariamente a una falta de interés, sino a que los sistemas de recomendación premian la novedad y la reacción, mientras que la verificación requiere tiempo y rara vez produce el mismo impacto emocional.', '这种张力解释了为何后续更正通常得到的关注少于最初信息。这未必是因为缺乏兴趣，而是推荐系统奖励新颖和反应，而核查需要时间，且很少产生同样的情感影响。', [{w:'rectificación',m:'更正'},{w:'premiar',m:'奖励；偏向'},{w:'verificación',m:'核查'}], 'por qué 引导间接疑问。no se debe a… sino a que…：并非归因于……而是归因于……。mientras que：而、相比之下。'),
+    readingParagraph('De ahí que la educación mediática no pueda limitarse a una lista de advertencias. Reconocer una fuente dudosa es importante, pero también lo es comprender cómo se seleccionan los temas, qué intereses condicionan la visibilidad y por qué ciertos marcos interpretativos parecen naturales aunque no sean inevitables.', '因此，媒体素养教育不能局限于一份警示清单。识别可疑来源很重要，但理解主题如何被选择、哪些利益影响可见度，以及为何某些解释框架看似自然却并非不可避免，也同样重要。', [{w:'de ahí que',m:'因此'},{w:'condicionar',m:'制约；影响'},{w:'inevitable',m:'不可避免的'}], 'de ahí que + 虚拟式（pueda）：因此。lo es：代替前文“es importante”。aunque + 虚拟式表示让步。'),
+    readingParagraph('Comparar versiones no significa buscar una simetría artificial entre posiciones desigualmente fundamentadas. Significa identificar qué afirmaciones cuentan con evidencia comprobable, cuáles dependen de inferencias y cuáles se sostienen únicamente mediante repetición. La pluralidad no elimina la necesidad de jerarquizar argumentos.', '比较不同版本并不意味着在论据基础不对等的立场之间寻找人为对称。它意味着识别哪些主张有可验证证据支撑，哪些依赖推断，哪些仅靠重复维持。多元性并不消除判断论证层级的需要。', [{w:'simetría',m:'对称'},{w:'inferencia',m:'推断'},{w:'jerarquizar',m:'分层；排序'}], 'no significa + 不定式：不意味着做……。cuáles 引导间接疑问。mediante + 名词：通过……。'),
+    readingParagraph('En ese sentido, el contexto no constituye un adorno que pueda añadirse al final de una noticia. Modifica el significado de las cifras, delimita las comparaciones pertinentes y permite reconocer aquello que una narración deja fuera. Sin contexto, incluso un dato correcto puede conducir a una conclusión engañosa.', '从这个意义上说，背景并不是可以在新闻末尾添加的装饰。它改变数据的意义，限定恰当的比较，并让人认识到一种叙述遗漏了什么。没有背景，即使正确的数据也可能导向误导性的结论。', [{w:'delimitar',m:'界定；限定'},{w:'pertinente',m:'恰当的；相关的'},{w:'engañoso/a',m:'误导性的'}], 'que pueda añadirse：关系从句中虚拟式，表示非特指/评价性对象。aquello que：……的那些事物。sin + 名词：没有……。'),
+    readingParagraph('Sin embargo, pedir contexto tampoco debe convertirse en una excusa para posponer indefinidamente cualquier juicio. En situaciones de riesgo, es razonable actuar con la mejor información disponible, siempre que se expliciten las incertidumbres y se mantenga abierta la posibilidad de revisar la decisión.', '然而，要求背景也不应变成无限期推迟任何判断的借口。在有风险的情形中，依据现有最佳信息行动是合理的，前提是明确说明不确定性，并保持修订决定的可能。', [{w:'posponer',m:'推迟'},{w:'explicitar',m:'明确说明'},{w:'revisar',m:'修订；复核'}], 'debe convertirse en：不应变成。siempre que + 虚拟式（se expliciten/se mantenga）：只要……。'),
+    readingParagraph('La diferencia entre prudencia y parálisis depende, en buena medida, de que las instituciones comuniquen sus criterios. Cuando no explican qué saben, qué ignoran y qué umbral utilizan para actuar, dejan que el vacío se llene con especulaciones. La transparencia no elimina el desacuerdo, pero hace que sea discutible de manera más honesta.', '谨慎与瘫痪之间的差异，很大程度取决于机构是否说明其标准。当它们不解释自己知道什么、不知道什么以及行动所用的门槛时，就让空白被猜测填满。透明度不会消除分歧，却使分歧能以更诚实的方式被讨论。', [{w:'umbral',m:'门槛'},{w:'especulación',m:'猜测'},{w:'desacuerdo',m:'分歧'}], 'depender de que + 虚拟式（comuniquen）：取决于……。qué saben/ignoran：间接疑问。hacer que + 虚拟式（sea）：使得……。'),
+    readingParagraph('También resulta insuficiente atribuir toda la responsabilidad a quien recibe la información. Las plataformas deciden qué contenidos priorizan, con qué frecuencia los repiten y qué señales convierten en indicadores de relevancia. Esas decisiones técnicas son, al mismo tiempo, decisiones culturales y económicas.', '同样，把所有责任归于接收信息的人也是不充分的。平台决定优先推送哪些内容、以何种频率重复它们，以及把哪些信号变成相关性指标。这些技术决定同时也是文化和经济决定。', [{w:'atribuir',m:'归因；归属'},{w:'priorizar',m:'优先处理'},{w:'relevancia',m:'相关性'}], 'atribuir… a…：把……归于……。qué/con qué/qué 引导间接疑问。al mismo tiempo：同时。'),
+    readingParagraph('Por eso, una lectura crítica no consiste únicamente en detectar errores factuales. Implica preguntarse por las ausencias, por el lenguaje que normaliza determinadas relaciones de poder y por las categorías que parecen neutrales porque se han vuelto familiares. Leer críticamente es comparar lo dicho con lo que podría haberse dicho de otro modo.', '因此，批判性阅读不仅在于发现事实错误。它还包括追问缺失、追问使某些权力关系正常化的语言，以及那些因为变得熟悉而显得中立的分类。批判性阅读是把已说出的内容与原本可以以其他方式说出的内容相比较。', [{w:'ausencia',m:'缺失'},{w:'normalizar',m:'使正常化'},{w:'determinado/a',m:'特定的'}], 'consistir en：在于。porque + 陈述式说明已知原因。podría haberse dicho：条件完成时，表示未实现的可能。'),
+    readingParagraph('Ese trabajo interpretativo se vuelve especialmente relevante cuando los titulares reducen procesos complejos a una causa única. Las explicaciones simples pueden ser atractivas, pero a menudo confunden correlación con causalidad y excepción con tendencia. Una buena pregunta no rechaza la complejidad: pide que se haga inteligible.', '当标题把复杂过程简化为单一原因时，这种解释工作尤其重要。简单解释可能很吸引人，但常常把相关性与因果性、例外与趋势混为一谈。一个好问题不拒绝复杂性，而是要求它变得可理解。', [{w:'correlación',m:'相关性'},{w:'causalidad',m:'因果性'},{w:'inteligible',m:'可理解的'}], 'cuando + 陈述式表达一般情况。no…: pide que + 虚拟式（se haga）：不……而要求……。'),
+    readingParagraph('La tarea de informarse mejor, por tanto, es necesariamente colectiva. Requiere hábitos individuales —leer más allá del titular, comprobar una fecha, revisar una fuente—, pero también condiciones institucionales que no castiguen la duda ni recompensen de forma automática la indignación. Sin esas condiciones, la responsabilidad personal queda limitada.', '因此，更好地获取信息的任务必然是集体性的。它需要个人习惯——读到标题之外、核对日期、查看来源——也需要制度条件，即不惩罚怀疑、也不自动奖励愤怒。没有这些条件，个人责任就受到限制。', [{w:'por tanto',m:'因此'},{w:'castigar',m:'惩罚'},{w:'indignación',m:'愤怒'}], 'requiere + 名词：需要。条件性关系从句（que no castiguen…）用虚拟式。ni… ni…：既不……也不……。'),
+    readingParagraph('En último término, comprender una noticia exige aceptar que el conocimiento público es provisional. Esta provisionalidad no es un defecto que deba ocultarse; es la condición que permite corregir errores sin fingir que nunca existieron. La confianza más sólida no nace de promesas de certeza, sino de procedimientos capaces de reconocer y reparar sus límites.', '归根结底，理解一则新闻要求接受公共知识具有暂时性。这种暂时性不是必须隐藏的缺陷；它是允许我们纠正错误而不假装错误从未存在的条件。最可靠的信任不来自确定性的承诺，而来自能够承认并修复自身局限的程序。', [{w:'provisionalidad',m:'暂时性'},{w:'fingir',m:'假装'},{w:'reparar',m:'修复'}], 'exige + 不定式：要求做……。que deba ocultarse：评价性关系从句用虚拟式。no nace de… sino de…：不来自……而来自……。'),
+    readingParagraph('La consecuencia práctica no es abstenerse de participar, sino intervenir con mayor responsabilidad. Compartir una información puede ser útil si añade una fuente, una precisión o una pregunta; puede ser dañino si solo amplifica una reacción. Entre el silencio y la difusión irreflexiva existe un espacio para la deliberación.', '实际结论不是避免参与，而是更负责任地介入。分享信息如果增加一个来源、一个澄清或一个问题，就可能有用；如果只放大一种反应，就可能有害。在沉默与不加思考的传播之间，存在审议的空间。', [{w:'abstenerse de',m:'避免；克制不做'},{w:'amplificar',m:'放大'},{w:'deliberación',m:'审议'}], 'no es… sino…：不是……而是……。si + 现在时：真实条件。entre… y… existe：在……之间存在……。'),
+    readingParagraph('En definitiva, el valor de una lectura informada no reside en alcanzar una objetividad imposible, sino en reducir los errores previsibles y hacer explícitas las razones de nuestras decisiones. Esa práctica, repetida en el tiempo, puede fortalecer una conversación pública menos vulnerable a la simplificación y más abierta a la corrección.', '总之，知情阅读的价值不在于达到不可能的绝对客观，而在于减少可预见的错误，并明确我们作出决定的理由。这种长期重复的实践，能够强化一种更不易被简化影响、也更开放于修正的公共对话。', [{w:'residir en',m:'在于'},{w:'previsible',m:'可预见的'},{w:'fortalecer',m:'加强'}], 'residir en + 不定式：在于做……。más… y más…：比较结构。puede + 不定式表示可能性。')
+  ];
 }
 function dailyTeachingArticles(headlines){
-  var today=todayStr();
-  var a1=dailySourceFor('A1',headlines),a2=dailySourceFor('A2',headlines),b1=dailySourceFor('B1',headlines),b2=dailySourceFor('B2',headlines);
+  var today=todayStr(),a1=dailySourceFor('A1',headlines),a2=dailySourceFor('A2',headlines),b1=dailySourceFor('B1',headlines),b2=dailySourceFor('B2',headlines);
+  var basicA1=[readingParagraph('En mi barrio hay una plaza pequeña. Por la mañana, muchas personas caminan por allí. Algunas llevan a sus perros y otras van al trabajo. La plaza tiene bancos, árboles y una fuente.','我住的街区有一个小广场。早上，许多人从那里步行经过。一些人带着狗，另一些人去上班。广场有长椅、树木和一座喷泉。',[{w:'barrio',m:'街区'},{w:'plaza',m:'广场'},{w:'fuente',m:'喷泉'}],'hay + 名词：表示“有、存在”，没有复数变化。ir al trabajo：去上班；por allí：从那里/在那附近。'),readingParagraph('Los vecinos quieren mantener el lugar limpio. Los sábados recogen papeles y riegan las plantas. Después, hablan un poco y toman café juntos. Es una actividad sencilla, pero todos participan con alegría.','邻居们想保持这个地方整洁。周六他们捡纸屑并给植物浇水。之后，他们聊一会儿，一起喝咖啡。这是一项简单的活动，但大家都开心地参加。',[{w:'vecino',m:'邻居'},{w:'mantener',m:'保持'},{w:'recoger',m:'捡起；收集'}],'querer + 不定式：想要做某事。第三人称复数现在时：recogen、riegan、hablan。pero 用来连接转折信息。'),readingParagraph('Cuidar un espacio común ayuda a conocer mejor a otras personas. Cuando la plaza está limpia, las familias pueden descansar y los niños pueden jugar. Un lugar agradable también cambia la vida diaria.','照顾公共空间有助于更好地认识其他人。当广场干净时，家庭可以休息，孩子们可以玩耍。一个宜人的地方也会改变日常生活。',[{w:'cuidar',m:'照顾；维护'},{w:'común',m:'共同的；公共的'},{w:'agradable',m:'宜人的'}],'不定式作主语：Cuidar… ayuda…。cuando + 陈述式用于一般事实；poder + 不定式表示“能够”。')];
+  var basicA2=[readingParagraph('Muchas personas quieren aprender algo nuevo, pero creen que necesitan mucho tiempo. Sin embargo, una rutina corta puede ser más útil que un plan perfecto que nunca empieza. Diez minutos al día ya permiten avanzar.','许多人想学习新东西，但认为自己需要很多时间。然而，短暂的日常习惯可能比一个永远不开始的完美计划更有用。每天十分钟已经能让人进步。',[{w:'rutina',m:'日常习惯'},{w:'avanzar',m:'进步'},{w:'sin embargo',m:'然而'}],'querer + 不定式表达愿望。más + 形容词 + que：比较级。ya + 动词表示“已经”。'),readingParagraph('Una estudiante empezó a escuchar un pódcast durante el viaje al instituto. Al principio no entendía todas las palabras, pero anotaba las ideas principales. Después de varias semanas, podía seguir conversaciones más largas.','一名学生开始在去学校的路上听播客。起初她并不理解所有单词，但会记录主要观点。几周后，她能听懂更长的对话。',[{w:'al principio',m:'起初'},{w:'anotar',m:'记下'},{w:'seguir',m:'跟上；听懂'}],'empezar a + 不定式：开始做。imperfecto（entendía/anotaba）用于描述过去习惯或背景；poder 在过去未完成时为 podía。'),readingParagraph('El objetivo no es estudiar sin descansar. También es importante dormir bien y celebrar los progresos. Si una persona repite una actividad con calma, es más fácil convertirla en una costumbre duradera.','目标不是不停地学习。睡好觉并庆祝进步也很重要。如果一个人平静地重复一项活动，更容易把它变成持久的习惯。',[{w:'objetivo',m:'目标'},{w:'progreso',m:'进步'},{w:'duradero/a',m:'持久的'}],'es importante + 不定式：评价某行为。Si + 现在时，es + 形容词：描述真实、一般条件。convertir… en…：把……变成……。')];
   return [
-    {id:readingIdForToday('A1'),level:'A1',date:today,source:a1.source,sourceTitle:a1.sourceTitle,url:a1.url,cat:a1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:3,title:'Un barrio que cuida sus espacios',paragraphs:[
-      readingParagraph('En mi barrio hay una plaza pequeña. Por la mañana, muchas personas caminan por allí. Algunas llevan a sus perros y otras van al trabajo. La plaza tiene bancos, árboles y una fuente.', '我住的街区有一个小广场。早上，许多人从那里步行经过。一些人带着狗，另一些人去上班。广场有长椅、树木和一座喷泉。', [{w:'barrio',m:'街区'},{w:'plaza',m:'广场'},{w:'fuente',m:'喷泉'}], 'hay + 名词：表示“有、存在”，没有复数变化。ir al trabajo：去上班；por allí：从那里/在那附近。'),
-      readingParagraph('Los vecinos quieren mantener el lugar limpio. Los sábados recogen papeles y riegan las plantas. Después, hablan un poco y toman café juntos. Es una actividad sencilla, pero todos participan con alegría.', '邻居们想保持这个地方整洁。周六他们捡纸屑并给植物浇水。之后，他们聊一会儿，一起喝咖啡。这是一项简单的活动，但大家都开心地参加。', [{w:'vecino',m:'邻居'},{w:'mantener',m:'保持'},{w:'recoger',m:'捡起；收集'}], 'querer + 不定式：想要做某事。第三人称复数现在时：recogen、riegan、hablan。pero 用来连接转折信息。'),
-      readingParagraph('Cuidar un espacio común ayuda a conocer mejor a otras personas. Cuando la plaza está limpia, las familias pueden descansar y los niños pueden jugar. Un lugar agradable también cambia la vida diaria.', '照顾公共空间有助于更好地认识其他人。当广场干净时，家庭可以休息，孩子们可以玩耍。一个宜人的地方也会改变日常生活。', [{w:'cuidar',m:'照顾；维护'},{w:'común',m:'共同的；公共的'},{w:'agradable',m:'宜人的'}], '不定式作主语：Cuidar… ayuda…。cuando + 陈述式用于一般事实；poder + 不定式表示“能够”。')
-    ]},
-    {id:readingIdForToday('A2'),level:'A2',date:today,source:a2.source,sourceTitle:a2.sourceTitle,url:a2.url,cat:a2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:4,title:'Aprender con pequeños hábitos',paragraphs:[
-      readingParagraph('Muchas personas quieren aprender algo nuevo, pero creen que necesitan mucho tiempo. Sin embargo, una rutina corta puede ser más útil que un plan perfecto que nunca empieza. Diez minutos al día ya permiten avanzar.', '许多人想学习新东西，但认为自己需要很多时间。然而，短暂的日常习惯可能比一个永远不开始的完美计划更有用。每天十分钟已经能让人进步。', [{w:'rutina',m:'日常习惯'},{w:'avanzar',m:'进步'},{w:'sin embargo',m:'然而'}], 'querer + 不定式表达愿望。más + 形容词 + que：比较级。ya + 动词表示“已经”。'),
-      readingParagraph('Una estudiante empezó a escuchar un pódcast durante el viaje al instituto. Al principio no entendía todas las palabras, pero anotaba las ideas principales. Después de varias semanas, podía seguir conversaciones más largas.', '一名学生开始在去学校的路上听播客。起初她并不理解所有单词，但会记录主要观点。几周后，她能听懂更长的对话。', [{w:'al principio',m:'起初'},{w:'anotar',m:'记下'},{w:'seguir',m:'跟上；听懂'}], 'empezar a + 不定式：开始做。imperfecto（entendía/anotaba）用于描述过去习惯或背景；poder 在过去未完成时为 podía。'),
-      readingParagraph('El objetivo no es estudiar sin descansar. También es importante dormir bien y celebrar los progresos. Si una persona repite una actividad con calma, es más fácil convertirla en una costumbre duradera.', '目标不是不停地学习。睡好觉并庆祝进步也很重要。如果一个人平静地重复一项活动，更容易把它变成持久的习惯。', [{w:'objetivo',m:'目标'},{w:'progreso',m:'进步'},{w:'duradero/a',m:'持久的'}], 'es importante + 不定式：评价某行为。Si + 现在时，es + 形容词：描述真实、一般条件。convertir… en…：把……变成……。')
-    ]},
-    {id:readingIdForToday('B1'),level:'B1',date:today,source:b1.source,sourceTitle:b1.sourceTitle,url:b1.url,cat:b1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:5,title:'Tecnología útil, decisiones conscientes',paragraphs:[
-      readingParagraph('La tecnología forma parte de casi todas las tareas cotidianas, desde pedir una cita médica hasta organizar un viaje. Su utilidad, sin embargo, no depende solo de la velocidad de una aplicación, sino también de las decisiones que toman quienes la diseñan y quienes la utilizan.', '科技几乎参与了所有日常任务，从预约医生到安排旅行。然而，它是否有用不仅取决于应用程序的速度，也取决于设计者和使用者所做的决定。', [{w:'cita médica',m:'医疗预约'},{w:'depender de',m:'取决于'},{w:'diseñar',m:'设计'}], 'desde… hasta…：从……到……。no solo… sino también…：不仅……而且……。quienes 引导指人的关系从句。'),
-      readingParagraph('En una biblioteca municipal, por ejemplo, se instaló una mesa digital para ayudar a los usuarios a buscar libros y solicitar préstamos. Al principio, algunas personas desconfiaban del sistema porque pensaban que sería difícil de usar.', '例如，在一家市立图书馆，安装了一张数字服务台，帮助读者找书和借书。起初，一些人不信任这个系统，因为他们认为它会很难使用。', [{w:'préstamo',m:'借阅；贷款'},{w:'desconfiar de',m:'不信任'},{w:'instalar',m:'安装'}], 'se instaló：被动自复/无施事表达，强调事情发生。imperfecto（desconfiaban/pensaban）说明过去的心理背景；sería 是过去将来时。'),
-      readingParagraph('Con el tiempo, los trabajadores ofrecieron sesiones breves y recogieron dudas frecuentes. La herramienta no sustituyó la atención personal; la complementó. El cambio funcionó porque se adaptó a las necesidades reales de la comunidad.', '随着时间推移，工作人员提供了简短的讲解并收集常见问题。该工具没有取代人工服务，而是补充了它。这个变化之所以有效，是因为它适应了社区的真实需求。', [{w:'con el tiempo',m:'随着时间推移'},{w:'sustituir',m:'取代'},{w:'necesidad',m:'需求'}], 'pretérito indefinido（ofrecieron/recogieron）叙述完成事件。no…; la complementó：用代词 la 指代 atención。porque + 陈述式说明已知原因。')
-    ]},
-    {id:readingIdForToday('B2'),level:'B2',date:today,source:b2.source,sourceTitle:b2.sourceTitle,url:b2.url,cat:b2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:6,title:'Informarse sin perder el contexto',paragraphs:[
-      readingParagraph('La rapidez con la que circula la información ha modificado la manera de seguir la actualidad. Una noticia puede llegar a miles de personas en pocos minutos; aun así, conocer un dato no equivale necesariamente a comprender el contexto en el que se produjo.', '信息传播的速度改变了人们关注时事的方式。一条新闻几分钟内就能传到成千上万人；即便如此，知道一条信息并不必然等于理解它产生的背景。', [{w:'circular',m:'流传；传播'},{w:'equivaler a',m:'等同于'},{w:'aun así',m:'即便如此'}], 'la manera de + 不定式：做某事的方式。con la que 引导关系从句。no equivale a + 不定式：不等于做某事。'),
-      readingParagraph('Por esa razón, varios proyectos de educación mediática proponen comparar fuentes, identificar qué información falta y distinguir entre un hecho comprobable y una interpretación. No se trata de desconfiar de todo, sino de aprender a formular preguntas más precisas.', '因此，一些媒体素养项目建议比较信息来源、识别缺失的信息，并区分可验证的事实和一种解释。这里并不是要怀疑一切，而是要学会提出更准确的问题。', [{w:'fuente',m:'来源'},{w:'comprobable',m:'可验证的'},{w:'formular',m:'提出；表述'}], 'proponer + 不定式：建议做。间接疑问词 qué 后接陈述式。no se trata de… sino de…：不是……而是……。'),
-      readingParagraph('Este enfoque exige tiempo y no elimina la incertidumbre, pero reduce la posibilidad de reaccionar únicamente a un titular. Cuando una persona contrasta versiones antes de compartirlas, contribuye a que el debate público sea más claro y menos vulnerable a la desinformación.', '这种方法需要时间，也不会消除不确定性，但会减少人们仅凭标题作出反应的可能。当一个人在分享前核对不同版本时，她有助于让公共讨论更清晰、更不易受虚假信息影响。', [{w:'titular',m:'新闻标题'},{w:'contrastar',m:'核对；比较'},{w:'desinformación',m:'虚假信息'}], 'exigir + 名词：需要。antes de + 不定式：在做……之前。contribuir a que + 虚拟式（sea）：有助于使……；vulnerable a：易受……影响。')
-    ]}
+    {id:readingIdForToday('A1'),level:'A1',date:today,source:a1.source,sourceTitle:a1.sourceTitle,url:a1.url,cat:a1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:3,title:'Un barrio que cuida sus espacios',paragraphs:basicA1},
+    {id:readingIdForToday('A2'),level:'A2',date:today,source:a2.source,sourceTitle:a2.sourceTitle,url:a2.url,cat:a2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:4,title:'Aprender con pequeños hábitos',paragraphs:basicA2},
+    {id:readingIdForToday('B1'),level:'B1',date:today,source:b1.source,sourceTitle:b1.sourceTitle,url:b1.url,cat:b1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:11,title:'Tecnología útil, decisiones conscientes',paragraphs:b1AdvancedParagraphs()},
+    {id:readingIdForToday('B2'),level:'B2',date:today,source:b2.source,sourceTitle:b2.sourceTitle,url:b2.url,cat:b2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:18,title:'Informarse sin perder el contexto',paragraphs:b2AdvancedParagraphs()}
   ];
 }
-async function fetchReadingHeadlines(){
-  var feeds=[
-    {source:'BBC Mundo',url:'https://feeds.bbci.co.uk/mundo/rss.xml'},
-    {source:'El País',url:'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'}
-  ];
-  var items=[];
-  for(var i=0;i<feeds.length;i++){
-    try{
-      var api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feeds[i].url);
-      var resp=await fetch(api); if(!resp.ok) continue;
-      var json=await resp.json();
-      (json.items||[]).slice(0,4).forEach(function(item){
-        if(item&&item.title) items.push({source:feeds[i].source,title:decodeArticleHtml(item.title),url:item.link||''});
-      });
-    }catch(e){}
-  }
-  var mapped={};
-  READING_DAILY_LEVELS.forEach(function(level,index){ if(items[index]) mapped[level]=items[index]; });
-  return mapped;
-}
+async function fetchReadingHeadlines(){var feeds=[{source:'BBC Mundo',url:'https://feeds.bbci.co.uk/mundo/rss.xml'},{source:'El País',url:'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'}],items=[];for(var i=0;i<feeds.length;i++){try{var api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feeds[i].url),resp=await fetch(api);if(!resp.ok)continue;var json=await resp.json();(json.items||[]).slice(0,4).forEach(function(item){if(item&&item.title)items.push({source:feeds[i].source,title:decodeArticleHtml(item.title),url:item.link||''});});}catch(e){}}var mapped={};READING_DAILY_LEVELS.forEach(function(level,index){if(items[index])mapped[level]=items[index];});return mapped;}
 async function refreshReadingArticles(silent){
-  if(_fetchingArticles) return !silent&&toast('正在更新中，请稍候...', 'warn');
-  _fetchingArticles=true;
-  if(!silent) toast('正在联网更新今日四级双语精读包...', 'ok');
-  try{
-    var headlines=await fetchReadingHeadlines();
-    var articles=dailyTeachingArticles(headlines);
-    var complete=READING_DAILY_LEVELS.every(function(level){return articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});
-    if(!complete) throw new Error('daily package incomplete');
-    var cache=readDailyBilingualCache();
-    cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};
-    var days=Object.keys(cache).sort().reverse().slice(0,14),pruned={};
-    days.forEach(function(day){pruned[day]=cache[day];});
-    writeDailyBilingualCache(pruned);
-    if(!silent) toast('今日 A1/A2/B1/B2 四篇双语精读已更新', 'ok');
-  }catch(e){
-    var offline=dailyTeachingArticles({}), cache=readDailyBilingualCache();
-    if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:offline};writeDailyBilingualCache(cache);}
-    if(!silent) toast('新闻源暂不可用，已保留完整的今日双语精读包', 'warn');
-  }finally{ _fetchingArticles=false; renderMain(); }
+  if(_fetchingArticles)return !silent&&toast('正在更新中，请稍候...','warn');_fetchingArticles=true;if(!silent)toast('正在联网更新今日四级双语精读包...','ok');
+  try{var headlines=await fetchReadingHeadlines(),articles=dailyTeachingArticles(headlines),complete=READING_DAILY_LEVELS.every(function(level){return articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});if(!complete)throw new Error('daily package incomplete');var cache=readDailyBilingualCache();
+    // 同一天只更新联网选题元数据；保留已有文章主体，防止刷新导致学习内容或进度对应文章消失。
+    var old=cache[todayStr()];if(old&&Array.isArray(old.articles)){articles=articles.map(function(next){var previous=old.articles.find(function(a){return a.id===next.id;});if(previous&&completeBilingualArticle(previous)){previous.source=next.source;previous.sourceTitle=next.sourceTitle;previous.url=next.url;return previous;}return next;});}
+    cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};writeDailyBilingualCache(cache);if(!silent)toast('已更新今日4篇；历史精读已完整保留','ok');
+  }catch(e){var cache=readDailyBilingualCache();if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:dailyTeachingArticles({})};writeDailyBilingualCache(cache);}if(!silent)toast('新闻源暂不可用，已保留所有历史精读','warn');}
+  finally{_fetchingArticles=false;renderMain();}
 }
-function ensureDailyReadingArticles(){
-  var cache=readDailyBilingualCache(), pack=cache[todayStr()];
-  var complete=pack&&Array.isArray(pack.articles)&&READING_DAILY_LEVELS.every(function(level){
-    return pack.articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});
-  });
-  if(!complete&&!_fetchingArticles) setTimeout(function(){refreshReadingArticles(true);},0);
-}
+function ensureDailyReadingArticles(){var cache=readDailyBilingualCache(),pack=cache[todayStr()],complete=pack&&Array.isArray(pack.articles)&&READING_DAILY_LEVELS.every(function(level){return pack.articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});if(!complete&&!_fetchingArticles)setTimeout(function(){refreshReadingArticles(true);},0);}
 
 function toast(msg, type){
   var t = document.createElement('div');
@@ -8298,7 +8286,7 @@ function renderReading(){
         <h5>${esc(a.title)} ${isUnreadYesterday?'<span class="unread-badge">📌 未读</span>':''}</h5>
         <div class="meta">
           <span class="article-cat-tag" style="background:${catColors[cat]||'#888'};color:#fff;margin-right:4px">${cat}</span>
-          <span class="src">${esc(a.source)}</span> · ${a.level} · ${a.date} · ${articleReadingMeta(a)} · ${a.paragraphs.length}段
+          <span class="src">${esc(a.source)}</span> · ${a.level} · ${a.date} · ${articleReadingMeta(a)} · ${a.paragraphs.length}段${a.isHistoricalArchive?' · <span class="tm tk">历史归档</span>':''}
         </div>
       </button>${a.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" class="rd-source-link" title="查看原文" onclick="event.stopPropagation()" style="font-size:10px;color:var(--soft);text-decoration:none;margin-left:8px;padding:2px 6px;border:1px solid var(--line);border-radius:4px;white-space:nowrap">🔗 原文</a>`:''}</div>`;
     });
