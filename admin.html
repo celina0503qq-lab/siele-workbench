@@ -584,7 +584,13 @@ const CLOUD_AUTH_MESSAGES={
   UNAUTHORIZED:'登录状态已过期，请重新登录',
   SERVER_ERROR:'服务暂时不可用，请稍后重试'
 };
-function cloudAuthMessage(code){return CLOUD_AUTH_MESSAGES[code]||'请求未完成，请检查网络后重试';}
+function cloudAuthMessage(code){
+  const known=CLOUD_AUTH_MESSAGES[code];
+  if(known)return known;
+  if(code==='FORBIDDEN')return '当前账号没有管理员权限，请退出后用管理员账号重新登录';
+  if(code==='ADMIN_USERS_FAILED')return '读取用户资料失败，请稍后重试';
+  return code?'请求未完成：'+code:'请求未完成，请检查网络后重试';
+}
 async function callSieleAuth(data){
   const app=await window.__sieleCloudBaseReady;
   const result=await app.callFunction({name:'siele-auth',data:data});
@@ -1471,7 +1477,8 @@ function saveDBNoLoop(){if(CUR&&DB)lsSet(dataKey(CUR),DB);}
 // ---- 同步页 ----
 let selProvider=null;
 function renderSyncPage(){
-  selProvider=DB.syncCfg?DB.syncCfg.provider:selProvider;
+  // 只在首次进入同步页时采用已保存的 Provider；之后用户点击的选择必须保留，不能被旧配置重置。
+  if(!selProvider)selProvider=DB.syncCfg?DB.syncCfg.provider:'cloudbase';
   $('providerGrid').innerHTML=Object.entries(PROVIDERS).map(([k,p])=>
     '<div class="provider'+(selProvider===k?' on':'')+'" onclick="pickProvider(\''+k+'\')"><div class="pn">'+p.name+'</div><div class="pd">'+p.desc+'</div>'+(p.rec?'<span class="rec">推荐</span>':'')+'</div>').join('');
   renderProviderForm();
@@ -1526,7 +1533,8 @@ async function renderAdminUsers(){
   try{
     var result=await callSieleAuth({action:'adminListUsers',sessionToken:ses.sessionToken});
     if(!result.ok)throw new Error(cloudAuthMessage(result.code));
-    var users=result.data&&result.data.users||[];
+    // 云函数返回 users 为顶层字段；同时兼容早期 {data:{users}} 响应格式。
+    var users=result.users||(result.data&&result.data.users)||[];
     if(!users.length){
       el.innerHTML='<div class="empty"><span class="big">📭</span>暂无注册用户</div>';
       return;
@@ -1609,7 +1617,14 @@ async function adminRevokeTokens(uid,username){
     toast('撤销令牌失败：'+(err.message||err),'err');
   }
 }
-function pickProvider(k){selProvider=k;renderSyncPage();}
+function pickProvider(k){
+  if(!PROVIDERS[k]){toast('未识别的云端存储服务','err');return;}
+  selProvider=k;
+  // 仅更新选择器与配置表单，避免切换时反复请求 CloudBase 令牌列表造成页面卡顿。
+  $('providerGrid').innerHTML=Object.entries(PROVIDERS).map(([id,p])=>
+    '<div class="provider'+(selProvider===id?' on':'')+'" onclick="pickProvider(\''+id+'\')"><div class="pn">'+p.name+'</div><div class="pd">'+p.desc+'</div>'+(p.rec?'<span class="rec">推荐</span>':'')+'</div>').join('');
+  renderProviderForm();
+}
 function renderProviderForm(){
   const el=$('providerForm');
   if(!selProvider){el.innerHTML='<div class="note">👆 点击上方选择一种云端存储。三种都是免费服务，只需注册一次、粘贴一个令牌。</div>';return;}

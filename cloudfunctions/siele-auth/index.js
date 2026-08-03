@@ -147,7 +147,8 @@ async function pullLearning(event) {
 }
 async function adminListUsers(event) {
   await requireAdmin(event);
-  const result = await db.collection("user_profiles").orderBy("createdAt", "desc").limit(100).get();
+  // 部分 CloudBase 文档数据库运行时不支持无过滤条件的 orderBy；先读取受限集合，再在内存中稳定排序。
+  const result = await db.collection("user_profiles").limit(100).get();
   const users = result.data.map((user) => ({
     id: user._id,
     uid: user.uid,
@@ -157,7 +158,7 @@ async function adminListUsers(event) {
     inviteCode: user.inviteCode || "",
     createdAt: user.createdAt || null,
     lastLoginAt: user.lastLoginAt || null
-  }));
+  })).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   return response(true, "ADMIN_USERS", { users });
 }
 async function adminSetUserStatus(event) {

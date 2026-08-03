@@ -9087,7 +9087,17 @@ save=function(){
 
 /* ---------- 导航：站内后台管理面板 ---------- */
 NAV.push({s:'系统',items:[{id:'admin',icon:'⚙️',label:'后台管理'}]});
-function openAdminPanel(){
+function isMainAdmin(){
+  try{var ses=lsg('swa_cloud_session_v1',null);return !!(ses&&ses.role==='admin');}catch(e){return false;}
+}
+function refreshAdminNav(){
+  var systemGroup=NAV.find(function(group){return group.s==='系统';});
+  if(!systemGroup)return;
+  var hasUsers=systemGroup.items.some(function(item){return item.id==='admin-users';});
+  if(isMainAdmin()&&!hasUsers)systemGroup.items.push({id:'admin-users',icon:'👥',label:'用户管理'});
+  if(!isMainAdmin()&&hasUsers)systemGroup.items=systemGroup.items.filter(function(item){return item.id!=='admin-users';});
+}
+function openAdminPanel(targetPage){
   var panel=document.getElementById('wbAdminPanel');
   if(!panel){
     panel=document.createElement('div');
@@ -9099,6 +9109,12 @@ function openAdminPanel(){
   document.body.style.overflow='hidden';
   var frame=document.getElementById('wbAdminFrame');
   if(frame && !frame.src) frame.src='admin.html';
+  if(targetPage==='users'&&frame){
+    frame.onload=function(){try{frame.contentWindow.go('users');}catch(e){}};
+    if(frame.contentDocument&&frame.contentDocument.readyState==='complete'){
+      try{frame.contentWindow.go('users');}catch(e){}
+    }
+  }
 }
 function closeAdminPanel(){
   var panel=document.getElementById('wbAdminPanel');
@@ -9115,8 +9131,16 @@ document.head.appendChild(_adminPanelStyle);
 var _go0=go;
 go=function(p){
   if(p==='admin'){openAdminPanel();return;}
+  if(p==='admin-users'){
+    if(!isMainAdmin()){alert('仅管理员可访问用户管理。');return;}
+    openAdminPanel('users');
+    return;
+  }
   _go0(p);
 };
+var _renderNav0=renderNav;
+renderNav=function(){refreshAdminNav();return _renderNav0();};
+refreshAdminNav();
 
 /* ---------- 仪表盘增强：今日待办 + 快捷操作入口 ---------- */
 window.wbToggleTask=function(i){
