@@ -801,6 +801,8 @@ function getDefaultState(){
   return {
     examDate: '', examType: 'dele', targetLevel: 'B2',
     flashIdx: 0, flashLevel: 'all', flashCurrentWord: '', flashMastery: {},
+    // 各级别已背单词数（断点续背关键数据）
+    flashProgressByLevel: {A1: 0, A2: 0, B1: 0, B2: 0, all: 0},
     flashMode: 'flip',  // 'flip' 翻牌模式 | 'practice' 中西对应练习
     flashPraStats: {correct:0, wrong:0, streak:0, bestStreak:0},
     vocabMastery: {}, grammarDone: {},
@@ -880,8 +882,8 @@ async function speak(text, btn, accent){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
   let played = false;
-  // Latin American accent: es-MX; default: es-ES
-  const langCode = accent==='la' ? 'es-MX' : 'es-ES';
+  // Latin American accent: es-MX (default); es-ES for Spain fallback
+  const langCode = accent==='es' ? 'es-ES' : 'es-MX';
 
   // Tier 1: speechSynthesis
   if(window.speechSynthesis){
@@ -895,7 +897,9 @@ async function speak(text, btn, accent){
       }
       // Prefer Latin American voice if requested
       let esVoice;
-      if(accent==='la'){
+      if(accent==='es'){
+        esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
+      } else {
         esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
       }
       if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
@@ -918,7 +922,7 @@ async function speak(text, btn, accent){
   try{
     if(_audioEl){ _audioEl.pause(); _audioEl = null; }
     const q = encodeURIComponent(text.slice(0, 200));
-    const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl=es-ES&q=' + q;
+    const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl=es-MX&q=' + q;
     _audioEl = new Audio(url);
     _audioEl.crossOrigin = 'anonymous';
     _audioEl.playbackRate = 0.92;
@@ -1540,19 +1544,34 @@ function getFlashPool(){
 }
 function syncFlashPosition(pool){
   pool=pool||getFlashPool();
+  // 1) 优先按已保存的当前词精确定位
   var saved=ST.flashCurrentWord||'';
   var found=saved?pool.findIndex(function(v){return v.es===saved;}):-1;
-  if(found>=0)ST.flashIdx=found;
-  else{
-    var safe=Math.max(0,Math.min(Number(ST.flashIdx)||0,pool.length-1));
-    ST.flashIdx=safe;ST.flashCurrentWord=(pool[safe]||{}).es||'';
-  }
+  if(found>=0){ST.flashIdx=found;return pool;}
+  // 2) 词已被移除/未保存 → 按已背进度数量定位
+  if(!ST.flashProgressByLevel) ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+  var key = (ST.flashLevel==='all') ? 'all' : (ST.flashLevel || 'all');
+  var done = Number(ST.flashProgressByLevel[key]||0);
+  var safe = Math.max(0, Math.min(done, pool.length-1));
+  ST.flashIdx = safe;
+  ST.flashCurrentWord = (pool[safe]||{}).es || '';
   return pool;
 }
 function setFlashPosition(index,pool){
   pool=pool||getFlashPool();
   if(!pool.length)return;
-  ST.flashIdx=(index+pool.length)%pool.length;
+  var newIdx=(index+pool.length)%pool.length;
+  // 仅向前移动时累加已背数（避免来回翻页污染统计）
+  if(newIdx > ST.flashIdx && !ST.flashMastery[pool[ST.flashIdx].es]){
+    if(!ST.flashProgressByLevel) ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+    var cur = pool[ST.flashIdx];
+    var lvl = cur.lvl || 'all';
+    if(ST.flashProgressByLevel[lvl] === undefined) ST.flashProgressByLevel[lvl] = 0;
+    if(ST.flashProgressByLevel.all === undefined) ST.flashProgressByLevel.all = 0;
+    ST.flashProgressByLevel[lvl]++;
+    ST.flashProgressByLevel.all++;
+  }
+  ST.flashIdx=newIdx;
   ST.flashCurrentWord=pool[ST.flashIdx].es;
 }
 function changeFlashLevel(level){
@@ -7302,6 +7321,7 @@ const VDATA_PDF = [
 {"t": "avanzado", "es": "reunión", "pos": "s.", "zh": "会议", "ex": "Tenemos una reunión.", "lvl": "B1"}
 ];
 VDATA.push(...VDATA_PDF);
+VDATA.push(...VDATA_DELE);
 
 // ===== SHADOW sentences from SIELE prep book (real audio-style texts) =====
 const SHADOW_PDF = [
@@ -8756,6 +8776,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script src="./vdata_dele.js"></script>
 <script>
 /* Register service worker for offline / installable PWA (only over http(s), not file://) */
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
