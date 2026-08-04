@@ -7977,7 +7977,7 @@ var _fetchingArticles=false;
 var READING_DAILY_CACHE_KEY='siele_daily_bilingual_reading_v3';
 var READING_DAILY_LEGACY_KEYS=['siele_daily_bilingual_reading_v2','siele_ext_articles'];
 var READING_DAILY_LEVELS=['A1','A2','B1','B2'];
-var READING_PARAGRAPH_MIN={A1:3,A2:3,B1:10,B2:15};
+var READING_PARAGRAPH_MIN={A1:3,A2:3,B1:8,B2:10};
 
 function readingParagraph(es,zh,vocab,grammar){return {es:es,zh:zh,vocab:vocab||[],grammar:grammar||''};}
 function hasBilingualTeachingFields(a){
@@ -8083,10 +8083,29 @@ async function refreshReadingArticles(silent){
     // 同一天只更新联网选题元数据；保留已有文章主体，防止刷新导致学习内容或进度对应文章消失。
     var old=cache[todayStr()];if(old&&Array.isArray(old.articles)){articles=articles.map(function(next){var previous=old.articles.find(function(a){return a.id===next.id;});if(previous&&completeBilingualArticle(previous)){previous.source=next.source;previous.sourceTitle=next.sourceTitle;previous.url=next.url;return previous;}return next;});}
     cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};writeDailyBilingualCache(cache);if(!silent)toast('已更新今日4篇；历史精读已完整保留','ok');
-  }catch(e){var cache=readDailyBilingualCache();if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:dailyTeachingArticles({})};writeDailyBilingualCache(cache);}if(!silent)toast('新闻源暂不可用，已保留所有历史精读','warn');}
-  finally{_fetchingArticles=false;renderMain();}
+  }  catch(e){var cache=readDailyBilingualCache();if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:dailyTeachingArticles({})};writeDailyBilingualCache(cache);}if(!silent)toast('新闻源暂不可用，已保留所有历史精读','warn');}
+  finally{
+    _fetchingArticles=false;
+    // 仅当当前确实在阅读页且没有打开文章详情时才重渲染；否则会打断阅读和答题。
+    if(typeof currentPage!=='undefined'&&currentPage==='reading'&&!currentReadingArticle){
+      renderMain();
+    }
+  }
 }
-function ensureDailyReadingArticles(){var cache=readDailyBilingualCache(),pack=cache[todayStr()],complete=pack&&Array.isArray(pack.articles)&&READING_DAILY_LEVELS.every(function(level){return pack.articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});if(!complete&&!_fetchingArticles)setTimeout(function(){refreshReadingArticles(true);},0);}
+// 防止后台刷新导致无限重渲染循环：每个会话最多静默触发一次，且仅当今日确实没有完整包时。
+var _readingEnsureFired=false;
+function ensureDailyReadingArticles(){
+  if(_readingEnsureFired||_fetchingArticles)return;
+  if(currentPage!=='reading')return;
+  var cache=readDailyBilingualCache(),pack=cache[todayStr()],
+  complete=pack&&Array.isArray(pack.articles)&&READING_DAILY_LEVELS.every(function(level){
+    return pack.articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});
+  });
+  if(!complete){
+    _readingEnsureFired=true;
+    setTimeout(function(){refreshReadingArticles(true);},0);
+  }
+}
 
 function toast(msg, type){
   var t = document.createElement('div');
@@ -8379,11 +8398,22 @@ function renderReading(){
 }
 
 // ===== NEW: Reading Quiz Generation =====
+// quiz 题目在首次生成后缓存到 ST.readingProgress[artId].quiz，避免每次 renderMain 用 Math.random 重新生成。
+// 答题状态同步持久化到 ST.readingProgress[artId].quizAnswers，避免重渲染丢失已答记录。
 function generateReadingQuiz(art){
   // 长文拥有人工校验的题目：题干与四个选项均为西班牙语，避免自动生成造成低质量干扰项。
   if(Array.isArray(art.quiz) && art.quiz.length){
     return renderReadingQuiz(art.quiz, art.id);
   }
+
+  if(!ST.readingProgress) ST.readingProgress = {};
+  if(!ST.readingProgress[art.id]) ST.readingProgress[art.id] = {};
+
+  // 缓存命中：直接复用已生成的题目，保证题目内容稳定不变（修复 bug 4）
+  if(Array.isArray(ST.readingProgress[art.id].quiz) && ST.readingProgress[art.id].quiz.length){
+    return renderReadingQuiz(ST.readingProgress[art.id].quiz, art.id);
+  }
+
   var paras = art.paragraphs || [];
   var allText = paras.map(function(p){return p.es;}).join(' ');
   var allVocab = [];
@@ -8450,19 +8480,59 @@ function generateReadingQuiz(art){
     exp_es: 'El título y el primer párrafo suelen revelar la idea principal; hay que distinguir la tesis central de un detalle secundario.'
   });
 
+  // 持久化缓存：下次渲染同一文章时复用这套题目，不再重新生成（修复 bug 4）
+  ST.readingProgress[art.id].quiz = questions;
+  save();
+
   return renderReadingQuiz(questions, art.id);
 }
 function renderReadingQuiz(questions, articleId){
   _readingQuizTotal = questions.length;
+  // 恢复该文章的已答状态到内存（从 ST.readingProgress 持久化数据）
+  var saved = ST.readingProgress && ST.readingProgress[articleId] || {};
+  var savedAnswers = saved.quizAnswers || {};
+  _readingQuizAnswered = {};
+  Object.keys(savedAnswers).forEach(function(k){ _readingQuizAnswered[k] = savedAnswers[k]; });
+
+  var answeredCount = Object.keys(_readingQuizAnswered).length;
+  var allDone = _readingQuizTotal > 0 && answeredCount >= _readingQuizTotal;
+
   var html = '<div class="rd-quiz-section" aria-live="polite"><h4>📝 Comprensión lectora ('+questions.length+' preguntas)</h4><p style="font-size:11px;color:var(--soft);margin:-7px 0 10px">Responde en español. Después de cada respuesta verás la explicación bilingüe.</p>';
   questions.forEach(function(q, qi){
-    html += '<div class="rd-quiz-item" id="rq'+qi+'"><div class="rq-type">'+esc(q.type||'Comprensión')+'</div><div class="rq-q">'+(qi+1)+'. '+esc(q.q)+'</div>';
+    var userAns = _readingQuizAnswered[qi]; // 'correct' | 'wrong' | undefined
+    var revealed = !!userAns;
+    var optsHtml = '';
     q.opts.forEach(function(o, oi){
-      html += '<button type="button" class="rq-opt" onclick="answerReadingQ('+qi+','+oi+','+q.ans+',\''+articleId+'\')">'+String.fromCharCode(65+oi)+'. '+esc(o)+'</button>';
+      var cls = 'rq-opt';
+      var style = '';
+      if(revealed){
+        style = 'pointer-events:none;';
+        if(oi === q.ans){ cls += ' chosen cor'; }
+        if(oi !== q.ans && userAns === 'wrong') {} // wrong 的标记需要知道用户选了哪个
+      }
+      optsHtml += '<button type="button" class="'+cls+'" style="'+style+'" onclick="answerReadingQ('+qi+','+oi+','+q.ans+',\''+articleId+'\')">'+String.fromCharCode(65+oi)+'. '+esc(o)+'</button>';
     });
-    html += '<div class="rq-exp" id="rqExp'+qi+'"><div style="margin-bottom:4px"><b>中文解析：</b>'+esc(q.exp||'请回到原文定位证据。')+'</div><div class="es"><b>Explicación:</b> '+esc(q.exp_es||'Vuelve al texto y localiza la evidencia que justifica la respuesta.')+'</div></div></div>';
+    // 恢复 wrong 标记：需要知道用户选了哪个选项
+    if(revealed){
+      var savedOpt = savedAnswers[qi+'_opt'];
+      if(savedOpt !== undefined && savedOpt !== q.ans){
+        // 给错误选项加 wrong class
+        optsHtml = optsHtml.replace('class="rq-opt chosen cor" style="pointer-events:none;" onclick="answerReadingQ('+qi+','+savedOpt+',', 'class="rq-opt chosen cor" style="pointer-events:none;" data-was="' + savedOpt + '" onclick="answerReadingQ('+qi+','+savedOpt+',');
+      }
+    }
+    var expStyle = revealed ? ' show' : '';
+    html += '<div class="rd-quiz-item" id="rq'+qi+'"><div class="rq-type">'+esc(q.type||'Comprensión')+'</div><div class="rq-q">'+(qi+1)+'. '+esc(q.q)+'</div>';
+    html += optsHtml;
+    html += '<div class="rq-exp'+expStyle+'" id="rqExp'+qi+'"><div style="margin-bottom:4px"><b>中文解析：</b>'+esc(q.exp||'请回到原文定位证据。')+'</div><div class="es"><b>Explicación:</b> '+esc(q.exp_es||'Vuelve al texto y localiza la evidencia que justifica la respuesta.')+'</div></div></div>';
   });
-  html += '<div id="rqScore" style="text-align:center;margin-top:8px;font-weight:700;display:none"></div></div>';
+  if(allDone){
+    var correct = 0, total = 0;
+    for(var k in _readingQuizAnswered){ if(_readingQuizAnswered.hasOwnProperty(k)){ total++; if(_readingQuizAnswered[k]==='correct') correct++; } }
+    html += '<div id="rqScore" style="text-align:center;margin-top:8px;font-weight:700;display:block">得分：'+correct+'/'+total+' ('+Math.round(correct/total*100)+'%) '+(correct===total?'🏆 ¡Perfecto!':correct>=Math.round(total/2)?'👍 ¡Bien!':'💪 ¡Sigue practicando!')+'</div>';
+  } else {
+    html += '<div id="rqScore" style="text-align:center;margin-top:8px;font-weight:700;display:none"></div>';
+  }
+  html += '</div>';
   return html;
 }
 
@@ -8478,6 +8548,14 @@ function answerReadingQ(qi, oi, correctAns, artId){
   if(oi !== correctAns) opts[oi].classList.add('wrong');
   document.getElementById('rqExp'+qi).classList.add('show');
 
+  // 答题状态持久化到 ST.readingProgress，重渲染后自动恢复（修复 bug 3）
+  if(!ST.readingProgress) ST.readingProgress = {};
+  if(!ST.readingProgress[artId]) ST.readingProgress[artId] = {};
+  if(!ST.readingProgress[artId].quizAnswers) ST.readingProgress[artId].quizAnswers = {};
+  ST.readingProgress[artId].quizAnswers[qi] = _readingQuizAnswered[qi];
+  ST.readingProgress[artId].quizAnswers[qi+'_opt'] = oi;
+  save();
+
   // Track score - check actual answered results
   var allQ = 0;
   for(var k in _readingQuizAnswered){ if(_readingQuizAnswered.hasOwnProperty(k)) allQ++; }
@@ -8490,8 +8568,6 @@ function answerReadingQ(qi, oi, correctAns, artId){
     }
     var scoreEl=document.getElementById('rqScore');
     if(scoreEl){ scoreEl.style.display='block'; scoreEl.innerHTML='得分：'+correct+'/'+total+' ('+Math.round(correct/total*100)+'%) '+(correct===total?'🏆 ¡Perfecto!':correct>=Math.round(total/2)?'👍 ¡Bien!':'💪 ¡Sigue practicando!'); }
-    if(!ST.readingProgress)ST.readingProgress={};
-    if(!ST.readingProgress[artId])ST.readingProgress[artId]={};
     ST.readingProgress[artId].quizScore=correct;
     ST.readingProgress[artId].quizDate=todayStr();
     save();
@@ -8503,20 +8579,19 @@ function setReadingLevel(lvl){
   currentReadingLevel = lvl;
   currentReadingArticle = null;
   _readingCatFilter = null;
-  _readingQuizAnswered = {};
+  // 答题状态现在持久化在 ST.readingProgress 中，由 renderReadingQuiz 自动恢复，无需手动清空。
   renderMain();
   var heading=document.querySelector('#main h2'); if(heading) heading.focus&&heading.focus();
 }
 function setReadingCategory(category){
   _readingCatFilter = category || null;
   currentReadingArticle = null;
-  _readingQuizAnswered = {};
   renderMain();
 }
 
 function showReadingArticle(id){
   currentReadingArticle = id;
-  _readingQuizAnswered = {}; // reset quiz for new article
+  // 答题状态由 renderReadingQuiz 从 ST.readingProgress 恢复，无需手动清空内存。
   renderMain();
   // Scroll to top
   window.scrollTo({top:0, behavior:'smooth'});
