@@ -675,18 +675,22 @@ function returnToWorkbench(){
 }
 // 登录/注册成功后进入学习工作台
 function gotoWorkbench(){setTimeout(function(){returnToWorkbench();},450);}
-async function doLogin(e){
-  e.preventDefault();
-  const u=$('loginUser').value.trim(),p=$('loginPass').value;
+async function doLogin(e,credentials){
+  if(e&&e.preventDefault)e.preventDefault();
+  const u=credentials&&credentials.username!=null?String(credentials.username).trim():$('loginUser').value.trim();
+  const p=credentials&&credentials.password!=null?String(credentials.password):$('loginPass').value;
   let ok=fldErr('f_lu',!u);ok=fldErr('f_lp',!p)&&ok;
   if(!ok)return false;
-  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  const submit=e&&e.currentTarget?e.currentTarget.querySelector('button[type="submit"]'):null;
   if(submit){submit.disabled=true;submit.textContent='正在登录…';}
   try{
     const result=await callSieleAuth({action:'login',username:u,password:p});
     if(!result.ok){
       if(result.code==='INVALID_CREDENTIALS'){fldErr('f_lp',true,cloudAuthMessage(result.code));}
       else toast(cloudAuthMessage(result.code),'err');
+      if(credentials&&window.parent&&window.parent!==window){
+        window.parent.postMessage({type:'siele-login-failed',code:result.code||'LOGIN_FAILED'},location.origin);
+      }
       return false;
     }
     saveCloudSession(result);
@@ -698,6 +702,9 @@ async function doLogin(e){
   }catch(err){
     console.error('Cloud login failed',err);
     toast('无法连接账号服务，请检查网络或稍后再试','err');
+    if(credentials&&window.parent&&window.parent!==window){
+      window.parent.postMessage({type:'siele-login-failed',code:'NETWORK_ERROR'},location.origin);
+    }
   }finally{
     if(submit){submit.disabled=false;submit.textContent='登 录';}
   }
@@ -1727,6 +1734,12 @@ async function transferIn(code){
   setInterval(()=>{if(DB&&DB.syncCfg&&syncState!=='ing')syncNow(true);},120000);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&DB&&DB.syncCfg)syncNow(true);});
   window.addEventListener('online',()=>{if(DB&&DB.syncCfg){toast('网络已恢复，正在同步…','info');syncNow(true);}});
+  // 主工作台登录框透传的云端凭据：仍由本页 doLogin 调用 CloudBase，成功后自动关闭 iframe 回到主工作台。
+  window.addEventListener('message',function(ev){
+    if(ev.origin!==location.origin||!ev.data||ev.data.type!=='siele-cloud-login')return;
+    authTab('login');
+    doLogin(null,{username:ev.data.username,password:ev.data.password});
+  });
   // 跨标签页感知：学习工作台写入数据后，后台自动刷新
   window.addEventListener('storage',e=>{
     if(!CUR)return;

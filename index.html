@@ -8814,14 +8814,23 @@ function hideLoginOverlay(){
 }
 async function wbDoLogin(e){
   e.preventDefault();
-  // 账号已迁移至 CloudBase：主工作台不再读取本浏览器的旧 localStorage 账号库。
-  // 统一在后台管理页进行云端登录，避免换设备或换浏览器出现“账号不存在”。
-  var fP=document.getElementById('wbLfP');
-  if(fP){
-    fP.querySelector('.err').textContent='请在后台管理页使用云端账号登录';
-    fP.classList.add('invalid');
+  var username=(document.getElementById('wbLoginUser').value||'').trim();
+  var password=document.getElementById('wbLoginPass').value||'';
+  var fU=document.getElementById('wbLfU'),fP=document.getElementById('wbLfP');
+  fU&&fU.classList.remove('invalid');fP&&fP.classList.remove('invalid');
+  if(!username||!password){
+    if(!username&&fU)fU.classList.add('invalid');
+    if(!password&&fP){fP.querySelector('.err').textContent='请输入密码';fP.classList.add('invalid');}
+    return false;
   }
+  var button=document.querySelector('#wbLoginForm button[type="submit"]');
+  if(button){button.disabled=true;button.textContent='正在登录…';}
+  // 主站通过同源后台页调用 CloudBase，账号验证与后台完全一致；成功后自动回到当前工作台。
   openAdminPanel();
+  var frame=document.getElementById('wbAdminFrame');
+  var send=function(){try{frame.contentWindow.postMessage({type:'siele-cloud-login',username:username,password:password},location.origin);}catch(err){}};
+  if(frame){frame.onload=send;try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')send();}catch(err){}}
+  setTimeout(function(){if(button&&!activeUser()){button.disabled=false;button.textContent='登 录';}},8000);
   return false;
 }
 
@@ -9123,7 +9132,18 @@ function closeAdminPanel(){
 }
 window.addEventListener('message',function(ev){
   if(ev.origin!==location.origin)return;
-  if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();}
+  if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();return;}
+  if(ev.data&&ev.data.type==='siele-login-failed'){
+    closeAdminPanel();
+    var button=document.querySelector('#wbLoginForm button[type="submit"]');
+    if(button){button.disabled=false;button.textContent='登 录';}
+    var field=document.getElementById('wbLfP');
+    if(field){
+      var err=field.querySelector('.err');
+      if(err)err.textContent=ev.data.code==='NETWORK_ERROR'?'账号服务暂时无法连接，请稍后重试':'账号或密码错误，请检查后重试';
+      field.classList.add('invalid');
+    }
+  }
 });
 var _adminPanelStyle=document.createElement('style');
 _adminPanelStyle.textContent='#wbAdminPanel{display:none;position:fixed;inset:0;z-index:999999;background:#f3ebdd;flex-direction:column;padding-top:env(safe-area-inset-top)}#wbAdminPanel.show{display:flex}.wb-admin-bar{height:48px;flex:0 0 48px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#2b1810;color:#fff;font-family:system-ui,sans-serif}.wb-admin-bar button{border:1px solid rgba(255,255,255,.5);border-radius:7px;background:transparent;color:#fff;padding:8px 14px;cursor:pointer;font:inherit;font-size:13px;min-height:36px}#wbAdminFrame{width:100%;height:calc(100% - 48px);border:0;background:#f3ebdd;-webkit-overflow-scrolling:touch}@media(max-width:600px){.wb-admin-bar{padding:0 12px;font-size:14px}.wb-admin-bar button{padding:8px 10px;font-size:12px}}';
