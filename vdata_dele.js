@@ -2191,8 +2191,11 @@ const VDATA_DELE = [
 {"t": "general", "es": "zoco", "pos": "s.", "zh": "(摩洛哥的)集市；市场", "ex": "Me explicó el zoco con detalle.", "lvl": "B1", "theme": "通用词汇"},
 ];
 
-// Merge into main VDATA
-if(typeof VDATA!=='undefined'){VDATA_DELE.forEach(function(v){VDATA.push(v);});}
+// Merge into main VDATA (去重合并，避免重复加载时翻倍)
+if(typeof VDATA!=='undefined'){
+  var _existing=new Set(VDATA.map(function(v){return v.es;}));
+  VDATA_DELE.forEach(function(v){ if(!_existing.has(v.es)){VDATA.push(v);} });
+}
 
 // Theme index for category browsing
 if(typeof VDATA_THEMES==='undefined'){var VDATA_THEMES={};}

@@ -376,7 +376,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 <!-- ===== 单词管理 ===== -->
 <section class="page" id="pg-words">
   <div class="tb">
-    <div><h2>📚 单词管理</h2><div class="d">词汇的增删改查 · 掌握度点击星星即改</div></div>
+    <div><h2>📚 单词管理</h2><div class="d">用户词 <b id="wUserCount" style="color:var(--accent)">'+(DB?DB.words.length:0)+'</b> · 种子词 <b id="wSeedCount" style="color:var(--tr)">'+_vdataSeedCount+'</b> · 合计 <b id="wTotalCount" style="color:var(--ok)">'+(DB?DB.words.length+_vdataSeedCount:0)+'</b> · 掌握度点击星星即改</div></div>
     <div class="acts"><button class="btn sm dgr hide" id="wBatchDel" onclick="batchDelWords()">🗑 删除选中</button><button class="btn sm" onclick="openWordForm()">＋ 新增单词</button></div>
   </div>
   <div class="toolbar">
@@ -761,12 +761,30 @@ function go(p){
   window.scrollTo({top:0});
 }
 function toggleDrawer(open){$('sideBar').classList.toggle('open',open);$('drawerMask').classList.toggle('on',open);}
+var _vdataSeedCount=0; // 由主站 postMessage 推送的种子词数量（含 VDATA/VDATA_EXTRA/VDATA_PDF/VDATA_DELE）
+window.addEventListener('message',function(ev){
+  if(ev.origin!==location.origin)return;
+  if(ev.data&&ev.data.type==='siele-vdata-count'){
+    _vdataSeedCount=parseInt(ev.data.count,10)||0;
+    if(typeof refreshBadges==='function')refreshBadges();
+    var seedEl=document.getElementById('wSeedCount');
+    if(seedEl){
+      seedEl.textContent=_vdataSeedCount;
+      var totalEl=document.getElementById('wTotalCount');
+      if(totalEl&&DB)totalEl.textContent=DB.words.length+_vdataSeedCount;
+    }
+  }
+});
 function refreshBadges(){
   if(!DB)return;
-  $('bdgWords').textContent=DB.words.length;
+  $('bdgWords').textContent=DB.words.length+_vdataSeedCount;
   $('bdgQuiz').textContent=DB.questions.length;
   $('bdgRev').textContent=DB.reviews.length;
   $('bdgPlan').textContent=DB.plans.length;
+  var seedEl=document.getElementById('wSeedCount');
+  var totalEl=document.getElementById('wTotalCount');
+  if(seedEl)seedEl.textContent=_vdataSeedCount;
+  if(totalEl)totalEl.textContent=DB.words.length+_vdataSeedCount;
 }
 function renderAll(){renderDash();}
 
@@ -869,6 +887,11 @@ function wFiltered(){
 function wJump(p,size){if(size){W.size=size;}W.page=p;renderWords();}
 function renderWords(){
   if(!DB)return;
+  var uc=document.getElementById('wUserCount'),sc=document.getElementById('wSeedCount');
+  if(uc)uc.textContent=DB.words.length;
+  if(sc)sc.textContent=_vdataSeedCount;
+  var tc=document.getElementById('wTotalCount');
+  if(tc)tc.textContent=DB.words.length+_vdataSeedCount;
   const cats=[...new Set(DB.words.map(w=>w.t||'general'))];
   $('wCatSel').innerHTML='<option value="all">全部分类</option>'+cats.map(c=>'<option value="'+esc(c)+'"'+(W.cat===c?' selected':'')+'>'+esc(CATNAMES[c]||c)+'</option>').join('');
   const list=wFiltered().slice().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0)||a.id.localeCompare(b.id));
@@ -1829,6 +1852,8 @@ async function transferIn(code){
   // 恢复云端账号会话；旧本地账户仅用于保留既有学习数据，不再作为登录凭据来源。
   const ses=cloudSession();
   if(ses&&ses.username&&ses.sessionToken)enter(ses.username,false,ses);
+  // 主动向父窗口请求 VDATA 种子词计数（iframe 内嵌场景）
+  try{ if(window.parent&&window.parent!==window){window.parent.postMessage({type:'siele-req-vdata-count'},location.origin);} }catch(e){}
 })();
 
 </script>

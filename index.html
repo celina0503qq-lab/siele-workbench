@@ -1910,6 +1910,7 @@ function resetPraStats(){
 // ===== PAGE: VOCAB LIBRARY =====
 function renderVocab(){
   let h = `<div class="tb"><div><h2>词汇库</h2><div class="d">共 ${VDATA.length} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
+  h += renderModuleCheckinBar('vocab','词汇学习','🃏');
 
   // Verb usage section
   h += renderVocabVerbUsage();
@@ -2008,7 +2009,9 @@ function setMastery(word, level){
 
 // ===== PAGE: GRAMMAR LIBRARY =====
 function renderGrammar(){
+  if(!ST.grammarDone)ST.grammarDone={};
   let h = `<div class="tb"><div><h2>语法库</h2><div class="d">共 ${GFLAT.length} 条语法 · 点击展开查看详情和例句 · 勾选标记已学 · 有练习题的语法点可点击练习</div></div></div>`;
+  h += renderModuleCheckinBar('grammar','语法学习','📐');
 
   // Grammar practice box (if active)
   if(_grammarPracticeTopic && GRAMMAR_PRACTICE[_grammarPracticeTopic]){
@@ -2515,6 +2518,7 @@ WRITING_TASKS.push(...WRITING_EXTRA);
 
 function renderWriting(){
   let h = `<div class="tb"><div><h2>写作练习</h2><div class="d">${WRITING_TASKS.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  h += renderModuleCheckinBar('writing','写作练习','✍️');
   h += `<div class="rg">`;
   WRITING_TASKS.forEach((t,i) => {
     h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i})">
@@ -2672,6 +2676,7 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
 
 function renderSpeaking(){
   let h = `<div class="tb"><div><h2>口语话题</h2><div class="d">${SPEAKING_TOPICS.length}个口语话题 · 点击发音听题目 · 录音练习</div></div></div>`;
+  h += renderModuleCheckinBar('speaking','口语训练','🗣');
   h += `<div class="rg">`;
   SPEAKING_TOPICS.forEach((t,i) => {
     h += `<div class="rc" onclick="selectSpeaking(${i})" id="spk_${i}">
@@ -3129,6 +3134,52 @@ function toggleDailyTask(i){
   }
   save();
   renderMain();
+}
+
+// ===== 模块打卡：按分类(cat)匹配今日任务并勾选 =====
+// 词汇库(vocab)、语法库(grammar)、写作(writing)、口语(speaking)、外刊(reading)等
+// 菜单栏在进入并完成学习后，调用 checkOffTodayByCat(cat) 即可完成打卡。
+function checkOffTodayByCat(cat){
+  if(!cat) return [];
+  const today = todayStr();
+  const tasks = (ST.dailyTasks && ST.dailyTasks[today]) || [];
+  let checked = [];
+  tasks.forEach((t,i)=>{
+    if(t.cat === cat && !t.done){
+      t.done = true; checked.push(i);
+      if(ST.dailyTodos && i < ST.dailyTodos.length) ST.dailyTodos[i].done = true;
+    }
+  });
+  if(checked.length){
+    save(); saveBackup();
+    if(ST.dailyTodos && ST.dailyTodos.length && ST.dailyTodos.every(x=>x.done)){
+      setTimeout(triggerConfetti,200); setTimeout(triggerConfetti,800);
+    }
+    if(typeof renderMain==='function' && currentPage!=='dash') renderMain();
+    if(typeof toast==='function') toast('✅ '+cat+' 打卡成功！完成 '+checked.length+' 项今日任务','ok');
+  } else {
+    if(typeof toast==='function') toast('📌 今日无「'+cat+'」类任务，但已记录学习','');
+  }
+  return checked;
+}
+
+// 渲染模块顶部的打卡条（若今日存在对应分类任务）
+function renderModuleCheckinBar(cat, label, icon){
+  if(!cat || !ST.dailyTasks) return '';
+  const today = todayStr();
+  const tasks = (ST.dailyTasks[today] || []);
+  const mine = tasks.filter(t=>t.cat===cat);
+  if(!mine.length) return '';
+  const doneCnt = mine.filter(t=>t.done).length;
+  const allDone = doneCnt === mine.length;
+  return `<div class="card" style="margin-bottom:14px;padding:11px 14px;display:flex;align-items:center;gap:10px;border-left:4px solid ${allDone?'var(--ok)':'var(--tr)'}">
+    <span style="font-size:20px">${icon||'📌'}</span>
+    <div style="flex:1">
+      <b>${label}打卡</b>
+      <div style="font-size:11px;color:var(--soft)">今日任务：${doneCnt}/${mine.length} 已完成</div>
+    </div>
+    <button class="btn sm ${allDone?'ol':'t'}" onclick="checkOffTodayByCat('${cat}')">${allDone?'✅ 已打卡':'✅ 完成打卡'}</button>
+  </div>`;
 }
 
 function renderPlanner(){
@@ -7321,7 +7372,7 @@ const VDATA_PDF = [
 {"t": "avanzado", "es": "reunión", "pos": "s.", "zh": "会议", "ex": "Tenemos una reunión.", "lvl": "B1"}
 ];
 VDATA.push(...VDATA_PDF);
-VDATA.push(...VDATA_DELE);
+// VDATA_DELE 由外链 vdata_dele.js 提供，在 DOMContentLoaded 后合并（见文件末尾）
 
 // ===== SHADOW sentences from SIELE prep book (real audio-style texts) =====
 const SHADOW_PDF = [
@@ -8270,6 +8321,7 @@ function renderReading(){
       let quizHtml = generateReadingQuiz(art);
 
       return `<div class="tb"><div><h2>📰 外刊阅读</h2><div class="d">每日精选 · 中西对照精读 · 词汇语法解析</div></div></div>
+      ${renderModuleCheckinBar('reading','外刊阅读','📰')}
       ${lvlFilter}
       <div class="rd-article">
         <h3>${esc(art.title)}</h3>
@@ -8318,6 +8370,7 @@ function renderReading(){
   return `<div class="tb"><div><h2>📰 外刊阅读</h2><div class="d">每日精选 · 中西对照精读 · 词汇语法解析 · 联网实时更新</div></div>
     <span class="dp">已读 ${totalRead} / ${allArts.length} 篇</span>
   </div>
+  ${renderModuleCheckinBar('reading','外刊阅读','📰')}
   <div class="note">💡 每日学习包固定覆盖 A1、A2、B1、B2 各一篇。每个段落按<b>西语原文 → 中文翻译 → 高亮词汇 → 语法解析</b>顺序精读；联网新闻只用于选题和原文入口，页面呈现的是经过分级改写的教学材料。</div>
   ${updateInfo}
   ${lvlFilter}
@@ -8777,6 +8830,26 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="./vdata_dele.js"></script>
+<script>
+/* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
+(function(){
+  try {
+    var f = document.getElementById('wbAdminFrame');
+    if (f && f.contentWindow && typeof VDATA !== 'undefined') {
+      f.contentWindow.postMessage({type:'siele-vdata-count', count: VDATA.length}, location.origin);
+    }
+    // 监听后台 iframe 打开后的请求，补发计数
+    window.addEventListener('message', function(ev){
+      if (ev.data && ev.data.type === 'siele-req-vdata-count') {
+        var ff = document.getElementById('wbAdminFrame');
+        if (ff && ff.contentWindow && typeof VDATA !== 'undefined') {
+          ff.contentWindow.postMessage({type:'siele-vdata-count', count: VDATA.length}, location.origin);
+        }
+      }
+    });
+  } catch(e){}
+})();
+</script>
 <script>
 /* Register service worker for offline / installable PWA (only over http(s), not file://) */
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
