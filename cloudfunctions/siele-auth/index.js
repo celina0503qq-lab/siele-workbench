@@ -167,6 +167,25 @@ async function adminListUsers(event) {
   })).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   return response(true, "ADMIN_USERS", { users });
 }
+
+// 管理员查询当前所有邀请码及其使用状态
+async function adminListInvites(event) {
+  await requireAdmin(event);
+  const result = await db.collection("invite_codes").limit(100).get();
+  const invites = result.data.map((doc) => ({
+    code: doc.code,
+    status: doc.status || "unused",
+    usedBy: doc.usedBy || null,
+    usedAt: doc.usedAt || null,
+    createdAt: doc.createdAt || null
+  })).sort((a, b) => {
+    // unused 优先，然后按创建时间倒序
+    if (a.status === "unused" && b.status !== "unused") return -1;
+    if (a.status !== "unused" && b.status === "unused") return 1;
+    return Number(b.createdAt || 0) - Number(a.createdAt || 0);
+  });
+  return response(true, "ADMIN_INVITES", { invites });
+}
 async function adminSetUserStatus(event) {
   const admin = await requireAdmin(event);
   const uid = String(event.uid || "");
@@ -223,6 +242,7 @@ exports.main = async (event) => {
     if (action === "listSyncTokens") return await listSyncTokens(input);
     if (action === "revokeSyncToken") return await revokeSyncToken(input);
     if (action === "adminListUsers") return await adminListUsers(input);
+    if (action === "adminListInvites") return await adminListInvites(input);
     if (action === "adminSetUserStatus") return await adminSetUserStatus(input);
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);

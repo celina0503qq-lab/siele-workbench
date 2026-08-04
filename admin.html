@@ -292,7 +292,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <form id="regForm" class="hide" onsubmit="return doRegister(event)">
       <div class="fld" id="f_ri">
         <label>邀请码 <span class="req">*</span></label>
-        <input id="regInvite" autocomplete="off" placeholder="请输入邀请码" maxlength="20">
+        <input id="regInvite" autocomplete="off" placeholder="请输入邀请码" maxlength="50">
         <div class="err-msg">邀请码无效或已被使用</div>
       </div>
       <div class="fld" id="f_ru">
@@ -464,11 +464,18 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 <!-- ===== 用户管理（仅管理员） ===== -->
 <section class="page" id="pg-users">
   <div class="tb">
-    <div><h2>👥 用户管理</h2><div class="d">仅管理员可查看账号、角色、注册来源与最近登录记录</div></div>
-    <div class="acts"><button class="btn sm t" onclick="renderAdminUsers()">⟳ 刷新列表</button></div>
+    <div><h2>👥 用户管理</h2><div class="d">账号、角色、注册来源、最近登录记录与邀请码管理</div></div>
+    <div class="acts">
+      <button class="btn sm t" onclick="renderAdminUsers()">⟳ 刷新用户</button>
+      <button class="btn sm gh" onclick="renderAdminInvites()">⟳ 刷新邀请码</button>
+    </div>
   </div>
-  <div class="card" style="margin-bottom:13px"><div style="font-size:12px;color:var(--soft);line-height:1.7">停用账号会立即禁止该账号继续登录，并撤销其全部独立同步令牌；恢复账号后需由用户重新登录并创建新的同步令牌。系统不会在此页面展示密码、密码哈希或同步令牌明文。</div></div>
-  <div id="adminUsersContent"><div class="empty">正在加载用户列表…</div></div>
+  <div style="display:flex;gap:8px;margin-bottom:13px;flex-wrap:wrap">
+    <button class="btn sm" id="tabUsersBtn" onclick="switchAdminTab('users')" style="font-weight:700">📊 用户列表</button>
+    <button class="btn sm gh" id="tabInvitesBtn" onclick="switchAdminTab('invites')">🎫 邀请码管理</button>
+  </div>
+  <div id="adminUsersContent"></div>
+  <div id="adminInvitesContent" style="display:none"></div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -750,7 +757,7 @@ function go(p){
   if(p==='plans')renderPlans();
   if(p==='io')renderIO();
   if(p==='sync')renderSyncPage();
-  if(p==='users')renderAdminUsers();
+  if(p==='users')switchAdminTab('users');
   window.scrollTo({top:0});
 }
 function toggleDrawer(open){$('sideBar').classList.toggle('open',open);$('drawerMask').classList.toggle('on',open);}
@@ -1528,6 +1535,72 @@ async function revokeCloudSyncToken(id){
 }
 
 // ============ 管理员 · 用户管理 ============
+function switchAdminTab(tab){
+  var uc=$('adminUsersContent'),ic=$('adminInvitesContent');
+  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn');
+  if(tab==='users'){
+    if(uc)uc.style.display='';if(ic)ic.style.display='none';
+    if(ub){ub.style.fontWeight='700';ub.classList.remove('gh');}
+    if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
+    renderAdminUsers();
+  }else{
+    if(uc)uc.style.display='none';if(ic)ic.style.display='';
+    if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
+    if(ib){ib.style.fontWeight='700';ib.classList.remove('gh');}
+    renderAdminInvites();
+  }
+}
+async function renderAdminInvites(){
+  var el=$('adminInvitesContent');
+  if(!el)return;
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+    el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
+    return;
+  }
+  el.innerHTML='<div class="empty">正在加载邀请码列表…</div>';
+  try{
+    var result=await callSieleAuth({action:'adminListInvites',sessionToken:ses.sessionToken});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    var invites=result.invites||(result.data&&result.data.invites)||[];
+    if(!invites.length){
+      el.innerHTML='<div class="empty"><span class="big">📭</span>暂无邀请码记录</div>';
+      return;
+    }
+    var unusedCount=invites.filter(function(i){return i.status==='unused';}).length;
+    var usedCount=invites.filter(function(i){return i.status==='used';}).length;
+    var disabledCount=invites.filter(function(i){return i.status==='disabled';}).length;
+    var summary='<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
+      +'<div class="card" style="flex:1;min-width:100px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--tr)">'+unusedCount+'</div><div style="font-size:11px;color:var(--soft)">可用</div></div>'
+      +'<div class="card" style="flex:1;min-width:100px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--ink)">'+usedCount+'</div><div style="font-size:11px;color:var(--soft)">已使用</div></div>'
+      +'<div class="card" style="flex:1;min-width:100px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--bad)">'+disabledCount+'</div><div style="font-size:11px;color:var(--soft)">已停用</div></div>'
+      +'</div>';
+    var rows=invites.map(function(i){
+      var badge=i.status==='unused'?'<span style="color:var(--tr);font-weight:600">● 可用</span>'
+        :i.status==='used'?'<span style="color:var(--soft)">● 已使用</span>'
+        :'<span style="color:var(--bad);font-weight:600">● 已停用</span>';
+      return '<tr>'
+        +'<td style="font-family:monospace;font-weight:600;font-size:12px">'+esc(i.code)+'</td>'
+        +'<td>'+badge+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(i.createdAt)+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">'+(i.status==='used'?fmtDT(i.usedAt):'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    el.innerHTML=summary
+      +'<div class="card" style="overflow-x:auto;padding:0">'
+      +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+      +'<thead><tr style="border-bottom:2px solid var(--line)">'
+      +'<th style="text-align:left;padding:10px 12px">邀请码</th>'
+      +'<th style="text-align:left;padding:10px 12px">状态</th>'
+      +'<th style="text-align:left;padding:10px 12px">创建时间</th>'
+      +'<th style="text-align:left;padding:10px 12px">使用时间</th>'
+      +'</tr></thead>'
+      +'<tbody>'+rows+'</tbody>'
+      +'</table></div>';
+  }catch(err){
+    el.innerHTML='<div class="note err">无法加载邀请码列表：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminInvites()">重试</button></div>';
+  }
+}
 async function renderAdminUsers(){
   var el=$('adminUsersContent');
   if(!el)return;
@@ -1575,6 +1648,7 @@ async function renderAdminUsers(){
         +'<td style="font-weight:600">'+esc(u.username)+'</td>'
         +'<td>'+roleBadge+'</td>'
         +'<td>'+statusBadge+'</td>'
+        +'<td style="font-size:11px;color:var(--soft)">🔒 已加密</td>'
         +'<td style="font-size:11px;color:var(--soft)">'+esc(u.inviteCode||'—')+'</td>'
         +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(u.createdAt)+'</td>'
         +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(u.lastLoginAt)+'</td>'
@@ -1588,6 +1662,7 @@ async function renderAdminUsers(){
       +'<th style="text-align:left;padding:10px 12px">用户名</th>'
       +'<th style="text-align:left;padding:10px 12px">角色</th>'
       +'<th style="text-align:left;padding:10px 12px">状态</th>'
+      +'<th style="text-align:left;padding:10px 12px">密码</th>'
       +'<th style="text-align:left;padding:10px 12px">邀请码</th>'
       +'<th style="text-align:left;padding:10px 12px">注册时间</th>'
       +'<th style="text-align:left;padding:10px 12px">最近登录</th>'
