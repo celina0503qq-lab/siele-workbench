@@ -1066,7 +1066,17 @@ function el(tag, cls, html){
   if(html !== undefined) e.innerHTML = html;
   return e;
 }
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/\\/g,'&#92;'); }
+// 安全解码 HTML 实体（如 RSS 标题中的 &amp; &quot; 等），绝不解析/执行标签脚本
+var _decodeTplEl;
+function decodeArticleHtml(s){
+  try{
+    if(!_decodeTplEl){_decodeTplEl=document.createElement('textarea');}
+    // innerHTML 在 textarea 内只解码实体(&amp;→&)，不会渲染标签，也不会执行脚本
+    _decodeTplEl.innerHTML=String(s==null?'':s);
+    return _decodeTplEl.value;
+  }catch(e){return String(s==null?'':s);}
+}
 
 // ===== PAGE: DASHBOARD =====
 function renderDash(){
@@ -3902,7 +3912,7 @@ function saveT2ModelChanges(id) {
     var x = getSieleOralItem();
     if (x) {
       var userM = getUserT2Model(id);
-      modelTextEl.innerHTML = userM || x.model || '暂无范文';
+      modelTextEl.innerHTML = esc(userM || x.model || '暂无范文').replace(/\n/g,'<br>');
       // Update status badge
       var statusEl = document.getElementById('soModelEditStatus');
       if (statusEl) {
@@ -3933,7 +3943,7 @@ function resetT2Model(id) {
   // Update model text display
   var modelTextEl = document.getElementById('soModelText');
   if (modelTextEl && x) {
-    modelTextEl.innerHTML = x.model || '暂无范文';
+    modelTextEl.innerHTML = esc(x.model || '暂无范文').replace(/\n/g,'<br>');
   }
 }
 // Toast 闪烁提示
