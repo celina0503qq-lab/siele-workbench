@@ -884,7 +884,9 @@ async function doChangePwdWithOld(e){
   const submit=e.currentTarget.querySelector('button[type="submit"]');
   if(submit){submit.disabled=true;submit.textContent='正在校验原密码…';}
   try{
-    const result=await callSieleAuth({action:'changePasswordWithOld',oldPassword:oldP,newPassword:newP});
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');return false;}
+    const result=await callSieleAuth({action:'changePasswordWithOld',sessionToken:ses.sessionToken,oldPassword:oldP,newPassword:newP});
     if(!result.ok){
       if(result.code==='PWD_OLD_MISMATCH')fldErr('f_po_old',true,cloudAuthMessage(result.code));
       else if(result.code==='WEAK_PASSWORD'||result.code==='PWD_SAME_AS_OLD')fldErr('f_po_new1',true,cloudAuthMessage(result.code));
@@ -896,7 +898,7 @@ async function doChangePwdWithOld(e){
     addPwdHistoryEntry('✅ 已通过原密码验证修改成功');
     toast(cloudAuthMessage('PASSWORD_CHANGED'),'ok');
     $('poOldPwd').value='';$('poNewPwd1').value='';$('poNewPwd2').value='';
-    setTimeout(function(){doLogout();},1200);
+    setTimeout(function(){doLogout({silent:true});},1200);
   }catch(err){
     console.error('changePasswordWithOld failed',err);
     if(err&&err.code==='UNAUTHORIZED')toast(cloudAuthMessage('UNAUTHORIZED'),'err');
@@ -1056,14 +1058,16 @@ function enter(u,persist,profile){
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.toggle('hide',!isAdmin);});
   if(DB.syncCfg)setTimeout(()=>syncNow(true),600);
 }
-function doLogout(){
-  if(!confirm('确定退出登录？本地学习数据仍会保留在此设备。'))return;
+function doLogout(opts){
+  const silent=opts&&opts.silent;
+  if(!silent && !confirm('确定退出登录？本地学习数据仍会保留在此设备。'))return;
   localStorage.removeItem(LSS);localStorage.removeItem(CLOUD_SESSION_KEY);CUR=null;DB=null;
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
   try{$('authPasswdView').classList.add('hide');}catch(_){}
   $('loginPass').value='';
+  if(silent)toast('已退出登录','ok');
 }
 // 强制下线：被云端停用的用户被踢出登录态，但保留本地与云端数据。
 // 流程：通知主窗口 -> 清空 cloudSession 和 LSS -> 切回登录视图。
