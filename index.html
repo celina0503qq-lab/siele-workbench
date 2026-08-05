@@ -9470,45 +9470,74 @@ function handleCloudKick(message){
 // 也会在下次心跳时被发现并踢出。timeout 15s 拿不到响应就当作正常。
 // 注意：主工作台自身不加载 CloudBase SDK，云函数调用必须经由 admin iframe 的 callFunction
 // 转发。若 iframe 尚未打开，则临时打开一个隐藏 iframe 完成心跳后再关闭。
+// 心跳机制：每 20s + 首次 5s + 用户主动操作时(切页/点击/按键/回到标签页) 主动 ping 云端
+// 确认当前用户仍处于 active 状态。
+// 覆盖三种踢出路径：(1) admin 改 DB 状态 → 下一次心跳或主动触发被发现;
+// (2) 不同浏览器/设备的 admin 改状态 → 主站 20s 内主动检查兜底;
+// (3) 用户的任何操作都触发一次实时检查，0 等待。
+// 主工作台自身不加载 CloudBase SDK，云函数调用必须经由 admin iframe 的 callFunction
+// 转发。若 iframe 尚未打开，则临时打开一个隐藏 iframe 完成心跳后再关闭。
 var _wbStatusPingTimer=null;
 var _wbStatusPingFrame=null;
+var _wbLastPingAt=0;
+var _wbPingInFlight=false;
 function _wbStatusFrameReady(cb){
   var f=document.getElementById('wbAdminFrame');
-  if(f&&f.contentWindow){cb(f);return;}
-  if(_wbStatusPingFrame)return cb(_wbStatusPingFrame);
+  if(f&&f.contentWindow){try{cb(f);}catch(e){}return;}
+  if(_wbStatusPingFrame&&_wbStatusPingFrame.contentWindow){try{cb(_wbStatusPingFrame);}catch(e){}return;}
   _wbStatusPingFrame=document.createElement('iframe');
   _wbStatusPingFrame.style.cssText='display:none;width:1px;height:1px;border:0';
   _wbStatusPingFrame.src='admin.html?v='+Date.now();
-  _wbStatusPingFrame.onload=function(){cb(_wbStatusPingFrame);};
+  _wbStatusPingFrame.onload=function(){try{cb(_wbStatusPingFrame);}catch(e){}};
   document.body.appendChild(_wbStatusPingFrame);
+}
+// 单次心跳触发。throttle 避免用户连点时洪水。10s 最小间隔（除定时器内的）。
+function triggerCloudKickCheck(reason){
+  if(_wbPingInFlight)return;
+  var now=Date.now();
+  if(reason!=='timer' && now-_wbLastPingAt<10000)return;
+  var cloud=lsg('swa_cloud_session_v1',null);
+  if(!cloud || !cloud.sessionToken || !cloud.username)return;
+  _wbLastPingAt=now;
+  _wbPingInFlight=true;
+  var reqId='ck'+(Date.now())+Math.random().toString(36).slice(2,6);
+  _wbStatusFrameReady(function(frame){
+    try{
+      frame.contentWindow.postMessage({type:'siele-cloud-check-status',sessionToken:cloud.sessionToken,reqId:reqId,reason:reason||'manual'},location.origin);
+    }catch(e){_wbPingInFlight=false;}
+  });
+  // 12s 内未收到响应则视为正常（云函数慢/网络抖动），释放 in-flight 标记
+  var handler=function(ev){
+    if(ev.origin!==location.origin)return;
+    if(!ev.data||ev.data.type!=='siele-cloud-check-status-result'||ev.data.reqId!==reqId)return;
+    window.removeEventListener('message',handler);
+    _wbPingInFlight=false;
+    if(ev.data.code==='USER_DISABLED'){
+      handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
+    }
+  };
+  window.addEventListener('message',handler);
+  setTimeout(function(){
+    window.removeEventListener('message',handler);
+    _wbPingInFlight=false;
+  },12000);
 }
 function startWorkbenchStatusPing(){
   if(_wbStatusPingTimer)return;
-  _wbStatusPingTimer=setInterval(function(){
-    // 只在已登录且有 cloudSession 时才发心跳
-    var cloud=lsg('swa_cloud_session_v1',null);
-    if(!cloud || !cloud.sessionToken || !cloud.username)return;
-    var uname=cloud.username;
-    var reqId='ck'+(Date.now())+Math.random().toString(36).slice(2,6);
-    _wbStatusFrameReady(function(frame){
-      try{
-        frame.contentWindow.postMessage({type:'siele-cloud-check-status',sessionToken:cloud.sessionToken,reqId:reqId},location.origin);
-      }catch(e){}
-    });
-    // 15s 内未收到对应响应则视为正常，等待下一轮
-    (function waitResp(){
-      var handler=function(ev){
-        if(ev.origin!==location.origin)return;
-        if(!ev.data||ev.data.type!=='siele-cloud-check-status-result'||ev.data.reqId!==reqId)return;
-        window.removeEventListener('message',handler);
-        if(ev.data.code==='USER_DISABLED'){
-          handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
-        }
-      };
-      window.addEventListener('message',handler);
-      setTimeout(function(){window.removeEventListener('message',handler);},15000);
-    })();
-  },60000);
+  // 启动 5s 后立即发一次（不等到第一个 20s 周期），把"已停用但漏过 broadcast"的用户快速踢出
+  setTimeout(function(){triggerCloudKickCheck('first');},5000);
+  // 定时心跳 20s 一次
+  _wbStatusPingTimer=setInterval(function(){triggerCloudKickCheck('timer');},20000);
+  // 用户回到标签页时（visibilitychange→visible）立即检查一次，常发生在 admin 改完切回来看
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible')triggerCloudKickCheck('visible');
+  });
+  // 用户在标签页内的任何点击/按键都触发一次（throttle 10s），保证活跃使用期间 < 10s 内必被发现
+  var _kickHandler=function(){triggerCloudKickCheck('user');};
+  document.addEventListener('click',_kickHandler,true);
+  document.addEventListener('keydown',_kickHandler,true);
+  // 切菜单/页面时也触发（go 函数末尾会调）— 详见 _go wrapper
+  window._wbGoTriggerPing=function(){triggerCloudKickCheck('nav');};
 }
 var _adminPanelStyle=document.createElement('style');
 _adminPanelStyle.textContent='#wbAdminPanel{display:none;position:fixed;inset:0;z-index:999999;background:#f3ebdd;flex-direction:column;padding-top:env(safe-area-inset-top)}#wbAdminPanel.show{display:flex}.wb-admin-bar{height:48px;flex:0 0 48px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#2b1810;color:#fff;font-family:system-ui,sans-serif}.wb-admin-bar button{border:1px solid rgba(255,255,255,.5);border-radius:7px;background:transparent;color:#fff;padding:8px 14px;cursor:pointer;font:inherit;font-size:13px;min-height:36px}#wbAdminFrame{width:100%;height:calc(100% - 48px);border:0;background:#f3ebdd;-webkit-overflow-scrolling:touch}@media(max-width:600px){.wb-admin-bar{padding:0 12px;font-size:14px}.wb-admin-bar button{padding:8px 10px;font-size:12px}}';
@@ -9522,6 +9551,9 @@ go=function(p){
     return;
   }
   _go0(p);
+  // 每次切换页面/模块：触发一次云端状态检查（throttle 10s），
+  // 这样 admin 在用户浏览期间改状态，用户的下一个动作立刻被踢出。
+  try{if(typeof window._wbGoTriggerPing==='function')window._wbGoTriggerPing();}catch(e){}
 };
 var _renderNav0=renderNav;
 renderNav=function(){refreshAdminNav();return _renderNav0();};
