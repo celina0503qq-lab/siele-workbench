@@ -324,6 +324,52 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
   </div>
 </div>
 
+<!-- ============ 未登录态的密码重置（独立视图，绕过登录） ============ -->
+<div class="auth-wrap hide" id="authPasswdView">
+  <div class="auth-card" style="max-width:520px">
+    <div class="auth-logo">Ñ</div>
+    <h1>忘记密码？用邀请码重置</h1>
+    <div class="sub">无需登录，使用「注册时」的用户名 + 邀请码即可重置密码</div>
+
+    <div style="background:#fffaef;border:1px solid #f5a62333;border-radius:9px;padding:10px 12px;margin:14px 0;font-size:12px;line-height:1.7;color:#5a4a26">
+      <b>安全说明：</b>重置后该账号在所有设备上的登录态将立即失效，下次登录请使用新密码。
+      <br>密码至少 <b>6 位</b>，建议字母 + 数字 + 符号组合。
+    </div>
+
+    <form id="formResetPwdInviteAnon" onsubmit="return doResetPwdWithInviteAnon(event)">
+      <div class="fld" id="f_apr_user">
+        <label>用户名 <span class="req">*</span></label>
+        <input id="aprUser" autocomplete="username" placeholder="注册时使用的邮箱或用户名" maxlength="50">
+        <div class="err-msg">请输入有效邮箱或 2-20 位用户名</div>
+      </div>
+      <div class="fld" id="f_apr_invite">
+        <label>注册时使用的邀请码 <span class="req">*</span></label>
+        <input id="aprInvite" autocomplete="off" placeholder="SIELE-2026-XXXX" maxlength="50">
+        <div class="err-msg">邀请码与该用户名不匹配</div>
+      </div>
+      <div class="fld" id="f_apr_new1">
+        <label>新密码 <span class="req">*</span></label>
+        <input id="aprNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
+        <div class="err-msg">新密码至少 6 位</div>
+      </div>
+      <div class="fld" id="f_apr_new2">
+        <label>确认新密码 <span class="req">*</span></label>
+        <input id="aprNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
+        <div class="err-msg">两次输入的密码不一致</div>
+      </div>
+      <button class="btn blk t" type="submit">验证并重置密码</button>
+      <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:10px;line-height:1.6">验证通过后会立即清空该账号所有设备的登录态。<b>重置后请到登录页用新密码登录</b>。</div>
+    </form>
+
+    <div style="margin-top:16px;border-top:1px dashed var(--line);padding-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between">
+      <button class="btn-link" type="button" onclick="showAuthView()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">← 返回登录</button>
+      <button class="btn-link" type="button" onclick="returnToWorkbench()" style="background:none;border:0;color:var(--soft);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">先去学习工作台逛逛</button>
+    </div>
+
+    <div class="auth-foot">本功能由 siele-auth 云函数验证身份，不依赖本机登录态。<br>所有密码操作均通过邀请码 + 用户名双重验证，安全等级与登录一致。</div>
+  </div>
+</div>
+
 <!-- ============ 应用主体 ============ -->
 <div class="mtop" id="mtop" style="display:none">
   <div class="mlogo">Ñ</div><h1>西语学习后台</h1>
@@ -535,7 +581,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
           <input id="prNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
           <div class="err-msg">两次输入的密码不一致</div>
         </div>
-        <button class="btn blk t" type="submit">🔓 验证并重置密码</button>
+        <button class="btn blk t" type="submit">验证并重置密码</button>
         <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">验证通过后，账号在所有设备的登录态将失效，<b>下次登录请使用新密码</b>。</div>
       </form>
     </div>
@@ -861,6 +907,51 @@ async function doChangePwdWithOld(e){
   return false;
 }
 
+// ---- 密码重置（未登录态：邀请码验证，独立视图） ----
+async function doResetPwdWithInviteAnon(e){
+  e.preventDefault();
+  const u=$('aprUser').value.trim(),inv=$('aprInvite').value.trim().toUpperCase(),newP=$('aprNewPwd1').value,newP2=$('aprNewPwd2').value;
+  const isEmail=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(u);
+  const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
+  let ok=fldErr('f_apr_user',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名');
+  ok=fldErr('f_apr_invite',!inv,'请输入邀请码')&&ok;
+  ok=fldErr('f_apr_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_apr_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在验证邀请码…';}
+  try{
+    const result=await callSieleAuth({action:'resetPasswordWithInvite',username:u,inviteCode:inv,newPassword:newP});
+    if(!result.ok){
+      if(result.code==='INVALID_INVITE')fldErr('f_apr_invite',true,cloudAuthMessage(result.code));
+      else if(result.code==='PWD_INVITE_MISMATCH')fldErr('f_apr_invite',true,cloudAuthMessage(result.code));
+      else if(result.code==='PWD_USER_NOT_FOUND')fldErr('f_apr_user',true,cloudAuthMessage(result.code));
+      else if(result.code==='USER_DISABLED'||result.code==='PWD_USER_DISABLED'){fldErr('f_apr_user',true,cloudAuthMessage(result.code));}
+      else if(result.code==='WEAK_PASSWORD')fldErr('f_apr_new1',true,cloudAuthMessage(result.code));
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    addPwdHistoryEntry('✓ 未登录态已通过邀请码重置成功（用户：'+u+'）');
+    toast(cloudAuthMessage('PASSWORD_RESET'),'ok');
+    // 清空输入并把用户名回填到登录框，引导用户用新密码登录
+    $('aprUser').value='';$('aprInvite').value='';$('aprNewPwd1').value='';$('aprNewPwd2').value='';
+    setTimeout(function(){
+      try{
+        var lu=$('loginUser');if(lu)lu.value=u;
+        showAuthView();
+        toast('重置成功，请用新密码登录','ok');
+        if(lu)lu.focus();
+      }catch(_){}
+    },800);
+  }catch(err){
+    console.error('resetPasswordWithInvite (anon) failed',err);
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='验证并重置密码';}
+  }
+  return false;
+}
+
 // ---- 密码重置（方式二：邀请码验证） ----
 async function doResetPwdWithInvite(e){
   e.preventDefault();
@@ -927,8 +1018,23 @@ function openPwdResetFromLogin(){
     },100);
     return;
   }
-  toast('请在登录页下方「忘记密码？用邀请码重置」按钮操作，或先登录后在「密码修改」页面使用原密码/邀请码重置。','info');
-  setTimeout(function(){try{$('loginUser').focus();}catch(_){}},100);
+  // 未登录：切到独立的密码重置视图（绕过登录也能用邀请码重置）
+  showAuthPasswdView();
+}
+
+// 显示未登录的密码重置视图
+function showAuthPasswdView(){
+  try{$('authView').style.display='none';}catch(_){}
+  try{$('appView').classList.remove('on');}catch(_){}
+  try{$('mtop').style.display='none';}catch(_){}
+  try{$('authPasswdView').classList.remove('hide');}catch(_){}
+  setTimeout(function(){try{$('aprUser').focus();}catch(_){}},120);
+}
+
+// 从密码重置视图返回登录视图
+function showAuthView(){
+  try{$('authPasswdView').classList.add('hide');}catch(_){}
+  try{$('authView').style.display='';}catch(_){}
 }
 
 function enter(u,persist,profile){
@@ -936,6 +1042,7 @@ function enter(u,persist,profile){
   DB=lsGet(dataKey(u),null)||blankData(true);
   if(persist)lsSet(LSS,{u,ts:Date.now(),cloud:!!(profile&&profile.sessionToken)});
   $('authView').style.display='none';
+  try{$('authPasswdView').classList.add('hide');}catch(_){}
   $('appView').classList.add('on');
   $('mtop').style.display='';
   $('uName').textContent=u;$('uAvatar').textContent=u[0].toUpperCase();
@@ -955,6 +1062,7 @@ function doLogout(){
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
+  try{$('authPasswdView').classList.add('hide');}catch(_){}
   $('loginPass').value='';
 }
 // 强制下线：被云端停用的用户被踢出登录态，但保留本地与云端数据。
@@ -969,6 +1077,7 @@ function forceLogoutByCloud(reason){
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
+  try{$('authPasswdView').classList.add('hide');}catch(_){}
   $('loginPass').value='';
   $('loginUser').value='';
   toast('账号已被管理员停用，已强制退出。本地学习数据仍保留。','err');
@@ -1021,14 +1130,8 @@ window.addEventListener('message',function(ev){
     if($('appView')&&$('appView').classList.contains('on')){
       go('passwd');
     }else{
-      // 未登录：先切到登录 tab 并不好用，因为登录页里没有 pg-passwd
-      // 退化方案：直接弹一个提示，让用户先登录；admin 会自动渲染历史表单
-      try{
-        $('authView').style.display='';
-        $('appView').classList.remove('on');
-        $('mtop').style.display='none';
-        toast('请先登录账号后再到「账户设置 → 密码修改」使用原密码/邀请码重置密码','info');
-      }catch(_){}
+      // 未登录：切到独立的密码重置视图，邀请码验证不需要登录态
+      showAuthPasswdView();
     }
   }
 });
