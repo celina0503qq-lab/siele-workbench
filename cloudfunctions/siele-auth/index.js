@@ -287,6 +287,12 @@ async function pullLearning(event) {
   const result = await db.collection("learning_snapshots").where({ uid }).limit(1).get();
   return response(true, "LEARNING_DATA", { snapshot: result.data[0] || null });
 }
+// 轻量心跳检查：主工作台每 60s 调一次，确认当前 session 对应的用户仍处于 active。
+// 不返回敏感数据，只返回 {active:true|false}。disabled 时返回 USER_DISABLED 让前端踢出。
+async function checkStatus(event) {
+  const { session, profile } = await requireActiveSession(event);
+  return response(true, "STATUS_OK", { active: true, role: profile.role, checkedAt: Date.now() });
+}
 async function adminListUsers(event) {
   await requireAdmin(event);
   // 部分 CloudBase 文档数据库运行时不支持无过滤条件的 orderBy；先读取受限集合，再在内存中稳定排序。
@@ -397,6 +403,7 @@ exports.main = async (event) => {
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
+    if (action === "checkStatus") return await checkStatus(input);
     return response(false, "UNKNOWN_ACTION");
   } catch (e) {
     console.error("siele-auth request failed", { action, code: e && e.code, message: e && e.message });

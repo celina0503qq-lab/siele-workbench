@@ -9362,6 +9362,14 @@ function closeAdminPanel(){
 window.addEventListener('message',function(ev){
   if(ev.origin!==location.origin)return;
   if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();return;}
+  // 管理员在 admin iframe 主动推送的用户状态变更（停用/启用）——不等下一次 API 调用就立即处理。
+  if(ev.data&&ev.data.type==='siele-user-status-changed'){
+    var u=ev.data.username||'';
+    if(u && isCurrentLoggedInUser(u) && ev.data.status==='disabled'){
+      handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
+    }
+    return;
+  }
   if(ev.data&&ev.data.type==='siele-cloud-kicked'){
     // 后台检测到该用户被云端停用：清空本机 cloudSession 和 LSS，保留学习数据和云同步配置。
     // activeUser() 会回退到 null → showLoginOverlay()。
@@ -9396,6 +9404,97 @@ window.addEventListener('message',function(ev){
     }
   }
 });
+
+// 跨标签页兜底：监听 BroadcastChannel 收到的 siele-user-status-changed 事件。
+// 这覆盖了"主工作台独立打开 + admin 在另一个标签页操作"的场景。
+(function(){
+  try{
+    if(typeof BroadcastChannel!=='undefined'){
+      var ch=new BroadcastChannel('siele-user-status');
+      ch.onmessage=function(ev){
+        if(!ev.data)return;
+        if(ev.data.type==='siele-user-status-changed' && ev.data.status==='disabled'){
+          var u=ev.data.username||'';
+          if(u && isCurrentLoggedInUser(u)){
+            handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
+          }
+        }
+      };
+      window.__sieleUserStatusBC=ch;
+    }
+  }catch(e){}
+})();
+// storage 事件兜底（BroadcastChannel 不可用或跨同源 iframe/标签）
+window.addEventListener('storage',function(ev){
+  if(ev.key!=='siele_user_status_event' || !ev.newValue)return;
+  try{
+    var data=JSON.parse(ev.newValue);
+    if(data.type==='siele-user-status-changed' && data.status==='disabled'){
+      var u=data.username||'';
+      if(u && isCurrentLoggedInUser(u)){
+        handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
+      }
+    }
+  }catch(e){}
+});
+
+// 检查传入的 username 是否就是当前主工作台的登录用户
+function isCurrentLoggedInUser(username){
+  try{
+    var cloud=lsg('swa_cloud_session_v1',null);
+    if(cloud && cloud.username===username)return true;
+    var s=lsg(LSS,null);
+    if(s && s.u===username)return true;
+  }catch(e){}
+  return false;
+}
+
+// 统一处理被云端踢出的清理动作（学习数据和同步配置完整保留）
+function handleCloudKick(message){
+  closeAdminPanel();
+  try{localStorage.removeItem(LSS);}catch(e){}
+  try{localStorage.removeItem('swa_cloud_session_v1');}catch(e){}
+  AU=null;ADB=null;
+  setChip('nologin');
+  showLoginOverlay();
+  var pField=document.getElementById('wbLfP');
+  if(pField){
+    var pErr=pField.querySelector('.err');
+    if(pErr)pErr.textContent=message||'您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。';
+    pField.classList.add('invalid');
+  }
+}
+
+// 心跳：每 60 秒主动 ping 云端确认当前用户仍处于 active 状态。
+// 这样即使错过了 admin 的 broadcast（网络中断、BroadcastChannel 不可用等），
+// 也会在下次心跳时被发现并踢出。timeout 30s 拿不到响应就当作正常。
+var _wbStatusPingTimer=null;
+function startWorkbenchStatusPing(){
+  if(_wbStatusPingTimer)return;
+  _wbStatusPingTimer=setInterval(function(){
+    // 只在已登录且有 cloudSession 时才发心跳
+    var cloud=lsg('swa_cloud_session_v1',null);
+    if(!cloud || !cloud.sessionToken || !cloud.username)return;
+    var uname=cloud.username;
+    if(typeof window.__sieleCloudBaseReady==='undefined')return;
+    (async function(){
+      try{
+        var app=await window.__sieleCloudBaseReady;
+        if(!app || !app.callFunction)return;
+        var r=await Promise.race([
+          app.callFunction({name:'siele-auth',data:{action:'checkStatus',sessionToken:cloud.sessionToken}}),
+          new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},15000);})
+        ]);
+        var payload=r&&r.result!==undefined?r.result:r;
+        if(payload && payload.ok===false && payload.code==='USER_DISABLED'){
+          handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
+        }
+      }catch(e){
+        // 网络超时/错误静默忽略，不打扰用户
+      }
+    })();
+  },60000);
+}
 var _adminPanelStyle=document.createElement('style');
 _adminPanelStyle.textContent='#wbAdminPanel{display:none;position:fixed;inset:0;z-index:999999;background:#f3ebdd;flex-direction:column;padding-top:env(safe-area-inset-top)}#wbAdminPanel.show{display:flex}.wb-admin-bar{height:48px;flex:0 0 48px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#2b1810;color:#fff;font-family:system-ui,sans-serif}.wb-admin-bar button{border:1px solid rgba(255,255,255,.5);border-radius:7px;background:transparent;color:#fff;padding:8px 14px;cursor:pointer;font:inherit;font-size:13px;min-height:36px}#wbAdminFrame{width:100%;height:calc(100% - 48px);border:0;background:#f3ebdd;-webkit-overflow-scrolling:touch}@media(max-width:600px){.wb-admin-bar{padding:0 12px;font-size:14px}.wb-admin-bar button{padding:8px 10px;font-size:12px}}';
 document.head.appendChild(_adminPanelStyle);
@@ -9471,6 +9570,8 @@ function activate(){
   hydrate();
   SIG='';doPush(); // 把本机已有进度推入后台数据库
   setChip(ADB.syncCfg?(hasConfirmedCloudSync()?'ok':'local'):'local');
+  // 启动云端状态心跳：每 60s 检查用户是否被管理员停用。
+  if(typeof startWorkbenchStatusPing==='function')startWorkbenchStatusPing();
   try{if(typeof currentPage!=='undefined'&&currentPage==='dash'&&typeof renderMain==='function')renderMain();}catch(e){}
   if(ADB.syncCfg)setTimeout(function(){cloudSync(true);},800);
 }

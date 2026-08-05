@@ -1724,6 +1724,31 @@ async function renderAdminUsers(){
     el.innerHTML='<div class="note err">无法加载用户列表：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminUsers()">重试</button></div>';
   }
 }
+// 跨标签页/跨iframe 通知：管理员停用或启用用户后，让所有已打开的主工作台立即收到信号。
+// 即使主工作台没有触发任何云函数调用，也会被立即踢出。
+// 实现：BroadcastChannel(同源多标签) + localStorage 存储事件(同源不同浏览上下文兜底) + 嵌入式 iframe 的 postMessage。
+function broadcastUserStatusChange(uid, username, status){
+  try{
+    if(typeof BroadcastChannel!=='undefined'){
+      const ch=new BroadcastChannel('siele-user-status');
+      ch.postMessage({type:'siele-user-status-changed', uid:uid, username:username, status:status, at:Date.now()});
+      ch.close();
+    }
+  }catch(e){}
+  try{
+    // 兜底：写入 localStorage 触发 storage 事件（同源跨标签页会收到）
+    const payload=JSON.stringify({type:'siele-user-status-changed', uid:uid, username:username, status:status, at:Date.now()});
+    localStorage.setItem('siele_user_status_event', payload);
+    // 立即清除，避免下次启动残留
+    setTimeout(()=>{try{localStorage.removeItem('siele_user_status_event');}catch(e){}},100);
+  }catch(e){}
+  // 嵌入式：直接给父窗口发 postMessage
+  try{
+    if(window.parent && window.parent!==window){
+      window.parent.postMessage({type:'siele-user-status-changed', uid:uid, username:username, status:status, at:Date.now()}, location.origin);
+    }
+  }catch(e){}
+}
 async function adminToggleUserStatus(uid,status){
   var label=status==='disabled'?'停用':'启用';
   var msg=status==='disabled'
@@ -1736,6 +1761,18 @@ async function adminToggleUserStatus(uid,status){
     if(!result.ok)throw new Error(cloudAuthMessage(result.code));
     toast('已'+label+'用户账号','ok');
     renderAdminUsers();
+    // 找出 username 用于广播
+    try{
+      var users=lsGet(LSU,{});
+      var uname=null;
+      for(var k in users){if(users[k]&&users[k].uid===uid){uname=k;break;}}
+      // 也尝试从当前 adminListUsers 缓存中找
+      if(!uname){
+        var list=document.querySelectorAll('[data-uid="'+uid+'"]');
+        if(list.length) uname=list[0].getAttribute('data-username')||null;
+      }
+      broadcastUserStatusChange(uid, uname, status);
+    }catch(e){console.warn('broadcast user status change failed',e);}
   }catch(err){
     toast(label+'失败：'+(err.message||err),'err');
   }
