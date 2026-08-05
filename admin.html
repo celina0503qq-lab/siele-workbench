@@ -589,6 +589,7 @@ const CLOUD_AUTH_MESSAGES={
   USERNAME_TAKEN:'该用户名已被注册',
   INVALID_CREDENTIALS:'账号或密码错误',
   UNAUTHORIZED:'登录状态已过期，请重新登录',
+  USER_DISABLED:'该账号已被管理员停用，无法登录',
   SERVER_ERROR:'服务暂时不可用，请稍后重试'
 };
 function cloudAuthMessage(code){
@@ -603,6 +604,14 @@ async function callSieleAuth(data){
   const result=await app.callFunction({name:'siele-auth',data:data});
   const payload=result&&result.result!==undefined?result.result:result;
   if(!payload||typeof payload!=='object')throw new Error('服务返回格式异常');
+  // 任何受 session 保护的操作一旦返回 USER_DISABLED，说明管理员在云端停用了该用户。
+  // 立即强制下线：清空本地 cloudSession 和 LSS，通知主窗口，保留 swa_data_v1_*（学习记录）和 syncCfg（云端存储配置）。
+  if(payload && payload.ok===false && payload.code==='USER_DISABLED'){
+    forceLogoutByCloud('USER_DISABLED');
+    const err=new Error(cloudAuthMessage('USER_DISABLED'));
+    err.code='USER_DISABLED';
+    throw err;
+  }
   return payload;
 }
 function cloudSession(){return lsGet(CLOUD_SESSION_KEY,null);}
@@ -708,10 +717,12 @@ async function doLogin(e,credentials){
     gotoWorkbench();
   }catch(err){
     console.error('Cloud login failed',err);
-    toast('无法连接账号服务，请检查网络或稍后再试','err');
+    // USER_DISABLED 已经被 callSieleAuth 拦截并触发 forceLogoutByCloud；这里只要把 code 透传给主站
+    const failCode = err && err.code==='USER_DISABLED' ? 'USER_DISABLED' : 'NETWORK_ERROR';
     if(credentials&&window.parent&&window.parent!==window){
-      window.parent.postMessage({type:'siele-login-failed',code:'NETWORK_ERROR'},location.origin);
+      window.parent.postMessage({type:'siele-login-failed',code:failCode},location.origin);
     }
+    if(failCode==='NETWORK_ERROR')toast('无法连接账号服务，请检查网络或稍后再试','err');
   }finally{
     if(submit){submit.disabled=false;submit.textContent='登 录';}
   }
@@ -742,6 +753,22 @@ function doLogout(){
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
   $('loginPass').value='';
+}
+// 强制下线：被云端停用的用户被踢出登录态，但保留本地与云端数据。
+// 流程：通知主窗口 -> 清空 cloudSession 和 LSS -> 切回登录视图。
+// 注意：DB(swa_data_v1_<u>) 和 syncCfg 不动；用户重新登录或管理员重新启用后可以继续使用。
+function forceLogoutByCloud(reason){
+  if(window.parent && window.parent!==window){
+    window.parent.postMessage({type:'siele-cloud-kicked',reason:reason||'USER_DISABLED'},location.origin);
+  }
+  try{localStorage.removeItem(LSS);localStorage.removeItem(CLOUD_SESSION_KEY);}catch(e){}
+  CUR=null;DB=null;
+  document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
+  $('appView').classList.remove('on');$('mtop').style.display='none';
+  $('authView').style.display='';
+  $('loginPass').value='';
+  $('loginUser').value='';
+  toast('账号已被管理员停用，已强制退出。本地学习数据仍保留。','err');
 }
 
 // ---- 路由 ----
@@ -1699,7 +1726,10 @@ async function renderAdminUsers(){
 }
 async function adminToggleUserStatus(uid,status){
   var label=status==='disabled'?'停用':'启用';
-  if(!confirm('确定'+label+'该用户账号？'+(status==='disabled'?'\n\n停用后该用户将无法登录，其所有同步令牌也会被立即撤销。':'')))return;
+  var msg=status==='disabled'
+    ?'确定停用该用户账号？\n\n停用后该用户将立即被强制退出（即便正在使用中），且无法重新登录。其本地学习数据、第三方云同步（如已配置）会完整保留。'
+    :'确定重新启用该用户账号？\n\n启用后该用户可立即重新登录，本地与云端的学习记录全部完整可用。';
+  if(!confirm(msg))return;
   var ses=cloudSession();
   try{
     var result=await callSieleAuth({action:'adminSetUserStatus',sessionToken:ses.sessionToken,uid:uid,status:status});

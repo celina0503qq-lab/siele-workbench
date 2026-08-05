@@ -117,6 +117,39 @@ async function _flushRateAudit() {
   }
 }
 
+// 模块作用域状态缓存：uid -> { status, role, checkedAt }
+// 用来在已签发 session 的高频请求里避免每次都打 DB。
+// TTL 60s；命中 USER_DISABLED 时立即失效以保证响应迅速。
+const USER_STATUS_CACHE = new Map();
+const USER_STATUS_CACHE_TTL_MS = 60000;
+function _getCachedUserStatus(uid) {
+  const entry = USER_STATUS_CACHE.get(uid);
+  if (!entry) return null;
+  if (entry.status === "disabled") return entry; // 命中黑名单，永不自动过期
+  if (Date.now() - entry.checkedAt > USER_STATUS_CACHE_TTL_MS) {
+    USER_STATUS_CACHE.delete(uid);
+    return null;
+  }
+  return entry;
+}
+function _setCachedUserStatus(uid, status, role) {
+  USER_STATUS_CACHE.set(uid, { status, role: role || "learner", checkedAt: Date.now() });
+}
+function _invalidateUserStatus(uid) {
+  if (uid) USER_STATUS_CACHE.delete(uid);
+}
+// 查 DB 拿 (status, role)；为避免每个 action 两次 DB 调用，缓存 60s。
+async function _lookupUserStatus(uid) {
+  const cached = _getCachedUserStatus(uid);
+  if (cached) return cached;
+  const result = await db.collection("user_profiles").where({ uid }).limit(1).get();
+  if (!result.data.length) return null;
+  const user = result.data[0];
+  const entry = { status: user.status === "disabled" ? "disabled" : "active", role: user.role === "admin" ? "admin" : "learner", checkedAt: Date.now() };
+  _setCachedUserStatus(uid, entry.status, entry.role);
+  return entry;
+}
+
 function response(ok, code, data) { return { ok, code, ...(data || {}) }; }
 function normalizeUsername(value) { return String(value || "").trim(); }
 function normalizeInvite(value) { return String(value || "").trim().toUpperCase(); }
@@ -151,12 +184,21 @@ function requireSession(event) {
   if (!session) { const err = new Error("UNAUTHORIZED"); err.code = "UNAUTHORIZED"; throw err; }
   return session;
 }
-async function requireAdmin(event) {
+// requireSession 的加强版：除签名外还会校验用户当前 status='active'。
+// 停用用户的 session 立即失效；前端捕获 USER_DISABLED 后清理本地登录态。
+async function requireActiveSession(event) {
   const session = requireSession(event);
-  const result = await db.collection("user_profiles").where({ uid: session.uid, status: "active" }).limit(1).get();
-  const user = result.data[0];
-  if (!user || user.role !== "admin") { const err = new Error("FORBIDDEN"); err.code = "FORBIDDEN"; throw err; }
-  return user;
+  const profile = await _lookupUserStatus(session.uid);
+  if (!profile) { const err = new Error("UNAUTHORIZED"); err.code = "UNAUTHORIZED"; throw err; }
+  if (profile.status === "disabled") {
+    const err = new Error("USER_DISABLED"); err.code = "USER_DISABLED"; throw err;
+  }
+  return { session, profile };
+}
+async function requireAdmin(event) {
+  const { session, profile } = await requireActiveSession(event);
+  if (profile.role !== "admin") { const err = new Error("FORBIDDEN"); err.code = "FORBIDDEN"; throw err; }
+  return { uid: session.uid, session, profile };
 }
 
 async function ensureInviteSeed() {
@@ -208,7 +250,7 @@ async function login(event) {
 }
 
 async function createSyncToken(event) {
-  const session = requireSession(event);
+  const { session } = await requireActiveSession(event);
   const label = String(event.label || "未命名设备").slice(0, 60);
   const plainToken = randomToken();
   await db.collection("sync_tokens").add({ uid: session.uid, tokenHash: tokenHash(plainToken), label, createdAt: now(), lastUsedAt: null, revokedAt: null });
@@ -216,12 +258,12 @@ async function createSyncToken(event) {
   return response(true, "SYNC_TOKEN_CREATED", { syncToken: plainToken, label });
 }
 async function listSyncTokens(event) {
-  const session = requireSession(event);
+  const { session } = await requireActiveSession(event);
   const result = await db.collection("sync_tokens").where({ uid: session.uid }).orderBy("createdAt", "desc").get();
   return response(true, "SYNC_TOKENS", { tokens: result.data.map(t => ({ id: t._id, label: t.label, createdAt: t.createdAt, lastUsedAt: t.lastUsedAt, revokedAt: t.revokedAt })) });
 }
 async function revokeSyncToken(event) {
-  const session = requireSession(event);
+  const { session } = await requireActiveSession(event);
   const id = String(event.id || "");
   const item = await db.collection("sync_tokens").doc(id).get();
   if (!item.data || item.data.uid !== session.uid) return response(false, "NOT_FOUND");
@@ -233,6 +275,10 @@ async function syncAuth(event) {
   const found = await db.collection("sync_tokens").where({ tokenHash: tokenHash(plainToken), revokedAt: null }).limit(1).get();
   if (!found.data.length) return null;
   const item = found.data[0];
+  // syncAuth 走的是 sync_token（不是 session），验证 token 有效后还要确认其所属用户仍处于 active。
+  // 否则管理员停用后该用户仍可凭已签发的 sync_token 拉/推云端数据。
+  const profile = await _lookupUserStatus(item.uid);
+  if (!profile || profile.status === "disabled") return null;
   await db.collection("sync_tokens").doc(item._id).update({ lastUsedAt: now() });
   return item.uid;
 }
@@ -285,6 +331,10 @@ async function adminSetUserStatus(event) {
   const found = await db.collection("user_profiles").where({ uid }).limit(1).get();
   if (!found.data.length) return response(false, "USER_NOT_FOUND");
   await db.collection("user_profiles").doc(found.data[0]._id).update({ status, statusUpdatedAt: now() });
+  // 关键：使该用户全部已签发 session 立即失效。
+  // 通过清理模块作用域 USER_STATUS_CACHE，让下一次 requireActiveSession 直接打 DB 拿到 status='disabled' → USER_DISABLED。
+  // 注意：HTTP session 是无状态的（仅靠 HMAC 签名校验过期时间），DB 查询是唯一的"撤销"手段。
+  _invalidateUserStatus(uid);
   if (status === "disabled") {
     const tokens = await db.collection("sync_tokens").where({ uid, revokedAt: null }).get();
     await Promise.all(tokens.data.map((token) => db.collection("sync_tokens").doc(token._id).update({ revokedAt: now() })));

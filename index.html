@@ -9362,6 +9362,24 @@ function closeAdminPanel(){
 window.addEventListener('message',function(ev){
   if(ev.origin!==location.origin)return;
   if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();return;}
+  if(ev.data&&ev.data.type==='siele-cloud-kicked'){
+    // 后台检测到该用户被云端停用：清空本机 cloudSession 和 LSS，保留学习数据和云同步配置。
+    // activeUser() 会回退到 null → showLoginOverlay()。
+    closeAdminPanel();
+    try{localStorage.removeItem(LSS);}catch(e){}
+    try{localStorage.removeItem('swa_cloud_session_v1');}catch(e){}
+    AU=null;ADB=null;
+    setChip('nologin');
+    showLoginOverlay();
+    var field=document.getElementById('wbLfU');
+    var msg='您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。';
+    if(field){
+      var err=field.querySelector('.err');
+      if(err)err.textContent=msg;
+      field.classList.add('invalid');
+    }
+    return;
+  }
   if(ev.data&&ev.data.type==='siele-login-failed'){
     closeAdminPanel();
     var button=document.querySelector('#wbLoginForm button[type="submit"]');
@@ -9369,7 +9387,11 @@ window.addEventListener('message',function(ev){
     var field=document.getElementById('wbLfP');
     if(field){
       var err=field.querySelector('.err');
-      if(err)err.textContent=ev.data.code==='NETWORK_ERROR'?'账号服务暂时无法连接，请稍后重试':'账号或密码错误，请检查后重试';
+      if(err){
+        if(ev.data.code==='USER_DISABLED')err.textContent='该账号已被管理员停用，无法登录';
+        else if(ev.data.code==='NETWORK_ERROR')err.textContent='账号服务暂时无法连接，请稍后重试';
+        else err.textContent='账号或密码错误，请检查后重试';
+      }
       field.classList.add('invalid');
     }
   }
