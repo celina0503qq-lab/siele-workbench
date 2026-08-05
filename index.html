@@ -9358,11 +9358,13 @@ function showLoginOverlay(){
     '<div class="fld" id="wbLfU"><label>账号</label><input id="wbLoginUser" autocomplete="username" placeholder="邮箱或用户名"></div>'+
     '<div class="fld" id="wbLfP"><label>密码</label><input id="wbLoginPass" type="password" autocomplete="current-password" placeholder="请输入密码"><span class="err">密码错误</span></div>'+
     '<button class="btn-login" type="submit">登 录</button>'+
-    '<div class="links">还没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></div>'+
+    '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>还没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></span></div>'+
     '</form></div>';
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
   document.getElementById('wbGoReg').addEventListener('click',function(){showLoginOverlay();openAdminPanel();});
+  var fp=document.getElementById('wbForgotPwd');
+  if(fp)fp.addEventListener('click',function(){showLoginOverlay();openAdminPanel('passwd');});
 }
 function hideLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
@@ -9674,11 +9676,20 @@ function openAdminPanel(targetPage){
   document.body.style.overflow='hidden';
   var frame=document.getElementById('wbAdminFrame');
   if(frame && !frame.src) frame.src='admin.html';
-  if(targetPage==='users'&&frame){
-    frame.onload=function(){try{frame.contentWindow.go('users');}catch(e){}};
-    if(frame.contentDocument&&frame.contentDocument.readyState==='complete'){
-      try{frame.contentWindow.go('users');}catch(e){}
-    }
+  // 支持 'users'、'passwd' 等目标页
+  if(targetPage && frame){
+    var goto=function(){
+      try{
+        if(typeof frame.contentWindow.go==='function'){
+          frame.contentWindow.go(targetPage);
+        }else{
+          // 未登录场景 go() 不可用 → 改用 postMessage 触发
+          frame.contentWindow.postMessage({type:'siele-open-'+targetPage},location.origin);
+        }
+      }catch(e){}
+    };
+    frame.onload=function(){try{goto();}catch(e){}};
+    try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')goto();}catch(e){}
   }
 }
 function closeAdminPanel(){

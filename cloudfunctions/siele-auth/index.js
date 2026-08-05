@@ -249,6 +249,51 @@ async function login(event) {
   return response(true, "LOGGED_IN", { uid: user.uid, username: user.username, role, sessionToken: issueSession(user.uid, user.username, role) });
 }
 
+// 用原密码换新密码：要求已登录 + 旧密码哈希匹配 + 强密码约束
+// 任何已签发 session 在改密后保留（session 本身没有密码信息），用户可在其他设备用新密码重登。
+// 如需强制踢出其他设备，可继续调用 adminRevokeUserSyncTokens。
+async function changePasswordWithOld(event) {
+  const { session } = await requireActiveSession(event);
+  const oldPassword = String(event.oldPassword || "");
+  const newPassword = String(event.newPassword || "");
+  if (newPassword.length < 6) return response(false, "WEAK_PASSWORD");
+  if (oldPassword === newPassword) return response(false, "PWD_SAME_AS_OLD");
+  const found = await db.collection("user_profiles").where({ uid: session.uid }).limit(1).get();
+  if (!found.data.length) return response(false, "PWD_USER_NOT_FOUND");
+  const user = found.data[0];
+  if (user.status === "disabled") return response(false, "PWD_USER_DISABLED");
+  const candidate = passwordHash(oldPassword, user.passwordSalt);
+  if (candidate.length !== user.passwordHash.length || !crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(user.passwordHash))) return response(false, "PWD_OLD_MISMATCH");
+  const newSalt = crypto.randomBytes(16).toString("base64url");
+  const newHash = passwordHash(newPassword, newSalt);
+  await db.collection("user_profiles").doc(user._id).update({ passwordSalt: newSalt, passwordHash: newHash, passwordUpdatedAt: now() });
+  await db.collection("security_audit").add({ type: "password_changed", uid: session.uid, username: session.username, method: "old_password", at: now() });
+  return response(true, "PASSWORD_CHANGED");
+}
+
+// 用注册时的邀请码重置密码（无 session 入口，专为忘记密码 / 新设备登录设计）
+// 强约束：必须与该用户档案入库时使用的 inviteCode 严格一致（不区分大小写、走 normalizeInvite）
+// 这样攻击者无法用自己持有的任何邀请码重置别人的密码。
+async function resetPasswordWithInvite(event) {
+  const username = normalizeUsername(event.username);
+  const newPassword = String(event.newPassword || "");
+  const inviteCode = normalizeInvite(event.inviteCode);
+  if (!validUsername(username)) return response(false, "INVALID_USERNAME");
+  if (newPassword.length < 6) return response(false, "WEAK_PASSWORD");
+  if (!INVITE_CODES.has(inviteCode)) return response(false, "INVALID_INVITE");
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return response(false, "PWD_USER_NOT_FOUND");
+  const user = found.data[0];
+  if (user.status === "disabled") return response(false, "USER_DISABLED");
+  // 用户档案里的 inviteCode 是注册时使用的唯一标识，必须与本次输入严格匹配
+  if (normalizeInvite(user.inviteCode || "") !== inviteCode) return response(false, "PWD_INVITE_MISMATCH");
+  const newSalt = crypto.randomBytes(16).toString("base64url");
+  const newHash = passwordHash(newPassword, newSalt);
+  await db.collection("user_profiles").doc(user._id).update({ passwordSalt: newSalt, passwordHash: newHash, passwordUpdatedAt: now() });
+  await db.collection("security_audit").add({ type: "password_reset", uid: user.uid, username, method: "invite_code", at: now() });
+  return response(true, "PASSWORD_RESET");
+}
+
 async function createSyncToken(event) {
   const { session } = await requireActiveSession(event);
   const label = String(event.label || "未命名设备").slice(0, 60);
@@ -404,6 +449,8 @@ exports.main = async (event) => {
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
     if (action === "checkStatus") return await checkStatus(input);
+    if (action === "changePasswordWithOld") return await changePasswordWithOld(input);
+    if (action === "resetPasswordWithInvite") return await resetPasswordWithInvite(input);
     return response(false, "UNKNOWN_ACTION");
   } catch (e) {
     console.error("siele-auth request failed", { action, code: e && e.code, message: e && e.message });

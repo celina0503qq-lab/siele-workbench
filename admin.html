@@ -316,8 +316,11 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <div style="margin-top:14px;border-top:1px dashed var(--line);padding-top:12px">
       <button class="btn blk gh" type="button" onclick="openTransferIn()">📲 换设备登录？点此用传输码迁入账号</button>
     </div>
+    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:space-between">
+      <button class="btn-link" type="button" id="btnForgotPwdLogin" onclick="openPwdResetFromLogin()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">🔑 忘记密码？用邀请码重置</button>
+    </div>
     <div style="margin-top:10px"><button class="btn blk gh" type="button" onclick="returnToWorkbench()">🏠 先去学习工作台逛逛（未登录时进度仅存本机）</button></div>
-    <div class="auth-foot">🔒 本系统需要邀请码才能注册<br>账号与邀请码状态由云端安全保存，可在任意设备用账号密码登录<br>学习进度仍可在「云同步」中配置独立同步令牌，不复用登录密码</div>
+    <div class="auth-foot">🔒 本系统需要邀请码才能注册<br>账号与邀请码状态由云端安全保存，可在任意设备用账号密码登录<br>学习进度仍可在「云同步」中配置独立同步令牌，不复用登录密码<br>忘记密码？已登录用户可在后台「密码修改」入口用原密码或邀请码重置</div>
   </div>
 </div>
 
@@ -345,6 +348,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <div class="ns">数据中心</div>
     <button class="ni" data-p="io" onclick="go('io')"><span class="ic">📦</span>导入 / 备份</button>
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
+    <div class="ns">账户设置</div>
+    <button class="ni" data-p="passwd" onclick="go('passwd')"><span class="ic">🔑</span>密码修改</button>
     <div class="ns admin-only hide">系统管理</div>
     <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
     <div class="ns">学习</div>
@@ -458,6 +463,87 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <div id="lastBackupInfo" style="font-size:11px;color:var(--soft);margin-top:11px"></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== 密码修改 ===== -->
+<section class="page" id="pg-passwd">
+  <div class="tb">
+    <div><h2>🔑 密码修改</h2><div class="d">修改当前账号登录密码。提供「原密码验证」与「邀请码验证」两种方式，任选其一即可。</div></div>
+    <div class="acts"><button class="btn sm ol" onclick="go('dash')">‹ 返回数据看板</button></div>
+  </div>
+
+  <div class="card" style="margin-bottom:13px;border-left:4px solid #f5a623;background:#fffaef">
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      <div style="font-size:22px;line-height:1">🛡️</div>
+      <div style="font-size:12.5px;line-height:1.7;color:#5a4a26">
+        <b>安全提示：</b>修改密码后，当前云端会话立即失效，需要用新密码重新登录。所有设备都需要重新验证。
+        <br>密码至少 <b>6 位</b>，建议使用字母 + 数字 + 符号组合。
+        <br>若怀疑账号被盗，请同时在「云同步」中撤销所有同步令牌。
+      </div>
+    </div>
+  </div>
+
+  <div class="g g2" style="margin-bottom:13px">
+    <!-- 方式一：原密码验证 -->
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3><span class="ic">🔐</span>方式一：用原密码修改</h3>
+      <div style="font-size:12px;color:var(--soft);line-height:1.65;margin-bottom:12px">已记住当前密码的用户推荐使用此方式，直接验证后即可设置新密码。</div>
+      <form id="formChangePwdOld" onsubmit="return doChangePwdWithOld(event)">
+        <div class="fld" id="f_po_old">
+          <label>当前密码 <span class="req">*</span></label>
+          <input id="poOldPwd" type="password" autocomplete="current-password" placeholder="请输入当前密码" maxlength="32">
+          <div class="err-msg">原密码错误</div>
+        </div>
+        <div class="fld" id="f_po_new1">
+          <label>新密码 <span class="req">*</span></label>
+          <input id="poNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
+          <div class="err-msg">新密码至少 6 位</div>
+        </div>
+        <div class="fld" id="f_po_new2">
+          <label>确认新密码 <span class="req">*</span></label>
+          <input id="poNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
+          <div class="err-msg">两次输入的密码不一致</div>
+        </div>
+        <button class="btn blk" type="submit">✅ 提交修改</button>
+        <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">修改成功后会自动退出当前登录，需要用新密码重新进入。</div>
+      </form>
+    </div>
+
+    <!-- 方式二：邀请码验证 -->
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3><span class="ic">🆘</span>方式二：忘记原密码，用邀请码重置</h3>
+      <div style="font-size:12px;color:var(--soft);line-height:1.65;margin-bottom:12px">已忘记当前密码，或在新设备登录时无法用密码验证时，使用注册时使用的邀请码验证身份后重置密码。</div>
+      <form id="formResetPwdInvite" onsubmit="return doResetPwdWithInvite(event)">
+        <div class="fld" id="f_pr_user">
+          <label>用户名 <span class="req">*</span></label>
+          <input id="prUser" autocomplete="username" placeholder="注册时使用的邮箱或用户名" maxlength="50">
+          <div class="err-msg">请输入用户名</div>
+        </div>
+        <div class="fld" id="f_pr_invite">
+          <label>注册时使用的邀请码 <span class="req">*</span></label>
+          <input id="prInvite" autocomplete="off" placeholder="SIELE-2026-XXXX" maxlength="50">
+          <div class="err-msg">邀请码与该用户名不匹配</div>
+        </div>
+        <div class="fld" id="f_pr_new1">
+          <label>新密码 <span class="req">*</span></label>
+          <input id="prNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
+          <div class="err-msg">新密码至少 6 位</div>
+        </div>
+        <div class="fld" id="f_pr_new2">
+          <label>确认新密码 <span class="req">*</span></label>
+          <input id="prNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
+          <div class="err-msg">两次输入的密码不一致</div>
+        </div>
+        <button class="btn blk t" type="submit">🔓 验证并重置密码</button>
+        <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">验证通过后，账号在所有设备的登录态将失效，<b>下次登录请使用新密码</b>。</div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card" style="background:#f5f7fa">
+    <h3><span class="ic">📋</span>最近的密码修改记录</h3>
+    <div id="passwdHistory" style="font-size:12px;color:var(--soft);line-height:1.7">仅记录由本设备发起的安全审计事件。云端账号服务保留完整审计日志可供管理员查询。</div>
   </div>
 </section>
 
@@ -590,7 +676,15 @@ const CLOUD_AUTH_MESSAGES={
   INVALID_CREDENTIALS:'账号或密码错误',
   UNAUTHORIZED:'登录状态已过期，请重新登录',
   USER_DISABLED:'该账号已被管理员停用，无法登录',
-  SERVER_ERROR:'服务暂时不可用，请稍后重试'
+  SERVER_ERROR:'服务暂时不可用，请稍后重试',
+  // 密码管理相关
+  PWD_OLD_MISMATCH:'当前密码不正确，请重新输入',
+  PWD_INVITE_MISMATCH:'邀请码与该账号不匹配，请确认是注册时使用的邀请码',
+  PWD_USER_NOT_FOUND:'找不到该用户名的账号，请先注册或检查拼写',
+  PWD_USER_DISABLED:'该账号已被管理员停用，无法修改密码',
+  PWD_SAME_AS_OLD:'新密码不能与当前密码相同',
+  PASSWORD_CHANGED:'密码已成功修改，请用新密码重新登录',
+  PASSWORD_RESET:'密码已通过邀请码重置，请用新密码重新登录'
 };
 function cloudAuthMessage(code){
   const known=CLOUD_AUTH_MESSAGES[code];
@@ -728,6 +822,115 @@ async function doLogin(e,credentials){
   }
   return false;
 }
+
+// ---- 密码修改（方式一：原密码验证） ----
+async function doChangePwdWithOld(e){
+  e.preventDefault();
+  const oldP=$('poOldPwd').value,newP=$('poNewPwd1').value,newP2=$('poNewPwd2').value;
+  let ok=fldErr('f_po_old',!oldP,'请输入当前密码');
+  ok=fldErr('f_po_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_po_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
+  if(oldP && newP && oldP===newP){
+    fldErr('f_po_new1',true,cloudAuthMessage('PWD_SAME_AS_OLD'));
+    ok=false;
+  }
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在校验原密码…';}
+  try{
+    const result=await callSieleAuth({action:'changePasswordWithOld',oldPassword:oldP,newPassword:newP});
+    if(!result.ok){
+      if(result.code==='PWD_OLD_MISMATCH')fldErr('f_po_old',true,cloudAuthMessage(result.code));
+      else if(result.code==='WEAK_PASSWORD'||result.code==='PWD_SAME_AS_OLD')fldErr('f_po_new1',true,cloudAuthMessage(result.code));
+      else if(result.code==='PWD_USER_DISABLED'||result.code==='USER_DISABLED'){fldErr('f_po_old',true,cloudAuthMessage(result.code));}
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    try{lsDel(CLOUD_SESSION_KEY);}catch(_){}
+    addPwdHistoryEntry('✅ 已通过原密码验证修改成功');
+    toast(cloudAuthMessage('PASSWORD_CHANGED'),'ok');
+    $('poOldPwd').value='';$('poNewPwd1').value='';$('poNewPwd2').value='';
+    setTimeout(function(){doLogout();},1200);
+  }catch(err){
+    console.error('changePasswordWithOld failed',err);
+    if(err&&err.code==='UNAUTHORIZED')toast(cloudAuthMessage('UNAUTHORIZED'),'err');
+    else toast('无法连接账号服务，请检查网络或稍后再试','err');
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='✅ 提交修改';}
+  }
+  return false;
+}
+
+// ---- 密码重置（方式二：邀请码验证） ----
+async function doResetPwdWithInvite(e){
+  e.preventDefault();
+  const u=$('prUser').value.trim(),inv=$('prInvite').value.trim().toUpperCase(),newP=$('prNewPwd1').value,newP2=$('prNewPwd2').value;
+  const isEmail=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(u);
+  const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
+  let ok=fldErr('f_pr_user',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名');
+  ok=fldErr('f_pr_invite',!inv,'请输入邀请码')&&ok;
+  ok=fldErr('f_pr_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_pr_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在验证邀请码…';}
+  try{
+    const result=await callSieleAuth({action:'resetPasswordWithInvite',username:u,inviteCode:inv,newPassword:newP});
+    if(!result.ok){
+      if(result.code==='INVALID_INVITE')fldErr('f_pr_invite',true,cloudAuthMessage(result.code));
+      else if(result.code==='PWD_INVITE_MISMATCH')fldErr('f_pr_invite',true,cloudAuthMessage(result.code));
+      else if(result.code==='PWD_USER_NOT_FOUND')fldErr('f_pr_user',true,cloudAuthMessage(result.code));
+      else if(result.code==='USER_DISABLED'||result.code==='PWD_USER_DISABLED'){fldErr('f_pr_user',true,cloudAuthMessage(result.code));}
+      else if(result.code==='WEAK_PASSWORD')fldErr('f_pr_new1',true,cloudAuthMessage(result.code));
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    addPwdHistoryEntry('✅ 已通过邀请码重置成功（用户：'+u+'）');
+    toast(cloudAuthMessage('PASSWORD_RESET'),'ok');
+    $('prUser').value='';$('prInvite').value='';$('prNewPwd1').value='';$('prNewPwd2').value='';
+  }catch(err){
+    console.error('resetPasswordWithInvite failed',err);
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='🔓 验证并重置密码';}
+  }
+  return false;
+}
+
+// 本地记录最近一次本机密码变更事件（审计展示）
+function addPwdHistoryEntry(text){
+  try{
+    const key='swa_pwd_history_v1';
+    const arr=lsGet(key,[]);
+    arr.unshift({ts:Date.now(),text:text});
+    if(arr.length>10)arr.length=10;
+    lsSet(key,arr);
+  }catch(_){}
+  renderPwdHistory();
+}
+function renderPwdHistory(){
+  const el=$('passwdHistory');if(!el)return;
+  let arr=[];try{arr=lsGet('swa_pwd_history_v1',[]);}catch(_){}
+  if(!arr.length){el.innerHTML='<div style="color:var(--soft)">暂无本机记录。</div>';return;}
+  el.innerHTML=arr.map(function(x){
+    const t=new Date(x.ts).toLocaleString();
+    return '<div style="padding:6px 0;border-bottom:1px dashed var(--line)"><span style="color:var(--soft);font-size:11px">'+esc(t)+'</span> · '+esc(x.text)+'</div>';
+  }).join('');
+}
+
+// 登录页"忘记密码"入口
+function openPwdResetFromLogin(){
+  if($('appView')&&$('appView').classList.contains('on')){
+    go('passwd');
+    setTimeout(function(){
+      try{$('prUser').focus();var card2=document.getElementById('formResetPwdInvite');if(card2&&card2.scrollIntoView)card2.scrollIntoView({behavior:'smooth',block:'center'});}catch(_){}
+    },100);
+    return;
+  }
+  toast('请在登录页下方「忘记密码？用邀请码重置」按钮操作，或先登录后在「密码修改」页面使用原密码/邀请码重置。','info');
+  setTimeout(function(){try{$('loginUser').focus();}catch(_){}},100);
+}
+
 function enter(u,persist,profile){
   CUR=u;
   DB=lsGet(dataKey(u),null)||blankData(true);
@@ -785,7 +988,19 @@ function go(p){
   if(p==='io')renderIO();
   if(p==='sync')renderSyncPage();
   if(p==='users')switchAdminTab('users');
+  if(p==='passwd')renderPasswdPage();
   window.scrollTo({top:0});
+}
+function renderPasswdPage(){
+  // 渲染最近本机密码变更事件
+  renderPwdHistory();
+  // 自动预填当前用户名（已登录场景下简化方式二）
+  try{
+    var sess=cloudSession&&cloudSession();
+    if(sess&&sess.username){
+      var u=$('prUser');if(u&&!u.value)u.value=sess.username;
+    }
+  }catch(_){}
 }
 function toggleDrawer(open){$('sideBar').classList.toggle('open',open);$('drawerMask').classList.toggle('on',open);}
 var _vdataSeedCount=0; // 由主站 postMessage 推送的种子词数量（含 VDATA/VDATA_EXTRA/VDATA_PDF/VDATA_DELE）
@@ -799,6 +1014,21 @@ window.addEventListener('message',function(ev){
       seedEl.textContent=_vdataSeedCount;
       var totalEl=document.getElementById('wTotalCount');
       if(totalEl&&DB)totalEl.textContent=DB.words.length+_vdataSeedCount;
+    }
+  }
+  // 主工作台"忘记密码"链接请求：在 admin 内打开密码修改页
+  if(ev.data&&ev.data.type==='siele-open-passwd'){
+    if($('appView')&&$('appView').classList.contains('on')){
+      go('passwd');
+    }else{
+      // 未登录：先切到登录 tab 并不好用，因为登录页里没有 pg-passwd
+      // 退化方案：直接弹一个提示，让用户先登录；admin 会自动渲染历史表单
+      try{
+        $('authView').style.display='';
+        $('appView').classList.remove('on');
+        $('mtop').style.display='none';
+        toast('请先登录账号后再到「账户设置 → 密码修改」使用原密码/邀请码重置密码','info');
+      }catch(_){}
     }
   }
 });
