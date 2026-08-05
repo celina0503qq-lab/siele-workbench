@@ -182,6 +182,10 @@
 .rd-quiz-item .rq-exp .es{color:var(--soft);font-style:italic}
 /* ===== NEW: 每日自动更新状态 ===== */
 .rd-update-info{font-size:11px;color:var(--soft);margin:6px 0;display:flex;align-items:center;gap:4px}
+/* 联网更新按钮 loading 状态：旋转图标 + 文字切换 + 禁用交互 */
+#rdRefreshBtn.loading{opacity:.65;cursor:wait}
+#rdRefreshBtn.loading .rd-refresh-icon{display:inline-block;animation:rd-refresh-spin 1s linear infinite}
+@keyframes rd-refresh-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 /* ===== 登录覆盖层 ===== */
 .wb-login-overlay{position:fixed;inset:0;z-index:999999;background:linear-gradient(135deg,#7a1f12 0%,#c0392b 45%,#e08e0b 100%);display:flex;align-items:center;justify-content:center;padding:20px}
 .wb-login-overlay.hide{display:none}
@@ -8086,19 +8090,111 @@ function getAllArticles(){
   var byId={};
   READING_LONGFORM.forEach(function(a){byId[a.id]=a;});
   var cache=readDailyBilingualCache();
+  // 第一遍：按 id 填充 byId（id 唯一优先，保持原合并语义）
   Object.keys(cache).forEach(function(day){(cache[day].articles||[]).forEach(function(a){if(keepHistoricalBilingualArticle(a))byId[a.id]=a;});});
-  return Object.keys(byId).map(function(id){return byId[id];}).sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
+  var all=Object.keys(byId).map(function(id){return byId[id];});
+  // 第二遍：跨日 daily 折叠——同日(YYYY-MM-DD)+ level 的多份同质内容只保留最新日期那条，
+  // 把被合并的日期记到 mergedFromDates。判定"同质"用内容指纹（title+首段 es/zh），
+  // 避免"硬编码文章每天复制一份只换日期"造成的视觉重复。
+  var byFp={};
+  all.forEach(function(a){
+    var fp=articleContentFingerprint(a);
+    var key=(a.level||'')+'|'+(a.isDaily?'daily':'lonform')+'|'+fp;
+    var prev=byFp[key];
+    if(!prev){byFp[key]={primary:a,duplicates:[]};return;}
+    // 日期较新的当主条
+    if(String(a.date||'').localeCompare(String(prev.primary.date||''))>0){
+      var old=prev.primary;byFp[key]={primary:a,duplicates:prev.duplicates.concat([old])};
+    } else {
+      byFp[key].duplicates.push(a);
+    }
+  });
+  var folded=Object.keys(byFp).map(function(k){
+    var p=byFp[k].primary, dups=byFp[k].duplicates.filter(function(x){return x.id!==p.id;});
+    if(dups.length){
+      var dupDates=dups.map(function(x){return x.date||'';}).filter(Boolean).sort();
+      // 浅拷贝，避免污染 byId 引用
+      var copy=Object.assign({},p);
+      copy.mergedFromDates=dupDates;
+      copy.mergedCount=dups.length+1;
+      return copy;
+    }
+    return p;
+  });
+  return folded.sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));});
+}
+function articleContentFingerprint(a){
+  if(!a)return '';
+  var t=(a.title||'').replace(/\s+/g,'');
+  var firstEs='',firstZh='';
+  if(Array.isArray(a.paragraphs)&&a.paragraphs.length){
+    firstEs=(a.paragraphs[0].es||'').slice(0,80);
+    firstZh=(a.paragraphs[0].zh||'').slice(0,40);
+  }
+  return t+'|'+firstEs+'|'+firstZh;
 }
 function readingIdForToday(level){return 'daily-'+todayStr()+'-'+level.toLowerCase();}
 function dailySourceFor(level,headlines){
   var fallback={A1:{source:'BBC Mundo · Selección diaria',url:'https://www.bbc.com/mundo',cat:'生活'},A2:{source:'El País · Selección diaria',url:'https://elpais.com/',cat:'社会'},B1:{source:'BBC Mundo · Lectura avanzada',url:'https://www.bbc.com/mundo',cat:'科技'},B2:{source:'El País · Análisis avanzado',url:'https://elpais.com/',cat:'文化'}}[level];
   var item=headlines&&headlines[level];return {source:item&&item.source?item.source:fallback.source,url:item&&item.url?item.url:fallback.url,sourceTitle:item&&item.title?item.title:'今日联网选题待更新',cat:fallback.cat};
 }
+// ===== DAILY BILINGUAL CANDIDATES (per level) =====
+// 每天根据 todayStr() 选一套候选，4 个等级各自 4 套以上候选池，
+// 彻底解决"硬编码文章每天复制一份只换日期"造成的视觉+内容重复。
+// 套数按"近 4 轮才重复一次"原则设计，让用户连续 3-4 天每天看到不同文章。
+
+var A1_DAILY_BANK = [
+  { title:'Un barrio que cuida sus espacios', minutes:3, paragraphs:[
+    readingParagraph('En mi barrio hay una plaza pequeña. Por la mañana, muchas personas caminan por allí. Algunas llevan a sus perros y otras van al trabajo. La plaza tiene bancos, árboles y una fuente.','我住的街区有一个小广场。早上，许多人从那里步行经过。一些人带着狗，另一些人去上班。广场有长椅、树木和一座喷泉。',[{w:'barrio',m:'街区'},{w:'plaza',m:'广场'},{w:'fuente',m:'喷泉'}],'hay + 名词：表示“有、存在”，没有复数变化。ir al trabajo：去上班；por allí：从那里/在那附近。'),
+    readingParagraph('Los vecinos quieren mantener el lugar limpio. Los sábados recogen papeles y riegan las plantas. Después, hablan un poco y toman café juntos. Es una actividad sencilla, pero todos participan con alegría.','邻居们想保持这个地方整洁。周六他们捡纸屑并给植物浇水。之后，他们聊一会儿，一起喝咖啡。这是一项简单的活动，但大家都开心地参加。',[{w:'vecino',m:'邻居'},{w:'mantener',m:'保持'},{w:'recoger',m:'捡起；收集'}],'querer + 不定式：想要做某事。第三人称复数现在时：recogen、riegan、hablan。pero 用来连接转折信息。'),
+    readingParagraph('Cuidar un espacio común ayuda a conocer mejor a otras personas. Cuando la plaza está limpia, las familias pueden descansar y los niños pueden jugar. Un lugar agradable también cambia la vida diaria.','照顾公共空间有助于更好地认识其他人。当广场干净时，家庭可以休息，孩子们可以玩耍。一个宜人的地方也会改变日常生活。',[{w:'cuidar',m:'照顾；维护'},{w:'común',m:'共同的；公共的'},{w:'agradable',m:'宜人的'}],'不定式作主语：Cuidar… ayuda…。cuando + 陈述式用于一般事实；poder + 不定式表示"能够"。')
+  ]},
+  { title:'Una mañana en el mercado', minutes:3, paragraphs:[
+    readingParagraph('Todos los domingos, mi madre va al mercado del barrio. Compra frutas, verduras y pan recién hecho. Los vendedores la conocen y siempre le guardan lo mejor.','每个周日，我妈妈去街区市场。她买水果、蔬菜和刚出炉的面包。商贩们认识她，总把最好的留给她。',[{w:'verdura',m:'蔬菜'},{w:'recién hecho',m:'刚做好的'},{w:'vendedor',m:'商贩'}],'todos los + 星期复数：每个……。ir al mercado：去市场；动词 conocer 表示"认识、熟悉"。'),
+    readingParagraph('A mí me gusta acompañarla. El mercado es ruidoso, colorido y huele muy bien. Entre los puestos hay personas de muchos países y se escuchan idiomas diferentes.','我喜欢陪她去。市场很热闹、色彩鲜艳、气味很好闻。在摊位之间有来自许多国家的人，可以听到不同的语言。',[{w:'colorido/a',m:'色彩鲜艳的'},{w:'oler',m:'闻、散发气味'},{w:'puesto',m:'摊位'}],'gustar + 名词/不定式：喜欢……。entre + 复数名词：在……之间。se escuchan：被动自复（人们听到）。'),
+    readingParagraph('Cuando termina la compra, volvemos a casa caminando. Mi madre lleva la bolsa y yo llevo el pan. En casa preparamos un desayuno largo y hablamos sobre la semana.','买完东西后，我们走路回家。妈妈拿袋子，我拿面包。在家我们准备一顿长长的早餐，聊这一周的事。',[{w:'compra',m:'购物'},{w:'bolsa',m:'袋子'},{w:'semana',m:'周'}],'cuando + 陈述式一般事实。volver a + 不定式：再次做……。llevar + 名词：携带；sobre + 名词：关于……。')
+  ]},
+  { title:'Cartas que llegan de lejos', minutes:3, paragraphs:[
+    readingParagraph('Mi abuelo vive en otra ciudad. Antes no hablaba con él todos los días, pero ahora escribimos cartas. Escribo en un papel y meto la carta en un sobre.','我爷爷住在另一座城市。以前我并不每天跟他说话，但现在我们写信。我把字写在纸上，再把信放进信封。',[{w:'antes',m:'以前'},{w:'sobre',m:'信封'},{w:'papel',m:'纸'}],'antes de：以前。pero 转折。meter algo en algo：把……放入……。'),
+    readingParagraph('Después camino hasta el buzón de la esquina. Cuando echo la carta, sé que tardará varios días en llegar. Pero esperar también es bonito, porque cada palabra vale más.','之后我走到街角的邮筒。当我投下信时，我知道要过几天才能到达。但等待也很美，因为每个字都更珍贵。',[{w:'buzón',m:'邮筒'},{w:'echar',m:'投、扔'},{w:'tardar',m:'需要（时间）'}],'sé que + 陈述式：我知道……。tardar en + 不定式：需要多久做……。'),
+    readingParagraph('Mi abuelo me contesta siempre. Me cuenta cosas del campo, del tiempo y de los pájaros. Yo le cuento del colegio y de mis amigos. Así nos conocemos mejor.','我爷爷总会回信。他跟我说田野、天气和鸟的事。我跟他说学校和朋友的事。就这样我们更了解彼此。',[{w:'contar',m:'讲述、计数'},{w:'campo',m:'田野、农村'},{w:'así',m:'这样'}],'contestar (a alguien)：回复某人。así 表示"如此、这样"，常用来总结。')
+  ]},
+  { title:'La bici del fin de semana', minutes:3, paragraphs:[
+    readingParagraph('Los sábados por la mañana, mi hermano y yo sacamos las bicis. Vamos al parque que está cerca del río. El camino es llano y se puede pedalear sin cansarse mucho.','周六早上，我和哥哥把自行车推出来。我们去河边附近的公园。路很平，骑起来不太累。',[{w:'sacar',m:'拿出来'},{w:'llano/a',m:'平坦的'},{w:'pedalear',m:'蹬车'}],'por la mañana：早上。estar cerca de：靠近……。poder + 不定式：能够……。'),
+    readingParagraph('A veces llevamos algo de comer. Nos sentamos en un banco y miramos el agua. Mi hermano siempre trae más pan del que necesitamos, y después vuelven a casa con hambre.','有时我们带些吃的。我们坐在长椅上看着水面。我哥总带比我们所需更多的面包，回家时又饿了。',[{w:'banco',m:'长椅'},{w:'agua',m:'水'},{w:'hambre',m:'饥饿'}],'a veces：有时。mirar + 名词：看……。más… del que + 动词：比所需的更多。'),
+    readingParagraph('Por la tarde, cuando llegamos a casa, estamos cansados pero contentos. Una ducha caliente y un vaso de leche son suficientes para sentirse nuevo otra vez.','下午回到家时，我们累但开心。一个热水澡和一杯牛奶就足以让人再次感觉焕然一新。',[{w:'ducha',m:'淋浴'},{w:'suficiente',m:'足够的'},{w:'nuevo/a',m:'新的'}],'estar + 形容词：处于状态。bastan/suficiente para + 不定式：足够做……。')
+  ]}
+];
+
+var A2_DAILY_BANK = [
+  { title:'Aprender con pequeños hábitos', minutes:4, paragraphs:[
+    readingParagraph('Muchas personas quieren aprender algo nuevo, pero creen que necesitan mucho tiempo. Sin embargo, una rutina corta puede ser más útil que un plan perfecto que nunca empieza. Diez minutos al día ya permiten avanzar.','许多人想学习新东西，但认为自己需要很多时间。然而，短暂的日常习惯可能比一个永远不开始的完美计划更有用。每天十分钟已经能让人进步。',[{w:'rutina',m:'日常习惯'},{w:'avanzar',m:'进步'},{w:'sin embargo',m:'然而'}],'querer + 不定式表达愿望。más + 形容词 + que：比较级。ya + 动词表示"已经"。'),
+    readingParagraph('Una estudiante empezó a escuchar un pódcast durante el viaje al instituto. Al principio no entendía todas las palabras, pero anotaba las ideas principales. Después de varias semanas, podía seguir conversaciones más largas.','一名学生开始在去学校的路上听播客。起初她并不理解所有单词，但会记录主要观点。几周后，她能听懂更长的对话。',[{w:'al principio',m:'起初'},{w:'anotar',m:'记下'},{w:'seguir',m:'跟上；听懂'}],'empezar a + 不定式：开始做。imperfecto（entendía/anotaba）用于描述过去习惯或背景；poder 在过去未完成时为 podía。'),
+    readingParagraph('El objetivo no es estudiar sin descansar. También es importante dormir bien y celebrar los progresos. Si una persona repite una actividad con calma, es más fácil convertirla en una costumbre duradera.','目标不是不停地学习。睡好觉并庆祝进步也很重要。如果一个人平静地重复一项活动，更容易把它变成持久的习惯。',[{w:'objetivo',m:'目标'},{w:'progreso',m:'进步'},{w:'duradero/a',m:'持久的'}],'es importante + 不定式：评价某行为。Si + 现在时，es + 形容词：描述真实、一般条件。convertir… en…：把……变成……。')
+  ]},
+  { title:'Cocinar para compartir', minutes:4, paragraphs:[
+    readingParagraph('Los domingos preparo la comida para la familia. Me gusta cocinar platos sencillos, pero con ingredientes frescos. Cuando todos se sientan a la mesa, la cocina se llena de conversación.','周日我给家人准备饭菜。我喜欢做简单的菜，但用新鲜的食材。当大家坐到餐桌前，厨房里充满了对话。',[{w:'plato',m:'菜、盘子'},{w:'ingrediente',m:'食材'},{w:'llenar',m:'填满'}],'gustar + 不定式：喜欢……。llenarse de：充满……。cuando + 陈述式：表一般事实。'),
+    readingParagraph('Esta semana he decidido probar una receta nueva: una sopa de verduras con un poco de comino. Al principio dudaba, pero al probar el primer plato, el sabor me ha sorprendido mucho.','这一周我决定试一道新菜谱：加一点孜然的蔬菜汤。起初我犹豫，但尝了第一口后，味道让我很惊喜。',[{w:'receta',m:'食谱'},{w:'comino',m:'孜然'},{w:'sorprender',m:'使惊讶'}],'decidir + 不定式：决定做……。probar algo：品尝。dudar + 副词 / dudar en + 不定式：犹豫。'),
+    readingParagraph('Cocinar en casa no solo alimenta el cuerpo, también alimenta la memoria. A veces, un olor de la sopa me recuerda la cocina de mi abuela y me hace sonreír sin darme cuenta.','在家做饭不仅滋养身体，也滋养记忆。有时，汤的某种气味让我想起祖母的厨房，让我不自觉地微笑。',[{w:'alimentar',m:'喂养、滋养'},{w:'recuerdo',m:'记忆'},{w:'sonreír',m:'微笑'}],'no solo… también…：不仅……也……。recordar + 名词：使想起。sin + 不定式：在没有……的情况下。')
+  ]},
+  { title:'El primer día de trabajo', minutes:4, paragraphs:[
+    readingParagraph('El lunes a las ocho de la mañana empecé un trabajo nuevo. Llegué al edificio con unos minutos de antelación, porque no quería llegar tarde. La recepcionista me acompañó a la sala de espera.','周一早上八点，我开始了一份新工作。我提前几分钟到达大楼，因为我不想迟到。接待员把我带到了等候室。',[{w:'antelación',m:'提前'},{w:'recepcionista',m:'接待员'},{w:'espera',m:'等待'}],'a las + 时间：在几点钟。con + 时间：表示"提前/延后"。porque + 陈述式：因为。'),
+    readingParagraph('Mientras esperaba, observé a las personas que pasaban. Algunas llevaban un café, otras hablaban por teléfono. Todas parecían tener prisa, pero nadie mostraba nervios.','等待时，我观察过往的人。一些人拿着咖啡，另一些人在打电话。所有人都似乎很匆忙，但没人显得紧张。',[{w:'mientras',m:'当……时'},{w:'prisa',m:'匆忙'},{w:'nervios',m:'紧张'}],'mientras + 陈述式：当……时。parecer + 形容词：似乎……。'),
+    readingParagraph('La persona que me iba a entrevistar salió a buscarme con una sonrisa. Me dijo que la reunión sería corta y que no me preocupara. Esa amabilidad hizo que me sintiera más tranquilo el resto del día.','要面试我的人出来接我时带着微笑。他告诉我会议会很短，不用担心。这种亲切感让我那天剩下的时间都感到更安心。',[{w:'entrevistar',m:'面试'},{w:'amabilidad',m:'亲切'},{w:'tranquilo/a',m:'安心的'}],'salir a + 不定式：出去做……。hacer que + 虚拟式（sintiera）：使……。el resto de：……的剩余部分。')
+  ]},
+  { title:'Viajar sin prisas', minutes:4, paragraphs:[
+    readingParagraph('Este verano he viajado por el norte de España. He visitado pueblos pequeños donde el tiempo parece ir más despacio. Las tiendas cierran a la hora de comer y nadie tiene prisa por abrir.','今年夏天我在西班牙北部旅行。我去了小村庄，那里的时间似乎走得更慢。商店在午饭时间关门，没人会急着开门。',[{w:'pueblo',m:'村庄'},{w:'despacio',m:'慢'},{w:'cerrar',m:'关门'}],'ir más despacio：走得更慢。a la hora de：在……的时间。por + 不定式：因为要……。'),
+    readingParagraph('En uno de esos pueblos encontré una librería muy especial. La dueña hablaba con cada cliente como si lo conociera de toda la vida. Me recomendó un libro y hablamos durante una hora.','在其中一个小村庄我发现了一家很特别的书店。店主与每位顾客说话都像是认识了一辈子。她给我推荐了一本书，我们聊了一个小时。',[{w:'librería',m:'书店'},{w:'cliente',m:'顾客'},{w:'recomendar',m:'推荐'}],'como si + 虚拟式（conociera）：好像……一样。durante + 时间段：持续……之久。'),
+    readingParagraph('Cuando regresé a casa, descubrí que el viaje me había cambiado algo. Ya no me molesta esperar en una cola ni caminar sin un plan fijo. Viajar sin prisas me enseñó a vivir el momento.','当我回到家时，我发现旅行让我有了一些变化。我不再为排队或不带固定计划地走路而烦恼。不慌不忙的旅行教会我活在当下。',[{w:'regresar',m:'返回'},{w:'molestar',m:'打扰、使烦恼'},{w:'momento',m:'时刻'}],'descubrir que + 陈述式：发现……。ya no：不再。ni… ni…：既不……也不……。')
+  ]}
+];
+
+// 9 段 / 14 段长文主题池，按日期种子选不同主题。
 function b1AdvancedParagraphs(){
   return [
-    readingParagraph('La primera condición para que una herramienta resulte útil no es que sea novedosa, sino que responda a una necesidad concreta. Cuando una solución digital se implanta sin haber observado cómo trabajan las personas, suele añadir pasos en vez de simplificar procesos.', '一项工具要真正有用，首要条件不是新颖，而是回应具体需求。当数字方案在没有观察人们如何工作的情况下被引入时，它往往会增加步骤而不是简化流程。', [{w:'implantar',m:'引入；实施'},{w:'en vez de',m:'而不是'},{w:'proceso',m:'流程'}], 'no es que… sino que…：不是……而是……。cuando + 陈述式用于一般规律；sin + 不定式完成时表示“没有做过……”。'),
+    readingParagraph('La primera condición para que una herramienta resulte útil no es que sea novedosa, sino que responda a una necesidad concreta. Cuando una solución digital se implanta sin haber observado cómo trabajan las personas, suele añadir pasos en vez de simplificar procesos.', '一项工具要真正有用，首要条件不是新颖，而是回应具体需求。当数字方案在没有观察人们如何工作的情况下被引入时，它往往会增加步骤而不是简化流程。', [{w:'implantar',m:'引入；实施'},{w:'en vez de',m:'而不是'},{w:'proceso',m:'流程'}], 'no es que… sino que…：不是……而是……。cuando + 陈述式用于一般规律；sin + 不定式完成时表示"没有做过……"。'),
     readingParagraph('Por ese motivo, algunos equipos empiezan con pruebas limitadas. Invitan a un grupo pequeño de usuarios, registran los obstáculos y modifican el diseño antes de extenderlo. Este método no garantiza el éxito, pero permite detectar errores que de otro modo permanecerían ocultos.', '因此，一些团队会先进行有限测试。他们邀请一小群用户，记录障碍，并在推广前修改设计。该方法不能保证成功，但能发现原本会被隐藏的错误。', [{w:'obstáculo',m:'障碍'},{w:'extender',m:'推广；扩大'},{w:'de otro modo',m:'否则'}], 'por ese motivo：因此。antes de + 不定式：在……之前。que de otro modo… 是关系从句，补充说明 errores。'),
-    readingParagraph('La accesibilidad ofrece un ejemplo claro. Un formulario con instrucciones ambiguas puede excluir a quienes leen despacio, usan lectores de pantalla o no están familiarizados con el vocabulario administrativo. Mejorarlo no beneficia únicamente a un grupo reducido: mejora la experiencia de todas las personas.', '无障碍性就是一个明确例子。说明含糊的表格可能排除阅读较慢、使用屏幕阅读器或不熟悉行政词汇的人。改进它并非只惠及小群体，而是改善所有人的体验。', [{w:'accesibilidad',m:'无障碍性'},{w:'ambiguo/a',m:'含糊的'},{w:'lector de pantalla',m:'屏幕阅读器'}], 'quienes + 动词：指“那些……的人”。no… únicamente：不仅仅不……；省略重复成分的并列结构。'),
+    readingParagraph('La accesibilidad ofrece un ejemplo claro. Un formulario con instrucciones ambiguas puede excluir a quienes leen despacio, usan lectores de pantalla o no están familiarizados con el vocabulario administrativo. Mejorarlo no beneficia únicamente a un grupo reducido: mejora la experiencia de todas las personas.', '无障碍性就是一个明确例子。说明含糊的表格可能排除阅读较慢、使用屏幕阅读器或不熟悉行政词汇的人。改进它并非只惠及小群体，而是改善所有人的体验。', [{w:'accesibilidad',m:'无障碍性'},{w:'ambiguo/a',m:'含糊的'},{w:'lector de pantalla',m:'屏幕阅读器'}], 'quienes + 动词：指"那些……的人"。no… únicamente：不仅仅不……；省略重复成分的并列结构。'),
     readingParagraph('También conviene distinguir entre automatizar una tarea y trasladar una responsabilidad. Si un sistema propone una decisión, alguien debe poder explicar con qué información se ha formado esa propuesta y qué límites tiene. De lo contrario, la rapidez puede convertirse en una forma de opacidad.', '还应区分自动化一项任务和转移一项责任。如果系统提出一个决定，就应有人能够说明该建议基于哪些信息形成、又有什么局限。否则，速度可能变成一种不透明。', [{w:'trasladar',m:'转移'},{w:'límite',m:'限制'},{w:'opacidad',m:'不透明'}], 'conviene + 不定式：有必要。si + 现在时，debe + 不定式：真实条件下的义务。de lo contrario：否则。'),
     readingParagraph('En la biblioteca, las sesiones presenciales revelaron otra cuestión: las dudas no eran idénticas. Algunas personas necesitaban aprender a buscar por autor; otras querían saber cómo renovar un préstamo. Diseñar una sola explicación para todos habría dejado sin respuesta necesidades importantes.', '在图书馆，线下讲解还揭示了另一个问题：人们的疑问并不相同。有些人需要学习如何按作者搜索；另一些人想知道怎样续借。为所有人设计一种单一说明本会让重要需求得不到回应。', [{w:'renovar',m:'续借；更新'},{w:'préstamo',m:'借阅'},{w:'dejar sin respuesta',m:'使得不到回应'}], 'no eran idénticas：未完成时描写背景。habría dejado：条件复合时，表达未发生的假设结果。'),
     readingParagraph('A partir de esas observaciones, el equipo organizó materiales de distinta complejidad. La misma información se presentaba mediante un vídeo breve, una guía impresa y una explicación oral. No se trataba de repetir tres veces lo mismo, sino de ofrecer caminos alternativos hacia un objetivo común.', '基于这些观察，团队组织了不同复杂度的材料。同一信息通过短视频、印刷指南和口头说明呈现。这不是把同样内容重复三次，而是为共同目标提供不同路径。', [{w:'a partir de',m:'基于'},{w:'complejidad',m:'复杂度'},{w:'camino alternativo',m:'替代路径'}], 'se presentaba：被动自复，未完成时说明方式。no se trataba de… sino de…：不是……而是……。'),
@@ -8111,7 +8207,7 @@ function b2AdvancedParagraphs(){
   return [
     readingParagraph('La circulación acelerada de información ha alterado no solo la velocidad con la que conocemos los acontecimientos, sino también las expectativas que proyectamos sobre ellos. Se espera una reacción inmediata, aunque los datos disponibles sean parciales y las fuentes todavía estén reconstruyendo lo sucedido.', '信息的加速传播不仅改变了我们了解事件的速度，也改变了我们对事件投射的期待。人们期待即时反应，即使现有数据只是片面的、信息来源仍在重建事情经过。', [{w:'proyectar',m:'投射；施加'},{w:'parcial',m:'片面的'},{w:'reconstruir',m:'重建；还原'}], 'no solo… sino también…：不仅……而且……。aunque + 虚拟式（sean/estén）表示让步假设或不确定事实。'),
     readingParagraph('Esta tensión explica por qué una rectificación posterior suele recibir menos atención que el mensaje inicial. No se debe necesariamente a una falta de interés, sino a que los sistemas de recomendación premian la novedad y la reacción, mientras que la verificación requiere tiempo y rara vez produce el mismo impacto emocional.', '这种张力解释了为何后续更正通常得到的关注少于最初信息。这未必是因为缺乏兴趣，而是推荐系统奖励新颖和反应，而核查需要时间，且很少产生同样的情感影响。', [{w:'rectificación',m:'更正'},{w:'premiar',m:'奖励；偏向'},{w:'verificación',m:'核查'}], 'por qué 引导间接疑问。no se debe a… sino a que…：并非归因于……而是归因于……。mientras que：而、相比之下。'),
-    readingParagraph('De ahí que la educación mediática no pueda limitarse a una lista de advertencias. Reconocer una fuente dudosa es importante, pero también lo es comprender cómo se seleccionan los temas, qué intereses condicionan la visibilidad y por qué ciertos marcos interpretativos parecen naturales aunque no sean inevitables.', '因此，媒体素养教育不能局限于一份警示清单。识别可疑来源很重要，但理解主题如何被选择、哪些利益影响可见度，以及为何某些解释框架看似自然却并非不可避免，也同样重要。', [{w:'de ahí que',m:'因此'},{w:'condicionar',m:'制约；影响'},{w:'inevitable',m:'不可避免的'}], 'de ahí que + 虚拟式（pueda）：因此。lo es：代替前文“es importante”。aunque + 虚拟式表示让步。'),
+    readingParagraph('De ahí que la educación mediática no pueda limitarse a una lista de advertencias. Reconocer una fuente dudosa es importante, pero también lo es comprender cómo se seleccionan los temas, qué intereses condicionan la visibilidad y por qué ciertos marcos interpretativos parecen naturales aunque no sean inevitables.', '因此，媒体素养教育不能局限于一份警示清单。识别可疑来源很重要，但理解主题如何被选择、哪些利益影响可见度，以及为何某些解释框架看似自然却并非不可避免，也同样重要。', [{w:'de ahí que',m:'因此'},{w:'condicionar',m:'制约；影响'},{w:'inevitable',m:'不可避免的'}], 'de ahí que + 虚拟式（pueda）：因此。lo es：代替前文"es importante"。aunque + 虚拟式表示让步。'),
     readingParagraph('Comparar versiones no significa buscar una simetría artificial entre posiciones desigualmente fundamentadas. Significa identificar qué afirmaciones cuentan con evidencia comprobable, cuáles dependen de inferencias y cuáles se sostienen únicamente mediante repetición. La pluralidad no elimina la necesidad de jerarquizar argumentos.', '比较不同版本并不意味着在论据基础不对等的立场之间寻找人为对称。它意味着识别哪些主张有可验证证据支撑，哪些依赖推断，哪些仅靠重复维持。多元性并不消除判断论证层级的需要。', [{w:'simetría',m:'对称'},{w:'inferencia',m:'推断'},{w:'jerarquizar',m:'分层；排序'}], 'no significa + 不定式：不意味着做……。cuáles 引导间接疑问。mediante + 名词：通过……。'),
     readingParagraph('En ese sentido, el contexto no constituye un adorno que pueda añadirse al final de una noticia. Modifica el significado de las cifras, delimita las comparaciones pertinentes y permite reconocer aquello que una narración deja fuera. Sin contexto, incluso un dato correcto puede conducir a una conclusión engañosa.', '从这个意义上说，背景并不是可以在新闻末尾添加的装饰。它改变数据的意义，限定恰当的比较，并让人认识到一种叙述遗漏了什么。没有背景，即使正确的数据也可能导向误导性的结论。', [{w:'delimitar',m:'界定；限定'},{w:'pertinente',m:'恰当的；相关的'},{w:'engañoso/a',m:'误导性的'}], 'que pueda añadirse：关系从句中虚拟式，表示非特指/评价性对象。aquello que：……的那些事物。sin + 名词：没有……。'),
     readingParagraph('Sin embargo, pedir contexto tampoco debe convertirse en una excusa para posponer indefinidamente cualquier juicio. En situaciones de riesgo, es razonable actuar con la mejor información disponible, siempre que se expliciten las incertidumbres y se mantenga abierta la posibilidad de revisar la decisión.', '然而，要求背景也不应变成无限期推迟任何判断的借口。在有风险的情形中，依据现有最佳信息行动是合理的，前提是明确说明不确定性，并保持修订决定的可能。', [{w:'posponer',m:'推迟'},{w:'explicitar',m:'明确说明'},{w:'revisar',m:'修订；复核'}], 'debe convertirse en：不应变成。siempre que + 虚拟式（se expliciten/se mantenga）：只要……。'),
@@ -8125,27 +8221,174 @@ function b2AdvancedParagraphs(){
     readingParagraph('En definitiva, el valor de una lectura informada no reside en alcanzar una objetividad imposible, sino en reducir los errores previsibles y hacer explícitas las razones de nuestras decisiones. Esa práctica, repetida en el tiempo, puede fortalecer una conversación pública menos vulnerable a la simplificación y más abierta a la corrección.', '总之，知情阅读的价值不在于达到不可能的绝对客观，而在于减少可预见的错误，并明确我们作出决定的理由。这种长期重复的实践，能够强化一种更不易被简化影响、也更开放于修正的公共对话。', [{w:'residir en',m:'在于'},{w:'previsible',m:'可预见的'},{w:'fortalecer',m:'加强'}], 'residir en + 不定式：在于做……。más… y más…：比较结构。puede + 不定式表示可能性。')
   ];
 }
+var B1_DAILY_BANK = [
+  { title:'Tecnología útil, decisiones conscientes', minutes:11, paragraphs:b1AdvancedParagraphs()},
+  { title:'Convivencia en espacios compartidos', minutes:11, paragraphs:[
+    readingParagraph('Vivir cerca de otras personas obliga a negociar detalles que, por sí solos, parecen menores. El volumen de la música, los horarios de la lavadora o el orden de la cocina no se resuelven solos: requieren acuerdos explícitos que cambian con el tiempo.','与其他住得近的人共同生活，需要协商一些看似细枝末节的细节。音乐的音量、洗衣机的使用时间或厨房的秩序不会自行解决：它们需要随时间调整的明确协议。',[{w:'negociar',m:'协商'},{w:'volumen',m:'音量'},{w:'acuerdo',m:'协议'}],'obligar a + 不定式：迫使……。por sí solos：单独地。requerir + 名词：需要。'),
+    readingParagraph('Los conflictos más comunes no nacen de malas intenciones, sino de expectativas distintas. Quien creció en una casa donde se cena a las nueve no entiende por qué a las siete ya hay olor a comida. La diferencia no es de principios, sino de costumbre.','最常见的冲突并非源于恶意，而是源于不同的期待。在九点吃晚饭的家庭中长大的人，不理解为何七点已有饭菜香味。差异不在原则，而在习惯。',[{w:'conflicto',m:'冲突'},{w:'expectativa',m:'期待'},{w:'costumbre',m:'习惯'}],'no… sino…：不是……而是……。de + 时间段：在……的时候。no es de… sino de…：不在于……而在于……。'),
+    readingParagraph('Una estrategia útil consiste en hablar antes de que el problema crezca. Esperar a estar molesto convierte una observación ligera en una queja difícil de revertir. Un comentario breve, a tiempo, evita muchas discusiones.','一个有效策略是在问题扩大前沟通。等到情绪变差，会把一句轻描淡写的观察变成难以挽回的抱怨。简短及时的一句话，可以避免很多争论。',[{w:'estrategia',m:'策略'},{w:'revertir',m:'逆转'},{w:'discusión',m:'讨论、争论'}],'consistir en + 不定式：在于做……。antes de que + 虚拟式：在……之前。convertir algo en algo：把……变成……。'),
+    readingParagraph('También ayuda separar el problema de la persona. Decir "el ruido me impide dormir" es más eficaz que "tú siempre pones la música muy alta". La primera frase se centra en el efecto, la segunda en el carácter, y abre una puerta que cuesta cerrar.','把问题与人分开也很有帮助。说"噪音让我睡不着"比"你总是把音乐开得很大"更有效。前者聚焦影响，后者指责性格，会打开一扇难合上的门。',[{w:'separar',m:'分开'},{w:'impedir',m:'阻止'},{w:'carácter',m:'性格'}],'ayudar a + 不定式：帮助做……。más + 形容词 + que：比较级。centrarse en：聚焦于……。'),
+    readingParagraph('Las normas escritas, si existen, deberían ser pocas y claras. Una lista larga de reglas no se lee; una lista corta se recuerda. Lo esencial no es cubrir todos los casos, sino marcar lo más importante: horarios, limpieza, ruido y visitas.','书面规则若存在，应简短而清晰。冗长的规则没人会读；简短的规则会记。关键不是覆盖所有情形，而是标明最重要的：作息、卫生、噪音和访客。',[{w:'norma',m:'规则'},{w:'esencial',m:'本质的'},{w:'limpieza',m:'清洁'}],'si + 陈述式：真实条件。debería + 不定式：委婉建议。lo esencial：本质。'),
+    readingParagraph('Cuando una convivencia funciona, rara vez es por un reglamento. Es porque las personas se han escuchado con regularidad y han ajustado pequeñas prácticas. Esa atención cotidiana es lo que sostiene acuerdos que, sobre el papel, serían frágiles.','当共同生活顺畅时，很少是因为有规章，而是因为大家经常相互倾听并调整小习惯。这种日常关注才是支撑协议的支柱——否则写在纸上，协议会很脆弱。',[{w:'convivencia',m:'共同生活'},{w:'sostener',m:'支撑'},{w:'frágil',m:'脆弱的'}],'funcionar：运行、奏效。rara vez：很少。es porque…：是因为……。'),
+    readingParagraph('Hay quien prefiere hablar solo cuando algo va mal. Esa costumbre suele agotar a la otra parte, que termina sintiéndose útil únicamente como receptora de quejas. Conversar sobre lo que sí funciona también es parte del cuidado común.','有些人只在事情变糟时才说话。这种习惯常让对方感到自己只是抱怨的接收者。谈论进展顺利的事也是共同关怀的一部分。',[{w:'agotar',m:'耗尽'},{w:'receptor',m:'接收者'},{w:'queja',m:'抱怨'}],'soler + 不定式：常常。terminar + 形容词 /gerundio：最终……。también + 动词：也……。'),
+    readingParagraph('Aprender a convivir no significa evitar todo desacuerdo, sino administrarlo. Los desacuerdos bien resueltos enseñan más que los acuerdos permanentes. Permiten revisar qué se ha dado por sentado y qué conviene nombrar.','学会共同生活不是避免一切分歧，而是管理它。被妥善解决的分歧比永久的协议教得更多。它们让人审视哪些是理所当然、哪些值得明说。',[{w:'administrar',m:'管理'},{w:'sentar',m:'坐下、奠定'},{w:'nombrar',m:'命名、说出'}],'significar + 不定式：意味着做……。enseñar + 不定式：教、说明。dar por sentado：视为理所当然。'),
+    readingParagraph('En último término, convivir es un ejercicio de traducción: explicar al otro por qué algo importa sin esperar que lo sepa de antemano. Esa traducción constante es costosa, pero es la base de cualquier espacio común que no se quiebre al primer conflicto.','归根结底，共同生活是一种翻译练习：向对方解释某事为何重要，却不指望他事先知道。这种持续的翻译成本很高，但它是任何"不在第一次冲突就崩溃"的公共空间的根基。',[{w:'ejercicio',m:'练习'},{w:'traducción',m:'翻译'},{w:'quebrar',m:'打破'}],'esperar que + 虚拟式（sepa）：期待……。de antemano：事先。la base de：……的基础。')
+  ]},
+  { title:'El valor de leer despacio', minutes:11, paragraphs:[
+    readingParagraph('Leer despacio es una habilidad que se entrena, no un don que se tiene o no se tiene. La velocidad inicial importa menos que la constancia con la que se vuelve al texto cuando algo no se entiende.','慢读是一种可以训练的能力，而不是天生的天赋。最初的阅读速度不如"看不懂时回到原文"的恒心重要。',[{w:'don',m:'天赋'},{w:'constancia',m:'坚持'},{w:'volver',m:'返回'}],'se entrena：被动自复。menos + 形容词 + que：比较级。cuando + 陈述式：当……时。'),
+    readingParagraph('Una de las primeras tentaciones es traducir palabra por palabra. Esa costumbre no solo consume tiempo, sino que pierde el sentido general del texto. Una mejor estrategia es leer primero el párrafo completo, intentar captar la idea y volver después sobre los detalles.','最初的诱惑之一是逐字翻译。这种习惯不仅耗时，还会丢失文本的整体意思。一个更好的策略是先完整读一遍段落，试着抓住大意，再回过头看细节。',[{w:'tentación',m:'诱惑'},{w:'consumir',m:'消耗'},{w:'captar',m:'抓住、领会'}],'no solo… sino que…：不仅……而且……。primero… después…：先……后……。intentar + 不定式：尝试做……。'),
+    readingParagraph('Subrayar puede ayudar, pero solo si se hace con criterio. Marcar todo equivale a no marcar nada. Es más útil destacar las palabras que cambian el argumento y dejar el resto en silencio, para volver a ellas cuando se necesite.','划线有帮助，但只有有原则时才有用。标记一切等于什么都没标记。突出那些改变论点的词更有用，让其余保持沉默，需要时再回来。',[{w:'subrayar',m:'在下面划线'},{w:'criterio',m:'标准'},{w:'destacar',m:'突出'}],'poder + 不定式：能够……。si + 陈述式：条件。equivaler a：等同于。'),
+    readingParagraph('Otra práctica útil consiste en hacerse preguntas antes de seguir. ¿Qué afirma el autor? ¿Con qué evidencia? ¿Hay algo que no me cuadra? Estas preguntas no requieren una respuesta inmediata; basta con dejarlas abiertas para retomarlas al final.','另一种有用的做法是继续阅读前先自问：作者主张什么？证据是什么？有什么让我不解？这些问题不需要立刻回答，只要保留到最后再回头看即可。',[{w:'afirmar',m:'主张'},{w:'evidencia',m:'证据'},{w:'cuadrar',m:'符合、吻合'}],'consistir en + 不定式：在于做……。antes de + 不定式：在……之前。basta con + 不定式：只需做……。'),
+    readingParagraph('Cuando se lee deprisa por obligación, el texto se vuelve enemigo. Cuando se lee con curiosidad, se vuelve compañía. La diferencia no está en la dificultad del libro, sino en la disposición con la que se abre.','当出于义务快速阅读时，文本会变成敌人。当带着好奇阅读时，它会变成伙伴。区别不在书的难度，而在于打开它的心境。',[{w:'obligación',m:'义务'},{w:'compañía',m:'陪伴'},{w:'disposición',m:'心境'}],'se vuelve + 名词：变成……。no estar en… sino en…：不在于……而在于……。'),
+    readingParagraph('También conviene variar el tipo de lectura. Leer noticias, ficción y ensayo en la misma semana entrena distintos músculos mentales. Las noticias exigen precisión y rapidez; la ficción, imaginación; el ensayo, paciencia.','变换阅读类型也很好。同一周读新闻、小说和散文能训练不同的心智肌肉。新闻要求准确和快速；小说要求想象；散文要求耐心。',[{w:'variar',m:'变化'},{w:'ficción',m:'小说'},{w:'ensayo',m:'散文'}],'conviene + 不定式：值得……。entrenar + 名词：训练。distintos/as + 名词：不同的……。'),
+    readingParagraph('Escribir lo que se ha leído, aunque sea en pocas líneas, fija el aprendizaje. Una nota al margen, un resumen breve o un ejemplo propio basta para pasar de la lectura pasiva a la lectura activa. La memoria agradece ese pequeño esfuerzo.','写下读到的内容，哪怕只有几行，也能巩固学习。边注、简短总结或自己的例子，都足以让阅读从被动变为主动。记忆力会感谢这种小努力。',[{w:'fijar',m:'固定、巩固'},{w:'pasivo/a',m:'被动的'},{w:'activo/a',m:'主动的'}],'aunque + 陈述式：让步。basta para + 不定式：足以……。agradecer + 名词：感谢。'),
+    readingParagraph('En la vida diaria, rara vez hay tiempo para leer todo lo que se quisiera. Por eso, elegir bien es tan importante como leer mucho. Un libro bien elegido y leído despacio enseña más que diez libros hojeados con prisa.','在日常生活中，很少有时间读完所有想读的书。因此，选得好和读得多同样重要。一本选得好、读得慢的书，比十本匆忙翻过的书教得更多。',[{w:'querrer',m:'想要'},{w:'elegir',m:'选择'},{w:'hojear',m:'翻阅'}],'rara vez：很少。por eso：因此。tan + 形容词 + como：同等比较。'),
+    readingParagraph('La lectura lenta, en suma, no es una pérdida de tiempo, sino una forma distinta de usarlo. Permite volver sobre las propias preguntas, reconocer dudas y encontrar matices. Quien aprende a leer así, descubre que cada texto es también una manera de leerse a sí mismo.','总之，慢读不是浪费时间，而是不同的使用方式。它让人回到自己的问题上，承认疑虑，找到细微差别。学会这样读的人，会发现每篇文本也是阅读自己的一种方式。',[{w:'suma',m:'总和'},{w:'matiz',m:'细微差别'},{w:'manera',m:'方式'}],'no es… sino…：不是……而是……。permitir + 不定式：允许……。cada + 名词：每个……。')
+  ]},
+  { title:'El tiempo fuera de la pantalla', minutes:11, paragraphs:[
+    readingParagraph('Pasar tiempo lejos de las pantallas no es una moda ni una renuncia. Es una forma de recuperar la atención dispersa y devolverle al cuerpo un ritmo que las pantallas rara vez ofrecen. Una caminata de veinte minutos sin teléfono ya produce un cambio notable.','远离屏幕既不是潮流也不是放弃。它是恢复分散注意力的方式，让身体重获屏幕很少提供的节奏。散步二十分钟不看手机，已经带来明显的变化。',[{w:'renuncia',m:'放弃'},{w:'disperso/a',m:'分散的'},{w:'ritmo',m:'节奏'}],'ni… ni…：既不……也不……。recuperar + 名词：恢复。rara vez：很少。'),
+    readingParagraph('La primera resistencia aparece en forma de aburrimiento. El cuerpo no está acostumbrado a no recibir estímulos, y protesta. Esa protesta es, paradójicamente, una señal de que el tiempo está siendo bien empleado: la atención vuelve a estar disponible.','最初的抗拒以无聊的形式出现。身体不习惯于没有刺激，便提出抗议。矛盾的是，这种抗议正是时间用得其所的信号：注意力重新变得可用。',[{w:'resistencia',m:'抗拒'},{w:'aburrimiento',m:'无聊'},{w:'paradójicamente',m:'矛盾地'}],'en forma de：以……形式。no estar acostumbrado a + 不定式：不习惯于做……。paradójicamente 是副词，修饰整个句子。'),
+    readingParagraph('Hay un error frecuente: sustituir el tiempo de pantalla por otra pantalla. Leer en una tableta, ver una serie mientras se come o revisar mensajes antes de dormir no son descanso. Cambian el contenido, pero no la postura ante la atención.','有一个常见错误：用另一个屏幕代替屏幕时间。在平板上阅读、边吃饭边追剧、睡前看消息，都不是休息。它们改变了内容，却没有改变注意力的姿态。',[{w:'sustituir',m:'代替'},{w:'serie',m:'剧集'},{w:'postura',m:'姿态'}],'sustituir algo por algo：用某物代替某物。mientras + 陈述式：在……期间。ante + 名词：面对……。'),
+    readingParagraph('Las actividades "aburridas" suelen ser las más reparadoras. Cocinar sin receta, arreglar un cajón desordenado, regar plantas, caminar sin destino. Ninguna de ellas compite con la pantalla en emoción inmediata, pero todas devuelven una sensación de competencia silenciosa.','"无聊"的活动通常最具修复力。没有食谱地做饭、整理凌乱的抽屉、浇植物、漫无目的地散步。这些活动在即时情绪上无法与屏幕竞争，但都让人重获一种沉默的胜任感。',[{w:'reparador/a',m:'修复性的'},{w:'desordenado/a',m:'凌乱的'},{w:'competencia',m:'胜任感'}],'soler + 不定式：常常。ninguna de ellas：它们中没有一个。competir con：与……竞争。'),
+    readingParagraph('Otra ventaja de salir de la pantalla es reencontrarse con la espera. Esperar el autobús, hacer cola, sentarse en un banco a observar. La espera enseña algo que las pantallas eliminan: que el tiempo tiene duración, y que no todo puede acelerarse sin perder algo.','离开屏幕的另一个好处是重新遇到等待。等公交、排队、坐在长椅上观察。等待教会屏幕消除的东西：时间有长度，不是所有事都能加速而不失去什么。',[{w:'reencontrarse',m:'重遇'},{w:'espera',m:'等待'},{w:'duración',m:'持续时间'}],'enseñar + 不定式 / + 名词：教、说明。poder + 不定式：能够。sin + 不定式：在没有……的情况下。'),
+    readingParagraph('No se trata de culpabilizar a quien usa pantallas. Se trata de distinguir entre uso y abuso. El uso consciente tiene un tiempo, un lugar y un final; el abuso se expande hasta llenar vacíos que no sabe nombrar.','这不是要指责使用屏幕的人，而是要区分使用与滥用。有意识的使用有时间、地点和终点；滥用则扩散至填满那些它说不出名字的空缺。',[{w:'culpabilizar',m:'指责'},{w:'abuso',m:'滥用'},{w:'vacío',m:'空缺'}],'tratarse de：关于的是……。distinguir entre A y B：区分 A 与 B。hasta + 不定式：直到……。'),
+    readingParagraph('Volver a leer en papel, escribir a mano, dibujar sin objetivo: todo eso entrena la atención sostenida. No porque sean actividades "mejores", sino porque no premian el salto constante entre estímulos. Recuperan el tiempo lento, que es donde la memoria y la creatividad se reorganizan.','回到纸面阅读、手写、漫无目的地绘画——所有这些都训练持续性注意力。并非因为它们是"更好的"活动，而是因为它们不奖励不断在刺激间跳跃。它们恢复慢时间，记忆和创意正是在那里重组。',[{w:'papel',m:'纸'},{w:'sostenido/a',m:'持续的'},{w:'reorganizar',m:'重组'}],'no porque… sino porque…：并非因为……而是因为……。es donde + 陈述式：那是……的地方。'),
+    readingParagraph('Un compromiso realista puede ser pequeño: una hora al día, o solo las comidas y las primeras horas de la mañana. Lo importante no es la cantidad, sino que ese tiempo no se negocie con la pantalla. La atención, como el músculo, crece con la repetición.','现实的承诺可以很小：每天一小时，或只是用餐时间和清晨。最重要的不是数量，而是这段时间不和屏幕谈判。注意力如同肌肉，在重复中成长。',[{w:'compromiso',m:'承诺'},{w:'músculo',m:'肌肉'},{w:'repetición',m:'重复'}],'poder + 不定式：可以……。lo importante：重要的。crecer con：随……成长。'),
+    readingParagraph('Quien incorpora este tipo de pausas, rara vez nota el cambio de inmediato. Pero, al cabo de unas semanas, descubre que piensa con más claridad, duerme mejor y conversa con más presencia. El tiempo fuera de la pantalla no se pierde: se devuelve.','融入这种停顿的人，很少立刻注意到变化。但几周后会发现，自己思考更清晰、睡得更安稳、交谈更投入。屏幕外的时间没有失去：它被归还。',[{w:'incorporar',m:'融入'},{w:'claridad',m:'清晰'},{w:'presencia',m:'在场感'}],'rara vez：很少。al cabo de + 时间段：在……之后。no… se devuelve：被动自复。')
+  ]}
+];
+
+var B2_DAILY_BANK = [
+  { title:'Informarse sin perder el contexto', minutes:18, paragraphs:b2AdvancedParagraphs()},
+  { title:'La deliberación como método', minutes:18, paragraphs:[
+    readingParagraph('Deliberar no es votar ni negociar. Es un proceso por el cual un grupo examina las razones a favor y en contra de una decisión antes de adoptarla, asumiendo que ninguna postura es la única razonable.','审议不是投票，也不是谈判。它是一个群体在作出决定前审视赞成与反对理由的过程，并承认任何立场都不是唯一合理的。',[{w:'deliberar',m:'审议'},{w:'asumir',m:'承担、假定'},{w:'razonable',m:'合理的'}],'no es… ni…：不是……也不是……。asumiendo que + 陈述式：承认……；动词 antes de + 不定式：在……之前。'),
+    readingParagraph('Esta práctica exige condiciones poco espectaculares: tiempo suficiente, reglas claras de intervención y un moderador que no busque imponer su propia conclusión. Sin estos requisitos, la deliberación se convierte en una coreografía de interrupciones.','这种实践需要不起眼的条件：足够时间、清晰的发言规则，以及一位不寻求强加自身结论的主持人。没有这些要求，审议就变成一场互相打断的表演。',[{w:'espectacular',m:'引人注目的'},{w:'intervención',m:'发言'},{w:'coreografía',m:'编排'}],'exigir + 名词：要求。sin + 名词：没有……。convertirse en：变成……。'),
+    readingParagraph('Uno de los errores más comunes consiste en confundir exposición con argumentación. Exponer es presentar; argumentar es justificar por qué una afirmación se prefiere sobre otras. La diferencia importa: en un grupo deliberativo, una idea no dicha se pierde, pero una idea mal justificada solo se debilita.','最常见的错误之一是把"陈述"和"论证"混为一谈。陈述是呈现；论证是说明为什么某个主张优于其他。区别很重要：在审议群体中，未说的想法会消失，但论证不充分的想法只会变弱。',[{w:'exposición',m:'陈述'},{w:'argumentación',m:'论证'},{w:'preferir',m:'更喜欢'}],'consistir en + 不定式：在于做……。preferir A sobre B：相对 B 更偏好 A。'),
+    readingParagraph('La calidad de la deliberación depende en buena medida de cómo se gestionan los silencios. Hay participantes que necesitan tiempo antes de articular una idea, y otros que hablan para ocupar el espacio. Reconocer ambas dinámicas y no penalizar a ninguna es parte del oficio deliberativo.','审议的质量很大程度上取决于如何管理沉默。有些参与者需要时间才能组织想法，有些则通过说话来占据空间。承认这两种动态而不惩罚任何一方，是审议这门手艺的一部分。',[{w:'articular',m:'清晰表达'},{w:'dinámica',m:'动态'},{w:'penalizar',m:'惩罚'}],'depender de：取决于。antes de + 不定式：在……之前。parte de：……的一部分。'),
+    readingParagraph('Otro riesgo es la polarización afectiva. Cuando las discusiones se vuelven largas, los participantes empiezan a asociar las posiciones con las personas que las defienden. Una crítica a una idea se vive como una crítica a quien la sostiene, y la conversación se personaliza.','另一个风险是情感极化。当讨论变长，参与者开始把立场与提出立场的人关联。对一个想法的批评被理解为对提出者的批评，对话就被个人化。',[{w:'polarización',m:'极化'},{w:'asociar',m:'关联'},{w:'personalizar',m:'使个人化'}],'cuando + 陈述式：当……。empezar a + 不定式：开始做……。se vive como：被动自复，被理解为……。'),
+    readingParagraph('Salir de esa trampa requiere reintroducir la distinción entre el argumento y quien lo formula. Una manera práctica es reformular lo que el otro ha dicho antes de responder, demostrando que se ha comprendido su posición. Este gesto no concede la razón, pero sí el respeto.','走出这个陷阱需要重新引入"论点"和"提出者"的区别。一个实际做法是在回应前先复述对方所说的，证明自己已理解其立场。这一动作并未让出真理，但让出了尊重。',[{w:'trampa',m:'陷阱'},{w:'reformular',m:'重新表述'},{w:'conceder',m:'授予、让步'}],'requerir + 不定式：需要做……。antes de + 不定式：在……之前。conceder la razón：承认对方有理。'),
+    readingParagraph('La deliberación también se beneficia de documentos compartidos. Cuando las ideas se escriben, se vuelven comparables. Es posible revisar argumentos en lugar de repetir intervenciones. La memoria escrita protege contra el sesgo de recordar solo lo último que se dijo.','审议也得益于共享的文档。当想法被写下，它们变得可比。可以回顾论点，而不是重复发言。书面记忆能保护我们免于只记得最后一句话的偏差。',[{w:'beneficiarse',m:'受益'},{w:'sesgo',m:'偏差'},{w:'revisar',m:'审视'}],'beneficiarse de：得益于……。volverse + 形容词：变得……。en lugar de + 不定式：代替做……。'),
+    readingParagraph('Una crítica habitual a la deliberación es su lentitud. Es cierto: una decisión bien deliberada exige más tiempo que una decisión precipitada. Pero también es cierto que las decisiones tomadas sin deliberación suelen pagarse más adelante, cuando se descubren consecuencias no previstas.','对审议的一种常见批评是其缓慢。这确实如此：充分审议的决定比草率的决定需要更多时间。但同样正确的是，缺乏审议的决定往往日后要付出代价——那时才会发现未曾预料的后果。',[{w:'habitual',m:'常见的'},{w:'precipitado/a',m:'草率的'},{w:'consecuencia',m:'后果'}],'es cierto que + 陈述式：诚然……。pagarse：被动自复。cuando + 陈述式：当……。'),
+    readingParagraph('El valor formativo de la deliberación merece tanta atención como su valor decisional. Quien delibera aprende a escuchar, a matizar y a revisar sus propias creencias bajo la presión respetuosa de otras razones. Esa formación cívica no se obtiene solo leyendo; requiere práctica.','审议的教育价值与其决定价值同样值得关注。审议者学会倾听、表达细微差别，并在他人理由的尊重性压力下审视自己的信念。这种公民教育无法只通过阅读获得；它需要实践。',[{w:'formativo/a',m:'教育的'},{w:'matizar',m:'表达细微差别'},{w:'creencia',m:'信念'}],'merecer + 名词：值得。aprender a + 不定式：学会做……。bajo + 名词：在……下。'),
+    readingParagraph('Por último, la deliberación no garantiza acuerdos, y eso no la hace fallida. Su propósito no es eliminar el disenso, sino darle cauce. Cuando se ha deliberado bien, los acuerdos se sostienen y los disensos se entienden; cuando no se ha hecho, cualquier victoria es provisional.','最后，审议不保证达成协议，这并不说明它失败。它的目的不是消除分歧，而是给分歧以渠道。当审议做得好，协议能站住脚，分歧也能被理解；没做好的话，任何胜利都是暂时的。',[{w:'garantizar',m:'保证'},{w:'disenso',m:'异议'},{w:'cauce',m:'渠道'}],'no… la hace fallida：使某事失败。dar cauce a：给……渠道。cuando + 陈述式：当……。'),
+    readingParagraph('En definitiva, deliberar es un oficio colectivo que se enseña deliberando. No hay un manual completo, porque cada grupo y cada asunto introducen matices distintos. Lo que permanece es la idea de que las decisiones importantes se toman mejor cuando se han escuchado, sopesado y articulado las razones de todos los afectados.','总之，审议是一项通过审议来学习的集体手艺。没有完整手册，因为每个群体和每个议题都引入不同的细微差别。持久不变的是：重要决定在听取、权衡并清晰表达所有受影响者的理由之后，作得更好。',[{w:'manual',m:'手册'},{w:'sopesar',m:'权衡'},{w:'afectado/a',m:'受影响的'}],'se enseña + gerundio：通过做某事来学习。lo que permanece：留下的东西。mejor + 形容词：当……时更好。'),
+    readingParagraph('Un grupo que delibera con regularidad no solo decide mejor: también se conoce mejor. Aprende a distinguir entre las personas que sostienen una idea por interés y las que la sostienen por convicción. Esa distinción, una vez visible, cambia el modo en que se conversa y se coopera.','经常审议的群体不仅决定更好，也更了解自己。它学会区分：哪些人是因利益而坚持某个想法，哪些人是因信念而坚持。这一区别一旦可见，会改变对话与合作的方式。',[{w:'interés',m:'利益'},{w:'convicción',m:'信念'},{w:'cooperar',m:'合作'}],'no solo… también…：不仅……也……。aprender a + 不定式：学会做……。el modo en que + 陈述式：……的方式。'),
+    readingParagraph('Por eso, conviene que las instituciones no traten la deliberación como un lujo. La inversión de tiempo y recursos en procesos deliberativos se compensa con decisiones más legítimas, más aceptadas y más duraderas. La prisa, en cambio, deja cicatrices que costarán más que el tiempo ahorrado.','因此，机构不应把审议当作奢侈。在审议过程中投入时间和资源，会得到更合法、更被接受、更持久的决定作为补偿。相反，匆忙会留下代价更高的伤疤。',[{w:'institución',m:'机构'},{w:'legítimo/a',m:'合法的'},{w:'cicatriz',m:'疤痕'}],'tratar algo como algo：把某物当作某物。compensarse con：由……补偿。en cambio：相反。'),
+    readingParagraph('En el plano individual, quien delibera también transforma su relación con la incertidumbre. Ya no necesita tener la respuesta antes de abrir la boca. Aprende que una pregunta bien formulada vale tanto como una conclusión apresurada, y que la honestidad intelectual se demuestra, sobre todo, en lo que se está dispuesto a revisar.','在个人层面，审议者也改变了他与不确定性的关系。他不再需要在开口前就有答案。他学会了一个好问题与草率的结论同样有价值，而智识上的诚实首先体现于他愿意修正什么。',[{w:'incertidumbre',m:'不确定性'},{w:'apresurado/a',m:'草率的'},{w:'revisar',m:'修正'}],'ya no：不再。aprender que + 陈述式：学会……。sobre todo：尤其。')
+  ]},
+  { title:'Memoria, historia y uso público', minutes:18, paragraphs:[
+    readingParagraph('La memoria colectiva no es un archivo neutro. Es una construcción en la que cada sociedad elige qué hechos conservar, cuáles olvidar y bajo qué forma transmitirlos. Esa selección revela tanto el presente desde el que se mira como el pasado al que se refiere.','集体记忆不是中性的档案。它是一种构建，每个社会在其中选择保留哪些事实、遗忘哪些事实、以何种形式传递它们。这种选择既揭示了观察的当下，也揭示了所指的过去。',[{w:'memoria',m:'记忆'},{w:'archivo',m:'档案'},{w:'transmitir',m:'传递'}],'no es…：否定表语。elegir + 不定式：选择做……。tanto… como…：既……又……。'),
+    readingParagraph('Por eso, un mismo episodio puede adquirir significados opuestos según quién lo relate. Lo que para unos es una gesta fundacional, para otros es un trauma. Ninguna de las dos lecturas es "falsa" en sentido absoluto; ambas lo son, parcialmente, y ambas contienen algo de verdad.','因此，同一事件会因叙述者不同而具有相反的含义。对一些人而言是奠基壮举，对另一些人则是创伤。两种解读在绝对意义上都不"假"；它们都部分地失真，又都包含某些真相。',[{w:'episodio',m:'事件'},{w:'gesta',m:'壮举'},{w:'trauma',m:'创伤'}],'según + 陈述式：根据……。lo que para unos…：对一些人来说……。en sentido absoluto：在绝对意义上。'),
+    readingParagraph('El riesgo de la memoria unidireccional es la petrificación. Cuando un relato se oficializa y se repite sin cuestionamiento, se convierte en mito. El mito no es mentira, pero tampoco es historia: es una versión congelada que organiza emociones y lealtades.','单向记忆的风险是固化。当一种叙述被官方化并被不加质疑地重复，它就变成神话。神话不是谎言，但也不是历史：它是一个冻结的版本，组织着情感和忠诚。',[{w:'petrificación',m:'石化'},{w:'oficializar',m:'使官方化'},{w:'lealtad',m:'忠诚'}],'el riesgo de + 名词：……的风险。convertirse en：变成……。ni… ni…：既不……也不……。'),
+    readingParagraph('Una sociedad sana necesita memorias plurales, no contradictorias por capricho, sino diversas por método. La pluralidad no niega los hechos; los pone en perspectiva. Un hecho es un dato; su significado cambia con el marco que se elija para interpretarlo.','健康的社会需要多元记忆——不是出于任性而矛盾，而是因方法而多元。多元不否定事实；它把事实放进视角。事实是数据；它的意义随所选解释框架而变。',[{w:'plural',m:'多元的'},{w:'capricho',m:'任性'},{w:'perspectiva',m:'视角'}],'necesitar + 名词：需要。por + 名词：因为……。cambiar con：随……变化。'),
+    readingParagraph('La educación desempeña un papel decisivo. Cuando se enseña historia como una sucesión de fechas y nombres, se pierde de vista la pregunta más relevante: por qué se eligieron esos hechos y no otros. Una pedagogía crítica de la memoria invita a los estudiantes a leer las fuentes, comparar versiones y argumentar sus propias hipótesis.','教育扮演决定性角色。当历史被教作日期和人名的序列，最关键的问题——为什么是这些事实而非其他——就被忽略了。批判性记忆教育邀请学生阅读原始资料、比较不同版本，并论证自己的假设。',[{w:'sucesión',m:'序列'},{w:'hipótesis',m:'假设'},{w:'pedagogía',m:'教育学'}],'desempeñar un papel：扮演角色。perder de vista：忽视、忽略。invitar a alguien a + 不定式：邀请某人做……。'),
+    readingParagraph('En el espacio público, los monumentos y las conmemoraciones cristalizan una determinada lectura del pasado. Reubicar un monumento no es borrar la historia; es decidir qué valores quieren ser públicos. El debate sobre estos gestos revela más de la sociedad presente que del pasado que pretende revisarse.','在公共空间，纪念碑和纪念活动固化了对过去的某种解读。重新安置纪念碑不是抹去历史，而是决定哪些价值应被公开化。对这些动作的辩论揭示了更多关于当下社会的信息，而非它试图修正的过去。',[{w:'monumento',m:'纪念碑'},{w:'conmemoración',m:'纪念'},{w:'reubicar',m:'重新安置'}],'no es… sino…：不是……而是……。revelar más de… que de…：揭示的关于……比关于……更多。'),
+    readingParagraph('La memoria también se construye con silencios. Lo que no se dice en un currículum escolar, en un museo o en un museo del aire forma parte de la interpretación. Reconocer esos vacíos requiere una sensibilidad particular, que no surge de la repetición sino de la atención a lo omitido.','记忆也由沉默构成。学校课程、博物馆或公共场所未说的内容，也是解释的一部分。承认这些空白需要一种特殊敏感度，它不来自重复，而来自对被忽略之物的关注。',[{w:'currículum',m:'课程'},{w:'omisión',m:'省略'},{w:'omitir',m:'省略'}],'lo que + 陈述式：……的事情。formar parte de：是……的一部分。prestar atención a：关注。'),
+    readingParagraph('Internet ha cambiado profundamente la relación con la memoria. Por un lado, ha democratizado el acceso a archivos antes reservados a especialistas; por otro, ha hecho circular versiones deliberadamente falseadas, que se replican a la velocidad del clic. La tarea de distinguir lo verificable se ha vuelto más difícil y más urgente.','互联网深刻改变了与记忆的关系。一方面，它让过去只对专家开放的档案民主化；另一方面，它让蓄意伪造的版本以点击的速度传播。区分可验证之事的任务变得既困难又紧迫。',[{w:'democratizar',m:'民主化'},{w:'falsear',m:'伪造'},{w:'verificable',m:'可验证的'}],'por un lado… por otro…：一方面……另一方面……。volverse + 形容词：变得……。'),
+    readingParagraph('Una política de la memoria no consiste en imponer un relato, sino en garantizar las condiciones para que varios relatos puedan confrontarse civilmente. Es un trabajo institucional, pero también cotidiano. Cada conversación familiar sobre "lo que pasó" es, en miniatura, una negociación de la memoria.','记忆政策不是强加一种叙述，而是为多种叙述的文明对峙提供条件。这既是制度性工作，也是日常性工作。每次家庭里关于"发生了什么"的对话，都是一次微型的记忆协商。',[{w:'garantizar',m:'保证'},{w:'confrontar',m:'对峙'},{w:'cotidiano/a',m:'日常的'}],'consistir en + 不定式：在于做……。poder + 不定式：能够……。en miniatura：微型地。'),
+    readingParagraph('Cuando se manipula la memoria con fines políticos, el daño no es solo histórico: es cívico. Socava la confianza en las instituciones, distorsiona la deliberación pública y dificulta la resolución de problemas que requieren un diagnóstico común.','当记忆被政治目的操控时，损害不仅是历史性的，也是公民性的。它侵蚀对机构的信任，扭曲公共审议，并让需要共同诊断的问题更难以解决。',[{w:'manipular',m:'操控'},{w:'socavar',m:'侵蚀'},{w:'diagnóstico',m:'诊断'}],'con fines de：为了……目的。no solo… también…：不仅……也……。requerir + 名词：需要。'),
+    readingParagraph('Por eso, una ciudadanía informada debe aprender a leer el pasado con la misma complejidad con la que lee el presente. No para evitar conclusiones, sino para hacerlas mejores. Una memoria crítica no es una memoria insatisfecha: es una memoria que reconoce sus límites y trabaja con ellos.','因此，受过良好教育的公民应该学会以阅读当下同样的复杂性来阅读过去。不是为了避免结论，而是为了让结论更好。批判性记忆不是不满足的记忆：它是承认自身局限并与之共事的记忆。',[{w:'complejidad',m:'复杂性'},{w:'límite',m:'局限'},{w:'insatisfecho/a',m:'不满足的'}],'aprender a + 不定式：学会做……。no para + 不定式… sino para + 不定式：不是为做……而是为做……。'),
+    readingParagraph('El uso público de la historia también tiene una dimensión estética. No solo se recuerda lo que se dice, sino cómo se dice: las imágenes, los gestos, los silencios, los encuadres. Un museo que muestra una foto de manera respetuosa y otro que la usa como espectáculo transmiten memorias muy distintas, aunque la foto sea la misma.','历史的公共使用也有美学维度。人们不仅记住说了什么，还记住怎么说：图像、姿势、沉默、框架。展示同一张照片，一个博物馆以尊重方式，另一个将其用作奇观，二者传递的记忆截然不同。',[{w:'estético/a',m:'美学的'},{w:'encuadre',m:'框架'},{w:'espectáculo',m:'奇观'}],'no solo… sino…：不仅……而且……。cómo se dice：方式（间接疑问）。aunque + 陈述式：已知让步。'),
+    readingParagraph('Esta dimensión estética no es superficial. Las formas importan porque enseñan a mirar. Una sociedad que solo se representa a sí misma en tono épico aprende a esperar gestas; una que solo se representa en tono victimista aprende a esperar redenciones. La pluralidad estética es también pluralidad política.','这一美学维度并非表面。形式很重要，因为它们教会如何看。一个只以英雄史诗方式再现自己的社会，学会了期待壮举；一个只以受害者方式再现自己的社会，学会了期待救赎。美学多元也是政治多元。',[{w:'épico/a',m:'史诗的'},{w:'victimista',m:'受害者心态的'},{w:'redención',m:'救赎'}],'aprender a + 不定式：学会做……。esperar + 名词：期待。a + 不定式：以……方式。'),
+    readingParagraph('Por último, conviene recordar que la memoria cambia con las generaciones. Lo que para los abuelos es central puede ser periférico para los nietos, y viceversa. Esa distancia no es deslealtad, sino el curso natural de una sociedad viva. Honrar la memoria de los mayores no significa repetirla idéntica, sino seguir preguntando con sus mismas preguntas.','最后，应该记住，记忆会随世代变化。对祖辈而言核心的，对孙辈可能边缘，反之亦然。这种距离不是不忠，而是一个活的社会的自然过程。尊敬长辈的记忆并不意味着完全重复它，而是用他们同样的问题继续追问。',[{w:'generación',m:'世代'},{w:'periférico/a',m:'边缘的'},{w:'deslealtad',m:'不忠'}],'lo que… es…：……的事情……。viceversa：反之亦然。significar + 不定式：意味着做……。')
+  ]},
+  { title:'Trabajo, tiempo y sentido', minutes:18, paragraphs:[
+    readingParagraph('El trabajo ocupa una parte sustancial de la vida adulta, pero su significado ha cambiado más rápido que su presencia. Lo que durante siglos fue principalmente esfuerzo físico hoy es, crecientemente, gestión de información, atención y relaciones. Esa transformación no ha sustituido el esfuerzo, pero sí ha cambiado su textura.','工作占据了成年生活的相当部分，但它的意义比它的存在变化得更快。几个世纪以来主要是体力劳动的工作，如今越来越多是信息、注意力和关系的管理。这种转变没有取代努力，却改变了它的质地。',[{w:'sustancial',m:'大量的'},{w:'esfuerzo',m:'努力'},{w:'textura',m:'质地'}],'lo que + 陈述式：……的事情。más + 形容词 + que：比较级。sí ha cambiado：确实已改变（sí 用于强调）。'),
+    readingParagraph('La pregunta por el sentido del trabajo no es nueva, pero se ha intensificado. Cuando el salario cubre las necesidades básicas, surge con fuerza la pregunta: ¿para qué hago esto? Responder no siempre es fácil, y la respuesta cambia a lo largo de la vida.','关于工作意义的问题并不新鲜，但它已经加剧。当工资覆盖了基本需求时，这个问题变得强烈：我为什么做这件事？回答并不总是容易，而且答案会随人生阶段变化。',[{w:'salario',m:'工资'},{w:'necesidad',m:'需求'},{w:'surgir',m:'出现'}],'cuando + 陈述式：当……。cubrir + 名词：覆盖、满足。a lo largo de：在……期间。'),
+    readingParagraph('Una respuesta habitual es la vocación: sentir que el trabajo coincide con un propósito personal. Esa coincidencia es poderosa, pero no siempre posible ni estable. Identificar un solo trabajo como "vocación" puede generar tanta presión como sentido, sobre todo cuando ese trabajo no responde como se esperaba.','一个常见的回答是"天职"：感觉工作与个人目标一致。这种契合是有力的，但并不总是可能或稳定。把一份工作视为"天职"可能产生与意义同等的压力，特别是当那份工作不像预期那样回应时。',[{w:'vocación',m:'天职'},{w:'coincidir',m:'一致'},{w:'propósito',m:'目标'}],'coincidir con：与……一致。tanto… como…：与……同样多。sobre todo：尤其。'),
+    readingParagraph('Otra respuesta es el oficio. Un oficio se construye con práctica: aprender a hacer algo bien, reconocer los problemas típicos, desarrollar un juicio profesional. Quien tiene oficio no necesita justificarse: su trabajo se evalúa por sus resultados y por cómo resuelve los problemas difíciles.','另一个回答是"手艺"。手艺通过实践构建：学会做好一件事，识别典型问题，发展出专业判断。有手艺的人不需要自我辩护：他们的工作通过结果和如何解决困难问题来评估。',[{w:'oficio',m:'手艺'},{w:'juicio',m:'判断'},{w:'justificarse',m:'自我辩护'}],'construir con：用……构建。aprender a + 不定式：学会做……。evaluar por：通过……评估。'),
+    readingParagraph('También está la respuesta del proyecto. Algunas personas encuentran sentido en un objetivo compartido: mejorar un barrio, escribir un libro, construir una organización. El proyecto da dirección, pero suele requerir plazos y aceptar que, cuando se completa, hay que iniciar otro.','还有"项目"这种回答。一些人在共同目标中找到意义：改善一个街区、写一本书、建立一个组织。项目赋予方向，但通常需要截止日期，并接受在完成时必须启动下一个。',[{w:'proyecto',m:'项目'},{w:'plazo',m:'期限'},{w:'completar',m:'完成'}],'encontrar sentido en：在……中找意义。requerir + 名词：需要。cuando + 陈述式：当……。'),
+    readingParagraph('Una cuarta respuesta, menos mencionada, es la disciplina. Hay personas para quienes el sentido del trabajo reside en la rutina misma: en la regularidad, en el dominio progresivo, en la posibilidad de hacer cada día un poco mejor lo que ya se hace. Esa respuesta no es glamurosa, pero sostiene carreras largas.','第四种回答较少被提及：纪律。对一些人来说，工作的意义在于常规本身：规律、渐进掌握、每天把已做的事做得稍好。这种回答并不光鲜，却支撑着漫长的职业生涯。',[{w:'disciplina',m:'纪律'},{w:'glamuroso/a',m:'光鲜的'},{w:'carrera',m:'职业'}],'para quienes：对于那些……的人。residir en：在于。hacer + 形容词 + lo que：让……做……。'),
+    readingParagraph('Cualquiera de estas respuestas puede ser válida. Lo que rara vez funciona es combinar todas en un solo trabajo: ni el sueldo más alto, ni la vocación más clara compensan una cultura organizacional que desoye, que premia la apariencia sobre el fondo o que organiza la disponibilidad como si fuese la única medida del compromiso.','任何一种回答都可以是有效的。很少能奏效的是把全部融合在一份工作里：再高的薪水、再清晰的天职，都无法补偿一种无动于衷、奖励表面而非实质、或把"随时在线"当作唯一承诺度的组织文化。',[{w:'válido/a',m:'有效的'},{w:'desoír',m:'不听'},{w:'disponibilidad',m:'随时可用'}],'ni… ni… compensan：既不……也不……补偿。como si + 虚拟式（fuese）：好像……。la única medida：唯一的衡量。'),
+    readingParagraph('La organización del tiempo es una dimensión poco discutida del sentido. Un trabajo que obliga a reaccionar constantemente deja poco espacio para pensar, y sin tiempo para pensar, la mayoría de las decisiones se vuelven reactivas. Un trabajo que, en cambio, reserva tiempo para la reflexión permite a las personas mejorar sus propios procesos.','时间组织是意义中较少被讨论的维度。一份让人不断反应的工作几乎没有思考空间，而没有思考时间，大部分决定就变成应激反应。相反，一份为反思保留时间的工作，让人们能改善自己的流程。',[{w:'reaccionar',m:'反应'},{w:'reflexión',m:'反思'},{w:'proceso',m:'流程'}],'que + 陈述式 / que + 虚拟式：关系从句。poco espacio：很少空间。en cambio：相反。'),
+    readingParagraph('También importa la pregunta por el reconocimiento. No se trata solo de表扬 económico, sino de ser visto en lo que uno aporta. Un entorno donde las ideas se descartan sin explicación, donde el mérito se atribuye siempre a otros o donde los errores se castigan más que los aciertos se premian, erosiona el sentido más rápido que un mal salario.','承认的问题也很重要。这不仅指经济回报，而是指被看到自己的贡献。一个不解释就丢弃想法、功劳总归他人、错误比成就受更多惩罚的环境，比低工资更快地侵蚀意义。',[{w:'reconocimiento',m:'认可'},{w:'descartar',m:'丢弃'},{w:'erosionar',m:'侵蚀'}],'no se trata de…：不是关于……。se atribuye a：被动语态。más + 形容词 + que：比较级。'),
+    readingParagraph('La posibilidad de aprender es, para muchos, una dimensión central del sentido. Un trabajo que no enseña nada durante años, por muy cómodo que sea, genera una forma particular de cansancio: el agotamiento de quien siente que ya no crece. Por eso, los entornos que ofrecen mentoría, formación y nuevos retos retienen a sus personas durante más tiempo.','对许多人来说，学习可能性是意义的核心维度。一份多年不教任何东西的工作，无论多舒适，都会产生一种特殊的疲倦：感觉不再成长的人的疲惫。因此，提供辅导、培训和新挑战的环境能更长时间留住人。',[{w:'aprendizaje',m:'学习'},{w:'cansancio',m:'疲倦'},{w:'retener',m:'留住'}],'por + 形容词 + que + 虚拟式（sea）：无论多么……；让步从句。generar + 名词：产生。durante + 时间段：在……期间。'),
+    readingParagraph('En el otro extremo, un trabajo que pide demasiado sin dar tiempo para integrar lo aprendido se vuelve agotador de otra manera: el de quien corre sin acumular. El equilibrio no es estático: cambia con la etapa vital, con los recursos disponibles y con el tipo de proyecto.','在另一端，一份不给出整合学习时间而过量要求的工作，以另一种方式令人疲惫：跑动而不积累的疲惫。这种平衡不是静态的：它随人生阶段、可用资源和项目类型而变化。',[{w:'integrar',m:'整合'},{w:'acumular',m:'积累'},{w:'estático/a',m:'静态的'}],'el de + 名词：……的（指代前文）。no es…：否定表语。cambiar con：随……变化。'),
+    readingParagraph('Por último, el trabajo se vive en cuerpo. Pasarse ocho horas frente a una pantalla no es neutro. Las pausas, la postura, la luz, el aire, el movimiento no son lujos: son parte del rendimiento. Ignorarlos tiene costes a corto plazo —fatiga, dolor— y a largo plazo —enfermedades, desgaste profesional—.','最后，工作是在身体中体验的。坐八小时面对屏幕并非中性。休息、姿势、光线、空气、运动不是奢侈，而是表现的一部分。忽视它们会有短期代价（疲劳、疼痛）和长期代价（疾病、职业倦怠）。',[{w:'neutro/a',m:'中性的'},{w:'desgaste',m:'磨损'},{w:'rendimiento',m:'表现'}],'no es…：否定表语。parte de：……的一部分。a corto/largo plazo：短期/长期。'),
+    readingParagraph('Una cultura laboral que entiende el cuerpo entiende también la sostenibilidad. No es necesario elegir entre producir y cuidar: las organizaciones que cuidan a sus equipos suelen producir resultados más sólidos y estables que las que solo buscan el máximo rendimiento inmediato. La diferencia, con el tiempo, se vuelve estructural.','理解身体的劳动文化也理解可持续性。无需在"生产"和"关怀"之间选择：关怀团队的组织通常比只追求短期最高产出的组织产生更扎实稳定的成果。这种差异随着时间会变得结构性。',[{w:'sostenibilidad',m:'可持续性'},{w:'estructural',m:'结构性的'},{w:'sólido/a',m:'扎实的'}],'entender：理解。elegir entre A y B：在 A 与 B 间选择。soler + 不定式：通常。con el tiempo：随着时间。'),
+    readingParagraph('En conjunto, el sentido del trabajo no se encuentra en una sola dimensión, sino en la combinación que cada persona construye. Esa construcción es inestable y exige revisiones periódicas. No es un problema que se resuelva una vez: es un trabajo continuo, parecido al que cada sociedad hace con su propia memoria.','总体而言，工作的意义不在于单一维度，而在于每个人构建的组合。这种构建是不稳定的，需要周期性回顾。它不是一个被解决一次的问题：它是一项持续的工作，类似于每个社会对自己记忆所做的工作。',[{w:'dimensión',m:'维度'},{w:'inestable',m:'不稳定的'},{w:'periódico/a',m:'周期性的'}],'no se encuentra en…：不在于……。sino en：而在于。parecido a：类似于。')
+  ]}
+];
+
+// 把字符串 YYYY-MM-DD 变成 0..N-1 的稳定下标，按候选池大小取模。
+function dailyBankIndex(today, bankSize){
+  var parts=(today||'').split('-').map(function(s){return parseInt(s,10)||0;});
+  // 简单但稳定的日期哈希：年*10000+月*100+日
+  var seed=parts[0]*10000+(parts[1]||0)*100+(parts[2]||0);
+  return ((seed%bankSize)+bankSize)%bankSize;
+}
+
 function dailyTeachingArticles(headlines){
   var today=todayStr(),a1=dailySourceFor('A1',headlines),a2=dailySourceFor('A2',headlines),b1=dailySourceFor('B1',headlines),b2=dailySourceFor('B2',headlines);
-  var basicA1=[readingParagraph('En mi barrio hay una plaza pequeña. Por la mañana, muchas personas caminan por allí. Algunas llevan a sus perros y otras van al trabajo. La plaza tiene bancos, árboles y una fuente.','我住的街区有一个小广场。早上，许多人从那里步行经过。一些人带着狗，另一些人去上班。广场有长椅、树木和一座喷泉。',[{w:'barrio',m:'街区'},{w:'plaza',m:'广场'},{w:'fuente',m:'喷泉'}],'hay + 名词：表示“有、存在”，没有复数变化。ir al trabajo：去上班；por allí：从那里/在那附近。'),readingParagraph('Los vecinos quieren mantener el lugar limpio. Los sábados recogen papeles y riegan las plantas. Después, hablan un poco y toman café juntos. Es una actividad sencilla, pero todos participan con alegría.','邻居们想保持这个地方整洁。周六他们捡纸屑并给植物浇水。之后，他们聊一会儿，一起喝咖啡。这是一项简单的活动，但大家都开心地参加。',[{w:'vecino',m:'邻居'},{w:'mantener',m:'保持'},{w:'recoger',m:'捡起；收集'}],'querer + 不定式：想要做某事。第三人称复数现在时：recogen、riegan、hablan。pero 用来连接转折信息。'),readingParagraph('Cuidar un espacio común ayuda a conocer mejor a otras personas. Cuando la plaza está limpia, las familias pueden descansar y los niños pueden jugar. Un lugar agradable también cambia la vida diaria.','照顾公共空间有助于更好地认识其他人。当广场干净时，家庭可以休息，孩子们可以玩耍。一个宜人的地方也会改变日常生活。',[{w:'cuidar',m:'照顾；维护'},{w:'común',m:'共同的；公共的'},{w:'agradable',m:'宜人的'}],'不定式作主语：Cuidar… ayuda…。cuando + 陈述式用于一般事实；poder + 不定式表示“能够”。')];
-  var basicA2=[readingParagraph('Muchas personas quieren aprender algo nuevo, pero creen que necesitan mucho tiempo. Sin embargo, una rutina corta puede ser más útil que un plan perfecto que nunca empieza. Diez minutos al día ya permiten avanzar.','许多人想学习新东西，但认为自己需要很多时间。然而，短暂的日常习惯可能比一个永远不开始的完美计划更有用。每天十分钟已经能让人进步。',[{w:'rutina',m:'日常习惯'},{w:'avanzar',m:'进步'},{w:'sin embargo',m:'然而'}],'querer + 不定式表达愿望。más + 形容词 + que：比较级。ya + 动词表示“已经”。'),readingParagraph('Una estudiante empezó a escuchar un pódcast durante el viaje al instituto. Al principio no entendía todas las palabras, pero anotaba las ideas principales. Después de varias semanas, podía seguir conversaciones más largas.','一名学生开始在去学校的路上听播客。起初她并不理解所有单词，但会记录主要观点。几周后，她能听懂更长的对话。',[{w:'al principio',m:'起初'},{w:'anotar',m:'记下'},{w:'seguir',m:'跟上；听懂'}],'empezar a + 不定式：开始做。imperfecto（entendía/anotaba）用于描述过去习惯或背景；poder 在过去未完成时为 podía。'),readingParagraph('El objetivo no es estudiar sin descansar. También es importante dormir bien y celebrar los progresos. Si una persona repite una actividad con calma, es más fácil convertirla en una costumbre duradera.','目标不是不停地学习。睡好觉并庆祝进步也很重要。如果一个人平静地重复一项活动，更容易把它变成持久的习惯。',[{w:'objetivo',m:'目标'},{w:'progreso',m:'进步'},{w:'duradero/a',m:'持久的'}],'es importante + 不定式：评价某行为。Si + 现在时，es + 形容词：描述真实、一般条件。convertir… en…：把……变成……。')];
+  // 按 today 的日期种子选不同候选，连续多日会自然轮换
+  var a1Pick=A1_DAILY_BANK[dailyBankIndex(today,A1_DAILY_BANK.length)];
+  var a2Pick=A2_DAILY_BANK[dailyBankIndex(today,A2_DAILY_BANK.length)];
+  var b1Pick=B1_DAILY_BANK[dailyBankIndex(today,B1_DAILY_BANK.length)];
+  var b2Pick=B2_DAILY_BANK[dailyBankIndex(today,B2_DAILY_BANK.length)];
   return [
-    {id:readingIdForToday('A1'),level:'A1',date:today,source:a1.source,sourceTitle:a1.sourceTitle,url:a1.url,cat:a1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:3,title:'Un barrio que cuida sus espacios',paragraphs:basicA1},
-    {id:readingIdForToday('A2'),level:'A2',date:today,source:a2.source,sourceTitle:a2.sourceTitle,url:a2.url,cat:a2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:4,title:'Aprender con pequeños hábitos',paragraphs:basicA2},
-    {id:readingIdForToday('B1'),level:'B1',date:today,source:b1.source,sourceTitle:b1.sourceTitle,url:b1.url,cat:b1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:11,title:'Tecnología útil, decisiones conscientes',paragraphs:b1AdvancedParagraphs()},
-    {id:readingIdForToday('B2'),level:'B2',date:today,source:b2.source,sourceTitle:b2.sourceTitle,url:b2.url,cat:b2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:18,title:'Informarse sin perder el contexto',paragraphs:b2AdvancedParagraphs()}
+    {id:readingIdForToday('A1'),level:'A1',date:today,source:a1.source,sourceTitle:a1.sourceTitle,url:a1.url,cat:a1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:a1Pick.minutes,title:a1Pick.title,paragraphs:a1Pick.paragraphs},
+    {id:readingIdForToday('A2'),level:'A2',date:today,source:a2.source,sourceTitle:a2.sourceTitle,url:a2.url,cat:a2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:a2Pick.minutes,title:a2Pick.title,paragraphs:a2Pick.paragraphs},
+    {id:readingIdForToday('B1'),level:'B1',date:today,source:b1.source,sourceTitle:b1.sourceTitle,url:b1.url,cat:b1.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:b1Pick.minutes,title:b1Pick.title,paragraphs:b1Pick.paragraphs},
+    {id:readingIdForToday('B2'),level:'B2',date:today,source:b2.source,sourceTitle:b2.sourceTitle,url:b2.url,cat:b2.cat,isDaily:true,contentMode:'pedagogical-adaptation',readingMinutes:b2Pick.minutes,title:b2Pick.title,paragraphs:b2Pick.paragraphs}
   ];
 }
 async function fetchReadingHeadlines(){var feeds=[{source:'BBC Mundo',url:'https://feeds.bbci.co.uk/mundo/rss.xml'},{source:'El País',url:'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada'}],items=[];for(var i=0;i<feeds.length;i++){try{var api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feeds[i].url),resp=await fetch(api);if(!resp.ok)continue;var json=await resp.json();(json.items||[]).slice(0,4).forEach(function(item){if(item&&item.title)items.push({source:feeds[i].source,title:decodeArticleHtml(item.title),url:item.link||''});});}catch(e){}}var mapped={};READING_DAILY_LEVELS.forEach(function(level,index){if(items[index])mapped[level]=items[index];});return mapped;}
+// ===== 外刊阅读：联网更新按钮状态管理 =====
+function setReadingRefreshLoading(isLoading){
+  var btn=document.getElementById('rdRefreshBtn');
+  if(!btn)return;
+  if(isLoading){
+    btn.classList.add('loading');
+    btn.disabled=true;
+    var txt=btn.querySelector('.rd-refresh-text');
+    if(txt)txt.textContent='更新中…';
+  } else {
+    btn.classList.remove('loading');
+    btn.disabled=false;
+    var txt2=btn.querySelector('.rd-refresh-text');
+    if(txt2)txt2.textContent='联网更新今日4篇';
+  }
+}
 async function refreshReadingArticles(silent){
-  if(_fetchingArticles)return !silent&&toast('正在更新中，请稍候...','warn');_fetchingArticles=true;if(!silent)toast('正在联网更新今日四级双语精读包...','ok');
-  try{var headlines=await fetchReadingHeadlines(),articles=dailyTeachingArticles(headlines),complete=READING_DAILY_LEVELS.every(function(level){return articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});if(!complete)throw new Error('daily package incomplete');var cache=readDailyBilingualCache();
+  if(_fetchingArticles)return !silent&&toast('正在更新中，请稍候...','warn');
+  _fetchingArticles=true;
+  if(!silent){
+    setReadingRefreshLoading(true);
+    toast('正在联网更新今日四级双语精读包...','ok');
+  }
+  try{
+    var headlines=await fetchReadingHeadlines();
+    var articles=dailyTeachingArticles(headlines);
+    var complete=READING_DAILY_LEVELS.every(function(level){return articles.some(function(a){return a.level===level&&completeBilingualArticle(a);});});
+    if(!complete)throw new Error('daily package incomplete');
+    var cache=readDailyBilingualCache();
     // 同一天只更新联网选题元数据；保留已有文章主体，防止刷新导致学习内容或进度对应文章消失。
-    var old=cache[todayStr()];if(old&&Array.isArray(old.articles)){articles=articles.map(function(next){var previous=old.articles.find(function(a){return a.id===next.id;});if(previous&&completeBilingualArticle(previous)){previous.source=next.source;previous.sourceTitle=next.sourceTitle;previous.url=next.url;return previous;}return next;});}
-    cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};writeDailyBilingualCache(cache);if(!silent)toast('已更新今日4篇；历史精读已完整保留','ok');
-  }  catch(e){var cache=readDailyBilingualCache();if(!cache[todayStr()]){cache[todayStr()]={updatedAt:new Date().toISOString(),articles:dailyTeachingArticles({})};writeDailyBilingualCache(cache);}if(!silent)toast('新闻源暂不可用，已保留所有历史精读','warn');}
-  finally{
+    var old=cache[todayStr()];
+    if(old&&Array.isArray(old.articles)){
+      articles=articles.map(function(next){
+        var previous=old.articles.find(function(a){return a.id===next.id;});
+        if(previous&&completeBilingualArticle(previous)){
+          previous.source=next.source;
+          previous.sourceTitle=next.sourceTitle;
+          previous.url=next.url;
+          return previous;
+        }
+        return next;
+      });
+    }
+    cache[todayStr()]={updatedAt:new Date().toISOString(),articles:articles};
+    writeDailyBilingualCache(cache);
+    if(!silent)toast('已更新今日4篇；历史精读已完整保留','ok');
+  } catch(e){
+    var cache=readDailyBilingualCache();
+    if(!cache[todayStr()]){
+      cache[todayStr()]={updatedAt:new Date().toISOString(),articles:dailyTeachingArticles({})};
+      writeDailyBilingualCache(cache);
+    }
+    if(!silent)toast('新闻源暂不可用，已保留所有历史精读','warn');
+  } finally {
     _fetchingArticles=false;
+    if(!silent)setReadingRefreshLoading(false);
     // 仅当当前确实在阅读页且没有打开文章详情时才重渲染；否则会打断阅读和答题。
     if(typeof currentPage!=='undefined'&&currentPage==='reading'&&!currentReadingArticle){
       renderMain();
@@ -8369,7 +8612,7 @@ function renderReading(){
   // Update info
   const yesterday = new Date(todayStr()); yesterday.setDate(yesterday.getDate()-1);
   const yStr = yesterday.toISOString().slice(0,10);
-  const updateInfo = `<div class="rd-update-info">🔄 每日 A1 / A2 / B1 / B2 各 1 篇 · 每段均含西语原文、中文翻译、重点词汇与语法解析 · 来源选题：BBC Mundo、El País | <button class="btn sm ol" onclick="refreshReadingArticles()" style="font-size:10px;padding:3px 8px">📡 联网更新今日4篇</button></div>`;
+  const updateInfo = `<div class="rd-update-info">🔄 每日 A1 / A2 / B1 / B2 各 1 篇 · 每段均含西语原文、中文翻译、重点词汇与语法解析 · 来源选题：BBC Mundo、El País | <button id="rdRefreshBtn" class="btn sm ol" onclick="refreshReadingArticles()" style="font-size:10px;padding:3px 8px"><span class="rd-refresh-icon" aria-hidden="true">📡</span><span class="rd-refresh-text">联网更新今日4篇</span></button></div>`;
 
   // If an article is selected, show it
   if(currentReadingArticle){
@@ -8433,12 +8676,17 @@ function renderReading(){
       const prog = ST.readingProgress[a.id] || {};
       const cat = guessCat(a);
       const isUnreadYesterday = !prog.read && a.date === yStr;
+      // 跨日折叠信息：同质内容曾在历史 N 天出现过，避免用户误以为系统"重复推送"
+      const merged = a.mergedFromDates && a.mergedFromDates.length
+        ? `<div class="rd-merged-note" style="font-size:10px;color:var(--ok);margin-top:4px;line-height:1.3">📅 同一内容曾在 ${a.mergedFromDates.length} 天前出现：${esc(a.mergedFromDates.slice(0,3).join('、'))}${a.mergedFromDates.length>3?' 等':''}</div>`
+        : '';
       cards += `<div class="rd-card ${prog.read?'read':''}"><button type="button" onclick="showReadingArticle('${a.id}')" aria-label="打开${esc(a.title)}">
         <h5>${esc(a.title)} ${isUnreadYesterday?'<span class="unread-badge">📌 未读</span>':''}</h5>
         <div class="meta">
           <span class="article-cat-tag" style="background:${catColors[cat]||'#888'};color:#fff;margin-right:4px">${cat}</span>
           <span class="src">${esc(a.source)}</span> · ${a.level} · ${a.date} · ${articleReadingMeta(a)} · ${a.paragraphs.length}段${a.isHistoricalArchive?' · <span class="tm tk">历史归档</span>':''}
         </div>
+        ${merged}
       </button>${a.url?`<a href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" class="rd-source-link" title="查看原文" onclick="event.stopPropagation()" style="font-size:10px;color:var(--soft);text-decoration:none;margin-left:8px;padding:2px 6px;border:1px solid var(--line);border-radius:4px;white-space:nowrap">🔗 原文</a>`:''}</div>`;
     });
   }
@@ -8482,62 +8730,141 @@ function generateReadingQuiz(art){
 
   if(paras.length < 1) return '';
 
+  // 把段落 es 截成短句（按 . ! ? 切分），取第 1 句作 evidence 引文
+  function firstSentence(s){
+    if(!s) return '';
+    var m = s.match(/[^.!?¿¡]+[.!?]+/);
+    return m ? m[0].trim() : s.slice(0, 90).trim();
+  }
+  // 中文 zh 也截短句（按 。！？切分）
+  function firstZhSentence(s){
+    if(!s) return '';
+    var m = s.match(/[^。！？!?]+[。！？!?]/);
+    return m ? m[0].trim() : s.slice(0, 40).trim();
+  }
+  function truncate(s, n){
+    if(!s) return '';
+    return s.length>n ? s.slice(0,n)+'…' : s;
+  }
+  function paragraphSnippet(p, n){
+    return truncate((p&&p.es)||'', n||100);
+  }
+  function paragraphSnippetZh(p, n){
+    return truncate((p&&p.zh)||'', n||60);
+  }
+  // 找出以某词开头的首句，引文才能定位
+  function findSentenceWith(word, source){
+    if(!word||!source) return '';
+    var re = new RegExp('[^.!?¿¡]*\\b'+word.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b[^.!?¿¡]*[.!?]+');
+    var m = source.match(re);
+    return m ? m[0].trim() : '';
+  }
+
   var questions = [];
-  var esWords = allText.split(/\s+/).filter(function(w){return w.length>3;});
-  var zhSegments = allZH.split(/[。，；！？]/).filter(function(s){return s.trim().length>6;});
 
-  // Q1: source/title verification. Unlike a guessed pronoun question, this is valid for
-  // both curated articles and short external RSS summaries.
+  // Q1: 主题——基于标题 + 首段内容定制
+  var leadPara = paras[0] || {};
+  var leadSentenceEs = firstSentence(leadPara.es);
+  var leadSentenceZh = firstZhSentence(leadPara.zh);
   questions.push({
-    type: 'Tema', ans:0,
-    q: 'Según el título y el texto, ¿de qué trata principalmente el artículo?',
-    opts: [art.title||'El tema central del artículo', 'Un viaje personal que no aparece en el texto', 'Un anuncio sin relación con la noticia', 'Un hecho histórico que el texto no menciona'],
-    exp: '正确选项由标题与正文共同支持；标题是定位文章主题的重要线索。',
-    exp_es: 'La opción correcta está respaldada por el título y el texto; el título es una pista fundamental para identificar el tema.'
+    type: 'Tema',
+    ans: 0,
+    q: 'Según el título «'+esc(art.title||'')+'» y el primer párrafo, ¿de qué trata principalmente el artículo?',
+    opts: [
+      (art.title||'El tema central')+' — '+truncate(leadSentenceEs, 60),
+      'Un tema que no se menciona en el primer párrafo ("'+truncate(leadSentenceEs,40)+'").',
+      'Un detalle secundario que aparece solo al final del artículo.',
+      'Una opinión personal del autor que el texto no desarrolla.'
+    ],
+    exp: '答案（A）由标题「'+esc(art.title||'')+'」和首段内容共同支持。首段「'+truncate(leadSentenceZh,40)+'」是定位主题的关键证据。',
+    exp_es: 'La respuesta correcta está respaldada por el título «'+esc(art.title||'')+'» y el primer párrafo. La pista clave es: "'+truncate(leadSentenceEs,80)+'".'
   });
 
-  // Q2: 内容理解 - based on actual paragraph content
-  var detailPara = paras[Math.floor(paras.length*0.5)] || paras[0];
-  var detailZH = detailPara.zh ? detailPara.zh.slice(0,35) : (zhSegments[0]||'原文中的描述');
-  var oppositeZH = zhSegments.length>=2 ? zhSegments[1].slice(0,35) : '与原文相反的内容';
+  // Q2: 信息定位——基于"中段段落"真实内容定制
+  var detailIdx = Math.max(1, Math.floor(paras.length*0.5));
+  var detailPara = paras[detailIdx] || paras[0];
+  var detailSentenceEs = firstSentence(detailPara.es);
+  var detailSentenceZh = firstZhSentence(detailPara.zh);
+  // 干扰项：从另一段取一句，作为"无中生有"
+  var otherPara = paras[(detailIdx+1) % paras.length] || paras[0];
+  var otherSentenceEs = firstSentence(otherPara.es);
   questions.push({
-    type: 'Información explícita', ans:0,
-    q: 'Según el texto, ¿cuál de las siguientes afirmaciones es correcta?',
-    opts: [detailPara.es||'La información que aparece de forma explícita en el texto', 'Una afirmación que contradice el segundo párrafo', 'Un detalle que no se menciona en el artículo', 'Una opinión que el autor no sostiene'],
-    exp: '正确选项可在原文中直接定位。答题时应逐项核对选项与段落信息是否一致。',
-    exp_es: 'La opción correcta puede localizarse directamente en el texto. Conviene contrastar cada opción con la información del párrafo.'
+    type: 'Información explícita',
+    ans: 0,
+    q: 'Según el artículo, ¿cuál de las siguientes afirmaciones aparece de forma explícita en el texto?',
+    opts: [
+      truncate(detailSentenceEs, 110),
+      'Una idea contraria a lo que dice el párrafo: "'+truncate(otherSentenceEs,60)+'".',
+      'Un dato que el artículo no menciona en ningún párrafo.',
+      'Una opinión personal del autor que no aparece en el texto.'
+    ],
+    exp: '答案（A）可在第 '+(detailIdx+1)+' 段直接定位：「'+truncate(detailSentenceZh,50)+'」。干扰项（B）来自其他段落，偷换了语义。',
+    exp_es: 'La respuesta correcta puede localizarse en el párrafo '+(detailIdx+1)+': "'+truncate(detailSentenceEs,90)+'". Los distractores mezclan información de otros párrafos.'
   });
 
-  // Q3: 词汇含义 - use actual vocab from article
+  // Q3: 词汇策略——完全去掉 Math.random，按词表顺序取，按文章内容定制
   if(allVocab.length>0){
-    var v = allVocab[Math.floor(Math.random()*allVocab.length)];
+    // 用稳定索引：articleId 哈希 → vocab 位置
+    var idx = 0;
+    for(var i=0;i<art.id.length;i++){ idx = (idx*31 + art.id.charCodeAt(i)) & 0x7fffffff; }
+    var v = allVocab[idx % allVocab.length];
+    var vocabSentence = findSentenceWith(v.w, allText) || paragraphSnippet(detailPara, 110);
+    // 干扰词：从同一文章选另外两个不同词
+    var distractors = [];
+    for(var k=1;k<allVocab.length && distractors.length<2;k++){
+      var cand = allVocab[(idx+k) % allVocab.length];
+      if(cand && cand.w && cand.w!==v.w && cand.m!==v.m) distractors.push(cand);
+    }
+    while(distractors.length<2){
+      distractors.push({w:'eliminar', m:'删除'},{w:'suponer', m:'假设'});
+      distractors = distractors.slice(0,2);
+    }
     questions.push({
-      type: 'Estrategia de vocabulario', ans:0,
-      q: 'Si no conoces "'+esc(v.w)+'", ¿qué deberías hacer antes de consultar un diccionario?',
-      opts: ['Relacionar la palabra con la idea de la oración y los conectores cercanos.', 'Eliminar el párrafo y responder sin volver al texto.', 'Escoger la primera traducción que recuerdes, aunque contradiga el contexto.', 'Suponer que la palabra tiene siempre el mismo sentido en cualquier situación.'],
-      exp: '该题考查词汇推断策略：先依据句子主题、逻辑连接词和上下文缩小词义范围，再查词典确认。',
-      exp_es: 'La estrategia adecuada es inferir el sentido a partir del tema de la oración, los conectores y el contexto antes de confirmar en el diccionario.'
+      type: 'Estrategia de vocabulario',
+      ans: 0,
+      q: 'En esta frase del artículo —"'+truncate(vocabSentence, 100)+'"—, ¿cuál es el significado más probable de «'+esc(v.w)+'» en su contexto?',
+      opts: [
+        esc(v.m||'在该句语境下的核心含义'),
+        esc(distractors[0].m||'其他常见含义'),
+        esc(distractors[1].m||'不相关含义'),
+        'Es un sinónimo de un adverbio de frecuencia, sin relación con el tema.'
+      ],
+      exp: '「'+esc(v.w)+'」在本段语境中的意思是 "'+esc(v.m)+'"。定位证据：第 '+(detailIdx+1)+' 段「'+truncate(detailSentenceZh,40)+'」。先结合句子主题和上下文判断，不要立刻查词典。',
+      exp_es: 'En el contexto de este artículo, «'+esc(v.w)+'» significa "'+esc(v.m)+'". Evidencia: "'+truncate(detailSentenceEs,90)+'". Conviene inferir el sentido por el tema de la oración y los conectores antes de consultar el diccionario.'
     });
-  } else if(esWords.length>3){
-    var ew = esWords[Math.floor(esWords.length*0.4)] || esWords[0];
+  } else if(allText.length>10){
+    // 兜底：如果文章真的没有 vocab，截一段让 Q3 仍可用
+    var snippet = paragraphSnippet(detailPara, 110);
     questions.push({
-      type: 'Inferencia léxica', ans:0,
-      q: 'Por el contexto, ¿cuál es la mejor estrategia para interpretar "'+esc(ew)+'"?',
-      opts: ['Relacionarlo con la idea principal de la oración donde aparece.', 'Ignorar por completo el párrafo en el que aparece.', 'Elegir un significado al azar sin volver al texto.', 'Suponer que siempre tiene el mismo sentido fuera de contexto.'],
-      exp: '该题考查策略：在无法立刻翻译时，应先从句子主题和上下文推断词义。',
-      exp_es: 'La estrategia adecuada es inferir el sentido a partir del tema de la oración y del contexto inmediato.'
+      type: 'Inferencia léxica',
+      ans: 0,
+      q: 'En la frase —"'+truncate(snippet,100)+'"—, ¿qué estrategia es más adecuada si no conoces alguna palabra clave?',
+      opts: [
+        'Relacionar la palabra desconocida con la idea principal de la oración y los conectores.',
+        'Saltar el párrafo entero y contestar sin volver al texto.',
+        'Elegir un significado al azar sin leer el contexto.',
+        'Suponer que la palabra tiene siempre el mismo sentido.'
+      ],
+      exp: '在陌生词时，先依据句子主题、连接词和上下文缩小词义范围，再查词典确认。这是最稳的阅读策略。',
+      exp_es: 'La estrategia adecuada es inferir el sentido a partir del tema de la oración, los conectores y el contexto antes de confirmar en el diccionario.'
     });
   }
 
-  // Q4: idea principal, sin opciones chinas
-  var mainIdea = art.title||'El tema central presentado en el texto';
-  var subTopic = paras.length>=2 ? (paras[1].es||'Un detalle secundario del artículo') : 'Un detalle secundario del artículo';
+  // Q4: 主旨——按标题 + 第一段非首句内容定制
+  var subPara = paras.length>=2 ? paras[1] : paras[0];
+  var subSentenceEs = firstSentence(subPara.es);
   questions.push({
-    type: 'Idea principal', ans:0,
-    q: '¿Cuál es la idea principal de este artículo?',
-    opts: [mainIdea, subTopic, 'Una crítica que el autor no desarrolla', 'Una experiencia personal ajena al tema'],
-    exp: '标题与首段通常揭示主旨；需要区分文章中心论点与某一段的细节。',
-    exp_es: 'El título y el primer párrafo suelen revelar la idea principal; hay que distinguir la tesis central de un detalle secundario.'
+    type: 'Idea principal',
+    ans: 0,
+    q: '¿Cuál es la idea principal del artículo?',
+    opts: [
+      (art.title||'El tema central')+' — '+truncate(leadSentenceEs, 60),
+      truncate(subSentenceEs, 100),
+      'Una crítica al autor que el texto no formula explícitamente.',
+      'Una experiencia personal ajena al tema principal.'
+    ],
+    exp: '标题「'+esc(art.title||'')+'」+ 首段「'+truncate(leadSentenceZh,40)+'」揭示主旨。干扰项（B）是第二段的细节描述，不是中心论点。',
+    exp_es: 'El título «'+esc(art.title||'')+'» y el primer párrafo —"'+truncate(leadSentenceEs,80)+'"— revelan la idea principal. El distractor (B) es un detalle del segundo párrafo, no la tesis central.'
   });
 
   // 持久化缓存：下次渲染同一文章时复用这套题目，不再重新生成（修复 bug 4）
