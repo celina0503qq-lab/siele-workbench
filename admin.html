@@ -1688,10 +1688,10 @@ async function renderAdminUsers(){
         actions='<span style="color:var(--soft);font-size:11px">管理员账户</span>';
       }else{
         if(isActive){
-          actions='<button class="btn xs dgr" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\'disabled\')">停用</button> '
+          actions='<button class="btn xs dgr" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\'disabled\')">停用</button> '
             +'<button class="btn xs gh" onclick="adminRevokeTokens(\''+esc(u.uid)+'\',\''+esc(u.username)+'\')">撤销令牌</button>';
         }else{
-          actions='<button class="btn xs t" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\'active\')">启用</button>';
+          actions='<button class="btn xs t" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\'active\')">启用</button>';
         }
       }
       return '<tr>'
@@ -1749,7 +1749,7 @@ function broadcastUserStatusChange(uid, username, status){
     }
   }catch(e){}
 }
-async function adminToggleUserStatus(uid,status){
+async function adminToggleUserStatus(uid,username,status){
   var label=status==='disabled'?'停用':'启用';
   var msg=status==='disabled'
     ?'确定停用该用户账号？\n\n停用后该用户将立即被强制退出（即便正在使用中），且无法重新登录。其本地学习数据、第三方云同步（如已配置）会完整保留。'
@@ -1761,18 +1761,9 @@ async function adminToggleUserStatus(uid,status){
     if(!result.ok)throw new Error(cloudAuthMessage(result.code));
     toast('已'+label+'用户账号','ok');
     renderAdminUsers();
-    // 找出 username 用于广播
-    try{
-      var users=lsGet(LSU,{});
-      var uname=null;
-      for(var k in users){if(users[k]&&users[k].uid===uid){uname=k;break;}}
-      // 也尝试从当前 adminListUsers 缓存中找
-      if(!uname){
-        var list=document.querySelectorAll('[data-uid="'+uid+'"]');
-        if(list.length) uname=list[0].getAttribute('data-username')||null;
-      }
-      broadcastUserStatusChange(uid, uname, status);
-    }catch(e){console.warn('broadcast user status change failed',e);}
+    // 广播状态变更。username 直接由操作按钮传入（云用户不存在于本地 swa_users_v1），
+    // 主工作台用 username 匹配当前登录用户后立即踢出。
+    broadcastUserStatusChange(uid, username, status);
   }catch(err){
     toast(label+'失败：'+(err.message||err),'err');
   }
@@ -1901,7 +1892,28 @@ async function transferIn(code){
   window.addEventListener('online',()=>{if(DB&&DB.syncCfg){toast('网络已恢复，正在同步…','info');syncNow(true);}});
   // 主工作台登录框透传的云端凭据：仍由本页 doLogin 调用 CloudBase，成功后自动关闭 iframe 回到主工作台。
   window.addEventListener('message',function(ev){
-    if(ev.origin!==location.origin||!ev.data||ev.data.type!=='siele-cloud-login')return;
+    if(ev.origin!==location.origin||!ev.data)return;
+    // 主工作台心跳：请求检查某 sessionToken 对应用户是否仍 active（被停用则踢出）。
+    if(ev.data.type==='siele-cloud-check-status'){
+      (async function(){
+        try{
+          var st=String(ev.data.sessionToken||'');
+          var app=await window.__sieleCloudBaseReady;
+          if(!app || !app.callFunction)throw new Error('SDK_UNREADY');
+          var res=await app.callFunction({name:'siele-auth',data:{action:'checkStatus',sessionToken:st}});
+          var p=res&&res.result!==undefined?res.result:res;
+          if(window.parent&&window.parent!==window){
+            window.parent.postMessage({type:'siele-cloud-check-status-result',reqId:ev.data.reqId,ok:!!(p&&p.ok),code:(p&&p.code)||'ERROR'},location.origin);
+          }
+        }catch(e){
+          if(window.parent&&window.parent!==window){
+            window.parent.postMessage({type:'siele-cloud-check-status-result',reqId:ev.data.reqId,ok:false,code:'NETWORK_ERROR'},location.origin);
+          }
+        }
+      })();
+      return;
+    }
+    if(ev.data.type!=='siele-cloud-login')return;
     authTab('login');
     doLogin(null,{username:ev.data.username,password:ev.data.password});
   });

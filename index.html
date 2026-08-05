@@ -9467,8 +9467,21 @@ function handleCloudKick(message){
 
 // 心跳：每 60 秒主动 ping 云端确认当前用户仍处于 active 状态。
 // 这样即使错过了 admin 的 broadcast（网络中断、BroadcastChannel 不可用等），
-// 也会在下次心跳时被发现并踢出。timeout 30s 拿不到响应就当作正常。
+// 也会在下次心跳时被发现并踢出。timeout 15s 拿不到响应就当作正常。
+// 注意：主工作台自身不加载 CloudBase SDK，云函数调用必须经由 admin iframe 的 callFunction
+// 转发。若 iframe 尚未打开，则临时打开一个隐藏 iframe 完成心跳后再关闭。
 var _wbStatusPingTimer=null;
+var _wbStatusPingFrame=null;
+function _wbStatusFrameReady(cb){
+  var f=document.getElementById('wbAdminFrame');
+  if(f&&f.contentWindow){cb(f);return;}
+  if(_wbStatusPingFrame)return cb(_wbStatusPingFrame);
+  _wbStatusPingFrame=document.createElement('iframe');
+  _wbStatusPingFrame.style.cssText='display:none;width:1px;height:1px;border:0';
+  _wbStatusPingFrame.src='admin.html?v='+Date.now();
+  _wbStatusPingFrame.onload=function(){cb(_wbStatusPingFrame);};
+  document.body.appendChild(_wbStatusPingFrame);
+}
 function startWorkbenchStatusPing(){
   if(_wbStatusPingTimer)return;
   _wbStatusPingTimer=setInterval(function(){
@@ -9476,22 +9489,24 @@ function startWorkbenchStatusPing(){
     var cloud=lsg('swa_cloud_session_v1',null);
     if(!cloud || !cloud.sessionToken || !cloud.username)return;
     var uname=cloud.username;
-    if(typeof window.__sieleCloudBaseReady==='undefined')return;
-    (async function(){
+    var reqId='ck'+(Date.now())+Math.random().toString(36).slice(2,6);
+    _wbStatusFrameReady(function(frame){
       try{
-        var app=await window.__sieleCloudBaseReady;
-        if(!app || !app.callFunction)return;
-        var r=await Promise.race([
-          app.callFunction({name:'siele-auth',data:{action:'checkStatus',sessionToken:cloud.sessionToken}}),
-          new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},15000);})
-        ]);
-        var payload=r&&r.result!==undefined?r.result:r;
-        if(payload && payload.ok===false && payload.code==='USER_DISABLED'){
+        frame.contentWindow.postMessage({type:'siele-cloud-check-status',sessionToken:cloud.sessionToken,reqId:reqId},location.origin);
+      }catch(e){}
+    });
+    // 15s 内未收到对应响应则视为正常，等待下一轮
+    (function waitResp(){
+      var handler=function(ev){
+        if(ev.origin!==location.origin)return;
+        if(!ev.data||ev.data.type!=='siele-cloud-check-status-result'||ev.data.reqId!==reqId)return;
+        window.removeEventListener('message',handler);
+        if(ev.data.code==='USER_DISABLED'){
           handleCloudKick('您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。');
         }
-      }catch(e){
-        // 网络超时/错误静默忽略，不打扰用户
-      }
+      };
+      window.addEventListener('message',handler);
+      setTimeout(function(){window.removeEventListener('message',handler);},15000);
     })();
   },60000);
 }
