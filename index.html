@@ -9371,12 +9371,12 @@ window.addEventListener('message',function(ev){
     AU=null;ADB=null;
     setChip('nologin');
     showLoginOverlay();
-    var field=document.getElementById('wbLfU');
-    var msg='您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。';
-    if(field){
-      var err=field.querySelector('.err');
-      if(err)err.textContent=msg;
-      field.classList.add('invalid');
+    // 错误消息注入到密码字段（账号字段没有 .err 子元素）
+    var pField=document.getElementById('wbLfP');
+    if(pField){
+      var pErr=pField.querySelector('.err');
+      if(pErr)pErr.textContent='您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。';
+      pField.classList.add('invalid');
     }
     return;
   }
