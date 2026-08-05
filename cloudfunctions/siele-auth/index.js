@@ -27,6 +27,96 @@ const INVITE_CODES = new Set([
 // VERDE/ROJO 曾仅存于浏览器本地，无法证明历史占用归属；为防止再次被利用，首次云端初始化时永久停用。
 const LEGACY_REVOKED_INVITES = new Set(["SIELE-2026-VERDE", "SIELE-2026-ROJO"]);
 
+// ========================================================================
+// 应用层 QPS 限流（滑动窗口）—— 缓解 accessKey 泄露后的滥用风险
+// 设计：
+//   - 全局 30 QPS（突发容忍）
+//   - 单 IP 5 QPS（防单点滥用）
+//   - 滑动窗口：保留每个 key 最近 1s 的请求时间戳
+//   - 健康检查 / 限流豁免名单跳过限流
+//   - 命中限流：返回 RATE_LIMITED + 同步写 security_audit
+//   - 审计记录在并发下可能丢失个别条目，限流决策不受影响
+// 注：实例级内存限流，在多实例部署下窗口精度受实例数影响。
+//     目前是 1 实例运行，影响可控；如未来扩到多实例，
+//     可将计数器下沉到 Redis/CloudBase Redis。
+// ========================================================================
+const RATE_LIMIT_CONFIG = {
+  GLOBAL_QPS: 30,
+  PER_IP_QPS: 5,
+  WINDOW_MS: 1000,
+  EXEMPT_ACTIONS: new Set(["health"])
+};
+const _rateBuckets = { global: [], perIp: new Map() };
+// 限流审计队列：模块作用域，并发请求间共享。
+// 竞态可能造成"被限流事件的审计记录"丢失，但不影响限流决策本身（_rateBuckets 是决策源）。
+// 若需精准审计，可下沉到 DB collection.add 的乐观锁，但当前规模不必要。
+let _rateAuditQueue = [];
+
+function _extractClientIp(event) {
+  const tryGet = (obj, keys) => {
+    if (!obj || typeof obj !== "object") return null;
+    for (const k of keys) {
+      const v = obj[k];
+      if (typeof v === "string" && v.length > 0) return v;
+    }
+    return null;
+  };
+  const ip = tryGet(event, ["clientIP", "clientIp", "ip"])
+    || tryGet(event && event.headers, ["x-forwarded-for", "X-Forwarded-For", "x-real-ip", "X-Real-IP", "client-ip", "Client-IP"])
+    || tryGet(event && event.queryStringParameters, ["clientIP", "clientIp", "ip"])
+    || tryGet(event && event.context, ["sourceIp", "clientIp", "clientIP"])
+    || tryGet(event && event.userInfo, ["clientIp", "clientIP"])
+    || "unknown";
+  return String(ip).split(",")[0].trim() || "unknown";
+}
+
+function _rateLimitCheck(clientIp) {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_CONFIG.WINDOW_MS;
+  const globalArr = _rateBuckets.global;
+  while (globalArr.length && globalArr[0] < windowStart) globalArr.shift();
+  const ipArr = _rateBuckets.perIp.get(clientIp) || [];
+  const ipArrLive = [];
+  for (let i = 0; i < ipArr.length; i++) {
+    if (ipArr[i] >= windowStart) ipArrLive.push(ipArr[i]);
+  }
+  if (globalArr.length >= RATE_LIMIT_CONFIG.GLOBAL_QPS) {
+    return { allowed: false, scope: "global", limit: RATE_LIMIT_CONFIG.GLOBAL_QPS };
+  }
+  if (ipArrLive.length >= RATE_LIMIT_CONFIG.PER_IP_QPS) {
+    return { allowed: false, scope: "ip", limit: RATE_LIMIT_CONFIG.PER_IP_QPS, clientIp };
+  }
+  globalArr.push(now);
+  _rateBuckets.perIp.set(clientIp, ipArrLive.concat([now]));
+  if (_rateBuckets.perIp.size > 1000) {
+    const keys = Array.from(_rateBuckets.perIp.keys());
+    for (let i = 0; i < keys.length - 800; i++) {
+      const k = keys[i];
+      const arr = _rateBuckets.perIp.get(k);
+      if (!arr || arr.length === 0 || arr[arr.length - 1] < windowStart) {
+        _rateBuckets.perIp.delete(k);
+      }
+    }
+  }
+  return { allowed: true };
+}
+
+function _enqueueRateAudit(scope, clientIp, action) {
+  // CloudBase 事件函数在 main 返回后可能冻结实例，因此必须 await 写完。
+  // 用 fire-and-forget 队列记录"本次需要写"的事实，由 main 在限流分支里 await 完成。
+  _rateAuditQueue.push({ scope, clientIp, action });
+}
+
+async function _flushRateAudit() {
+  if (_rateAuditQueue.length === 0) return;
+  const batch = _rateAuditQueue.splice(0, _rateAuditQueue.length);
+  try {
+    await db.collection("security_audit").add({ type: "rate_limited", scope: batch[0].scope, clientIp: batch[0].clientIp, action: batch[0].action, count: batch.length, at: Date.now() });
+  } catch (e) {
+    console.error("rate_limit_audit_write_failed", { count: batch.length, error: e && e.message });
+  }
+}
+
 function response(ok, code, data) { return { ok, code, ...(data || {}) }; }
 function normalizeUsername(value) { return String(value || "").trim(); }
 function normalizeInvite(value) { return String(value || "").trim().toUpperCase(); }
@@ -234,6 +324,16 @@ exports.main = async (event) => {
   const input = event && event.data && typeof event.data === "object" ? event.data : (event || {});
   const action = String(input.action || "");
   if (action === "health") return response(true, "HEALTHY", { service: "siele-auth" });
+  // 应用层 QPS 限流（exempt action 已跳过）
+  if (!RATE_LIMIT_CONFIG.EXEMPT_ACTIONS.has(action)) {
+    const clientIp = _extractClientIp(event);
+    const check = _rateLimitCheck(clientIp);
+    if (!check.allowed) {
+      _enqueueRateAudit(check.scope, check.clientIp || clientIp, action);
+      try { await _flushRateAudit(); } catch (e) { console.error("rate_limit_audit_flush_failed", e && e.message); }
+      return response(false, "RATE_LIMITED", { scope: check.scope, limit: check.limit, retryAfterMs: RATE_LIMIT_CONFIG.WINDOW_MS });
+    }
+  }
   try {
     await ensureInviteSeed();
     if (action === "register") return await register(input);
