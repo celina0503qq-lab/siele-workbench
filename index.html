@@ -805,6 +805,7 @@ function getDefaultState(){
     flashProgressByLevel: {A1: 0, A2: 0, B1: 0, B2: 0, all: 0},
     flashMode: 'flip',  // 'flip' 翻牌模式 | 'practice' 中西对应练习
     flashPraStats: {correct:0, wrong:0, streak:0, bestStreak:0},
+    globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
     vocabMastery: {}, grammarDone: {},
     quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all'},
     quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
@@ -830,6 +831,7 @@ function getDefaultState(){
     vocabDictation: {},         // 单词默写记录 {esWord: {correct:0, wrong:0}}
     dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
+    recentlyStudiedWords: [],   // 最近学过的词（环形缓冲，最多10个，用于触发听写池）
     readingArticles: [],        // 外刊文章缓存
     readingLastUpdate: ''       // 外刊最后更新日期
   };
@@ -882,8 +884,10 @@ async function speak(text, btn, accent){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
   let played = false;
+  // 口音优先级：显式传入 > 全局设定 ST.globalAccent > 默认拉美(es-MX)
+  var effectiveAccent = accent || (ST && ST.globalAccent) || 'la';
   // Latin American accent: es-MX (default); es-ES for Spain fallback
-  const langCode = accent==='es' ? 'es-ES' : 'es-MX';
+  const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
 
   // Tier 1: speechSynthesis
   if(window.speechSynthesis){
@@ -897,7 +901,7 @@ async function speak(text, btn, accent){
       }
       // Prefer Latin American voice if requested
       let esVoice;
-      if(accent==='es'){
+      if(effectiveAccent==='es'){
         esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
       } else {
         esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
@@ -969,6 +973,13 @@ function spkBtn(text, cls){
 
 
 // ===== NAVIGATION =====
+function setGlobalAccent(acc){
+  ST.globalAccent = acc;
+  save();
+  // 立即播放示例确认
+  speak(acc==='es' ? 'Hola, ¿cómo estás?' : 'Hola, ¿qué onda?', null, acc);
+  if(currentPage==='dash')renderMain();
+}
 const NAV = [
   {s:'main', items:[
     {id:'dash', icon:'🏠', label:'仪表盘'},
@@ -1071,6 +1082,7 @@ function renderDash(){
       <div><label>考试类型</label><select onchange="ST.examType=this.value;save()"><option ${ST.examType==='dele'?'selected':''}>dele</option><option ${ST.examType==='siele'?'selected':''}>siele</option></select></div>
       <div><label>目标等级</label><select onchange="ST.targetLevel=this.value;save()"><option ${ST.targetLevel==='A1'?'selected':''}>A1</option><option ${ST.targetLevel==='A2'?'selected':''}>A2</option><option ${ST.targetLevel==='B1'?'selected':''}>B1</option><option ${ST.targetLevel==='B2'?'selected':''}>B2</option></select></div>
       <div><label>考试日期</label><input type="date" value="${ST.examDate||''}" onchange="ST.examDate=this.value;save();renderMain()"></div>
+      <div><label>发音口音</label><div class="mode-toggle" style="display:inline-flex"><button class="${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" style="padding:4px 10px;font-size:12px" onclick="setGlobalAccent('la')">🌎 拉美</button><button class="${ST.globalAccent==='es'?'on':''}" style="padding:4px 10px;font-size:12px" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button></div></div>
     </div>
   </div>`;
 
@@ -1360,7 +1372,19 @@ function startDictationTest(options){
   var words=[];
   if(Array.isArray(requested)&&requested.length){
     words=requested.slice(0,Math.min(15,requested.length)).map(function(v){return {es:v.es,zh:v.zh||'',ex:v.ex||''};});
-  }else{
+  }else if(options.fromRecent&&Array.isArray(ST.recentlyStudiedWords)&&ST.recentlyStudiedWords.length){
+    // 优先从最近学过的词出题（Task #159：听写池跟随学过的词）
+    var recentVocab=ST.recentlyStudiedWords.map(function(es){
+      return vocabPool.find(function(v){return v.es===es;});
+    }).filter(function(v){return v&&v.es;});
+    if(recentVocab.length){
+      // 打乱顺序但保留全部最近学过的词
+      for(var k=recentVocab.length-1;k>0;k--){var n=Math.floor(Math.random()*(k+1)),tmp=recentVocab[k];recentVocab[k]=recentVocab[n];recentVocab[n]=tmp;}
+      words=recentVocab.slice(0,Math.min(10,recentVocab.length)).map(function(v){return {es:v.es,zh:v.zh||'',ex:v.ex||''};});
+    }
+  }
+  if(!words.length){
+    // 回退到原有逻辑：全词库智能抽题
     var reviewCounts=ST.vocabReviewCount||{};
     // Stable linear selection avoids a full sort on the UI-critical path.
     var scored=vocabPool.map(function(v){
@@ -1401,7 +1425,7 @@ function showDictationWord(){
   overlay.innerHTML = `<div class="dictation-modal">
     <h3>📝 即时默写测试</h3>
     <div class="dm-hint">第 ${_dictationState.idx+1}/${_dictationState.words.length} 题 · 听发音写出西班牙语单词</div>
-    <div style="text-align:center;margin:8px 0"><button class="btn sm" onclick="speak('${w.es.replace(/'/g,"\\'")}',null,'la')">🔊 再听一次 (拉美口音)</button></div>
+    <div style="text-align:center;margin:8px 0"><button class="btn sm" onclick="speak('${w.es.replace(/'/g,"\\'")}',null)">🔊 再听一次</button></div>
     <div style="text-align:center;font-size:14px;color:var(--soft)">中文提示：${w.zh}</div>
     <div style="margin-top:10px"><input class="dm-input" id="dictInput" placeholder="输入西班牙语..." onkeydown="if(event.key==='Enter')checkDictation()" autofocus></div>
     <div class="dm-result" id="dictResult"></div>
@@ -1413,7 +1437,7 @@ function showDictationWord(){
   document.body.appendChild(overlay);
   setTimeout(()=>document.getElementById('dictInput')?.focus(),200);
   // Auto-speak the word
-  setTimeout(()=>speak(w.es,null,'la'),400);
+  setTimeout(()=>speak(w.es,null),400);
 }
 function checkDictation(){
   const input = document.getElementById('dictInput');
@@ -1448,7 +1472,19 @@ function showDictationCheer(){
   for(var i=0;i<6;i++){(function(i){setTimeout(function(){var el=document.createElement('span');el.className='dict-cheer';el.textContent=icons[i%icons.length];el.style.left=(42+Math.random()*18)+'vw';el.style.top=(52+Math.random()*12)+'vh';el.style.setProperty('--x',((Math.random()-.5)*180)+'px');document.body.appendChild(el);setTimeout(function(){el.remove();},1250);},i*75);})(i);}
 }
 function skipDictation(){
-  if(!_dictationState)return;
+  if(!_dictationState||!_dictationState.currentWord)return;
+  // 跳过计入错误：写入 vocabDictation.wrong 统计 + 进入二次巩固错词库（与答错同等对待）
+  var w=_dictationState.currentWord;
+  if(!ST.vocabDictation)ST.vocabDictation={};
+  var rec=ST.vocabDictation[w.es]||{correct:0,wrong:0};
+  rec.wrong=(rec.wrong||0)+1;
+  ST.vocabDictation[w.es]=rec;
+  _dictationState.wrong++;
+  // 累计错词入库：纳入二次巩固（标记跳过但保留原词，userAnswer 用 skip 标注）
+  if(!ST.dictationErrorBank)ST.dictationErrorBank=[];
+  ST.dictationErrorBank.push({es:w.es,zh:w.zh||'',userAnswer:'__skip__',correctAnswer:w.es,ts:Date.now()});
+  if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
+  save();
   _dictationState.idx++;
   document.getElementById('dictOverlay')?.remove();
   showDictationWord();
@@ -1608,6 +1644,12 @@ function renderFlash(){
   });
   h += `</div>`;
 
+  // Accent toggle (per-module, synced with global)
+  h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">口音：</span>`;
+  h += `<button class="chip ${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" onclick="setGlobalAccent('la')">🌎 拉美</button>`;
+  h += `<button class="chip ${ST.globalAccent==='es'?'on':''}" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button>`;
+  h += `</div>`;
+
   // Progress bar
   const masteryPct = m/3*100;
   h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${ST.flashIdx+1}/${pool.length}</span></div>`;
@@ -1655,7 +1697,7 @@ function renderFlash(){
 function renderFlashPronunciation(v){
   var key=encodeURIComponent(v.es), score=(ST.flashPronunciation&&ST.flashPronunciation[v.es])||null;
   return '<section class="dictation-review" style="margin-top:4px" aria-live="polite"><h3>🎤 跟读评分</h3><div class="sub">朗读当前单词；评分基于浏览器语音识别的单词匹配结果。</div>'+
-    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn sm ol" onclick="speak(decodeURIComponent(\''+key+'\'),this,\'la\')">🔊 听标准发音</button><button class="btn sm t" id="flashRecBtn" onclick="toggleFlashRecord()">🎤 开始跟读</button>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn sm ol" onclick="speak(decodeURIComponent(\''+key+'\'),this)">🔊 听标准发音</button><button class="btn sm t" id="flashRecBtn" onclick="toggleFlashRecord()">🎤 开始跟读</button>'+
     (v.ex?'<button class="btn sm ol" onclick="startFlashExampleRecord()">跟读例句</button>':'')+'</div>'+
     '<div id="flashPronResult" style="margin-top:10px">'+(score?renderFlashPronResult(score):'<div style="font-size:11.5px;color:var(--soft)">还没有评分记录。请允许麦克风权限后开始朗读。</div>')+'</div></section>';
 }
@@ -1739,6 +1781,13 @@ function rateFlash(level){
   ST.vocabReviewCount[v.es] = (ST.vocabReviewCount[v.es]||0) + 1;
   if(!ST.flashReviewSession) ST.flashReviewSession=0;
   ST.flashReviewSession++;
+  // 记录最近学过的词（环形缓冲，最多10个）—— 每10词触发的听写会优先测试这些词
+  if(!ST.recentlyStudiedWords) ST.recentlyStudiedWords=[];
+  var studiedEs=v.es;
+  // 去重：如果已存在先移除旧记录
+  ST.recentlyStudiedWords=ST.recentlyStudiedWords.filter(function(w){return w!==studiedEs;});
+  ST.recentlyStudiedWords.push(studiedEs);
+  if(ST.recentlyStudiedWords.length>10) ST.recentlyStudiedWords.shift();
   // Persist the *next actual word* once, then defer the secondary backup so the next card can paint immediately.
   setFlashPosition(ST.flashIdx+1,pool);
   updateStreak();
@@ -1746,7 +1795,7 @@ function rateFlash(level){
   deferFlashBackup();
   const shouldDictate=ST.flashReviewSession>0&&ST.flashReviewSession%10===0;
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
-  if(shouldDictate)setTimeout(function(){startDictationTest();},260);
+  if(shouldDictate)setTimeout(function(){startDictationTest({fromRecent:true});},260);
 }
 function nextFlash(alreadySaved){
   const pool=syncFlashPosition(getFlashPool());
@@ -1927,6 +1976,7 @@ function renderVocab(){
   </div>`;
 
   h += `<div class="fr" id="vocabFilter"></div>`;
+  h += `<div class="fcb" style="margin-bottom:6px"><span style="font-size:11px;color:var(--soft)">口音：</span><button class="chip ${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" onclick="setGlobalAccent('la')">🌎 拉美</button><button class="chip ${ST.globalAccent==='es'?'on':''}" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button></div>`;
   h += `<div style="max-height:600px;overflow-y:auto;border:1px solid var(--line);border-radius:10px"><table class="vt" id="vocabTable"></table></div>`;
   h += `<div style="margin-top:8px;font-size:11px;color:var(--soft)" id="vocabCount"></div>`;
 
@@ -1985,12 +2035,12 @@ function filterVocab(){
     masteryHtml += `<div style="width:100%;height:3px;background:#e8e0d0;border-radius:2px;margin-top:3px"><div style="width:${compositeScore}%;height:100%;background:${compositeScore>=80?'var(--ok)':compositeScore>=40?'var(--am)':'var(--bad)'};border-radius:2px"></div></div>`;
 
     h += `<tr>
-      <td><button class="spk" style="width:24px;height:24px;font-size:11px" onclick="speak('${v.es.replace(/'/g,"\\'")}',this,'la')">&#128264;</button></td>
-      <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this,'la')">${esc(v.es)}</td>
+      <td><button class="spk" style="width:24px;height:24px;font-size:11px" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
+      <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">${esc(v.es)}</td>
       <td>${esc(v.zh)}</td>
       <td class="pc">${v.pos}</td>
       <td><span class="tm l${v.lvl}">${v.lvl}</span></td>
-      <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this,'la')">&#128264;</button></td>
+      <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
       <td>${masteryHtml}</td>
     </tr>`;
   });
@@ -9108,7 +9158,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','flashIdx','flashLevel','flashCurrentWord','flashMode','flashPraStats','flashPronunciation','vocabReviewCount','vocabDictation','flashReviewSession','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
+    ['examDate','examType','targetLevel','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     if(rm.pomodoro&&typeof rm.pomodoro.completed==='number'&&ST.pomodoro)
@@ -9129,7 +9179,7 @@ function hydrate(){
 function calcSig(){
   var oralSig='';
   if(ST.sieleOralScores){Object.keys(ST.sieleOralScores).forEach(function(id){var s=ST.sieleOralScores[id];oralSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashPronunciation,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -9430,8 +9480,9 @@ function ghApi(path, method, body){
 
 function createGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
-    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashPronunciation: ST.flashPronunciation,
+    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
@@ -9458,8 +9509,9 @@ function pullGist(){
 
 function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
-    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashPronunciation: ST.flashPronunciation,
+    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
@@ -9543,6 +9595,15 @@ async function standaloneSync(showLog){
       else if(typeof remote.flashIdx==='number') ST.flashIdx=Math.max(0,remote.flashIdx);
       syncFlashPosition(getFlashPool());
     }
+    // 合并各级学习进度（跨设备续学关键）：逐级取最大值，保证 A1-A2-B1-B2-all 都保留较高进度
+    if(remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
+      ST.flashProgressByLevel=ST.flashProgressByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
+      ['all','A1','A2','B1','B2'].forEach(function(lv){
+        var rv=Number(remote.flashProgressByLevel[lv]||0);
+        var lvLocal=Number(ST.flashProgressByLevel[lv]||0);
+        if(rv>lvLocal) ST.flashProgressByLevel[lv]=rv;
+      });
+    }
     if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
       ST.flashPronunciation=ST.flashPronunciation||{};
       Object.keys(remote.flashPronunciation).forEach(function(es){var rr=remote.flashPronunciation[es]||{},lr=ST.flashPronunciation[es]||{};if((rr.score||0)>(lr.score||0))ST.flashPronunciation[es]=rr;});
@@ -9559,6 +9620,18 @@ async function standaloneSync(showLog){
       Object.keys(remote.vocabReviewCount).forEach(function(es){ST.vocabReviewCount[es]=Math.max(ST.vocabReviewCount[es]||0,remote.vocabReviewCount[es]||0);});
     }
     if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
+    // 全局发音口音：远程有值则采用（两端偏好一致即可）
+    if(typeof remote.globalAccent==='string'&&(remote.globalAccent==='la'||remote.globalAccent==='es'))ST.globalAccent=remote.globalAccent;
+    // 合并最近学过的词：取本地和远程的并集，按远程时间戳优先排列（跨设备同步听写池）
+    if(Array.isArray(remote.recentlyStudiedWords)&&remote.recentlyStudiedWords.length){
+      ST.recentlyStudiedWords=ST.recentlyStudiedWords||[];
+      var _seen={};
+      ST.recentlyStudiedWords.forEach(function(es){_seen[es]=true;});
+      // 远程的词追加到尾部（保留时序）
+      remote.recentlyStudiedWords.forEach(function(es){if(!_seen[es]){_seen[es]=true;ST.recentlyStudiedWords.push(es);}});
+      // 只保留最近10个
+      if(ST.recentlyStudiedWords.length>10)ST.recentlyStudiedWords=ST.recentlyStudiedWords.slice(-10);
+    }
     // 合并错词库：本地上传的错词累计保留
     if(Array.isArray(remote.dictationErrorBank) && remote.dictationErrorBank.length){
       ST.dictationErrorBank=ST.dictationErrorBank||[];
@@ -9576,7 +9649,25 @@ async function standaloneSync(showLog){
       });
     }
     if(remote.quizResults && remote.quizResults.length>(ST.quizResults||[]).length) ST.quizResults = remote.quizResults;
-    if(remote.errors && remote.errors.length>(ST.errors||[]).length) ST.errors = remote.errors;
+    // 错题集合并：基于 question+date 去重，保留两端所有错题，reviewed 取或
+    if(Array.isArray(remote.errors) && remote.errors.length){
+      ST.errors=ST.errors||[];
+      var _errSeen={};
+      ST.errors.forEach(function(e){var k=(e.question||'')+'_'+(e.date||'');_errSeen[k]=e;});
+      remote.errors.forEach(function(e){
+        if(!e||!e.question)return;
+        var k=(e.question||'')+'_'+(e.date||'');
+        if(_errSeen[k]){
+          // 合并 reviewed 状态：任一端已复习则为已复习
+          if(e.reviewed)_errSeen[k].reviewed=true;
+        }else{
+          _errSeen[k]=e;
+          ST.errors.push(e);
+        }
+      });
+      // 保持最多200条
+      if(ST.errors.length>200)ST.errors=ST.errors.slice(-200);
+    }
     if(remote.readingProgress) Object.keys(remote.readingProgress).forEach(function(k){ ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k]; });
     if(remote.streak > ST.streak) ST.streak = remote.streak;
     if(remote.totalStudy > ST.totalStudy) ST.totalStudy = remote.totalStudy;
