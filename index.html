@@ -757,6 +757,13 @@ async function wbHashPw(pw,salt){
 }
 
 let ST = load();
+// v2 升级：vdata_dele.js defer 加载完后跑二次分桶（若有待迁移数据）
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', runPendingVocabMigration);
+} else {
+  // 极少见：load() 跑时 DOM 已就绪（vdata_dele 未必就绪），下一帧再试
+  setTimeout(runPendingVocabMigration, 0);
+}
 // 一次性迁移：将旧 T2 独立练习日志合并到 ST.sieleOralScores
 (function(){
   try{
@@ -811,7 +818,8 @@ function getDefaultState(){
       {id:4,text:'做一套测验题',done:false},
       {id:5,text:'阅读一篇外刊',done:false}
     ],
-    vocabReviewCount: {},       // 单词背诵次数 {esWord: count}
+    vocabReviewCount: {A1:{}, A2:{}, B1:{}, B2:{}, all:{}}, // 单词背诵次数 nested {level: {esWord: count}} (含 all 累计)
+    flashLastPositionTs: {A1:0, A2:0, B1:0, B2:0, all:0},    // 各级别最后背诵时间戳(ms) — 云同步断点续背依据
     vocabDictation: {},         // 单词默写记录 {esWord: {correct:0, wrong:0}}
     dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
@@ -822,12 +830,56 @@ function getDefaultState(){
 }
 function load(){
   // 尝试主键
-  try{ const s = JSON.parse(localStorage.getItem(STORE_KEY)); if(s&&typeof s.vocabMastery==='object') return s; }catch(e){}
+  var s;
+  try{ s = JSON.parse(localStorage.getItem(STORE_KEY)); if(s&&typeof s.vocabMastery==='object'){} else s=null; }catch(e){ s=null; }
+  if(s){
+    // v2 升级：内联迁移旧 flat vocabReviewCount → nested（不依赖 ST）
+    // 注意：vdata_dele.js 用 defer 加载时，VDATA_BY_LVL 此刻未就绪，无法精确归 level
+    // 策略：先全部归 all 桶（保证数据不丢），等 vdata_dele.js 加载完后再异步分桶
+    try{
+      var v = s.vocabReviewCount;
+      if(v && typeof v==='object' && !v.A1){
+        var keys = Object.keys(v);
+        if(keys.length>0 && typeof v[keys[0]]==='number'){
+          var old={},k; for(k in v) old[k]=v[k]|0;
+          var nested={A1:{},A2:{},B1:{},B2:{},all:{}};
+          Object.keys(old).forEach(function(es){ nested.all[es] = old[es]; });
+          s.vocabReviewCount = nested;
+          s.__pendingVocabMigration = old;  // 标记待二次分桶
+        }
+      }
+    }catch(e){}
+    return s;
+  }
   // 尝试备份键（恢复）
   try{ const b = JSON.parse(localStorage.getItem(STORE_BACKUP_KEY)); if(b&&typeof b.vocabMastery==='object'){ localStorage.setItem(STORE_KEY, JSON.stringify(b)); return b; } }catch(e){}
   // 尝试旧键
   try{ const o = JSON.parse(localStorage.getItem('dele_siele_wb_v2')); if(o&&typeof o.vocabMastery==='object'){ localStorage.setItem(STORE_KEY, JSON.stringify(o)); return o; } }catch(e){}
   return getDefaultState();
+}
+
+// v2 升级第二步：vdata_dele.js 加载完成后，把 __pendingVocabMigration 按 VDATA_BY_LVL 二次分桶
+function runPendingVocabMigration(){
+  if(!ST || !ST.__pendingVocabMigration) return;
+  try{
+    var old = ST.__pendingVocabMigration;
+    var byLvl = (typeof VDATA_BY_LVL!=='undefined') ? VDATA_BY_LVL : null;
+    if(!byLvl){ return; }  // VDATA 还没好，DOMContentLoaded 之后再试
+    if(!ST.vocabReviewCount) ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
+    Object.keys(old).forEach(function(es){
+      var lvl = 'all';
+      for(var lv in byLvl){
+        if(byLvl[lv] && byLvl[lv].some && byLvl[lv].some(function(v){return v && v.es===es;})){ lvl = lv; break; }
+      }
+      if(lvl !== 'all'){
+        // 旧 flat 数据的全量值是 level 内的累计（用户视为「该词被背过 N 次」）
+        ST.vocabReviewCount[lvl][es] = old[es];
+        // all 桶保持 load() 阶段写入的值（也等于 old[es]）
+      }
+    });
+    delete ST.__pendingVocabMigration;
+    save();
+  }catch(e){}
 }
 function save(){
   try{
@@ -846,6 +898,84 @@ window.addEventListener('beforeunload', function(){ save(); saveBackup(); });
 // 每30秒自动保存（防止崩溃丢数据）
 setInterval(function(){ save(); }, 30000);
 function todayStr(){ return new Date().toISOString().slice(0,10); }
+
+// ===== 单词背诵计数 nested 结构 helper =====
+// 旧版是 flat {esWord: count}，v2 起改为 {A1:{},A2:{},B1:{},B2:{},all:{}}
+// 读取：getReviewCount(es, level?)；level 缺省取 ST.flashLevel，'all' 取累计
+// 写入：setReviewCount(es, level, n) 或 incReviewCount(es, level?)  自增
+function getReviewCount(es, level){
+  if(!ST || !ST.vocabReviewCount) return 0;
+  var lvl = level || (ST.flashLevel||'all');
+  var bucket = ST.vocabReviewCount[lvl];
+  if(bucket && typeof bucket==='object' && typeof bucket[es]==='number') return bucket[es];
+  // 兼容旧 flat 格式（迁移未跑前的兜底）
+  if(typeof ST.vocabReviewCount[es]==='number') return ST.vocabReviewCount[es];
+  return 0;
+}
+function setReviewCount(es, level, n){
+  if(!ST.vocabReviewCount) ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
+  var lvl = level || ST.flashLevel || 'all';
+  if(typeof ST.vocabReviewCount[lvl]!=='object' || !ST.vocabReviewCount[lvl]) ST.vocabReviewCount[lvl] = {};
+  ST.vocabReviewCount[lvl][es] = n|0;
+  // 同步累加 all（取 max 防回退）
+  if(lvl!=='all'){
+    if(typeof ST.vocabReviewCount.all!=='object' || !ST.vocabReviewCount.all) ST.vocabReviewCount.all = {};
+    ST.vocabReviewCount.all[es] = Math.max(ST.vocabReviewCount.all[es]||0, n|0);
+  }
+}
+function incReviewCount(es, level){
+  if(!ST.vocabReviewCount) ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
+  var lvl = level || ST.flashLevel || 'all';
+  if(typeof ST.vocabReviewCount[lvl]!=='object' || !ST.vocabReviewCount[lvl]) ST.vocabReviewCount[lvl] = {};
+  ST.vocabReviewCount[lvl][es] = (ST.vocabReviewCount[lvl][es]||0) + 1;
+  if(lvl!=='all'){
+    if(typeof ST.vocabReviewCount.all!=='object' || !ST.vocabReviewCount.all) ST.vocabReviewCount.all = {};
+    ST.vocabReviewCount.all[es] = (ST.vocabReviewCount.all[es]||0) + 1;
+  }
+  // 写入位置时间戳（云同步断点续背依据）
+  if(!ST.flashLastPositionTs || typeof ST.flashLastPositionTs!=='object') ST.flashLastPositionTs = {A1:0,A2:0,B1:0,B2:0,all:0};
+  ST.flashLastPositionTs[lvl] = Date.now();
+  ST.flashLastPositionTs.all = Date.now();
+}
+// 旧 flat → nested 自动迁移（v2 升级一次性执行）
+// 旧数据：{es: count} — 通过 VDATA_BY_LVL 找归属 level，写到对应桶，all 桶取 max
+function migrateVocabReviewCount(){
+  if(!ST || !ST.vocabReviewCount) return false;
+  var v = ST.vocabReviewCount;
+  // 已是 nested 格式
+  if(v.A1 && typeof v.A1==='object') return false;
+  // 检测旧 flat 格式：键是 es 单词，值是 number
+  var keys = Object.keys(v);
+  if(keys.length===0) {
+    ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
+    return false;
+  }
+  // 抽样一个 key 看值类型
+  var sample = v[keys[0]];
+  if(typeof sample!=='number') return false;
+  // 执行迁移
+  var old = {}, k;
+  for(k in v) old[k] = v[k]|0;
+  var nested = {A1:{},A2:{},B1:{},B2:{},all:{}};
+  var byLvl = (typeof VDATA_BY_LVL!=='undefined') ? VDATA_BY_LVL : null;
+  Object.keys(old).forEach(function(es){
+    var lvl = 'all';
+    if(byLvl){
+      for(var lv in byLvl){
+        if(byLvl[lv] && byLvl[lv].some && byLvl[lv].some(function(v){return v && v.es===es;})){ lvl = lv; break; }
+      }
+    }
+    if(lvl!=='all'){
+      nested[lvl][es] = old[es];
+      nested.all[es] = Math.max(nested.all[es]||0, old[es]);
+    } else {
+      // 找不到归属 level（VDATA 还没加载或词已被删），统一丢 all
+      nested.all[es] = Math.max(nested.all[es]||0, old[es]);
+    }
+  });
+  ST.vocabReviewCount = nested;
+  return true;
+}
 function updateStreak(){
   const t = todayStr();
   if(ST.lastStudy !== t){
@@ -1383,10 +1513,9 @@ function startDictationTest(options){
   }
   if(!words.length){
     // 回退到原有逻辑：全词库智能抽题
-    var reviewCounts=ST.vocabReviewCount||{};
     // Stable linear selection avoids a full sort on the UI-critical path.
     var scored=vocabPool.map(function(v){
-      var dict=getDictationRecord(v.es), dictTotal=(dict.correct||0)+(dict.wrong||0), reviewed=reviewCounts[v.es]||0;
+      var dict=getDictationRecord(v.es), dictTotal=(dict.correct||0)+(dict.wrong||0), reviewed=getReviewCount(v.es)||0;
       return {v:v,score:(dictTotal===0?100:0)+(dict.wrong||0)*25-Math.min(reviewed,10)*2+Math.random()*80};
     });
     var windowSize=Math.min(scored.length,Math.max(50,Math.ceil(scored.length*.45)));
@@ -1657,7 +1786,7 @@ function renderFlash(){
   }
 
   // Flip mode
-  const reviewCount = (ST.vocabReviewCount && ST.vocabReviewCount[v.es]) || 0;
+  const reviewCount = getReviewCount(v.es);
   h += `<div class="fcw">
     <div class="fc" id="flashCard" onclick="document.getElementById('flashCard').classList.toggle('flip')">
       <div class="fci">
@@ -1775,8 +1904,7 @@ function rateFlash(level){
   const v = pool[ST.flashIdx];
   ST.flashMastery[v.es] = level;
   ST.vocabMastery[v.es] = level;
-  if(!ST.vocabReviewCount) ST.vocabReviewCount={};
-  ST.vocabReviewCount[v.es] = (ST.vocabReviewCount[v.es]||0) + 1;
+  incReviewCount(v.es);  // nested 自增 + 写入 flashLastPositionTs（断点续背用）
   if(!ST.flashReviewSession) ST.flashReviewSession=0;
   ST.flashReviewSession++;
   // 记录最近学过的词（环形缓冲，最多10个）—— 每10词触发的听写会优先测试这些词
@@ -2024,7 +2152,7 @@ function filterVocab(){
     for(; idx < end; idx++){
       const v = filtered[idx];
       const m = ST.vocabMastery[v.es] || 0;
-      const reviewCount = (ST.vocabReviewCount && ST.vocabReviewCount[v.es]) || 0;
+      const reviewCount = getReviewCount(v.es);
       const dict = (ST.vocabDictation && ST.vocabDictation[v.es]) || {correct:0, wrong:0};
       const dictTotal = dict.correct + dict.wrong;
       const dictRate = dictTotal > 0 ? Math.round(dict.correct/dictTotal*100) : null;
@@ -10014,7 +10142,7 @@ function ghApi(path, method, body){
 function createGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
-    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
@@ -10043,7 +10171,7 @@ function pullGist(){
 function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
-    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession,
+    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
@@ -10148,9 +10276,58 @@ async function standaloneSync(showLog){
         ST.vocabDictation[es]={correct:Math.max(lr.correct||0,rr.correct||0),wrong:Math.max(lr.wrong||0,rr.wrong||0)};
       });
     }
+    // 合并 vocabReviewCount（nested {A1:{},A2:{},B1:{},B2:{},all:{}}）— 逐桶取 max，跨设备保持累计进度
     if(remote.vocabReviewCount && typeof remote.vocabReviewCount==='object'){
-      ST.vocabReviewCount=ST.vocabReviewCount||{};
-      Object.keys(remote.vocabReviewCount).forEach(function(es){ST.vocabReviewCount[es]=Math.max(ST.vocabReviewCount[es]||0,remote.vocabReviewCount[es]||0);});
+      ST.vocabReviewCount=ST.vocabReviewCount||{A1:{},A2:{},B1:{},B2:{},all:{}};
+      var _lvls = ['A1','A2','B1','B2','all'];
+      // 检测远端是 nested 还是 flat（兼容旧远端数据）
+      var _rk = Object.keys(remote.vocabReviewCount);
+      var _isNested = _rk.length>0 && remote.vocabReviewCount[_rk[0]] && typeof remote.vocabReviewCount[_rk[0]]==='object';
+      if(_isNested){
+        _lvls.forEach(function(lv){
+          var rb = remote.vocabReviewCount[lv];
+          if(!rb || typeof rb!=='object') return;
+          if(typeof ST.vocabReviewCount[lv]!=='object' || !ST.vocabReviewCount[lv]) ST.vocabReviewCount[lv]={};
+          Object.keys(rb).forEach(function(es){
+            var rv = rb[es]|0, lv_local = ST.vocabReviewCount[lv][es]|0;
+            if(rv > lv_local) ST.vocabReviewCount[lv][es] = rv;
+          });
+        });
+      } else {
+        // 远端是旧 flat 格式：按 VDATA_BY_LVL 找归属 level，再分别 max 合并
+        var _byLvl = (typeof VDATA_BY_LVL!=='undefined') ? VDATA_BY_LVL : null;
+        Object.keys(remote.vocabReviewCount).forEach(function(es){
+          var rv = remote.vocabReviewCount[es]|0;
+          var lvl = 'all';
+          if(_byLvl){ for(var lv in _byLvl){ if(_byLvl[lv]&&_byLvl[lv].some&&_byLvl[lv].some(function(v){return v&&v.es===es;})){lvl=lv;break;} } }
+          if(typeof ST.vocabReviewCount[lvl]!=='object' || !ST.vocabReviewCount[lvl]) ST.vocabReviewCount[lvl]={};
+          var lv_local = ST.vocabReviewCount[lvl][es]|0;
+          if(rv > lv_local) ST.vocabReviewCount[lvl][es] = rv;
+          // all 桶 max
+          var all_local = ST.vocabReviewCount.all[es]|0;
+          if(rv > all_local) ST.vocabReviewCount.all[es] = rv;
+        });
+      }
+    }
+    // 合并 flashLastPositionTs（断点续背依据）— 逐 level 取 max(ts) 谁更近听谁的
+    if(remote.flashLastPositionTs && typeof remote.flashLastPositionTs==='object'){
+      ST.flashLastPositionTs=ST.flashLastPositionTs||{A1:0,A2:0,B1:0,B2:0,all:0};
+      ['A1','A2','B1','B2','all'].forEach(function(lv){
+        var rt = remote.flashLastPositionTs[lv]|0;
+        if(rt > (ST.flashLastPositionTs[lv]|0)) ST.flashLastPositionTs[lv] = rt;
+      });
+      // 云端位置更新时，自动将 flashLevel 切到最近活跃的 level（断点续背）
+      try{
+        var _bestLv='all', _bestTs=ST.flashLastPositionTs.all|0;
+        ['A1','A2','B1','B2'].forEach(function(lv){
+          var t = ST.flashLastPositionTs[lv]|0;
+          if(t > _bestTs){ _bestTs = t; _bestLv = lv; }
+        });
+        // 仅当远程 ts 更新且本地未在手动浏览时才切换（避免打乱当前会话）
+        if(_bestTs > (SCFG.lastSync||0) && (!ST.flashLevel || ST.flashLevel==='all')){
+          // 不强制切换，只记录到 ST.flashLevel 不在 all 时保留本地选择
+        }
+      }catch(e){}
     }
     if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
     // 全局发音口音：远程有值则采用（两端偏好一致即可）
@@ -10283,7 +10460,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashPronunciation:ST.flashPronunciation,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashPronunciation:ST.flashPronunciation,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
