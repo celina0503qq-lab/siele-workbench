@@ -10160,14 +10160,14 @@ function ghApi(path, method, body){
 
 function createGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
-    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
+    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashIdxByLevel: ST.flashIdxByLevel, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
-    dailyTasks: ST.dailyTasks, streak: ST.streak, totalStudy: ST.totalStudy,
+    dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
     usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
   });
@@ -10189,14 +10189,14 @@ function pullGist(){
 
 function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
-    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
+    flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashIdxByLevel: ST.flashIdxByLevel, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
     vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
-    dailyTasks: ST.dailyTasks, streak: ST.streak, totalStudy: ST.totalStudy,
+    dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
     usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
   });
@@ -10284,6 +10284,15 @@ async function standaloneSync(showLog){
         if(rv>lvLocal) ST.flashProgressByLevel[lv]=rv;
       });
     }
+    // 合并各等级背诵索引（per-level 断点续背核心）：逐 level 取 max(idx)，切级时回到正确位置
+    if(remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
+      ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
+      ['A1','A2','B1','B2','all'].forEach(function(lv){
+        var ri=Number(remote.flashIdxByLevel[lv]||0);
+        var li=Number(ST.flashIdxByLevel[lv]||0);
+        if(ri>li) ST.flashIdxByLevel[lv]=ri;
+      });
+    }
     if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
       ST.flashPronunciation=ST.flashPronunciation||{};
       Object.keys(remote.flashPronunciation).forEach(function(es){var rr=remote.flashPronunciation[es]||{},lr=ST.flashPronunciation[es]||{};if((rr.score||0)>(lr.score||0))ST.flashPronunciation[es]=rr;});
@@ -10349,6 +10358,29 @@ async function standaloneSync(showLog){
       }catch(e){}
     }
     if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
+    // 合并每日签到日期（跨设备签到累计）：取两端日期并集去重，按时间排序
+    if(Array.isArray(remote.checkIns) && remote.checkIns.length){
+      ST.checkIns=ST.checkIns||[];
+      var _ciSeen={};
+      ST.checkIns.forEach(function(d){if(d)_ciSeen[d]=true;});
+      remote.checkIns.forEach(function(d){if(d&&!_ciSeen[d]){_ciSeen[d]=true;ST.checkIns.push(d);}});
+      ST.checkIns.sort();
+    }
+    // 合并每日待办（按 todo.id 去重，done 取或，text 取较新一端的非空值）
+    if(Array.isArray(remote.dailyTodos) && remote.dailyTodos.length){
+      ST.dailyTodos=ST.dailyTodos||[];
+      var _tdSeen={};
+      ST.dailyTodos.forEach(function(t){if(t&&t.id!=null)_tdSeen[t.id]=t;});
+      remote.dailyTodos.forEach(function(t){
+        if(!t||t.id==null)return;
+        var lt=_tdSeen[t.id];
+        if(!lt){_tdSeen[t.id]=t;ST.dailyTodos.push(t);}
+        else{
+          if(t.done)lt.done=true;
+          if(typeof t.text==='string'&&t.text&&(!lt.text||lt.text.length<t.text.length))lt.text=t.text;
+        }
+      });
+    }
     // 全局发音口音：远程有值则采用（两端偏好一致即可）
     if(typeof remote.globalAccent==='string'&&(remote.globalAccent==='la'||remote.globalAccent==='es'))ST.globalAccent=remote.globalAccent;
     // 合并最近学过的词：取本地和远程的并集，按远程时间戳优先排列（跨设备同步听写池）
@@ -10479,7 +10511,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashPronunciation:ST.flashPronunciation,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -10518,6 +10550,46 @@ function importDataPrompt_(){
             if(e&&e.es&&!iexist[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);iexist[e.es+'_'+e.userAnswer]=true;}
           });
           if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
+        }
+        // 合并每级背诵索引（per-level 断点续背）
+        if(data.flashIdxByLevel && typeof data.flashIdxByLevel==='object'){
+          ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
+          ['A1','A2','B1','B2','all'].forEach(function(lv){
+            var ri=Number(data.flashIdxByLevel[lv]||0);
+            var li=Number(ST.flashIdxByLevel[lv]||0);
+            if(ri>li) ST.flashIdxByLevel[lv]=ri;
+          });
+        }
+        // 合并各级学习进度
+        if(data.flashProgressByLevel && typeof data.flashProgressByLevel==='object'){
+          ST.flashProgressByLevel=ST.flashProgressByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
+          ['A1','A2','B1','B2','all'].forEach(function(lv){
+            var rv=Number(data.flashProgressByLevel[lv]||0);
+            if(rv>(ST.flashProgressByLevel[lv]||0)) ST.flashProgressByLevel[lv]=rv;
+          });
+        }
+        // 合并每日签到
+        if(Array.isArray(data.checkIns) && data.checkIns.length){
+          ST.checkIns=ST.checkIns||[];
+          var _ciSeen={};
+          ST.checkIns.forEach(function(d){if(d)_ciSeen[d]=true;});
+          data.checkIns.forEach(function(d){if(d&&!_ciSeen[d]){_ciSeen[d]=true;ST.checkIns.push(d);}});
+          ST.checkIns.sort();
+        }
+        // 合并每日待办
+        if(Array.isArray(data.dailyTodos) && data.dailyTodos.length){
+          ST.dailyTodos=ST.dailyTodos||[];
+          var _tdSeen={};
+          ST.dailyTodos.forEach(function(t){if(t&&t.id!=null)_tdSeen[t.id]=t;});
+          data.dailyTodos.forEach(function(t){
+            if(!t||t.id==null)return;
+            var lt=_tdSeen[t.id];
+            if(!lt){_tdSeen[t.id]=t;ST.dailyTodos.push(t);}
+            else{
+              if(t.done)lt.done=true;
+              if(typeof t.text==='string'&&t.text&&(!lt.text||lt.text.length<t.text.length))lt.text=t.text;
+            }
+          });
         }
         save();saveBackup();
         appendSyncLog('✅ 导入完成: '+merged+' 词合并','ok');
