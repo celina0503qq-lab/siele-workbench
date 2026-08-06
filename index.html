@@ -1092,7 +1092,7 @@ function setGlobalAccent(acc){
   save();
   // 立即播放示例确认
   speak(acc==='es' ? 'Hola, ¿cómo estás?' : 'Hola, ¿qué onda?', null, acc);
-  if(currentPage==='dash')renderMain();
+  if(currentPage==='dash'||currentPage==='flash')renderMain();
 }
 const NAV = [
   {s:'main', items:[
