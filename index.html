@@ -2356,7 +2356,8 @@ function renderShadow(){
   // 补全所有句子的 cat
   SHADOW_SENTENCES.forEach(ensureShadowCat);
   // 当前筛选下可见的索引数组
-  const visibleIdxs = SHADOW_SENTENCES.map((s,i) => (i, s))
+  const visibleIdxs = SHADOW_SENTENCES
+    .map((s,i) => [i, s])
     .filter(([i,s]) => (_shadowFilterLvl==='all'||s.lvl===_shadowFilterLvl) && (_shadowFilterCat==='all'||s.cat===_shadowFilterCat))
     .map(([i]) => i);
   if(visibleIdxs.length > 0 && !visibleIdxs.includes(_shadowIdx)) _shadowIdx = visibleIdxs[0];
@@ -2860,25 +2861,60 @@ function saveWriting(){
   const text = document.getElementById('writingText').value;
   ST['writing_'+_writingIdx] = text;
   save(); updateStreak();
-  // AI 批改
-  const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, 1) : null;
+  // AI 批改 (使用新评分引擎)
+  const tareaType = _writingIdx <= 7 ? 1 : 2;  // 前 8 个为 Tarea 1 风格, 后 6 个为 Tarea 2 风格
+  const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, tareaType) : null;
   const gradeEl = document.getElementById('writingGrading');
   if(gradeEl && g){
-    const connItems = g.connectors.map(c=>`<span style="display:inline-block;background:#d4edda;color:#155724;padding:2px 6px;border-radius:4px;font-size:11px;margin:2px">${c}</span>`).join('');
-    const subjItems = g.subjunctive.map(c=>`<span style="display:inline-block;background:#cfe2ff;color:#084298;padding:2px 6px;border-radius:4px;font-size:11px;margin:2px">${c}</span>`).join('');
+    // 渲染连接词分类
+    const connItems = Object.keys(g.connectors).map(cat => {
+      const list = g.connectors[cat].map(c=>`<span style="display:inline-block;background:#d4edda;color:#155724;padding:2px 6px;border-radius:4px;font-size:11px;margin:2px">${c}</span>`).join('');
+      const catName = {addition:'递进',cause:'原因',consequence:'结果',contrast:'转折',order:'顺序',example:'举例'}[cat] || cat;
+      return `<div style="margin:4px 0"><b style="font-size:11px;color:var(--tr)">${catName}:</b> ${list || '<span style="color:var(--soft);font-size:11px">无</span>'}</div>`;
+    }).join('');
+    // 渲染虚拟式
+    const subjItems = Object.keys(g.subjunctive).map(cat => {
+      const list = g.subjunctive[cat].map(c=>`<span style="display:inline-block;background:#cfe2ff;color:#084298;padding:2px 6px;border-radius:4px;font-size:11px;margin:2px">${c}</span>`).join('');
+      const catName = {impersonal:'无人称',wishes:'愿望',purpose:'目的',doubt:'怀疑',temporal_subj:'时间'}[cat] || cat;
+      return `<div style="margin:4px 0"><b style="font-size:11px;color:var(--tr)">${catName}:</b> ${list || '<span style="color:var(--soft);font-size:11px">无</span>'}</div>`;
+    }).join('');
+    // 高级句型
+    const advItems = g.advancedPatterns.length
+      ? g.advancedPatterns.map(p=>`<span style="display:inline-block;background:#f3e8ff;color:#6b21a8;padding:2px 6px;border-radius:4px;font-size:11px;margin:2px">${p}</span>`).join('')
+      : '<span style="color:var(--soft);font-size:11px">未识别到 B2 级高级句型</span>';
+    // 语法检查
+    const grammarItems = g.grammarChecks.map(c =>
+      `<div style="margin:3px 0;display:flex;align-items:start;gap:6px;font-size:11px">
+        <span style="color:${c.pass?'var(--ok)':'var(--bad)'};font-weight:700;flex-shrink:0">${c.pass?'✓':'✗'}</span>
+        <span><b>${c.label}</b>${c.tip?` <span style="color:var(--soft)">— ${c.tip}</span>`:''}</span>
+      </div>`
+    ).join('');
+    // 等级色标
+    const bandColor = {A1:'#10b981',A2:'#3b82f6',B1:'#f59e0b',B2:'#ef4444',C1:'#8b5cf6'}[g.sieleBand] || '#6b7280';
     gradeEl.style.display = 'block';
     gradeEl.innerHTML = `<div class="card" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);border-color:var(--am)">
-      <h3><span class="ic">🤖</span>AI 规则引擎批改</h3>
+      <h3><span class="ic">评分</span>AI 规则引擎批改</h3>
       <div style="display:flex;align-items:center;gap:18px;margin:10px 0;flex-wrap:wrap">
-        <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--tr);font-family:var(--serif)">${g.score}</div><div style="font-size:10px;color:var(--soft)">分 / ${g.maxScore}</div></div>
+        <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--tr);font-family:var(--serif)">${g.score}</div><div style="font-size:10px;color:var(--soft)">分 / 100</div></div>
         <div>
-          <div style="font-size:12px;margin:2px 0"><b>字数：</b>${g.wordCount} 字 (目标 ${g.target[0]}-${g.target[1]}${g.wcOk?' ✓':' ⚠️'})</div>
-          <div style="font-size:12px;margin:2px 0"><b>连接词：</b>${g.connectorCount} 个 ${g.connectorCount>=5?'✓ 优秀':'⚠️ 建议 ≥5'}</div>
-          <div style="font-size:12px;margin:2px 0"><b>虚拟式触发：</b>${g.subjunctiveCount} 个</div>
+          <div style="font-size:12px;margin:2px 0"><b>字数：</b>${g.wordCount} 字 (Tarea ${tareaType} 目标 ${g.target[0]}-${g.target[1]}${g.wcOk?' ✓':' ⚠️'})</div>
+          <div style="font-size:12px;margin:2px 0"><b>连接词：</b>${g.uniqueConnectorCount} 种 (共 ${g.connectorCount} 次) ${g.uniqueConnectorCount>=5?'✓ 优秀':g.uniqueConnectorCount>=3?'○ 良好':'⚠️ 建议 ≥3 种'}</div>
+          <div style="font-size:12px;margin:2px 0"><b>虚拟式：</b>${g.subjunctiveCount} 个</div>
+          <div style="font-size:12px;margin:2px 0"><b>高级句型 (B2)：</b>${g.advancedPatterns.length} 个</div>
+          <div style="font-size:12px;margin:2px 0"><b>语法检查：</b>${g.grammarPassCount}/${g.grammarChecks.length} 通过</div>
+        </div>
+        <div style="text-align:center;padding:8px 14px;background:${bandColor};color:#fff;border-radius:9px">
+          <div style="font-size:22px;font-weight:800;font-family:var(--serif)">${g.sieleBand}</div>
+          <div style="font-size:10px;margin-top:2px">SIELE 等级映射</div>
         </div>
       </div>
-      <div style="margin-top:6px"><b style="font-size:11px">找到的连接词：</b><br>${connItems || '<span style="color:var(--soft);font-size:11px">未识别到加分连接词，建议多用 sin embargo / por ejemplo / no solo...sino también...</span>'}</div>
-      <div style="margin-top:6px"><b style="font-size:11px">虚拟式触发：</b><br>${subjItems || '<span style="color:var(--soft);font-size:11px">未识别到。建议在适当语境用 subjuntivo: \"es necesario que...\" \"ojalá...\" \"aunque + subj.\"</span>'}</div>
+      <details style="margin-top:8px"><summary style="cursor:pointer;font-weight:600;font-size:12px;color:var(--tr)">📊 连接词分类 (${Object.keys(g.connectors).length}类 / ${g.uniqueConnectorCount}种)</summary><div style="margin-top:6px">${connItems}</div></details>
+      <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600;font-size:12px;color:var(--tr)">🔮 虚拟式触发 (${g.subjunctiveCount}处)</summary><div style="margin-top:6px">${subjItems}</div></details>
+      <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600;font-size:12px;color:var(--tr)">⭐ 高级句型</summary><div style="margin-top:6px">${advItems}</div></details>
+      <details open style="margin-top:6px"><summary style="cursor:pointer;font-weight:600;font-size:12px;color:var(--tr)">📐 语法检查 (${g.grammarPassCount}/${g.grammarChecks.length})</summary><div style="margin-top:6px;background:#fff;padding:8px;border-radius:6px">${grammarItems}</div></details>
+      <div style="margin-top:6px;padding:8px;background:${bandColor}15;border-radius:6px;font-size:11px;color:${bandColor}">
+        <b>升级到 ${g.sieleBand === 'C1' ? '保持 C1' : nextBand(g.sieleBand) + ' 需要'}:</b> ${nextBandTip(g.sieleBand, g)}
+      </div>
     </div>`;
     // 自动滚动到批改区
     setTimeout(()=>gradeEl.scrollIntoView({behavior:'smooth',block:'center'}), 100);
@@ -2886,20 +2922,111 @@ function saveWriting(){
     gradeEl.style.display = 'block';
     gradeEl.innerHTML = '<div class="note"><b>已保存。</b></div>';
   }
-  // 联想范文
-  showRelatedEssay();
+  // 联想范文 (新: 任务对应 + 可编辑)
+  showRelatedEssay(_writingIdx);
 }
-function showRelatedEssay(){
-  if(typeof SIELE_WRITING_ESSAYS === 'undefined') return;
+
+// 辅助: 下一等级提示
+function nextBand(band, g){
+  const next = {A1:'A2',A2:'B1',B1:'B2',B2:'C1',C1:'C1+'};
+  return next[band] || 'C1';
+}
+function nextBandTip(band, g){
+  if(band === 'C1') return '已达成 C1! 继续保持, 多用高级句型 + 完整论证结构';
+  const tips = {
+    A1: `多写 30+ 字, 加 2-3 个不同连接词 (${g.grammarChecks.find(c=>c.key==='tenses')?.tip || '混入过去时'})`,
+    A2: `达到 B1 需: 120+ 字, 4 种以上不同连接词, 至少 2 段结构`,
+    B1: `达到 B2 需: 150+ 字, 5 种连接词, 至少 1 处虚拟式 (es necesario que, ojalá, para que)`,
+    B2: `达到 C1 需: 200+ 字, 6+ 种连接词, 2+ 虚拟式, 至少 1 个高级句型 (no solo...sino también, mientras que, a medida que)`,
+  };
+  return tips[band] || '';
+}
+function showRelatedEssay(taskIdx){
+  if(typeof WRITING_TASK_ESSAYS === 'undefined') return;
   const eEl = document.getElementById('writingEssay');
   if(!eEl) return;
-  // Pick the first essay as reference (could be smarter based on writing task)
-  const e = SIELE_WRITING_ESSAYS[0];
-  const others = SIELE_WRITING_ESSAYS.slice(1);
+  // 用户编辑过的范文 key
+  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  const userEdit = ST[userEditKey];
+  const essay = WRITING_TASK_ESSAYS[taskIdx] || WRITING_TASK_ESSAYS[0];
+  // 用户文本
+  const userText = (ST['writing_'+taskIdx] || '').trim();
+  const showCompare = userText.length > 0;
+  // 渲染当前范文(用户版优先)
+  const currentEssayText = userEdit || essay.text;
+  const currentWordCount = currentEssayText.split(/\s+/).filter(Boolean).length;
+  // 高亮连接词
+  const connsToHighlight = essay.highlights || [];
+  let escaped = esc(currentEssayText);
+  connsToHighlight.forEach(c => {
+    const re = new RegExp('(' + c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    escaped = escaped.replace(re, '<mark style="background:#fff3cd;color:#856404;padding:0 2px;border-radius:2px">$1</mark>');
+  });
   eEl.style.display = 'block';
-  eEl.innerHTML = `<details><summary style="cursor:pointer;font-weight:700;color:var(--tr)">📖 查看范文参考（点击展开）</summary>` +
-    SIELE_WRITING_ESSAYS.map((essay,idx) => `<div class="card" style="margin-top:8px;background:#fdfaf3"><h4>📄 范文 ${idx+1} · ${esc(essay.topic)}</h4><div style="font-size:11px;color:var(--am);margin:3px 0">${esc(essay.tarea)} · ${essay.words}字 · ${esc(essay.score_range)}</div><div style="background:#fff;padding:10px;border-radius:6px;line-height:1.6;font-size:12px;white-space:pre-wrap;font-family:var(--serif);margin-top:6px;border:1px solid var(--line)">${esc(essay.text)}</div><details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:var(--tr)">💡 此篇常见问题</summary><ul style="margin:6px 0 0 18px;padding:0;font-size:11.5px">${essay.common_problems.map(p=>`<li style="margin:3px 0">${esc(p)}</li>`).join('')}</ul></details></div>`).join('') +
-    `</details>`;
+  eEl.innerHTML = `
+    <div class="card" style="margin-top:12px;background:#fdfaf3">
+      <h3 style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <span><span class="ic">范文</span>${esc(essay.tarea || '范文参考')} · ${esc(essay.structure || '')}</span>
+        <div style="display:flex;gap:5px">
+          <button class="btn sm ol" onclick="editEssay(${taskIdx})">✏️ 编辑范文</button>
+          <button class="btn sm" onclick="resetEssay(${taskIdx})">↻ 恢复原文</button>
+        </div>
+      </h3>
+      <div style="display:flex;gap:8px;margin-bottom:8px;font-size:11px;align-items:center;flex-wrap:wrap">
+        <span class="tm l${essay.lvl}">${essay.lvl}</span>
+        <span style="color:var(--am);font-weight:600">${currentWordCount}字</span>
+        <span style="color:var(--soft)">目标 ${essay.target_words[0]}-${essay.target_words[1]}字</span>
+        ${userEdit?'<span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:3px;font-size:10px">已编辑</span>':''}
+      </div>
+      <div id="essayViewBox" style="background:#fff;padding:12px;border-radius:8px;line-height:1.7;font-size:13px;white-space:pre-wrap;font-family:var(--serif);border:1px solid var(--line)">${escaped}</div>
+      <div style="margin-top:8px;font-size:11px"><b>高分句式：</b>${connsToHighlight.map(c=>`<span style="background:#fff3cd;padding:1px 4px;border-radius:3px;font-weight:700;color:#856404;margin:0 2px">${esc(c)}</span>`).join('')}</div>
+      ${essay.notes && essay.notes.length ? `<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:var(--tr);font-weight:600">写作要点 (${essay.notes.length}条)</summary><ul style="margin:6px 0 0 18px;padding:0;font-size:11.5px">${essay.notes.map(p=>`<li style="margin:3px 0">${esc(p)}</li>`).join('')}</ul></details>` : ''}
+    </div>
+    ${showCompare ? `
+    <div class="card" style="margin-top:10px;background:#f0f9ff;border-color:#3b82f6">
+      <h3 style="color:#1e40af"><span class="ic">对比</span>你的答案 vs 范文</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--tr);margin-bottom:4px">📝 你的答案 (${userText.split(/\s+/).filter(Boolean).length}字)</div>
+          <div style="background:#fff;padding:10px;border-radius:6px;line-height:1.6;font-size:12px;white-space:pre-wrap;font-family:var(--serif);border:1px solid #bfdbfe;max-height:400px;overflow-y:auto">${esc(userText)}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--am);margin-bottom:4px">参考范文 (${currentWordCount}字)</div>
+          <div style="background:#fff;padding:10px;border-radius:6px;line-height:1.6;font-size:12px;white-space:pre-wrap;font-family:var(--serif);border:1px solid var(--line);max-height:400px;overflow-y:auto">${escaped}</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#dbeafe;border-radius:6px;font-size:11.5px;color:#1e3a8a;line-height:1.5">
+        <b>对比要点：</b><br>
+        • <b>字数差异：</b>${Math.abs(userText.split(/\s+/).filter(Boolean).length - currentWordCount)} 字 (目标 ${essay.target_words[0]}-${essay.target_words[1]})<br>
+        • <b>结构：</b>${esc(essay.structure || '见范文')}<br>
+        • <b>高分句式：</b>参考范文使用了 ${connsToHighlight.length} 个高分短语,你的答案可用 ctrl+F 搜索 ${connsToHighlight.slice(0,3).map(c=>`"${c}"`).join('、')} 看是否覆盖
+      </div>
+    </div>
+    ` : '<div class="note" style="margin-top:8px;background:#fef9c3;border-color:#facc15"><b>提示：</b>输入作文并保存后,这里会自动显示「你的答案 vs 范文」对比</div>'}
+  `;
+}
+
+// 编辑范文
+function editEssay(taskIdx){
+  if(typeof WRITING_TASK_ESSAYS === 'undefined') return;
+  const essay = WRITING_TASK_ESSAYS[taskIdx] || WRITING_TASK_ESSAYS[0];
+  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  const current = ST[userEditKey] || essay.text;
+  const newText = prompt('编辑范文 (点取消则不保存):\n\n当前内容:\n' + current, current);
+  if(newText === null) return;
+  if(newText.trim() === ''){ alert('范文不能为空,如需恢复请点击「恢复原文」'); return; }
+  ST[userEditKey] = newText;
+  save();
+  showRelatedEssay(taskIdx);
+}
+// 恢复原文
+function resetEssay(taskIdx){
+  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  if(!ST[userEditKey]) return;
+  if(!confirm('确定要恢复为系统默认范文吗?你的编辑会丢失。')) return;
+  delete ST[userEditKey];
+  save();
+  showRelatedEssay(taskIdx);
 }
 function useEssay(idx){
   if(typeof SIELE_WRITING_ESSAYS === 'undefined') return;
@@ -2974,6 +3101,7 @@ function renderSpeaking(){
           <div class="sc" id="speakScore"></div>
           <div><div style="font-size:12px;color:var(--soft)">识别结果</div><div id="speakRecog" style="font-size:13px;font-family:var(--serif)"></div></div>
         </div>
+        <div class="note" id="speakFeedback" style="margin-top:8px"></div>
       </div>
     </div>
   </div>`;
@@ -2986,6 +3114,29 @@ function renderSpeaking(){
 let _speakIdx = -1;
 let _speakRec = false;
 let _speakRecognition = null;
+let _speakTimer = null;  // #235: 60s 超时自动 stop
+
+// 题目分级关键词集 (新 #236) - 按 cat/lvl 分
+const SPEAK_KEYWORDS = {
+  'A1·个人介绍': { must:['me llamo','tengo','soy','años','hola','gracias'], good:['me gusta','trabajo','estudio','vivo'], bonus:['nacionalidad','profesión'] },
+  'A1·日常生活': { must:['me levanto','desayuno','luego','después','primero'], good:['trabajo','estudio','ceno','me acuesto'], bonus:['rutina','temprano','tarde'] },
+  'A2·经历': { must:['ayer','pasado','fui','hice','vi'], good:['el sábado','el domingo','después','luego'], bonus:['recuerdo','experiencia','primera vez'] },
+  'A2·比较': { must:['más','que','menos','pero','mi ciudad'], good:['también','sin embargo','diferente'], bonus:['prefiero','me gusta más'] },
+  'B1·观点': { must:['creo','pienso','opinión','porque','por un lado'], good:['sin embargo','además','en cambio'], bonus:['desde mi punto de vista','por eso'] },
+  'B1·假设': { must:['si','podría','viajar','iría','país'], good:['quisiera','me gustaría','condicional'], bonus:['ojalá','sueño','con tal de'] },
+  'B2·辩论': { must:['a favor','en contra','argumento','porque','sin embargo'], good:['además','por lo tanto','no obstante'], bonus:['en definitiva','desde mi perspectiva'] },
+  'B2·抽象话题': { must:['significa','ejemplo','explica','proverbio','refrán'], good:['es decir','por ejemplo','en concreto'], bonus:['metafóricamente','analogía'] },
+  'B2·图片描述': { must:['se ve','hay','está','en primer plano','al fondo'], good:['llama la atención','destaca','predomina'], bonus:['en cambio','a diferencia de'] },
+  'B2·总结': { must:['el artículo','trata de','según','opinión','en resumen'], good:['por lo tanto','sin embargo','además'], bonus:['desde mi punto de vista','en definitiva'] },
+  'default': { must:[], good:[], bonus:[] }
+};
+
+function getKeywordsForTopic(t){
+  if(!t) return SPEAK_KEYWORDS.default;
+  const key = t.lvl + '·' + t.cat;
+  return SPEAK_KEYWORDS[key] || SPEAK_KEYWORDS.default;
+}
+
 function selectSpeaking(i){
   _speakIdx = i;
   const t = SPEAKING_TOPICS[i];
@@ -2994,97 +3145,177 @@ function selectSpeaking(i){
   document.getElementById('speakTarget').textContent = t.topic;
   document.getElementById('speakZh').textContent = t.prep;
   document.getElementById('speakRes').classList.remove('show');
+  // 重置录音按钮
+  const btn = document.getElementById('speakRecBtn');
+  if(btn){ btn.className = 'rb idle'; btn.textContent = '录音回答'; }
 }
+
 function toggleSpeakRecord(){
   const btn = document.getElementById('speakRecBtn');
+  if(!btn) return;
   if(!_speakRec){
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR){ alert('请使用Chrome或Edge浏览器进行语音识别'); return; }
     _speakRecognition = new SR();
     _speakRecognition.lang = 'es-ES';
-    _speakRecognition.continuous = true;
-    _speakRecognition.interimResults = false;
+    _speakRecognition.continuous = true;  // #235 改为 true: 持续识别
+    _speakRecognition.interimResults = true;  // #235 改为 true: 实时中间结果
     _speakRec = true;
     btn.className = 'rb rec'; btn.textContent = '⏹ 停止录音';
+    btn.disabled = false;
+    // #237: 立即给 UI 反馈 (< 50ms)
+    const recogEl = document.getElementById('speakRecog');
+    if(recogEl) recogEl.innerHTML = '<span style="color:var(--soft);font-size:11px">● 正在听...</span>';
     let fullText = '';
+    let interimText = '';
+    let lastFinal = '';
     _speakRecognition.onresult = (e) => {
-      for(let i=e.resultIndex;i<e.results.length;i++) fullText += e.results[i][0].transcript;
+      interimText = '';
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const r = e.results[i];
+        if(r.isFinal){
+          fullText += r[0].transcript + ' ';
+        } else {
+          interimText += r[0].transcript;
+        }
+      }
+      // #237: 实时更新 UI - interim 灰色, final 正常
+      const recogEl = document.getElementById('speakRecog');
+      if(recogEl){
+        recogEl.innerHTML = esc(fullText) + (interimText ? '<span style="color:var(--soft)"> ' + esc(interimText) + '</span>' : '');
+      }
+      lastFinal = fullText;
     };
     _speakRecognition.onend = () => {
-      _speakRec = false; btn.className = 'rb idle'; btn.textContent = '🎤 录音回答';
-      if(fullText) scoreSpeaking(fullText);
+      _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
+      clearTimeout(_speakTimer);
+      if((lastFinal || fullText).trim()) scoreSpeaking(lastFinal || fullText);
     };
-    _speakRecognition.onerror = () => { _speakRec = false; btn.className = 'rb idle'; btn.textContent = '🎤 录音回答'; };
-    try{ _speakRecognition.start(); }catch(e){}
+    _speakRecognition.onerror = (event) => {
+      _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
+      clearTimeout(_speakTimer);
+      if(event.error === 'not-allowed'){
+        alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');
+      } else if(event.error === 'no-speech'){
+        // no-speech: 自动重新开始,避免卡住
+        if(_speakRec){ try{ _speakRecognition.start(); }catch(e){} }
+        return;
+      } else {
+        const recogEl = document.getElementById('speakRecog');
+        if(recogEl) recogEl.innerHTML = '<span style="color:var(--bad)">识别错误: ' + event.error + '</span>';
+      }
+    };
+    try{ _speakRecognition.start(); }catch(e){
+      _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
+    }
+    // #235: 60 秒超时自动 stop
+    _speakTimer = setTimeout(() => {
+      if(_speakRec && _speakRecognition){
+        try{ _speakRecognition.stop(); }catch(e){}
+        const recogEl = document.getElementById('speakRecog');
+        if(recogEl) recogEl.innerHTML = '<span style="color:var(--soft);font-size:11px">⏱ 已达 60 秒上限,自动停止</span>';
+      }
+    }, 60000);
   } else {
     if(_speakRecognition) try{_speakRecognition.stop();}catch(e){}
-    _speakRec = false; btn.className = 'rb idle'; btn.textContent = '🎤 录音回答';
+    _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
+    clearTimeout(_speakTimer);
   }
 }
+
 function scoreSpeaking(text){
-  // P1-2: DOM null 防御
   const res = document.getElementById('speakRes');
   const sc = document.getElementById('speakScore');
   const rt = document.getElementById('speakRecog');
   if(!res || !sc || !rt){ return; }
 
-  // P0-2 方案A: 复用 scoreShadow 多维引擎 + 关键词命中维度
-  // 目标文本: 题目(topic) + 提示语(prep) 的核心西语词
-  let targetEs = '';
-  if(_speakIdx >= 0 && _speakIdx < SPEAKING_TOPICS.length){
-    const t = SPEAKING_TOPICS[_speakIdx];
-    targetEs = (t.topic || '') + ' ' + (t.prep || '');
-  }
-  const target = (targetEs || '').toLowerCase().replace(/[¿?¡!.,;:()¿¡]/g,'');
-  const rec = (text || '').toLowerCase().replace(/[¿?¡!.,;:()¿¡]/g,'');
-  const targetWords = target.split(/\s+/).filter(w=>w.length>2);
+  const topic = _speakIdx >= 0 ? SPEAKING_TOPICS[_speakIdx] : null;
+  const rec = (text || '').toLowerCase().replace(/[¿?¡!.,;:()¿¡¿¡¿¡]/g,'');
   const recWords = rec.split(/\s+/).filter(w=>w.length>0);
   const wc = recWords.length;
 
-  // 1. 关键词命中(40%) - 重点: 是否触及题目核心概念
-  let hit = 0;
-  targetWords.forEach(w => { if(recWords.includes(w)) hit++; });
-  const wordAccuracy = targetWords.length > 0 ? Math.round(hit / targetWords.length * 100) : 0;
+  // ===== 1. 关键词命中 35% (新 #236: 用题目分级关键词集) =====
+  const kw = getKeywordsForTopic(topic);
+  const mustHit = kw.must.filter(k => rec.includes(k)).length;
+  const goodHit = kw.good.filter(k => rec.includes(k)).length;
+  const bonusHit = kw.bonus.filter(k => rec.includes(k)).length;
+  // 加权: must 5分/个, good 2分/个, bonus 1分/个, 上限 100
+  const kwScore = Math.min(100, mustHit * 18 + goodHit * 8 + bonusHit * 4);
+  // 缺 must 关键词扣分 (核心)
+  const missingMust = kw.must.filter(k => !rec.includes(k));
 
-  // 2. 内容覆盖度(25%) - 长度合理性 (10-150 词最佳)
-  let fluencyScore = 0;
-  if(wc >= 10 && wc <= 150) fluencyScore = 100;
-  else if(wc < 10) fluencyScore = Math.round(wc / 10 * 100);
-  else fluencyScore = Math.max(40, Math.round(150 / wc * 100));
+  // ===== 2. 内容覆盖度 25% =====
+  let coverageScore = 0;
+  if(wc >= 15 && wc <= 200) coverageScore = 100;
+  else if(wc >= 10) coverageScore = 80;
+  else if(wc >= 6) coverageScore = 55;
+  else if(wc >= 3) coverageScore = 30;
+  else coverageScore = 10;
 
-  // 3. 表达完整度(20%) - 至少出现一些连接/功能词
-  const funcWords = ['y','o','pero','porque','que','si','cuando','como','para','con','de','el','la','en','un','una','es','son','estoy','tengo','creo','pienso','me','te','se'];
+  // ===== 3. 表达完整度 20% (新: 检测虚拟式 / 条件式) =====
+  const funcWords = ['y','o','pero','porque','que','si','cuando','como','para','con','de','el','la','en','un','una','es','son','estoy','tengo','creo','pienso','me','te','se','a','del','las','los','al','lo','su','sus','le'];
   const funcHit = recWords.filter(w => funcWords.includes(w)).length;
-  const orderScore = wc > 0 ? Math.min(100, Math.round(funcHit / Math.min(wc, 8) * 100)) : 0;
+  let funcBase = wc > 0 ? Math.min(70, Math.round(funcHit / Math.min(wc, 12) * 100)) : 0;
+  // 高级特征加分
+  let bonus = 0;
+  if(/\b(creo|pienso|opino|considero|me parece)\b/.test(rec)) bonus += 10;
+  if(/\b(porque|ya que|dado que|puesto que)\b/.test(rec)) bonus += 8;
+  if(/\b(si\s+(pudiera|tuviera|fuera|viajara)|ojalá|desearía|quisiera|me gustaría)\b/.test(rec)) bonus += 12;
+  const orderScore = Math.min(100, funcBase + bonus);
 
-  // 4. 词数匹配(15%) - 鼓励充分表达
-  const targetLen = 40; // 期望词数基准
-  const countProx = wc > 0 ? Math.max(30, Math.round((1 - Math.abs(targetLen - wc) / Math.max(targetLen, 1)) * 100)) : 0;
+  // ===== 4. 词数匹配 20% (新: 按 lvl 给目标) =====
+  const targetLen = topic ? (topic.lvl === 'A1' ? 25 : topic.lvl === 'A2' ? 40 : topic.lvl === 'B1' ? 60 : 80) : 50;
+  let countScore = 0;
+  if(wc >= targetLen * 0.7 && wc <= targetLen * 2) countScore = 100;
+  else if(wc >= targetLen * 0.4) countScore = 70;
+  else if(wc > 0) countScore = 30;
 
   // 加权
-  let score = Math.round(wordAccuracy * 0.40 + fluencyScore * 0.25 + orderScore * 0.20 + countProx * 0.15);
-  if(score > 100) score = 100; if(score < 0) score = 0;
+  let score = Math.round(kwScore * 0.35 + coverageScore * 0.25 + orderScore * 0.20 + countScore * 0.20);
+  score = Math.max(0, Math.min(100, score));
 
-  let cls = score >= 80 ? 'h' : score >= 50 ? 'm' : 'l';
-  let msg = '';
-  if(score >= 80) msg = '¡Excelente! 内容切题,表达流畅自然。';
-  else if(score >= 50) msg = '¡Bien! 基本扣题,注意多使用题目中的核心词汇。';
-  else msg = '¡Ánimo! 试着围绕题目中的关键词展开,10词以上更易拿到完整分数。';
+  let cls = score >= 80 ? 'h' : score >= 55 ? 'm' : 'l';
+  // 反馈建议 (新 #236)
+  let advice = [];
+  if(missingMust.length && missingMust.length >= 2){
+    advice.push(`🔑 关键句型缺失: 尝试加入 <b>${missingMust.slice(0,3).map(m => esc(m)).join(' / ')}</b> (核心关键词,扣分会较多)`);
+  }
+  if(orderScore < 60){
+    advice.push('💬 表达完整度: 句中多用连接词 (y / pero / porque / si) 和观点词 (creo / pienso / opino)');
+  }
+  if(coverageScore < 60){
+    if(wc < 10) advice.push('📏 词数太少, 建议至少说 15-20 个词,围绕题目展开 1-2 个要点');
+    else if(wc > 200) advice.push('📏 词数过多, 建议控制在 200 词内, 突出核心观点');
+  }
+  if(countScore < 60 && topic){
+    advice.push(`🎯 ${topic.lvl} 级建议词数: ${targetLen} 词左右, 当前 ${wc} 词`);
+  }
+  if(kwScore < 50 && kw.must.length > 0){
+    advice.push('📌 关注题目主题词, 用题目中的西语关键词构建你的回答 (如职业/动作/对象)');
+  }
+  // 高级建议
+  if(topic && topic.lvl === 'B2' && !/\b(aunque|sin embargo|no obstante|por lo tanto|además)\b/.test(rec)){
+    advice.push('⭐ B2 话题建议加入高级连接词: sin embargo / no obstante / por lo tanto');
+  }
+  if(advice.length === 0){
+    advice.push('✓ 表达良好!继续保持, 尝试更自然的语速和更多细节描述。');
+  }
 
   sc.className = 'sc ' + cls;
   sc.textContent = score + '%';
-  rt.textContent = text;
+  rt.innerHTML = esc(text) + '<br><span style="color:var(--tr);font-size:11px;font-weight:600">已识别: ' + wc + ' 词 · ' + (mustHit) + '/' + kw.must.length + ' 关键 · ' + goodHit + '/' + kw.good.length + ' 加分</span>';
 
-  // 如果有 feedback 容器,展开多维反馈
   const fb = document.getElementById('speakFeedback');
   if(fb){
-    fb.innerHTML = `<b>评价：</b>${msg}<br>
-      <b>识别：</b>${esc(text)}<br>
+    fb.innerHTML = `<b>评价：</b>${score >= 80 ? '<span style="color:var(--ok)">¡Excelente!</span>' : score >= 55 ? '<span style="color:var(--warn)">¡Bien!</span>' : '<span style="color:var(--bad)">¡Ánimo!</span>'}<br>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
-        <div>关键词命中：<b>${wordAccuracy}%</b></div>
-        <div>内容覆盖度：<b>${fluencyScore}%</b></div>
-        <div>表达完整度：<b>${orderScore}%</b></div>
-        <div>词数匹配：<b>${countProx}%</b></div>
+        <div>关键词命中：<b>${kwScore}%</b></div>
+        <div>内容覆盖：<b>${coverageScore}%</b></div>
+        <div>表达完整：<b>${orderScore}%</b></div>
+        <div>词数匹配：<b>${countScore}%</b></div>
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#fef9c3;border-radius:6px;font-size:11.5px;line-height:1.5">
+        <b>改进建议：</b><br>${advice.map(a => '<div style="margin:3px 0">• ' + a + '</div>').join('')}
       </div>`;
   }
   res.classList.add('show');
@@ -7967,27 +8198,467 @@ Para terminar, es necesario prestar mucha mayor atención a otros tipos de probl
   }
 ];
 
+// ===== WRITING_TASK_ESSAYS: 与 WRITING_TASKS 14 个任务一一对应的初始范文 =====
+// 索引 i 对应 WRITING_TASKS[i]
+const WRITING_TASK_ESSAYS = [
+  { // 0  A1 自我介绍邮件
+    id:'wt0', lvl:'A1',
+    target_words:[50,80],
+    text:`Estimado/a señor/a:
+
+Me llamo Elena, tengo veinticinco años y soy de España. Soy estudiante de español y estudio en la universidad. También trabajo como profesora de inglés en una escuela primaria. En mi tiempo libre, me gusta mucho leer libros y cocinar platos nuevos. Además, practico yoga todos los días porque me ayuda a relajarme.
+
+Un cordial saludo,
+Elena`,
+    structure:'问候 → 名字/年龄/国籍 → 职业 → 爱好 → 结束语',
+    highlights:['Me llamo','tengo veinticinco años','soy de','me gusta mucho','además','en mi tiempo libre'],
+    notes:[
+      "基础信息句型: Me llamo / Tengo ... años / Soy de / Soy + 职业",
+      "tener 表达年龄，ser 表达职业/国籍，不要混用",
+      "爱好用 me gusta + 动词原形 或 me gusta + 名词",
+      "邮件结尾问候 Un cordial saludo / Atentamente / Un saludo"
+    ]
+  },
+  { // 1  A1 描述你的一天
+    id:'wt1', lvl:'A1',
+    target_words:[60,80],
+    text:`Me levanto a las siete de la mañana. Primero, me lavo la cara y me cepillo los dientes. Después, desayuno con mi familia: tomo un café con leche y como una tostada. A las ocho, voy a la universidad en autobús.
+
+Por la tarde, estudio en la biblioteca hasta las cinco. Luego, vuelvo a casa y ceno con mis padres. Finalmente, veo la televisión un rato y me acuesto a las once de la noche.`,
+    structure:'起床 → 早餐 → 上午 → 下午 → 晚上 → 睡觉',
+    highlights:['Me levanto','primero','después','luego','finalmente','a las'],
+    notes:[
+      "日常动作用陈述式现在时，第一人称变位 (me levanto, desayuno, voy)",
+      "时间顺序连接词: primero / después / luego / finalmente / a las + 时间",
+      "起居动词: me levanto, me lavo, me cepillo, me acuesto (反身动词)",
+      "饮食动词: desayuno, almuerzo, ceno (特殊变化)"
+    ]
+  },
+  { // 2  A2 给朋友讲上周末
+    id:'wt2', lvl:'A2',
+    target_words:[80,100],
+    text:`Hola María:
+
+¿Qué tal? El fin de semana pasado hice muchas cosas interesantes. El sábado por la mañana, fui al mercado con mi madre y compramos fruta y verdura. Por la tarde, vi una película en el cine con mis amigos. La película fue muy divertida.
+
+El domingo, llovió todo el día, así que me quedé en casa. Leí un libro nuevo y preparé una tarta de chocolate. Por la noche, cenamos juntos en casa de mis abuelos.
+
+¿Te llamo esta semana para vernos? ¡Cuídate!
+Laura`,
+    structure:'寒暄 → 周六上午 → 周六下午 → 周日(因下雨在家) → 提议见面',
+    highlights:['El fin de semana pasado','fui','vi','llovió','así que','me quedé','leí','preparé','por la noche','¡Cuídate!'],
+    notes:[
+      "简单过去时 (pretérito indefinido) 变位: hice, fui, vi, llovió, leí, preparé",
+      "时间表达: El sábado / El domingo / por la mañana / por la tarde / por la noche",
+      "因果连接: así que (所以), porque (因为)",
+      "朋友信件用 ¡Cuídate! / ¡Un abrazo! / ¡Hasta pronto! 收尾"
+    ]
+  },
+  { // 3  A2 描述家乡
+    id:'wt3', lvl:'A2',
+    target_words:[80,100],
+    text:`Mi ciudad se llama Valencia y está en el este de España, cerca del mar Mediterráneo. Tiene unos 800.000 habitantes. El clima es mediterráneo: los veranos son muy calurosos y los inviernos son suaves.
+
+Valencia es famosa por la paella, un plato típico de la región. También hay muchas playas preciosas y un parque muy bonito llamado Turia. Además, todos los años en marzo se celebra la fiesta de Las Fallas, que es muy popular en todo el mundo.
+
+Me gusta mucho vivir aquí porque hay mucha vida cultural y siempre hay algo interesante que hacer.`,
+    structure:'地理位置 → 人口气候 → 特色(食物/景点/节日) → 个人感受',
+    highlights:['está en','cerca de','es famosa por','se celebra','todos los años','me gusta mucho vivir aquí porque'],
+    notes:[
+      "地理位置: está en + 地点, cerca de, al norte/sur/este/oeste de",
+      "气候: hace calor/frío, llueve mucho, es caluroso, es suave",
+      "描述城市: hay + 名词, se llama, es famoso/a por",
+      "个人感受用 me gusta + 动词原形 + porque 引导原因"
+    ]
+  },
+  { // 4  B1 环保议论文
+    id:'wt4', lvl:'B1',
+    target_words:[120,150],
+    text:`En los últimos años, el problema del plástico se ha convertido en una preocupación mundial. Aunque es muy útil en nuestra vida diaria, su uso excesivo está dañando gravemente el medio ambiente. Por eso, es necesario que todos reduzcamos su consumo.
+
+En primer lugar, deberíamos llevar bolsas de tela cuando vayamos al supermercado, en lugar de usar bolsas de plástico. Además, sería importante evitar los productos con envases innecesarios. También conviene que reutilicemos las botellas de agua en vez de comprar nuevas cada día.
+
+Si cada uno de nosotros hace pequeños cambios en su vida cotidiana, podremos conseguir un futuro más limpio y sostenible.`,
+    structure:'引入问题 → 原因分析 → 三个具体措施 → 展望',
+    highlights:['se ha convertido en','por eso','es necesario que + subj','en primer lugar','deberíamos + inf','en lugar de','sería importante','también conviene que + subj','si + presente + futuro'],
+    notes:[
+      "B1 关键句型: es necesario/importante que + 虚拟式 (reduzcamos, reutilicemos)",
+      "建议语气: deberíamos / sería importante / conviene que / hay que",
+      "对比: en lugar de + 名词, en vez de + 动词原形",
+      "条件句: Si + 现在时, + 简单将来时 (Si hacemos..., podremos...)"
+    ]
+  },
+  { // 5  B1 正式投诉信
+    id:'wt5', lvl:'B1',
+    target_words:[120,150],
+    text:`Estimado servicio de atención al cliente:
+
+Le escribo para expresar mi的不满 con la compra que realicé el pasado día 15 de octubre en su tienda online. Pedí un ordenador portátil y, al recibirlo, descubrí que la pantalla estaba rota y el cargador no funcionaba.
+
+Le ruego que me devuelvan el dinero íntegro o, en su defecto, me envíen un producto nuevo en perfecto estado. Si no recibo una respuesta en los próximos siete días, me veré obligada a presentar una reclamación formal ante la oficina del consumidor.
+
+Agradezco su atención y espero una pronta solución.
+Atentamente,
+María López`,
+    structure:'问候 → 投诉事件 → 明确诉求 → 警告升级 → 结束',
+    highlights:['Le escribo para expresar','al recibirlo','Le ruego que + subj','en su defecto','me veré obligada a + inf','ante la oficina del consumidor','Agradezco su atención'],
+    notes:[
+      "正式投诉用: Estimado/a + 部门名, Atentamente 结尾",
+      "礼貌请求: Le ruego que + 虚拟式, Le agradecería que + 虚拟式",
+      "描述问题用 al + 副动词 (al recibirlo) 或简单过去时",
+      "威胁升级用 me veré obligada a / en caso contrario / si no..."
+    ]
+  },
+  { // 6  B2 远程工作利弊
+    id:'wt6', lvl:'B2',
+    target_words:[150,200],
+    text:`El Teletrabajo: Ventajas y Desafíos
+
+En la actualidad, el teletrabajo se ha consolidado como una modalidad laboral cada vez más extendida, especialmente tras la pandemia. Sin embargo, esta nueva forma de trabajar presenta tanto beneficios como inconvenientes que es necesario analizar.
+
+Por un lado, el teletrabajo ofrece numerosas ventajas. Los empleados pueden organizar su propio horario, lo que les permite conciliar mejor la vida personal y profesional. Asimismo, se elimina el tiempo de desplazamiento, lo que reduce el estrés y aumenta la productividad. Además, las empresas pueden ahorrar costes en infraestructura.
+
+No obstante, esta modalidad también plantea serios desafíos. Por un lado, muchos trabajadores sienten aislamiento social, ya que pierden el contacto cotidiano con sus compañeros. Por otro lado, la frontera entre la vida laboral y personal se difumina, lo que a menudo provoca el fenómeno del "tecnoestrés". A pesar de que las herramientas digitales facilitan la comunicación, carecen de la calidez de la interacción presencial.
+
+En conclusión, sería recomendable adoptar un modelo híbrido que combine lo mejor de ambos sistemas. De este modo, se podría disfrutar de la flexibilidad del trabajo remoto sin renunciar a los vínculos sociales del entorno laboral.`,
+    structure:'引入话题(总) → 利(分1) → 弊(分2) → 结论(总) + 建议',
+    highlights:['se ha consolidado','en la actualidad','por un lado','por otro lado','sin embargo','no obstante','a pesar de que + subj','en conclusión','sería recomendable','de este modo','sin renunciar a'],
+    notes:[
+      "B2 议论文三段式: 总-分-总 (引言-利-弊-结论)",
+      "转折连接词: Sin embargo / No obstante / Ahora bien / A pesar de que + subj",
+      "列举连接: Por un lado... Por otro lado... / En primer lugar... Además... / Por una parte... Por otra parte...",
+      "虚拟式高级: A pesar de que + subj. (carecen de la calidez), ojalá + subj",
+      "条件/建议: Si + subj imperfecto, + condicional (Si tuviera tiempo, viajaría)"
+    ]
+  },
+  { // 7  B2 书评/影评
+    id:'wt7', lvl:'B2',
+    target_words:[150,200],
+    text:`Reseña: "La Casa de los Espíritus" de Isabel Allende
+
+Acabo de terminar de leer "La Casa de los Espíritus", la primera novela de Isabel Allende, publicada en 1982. Sin duda, es una de las obras más emblemáticas de la literatura latinoamericana contemporánea, y merece ser leída por cualquier amante de la buena literatura.
+
+La novela narra la historia de la familia Trueba a lo largo de varias generaciones, mezclando elementos realistas con toques de realismo mágico. A mi parecer, lo más destacable es la profundidad con la que Allende construye sus personajes, especialmente Clara y Esteban Trueba, cuyas vidas reflejan los cambios sociales y políticos de Chile.
+
+No solo destaca por su trama absorbente, sino también por su prosa poética y evocadora. Aunque algunas partes pueden resultar lentas, el desenlace compensa con creces la espera. A pesar de abordar temas tan duros como la dictadura y la violencia, la autora consigue transmitir una mensaje de esperanza y amor.
+
+En definitiva, recomiendo encarecidamente esta novela a quienes busquen una lectura profunda y emocional. Es, sin lugar a dudas, una obra maestra.`,
+    structure:'总评 → 内容介绍 → 优点 → 缺点 → 总结推荐',
+    highlights:['acabo de + inf','sin duda','a mi parecer','no solo...sino también','a pesar de + inf','a pesar de que + subj','en definitiva','sin lugar a dudas','recomendar encarecidamente'],
+    notes:[
+      "书评常用句型: Acabo de leer / Me parece + adj / A mi parecer / En mi opinión",
+      "强烈推荐: Recomiendo encarecidamente / Sin duda / Sin lugar a dudas",
+      "转折: Aunque + 虚拟式 (aunque algunas partes puedan resultar lentas)",
+      "高级连接: no solo...sino también, a pesar de, en definitiva, por lo tanto",
+      "表达评价: merece ser leída, es una obra maestra, es imprescindible"
+    ]
+  },
+  { // 8  A2 邮件给语言学校
+    id:'wt8', lvl:'A2',
+    target_words:[60,100],
+    text:`Estimada señora García:
+
+Me llamo Carlos y me gustaría recibir información sobre los cursos de español para extranjeros. He visto su página web y me interesa mucho su programa intensivo de verano.
+
+¿Podrían informarme sobre las fechas de inicio, los horarios y el precio del curso? También quisiera saber si ofrecen alojamiento para estudiantes y si el material didáctico está incluido en el precio.
+
+Me sería de gran ayuda si pudieran enviarme un folleto informativo. Quedo a la espera de su respuesta. Muchas gracias por su atención.
+
+Atentamente,
+Carlos Martínez`,
+    structure:'自我介绍 → 表达兴趣 → 三个具体问题 → 请求资料 → 感谢',
+    highlights:['Me gustaría + inf','me interesa','¿Podrían informarme sobre...?','quisiera saber','me sería de gran ayuda si + subj','quedo a la espera de','muchas gracias'],
+    notes:[
+      "礼貌请求: me gustaría + 动词原形, quisiera + 动词原形",
+      "询问信息: ¿Podría informarme sobre...? / Quisiera saber si... / ¿Sería posible...?",
+      "假设语气: Si + 虚拟式 imperfecto, + 条件式 (Si pudieran enviarme, me sería...)",
+      "正式结尾: Quedo a la espera de su respuesta / Agradezco de antemano su atención"
+    ]
+  },
+  { // 9  B1 西语学习博客
+    id:'wt9', lvl:'B1',
+    target_words:[130,170],
+    text:`Cómo Aprendí Español en Un Año: Mi Experiencia Personal
+
+¡Hola a todos! Hoy quiero compartir con vosotros mi experiencia aprendiendo español durante el último año. Espero que os sirva de ayuda si estáis empezando con este idioma.
+
+En primer lugar, considero que la constancia es lo más importante. Al principio, estudiaba una hora todos los días, sin falta. Además, veía series en español con subtítulos, lo que me ayudó mucho a mejorar la comprensión auditiva. Por otra parte, intentaba hablar con nativos por internet al menos una vez a la semana.
+
+Poco a poco, empecé a notar grandes avances. Aunque al principio me costaba mucho entender el ritmo rápido de los nativos, con la práctica diaria fui ganando confianza. Mi consejo es que no tengáis miedo a equivocaros, porque cada error es una oportunidad para aprender.
+
+En resumen, si dedicáis tiempo y pasión, podréis alcanzar vuestro objetivo. ¡Ánimo y mucha suerte!`,
+    structure:'问候引入 → 学习方法 3 点 → 进步描述 → 建议 + 鼓励',
+    highlights:['considero que + ind','sin falta','por otra parte','poco a poco','me costaba + inf','con la práctica diaria','a pesar de que','mi consejo es que + subj','en resumen','si + presente + futuro'],
+    notes:[
+      "B1 高级连接: En primer lugar / Por otra parte / Poco a poco / En resumen",
+      "未完成过去时: estudiaba, intentaba, me costaba (描述过去习惯/背景)",
+      "建议/命令: Mi consejo es que + subj (tengáis miedo), No tengáis miedo a + inf",
+      "条件: Si + 现在时, + 简单将来时 (Si dedicáis, podréis alcanzar)"
+    ]
+  },
+  { // 10  B1 投诉酒店
+    id:'wt10', lvl:'B1',
+    target_words:[60,100],
+    text:`Estimado señor director:
+
+Le escribo para transmitirle mi insatisfacción con la estancia en su hotel del pasado fin de semana. La habitación que reservé no correspondía con la descripción de su página web. En primer lugar, la habitación era mucho más pequeña de lo esperado y no tenía vistas al mar como se anunciaba. Además, el aire acondicionado no funcionaba correctamente y la limpieza de la ducha era deficiente.
+
+Les ruego que me devuelvan el importe de la noche de alojamiento, ya que el servicio no cumplió con las expectativas prometidas. De no recibir una respuesta satisfactoria en una semana, me veré en la necesidad de reclamar la cantidad a través de la oficina de turismo.
+
+Agradezco su pronta atención.
+Atentamente,
+Pedro Sánchez`,
+    structure:'问候 → 投诉问题 3 点 → 明确要求 → 警告升级 → 结束',
+    highlights:['para transmitirle mi insatisfacción','no correspondía con','en primer lugar','además','les ruego que + subj','ya que','de no + inf','me veré en la necesidad de','agradezco'],
+    notes:[
+      "正式投诉开头: Le escribo para + 动词原形 (expresar mi insatisfacción, presentar una queja)",
+      "描述问题用未完成过去时: era, no tenía, no funcionaba (描述过去状态)",
+      "礼貌请求: Les ruego que + subj (me devuelvan), Le agradecería que + subj",
+      "未实现条件: De no + inf = Si no + subj (De no recibir = Si no recibo)"
+    ]
+  },
+  { // 11  B2 远程教育 vs 传统教育
+    id:'wt11', lvl:'B2',
+    target_words:[130,170],
+    text:`Educación a Distancia vs. Educación Presencial: ¿Cuál es Mejor?
+
+En los últimos años, la educación a distancia ha ganado terreno frente a la educación tradicional. Aunque ambas modalidades tienen sus ventajas, es importante analizar sus diferencias para tomar una decisión informada.
+
+Por una parte, la educación presencial ofrece una interacción directa entre profesores y alumnos, lo que facilita la resolución de dudas y el trabajo en equipo. Además, el ambiente del aula motiva a muchos estudiantes a mantener una rutina de estudio. No obstante, requiere desplazamientos diarios y un horario fijo, lo que puede ser un inconveniente para quienes trabajan.
+
+Por otra parte, la educación a distancia permite estudiar desde cualquier lugar y adaptar el horario a las necesidades personales. Sin embargo, exige una mayor disciplina y autonomía, ya que no hay nadie que supervise el progreso del estudiante.
+
+En conclusión, no existe una opción única que sea la mejor para todos. La elección dependerá de las circunstancias y preferencias de cada persona. Sería ideal combinar ambas modalidades, aprovechando las ventajas de cada una.`,
+    structure:'引入 → 传统教育利弊 → 远程教育利弊 → 结论:看情况',
+    highlights:['ha ganado terreno','por una parte','por otra parte','no obstante','sin embargo','ya que','en conclusión','la elección dependerá de','sería ideal','aprovechando'],
+    notes:[
+      "B2 对比结构: Por una parte... Por otra parte... / Mientras que... / En cambio",
+      "因果: ya que (原因), lo que (结果), porque (通用)",
+      "让步: Aunque + subj imperfecto (Aunque ambas tengan, es importante...)",
+      "未来表达: dependerá de, sería ideal, podría combinar",
+      "名词化优势: el estudio, la resolución, el desplazamiento (动名词避免重复)"
+    ]
+  },
+  { // 12  B2 限制社交媒体
+    id:'wt12', lvl:'B2',
+    target_words:[150,200],
+    text:`¿Deberíamos Limitar el Uso de las Redes Sociales?
+
+En la última década, las redes sociales se han convertido en una parte indispensable de nuestra vida cotidiana. Sin embargo, su uso excesivo plantea serios interrogantes sobre la salud mental, especialmente entre los jóvenes. Ante esta situación, cabe preguntarse: ¿es necesario limitar su uso?
+
+Según un estudio reciente de la Universidad de Harvard, los adolescentes que pasan más de tres horas diarias en redes sociales tienen un 40% más de probabilidades de desarrollar ansiedad. Por otra parte, la adicción a la pantalla también afecta al rendimiento académico y a las relaciones personales. A pesar de que muchos argumentan que las redes fomentan la conexión social, lo cierto es que, paradójicamente, pueden provocar un profundo aislamiento.
+
+En mi opinión, sería conveniente establecer límites claros, especialmente para los menores. Una posible solución sería que los padres supervisaran el tiempo de uso y que las propias plataformas incorporaran avisos periódicos. No se trata de prohibir las redes, sino de fomentar un uso responsable y equilibrado.
+
+Para terminar, conviene recordar que la tecnología debe estar al servicio de las personas, y no al contrario. Si cada uno hace un uso consciente, las redes sociales pueden seguir siendo una herramienta valiosa.`,
+    structure:'引入问题 → 引用研究 → 个人观点 → 解决方案 → 总结',
+    highlights:['se han convertido en','sin embargo','según + noun','por otra parte','a pesar de que + subj','en mi opinión','sería conveniente','una posible solución sería que + subj','no se trata de + inf','sino de + inf','para terminar','conviene recordar que + subj'],
+    notes:[
+      "引用数据: Según un estudio de + 机构 (Universidad de Harvard)",
+      "数据呈现: un 40% más de probabilidades de + inf (名词化)",
+      "让步从句: A pesar de que + subj (muchos argumenten), Aunque + subj",
+      "提议: sería conveniente + inf, una posible solución sería que + subj",
+      "转折: No se trata de..., sino de... (不是..., 而是...)"
+    ]
+  },
+  { // 13  B2 国际交流项目申请
+    id:'wt13', lvl:'B2',
+    target_words:[80,120],
+    text:`Estimado comité de selección:
+
+Por medio de la presente, me dirijo a ustedes con el fin de expresar mi interés en participar en el Programa Internacional de Intercambio Cultural del próximo año académico.
+
+Me llamo Ana Ruiz, soy estudiante de último año de Traducción e Interpretación en la Universidad de Salamanca, y considero que mi perfil podría encajar perfectamente en los objetivos del programa. Cuento con un nivel avanzado de español (C1), inglés (C1) y francés (B2), además de experiencia previa en proyectos de voluntariado internacional.
+
+Me gustaría destacar mi capacidad de adaptación y mi interés genuino por conocer otras culturas. Considero que esta experiencia no solo enriquecería mi formación académica, sino que también me permitiría contribuir de manera significativa a la comunidad de acogida.
+
+Quedo a su disposición para ampliar cualquier información que consideren necesaria. Agradezco de antemano la atención prestada y quedo a la espera de su respuesta.
+
+Atentamente,
+Ana Ruiz`,
+    structure:'自我介绍 → 资格优势 → 个人动机 → 请求回复 → 结束',
+    highlights:['por medio de la presente','con el fin de + inf','me dirijo a ustedes','considero que + ind','cuento con','me gustaría + inf','considero que + ind','no solo...sino que también','quedo a su disposición','agradezco de antemano'],
+    notes:[
+      "正式申请开头: Por medio de la presente / Me dirijo a ustedes / Con el fin de",
+      "介绍资格: Cuento con + 名词, Poseo experiencia en, Mi nivel de ... es",
+      "申请动机: Me gustaría participar, Considero que mi perfil encaja, Sería una oportunidad para",
+      "双重否定优势: no solo...sino que también (不仅...而且...)",
+      "礼貌结尾: Quedo a su disposición, Agradezco de antemano, A la espera de su respuesta"
+    ]
+  }
+];
+
 // ===== SIELE WRITING EVALUATION RUBRIC (rule-based, self-grading) =====
+// 升级 #231 + #233: SIELE 4 级映射 + 西语语法模式检测
 function sieleGradeWriting(text, tarea) {
   if(!text || !text.trim()) return null;
   const t = text.trim();
   const wc = t.split(/\s+/).filter(Boolean).length;
-  const connectors = ['sin embargo','por lo tanto','además','por ejemplo','asimismo','no obstante','mientras tanto','por un lado','por otro lado','en cambio','ahora bien','aunque','incluso','de hecho','es decir','por eso','por tanto','ya que','porque','cuando','mientras','como','luego','entonces','primero','después','finalmente','en primer lugar','para empezar','para terminar','para concluir','en resumen','en cuanto a','gracias a','a causa de','debido a','a pesar de','a través de','en lugar de'];
-  const cFound = connectors.filter(c=>t.toLowerCase().includes(c));
-  // Subjunctive triggers
-  const subjTriggers = ['es necesario','es importante','es recomendable','es fundamental','ojalá','para que','antes de que','aunque + subj','cuando + subj','a menos que','a no ser que','quizás','tal vez','acaso','es posible que','es probable que','puede que','conviene que','recomiendo que','sugiero que'];
-  const subjFound = subjTriggers.filter(s=>t.toLowerCase().includes(s));
-  // Length target by tarea
+  const tl = t.toLowerCase();
+
+  // ===== 连接词检测 (5类) =====
+  const connectors = {
+    addition:['además','asimismo','también','igualmente','incluso'],
+    cause:['porque','ya que','puesto que','dado que','a causa de','debido a','gracias a'],
+    consequence:['por lo tanto','por tanto','por eso','por consiguiente','en consecuencia','así pues','así que','entonces'],
+    contrast:['sin embargo','no obstante','ahora bien','en cambio','por un lado','por otro lado','a pesar de','a pesar de que','aunque','incluso','de hecho','por el contrario'],
+    order:['en primer lugar','para empezar','por una parte','por otra parte','primero','después','luego','a continuación','finalmente','para terminar','para concluir','en resumen','en conclusión','por último'],
+    example:['por ejemplo','como','es decir','en concreto','en particular'],
+  };
+  const connsByCat = {};
+  let totalConns = 0;
+  let uniqueConns = 0;
+  Object.keys(connectors).forEach(cat => {
+    const found = connectors[cat].filter(c => tl.includes(c));
+    if(found.length){ connsByCat[cat] = found; totalConns += found.length; uniqueConns += new Set(found).size; }
+  });
+
+  // ===== 虚拟式触发器 =====
+  const subjTriggers = {
+    impersonal:['es necesario','es importante','es recomendable','es fundamental','es posible','es probable','es imprescindible','conviene que','recomiendo que','sugiero que','aconsejo que'],
+    wishes:['ojalá','quisiera','me gustaría','desearía','ojalá que'],
+    purpose:['para que','a fin de que','con el fin de que','antes de que','a menos que','a no ser que','sin que','en caso de que','con tal de que'],
+    doubt:['quizás','tal vez','acaso','puede que','puede ser que','dudo que','no creo que','no pienso que'],
+    temporal_subj:['cuando + subj','mientras + subj','hasta que','apenas','en cuanto','antes de que'],
+  };
+  const subjByCat = {};
+  let subjCount = 0;
+  Object.keys(subjTriggers).forEach(cat => {
+    const found = subjTriggers[cat].filter(s => tl.includes(s.split(' + ')[0]));
+    if(found.length){ subjByCat[cat] = found; subjCount += found.length; }
+  });
+
+  // ===== 高级句型 (B2) =====
+  const advancedPatterns = ['no solo...sino también','no solo...sino que','por más que','a no ser que','si + subj','como si + subj','es como si','dar igual que','lo + adj que','mientras que','en la medida en que','a medida que','gracias a que','debido a que'];
+  const advFound = advancedPatterns.filter(p => {
+    const key = p.split(' + ')[0].split('...')[0];
+    return tl.includes(key);
+  });
+
+  // ===== 西语语法模式检测 (新 #233) =====
+  const grammarChecks = [];
+
+  // 1. 标点符号 (¡¿) - 仅在有疑问句/感叹句时检查,A1 自我介绍等陈述文不适用
+  const hasQuestion = /[?¿]/.test(t);
+  const hasExclaim = /[¡!]/.test(t);
+  if(hasQuestion || hasExclaim){
+    const invertedMark = /[¿¡]/.test(t) ? 1 : 0;
+    if(!invertedMark) grammarChecks.push({key:'invertedPunct', label:'倒置标点 (¿? ¡!)', pass:false, tip:'西语问号感叹号要倒置: ¿Cómo estás? ¡Hola!'});
+    else grammarChecks.push({key:'invertedPunct', label:'倒置标点 (¿? ¡!)', pass:true});
+  }
+  // 纯陈述文则跳过此项,不扣分
+
+  // 2. 性别一致 - 简单检测 (la problema/el problema, la sistema/el sistema)
+  const genderMistakes = [];
+  // 阳性以 -o 结尾的常见名词 (problema, sistema, día, mapa, idioma, tema)
+  const mWords = ['problema','sistema','día','mapa','idioma','tema','programa','esquema','clima','poema','drama','síntoma','símbolo'];
+  mWords.forEach(w => {
+    const re = new RegExp('\\bla\\s+' + w + '\\b', 'gi');
+    if(re.test(t)) genderMistakes.push('la ' + w);
+  });
+  // 阴性以 -a 结尾的常见名词 (mano, foto, moto, radio, gente, noche, clase, llave, madre, parte)
+  const fWords = ['mano','foto','moto','radio','gente','noche','clase','llave','madre','parte','ciudad','nación','canción','razón','lección'];
+  fWords.forEach(w => {
+    const re = new RegExp('\\bel\\s+' + w + '\\b', 'gi');
+    if(re.test(t)) genderMistakes.push('el ' + w);
+  });
+  if(genderMistakes.length === 0) grammarChecks.push({key:'gender', label:'名词性别', pass:true});
+  else grammarChecks.push({key:'gender', label:'名词性别', pass:false, tip:`检查: ${genderMistakes.slice(0,3).join(', ')} - 注意: problema/sistema/día 是阳性用 el`});
+
+  // 3. 段落结构 (至少 2 段, 即至少 1 个空行)
+  const paragraphs = t.split(/\n\s*\n/).filter(p => p.trim());
+  if(paragraphs.length >= 2) grammarChecks.push({key:'paragraphs', label:`段落结构 (${paragraphs.length}段)`, pass:true});
+  else grammarChecks.push({key:'paragraphs', label:`段落结构 (${paragraphs.length}段)`, pass:false, tip:'建议至少分 2-3 段(空行分隔),结构更清晰'});
+
+  // 4. 动词时态多样性 - 简单检测 (A1/A2 阶段不强制,B1+ 要求至少 2 种)
+  const tenseMarkers = {
+    present: ['hoy','siempre','nunca','generalmente','normalmente','todos los días','cada día'],
+    indefinido: ['ayer','anoche','el año pasado','el mes pasado','el lunes pasado','hace dos años'],
+    imperfecto: ['antes','de pequeño','cuando era niño','en aquel entonces','siempre + imperfecto'],
+    futuro: ['mañana','el próximo año','la semana que viene','en el futuro'],
+    condicional: ['me gustaría','podría','debería','sería','quisiera'],
+  };
+  const tensesFound = [];
+  Object.keys(tenseMarkers).forEach(tense => {
+    if(tenseMarkers[tense].some(m => tl.includes(m))) tensesFound.push(tense);
+  });
+  // 仅 B1+ 强制要求时态多样性,A1/A2 标注建议但不扣分
+  if(tensesFound.length >= 2) grammarChecks.push({key:'tenses', label:`时态多样性 (${tensesFound.length}种: ${tensesFound.join('/')})`, pass:true});
+  else if(wc >= 100) grammarChecks.push({key:'tenses', label:`时态多样性 (${tensesFound.length}种)`, pass:false, tip:'建议混用至少 2 种时态(现在/过去/未来/条件),体现语法多样性'});
+  // A1/A2 短文(<100词)只显示提示,不计入扣分项
+  else if(tensesFound.length === 1) grammarChecks.push({key:'tenses', label:`时态多样性 (${tensesFound.length}种 - A1/A2 阶段合理)`, pass:true, tip:'B1+ 写作建议混用现在时 + 过去时/未来时'});
+  else grammarChecks.push({key:'tenses', label:`时态多样性 (0种)`, pass:false, tip:'建议至少使用现在时'});
+
+
+  // 5. 重音符号 (常见缺失)
+  const missingAccent = [];
+  if(/\bdia\b/.test(tl)) missingAccent.push('día');
+  if(/\bestudie\b/.test(tl)) missingAccent.push('estudié');
+  if(/\bmas\b/.test(tl) && !/pero\s+mas\b/.test(t)) missingAccent.push('más');
+  if(/\btambien\b/.test(tl)) missingAccent.push('también');
+  if(/\bnumero\b/.test(tl) && !/\bnúmero de teléfono\b/.test(tl)) missingAccent.push('número');
+  if(/\bcafe\b/.test(tl) && !/\bcafé con\b/.test(tl)) missingAccent.push('café');
+  if(/\btambien\b/.test(tl)) missingAccent.push('también');
+  if(missingAccent.length === 0) grammarChecks.push({key:'accents', label:'重音符号', pass:true});
+  else grammarChecks.push({key:'accents', label:'重音符号', pass:false, tip:`检查重音: ${missingAccent.slice(0,3).join(', ')}`});
+
+  // 6. 首字母大写
+  const sentences = t.split(/[.!?]\s+/).filter(s => s.length > 5);
+  const lowerStart = sentences.filter(s => /^[a-záéíóúñ]/.test(s)).length;
+  if(lowerStart === 0) grammarChecks.push({key:'capital', label:'句首大写', pass:true});
+  else grammarChecks.push({key:'capital', label:'句首大写', pass:false, tip:`有 ${lowerStart} 句未大写开头`});
+
+  // ===== SIELE 4 级映射 (新 #231) =====
+  // 根据词数 + 高级特征判定目标等级
+  let sieleBand = 'A1';
+  let sieleBandTarget = '';
+  if(wc >= 200 && uniqueConns >= 6 && subjCount >= 2 && advFound.length >= 1) { sieleBand = 'C1'; sieleBandTarget = '200+字/6+连接/2+虚拟/高级句型'; }
+  else if(wc >= 150 && uniqueConns >= 5 && subjCount >= 1) { sieleBand = 'B2'; sieleBandTarget = '150+字/5+连接/1+虚拟'; }
+  else if(wc >= 120 && uniqueConns >= 4) { sieleBand = 'B1'; sieleBandTarget = '120+字/4+连接'; }
+  else if(wc >= 80 && uniqueConns >= 2) { sieleBand = 'A2'; sieleBandTarget = '80+字/2+连接'; }
+  else { sieleBand = 'A1'; sieleBandTarget = '基础词汇 + 1+连接'; }
+
+  // ===== Length target by tarea =====
   const target = tarea===1 ? [100,150] : [200,250];
   const wcOk = wc >= target[0] && wc <= target[1];
-  // Score
-  let s = 0, mx = 100;
-  if(wcOk) s += 30; else s += Math.max(0, 30 - Math.abs(wc - (target[0]+target[1])/2));
-  s += Math.min(40, cFound.length * 5);  // connectors up to 40
-  s += Math.min(20, subjFound.length * 5); // subjunctive up to 20
-  s += 10;  // base completion
-  s = Math.min(100, s);
-  return {wordCount:wc, target, wcOk, connectors:cFound, connectorCount:cFound.length, subjunctive:subjFound, subjunctiveCount:subjFound.length, score:s, maxScore:mx};
+
+  // ===== 评分 (满分 100) =====
+  let s = 0;
+  // 词数 20 分
+  if(wcOk) s += 20; else {
+    const dist = Math.min(Math.abs(wc - target[0]), Math.abs(wc - target[1]));
+    s += Math.max(0, 20 - dist);
+  }
+  // 连接词多样性 25 分 (按 unique 算)
+  s += Math.min(25, uniqueConns * 4);
+  // 虚拟式 15 分
+  s += Math.min(15, subjCount * 4);
+  // 高级句型 10 分
+  s += Math.min(10, advFound.length * 4);
+  // 语法模式 20 分 (6 项, 每项 3-4 分)
+  const grammarPass = grammarChecks.filter(c => c.pass).length;
+  s += Math.min(20, grammarPass * 3.5);
+  // 基础完成 10 分
+  s += 10;
+  s = Math.min(100, Math.round(s));
+
+  return {
+    wordCount:wc,
+    target,
+    wcOk,
+    connectors: connsByCat,
+    connectorCount: totalConns,
+    uniqueConnectorCount: uniqueConns,
+    subjunctive: subjByCat,
+    subjunctiveCount: subjCount,
+    advancedPatterns: advFound,
+    grammarChecks,
+    grammarPassCount: grammarPass,
+    sieleBand,
+    sieleBandTarget,
+    score:s,
+    maxScore:100,
+  };
 }
 
 
