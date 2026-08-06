@@ -820,6 +820,7 @@ function getDefaultState(){
     ],
     vocabReviewCount: {A1:{}, A2:{}, B1:{}, B2:{}, all:{}}, // 单词背诵次数 nested {level: {esWord: count}} (含 all 累计)
     flashLastPositionTs: {A1:0, A2:0, B1:0, B2:0, all:0},    // 各级别最后背诵时间戳(ms) — 云同步断点续背依据
+    flashIdxByLevel: {A1:0, A2:0, B1:0, B2:0, all:0},         // 各级别当前 idx (per-level 断点续背核心, 修复 BUG: 切级不再丢位置)
     vocabDictation: {},         // 单词默写记录 {esWord: {correct:0, wrong:0}}
     dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
@@ -847,6 +848,15 @@ function load(){
           s.vocabReviewCount = nested;
           s.__pendingVocabMigration = old;  // 标记待二次分桶
         }
+      }
+    }catch(e){}
+    // v2.1 升级：兜底 flashIdxByLevel（老数据无此字段，用当前 flashLevel 的 flashIdx 初始化对应桶，其他置 0）
+    try{
+      if(!s.flashIdxByLevel || typeof s.flashIdxByLevel!=='object' || !s.flashIdxByLevel.A1){
+        var cur = {A1:0,A2:0,B1:0,B2:0,all:0};
+        var lv = s.flashLevel || 'all';
+        if(cur[lv] !== undefined) cur[lv] = s.flashIdx|0;
+        s.flashIdxByLevel = cur;
       }
     }catch(e){}
     return s;
@@ -1711,11 +1721,11 @@ function syncFlashPosition(pool){
   var saved=ST.flashCurrentWord||'';
   var found=saved?pool.findIndex(function(v){return v.es===saved;}):-1;
   if(found>=0){ST.flashIdx=found;return pool;}
-  // 2) 词已被移除/未保存 → 按已背进度数量定位
-  if(!ST.flashProgressByLevel) ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+  // 2) 词已被移除/未保存 → 按 per-level idx 恢复 (v2.1 修复, 之前用 flashProgressByLevel 不准)
+  if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
   var key = (ST.flashLevel==='all') ? 'all' : (ST.flashLevel || 'all');
-  var done = Number(ST.flashProgressByLevel[key]||0);
-  var safe = Math.max(0, Math.min(done, pool.length-1));
+  var savedIdx = Number(ST.flashIdxByLevel[key]||0);
+  var safe = Math.max(0, Math.min(savedIdx, pool.length-1));
   ST.flashIdx = safe;
   ST.flashCurrentWord = (pool[safe]||{}).es || '';
   return pool;
@@ -1736,6 +1746,15 @@ function setFlashPosition(index,pool){
   }
   ST.flashIdx=newIdx;
   ST.flashCurrentWord=pool[ST.flashIdx].es;
+  // v2.1 修复 BUG: per-level 断点续背 — 翻页时同步写 flashIdxByLevel + ts
+  try{
+    var curLvl = ST.flashLevel || 'all';
+    if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+    ST.flashIdxByLevel[curLvl] = newIdx;
+    if(!ST.flashLastPositionTs || typeof ST.flashLastPositionTs!=='object') ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
+    ST.flashLastPositionTs[curLvl] = Date.now();
+    ST.flashLastPositionTs.all = Date.now();
+  }catch(e){}
 }
 function changeFlashLevel(level){
   // Preserve the actual word when it exists in the requested level; otherwise use the first valid word only once.
