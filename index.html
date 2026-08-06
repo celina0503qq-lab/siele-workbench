@@ -2123,7 +2123,8 @@ function renderVocab(){
   h += `<div class="fr" id="vocabFilter"></div>`;
   h += `<div class="fcb" style="margin-bottom:6px"><span style="font-size:11px;color:var(--soft)">口音：</span><button class="chip ${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" onclick="setGlobalAccent('la')">🌎 拉美</button><button class="chip ${ST.globalAccent==='es'?'on':''}" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button></div>`;
   h += `<div style="max-height:600px;overflow-y:auto;border:1px solid var(--line);border-radius:10px"><table class="vt" id="vocabTable"></table></div>`;
-  h += `<div style="margin-top:8px;font-size:11px;color:var(--soft)" id="vocabCount"></div>`;
+  h += `<div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px" id="vocabPager"></div>`;
+  h += `<div style="margin-top:4px;font-size:11px;color:var(--soft)" id="vocabCount"></div>`;
 
   // Populate topics after render
   setTimeout(() => {
@@ -2132,11 +2133,15 @@ function renderVocab(){
     topics.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
     // Set initial level filter
     document.getElementById('vocabLvl').value = 'all';
+    _vocabPage = 1; // P2-1: 切到 vocab 页时回到第 1 页
     filterVocab();
   }, 10);
 
   return h;
 }
+
+let _vocabPage = 1;
+const VOCAB_PAGE_SIZE = 100; // P2-1 方案B: 每页 100 条
 
 function filterVocab(){
   const q = (document.getElementById('vocabSearch')?.value || '').toLowerCase();
@@ -2152,67 +2157,70 @@ function filterVocab(){
   const tb = document.getElementById('vocabTable');
   if(!tb) return;
 
-  // 2026-08-05 P0-P-3 性能优化：分帧渲染（每帧 200 条），2758 词不卡 UI 线程
-  // 思路：先清空表头 + tbody，requestAnimationFrame 循环 push chunk，每帧 16ms 渲染预算
-  let h = `<thead><tr><th style="width:30px"></th><th>单词</th><th>释义</th><th>词性</th><th>等级</th><th>例句</th><th style="width:100px">熟练度</th></tr></thead><tbody></tbody>`;
+  // P2-1 方案B: 分页器 - 2169 词全部塞 DOM 太重,改为每页 100 条
+  const totalPages = Math.max(1, Math.ceil(filtered.length / VOCAB_PAGE_SIZE));
+  if(_vocabPage > totalPages) _vocabPage = totalPages;
+  if(_vocabPage < 1) _vocabPage = 1;
+  const start = (_vocabPage - 1) * VOCAB_PAGE_SIZE;
+  const pageItems = filtered.slice(start, start + VOCAB_PAGE_SIZE);
+
+  // 渲染表头 + 当前页内容(不分帧,每页最多 100 行,DOM 渲染 < 5ms)
+  let h = `<thead><tr><th style="width:30px"></th><th>单词</th><th>释义</th><th>词性</th><th>等级</th><th>例句</th><th style="width:100px">熟练度</th></tr></thead><tbody>`;
+  pageItems.forEach(v => { h += renderVocabRow(v); });
+  h += '</tbody>';
   tb.innerHTML = h;
-  const tbody = tb.querySelector('tbody');
-  const cnt = document.getElementById('vocabCount');
-  if(cnt) cnt.textContent = `显示 ${filtered.length} / ${VDATA.length} 个词条`;
 
-  const CHUNK = 200;
-  let idx = 0;
-  let renderToken = ++filterVocab._token; // 防止旧帧覆盖新结果
-
-  function renderChunk(){
-    if(renderToken !== filterVocab._token) return; // 已被新调用打断，丢弃
-    const frag = document.createDocumentFragment();
-    const end = Math.min(idx + CHUNK, filtered.length);
-    for(; idx < end; idx++){
-      const v = filtered[idx];
-      const m = ST.vocabMastery[v.es] || 0;
-      const reviewCount = getReviewCount(v.es);
-      const dict = (ST.vocabDictation && ST.vocabDictation[v.es]) || {correct:0, wrong:0};
-      const dictTotal = dict.correct + dict.wrong;
-      const dictRate = dictTotal > 0 ? Math.round(dict.correct/dictTotal*100) : null;
-
-      // Composite mastery: 50% star rating + 30% review frequency + 20% dictation accuracy
-      const starScore = m/3*100;
-      const reviewScore = Math.min(100, reviewCount * 20);
-      const dictScore = dictRate !== null ? dictRate : (m>0 ? 50 : 0);
-      const compositeScore = Math.round(starScore * 0.5 + reviewScore * 0.3 + dictScore * 0.2);
-
-      let dots = '';
-      for(let i=0;i<3;i++) dots += `<span class="mdd ${i<m?'on':''}" onclick="setMastery('${v.es.replace(/'/g,"\\'")}',${i+1})" title="点击设置掌握度"></span>`;
-
-      // Build mastery display
-      let masteryHtml = `<div class="md">${dots}</div>`;
-      if(reviewCount > 0 || dictTotal > 0){
-        masteryHtml += `<div style="font-size:9px;color:var(--soft);margin-top:2px;text-align:center">`;
-        if(reviewCount > 0) masteryHtml += `📖${reviewCount}次 `;
-        if(dictTotal > 0) masteryHtml += `✍️${dict.correct}/${dictTotal}`;
-        masteryHtml += `</div>`;
-      }
-      masteryHtml += `<div style="width:100%;height:3px;background:#e8e0d0;border-radius:2px;margin-top:3px"><div style="width:${compositeScore}%;height:100%;background:${compositeScore>=80?'var(--ok)':compositeScore>=40?'var(--am)':'var(--bad)'};border-radius:2px"></div></div>`;
-
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td><button class="spk" style="width:24px;height:24px;font-size:11px" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
-      <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">${esc(v.es)}</td>
-      <td>${esc(v.zh)}</td>
-      <td class="pc">${v.pos}</td>
-      <td><span class="tm l${v.lvl}">${v.lvl}</span></td>
-      <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
-      <td>${masteryHtml}</td>`;
-      frag.appendChild(tr);
-    }
-    tbody.appendChild(frag);
-    if(idx < filtered.length){
-      requestAnimationFrame(renderChunk);
-    }
+  // 翻页器
+  const pager = document.getElementById('vocabPager');
+  if(pager){
+    const cur = _vocabPage, total = totalPages;
+    pager.innerHTML = `<div style="font-size:11px;color:var(--soft)">第 ${cur} / ${total} 页</div>
+      <div style="display:flex;gap:4px">
+        <button class="btn sg" ${cur<=1?'disabled':''} onclick="_vocabPage=1;filterVocab()">首页</button>
+        <button class="btn sg" ${cur<=1?'disabled':''} onclick="_vocabPage=${cur-1};filterVocab()">上一页</button>
+        <button class="btn sg" ${cur>=total?'disabled':''} onclick="_vocabPage=${cur+1};filterVocab()">下一页</button>
+        <button class="btn sg" ${cur>=total?'disabled':''} onclick="_vocabPage=${total};filterVocab()">末页</button>
+      </div>`;
   }
-  requestAnimationFrame(renderChunk);
+  const cnt = document.getElementById('vocabCount');
+  if(cnt) cnt.textContent = `显示 ${start+1}-${Math.min(start+VOCAB_PAGE_SIZE, filtered.length)} / 共 ${filtered.length} 个词条${filtered.length!==VDATA.length?` (全部 ${VDATA.length})`:''}`;
 }
-filterVocab._token = 0;
+
+// 把单行渲染抽出,便于分页调用
+function renderVocabRow(v){
+  const m = ST.vocabMastery[v.es] || 0;
+  const reviewCount = getReviewCount(v.es);
+  const dict = (ST.vocabDictation && ST.vocabDictation[v.es]) || {correct:0, wrong:0};
+  const dictTotal = dict.correct + dict.wrong;
+  const dictRate = dictTotal > 0 ? Math.round(dict.correct/dictTotal*100) : null;
+
+  const starScore = m/3*100;
+  const reviewScore = Math.min(100, reviewCount * 20);
+  const dictScore = dictRate !== null ? dictRate : (m>0 ? 50 : 0);
+  const compositeScore = Math.round(starScore * 0.5 + reviewScore * 0.3 + dictScore * 0.2);
+
+  let dots = '';
+  for(let i=0;i<3;i++) dots += `<span class="mdd ${i<m?'on':''}" onclick="setMastery('${v.es.replace(/'/g,"\\'")}',${i+1})" title="点击设置掌握度"></span>`;
+
+  let masteryHtml = `<div class="md">${dots}</div>`;
+  if(reviewCount > 0 || dictTotal > 0){
+    masteryHtml += `<div style="font-size:9px;color:var(--soft);margin-top:2px;text-align:center">`;
+    if(reviewCount > 0) masteryHtml += `📖${reviewCount}次 `;
+    if(dictTotal > 0) masteryHtml += `✍️${dict.correct}/${dictTotal}`;
+    masteryHtml += `</div>`;
+  }
+  masteryHtml += `<div style="width:100%;height:3px;background:#e8e0d0;border-radius:2px;margin-top:3px"><div style="width:${compositeScore}%;height:100%;background:${compositeScore>=80?'var(--ok)':compositeScore>=40?'var(--am)':'var(--bad)'};border-radius:2px"></div></div>`;
+
+  return `<tr>
+    <td><button class="spk" style="width:24px;height:24px;font-size:11px" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
+    <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">${esc(v.es)}</td>
+    <td>${esc(v.zh)}</td>
+    <td class="pc">${v.pos}</td>
+    <td><span class="tm l${v.lvl}">${v.lvl}</span></td>
+    <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
+    <td>${masteryHtml}</td>
+  </tr>`;
+}
 
 // 2026-08-05 P0-P-3 性能优化：搜索框 debounce 300ms（避免每次按键都触发 filterVocab）
 function filterVocabDebounced(){
@@ -2311,37 +2319,80 @@ function renderGrammar(){
 
 // ===== PAGE: SHADOW / PRONUNCIATION =====
 const SHADOW_SENTENCES = [
-  {es:'Hola, ¿cómo estás? Me llamo Ana.', zh:'你好，你好吗？我叫安娜。', lvl:'A1'},
-  {es:'Todos los días desayuno café con leche y pan tostado.', zh:'每天我早餐喝咖啡加奶吃烤面包。', lvl:'A1'},
-  {es:'Me gusta mucho viajar por España y conocer ciudades nuevas.', zh:'我非常喜欢在西班牙旅行并了解新城市。', lvl:'A2'},
-  {es:'El año pasado fui a Barcelona y visité la Sagrada Familia.', zh:'去年我去了巴塞罗那，参观了圣家堂。', lvl:'A2'},
-  {es:'Si tuviera más tiempo libre, aprendería a tocar la guitarra flamenca.', zh:'如果我有更多空闲时间，我会学弹弗拉门戈吉他。', lvl:'B1'},
-  {es:'Aunque llovía a cántaros, decidimos salir a pasear por el parque.', zh:'虽然下着倾盆大雨，我们还是决定去公园散步。', lvl:'B1'},
-  {es:'Cuanto más estudio español, más me doy cuenta de lo mucho que me queda por aprender.', zh:'我越学西班牙语，越意识到还有很多要学。', lvl:'B2'},
-  {es:'No solo es importante saber gramática, sino también poder comunicarse con fluidez.', zh:'不仅懂语法重要，能流利交流也很重要。', lvl:'B2'},
-  {es:'Se dice que el español es uno de los idiomas más hablados del mundo.', zh:'据说西班牙语是世界上使用最广泛的语言之一。', lvl:'B2'},
-  {es:'Me encantaría que vinieras a visitarme cuando tengas tiempo libre.', zh:'你有空的时候我很乐意你来拜访我。', lvl:'B2'},
+  {es:'Hola, ¿cómo estás? Me llamo Ana.', zh:'你好，你好吗？我叫安娜。', lvl:'A1', cat:'问候'},
+  {es:'Todos los días desayuno café con leche y pan tostado.', zh:'每天我早餐喝咖啡加奶吃烤面包。', lvl:'A1', cat:'生活'},
+  {es:'Me gusta mucho viajar por España y conocer ciudades nuevas.', zh:'我非常喜欢在西班牙旅行并了解新城市。', lvl:'A2', cat:'旅行'},
+  {es:'El año pasado fui a Barcelona y visité la Sagrada Familia.', zh:'去年我去了巴塞罗那，参观了圣家堂。', lvl:'A2', cat:'旅行'},
+  {es:'Si tuviera más tiempo libre, aprendería a tocar la guitarra flamenca.', zh:'如果我有更多空闲时间，我会学弹弗拉门戈吉他。', lvl:'B1', cat:'抽象'},
+  {es:'Aunque llovía a cántaros, decidimos salir a pasear por el parque.', zh:'虽然下着倾盆大雨，我们还是决定去公园散步。', lvl:'B1', cat:'生活'},
+  {es:'Cuanto más estudio español, más me doy cuenta de lo mucho que me queda por aprender.', zh:'我越学西班牙语，越意识到还有很多要学。', lvl:'B2', cat:'学习'},
+  {es:'No solo es importante saber gramática, sino también poder comunicarse con fluidez.', zh:'不仅懂语法重要，能流利交流也很重要。', lvl:'B2', cat:'学习'},
+  {es:'Se dice que el español es uno de los idiomas más hablados del mundo.', zh:'据说西班牙语是世界上使用最广泛的语言之一。', lvl:'B2', cat:'抽象'},
+  {es:'Me encantaría que vinieras a visitarme cuando tengas tiempo libre.', zh:'你有空的时候我很乐意你来拜访我。', lvl:'B2', cat:'生活'},
 
 ].concat(SHADOW_EXTRA);
 
 let _shadowIdx = 0;
 let _recognition = null;
 let _recording = false;
+let _shadowFilterLvl = 'all'; // P2-2: 跟读等级筛选
+let _shadowFilterCat = 'all'; // P2-2: 跟读主题筛选
+
+// P2-2: 自动按关键词给 shadow 句子补 cat
+function ensureShadowCat(s){
+  if(s.cat) return s;
+  const e = (s.es||'').toLowerCase();
+  if(/hola|encantar|salud|presentar|nombre|c[oó]mo est[aá]s|gracias/.test(e)) s.cat = '问候';
+  else if(/viajar|viaje|barcelona|madrid|ciudad|visitar|turism|pasear|parque/.test(e)) s.cat = '旅行';
+  else if(/trabajo|oficina|jefe|empresa|reuni[oó]n|colega|profesi[oó]n/.test(e)) s.cat = '工作';
+  else if(/estudio|aprender|estudiar|universidad|escuela|examen|clase|profesor|idioma|gram[aá]tica/.test(e)) s.cat = '学习';
+  else if(/comida|cena|desayuno|almuerzo|restaurante|cocina|caf[eé]|leche|pan/.test(e)) s.cat = '饮食';
+  else if(/familia|amigo|novio|hijo|padre|madre|hermano|casa|hogar/.test(e)) s.cat = '家庭';
+  else s.cat = '生活';
+  return s;
+}
 
 function renderShadow(){
+  // 补全所有句子的 cat
+  SHADOW_SENTENCES.forEach(ensureShadowCat);
+  // 当前筛选下可见的索引数组
+  const visibleIdxs = SHADOW_SENTENCES.map((s,i) => (i, s))
+    .filter(([i,s]) => (_shadowFilterLvl==='all'||s.lvl===_shadowFilterLvl) && (_shadowFilterCat==='all'||s.cat===_shadowFilterCat))
+    .map(([i]) => i);
+  if(visibleIdxs.length > 0 && !visibleIdxs.includes(_shadowIdx)) _shadowIdx = visibleIdxs[0];
+  // 收集主题集合
+  const cats = [...new Set(SHADOW_SENTENCES.map(s => s.cat))];
+
   let h = `<div class="tb"><div><h2>跟读训练</h2><div class="d">听原句 → 跟读录音 → AI评分对比 · 需要麦克风权限</div></div></div>`;
 
-  // Sentence list
+  // P2-2: 筛选器
+  h += `<div class="sb" style="margin-bottom:8px">
+    <select id="shLvl" onchange="_shadowFilterLvl=this.value;renderMain()">
+      <option value="all" ${_shadowFilterLvl==='all'?'selected':''}>全部等级</option>
+      <option value="A1" ${_shadowFilterLvl==='A1'?'selected':''}>A1</option>
+      <option value="A2" ${_shadowFilterLvl==='A2'?'selected':''}>A2</option>
+      <option value="B1" ${_shadowFilterLvl==='B1'?'selected':''}>B1</option>
+      <option value="B2" ${_shadowFilterLvl==='B2'?'selected':''}>B2</option>
+    </select>
+    <select id="shCat" onchange="_shadowFilterCat=this.value;renderMain()">
+      <option value="all" ${_shadowFilterCat==='all'?'selected':''}>全部主题</option>
+      ${cats.map(c => `<option value="${esc(c)}" ${_shadowFilterCat===c?'selected':''}>${esc(c)}</option>`).join('')}
+    </select>
+    <span style="font-size:11px;color:var(--soft);align-self:center">共 ${visibleIdxs.length} 句</span>
+  </div>`;
+
+  // Sentence list (filtered)
   h += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
-      <h4 style="font-size:12px;color:var(--soft);margin-bottom:7px">选择句子（${SHADOW_SENTENCES.length}句）</h4>
+      <h4 style="font-size:12px;color:var(--soft);margin-bottom:7px">选择句子（${visibleIdxs.length}/${SHADOW_SENTENCES.length}句）</h4>
       <div class="sh-list">`;
-  SHADOW_SENTENCES.forEach((s,i) => {
+  visibleIdxs.forEach(i => {
+    const s = SHADOW_SENTENCES[i];
     const sc = ST.shadowScores[i];
     h += `<div class="sh-item ${i===_shadowIdx?'on':''}" onclick="_shadowIdx=${i};renderMain()">
       <div class="es">${esc(s.es.slice(0,40))}${s.es.length>40?'...':''}</div>
       <div class="zh">${esc(s.zh)}</div>
-      <div class="meta">${s.lvl} ${sc!==undefined?'· 最高分 '+sc+'%':''}</div>
+      <div class="meta">${s.lvl} · ${esc(s.cat||'')} ${sc!==undefined?'· 最高分 '+sc+'%':''}</div>
     </div>`;
   });
   h += `</div></div>`;
@@ -2467,11 +2518,8 @@ function scoreShadow(recognized){
   // 4. Word count proximity (10%): how close the word count is
   const countProx = Math.round((1 - Math.abs(targetWords.length - recWords.length) / Math.max(targetWords.length, 1)) * 100);
 
-  // 5. Pronunciation confidence (10%): bonus based on speech recognition confidence
-  const confScore = 70; // placeholder (Web Speech API doesn't reliably expose confidence)
-
-  // Weighted total
-  let score = Math.round(wordAccuracy * 0.40 + fluencyScore * 0.25 + orderScore * 0.15 + countProx * 0.10 + confScore * 0.10);
+  // Weighted total (P0-1: removed placeholder confScore, rebalanced 45/28/17/10)
+  let score = Math.round(wordAccuracy * 0.45 + fluencyScore * 0.28 + orderScore * 0.17 + countProx * 0.10);
   if(score > 100) score = 100; if(score < 0) score = 0;
 
   // Save best score
@@ -2484,6 +2532,7 @@ function scoreShadow(recognized){
   const sc = document.getElementById('scoreCircle');
   const rt = document.getElementById('recogText');
   const fb = document.getElementById('shadowFeedback');
+  if(!res || !sc || !rt || !fb){ return; }
 
   let cls = score >= 80 ? 'h' : score >= 50 ? 'm' : 'l';
   let msg = '';
@@ -2973,14 +3022,71 @@ function toggleSpeakRecord(){
   }
 }
 function scoreSpeaking(text){
+  // P1-2: DOM null 防御
   const res = document.getElementById('speakRes');
   const sc = document.getElementById('speakScore');
   const rt = document.getElementById('speakRecog');
-  const wc = text.trim().split(/\s+/).filter(w=>w).length;
-  let score = Math.min(100, Math.round(wc * 5)); // rough: 20 words = 100
-  let cls = score >= 70 ? 'h' : score >= 40 ? 'm' : 'l';
-  sc.className = 'sc ' + cls; sc.textContent = score + '%';
+  if(!res || !sc || !rt){ return; }
+
+  // P0-2 方案A: 复用 scoreShadow 多维引擎 + 关键词命中维度
+  // 目标文本: 题目(topic) + 提示语(prep) 的核心西语词
+  let targetEs = '';
+  if(_speakIdx >= 0 && _speakIdx < SPEAKING_TOPICS.length){
+    const t = SPEAKING_TOPICS[_speakIdx];
+    targetEs = (t.topic || '') + ' ' + (t.prep || '');
+  }
+  const target = (targetEs || '').toLowerCase().replace(/[¿?¡!.,;:()¿¡]/g,'');
+  const rec = (text || '').toLowerCase().replace(/[¿?¡!.,;:()¿¡]/g,'');
+  const targetWords = target.split(/\s+/).filter(w=>w.length>2);
+  const recWords = rec.split(/\s+/).filter(w=>w.length>0);
+  const wc = recWords.length;
+
+  // 1. 关键词命中(40%) - 重点: 是否触及题目核心概念
+  let hit = 0;
+  targetWords.forEach(w => { if(recWords.includes(w)) hit++; });
+  const wordAccuracy = targetWords.length > 0 ? Math.round(hit / targetWords.length * 100) : 0;
+
+  // 2. 内容覆盖度(25%) - 长度合理性 (10-150 词最佳)
+  let fluencyScore = 0;
+  if(wc >= 10 && wc <= 150) fluencyScore = 100;
+  else if(wc < 10) fluencyScore = Math.round(wc / 10 * 100);
+  else fluencyScore = Math.max(40, Math.round(150 / wc * 100));
+
+  // 3. 表达完整度(20%) - 至少出现一些连接/功能词
+  const funcWords = ['y','o','pero','porque','que','si','cuando','como','para','con','de','el','la','en','un','una','es','son','estoy','tengo','creo','pienso','me','te','se'];
+  const funcHit = recWords.filter(w => funcWords.includes(w)).length;
+  const orderScore = wc > 0 ? Math.min(100, Math.round(funcHit / Math.min(wc, 8) * 100)) : 0;
+
+  // 4. 词数匹配(15%) - 鼓励充分表达
+  const targetLen = 40; // 期望词数基准
+  const countProx = wc > 0 ? Math.max(30, Math.round((1 - Math.abs(targetLen - wc) / Math.max(targetLen, 1)) * 100)) : 0;
+
+  // 加权
+  let score = Math.round(wordAccuracy * 0.40 + fluencyScore * 0.25 + orderScore * 0.20 + countProx * 0.15);
+  if(score > 100) score = 100; if(score < 0) score = 0;
+
+  let cls = score >= 80 ? 'h' : score >= 50 ? 'm' : 'l';
+  let msg = '';
+  if(score >= 80) msg = '¡Excelente! 内容切题,表达流畅自然。';
+  else if(score >= 50) msg = '¡Bien! 基本扣题,注意多使用题目中的核心词汇。';
+  else msg = '¡Ánimo! 试着围绕题目中的关键词展开,10词以上更易拿到完整分数。';
+
+  sc.className = 'sc ' + cls;
+  sc.textContent = score + '%';
   rt.textContent = text;
+
+  // 如果有 feedback 容器,展开多维反馈
+  const fb = document.getElementById('speakFeedback');
+  if(fb){
+    fb.innerHTML = `<b>评价：</b>${msg}<br>
+      <b>识别：</b>${esc(text)}<br>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
+        <div>关键词命中：<b>${wordAccuracy}%</b></div>
+        <div>内容覆盖度：<b>${fluencyScore}%</b></div>
+        <div>表达完整度：<b>${orderScore}%</b></div>
+        <div>词数匹配：<b>${countProx}%</b></div>
+      </div>`;
+  }
   res.classList.add('show');
   updateStreak();
 }
