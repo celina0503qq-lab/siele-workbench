@@ -17,7 +17,7 @@
 <style>
 :root{--tr:#C0392B;--trd:#962d22;--am:#E08E0B;--aml:#F5B041;--ink:#2B2118;--soft:#6B5D4F;--line:#E7DCCB;--teal:#1F6F5C;--teall:#2E8B73;--ok:#2E7D32;--warn:#E65100;--bad:#B71C1C;--bg:#F3EBDD;--paper:#fff;--sh:0 6px 22px rgba(80,50,20,.1);--r:14px;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,sans-serif;--serif:Georgia,"Songti SC",serif}
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:15px}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}input,select,textarea{font-family:inherit}a{color:var(--tr);text-decoration:none}a:hover{text-decoration:underline}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#d8c9b1;border-radius:8px}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:linear-gradient(180deg,#3a2418,#2b1810);color:#f3e7d3;padding:22px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--tr),var(--am));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px;box-shadow:0 4px 12px rgba(192,57,43,.4)}.brand h1{font-size:15px;font-weight:700;color:#fff;line-height:1.2}.brand .sub{font-size:11px;color:#c9a877}.nav{margin-top:18px;display:flex;flex-direction:column;gap:2px}.ni{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:9px;color:#d9c6ad;font-size:12.5px;font-weight:500;transition:.15s;text-align:left;width:100%}.ni .ic{width:16px;text-align:center;font-size:14px}.ni:hover{background:rgba(255,255,255,.07);color:#fff}.ni.on{background:linear-gradient(90deg,rgba(192,57,43,.85),rgba(224,142,11,.7));color:#fff}.ni .bdg{font-size:9px;background:#e08e0b;color:#fff;padding:1px 5px;border-radius:8px;margin-left:auto;font-weight:700}.ns{font-size:10px;color:#8a7355;letter-spacing:1px;text-transform:uppercase;margin:12px 0 4px 8px}.main{padding:22px 28px 50px;max-width:1200px}@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{flex-direction:row;flex-wrap:wrap}.ns{display:none}}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:linear-gradient(180deg,#3a2418,#2b1810);color:#f3e7d3;padding:22px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--tr),var(--am));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px;box-shadow:0 4px 12px rgba(192,57,43,.4)}.brand h1{font-size:15px;font-weight:700;color:#fff;line-height:1.2}.brand .sub{font-size:11px;color:#c9a877}.nav{margin-top:18px;display:flex;flex-direction:column;gap:2px}.ni{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:9px;color:#d9c6ad;font-size:12.5px;font-weight:500;transition:.15s;text-align:left;width:100%}.ni .ic{width:16px;text-align:center;font-size:14px}.ni .ic.dele-lv-a1,.ni .ic.dele-lv-a2,.ni .ic.dele-lv-b1,.ni .ic.dele-lv-b2{width:24px;height:18px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:0;color:#fff}.ni .ic.dele-lv-a1{background:#10b981}.ni .ic.dele-lv-a2{background:#3b82f6}.ni .ic.dele-lv-b1{background:#f59e0b}.ni .ic.dele-lv-b2{background:#ef4444}.ni:hover{background:rgba(255,255,255,.07);color:#fff}.ni.on{background:linear-gradient(90deg,rgba(192,57,43,.85),rgba(224,142,11,.7));color:#fff}.ni .bdg{font-size:9px;background:#e08e0b;color:#fff;padding:1px 5px;border-radius:8px;margin-left:auto;font-weight:700}.ns{font-size:10px;color:#8a7355;letter-spacing:1px;text-transform:uppercase;margin:12px 0 4px 8px}.main{padding:22px 28px 50px;max-width:1200px}@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{flex-direction:row;flex-wrap:wrap}.ns{display:none}}
 .page{display:none;animation:fade .3s ease}.page.on{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.tb{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}.tb h2{font-size:21px;font-weight:800}.tb .d{color:var(--soft);font-size:12.5px;margin-top:2px}.dp{background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:5px 13px;font-size:12px;color:var(--soft);box-shadow:var(--sh)}.g{display:grid;gap:13px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}@media(max-width:980px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;box-shadow:var(--sh)}.card h3{font-size:14.5px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}.card h3 .ic{color:var(--tr)}.stat .num{font-size:26px;font-weight:800;color:var(--tr);line-height:1}.stat .num.t{color:var(--teal)}.stat .num.a{color:var(--am)}.stat .lbl{font-size:11px;color:var(--soft)}.stat .sub{font-size:10.5px;color:var(--soft);margin-top:2px}
 .hero{background:linear-gradient(135deg,#7a1f12,#c0392b 45%,#e08e0b);border-radius:16px;padding:22px 24px;color:#fff;box-shadow:0 8px 26px rgba(122,31,18,.28);position:relative;overflow:hidden}.hero::after{content:"¡Olé!";position:absolute;right:-8px;bottom:-26px;font-size:110px;font-weight:800;opacity:.1;font-family:var(--serif)}.hero .tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.85;font-weight:600}.hero .cd{display:flex;align-items:flex-end;gap:5px;margin-top:5px}.hero .cd .big{font-size:50px;font-weight:800;line-height:.9;font-family:var(--serif)}.hero .cd .u{font-size:14px;margin-bottom:6px;opacity:.9}.hero-r{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;position:relative;z-index:1}.hero-c{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end}.hero-c label{font-size:10px;opacity:.9;display:block;margin-bottom:2px}.hero-c input,.hero-c select{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:7px;padding:5px 8px;font-size:12px}.hero-c input::-webkit-calendar-picker-indicator{filter:invert(1)}.hero-c option{color:#2b2118}
 .btn{display:inline-flex;align-items:center;gap:5px;background:var(--tr);color:#fff;padding:7px 14px;border-radius:8px;font-size:12.5px;font-weight:600;transition:.15s}.btn:hover{background:var(--trd);text-decoration:none}.btn.gh{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4)}.btn.t{background:var(--teal)}.btn.t:hover{background:#175544}.btn.sm{padding:5px 10px;font-size:11.5px}.btn.ol{background:var(--paper);color:var(--tr);border:1px solid var(--tr)}.btn.ol:hover{background:#fbeae6}
@@ -34,7 +34,7 @@
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.rc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px;transition:.15s}.rc:hover{border-color:var(--tr);box-shadow:var(--sh)}.rc .cat{font-size:9.5px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.5px}.rc h5{font-size:12.5px;font-weight:700;margin:3px 0}.rc p{font-size:10.5px;color:var(--soft);line-height:1.35}
 .so-scene-card{margin:10px 0;padding:14px;border:1px dashed #85c7ba;border-radius:12px;background:rgba(232,250,246,.1);color:#fff}.so-scene-card span{display:block;color:#9ce0d3;font-size:10px;font-weight:800;letter-spacing:.45px;text-transform:uppercase}.so-scene-card strong{display:block;margin:5px 0;font-size:15px}.so-scene-card p{margin:5px 0;font-size:12px;line-height:1.6}.so-scene-card small{display:block;color:#dbc7ae;font-size:10.5px;line-height:1.5}
 /* SIELE oral simulator */
-.so-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}.so-tab{min-width:118px;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:9px 11px;color:var(--ink);touch-action:manipulation}.so-tab.on{border-color:var(--tr);background:#fdeee9;color:var(--tr)}.so-tab b,.so-tab span{display:block}.so-tab span{font-size:10px;color:var(--soft);margin-top:2px}.so-stage{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:14px;align-items:start}.so-console{background:linear-gradient(150deg,#3a2418,#20130d);color:#fff;border-radius:14px;padding:18px;min-height:320px}.so-kicker{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#edbd76;font-weight:800}.so-console h3{font-size:19px;margin:5px 0 4px}.so-meta{font-size:11px;color:#dbc7ae;margin-bottom:13px}.so-prompt{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);border-radius:11px;padding:13px;margin:10px 0}.so-hidden{min-height:74px;display:flex;align-items:center;justify-content:center;text-align:center;color:#d8c4aa;font-size:12px}.so-question{font-family:var(--serif);font-size:17px;line-height:1.55}.so-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.so-actions .btn{min-height:38px}.so-timer{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:#f0be73;margin-left:auto}.so-side{display:grid;gap:10px}.so-score{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center}.so-score .total{width:72px;height:72px;border-radius:50%;border:5px solid var(--am);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--tr)}.so-bars{display:grid;gap:5px}.so-bar{display:grid;grid-template-columns:58px 1fr 28px;gap:6px;align-items:center;font-size:10px}.so-bar i{height:6px;background:#eee1cf;border-radius:5px;overflow:hidden}.so-bar i b{display:block;height:100%;background:var(--teal);border-radius:5px}.so-feedback{font-size:11.5px;line-height:1.55;margin-top:8px}.so-history{margin:0;border-radius:10px;overflow:hidden}.so-history-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8f6f0;border-radius:10px;cursor:pointer;font-size:12px;color:var(--tr);user-select:none;transition:background .2s}.so-history-bar:hover{background:#efe9dc}.so-history-bar span:first-child{font-weight:600;color:var(--tx)}.so-history-score{background:#e3f5e9;color:#1e7a44;padding:2px 10px;border-radius:20px;font-weight:600;font-size:13px}.so-history-date{color:var(--soft);font-size:11px;margin-left:auto}.so-history-arrow{font-size:11px;color:var(--ac);transition:transform .2s}.so-history-body{margin-top:8px;padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.so-history-text{font-size:12px;line-height:1.65;color:var(--tx);white-space:pre-wrap;word-break:break-word}.so-history-item{margin-bottom:10px;padding:10px 12px;background:var(--paper);border:1px solid var(--line);border-radius:8px;border-left:3px solid var(--teal)}.so-history-item-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:11px}.so-history-item-num{background:var(--teal);color:#fff;padding:1px 8px;border-radius:10px;font-weight:600;font-size:10px}.so-history-item-score{background:#e3f5e9;color:#1e7a44;padding:2px 8px;border-radius:10px;font-weight:600;font-size:12px}.so-history-item-date{color:var(--soft);font-size:11px}.so-history-item-wc{color:var(--soft);font-size:10px;background:var(--paper);padding:1px 6px;border-radius:8px;border:1px solid var(--line)}.so-history-item-text{font-size:11.5px;line-height:1.55;color:var(--tx);white-space:pre-wrap;word-break:break-word;max-height:90px;overflow-y:auto}.so-model{display:none;margin-top:10px;padding:12px;border-radius:10px;background:#eff7f3;color:#173e34;font-family:var(--serif);font-size:13px;line-height:1.7}.so-model.show{display:block;animation:fade .2s}.so-model .key{background:#ffe39b;color:#5b3a00;padding:1px 3px;border-radius:3px;font-weight:700}.so-model .link{color:#a83a2d;font-weight:700}.so-photo{position:relative;width:100%;aspect-ratio:4/3;border-radius:11px;overflow:hidden;background:#d8cdbd}.so-photo img{position:absolute;width:200%;height:200%;max-width:none;object-fit:cover}.so-photo.p0 img{left:0;top:0}.so-photo.p1 img{left:-100%;top:0}.so-photo.p2 img{left:0;top:-100%}.so-photo.p3 img{left:-100%;top:-100%}.so-photo-local{position:relative;width:100%;aspect-ratio:16/10;border-radius:11px;overflow:hidden;background:#d8cdbd;margin:10px 0}.so-photo-local img{width:100%;height:100%;object-fit:cover}.so-topic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.so-topic{padding:8px;border:1px solid var(--line);border-radius:8px;background:#fbf4e8;font-size:11px;text-align:left}.so-topic.on{border-color:var(--tr);background:#fdeee9}.so-recognized{max-height:110px;overflow:auto;background:rgba(255,255,255,.08);border-radius:8px;padding:8px;margin-top:8px;font-size:11px;line-height:1.45;color:#f3e6d6}.so-source{font-size:10px;color:var(--soft);margin-top:8px}.pr-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px;background:#e3f3ee;color:var(--teal)}.pr-badge.new{background:#fdeee9;color:var(--tr)}.so-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;padding:8px 0}.so-nav-pos{font-size:12px;font-weight:700;color:var(--tr)}.so-empty{padding:18px;text-align:center;color:var(--soft);font-size:12px}@media(max-width:760px){.so-stage{grid-template-columns:1fr}.so-console{padding:14px;min-height:0}.so-tab{min-width:104px}.so-topic-list{grid-template-columns:1fr}.so-actions .btn{flex:1;justify-content:center}.so-timer{width:100%;margin:4px 0 0}.so-question{font-size:15px}}
+.so-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}.so-tab{min-width:118px;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:9px 11px;color:var(--ink);touch-action:manipulation}.so-tab.on{border-color:var(--tr);background:#fdeee9;color:var(--tr)}.so-tab b,.so-tab span{display:block}.so-tab span{font-size:10px;color:var(--soft);margin-top:2px}.so-stage{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:14px;align-items:start}.so-console{background:linear-gradient(150deg,#3a2418,#20130d);color:#fff;border-radius:14px;padding:18px;min-height:320px}.so-kicker{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#edbd76;font-weight:800}.so-console h3{font-size:19px;margin:5px 0 4px}.so-meta{font-size:11px;color:#dbc7ae;margin-bottom:13px}.so-prompt{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);border-radius:11px;padding:13px;margin:10px 0}.so-hidden{min-height:74px;display:flex;align-items:center;justify-content:center;text-align:center;color:#d8c4aa;font-size:12px}.so-question{font-family:var(--serif);font-size:17px;line-height:1.55}.so-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.so-actions .btn{min-height:38px}.so-timer{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:#f0be73;margin-left:auto}.so-side{display:grid;gap:10px}.so-score{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center}.so-score .total{width:72px;height:72px;border-radius:50%;border:5px solid var(--am);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--tr)}.so-bars{display:grid;gap:5px}.so-bar{display:grid;grid-template-columns:58px 1fr 28px;gap:6px;align-items:center;font-size:10px}.so-bar i{height:6px;background:#eee1cf;border-radius:5px;overflow:hidden}.so-bar i b{display:block;height:100%;background:var(--teal);border-radius:5px}.so-feedback{font-size:11.5px;line-height:1.55;margin-top:8px}.so-history{margin:0;border-radius:10px;overflow:hidden}.so-history-bar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f8f6f0;border-radius:10px;cursor:pointer;font-size:12px;color:var(--tr);user-select:none;transition:background .2s}.so-history-bar:hover{background:#efe9dc}.so-history-bar span:first-child{font-weight:600;color:var(--tx)}.so-history-score{background:#e3f5e9;color:#1e7a44;padding:2px 10px;border-radius:20px;font-weight:600;font-size:13px}.so-history-date{color:var(--soft);font-size:11px;margin-left:auto}.so-history-arrow{font-size:11px;color:var(--ac);transition:transform .2s}.so-history-body{margin-top:8px;padding:10px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.so-history-text{font-size:12px;line-height:1.65;color:var(--tx);white-space:pre-wrap;word-break:break-word}.so-history-item{margin-bottom:10px;padding:10px 12px;background:var(--paper);border:1px solid var(--line);border-radius:8px;border-left:3px solid var(--teal)}.so-history-item-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:11px}.so-history-item-num{background:var(--teal);color:#fff;padding:1px 8px;border-radius:10px;font-weight:600;font-size:10px}.so-history-item-score{background:#e3f5e9;color:#1e7a44;padding:2px 8px;border-radius:10px;font-weight:600;font-size:12px}.so-history-item-date{color:var(--soft);font-size:11px}.so-history-item-wc{color:var(--soft);font-size:10px;background:var(--paper);padding:1px 6px;border-radius:8px;border:1px solid var(--line)}.so-history-item-text{font-size:11.5px;line-height:1.55;color:var(--tx);white-space:pre-wrap;word-break:break-word;max-height:90px;overflow-y:auto}.so-model{display:none;margin-top:10px;padding:12px;border-radius:10px;background:#eff7f3;color:#173e34;font-family:var(--serif);font-size:13px;line-height:1.7}.so-model.show{display:block;animation:fade .2s}.so-model .key{background:#ffe39b;color:#5b3a00;padding:1px 3px;border-radius:3px;font-weight:700}.so-model .link{color:#a83a2d;font-weight:700}.so-photo{position:relative;width:100%;aspect-ratio:4/3;border-radius:11px;overflow:hidden;background:#d8cdbd}.so-photo img{position:absolute;width:200%;height:200%;max-width:none;object-fit:cover}.so-photo.p0 img{left:0;top:0}.so-photo.p1 img{left:-100%;top:0}.so-photo.p2 img{left:0;top:-100%}.so-photo.p3 img{left:-100%;top:-100%}.so-photo-local{position:relative;width:100%;aspect-ratio:16/10;border-radius:11px;overflow:hidden;background:#d8cdbd;margin:10px 0}.so-photo-local img{width:100%;height:100%;object-fit:cover}.so-topic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.so-topic{padding:8px;border:1px solid var(--line);border-radius:8px;background:#fbf4e8;font-size:11px;text-align:left}.so-topic.on{border-color:var(--tr);background:#fdeee9}.so-recognized{max-height:110px;overflow:auto;background:rgba(255,255,255,.08);border-radius:8px;padding:8px;margin-top:8px;font-size:11px;line-height:1.45;color:#f3e6d6}.so-source{font-size:10px;color:var(--soft);margin-top:8px}.pr-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px;background:#e3f3ee;color:var(--teal)}.pr-badge.new{background:#fdeee9;color:var(--tr)}.dele-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}.dele-task-card{transition:transform .15s,box-shadow .15s}.dele-task-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}.so-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;padding:8px 0}.so-nav-pos{font-size:12px;font-weight:700;color:var(--tr)}.so-empty{padding:18px;text-align:center;color:var(--soft);font-size:12px}@media(max-width:760px){.so-stage{grid-template-columns:1fr}.so-console{padding:14px;min-height:0}.so-tab{min-width:104px}.so-topic-list{grid-template-columns:1fr}.so-actions .btn{flex:1;justify-content:center}.so-timer{width:100%;margin:4px 0 0}.so-question{font-size:15px}}
 .rsm{display:flex;align-items:center;gap:10px}.rsm svg{width:54px;height:54px;flex-shrink:0;transform:rotate(-90deg)}.rsm .pct{font-size:15px;font-weight:800;fill:var(--tr)}.banner{background:#e3f3ee;border:1px solid #b8dccf;border-radius:9px;padding:8px 12px;font-size:11.5px;color:#175544;margin-bottom:10px}.banner b{color:var(--teal)}.banner.err{background:#fdecea;border-color:#f5c6cb;color:#b71c1c}.banner.err b{color:var(--bad)}.empty{color:var(--soft);font-size:12px;padding:14px;text-align:center}footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-size:10.5px;color:var(--soft);text-align:center}
 .audio-debug{font-size:10px;color:var(--soft);margin-top:4px;font-family:monospace}
 
@@ -213,7 +213,7 @@
 <div class="app">
 <aside class="side" data-eusoft-scrollable-element="1">
 <div class="brand"><div class="logo">Ñ</div><div><h1 data-eusoft-scrollable-element="1">西语备考工作台</h1><div class="sub">DELE · SIELE · A1–B2</div></div></div>
-<nav class="nav" id="nav"><div class="ns">main</div><button class="ni on" onclick="go(&#39;dash&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🏠</span>仪表盘</button><button class="ni" onclick="go(&#39;flash&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🃏</span>单词卡片</button><button class="ni" onclick="go(&#39;vocab&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📚</span>词汇库</button><div class="ns">学习</div><button class="ni" onclick="go(&#39;grammar&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📐</span>语法库</button><button class="ni" onclick="go(&#39;shadow&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🎤</span>跟读训练</button><button class="ni" onclick="go(&#39;siele&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🎯</span>SIELE专项</button><div class="ns">练习</div><button class="ni" onclick="go(&#39;quiz&#39;)"><span class="ic" data-eusoft-scrollable-element="1">✏️</span>题库测验</button><button class="ni" onclick="go(&#39;writing&#39;)"><span class="ic" data-eusoft-scrollable-element="1">✍️</span>写作练习</button><button class="ni" onclick="go(&#39;speaking&#39;)"><span class="ic">🗣</span>口语话题</button><div class="ns">备考</div><button class="ni" onclick="go(&#39;exam&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📋</span>考试结构</button><button class="ni" onclick="go(&#39;planner&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📅</span>学习计划</button><button class="ni" onclick="go(&#39;errors&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🚨</span>错题集</button><button class="ni" onclick="go(&#39;reading&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📰</span>外刊阅读</button><div class="ns">系统</div><button class="ni" onclick="go(&#39;admin&#39;)"><span class="ic" data-eusoft-scrollable-element="1">⚙️</span>后台管理</button></nav>
+<nav class="nav" id="nav"><div class="ns">main</div><button class="ni on" onclick="go(&#39;dash&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🏠</span>仪表盘</button><button class="ni" onclick="go(&#39;flash&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🃏</span>单词卡片</button><button class="ni" onclick="go(&#39;vocab&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📚</span>词汇库</button><div class="ns">学习</div><button class="ni" onclick="go(&#39;grammar&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📐</span>语法库</button><button class="ni" onclick="go(&#39;shadow&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🎤</span>跟读训练</button><button class="ni" onclick="go(&#39;siele&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🎯</span>SIELE专项</button><div class="ns">练习</div><button class="ni" onclick="go(&#39;quiz&#39;)"><span class="ic" data-eusoft-scrollable-element="1">✏️</span>题库测验</button><button class="ni" onclick="go(&#39;writing&#39;)"><span class="ic" data-eusoft-scrollable-element="1">✍️</span>写作练习</button><button class="ni" onclick="go(&#39;speaking&#39;)"><span class="ic">🗣</span>口语话题</button><div class="ns">备考</div><button class="ni" onclick="go(&#39;exam&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📋</span>考试结构</button><button class="ni" onclick="go(&#39;planner&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📅</span>学习计划</button><button class="ni" onclick="go(&#39;errors&#39;)"><span class="ic" data-eusoft-scrollable-element="1">🚨</span>错题集</button><button class="ni" onclick="go(&#39;reading&#39;)"><span class="ic" data-eusoft-scrollable-element="1">📰</span>外刊阅读</button><div class="ns">DELE专项</div><button class="ni" onclick="go(&#39;deleA1&#39;)"><span class="ic dele-lv-a1">A1</span>DELE A1</button><button class="ni" onclick="go(&#39;deleA2&#39;)"><span class="ic dele-lv-a2">A2</span>DELE A2</button><button class="ni" onclick="go(&#39;deleB1&#39;)"><span class="ic dele-lv-b1">B1</span>DELE B1</button><button class="ni" onclick="go(&#39;deleB2&#39;)"><span class="ic dele-lv-b2">B2</span>DELE B2</button><div class="ns">系统</div><button class="ni" onclick="go(&#39;admin&#39;)"><span class="ic" data-eusoft-scrollable-element="1">⚙️</span>后台管理</button></nav>
 </aside>
 <main class="main" id="main"><div id="audioBanner" class="banner"></div><div class="tb"><div><h2>¡Hola! 学习仪表盘</h2><div class="d">今天是 2026/7/29 · 坚持 0 天</div></div>
     <div class="hero-c">
@@ -1128,6 +1128,12 @@ const NAV = [
     {id:'errors', icon:'🚨', label:'错题集'},
     {id:'reading', icon:'📰', label:'外刊阅读'},
   ]},
+  {s:'DELE专项', items:[
+    {id:'deleA1', icon:'A1', label:'DELE A1'},
+    {id:'deleA2', icon:'A2', label:'DELE A2'},
+    {id:'deleB1', icon:'B1', label:'DELE B1'},
+    {id:'deleB2', icon:'B2', label:'DELE B2'},
+  ]},
 ];
 
 let currentPage = 'dash';
@@ -1173,6 +1179,10 @@ function renderMain(){
     case 'netdisk': h += renderNetdisk(); break;
     case 'errors': h += renderErrors(); break;
     case 'reading': h += renderReading(); break;
+    case 'deleA1': h += renderDeleLevel('A1'); break;
+    case 'deleA2': h += renderDeleLevel('A2'); break;
+    case 'deleB1': h += renderDeleLevel('B1'); break;
+    case 'deleB2': h += renderDeleLevel('B2'); break;
   }
   main.innerHTML = h + '<footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // Post-render hooks
@@ -10068,6 +10078,258 @@ function markReadingDone(id){
   renderMain();
 }
 
+// ===== DELE 专项（A1/A2/B1/B2）=====
+// 4 个级别的入口页 + 5 个专项卡片（口语/听力/阅读/写作/全真模拟）
+// 数据接驳位置：renderDeleTask() 内的 _deleBank[level][task]，目前为占位。
+const DELE_LEVELS = ['A1','A2','B1','B2'];
+const DELE_TASKS = [
+  {key:'reading', label:'阅读专项',  desc:'Prueba de Comprensión de Lectura · TAREA 1-4'},
+  {key:'listening',label:'听力专项', desc:'Prueba de Comprensión Auditiva · TAREA 1-4'},
+  {key:'writing', label:'写作专项',  desc:'Prueba de Expresión Escrita · Tarea 1-2'},
+  {key:'speaking',label:'口语专项',  desc:'Prueba de Expresión Oral · Tarea 1-3 · 录音作答'},
+  {key:'mock',    label:'全真模拟',  desc:'完整一套官方样题 · 计时模考'},
+];
+// 题库数据挂载点（OCR 跑完后填充）
+const _deleBank = {
+  A1:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
+  A2:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
+  B1:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
+  B2:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
+};
+// 题库注入: 把 DELE_BANK_A1 (外链 dele_bank_a1.js) 转成 _deleBank 内部结构
+// DELE_BANK_A1.modelos[].pruebas[].tareas[] → _deleBank.A1.reading (P1 tareas) + .listening (P2 tareas)
+function _injectDeleBank(){
+  if (typeof window.DELE_BANK_A1 === 'undefined') return;
+  const bank = window.DELE_BANK_A1;
+  for (const m of (bank.modelos||[])) {
+    for (const p of (m.pruebas||[])) {
+      // p.id = 1 (P1 阅读) → reading; p.id = 2 (P2 听力) → listening
+      const targetKey = p.id === 1 ? 'reading' : (p.id === 2 ? 'listening' : null);
+      if (!targetKey) continue;
+      // 把每个 modelo 的 tareas 平铺成题库 (每题带 modelo + tarea + q + answer)
+      const flat = [];
+      for (const t of (p.tareas||[])) {
+        for (const [qStr, ans] of Object.entries(t.answers||{})) {
+          flat.push({
+            modelo: m.id,
+            modelo_name: m.name,
+            prueba: p.id,
+            tarea: t.id,
+            q: parseInt(qStr),
+            q_range: t.q_range,
+            answer: ans,
+            body_excerpt: t.body_excerpt || '',
+          });
+        }
+      }
+      if (flat.length) _deleBank.A1[targetKey] = _deleBank.A1[targetKey].concat(flat);
+    }
+  }
+  // A1.mock: 整卷模拟 (合并 P1+P2 所有题)
+  if (_deleBank.A1.reading.length || _deleBank.A1.listening.length) {
+    _deleBank.A1.mock = _deleBank.A1.reading.concat(_deleBank.A1.listening);
+  }
+}
+// 简单 level → 颜色 token（避免硬编码颜色，写到 var 体系即可）
+function deleLevelColor(level){
+  return {
+    A1:'#10b981', // 翠绿
+    A2:'#3b82f6', // 蓝
+    B1:'#f59e0b', // 琥珀
+    B2:'#ef4444', // 红
+  }[level]||'#64748b';
+}
+function renderDeleLevel(level){
+  if(!DELE_LEVELS.includes(level)) level='A1';
+  const color = deleLevelColor(level);
+  const header =
+    '<div class="card" style="border-left:4px solid '+color+'">'+
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+
+        '<div style="display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:10px;background:'+color+'22;color:'+color+';font-weight:700;font-size:18px">'+level+'</div>'+
+        '<div style="flex:1;min-width:0">'+
+          '<h2 style="margin:0">DELE '+level+' 专项训练</h2>'+
+          '<div class="sub" style="color:var(--tr)">'+DELE_LEVEL_DESC[level]+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  const cards = DELE_TASKS.map(function(t){
+    const count = (_deleBank[level] && _deleBank[level][t.key] && _deleBank[level][t.key].length) || 0;
+    const meta = deleTaskMeta(level, t.key);
+    const ready = count > 0;
+    const badge = ready
+      ? '<span class="pr-badge">'+count+' 题</span>'
+      : '<span class="pr-badge new">题库构建中</span>';
+    // 考纲元数据 (官方时长/题数/技能)
+    let metaLine = '';
+    if (meta) {
+      const dur = meta.duration || (meta.duration_prep ? meta.duration_prep + '+' + meta.duration_test : '');
+      const total = meta.question_count || meta.tarea_count || '';
+      const tareaCount = meta.tareas ? meta.tareas.length : (meta.tarea_count || '');
+      metaLine = '<div class="sub" style="color:var(--tr);margin-top:4px;font-size:12px">'+
+        '<span style="background:'+color+'22;color:'+color+';padding:1px 6px;border-radius:4px;margin-right:4px">官方考纲</span>'+
+        (dur ? '⏱ '+dur+' 分钟' : '')+
+        (total ? ' · '+total+(meta.question_count ? ' 题' : ' 大题') : '')+
+        (tareaCount ? ' · Tarea 1-'+tareaCount : '')+
+      '</div>';
+    }
+    return '<div class="card dele-task-card" style="cursor:'+(ready?'pointer':'default')+';opacity:'+(ready?'1':'0.7')+'" '+
+      (ready ? 'onclick="renderDeleTask(\''+level+'\',\''+t.key+'\')"' : '')+
+      '>'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
+          '<div style="flex:1;min-width:0">'+
+            '<h3 style="margin:0 0 6px">'+esc(t.label)+'</h3>'+
+            '<div class="sub" style="color:var(--tr);line-height:1.5">'+esc(t.desc)+'</div>'+
+            metaLine+
+          '</div>'+
+          badge+
+        '</div>'+
+      '</div>';
+  }).join('');
+  const otherLevels = DELE_LEVELS.filter(function(l){return l!==level;}).map(function(l){
+    return '<button class="btn sm ol" onclick="go(\'dele'+l+'\')">切到 '+l+'</button>';
+  }).join('');
+  return '<section>'+header+'<div class="dele-grid">'+cards+'</div>'+
+    '<div class="card" style="margin-top:12px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">'+
+        '<div class="sub">切换级别：</div>'+
+        '<div style="display:flex;gap:6px;flex-wrap:wrap">'+otherLevels+'</div>'+
+      '</div>'+
+    '</div>'+
+  '</section>';
+}
+// 5 个专项卡片点击后进的具体练习页
+function renderDeleTask(level, task){
+  const bank = (_deleBank[level] && _deleBank[level][task]) || [];
+  const taskLabel = (DELE_TASKS.find(function(t){return t.key===task;}) || {}).label || task;
+  // A1 reading / listening / mock: 渲染题库为可答题
+  if (level==='A1' && (task==='reading' || task==='listening' || task==='mock') && bank.length) {
+    return _renderDeleA1Quiz(level, task, taskLabel, bank);
+  }
+  return '<section>'+
+    '<div class="card" style="border-left:4px solid '+deleLevelColor(level)+'">'+
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
+        '<button class="btn sm ol" onclick="go(\'dele'+level+'\')">← 返回 '+level+'</button>'+
+        '<h2 style="margin:0">'+esc(taskLabel)+' · '+level+'</h2>'+
+      '</div>'+
+    '</div>'+
+    (bank.length
+      ? '<div class="card"><div class="sub">题库已就绪（'+bank.length+' 题）。具体练习 UI 待题库结构化完成后渲染。</div></div>'
+      : '<div class="card"><div class="sub" style="color:var(--tr)">本题库的 '+level+' '+taskLabel+' 正在 OCR 提取 + 结构化处理中，完成后将自动接入。</div></div>'
+    )+
+  '</section>';
+}
+
+// A1 阅读/听力/全真模拟: 按 modelo 分组的练习 UI
+function _renderDeleA1Quiz(level, task, taskLabel, bank){
+  // 按 modelo 分组
+  const grupos = {};
+  for (const it of bank) {
+    (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+  }
+  // 排序每个 grupo
+  for (const k in grupos) {
+    grupos[k].sort((a,b) => (a.prueba-b.prueba) || (a.tarea-b.tarea) || (a.q-b.q));
+  }
+  // 上方统计
+  const totalAns = bank.filter(function(x){return x.answer;}).length;
+  const cobertura = bank.length ? Math.round(totalAns / bank.length * 100) : 0;
+  // body 示例 (取第一题的 excerpt)
+  const sample = bank[0] && bank[0].body_excerpt || '暂无原文';
+  // 模型选择器
+  const modeloBtns = Object.keys(grupos).map(function(mid, idx){
+    const m = grupos[mid][0];
+    return '<button class="btn sm '+(idx===0?'pr':'ol')+'" onclick="_deleA1SwitchModelo(\''+mid+'\')">'+
+      esc(m.modelo_name)+' <span class="sub" style="color:var(--tr);margin-left:4px">('+grupos[mid].length+' 题)</span></button>';
+  }).join(' ');
+  // 选中第一个 modelo 的题目列表
+  const firstMid = Object.keys(grupos)[0];
+  const firstList = grupos[firstMid] || [];
+  const initialId = '__dele_a1_'+task+'_'+firstMid;
+  window._deleA1CurrentTask = task;
+  return '<section>'+
+    '<div class="card" style="border-left:4px solid '+deleLevelColor(level)+'">'+
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
+        '<button class="btn sm ol" onclick="go(\'dele'+level+'\')">← 返回 '+level+'</button>'+
+        '<h2 style="margin:0">'+esc(taskLabel)+' · '+level+'</h2>'+
+        '<span class="pr-badge">'+bank.length+' 题</span>'+
+        '<span class="pr-badge" style="background:var(--accent2,#10b981)22;color:var(--accent2,#10b981)">答案覆盖 '+cobertura+'%</span>'+
+      '</div>'+
+      '<div class="sub" style="color:var(--tr);margin-top:6px">'+
+        '题库来源: '+esc(DELE_BANK_A1 && DELE_BANK_A1.source || 'OCR-extracted')+
+      '</div>'+
+    '</div>'+
+    '<div class="card">'+
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">'+
+        '<div class="sub">选择 Modelo:&nbsp;</div>'+modeloBtns+
+      '</div>'+
+    '</div>'+
+    '<div id="'+initialId+'">'+_renderDeleA1ModeloList(task, firstMid, grupos[firstMid])+'</div>'+
+  '</section>';
+}
+function _renderDeleA1ModeloList(task, mid, items){
+  // 按 prueba → tarea 分组渲染
+  const byTarea = {};
+  for (const it of items) {
+    const k = 'P'+it.prueba+' T'+it.tarea;
+    (byTarea[k] = byTarea[k] || []).push(it);
+  }
+  let h = '';
+  // 原文片段 (取第一个)
+  const sample = items[0] && items[0].body_excerpt || '暂无原文';
+  h += '<div class="card">'+
+    '<div class="sub" style="color:var(--tr);margin-bottom:6px">题目原文 (OCR 提取, 首段):</div>'+
+    '<div style="background:var(--bg2,#f5f5f5);padding:10px;border-radius:6px;font-size:13px;line-height:1.6;max-height:160px;overflow:auto;white-space:pre-wrap">'+esc(sample)+'</div>'+
+  '</div>';
+  for (const tk in byTarea) {
+    const group = byTarea[tk];
+    h += '<div class="card"><h3 style="margin:0 0 10px">'+esc(tk)+' <span class="sub" style="color:var(--tr)">· '+group.length+' 题</span></h3>';
+    h += '<div class="gp">';
+    for (const q of group) {
+      const answered = !!q.answer;
+      h += '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">'+
+          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span></div>'+
+          (answered
+            ? '<span class="pr-badge" style="background:#10b98122;color:#10b981">答案 '+q.answer+'</span>'
+            : '<span class="pr-badge new">OCR 漏抽</span>')+
+        '</div>'+
+        '<div class="sub" style="color:var(--tr);margin-top:4px">题号范围: P'+q.prueba+' T'+q.tarea+' · q_range '+JSON.stringify(q.q_range)+'</div>'+
+      '</div>';
+    }
+    h += '</div></div>';
+  }
+  return h;
+}
+function _deleA1SwitchModelo(mid){
+  // 找到当前 task
+  const task = window._deleA1CurrentTask || 'reading';
+  const bank = (_deleBank.A1[task] || []);
+  const grupos = {};
+  for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+  for (const k in grupos) grupos[k].sort((a,b) => (a.prueba-b.prueba) || (a.tarea-b.tarea) || (a.q-b.q));
+  const el = document.getElementById('__dele_a1_'+task+'_'+mid);
+  if (el) el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+}
+// DELE 官方考纲 (来源: 知乎考纲 PDF p3-p7 + Cervantes 官方标准)
+const DELE_LEVEL_DESC = {
+  A1:'阅读 45 分钟·25 题 · 听力 25 分钟·25 题 · 写作 25 分钟·2 题 · 口语 10 分钟+准备 10 分钟·3 题',
+  A2:'阅读 60 分钟·25 题 · 听力 40 分钟·25 题 · 写作 45 分钟·2 题 · 口语 12 分钟+准备 12 分钟·3 题',
+  B1:'阅读 70 分钟·30 题 · 听力 40 分钟·30 题 · 写作 60 分钟·2 题 · 口语 15 分钟+准备 15 分钟·4 题',
+  B2:'阅读 70 分钟·36 题 · 听力 40 分钟·30 题 · 写作 80 分钟·2 题 · 口语 20 分钟+准备 20 分钟·3 题',
+};
+// 每个级别的 5 个专项分别显示的元数据 (题数/时长/技能)
+function deleTaskMeta(level, taskKey){
+  if (level !== 'A1') return null;  // 仅 A1 有真实题库
+  if (!window.DELE_BANK_A1 || !window.DELE_BANK_A1.syllabus) return null;
+  const syl = window.DELE_BANK_A1.syllabus;
+  if (taskKey === 'reading')  return syl.pruebas.reading;
+  if (taskKey === 'listening') return syl.pruebas.listening;
+  if (taskKey === 'writing')  return syl.writing;
+  if (taskKey === 'speaking' || taskKey === 'oral') return syl.speaking;
+  if (taskKey === 'mock')     return {duration: syl.pruebas.reading.duration + syl.pruebas.listening.duration, name: '全真模拟', tarea_count: 8, question_count: 50};
+  return null;
+}
+
 // ===== VERB USAGE DETAILS (动词用法详解) =====
 const VERB_USAGE = {
   'ser': {
@@ -10363,10 +10625,22 @@ window.addEventListener('DOMContentLoaded', () => {
   if(window.speechSynthesis) window.speechSynthesis.getVoices();
   renderNav();
   renderMain();
+  // 等待 defer 加载的 dele_bank_a1.js 就绪后注入题库并刷新 DELE 卡片数
+  function tryInject(retries){
+    if (typeof window.DELE_BANK_A1 !== 'undefined') {
+      _injectDeleBank();
+      renderNav();
+      renderMain();
+    } else if (retries > 0) {
+      setTimeout(function(){tryInject(retries-1);}, 80);
+    }
+  }
+  tryInject(30); // ~2.4s
 });
 </script>
 
 <script src="./vdata_dele.js" defer></script>
+<script src="./dele_bank_a1.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
