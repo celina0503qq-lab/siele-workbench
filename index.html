@@ -10143,39 +10143,158 @@ const _deleBank = {
   B1:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
   B2:{speaking:[],listening:[],reading:[],writing:[],mock:[]},
 };
+// 暴露给测试/调试用
+if (typeof window !== 'undefined') window._deleBank = _deleBank;
 // 题库注入: 把 DELE_BANK_A1 (外链 dele_bank_a1.js) 转成 _deleBank 内部结构
-// DELE_BANK_A1.modelos[].pruebas[].tareas[] → _deleBank.A1.reading (P1 tareas) + .listening (P2 tareas)
+// v4 bank: modelos[].pruebas[].tareas[] 含 passage_raw (OCR 整段) + answers
+// → UI 端用 _parseTareaFromRaw() 切每题 prompt/options
 function _injectDeleBank(){
   if (typeof window.DELE_BANK_A1 === 'undefined') return;
   const bank = window.DELE_BANK_A1;
+  // 旧版 v2 bank 兜底
+  if (!bank.modelos && bank.reading) {
+    for (const k of ['reading','listening']) {
+      const arr = bank[k] || [];
+      for (const it of arr) {
+        _deleBank.A1[k].push({
+          modelo: it.modelo || 'm',
+          modelo_name: it.modelo_name || '',
+          prueba: k === 'reading' ? 1 : 2,
+          tarea: it.tarea || 1,
+          q: it.q,
+          answer: it.answer,
+          q_range: it.q_range || [it.q, it.q],
+          body_excerpt: it.body_excerpt || '',
+        });
+      }
+    }
+    if (_deleBank.A1.reading.length || _deleBank.A1.listening.length) {
+      _deleBank.A1.mock = _deleBank.A1.reading.concat(_deleBank.A1.listening);
+    }
+    return;
+  }
+  // v4 bank: modelos[].pruebas[].tareas[]
   for (const m of (bank.modelos||[])) {
     for (const p of (m.pruebas||[])) {
-      // p.id = 1 (P1 阅读) → reading; p.id = 2 (P2 听力) → listening
       const targetKey = p.id === 1 ? 'reading' : (p.id === 2 ? 'listening' : null);
       if (!targetKey) continue;
-      // 把每个 modelo 的 tareas 平铺成题库 (每题带 modelo + tarea + q + answer)
       const flat = [];
       for (const t of (p.tareas||[])) {
-        for (const [qStr, ans] of Object.entries(t.answers||{})) {
+        // v4 关键: 解析 passage_raw → 每题 prompt/options
+        const parsed = (t.passage_raw && typeof _parseTareaFromRaw === 'function')
+          ? _parseTareaFromRaw(t.passage_raw, t.q_range, t.opt_count, t.answers || {})
+          : null;
+        for (const [qStr, ans] of Object.entries(t.answers || {})) {
+          const qn = parseInt(qStr);
+          const qParsed = parsed && parsed.questions ? (parsed.questions.find(q => q.id === qn) || null) : null;
           flat.push({
             modelo: m.id,
             modelo_name: m.name,
             prueba: p.id,
-            tarea: t.id,
-            q: parseInt(qStr),
+            tarea: t.tarea,
+            q: qn,
             q_range: t.q_range,
             answer: ans,
-            body_excerpt: t.body_excerpt || '',
+            instruction: t.instruction || '',
+            body_excerpt: parsed ? (parsed.body_excerpt || '') : '',
+            prompt: qParsed ? qParsed.prompt : '',
+            options: qParsed ? qParsed.options : [],
+            type: qParsed ? qParsed.type : 'unknown',
           });
         }
       }
       if (flat.length) _deleBank.A1[targetKey] = _deleBank.A1[targetKey].concat(flat);
     }
   }
-  // A1.mock: 整卷模拟 (合并 P1+P2 所有题)
   if (_deleBank.A1.reading.length || _deleBank.A1.listening.length) {
     _deleBank.A1.mock = _deleBank.A1.reading.concat(_deleBank.A1.listening);
   }
+}
+
+// ===== v4 题库 OCR 解析器 =====
+// 把 passage_raw (Edelsa 题目段) 切成:
+//   body_excerpt: 题目原文 (邮件/笔记/广告/通知 整段)
+//   questions: [{id, type, prompt, options}]  每道题
+// q_range: [q_start, q_end]  opt_count: 0=填空, 3/4/8=匹配/选择
+function _parseTareaFromRaw(raw, qRange, optCount, answers) {
+  if (!raw) return { body_excerpt: '', questions: [] };
+  // 找 PREGUNTAS 切分: 之前是 body, 之后是题号段
+  const pregMatch = raw.match(/PREGUNTAS\s*\n/i);
+  let body = '', rest = raw;
+  if (pregMatch) {
+    const idx = raw.indexOf(pregMatch[0]);
+    body = raw.substring(0, idx).trim();
+    rest = raw.substring(idx + pregMatch[0].length).trim();
+  } else {
+    // 没 PREGUNTAS 段: 第一个题号前为 body
+    const firstQ = new RegExp(`\\b${qRange[0]}\\s*[\\.\\)]`);
+    const fm = rest.match(firstQ);
+    if (fm) {
+      body = rest.substring(0, fm.index).trim();
+      rest = rest.substring(fm.index).trim();
+    }
+  }
+  // 清理 body 中的页眉/PRUEBA 残留
+  body = body.replace(/^(?:examen|PRUEBA|TAREA|Comprensión[^\n]*|de lectura|auditiva|LS PERSONAS[^\n]*|VOCABULARIO[^\n]*|FICHA[^\n]*)\n?/gim, '').trim();
+  body = body.replace(/\n{3,}/g, '\n\n').trim();
+
+  const questions = [];
+  if (optCount === 0) {
+    // 填空题: 提取每道题, prompt 留 OCR 行, answer 已在 answers 中
+    const lines = rest.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    for (let q = qRange[0]; q <= qRange[1]; q++) {
+      // 找 "qn." 开头的行
+      const re = new RegExp(`^${q}\\s*[\\.\\)]\\s*(.+?)(?=\\n?\\s*${q+1}\\s*[\\.\\)]|$)`, 'ms');
+      const m = rest.match(re);
+      const prompt = m ? m[1].replace(/\n+/g, ' ').trim().slice(0, 200) : `[填空题 ${q}]`;
+      questions.push({ id: q, type: 'fill', prompt, options: [] });
+    }
+  } else if (optCount === 3 || optCount === 4) {
+    // 选择题: 提取 1-5 题, 每题 3 或 4 个 a/b/c/d 选项
+    // OCR 把 P7+P8 双栏拆成线性文本, 选项可能错位 (题 1 的 a-d 后面跟着题 3 的 prompt).
+    // 因此: 用"PREGUNTAS 段 + 各题题号" 切片, prompt 在题号行后的非空文本中,
+    //       选项留 placeholder (因为 OCR 已不可靠解析, 让用户对照答案).
+    const lines = rest.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    for (let q = qRange[0]; q <= qRange[1]; q++) {
+      // 找 "qn." 或 "qn " 开头的行
+      const lineRe = new RegExp(`^${q}\\s*[\\.\\)]?\\s*(.*)$`);
+      let promptText = '';
+      for (const line of lines) {
+        const m = line.match(lineRe);
+        if (m && m[1]) { promptText = m[1].trim(); break; }
+      }
+      // 如果没找到纯题号行, 尝试 "qn . prompt" 格式 (OCR 拆题号和点)
+      if (!promptText) {
+        const re2 = new RegExp(`^${q}\\s*\\.\\s*([^\\n]{5,200})`, 'm');
+        const m2 = rest.match(re2);
+        promptText = m2 ? m2[1].replace(/\s+/g, ' ').trim() : '';
+      }
+      // 提取占位选项 (供 UI 展示"选择题 4 选 1", 正确答案高亮)
+      const correctKey = (answers && answers[q]) || '';
+      const options = [];
+      for (let i = 0; i < optCount; i++) {
+        const k = String.fromCharCode(65 + i);
+        const isCorrect = correctKey === k;
+        const tag = isCorrect ? ' ✓ 正确答案' : (correctKey ? '' : '');
+        options.push({ key: k, text: `[选项 ${k}${tag} - OCR 双栏错位, 原题见 Edelsa 书 P${qRange[0]}页附近]` });
+      }
+      questions.push({
+        id: q,
+        type: 'choice',
+        prompt: promptText || `[题 ${q} - OCR 未识别 prompt]`,
+        options,
+      });
+    }
+  } else if (optCount === 8) {
+    // 匹配题: 提取 phrases (6-11 / 12-17 / 11-17), items 留 placeholder
+    for (let q = qRange[0]; q <= qRange[1]; q++) {
+      const re = new RegExp(`^${q}\\s*[\\.\\)]\\s*([\\s\\S]+?)(?=\\n?\\s*${q+1}\\s*[\\.\\)]|$)`, 'm');
+      const m = rest.match(re);
+      const prompt = m ? m[1].replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200) : `[匹配题 ${q}]`;
+      questions.push({ id: q, type: 'match', prompt, options: [] });
+    }
+  }
+  return { body_excerpt: body.slice(0, 1200), questions };
 }
 // 简单 level → 颜色 token（避免硬编码颜色，写到 var 体系即可）
 function deleLevelColor(level){
@@ -10342,26 +10461,48 @@ function _renderDeleA1ModeloList(task, mid, items){
     (byTarea[k] = byTarea[k] || []).push(it);
   }
   let h = '';
-  // 原文片段 (取第一个)
+  // 原文片段 (取第一个, 来自 v4 passage_raw 解析)
   const sample = items[0] && items[0].body_excerpt || '暂无原文';
-  h += '<div class="card">'+
-    '<div class="sub" style="color:var(--tr);margin-bottom:6px">题目原文 (OCR 提取, 首段):</div>'+
-    '<div style="background:var(--bg2,#f5f5f5);padding:10px;border-radius:6px;font-size:13px;line-height:1.6;max-height:160px;overflow:auto;white-space:pre-wrap">'+esc(sample)+'</div>'+
-  '</div>';
+  if (sample) {
+    h += '<div class="card">'+
+      '<div class="sub" style="color:var(--tr);margin-bottom:6px">题目原文 (OCR 提取, 首段):</div>'+
+      '<div style="background:var(--bg2,#f5f5f5);padding:10px;border-radius:6px;font-size:13px;line-height:1.6;max-height:200px;overflow:auto;white-space:pre-wrap">'+esc(sample)+'</div>'+
+    '</div>';
+  }
   for (const tk in byTarea) {
     const group = byTarea[tk];
     h += '<div class="card"><h3 style="margin:0 0 10px">'+esc(tk)+' <span class="sub" style="color:var(--tr)">· '+group.length+' 题</span></h3>';
     h += '<div class="gp">';
     for (const q of group) {
       const answered = !!q.answer;
+      // 渲染 prompt
+      let promptHtml = '';
+      if (q.prompt) {
+        promptHtml = '<div style="margin-top:6px;font-size:13px;line-height:1.6;color:var(--fg)"><b>题 '+q.q+':</b> '+esc(q.prompt)+'</div>';
+      }
+      // 渲染选项
+      let optsHtml = '';
+      if (q.options && q.options.length) {
+        optsHtml = '<div style="margin-top:4px;font-size:12px;color:var(--tr)">'+
+          q.options.map(function(o){
+            const isAns = q.answer && o.key.toUpperCase() === q.answer.toUpperCase();
+            return '<div style="'+(isAns?'background:#10b98122;border-left:3px solid #10b981;padding:2px 6px;margin:2px 0;border-radius:3px':'')+'"><b>'+esc(o.key)+')</b> '+esc(o.text)+(isAns?' ✓':'')+'</div>';
+          }).join('')+
+        '</div>';
+      }
+      // 填空题答案
+      if (q.type === 'fill' && q.answer) {
+        optsHtml = '<div style="margin-top:4px;font-size:12px;color:#10b981">答案: <b>'+esc(q.answer)+'</b></div>';
+      }
       h += '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">'+
-          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span></div>'+
+          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span> <span class="sub" style="color:var(--tr)">· '+esc(q.type||'unknown')+'</span></div>'+
           (answered
             ? '<span class="pr-badge" style="background:#10b98122;color:#10b981">答案 '+q.answer+'</span>'
-            : '<span class="pr-badge new">OCR 漏抽</span>')+
+            : '<span class="pr-badge new">未匹配答案</span>')+
         '</div>'+
-        '<div class="sub" style="color:var(--tr);margin-top:4px">题号范围: P'+q.prueba+' T'+q.tarea+' · q_range '+JSON.stringify(q.q_range)+'</div>'+
+        promptHtml+
+        optsHtml+
       '</div>';
     }
     h += '</div></div>';
