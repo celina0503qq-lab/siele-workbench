@@ -1129,10 +1129,10 @@ const NAV = [
     {id:'reading', icon:'📰', label:'外刊阅读'},
   ]},
   {s:'DELE专项', items:[
-    {id:'deleA1', icon:'A1', label:'DELE A1'},
-    {id:'deleA2', icon:'A2', label:'DELE A2'},
-    {id:'deleB1', icon:'B1', label:'DELE B1'},
-    {id:'deleB2', icon:'B2', label:'DELE B2'},
+    {id:'deleA1', icon:'A1', label:'DELE A1', adminOnly:true},
+    {id:'deleA2', icon:'A2', label:'DELE A2', adminOnly:true},
+    {id:'deleB1', icon:'B1', label:'DELE B1', adminOnly:true},
+    {id:'deleB2', icon:'B2', label:'DELE B2', adminOnly:true},
   ]},
 ];
 
@@ -1144,10 +1144,17 @@ function renderNav(){
   const navOnId = (typeof currentPage === 'string' && /^dele(A[12]|B[12])_/.test(currentPage))
     ? 'dele' + currentPage.match(/^dele(A[12]|B[12])_/)[1]
     : currentPage;
+  // 管理员独占项 (DELE 专项目前仅 Serena 可见, 题库完善中不对所有用户展示)
+  // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处不依赖跨块引用
+  // 直接读 localStorage 解 swa_cloud_session_v1
+  let isAdmin = false;
+  try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && _ses.role === 'admin'); } catch(e) {}
   let h = '';
   NAV.forEach(sec => {
+    const visibleItems = sec.items.filter(it => !it.adminOnly || isAdmin);
+    if (!visibleItems.length) return; // 整组都不可见则整组跳过
     h += `<div class="ns">${sec.s}</div>`;
-    sec.items.forEach(it => {
+    visibleItems.forEach(it => {
       const on = navOnId === it.id ? ' on' : '';
       h += `<button class="ni${on}" onclick="go('${it.id}')"><span class="ic">${it.icon}</span>${it.label}</button>`;
     });
@@ -1156,6 +1163,14 @@ function renderNav(){
 }
 
 function go(page){
+  // 管理员独占页面: 非管理员被踢回仪表盘 + 提示
+  // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处直接读 localStorage
+  let isAdmin = false;
+  try { var _raw2 = localStorage.getItem('swa_cloud_session_v1'); var _ses2 = _raw2 ? JSON.parse(_raw2) : null; isAdmin = !!(_ses2 && _ses2.role === 'admin'); } catch(e) {}
+  if (!isAdmin && /^dele(A[12]|B[12])(_|$)/.test(page)) {
+    (typeof toast === 'function' ? toast : function(m){})( 'DELE 专项题库完善中, 暂未对所有用户开放');
+    page = 'dash';
+  }
   currentPage = page;
   renderNav();
   renderMain();
