@@ -1004,7 +1004,7 @@ function updateStreak(){
 let _audioEl = null;
 let _currentSpeakBtn = null;
 
-async function speak(text, btn, accent){
+async function speak(text, btn, accent, rate){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
   let played = false;
@@ -1012,6 +1012,8 @@ async function speak(text, btn, accent){
   var effectiveAccent = accent || (ST && ST.globalAccent) || 'la';
   // Latin American accent: es-MX (default); es-ES for Spain fallback
   const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
+  // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
+  const playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
 
   // Tier 1: speechSynthesis
   if(window.speechSynthesis){
@@ -1035,7 +1037,7 @@ async function speak(text, btn, accent){
         const u = new SpeechSynthesisUtterance(text);
         if(esVoice) u.voice = esVoice;
         u.lang = langCode;
-        u.rate = 0.92;
+        u.rate = playRate;
         u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; };
         u.onerror = () => { if(btn) btn.classList.remove('playing'); };
         window.speechSynthesis.speak(u);
@@ -1053,7 +1055,7 @@ async function speak(text, btn, accent){
     const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl=es-MX&q=' + q;
     _audioEl = new Audio(url);
     _audioEl.crossOrigin = 'anonymous';
-    _audioEl.playbackRate = 0.92;
+    _audioEl.playbackRate = playRate;
     _audioEl.onended = () => { if(btn) btn.classList.remove('playing'); };
     _audioEl.onerror = () => {
       if(btn) btn.classList.remove('playing');
@@ -1203,6 +1205,50 @@ function decodeArticleHtml(s){
 }
 
 // ===== PAGE: DASHBOARD =====
+// P0 规则提示：项目当前已大量使用 emoji 作为功能图标 (435 处)，未引入统一 SVG 库
+// 本次新增严格遵守 P0：用 inline SVG 替代 emoji 作图标
+const _iconStreak = (filled)=> filled
+  ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px"><path d="M12 2c.5 3-1 4-1 6 0 2 2 3 2 3s-1-1-1-3c0-2 2-3 2-3 .5 1 1 2 1 3 0 1.5-.5 2-1 3 1.5-.5 3-2 3-4 0-1-1-2-1-2s1 0 1.5-1c0 4-3 6-3 9 0 2 1.5 3 3 3 0 2-1 4-3 4-1 0-2-1-2-2 0-1 1-2 1-3 0-2-3-4-3-7 0-2 1-4 1-6z"/></svg>'
+  : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-4px;opacity:.6"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.5.4 1 1 1 2v.3h6v-.3c0-1 .5-1.6 1-2A7 7 0 0 0 12 2z"/></svg>';
+const _iconCheck = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polyline points="20 6 9 17 4 12"/></svg>';
+const _iconClock = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+
+function renderStreakBanner(){
+  // P0-4: 仪表盘 streak 横幅 (用户拍板 2026-08-06) — 用 inline SVG 替代 emoji
+  const streak = (typeof ST.streak === 'number' && ST.streak > 0) ? ST.streak : 0;
+  const today = todayStr();
+  const isCheckedToday = ST.lastStudy === today;
+  const totalTodos = (ST.dailyTodos || []).length;
+  const todoRemain = (ST.dailyTodos || []).filter(t=>!t.done).length;
+  const todosTxt = totalTodos > 0 ? `${totalTodos - todoRemain}/${totalTodos}` : '0/0';
+  const accent = streak >= 7 ? 'var(--teal)' : streak >= 3 ? 'var(--am)' : 'var(--tr)';
+  const msg = streak >= 30 ? '月级坚持 · 节奏稳定'
+            : streak >= 14 ? '两周养成 · 别断节奏'
+            : streak >= 7  ? '一周连续 · 渐入佳境'
+            : streak >= 3  ? '初养成 · 继续坚持'
+            : streak >= 1  ? '今天开始打卡吧'
+            : '点下方按钮开始第一次打卡';
+  const streakIcon = streak >= 3 ? _iconStreak(true) : _iconStreak(false);
+  const statusIcon = isCheckedToday ? _iconCheck : _iconClock;
+  const statusColor = isCheckedToday ? 'var(--ok)' : 'var(--soft)';
+  const statusLabel = isCheckedToday ? '今日已打卡' : '今日未打卡';
+  const btnHtml = isCheckedToday
+    ? '<button class="btn sm ol" disabled style="opacity:.55;cursor:not-allowed">今日已签到</button>'
+    : '<button class="btn" onclick="doCheckIn();renderMain()">今日打卡</button>';
+  return '<div class="streak-banner" style="background:linear-gradient(135deg,#fff8ec 0%,#fff 100%);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--sh)">'
+       + '<div style="display:flex;align-items:baseline;gap:6px;min-width:160px;color:' + accent + '">'
+       +   streakIcon
+       +   '<span style="font-size:36px;font-weight:800;color:' + accent + ';line-height:1;font-family:var(--serif)">' + streak + '</span>'
+       +   '<span style="font-size:13px;color:var(--soft)">天连续学习</span>'
+       + '</div>'
+       + '<div style="flex:1;min-width:180px">'
+       +   '<div style="font-size:14px;font-weight:700;color:var(--ink)">' + msg + '</div>'
+       +   '<div style="font-size:12px;color:' + statusColor + ';margin-top:2px;display:flex;align-items:center;gap:4px">' + statusIcon + '<span>' + statusLabel + ' · ' + todosTxt + ' 待办完成</span></div>'
+       + '</div>'
+       + btnHtml
+       + '</div>';
+}
+
 function renderDash(){
   const mastered = Object.values(ST.vocabMastery).filter(v=>v===3).length;
   const learned = Object.values(ST.vocabMastery).filter(v=>v>=1).length;
@@ -1230,6 +1276,9 @@ function renderDash(){
       <div class="pc"><button class="btn gh" onclick="go('flash')">开始背词</button><button class="btn gh" onclick="go('quiz')">开始测验</button></div>
     </div>
   </div>`;
+
+  // Streak banner (P0-4: 用户拍板 2026-08-06)
+  h += renderStreakBanner();
 
   // Stats
   h += `<div class="g g4" style="margin-bottom:18px">
@@ -2407,6 +2456,7 @@ function renderShadow(){
       <div style="font-size:12px;opacity:.8;margin-top:3px">${esc(cur.zh)}</div>
       <div class="sh-ctrls">
         <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this)">🔊 听原句</button>
+        <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this,null,0.7)" title="P2-4 慢速 0.7x 跟读">慢速 0.7x</button>
         <button class="rb idle" id="recBtn" onclick="toggleRecord()">🎤 开始录音</button>
         <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this)">🔁 再听一次</button>
       </div>
@@ -2527,6 +2577,18 @@ function scoreShadow(recognized){
   const prev = (ST.shadowScores[_shadowIdx] && ST.shadowScores[_shadowIdx].score) || 0;
   if(score > prev) ST.shadowScores[_shadowIdx] = {score, wordAccuracy, fluencyScore, orderScore, date: todayStr()};
   save(); updateStreak();
+
+  // P1-1: 跟读 < 60 自动入错题集
+  if(score < 60){
+    const _sh = SHADOW_SENTENCES[_shadowIdx];
+    autoLogLowScore('shadow', ['shadow', _shadowIdx, _sh && _sh.topic || ''].join('::'), {
+      question: (_sh && _sh.es) || ('跟读句 ' + (_shadowIdx+1)),
+      myAnswer: recognized,
+      correctAnswer: (_sh && _sh.es) || '',
+      note: '跟读评分 ' + score + '% · 准确度 ' + wordAccuracy + '% · 流利度 ' + fluencyScore + '%',
+      score: score
+    });
+  }
 
   // Display with multi-dimensional feedback
   const res = document.getElementById('shadowRes');
@@ -2864,6 +2926,16 @@ function saveWriting(){
   // AI 批改 (使用新评分引擎)
   const tareaType = _writingIdx <= 7 ? 1 : 2;  // 前 8 个为 Tarea 1 风格, 后 6 个为 Tarea 2 风格
   const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, tareaType) : null;
+  // P1-1: 写作 < 60 自动入错题集
+  if(g && g.score < 60 && text.trim().length > 0){
+    autoLogLowScore('writing', ['writing', _writingIdx, tareaType].join('::'), {
+      question: 'Tarea ' + tareaType + ' 写作任务 #' + (_writingIdx+1),
+      myAnswer: text.trim().slice(0, 200) + (text.length > 200 ? '…' : ''),
+      correctAnswer: '参考范文见"显示范文"',
+      note: '写作评分 ' + g.score + ' 分 · 字数 ' + g.wordCount + ' · 连接词 ' + g.uniqueConnectorCount + ' 种 · 语法通过 ' + g.grammarPassCount + '/' + g.grammarChecks.length,
+      score: g.score
+    });
+  }
   const gradeEl = document.getElementById('writingGrading');
   if(gradeEl && g){
     // 渲染连接词分类
@@ -2922,8 +2994,15 @@ function saveWriting(){
     gradeEl.style.display = 'block';
     gradeEl.innerHTML = '<div class="note"><b>已保存。</b></div>';
   }
-  // 联想范文 (新: 任务对应 + 可编辑)
+  // 联想范文 (新: 任务对应 + 可编辑) — 完成后自动滚动到对比视图 (P1-3)
   showRelatedEssay(_writingIdx);
+  // P1-3: 自动滚动到对比视图 (仅在用户有内容时)
+  setTimeout(()=>{
+    const cmpEl = document.getElementById('writingCompareView');
+    if(cmpEl && (ST['writing_'+_writingIdx] || '').trim().length > 0){
+      cmpEl.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  }, 200);
 }
 
 // 辅助: 下一等级提示
@@ -2983,7 +3062,7 @@ function showRelatedEssay(taskIdx){
       ${essay.notes && essay.notes.length ? `<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:var(--tr);font-weight:600">写作要点 (${essay.notes.length}条)</summary><ul style="margin:6px 0 0 18px;padding:0;font-size:11.5px">${essay.notes.map(p=>`<li style="margin:3px 0">${esc(p)}</li>`).join('')}</ul></details>` : ''}
     </div>
     ${showCompare ? `
-    <div class="card" style="margin-top:10px;background:#f0f9ff;border-color:#3b82f6">
+    <div id="writingCompareView" class="card" style="margin-top:10px;background:#f0f9ff;border-color:#3b82f6">
       <h3 style="color:#1e40af"><span class="ic">对比</span>你的答案 vs 范文</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px">
         <div>
@@ -3320,6 +3399,19 @@ function scoreSpeaking(text){
   }
   res.classList.add('show');
   updateStreak();
+
+  // P1-1: 口语 < 60 自动入错题集
+  if(score < 60 && wc > 0){
+    autoLogLowScore('speaking', ['speaking', _speakIdx, topic && topic.lvl || ''].join('::'), {
+      question: (topic && topic.title) ? topic.title : ('口语话题 #' + (_speakIdx+1)),
+      myAnswer: text.trim().slice(0, 200) + (text.length > 200 ? '…' : ''),
+      correctAnswer: '建议: ' + (kw && kw.must ? kw.must.slice(0, 3).join(' / ') : '多覆盖关键词'),
+      note: '口语评分 ' + score + '% · 关键词 ' + mustHit + '/' + kw.must.length + ' · 词数 ' + wc,
+      score: score
+    });
+  }
+  // P2-5: 完成后鼓励文案
+  showEncouragement('speaking', score);
 }
 
 // ===== SIELE SPEAKING TEMPLATES (口语模板展示) =====
@@ -8638,8 +8730,8 @@ function sieleGradeWriting(text, tarea) {
   // 语法模式 20 分 (6 项, 每项 3-4 分)
   const grammarPass = grammarChecks.filter(c => c.pass).length;
   s += Math.min(20, grammarPass * 3.5);
-  // 基础完成 10 分
-  s += 10;
+  // 基础完成 10 分 (P2-3: 空白文本 0 分)
+  s += wc > 0 ? 10 : 0;
   s = Math.min(100, Math.round(s));
 
   return {
@@ -9493,6 +9585,58 @@ function autoLogQuizError(errData){
   save();
   // 立即刷新错题页；后台/云端推送由 save() 的同步钩子自动排队。
   if(currentPage==='errors') renderMain();
+}
+
+// P1-1 (用户拍板 2026-08-06): 跟读 / 写作 / 口语 评分 < 60 自动入错题集
+// 统一入口：autoLogLowScore(type, sourceKey, payload) — 阈值 60 分
+function autoLogLowScore(type, sourceKey, payload){
+  if(!ST.errors) ST.errors = [];
+  const duplicate = ST.errors.some(function(e){
+    return e.type===type && e.sourceKey===sourceKey && e.date===todayStr() && !e.reviewed;
+  });
+  if(duplicate) return;
+  ST.errors.unshift(Object.assign({
+    id: type[0]+'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+    type: type,
+    sourceKey: sourceKey,
+    question: payload.question || '',
+    myAnswer: payload.myAnswer || '',
+    correctAnswer: payload.correctAnswer || '',
+    note: payload.note || '',
+    score: typeof payload.score === 'number' ? payload.score : 0,
+    date: todayStr(),
+    reviewed: false
+  }));
+  save();
+  if(currentPage==='errors') renderMain();
+}
+
+// ===== 完成后鼓励文案 (P2-5) =====
+// 在跟读 / 写作 / 口语模块评分完成后弹出简短的鼓励提示, 按分数分级。
+function showEncouragement(type, score){
+  let emoji, title, msg, tip;
+  if(score >= 90){ emoji = '🏆'; title = '太棒了！'; msg = 'SIELE 高分稳了'; tip = '挑战更高级别'; }
+  else if(score >= 75){ emoji = '🎉'; title = '完成得很棒'; msg = '基础扎实, 再练几遍就是高分'; tip = '试试 1.2x 加速'; }
+  else if(score >= 60){ emoji = '👍'; title = '完成不错'; msg = '继续巩固, 离优秀不远了'; tip = '回听薄弱处'; }
+  else { emoji = '💪'; title = '继续加油'; msg = '错了不怕, 练会才是真的'; tip = '试试 0.7x 慢速'; }
+  const tail = ' · 已自动收录错题集';
+  // 浮动提示卡片, 3 秒后淡出
+  const el = document.createElement('div');
+  el.className = 'encouragement-toast';
+  el.innerHTML = `
+    <div style="display:flex;align-items:start;gap:12px">
+      <span style="font-size:34px;line-height:1">${emoji}</span>
+      <div style="flex:1">
+        <div style="font-size:15px;font-weight:800;color:var(--ink)">${title}${score < 60 ? tail : ''}</div>
+        <div style="font-size:12px;color:var(--soft);margin-top:2px">${msg}</div>
+        <div style="font-size:11px;color:var(--tr);margin-top:3px">${tip} · 得分 ${score}</div>
+      </div>
+    </div>
+  `;
+  el.style.cssText = 'position:fixed;top:80px;right:24px;z-index:9999;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-width:280px;animation:slideInRight .3s ease-out';
+  document.body.appendChild(el);
+  setTimeout(()=>{ el.style.opacity = '0'; el.style.transform = 'translateX(20px)'; el.style.transition = 'all .4s'; }, 2800);
+  setTimeout(()=>{ if(el.parentNode) el.parentNode.removeChild(el); }, 3400);
 }
 
 // ===== READING MODULE (外刊阅读) =====
