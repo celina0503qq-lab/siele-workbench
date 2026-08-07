@@ -1140,11 +1140,15 @@ let currentPage = 'dash';
 
 function renderNav(){
   const nav = document.getElementById('nav');
+  // DELE 子页面 (dele<level>_<task>) 也高亮对应 dele<level> 父项, 保持导航连续性
+  const navOnId = (typeof currentPage === 'string' && /^dele(A[12]|B[12])_/.test(currentPage))
+    ? 'dele' + currentPage.match(/^dele(A[12]|B[12])_/)[1]
+    : currentPage;
   let h = '';
   NAV.forEach(sec => {
     h += `<div class="ns">${sec.s}</div>`;
     sec.items.forEach(it => {
-      const on = currentPage === it.id ? ' on' : '';
+      const on = navOnId === it.id ? ' on' : '';
       h += `<button class="ni${on}" onclick="go('${it.id}')"><span class="ic">${it.icon}</span>${it.label}</button>`;
     });
   });
@@ -1183,8 +1187,51 @@ function renderMain(){
     case 'deleA2': h += renderDeleLevel('A2'); break;
     case 'deleB1': h += renderDeleLevel('B1'); break;
     case 'deleB2': h += renderDeleLevel('B2'); break;
+    // DELE 子页面兜底: dele<level>_<task> 形式 (阅读/听力/写作/口语/全真模拟)
+    default:
+      if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
+        var _dm = currentPage.match(/^dele(A[12]|B[12])_(.+)$/);
+        if (_dm) {
+          var _lvl = _dm[1], _task = _dm[2];
+          if (_task === 'oral') _task = 'speaking';
+          h += '<div id="__dele_sub_holder" data-level="'+_lvl+'" data-task="'+_task+'"></div>';
+        }
+      }
+      break;
   }
   main.innerHTML = h + '<footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
+  if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
+    var _holder = document.getElementById('__dele_sub_holder');
+    if (_holder) {
+      var _dm2 = currentPage.match(/^dele(A[12]|B[12])_(.+)$/);
+      if (_dm2) {
+        var _lvl2 = _dm2[1], _task2 = _dm2[2];
+        if (_task2 === 'oral') _task2 = 'speaking';
+        // 直接渲染并替换 holder, 不重复设置 currentPage / scroll (避免递归)
+        var _bank2 = (_deleBank[_lvl2] && _deleBank[_lvl2][_task2]) || [];
+        var _label2 = ((window.DELE_TASKS || []).find(function(t){return t.key===_task2;}) || {}).label || _task2;
+        var _subHtml;
+        if (_lvl2==='A1' && (_task2==='reading' || _task2==='listening' || _task2==='mock') && _bank2.length) {
+          _subHtml = _renderDeleA1Quiz(_lvl2, _task2, _label2, _bank2);
+        } else {
+          _subHtml = '<section>'+
+            '<div class="card" style="border-left:4px solid '+deleLevelColor(_lvl2)+'">'+
+              '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
+                '<button class="btn sm ol" onclick="go(\'dele'+_lvl2+'\')">← 返回 '+_lvl2+'</button>'+
+                '<h2 style="margin:0">'+esc(_label2)+' · '+_lvl2+'</h2>'+
+              '</div>'+
+            '</div>'+
+            (_bank2.length
+              ? '<div class="card"><div class="sub">题库已就绪（'+_bank2.length+' 题）。具体练习 UI 待题库结构化完成后渲染。</div></div>'
+              : '<div class="card"><div class="sub" style="color:var(--tr)">本题库的 '+_lvl2+' '+_label2+' 正在 OCR 提取 + 结构化处理中，完成后将自动接入。</div></div>'
+            )+
+          '</section>';
+        }
+        _holder.outerHTML = _subHtml;
+      }
+    }
+  }
   // Post-render hooks
   if(currentPage === 'flash') initFlash();
   if(currentPage === 'quiz') initQuiz();
@@ -10198,14 +10245,18 @@ function renderDeleLevel(level){
   '</section>';
 }
 // 5 个专项卡片点击后进的具体练习页
+// 同时承担两种职责:
+//   1) 返回 HTML 字符串 (供 renderMain 兜底调用,例如刷新后保持 currentPage)
+//   2) 副作用: 把 HTML 写入 #main,更新 currentPage,渲染导航,滚顶
 function renderDeleTask(level, task){
   const bank = (_deleBank[level] && _deleBank[level][task]) || [];
   const taskLabel = (DELE_TASKS.find(function(t){return t.key===task;}) || {}).label || task;
   // A1 reading / listening / mock: 渲染题库为可答题
   if (level==='A1' && (task==='reading' || task==='listening' || task==='mock') && bank.length) {
-    return _renderDeleA1Quiz(level, task, taskLabel, bank);
+    var html = _renderDeleA1Quiz(level, task, taskLabel, bank);
+    return _commitDeleSubPage(level, task, html);
   }
-  return '<section>'+
+  var fallbackHtml = '<section>'+
     '<div class="card" style="border-left:4px solid '+deleLevelColor(level)+'">'+
       '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
         '<button class="btn sm ol" onclick="go(\'dele'+level+'\')">← 返回 '+level+'</button>'+
@@ -10217,6 +10268,23 @@ function renderDeleTask(level, task){
       : '<div class="card"><div class="sub" style="color:var(--tr)">本题库的 '+level+' '+taskLabel+' 正在 OCR 提取 + 结构化处理中，完成后将自动接入。</div></div>'
     )+
   '</section>';
+  return _commitDeleSubPage(level, task, fallbackHtml);
+}
+
+// 子页面统一提交: 写 main + 改 currentPage + 刷新 nav + 滚顶 + 隐藏登录覆盖
+function _commitDeleSubPage(level, task, html){
+  if (typeof currentPage !== 'undefined') currentPage = 'dele' + level + '_' + task;
+  var main = document.getElementById('main');
+  if (main) main.innerHTML = '<div id="audioBanner" class="banner"></div>' + html +
+    '<footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  if (typeof renderNav === 'function') {
+    try { renderNav(); } catch (e) {}
+  }
+  if (typeof hideLoginOverlay === 'function') {
+    try { hideLoginOverlay(); } catch (e) {}
+  }
+  try { window.scrollTo(0,0); } catch (e) {}
+  return html; // 兼容既有调用方
 }
 
 // A1 阅读/听力/全真模拟: 按 modelo 分组的练习 UI
