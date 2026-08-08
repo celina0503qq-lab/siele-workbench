@@ -12674,6 +12674,12 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
         });
       });
     }).catch(function(e){ console.warn('SW 注册失败:', e); });
+    // SW 自愈：强制检查所有旧 SW 更新，加速旧版（缺板块）退役
+    try{
+      navigator.serviceWorker.getRegistrations().then(function(regs){
+        regs.forEach(function(r){ r.update().catch(function(){}); });
+      });
+    }catch(e){}
   });
 }
 </script>
