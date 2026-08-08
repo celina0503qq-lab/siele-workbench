@@ -13282,7 +13282,13 @@ function todoCardHtml(){
         '<div style="display:flex;flex-wrap:wrap;gap:8px">'+quick+'</div>'+
         '<div class="note" style="margin-top:12px;font-size:11.5px">'+(AU?('👤 已登录 <b>'+escB(AU)+'</b>，背词/刷题进度自动汇入后台'+(ADB&&ADB.syncCfg?'并同步到云端 ☁️':'，可在「后台管理 → 云同步」开启跨设备同步')):'⚠️ 尚未登录：进度仅存本机。<a href="javascript:void(0)" onclick="go(\'admin\')" style="color:var(--tr);font-weight:700">去登录 →</a>')+'</div>'+
       '</div></div>';
-  }catch(e){return '';}
+  }catch(e){
+    console.warn('todoCardHtml error:',e);
+    // 出错时仍渲染快捷操作卡，确保仪表盘不缺失
+    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图']]
+      .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
+    return '<div class=\"g g2\"><div class=\"card\"><h3><span class=\"ic\">⚡</span>快捷操作</h3><div style=\"display:flex;flex-wrap:wrap;gap:8px\">'+quick+'</div></div></div>';
+  }
 }
 if(typeof renderDash==='function'){
   var _rd0=renderDash;
