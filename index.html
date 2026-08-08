@@ -13366,12 +13366,7 @@ function pullGist(){
 function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashIdxByLevel: ST.flashIdxByLevel, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
-    vocabReviewCount: ST.vocabReviewCount || {},
-    vocabReviewCount_A1: ST.vocabReviewCount_A1 || {}, vocabReviewCount_A2: ST.vocabReviewCount_A2 || {}, vocabReviewCount_B1: ST.vocabReviewCount_B1 || {}, vocabReviewCount_B2: ST.vocabReviewCount_B2 || {}, vocabReviewCount_all: ST.vocabReviewCount_all || {},
-    accentOverride: ST.accentOverride || {},
-    dailyTodoDates: ST.dailyTodoDates || [],
-    speakModelEssays: ST.speakModelEssays || {},
-    vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
+    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
@@ -13573,42 +13568,6 @@ async function standaloneSync(showLog){
           if(!found) ST.dailyTodos[dt].push({text:rt.text,done:!!rt.done});
           else if(rt.done) found.done = true;
         });
-      });
-    }
-    // FEAT-4: 合并扁平化 vocabReviewCount — 逐 key max
-    ['A1','A2','B1','B2','all'].forEach(function(lv){
-      var flatKey = 'vocabReviewCount_'+lv;
-      var remoteVal = remote[flatKey];
-      if(remoteVal && typeof remoteVal==='object'){
-        ST[flatKey]=ST[flatKey]||{};
-        Object.keys(remoteVal).forEach(function(es){
-          var rv=remoteVal[es]|0;
-          if(rv > (ST[flatKey][es]|0)) ST[flatKey][es]=rv;
-        });
-      }
-    });
-    // FEAT-3: 合并口音覆盖(本地优先)
-    if(remote.accentOverride && typeof remote.accentOverride==='object'){
-      ST.accentOverride=ST.accentOverride||{};
-      Object.keys(remote.accentOverride).forEach(function(mod){
-        if(!ST.accentOverride[mod]) ST.accentOverride[mod]=remote.accentOverride[mod];
-      });
-    }
-    // FEAT-5: 合并口语范文(远程新于本地才覆盖)
-    if(remote.speakModelEssays && typeof remote.speakModelEssays==='object'){
-      ST.speakModelEssays=ST.speakModelEssays||{};
-      Object.keys(remote.speakModelEssays).forEach(function(tid){
-        var rt=remote.speakModelEssays[tid];
-        if(!ST.speakModelEssays[tid]||(rt.createdAt||0)>(ST.speakModelEssays[tid].createdAt||0)){
-          ST.speakModelEssays[tid]=rt;
-        }
-      });
-    }
-    // FEAT-2: 合并 dailyTodoDates
-    if(Array.isArray(remote.dailyTodoDates) && remote.dailyTodoDates.length){
-      ST.dailyTodoDates=ST.dailyTodoDates||[];
-      remote.dailyTodoDates.forEach(function(d){
-        if(d && ST.dailyTodoDates.indexOf(d)<0) ST.dailyTodoDates.push(d);
       });
     }
     // 全局发音口音：远程有值则采用（两端偏好一致即可）
