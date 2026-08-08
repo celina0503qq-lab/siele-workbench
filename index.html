@@ -1339,6 +1339,14 @@ function go(page){
     page = 'dash';
   }
   currentPage = page;
+  // 已登录则自动隐藏覆盖层 (P0 fix: overlay blocks all button clicks if not hidden)
+  try {
+    var _s = JSON.parse(localStorage.getItem('swa_cloud_session_v1') || 'null');
+    if (_s && _s.username) {
+      var _ov = document.getElementById('wbLoginOverlay');
+      if (_ov) _ov.classList.add('hide');
+    }
+  } catch(e) {}
   renderNav();
   renderMain();
   window.scrollTo(0,0);
@@ -2694,7 +2702,8 @@ function renderShadow(){
       <div style="font-size:12px;opacity:.8;margin-top:3px">${esc(cur.zh)}</div>
       <div class="sh-ctrls">
         <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this)">🔊 听原句</button>
-        <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this,null,0.7)" title="P2-4 慢速 0.7x 跟读">慢速 0.7x</button>
+        <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this,null,0.7)" title="慢速 0.7x 跟读">🐢 慢速 0.7x</button>
+        <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this,null,0.6)" title="超慢速 0.6x 逐音节">🐌 逐音节 0.6x</button>
         <button class="rb idle" id="recBtn" onclick="toggleRecord()">🎤 开始录音</button>
         <button class="btn gh" onclick="speak('${cur.es.replace(/'/g,"\\'")}',this)">🔁 再听一次</button>
       </div>
@@ -2709,7 +2718,7 @@ function renderShadow(){
       </div>
       <div class="note" id="shadowFeedback"></div>
     </div>
-    <div class="note" style="margin-top:10px"><b>提示：</b>请使用Chrome或Edge浏览器。点击"开始录音"后朗读句子，系统会通过语音识别评估你的发音准确度。如果浏览器不支持语音识别，可点击"听原句"反复跟读练习。</div>
+    <div class="note" style="margin-top:10px"><b>提示：</b>请使用Chrome或Edge浏览器。点击"开始录音"后朗读句子，系统会通过语音识别评估你的<b>跟读完整度</b>（文本匹配）。如果浏览器不支持语音识别，可点击"听原句"反复跟读练习。</div>
   </div></div>`;
 
   return h;
@@ -2823,7 +2832,7 @@ function scoreShadow(recognized){
       question: (_sh && _sh.es) || ('跟读句 ' + (_shadowIdx+1)),
       myAnswer: recognized,
       correctAnswer: (_sh && _sh.es) || '',
-      note: '跟读评分 ' + score + '% · 准确度 ' + wordAccuracy + '% · 流利度 ' + fluencyScore + '%',
+      note: '跟读完整度 ' + score + '% · 准确度 ' + wordAccuracy + '% · 流利度 ' + fluencyScore + '%',
       score: score
     });
   }
@@ -2837,14 +2846,14 @@ function scoreShadow(recognized){
 
   let cls = score >= 80 ? 'h' : score >= 50 ? 'm' : 'l';
   let msg = '';
-  if(score >= 80) msg = '¡Excelente! 发音非常准确，继续保持！';
+  if(score >= 80) msg = '¡Excelente! 跟读完整度非常高，文本匹配优秀！';
   else if(score >= 50) msg = '¡Bien! 基本正确，注意未识别到的单词，多听原句再试。';
   else msg = '¡Ánimo! 需要更多练习。建议先听几遍原句，慢速跟读，逐步加快。';
 
   sc.className = 'sc ' + cls;
   sc.textContent = score + '%';
   rt.textContent = recognized;
-  fb.innerHTML = `<b>评价：</b>${msg}<br>
+  fb.innerHTML = `<b>跟读完整度：</b>${msg}<br>
     <b>目标：</b>${SHADOW_SENTENCES[_shadowIdx].es}<br>
     <b>识别：</b>${recognized}<br>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
@@ -2852,8 +2861,35 @@ function scoreShadow(recognized){
       <div>💨 流利度：<b>${fluencyScore}%</b></div>
       <div>🔤 语序正确率：<b>${orderScore}%</b></div>
       <div>📏 词数匹配：<b>${countProx}%</b></div>
+    </div>
+    ${score < 50 ? '<div style="margin-top:8px;padding:8px 10px;background:#fef9e7;border-left:3px solid var(--am);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.5">🎯 <b>发音小提示：</b>注意 r/rr 颤音、ñ 的发音、重音位置（带 tilde 的音节要重读）。建议用上方的「🐌 逐音节 0.6x」按钮听清每个音节后再跟读。</div>' : ''}
+    <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn sm" onclick="nextShadowSentence()">▶ 下一句</button>
+      <button class="btn sm ol" onclick="toggleRecord()">🎤 重新录音</button>
     </div>`;
   res.classList.add('show');
+}
+
+/** Navigate to the next shadow sentence in the current filtered list. */
+function nextShadowSentence(){
+  const visibleIdxs = SHADOW_SENTENCES
+    .map((s,i) => [i, s])
+    .filter(([i,s]) => (_shadowFilterLvl==='all'||s.lvl===_shadowFilterLvl) && (_shadowFilterCat==='all'||s.cat===_shadowFilterCat))
+    .map(([i]) => i);
+  const curPos = visibleIdxs.indexOf(_shadowIdx);
+  if(curPos >= 0 && curPos < visibleIdxs.length - 1){
+    _shadowIdx = visibleIdxs[curPos + 1];
+    renderMain();
+    window.scrollTo(0,0);
+    // Re-show the recording UI for the new sentence
+    setTimeout(function(){ var btn = document.getElementById('recBtn'); if(btn){ btn.className='rb idle'; btn.textContent='🎤 开始录音'; } }, 100);
+  } else if(visibleIdxs.length > 0 && curPos === visibleIdxs.length - 1){
+    // Already at the last sentence — wrap to first
+    _shadowIdx = visibleIdxs[0];
+    renderMain();
+    window.scrollTo(0,0);
+    setTimeout(function(){ var btn = document.getElementById('recBtn'); if(btn){ btn.className='rb idle'; btn.textContent='🎤 开始录音'; } }, 100);
+  }
 }
 
 // ===== PAGE: QUIZ =====
