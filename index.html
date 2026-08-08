@@ -959,6 +959,7 @@ if(document.readyState==='loading'){
 })();
 function getDefaultState(){
   return {
+    _appVer: 20260808, // 数据格式版本号：每次数据结构变更递增
     examDate: '', examType: 'dele', targetLevel: 'B2',
     flashIdx: 0, flashLevel: 'all', flashCurrentWord: '', flashMastery: {},
     // 各级别已背单词数（断点续背关键数据）
@@ -1049,6 +1050,18 @@ function load(){
         s.__vocabReviewCount_migrated = Date.now(); // 标记迁移时间, 旧 key 保留 7 天
       }
     }catch(e){}
+    // 版本检测：旧数据格式 → 自动修复缺失字段，避免 Edge 缓存旧版渲染异常
+    var curVer = (getDefaultState())._appVer || 20260808;
+    if(!s._appVer || s._appVer < 20260808){
+      console.log('[upgrade] 数据格式升级 v'+(s._appVer||0)+' → v'+curVer);
+      var def = getDefaultState();
+      // 补全新字段（不覆盖已有数据）
+      ['accentOverride','dailyTodos','vocabReviewCount_A1','vocabReviewCount_A2','vocabReviewCount_B1','vocabReviewCount_B2','vocabReviewCount_all','speakModelEssays','dailyTodoDates'].forEach(function(k){
+        if(!(k in s)) s[k]=def[k];
+      });
+      s._appVer = curVer;
+      save();
+    }
     return s;
   }
   // 尝试备份键（恢复）
