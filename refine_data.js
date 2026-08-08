@@ -49,8 +49,8 @@ window.REFINE_PACKS = {
     sources: [
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/", topic: "Un día en la oficina en España" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/economia/", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
-      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/sociedad/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
-      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "El teletrabajo y el futuro del empleo en España" }
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
+      { level: "B2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tecnologia/", topic: "El teletrabajo y el futuro del empleo en España" }
     ]
   }
 };
