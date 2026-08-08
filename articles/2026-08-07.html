@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-07</title>
+<style>
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>西语学习每日推送 · 2026-08-07</h1>
+  <div class="sub">第6期 · 周五 · 夏季出行 · 酷暑天气 · 行政手续 · 农村空心化</div>
+</div>
+<div class="wrap">
+<div class="toc">
+  <h2>本日内容</h2>
+  <div class="toc-grid">
+    <a href="#vocab">5 个高频词</a>
+    <a href="#a1">A1 精读</a><a href="#quiz-a1">A1 阅读题</a>
+    <a href="#a2">A2 精读</a><a href="#quiz-a2">A2 阅读题</a>
+    <a href="#b1">B1 精读</a><a href="#quiz-b1">B1 阅读题</a>
+    <a href="#b2">B2 精读</a><a href="#quiz-b2">B2 阅读题</a>
+  </div>
+</div>
+<section id="vocab">
+  <h2 style="color:var(--brand)">今日 5 个高频词</h2>
+  <div class="vocab-grid"><div class="vocab-card">
+  <div class="lema">1. madrugar</div>
+  <div class="ipa">[ma.ðɾuˈɣaɾ]</div>
+  <div class="pos">v.</div>
+  <div class="def">早起；起得很早（动词，不规则变位：madrugo/madrugas/madruga）</div>
+  <div class="ex">Para coger el AVE a las siete de la mañana, tuve que madrugar muchísimo.</div>
+  <div class="ex-zh">为了赶早上七点的高铁，我不得不起得特别早。</div>
+  <div class="tip">西班牙特有语境：赶早班飞机(AVE/avión)经常需要 madrugar。<b>madrugada</b> = 凌晨。<b>ser muy madrugador/a</b> = 习惯早起的人。A2 听力常出现：de madrugada (凌晨时段)。</div>
+</div><div class="vocab-card">
+  <div class="lema">2. bochorno</div>
+  <div class="ipa">[boˈtʃoɾ.no]</div>
+  <div class="pos">m.</div>
+  <div class="def">闷热；酷暑（高温高湿让人难受的天气）</div>
+  <div class="ex">Hoy hace un bochorno insoportable: 38 grados y mucha humedad.</div>
+  <div class="ex-zh">今天闷热得受不了：38 度还特别潮湿。</div>
+  <div class="tip">和 <b>calor</b>(热) 不同，bochorno 强调 <b>闷热+潮湿</b>。<b>hace bochorno</b> 是口语高频表达。<b>bochornoso/a</b> = 令人汗颜的(原义) / 闷热的(引申义)。八月西班牙南方必用词。区别 <b>ola de calor</b>(热浪)是气象术语，bochorno 是体感描写。</div>
+</div><div class="vocab-card">
+  <div class="lema">3. empadronamiento</div>
+  <div class="ipa">[em.pa.ðɾo.naˈmjen.to]</div>
+  <div class="pos">m.</div>
+  <div class="def">户籍登记；住家登记（在西班牙市政府注册居住地址的法律手续）</div>
+  <div class="ex">Para solicitar la tarjeta sanitaria, primero necesitas el certificado de empadronamiento.</div>
+  <div class="ex-zh">要申请医疗卡，首先需要户籍证明。</div>
+  <div class="tip">西班牙生活必需词。<b>empadronarse</b>(登记户籍) / <b>el padrón municipal</b>(市户籍册)。<b>certificado de empadronamiento</b> 是办居留卡、医疗卡、学校注册的敲门砖，有效期通常 3 个月。B1 行政类话题必考。</div>
+</div><div class="vocab-card">
+  <div class="lema">4. tramitar</div>
+  <div class="ipa">[tɾa.miˈtaɾ]</div>
+  <div class="pos">v.</div>
+  <div class="def">办理；处理（行政手续、文件、申请等）</div>
+  <div class="ex">Estoy tramitando la renovación del NIE. Es un proceso muy lento.</div>
+  <div class="ex-zh">我正在办理 NIE 续签，程序非常慢。</div>
+  <div class="tip">西班牙生活高频动词。<b>tramitar + 文件</b> (办理…手续)。<b>en trámite</b> = 正在办理中。<b>trámite</b>(名词) 手续、流程。常见搭配：<b>tramitar una solicitud / la beca / el visado / la baja</b>。B1-B2 功能类写作必考（撰写申请信、申诉信）。</div>
+</div><div class="vocab-card">
+  <div class="lema">5. despedida</div>
+  <div class="ipa">[des.peˈði.ða]</div>
+  <div class="pos">f.</div>
+  <div class="def">告别；告别派对；欢送会</div>
+  <div class="ex">Mis compañeros de trabajo me organizaron una despedida porque me mudo a otra ciudad.</div>
+  <div class="ex-zh">同事们为我办了欢送会，因为我要搬到另一个城市了。</div>
+  <div class="tip">由动词 <b>despedirse de</b>(向…告别) 派生。<b>despedida de soltero/a</b> = 单身告别派对。<b>carta de despedida</b> = 告别信。<b>fiesta de despedida</b> = 送别会。A2-B1 听力高频：机场告别、离职告别场景。注意和 <b>despido</b>(解雇) 区别。</div>
+</div></div>
+</section>
+<section class="article" id="a1">
+  <header>
+    <span class="level-tag" style="background:#2e7d32">A1</span>
+    <h2></h2>
+    <div class="meta">
+      <span>来源: </span>
+      <a href="#" class="source-cta" style="background:#2e7d32" target="_blank" rel="noopener noreferrer">阅读原文 &rarr;</a>
+    </div>
+  </header>
+  <div class="bilingual"><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Agosto es el mes de las vacaciones en España. Muchas familias viajan.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>八月是西班牙的假期月。很多家庭出门旅行。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los destinos favoritos son la playa, la montaña y los pueblos.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>最喜欢的旅游目的地是海滩、山区和乡下村庄。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>María y su familia van a la playa. Salen de casa a las seis de la mañana.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>玛利亚和她的家人去海边。他们早上六点出门。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Llevan maletas, toallas, crema solar y mucha agua.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>他们带着行李箱、毛巾、防晒霜和很多水。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>En la playa, los niños juegan con la arena y se bañan en el mar.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>在海滩上，孩子们玩沙子、在海里游泳。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El agua está fresca. Hace mucho calor fuera del agua.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>水很凉快。水外面非常热。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Al mediodía, la familia come en un chiringuito junto a la playa.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>中午，全家在海滩旁的餐馆吃饭。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Piden pescado frito, ensalada y gazpacho. Todo está muy rico.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>他们点了炸鱼、沙拉和冷汤。都很好吃。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Por la tarde, dan un paseo por el paseo marítimo y comen un helado.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>下午，他们在海滨步道散步并吃冰淇淋。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Al final del día, todos están cansados pero muy contentos. ¡Qué bien se está de vacaciones!</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>一天结束时，大家都很累但很开心。假期真好！</div>
+</div></div>
+  <div class="dele-points">DELE A1 考点：A1 考点：<b>陈述式现在时</b>(viajan, llevan, juegan, comen, piden, dan)；<b>动词 estar+形容词</b>(está fresca, están cansados, están contentos)；<b>钟点表达</b>(a las seis)；<b>前置词</b>(a la playa, en la playa, junto a, por)。</div>
+  <div class="dele-points" style="border-left-color:#e07a1f;background:linear-gradient(90deg,#fff3e0,#fff)"><b>难词速查：</b><span class="hl">toalla</span> 毛巾（playa常用词） <span class="hl">crema solar</span> 防晒霜（protección solar 防晒） <span class="hl">arena</span> 沙子（jugar con la arena 玩沙） <span class="hl">chiringuito</span> 海滩小吃店（典型西国词汇） <span class="hl">gazpacho</span> 西班牙冷汤（番茄、黄瓜做的夏季汤）</div>
+  <section class="quiz-section" id="quiz-a1"><h3>A1 阅读理解</h3><div class="quiz-item" id="q-a1-0">
+  <div class="q-title">1. ¿A qué hora salen de casa María y su familia?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,0)">A. A las ocho</li><li onclick="pickOpt(this,0)">B. A las seis</li><li onclick="pickOpt(this,0)">C. A las diez</li><li onclick="pickOpt(this,0)">D. A las doce</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a1',0,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Salen de casa a las seis de la mañana. (第三段)<br>ZH: 他们早上六点出门。</div>
+</div><div class="quiz-item" id="q-a1-1">
+  <div class="q-title">2. ¿Qué llevan a la playa?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,1)">A. Solo agua</li><li onclick="pickOpt(this,1)">B. Maletas, toallas y crema solar</li><li onclick="pickOpt(this,1)">C. Solo juguetes</li><li onclick="pickOpt(this,1)">D. Ropa de invierno</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a1',1,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Llevan maletas, toallas, crema solar y mucha agua. (第四段)<br>ZH: 他们带着行李箱、毛巾、防晒霜和很多水。</div>
+</div><div class="quiz-item" id="q-a1-2">
+  <div class="q-title">3. ¿Dónde comen al mediodía?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,2)">A. En casa</li><li onclick="pickOpt(this,2)">B. En un restaurante de lujo</li><li onclick="pickOpt(this,2)">C. En un chiringuito junto a la playa</li><li onclick="pickOpt(this,2)">D. No comen</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a1',2,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Al mediodía, la familia come en un chiringuito junto a la playa. (第七段)<br>ZH: 中午全家在海滩旁的餐馆吃饭。</div>
+</div><div class="quiz-item" id="q-a1-3">
+  <div class="q-title">4. ¿Qué comen en el chiringuito?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,3)">A. Pizza y pasta</li><li onclick="pickOpt(this,3)">B. Pescado frito, ensalada y gazpacho</li><li onclick="pickOpt(this,3)">C. Solo helado</li><li onclick="pickOpt(this,3)">D. Hamburguesas</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a1',3,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Piden pescado frito, ensalada y gazpacho. (第八段)<br>ZH: 他们点了炸鱼、沙拉和冷汤。</div>
+</div><div class="quiz-item" id="q-a1-4">
+  <div class="q-title">5. ¿Está fría o caliente el agua del mar?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,4)">A. Muy caliente</li><li onclick="pickOpt(this,4)">B. Fresca</li><li onclick="pickOpt(this,4)">C. Helada</li><li onclick="pickOpt(this,4)">D. Templada</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a1',4,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: El agua está fresca. Hace mucho calor fuera del agua. (第六段)<br>ZH: 水很凉快。水外面非常热。</div>
+</div></section>
+</section><section class="article" id="a2">
+  <header>
+    <span class="level-tag" style="background:#1565c0">A2</span>
+    <h2></h2>
+    <div class="meta">
+      <span>来源: </span>
+      <a href="#" class="source-cta" style="background:#1565c0" target="_blank" rel="noopener noreferrer">阅读原文 &rarr;</a>
+    </div>
+  </header>
+  <div class="bilingual"><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Este verano está siendo uno de los más calurosos de los últimos años en España.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>今年夏天是西班牙近年来最炎热的夏天之一。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>En muchas ciudades del sur, las temperaturas superan los 40 grados cada día.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>在南方很多城市，每天气温都超过 40 度。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Las autoridades recomiendan beber mucha agua y evitar salir en las horas centrales del día.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>当局建议多喝水并避免在中午时段外出。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los ancianos y los niños son los más vulnerables al calor extremo.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>老年人和儿童最容易受到极端炎热的影响。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Muchas oficinas permiten a sus empleados llevar ropa más informal en verano.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>很多办公室允许员工在夏季穿得更随意。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los ventiladores y los aparatos de aire acondicionado se agotan en las tiendas.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>风扇和空调设备在商店里脱销。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Por la noche, la temperatura no baja de los 25 grados. Es difícil dormir.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>晚上温度也不低于 25 度，很难入睡。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Algunas personas duermen con las ventanas abiertas y sin sábanas para aguantar el bochorno.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>有些人开着窗不盖床单睡觉来忍受闷热。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Las piscinas municipales están llenas de gente desde primera hora de la mañana.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>市立游泳池从一早开始就挤满了人。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los expertos dicen que el cambio climático está haciendo los veranos más largos y calurosos.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>专家表示气候变化使夏季变得更长更热。</div>
+</div></div>
+  <div class="dele-points">DELE A2 考点：A2 考点：<b>estar + gerundio</b>(está siendo)；<b>比较级</b>(más calurosos, más vulnerables, más largos)；<b>不定式</b>(beber, evitar, dormir, llevar)；<b>条件句简单式</b>(si hace calor...)；<b>频度副词</b>(cada día, desde primera hora)。</div>
+  <div class="dele-points" style="border-left-color:#e07a1f;background:linear-gradient(90deg,#fff3e0,#fff)"><b>难词速查：</b><span class="hl">caluroso</span> 炎热的（más caluroso 更热的） <span class="hl">vulnerable</span> 脆弱的；易受影响的 <span class="hl">ventilador</span> 风扇（aire acondicionado 空调） <span class="hl">aire acondicionado</span> 空调（agotarse 脱销/售罄） <span class="hl">cambio climático</span> 气候变化（veranos más largos 更长的夏季）</div>
+  <section class="quiz-section" id="quiz-a2"><h3>A2 阅读理解</h3><div class="quiz-item" id="q-a2-0">
+  <div class="q-title">1. ¿Cuántos grados se superan en muchas ciudades del sur?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,0)">A. 30 grados</li><li onclick="pickOpt(this,0)">B. 35 grados</li><li onclick="pickOpt(this,0)">C. 40 grados</li><li onclick="pickOpt(this,0)">D. 50 grados</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a2',0,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: En muchas ciudades del sur, las temperaturas superan los 40 grados cada día. (第二段)<br>ZH: 南方很多城市每天超过 40 度。</div>
+</div><div class="quiz-item" id="q-a2-1">
+  <div class="q-title">2. ¿Qué recomiendan las autoridades?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,1)">A. Salir más</li><li onclick="pickOpt(this,1)">B. Beber mucha agua y evitar salir al mediodía</li><li onclick="pickOpt(this,1)">C. Hacer deporte</li><li onclick="pickOpt(this,1)">D. Viajar</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a2',1,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Las autoridades recomiendan beber mucha agua y evitar salir en las horas centrales. (第三段)<br>ZH: 当局建议多喝水并避免中午外出。</div>
+</div><div class="quiz-item" id="q-a2-2">
+  <div class="q-title">3. ¿Quiénes son los más vulnerables al calor?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,2)">A. Los jóvenes</li><li onclick="pickOpt(this,2)">B. Los deportistas</li><li onclick="pickOpt(this,2)">C. Los ancianos y los niños</li><li onclick="pickOpt(this,2)">D. Los turistas</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a2',2,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Los ancianos y los niños son los más vulnerables al calor extremo. (第四段)<br>ZH: 老年人和儿童最容易受高温影响。</div>
+</div><div class="quiz-item" id="q-a2-3">
+  <div class="q-title">4. ¿Qué se agota en las tiendas?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,3)">A. Comida</li><li onclick="pickOpt(this,3)">B. Ropa</li><li onclick="pickOpt(this,3)">C. Ventiladores y aires acondicionados</li><li onclick="pickOpt(this,3)">D. Libros</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a2',3,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Los ventiladores y los aparatos de aire acondicionado se agotan en las tiendas. (第六段)<br>ZH: 风扇和空调在商店里脱销。</div>
+</div><div class="quiz-item" id="q-a2-4">
+  <div class="q-title">5. Según los expertos, ¿qué está pasando con los veranos?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,4)">A. Son más cortos</li><li onclick="pickOpt(this,4)">B. Son iguales</li><li onclick="pickOpt(this,4)">C. Son más largos y calurosos</li><li onclick="pickOpt(this,4)">D. Son más fríos</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('a2',4,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Los expertos dicen que el cambio climático está haciendo los veranos más largos y calurosos. (第十段)<br>ZH: 气候变化使夏季变得更长更热。</div>
+</div></section>
+</section><section class="article" id="b1">
+  <header>
+    <span class="level-tag" style="background:#c12a2a">B1</span>
+    <h2></h2>
+    <div class="meta">
+      <span>来源: </span>
+      <a href="#" class="source-cta" style="background:#c12a2a" target="_blank" rel="noopener noreferrer">阅读原文 &rarr;</a>
+    </div>
+  </header>
+  <div class="bilingual"><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Hacer cualquier gestión administrativa en España puede convertirse en una auténtica odisea burocrática.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>在西班牙办理任何行政手续都可能变成一场真正的官僚历险。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El primer paso para cualquier extranjero es obtener el NIE, el Número de Identidad de Extranjero.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>对任何外国人来说，第一步就是获取 NIE——外国人身份证号码。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Sin el NIE no se puede abrir una cuenta bancaria, firmar un contrato de trabajo ni comprar un coche.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>没有 NIE 就没法开户、签工作合同、买车。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Para solicitar el NIE hay que pedir cita previa en la Oficina de Extranjería. Las citas suelen tardar semanas.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>要申请 NIE 需要在移民局预约。预约通常需要等好几周。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Una vez conseguido el NIE, el siguiente trámite es el empadronamiento en el ayuntamiento del municipio donde se reside.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>拿到 NIE 后，下一个手续是在居住地市政府办理户籍登记。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El certificado de empadronamiento es necesario para acceder a la sanidad pública y escolarizar a los hijos.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>户籍证明是享受公共医疗和孩子入学的必要条件。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Después, si se quiere trabajar por cuenta propia, hay que darse de alta como autónomo en Hacienda y la Seguridad Social.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>之后，如果要做个体户，需要在税务局和社保局登记为自由职业者。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Cada paso requiere rellenar formularios, presentar fotocopias compulsadas y, a menudo, pagar tasas administrativas.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>每一步都需要填表格、提交公证复印件，通常还要支付行政费用。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Muchos ciudadanos se quejan de la lentitud del sistema. 'Todo son papeles y más papeles', dice una usuaria.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>很多市民抱怨系统太慢。“全是文件、文件、更多的文件”，一位用户说。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Sin embargo, en los últimos años se ha avanzado bastante en la digitalización de los trámites.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>不过近年来在手续数字化方面取得了不少进展。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Ahora se pueden realizar muchas gestiones a través de la sede electrónica con certificado digital o Cl@ve.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>现在很多手续可以通过电子政务平台用数字证书或 Cl@ve 系统办理。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Aun así, una encuesta reciente revela que el 60% de los ciudadanos considera la burocracia española excesivamente complicada.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>尽管如此，最近一项调查显示 60% 的市民认为西班牙官僚制度过于复杂。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Las personas mayores son las más afectadas por la brecha digital, ya que muchos trámites solo se hacen por internet.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>老年人受数字鸿沟影响最大，因为很多手续只能网上办理。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Algunas asociaciones ofrecen ayuda gratuita para rellenar formularios y navegar por la sede electrónica.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>一些协会提供免费帮助，协助填写表格和操作电子政务平台。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>A pesar de las dificultades, aprender a tramitar los papeles es una habilidad esencial para vivir en España.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>尽管有困难，学会办理各种文件是在西班牙生活的一项必备技能。</div>
+</div></div>
+  <div class="dele-points">DELE B1 考点：B1 考点：<b>无人称句</b>(hay que, se puede, se necesita)；<b>条件句</b>(si se quiere trabajar... hay que...)；<b>关系从句</b>(donde se reside, que revela que)；<b>被动语态</b>(se ha avanzado, se pueden realizar)；<b>连接词</b>(sin embargo, aun así, a pesar de)。</div>
+  <div class="dele-points" style="border-left-color:#e07a1f;background:linear-gradient(90deg,#fff3e0,#fff)"><b>难词速查：</b><span class="hl">odisea</span> 漫长艰难的旅程（burocrática 官僚的） <span class="hl">compulsar</span> 公证（fotocopia compulsada 认证复印件） <span class="hl">tasa</span> 费用；费率（tasa administrativa 行政费） <span class="hl">digitalización</span> 数字化（sede electrónica 电子政务平台） <span class="hl">brecha digital</span> 数字鸿沟（personas mayores 老年人）</div>
+  <section class="quiz-section" id="quiz-b1"><h3>B1 阅读理解</h3><div class="quiz-item" id="q-b1-0">
+  <div class="q-title">1. ¿Qué es el NIE?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,0)">A. Un tipo de visado</li><li onclick="pickOpt(this,0)">B. El Número de Identidad de Extranjero</li><li onclick="pickOpt(this,0)">C. Un documento fiscal</li><li onclick="pickOpt(this,0)">D. Una tarjeta de residencia</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b1',0,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: El NIE es el Número de Identidad de Extranjero. (第二段)<br>ZH: NIE 是外国人身份证号码。</div>
+</div><div class="quiz-item" id="q-b1-1">
+  <div class="q-title">2. ¿Para qué sirve el certificado de empadronamiento?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,1)">A. Para viajar</li><li onclick="pickOpt(this,1)">B. Para acceder a la sanidad y escolarizar a los hijos</li><li onclick="pickOpt(this,1)">C. Para comprar un coche</li><li onclick="pickOpt(this,1)">D. Para abrir un bar</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b1',1,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Es necesario para acceder a la sanidad pública y escolarizar a los hijos. (第六段)<br>ZH: 是享受公共医疗和孩子入学的必要条件。</div>
+</div><div class="quiz-item" id="q-b1-2">
+  <div class="q-title">3. ¿Qué porcentaje de ciudadanos considera la burocracia demasiado complicada?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,2)">A. El 30%</li><li onclick="pickOpt(this,2)">B. El 50%</li><li onclick="pickOpt(this,2)">C. El 60%</li><li onclick="pickOpt(this,2)">D. El 80%</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b1',2,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Una encuesta reciente revela que el 60% de los ciudadanos considera la burocracia española excesivamente complicada. (第十二段)<br>ZH: 60% 的市民认为西班牙官僚制度过于复杂。</div>
+</div><div class="quiz-item" id="q-b1-3">
+  <div class="q-title">4. ¿Quiénes son los más afectados por la brecha digital?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,3)">A. Los jóvenes</li><li onclick="pickOpt(this,3)">B. Los turistas</li><li onclick="pickOpt(this,3)">C. Las personas mayores</li><li onclick="pickOpt(this,3)">D. Los empresarios</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b1',3,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: Las personas mayores son las más afectadas por la brecha digital. (第十三段)<br>ZH: 老年人受数字鸿沟影响最大。</div>
+</div><div class="quiz-item" id="q-b1-4">
+  <div class="q-title">5. ¿Qué sistema permite hacer trámites por internet?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,4)">A. WhatsApp</li><li onclick="pickOpt(this,4)">B. La sede electrónica con Cl@ve</li><li onclick="pickOpt(this,4)">C. El correo postal</li><li onclick="pickOpt(this,4)">D. Las llamadas telefónicas</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b1',4,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Ahora se pueden realizar muchas gestiones a través de la sede electrónica con certificado digital o Cl@ve. (第十一段)<br>ZH: 通过电子政务平台用数字证书或 Cl@ve 办理。</div>
+</div></section>
+</section><section class="article" id="b2">
+  <header>
+    <span class="level-tag" style="background:#6a1b9a">B2</span>
+    <h2></h2>
+    <div class="meta">
+      <span>来源: </span>
+      <a href="#" class="source-cta" style="background:#6a1b9a" target="_blank" rel="noopener noreferrer">阅读原文 &rarr;</a>
+    </div>
+  </header>
+  <div class="bilingual"><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>La España vaciada es uno de los problemas estructurales más graves que afronta el país desde hace décadas.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>&quot;空心的西班牙&quot;是这个国家几十年来面临的最严重的结构性问题之一。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Se refiere al fenómeno de despoblación que afecta a amplias zonas del interior peninsular, especialmente en Castilla y León, Aragón y Extremadura.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>它指的是影响半岛内陆广大地区的人口流失现象，特别是在卡斯蒂利亚-莱昂、阿拉贡和埃斯特雷马杜拉。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>En provincias como Soria o Teruel, la densidad de población es inferior a 10 habitantes por kilómetro cuadrado.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>在索里亚或特鲁埃尔等省份，人口密度低于每平方公里 10 人。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Esto equivale a los niveles de despoblación de Laponia o algunas regiones de Siberia.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>这相当于拉普兰或西伯利亚某些地区的人口流失水平。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Las causas son múltiples: la mecanización del campo, la falta de oportunidades laborales y la concentración de servicios en las grandes ciudades.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>原因多种多样：农业机械化、就业机会缺乏以及服务业向大城市集中。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los jóvenes emigran a Madrid, Barcelona o al extranjero en busca de trabajo cualificado.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>年轻人移居到马德里、巴塞罗那或国外寻找技能型工作。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Como consecuencia, los pueblos se quedan sin escuela, sin consultorio médico y sin transporte público.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>结果是村庄失去学校、诊所和公共交通。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El cierre de la escuela suele ser el golpe definitivo para un pueblo pequeño. Sin niños, no hay futuro.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>学校的关闭往往是对一个小村庄的致命一击。没有孩子，就没有未来。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Sin embargo, en los últimos años ha surgido un movimiento de repoblación rural impulsado por el teletrabajo.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>然而近年来，在远程办公推动下出现了一股农村重新入住运动。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Familias jóvenes que antes vivían en la ciudad se están mudando a pueblos con buena conexión a internet.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>以前住在城市的年轻家庭正搬到有良好网络连接的村庄。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El teletrabajo ha sido un punto de inflexión. Ya no es necesario vivir en una gran ciudad para trabajar en una empresa tecnológica.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>远程办公是一个转折点。不再需要住在大城市就能在科技公司工作。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Los ayuntamientos de muchos pueblos ofrecen incentivos: alquileres baratos, ayudas para emprendedores y terrenos a bajo precio.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>很多村落的市政厅提供激励措施：便宜的租金、创业者补贴和低价土地。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Pero la repoblación no es solo cuestión de infraestructura. También se necesita crear comunidad y vida cultural.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>但重新入住不仅仅是基础设施问题。还需要创造社区和文化生活。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>Iniciativas como festivales rurales, mercados de productores y residencias de artistas ayudan a revitalizar el tejido social.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>乡村音乐节、农夫市集和艺术家驻地等倡议有助于复兴社会网络。</div>
+</div><div class="para">
+  <div class="es"><span class="lang-tag es-tag">ES</span>El desafío es enorme, pero cada vez más personas creen que el futuro de España también pasa por sus pueblos.</div>
+  <div class="zh"><span class="lang-tag zh-tag">ZH</span>挑战是巨大的，但越来越多的人相信西班牙的未来也在于它的乡村。</div>
+</div></div>
+  <div class="dele-points">DELE B2 考点：B2 考点：<b>被动语态</b>(es considerada, ha sido impulsado, se están mudando)；<b>虚拟式</b>(aunque algunos duden, es necesario que se cree)；<b>复合句连接词</b>(como consecuencia, sin embargo, ya que, a pesar de que)；<b>代动词</b>(se refiere a, se están mudando)；<b>条件句</b>(si no hay niños, no hay futuro)。</div>
+  <div class="dele-points" style="border-left-color:#e07a1f;background:linear-gradient(90deg,#fff3e0,#fff)"><b>难词速查：</b><span class="hl">despoblación</span> 人口流失（densidad de población 人口密度） <span class="hl">repoblación</span> 重新入住（movimiento de repoblación rural） <span class="hl">teletrabajo</span> 远程办公（punto de inflexión 转折点） <span class="hl">incentivo</span> 激励措施（ayudas para emprendedores 创业者补贴） <span class="hl">tejido social</span> 社会网络；社会结构（revitalizar 复兴）</div>
+  <section class="quiz-section" id="quiz-b2"><h3>B2 阅读理解</h3><div class="quiz-item" id="q-b2-0">
+  <div class="q-title">1. ¿Qué significa 'la España vaciada'?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,0)">A. España sin turistas</li><li onclick="pickOpt(this,0)">B. El fenómeno de despoblación del interior</li><li onclick="pickOpt(this,0)">C. Una región de España</li><li onclick="pickOpt(this,0)">D. Un barrio de Madrid</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b2',0,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Se refiere al fenómeno de despoblación que afecta a amplias zonas del interior peninsular. (第二段)<br>ZH: 指影响半岛内陆广大地区的人口流失。</div>
+</div><div class="quiz-item" id="q-b2-1">
+  <div class="q-title">2. ¿Cuál es la densidad de población en Soria o Teruel?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,1)">A. 100 hab/km²</li><li onclick="pickOpt(this,1)">B. 50 hab/km²</li><li onclick="pickOpt(this,1)">C. Menos de 10 hab/km²</li><li onclick="pickOpt(this,1)">D. 200 hab/km²</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b2',1,2)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 C</b> — ES: La densidad de población es inferior a 10 habitantes por kilómetro cuadrado. (第三段)<br>ZH: 人口密度低于每平方公里 10 人。</div>
+</div><div class="quiz-item" id="q-b2-2">
+  <div class="q-title">3. ¿Qué ha impulsado la repoblación rural?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,2)">A. Las nuevas autopistas</li><li onclick="pickOpt(this,2)">B. El teletrabajo</li><li onclick="pickOpt(this,2)">C. Las fábricas</li><li onclick="pickOpt(this,2)">D. El turismo</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b2',2,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: En los últimos años ha surgido un movimiento de repoblación rural impulsado por el teletrabajo. (第九段)<br>ZH: 远程办公推动了农村重新入住运动。</div>
+</div><div class="quiz-item" id="q-b2-3">
+  <div class="q-title">4. ¿Qué ofrecen los ayuntamientos para atraer nuevos habitantes?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,3)">A. Coches gratis</li><li onclick="pickOpt(this,3)">B. Alquileres baratos y ayudas</li><li onclick="pickOpt(this,3)">C. Viajes gratis</li><li onclick="pickOpt(this,3)">D. Televisores</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b2',3,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Los ayuntamientos ofrecen incentivos: alquileres baratos, ayudas para emprendedores y terrenos a bajo precio. (第十二段)<br>ZH: 市政厅提供便宜租金、创业者补贴和低价土地。</div>
+</div><div class="quiz-item" id="q-b2-4">
+  <div class="q-title">5. ¿Qué iniciativas ayudan a revitalizar el tejido social?</div>
+  <ul class="quiz-opts"><li onclick="pickOpt(this,4)">A. Más fábricas</li><li onclick="pickOpt(this,4)">B. Festivales rurales y mercados de productores</li><li onclick="pickOpt(this,4)">C. Más oficinas</li><li onclick="pickOpt(this,4)">D. Más autopistas</li></ul>
+  <button class="quiz-check" onclick="checkAnswer('b2',4,1)">提交答案</button>
+  <div class="quiz-explanation"><b>正确答案 B</b> — ES: Iniciativas como festivales rurales, mercados de productores y residencias de artistas ayudan a revitalizar el tejido social. (第十四段)<br>ZH: 乡村音乐节、农夫市集和艺术家驻地有助于复兴社会网络。</div>
+</div></section>
+</section>
+</div>
+<script>
+function pickOpt(li, qi){
+  var parent = li.closest('.quiz-item');
+  parent.querySelectorAll('.quiz-opts li').forEach(function(l){ l.classList.remove('selected'); });
+  li.classList.add('selected');
+}
+function checkAnswer(lv, qi, ans){
+  var item = document.getElementById('q-'+lv+'-'+qi);
+  if(!item) return;
+  var opts = item.querySelectorAll('.quiz-opts li');
+  var sel = item.querySelector('.quiz-opts li.selected');
+  var selIdx = sel ? Array.from(opts).indexOf(sel) : -1;
+  item.classList.add('checked');
+  opts.forEach(function(li, i){
+    if(i===ans) li.classList.add('correct');
+    if(i===selIdx && i!==ans) li.classList.add('wrong');
+  });
+  var btn = item.querySelector('.quiz-check');
+  if(selIdx===ans){ btn.textContent = '正确!'; btn.className = 'quiz-check correct'; }
+  else { btn.textContent = (selIdx<0?'未选择':'错误'); btn.className = 'quiz-check wrong'; }
+}
+</script>
+</body>
+</html>
