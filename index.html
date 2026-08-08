@@ -1160,27 +1160,32 @@ async function speak(text, btn, accent, rate){
   if(window.speechSynthesis){
     try{
       window.speechSynthesis.cancel();
-      // Warm up voices
-      let voices = window.speechSynthesis.getVoices();
-      if(voices.length === 0){
-        await new Promise(r => setTimeout(r, 300));
-        voices = window.speechSynthesis.getVoices();
+      // Use cached Spanish voice if available
+      let esVoice = window.__esVoiceCache;
+      if(!esVoice){
+        // Warm up voices
+        let voices = window.speechSynthesis.getVoices();
+        if(voices.length === 0){
+          await new Promise(r => setTimeout(r, 200));
+          voices = window.speechSynthesis.getVoices();
+        }
+        // Prefer Latin American voice if requested
+        if(effectiveAccent==='es'){
+          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
+        } else {
+          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
+        }
+        if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
+        if(esVoice) window.__esVoiceCache = esVoice;  // cache for reuse
       }
-      // Prefer Latin American voice if requested
-      let esVoice;
-      if(effectiveAccent==='es'){
-        esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
-      } else {
-        esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
-      }
-      if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
-      if(esVoice || voices.length > 0){
+      if(esVoice){
         const u = new SpeechSynthesisUtterance(text);
+        window.__currentUtterance = u;  // Keep alive to prevent GC in Chrome
         if(esVoice) u.voice = esVoice;
         u.lang = langCode;
         u.rate = playRate;
-        u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; };
-        u.onerror = () => { if(btn) btn.classList.remove('playing'); };
+        u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; window.__currentUtterance = null; };
+        u.onerror = () => { if(btn) btn.classList.remove('playing'); window.__currentUtterance = null; };
         window.speechSynthesis.speak(u);
         // Fallback timer in case onend doesn't fire
         setTimeout(() => { if(btn) btn.classList.remove('playing'); }, text.length * 120 + 2000);
@@ -10306,6 +10311,7 @@ function _bindRefinePlayAll(){
           if(window.speechSynthesis){
             window.speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(text);
+            window.__refineCurrentUtterance = u;  // GC guard
             // 选口音
             const voices = window.speechSynthesis.getVoices();
             const accent = (ST && ST.globalAccent) || 'la';
@@ -10321,10 +10327,12 @@ function _bindRefinePlayAll(){
             u.lang = langCode;
             u.rate = rate;
             u.onend = () => {
+              window.__refineCurrentUtterance = null;
               if(!window.__refineSpeakQueue || window.__refineSpeakQueue !== queue) return;
               setTimeout(playNext, 500);
             };
             u.onerror = () => {
+              window.__refineCurrentUtterance = null;
               if(!window.__refineSpeakQueue || window.__refineSpeakQueue !== queue) return;
               setTimeout(playNext, 200);
             };
