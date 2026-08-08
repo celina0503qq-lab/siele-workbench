@@ -1219,9 +1219,10 @@ async function speak(text, btn, accent, rate){
         }
         // Prefer Latin American voice if requested
         if(effectiveAccent==='es'){
-          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
+          esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es-es'));
+          if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es') && !v.lang.toLowerCase().startsWith('es-mx'));
         } else {
-          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
+          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')||v.lang.toLowerCase().startsWith('es-cl')||v.lang.toLowerCase().startsWith('es-pe')));
         }
         if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
         if(esVoice) window.__esVoiceCache = esVoice;  // cache for reuse
@@ -1385,7 +1386,7 @@ function go(page){
     currentPage='dash'; renderNav(); renderMain();
     setTimeout(function(){
       var el=document.getElementById('dashExamCard');
-      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+      if(el){ try{el.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){el.scrollIntoView(true);} }
     },150);
     return;
   }
@@ -1596,7 +1597,7 @@ function renderDash(){
   </div>`;
 
   // Pomodoro + progress
-  h += `<div class="g g2">
+  h += `<div class="g g2" id="dashQuickAnchor">
     <div class="card">
       <h3><span class="ic">⏱</span>番茄钟</h3>
       <div class="pomo">
@@ -13275,9 +13276,13 @@ if(typeof renderDash==='function'){
   var _rd0=renderDash;
   renderDash=function(){
     var h=_rd0();
-    var anchor='<div class="g g2">';
+    var anchor='<div class="g g2" id="dashQuickAnchor">';
     var i=h.indexOf(anchor);
     if(i>=0)return h.slice(0,i)+todoCardHtml()+h.slice(i);
+    // Edge fallback: class-only search if ID anchor not found
+    var anchor2='<div class="g g2">';
+    var j=h.indexOf(anchor2);
+    if(j>=0)return h.slice(0,j)+todoCardHtml()+h.slice(j);
     return h+todoCardHtml();
   };
 }
@@ -13337,7 +13342,13 @@ function ghApi(path, method, body){
 function createGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashIdxByLevel: ST.flashIdxByLevel, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
-    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
+    vocabReviewCount: ST.vocabReviewCount || {},
+    vocabReviewCount_A1: ST.vocabReviewCount_A1 || {}, vocabReviewCount_A2: ST.vocabReviewCount_A2 || {},
+    vocabReviewCount_B1: ST.vocabReviewCount_B1 || {}, vocabReviewCount_B2: ST.vocabReviewCount_B2 || {},
+    vocabReviewCount_all: ST.vocabReviewCount_all || {},
+    accentOverride: ST.accentOverride || {}, dailyTodoDates: ST.dailyTodoDates || [],
+    speakModelEssays: ST.speakModelEssays || {},
+    vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
@@ -13366,7 +13377,13 @@ function pullGist(){
 function pushGist(){
   var data = JSON.stringify({v:3, ts:Date.now(), device:'wb-standalone/'+navigator.userAgent.slice(0,40),
     flashIdx: ST.flashIdx, flashLevel: ST.flashLevel, flashCurrentWord: ST.flashCurrentWord, flashIdxByLevel: ST.flashIdxByLevel, flashProgressByLevel: ST.flashProgressByLevel, flashPronunciation: ST.flashPronunciation, globalAccent: ST.globalAccent,
-    vocabReviewCount: ST.vocabReviewCount, vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
+    vocabReviewCount: ST.vocabReviewCount || {},
+    vocabReviewCount_A1: ST.vocabReviewCount_A1 || {}, vocabReviewCount_A2: ST.vocabReviewCount_A2 || {},
+    vocabReviewCount_B1: ST.vocabReviewCount_B1 || {}, vocabReviewCount_B2: ST.vocabReviewCount_B2 || {},
+    vocabReviewCount_all: ST.vocabReviewCount_all || {},
+    accentOverride: ST.accentOverride || {}, dailyTodoDates: ST.dailyTodoDates || [],
+    speakModelEssays: ST.speakModelEssays || {},
+    vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
@@ -13570,6 +13587,16 @@ async function standaloneSync(showLog){
         });
       });
     }
+    // FEAT-4: 合并扁平化 vocabReviewCount — 逐 key max
+    ['A1','A2','B1','B2','all'].forEach(function(lv){
+      var fk='vocabReviewCount_'+lv;
+      var rv=remote[fk];
+      if(rv&&typeof rv==='object'){ST[fk]=ST[fk]||{};Object.keys(rv).forEach(function(es){var x=rv[es]|0;if(x>(ST[fk][es]|0))ST[fk][es]=x;});}
+    });
+    // FEAT-3: accentOverride 本地优先
+    if(remote.accentOverride&&typeof remote.accentOverride==='object'){ST.accentOverride=ST.accentOverride||{};Object.keys(remote.accentOverride).forEach(function(m){if(!ST.accentOverride[m])ST.accentOverride[m]=remote.accentOverride[m];});}
+    // FEAT-5: speakModelEssays
+    if(remote.speakModelEssays&&typeof remote.speakModelEssays==='object'){ST.speakModelEssays=ST.speakModelEssays||{};Object.keys(remote.speakModelEssays).forEach(function(t){var rt=remote.speakModelEssays[t];if(!ST.speakModelEssays[t]||(rt.createdAt||0)>(ST.speakModelEssays[t].createdAt||0))ST.speakModelEssays[t]=rt;});}
     // 全局发音口音：远程有值则采用（两端偏好一致即可）
     if(typeof remote.globalAccent==='string'&&(remote.globalAccent==='la'||remote.globalAccent==='es'))ST.globalAccent=remote.globalAccent;
     // 合并最近学过的词：取本地和远程的并集，按远程时间戳优先排列（跨设备同步听写池）
