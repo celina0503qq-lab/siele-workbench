@@ -107,6 +107,71 @@
 .rd-card .meta{font-size:10.5px;color:var(--soft)}
 .rd-card .meta .src{color:var(--tr);font-weight:600}
 
+/* ===== 外刊精炼 (REFINE MODULE) ===== */
+.refine-dates{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}
+.refine-date-chip{display:flex;flex-direction:column;align-items:flex-start;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font-size:12px;cursor:pointer;transition:.15s;min-height:48px;min-width:120px;touch-action:manipulation}
+.refine-date-chip:hover,.refine-date-chip:focus-visible{border-color:var(--tr);outline:2px solid rgba(192,57,43,.28);outline-offset:2px}
+.refine-date-chip.on{background:var(--tr);color:#fff;border-color:var(--tr)}
+.refine-date-chip.on span{color:rgba(255,255,255,.85)}
+.refine-date-chip b{font-size:13px;font-weight:700;letter-spacing:.3px}
+.refine-date-chip span{font-size:10px;color:var(--soft);margin-top:2px}
+.refine-theme{font-size:13px;color:var(--ink);background:var(--paper);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;margin-bottom:12px;line-height:1.5}
+.refine-theme::before{content:""}
+.refine-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.refine-section{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:14px;box-shadow:var(--sh)}
+.refine-section h3{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.refine-word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.refine-word-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.5}
+.refine-word-card .lema{font-size:15px;font-weight:700;color:var(--tr);margin-bottom:4px}
+.refine-word-card .ipa{font-size:11px;color:var(--soft);margin-bottom:6px;font-family:monospace}
+.refine-word-card .ipa .pos{font-style:italic;margin-left:4px;color:var(--am);background:rgba(255,255,255,.06);padding:0 6px;border-radius:4px;font-size:10px}
+.refine-word-card .significado{color:var(--ink);margin-bottom:6px;font-weight:500}
+.refine-word-card .ejemplo{color:var(--soft);font-style:italic;margin-bottom:2px}
+.refine-word-card .ejemplo-zh{color:var(--ink);margin-bottom:6px;font-size:11.5px}
+.refine-word-card .tip{background:rgba(192,57,43,.08);border-left:3px solid var(--tr);padding:6px 10px;font-size:11px;line-height:1.45;border-radius:0 6px 6px 0}
+.refine-article-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:18px;box-shadow:var(--sh)}
+.refine-article-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.refine-level-tag{display:inline-block;color:#fff;font-weight:800;font-size:12px;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
+.refine-article-head h3{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;margin:0;flex:1;min-width:200px}
+.refine-meta{font-size:11px;color:var(--soft);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.refine-meta a{color:var(--tr);text-decoration:none;font-weight:600}
+.refine-meta a:hover{text-decoration:underline}
+.refine-dele{background:rgba(255,193,7,.12);border:1px solid rgba(255,193,7,.3);border-radius:8px;padding:6px 10px;font-size:11px;margin-bottom:10px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.refine-dele-chip{display:inline-block;background:rgba(255,193,7,.25);color:#B8860B;padding:2px 7px;border-radius:4px;font-weight:600;margin-right:4px}
+.refine-para{background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:8px;border:1px solid var(--line)}
+.refine-para .es{color:var(--ink);font-size:12.5px;line-height:1.6;margin-bottom:4px}
+.refine-para .zh{color:var(--soft);font-size:12px;line-height:1.55;margin-bottom:4px}
+.refine-para .es b{color:var(--tr);font-weight:700}
+.refine-para .zh b{color:var(--ink);font-weight:600}
+.refine-para mark{background:rgba(192,57,43,.18);color:var(--tr);padding:0 3px;border-radius:3px;font-weight:600}
+.refine-vocab{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.refine-vocab .vw{background:rgba(192,57,43,.08);color:var(--tr);padding:3px 8px;border-radius:4px;font-size:11px}
+.refine-vocab .vw span{color:var(--soft);font-size:10px;margin-left:4px}
+.refine-grammar{margin-top:6px;font-size:11px;color:var(--teal);font-style:italic}
+.refine-grammar::before{content:"📐 "}
+.refine-hardwords{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0;font-size:12px}
+.refine-hardwords b{color:var(--tr);margin-right:6px}
+.refine-hardwords .vw{background:rgba(192,57,43,.08);color:var(--tr);padding:3px 8px;border-radius:4px;font-size:11px;margin:2px;display:inline-block}
+.refine-hardwords .vw span{color:var(--soft);font-size:10px;margin-left:4px}
+.refine-quiz-block{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-top:10px}
+.refine-quiz-block>summary{font-size:12px;font-weight:700;color:var(--tr);cursor:pointer;padding:4px 0;user-select:none}
+.refine-quiz-block>summary:hover{color:var(--ink)}
+.refine-quiz-q{padding:8px 0;border-top:1px dashed var(--line)}
+.refine-quiz-q:first-of-type{border-top:none}
+.refine-quiz-q .q-text{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.refine-quiz-q .q-opts{list-style:none;padding:0;margin:0 0 6px}
+.refine-quiz-q .q-opts li{font-size:12px;color:var(--ink);padding:3px 0;line-height:1.4}
+.refine-quiz-q .q-opts li:nth-child(1)::before{content:"○ "}
+.refine-quiz-q .q-opts li:nth-child(2)::before{content:"○ "}
+.refine-quiz-q .q-opts li:nth-child(3)::before{content:"○ "}
+.refine-quiz-q .q-opts li:nth-child(4)::before{content:"○ "}
+.refine-quiz-q .q-opts li{color:var(--soft)}
+.refine-quiz-q .q-opts li:has-text{color:var(--ink)}
+.refine-quiz-q details{font-size:11.5px;margin-top:4px}
+.refine-quiz-q summary{cursor:pointer;color:var(--tr);font-weight:600;user-select:none}
+.refine-quiz-q .es-ex{color:var(--ink);font-style:italic;margin-top:4px;line-height:1.5}
+.refine-quiz-q .zh-ex{color:var(--soft);margin-top:2px;line-height:1.5}
+
 /* ===== 云同步设置面板 ===== */
 .sync-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99998;display:flex;align-items:center;justify-content:center;animation:fade .2s}
 .sync-panel{background:var(--paper);border-radius:16px;width:520px;max-width:92vw;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);padding:0}
@@ -1127,6 +1192,7 @@ const NAV = [
     {id:'planner', icon:'📅', label:'学习计划'},
     {id:'errors', icon:'🚨', label:'错题集'},
     {id:'reading', icon:'📰', label:'外刊阅读'},
+    {id:'refine', icon:'📚', label:'外刊精炼'},
   ]},
   {s:'DELE专项', items:[
     {id:'deleA1', icon:'A1', label:'DELE A1', adminOnly:true},
@@ -1198,6 +1264,7 @@ function renderMain(){
     case 'netdisk': h += renderNetdisk(); break;
     case 'errors': h += renderErrors(); break;
     case 'reading': h += renderReading(); break;
+    case 'refine': h += renderRefine(); break;
     case 'deleA1': h += renderDeleLevel('A1'); break;
     case 'deleA2': h += renderDeleLevel('A2'); break;
     case 'deleB1': h += renderDeleLevel('B1'); break;
@@ -9709,6 +9776,224 @@ function showEncouragement(type, score){
   setTimeout(()=>{ if(el.parentNode) el.parentNode.removeChild(el); }, 3400);
 }
 
+// ===== REFINE MODULE (外刊精炼) =====
+let currentRefineDate = null;
+let currentRefineLevel = null; // null=显示全部 4 篇；或 'A1'/'A2'/'B1'/'B2'
+let __refineCache = {}; // date -> {words, articles, levelColors}
+const REFINE_LEVEL_COLORS = { A1: '#2E7D32', A2: '#1565C0', B1: '#C12A2A', B2: '#6A1B9A' };
+const REFINE_LEVEL_LABEL = { A1: 'A1 入门', A2: 'A2 基础', B1: 'B1 中级', B2: 'B2 中高级' };
+const REFINE_LEVEL_TITLES = {
+  A1: '☕ El café de la mañana（早晨的一杯咖啡）',
+  A2: '🎒 Vuelta al cole en septiembre（九月开学季）',
+  B1: '🌡️ La ola de calor de agosto en España（西班牙八月热浪）',
+  B2: '🏘️ La España vaciada：el reto demográfico del siglo XXI（"空心化的西班牙"：21 世纪的人口挑战）'
+};
+
+function pickRefineDate(){
+  if(currentRefineDate && window.REFINE_PACKS && window.REFINE_PACKS[currentRefineDate]) return currentRefineDate;
+  const keys = window.REFINE_PACKS ? Object.keys(window.REFINE_PACKS).sort().reverse() : [];
+  return keys[0] || null;
+}
+
+function renderRefine(){
+  if(!window.REFINE_PACKS){
+    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
+      <div class="empty">⏳ 数据加载中…如长时间未显示，请刷新页面。</div>`;
+  }
+  const dates = Object.keys(window.REFINE_PACKS).sort().reverse();
+  if(dates.length === 0){
+    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
+      <div class="empty">📭 暂未发布精炼包，请在每日 10:30 后查看。</div>`;
+  }
+  if(!currentRefineDate) currentRefineDate = dates[0];
+
+  const pack = window.REFINE_PACKS[currentRefineDate];
+  const sourceByLevel = {};
+  (pack.sources||[]).forEach(s => sourceByLevel[s.level] = s);
+
+  // Date selector
+  let datePicker = '<div class="refine-dates">';
+  dates.forEach(d => {
+    const p = window.REFINE_PACKS[d];
+    const isOn = d === currentRefineDate;
+    const wd = p.weekday || '';
+    datePicker += `<button type="button" class="refine-date-chip ${isOn?'on':''}" onclick="selectRefineDate('${d}')" aria-pressed="${isOn}">
+      <b>${d}</b><span>周${wd} · 第${p.issue}期</span>
+    </button>`;
+  });
+  datePicker += '</div>';
+
+  // Word + Article cards skeleton (data is async-loaded)
+  const levels = ['A1','A2','B1','B2'];
+  const levelFilter = '<div class="rd-lvl-filter" style="margin-bottom:10px">' +
+    `<button type="button" class="rd-lvl ${!currentRefineLevel?'on':''}" onclick="selectRefineLevel(null)">全部</button>` +
+    levels.map(l => `<button type="button" class="rd-lvl ${currentRefineLevel===l?'on':''}" onclick="selectRefineLevel('${l}')">${l}</button>`).join('') +
+    '</div>';
+
+  const actions = `<div class="refine-actions">
+    <a class="btn ol" href="articles/${currentRefineDate}.docx" download="外刊精炼-${currentRefineDate}.docx" target="_blank" rel="noopener noreferrer">📥 下载今日 Word</a>
+    <a class="btn ol" href="articles/${currentRefineDate}.html" target="_blank" rel="noopener noreferrer">📖 在线精读（独立页）</a>
+  </div>`;
+
+  const theme = pack.theme ? `<div class="refine-theme">📌 主题：${esc(pack.theme)}</div>` : '';
+
+  let body = `<div id="refineBody">
+    <div class="empty">⏳ 正在加载今日精读内容…</div>
+  </div>`;
+
+  return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 5 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
+    ${renderModuleCheckinBar ? renderModuleCheckinBar('refine','外刊精炼','📚') : ''}
+    ${datePicker}
+    ${theme}
+    ${actions}
+    ${levelFilter}
+    ${body}`;
+}
+
+async function renderRefineBody(){
+  const el = document.getElementById('refineBody');
+  if(!el) return;
+  if(!currentRefineDate) return;
+  try {
+    const data = await window.loadRefineData(currentRefineDate);
+    window.__REFINE_DATE__ = currentRefineDate;
+    const words = data.WORDS || [];
+    const articles = data.ARTICLES || {};
+    const levels = ['A1','A2','B1','B2'];
+    const visibleLevels = currentRefineLevel ? [currentRefineLevel] : levels;
+
+    // Words section
+    let wordsHtml = '';
+    if(words.length && !currentRefineLevel){
+      wordsHtml = `<div class="refine-section">
+        <h3>📝 今日 5 个高频词</h3>
+        <div class="refine-word-grid">${words.map(w => `
+          <div class="refine-word-card">
+            <div class="lema">${esc(w.lema)}</div>
+            <div class="ipa">${esc(w.ipa||'')} <span class="pos">${esc(w.pos||'')}</span></div>
+            <div class="significado">${esc(w.significado||'')}</div>
+            <div class="ejemplo"><b>例：</b>${esc(w.ejemplo_es||'')}</div>
+            <div class="ejemplo-zh">${esc(w.ejemplo_zh||'')}</div>
+            ${w.tip ? `<div class="tip">💡 ${w.tip}</div>` : ''}
+          </div>`).join('')}</div>
+      </div>`;
+    }
+
+    // Article cards
+    const pack = window.REFINE_PACKS[currentRefineDate] || {};
+    const sourceByLevel = {};
+    (pack.sources||[]).forEach(s => sourceByLevel[s.level] = s);
+
+    let articlesHtml = '';
+    visibleLevels.forEach(lv => {
+      const a = articles[lv.toLowerCase()];
+      if(!a) return;
+      const color = REFINE_LEVEL_COLORS[lv];
+      const src = sourceByLevel[lv] || {};
+      const paras = (a.paragraphs||[]).map((p,i) => {
+        let esHtml = esc(p.es);
+        // Highlight per-paragraph vocab if available; otherwise highlight the first occurrence of each hardWord
+        if (p.vocab && p.vocab.length) {
+          p.vocab.forEach(v => {
+            const re = new RegExp('(' + v.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')','gi');
+            esHtml = esHtml.replace(re,'<mark>$1</mark>');
+          });
+        } else if (a.hardWords && a.hardWords.length) {
+          a.hardWords.forEach(v => {
+            const re = new RegExp('(' + v.w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')','gi');
+            esHtml = esHtml.replace(re,'<mark>$1</mark>');
+          });
+        }
+        const vocabHtml = p.vocab && p.vocab.length
+          ? '<div class="refine-vocab">' + p.vocab.map(v => `<span class="vw"><b>${esc(v.w)}</b> <span>${esc(v.m)}</span></span>`).join('') + ''
+          : '';
+        const grammarHtml = p.grammar ? `<div class="refine-grammar"><b>语法解析：</b>${esc(p.grammar)}</div>` : '';
+        return `<div class="refine-para">
+          <div class="es"><b>第 ${i+1} 段 · 西语原文：</b>${esHtml}</div>
+          <div class="zh"><b>中文翻译：</b>${esc(p.zh||'')}</div>
+          ${vocabHtml}${grammarHtml}
+        </div>`;
+      }).join('');
+
+      const hw = (a.hardWords||[]).map(h => `<span class="vw"><b>${esc(h.w)}</b> <span>${esc(h.m)}</span></span>`).join('');
+      // dele can be either a string (HTML) or an array of strings
+      let deleHtml = '';
+      if (a.dele) {
+        if (Array.isArray(a.dele)) {
+          deleHtml = `<div class="refine-dele"><b>DELE ${lv} 考点：</b>${a.dele.map(d=>`<span class="refine-dele-chip">${esc(d)}</span>`).join('')}</div>`;
+        } else if (typeof a.dele === 'string') {
+          deleHtml = `<div class="refine-dele"><b>DELE ${lv} 考点：</b>${a.dele}</div>`;
+        }
+      }
+
+      const quiz = (a.quiz||[]);
+      const quizHtml = quiz.length ? `<details class="refine-quiz-block">
+        <summary>📝 阅读理解（${quiz.length} 题）</summary>
+        ${quiz.map((q,i) => `<div class="refine-quiz-q">
+          <div class="q-text">${i+1}. ${esc(q.q)}</div>
+          <ul class="q-opts">${(q.opts||[]).map((o,j)=>`<li>${String.fromCharCode(65+j)}. ${esc(o)}${j===q.ans?' ✅':''}</li>`).join('')}</ul>
+          <details class="q-expl"><summary>查看解析</summary>
+            <div class="es-ex">${esc(q.es||'')}</div>
+            <div class="zh-ex">${esc(q.zh||'')}</div>
+          </details>
+        </div>`).join('')}
+      </details>` : '';
+
+      articlesHtml += `<div class="refine-article-card" style="border-left:6px solid ${color}">
+        <div class="refine-article-head">
+          <span class="refine-level-tag" style="background:${color}">${lv}</span>
+          <h3>${esc(REFINE_LEVEL_TITLES[lv] || a.title || lv)}</h3>
+        </div>
+        <div class="refine-meta">
+          ${src.source ? `<span class="src">来源：<a href="${esc(src.sourceUrl||'#')}" target="_blank" rel="noopener noreferrer">${esc(src.source)}</a></span>` : ''}
+          ${src.topic ? `<span class="topic">选题：${esc(src.topic)}</span>` : ''}
+          <span>${(a.paragraphs||[]).length} 段 · ${(a.hardWords||[]).length} 个难词 · ${(a.quiz||[]).length} 题</span>
+        </div>
+        ${deleHtml}
+        ${paras}
+        ${hw ? `<div class="refine-hardwords"><b>🧠 难词速查：</b>${hw}</div>` : ''}
+        ${quizHtml}
+      </div>`;
+    });
+
+    el.innerHTML = wordsHtml + articlesHtml;
+    if(typeof ST !== 'undefined' && ST.checkIns){
+      try { checkOffTodayByCat('refine'); } catch(e){}
+    }
+  } catch(err){
+    el.innerHTML = `<div class="empty">❌ 加载失败：${esc(err.message)}<br><br>请检查 articles/data/${currentRefineDate}.js 是否存在。</div>`;
+  }
+}
+
+function selectRefineDate(d){
+  currentRefineDate = d;
+  currentRefineLevel = null;
+  renderMain();
+  setTimeout(renderRefineBody, 30);
+}
+
+function selectRefineLevel(l){
+  currentRefineLevel = l;
+  renderMain();
+  setTimeout(renderRefineBody, 30);
+}
+
+// Auto-load body after the main shell renders (used by renderMain when refine is first opened)
+function _refineAutoLoad(){
+  if(typeof currentPage === 'string' && currentPage === 'refine'){
+    setTimeout(renderRefineBody, 60);
+  }
+}
+// Hook into renderMain by checking after each main render via MutationObserver-lite
+const _origRenderMain = typeof renderMain === 'function' ? renderMain : null;
+if(_origRenderMain && !window.__refineHooked){
+  window.__refineHooked = true;
+  window.renderMain = function(){
+    _origRenderMain.apply(this, arguments);
+    _refineAutoLoad();
+  };
+}
+
 // ===== READING MODULE (外刊阅读) =====
 let currentReadingLevel = 'A1';
 let currentReadingArticle = null;
@@ -10226,6 +10511,63 @@ function _injectDeleBank(){
   }
 }
 
+// ===== v5 题库注入 (Instituto Cervantes Modelo 0 官方 2020 格式) =====
+// v5 items 已是扁平数组 (P1+P2+P3+P4), schema 完整: prompt/options/answer/cuerpo/transcript/audio
+// v5 与 v4 共用 _deleBank.A1.{reading, listening, writing, speaking} 结构
+function _injectDeleBankV5(){
+  if (typeof window.DELE_BANK_A1_V5 === 'undefined') return false;
+  const v5 = window.DELE_BANK_A1_V5;
+  if (!v5.items || !v5.items.length) return false;
+  // 按 prueba → task 重新分配
+  // 1=reading, 2=listening, 3=writing, 4=speaking
+  for (const it of v5.items) {
+    let targetKey = null;
+    if (it.prueba === 1) targetKey = 'reading';
+    else if (it.prueba === 2) targetKey = 'listening';
+    else if (it.prueba === 3) targetKey = 'writing';
+    else if (it.prueba === 4) targetKey = 'speaking';
+    if (!targetKey || !_deleBank.A1[targetKey]) continue;
+    // 标准化字段 (跟 v4 schema 对齐, UI 渲染器共用)
+    const normalized = {
+      modelo: it.modelo,
+      modelo_name: it.modelo_name,
+      prueba: it.prueba,
+      tarea: it.tarea,
+      q: it.q,
+      q_range: it.q_range || [it.q, it.q],
+      answer: it.answer || '',
+      body_excerpt: it.body_excerpt || (it.cuerpo || it.transcript || '').slice(0, 800),
+      prompt: it.prompt || '',
+      options: it.options || [],
+      type: it.type || 'choice3',
+      instrucciones: it.instrucciones || '',
+      cuerpo: it.cuerpo || '',
+      transcript: it.transcript || '',
+      audio: it.audio || '',
+      // v5 独有字段
+      mensajes: it.mensajes || null,
+      anuncios: it.anuncios || null,
+      contexto: it.contexto || '',
+      formulario: it.formulario || null,
+      requisitos: it.requisitos || null,
+      rango_palabras: it.rango_palabras || '',
+      aspectos: it.aspectos || null,
+      temas: it.temas || null,
+      sugerencias: it.sugerencias || null,
+      ejemplos_preguntas: it.ejemplos_preguntas || null,
+      instrucciones_examinador: it.instrucciones_examinador || '',
+      // 标记 v5 来源 (UI 端可显示)
+      _v5: true
+    };
+    _deleBank.A1[targetKey].push(normalized);
+  }
+  // 重建 mock
+  if (_deleBank.A1.reading.length || _deleBank.A1.listening.length) {
+    _deleBank.A1.mock = _deleBank.A1.reading.concat(_deleBank.A1.listening);
+  }
+  return true;
+}
+
 // ===== v4 题库 OCR 解析器 =====
 // 把 passage_raw (Edelsa 题目段) 切成:
 //   body_excerpt: 题目原文 (邮件/笔记/广告/通知 整段)
@@ -10448,6 +10790,7 @@ function _renderDeleA1Quiz(level, task, taskLabel, bank){
   const firstList = grupos[firstMid] || [];
   const initialId = '__dele_a1_'+task+'_'+firstMid;
   window._deleA1CurrentTask = task;
+  window._deleA1CurrentModelo = firstMid;
   return '<section>'+
     '<div class="card" style="border-left:4px solid '+deleLevelColor(level)+'">'+
       '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
@@ -10476,9 +10819,11 @@ function _renderDeleA1ModeloList(task, mid, items){
     (byTarea[k] = byTarea[k] || []).push(it);
   }
   let h = '';
-  // 原文片段 (取第一个, 来自 v4 passage_raw 解析)
+  // 原文片段 (取第一个, 来自 v4 passage_raw 解析 或 v5 cuerpo)
   const sample = items[0] && items[0].body_excerpt || '暂无原文';
-  if (sample) {
+  // v5 模式标识: 任一 item 是 v5
+  const isV5 = items.some(function(it){ return it._v5; });
+  if (sample && !isV5) {
     h += '<div class="card">'+
       '<div class="sub" style="color:var(--tr);margin-bottom:6px">题目原文 (OCR 提取, 首段):</div>'+
       '<div style="background:var(--bg2,#f5f5f5);padding:10px;border-radius:6px;font-size:13px;line-height:1.6;max-height:200px;overflow:auto;white-space:pre-wrap">'+esc(sample)+'</div>'+
@@ -10490,43 +10835,243 @@ function _renderDeleA1ModeloList(task, mid, items){
     h += '<div class="gp">';
     for (const q of group) {
       const answered = !!q.answer;
+      // v5 写作/口语题: 走特殊渲染 (无选择题 answer)
+      if (q._v5 && (q.type === 'form_fill' || q.type === 'writing_ad' || q.type === 'speaking_self' || q.type === 'speaking_topic' || q.type === 'speaking_dialogue')) {
+        h += _renderDeleA1V5TaskCard(q);
+        continue;
+      }
+      // v5 听力题: 显示 transcript 折叠区
+      let transcriptHtml = '';
+      if (q._v5 && q.transcript && q.prueba === 2) {
+        transcriptHtml = '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📝 听力原文 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.5">'+esc(q.transcript)+'</div></details>';
+        if (q.audio) {
+          transcriptHtml += '<div style="margin-top:4px"><audio controls style="width:100%;height:32px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
+        }
+      }
+      // 渲染 cuerpo (题目原文, v5 才有)
+      let cuerpoHtml = '';
+      if (q._v5 && q.cuerpo && q.cuerpo.length > 50 && (q.prueba === 1)) {
+        cuerpoHtml = '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目原文 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
+      }
       // 渲染 prompt
       let promptHtml = '';
       if (q.prompt) {
         promptHtml = '<div style="margin-top:6px;font-size:13px;line-height:1.6;color:var(--fg)"><b>题 '+q.q+':</b> '+esc(q.prompt)+'</div>';
       }
-      // 渲染选项
+      // 渲染选项 — v5 可自测模式
       let optsHtml = '';
       if (q.options && q.options.length) {
-        optsHtml = '<div style="margin-top:4px;font-size:12px;color:var(--tr)">'+
-          q.options.map(function(o){
-            const isAns = q.answer && o.key.toUpperCase() === q.answer.toUpperCase();
-            return '<div style="'+(isAns?'background:#10b98122;border-left:3px solid #10b981;padding:2px 6px;margin:2px 0;border-radius:3px':'')+'"><b>'+esc(o.key)+')</b> '+esc(o.text)+(isAns?' ✓':'')+'</div>';
-          }).join('')+
-        '</div>';
+        if (q._v5) {
+          // v5: 自测模式 (选择题+匹配题可点击)
+          optsHtml = _renderDeleA1V5Choice(q);
+        } else {
+          // v4: 仅查看 (options 是占位符)
+          optsHtml = '<div style="margin-top:4px;font-size:12px;color:var(--tr)">'+
+            q.options.map(function(o){
+              const isAns = q.answer && o.key.toUpperCase() === q.answer.toUpperCase();
+              return '<div style="'+(isAns?'background:#10b98122;border-left:3px solid #10b981;padding:2px 6px;margin:2px 0;border-radius:3px':'')+'"><b>'+esc(o.key)+')</b> '+esc(o.text)+(isAns?' ✓':'')+'</div>';
+            }).join('')+
+          '</div>';
+        }
       }
       // 填空题答案
       if (q.type === 'fill' && q.answer) {
         optsHtml = '<div style="margin-top:4px;font-size:12px;color:#10b981">答案: <b>'+esc(q.answer)+'</b></div>';
       }
+      // v5 标记徽章
+      let v5Badge = '';
+      if (q._v5) {
+        v5Badge = ' <span class="sub" style="color:#10b981;font-weight:600">v5 Cervantes</span>';
+      }
       h += '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">'+
-          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span> <span class="sub" style="color:var(--tr)">· '+esc(q.type||'unknown')+'</span></div>'+
+          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span> <span class="sub" style="color:var(--tr)">· '+esc(q.type||'unknown')+'</span>'+v5Badge+'</div>'+
           (answered
             ? '<span class="pr-badge" style="background:#10b98122;color:#10b981">答案 '+q.answer+'</span>'
             : '<span class="pr-badge new">未匹配答案</span>')+
         '</div>'+
+        cuerpoHtml+
         promptHtml+
         optsHtml+
+        transcriptHtml+
       '</div>';
     }
     h += '</div></div>';
   }
   return h;
 }
+
+// ===== v5 选择题自测模式渲染 =====
+// 状态保存在 window._deleA1V5Answers (key: modelo+prueba+tarea+q, value: 用户选的 key)
+function _renderDeleA1V5Choice(q){
+  const stateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+  if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+  const userChoice = window._deleA1V5Answers[stateKey];
+  const isSubmitted = !!userChoice && userChoice._submitted;
+  // 选项列表
+  let optsH = '';
+  for (const o of q.options) {
+    const isUserPick = userChoice && userChoice.key === o.key;
+    const isCorrectAns = q.answer && o.key.toUpperCase() === q.answer.toUpperCase();
+    let bgStyle = '';
+    if (isSubmitted) {
+      if (isCorrectAns) bgStyle = 'background:#10b98122;border-left:3px solid #10b981;';
+      else if (isUserPick) bgStyle = 'background:#ef444422;border-left:3px solid #ef4444;';
+    } else if (isUserPick) {
+      bgStyle = 'background:#3b82f622;border-left:3px solid #3b82f6;';
+    }
+    optsH += '<div onclick="_deleA1V5Pick(\''+esc(stateKey)+'\',\''+esc(o.key)+'\')" '+
+      'style="'+bgStyle+'padding:4px 8px;margin:3px 0;border-radius:4px;cursor:pointer;font-size:13px;line-height:1.5;transition:all .15s">'+
+      '<b>'+esc(o.key)+')</b> '+esc(o.text)+
+      (isSubmitted && isCorrectAns ? ' <span style="color:#10b981">✓ 正确</span>' : '')+
+      (isSubmitted && isUserPick && !isCorrectAns ? ' <span style="color:#ef4444">✗ 你的选择</span>' : '')+
+    '</div>';
+  }
+  // 提交/重做按钮 + 反馈
+  let actionH = '';
+  if (q.answer) {
+    if (!userChoice) {
+      actionH = '<button class="btn sm pr" onclick="_deleA1V5Submit(\''+esc(stateKey)+'\')" style="margin-top:6px;font-size:12px">提交答案</button>';
+    } else if (!isSubmitted) {
+      actionH = '<button class="btn sm pr" onclick="_deleA1V5Submit(\''+esc(stateKey)+'\')" style="margin-top:6px;font-size:12px">提交</button>';
+    } else {
+      const correct = userChoice.key.toUpperCase() === q.answer.toUpperCase();
+      actionH = '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+        '<span class="pr-badge" style="background:'+(correct?'#10b98122;color:#10b981':'#ef444422;color:#ef4444')+'">'+
+          (correct ? '✓ 答对了' : '✗ 答错了 · 正确 '+q.answer)+
+        '</span>'+
+        '<button class="btn sm ol" onclick="_deleA1V5Reset(\''+esc(stateKey)+'\')" style="font-size:12px">重做</button>'+
+      '</div>';
+    }
+  } else {
+    actionH = '<span class="sub" style="color:var(--tr);font-size:12px">本题无客观答案</span>';
+  }
+  return '<div style="margin-top:6px">'+optsH+actionH+'</div>';
+}
+
+window._deleA1V5Pick = function(stateKey, key){
+  if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+  window._deleA1V5Answers[stateKey] = { key: key, _submitted: false };
+  // 触发局部重渲染
+  const task = window._deleA1CurrentTask || 'reading';
+  const mid = window._deleA1CurrentModelo;
+  if (mid) {
+    const el = document.getElementById('__dele_a1_'+task+'_'+mid);
+    if (el) {
+      const bank = (_deleBank.A1[task] || []);
+      const grupos = {};
+      for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+      el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+    }
+  }
+};
+window._deleA1V5Submit = function(stateKey){
+  if (!window._deleA1V5Answers || !window._deleA1V5Answers[stateKey]) {
+    if (window.toast) window.toast('请先选择一个选项');
+    return;
+  }
+  window._deleA1V5Answers[stateKey]._submitted = true;
+  // 触发局部重渲染
+  const task = window._deleA1CurrentTask || 'reading';
+  const mid = window._deleA1CurrentModelo;
+  if (mid) {
+    const el = document.getElementById('__dele_a1_'+task+'_'+mid);
+    if (el) {
+      const bank = (_deleBank.A1[task] || []);
+      const grupos = {};
+      for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+      el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+    }
+  } else {
+    // 兜底: 触发全局刷新
+    if (typeof renderMain === 'function') renderMain();
+  }
+};
+window._deleA1V5Reset = function(stateKey){
+  if (window._deleA1V5Answers) delete window._deleA1V5Answers[stateKey];
+  const task = window._deleA1CurrentTask || 'reading';
+  const mid = window._deleA1CurrentModelo;
+  if (mid) {
+    const el = document.getElementById('__dele_a1_'+task+'_'+mid);
+    if (el) {
+      const bank = (_deleBank.A1[task] || []);
+      const grupos = {};
+      for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+      el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+    }
+  }
+};
+
+// ===== v5 写作/口语任务卡片渲染 =====
+function _renderDeleA1V5TaskCard(q){
+  let body = '';
+  // instrucciones
+  if (q.instrucciones) {
+    body += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+'</div>';
+  }
+  // form_fill: 表单
+  if (q.type === 'form_fill' && q.formulario) {
+    body += '<div style="margin-top:8px;font-size:13px"><b>'+esc(q.formulario.titulo)+'</b></div>';
+    body += '<div style="margin-top:4px;font-size:12px;color:var(--tr)">个人信息: '+esc(q.formulario.datos_personales.join(' · '))+'</div>';
+    body += '<div style="margin-top:6px">';
+    for (const p of q.formulario.preguntas) {
+      body += '<div style="margin-top:6px"><b>'+esc(p.pregunta)+'</b> <span class="sub" style="color:var(--tr);font-size:12px">('+esc(p.rango_palabras)+' 词)</span>'+
+        '<textarea placeholder="在这里用西班牙语回答..." style="width:100%;min-height:50px;margin-top:4px;padding:6px;border:1px solid var(--bd,#ddd);border-radius:4px;font-size:13px;resize:vertical"></textarea></div>';
+    }
+    body += '</div>';
+  }
+  // writing_ad: 小广告
+  else if (q.type === 'writing_ad' && q.requisitos) {
+    body += '<div style="margin-top:6px;font-size:13px"><b>写作要求:</b></div><ul style="margin:4px 0 6px 20px;font-size:13px;line-height:1.6;color:var(--fg)">';
+    for (const r of q.requisitos) body += '<li>'+esc(r)+'</li>';
+    body += '</ul>';
+    body += '<div class="sub" style="color:var(--tr);font-size:12px">字数: '+esc(q.rango_palabras)+'</div>';
+    body += '<textarea placeholder="Escribe aquí tu anuncio (30-40 palabras)..." style="width:100%;min-height:120px;margin-top:6px;padding:8px;border:1px solid var(--bd,#ddd);border-radius:4px;font-size:13px;resize:vertical"></textarea>';
+  }
+  // speaking_self: 自我介绍
+  else if (q.type === 'speaking_self' && q.aspectos) {
+    body += '<div style="margin-top:6px;font-size:13px"><b>📝 准备要点:</b></div><ul style="margin:4px 0 6px 20px;font-size:13px;line-height:1.6;color:var(--fg)">';
+    for (const a of q.aspectos) body += '<li>'+esc(a)+'</li>';
+    body += '</ul>';
+    body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 1-2 分钟 · 可准备 10 分钟后开始录音</div>';
+    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+  }
+  // speaking_topic: 主题阐述
+  else if (q.type === 'speaking_topic' && q.temas) {
+    body += '<div style="margin-top:6px;font-size:13px"><b>📝 主题 (5 选 3):</b></div><ul style="margin:4px 0 6px 20px;font-size:13px;line-height:1.6;color:var(--fg)">';
+    for (const t of q.temas) body += '<li>'+esc(t)+'</li>';
+    body += '</ul>';
+    body += '<div style="margin-top:6px;font-size:13px"><b>💡 建议提示:</b></div><ul style="margin:4px 0 6px 20px;font-size:13px;color:var(--tr)">';
+    for (const s of q.sugerencias) body += '<li>'+esc(s)+'</li>';
+    body += '</ul>';
+    body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 2-3 分钟 · 可准备 10 分钟</div>';
+    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+  }
+  // speaking_dialogue: 对话
+  else if (q.type === 'speaking_dialogue' && q.ejemplos_preguntas) {
+    body += '<div style="margin-top:6px;font-size:13px"><b>💬 对话流程:</b></div>';
+    body += '<div style="margin-top:4px;font-size:13px;line-height:1.6;color:var(--fg)">'+esc(q.instrucciones_examinador)+'</div>';
+    body += '<div style="margin-top:6px;font-size:13px"><b>考官可能问:</b></div>';
+    for (const [topic, qs] of Object.entries(q.ejemplos_preguntas)) {
+      body += '<div style="margin-top:4px;font-size:13px"><b>'+esc(topic)+':</b></div><ul style="margin:2px 0 4px 20px;font-size:13px;color:var(--tr)">';
+      for (const qu of qs) body += '<li>'+esc(qu)+'</li>';
+      body += '</ul>';
+    }
+    body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 3-4 分钟 · 考官实时提问</div>';
+    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+  }
+  return '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
+      '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span> <span class="sub" style="color:var(--tr)">· Prueba '+q.prueba+' · Tarea '+q.tarea+'</span> <span class="sub" style="color:#10b981;font-weight:600">v5 Cervantes</span></div>'+
+      '<span class="pr-badge" style="background:#3b82f622;color:#3b82f6">开放式任务</span>'+
+    '</div>'+
+    body+
+  '</div>';
+}
 function _deleA1SwitchModelo(mid){
   // 找到当前 task
   const task = window._deleA1CurrentTask || 'reading';
+  window._deleA1CurrentModelo = mid;
   const bank = (_deleBank.A1[task] || []);
   const grupos = {};
   for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
@@ -10853,18 +11398,35 @@ window.addEventListener('DOMContentLoaded', () => {
   function tryInject(retries){
     if (typeof window.DELE_BANK_A1 !== 'undefined') {
       _injectDeleBank();
+      // v5 题库 (Cervantes 官方) — 在 v4 之后注入, 数据更优先生效
+      if (typeof window.DELE_BANK_A1_V5 !== 'undefined') {
+        _injectDeleBankV5();
+      }
       renderNav();
       renderMain();
     } else if (retries > 0) {
       setTimeout(function(){tryInject(retries-1);}, 80);
     }
   }
+  // 独立检测 v5 (即使 v4 缺失, v5 也能独立工作)
+  function tryInjectV5(retries){
+    if (typeof window.DELE_BANK_A1_V5 !== 'undefined') {
+      _injectDeleBankV5();
+      renderNav();
+      renderMain();
+    } else if (retries > 0) {
+      setTimeout(function(){tryInjectV5(retries-1);}, 80);
+    }
+  }
   tryInject(30); // ~2.4s
+  tryInjectV5(35); // 略晚启动兜底
 });
 </script>
 
+<script src="./refine_data.js" defer></script>
 <script src="./vdata_dele.js" defer></script>
 <script src="./dele_bank_a1.js" defer></script>
+<script src="./dele_bank_a1_v5.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
