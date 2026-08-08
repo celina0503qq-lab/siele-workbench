@@ -1589,7 +1589,7 @@ function renderDash(){
 
   // Stats
   h += `<div class="g g4" style="margin-bottom:18px">
-    <div class="card stat"><div class="num">${learned}</div><div class="lbl">已学单词</div><div class="sub">共 ${VDATA.length} 词</div></div>
+    <div class="card stat"><div class="num">${learned}</div><div class="lbl">已学单词</div><div class="sub">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 词</div></div>
     <div class="card stat"><div class="num t">${mastered}</div><div class="lbl">已掌握</div><div class="sub">三颗星掌握</div></div>
     <div class="card stat"><div class="num a">${grammarDoneCount}</div><div class="lbl">语法已学</div><div class="sub">共 ${GFLAT.length} 条</div></div>
     <div class="card stat"><div class="num">${quizAvg}<span style="font-size:14px">分</span></div><div class="lbl">测验均分</div><div class="sub">完成 ${quizDone} 次</div></div>
@@ -1632,7 +1632,8 @@ function renderDash(){
   const tasksDoneN = ST.tasks.filter(t=>t.done).length;
 
   // Overall completion (weighted)
-  const overall = Math.round((vocabDone/Math.max(VDATA.length,1))*30 + (grammarDoneN/Math.max(grammarTotal,1))*25 + (shadowDoneN/Math.max(shadowTotal,1))*15 + Math.min(quizDoneN,10)*2 + Math.min(pomodoroDoneN,20)*0.5);
+  var _vdataLen = typeof VDATA!=='undefined' ? VDATA.length : 553;
+  const overall = Math.round((vocabDone/Math.max(_vdataLen,1))*30 + (grammarDoneN/Math.max(grammarTotal,1))*25 + (shadowDoneN/Math.max(shadowTotal,1))*15 + Math.min(quizDoneN,10)*2 + Math.min(pomodoroDoneN,20)*0.5);
 
   // Ring SVG
   const R = 58, C = 2*Math.PI*R;
@@ -1656,7 +1657,7 @@ function renderDash(){
     {ico:'📚', name:'单词·按等级', rows:[
       ...['A1','A2','B1','B2'].map(lvl=>{
         // 2026-08-05 P0-P-4：改用 VDATA_BY_LVL 索引（vdata_dele.js 末尾初始化）
-        const pool = (typeof VDATA_BY_LVL!=='undefined' && VDATA_BY_LVL[lvl]) ? VDATA_BY_LVL[lvl] : VDATA.filter(v=>v.lvl===lvl);
+        const pool = (typeof VDATA_BY_LVL!=='undefined' && VDATA_BY_LVL[lvl]) ? VDATA_BY_LVL[lvl] : (typeof VDATA!=='undefined'?VDATA:[]).filter(v=>v.lvl===lvl);
         return {
           name:`单词 ${lvl}`,
           tot: pool.length,
@@ -1664,7 +1665,7 @@ function renderDash(){
           tag:`l${lvl}`
         };
       }),
-      {name:'单词·掌握', tot: VDATA.length, done: vocabMastered, tag:'tot'}
+      {name:'单词·掌握', tot: _vdataLen, done: vocabMastered, tag:'tot'}
     ]},
     {ico:'✏️', name:'其他板块', rows:[
       {name:'语法要点', tot:grammarTotal, done:grammarDoneN, tag:'gra'},
@@ -2203,6 +2204,7 @@ function updatePomoDisplay(){
 
 // ===== PAGE: FLASHCARDS =====
 function getFlashPool(){
+  if(typeof VDATA==='undefined') return [];
   var pool=ST.flashLevel==='all'?VDATA:VDATA.filter(function(v){return v.lvl===ST.flashLevel;});
   return pool.length?pool:VDATA;
 }
@@ -2470,10 +2472,12 @@ function renderFlashPractice(pool){
     }
   }
   // Fallback to any words from VDATA if not enough distractors
+  if(typeof VDATA!=='undefined'){
   while(distractors.length < 3){
     const idx = Math.floor(Math.random()*VDATA.length);
     const c = VDATA[idx];
     if(c.es !== v.es && !distractors.find(d=>d.es===c.es)) distractors.push(c);
+  }
   }
   // Mix options
   const options = [...distractors, v];
@@ -2594,7 +2598,7 @@ function resetPraStats(){
 
 // ===== PAGE: VOCAB LIBRARY =====
 function renderVocab(){
-  let h = `<div class="tb"><div><h2>词汇库${renderModuleAccentToggle('vocab')}</h2><div class="d">共 ${VDATA.length} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
+  let h = `<div class="tb"><div><h2>词汇库${renderModuleAccentToggle('vocab')}</h2><div class="d">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
   h += renderModuleCheckinBar('vocab','词汇学习','🃏');
 
   // Verb usage section
@@ -2619,6 +2623,7 @@ function renderVocab(){
 
   // Populate topics after render
   setTimeout(() => {
+    if(typeof VDATA==='undefined') return;
     const topics = [...new Set(VDATA.map(v=>v.t))];
     const sel = document.getElementById('vocabTopic');
     topics.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
@@ -2638,6 +2643,7 @@ function filterVocab(){
   const q = (document.getElementById('vocabSearch')?.value || '').toLowerCase();
   const lvl = document.getElementById('vocabLvl')?.value || 'all';
   const topic = document.getElementById('vocabTopic')?.value || 'all';
+  if(typeof VDATA==='undefined') return;
   let filtered = VDATA.filter(v => {
     if(lvl !== 'all' && v.lvl !== lvl) return false;
     if(topic !== 'all' && v.t !== topic) return false;
@@ -2674,7 +2680,7 @@ function filterVocab(){
       </div>`;
   }
   const cnt = document.getElementById('vocabCount');
-  if(cnt) cnt.textContent = `显示 ${start+1}-${Math.min(start+VOCAB_PAGE_SIZE, filtered.length)} / 共 ${filtered.length} 个词条${filtered.length!==VDATA.length?` (全部 ${VDATA.length})`:''}`;
+  if(cnt){ var _vdLen = typeof VDATA!=='undefined'?VDATA.length:0; cnt.textContent = '显示 '+(start+1)+'-'+Math.min(start+VOCAB_PAGE_SIZE, filtered.length)+' / 共 '+filtered.length+' 个词条'+(filtered.length!==_vdLen?(' (全部 '+_vdLen+')'):''); }
 }
 
 // 把单行渲染抽出,便于分页调用
@@ -3651,7 +3657,7 @@ function renderSpeaking(){
           <div><div style="font-size:12px;color:var(--soft)">识别结果</div><div id="speakRecog" style="font-size:13px;font-family:var(--serif)"></div></div>
         </div>
         <div class="note" id="speakFeedback" style="margin-top:8px"></div>
-        /* FEAT-5: 范文生成区 */
+        <!-- FEAT-5: 范文生成区 -->
         <div id="speakModelEssay" style="display:none;margin-top:10px"></div>
       </div>
     </div>
@@ -4312,20 +4318,17 @@ function generateDailyTasks(){
   }));
 
   ST.dailyTasks[today] = tasks;
-  // Sync generated tasks to dailyTodos (take top 5)
-  if(!ST.dailyTodos) ST.dailyTodos = [];
-  const syncedTodos = tasks.slice(0, 5).map((t, i) => ({
-    id: i+1,
-    text: t.text,
-    done: ST.dailyTodos[i] ? ST.dailyTodos[i].done : false,
-    cat: t.cat,
-    link: t.link
-  }));
-  // Preserve existing done state for matching items
-  ST.dailyTodos.forEach((old, i) => {
-    if(i < syncedTodos.length && old.done) syncedTodos[i].done = true;
+  // Sync generated tasks to dailyTodos (take top 5) /* FEAT-2: date-keyed format */
+  if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+  var existingDone = {};
+  var existingTodos = ST.dailyTodos[today] || [];
+  existingTodos.forEach(function(t){ if(t.done) existingDone[t.text] = true; });
+  var syncedTodos = tasks.slice(0, 5).map(function(t){
+    return {text: t.text, done: !!existingDone[t.text]};
   });
-  ST.dailyTodos = syncedTodos;
+  ST.dailyTodos[today] = syncedTodos;
+  if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+  if(ST.dailyTodoDates.indexOf(today)<0) ST.dailyTodoDates.push(today);
   save();
 }
 
@@ -4333,10 +4336,11 @@ function toggleDailyTask(i){
   const today = todayStr();
   if(!ST.dailyTasks || !ST.dailyTasks[today]) return;
   ST.dailyTasks[today][i].done = !ST.dailyTasks[today][i].done;
-  // Also sync to dailyTodos
-  if(ST.dailyTodos && i < ST.dailyTodos.length){
-    ST.dailyTodos[i].done = ST.dailyTasks[today][i].done;
-    if(ST.dailyTodos.every(t=>t.done)){ setTimeout(triggerConfetti,200); setTimeout(triggerConfetti,800); }
+  // Also sync to dailyTodos /* FEAT-2: date-keyed format */
+  if(ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)){
+    var td = ST.dailyTodos[today] || [];
+    if(td[i]){ td[i].done = ST.dailyTasks[today][i].done; }
+    if(td.length && td.every(function(t){return t.done;})){ setTimeout(triggerConfetti,200); setTimeout(triggerConfetti,800); }
   }
   save();
   renderMain();
@@ -4353,13 +4357,19 @@ function checkOffTodayByCat(cat){
   tasks.forEach((t,i)=>{
     if(t.cat === cat && !t.done){
       t.done = true; checked.push(i);
-      if(ST.dailyTodos && i < ST.dailyTodos.length) ST.dailyTodos[i].done = true;
+      if(ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)){
+        var td = ST.dailyTodos[today] || [];
+        if(td[i]) td[i].done = true;
+      }
     }
   });
   if(checked.length){
     save(); saveBackup();
-    if(ST.dailyTodos && ST.dailyTodos.length && ST.dailyTodos.every(x=>x.done)){
-      setTimeout(triggerConfetti,200); setTimeout(triggerConfetti,800);
+    if(ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)){
+      var td2 = ST.dailyTodos[today] || [];
+      if(td2.length && td2.every(function(x){return x.done;})){
+        setTimeout(triggerConfetti,200); setTimeout(triggerConfetti,800);
+      }
     }
     if(typeof renderMain==='function' && currentPage!=='dash') renderMain();
     if(typeof toast==='function') toast('✅ '+cat+' 打卡成功！完成 '+checked.length+' 项今日任务','ok');
@@ -10695,7 +10705,8 @@ function _bindRefinePlayAll(){
         try{
           if(window._refineQueueAudio){ window._refineQueueAudio.pause(); }
           const q = encodeURIComponent(text.slice(0, 200));
-          const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl=es-MX&q=' + q;
+          const tlCode2 = accent==='es'?'es':'es-MX'; /* FEAT-3 */
+          const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl='+tlCode2+'&q=' + q;
           const audio = new Audio(url);
           audio.playbackRate = rate;
           window._refineQueueAudio = audio;
@@ -13531,19 +13542,32 @@ async function standaloneSync(showLog){
       remote.checkIns.forEach(function(d){if(d&&!_ciSeen[d]){_ciSeen[d]=true;ST.checkIns.push(d);}});
       ST.checkIns.sort();
     }
-    // 合并每日待办（按 todo.id 去重，done 取或，text 取较新一端的非空值）
+    // 合并每日待办 /* FEAT-2: date-keyed format — 兼容旧数组格式 */
     if(Array.isArray(remote.dailyTodos) && remote.dailyTodos.length){
-      ST.dailyTodos=ST.dailyTodos||[];
+      // 旧格式 → 迁移到新格式 (最新日期)
+      if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+      var _tdDate = remote.lastStudy || todayStr();
+      if(!ST.dailyTodos[_tdDate]) ST.dailyTodos[_tdDate] = [];
       var _tdSeen={};
-      ST.dailyTodos.forEach(function(t){if(t&&t.id!=null)_tdSeen[t.id]=t;});
+      (ST.dailyTodos[_tdDate]||[]).forEach(function(t){if(t&&t.text) _tdSeen[t.text]=t;});
       remote.dailyTodos.forEach(function(t){
-        if(!t||t.id==null)return;
-        var lt=_tdSeen[t.id];
-        if(!lt){_tdSeen[t.id]=t;ST.dailyTodos.push(t);}
-        else{
-          if(t.done)lt.done=true;
-          if(typeof t.text==='string'&&t.text&&(!lt.text||lt.text.length<t.text.length))lt.text=t.text;
-        }
+        if(!t||!t.text)return;
+        var lt=_tdSeen[t.text];
+        if(!lt){_tdSeen[t.text]=t;ST.dailyTodos[_tdDate].push({text:t.text,done:!!t.done});}
+        else{if(t.done)lt.done=true;}
+      });
+      if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+      if(ST.dailyTodoDates.indexOf(_tdDate)<0) ST.dailyTodoDates.push(_tdDate);
+    } else if(remote.dailyTodos && typeof remote.dailyTodos==='object' && !Array.isArray(remote.dailyTodos)){
+      // 新格式合并: date-keyed map
+      if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+      Object.keys(remote.dailyTodos).forEach(function(dt){
+        if(!ST.dailyTodos[dt]) ST.dailyTodos[dt] = [];
+        (remote.dailyTodos[dt]||[]).forEach(function(rt){
+          var found = (ST.dailyTodos[dt]||[]).find(function(lt){return lt.text===rt.text;});
+          if(!found) ST.dailyTodos[dt].push({text:rt.text,done:!!rt.done});
+          else if(rt.done) found.done = true;
+        });
       });
     }
     // 全局发音口音：远程有值则采用（两端偏好一致即可）
@@ -13741,19 +13765,30 @@ function importDataPrompt_(){
           data.checkIns.forEach(function(d){if(d&&!_ciSeen[d]){_ciSeen[d]=true;ST.checkIns.push(d);}});
           ST.checkIns.sort();
         }
-        // 合并每日待办
+        // 合并每日待办 /* FEAT-2: 兼容新旧格式 */
         if(Array.isArray(data.dailyTodos) && data.dailyTodos.length){
-          ST.dailyTodos=ST.dailyTodos||[];
-          var _tdSeen={};
-          ST.dailyTodos.forEach(function(t){if(t&&t.id!=null)_tdSeen[t.id]=t;});
+          if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+          var _tdDate2 = data.lastStudy || todayStr();
+          if(!ST.dailyTodos[_tdDate2]) ST.dailyTodos[_tdDate2] = [];
+          var _tdSeen2={};
+          (ST.dailyTodos[_tdDate2]||[]).forEach(function(t){if(t&&t.text) _tdSeen2[t.text]=t;});
           data.dailyTodos.forEach(function(t){
-            if(!t||t.id==null)return;
-            var lt=_tdSeen[t.id];
-            if(!lt){_tdSeen[t.id]=t;ST.dailyTodos.push(t);}
-            else{
-              if(t.done)lt.done=true;
-              if(typeof t.text==='string'&&t.text&&(!lt.text||lt.text.length<t.text.length))lt.text=t.text;
-            }
+            if(!t||!t.text)return;
+            var lt=_tdSeen2[t.text];
+            if(!lt){_tdSeen2[t.text]=t;ST.dailyTodos[_tdDate2].push({text:t.text,done:!!t.done});}
+            else{if(t.done)lt.done=true;}
+          });
+          if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+          if(ST.dailyTodoDates.indexOf(_tdDate2)<0) ST.dailyTodoDates.push(_tdDate2);
+        } else if(data.dailyTodos && typeof data.dailyTodos==='object' && !Array.isArray(data.dailyTodos)){
+          if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+          Object.keys(data.dailyTodos).forEach(function(dt){
+            if(!ST.dailyTodos[dt]) ST.dailyTodos[dt] = [];
+            (data.dailyTodos[dt]||[]).forEach(function(rt){
+              var found = (ST.dailyTodos[dt]||[]).find(function(lt){return lt.text===rt.text;});
+              if(!found) ST.dailyTodos[dt].push({text:rt.text,done:!!rt.done});
+              else if(rt.done) found.done = true;
+            });
           });
         }
         save();saveBackup();
