@@ -13941,6 +13941,11 @@ setInterval(function(){
 }, 300000);
 
 // 暴露到全局（strict-mode IIFE内函数需手动挂载到window供inline onclick使用）
+// 暴露到全局：inline onclick/oninput 在全局作用域运行
+// 需手动挂载 SCFG + saveSyncCfg，否则 oninput="SCFG.token=...;saveSyncCfg()" 报 ReferenceError
+window.SCFG = SCFG;
+window.saveSyncCfg = saveSyncCfg;
+window.updateSyncBadge = updateSyncBadge;
 window.openSyncSettings = openSyncSettings;
 window.closeSyncSettings = closeSyncSettings;
 window.standaloneSync = standaloneSync;
