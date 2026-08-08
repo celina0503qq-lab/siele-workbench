@@ -1217,8 +1217,8 @@ async function speak(text, btn, accent, rate){
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
   const playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
 
-  // Tier 1: speechSynthesis
-  if(window.speechSynthesis){
+  // Tier 1: speechSynthesis (仅西班牙口音使用; 拉美口音始终走 Google TTS 获取正确 ll/y 发音)
+  if(effectiveAccent==='es' && window.speechSynthesis){
     try{
       window.speechSynthesis.cancel();
       // Use cached Spanish voice if available
@@ -1230,20 +1230,11 @@ async function speak(text, btn, accent, rate){
           await new Promise(r => setTimeout(r, 200));
           voices = window.speechSynthesis.getVoices();
         }
-        // Prefer Latin American voice if requested
-        if(effectiveAccent==='es'){
-          esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es-es'));
-          if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es') && !v.lang.toLowerCase().startsWith('es-mx'));
-        } else {
-          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')||v.lang.toLowerCase().startsWith('es-cl')||v.lang.toLowerCase().startsWith('es-pe')));
-        }
+        // Find Spain Spanish voice
+        esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es-es'));
+        if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es') && !v.lang.toLowerCase().startsWith('es-mx'));
         if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
         if(esVoice) window.__esVoiceCache = esVoice;  // cache for reuse
-      }
-      // 拉美口音: 若找到的语音是西班牙口音(es-es)且用户要拉美, 跳过Tier1走Google TTS(es-MX)
-      var isLaVoice = esVoice && (esVoice.lang||'').toLowerCase().startsWith('es-') && !(esVoice.lang||'').toLowerCase().startsWith('es-es');
-      if(effectiveAccent==='la' && esVoice && !isLaVoice){
-        esVoice = null; // force fallback to Google TTS with es-MX
       }
       if(esVoice){
         const u = new SpeechSynthesisUtterance(text);
