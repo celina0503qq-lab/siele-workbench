@@ -472,179 +472,36 @@ window.ARTICLES = {
   },
   "b2": {
     "paragraphs": [
-      {
-        "es": "En el interior de España existen pueblos que han perdido casi toda su población. Este fenómeno se conoce como \"la España vaciada\" (\"空心化的西班牙\").",
-        "zh": "在西班牙内陆，有些村镇几乎失去了所有人口。这种现象被称为\"空心化的西班牙\"。"
-      },
-      {
-        "es": "Según los últimos datos del Instituto Nacional de Estadística (INE), más de 4.000 municipios cuentan con menos de 500 habitantes. Algunos incluso no llegan a cien.",
-        "zh": "根据国家统计局（INE）的最新数据，超过 4000 个市镇居民不足 500 人。有些甚至不到 100 人。"
-      },
-      {
-        "es": "Las causas son múltiples: el éxodo rural del siglo XX, la falta de oportunidades laborales y el envejecimiento de la población son las más citadas.",
-        "zh": "原因多种多样：20 世纪的农村人口外流、缺乏就业机会和人口老龄化是被提及最多的。"
-      },
-      {
-        "es": "Los jóvenes abandonan estos pueblos para estudiar en la ciudad. La mayoría no regresa una vez finalizados sus estudios, lo que provoca un círculo vicioso.",
-        "zh": "年轻人离开这些村镇去城市学习。绝大多数人在完成学业后不会回来，这造成了一个恶性循环。"
-      },
-      {
-        "es": "Esta despoblación tiene consecuencias graves: escuelas cerradas, consultorios médicos vacíos y comercios que desaparecen. La vida social se apaga lentamente.",
-        "zh": "这种人口减少带来严重后果：学校关闭、医务室空置、商店消失。社交生活慢慢熄灭。"
-      },
-      {
-        "es": "Sin embargo, no todo son malas noticias. En los últimos años ha surgido un movimiento de \"neorrurales\": personas que deciden abandonar la ciudad para vivir en el campo.",
-        "zh": "然而，并非全是坏消息。近年来出现了一场\"新农村人\"运动：决定离开城市到农村生活的人。"
-      },
-      {
-        "es": "La pandemia de 2020 aceleró esta tendencia. El teletrabajo permitió a muchos profesionales mantener su empleo en la ciudad mientras vivían en pueblos pequeños.",
-        "zh": "2020 年的疫情加速了这一趋势。远程办公让许多专业人士能够住在小村镇，同时保持城市的工作。"
-      },
-      {
-        "es": "Además, varias comunidades autónomas han implementado políticas de incentivos. Castilla y León, por ejemplo, ofrece hasta 10.000 euros a familias que se trasladen al medio rural.",
-        "zh": "此外，几个自治区实施了激励政策。例如卡斯蒂利亚-莱昂为迁至农村的家庭提供高达 10000 欧元的补助。"
-      },
-      {
-        "es": "No obstante, los expertos señalan que el dinero no es suficiente. Es fundamental mejorar las infraestructuras: transporte público, internet de alta velocidad y servicios sanitarios.",
-        "zh": "然而，专家指出金钱不够。改善基础设施至关重要：公共交通、高速互联网和医疗服务。"
-      },
-      {
-        "es": "La fibra óptica ha llegado a muchos pueblos que antes estaban completamente aislados. Esto ha permitido a los emprendedores digitales crear negocios desde lugares remotos.",
-        "zh": "光纤已通到许多以前完全与世隔绝的村庄。这让数字创业者能够在偏远地区创业。"
-      },
-      {
-        "es": "Otro aspecto clave es la vivienda. En muchos pueblos hay casas en ruinas que se venden por precios simbólicos, lo que atrae a jóvenes con pocos recursos.",
-        "zh": "另一个关键方面是住房。在许多村镇有以象征性价格出售的破旧房屋，这吸引了资源有限的年轻人。"
-      },
-      {
-        "es": "Sin embargo, la oposición al modelo también existe. Algunos vecinos temen que estos recién llegados se conviertan en \"gente de paso\" y no se integren realmente en la comunidad.",
-        "zh": "然而，对该模式的反对也存在。一些邻居担心这些新来者会成为\"过客\"，不会真正融入社区。"
-      },
-      {
-        "es": "Desde el punto de vista cultural, la España vaciada representa una pérdida de tradiciones, dialectos y formas de vida ancestrales. Cada pueblo abandonado es una biblioteca que se cierra.",
-        "zh": "从文化角度看，空心化的西班牙代表着传统、方言和古老生活方式的损失。每座被遗弃的村庄都是一座正在关闭的图书馆。"
-      },
-      {
-        "es": "Los movimientos ciudadanos han exigido al gobierno central un Pacto de Estado contra la Despoblación. Aunque se han dado algunos pasos, los resultados todavía son insuficientes.",
-        "zh": "公民运动已要求中央政府签订一项反对人口减少的国家协议。尽管已迈出一些步伐，但结果仍然不够。"
-      },
-      {
-        "es": "El futuro de la España vaciada depende de la capacidad de toda la sociedad para reinventar el mundo rural. Si no actuamos ahora, dentro de veinte años estos pueblos serán solo recuerdos en fotografías.",
-        "zh": "空心化的西班牙的未来取决于整个社会重塑农村世界的能力。如果我们现在不行动，二十年后这些村镇将只是照片中的回忆。"
-      }
+      {"es": "Europa y gran parte de Estados Unidos están experimentando un verano de un calor abrasador. Los científicos han advertido que estas temperaturas extremas se han convertido en la nueva normalidad.", "zh": "欧洲和美国大部分地区正在经历一个酷热的夏天。科学家警告，这些极端气温已成为新常态。"},
+      {"es": "Francia registró más de 2.000 fallecimientos durante la ola de calor sin precedentes de finales de junio. En Inglaterra y Gales, los científicos estimaron que más de 2.700 personas podrían haber fallecido por causas relacionadas con el aumento de las temperaturas desde mayo.", "zh": "法国在六月底那场史无前例的热浪中记录了超过2000人死亡。在英格兰和威尔士，科学家估计自五月以来超过2700人可能因气温升高而死亡。"},
+      {"es": "En Estados Unidos se registraron al menos 44 muertes relacionadas con el calor durante el fin de semana festivo del 4 de julio, a causa de las condiciones meteorológicas extremas. El aumento de las temperaturas ha supuesto un golpe duro para millones de personas.", "zh": "美国在国庆周末至少记录了44起高温相关死亡。气温升高对数百万人来说是沉重打击。"},
+      {"es": "\u201CLa gente no se da cuenta de que este calor no es el mismo que experimentábamos hace diez años; de hecho, es peor, porque en muchos casos las temperaturas nocturnas no bajan\u201D, explicó a la BBC Jennifer Marlon, investigadora de la Universidad de Yale.", "zh": "耶鲁大学研究员詹妮弗\u00B7马隆向BBC解释：\u201C人们没意识到，现在的热和十年前不一样了；事实上更糟，因为很多情况下夜间气温不会降下来。\u201D"},
+      {"es": "Nuestros cuerpos dependen de las temperaturas nocturnas más frescas para recuperarse del calor del día. El problema se agrava cuando por la noche los termómetros no bajan de los 25 grados, impidiendo que el organismo descanse adecuadamente.", "zh": "我们的身体依靠夜间较凉爽的气温来恢复。当夜间温度不低于25度时，问题会恶化，阻碍身体正常休息。"},
+      {"es": "En España, la Agencia Estatal de Meteorología (AEMET) ha activado avisos rojos en ocho comunidades autónomas este verano. En ciudades como Sevilla y Córdoba, el termómetro ha llegado a marcar 44 grados a la sombra, unas cifras que los expertos califican de \u201Cextremadamente preocupantes\u201D.", "zh": "西班牙国家气象局今年夏天在八个自治区启动了红色预警。在塞维利亚和科尔多瓦，温度计在阴凉处达到了44度，专家称之为\u201C极为令人担忧\u201D。"},
+      {"es": "Pero para una ciudad estadounidense, las altas temperaturas no son nada nuevo. Phoenix, en Arizona, lleva años trabajando en soluciones para reducir las muertes por calor, un esfuerzo que parece estar dando sus frutos y que podría servir de modelo para el resto del mundo.", "zh": "但对于美国一座城市来说，高温并不是新鲜事。亚利桑那州凤凰城多年来一直在研究减少高温死亡的方法，这一努力似乎正在取得成果，并可能成为全球的榜样。"},
+      {"es": "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. El condado de Maricopa, donde se encuentra la ciudad, se sitúa a la vanguardia de la lucha por la seguridad frente al calor.", "zh": "凤凰城在2021年成为全球首个聘请高温管理官员的城市。该市所在的马里科帕县处于高温安全斗争的前沿。"},
+      {"es": "Las medidas adoptadas por el condado han dado buenos resultados. Después de que los fallecimientos relacionados con el calor alcanzaran un máximo de 645 en 2023, descendieron a 405 en 2025. Muchos expertos atribuyen parte de este descenso a los cambios en las políticas.", "zh": "该县采取的措施取得了良好成效。高温相关死亡在2023年达到645人的峰值后，2025年降至405人。许多专家将这归因于政策变化。"},
+      {"es": "Gran parte de los esfuerzos se han centrado en mejorar el acceso al aire acondicionado, ya que muchas de las muertes por calor se produjeron entre personas con bajos ingresos o sin hogar. El condado ofrece acceso constante y gratuito a centros de refrigeración, algunos abiertos las 24 horas.", "zh": "大部分努力集中在改善空调使用条件上，因为许多高温死亡发生在低收入或无家可归人群中。该县提供持续免费的制冷中心通道，部分24小时开放。"},
+      {"es": "Sin embargo, la tendencia a la baja no está garantizada. En lo que va de año, a fecha de 11 de julio, el condado ha registrado 23 muertes relacionadas con el calor y hay otras 282 bajo investigación. Si estas cifras se confirman, superarían las del año anterior.", "zh": "然而下降趋势并不能保证持续。截至7月11日，该县今年已记录23起高温死亡，另有282起在调查中。如果这些数字确认，将超过去年。"},
+      {"es": "\u201CCon coordinaci\u00F3n y comunicaci\u00F3n, se pueden crear instalaciones como centros de refrigeraci\u00F3n en otras partes que no est\u00E1n acostumbradas al calor abrasador\u201D, afirma Marlon. Pero para ello, se\u00F1alan los expertos, es necesario que exista un reconocimiento generalizado de lo grave que puede ser el calor.", "zh": "\u9A6C\u9686\u6307\u51FA\uFF1A\u201C\u901A\u8FC7\u534F\u8C03\u6C9F\u901A\uFF0C\u53EF\u4EE5\u5728\u4E0D\u4E60\u60EF\u9177\u70ED\u7684\u5176\u4ED6\u5730\u533A\u5EFA\u7ACB\u5236\u51B7\u4E2D\u5FC3\u3002\u201D\u4F46\u4E13\u5BB6\u5F3A\u8C03\uFF0C\u4E3A\u6B64\u5FC5\u987B\u5E7F\u6CDB\u8BA4\u8BC6\u5230\u9AD8\u6E29\u53EF\u80FD\u6709\u591A\u4E25\u91CD\u3002"},
+      {"es": "El panorama global es alarmante. El mundo ya se ha calentado más de 1,1\u00B0C desde la era industrial. Las olas de calor se han vuelto más frecuentes, más intensas y más duraderas debido al cambio climático, y las temperaturas seguirán aumentando incluso si los países reducen drásticamente las emisiones.", "zh": "全球形势令人担忧。自工业时代以来全球已升温超过1.1°C。由于气候变化，热浪变得更加频繁、强烈和持久。即使各国大幅减排，气温仍将继续上升。"},
+      {"es": "También es esencial que las ciudades comprendan que el calor no es solo un problema de salud, sino también un problema de infraestructuras y económico. Las carreteras seguirán deformándose y los vuelos sufrirán retrasos a causa del calor extremo, advierte Marlon.", "zh": "城市还必须认识到高温不仅是健康问题，也是基础设施和经济问题。马隆警告，道路将继续变形，航班将因极端高温而延误。"},
+      {"es": "\u201CTenemos que dejar de planificar en función de las olas de calor históricas y empezar a planificar en función del calor que vamos a sufrir en los próximos cinco a diez años\u201D, afirma Ladd Keith, director de la Iniciativa de Resiliencia frente al Calor de la Universidad de Arizona. \u201CSi la gente piensa que ahora hace mucho calor, va a hacer aún más calor, y va a durar más tiempo. Se van a batir récords, se puede dar casi por seguro, año tras año en todo el mundo\u201D.", "zh": "亚利桑那大学高温韧性倡议主任拉德\u00B7基思表示：\u201C我们必须停止根据过去的热浪做规划，而要根据未来五到十年将要遭受的高温来做规划。如果人们觉得现在已经很热了，那以后会更热，持续时间更长。几乎可以肯定，全球将年复一年地打破纪录。\u201D"}
     ],
-    "dele": "B2 考点：<b>虚拟式现在时</b>(temen que se conviertan, que se integren)；<b>虚拟式未完成过去时</b>(depende de que);<b>关系从句</b>(que abandonan, que deciden)；<b>条件从句</b>(si no actuamos)；<b>被动句与自复被动</b>(se conoce, se venden)；<b>副词与连接词</b>(sin embargo, no obstante, además, mientras)；<b>抽象词汇</b>(despoblación, neorrurales, infraestructura, círculo vicioso)。",
+    "dele": "B2 考点：<b>虚拟式</b>(es necesario que exista, después de que alcanzaran, para que las personas puedan)；<b>条件式完成时</b>(podrían haber fallecido, superarían, se volverían)；<b>被动语态与无人称</b>(se han registrado, se puede dar por seguro, se han vuelto)；<b>复合连接词</b>(sin embargo, a causa de, debido a, en lo que va de año, a raíz de)；<b>过去完成时</b>(habían alcanzado)；<b>将来完成时推测</b>(se habrán batido récords)；<b>抽象学术词汇</b>(resiliencia, sin precedentes, drásticamente, generalizado, imprescindible)。",
     "hardWords": [
-      {
-        "w": "España vaciada",
-        "m": "空心化的西班牙"
-      },
-      {
-        "w": "municipio",
-        "m": "市镇"
-      },
-      {
-        "w": "éxodo rural",
-        "m": "农村人口外流"
-      },
-      {
-        "w": "círculo vicioso",
-        "m": "恶性循环"
-      },
-      {
-        "w": "despoblación",
-        "m": "人口减少"
-      },
-      {
-        "w": "neorrural",
-        "m": "新农村人"
-      },
-      {
-        "w": "teletrabajo",
-        "m": "远程办公"
-      },
-      {
-        "w": "infraestructura",
-        "m": "基础设施"
-      },
-      {
-        "w": "fibra óptica",
-        "m": "光纤"
-      },
-      {
-        "w": "emprendedor",
-        "m": "创业者"
-      },
-      {
-        "w": "ancestral",
-        "m": "古老的，祖传的"
-      },
-      {
-        "w": "pacto de Estado",
-        "m": "国家协议"
-      }
+      {"w": "abrasador", "m": "灼热的、炙烤的 (calor abrasador 酷热)"},
+      {"w": "sin precedentes", "m": "史无前例的 (ola de calor sin precedentes)"},
+      {"w": "a la vanguardia", "m": "在前沿、处于领先地位"},
+      {"w": "resiliencia", "m": "韧性、恢复力 (C1级借词，社会科学高频)"},
+      {"w": "batir récords", "m": "打破纪录 (batir = 击碎/打破)"}
     ],
     "quiz": [
-      {
-        "q": "¿Cuántos municipios tienen menos de 500 habitantes?",
-        "opts": [
-          "Menos de 1.000",
-          "Entre 1.000 y 2.000",
-          "Más de 4.000",
-          "No se dice"
-        ],
-        "ans": 2,
-        "es": "más de 4.000 municipios cuentan con menos de 500 habitantes. (第二段)",
-        "zh": "超过 4000 个市镇居民不足 500 人。"
-      },
-      {
-        "q": "¿Qué aceleró el movimiento neorrural?",
-        "opts": [
-          "La crisis de 2008",
-          "La pandemia de 2020",
-          "La guerra",
-          "La sequía"
-        ],
-        "ans": 1,
-        "es": "La pandemia de 2020 aceleró esta tendencia. (第七段)",
-        "zh": "2020 年的疫情加速了新农村人运动。"
-      },
-      {
-        "q": "¿Cuánto ofrece Castilla y León a las familias que se trasladen?",
-        "opts": [
-          "5.000 euros",
-          "Hasta 10.000 euros",
-          "15.000 euros",
-          "20.000 euros"
-        ],
-        "ans": 1,
-        "es": "Castilla y León, por ejemplo, ofrece hasta 10.000 euros a familias que se trasladen al medio rural. (第八段)",
-        "zh": "卡斯蒂利亚-莱昂为迁至农村的家庭提供高达 10000 欧元。"
-      },
-      {
-        "q": "¿Qué se necesita mejorar, además del dinero, según los expertos?",
-        "opts": [
-          "Solo carreteras",
-          "Solo hospitales",
-          "Infraestructuras (transporte, internet, sanidad)",
-          "Solo escuelas"
-        ],
-        "ans": 2,
-        "es": "Es fundamental mejorar las infraestructuras: transporte público, internet de alta velocidad y servicios sanitarios. (第九段)",
-        "zh": "专家认为除了金钱，还需改善基础设施。"
-      },
-      {
-        "q": "¿Qué representa la España vaciada desde el punto de vista cultural?",
-        "opts": [
-          "Una oportunidad",
-          "Una pérdida de tradiciones",
-          "Un avance",
-          "Nada"
-        ],
-        "ans": 1,
-        "es": "la España vaciada representa una pérdida de tradiciones, dialectos y formas de vida ancestrales. (第十三段)",
-        "zh": "空心化的西班牙代表着传统、方言和古老生活方式的损失。"
-      }
+      {"q": "Según el texto, ¿cuántos fallecimientos se registraron en Francia durante la ola de calor de junio?", "opts": ["Menos de 1.000", "Más de 2.000", "Más de 3.000", "No se registraron"], "ans": 1, "es": "Francia registró más de 2.000 fallecimientos durante la ola de calor sin precedentes. (第二段)", "zh": "法国在那场史无前例的热浪中记录了超过2000人死亡。"},
+      {"q": "¿Qué ciudad fue la primera del mundo en contratar a un responsable del calor?", "opts": ["Madrid", "Nueva York", "Phoenix", "Londres"], "ans": 2, "es": "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. (第八段)", "zh": "凤凰城在2021年成为全球首个聘请高温管理官员的城市。"},
+      {"q": "¿Cuántos fallecimientos relacionados con el calor se registraron en Maricopa en 2023?", "opts": ["405", "645", "282", "23"], "ans": 1, "es": "Los fallecimientos alcanzaron un máximo de 645 en 2023. (第九段)", "zh": "2023年高温相关死亡达到645人的峰值。"},
+      {"q": "Según Ladd Keith, ¿en qué debemos dejar de basar la planificación?", "opts": ["En el futuro", "En las olas de calor históricas", "En la economía", "En la población"], "ans": 1, "es": "Tenemos que dejar de planificar en función de las olas de calor históricas. (第十五段)", "zh": "我们必须停止根据过去经历的历史热浪来做规划。"},
+      {"q": "¿Cuánto se ha calentado el mundo desde la era industrial, según el texto?", "opts": ["0,5\u00B0C", "M\u00E1s de 1,1\u00B0C", "M\u00E1s de 2\u00B0C", "No se ha calentado"], "ans": 1, "es": "El mundo ya se ha calentado más de 1,1\u00B0C desde la era industrial. (第十三段)", "zh": "自工业时代以来全球已升温超过1.1°C。"}
     ]
   }
 };
