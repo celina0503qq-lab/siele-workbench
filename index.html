@@ -12682,10 +12682,9 @@ window.addEventListener('DOMContentLoaded', () => {
 /* Register service worker for offline / installable PWA (only over http(s), not file://) */
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
-    // 带版本号的 SW URL：GitHub Pages 对 sw.js 有 10 分钟缓存，
-    // 用 ?v= 参数强制浏览器注册新 SW，避免旧 SW 持续提供旧版 HTML（导致仪表盘缺板块/功能）
-    var swVer = 'v11-2026080822';
-    navigator.serviceWorker.register('sw.js?v='+swVer).then(function(reg){
+    // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
+    var swVer = 'v12-2026080823';
+    navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
         var nw = reg.installing;
