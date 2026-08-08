@@ -1201,8 +1201,6 @@ async function speak(text, btn, accent, rate){
   var effectiveAccent = accent || (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent(currentPage||'dash') : null) || (ST && ST.globalAccent) || 'la';
   // Latin American accent: es-MX (default); es-ES for Spain fallback
   const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
-  // BUGFIX: debug log to verify accent resolution at runtime
-  if(typeof DEBUG_ACCENT==='undefined'||DEBUG_ACCENT) console.log('[accent] speak() effectiveAccent='+effectiveAccent+' langCode='+langCode+' module='+(currentPage||'dash')+' globalAccent='+(ST&&ST.globalAccent||'la'));
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
   const playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
 
@@ -1220,21 +1218,12 @@ async function speak(text, btn, accent, rate){
           voices = window.speechSynthesis.getVoices();
         }
         // Prefer Latin American voice if requested
-        // BUGFIX: Spain accent must ONLY match es-ES, not the generic 'es' prefix (which also hits es-MX)
         if(effectiveAccent==='es'){
-          esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es-es'));
+          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-es')||v.lang.toLowerCase().startsWith('es')));
         } else {
-          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')||v.lang.toLowerCase().startsWith('es-cl')||v.lang.toLowerCase().startsWith('es-pe')));
+          esVoice = voices.find(v => v.lang && (v.lang.toLowerCase().startsWith('es-mx')||v.lang.toLowerCase().startsWith('es-419')||v.lang.toLowerCase().startsWith('es-ar')||v.lang.toLowerCase().startsWith('es-co')));
         }
-        // Fallback: Spain → es-ES only; Latin America → any es-* voice (but prefer not es-ES)
-        if(!esVoice) {
-          if(effectiveAccent==='es'){
-            esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
-          } else {
-            esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es') && !v.lang.toLowerCase().startsWith('es-es'));
-            if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
-          }
-        }
+        if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
         if(esVoice) window.__esVoiceCache = esVoice;  // cache for reuse
       }
       if(esVoice){
@@ -1396,10 +1385,7 @@ function go(page){
     currentPage='dash'; renderNav(); renderMain();
     setTimeout(function(){
       var el=document.getElementById('dashExamCard');
-      // BUGFIX: Edge may not support {behavior:'smooth'}, add try/catch fallback
-      if(el){
-        try{el.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){el.scrollIntoView(true);}
-      }
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
     },150);
     return;
   }
@@ -1610,7 +1596,7 @@ function renderDash(){
   </div>`;
 
   // Pomodoro + progress
-  h += `<div class="g g2" id="dashQuickAnchor">
+  h += `<div class="g g2">
     <div class="card">
       <h3><span class="ic">⏱</span>番茄钟</h3>
       <div class="pomo">
@@ -1703,15 +1689,13 @@ function renderDash(){
     h += `</div>`;
   });
 
-  // Animations: staggered start from 0 after DOM ready (Edge-friendly batching via requestAnimationFrame)
+  // Animations: start from 0 after DOM ready
   h += `<script>
   (function(){
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){
-        // BUGFIX: stagger bar animations by index to reduce Edge layout thrashing
-        var bars = document.querySelectorAll('.fcp .bar i[data-target]');
-        bars.forEach(function(b, idx){
-          setTimeout(function(){ b.style.width = b.getAttribute('data-target') + '%'; }, idx * 25 + 40);
+        document.querySelectorAll('.fcp .bar i[data-target]').forEach(function(b){
+          setTimeout(function(){ b.style.width = b.getAttribute('data-target') + '%'; }, 50);
         });
         var ring = document.getElementById('overallCircle');
         if(ring){ setTimeout(function(){ ring.style.strokeDashoffset = '${dashOffset}'; }, 80); }
@@ -13291,14 +13275,9 @@ if(typeof renderDash==='function'){
   var _rd0=renderDash;
   renderDash=function(){
     var h=_rd0();
-    // BUGFIX: use ID-based anchor instead of class-based to avoid ambiguity (multiple .g.g2 in page)
-    var anchor='<div class="g g2" id="dashQuickAnchor">';
+    var anchor='<div class="g g2">';
     var i=h.indexOf(anchor);
     if(i>=0)return h.slice(0,i)+todoCardHtml()+h.slice(i);
-    // Fallback: try class-only anchor just in case
-    var anchor2='<div class="g g2">';
-    var j=h.indexOf(anchor2);
-    if(j>=0)return h.slice(0,j)+todoCardHtml()+h.slice(j);
     return h+todoCardHtml();
   };
 }
