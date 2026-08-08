@@ -13314,6 +13314,8 @@ function todoCardHtml(){
     var icons={vocab:'🃏',grammar:'📐',listening:'🎧',quiz:'✏️',writing:'✍️',speaking:'🗣',shadow:'🎤',reading:'📰',errors:'🚨'};
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图']]
       .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
+    // 附加云同步入口（弹窗而非路由跳转）
+    quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="GitHub Gist 云同步 · 单词卡片/SIELE/测验/错题集跨设备同步">☁️ 云同步</button>';
     var lis=tasks.map(function(t,i){
       return '<li class="'+(t.done?'done':'')+'" style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,.06)'+(t.done?';opacity:.55':'')+'">'+
         '<input type="checkbox" '+(t.done?'checked':'')+' onchange="wbToggleTask('+i+')">'+
@@ -13337,6 +13339,7 @@ function todoCardHtml(){
     // 出错时仍渲染快捷操作卡，确保仪表盘不缺失
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图']]
       .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
+    quick += '<button class=\"btn sm ol\" onclick=\"openSyncSettings()\" title=\"GitHub Gist 云同步\">☁️ 云同步</button>';
     return '<div class=\"g g2\"><div class=\"card\"><h3><span class=\"ic\">⚡</span>快捷操作</h3><div style=\"display:flex;flex-wrap:wrap;gap:8px\">'+quick+'</div></div></div>';
   }
 }
