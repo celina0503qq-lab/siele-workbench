@@ -181,8 +181,5 @@ window.ARTICLES = {
       {"q": "¿Qué problema genera la llegada de nómadas digitales según el texto?", "opts": ["Falta de cafeterías", "Encarecimiento del alquiler en ciudades como Barcelona y Valencia", "Aumento del tráfico", "Escasez de vuelos internacionales"], "ans": 1, "es": "La llegada de nómadas digitales ha contribuido al encarecimiento del alquiler en ciudades como Barcelona, Valencia o Málaga. (第十二段)", "zh": "数字游民的到来加剧了巴塞罗那、瓦伦西亚等城市的房租上涨。"},
       {"q": "¿Qué inferencia es más razonable sobre el futuro del teletrabajo en España?", "opts": ["Volveremos al 100% presencial en 2025", "El modelo híbrido se consolidará pero requerirá mejores políticas", "Todo el mundo trabajará desde casa", "Solo los jóvenes podrán teletrabajar"], "ans": 1, "es": "Los expertos coinciden en que el modelo híbrido ha llegado para quedarse pero depende de políticas futuras. (第十三十四段)", "zh": "专家一致认为混合模式已成定局，但取决于未来政策。"}
     ],
-      {"q": "¿Qué fenómeno está provocando el teletrabajo a nivel territorial?", "opts": ["Más tráfico", "La redistribución de la población", "El cierre de empresas", "Más contaminación"], "ans": 1, "es": "El teletrabajo está provocando la redistribución de la población. (第十一段)", "zh": "远程办公正在引发人口重新分布。"},
-      {"q": "¿Qué visa se aprobó en 2023?", "opts": ["Visa de turista", "Visa de estudiante", "Visado para nómadas digitales", "Visa de trabajo temporal"], "ans": 2, "es": "El visado para nómadas digitales, aprobado en 2023. (第十五段)", "zh": "2023 年通过了数字游民签证。"}
-    ]
   }
 };

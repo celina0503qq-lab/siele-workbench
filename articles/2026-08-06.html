@@ -7,6 +7,8 @@
 <style>
 
 
+
+
   :root {
     --bg: #f6f7fb;
     --card: #ffffff;
@@ -330,6 +332,8 @@
   }
 
 
+
+
 </style>
 </head>
 <body>
@@ -571,43 +575,48 @@ const ARTICLES = {
     quiz: [
       {q: "¿Cuántos trabajadores autónomos hay en España aproximadamente?", opts: ["Un millón","Dos millones","Más de tres millones","Cinco millones"], ans: 2, es: "En España hay más de tres millones de trabajadores autónomos. (第一段)", zh: "西班牙有超过三百万自由职业者。"},
       {q: "¿Cuánto era la cuota mínima de autónomos en 2023?", opts: ["150 euros","Unos 230 euros","300 euros","400 euros"], ans: 1, es: "La cuota mínima era de unos 230 euros al mes. (第五段)", zh: "2023 年最低社保费约 230 欧元/月。"},
-      {q: "¿Qué ventaja tiene ser autónomo según el texto?", opts: ["Sueldo fijo","Flexibilidad horaria","Vacaciones pagadas","Seguro médico gratis"], ans: 1, es: "Las ventajas incluyen la flexibilidad horaria. (第七段)", zh: "优势包括时间灵活。"},
-      {q: "¿Qué es un falso autónomo?", opts: ["Un autónomo con mucho dinero","Un empleado obligado a registrarse como autónomo","Un jubilado","Un funcionario"], ans: 1, es: "Trabajadores que en realidad son empleados, pero que la empresa obliga a darse de alta como autónomos. (第十段)", zh: "实际是雇员却被公司强迫注册为自雇人士。"},
-      {q: "¿Qué recomiendan los expertos para tener éxito como autónomo?", opts: ["Trabajar sin descanso","Tener un colchón financiero","No pagar impuestos","Contratar a muchos empleados"], ans: 1, es: "Los expertos recomiendan tener un colchón financiero para los primeros meses. (第十二段)", zh: "专家建议为头几个月准备一笔财务缓冲金。"}
+      {q: "Según el texto, ¿qué ventaja tiene ser autónomo?", opts: ["Sueldo fijo","Flexibilidad horaria","Vacaciones pagadas","Seguro médico gratis"], ans: 1, es: "Las ventajas incluyen la flexibilidad horaria. (第七段)", zh: "优势包括时间灵活。"},
+      {q: "¿A qué se refiere “falso autónomo” en el texto?", opts: ["Un autónomo que gana mucho dinero","Un empleado obligado a registrarse como autónomo por su empresa","Un jubilado que trabaja","Un funcionario público"], ans: 1, es: "Trabajadores que en realidad son empleados pero la empresa obliga a darse de alta como autónomos. (第十段)", zh: "实际是雇员却被公司强迫注册为自雇人士。"},
+      {q: "¿Qué cambio introdujo el nuevo sistema de cotización de 2023?", opts: ["Los autónomos ya no pagan impuestos","Se paga según los ingresos reales, no una cuota fija","Todos los autónomos pagan lo mismo","Solo los jóvenes están exentos"], ans: 1, es: "Se ha introducido un sistema de cotización por ingresos reales. Ahora los autónomos pagan según lo que ganan. (第六段)", zh: "引入了按实际收入缴费的新制度，自雇者按实际收入缴费。"},
+      {q: "¿Cuál de las siguientes NO es una desventaja de ser autónomo según el texto?", opts: ["Inestabilidad económica","Dificultad para desconectar","Soledad del trabajo en solitario","Exceso de vacaciones"], ans: 3, es: "El texto menciona inestabilidad, dificultad para desconectar y soledad. No menciona exceso de vacaciones. (第九段)", zh: "文中提及经济不稳定、难以断网、孤独感。未提及假期过多。"},
+      {q: "¿En qué sectores denuncian los sindicatos la práctica de falsos autónomos?", opts: ["Educación y sanidad","Reparto y tecnología","Turismo y hostelería","Agricultura y pesca"], ans: 1, es: "Los sindicatos llevan años denunciándola en sectores como el reparto y la tecnología. (第十一段)", zh: "工会在配送和科技等行业已举报多年。"},
+      {q: "¿Qué inferencia es más razonable sobre el perfil del autónomo español?", opts: ["Son mayoritariamente hombres mayores","Cada vez hay más mujeres, jóvenes y profesionales digitales","Todos trabajan en la construcción","La mayoría son extranjeros"], ans: 1, es: "El perfil está cambiando: cada vez hay más mujeres, más jóvenes y más profesionales del sector digital. (第十五段)", zh: "自雇者画像正在变化：越来越多女性、年轻人和数字行业人士。"}
     ]
   },
   b2: {
     paragraphs: [
-      {es: "La pandemia de COVID-19 supuso un punto de inflexión en el mundo laboral español. El teletrabajo pasó de ser una rareza a una práctica habitual en cuestión de semanas.", zh: "新冠疫情是西班牙就业市场的转折点。远程办公在几周内从罕见变成了常态。"},
-      {es: "Antes de 2020, solo un 5% de los trabajadores españoles teletrabajaba de forma regular. Durante la pandemia, la cifra superó el 30%.", zh: "2020 年之前只有 5% 的西班牙员工定期远程办公。疫情期间这一数字超过了 30%。"},
-      {es: "Esta transformación no ha sido homogénea. Los sectores más digitalizados, como la tecnología y las finanzas, han adoptado el teletrabajo con más facilidad.", zh: "这种转变并不均衡。科技和金融等数字化程度更高的行业更容易采用远程办公。"},
-      {es: "En cambio, sectores como la hostelería, el comercio minorista y la construcción no pueden teletrabajar por la propia naturaleza de sus actividades.", zh: "相反，酒店、零售和建筑业因其活动性质无法远程办公。"},
-      {es: "La Ley de Trabajo a Distancia, aprobada en 2021, estableció por primera vez un marco legal para el teletrabajo en España.", zh: "2021 年通过的《远程工作法》首次为西班牙的远程办公建立了法律框架。"},
-      {es: "Esta ley reconoce el derecho a la desconexión digital, la obligación de la empresa de proporcionar los medios necesarios y la voluntariedad del teletrabajo.", zh: "该法承认数字断联权、企业提供必要设备的义务、以及远程办公的自愿性。"},
-      {es: "Sin embargo, la aplicación real de la ley ha sido desigual. Muchas empresas siguen sin compensar los gastos de electricidad, internet o mobiliario de sus empleados remotos.", zh: "然而法律的实际执行参差不齐。很多企业仍未补偿远程员工的电费、网费或办公家具费用。"},
-      {es: "Desde el punto de vista de los trabajadores, el teletrabajo ofrece ventajas evidentes: elimina los desplazamientos y permite una mejor conciliación familiar.", zh: "从员工角度看，远程办公优势明显：消除通勤、更好地平衡家庭与工作。"},
-      {es: "No obstante, también plantea riesgos: el aislamiento social, la difuminación de los límites entre vida laboral y personal, y el llamado “síndrome del trabajador quemado” o burnout.", zh: "但也带来风险：社交孤立、工作与生活界限模糊、以及所谓的“过劳综合症”。"},
-      {es: "Los expertos en psicología laboral recomiendan establecer rutinas claras, crear un espacio de trabajo separado en casa y fijar horarios de desconexión.", zh: "职场心理学家建议建立清晰的生活规律、在家中划分独立工作空间、设定断联时间。"},
-      {es: "A nivel territorial, el teletrabajo está provocando un fenómeno interesante: la redistribución de la población.", zh: "在区域层面，远程办公正在引发一个有趣现象：人口重新分布。"},
-      {es: "Cada vez más profesionales abandonan las grandes ciudades como Madrid o Barcelona para instalarse en ciudades medianas o pueblos con mejor calidad de vida.", zh: "越来越多专业人士离开马德里、巴塞罗那等大城市，搬到生活质量更好的中等城市或村镇。"},
-      {es: "Este fenómeno podría ayudar a frenar la despoblación rural, uno de los grandes desafíos demográficos de España.", zh: "这一现象可能有助于遏制农村人口流失——西班牙最大的几个挑战之一。"},
-      {es: "En el ámbito internacional, España se ha posicionado como un destino atractivo para los llamados “nómadas digitales”.", zh: "在国际层面，西班牙已定位为“数字游民”的热门目的地。"},
-      {es: "El visado para nómadas digitales, aprobado en 2023, permite a trabajadores extranjeros residir en España mientras trabajan para empresas de fuera del país. Una oportunidad y un desafío.", zh: "2023 年通过的数字游民签证允许外国员工住在西班牙同时为境外公司工作。既是机遇也是挑战。"}
+      {es: "La pandemia de COVID-19 supuso un punto de inflexión en el mundo laboral global. Según la Organización Internacional del Trabajo (OIT), antes de 2020 solo el 5% de los trabajadores españoles teletrabajaba de forma regular. Durante los meses más duros de la pandemia, esa cifra se disparó hasta superar el 30%.", zh: "新冠疫情是全球就业市场的转折点。据国际劳工组织数据，2020年前仅5%的西班牙员工定期远程办公。在疫情最严重的几个月，这一数字飙升至超过30%。"},
+      {es: "En 2023, el teletrabajo se ha estabilizado en torno al 15% de los ocupados, según el INE. “No hemos vuelto a la oficina como antes, pero tampoco nos hemos quedado en casa”, explica María Caprile, investigadora de la Fundación Europea para la Mejora de las Condiciones de Vida y de Trabajo (Eurofound). “El modelo híbrido se ha impuesto como la nueva normalidad”.", zh: "据西班牙统计局数据，2023年远程办公稳定在约15%的就业人口。欧洲改善生活与工作条件基金会研究员玛丽亚·卡普里莱解释：“我们没有像以前那样回到办公室，但也没有完全留在家。混合模式已成为新常态。”"},
+      {es: "Esta transformación no ha sido homogénea. Los sectores más digitalizados —tecnología, finanzas, consultoría— han adoptado el teletrabajo con facilidad. En cambio, la hostelería, el comercio minorista y la construcción no pueden teletrabajar por la naturaleza presencial de sus actividades, lo que ha creado una “brecha de teletrabajo” entre trabajadores cualificados y no cualificados.", zh: "这一转变并不均衡。科技、金融、咨询等数字化程度更高的行业已轻松采用远程办公。相反，酒店、零售和建筑业因活动性质无法远程办公，这在技能型和非技能型工人之间造成了“远程办公鸿沟”。"},
+      {es: "La Ley de Trabajo a Distancia, aprobada en España en 2021, estableció por primera vez un marco legal. Reconoce el derecho a la desconexión digital, la obligación empresarial de proporcionar medios técnicos y la voluntariedad del teletrabajo para el empleado. “Fue un avance histórico, pero su aplicación ha sido desigual”, señala Caprile.", zh: "西班牙2021年通过的《远程工作法》首次建立了法律框架，承认数字断联权、企业提供技术设备的义务和员工远程办公的自愿性。“这是历史性进步，但执行参差不齐，”卡普里莱指出。"},
+      {es: "Una encuesta de Adecco de 2024 revela que el 43% de los teletrabajadores españoles no recibe compensación por los gastos de electricidad, internet o mobiliario. “Muchas empresas cumplen la ley sobre el papel pero no en la práctica”, denuncia Pepe Álvarez, secretario general de UGT.", zh: "Adecco 2024年的一项调查显示，43%的西班牙远程员工未获得电费、网费或办公家具的补偿。“很多企业在纸面上遵守法律但在实践中不执行，”西班牙工人总工会总书记佩佩·阿尔瓦雷斯谴责道。"},
+      {es: "Desde el punto de vista psicológico, el teletrabajo presenta una doble cara. Un estudio de la Universidad Complutense de Madrid señala que el 62% de los teletrabajadores valora positivamente la eliminación de desplazamientos y la flexibilidad horaria, pero el 38% reporta síntomas de aislamiento social y dificultad para desconectar.", zh: "从心理学角度看，远程办公呈现两面性。马德里康普顿斯大学的一项研究指出，62%的远程员工积极评价通勤消除和时间灵活，但38%报告了社交孤立和难以断网的症状。"},
+      {es: "“El mayor riesgo es la difuminación de los límites entre vida laboral y personal”, advierte la psicóloga laboral Carmen Soler. “Cuando la oficina está en el salón de casa, es muy difícil cerrar la puerta mentalmente al final del día. Recomendamos rituales de transición: un paseo corto, cambiar de ropa, apagar el ordenador a una hora fija”.", zh: "“最大的风险是工作与个人生活界限的模糊化，”职场心理学家卡门·索莱尔警告。“当办公室就在家中的客厅时，一天结束时很难在心理上关上门。我们建议过渡仪式：短距离散步、换衣服、在固定时间关电脑。”"},
+      {es: "A nivel territorial, el teletrabajo está provocando un fenómeno de redistribución poblacional. Según datos del Ministerio de Transición Ecológica, unas 50.000 personas abandonaron las grandes ciudades españolas entre 2020 y 2024 para instalarse en municipios de menos de 20.000 habitantes, atraídas por una mejor calidad de vida y viviendas más asequibles.", zh: "在区域层面，远程办公引发了人口重新分布。据生态转型部数据，2020至2024年间约5万人离开西班牙大城市，搬到2万人以下的市镇，被更好的生活质量和更实惠的住房所吸引。"},
+      {es: "“Este fenómeno podría ser una oportunidad histórica para frenar la despoblación rural”, afirma Joaquín Alcalde, director del Observatorio de la España Vaciada. “Pero necesitamos que la fibra óptica llegue al 100% de los municipios y que haya servicios públicos de calidad. Sin eso, la gente no se queda”.", zh: "“这一现象可能是遏制农村人口流失的历史性机遇，”空心西班牙观察站主任华金·阿尔卡尔德表示。“但我们需要光纤覆盖100%的市镇，并且有优质的公共服务。没有这些，人们留不住。”"},
+      {es: "En el ámbito internacional, España se ha posicionado como destino líder para nómadas digitales. El visado específico aprobado en 2023 ha atraído a más de 10.000 solicitantes en su primer año, según el Ministerio de Inclusión y Seguridad Social. Los principales países de origen son Estados Unidos, Reino Unido y Alemania.", zh: "在国际层面，西班牙已成为数字游民的首选目的地。根据包容与社会保障部的数据，2023年通过的专项签证在第一年就吸引了超过1万名申请者。主要来源国为美国、英国和德国。"},
+      {es: "Sin embargo, este fenómeno también genera tensiones. En ciudades como Barcelona, Valencia o Málaga, la llegada de nómadas digitales con salarios internacionales ha contribuido al encarecimiento del alquiler, generando críticas de colectivos vecinales. “Hay que encontrar un equilibrio entre atraer talento y proteger el derecho a la vivienda de los residentes”, señala Alcalde.", zh: "然而这一现象也引发了紧张。在巴塞罗那、瓦伦西亚或马拉加等城市，拿着国际薪水的数字游民的到来加剧了房租上涨，引发了邻里团体的批评。“必须在吸引人才和保护居民住房权之间找到平衡，”阿尔卡尔德指出。"},
+      {es: "De cara al futuro, los expertos coinciden en que el teletrabajo ha llegado para quedarse. La cuestión ya no es si teletrabajaremos, sino cómo lo haremos. “El desafío es construir un marco que maximice los beneficios y minimice los riesgos: más productividad, mejor conciliación y menos desigualdad territorial”, concluye Caprile.", zh: "展望未来，专家们一致认为远程办公已成定局。问题已不是是否会远程办公，而是如何远程办公。“挑战在于建立一个最大化收益、最小化风险的框架：更高的生产力、更好的工作家庭平衡、更少的地域不平等，”卡普里莱总结道。"},
+      {es: "La OCDE, en su informe de 2024 sobre el futuro del trabajo, sitúa a España en una posición privilegiada para liderar el teletrabajo en Europa, gracias a su clima, infraestructura digital en expansión y calidad de vida. “Pero el éxito dependerá de las políticas que se implementen en los próximos cinco años”, advierte el organismo.", zh: "经合组织在2024年关于工作未来的报告中，将西班牙置于引领欧洲远程办公的优势地位，归功于其气候、不断扩展的数字基础设施和生活质量。“但成功将取决于未来五年实施的政策，”该组织警告。"},
+      {es: "Para los trabajadores, la clave está en la formación continua. Según el SEPE, las ofertas de empleo que permiten teletrabajo requieren un 40% más de competencias digitales que las presenciales. “El futuro del trabajo no es presencial ni remoto: es híbrido, digital y en constante evolución”, sentencia Caprile.", zh: "对劳动者来说，关键在于持续培训。根据西班牙就业服务局的数据，允许远程办公的岗位比现场岗位需要多40%的数字技能。“工作的未来不是面对面也不是远程：它是混合的、数字化的、不断演变的，”卡普里莱断言。"}
     ],
-    dele: "B2 考点：<b>虚拟式</b>(aunque la aplicación haya sido desigual, es fundamental que se establezcan rutinas)；<b>被动语态</b>(fue aprobada, ha sido adoptado)；<b>复合句连接词</b>(en cambio, no obstante, sin embargo, desde el punto de vista de, a nivel)；<b>过去完成时</b>(había superado)；<b>将来时推测</b>(podría ayudar, permitirá)；<b>抽象名词</b>(despoblación, redistribución, conciliación, difuminación)。",
+    dele: "B2 考点：<b>虚拟式</b>(es fundamental que se establezcan, aunque se hayan implementado medidas, es necesario que exista)；<b>条件式</b>(podría ser, dependería, se habría estabilizado)；<b>被动/无人称</b>(se ha estabilizado, fue aprobada, se ha posicionado)；<b>间接引语</b>(explica, señala, advierte, denuncia, concluye, sentencia)；<b>复合连接词</b>(sin embargo, en cambio, no obstante, de cara a, en el ámbito de)；<b>学术词汇</b>(difuminación, redistribución, conciliación, encarecimiento, desigualdad)。",
     hardWords: [
-      {w: "punto de inflexión", m: "转折点（inflexión = 拐点）"},
-      {w: "marco legal", m: "法律框架"},
-      {w: "conciliación familiar", m: "工作与家庭平衡"},
-      {w: "difuminación", m: "模糊化（difuminar 使模糊）"},
-      {w: "nómada digital", m: "数字游民（远程工作+旅居）"}
+      {w: "modelo híbrido", m: "混合模式 (presencial+remoto)"},
+      {w: "brecha de teletrabajo", m: "远程办公鸿沟 (cualificados vs no cualificados)"},
+      {w: "difuminación", m: "模糊化 (límites vida-trabajo)"},
+      {w: "encarecimiento", m: "价格上涨 (encarecimiento del alquiler)"},
+      {w: "nómada digital", m: "数字游民 (visado específico 2023)"}
     ],
     quiz: [
-      {q: "¿Qué porcentaje de trabajadores teletrabajaba antes de 2020?", opts: ["El 10%","El 15%","Solo un 5%","El 25%"], ans: 2, es: "Antes de 2020, solo un 5% de los trabajadores españoles teletrabajaba de forma regular. (第二段)", zh: "2020 年之前只有 5% 定期远程办公。"},
-      {q: "¿Qué ley se aprobó en 2021?", opts: ["La Ley de Teletrabajo","La Ley de Trabajo a Distancia","La Ley de Autónomos","La Ley de Contratación"], ans: 1, es: "La Ley de Trabajo a Distancia, aprobada en 2021. (第五段)", zh: "2021 年通过了《远程工作法》。"},
-      {q: "¿Qué riesgo menciona el texto sobre el teletrabajo?", opts: ["Más vacaciones","El síndrome del trabajador quemado","Mejor sueldo","Más reuniones"], ans: 1, es: "El síndrome del trabajador quemado o burnout. (第九段)", zh: "“过劳综合症”或 burnout。"},
-      {q: "¿Qué fenómeno está provocando el teletrabajo a nivel territorial?", opts: ["Más tráfico","La redistribución de la población","El cierre de empresas","Más contaminación"], ans: 1, es: "El teletrabajo está provocando la redistribución de la población. (第十一段)", zh: "远程办公正在引发人口重新分布。"},
-      {q: "¿Qué visa se aprobó en 2023?", opts: ["Visa de turista","Visa de estudiante","Visado para nómadas digitales","Visa de trabajo temporal"], ans: 2, es: "El visado para nómadas digitales, aprobado en 2023. (第十五段)", zh: "2023 年通过了数字游民签证。"}
+      {q: "Según la OIT, ¿qué porcentaje de españoles teletrabajaba antes de 2020?", opts: ["El 10%","El 15%","Solo un 5%","El 30%"], ans: 2, es: "Antes de 2020, solo el 5% de los trabajadores españoles teletrabajaba de forma regular. (第一段)", zh: "2020年前仅5%定期远程办公。"},
+      {q: "¿A qué se refiere “brecha de teletrabajo” en el texto?", opts: ["Una aplicación informática","La diferencia entre trabajadores cualificados y no cualificados en el acceso al teletrabajo","Un problema de conexión a internet","Un tipo de contrato laboral"], ans: 1, es: "Se refiere a la división entre sectores que pueden teletrabajar y los que no por la naturaleza presencial de sus actividades. (第三段)", zh: "指能远程办公的行业与因活动性质无法远程的行业之间的鸿沟。"},
+      {q: "¿Qué porcentaje de teletrabajadores no recibe compensación por gastos según Adecco 2024?", opts: ["El 20%","El 30%","El 43%","El 60%"], ans: 2, es: "El 43% de los teletrabajadores no recibe compensación por gastos de electricidad, internet o mobiliario. (第六段)", zh: "43%的远程员工未获电费、网费或家具补偿。"},
+      {q: "Según el texto, ¿cuál es el mayor riesgo psicológico del teletrabajo?", opts: ["El exceso de reuniones","La difuminación de los límites entre vida laboral y personal","El ruido en casa","La falta de tecnología"], ans: 1, es: "El mayor riesgo es la difuminación de los límites entre vida laboral y personal. (第八段)", zh: "最大风险是工作与个人生活界限的模糊化。"},
+      {q: "¿Cuántas personas abandonaron las grandes ciudades españolas entre 2020 y 2024?", opts: ["Unas 10.000","Unas 25.000","Unas 50.000","Unas 100.000"], ans: 2, es: "Unas 50.000 personas abandonaron las grandes ciudades para instalarse en municipios más pequeños. (第九段)", zh: "约5万人离开大城市搬到更小的市镇。"},
+      {q: "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", opts: ["El visado para nómadas digitales atrajo más de 10.000 solicitantes","La OCDE sitúa a España en posición privilegiada para el teletrabajo","El teletrabajo ha desaparecido completamente tras la pandemia","Los empleos con teletrabajo requieren más competencias digitales"], ans: 2, es: "El texto dice que el teletrabajo se ha estabilizado en torno al 15%, no que haya desaparecido. (第二段+全文)", zh: "文中说远程办公稳定在15%，并非完全消失。"},
+      {q: "¿Qué problema genera la llegada de nómadas digitales según el texto?", opts: ["Falta de cafeterías","Encarecimiento del alquiler en ciudades como Barcelona y Valencia","Aumento del tráfico","Escasez de vuelos internacionales"], ans: 1, es: "La llegada de nómadas digitales ha contribuido al encarecimiento del alquiler en ciudades como Barcelona, Valencia o Málaga. (第十二段)", zh: "数字游民的到来加剧了巴塞罗那、瓦伦西亚等城市的房租上涨。"},
+      {q: "¿Qué inferencia es más razonable sobre el futuro del teletrabajo en España?", opts: ["Volveremos al 100% presencial en 2025","El modelo híbrido se consolidará pero requerirá mejores políticas","Todo el mundo trabajará desde casa","Solo los jóvenes podrán teletrabajar"], ans: 1, es: "Los expertos coinciden en que el modelo híbrido ha llegado para quedarse pero depende de políticas futuras. (第十三十四段)", zh: "专家一致认为混合模式已成定局，但取决于未来政策。"}
     ]
   }
 };
@@ -717,6 +726,8 @@ renderVocab();
     };
   });
 });
+
+
 
 
 </script>
