@@ -40,6 +40,18 @@ window.REFINE_PACKS = {
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/la-ola-de-calor-mantiene-en-aviso-a-gran-parte-de/a3b0b5d8-1dba-48b4-963f-5ee3ddc6cae0", topic: "La ola de calor mantiene en aviso a gran parte de España" },
       { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: el reto demográfico" }
     ]
+  },
+  "2026-08-06": {
+    date: "2026-08-06",
+    weekday: "四",
+    issue: 5,
+    theme: "办公室日常 · 求职面试 · 自由职业 · 远程办公",
+    sources: [
+      { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/", topic: "Un día en la oficina en España" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/economia/", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/sociedad/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "El teletrabajo y el futuro del empleo en España" }
+    ]
   }
 };
 
