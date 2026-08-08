@@ -9920,12 +9920,7 @@ let currentRefineLevel = null; // null=显示全部 4 篇；或 'A1'/'A2'/'B1'/'
 let __refineCache = {}; // date -> {words, articles, levelColors}
 const REFINE_LEVEL_COLORS = { A1: '#2E7D32', A2: '#1565C0', B1: '#C12A2A', B2: '#6A1B9A' };
 const REFINE_LEVEL_LABEL = { A1: 'A1 入门', A2: 'A2 基础', B1: 'B1 中级', B2: 'B2 中高级' };
-const REFINE_LEVEL_TITLES = {
-  A1: '☕ El café de la mañana（早晨的一杯咖啡）',
-  A2: '🎒 Vuelta al cole en septiembre（九月开学季）',
-  B1: '🌡️ La ola de calor de agosto en España（西班牙八月热浪）',
-  B2: '🏘️ La España vaciada：el reto demográfico del siglo XXI（"空心化的西班牙"：21 世纪的人口挑战）'
-};
+// 文章标题现在从 refine_data.js 的 sources[level].topic 动态读取
 
 function pickRefineDate(){
   if(currentRefineDate && window.REFINE_PACKS && window.REFINE_PACKS[currentRefineDate]) return currentRefineDate;
@@ -10158,7 +10153,7 @@ async function renderRefineBody(){
       articlesHtml += `<div class="refine-article-card" id="refine-${lvKey}" style="border-left:6px solid ${color}">
         <div class="refine-article-head">
           <span class="refine-level-tag" style="background:${color}">${lv}</span>
-          <h3>${esc(REFINE_LEVEL_TITLES[lv] || a.title || lv)}</h3>
+          <h3>${esc(src.topic || a.title || lv)}</h3>
           ${src.sourceUrl ? `<a class="refine-source-cta" href="${esc(src.sourceUrl)}" target="_blank" rel="noopener noreferrer" title="在 ${esc(src.source)} 查看原文" style="background:${color}">🔗 ${esc(src.source)} 原文</a>` : (src.source ? `<span class="refine-source-cta disabled" title="暂无原文链接">🔗 ${esc(src.source)}</span>` : '')}
         </div>
         ${metaRow}

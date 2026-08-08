@@ -26,7 +26,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/viajes-y-turismo/", topic: "Viajar en España en agosto: mucho más que playa" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El calor extremo del verano español: temperaturas récord" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
-      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: el reto demográfico" }
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: despoblación rural y repoblación" }
     ]
   },
   "2026-08-08": {
