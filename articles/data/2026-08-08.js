@@ -408,66 +408,14 @@ window.ARTICLES = {
       }
     ],
     "quiz": [
-      {
-        "q": "¿Cuántas comunidades autónomas tienen aviso rojo?",
-        "opts": [
-          "Cuatro",
-          "Seis",
-          "Ocho",
-          "Diez"
-        ],
-        "ans": 2,
-        "es": "La Agencia Estatal de Meteorología (AEMET) ha activado avisos rojos en ocho comunidades autónomas. (第二段)",
-        "zh": "AEMET 在 8 个自治区发布了红色预警。"
-      },
-      {
-        "q": "¿Qué temperatura ha alcanzado Sevilla y Córdoba?",
-        "opts": [
-          "38 grados",
-          "40 grados",
-          "44 grados",
-          "46 grados"
-        ],
-        "ans": 2,
-        "es": "el termómetro ha llegado a marcar 44 grados a la sombra. (第三段)",
-        "zh": "塞维利亚和科尔多瓦阴影处达到 44 度。"
-      },
-      {
-        "q": "¿A qué hora salen los trabajadores en jornada intensiva?",
-        "opts": [
-          "A la una",
-          "A las dos",
-          "A las tres",
-          "A las cuatro"
-        ],
-        "ans": 2,
-        "es": "Los trabajadores salen a las tres de la tarde para evitar las horas más calurosas. (第六段)",
-        "zh": "集中工时制员工下午三点下班。"
-      },
-      {
-        "q": "¿Cuánto ha aumentado el número de rescates en playas?",
-        "opts": [
-          "10%",
-          "20%",
-          "30%",
-          "50%"
-        ],
-        "ans": 2,
-        "es": "El número de rescates ha aumentado un 30% este verano. (第十一段)",
-        "zh": "海滩救援次数今年夏天增加了 30%。"
-      },
-      {
-        "q": "¿A partir de qué hora los comercios deben apagar escaparates?",
-        "opts": [
-          "A las 20:00",
-          "A las 21:00",
-          "A las 22:00",
-          "A las 23:00"
-        ],
-        "ans": 2,
-        "es": "el gobierno ha pedido a los comercios que apaguen los escaparates a partir de las diez de la noche. (第十三段)",
-        "zh": "政府要求商店从晚上 10 点起关闭橱窗灯。"
-      }
+      {"q": "¿Cuántas comunidades autónomas tienen aviso rojo según la AEMET?", "opts": ["Cuatro", "Seis", "Ocho", "Diez"], "ans": 2, "es": "La AEMET ha activado avisos rojos en ocho comunidades autónomas. (第二段)", "zh": "AEMET 在 8 个自治区发布了红色预警。"},
+      {"q": "¿Qué temperatura se ha registrado en Sevilla y Córdoba?", "opts": ["38 grados", "40 grados", "44 grados", "46 grados"], "ans": 2, "es": "El termómetro ha llegado a marcar 44 grados a la sombra. (第三段)", "zh": "塞维利亚和科尔多瓦阴影处达到 44 度。"},
+      {"q": "Según el texto, ¿por qué han aumentado los rescates en las playas?", "opts": ["Porque hay más turistas este año", "Por la imprudencia de los bañistas y el calor extremo", "Porque las playas están más llenas", "Por falta de socorristas"], "ans": 1, "es": "Según el texto, los rescates han aumentado un 30% este verano por la combinación de calor extremo e imprudencia. (第十一段)", "zh": "由于极端高温与游泳者大意，海滩救援增加了 30%。"},
+      {"q": "La palabra \u201Clos\u201D en \u201Cpara evitar las horas más calurosas del día, los trabajadores salen a las tres\u201D se refiere a:", "opts": ["Las horas calurosas", "Los trabajadores", "Los comercios", "Los termómetros"], "ans": 1, "es": "\u201CLos trabajadores salen a las tres\u201D: \u201Clos\u201D se refiere a los trabajadores (sujeto de la oración). (第六段)", "zh": "\u201Clos\u201D 指代工人们（句子的主语）。"},
+      {"q": "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", "opts": ["Las temperaturas superan los 40 grados en varias ciudades", "Los comercios deben apagar escaparates a las diez de la noche", "Las autoridades recomiendan hacer deporte al mediodía", "Los trabajadores en jornada intensiva salen a las tres"], "ans": 2, "es": "El texto dice que las autoridades recomiendan evitar salir en las horas centrales, no hacer deporte al mediodía. (第四段+第五段)", "zh": "当局建议避免中午外出，而非在中午做运动。"},
+      {"q": "¿Qué consecuencia NO menciona el texto sobre la ola de calor?", "opts": ["Aumento de rescates en playas", "Cierre de escuelas por calor", "Petición de apagar escaparates de comercios", "Trabajadores que salen antes del trabajo"], "ans": 1, "es": "El texto no menciona el cierre de escuelas. Sí menciona rescates (+30%), apagar escaparates (22:00) y jornada intensiva (salida a las 15:00). (整篇文章)", "zh": "文中未提及学校因高温关闭。其他三项均有提到。"},
+      {"q": "La expresión \u201Choras centrales del día\u201D se refiere aproximadamente a:", "opts": ["Las primeras horas de la mañana", "El mediodía y las primeras horas de la tarde", "La noche", "La madrugada"], "ans": 1, "es": "\u201CLas horas centrales del día\u201D se refiere al período de máxima radiación solar, aproximadamente entre las 12:00 y las 16:00. (第四段)", "zh": "\u201C一天中最中心的时段\u201D指正午和下午早些时候（12:00-16:00）。"},
+      {"q": "¿Qué inferencia es más razonable a partir del texto sobre el futuro de los veranos en España?", "opts": ["Los veranos serán cada vez más frescos", "Las olas de calor serán más frecuentes e intensas", "Las playas estarán vacías", "La jornada intensiva desaparecerá"], "ans": 1, "es": "El texto indica que \u201Clos fenómenos meteorológicos extremos se vuelven más frecuentes e intensos con el cambio climático\u201D, por lo que se infiere que la tendencia continuará. (第一段+全文)", "zh": "文章指出极端天气现象因气候变化变得更加频繁和强烈，因此可推断这一趋势将继续。"}
     ]
   },
   "b2": {
@@ -498,10 +446,13 @@ window.ARTICLES = {
     ],
     "quiz": [
       {"q": "Según el texto, ¿cuántos fallecimientos se registraron en Francia durante la ola de calor de junio?", "opts": ["Menos de 1.000", "Más de 2.000", "Más de 3.000", "No se registraron"], "ans": 1, "es": "Francia registró más de 2.000 fallecimientos durante la ola de calor sin precedentes. (第二段)", "zh": "法国在那场史无前例的热浪中记录了超过2000人死亡。"},
-      {"q": "¿Qué ciudad fue la primera del mundo en contratar a un responsable del calor?", "opts": ["Madrid", "Nueva York", "Phoenix", "Londres"], "ans": 2, "es": "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. (第八段)", "zh": "凤凰城在2021年成为全球首个聘请高温管理官员的城市。"},
-      {"q": "¿Cuántos fallecimientos relacionados con el calor se registraron en Maricopa en 2023?", "opts": ["405", "645", "282", "23"], "ans": 1, "es": "Los fallecimientos alcanzaron un máximo de 645 en 2023. (第九段)", "zh": "2023年高温相关死亡达到645人的峰值。"},
-      {"q": "Según Ladd Keith, ¿en qué debemos dejar de basar la planificación?", "opts": ["En el futuro", "En las olas de calor históricas", "En la economía", "En la población"], "ans": 1, "es": "Tenemos que dejar de planificar en función de las olas de calor históricas. (第十五段)", "zh": "我们必须停止根据过去经历的历史热浪来做规划。"},
-      {"q": "¿Cuánto se ha calentado el mundo desde la era industrial, según el texto?", "opts": ["0,5\u00B0C", "M\u00E1s de 1,1\u00B0C", "M\u00E1s de 2\u00B0C", "No se ha calentado"], "ans": 1, "es": "El mundo ya se ha calentado más de 1,1\u00B0C desde la era industrial. (第十三段)", "zh": "自工业时代以来全球已升温超过1.1°C。"}
+      {"q": "¿Qué ciudad fue la primera del mundo en contratar a un responsable de la gestión del calor?", "opts": ["Madrid", "Nueva York", "Phoenix", "Londres"], "ans": 2, "es": "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. (第八段)", "zh": "凤凰城在2021年成为全球首个聘请高温管理官员的城市。"},
+      {"q": "¿Cuántos fallecimientos relacionados con el calor se registraron en el condado de Maricopa en 2023?", "opts": ["405", "645", "282", "23"], "ans": 1, "es": "Los fallecimientos alcanzaron un máximo de 645 en 2023, y luego descendieron a 405 en 2025. (第九段)", "zh": "2023年高温相关死亡达到645人的峰值。"},
+      {"q": "La expresión \u201Cla tendencia a la baja no está garantizada\u201D significa que:", "opts": ["Las temperaturas seguirán bajando", "No es seguro que las muertes sigan disminuyendo", "El condado dejará de financiar los centros de refrigeración", "Los expertos no confían en los datos"], "ans": 1, "es": "En 2026 ya hay 23 muertes confirmadas y 282 bajo investigación: la reducción no está asegurada. (第十一段)", "zh": "2026年已有23例确认死亡+282例调查中，下降趋势不能保证。"},
+      {"q": "¿A qué se refiere \u201Cpara ello\u201D en \u201Cpara ello, señalan los expertos, es necesario que exista un reconocimiento generalizado\u201D?", "opts": ["A los centros de refrigeración", "A crear instalaciones similares en otras regiones", "A la coordinación y comunicación", "A reducir las emisiones"], "ans": 1, "es": "\u201CPara ello\u201D se refiere a crear instalaciones como centros de refrigeración en otras partes del mundo. (第十二段)", "zh": "\u201CPara ello\u201D 指代在其他地区建立类似制冷中心的设施。"},
+      {"q": "¿Cuál de las siguientes NO es una consecuencia del calor extremo mencionada en el texto?", "opts": ["Deformación de carreteras", "Retrasos en vuelos", "Aumento del nivel del mar", "Muertes entre personas sin hogar"], "ans": 2, "es": "El texto menciona carreteras deformadas, retrasos de vuelos y muertes de personas sin hogar. No menciona el aumento del nivel del mar. (第五段+第十段+第十四段)", "zh": "文中提及道路变形、航班延误、无家可归者死亡。未提及海平面上升。"},
+      {"q": "Según Ladd Keith, ¿en qué debemos basar la planificación futura contra el calor?", "opts": ["En las olas de calor del pasado", "En el calor que se sufrirá en los próximos 5-10 años", "En los modelos climáticos del siglo pasado", "En la experiencia de los países nórdicos"], "ans": 1, "es": "Keith afirma: \u201Cempezar a planificar en función del calor que vamos a sufrir en los próximos cinco a diez años\u201D. (第十五段)", "zh": "基思说应根据未来五到十年将要遭受的高温来规划。"},
+      {"q": "¿Qué inferencia es más razonable a partir del texto sobre el futuro de las temperaturas globales?", "opts": ["Dejarán de subir si se reducen las emisiones", "Seguirán aumentando aunque se reduzcan las emisiones", "Solo subirán en países sin aire acondicionado", "Volverán a niveles preindustriales en 2030"], "ans": 1, "es": "El texto dice: \u201Clas temperaturas seguirán aumentando durante algún tiempo, incluso si los países reducen drásticamente las emisiones\u201D. (第十三段)", "zh": "文章明确指出即使各国大幅减排，气温仍将继续上升。"}
     ]
   }
 };
