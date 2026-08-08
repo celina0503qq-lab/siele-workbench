@@ -1849,6 +1849,9 @@ function renderDash(){
     <div class="note" style="margin-top:8px"><b>APTO（及格）：</b>总分 ≥ 60/100，且读写组 ≥ 30/50，听说组 ≥ 30/50。两组须同时满足。</div>
   </div>`;
 
+  // 显示工作台云同步角标（固定定位，在后台同步芯片上方）
+  setTimeout(function(){ ensureSyncBadge(); }, 0);
+
   return h;
 }
 
@@ -13490,19 +13493,13 @@ function updateSyncBadge(st){
 
 function ensureSyncBadge(){
   var el = document.getElementById('standaloneSyncBadge');
-  if(el) return el;
+  if(el) { updateSyncBadge(SCFG.enabled ? (SCFG.lastSync ? 'ok' : 'local') : 'off'); return el; }
   el = document.createElement('span');
   el.id = 'standaloneSyncBadge';
-  el.style.cssText = 'display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer;margin-left:12px;transition:.2s;vertical-align:middle';
-  el.title = '点击打开云同步设置';
+  el.style.cssText = 'position:fixed;bottom:60px;right:14px;z-index:99998;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:22px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:rgba(0,0,0,0.18) 0px 4px 16px;user-select:none;transition:.25s;max-width:70vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
+  el.title = '☁️ 工作台云同步 — 点击打开设置';
   el.onclick = function(){ openSyncSettings(); };
-  // Append to dash header
-  var tryAppend = function(){
-    var tb = document.querySelector('.main .tb');
-    if(tb){ var h2 = tb.querySelector('h2'); if(h2) h2.appendChild(el); else tb.appendChild(el); return true; }
-    return false;
-  };
-  if(!tryAppend()) setTimeout(tryAppend, 500);
+  document.body.appendChild(el);
   updateSyncBadge(SCFG.enabled ? (SCFG.lastSync ? 'ok' : 'local') : 'off');
   return el;
 }
@@ -13946,6 +13943,7 @@ setInterval(function(){
 window.SCFG = SCFG;
 window.saveSyncCfg = saveSyncCfg;
 window.updateSyncBadge = updateSyncBadge;
+window.ensureSyncBadge = ensureSyncBadge;
 window.openSyncSettings = openSyncSettings;
 window.closeSyncSettings = closeSyncSettings;
 window.standaloneSync = standaloneSync;
