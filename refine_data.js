@@ -23,10 +23,10 @@ window.REFINE_PACKS = {
     issue: 6,
     theme: "夏季出行 · 酷暑天气 · 行政手续 · 农村空心化",
     sources: [
-      { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/television/20240807/viajar-espana-agosto-vacaciones/", topic: "Viajar en España en agosto: mucho más que playa" },
-      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/20240807/ola-calor-agosto-temperaturas/", topic: "La ola de calor de agosto mantiene en alerta a media España" },
-      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/20240807/tramites-burocracia-espana-extranjeros/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
-      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/espana/2024/03/15/espana-vaciada-reto-demografico.html", topic: "La España vaciada: un desafío de país" }
+      { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/viajes-y-turismo/", topic: "Viajar en España en agosto: mucho más que playa" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El calor extremo del verano español: temperaturas récord" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: el reto demográfico" }
     ]
   },
   "2026-08-08": {
