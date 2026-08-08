@@ -362,6 +362,7 @@
 .refine-score-card .score-dim .dim-bar .fill{height:100%;border-radius:4px;transition:width .5s}
 .refine-score-card .score-dim .dim-val{width:40px;text-align:right;font-weight:700;flex-shrink:0}
 .refine-score-card .score-feedback{text-align:center;margin-top:10px;padding:8px;background:linear-gradient(90deg,#fef3c7,#fffbeb);border-radius:6px;font-weight:700;font-size:13px;color:#92400e}
+.refine-score-card .score-word-detail{margin-top:8px;padding:8px;background:#fafafa;border-radius:6px;font-size:11px;line-height:2}
 .refine-para-row .refine-para-es{position:relative}
 .refine-para-row .refine-para-es .row-actions{position:absolute;top:4px;right:4px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
 .refine-para-row:hover .refine-para-es .row-actions{opacity:1}
@@ -10530,7 +10531,8 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   var recognition = new SpeechRecognition();
   recognition.lang = 'es-ES';
   recognition.interimResults = true;
-  recognition.maxAlternatives = 3;
+  recognition.maxAlternatives = 5;
+  recognition.continuous = true;
   window.__refineRecognition = recognition;
 
   var finalTranscript = '';
@@ -10542,11 +10544,12 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
     for(var i = event.resultIndex; i < event.results.length; i++){
       var r = event.results[i];
       if(r.isFinal){
+        // Pick best alternative: closest to expected via word-level distance
         var best = r[0].transcript;
+        var bestDist = wordDistance(best, expectedText);
         for(var j = 1; j < r.length; j++){
-          if(levenshteinDistance(r[j].transcript.toLowerCase(), expectedText.toLowerCase()) < levenshteinDistance(best.toLowerCase(), expectedText.toLowerCase())){
-            best = r[j].transcript;
-          }
+          var d = wordDistance(r[j].transcript, expectedText);
+          if(d < bestDist){ best = r[j].transcript; bestDist = d; }
         }
         finalTranscript += ' ' + best;
       } else {
@@ -10555,7 +10558,7 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
     }
     var partial = (finalTranscript + ' ' + interimText).trim();
     if(partial.length > 0 && status){
-      status.innerHTML = '🔴 正在录音: <span style="color:#7c3aed;font-weight:400">' + esc(partial.substring(0, 60)) + (partial.length > 60 ? '...' : '') + '</span>';
+      status.innerHTML = '🔴 正在录音: <span style="color:#7c3aed;font-weight:400">' + esc(partial.substring(0, 80)) + (partial.length > 80 ? '...' : '') + '</span>';
     }
   };
 
@@ -10583,67 +10586,172 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   recognition.start();
 }
 
-function calcScore(expected, spoken, elapsedSec){
-  var expClean = expected.toLowerCase().replace(/[^a-záéíóúüñ 0-9]/g, '').trim();
-  var spkClean = spoken.toLowerCase().replace(/[^a-záéíóúüñ 0-9]/g, '').trim();
-  var expWords = expClean.split(/\s+/).filter(Boolean);
-  var spkWords = spkClean.split(/\s+/).filter(Boolean);
-  var expChars = expClean.replace(/\s/g, '');
-  var spkChars = spkClean.replace(/\s/g, '');
+// ============ V2 评分引擎 ============
 
-  // 1. Pronunciation (35%)
-  var levDist = levenshteinDistance(expChars, spkChars);
-  var maxLen = Math.max(expChars.length, spkChars.length);
-  var pronScore = maxLen > 0 ? Math.max(0, Math.round((1 - levDist / maxLen) * 100)) : 100;
+// 西班牙语音素归一化: 处理常见同音异写(seseo/yeísmo/弱读h/清浊同化)
+function phonemeNorm(w){
+  return w.toLowerCase()
+    .replace(/[áä]/g,'a').replace(/[éë]/g,'e').replace(/[íï]/g,'i')
+    .replace(/[óö]/g,'o').replace(/[úü]/g,'u')
+    .replace(/[vw]/g,'b')       // v→b (betacismo)
+    .replace(/[sz]/g,'s')       // s/z→s (seseo latino)
+    .replace(/c(?=[eiéí])/g,'s') // c(e/i)→s
+    .replace(/ll/g,'y')         // ll→y (yeísmo)
+    .replace(/h/g,'')           // h muda
+    .replace(/[qk]/g,'k')       // q(u)→k
+    .replace(/g(?=[eiéí])/g,'j') // g(e/i)→j
+    .replace(/x/g,'ks')         // x→ks
+    .replace(/rr/g,'r')         // rr→r
+    .replace(/ñ/g,'ny')         // ñ→ny (唯一区分)
+    .replace(/ch/g,'tsh')       // ch→tsh
+    .replace(/([bcdfgklmnpst]){2,}/g,'$1'); // 去重辅音
+}
 
-  // 2. Fluency (25%)
-  var wpm = elapsedSec > 0 ? (spkWords.length / elapsedSec) * 60 : 0;
-  var fluencyScore;
-  if(wpm >= 80 && wpm <= 120) fluencyScore = 100;
-  else if(wpm >= 60 && wpm <= 140) fluencyScore = 80;
-  else if(wpm >= 40 && wpm <= 160) fluencyScore = 60;
-  else fluencyScore = Math.max(20, Math.round(wpm > 0 ? 100 * (80 / wpm) : 0));
+// tokenize + normalize
+function tokenize(text){ return text.toLowerCase().replace(/[^a-záéíóúüñ 0-9]/g,'').trim().split(/\s+/).filter(Boolean); }
 
-  // 3. Completeness (25%)
-  var matchedWords = 0;
+// 词级编辑距离 (基于 phonemeNorm, 2 个词的最小距离)
+function wordDistance(a, b){
+  var wa = tokenize(a), wb = tokenize(b);
+  if(!wa.length || !wb.length) return Math.max(wa.length, wb.length) * 10;
+  var total = 0;
+  for(var i = 0; i < Math.min(wa.length, wb.length); i++){
+    total += levenshteinDistance(phonemeNorm(wa[i]), phonemeNorm(wb[i]));
+  }
+  total += Math.abs(wa.length - wb.length) * 3;
+  return total;
+}
+
+// 一对一贪婪匹配: 把 spoken 的每个词匹配到 expected 的某个未匹配词
+function pairWords(expWords, spkWords){
+  var used = new Array(expWords.length).fill(false);
+  var pairs = [];
   for(var si = 0; si < spkWords.length; si++){
-    var sw = spkWords[si];
+    var bestIdx = -1, bestDist = 999;
     for(var ei = 0; ei < expWords.length; ei++){
-      if(sw === expWords[ei] || levenshteinDistance(sw, expWords[ei]) <= 2){ matchedWords++; break; }
+      if(used[ei]) continue;
+      var d = levenshteinDistance(phonemeNorm(spkWords[si]), phonemeNorm(expWords[ei]));
+      if(d < bestDist){ bestDist = d; bestIdx = ei; }
+    }
+    if(bestIdx >= 0){
+      used[bestIdx] = true;
+      pairs.push({ expIdx: bestIdx, spkIdx: si, dist: bestDist, expWord: expWords[bestIdx], spkWord: spkWords[si] });
     }
   }
-  matchedWords = Math.min(matchedWords, expWords.length);
-  var completenessScore = expWords.length > 0 ? Math.round((matchedWords / expWords.length) * 100) : 100;
+  // Unmatched expected words
+  var unmatched = [];
+  for(var i = 0; i < expWords.length; i++){ if(!used[i]) unmatched.push(expWords[i]); }
+  return { pairs: pairs, unmatched: unmatched, unmatchedCount: unmatched.length };
+}
 
-  // 4. Grammar (15%)
+function calcScore(expected, spoken, elapsedSec){
+  var expWords = tokenize(expected);
+  var spkWords = tokenize(spoken);
+  if(!expWords.length) return { total: 100, grade: '🏆 Excelente', feedback: '空文本。', dimensions: [], wordDetail: '' };
+  if(!spkWords.length) return { total: 0, grade: '💪 Sigue practicando', feedback: '未识别到语音。', dimensions: [], wordDetail: '' };
+
+  var pairing = pairWords(expWords, spkWords);
+  var ew = expWords.length, sw = spkWords.length;
+  var wordDetailHtml = '';
+
+  // ============ 1. 发音准确度 (35%) ============
+  // 对每对匹配词计算音素级相似度, 未匹配词扣分
+  var totalPron = 0;
+  for(var p = 0; p < pairing.pairs.length; p++){
+    var pd = pairing.pairs[p];
+    var pnExp = phonemeNorm(pd.expWord);
+    var pnSpk = phonemeNorm(pd.spkWord);
+    var maxPh = Math.max(pnExp.length, pnSpk.length);
+    var phDist = levenshteinDistance(pnExp, pnSpk);
+    var wordScore = maxPh > 0 ? Math.max(0, 1 - phDist / maxPh) : 1;
+    totalPron += wordScore;
+  }
+  // 用平方根曲线拉高部分匹配的分数: sqrt(avg) 比 linear avg 更宽容
+  var avgPron = pairing.pairs.length > 0 ? totalPron / pairing.pairs.length : 0;
+  var pronScore = Math.round(Math.sqrt(Math.max(0, avgPron)) * 100);
+  // 未匹配词惩罚
+  pronScore = Math.round(pronScore * Math.max(0.3, 1 - pairing.unmatchedCount * 0.1 / ew));
+
+  // ============ 2. 流利度 (25%) — 西班牙语 90-140 WPM ============
+  var wpm = elapsedSec > 0 ? (sw / elapsedSec) * 60 : 0;
+  var fluencyScore;
+  if(wpm >= 90 && wpm <= 140) fluencyScore = 100;
+  else if(wpm >= 70 && wpm <= 160) fluencyScore = 90;
+  else if(wpm >= 50 && wpm <= 180) fluencyScore = 70;
+  else if(wpm >= 30 && wpm <= 200) fluencyScore = 50;
+  else fluencyScore = Math.max(20, Math.round(100 * Math.min(wpm, 140) / 140));
+
+  // ============ 3. 完整性 (25%) — 对数曲线 ============
+  var matchRatio = Math.min(sw, ew) / ew;
+  // log曲线: 50%匹配→70分, 80%→90分, 100%→100分
+  var completenessScore = Math.round(100 * (1 - Math.exp(-3 * matchRatio)));
+  completenessScore = Math.min(100, completenessScore);
+
+  // ============ 4. 语法准确度 (15%) — bigram/trigram on phoneme-normalized words ============
+  var pnExpWords = expWords.map(phonemeNorm);
+  var pnSpkWords = spkWords.map(phonemeNorm);
   var grammarScore = 50;
-  if(spkWords.length >= 2){
-    var expBigrams = {};
-    for(var ei2 = 0; ei2 < expWords.length - 1; ei2++) expBigrams[expWords[ei2] + '|' + expWords[ei2+1]] = true;
-    var spkBigrams = {};
-    for(var si2 = 0; si2 < spkWords.length - 1; si2++) spkBigrams[spkWords[si2] + '|' + spkWords[si2+1]] = true;
-    var bMatch = 0, bgCount = 0;
-    for(var bg in spkBigrams){ bgCount++; if(expBigrams[bg]) bMatch++; }
-    grammarScore = bgCount > 0 ? Math.round((bMatch / bgCount) * 100) : 100;
+  if(sw >= 2){
+    var expBi = {}, spkBi = {};
+    for(var i = 0; i < ew - 1; i++){ expBi[pnExpWords[i]+'|'+pnExpWords[i+1]] = true; }
+    for(var i = 0; i < sw - 1; i++){ spkBi[pnSpkWords[i]+'|'+pnSpkWords[i+1]] = true; }
+    var biMatch = 0, biTotal = 0;
+    for(var bk in spkBi){ biTotal++; if(expBi[bk]) biMatch++; }
+    var biScore = biTotal > 0 ? (biMatch / biTotal) : 0.5;
+
+    // If very short (<5 words), blend with word match ratio
+    if(ew < 5){
+      grammarScore = Math.round((biScore * 0.6 + matchRatio * 0.4) * 100);
+    } else {
+      // Longer: weighted bigram 70% + trigram 30%
+      var expTri = {}, spkTri = {};
+      if(ew >= 3) for(var i = 0; i < ew - 2; i++){ expTri[pnExpWords[i]+'|'+pnExpWords[i+1]+'|'+pnExpWords[i+2]] = true; }
+      if(sw >= 3) for(var i = 0; i < sw - 2; i++){ spkTri[pnSpkWords[i]+'|'+pnSpkWords[i+1]+'|'+pnSpkWords[i+2]] = true; }
+      var triMatch = 0, triTotal = 0;
+      for(var tk in spkTri){ triTotal++; if(expTri[tk]) triMatch++; }
+      var triScore = triTotal > 0 ? (triMatch / triTotal) : biScore;
+      grammarScore = Math.round((biScore * 0.7 + triScore * 0.3) * 100);
+    }
+  } else {
+    grammarScore = matchRatio > 0.8 ? 80 : Math.round(matchRatio * 60);
   }
 
+  // ============ 加权总分 ============
   var total = Math.round(pronScore * 0.35 + fluencyScore * 0.25 + completenessScore * 0.25 + grammarScore * 0.15);
+  total = Math.min(100, Math.max(0, total));
 
+  // 等级
   var grade, feedback;
-  if(total >= 90){ grade = '🏆 Excelente'; feedback = '发音清晰，流利度高，与原文高度匹配！SIELE B2+ 水平。'; }
-  else if(total >= 75){ grade = '👍 Muy Bien'; feedback = '整体表现不错，继续加强发音准确度和流畅度。'; }
-  else if(total >= 60){ grade = '📚 Bien'; feedback = '能完成朗读，建议多听原文录音模仿节奏。'; }
-  else if(total >= 40){ grade = '📝 Regular'; feedback = '多练习慢速跟读，注意重音和元音发音。'; }
-  else { grade = '💪 Sigue practicando'; feedback = '不要气馁！建议先听原文 2-3 遍再尝试朗读。'; }
+  if(total >= 95){ grade = '🏆 Excelente'; feedback = '发音精准，流利自然，几乎与原文一致！DELE C1 水平。'; }
+  else if(total >= 85){ grade = '🌟 Muy Bien'; feedback = '发音清晰准确，流利度好，少量词汇可改进。B2+ 水平。'; }
+  else if(total >= 70){ grade = '👍 Bien'; feedback = '整体朗读流畅，个别发音和重音可加强。建议再听 1 遍原文。'; }
+  else if(total >= 55){ grade = '📚 Regular'; feedback = '能完成朗读。多听慢速跟读，重点练习元音和重音音节。'; }
+  else if(total >= 35){ grade = '📝 En progreso'; feedback = '正在进步中！先听原文 2-3 遍，再逐段模仿朗读。'; }
+  else { grade = '💪 Sigue practicando'; feedback = '不要气馁！建议先逐词跟读，再尝试整段朗读。每个大师都曾是新学。'; }
+
+  // 单词详情: 标记正确/可改进的单词
+  var wordRows = '';
+  for(var p = 0; p < pairing.pairs.length; p++){
+    var pd = pairing.pairs[p];
+    var isGood = pd.dist <= 1;
+    var color = isGood ? '#10b981' : '#f59e0b';
+    var icon = isGood ? '✓' : '~';
+    wordRows += '<span style="display:inline-block;margin:2px 4px;padding:2px 6px;border-radius:4px;font-size:11px;background:' + color + '15;border:1px solid ' + color + '40">' + icon + ' <b>' + esc(pd.expWord) + '</b>' + (isGood ? '' : ' → ' + esc(pd.spkWord)) + '</span>';
+  }
+  for(var u = 0; u < pairing.unmatched.length; u++){
+    wordRows += '<span style="display:inline-block;margin:2px 4px;padding:2px 6px;border-radius:4px;font-size:11px;background:#ef444415;border:1px solid #ef444440;color:#dc2626">✗ <b>' + esc(pairing.unmatched[u]) + '</b></span>';
+  }
+  wordDetailHtml = '<div style="margin-top:10px;padding:8px;background:#fafafa;border-radius:6px;font-size:11px;line-height:2"><b>逐词分析：</b><br>' + wordRows + '</div>';
 
   return {
     total: total, grade: grade, feedback: feedback,
     dimensions: [
-      { label: '发音准确度', score: pronScore, weight: 35, color: '#7c3aed' },
-      { label: '流利度', score: fluencyScore, weight: 25, color: '#f97316' },
-      { label: '完整性', score: completenessScore, weight: 25, color: '#10b981' },
-      { label: '语法准确度', score: grammarScore, weight: 15, color: '#3b82f6' }
-    ]
+      { label: '发音准确度', score: pronScore, weight: 35, color: '#7c3aed', detail: pairing.pairs.length + '/' + ew + '词匹配' },
+      { label: '流利度', score: fluencyScore, weight: 25, color: '#f97316', detail: Math.round(wpm) + ' 词/分钟' },
+      { label: '完整性', score: completenessScore, weight: 25, color: '#10b981', detail: Math.round(matchRatio*100) + '% 覆盖' },
+      { label: '语法准确度', score: grammarScore, weight: 15, color: '#3b82f6', detail: sw + '词序列匹配' }
+    ],
+    wordDetail: wordDetailHtml
   };
 }
 
@@ -10671,13 +10779,22 @@ function renderScoreCard(lvKey, card, status, score){
     dimsHtml += '<div class="score-dim">' +
       '<span class="dim-label">' + dim.label + ' (' + dim.weight + '%)</span>' +
       '<div class="dim-bar"><div class="fill" style="width:' + dim.score + '%;background:' + dim.color + '"></div></div>' +
-      '<span class="dim-val">' + dim.score + '</span></div>';
+      '<span class="dim-val">' + dim.score + '</span></div>' +
+      '<div style="font-size:10px;color:var(--soft);margin:-2px 0 6px 80px">' + (dim.detail || '') + '</div>';
   }
 
   document.getElementById('refine-score-total-' + lvKey).textContent = score.total;
   document.getElementById('refine-score-grade-' + lvKey).innerHTML = score.grade + dimsHtml;
   document.getElementById('refine-score-feedback-' + lvKey).textContent = score.feedback;
   card.classList.add('show');
+  // 注入逐词分析
+  var wordPanel = document.getElementById('refine-score-word-' + lvKey);
+  if(!wordPanel){
+    wordPanel = document.createElement('div');
+    wordPanel.id = 'refine-score-word-' + lvKey;
+    card.appendChild(wordPanel);
+  }
+  wordPanel.innerHTML = score.wordDetail || '';
 }
 
 window.bindRefineSpeaks = function(){
