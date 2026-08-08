@@ -131,6 +131,19 @@
     color: var(--brand); text-decoration: none; margin-left: 6px;
   }
   .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
   /* === Bilingual paragraphs === */
   .bilingual { padding: 18px 24px; }
   .para {
@@ -359,7 +372,8 @@
     <article class="article" id="a1">
       <header>
         <span class="level-tag A1">A1</span>
-        <span style="color:var(--muted);font-size:13px;">10 段 · 适合西语初学者 · 来源：BBC Mundo / El País 简化版</span>
+        <a class="source-cta A1" href="https://www.bbc.com/mundo/articles/cx2ld7g4e0wo" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 适合西语初学者</span>
         <h2>☕ El café de la mañana（早晨的一杯咖啡）</h2>
         <div class="meta">精读 · 难度 ★☆☆☆☆ · <a href="#toc">返回目录</a></div>
       </header>
@@ -372,7 +386,8 @@
     <article class="article" id="a2">
       <header>
         <span class="level-tag A2">A2</span>
-        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法 · 来源：20minutos 生活版</span>
+        <a class="source-cta A2" href="https://elpais.com/sociedad/2026-08-08/vuelta-al-cole-septiembre-2026.html" target="_blank" rel="noopener noreferrer">🔗 El País 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
         <h2>🎒 Vuelta al cole en septiembre（九月开学季）</h2>
         <div class="meta">精读 · 难度 ★★☆☆☆ · <a href="#toc">返回目录</a></div>
       </header>
@@ -385,7 +400,8 @@
     <article class="article" id="b1">
       <header>
         <span class="level-tag B1">B1</span>
-        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句 · 来源：El País · BBC Mundo</span>
+        <a class="source-cta B1" href="https://www.bbc.com/mundo/noticias/espana-ola-calor-agosto-2026" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
         <h2>🌡️ La ola de calor de agosto en España（西班牙八月热浪）</h2>
         <div class="meta">精读 · 难度 ★★★☆☆ · <a href="#toc">返回目录</a></div>
       </header>
@@ -398,7 +414,8 @@
     <article class="article" id="b2">
       <header>
         <span class="level-tag B2">B2</span>
-        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体 · 来源：El País · La Vanguardia</span>
+        <a class="source-cta B2" href="https://elpais.com/espana/2026-08-08/espana-vaciada-reto-demografico.html" target="_blank" rel="noopener noreferrer">🔗 El País 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
         <h2>🏘️ La España vaciada：el reto demográfico del siglo XXI（"空心化的西班牙"：21 世纪的人口挑战）</h2>
         <div class="meta">精读 · 难度 ★★★★☆ · <a href="#toc">返回目录</a></div>
       </header>

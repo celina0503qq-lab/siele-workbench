@@ -133,6 +133,10 @@
 .refine-article-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
 .refine-level-tag{display:inline-block;color:#fff;font-weight:800;font-size:12px;padding:4px 10px;border-radius:6px;letter-spacing:.5px}
 .refine-article-head h3{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;margin:0;flex:1;min-width:200px}
+.refine-source-cta{display:inline-flex;align-items:center;gap:5px;color:#fff!important;font-weight:700;font-size:11.5px;padding:6px 12px;border-radius:7px;text-decoration:none!important;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.12);transition:transform .15s,box-shadow .15s}
+.refine-source-cta:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.refine-source-cta::after{content:"↗";font-size:13px;line-height:1}
+.refine-source-cta.disabled{background:var(--soft)!important;cursor:not-allowed;opacity:.5}
 .refine-meta{font-size:11px;color:var(--soft);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
 .refine-meta a{color:var(--tr);text-decoration:none;font-weight:600}
 .refine-meta a:hover{text-decoration:underline}
@@ -9943,6 +9947,7 @@ async function renderRefineBody(){
         <div class="refine-article-head">
           <span class="refine-level-tag" style="background:${color}">${lv}</span>
           <h3>${esc(REFINE_LEVEL_TITLES[lv] || a.title || lv)}</h3>
+          ${src.sourceUrl ? `<a class="refine-source-cta" href="${esc(src.sourceUrl)}" target="_blank" rel="noopener noreferrer" title="在 ${esc(src.source)} 查看原文" style="background:${color}">🔗 ${esc(src.source)} 原文</a>` : (src.source ? `<span class="refine-source-cta disabled" title="暂无原文链接">🔗 ${esc(src.source)}</span>` : '')}
         </div>
         <div class="refine-meta">
           ${src.source ? `<span class="src">来源：<a href="${esc(src.sourceUrl||'#')}" target="_blank" rel="noopener noreferrer">${esc(src.source)}</a></span>` : ''}
