@@ -17,6 +17,18 @@
 
 // 1) 2026-08-08 第 7 期 — 主题：夏季集中工时 / 开学季 / 八月热浪 / 人口空心化
 window.REFINE_PACKS = {
+  "2026-08-07": {
+    date: "2026-08-07",
+    weekday: "五",
+    issue: 6,
+    theme: "早餐文化 · 暑假收尾 · 夏季工时 · 人口挑战",
+    sources: [
+      { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/video/dia-mundial-del-cafe-los-espaoles-consumimos/cb38b8d1-2b31-4a40-b342-2d4a7679c378", topic: "Día mundial del café: los españoles consumimos" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/como-ha-cambiado-la-vuelta-al-cole/f43014f2-3dc6-4443-86ad-eaa47517d713", topic: "¿Cómo ha cambiado la vuelta al cole?" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/la-ola-de-calor-mantiene-en-aviso-a-gran-parte-de/a3b0b5d8-1dba-48b4-963f-5ee3ddc6cae0", topic: "La ola de calor mantiene en aviso a gran parte de España" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: el reto demográfico" }
+    ]
+  },
   "2026-08-08": {
     date: "2026-08-08",
     weekday: "六",
