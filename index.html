@@ -1215,70 +1215,53 @@ async function speak(text, btn, accent, rate){
   let played = false;
   // 口音优先级：显式传入 > 模块覆盖 > 全局设定 > 默认拉美(es-MX) /* FEAT-3 */
   var effectiveAccent = accent || (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent(currentPage||'dash') : null) || (ST && ST.globalAccent) || 'la';
-  // Latin American accent: es-MX (default); es-ES for Spain fallback
+  // Latin American accent: es-MX (default); es-ES for Spain
   const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
   const playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
 
-  // Tier 1: speechSynthesis (仅西班牙口音使用; 拉美口音始终走 Google TTS 获取正确 ll/y 发音)
-  if(effectiveAccent==='es' && window.speechSynthesis){
+  // Tier 1: speechSynthesis（双口音通用 — 跨设备/离线/无CORS限制）
+  if(window.speechSynthesis){
     try{
       window.speechSynthesis.cancel();
-      // Use cached Spanish voice if available
-      let esVoice = window.__esVoiceCache;
-      if(!esVoice){
-        // Warm up voices
-        let voices = window.speechSynthesis.getVoices();
-        if(voices.length === 0){
-          await new Promise(r => setTimeout(r, 200));
-          voices = window.speechSynthesis.getVoices();
-        }
-        // Find Spain Spanish voice
-        esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es-es'));
-        if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es') && !v.lang.toLowerCase().startsWith('es-mx'));
-        if(!esVoice) esVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('es'));
-        if(esVoice) window.__esVoiceCache = esVoice;  // cache for reuse
+      let voices = window.speechSynthesis.getVoices();
+      if(!voices.length){
+        await new Promise(r => setTimeout(r, 200));
+        voices = window.speechSynthesis.getVoices();
       }
-      if(esVoice){
-        const u = new SpeechSynthesisUtterance(text);
-        window.__currentUtterance = u;  // Keep alive to prevent GC in Chrome
-        if(esVoice) u.voice = esVoice;
-        u.lang = langCode;
-        u.rate = playRate;
-        u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; window.__currentUtterance = null; };
-        u.onerror = () => { if(btn) btn.classList.remove('playing'); window.__currentUtterance = null; };
-        window.speechSynthesis.speak(u);
-        // Fallback timer in case onend doesn't fire
-        setTimeout(() => { if(btn) btn.classList.remove('playing'); }, text.length * 120 + 2000);
-        return;
+      // 按口音选语音：拉美优先 es-MX/419/AR/CO/CL/PE/US；西班牙优先 es-ES
+      let esVoice = null;
+      if(effectiveAccent==='es'){
+        esVoice = voices.find(v => v.lang && /^es-es/i.test((v.lang||'').replace(/_/g,'-')));
+        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')));
+      } else {
+        esVoice = voices.find(v => v.lang && /^es-(mx|419|ar|co|cl|pe|us)/i.test((v.lang||'').replace(/_/g,'-')));
+        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')) && !/^es-es/i.test((v.lang||'').replace(/_/g,'-')));
+        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')));
       }
+      window.__esVoiceCache = esVoice || null;
+      const u = new SpeechSynthesisUtterance(text);
+      window.__currentUtterance = u;  // Keep alive to prevent GC in Chrome
+      if(esVoice) u.voice = esVoice;
+      u.lang = langCode;  // 强制目标语言：无匹配语音时由系统/在线TTS引擎按 lang 发音（拉美=es-MX）
+      u.rate = playRate;
+      u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; window.__currentUtterance = null; };
+      u.onerror = () => { if(btn) btn.classList.remove('playing'); window.__currentUtterance = null; };
+      window.speechSynthesis.speak(u);
+      // Fallback timer in case onend doesn't fire
+      setTimeout(() => { if(btn) btn.classList.remove('playing'); }, text.length * 120 + 2000);
+      return;
     }catch(e){ console.warn('speechSynthesis failed:', e); }
   }
 
-  // Tier 2: Google Translate TTS via Audio element
-  try{
-    if(_audioEl){ _audioEl.pause(); _audioEl = null; }
-    const q = encodeURIComponent(text.slice(0, 200));
-    const tlCode = effectiveAccent==='es'?'es':'es-MX'; /* FEAT-3 */
-    const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl='+tlCode+'&q=' + q;
-    _audioEl = new Audio(url);
-    _audioEl.crossOrigin = 'anonymous';
-    _audioEl.playbackRate = playRate;
-    _audioEl.onended = () => { if(btn) btn.classList.remove('playing'); };
-    _audioEl.onerror = () => {
-      if(btn) btn.classList.remove('playing');
-      // Tier 3: show message
-      showAudioBanner();
-    };
-    await _audioEl.play();
-    return;
-  }catch(e){
-    console.warn('Google TTS failed:', e);
-  }
-
-  // Tier 3
+  // Tier 2: 语音合成不可用时给出引导（Google TTS 免费端点已下线，不再尝试）
   if(btn) btn.classList.remove('playing');
-  showAudioBanner();
+  const b = document.getElementById('audioBanner');
+  if(b){
+    b.classList.add('show','err');
+    b.innerHTML = '<b>音频提示：</b>当前浏览器不支持语音合成。请使用 Chrome/Edge/Safari/Firefox 最新版，或允许麦克风权限后重试。';
+    setTimeout(() => b.classList.remove('show','err'), 5000);
+  }
 }
 
 function showAudioBanner(){
@@ -1290,9 +1273,17 @@ function showAudioBanner(){
   }
 }
 
-// Preload voices
+// Preload voices — 预热语音列表，按口音缓存最合适语音
 if(window.speechSynthesis){
-  window.speechSynthesis.onvoiceschanged = () => {};
+  window.speechSynthesis.onvoiceschanged = function(){
+    try{
+      var _vs = window.speechSynthesis.getVoices();
+      if(_vs.length){
+        window.__esVoiceCache = _vs.find(function(v){return v.lang && /^es-(mx|419|ar|co|cl|pe|us)/i.test((v.lang||'').replace(/_/g,'-'));})
+          || _vs.find(function(v){return v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-'));});
+      }
+    }catch(e){}
+  };
   window.speechSynthesis.getVoices();
 }
 
@@ -12667,7 +12658,19 @@ window.addEventListener('DOMContentLoaded', () => {
 /* Register service worker for offline / installable PWA (only over http(s), not file://) */
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('sw.js').catch(function(e){ console.warn('SW 注册失败:', e); });
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      // SW 更新时自动刷新页面，避免旧标签页停留在旧版本（解决 Edge/Chrome 显示旧版不完整内容）
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if(!nw) return;
+        nw.addEventListener('statechange', function(){
+          if(nw.state === 'activated' && navigator.serviceWorker.controller){
+            console.log('[sw] 新版本已激活，自动刷新');
+            window.location.reload();
+          }
+        });
+      });
+    }).catch(function(e){ console.warn('SW 注册失败:', e); });
   });
 }
 </script>
