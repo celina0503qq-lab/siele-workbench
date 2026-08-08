@@ -291,6 +291,13 @@
 .refine-dele-box{background:linear-gradient(90deg,#f3e5f5,#fff);border-left:4px solid #8e24aa;border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:12.5px;line-height:1.6;color:var(--ink)}
 .refine-dele-box b{color:#6a1b9a}
 .refine-dele-box code{background:#fff;padding:1px 5px;border-radius:3px;font-size:12px;border:1px solid #e7dccb;color:var(--tr);font-family:inherit}
+.refine-note-block{margin-top:10px;border-top:1px dashed #ddd;padding-top:8px}
+.refine-note-block .note-toggle{font-size:11px;color:#7c3aed;cursor:pointer;font-weight:600;user-select:none}
+.refine-note-block .note-toggle:hover{color:#5b21b6}
+.refine-note-block textarea{display:none;width:100%;min-height:56px;margin-top:6px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.refine-note-block textarea.show{display:block}
+.refine-note-block .note-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.refine-note-block .note-saved.show{display:inline-block}
 .refine-quiz-area{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
 .refine-quiz-area h4{margin:0 0 10px;font-size:14px;color:var(--tr);font-weight:800;display:flex;align-items:center;gap:6px}
 .refine-quiz-item{padding:12px 14px;background:#fff;border-radius:8px;border:1px solid var(--line);margin-bottom:10px}
@@ -959,6 +966,7 @@ function getDefaultState(){
     flashMode: 'flip',  // 'flip' 翻牌模式 | 'practice' 中西对应练习
     flashPraStats: {correct:0, wrong:0, streak:0, bestStreak:0},
     globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
+    accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
     vocabMastery: {}, grammarDone: {},
     quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all'},
     quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
@@ -973,13 +981,8 @@ function getDefaultState(){
     errorFilter: 'all',
     dailyTasks: {},
     checkIns: [],              // 签到日期数组 ['2026-07-31', ...]
-    dailyTodos: [              // 5个可自定义待办项
-      {id:1,text:'背诵20个单词',done:false},
-      {id:2,text:'复习语法要点',done:false},
-      {id:3,text:'完成跟读训练',done:false},
-      {id:4,text:'做一套测验题',done:false},
-      {id:5,text:'阅读一篇外刊',done:false}
-    ],
+    dailyTodos: {},              /* FEAT-2: date→task map, e.g. {"2026-08-08":[{text:'...',done:false},...]} */
+    dailyTodoDates: [],          /* FEAT-2: 有自定义待办的日期列表 */
     vocabReviewCount: {A1:{}, A2:{}, B1:{}, B2:{}, all:{}}, // 单词背诵次数 nested {level: {esWord: count}} (含 all 累计)
     flashLastPositionTs: {A1:0, A2:0, B1:0, B2:0, all:0},    // 各级别最后背诵时间戳(ms) — 云同步断点续背依据
     flashIdxByLevel: {A1:0, A2:0, B1:0, B2:0, all:0},         // 各级别当前 idx (per-level 断点续背核心, 修复 BUG: 切级不再丢位置)
@@ -1019,6 +1022,31 @@ function load(){
         var lv = s.flashLevel || 'all';
         if(cur[lv] !== undefined) cur[lv] = s.flashIdx|0;
         s.flashIdxByLevel = cur;
+      }
+    }catch(e){}
+    /* FEAT-2: 迁移旧 dailyTodos 数组格式 → 日期键值对格式 */
+    try{
+      if(s.dailyTodos && Array.isArray(s.dailyTodos) && s.dailyTodos.length>0){
+        var dt = s.lastStudy || todayStr();
+        s.dailyTodos = {};
+        s.dailyTodos[dt] = s.dailyTodos;
+        s.dailyTodoDates = [dt];
+      }
+    }catch(e){}
+    /* FEAT-4: 迁移旧 vocabReviewCount nested → 扁平化独立 key */
+    try{
+      var vrc = s.vocabReviewCount;
+      if(vrc && typeof vrc==='object' && vrc.A1){
+        var lvls = ['A1','A2','B1','B2','all'];
+        for(var li=0; li<lvls.length; li++){
+          var lv = lvls[li];
+          if(vrc[lv] && typeof vrc[lv]==='object'){
+            s['vocabReviewCount_'+lv] = Object.assign({}, vrc[lv]);
+          } else {
+            s['vocabReviewCount_'+lv] = {};
+          }
+        }
+        s.__vocabReviewCount_migrated = Date.now(); // 标记迁移时间, 旧 key 保留 7 天
       }
     }catch(e){}
     return s;
@@ -1071,38 +1099,37 @@ window.addEventListener('beforeunload', function(){ save(); saveBackup(); });
 setInterval(function(){ save(); }, 30000);
 function todayStr(){ return new Date().toISOString().slice(0,10); }
 
-// ===== 单词背诵计数 nested 结构 helper =====
-// 旧版是 flat {esWord: count}，v2 起改为 {A1:{},A2:{},B1:{},B2:{},all:{}}
-// 读取：getReviewCount(es, level?)；level 缺省取 ST.flashLevel，'all' 取累计
-// 写入：setReviewCount(es, level, n) 或 incReviewCount(es, level?)  自增
+// ===== 单词背诵计数 helper =====
+/* FEAT-4: 扁平化 vocabReviewCount — 从嵌套 {A1:{},A2:{}} 改为独立 key vocabReviewCount_A1, vocabReviewCount_A2...
+   读取：getReviewCount(es, level?) — level 缺省取 ST.flashLevel, 'all' 取累计
+   写入：incReviewCount(es, level?) 自增 */
 function getReviewCount(es, level){
-  if(!ST || !ST.vocabReviewCount) return 0;
+  if(!ST) return 0;
   var lvl = level || (ST.flashLevel||'all');
-  var bucket = ST.vocabReviewCount[lvl];
-  if(bucket && typeof bucket==='object' && typeof bucket[es]==='number') return bucket[es];
-  // 兼容旧 flat 格式（迁移未跑前的兜底）
-  if(typeof ST.vocabReviewCount[es]==='number') return ST.vocabReviewCount[es];
+  var flatKey = 'vocabReviewCount_'+lvl;
+  if(ST[flatKey] && typeof ST[flatKey]==='object' && typeof ST[flatKey][es]==='number') return ST[flatKey][es];
+  // 兼容旧 nested 格式（迁移未跑完前兜底）
+  if(ST.vocabReviewCount && ST.vocabReviewCount[lvl] && typeof ST.vocabReviewCount[lvl]==='object' && typeof ST.vocabReviewCount[lvl][es]==='number') return ST.vocabReviewCount[lvl][es];
+  // 兼容旧 flat 格式
+  if(ST.vocabReviewCount && typeof ST.vocabReviewCount[es]==='number') return ST.vocabReviewCount[es];
   return 0;
 }
-function setReviewCount(es, level, n){
-  if(!ST.vocabReviewCount) ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
-  var lvl = level || ST.flashLevel || 'all';
-  if(typeof ST.vocabReviewCount[lvl]!=='object' || !ST.vocabReviewCount[lvl]) ST.vocabReviewCount[lvl] = {};
-  ST.vocabReviewCount[lvl][es] = n|0;
-  // 同步累加 all（取 max 防回退）
-  if(lvl!=='all'){
-    if(typeof ST.vocabReviewCount.all!=='object' || !ST.vocabReviewCount.all) ST.vocabReviewCount.all = {};
-    ST.vocabReviewCount.all[es] = Math.max(ST.vocabReviewCount.all[es]||0, n|0);
-  }
-}
 function incReviewCount(es, level){
-  if(!ST.vocabReviewCount) ST.vocabReviewCount = {A1:{},A2:{},B1:{},B2:{},all:{}};
+  // FEAT-4: 扁平化写入
+  if(!ST) return;
   var lvl = level || ST.flashLevel || 'all';
-  if(typeof ST.vocabReviewCount[lvl]!=='object' || !ST.vocabReviewCount[lvl]) ST.vocabReviewCount[lvl] = {};
-  ST.vocabReviewCount[lvl][es] = (ST.vocabReviewCount[lvl][es]||0) + 1;
-  if(lvl!=='all'){
-    if(typeof ST.vocabReviewCount.all!=='object' || !ST.vocabReviewCount.all) ST.vocabReviewCount.all = {};
-    ST.vocabReviewCount.all[es] = (ST.vocabReviewCount.all[es]||0) + 1;
+  var keys = [lvl]; if(lvl!=='all') keys.push('all');
+  for(var ki=0; ki<keys.length; ki++){
+    var flatKey = 'vocabReviewCount_'+keys[ki];
+    if(!ST[flatKey] || typeof ST[flatKey]!=='object') ST[flatKey] = {};
+    ST[flatKey][es] = (ST[flatKey][es]||0) + 1;
+  }
+  // 兼容写入旧 nested 格式 7 天内
+  if(ST.vocabReviewCount && ST.__vocabReviewCount_migrated && (Date.now()-ST.__vocabReviewCount_migrated < 7*86400000)){
+    keys.forEach(function(k){
+      if(!ST.vocabReviewCount[k] || typeof ST.vocabReviewCount[k]!=='object') ST.vocabReviewCount[k] = {};
+      ST.vocabReviewCount[k][es] = (ST.vocabReviewCount[k][es]||0) + 1;
+    });
   }
   // 写入位置时间戳（云同步断点续背依据）
   if(!ST.flashLastPositionTs || typeof ST.flashLastPositionTs!=='object') ST.flashLastPositionTs = {A1:0,A2:0,B1:0,B2:0,all:0};
@@ -1170,8 +1197,8 @@ async function speak(text, btn, accent, rate){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
   let played = false;
-  // 口音优先级：显式传入 > 全局设定 ST.globalAccent > 默认拉美(es-MX)
-  var effectiveAccent = accent || (ST && ST.globalAccent) || 'la';
+  // 口音优先级：显式传入 > 模块覆盖 > 全局设定 > 默认拉美(es-MX) /* FEAT-3 */
+  var effectiveAccent = accent || (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent(currentPage||'dash') : null) || (ST && ST.globalAccent) || 'la';
   // Latin American accent: es-MX (default); es-ES for Spain fallback
   const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
@@ -1219,7 +1246,8 @@ async function speak(text, btn, accent, rate){
   try{
     if(_audioEl){ _audioEl.pause(); _audioEl = null; }
     const q = encodeURIComponent(text.slice(0, 200));
-    const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl=es-MX&q=' + q;
+    const tlCode = effectiveAccent==='es'?'es':'es-MX'; /* FEAT-3 */
+    const url = 'https://translate.google.com/translate_tts?client=tw-ob&ie=UTF-8&tl='+tlCode+'&q=' + q;
     _audioEl = new Audio(url);
     _audioEl.crossOrigin = 'anonymous';
     _audioEl.playbackRate = playRate;
@@ -1273,6 +1301,28 @@ function setGlobalAccent(acc){
   speak(acc==='es' ? 'Hola, ¿cómo estás?' : 'Hola, ¿qué onda?', null, acc);
   if(currentPage==='dash'||currentPage==='flash')renderMain();
 }
+/* FEAT-3: 模块级口音覆盖 — ST.accentOverride = {flash:'la', vocab:'es', ...} */
+function setModuleAccent(module, acc){
+  if(!ST.accentOverride || typeof ST.accentOverride!=='object') ST.accentOverride = {};
+  ST.accentOverride[module] = acc;
+  save();
+  // 播放示例确认
+  speak(acc==='es' ? 'Vale, con acento de España.' : 'Bueno, con acento latino.', null, acc);
+  renderMain();
+}
+function getEffectiveAccent(module){
+  if(!ST.accentOverride || typeof ST.accentOverride!=='object') ST.accentOverride = {};
+  if(ST.accentOverride[module]) return ST.accentOverride[module];
+  return ST.globalAccent || 'la';
+}
+/* FEAT-3: 模块口音切换器 HTML 片段 — 返回小型 🇲🇽/🇪🇸 按钮组 */
+function renderModuleAccentToggle(module){
+  var acc = getEffectiveAccent(module);
+  return '<span style="display:inline-flex;gap:2px;margin-left:8px;font-size:10px;vertical-align:middle">'+
+    '<button class="chip '+(acc==='la'?'on':'')+'" style="padding:2px 7px;font-size:10px;border-radius:10px" onclick="setModuleAccent(\''+module+'\',\'la\');event.stopPropagation()" title="拉美口音">🇲🇽</button>'+
+    '<button class="chip '+(acc==='es'?'on':'')+'" style="padding:2px 7px;font-size:10px;border-radius:10px" onclick="setModuleAccent(\''+module+'\',\'es\');event.stopPropagation()" title="西班牙口音">🇪🇸</button>'+
+    '</span>';
+}
 const NAV = [
   {s:'main', items:[
     {id:'dash', icon:'🏠', label:'仪表盘'},
@@ -1290,12 +1340,11 @@ const NAV = [
     {id:'speaking', icon:'🗣', label:'口语话题'},
   ]},
   {s:'备考', items:[
-    {id:'exam', icon:'📋', label:'考试结构'},
     {id:'planner', icon:'📅', label:'学习计划'},
     {id:'errors', icon:'🚨', label:'错题集'},
     {id:'reading', icon:'📰', label:'外刊阅读'},
     {id:'refine', icon:'📚', label:'外刊精炼'},
-  ]},
+  ]}, /* FEAT-1: 考试结构移除独立页面,并入仪表盘 */
   {s:'DELE专项', items:[
     {id:'deleA1', icon:'A1', label:'DELE A1', adminOnly:true},
     {id:'deleA2', icon:'A2', label:'DELE A2', adminOnly:true},
@@ -1331,6 +1380,15 @@ function renderNav(){
 }
 
 function go(page){
+  /* FEAT-1: 考试结构并入仪表盘 — exam 重定向到 dash 并滚动到考试结构卡片 */
+  if(page==='exam'){
+    currentPage='dash'; renderNav(); renderMain();
+    setTimeout(function(){
+      var el=document.getElementById('dashExamCard');
+      if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+    },150);
+    return;
+  }
   // 管理员独占页面: 非管理员被踢回仪表盘 + 提示
   // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处直接读 localStorage
   let isAdmin = false;
@@ -1464,9 +1522,11 @@ function renderStreakBanner(){
   // P0-4: 仪表盘 streak 横幅 (用户拍板 2026-08-06) — 用 inline SVG 替代 emoji
   const streak = (typeof ST.streak === 'number' && ST.streak > 0) ? ST.streak : 0;
   const today = todayStr();
+  /* FEAT-2: 从日期键值对取今日待办 */
+  const todaysTodos = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[today] || []) : [];
   const isCheckedToday = ST.lastStudy === today;
-  const totalTodos = (ST.dailyTodos || []).length;
-  const todoRemain = (ST.dailyTodos || []).filter(t=>!t.done).length;
+  const totalTodos = (todaysTodos||[]).length;
+  const todoRemain = (todaysTodos||[]).filter(t=>!t.done).length;
   const todosTxt = totalTodos > 0 ? `${totalTodos - todoRemain}/${totalTodos}` : '0/0';
   const accent = streak >= 7 ? 'var(--teal)' : streak >= 3 ? 'var(--am)' : 'var(--tr)';
   const msg = streak >= 30 ? '月级坚持 · 节奏稳定'
@@ -1682,7 +1742,8 @@ function renderDash(){
     const ds = `${yy}-${String(mm+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isChecked = checked.has(ds);
     const isToday = d===todayDay;
-    h += `<div class="day-cell${isChecked?' checked':''}${isToday?' today':''}">${d}</div>`;
+    /* FEAT-2: 签到日期方块联动待办 — 点击任意日期打开待办 Modal */
+    h += `<div class="day-cell${isChecked?' checked':''}${isToday?' today':''}" style="cursor:pointer" onclick="openDayTodoModal('${ds}')" title="点击设置 ${ds} 待办">${d}</div>`;
   }
   h += `</div>
     <div style="text-align:center;margin-top:10px">
@@ -1691,8 +1752,9 @@ function renderDash(){
     </div>
   </div>`;
 
-  // Check if all daily todos done → show reward
-  if(ST.dailyTodos && ST.dailyTodos.length>0 && ST.dailyTodos.every(t=>t.done)){
+  // Check if all daily todos done → show reward /* FEAT-2: date-keyed format */
+  var _todayTodos = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[todayStr()] || []) : [];
+  if(_todayTodos.length>0 && _todayTodos.every(function(t){return t.done;})){
     h += `<div class="reward-card" style="margin-top:14px;padding:16px;border-radius:14px;text-align:center">
       <div style="font-size:48px">🏆</div>
       <div style="font-size:20px;font-weight:800;margin:6px 0;color:var(--tr)">¡Excelente! 今日任务全部完成！</div>
@@ -1701,25 +1763,158 @@ function renderDash(){
     h += `<script>triggerConfetti();setTimeout(triggerConfetti,600);<\/script>`;
   }
 
+  /* FEAT-1: 考试结构卡片并入仪表盘 (第11张快捷卡片) */
+  h += `<div class="card" id="dashExamCard" style="margin-top:14px;border-left:4px solid var(--tr)">
+    <h3><span class="ic">📋</span>考试结构 · DELE & SIELE</h3>
+    <div class="g g2" style="margin-top:8px">
+      <div>
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--tr)">DELE 考试</h4>
+        <table class="tbl" style="font-size:11.5px"><tbody>
+          <tr><td style="font-weight:700">全称</td><td>Diplomas de Español como Lengua Extranjera</td></tr>
+          <tr><td style="font-weight:700">等级</td><td>A1, A2, B1, B2, C1, C2（共6级）</td></tr>
+          <tr><td style="font-weight:700">有效期</td><td><b style="color:var(--ok)">终身有效</b></td></tr>
+          <tr><td style="font-weight:700">形式</td><td>纸笔考试 + 口语面试</td></tr>
+          <tr><td style="font-weight:700">满分</td><td>100分，及格60分 (APTO)</td></tr>
+          <tr><td style="font-weight:700">评分</td><td>读写组(P1+P3)和听说组(P2+P4)各50分,每组须≥30分</td></tr>
+        </tbody></table>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--teal)">SIELE 考试</h4>
+        <table class="tbl" style="font-size:11.5px"><tbody>
+          <tr><td style="font-weight:700">全称</td><td>Servicio Internacional de Evaluación de la Lengua Española</td></tr>
+          <tr><td style="font-weight:700">等级</td><td>对应CEFR A1-C1（不设C2）</td></tr>
+          <tr><td style="font-weight:700">有效期</td><td><b style="color:var(--warn)">5年</b></td></tr>
+          <tr><td style="font-weight:700">形式</td><td>全机考 (CBT)，口语为录音</td></tr>
+          <tr><td style="font-weight:700">满分</td><td>1000分（S1全球考试），各模块0-250分</td></tr>
+          <tr><td style="font-weight:700">出成绩</td><td>约3周内</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <h4 style="font-size:12px;font-weight:700;margin-bottom:6px">DELE 四项测试</h4>
+      <table class="tbl" style="font-size:11px">
+        <thead><tr><th>测试</th><th>名称</th><th>内容</th><th>时长</th><th>分值</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tm td">P1</span></td><td>Comprensión de lectura</td><td>阅读理解</td><td>60-70分钟</td><td>25分</td></tr>
+          <tr><td><span class="tm td">P2</span></td><td>Comprensión auditiva</td><td>听力理解</td><td>40-50分钟</td><td>25分</td></tr>
+          <tr><td><span class="tm ts">P3</span></td><td>Expresión escrita</td><td>书面表达</td><td>60-75分钟</td><td>25分</td></tr>
+          <tr><td><span class="tm ts">P4</span></td><td>Expresión oral</td><td>口语表达</td><td>15-20分钟</td><td>25分</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:8px"><b>APTO（及格）：</b>总分 ≥ 60/100，且读写组 ≥ 30/50，听说组 ≥ 30/50。两组须同时满足。</div>
+  </div>`;
+
   return h;
 }
 
-// ===== NEW: 5个可自定义每日待办 =====
+// ===== FEAT-2: 日期联动待办 =====
+function getTodaysTodos(){
+  var today = todayStr();
+  if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+  if(!ST.dailyTodos[today]){
+    ST.dailyTodos[today] = [
+      {text:'复习今日所学单词',done:false},
+      {text:'完成今日跟读训练',done:false},
+      {text:'整理今日错题',done:false}
+    ];
+    if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+    if(ST.dailyTodoDates.indexOf(today)<0) ST.dailyTodoDates.push(today);
+    save();
+  }
+  return ST.dailyTodos[today];
+}
+function getDayTodos(dateStr){
+  if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+  return ST.dailyTodos[dateStr] || [];
+}
 function renderDailyTodos(){
-  if(!ST.dailyTodos||ST.dailyTodos.length===0) return '<li class="empty">暂无待办项</li>';
-  return ST.dailyTodos.map((t,i)=>`<li class="${t.done?'done':''}">
-    <input type="checkbox" ${t.done?'checked':''} onchange="toggleDailyTodo(${i})">
-    <span class="tx" contenteditable="true" onblur="editDailyTodo(${i},this.textContent)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${esc(t.text)}</span>
-    ${t.done?'<span style="font-size:12px;color:var(--ok);margin-left:6px">✓</span>':''}
-  </li>`).join('');
+  var todos = getTodaysTodos();
+  if(!todos||todos.length===0) return '<li class="empty">暂无待办项</li>';
+  var today = todayStr();
+  return todos.map(function(t,i){
+    return '<li class="'+(t.done?'done':'')+'">'+
+      '<input type="checkbox" '+(t.done?'checked':'')+' onchange="toggleDailyTodo('+i+')">'+
+      '<span class="tx" contenteditable="true" onblur="editDailyTodo('+i+',this.textContent)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur()}">'+esc(t.text)+'</span>'+
+      (t.done?'<span style="font-size:12px;color:var(--ok);margin-left:6px">✓</span>':'')+
+      '<button class="del" onclick="delDailyTodo('+i+')" title="删除">✕</button></li>';
+  }).join('');
 }
 function toggleDailyTodo(i){
-  ST.dailyTodos[i].done=!ST.dailyTodos[i].done;
+  var todos = getTodaysTodos();
+  if(!todos[i]) return;
+  todos[i].done=!todos[i].done;
   saveBackup();save();
-  if(ST.dailyTodos.every(t=>t.done)){ triggerConfetti();setTimeout(triggerConfetti,600);setTimeout(triggerConfetti,1200); }
+  if(todos.every(function(t){return t.done;})){ triggerConfetti();setTimeout(triggerConfetti,600);setTimeout(triggerConfetti,1200); }
   if(typeof renderMain==='function')renderMain();
 }
-function editDailyTodo(i,text){ if(text&&text.trim()){ ST.dailyTodos[i].text=text.trim(); save(); } }
+function editDailyTodo(i,text){
+  var todos = getTodaysTodos();
+  if(text&&text.trim()&&todos[i]){ todos[i].text=text.trim(); save(); }
+}
+function delDailyTodo(i){
+  var todos = getTodaysTodos();
+  todos.splice(i,1);
+  save();
+  if(typeof renderMain==='function')renderMain();
+}
+/* FEAT-2: 签到日历点击 → 待办 Modal */
+function openDayTodoModal(dateStr, d){
+  var todos = getDayTodos(dateStr);
+  var overlay = document.createElement('div');
+  overlay.id='dayTodoOverlay';
+  overlay.className='dictation-overlay';
+  overlay.innerHTML = '<div class="dictation-modal" style="max-width:480px">'+
+    '<h3>📅 '+dateStr+' 待办事项</h3>'+
+    '<div class="dm-hint">设置这一天的学习任务</div>'+
+    '<div id="dayTodoList" style="max-height:260px;overflow-y:auto;margin:10px 0">'+
+      (todos.length ? todos.map(function(t,i){
+        return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0e6d2">'+
+          '<span style="flex:1;font-size:13px">'+esc(t.text)+'</span>'+
+          '<button class="btn sm ol" style="font-size:10px" onclick="removeDayTodoItem(\''+dateStr+'\','+i+')">✕</button></div>';
+      }).join('') : '<div style="color:var(--soft);text-align:center;padding:14px">暂无待办，添加一个吧</div>')+
+    '</div>'+
+    '<div class="ti" style="margin-top:8px">'+
+      '<input id="dayTodoInput" placeholder="添加待办，如：复习ser/estar变位" onkeydown="if(event.key===\'Enter\'){addDayTodoItem(\''+dateStr+'\')}">'+
+      '<button class="btn sm" onclick="addDayTodoItem(\''+dateStr+'\')">添加</button></div>'+
+    '<div class="dm-actions" style="margin-top:12px">'+
+      '<button class="btn sm ol" onclick="document.getElementById(\'dayTodoOverlay\').remove()">关闭</button>'+
+      (dateStr===todayStr()?'<button class="btn sm" onclick="document.getElementById(\'dayTodoOverlay\').remove();renderMain()">刷新仪表盘</button>':'')+
+    '</div></div>';
+  document.body.appendChild(overlay);
+  setTimeout(function(){ var inp=document.getElementById('dayTodoInput'); if(inp) inp.focus(); },200);
+}
+function addDayTodoItem(dateStr){
+  var inp = document.getElementById('dayTodoInput');
+  if(!inp||!inp.value.trim()) return;
+  if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+  if(!ST.dailyTodos[dateStr]) ST.dailyTodos[dateStr] = [];
+  ST.dailyTodos[dateStr].push({text:inp.value.trim(),done:false});
+  if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+  if(ST.dailyTodoDates.indexOf(dateStr)<0) ST.dailyTodoDates.push(dateStr);
+  save();
+  inp.value = '';
+  // Refresh modal list
+  var listEl = document.getElementById('dayTodoList');
+  if(listEl){
+    var todos = ST.dailyTodos[dateStr];
+    listEl.innerHTML = todos.length ? todos.map(function(t,i){
+      return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0e6d2">'+
+        '<span style="flex:1;font-size:13px">'+esc(t.text)+'</span>'+
+        '<button class="btn sm ol" style="font-size:10px" onclick="removeDayTodoItem(\''+dateStr+'\','+i+')">✕</button></div>';
+    }).join('') : '<div style="color:var(--soft);text-align:center;padding:14px">暂无待办，添加一个吧</div>';
+  }
+  inp.focus();
+}
+function removeDayTodoItem(dateStr, i){
+  if(!ST.dailyTodos || !ST.dailyTodos[dateStr]) return;
+  ST.dailyTodos[dateStr].splice(i,1);
+  save();
+  // Re-render modal
+  var overlay = document.getElementById('dayTodoOverlay');
+  if(overlay) overlay.remove();
+  openDayTodoModal(dateStr);
+}
 function triggerConfetti(){
   const colors=['#C0392B','#E08E0B','#4CAF50','#2196F3','#9C27B0','#FF9800','#E91E63','#00BCD4'];
   for(let i=0;i<80;i++){
@@ -2062,7 +2257,7 @@ function renderFlash(){
   const m = ST.flashMastery[v.es] || 0;
   const errors=getDictationErrors();
 
-  let h = `<div class="tb"><div><h2>单词卡片</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
+  let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${ST.flashIdx+1} / ${pool.length}</div>
   </div>`;
   h += renderFlashGarden();
@@ -2086,10 +2281,10 @@ function renderFlash(){
   });
   h += `</div>`;
 
-  // Accent toggle (per-module, synced with global)
+  // Accent toggle (per-module, synced with global) /* FEAT-3: 模块口音切换器 */
   h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">口音：</span>`;
-  h += `<button class="chip ${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" onclick="setGlobalAccent('la')">🌎 拉美</button>`;
-  h += `<button class="chip ${ST.globalAccent==='es'?'on':''}" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button>`;
+  h += `<button class="chip ${getEffectiveAccent('flash')==='la'?'on':''}" onclick="setModuleAccent('flash','la')">🌎 拉美</button>`;
+  h += `<button class="chip ${getEffectiveAccent('flash')==='es'?'on':''}" onclick="setModuleAccent('flash','es')">🇪🇸 西班牙</button>`;
   h += `</div>`;
 
   // Progress bar
@@ -2110,13 +2305,13 @@ function renderFlash(){
           ${reviewCount>0?`<span class="review-badge">已背${reviewCount}次</span>`:''}
           <div class="word">${esc(v.es)}</div>
           <div class="pos">${v.pos} · ${v.t}</div>
-          <div style="margin-top:10px">${spkBtnHTML(v.es,'la')}</div>
+          <div style="margin-top:10px">${spkBtnHTML(v.es,getEffectiveAccent('flash'))}</div>
           <div class="hint">点击翻转查看释义 →</div>
         </div>
         <div class="ff bk">
           <div style="font-size:18px;font-weight:700;margin-bottom:4px">${esc(v.zh)}</div>
           <div class="ex" style="margin-top:6px;font-size:13px">${esc(v.ex)}</div>
-          <div style="margin-top:8px">${spkBtnHTML(v.ex,'la')}</div>
+          <div style="margin-top:8px">${spkBtnHTML(v.ex,getEffectiveAccent('flash'))}</div>
           <div class="hint">点击翻回 ←</div>
         </div>
       </div>
@@ -2399,7 +2594,7 @@ function resetPraStats(){
 
 // ===== PAGE: VOCAB LIBRARY =====
 function renderVocab(){
-  let h = `<div class="tb"><div><h2>词汇库</h2><div class="d">共 ${VDATA.length} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
+  let h = `<div class="tb"><div><h2>词汇库${renderModuleAccentToggle('vocab')}</h2><div class="d">共 ${VDATA.length} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
   h += renderModuleCheckinBar('vocab','词汇学习','🃏');
 
   // Verb usage section
@@ -2534,7 +2729,7 @@ function setMastery(word, level){
 // ===== PAGE: GRAMMAR LIBRARY =====
 function renderGrammar(){
   if(!ST.grammarDone)ST.grammarDone={};
-  let h = `<div class="tb"><div><h2>语法库</h2><div class="d">共 ${GFLAT.length} 条语法 · 点击展开查看详情和例句 · 勾选标记已学 · 有练习题的语法点可点击练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>语法库${renderModuleAccentToggle('grammar')}</h2><div class="d">共 ${GFLAT.length} 条语法 · 点击展开查看详情和例句 · 勾选标记已学 · 有练习题的语法点可点击练习</div></div></div>`;
   h += renderModuleCheckinBar('grammar','语法学习','📐');
 
   // Grammar practice box (if active)
@@ -2660,7 +2855,7 @@ function renderShadow(){
   // 收集主题集合
   const cats = [...new Set(SHADOW_SENTENCES.map(s => s.cat))];
 
-  let h = `<div class="tb"><div><h2>跟读训练</h2><div class="d">听原句 → 跟读录音 → AI评分对比 · 需要麦克风权限</div></div></div>`;
+  let h = `<div class="tb"><div><h2>跟读训练${renderModuleAccentToggle('shadow')}</h2><div class="d">听原句 → 跟读录音 → AI评分对比 · 需要麦克风权限</div></div></div>`;
 
   // P2-2: 筛选器
   h += `<div class="sb" style="margin-bottom:8px">
@@ -3124,7 +3319,7 @@ WRITING_TASKS.push(...WRITING_EXTRA);
 
 
 function renderWriting(){
-  let h = `<div class="tb"><div><h2>写作练习</h2><div class="d">${WRITING_TASKS.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${WRITING_TASKS.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
   h += `<div class="rg">`;
   WRITING_TASKS.forEach((t,i) => {
@@ -3425,7 +3620,7 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
 
 
 function renderSpeaking(){
-  let h = `<div class="tb"><div><h2>口语话题</h2><div class="d">${SPEAKING_TOPICS.length}个口语话题 · 点击发音听题目 · 录音练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>口语话题${renderModuleAccentToggle('speaking')}</h2><div class="d">${SPEAKING_TOPICS.length}个口语话题 · 点击发音听题目 · 录音练习</div></div></div>`;
   h += renderModuleCheckinBar('speaking','口语训练','🗣');
   h += `<div class="rg">`;
   SPEAKING_TOPICS.forEach((t,i) => {
@@ -3456,6 +3651,8 @@ function renderSpeaking(){
           <div><div style="font-size:12px;color:var(--soft)">识别结果</div><div id="speakRecog" style="font-size:13px;font-family:var(--serif)"></div></div>
         </div>
         <div class="note" id="speakFeedback" style="margin-top:8px"></div>
+        /* FEAT-5: 范文生成区 */
+        <div id="speakModelEssay" style="display:none;margin-top:10px"></div>
       </div>
     </div>
   </div>`;
@@ -3687,6 +3884,91 @@ function scoreSpeaking(text){
   }
   // P2-5: 完成后鼓励文案
   showEncouragement('speaking', score);
+
+  /* FEAT-5: 口语范文生成 — 评分完成后生成模板范文 */
+  var essay = generateModelEssay(topic, text, kw);
+  var essayEl = document.getElementById('speakModelEssay');
+  if(essayEl && essay){
+    essayEl.innerHTML = renderModelEssayHTML(essay, text);
+    essayEl.classList.add('show');
+  }
+}
+/* FEAT-5: 口语范文生成器 — 纯客户端模板 + 关键词填充, 按 A1/B1/C1 分级复杂度 */
+function generateModelEssay(topic, userText, keywords){
+  if(!topic) return null;
+  var lvl = topic.lvl || 'B1';
+  var title = topic.title || 'el tema';
+  var kwList = (keywords && keywords.must) ? keywords.must.slice(0, 5) : [];
+  var goodKw = (keywords && keywords.good) ? keywords.good.slice(0, 3) : [];
+
+  // 从用户回答中提取可能的关键词
+  var userWords = (userText||'').toLowerCase().replace(/[¿?¡!.,;:()]/g,'').split(/\s+/).filter(function(w){return w.length>3;});
+  var userKeywords = userWords.slice(0, 4);
+
+  // 按等级选择不同模板复杂度
+  var introduction, body, conclusion;
+  if(lvl==='A1'){
+    introduction = 'Hola, me gustaría hablar sobre ' + esc(title) + '. Es un tema que me interesa mucho.';
+    body = 'Hay varios aspectos importantes. Primero, creo que ' + (userKeywords[0]||'es muy interesante') + ' es importante. También, ' + (userKeywords[1]||'me gusta mucho') + ' porque es bueno para la gente. Además, ' + (userKeywords[2]||'siempre pienso en esto') + ' cuando hablo con mis amigos.';
+    conclusion = 'En resumen, ' + esc(title) + ' es muy importante para mí.';
+  } else if(lvl==='B1'){
+    introduction = 'Me gustaría expresar mi opinión sobre ' + esc(title) + ', un tema que considero bastante relevante en la sociedad actual.';
+    body = 'En primer lugar, es importante señalar que ' + (userKeywords[0]||kwList[0]||'este fenómeno') + ' tiene un impacto significativo. ' +
+      'Por un lado, podemos observar que ' + (userKeywords[1]||kwList[1]||'muchas personas') + ' se benefician de esta situación. ' +
+      'Por otro lado, existen ciertos desafíos relacionados con ' + (userKeywords[2]||kwList[2]||'este aspecto') + ' que no podemos ignorar. ' +
+      'Además, considero fundamental mencionar que la experiencia personal nos enseña que ' + (userKeywords[3]||kwList[3]||'hay que tener en cuenta todos los factores') + '.';
+    conclusion = 'En conclusión, creo que ' + esc(title) + ' seguirá siendo un tema de debate en el futuro. Es necesario que tomemos medidas para mejorar esta situación.';
+  } else {
+    // B2/C1
+    introduction = 'Me gustaría abordar el tema de ' + esc(title) + ', una cuestión que, a mi juicio, merece una reflexión profunda dado su impacto en múltiples ámbitos de nuestra sociedad.';
+    body = 'En primer lugar, cabe destacar que ' + (userKeywords[0]||kwList[0]||'este fenómeno') + ' ha experimentado cambios notables en las últimas décadas. ' +
+      'No obstante, es imprescindible considerar que ' + (userKeywords[1]||kwList[1]||'existen múltiples perspectivas') + ' al respecto. ' +
+      'Por una parte, los defensores argumentan que ' + (userKeywords[2]||kwList[2]||'los beneficios son evidentes') + ', mientras que, por otra, los críticos señalan que ' +
+      (userKeywords[3]||kwList[3]||'hay riesgos que no se pueden subestimar') + '. ' +
+      'Aunque es cierto que existen desafíos, considero que ' + (goodKw[0]||'con las medidas adecuadas') + ' se pueden obtener resultados positivos. ' +
+      'Además, la evidencia sugiere que ' + (goodKw[1]||'el contexto es determinante') + ' para evaluar adecuadamente esta cuestión.';
+    conclusion = 'En definitiva, si bien ' + esc(title) + ' presenta tanto oportunidades como desafíos, creo firmemente que una aproximación equilibrada y basada en evidencia nos permitirá afrontar este reto con éxito. Es fundamental seguir reflexionando y actuando al respecto.';
+  }
+
+  return {
+    introduction: introduction,
+    body: body,
+    conclusion: conclusion,
+    full: introduction + '\n\n' + body + '\n\n' + conclusion,
+    level: lvl,
+    dimensions: {
+      coherencia: lvl==='A1'?'Organización básica con conectores simples (y, también, porque).':'Uso adecuado de conectores (por una parte, además, en conclusión).',
+      fluidez: lvl==='A1'?'Oraciones cortas y claras, ritmo pausado.':'Oraciones compuestas con ritmo natural y transiciones suaves.',
+      correccion: lvl==='A1'?'Presente de indicativo, concordancia básica de género y número.':'Uso correcto de subjuntivo, condicional y concordancia avanzada.',
+      alcance: lvl==='A1'?'Vocabulario básico cotidiano, léxico limitado.':'Vocabulario variado con sinónimos, expresiones idiomáticas y tecnicismos.'
+    }
+  };
+}
+/* FEAT-5: 渲染范文 UI — 左:用户识别文字 | 右:范文 textarea */
+function renderModelEssayHTML(essay, userText){
+  var dims = essay.dimensions;
+  return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px">'+
+    '<div>'+
+      '<h4 style="font-size:13px;font-weight:700;color:var(--tr);margin-bottom:6px">📝 你的回答 (识别文字)</h4>'+
+      '<div style="background:#faf5ec;border:1px solid var(--line);border-radius:8px;padding:10px;min-height:80px;font-size:12.5px;line-height:1.6;white-space:pre-wrap;max-height:300px;overflow-y:auto">'+esc(userText||'(无识别文字)')+'</div>'+
+    '</div>'+
+    '<div>'+
+      '<h4 style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px">✨ 范文参考 ('+essay.level+' 级别)</h4>'+
+      '<textarea style="width:100%;height:280px;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12.5px;line-height:1.65;resize:vertical;background:var(--paper);font-family:var(--serif)" readonly>'+esc(essay.full)+'</textarea>'+
+    '</div>'+
+  '</div>'+
+  '<div style="margin-top:10px;padding:10px 14px;background:linear-gradient(90deg,#f0f7f4,#fff);border-radius:8px;font-size:11px;line-height:1.5">'+
+    '<b style="color:var(--teal)">📊 DELE 评分维度参考：</b>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">'+
+      '<div><b>Coherencia：</b>'+esc(dims.coherencia)+'</div>'+
+      '<div><b>Fluidez：</b>'+esc(dims.fluidez)+'</div>'+
+      '<div><b>Corrección：</b>'+esc(dims.correccion)+'</div>'+
+      '<div><b>Alcance：</b>'+esc(dims.alcance)+'</div>'+
+    '</div>'+
+  '</div>'+
+  '<div style="margin-top:6px;text-align:right">'+
+    '<button class="btn sm ol" onclick="speak(this.getAttribute(\'data-text\'),this)" data-text="'+esc(essay.full.replace(/"/g,'&quot;').replace(/\n/g,' '))+'">🔊 朗读范文</button>'+
+  '</div>';
 }
 
 // ===== SIELE SPEAKING TEMPLATES (口语模板展示) =====
@@ -4933,7 +5215,7 @@ function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=SIELE_ORAL_BANK[
 // ===== PAGE: SIELE SPECIAL =====
 function renderSiele(){
   if(ST.sieleOralProgress&&ST.sieleOralProgress.tarea&&!renderSiele._restored){_sieleOralTarea=ST.sieleOralProgress.tarea;renderSiele._restored=true;}
-  let h = `<div class="tb"><div><h2>SIELE 专项训练</h2><div class="d">口语 Tarea 1-5 · 音频先行 · 录音评分 · 答后范例 · 基于回忆版真题资料</div></div></div>`;
+  let h = `<div class="tb"><div><h2>SIELE 专项训练${renderModuleAccentToggle('siele')}</h2><div class="d">口语 Tarea 1-5 · 音频先行 · 录音评分 · 答后范例 · 基于回忆版真题资料</div></div></div>`;
 
   h += renderSieleOralTrainer();
   h += `<div class="tb" style="margin-top:20px"><div><h2 style="font-size:17px">考试结构与答题工具</h2><div class="d">先练习，再查看五项任务策略和连接词</div></div></div>`;
@@ -9974,7 +10256,7 @@ function renderRefine(){
     <div class="empty">⏳ 正在加载今日精读内容…</div>
   </div>`;
 
-  return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 5 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
+  return `<div class="tb"><div><h2>📚 外刊精炼${renderModuleAccentToggle('refine')}</h2><div class="d">每日精选外刊 · 5 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
     ${renderModuleCheckinBar ? renderModuleCheckinBar('refine','外刊精炼','📚') : ''}
     ${datePicker}
     ${theme}
@@ -10109,9 +10391,16 @@ async function renderRefineBody(){
         </div>
       </div>`;
 
-      // DELE box (full)
+      // DELE box (full) + user note
+      const noteKey = `refine_note_${currentRefineDate}_${lvKey}`;
+      const savedNote = (window.__refineNotes || {})[noteKey] || '';
       const deleHtml = a.dele ? `<div class="refine-dele-box">
         <b>🎯 DELE ${lv} 考点：</b>${a.dele}
+        <div class="refine-note-block">
+          <span class="note-toggle" onclick="toggleRefineNote(this,'${noteKey}')">📝 我的笔记 ${savedNote ? '(已保存)' : ''}</span>
+          <textarea id="refine-note-${noteKey}" class="${savedNote ? 'show' : ''}" placeholder="在这里记录你的学习笔记..." oninput="saveRefineNote('${noteKey}', this.value)">${esc(savedNote)}</textarea>
+          <span class="note-saved ${savedNote ? 'show' : ''}" id="note-saved-${noteKey}">✅ 已自动保存</span>
+        </div>
       </div>` : '';
 
       // Hard words box
@@ -10376,7 +10665,7 @@ function _bindRefinePlayAll(){
             window.__refineCurrentUtterance = u;  // GC guard
             // 选口音
             const voices = window.speechSynthesis.getVoices();
-            const accent = (ST && ST.globalAccent) || 'la';
+            const accent = (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent('refine') : null) || (ST && ST.globalAccent) || 'la'; /* FEAT-3 */
             const langCode = accent === 'es' ? 'es-ES' : 'es-MX';
             let esVoice;
             if(accent === 'es'){
@@ -10790,6 +11079,25 @@ function renderScoreCard(lvKey, card, status, score){
     card.appendChild(wordPanel);
   }
   wordPanel.innerHTML = score.wordDetail || '';
+}
+
+// ===== User notes =====
+window.__refineNotes = {};
+try { var stored = localStorage.getItem('refine_notes_v1'); if(stored) window.__refineNotes = JSON.parse(stored); } catch(e){}
+
+function toggleRefineNote(toggleEl, noteKey){
+  var textarea = document.getElementById('refine-note-' + noteKey);
+  if(!textarea) return;
+  var isShown = textarea.classList.contains('show');
+  if(isShown){ textarea.classList.remove('show'); toggleEl.textContent = '📝 我的笔记' + (window.__refineNotes[noteKey] ? ' (已保存)' : ''); }
+  else { textarea.classList.add('show'); textarea.focus(); toggleEl.textContent = '📝 收起笔记'; }
+}
+
+function saveRefineNote(key, value){
+  window.__refineNotes[key] = value;
+  try { localStorage.setItem('refine_notes_v1', JSON.stringify(window.__refineNotes)); } catch(e){}
+  var savedEl = document.getElementById('note-saved-' + key);
+  if(savedEl){ savedEl.classList.add('show'); clearTimeout(savedEl._timer); savedEl._timer = setTimeout(function(){ savedEl.classList.remove('show'); }, 1500); }
 }
 
 window.bindRefineSpeaks = function(){
