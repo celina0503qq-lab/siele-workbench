@@ -1056,9 +1056,20 @@ function load(){
     try{
       if(s.dailyTodos && Array.isArray(s.dailyTodos) && s.dailyTodos.length>0){
         var dt = s.lastStudy || todayStr();
+        var oldArr = s.dailyTodos;   // 先保存旧数组（不能先清空再自引用！）
         s.dailyTodos = {};
-        s.dailyTodos[dt] = s.dailyTodos;
+        s.dailyTodos[dt] = oldArr.map(function(t){ return {text:(t&&t.text)||String(t), done:!!(t&&t.done)}; });
         s.dailyTodoDates = [dt];
+      }
+    }catch(e){}
+    /* 坏数据自愈：检测 dailyTodos 自引用/循环 → 重置为空对象 */
+    try{
+      if(s.dailyTodos && typeof s.dailyTodos==='object' && !Array.isArray(s.dailyTodos)){
+        var _self=false;
+        Object.keys(s.dailyTodos).forEach(function(k){
+          if(s.dailyTodos[k]===s.dailyTodos) _self=true;  // 自引用检测
+        });
+        if(_self) s.dailyTodos = {};
       }
     }catch(e){}
     /* FEAT-4: 迁移旧 vocabReviewCount nested → 扁平化独立 key */
@@ -1550,8 +1561,10 @@ function renderStreakBanner(){
   // P0-4: 仪表盘 streak 横幅 (用户拍板 2026-08-06) — 用 inline SVG 替代 emoji
   const streak = (typeof ST.streak === 'number' && ST.streak > 0) ? ST.streak : 0;
   const today = todayStr();
-  /* FEAT-2: 从日期键值对取今日待办 */
-  const todaysTodos = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[today] || []) : [];
+  /* FEAT-2: 从日期键值对取今日待办（值必须是数组才可用，防循环引用/坏数据） */
+  var _todosVal = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? ST.dailyTodos[today] : [];
+  if(!Array.isArray(_todosVal)) _todosVal = [];
+  const todaysTodos = _todosVal;
   const isCheckedToday = ST.lastStudy === today;
   const totalTodos = (todaysTodos||[]).length;
   const todoRemain = (todaysTodos||[]).filter(t=>!t.done).length;
@@ -1782,7 +1795,9 @@ function renderDash(){
   </div>`;
 
   // Check if all daily todos done → show reward /* FEAT-2: date-keyed format */
-  var _todayTodos = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[todayStr()] || []) : [];
+  var _ttv = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[todayStr()] || []) : [];
+  if(!Array.isArray(_ttv)) _ttv = [];
+  var _todayTodos = _ttv;
   if(_todayTodos.length>0 && _todayTodos.every(function(t){return t.done;})){
     h += `<div class="reward-card" style="margin-top:14px;padding:16px;border-radius:14px;text-align:center">
       <div style="font-size:48px">🏆</div>
