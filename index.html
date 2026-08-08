@@ -496,6 +496,30 @@
   </div><footer>西语备考工作台 v5.20260808 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer></main>
 </div>
 <script>
+/* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
+   用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
+(function(){
+  var _rq = (location.search||'').indexOf('reset')>=0;
+  if(!_rq) return;
+  (async function(){
+    try{
+      if('serviceWorker' in navigator){
+        var regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(function(r){ return r.unregister(); }));
+      }
+      if(window.caches){
+        var keys = await caches.keys();
+        await Promise.all(keys.map(function(k){ return caches.delete(k); }));
+      }
+    }catch(e){}
+    var clean = location.pathname;
+    if(location.host === '127.0.0.1' || location.host === 'localhost'){
+      location.replace(clean + '?v=' + Date.now());
+    } else {
+      location.replace(clean + '?v=' + Date.now());
+    }
+  })();
+})();
 
 // ===== EXTENDED DATA (from Baidu Netdisk resources) =====
 
