@@ -12658,14 +12658,17 @@ window.addEventListener('DOMContentLoaded', () => {
 /* Register service worker for offline / installable PWA (only over http(s), not file://) */
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('sw.js').then(function(reg){
-      // SW 更新时自动刷新页面，避免旧标签页停留在旧版本（解决 Edge/Chrome 显示旧版不完整内容）
+    // 带版本号的 SW URL：GitHub Pages 对 sw.js 有 10 分钟缓存，
+    // 用 ?v= 参数强制浏览器注册新 SW，避免旧 SW 持续提供旧版 HTML（导致仪表盘缺板块/功能）
+    var swVer = 'v11-2026080822';
+    navigator.serviceWorker.register('sw.js?v='+swVer).then(function(reg){
+      // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
         var nw = reg.installing;
         if(!nw) return;
         nw.addEventListener('statechange', function(){
           if(nw.state === 'activated' && navigator.serviceWorker.controller){
-            console.log('[sw] 新版本已激活，自动刷新');
+            console.log('[sw] 新版本已激活，自动刷新 ('+swVer+')');
             window.location.reload();
           }
         });
@@ -13697,8 +13700,14 @@ async function standaloneSync(showLog){
     updateSyncBadge('ok');
     if(typeof renderMain === 'function') renderMain();
   }catch(e){
-    appendSyncLog('❌ '+e.message,'err');
+    var _em = String(e && e.message || e || '未知错误');
+    appendSyncLog('❌ '+_em,'err');
     updateSyncBadge('err');
+    // 常见错误分类提示（GitHub API）
+    if(_em.indexOf('403')>=0) appendSyncLog('💡 GitHub API 限流(403)：请等待几分钟或换新 Token（设置→云同步→重新填入）','');
+    else if(_em.indexOf('401')>=0) appendSyncLog('💡 Token 无效(401)：Token 可能已过期，请在 GitHub 重新生成后更新','');
+    else if(_em.indexOf('404')>=0) appendSyncLog('💡 Gist 不存在(404)：可能是云端数据被删除，可重新同步或新建 Gist','');
+    else if(_em.indexOf('Failed to fetch')>=0||_em.indexOf('NetworkError')>=0) appendSyncLog('💡 网络不通：检查网络/代理后重试','');
   }
   standaloneSync._busy = false;
 }
