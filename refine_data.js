@@ -23,7 +23,7 @@ window.REFINE_PACKS = {
     issue: 6,
     theme: "夏季出行 · 酷暑天气 · 行政手续 · 农村空心化",
     sources: [
-      { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/viajes-y-turismo/", topic: "Viajar en España en agosto: mucho más que playa" },
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/a1-a2", topic: "Viajar en España en agosto: mucho más que playa" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El calor extremo del verano español: temperaturas récord" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
       { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: despoblación rural y repoblación" }
@@ -38,7 +38,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/video/dia-mundial-del-cafe-los-espaoles-consumimos/cb38b8d1-2b31-4a40-b342-2d4a7679c378", topic: "Día mundial del café: los españoles consumimos" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/como-ha-cambiado-la-vuelta-al-cole/f43014f2-3dc6-4443-86ad-eaa47517d713", topic: "¿Cómo ha cambiado la vuelta al cole?" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/la-ola-de-calor-mantiene-en-aviso-a-gran-parte-de/a3b0b5d8-1dba-48b4-963f-5ee3ddc6cae0", topic: "La ola de calor mantiene en aviso a gran parte de España" },
-      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cx2ld7g4e0wo", topic: "Ciudades frente al calor extremo: el modelo de Phoenix" }
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "Ciudades frente al calor extremo: el modelo de Phoenix" }
     ]
   },
   "2026-08-06": {
@@ -48,7 +48,7 @@ window.REFINE_PACKS = {
     theme: "办公室日常 · 求职面试 · 自由职业 · 远程办公",
     sources: [
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/", topic: "Un día en la oficina en España" },
-      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/temas/economia/", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
       { level: "B2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tecnologia/", topic: "El teletrabajo y el futuro del empleo en España" }
     ]
