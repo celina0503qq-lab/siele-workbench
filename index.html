@@ -342,6 +342,26 @@
 .refine-speak-toolbar .play-all-btn{background:linear-gradient(90deg,#f97316,#ea580c);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 1px 3px rgba(234,88,12,.3)}
 .refine-speak-toolbar .play-all-btn:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(234,88,12,.4)}
 .refine-speak-toolbar .play-all-btn.playing{background:linear-gradient(90deg,#10b981,#059669)}
+.refine-speak-toolbar .score-btn{background:linear-gradient(90deg,#8b5cf6,#7c3aed);color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 1px 3px rgba(124,58,237,.3)}
+.refine-speak-toolbar .score-btn:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(124,58,237,.4)}
+.refine-speak-toolbar .score-btn.recording{background:linear-gradient(90deg,#ef4444,#dc2626);animation:pulse 0.8s infinite}
+/* 跟读评分面板 */
+.refine-score-panel{display:none;margin:10px 0;padding:14px 18px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #c4b5fd;border-radius:10px;font-size:13px}
+.refine-score-panel.show{display:block}
+.refine-score-panel .score-prompt{padding:12px 16px;background:#fff;border-radius:8px;border:2px dashed #c4b5fd;font-size:15px;line-height:1.6;color:var(--ink);margin-bottom:10px}
+.refine-score-panel .score-prompt .lang-tag{display:inline-block;padding:2px 8px;background:#8b5cf6;color:#fff;border-radius:4px;font-size:10px;font-weight:700;margin-right:6px}
+.refine-score-panel .score-status{text-align:center;padding:8px;font-weight:700;color:#7c3aed;font-size:14px}
+.refine-score-panel .score-status .countdown{font-size:24px;color:#dc2626;font-weight:900}
+.refine-score-card{display:none;margin-top:10px;padding:14px;background:#fff;border-radius:10px;border:1px solid #e5e7eb}
+.refine-score-card.show{display:block}
+.refine-score-card .score-total{text-align:center;font-size:32px;font-weight:900;color:#7c3aed;margin-bottom:4px}
+.refine-score-card .score-grade{text-align:center;font-size:14px;color:var(--soft);margin-bottom:10px}
+.refine-score-card .score-dim{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:12px}
+.refine-score-card .score-dim .dim-label{width:70px;font-weight:700;flex-shrink:0}
+.refine-score-card .score-dim .dim-bar{flex:1;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.refine-score-card .score-dim .dim-bar .fill{height:100%;border-radius:4px;transition:width .5s}
+.refine-score-card .score-dim .dim-val{width:40px;text-align:right;font-weight:700;flex-shrink:0}
+.refine-score-card .score-feedback{text-align:center;margin-top:10px;padding:8px;background:linear-gradient(90deg,#fef3c7,#fffbeb);border-radius:6px;font-weight:700;font-size:13px;color:#92400e}
 .refine-para-row .refine-para-es{position:relative}
 .refine-para-row .refine-para-es .row-actions{position:absolute;top:4px;right:4px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
 .refine-para-row:hover .refine-para-es .row-actions{opacity:1}
@@ -10040,11 +10060,21 @@ async function renderRefineBody(){
       const speakToolbar = `<div class="refine-speak-toolbar" data-speak-toolbar="${lvKey}">
         <span class="lbl">🎧 跟读模式：</span>
         <button class="play-all-btn" data-play-all="${lvKey}">▶ 通读全文</button>
+        <button class="score-btn" data-score="${lvKey}">🎤 跟读评分</button>
         <span class="lbl" style="margin-left:8px">语速：</span>
         <button class="rate-btn on" data-rate="0.92" data-target="${lvKey}">1.0x</button>
         <button class="rate-btn" data-rate="0.7" data-target="${lvKey}">0.7x 慢速</button>
         <button class="rate-btn" data-rate="0.5" data-target="${lvKey}">0.5x 特慢</button>
         <span style="color:var(--soft);font-size:10.5px;margin-left:auto">ⓘ 通读会按段朗读，每段间隔 0.5s</span>
+      </div>
+      <div class="refine-score-panel" id="refine-score-${lvKey}" data-score-panel="${lvKey}">
+        <div class="score-prompt" id="refine-score-text-${lvKey}"></div>
+        <div class="score-status" id="refine-score-status-${lvKey}"></div>
+        <div class="refine-score-card" id="refine-score-card-${lvKey}">
+          <div class="score-total" id="refine-score-total-${lvKey}">--</div>
+          <div class="score-grade" id="refine-score-grade-${lvKey}"></div>
+          <div class="score-feedback" id="refine-score-feedback-${lvKey}"></div>
+        </div>
       </div>`;
 
       // DELE box (full)
@@ -10398,11 +10428,228 @@ function _bindRefineRate(){
   });
 }
 
+// 跟读评分按钮
+function _bindRefineScore(){
+  document.querySelectorAll('.score-btn[data-score]').forEach(btn => {
+    if(btn.dataset.scoreBound) return;
+    btn.dataset.scoreBound = '1';
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lvKey = btn.dataset.score;
+      if(!lvKey) return;
+      const panel = document.getElementById('refine-score-' + lvKey);
+      if(!panel) return;
+      const card = document.getElementById('refine-score-card-' + lvKey);
+      const status = document.getElementById('refine-score-status-' + lvKey);
+      const textEl = document.getElementById('refine-score-text-' + lvKey);
+
+      // If already recording, stop
+      if(btn.classList.contains('recording')){
+        btn.classList.remove('recording');
+        status.textContent = '';
+        panel.classList.remove('show');
+        card.classList.remove('show');
+        if(window.__refineRecognition){ window.__refineRecognition.stop(); window.__refineRecognition = null; }
+        return;
+      }
+
+      // Pick a random paragraph for this level
+      var data = window.__REFINE_CACHE && window.__REFINE_CACHE[currentRefineDate];
+      if(!data) return;
+      var article = (data.ARTICLES||{})[lvKey];
+      if(!article || !article.paragraphs) return;
+      var paras = article.paragraphs.filter(function(p){ return p.es && p.es.length > 15; });
+      if(!paras.length) return;
+      var selected = paras[Math.floor(Math.random() * paras.length)];
+      var expectedText = selected.es.trim();
+
+      // Show panel with prompt
+      textEl.innerHTML = '<span class="lang-tag">ES</span>' + esc(expectedText);
+      status.innerHTML = '准备录音... <span class="countdown" id="refine-score-cd-' + lvKey + '">3</span>';
+      panel.classList.add('show');
+      card.classList.remove('show');
+      btn.classList.add('recording');
+
+      // Countdown 3-2-1 then start
+      var cd = 3;
+      var cdEl = document.getElementById('refine-score-cd-' + lvKey);
+      var cdTimer = setInterval(function(){
+        cd--;
+        if(cd <= 0){ clearInterval(cdTimer); status.innerHTML = '<span style="color:#ef4444">🔴 正在录音，请朗读上方段落...</span>';
+          startScoring(lvKey, expectedText, btn, panel, card, status);
+        } else if(cdEl) { cdEl.textContent = cd; }
+      }, 1000);
+      window.__refineScoreCd = cdTimer;
+    });
+  });
+}
+
+function startScoring(lvKey, expectedText, btn, panel, card, status){
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    status.innerHTML = '<span style="color:#dc2626">❌ 此浏览器不支持语音识别。请使用 Chrome 或 Edge。</span>';
+    btn.classList.remove('recording');
+    return;
+  }
+  var recognition = new SpeechRecognition();
+  recognition.lang = 'es-ES';
+  recognition.interimResults = true;
+  recognition.maxAlternatives = 3;
+  window.__refineRecognition = recognition;
+
+  var finalTranscript = '';
+  var startTime = Date.now();
+  var interimText = '';
+
+  recognition.onresult = function(event){
+    interimText = '';
+    for(var i = event.resultIndex; i < event.results.length; i++){
+      var r = event.results[i];
+      if(r.isFinal){
+        var best = r[0].transcript;
+        for(var j = 1; j < r.length; j++){
+          if(levenshteinDistance(r[j].transcript.toLowerCase(), expectedText.toLowerCase()) < levenshteinDistance(best.toLowerCase(), expectedText.toLowerCase())){
+            best = r[j].transcript;
+          }
+        }
+        finalTranscript += ' ' + best;
+      } else {
+        interimText += r[0].transcript;
+      }
+    }
+    var partial = (finalTranscript + ' ' + interimText).trim();
+    if(partial.length > 0 && status){
+      status.innerHTML = '🔴 正在录音: <span style="color:#7c3aed;font-weight:400">' + esc(partial.substring(0, 60)) + (partial.length > 60 ? '...' : '') + '</span>';
+    }
+  };
+
+  recognition.onerror = function(event){
+    status.innerHTML = '<span style="color:#dc2626">❌ 语音识别出错：' + esc(event.error) + '。请重试。</span>';
+    btn.classList.remove('recording');
+    window.__refineRecognition = null;
+  };
+
+  recognition.onend = function(){
+    var elapsed = (Date.now() - startTime) / 1000;
+    btn.classList.remove('recording');
+    window.__refineRecognition = null;
+
+    var spokenText = finalTranscript.trim();
+    if(spokenText.length < 3){
+      status.textContent = '⚠️ 未检测到语音。请检查麦克风权限后重试。';
+      return;
+    }
+
+    var score = calcScore(expectedText, spokenText, elapsed);
+    renderScoreCard(lvKey, card, status, score);
+  };
+
+  recognition.start();
+}
+
+function calcScore(expected, spoken, elapsedSec){
+  var expClean = expected.toLowerCase().replace(/[^a-záéíóúüñ 0-9]/g, '').trim();
+  var spkClean = spoken.toLowerCase().replace(/[^a-záéíóúüñ 0-9]/g, '').trim();
+  var expWords = expClean.split(/\s+/).filter(Boolean);
+  var spkWords = spkClean.split(/\s+/).filter(Boolean);
+  var expChars = expClean.replace(/\s/g, '');
+  var spkChars = spkClean.replace(/\s/g, '');
+
+  // 1. Pronunciation (35%)
+  var levDist = levenshteinDistance(expChars, spkChars);
+  var maxLen = Math.max(expChars.length, spkChars.length);
+  var pronScore = maxLen > 0 ? Math.max(0, Math.round((1 - levDist / maxLen) * 100)) : 100;
+
+  // 2. Fluency (25%)
+  var wpm = elapsedSec > 0 ? (spkWords.length / elapsedSec) * 60 : 0;
+  var fluencyScore;
+  if(wpm >= 80 && wpm <= 120) fluencyScore = 100;
+  else if(wpm >= 60 && wpm <= 140) fluencyScore = 80;
+  else if(wpm >= 40 && wpm <= 160) fluencyScore = 60;
+  else fluencyScore = Math.max(20, Math.round(wpm > 0 ? 100 * (80 / wpm) : 0));
+
+  // 3. Completeness (25%)
+  var matchedWords = 0;
+  for(var si = 0; si < spkWords.length; si++){
+    var sw = spkWords[si];
+    for(var ei = 0; ei < expWords.length; ei++){
+      if(sw === expWords[ei] || levenshteinDistance(sw, expWords[ei]) <= 2){ matchedWords++; break; }
+    }
+  }
+  matchedWords = Math.min(matchedWords, expWords.length);
+  var completenessScore = expWords.length > 0 ? Math.round((matchedWords / expWords.length) * 100) : 100;
+
+  // 4. Grammar (15%)
+  var grammarScore = 50;
+  if(spkWords.length >= 2){
+    var expBigrams = {};
+    for(var ei2 = 0; ei2 < expWords.length - 1; ei2++) expBigrams[expWords[ei2] + '|' + expWords[ei2+1]] = true;
+    var spkBigrams = {};
+    for(var si2 = 0; si2 < spkWords.length - 1; si2++) spkBigrams[spkWords[si2] + '|' + spkWords[si2+1]] = true;
+    var bMatch = 0, bgCount = 0;
+    for(var bg in spkBigrams){ bgCount++; if(expBigrams[bg]) bMatch++; }
+    grammarScore = bgCount > 0 ? Math.round((bMatch / bgCount) * 100) : 100;
+  }
+
+  var total = Math.round(pronScore * 0.35 + fluencyScore * 0.25 + completenessScore * 0.25 + grammarScore * 0.15);
+
+  var grade, feedback;
+  if(total >= 90){ grade = '🏆 Excelente'; feedback = '发音清晰，流利度高，与原文高度匹配！SIELE B2+ 水平。'; }
+  else if(total >= 75){ grade = '👍 Muy Bien'; feedback = '整体表现不错，继续加强发音准确度和流畅度。'; }
+  else if(total >= 60){ grade = '📚 Bien'; feedback = '能完成朗读，建议多听原文录音模仿节奏。'; }
+  else if(total >= 40){ grade = '📝 Regular'; feedback = '多练习慢速跟读，注意重音和元音发音。'; }
+  else { grade = '💪 Sigue practicando'; feedback = '不要气馁！建议先听原文 2-3 遍再尝试朗读。'; }
+
+  return {
+    total: total, grade: grade, feedback: feedback,
+    dimensions: [
+      { label: '发音准确度', score: pronScore, weight: 35, color: '#7c3aed' },
+      { label: '流利度', score: fluencyScore, weight: 25, color: '#f97316' },
+      { label: '完整性', score: completenessScore, weight: 25, color: '#10b981' },
+      { label: '语法准确度', score: grammarScore, weight: 15, color: '#3b82f6' }
+    ]
+  };
+}
+
+function levenshteinDistance(a, b){
+  if(a.length === 0) return b.length;
+  if(b.length === 0) return a.length;
+  var matrix = [];
+  for(var i = 0; i <= b.length; i++){ matrix[i] = [i]; }
+  for(var j = 0; j <= a.length; j++){ matrix[0][j] = j; }
+  for(var i = 1; i <= b.length; i++){
+    for(var j = 1; j <= a.length; j++){
+      if(b.charAt(i-1) === a.charAt(j-1)) matrix[i][j] = matrix[i-1][j-1];
+      else matrix[i][j] = Math.min(matrix[i-1][j-1]+1, matrix[i][j-1]+1, matrix[i-1][j]+1);
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+function renderScoreCard(lvKey, card, status, score){
+  status.textContent = '';
+
+  var dimsHtml = '';
+  for(var d = 0; d < score.dimensions.length; d++){
+    var dim = score.dimensions[d];
+    dimsHtml += '<div class="score-dim">' +
+      '<span class="dim-label">' + dim.label + ' (' + dim.weight + '%)</span>' +
+      '<div class="dim-bar"><div class="fill" style="width:' + dim.score + '%;background:' + dim.color + '"></div></div>' +
+      '<span class="dim-val">' + dim.score + '</span></div>';
+  }
+
+  document.getElementById('refine-score-total-' + lvKey).textContent = score.total;
+  document.getElementById('refine-score-grade-' + lvKey).innerHTML = score.grade + dimsHtml;
+  document.getElementById('refine-score-feedback-' + lvKey).textContent = score.feedback;
+  card.classList.add('show');
+}
+
 window.bindRefineSpeaks = function(){
   _bindRefineWordSpeak();
   _bindRefineParaSpeak();
   _bindRefinePlayAll();
   _bindRefineRate();
+  _bindRefineScore();
 };
 
 // Auto-bind quiz clicks + speak buttons after every body render
