@@ -11526,8 +11526,41 @@ function _deleA1SwitchModelo(mid){
   const grupos = {};
   for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
   for (const k in grupos) grupos[k].sort((a,b) => (a.prueba-b.prueba) || (a.tarea-b.tarea) || (a.q-b.q));
-  const el = document.getElementById('__dele_a1_'+task+'_'+mid);
-  if (el) el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+
+  // 更新按钮高亮: 当前 modelo 用 pr(primary), 其余用 ol(outline)
+  const btns = document.querySelectorAll('button[onclick*="_deleA1SwitchModelo"]');
+  for (var _i = 0; _i < btns.length; _i++) {
+    var _btn = btns[_i];
+    var _oc = _btn.getAttribute('onclick') || '';
+    if (_oc.indexOf("'"+mid+"'") >= 0) {
+      _btn.className = _btn.className.replace(/\bol\b/g, 'pr');
+    } else {
+      _btn.className = _btn.className.replace(/\bpr\b/g, 'ol');
+    }
+  }
+
+  var containerId = '__dele_a1_'+task+'_'+mid;
+  var prefix = '__dele_a1_'+task+'_';
+  var allC = document.querySelectorAll('[id^="'+prefix+'"]');
+  // 隐藏所有现有容器并记录父节点
+  var parent = null;
+  for (var _j = 0; _j < allC.length; _j++) {
+    if (!parent) parent = allC[_j].parentNode;
+    allC[_j].style.display = 'none';
+  }
+
+  var el = document.getElementById(containerId);
+  if (el) {
+    // 容器已存在: 重新渲染内容并显示
+    el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+    el.style.display = '';
+  } else if (parent) {
+    // 容器不存在 (非初始 modelo): 动态创建并追加到父节点
+    var newDiv = document.createElement('div');
+    newDiv.id = containerId;
+    newDiv.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+    parent.appendChild(newDiv);
+  }
 }
 // DELE 官方考纲 (来源: 知乎考纲 PDF p3-p7 + Cervantes 官方标准)
 const DELE_LEVEL_DESC = {
