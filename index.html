@@ -493,7 +493,7 @@
     <h3><span class="ic">📝</span>今日待办</h3>
     <div class="ti"><input id="taskInput" placeholder="添加学习任务，如：复习ser/estar变位" onkeydown="if(event.key===&#39;Enter&#39;)addTask()"><button class="btn sm" onclick="addTask()">添加</button></div>
     <ul class="tl" id="taskList"><li class="empty">暂无任务，添加一个开始学习吧</li></ul>
-  </div><footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer></main>
+  </div><footer>西语备考工作台 v5.20260808 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer></main>
 </div>
 <script>
 
@@ -1462,7 +1462,7 @@ function renderMain(){
       }
       break;
   }
-  main.innerHTML = h + '<footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  main.innerHTML = h + '<footer>西语备考工作台 v5.20260808 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -11929,7 +11929,7 @@ function _commitDeleSubPage(level, task, html){
   if (typeof currentPage !== 'undefined') currentPage = 'dele' + level + '_' + task;
   var main = document.getElementById('main');
   if (main) main.innerHTML = '<div id="audioBanner" class="banner"></div>' + html +
-    '<footer>西语备考工作台 v5 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+    '<footer>西语备考工作台 v5.20260808 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   if (typeof renderNav === 'function') {
     try { renderNav(); } catch (e) {}
   }
