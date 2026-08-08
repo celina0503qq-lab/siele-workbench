@@ -13508,6 +13508,12 @@ function ensureSyncBadge(){
 }
 
 async function standaloneSync(showLog){
+  // 保险：从 DOM 输入框读取最新值（防止 onchange/oninput 未触发的情况）
+  try{
+    var _ti=document.getElementById('syncToken'); if(_ti&&_ti.value) SCFG.token=_ti.value;
+    var _gi=document.getElementById('syncGistId'); if(_gi&&_gi.value) SCFG.gistId=_gi.value;
+    var _pi=document.getElementById('syncPassword'); if(_pi) SCFG.password=_pi.value;
+  }catch(e){}
   if(!SCFG.token || !SCFG.enabled){
     if(showLog) appendSyncLog('❌ 请先设置 GitHub Token 并启用同步','err');
     return;
@@ -13772,7 +13778,7 @@ function openSyncSettings(){
     '<div class="sp-body">'+
       '<div class="note" style="margin-bottom:12px"><b>🔐 安全提示：</b>Token 仅保存在本机浏览器 localStorage 中。建议使用具有 <b>gist</b> 权限的 Fine-grained Token。<br>获取 Token: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens →</a></div>'+
       '<div class="fg"><label>GitHub Token <span class="hint">(需要 gist 权限)</span></label>'+
-        '<input type="password" id="syncToken" value="'+escB(SCFG.token||'')+'" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" onchange="SCFG.token=this.value;saveSyncCfg()"></div>'+
+        '<input type="password" id="syncToken" value="'+escB(SCFG.token||'')+'" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" oninput="SCFG.token=this.value;saveSyncCfg()"></div>'+
       '<div class="fg"><label>Gist ID <span class="hint">(自动创建或手动填入)</span></label>'+
         '<input type="text" id="syncGistId" value="'+escB(SCFG.gistId||'')+'" placeholder="创建后自动填入，也可手动粘贴" onchange="SCFG.gistId=this.value;saveSyncCfg()"></div>'+
       '<div class="fg"><label>同步密码 <span class="hint">(可选，用于额外识别)</span></label>'+
