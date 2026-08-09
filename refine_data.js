@@ -15,8 +15,20 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-08-08 第 7 期 — 主题：夏季集中工时 / 开学季 / 八月热浪 / 人口空心化
+// 1) 2026-08-09 第 8 期 — 主题：周日家庭聚餐 · 橄榄油文化 · 意大利儿童肥胖 · AI设计病毒
 window.REFINE_PACKS = {
+  "2026-08-09": {
+    date: "2026-08-09",
+    weekday: "日",
+    issue: 8,
+    theme: "周日家庭聚餐 · 橄榄油文化 · 意大利儿童肥胖 · AI设计病毒",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura/la-importancia", topic: "Los domingos en familia: comida y tradición" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "El olivo y la dieta mediterránea: un patrimonio en peligro" },
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cx2mrppm26do", topic: "Italia y la obesidad infantil: el fin de la dieta mediterránea" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cgk4ek6xke3o", topic: "La IA diseña virus completamente nuevos por primera vez en la historia" }
+    ]
+  },
   "2026-08-07": {
     date: "2026-08-07",
     weekday: "五",
