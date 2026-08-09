@@ -20,7 +20,7 @@ window.REFINE_PACKS = {
   "2026-08-03": {
     date: "2026-08-03",
     weekday: "一",
-    issue: 1,
+    issue: 2,
     theme: "问路指路 · 餐厅点餐 · 西班牙旅游热潮 · 过度旅游争议",
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Perdido en la ciudad: cómo pedir direcciones" },
@@ -32,7 +32,7 @@ window.REFINE_PACKS = {
   "2026-08-02": {
     date: "2026-08-02",
     weekday: "日",
-    issue: 0,
+    issue: 1,
     theme: "家庭日常 · 天气描述 · 西班牙午睡文化 · 四天工作制实验",
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura/la-familia-garcia-un-dia-normal", topic: "Un domingo en familia: rutinas y actividades" },
@@ -44,7 +44,7 @@ window.REFINE_PACKS = {
   "2026-08-04": {
     date: "2026-08-04",
     weekday: "二",
-    issue: 2,
+    issue: 3,
     theme: "医院看病 · 租房找房 · 西班牙医疗体系 · 欧洲住房危机",
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el médico: una consulta rutinaria" },
@@ -104,7 +104,7 @@ window.REFINE_PACKS = {
   "2026-08-05": {
     date: "2026-08-05",
     weekday: "三",
-    issue: 3,
+    issue: 4,
     theme: "超市购物 · 西班牙美食文化 · 数字游民潮 · 欧洲干旱危机",
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura/el-fin-de-semana-texto-para-completar", topic: "De compras en el supermercado" },
