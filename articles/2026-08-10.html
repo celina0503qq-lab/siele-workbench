@@ -6,27 +6,39 @@
 <title>外刊精炼 · 第9期 | 2026-08-10</title>
 <style>
 :root {
-  --brand: #6C5CE7;
-  --a1: #27ae60;
-  --a2: #2980b9;
-  --b1: #e67e22;
-  --b2: #8e44ad;
-  --es-bg: #e8f5e9;
-  --zh-bg: #fff3e0;
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --brand: #c0392b;
+  --brand-soft: #fff5f3;
+  --a1: #2e7d32;
+  --a2: #1565c0;
+  --b1: #c12a2a;
+  --b2: #6a1b9a;
+  --highlight: #e07a1f;
+  --highlight-bg: #fff3e0;
+  --es-bg: #f0f6fc;
+  --zh-bg: #fefcf5;
+  --es-ink: #1b496b;
+  --zh-ink: #2a2a2a;
+  --correct: #16a34a;
+  --wrong: #dc2626;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
   --card-bg: #ffffff;
-  --body-bg: #f5f6fa;
-  --text: #2d3436;
-  --text-secondary: #636e72;
-  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --body-bg: #f6f7fb;
+  --text: #1f2937;
+  --text-secondary: #6b7280;
   --radius: 12px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--body-bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
 .topbar {
-  background: linear-gradient(135deg, var(--brand), #a29bfe);
+  background: linear-gradient(135deg, var(--brand), #d35400);
   color: #fff; padding: 28px 20px; text-align: center;
-  position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(108,92,231,.3);
+  position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(192,57,43,.3);
 }
 .topbar h1 { font-size: 1.8em; letter-spacing: .04em; margin-bottom: 6px; }
 .topbar p { font-size: .95em; opacity: .9; }
@@ -42,9 +54,9 @@ body { background: var(--body-bg); color: var(--text); font-family: var(--font);
 .toc-grid a:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
 .toc-a1 { background: #e8f5e9; color: var(--a1); }
 .toc-a2 { background: #e3f2fd; color: var(--a2); }
-.toc-b1 { background: #fff3e0; color: var(--b1); }
+.toc-b1 { background: #ffebee; color: var(--b1); }
 .toc-b2 { background: #f3e5f5; color: var(--b2); }
-.toc-vocab { background: #ede7f6; color: var(--brand); }
+.toc-vocab { background: var(--brand-soft); color: var(--brand); }
 
 .jump-links { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
 .jump-links a {
@@ -59,11 +71,11 @@ body { background: var(--body-bg); color: var(--text); font-family: var(--font);
 .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 16px; margin-bottom: 32px; }
 .vocab-card {
   background: var(--card-bg); border-radius: var(--radius); padding: 16px;
-  box-shadow: var(--shadow); border-left: 4px solid var(--brand); transition: all .2s;
+  box-shadow: var(--shadow); border-left: 4px solid var(--highlight); transition: all .2s;
 }
 .vocab-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.12); }
 .vocab-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-.vocab-head .lema { font-size: 1.15em; font-weight: 700; color: var(--brand); }
+.vocab-head .lema { font-size: 1.15em; font-weight: 700; color: var(--highlight); }
 .vocab-head .ipa { font-size: .8em; color: var(--text-secondary); }
 .vocab-head .pos { font-size: .75em; color: var(--text-secondary); background: #f0f0f0; padding: 1px 6px; border-radius: 4px; }
 .vocab-tag { font-size: .72em; font-weight: 600; display: inline-block; padding: 1px 8px; border-radius: 4px; margin-bottom: 4px; }
@@ -129,7 +141,7 @@ hl::after { content: "✦"; font-size: .6em; color: var(--b1); vertical-align: s
 /* DELE 考点 */
 .dele-points {
   margin: 20px 0; padding: 16px 20px; border-radius: 10px;
-  background: linear-gradient(135deg, #ede7f6, #e8eaf6);
+  background: linear-gradient(135deg, var(--brand-soft), #fff8e1);
   border-left: 4px solid var(--brand); font-size: .9em; line-height: 1.8;
 }
 .dele-points b { color: var(--brand); }
@@ -138,7 +150,7 @@ hl::after { content: "✦"; font-size: .6em; color: var(--b1); vertical-align: s
 .hard-words { margin: 16px 0; }
 .hard-words h4 { font-size: .95em; color: var(--text-secondary); margin-bottom: 8px; }
 .hard-word { display: inline-block; margin: 3px 6px; font-size: .85em; }
-.hard-word .hw { font-weight: 600; color: var(--b2); cursor: help; border-bottom: 1px dashed var(--b2); }
+.hard-word .hw { font-weight: 600; color: var(--highlight); cursor: help; border-bottom: 1px dashed var(--highlight); }
 
 /* Quiz */
 .quiz-section { margin: 20px 0; }
@@ -149,10 +161,10 @@ hl::after { content: "✦"; font-size: .6em; color: var(--b1); vertical-align: s
   padding: 8px 12px; margin: 4px 0; border-radius: 6px; cursor: pointer;
   border: 1.5px solid #e0e0e0; transition: all .15s; font-size: .9em;
 }
-.quiz-opts li:hover { border-color: var(--brand); background: #f5f0ff; }
-.quiz-opts li.selected { border-color: var(--brand); background: #ede7f6; font-weight: 600; }
-.quiz-opts li.correct { border-color: var(--a1); background: #e8f5e9; }
-.quiz-opts li.wrong { border-color: #e74c3c; background: #ffebee; }
+.quiz-opts li:hover { border-color: var(--highlight); background: var(--highlight-bg); }
+.quiz-opts li.selected { border-color: var(--highlight); background: var(--highlight-bg); font-weight: 600; }
+.quiz-opts li.correct { border-color: var(--correct); background: #e8f5e9; }
+.quiz-opts li.wrong { border-color: var(--wrong); background: #ffebee; }
 .quiz-explain {
   margin-top: 8px; padding: 10px 14px; border-radius: 8px; font-size: .85em;
   background: linear-gradient(135deg, #fff8e1, #fff3e0); display: none;
@@ -161,7 +173,7 @@ hl::after { content: "✦"; font-size: .6em; color: var(--b1); vertical-align: s
 
 .quiz-submit {
   padding: 8px 24px; border: none; border-radius: 20px; font-size: .9em;
-  font-weight: 600; cursor: pointer; color: #fff; background: var(--brand);
+  font-weight: 600; cursor: pointer; color: #fff; background: var(--b1);
   transition: all .2s; margin-top: 8px;
 }
 .quiz-submit:hover { opacity: .9; }
