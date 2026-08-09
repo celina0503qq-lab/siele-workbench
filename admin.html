@@ -1765,7 +1765,24 @@ function serializeCloud(){
   const seedW={},seedQ={},words=[],questions=[];
   DB.words.forEach(w=>{if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   DB.questions.forEach(q=>{if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null};
+  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null,quizzes:loadQuizData()};
+}
+function loadQuizData(){try{const raw=localStorage.getItem('swa_quiz_v1');return raw?JSON.parse(raw):{version:1,quizzes:{}};}catch(e){return{version:1,quizzes:{}};}}
+function saveQuizDataToLocal(data){try{localStorage.setItem('swa_quiz_v1',JSON.stringify(data));}catch(e){console.warn('saveQuizDataToLocal failed',e);}}
+function mergeQuizzes(localQ,remoteQ){
+  const lq=localQ.quizzes||{},rq=remoteQ.quizzes||{},merged={};
+  const allDates=new Set([...Object.keys(lq),...Object.keys(rq)]);
+  for(const date of allDates){merged[date]={};
+    const ld=lq[date]||{},rd=rq[date]||{};
+    const allLevels=new Set([...Object.keys(ld),...Object.keys(rd)]);
+    for(const level of allLevels){const ll=ld[level]||{attempts:[],notes:''},rl=rd[level]||{attempts:[],notes:''};
+      const am=new Map();(ll.attempts||[]).forEach(a=>am.set(a.id,a));(rl.attempts||[]).forEach(a=>{if(!am.has(a.id))am.set(a.id,a);});
+      merged[date][level]={totalQuestions:ll.totalQuestions||rl.totalQuestions,
+        attempts:[...am.values()].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)),
+        notes:ll.notes||rl.notes||''};
+    }
+  }
+  return {version:Math.max(localQ.version||1,remoteQ.version||1),updatedAt:new Date().toISOString(),quizzes:merged};
 }
 function mergeById(localArr,remoteArr,trash){
   const map={};
@@ -1804,6 +1821,7 @@ function mergeData(db,remote){
   db.plans=mergeById(db.plans,(remote.plans||[]),trash);
   if(remote.settings&&remote.ts>(db.meta.lastSync||0))db.settings=Object.assign({},db.settings,remote.settings);
   if(remote.wb&&(!db.wb||((remote.wb.ts||0)>(db.wb.ts||0))))db.wb=remote.wb;
+  if(remote.quizzes){db.quizzes=mergeQuizzes(db.quizzes||{version:1,quizzes:{}},remote.quizzes);saveQuizDataToLocal(db.quizzes);}
 }
 
 // ---- 各云端 Provider ----
