@@ -329,6 +329,22 @@
 .refine-quiz-explain .zh-explain{color:var(--soft);margin-top:4px;padding-top:4px;border-top:1px dashed #f0d68b}
 .refine-quiz-stats{margin-top:8px;padding:8px 12px;background:linear-gradient(90deg,#e3f3ee,#fff);border-radius:8px;font-size:12px;color:#175544;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .refine-quiz-stats b{color:var(--teal);font-size:14px}
+.refine-quiz-ctrls{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.refine-quiz-ctrls .rqc-btn{padding:5px 12px;border-radius:6px;font-size:11.5px;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--soft);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.refine-quiz-ctrls .rqc-btn:hover{border-color:var(--tr);color:var(--tr)}
+.refine-quiz-ctrls .rqc-btn.redo{color:var(--am);border-color:var(--am)}
+.refine-quiz-ctrls .rqc-btn.redo:hover{background:#fef3e3}
+.refine-quiz-ctrls .rqc-btn .hint{font-size:10px;color:var(--soft);font-weight:400}
+.refine-quiz-history{margin-top:8px;padding:8px 12px;background:#f9fafb;border-radius:8px;font-size:11.5px;display:none;line-height:1.6}
+.refine-quiz-history.show{display:block;animation:fade .25s}
+.refine-quiz-history .hdr{font-weight:700;color:var(--teal);margin-bottom:4px}
+.refine-quiz-history .att{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:4px 8px;background:#fff;border-radius:6px;margin:3px 0;font-size:11px}
+.refine-quiz-history .att .ts{color:var(--soft)}
+.refine-quiz-history .att .rate{font-weight:700}
+.refine-quiz-history .att .rate.good{color:var(--ok)}
+.refine-quiz-history .att .rate.mid{color:var(--am)}
+.refine-quiz-history .att .rate.bad{color:var(--bad)}
+.refine-quiz-history .att .tag{font-size:10px;background:var(--bg);padding:1px 6px;border-radius:4px}
 .refine-hardwords-box{background:#fbf4e8;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:12px;line-height:1.7}
 .refine-hardwords-box b{color:var(--tr);font-weight:700;display:block;margin-bottom:4px}
 .refine-hardwords-box code{background:#fff;padding:1px 6px;border-radius:3px;font-size:11.5px;color:var(--tr);font-weight:600;border:1px solid #e7dccb;margin:0 2px}
@@ -10321,6 +10337,37 @@ function renderRefine(){
     ${body}`;
 }
 
+// ===== Refine Quiz Persistence (swa_quiz_v1) =====
+const RefineQuizDB = {
+  STORAGE_KEY: 'swa_quiz_v1',
+  load(){try{const raw=localStorage.getItem(this.STORAGE_KEY);return raw?JSON.parse(raw):{version:1,quizzes:{}};}catch(e){return{version:1,quizzes:{}};}},
+  save(data){try{localStorage.setItem(this.STORAGE_KEY,JSON.stringify(data));}catch(e){}},
+  recordAnswer(date,level,qIdx,chosen,correct,totalQuestions){
+    const db=this.load();
+    if(!db.quizzes[date])db.quizzes[date]={};
+    if(!db.quizzes[date][level])db.quizzes[date][level]={attempts:[],notes:''};
+    const entry=db.quizzes[date][level];
+    let att=entry.attempts.length>0?entry.attempts[0]:null;
+    if(!att||att.completed){att={id:Date.now().toString(36),timestamp:Date.now(),answers:[],score:0,total:totalQuestions,completed:false};entry.attempts.unshift(att);}
+    const exIdx=att.answers.findIndex(function(a){return a.idx===qIdx;});
+    const ansObj={idx:qIdx,chosen:chosen,correct:correct};
+    if(exIdx>=0)att.answers[exIdx]=ansObj;else att.answers.push(ansObj);
+    att.score=att.answers.filter(function(a){return a.chosen===a.correct;}).length;
+    if(att.answers.length>=totalQuestions)att.completed=true;
+    this.save(db);return att;
+  },
+  getAttempts(date,level){const db=this.load();const entry=(db.quizzes[date]||{})[level];return entry?entry.attempts:[];},
+  getLatestAttempt(date,level){const as=this.getAttempts(date,level);return as.length>0?as[0]:null;},
+  resetQuiz(date,level){
+    const db=this.load();
+    if(!db.quizzes[date])db.quizzes[date]={};
+    if(!db.quizzes[date][level])db.quizzes[date][level]={attempts:[],notes:''};
+    const entry=db.quizzes[date][level];
+    if(entry.attempts.length>0&&!entry.attempts[0].completed)entry.attempts[0].completed=true;
+    this.save(db);
+  }
+};
+
 async function renderRefineBody(){
   const el = document.getElementById('refineBody');
   if(!el) return;
@@ -10480,6 +10527,14 @@ async function renderRefineBody(){
             <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh||'')}</div>
           </div>
         </div>`).join('')}
+        <div class="refine-quiz-ctrls" data-ctrls>
+          <button class="rqc-btn redo" type="button" onclick="window.redoRefineQuiz('${lvKey}')" title="重新做题（保留历史记录）">🔄 重新做题</button>
+          <button class="rqc-btn" type="button" onclick="window.toggleRefineQuizHistory('${lvKey}')">📋 历史记录</button>
+        </div>
+        <div class="refine-quiz-history" data-history>
+          <div class="hdr">📜 历史答题记录</div>
+          <div data-history-list></div>
+        </div>
         <div class="refine-quiz-stats" data-stats style="display:none">
           <span>📊 成绩：<b data-correct>0</b> / ${quiz.length} 正确</span>
           <span>⏱ 提交时间：<span data-time></span></span>
@@ -10596,6 +10651,96 @@ window.submitRefineQuiz = function(levelKey, qIdx){
       autoLogLowScore('refineQuiz', { level: levelKey.toUpperCase(), question: q.q, correct: q.opts[correct], chosen: q.opts[chosen] });
     } catch(e){}
   }
+
+  // Persist quiz answer to localStorage (swa_quiz_v1)
+  try {
+    const totalQ = (article.quiz||[]).length;
+    if(totalQ>0 && typeof RefineQuizDB!=='undefined'){
+      RefineQuizDB.recordAnswer(currentRefineDate, levelKey.toUpperCase(), qIdx, chosen, correct, totalQ);
+    }
+  } catch(e){}
+};
+
+// Restore quiz UI from saved state
+window.restoreRefineQuizUI = function(levelKey, attempt){
+  const area = document.getElementById('refine-'+levelKey+'-quiz');
+  if(!area) return;
+  attempt.answers.forEach(function(ans){
+    const item = area.querySelector('.refine-quiz-item[data-qidx="'+ans.idx+'"]');
+    if(!item) return;
+    const opts = item.querySelectorAll('.refine-quiz-opts li');
+    const submitBtn = item.querySelector('.refine-quiz-submit');
+    const scoreEl = item.querySelector('.refine-quiz-score');
+    const explainEl = item.querySelector('.refine-quiz-explain');
+    opts.forEach(function(li,j){
+      li.classList.add('disabled');
+      if(j===ans.correct) li.classList.add('correct');
+      if(j===ans.chosen && j!==ans.correct) li.classList.add('wrong');
+      if(j===ans.chosen && j===ans.correct) li.classList.add('selected');
+    });
+    if(ans.chosen===ans.correct){scoreEl.textContent='✓ 正确！';scoreEl.className='refine-quiz-score show full';}
+    else {var letter=String.fromCharCode(65+ans.correct);scoreEl.textContent='✗ 错误，正确答案 '+letter;scoreEl.className='refine-quiz-score show zero';}
+    if(explainEl) explainEl.classList.add('show');
+    if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='已提交';}
+  });
+  // Update stats
+  var totalCorrect=attempt.answers.filter(function(a){return a.chosen===a.correct;}).length;
+  var stats=area.querySelector('.refine-quiz-stats');
+  if(stats){
+    stats.style.display='flex';
+    var correctEl=stats.querySelector('[data-correct]');
+    var timeEl=stats.querySelector('[data-time]');
+    if(correctEl) correctEl.textContent=totalCorrect;
+    if(timeEl) timeEl.textContent=new Date(attempt.timestamp).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+  }
+};
+
+// Redo: reset quiz for current level
+window.redoRefineQuiz = function(levelKey){
+  if(!confirm('确定要重新做题吗？之前的答题记录会保留在历史中。')) return;
+  try { if(typeof RefineQuizDB!=='undefined') RefineQuizDB.resetQuiz(currentRefineDate, levelKey.toUpperCase()); } catch(e){}
+  // Reset in-memory state
+  if(window.__refineQuizState && window.__refineQuizState[levelKey]){
+    window.__refineQuizState[levelKey] = { startTs: Date.now(), submitted: 0, correct: 0 };
+  }
+  // Reset UI for all quiz items in this area
+  var area = document.getElementById('refine-'+levelKey+'-quiz');
+  if(!area) return;
+  area.querySelectorAll('.refine-quiz-item').forEach(function(item){
+    var opts=item.querySelectorAll('.refine-quiz-opts li');
+    opts.forEach(function(li){li.classList.remove('disabled','correct','wrong','selected');li.style.animation='';});
+    var btn=item.querySelector('.refine-quiz-submit');
+    if(btn){btn.disabled=false;btn.textContent='提交答案';}
+    var sc=item.querySelector('.refine-quiz-score');
+    if(sc){sc.className='refine-quiz-score';sc.textContent='';}
+    var ex=item.querySelector('.refine-quiz-explain');
+    if(ex) ex.classList.remove('show');
+  });
+  var stats=area.querySelector('.refine-quiz-stats');
+  if(stats) stats.style.display='none';
+  var hist=area.querySelector('.refine-quiz-history');
+  if(hist) hist.classList.remove('show');
+};
+
+// Toggle history display
+window.toggleRefineQuizHistory = function(levelKey){
+  var area = document.getElementById('refine-'+levelKey+'-quiz');
+  if(!area) return;
+  var hist = area.querySelector('.refine-quiz-history');
+  if(!hist) return;
+  if(hist.classList.contains('show')){hist.classList.remove('show');return;}
+  // Populate history
+  var listEl = hist.querySelector('[data-history-list]');
+  var attempts = (typeof RefineQuizDB!=='undefined') ? RefineQuizDB.getAttempts(currentRefineDate, levelKey.toUpperCase()) : [];
+  if(!attempts.length){listEl.innerHTML='<span style="color:var(--soft)">暂无记录</span>';}
+  else {
+    listEl.innerHTML = attempts.map(function(a,i){
+      var rateClass=a.score>=a.total?'good':(a.score>=a.total/2?'mid':'bad');
+      var pct=a.total>0?Math.round(a.score/a.total*100):0;
+      return '<div class="att"><span class="tag">'+(i===0?'最新':'#'+(attempts.length-i))+'</span><span class="rate '+rateClass+'">'+a.score+'/'+a.total+' ('+pct+'%)</span><span class="ts">'+new Date(a.timestamp).toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+'</span>'+(a.completed?'':' <span style="color:var(--am);font-size:10px">未完成</span>')+'</div>';
+    }).join('');
+  }
+  hist.classList.add('show');
 };
 
 // Wire up option click for all rendered quizzes
@@ -11165,13 +11310,26 @@ window.bindRefineSpeaks = function(){
   _bindRefineScore();
 };
 
-// Auto-bind quiz clicks + speak buttons after every body render
+// Auto-bind quiz clicks + speak buttons after every body render, and restore quiz state
 const _origRenderRefineBody = renderRefineBody;
 window.renderRefineBody = async function(){
   await _origRenderRefineBody.apply(this, arguments);
   setTimeout(() => {
     window.bindRefineQuizClicks();
     window.bindRefineSpeaks();
+    // Restore saved quiz state from localStorage
+    try {
+      if(typeof RefineQuizDB!=='undefined' && currentRefineDate){
+        const lvs = currentRefineLevel ? [currentRefineLevel] : ['A1','A2','B1','B2'];
+        lvs.forEach(function(lv){
+          var lvKey=lv.toLowerCase();
+          var att=RefineQuizDB.getLatestAttempt(currentRefineDate, lv.toUpperCase());
+          if(att && att.answers && att.answers.length>0){
+            window.restoreRefineQuizUI(lvKey, att);
+          }
+        });
+      }
+    } catch(e){}
   }, 0);
 };
 
