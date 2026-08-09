@@ -2,11 +2,11 @@
  * refine_data.js — 外刊精炼模块数据索引
  *
  * 每个外刊精炼包对应一天的推送：
- *   - 5 个生活/职场高频西语单词
+ *   - 15 个生活/职场高频西语单词
  *   - 4 篇分级外刊（A1/A2/B1/B2）
  *   - 每篇 10 段（A1/A2）或 15 段（B1/B2）中西双语精读
- *   - 每篇 5 道阅读题（中西双语解析）
- *   - 每篇附带 BBC Mundo / El País 原文链接
+ *   - 每篇阅读题（A1/A2: 5题，B1/B2: 8题）中西双语解析
+ *   - 每篇附带 DELE Ahora / RTVE / BBC Mundo 原文链接
  *
  * 添加新日期步骤：
  *   1. 把当天推送的 HTML 复制到 articles/<date>.html
@@ -29,18 +29,6 @@ window.REFINE_PACKS = {
       { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cgk4ek6xke3o", topic: "La IA diseña virus completamente nuevos por primera vez en la historia" }
     ]
   },
-  "2026-08-07": {
-    date: "2026-08-07",
-    weekday: "五",
-    issue: 6,
-    theme: "夏季出行 · 酷暑天气 · 行政手续 · 农村空心化",
-    sources: [
-      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/a1-a2", topic: "Viajar en España en agosto: mucho más que playa" },
-      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El calor extremo del verano español: temperaturas récord" },
-      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
-      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: despoblación rural y repoblación" }
-    ]
-  },
   "2026-08-08": {
     date: "2026-08-08",
     weekday: "六",
@@ -53,6 +41,18 @@ window.REFINE_PACKS = {
       { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "Ciudades frente al calor extremo: el modelo de Phoenix" }
     ]
   },
+  "2026-08-07": {
+    date: "2026-08-07",
+    weekday: "五",
+    issue: 6,
+    theme: "夏季出行 · 酷暑天气 · 行政手续 · 农村空心化",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/a1-a2", topic: "Viajar en España en agosto: mucho más que playa" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El calor extremo del verano español: temperaturas récord" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Trámites en España: la odisea burocrática de los extranjeros" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html", topic: "La España vaciada: despoblación rural y repoblación" }
+    ]
+  },
   "2026-08-06": {
     date: "2026-08-06",
     weekday: "四",
@@ -63,6 +63,18 @@ window.REFINE_PACKS = {
       { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
       { level: "B2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tecnologia/", topic: "El teletrabajo y el futuro del empleo en España" }
+    ]
+  },
+  "2026-08-05": {
+    date: "2026-08-05",
+    weekday: "三",
+    issue: 3,
+    theme: "超市购物 · 西班牙美食文化 · 数字游民潮 · 欧洲干旱危机",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura/el-fin-de-semana-texto-para-completar", topic: "De compras en el supermercado" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/gastronomia/", topic: "La gastronomía española: un viaje por sus regiones" },
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/c5yw679ggjvo", topic: "Nómadas digitales en España: ¿oportunidad o amenaza?" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/c5yv2rlzd40o", topic: "La gran sequía europea: crisis hídrica y cambio climático" }
     ]
   }
 };
