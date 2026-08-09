@@ -334,6 +334,23 @@
 
 
 
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
 </style>
 </head>
 <body>
@@ -437,6 +454,169 @@
   </div>
 
 <script>
+
+// ========== \u6d4b\u9a8c\u6301\u4e45\u5316\u6a21\u5757 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage \u5199\u5165\u5931\u8d25:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '\u2713 \u6b63\u786e\uff01' : '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('\u786e\u5b9a\u8981\u91cd\u505a ' + level.toUpperCase() + ' \u7684\u5168\u90e8\u9898\u76ee\u5417\uff1f\n\u5386\u53f2\u8bb0\u5f55\u5c06\u88ab\u4fdd\u7559\u3002')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
 /* ==================== 词汇数据 ==================== */
 const WORDS = [
   {
@@ -687,49 +867,100 @@ function esc(s) {
 // 初始化
 renderVocab();
 ['a1','a2','b1','b2'].forEach(renderArticle);
-
-// 给每个 quiz 绑定交互
+// ===== \u6062\u590d\u5df2\u4fdd\u5b58\u7684\u7b54\u9898\u72b6\u6001 + \u6e32\u67d3\u63a7\u4ef6 =====
+const currentDate = QuizData.getDate();
 ['a1','a2','b1','b2'].forEach(level => {
-  const items = document.querySelectorAll(`#${level}-quiz .quiz-item`);
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">\u{1F504} \u91cd\u505a</button>' +
+    '<span class="quiz-stats">' +
+      '\u5df2\u7b54\u9898 <b>' + historyCount + '</b> \u6b21' +
+      (latest ? ' \u00b7 \u6700\u8fd1\u6b63\u786e <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">\u{1F4DD} \u7b14\u8bb0</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="\u8bb0\u5f55\u4f60\u7684\u5b66\u4e60\u7b14\u8bb0..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">\u2713 \u5df2\u4fdd\u5b58</span>';
+  section.appendChild(notesArea);
+}
+
+// \u7ed9\u6bcf\u4e2a quiz \u7ed1\u5b9a\u4ea4\u4e92
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
   items.forEach((item, idx) => {
     const submit = item.querySelector('.quiz-submit');
     const opts = item.querySelectorAll('.quiz-opts li');
     let chosen = -1;
     opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
       li.addEventListener('click', () => {
         if (li.classList.contains('disabled')) return;
-        opts.forEach(o => o.classList.remove('selected'));
+        freshOpts.forEach(o => o.classList.remove('selected'));
         li.classList.add('selected');
         chosen = j;
       });
     });
     submit.onclick = () => {
       if (chosen === -1) {
-        alert('请先选择一个答案！');
+        alert('\u8bf7\u5148\u9009\u62e9\u4e00\u4e2a\u7b54\u6848\uff01');
         return;
       }
       const q = ARTICLES[level].quiz[idx];
-      opts.forEach((li, j) => {
+      freshOpts.forEach((li, j) => {
         li.classList.add('disabled');
         if (j === q.ans) li.classList.add('correct');
         if (j === chosen && j !== q.ans) li.classList.add('wrong');
       });
-      const explain = document.getElementById(`${level}-explain-${idx}`);
+      const explain = document.getElementById(level + '-explain-' + idx);
       explain.classList.add('show');
-      const scoreEl = document.getElementById(`${level}-score-${idx}`);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
       if (chosen === q.ans) {
-        scoreEl.textContent = '✓ 正确！';
+        scoreEl.textContent = '\u2713 \u6b63\u786e\uff01';
         scoreEl.className = 'quiz-score show full';
       } else {
-        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.textContent = '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
         scoreEl.className = 'quiz-score show zero';
       }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
     };
   });
-});
+}
 
-
-
+// \u521d\u59cb\u5316
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
 
 </script>
 </body>
