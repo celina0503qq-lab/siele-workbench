@@ -26,7 +26,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Perdido en la ciudad: cómo pedir direcciones" },
       { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/a1-a2", topic: "En el restaurante: del menú a la cuenta" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "El turismo en España: el motor que mueve el país" },
-      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "Turismofobia: el lado oscuro del paraíso turístico" }
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/ckgdmv8gz1jo", topic: "Turismofobia: el lado oscuro del paraíso turístico" }
     ]
   },
   "2026-08-02": {
@@ -35,10 +35,10 @@ window.REFINE_PACKS = {
     issue: 0,
     theme: "家庭日常 · 天气描述 · 西班牙午睡文化 · 四天工作制实验",
     sources: [
-      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Un domingo en familia: rutinas y actividades" },
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura/la-familia-garcia-un-dia-normal", topic: "Un domingo en familia: rutinas y actividades" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El tiempo en España: cuatro estaciones, mil climas" },
-      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La siesta española: entre el mito y la productividad" },
-      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La semana laboral de cuatro días: el experimento europeo" }
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cgr7xknqgrjo", topic: "La siesta española: entre el mito y la productividad" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/crrvepyp5g2o", topic: "La semana laboral de cuatro días: el experimento europeo" }
     ]
   },
   "2026-08-04": {
@@ -49,8 +49,8 @@ window.REFINE_PACKS = {
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el médico: una consulta rutinaria" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Buscar piso en España: anuncios, precios y contratos" },
-      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "El sistema sanitario español: ¿modelo a seguir o en crisis?" },
-      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La crisis de vivienda en Europa: precios récord y desahucios" }
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cx2mrppm26do", topic: "El sistema sanitario español: ¿modelo a seguir o en crisis?" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/czxq1ppnw18o", topic: "La crisis de vivienda en Europa: precios récord y desahucios" }
     ]
   },
   "2026-08-09": {
@@ -74,7 +74,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/video/dia-mundial-del-cafe-los-espaoles-consumimos/cb38b8d1-2b31-4a40-b342-2d4a7679c378", topic: "Día mundial del café: los españoles consumimos" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/como-ha-cambiado-la-vuelta-al-cole/f43014f2-3dc6-4443-86ad-eaa47517d713", topic: "¿Cómo ha cambiado la vuelta al cole?" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/grafo/en/video/la-ola-de-calor-mantiene-en-aviso-a-gran-parte-de/a3b0b5d8-1dba-48b4-963f-5ee3ddc6cae0", topic: "La ola de calor mantiene en aviso a gran parte de España" },
-      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "Ciudades frente al calor extremo: el modelo de Phoenix" }
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/crrvepyp5g2o", topic: "Ciudades frente al calor extremo: el modelo de Phoenix" }
     ]
   },
   "2026-08-07": {
@@ -98,7 +98,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/", topic: "Un día en la oficina en España" },
       { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Cómo buscar trabajo en España: currículum y entrevista" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Ser autónomo en España: ventajas, desafíos y cuotas" },
-      { level: "B2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tecnologia/", topic: "El teletrabajo y el futuro del empleo en España" }
+      { level: "B2", source: "RTVE", sourceUrl: "https://www.bbc.com/mundo/articles/c5y6g9dxww4o", topic: "El teletrabajo y el futuro del empleo en España" }
     ]
   },
   "2026-08-05": {
