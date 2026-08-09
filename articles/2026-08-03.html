@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-03</title>
+<style>
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-03</h1>
+    <div class="sub">第1期 · 周一 · 问路指路 · 餐厅点餐 · 西班牙旅游热潮 · 过度旅游争议</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10段 · 陈述式现在时+命令式</span>
+        <h2>🗺️ Perdido en la ciudad: cómo pedir direcciones</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://deleahora.com/actividades/a1-a2" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10段 · 陈述式+简单过去时</span>
+        <h2>🍽️ En el restaurante: del menú a la cuenta</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.rtve.es/noticias/economia/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15段 · 虚拟式+复合句</span>
+        <h2>🏖️ El turismo en España: el motor que mueve el país</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15段 · 议论文体+虚拟式</span>
+        <h2>🚫 Turismofobia: el lado oscuro del paraíso turístico</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-03（星期一） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-03.docx</p>
+    </div>
+  </div>
+
+<script>
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+    {
+    lema: "derecho",
+    ipa: "[deˈɾe.tʃo]",
+    pos: "adj./m.",
+    significado: "右边的；直的；权利（方向词+法律术语，多义词）",
+    ejemplo_es: "Gire a la derecha en la pr\u00F3xima calle y siga todo recto.",
+    ejemplo_zh: "在下一条街右转，然后一直直走。",
+    tip: "\u003Cb\u003Ea la derecha\u003C/b\u003E = 向右，\u003Cb\u003Etodo recto\u003C/b\u003E = 一直直走。\u003Cb\u003Etener derecho a\u003C/b\u003E = 有权利。\u003Cb\u003Ederechos humanos\u003C/b\u003E = 人权。A1 问路场景必考方向词。"
+    },
+    {
+    lema: "cruzar",
+    ipa: "[kɾuˈθaɾ]",
+    pos: "v.",
+    significado: "穿过；横穿（街道、广场等）",
+    ejemplo_es: "Tienes que cruzar la plaza y el museo est\u00E1 al otro lado.",
+    ejemplo_zh: "你得穿过广场，博物馆就在对面。",
+    tip: "\u003Cb\u003Ecruzar la calle\u003C/b\u003E = 过马路。\u003Cb\u003Ecruzar el puente\u003C/b\u003E = 过桥。\u003Cb\u003Ecruce\u003C/b\u003E（名词）= 十字路口。命令式：\u003Cb\u003Ecruza\u003C/b\u003E（t\u00FA）。A1-A2 问路指路高频动词。"
+    },
+    {
+    lema: "esquina",
+    ipa: "[esˈki.na]",
+    pos: "f.",
+    significado: "拐角；街角（两条街道交汇处）",
+    ejemplo_es: "La farmacia est\u00E1 en la esquina, al lado de la panader\u00EDa.",
+    ejemplo_zh: "药房在拐角处，面包店旁边。",
+    tip: "\u003Cb\u003Een la esquina\u003C/b\u003E = 在拐角处。\u003Cb\u003Edoblar la esquina\u003C/b\u003E = 转过街角。\u003Cb\u003Ehacer esquina\u003C/b\u003E = 位于拐角。注意与\u003Cb\u003Erinc\u00F3n\u003C/b\u003E（角落，室内的）区别。A1 场景必考。"
+    },
+    {
+    lema: "camarero/a",
+    ipa: "[ka.maˈɾe.ɾo]",
+    pos: "m./f.",
+    significado: "服务员（餐厅、酒吧的服务人员）",
+    ejemplo_es: "Camarero, \u00BFnos puede traer la carta, por favor?",
+    ejemplo_zh: "服务员，请给我们拿菜单好吗？",
+    tip: "\u003Cb\u003Ecamarero\u003C/b\u003E = 男服务员，\u003Cb\u003Ecamarera\u003C/b\u003E = 女服务员。拉丁美洲常用\u003Cb\u003Emesero/a\u003C/b\u003E。\u003Cb\u003Epedir al camarero\u003C/b\u003E = 向服务员点单。A1-A2 餐厅场景核心词汇。"
+    },
+    {
+    lema: "cuenta",
+    ipa: "[ˈkwen.ta]",
+    pos: "f.",
+    significado: "账单；账户（餐厅结账用语）",
+    ejemplo_es: "Perdone, \u00BFme trae la cuenta, por favor?",
+    ejemplo_zh: "打扰一下，请把账单拿来好吗？",
+    tip: "\u003Cb\u003Epedir la cuenta\u003C/b\u003E = 结账。\u003Cb\u003ELa cuenta, por favor.\u003C/b\u003E = 买单。\u003Cb\u003Ecuenta bancaria\u003C/b\u003E = 银行账户。\u003Cb\u003Edarse cuenta de\u003C/b\u003E = 意识到（A2 常考短语）。A1-A2 餐厅必考。"
+    },
+    {
+    lema: "plato del d\u00EDa",
+    ipa: "[ˈpla.to del ˈdi.a]",
+    pos: "m.",
+    significado: "今日特价菜；每日套餐（餐厅每日提供的固定套餐）",
+    ejemplo_es: "De primero, quiero la sopa de verduras; y de segundo, el plato del d\u00EDa.",
+    ejemplo_zh: "前菜我要蔬菜汤，主菜要今日特价菜。",
+    tip: "\u003Cb\u003Emen\u00FA del d\u00EDa\u003C/b\u003E = 每日套餐（含前菜+主菜+甜点+饮料）。\u003Cb\u003Ede primero/segundo\u003C/b\u003E = 前菜/主菜。\u003Cb\u003Eplato combinado\u003C/b\u003E = 组合套餐。A2 点餐场景核心。"
+    },
+    {
+    lema: "turismo de masas",
+    ipa: "[tuˈɾiz.mo de ˈma.sas]",
+    pos: "m.",
+    significado: "大众旅游（大规模、标准化的旅游模式）",
+    ejemplo_es: "El turismo de masas ha transformado el centro de Barcelona en los \u00FAltimos veinte a\u00F1os.",
+    ejemplo_zh: "大众旅游在过去二十年中改变了巴塞罗那市中心。",
+    tip: "\u003Cb\u003Eturismo de masas\u003C/b\u003E 强调数量大、标准化。\u003Cb\u003Eturismo sostenible\u003C/b\u003E = 可持续旅游。\u003Cb\u003Eturismo de calidad\u003C/b\u003E = 品质旅游。B1-B2 旅游话题必考。"
+    },
+    {
+    lema: "motor econ\u00F3mico",
+    ipa: "[moˈtoɾ e.koˈno.mi.ko]",
+    pos: "m.",
+    significado: "经济引擎（推动经济增长的核心产业）",
+    ejemplo_es: "El turismo es el principal motor econ\u00F3mico de las Islas Baleares.",
+    ejemplo_zh: "旅游业是巴利阿里群岛的主要经济引擎。",
+    tip: "\u003Cb\u003Emotor\u003C/b\u003E 本义是发动机，比喻经济推动力。\u003Cb\u003Emotor de crecimiento\u003C/b\u003E = 增长引擎。\u003Cb\u003Esector clave\u003C/b\u003E = 关键产业。B1 经济类话题高频。"
+    },
+    {
+    lema: "temporada alta",
+    ipa: "[tem.poˈɾa.ða ˈal.ta]",
+    pos: "f.",
+    significado: "旺季（旅游、商业活动的高峰期）",
+    ejemplo_es: "En temporada alta, Mallorca recibe m\u00E1s de 200.000 turistas al d\u00EDa.",
+    ejemplo_zh: "旺季时，马略卡岛每天接待超过 20 万名游客。",
+    tip: "\u003Cb\u003Etemporada alta\u003C/b\u003E = 旺季，\u003Cb\u003Etemporada baja\u003C/b\u003E = 淡季。\u003Cb\u003Een plena temporada\u003C/b\u003E = 在旺季高峰期。西班牙旅游旺季：7-8月（verano）、Semana Santa（圣周）。B1 旅游话题。"
+    },
+    {
+    lema: "turismofobia",
+    ipa: "[tu.ɾiz.moˈfo.bja]",
+    pos: "f.",
+    significado: "旅游恐惧症；反旅游情绪（因过度旅游引发的本地居民对游客的排斥现象）",
+    ejemplo_es: "La turismofobia ha aumentado en ciudades como Barcelona, Palma y San Sebasti\u00E1n.",
+    ejemplo_zh: "巴塞罗那、帕尔马和圣塞巴斯蒂安等城市的反旅游情绪日益高涨。",
+    tip: "\u003Cb\u003Eturismofobia\u003C/b\u003E = turismo + fobia（恐惧）。2017年起成为媒体热词。\u003Cb\u003Erechazo al turismo\u003C/b\u003E = 对旅游的排斥。\u003Cb\u003Esaturaci\u00F3n tur\u00EDstica\u003C/b\u003E = 旅游饱和。B2 社会议题核心词汇。"
+    },
+    {
+    lema: "masificaci\u00F3n",
+    ipa: "[ma.si.fi.kaˈθjon]",
+    pos: "f.",
+    significado: "过度拥挤；饱和（因人数过多导致的空间/资源饱和）",
+    ejemplo_es: "La masificaci\u00F3n tur\u00EDstica ha provocado protestas vecinales en varios destinos espa\u00F1oles.",
+    ejemplo_zh: "旅游过度拥挤已在西班牙多个目的地引发了居民抗议。",
+    tip: "\u003Cb\u003Emasificar\u003C/b\u003E（动词）= 使过度拥挤。\u003Cb\u003Emasivo/a\u003C/b\u003E = 大量的。\u003Cb\u003Esaturaci\u00F3n\u003C/b\u003E 为同义词。B1-B2 旅游/社会话题高频。"
+    },
+    {
+    lema: "vivienda vacacional",
+    ipa: "[biˈβjen.da ba.ka.θjoˈnal]",
+    pos: "f.",
+    significado: "度假短租房（面向游客的短期出租住房，通常通过平台预订）",
+    ejemplo_es: "Las viviendas vacacionales han reducido la oferta de alquiler para los residentes locales.",
+    ejemplo_zh: "度假短租房减少了面向本地居民的租房供应。",
+    tip: "\u003Cb\u003Evivienda vacacional\u003C/b\u003E = 度假短租房，\u003Cb\u003Episo tur\u00EDstico\u003C/b\u003E = 旅游公寓（同义）。\u003Cb\u003Evivienda habitual\u003C/b\u003E = 常住住房。Airbnb 等平台推动了这个概念。B2 住房/旅游话题必考。"
+    },
+    {
+    lema: "sostenibilidad",
+    ipa: "[sos.te.ni.βi.liˈðað]",
+    pos: "f.",
+    significado: "可持续性（在不损害未来资源的前提下满足当前需求）",
+    ejemplo_es: "Muchos expertos piden un modelo tur\u00EDstico basado en la sostenibilidad y no solo en el volumen de visitantes.",
+    ejemplo_zh: "许多专家呼吁建立基于可持续性而非仅仅追求游客数量的旅游模式。",
+    tip: "\u003Cb\u003Esostenible\u003C/b\u003E（形容词）= 可持续的。\u003Cb\u003Edesarrollo sostenible\u003C/b\u003E = 可持续发展。\u003Cb\u003Eturismo sostenible\u003C/b\u003E = 可持续旅游。B1-B2 环境/社会话题核心词汇。"
+    },
+    {
+    lema: "repartir",
+    ipa: "[re.paɾˈtiɾ]",
+    pos: "v.",
+    significado: "分配；分发（将某物在多方之间进行分配）",
+    ejemplo_es: "El gobierno quiere repartir mejor los beneficios del turismo entre todas las regiones.",
+    ejemplo_zh: "政府希望更好地在各地区之间分配旅游收益。",
+    tip: "\u003Cb\u003Erepartir\u003C/b\u003E = 分配，\u003Cb\u003Ereparto\u003C/b\u003E（名词）= 分配。\u003Cb\u003Erepartir a partes iguales\u003C/b\u003E = 平均分配。\u003Cb\u003Edistribuir\u003C/b\u003E 为同义词。B1-B2 经济/政策话题。"
+    },
+    {
+    lema: "poner coto a",
+    ipa: "[poˈneɾ ˈko.to a]",
+    pos: "loc. v.",
+    significado: "限制；制止（采取措施限制某种现象或行为）",
+    ejemplo_es: "Varios ayuntamientos han decidido poner coto a los pisos tur\u00EDsticos ilegales.",
+    ejemplo_zh: "多个市政府已决定限制非法旅游公寓。",
+    tip: "\u003Cb\u003Eponer coto a\u003C/b\u003E 比 \u003Cb\u003Elimitar\u003C/b\u003E 更口语化，强调果断限制。\u003Cb\u003Ecoto\u003C/b\u003E 原意为猎场/禁猎区。\u003Cb\u003Eponer freno a\u003C/b\u003E = 刹车/制止（同义）。B2 新闻/政策类高频。"
+    }
+  ];
+
+/* ==================== 文章数据 ==================== */
+const ARTICLES = {
+  a1:     {
+    paragraphs: [
+    { es: "Miguel es un turista que acaba de llegar a Madrid. Quiere visitar el Museo del Prado, pero no sabe c\u00F3mo llegar.", zh: "米格尔是刚抵达马德里的游客。他想参观普拉多博物馆，但不知道怎么去。" },
+    { es: "Se acerca a una se\u00F1ora que pasea por la calle y le pregunta: \u00ABPerdone, \u00BFsabe d\u00F3nde est\u00E1 el Museo del Prado?\u00BB", zh: "他走近一位在街上散步的女士问道：\u201C打扰一下，您知道普拉多博物馆在哪里吗？\u201D" },
+    { es: "La se\u00F1ora responde amablemente: \u00ABS\u00ED, claro. Est\u00E1 muy cerca. Siga todo recto por esta calle hasta llegar a la plaza.", zh: "女士友善地回答：\u201C当然知道。很近。沿着这条街一直直走，走到广场。\u201D" },
+    { es: "\u00ABAl llegar a la plaza, cruce la calle y gire a la derecha. Ver\u00E1 un edificio grande de color blanco.\u00BB", zh: "\u201C到广场后，过马路然后右转。您会看到一栋白色的大建筑。\u201D" },
+    { es: "\u00ABEl Museo del Prado est\u00E1 en la esquina, al lado del Jard\u00EDn Bot\u00E1nico. No tiene p\u00E9rdida.\u00BB", zh: "\u201C普拉多博物馆在拐角处，植物园旁边。不会走错的。\u201D" },
+    { es: "Miguel repite las instrucciones: \u00ABEntonces, todo recto, cruzo la plaza, giro a la derecha y el museo est\u00E1 en la esquina.\u00BB", zh: "米格尔重复了指示：\u201C那么，一直直走，穿过广场，右转，博物馆就在拐角。\u201D" },
+    { es: "\u00ABExacto. Son solo diez minutos andando\u00BB, confirma la se\u00F1ora con una sonrisa.", zh: "\u201C没错。走路只要十分钟。\u201D女士微笑着确认。" },
+    { es: "Miguel le da las gracias y empieza a caminar. Por el camino ve muchas tiendas, cafeter\u00EDas y una fuente bonita.", zh: "米格尔道谢后开始步行。沿途他看到许多商店、咖啡馆和一座漂亮的喷泉。" },
+    { es: "Diez minutos despu\u00E9s, Miguel llega al museo. La entrada cuesta 15 euros, pero los estudiantes tienen un descuento del 50%.", zh: "十分钟后，米格尔到达博物馆。门票 15 欧元，但学生可享受 50% 折扣。" },
+    { es: "Miguel compra su entrada, entra en el museo y se siente muy contento. \u00A1Qu\u00E9 f\u00E1cil es pedir direcciones en espa\u00F1ol!", zh: "米格尔买了门票，走进博物馆，感到非常高兴。用西班牙语问路真简单！" }
+    ],
+    dele: "命令式礼貌形式(siga, cruce, gire)；方向表达(todo recto, a la derecha, en la esquina)；地点前置词(en, al lado de, hasta, por)；疑问词(d\u00F3nde, c\u00F3mo)；礼貌用语(perdone, por favor, gracias)；数字与价格(15 euros, 50%)。",
+    hardWords: [
+    { w: "acabar de + inf.", m: "刚刚（做完某事）" },
+    { w: "todo recto", m: "一直直走（方向指示）" },
+    { w: "esquina", m: "拐角；街角" },
+    { w: "descuento", m: "折扣（学生享受 50% 折扣）" },
+    { w: "no tiene p\u00E9rdida", m: "不会走错的；很容易找到" }
+    ],
+    quiz: [
+    { q: "\u00BFA d\u00F3nde quiere ir Miguel?", opts: ["Al Jard\u00EDn Bot\u00E1nico", "Al Museo del Prado", "A una cafeter\u00EDa", "A una tienda"], ans: 1, es: "P\u00E1rrafo 1: \u0022Quiere visitar el Museo del Prado.\u0022", zh: "米格尔想去普拉多博物馆。" },
+    { q: "\u00BFQu\u00E9 debe hacer Miguel al llegar a la plaza?", opts: ["Girar a la izquierda", "Coger un taxi", "Cruzar la calle y girar a la derecha", "Preguntar a otra persona"], ans: 2, es: "P\u00E1rrafo 4: \u0022Cruce la calle y gire a la derecha.\u0022", zh: "到广场后要过马路然后右转。" },
+    { q: "\u00BFCu\u00E1nto tiempo se tarda andando?", opts: ["Cinco minutos", "Diez minutos", "Quince minutos", "Veinte minutos"], ans: 1, es: "P\u00E1rrafo 7: \u0022Son solo diez minutos andando.\u0022", zh: "走路只需要十分钟。" },
+    { q: "\u00BFCu\u00E1nto cuesta la entrada del museo?", opts: ["10 euros", "15 euros", "20 euros", "7,50 euros"], ans: 1, es: "P\u00E1rrafo 9: \u0022La entrada cuesta 15 euros.\u0022", zh: "门票价格为 15 欧元。" },
+    { q: "\u00BFQu\u00E9 descuento tienen los estudiantes?", opts: ["25%", "50%", "Gratis", "75%"], ans: 1, es: "P\u00E1rrafo 9: \u0022Los estudiantes tienen un descuento del 50%.\u0022", zh: "学生享受 50% 折扣。" }
+    ]
+    },
+  a2:     {
+    paragraphs: [
+    { es: "Sara y su amigo Luis entran en un restaurante t\u00EDpico espa\u00F1ol en el centro de Sevilla. El camarero les recibe con una sonrisa.", zh: "萨拉和她的朋友路易斯走进塞维利亚市中心一家典型的西班牙餐厅。服务员微笑着迎接他们。" },
+    { es: "\u00AB\u00BFMesa para dos?\u00BB pregunta el camarero. \u00ABS\u00ED, por favor. \u00BFPodemos sentarnos en la terraza?\u00BB responde Sara.", zh: "\u201C两位吗？\u201D服务员问道。\u201C是的，请。我们可以坐在露台吗？\u201D萨拉回答。" },
+    { es: "El camarero les trae la carta. Luis la hojea y dice: \u00AB\u00A1Qu\u00E9 dif\u00EDcil elegir! Todo tiene muy buena pinta.\u00BB", zh: "服务员给他们拿来了菜单。路易斯翻看着说：\u201C太难选了！每样看起来都很好吃。\u201D" },
+    { es: "De primero, Sara pide gazpacho andaluz y Luis elige una ensalada mixta con at\u00FAn. De segundo, los dos piden pescado del d\u00EDa.", zh: "前菜，萨拉点了安达卢西亚冷汤，路易斯选了金枪鱼混合沙拉。主菜，两人都点了当日鲜鱼。" },
+    { es: "\u00AB\u00BFQu\u00E9 desean beber?\u00BB pregunta el camarero. Sara pide una copa de vino tinto y Luis, agua con gas.", zh: "\u201C想喝什么？\u201D服务员问道。萨拉点了一杯红葡萄酒，路易斯点了气泡水。" },
+    { es: "La comida est\u00E1 deliciosa. El gazpacho est\u00E1 bien fr\u00EDo, perfecto para el calor de Sevilla en verano.", zh: "食物非常美味。冷汤冰冰凉凉的，非常适合塞维利亚夏天的炎热。" },
+    { es: "Despu\u00E9s de los platos principales, el camarero les pregunta: \u00AB\u00BFQuieren postre? Tenemos flan casero, tarta de queso y fruta del tiempo.\u00BB", zh: "主菜之后，服务员问他们：\u201C要甜点吗？我们有自制焦糖布丁、芝士蛋糕和时令水果。\u201D" },
+    { es: "Sara pide flan y Luis prefiere la fruta. \u00ABEl flan est\u00E1 riqu\u00EDsimo\u00BB, comenta Sara despu\u00E9s de probarlo.", zh: "萨拉点了焦糖布丁，路易斯选了水果。\u201C布丁太好吃了。\u201D萨拉品尝后说。" },
+    { es: "Al terminar, Luis hace una se\u00F1a al camarero: \u00ABCamarero, la cuenta, por favor.\u00BB El total son 48,50 euros.", zh: "吃完后，路易斯向服务员示意：\u201C服务员，请买单。\u201D一共 48.50 欧元。" },
+    { es: "\u00ABDejamos propina?\u00BB pregunta Sara. Luis responde: \u00ABS\u00ED, el servicio ha sido excelente. Dejamos un 10%.\u00BB", zh: "\u201C要给小费吗？\u201D萨拉问。路易斯回答：\u201C给吧，服务非常好。给 10%。\u201D" }
+    ],
+    dele: "现在时与简单过去时(entran, recibe, pregunt\u00F3, pidieron)；直接宾语代词(les, lo, la)；比较级(mejor, peor, m\u00E1s rico)；礼貌请求(\u00BFpodemos sentarnos?)；餐厅场景词汇(carta, camarero, cuenta, propina, primer/segundo plato)。",
+    hardWords: [
+    { w: "hojear", m: "翻阅；浏览（翻看菜单/书页）" },
+    { w: "tener buena pinta", m: "看起来不错（口语表达）" },
+    { w: "de primero/segundo", m: "前菜/主菜（西餐点餐结构）" },
+    { w: "hacer una se\u00F1a", m: "示意；打手势" },
+    { w: "propina", m: "小费（通常在账单的 5%-10%）" }
+    ],
+    quiz: [
+    { q: "\u00BFD\u00F3nde est\u00E1 el restaurante?", opts: ["En Madrid", "En Barcelona", "En Sevilla", "En Valencia"], ans: 2, es: "P\u00E1rrafo 1: \u0022En el centro de Sevilla.\u0022", zh: "餐厅在塞维利亚市中心。" },
+    { q: "\u00BFQu\u00E9 pide Sara de primero?", opts: ["Ensalada mixta", "Gazpacho andaluz", "Pescado del d\u00EDa", "Tarta de queso"], ans: 1, es: "P\u00E1rrafo 4: \u0022Sara pide gazpacho andaluz.\u0022", zh: "萨拉前菜点了安达卢西亚冷汤。" },
+    { q: "\u00BFCu\u00E1l es el total de la cuenta?", opts: ["38,50 euros", "42,50 euros", "48,50 euros", "52,50 euros"], ans: 2, es: "P\u00E1rrafo 9: \u0022El total son 48,50 euros.\u0022", zh: "账单总额为 48.50 欧元。" },
+    { q: "\u00BFQu\u00E9 postre pide Sara?", opts: ["Fruta del tiempo", "Tarta de queso", "Flan casero", "Helado"], ans: 2, es: "P\u00E1rrafo 8: \u0022Sara pide flan.\u0022", zh: "萨拉点了自制焦糖布丁。" },
+    { q: "\u00BFCu\u00E1nto deciden dejar de propina?", opts: ["Un 5%", "Un 10%", "Un 15%", "Nada"], ans: 1, es: "P\u00E1rrafo 10: \u0022Dejamos un 10%.\u0022", zh: "他们决定留下 10% 小费。" }
+    ]
+    },
+  b1:     {
+    paragraphs: [
+    { es: "Espa\u00F1a recibi\u00F3 en 2025 un total de 94 millones de turistas internacionales, seg\u00FAn datos del Instituto Nacional de Estad\u00EDstica (INE), una cifra que consolida al pa\u00EDs como el segundo destino tur\u00EDstico del mundo, solo por detr\u00E1s de Francia.", zh: "据西班牙国家统计局（INE）数据，2025 年西班牙共接待 9400 万国际游客，巩固了其作为全球第二大旅游目的地的地位，仅次于法国。" },
+    { es: "El sector tur\u00EDstico representa el 12,8% del Producto Interior Bruto (PIB) espa\u00F1ol y genera m\u00E1s de 2,7 millones de empleos directos, lo que lo convierte en uno de los pilares fundamentales de la econom\u00EDa nacional.", zh: "旅游业占西班牙国内生产总值（GDP）的 12.8%，创造超过 270 万个直接就业岗位，使其成为国民经济的基本支柱之一。" },
+    { es: "Catalu\u00F1a, Baleares y Canarias son las comunidades que m\u00E1s turistas reciben. Solo en Baleares, el turismo supone el 35% del PIB regional, una dependencia que preocupa a algunos economistas.", zh: "加泰罗尼亚、巴利阿里群岛和加那利群岛是接待游客最多的自治区。仅在巴利阿里群岛，旅游业就占地区 GDP 的 35%，这种依赖令一些经济学家担忧。" },
+    { es: "\u0022El turismo ha sido un motor econ\u00F3mico indiscutible, especialmente tras la crisis financiera de 2008\u0022, explica Elena G\u00F3mez, profesora de Econom\u00EDa Aplicada de la Universidad Aut\u00F3noma de Madrid. \u0022Pero debemos preguntarnos si este modelo es sostenible a largo plazo.\u0022", zh: "马德里自治大学应用经济学教授埃莱娜·戈麦斯解释道：\u201C旅游业一直是无可争议的经济引擎，特别是在 2008 年金融危机之后。但我们必须问自己，这种模式在长期是否可持续。\u201D" },
+    { es: "Durante la temporada alta de verano, destinos como Mallorca o la Costa del Sol multiplican su poblaci\u00F3n. En agosto de 2025, Palma de Mallorca registr\u00F3 una ocupaci\u00F3n hotelera del 94,3%, seg\u00FAn la patronal hotelera CEHAT.", zh: "在夏季旺季，马略卡岛或太阳海岸等目的地的人口成倍增长。据酒店业协会 CEHAT 数据，2025 年 8 月帕尔马·德·马略卡的酒店入住率达到 94.3%。" },
+    { es: "Sin embargo, el crecimiento acelerado del turismo ha generado tensiones crecientes. Los precios de la vivienda en zonas tur\u00EDsticas han subido un 40% en la \u00FAltima d\u00E9cada, seg\u00FAn el portal inmobiliario Fotocasa.", zh: "然而，旅游业的加速增长引发了日益加剧的紧张。据 Fotocasa 房产门户数据，旅游区房价在过去十年上涨了 40%。" },
+    { es: "En ciudades como Barcelona, M\u00E1laga o San Sebasti\u00E1n, los residentes llevan a\u00F1os quej\u00E1ndose de la masificaci\u00F3n. \u0022No podemos vivir en nuestra propia ciudad\u0022, es una frase que se repite en las manifestaciones vecinales.", zh: "在巴塞罗那、马拉加或圣塞巴斯蒂安等城市，居民多年来一直在抱怨过度拥挤。\u201C我们无法在自己的城市生活\u201D，这是居民抗议中反复出现的一句话。" },
+    { es: "Las viviendas vacacionales son una de las principales fuentes de conflicto. Seg\u00FAn datos del Ministerio de Vivienda, en Espa\u00F1a hay m\u00E1s de 350.000 viviendas tur\u00EDsticas registradas, y se estima que otras 150.000 operan sin licencia.", zh: "度假短租房是冲突的主要来源之一。据住房部数据，西班牙注册旅游住房超过 35 万套，估计另有 15 万套无证经营。" },
+    { es: "\u0022La proliferaci\u00F3n de pisos tur\u00EDsticos ha expulsado a los vecinos del centro de las ciudades\u0022, denuncia Miguel \u00C1ngel Torres, presidente de la Federaci\u00F3n de Asociaciones de Vecinos de M\u00E1laga. \u0022Los barrios pierden su identidad cuando solo hay turistas.\u0022", zh: "马拉加居民协会联合会主席米格尔·安赫尔·托雷斯谴责道：\u201C旅游公寓的泛滥已将居民赶出市中心。当只有游客时，街区就失去了自己的身份。\u201D" },
+    { es: "No obstante, el turismo tambi\u00E9n tiene defensores. Miles de familias dependen directamente de esta industria: hoteles, restaurantes, comercios, gu\u00EDas tur\u00EDsticos y transporte.", zh: "然而，旅游业也有其捍卫者。成千上万的家庭直接依赖这一产业：酒店、餐厅、商店、导游和交通。" },
+    { es: "Antonio P\u00E9rez, propietario de un restaurante en la Costa Brava, lo resume as\u00ED: \u0022Sin turismo, este pueblo estar\u00EDa vac\u00EDo en invierno. Lo que necesitamos es un turismo mejor repartido, no menos turismo.\u0022", zh: "布拉瓦海岸一家餐厅老板安东尼奥·佩雷斯这样总结：\u201C没有旅游业，这个小镇冬天就会空无一人。我们需要的是更好地分配旅游，而不是减少旅游。\u201D" },
+    { es: "El gobierno central y varias comunidades aut\u00F3nomas han empezado a tomar medidas. Catalu\u00F1a ha limitado las licencias de pisos tur\u00EDsticos en Barcelona, y Baleares ha aprobado una moratoria para nuevas plazas hoteleras.", zh: "中央政府及多个自治区已开始采取措施。加泰罗尼亚限制了巴塞罗那的旅游公寓许可，巴利阿里群岛已批准暂停新增酒店床位。" },
+    { es: "A nivel europeo, otras ciudades como \u00C1msterdam, Venecia o Dubrovnik tambi\u00E9n luchan contra los efectos del turismo de masas. \u00C1msterdam ha prohibido la construcci\u00F3n de nuevos hoteles en el centro hist\u00F3rico.", zh: "在欧洲层面，阿姆斯特丹、威尼斯或杜布罗夫尼克等其他城市也在应对大众旅游的影响。阿姆斯特丹已禁止在历史中心新建酒店。" },
+    { es: "Los expertos coinciden en que el futuro pasa por un modelo de turismo sostenible y de calidad. \u0022No se trata de poner puertas al campo\u0022, se\u00F1ala G\u00F3mez. \u0022Se trata de gestionar los flujos tur\u00EDsticos para que todos ganen: turistas, empresarios y residentes.\u0022", zh: "专家们一致认为未来在于可持续和品质旅游模式。戈麦斯指出：\u201C这不是因噎废食的问题，而是管理旅游流量，让所有人受益：游客、企业和居民。\u201D" },
+    { es: "El debate sobre el modelo tur\u00EDstico espa\u00F1ol sigue abierto. Mientras el n\u00FAmero de visitantes no deja de crecer, la pregunta sigue en el aire: \u00BFc\u00F3mo lograr que el motor econ\u00F3mico no termine devorando aquello que lo hace atractivo?", zh: "关于西班牙旅游模式的讨论仍在继续。随着游客数量不断增长，问题依然悬而未决：如何让经济引擎不至于最终吞噬掉使其有吸引力的东西？" }
+    ],
+    dele: "简单过去时(recibi\u00F3, registr\u00F3, aprob\u00F3)；过去未完成时(representaba, viv\u00EDan)；现在完成时(ha generado, han empezado)；虚拟式(para que todos ganen, no termine devorando)；百分比与数据表达(12,8%, 94,3%, 40%)；直接引语(explica, denuncia, resume, se\u00F1ala)；让步连接词(no obstante, sin embargo)。",
+    hardWords: [
+    { w: "Producto Interior Bruto (PIB)", m: "国内生产总值（GDP）" },
+    { w: "pilar fundamental", m: "基本支柱（核心组成部分）" },
+    { w: "ocupaci\u00F3n hotelera", m: "酒店入住率" },
+    { w: "proliferaci\u00F3n", m: "激增；泛滥" },
+    { w: "moratoria", m: "暂停；延期（moratoria hotelera = 酒店建设冻结）" },
+    { w: "devorar", m: "吞噬；摧毁" },
+    { w: "poner puertas al campo", m: "因噎废食（成语：对无法控制的事强行设限）" },
+    { w: "flujo tur\u00EDstico", m: "旅游流量" }
+    ],
+    quiz: [
+    { q: "\u00BFCu\u00E1ntos turistas internacionales recibi\u00F3 Espa\u00F1a en 2025?", opts: ["74 millones", "84 millones", "94 millones", "104 millones"], ans: 2, es: "P\u00E1rrafo 1: \u002294 millones de turistas internacionales.\u0022", zh: "2025 年西班牙接待了 9400 万国际游客。" },
+    { q: "\u00BFQu\u00E9 porcentaje del PIB espa\u00F1ol representa el turismo?", opts: ["El 8,5%", "El 10,2%", "El 12,8%", "El 15,3%"], ans: 2, es: "P\u00E1rrafo 2: \u0022El 12,8% del PIB.\u0022", zh: "旅游业占西班牙 GDP 的 12.8%。" },
+    { q: "\u00BFA qu\u00E9 se refiere \u0022este modelo\u0022 en la cita de la profesora G\u00F3mez (p\u00E1rrafo 4)?", opts: ["Al modelo educativo", "Al modelo tur\u00EDstico actual", "Al modelo agr\u00EDcola", "Al modelo sanitario"], ans: 1, es: "P\u00E1rrafo 4: \u0022Pero debemos preguntarnos si este modelo es sostenible a largo plazo\u0022, refiri\u00E9ndose al modelo tur\u00EDstico.", zh: "\u201C这种模式\u201D 指的是当前的旅游模式。" },
+    { q: "\u00BFSeg\u00FAn el texto, cu\u00E1nto han subido los precios de la vivienda en zonas tur\u00EDsticas?", opts: ["Un 20%", "Un 30%", "Un 40%", "Un 50%"], ans: 2, es: "P\u00E1rrafo 6: \u0022Los precios de la vivienda han subido un 40% en la \u00FAltima d\u00E9cada.\u0022", zh: "旅游区房价在过去十年上涨了 40%。" },
+    { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA?", opts: ["El turismo genera m\u00E1s de 2,7 millones de empleos", "Palma registr\u00F3 una ocupaci\u00F3n hotelera del 94,3% en agosto de 2025", "Todas las viviendas tur\u00EDsticas en Espa\u00F1a operan con licencia", "Baleares ha aprobado una moratoria para nuevas plazas hoteleras"], ans: 2, es: "P\u00E1rrafo 8: \u0022Se estima que otras 150.000 operan sin licencia.\u0022", zh: "并非所有旅游住房都有许可证——估计有 15 万套无证经营。" },
+    { q: "\u00BFQu\u00E9 aspecto NO menciona el texto como consecuencia del turismo de masas?", opts: ["Subida del precio de la vivienda", "P\u00E9rdida de identidad de los barrios", "Aumento del desempleo", "Expulsi\u00F3n de residentes del centro"], ans: 2, es: "El texto no menciona el aumento del desempleo como consecuencia.", zh: "文章未提及失业率上升作为大众旅游的后果。" },
+    { q: "Seg\u00FAn el texto, \u00BFqu\u00E9 medida ha tomado \u00C1msterdam?", opts: ["Aumentar los impuestos tur\u00EDsticos", "Prohibir nuevos hoteles en el centro hist\u00F3rico", "Limitar el n\u00FAmero de vuelos", "Cerrar todos los pisos tur\u00EDsticos"], ans: 1, es: "P\u00E1rrafo 13: \u0022\u00C1msterdam ha prohibido la construcci\u00F3n de nuevos hoteles en el centro hist\u00F3rico.\u0022", zh: "阿姆斯特丹禁止在历史中心新建酒店。" },
+    { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre el futuro del turismo en Espa\u00F1a?", opts: ["El turismo desaparecer\u00E1 en diez a\u00F1os", "Solo afecta a las islas", "Se necesita un modelo sostenible que equilibre los intereses de todos", "Aumentar el n\u00FAmero de turistas resolver\u00E1 los problemas"], ans: 2, es: "P\u00E1rrafo 14: \u0022Se trata de gestionar los flujos tur\u00EDsticos para que todos ganen.\u0022", zh: "需要一个平衡各方利益的可持续旅游模式。" }
+    ]
+    },
+  b2:     {
+    paragraphs: [
+    { es: "En el verano de 2026, la palabra \u0022turismofobia\u0022 ha dejado de ser un t\u00E9rmino acad\u00E9mico para convertirse en una realidad cotidiana en las calles de varias ciudades espa\u00F1olas. Pintadas como \u0022Tourists go home\u0022 o \u0022Tu lujo, mi miseria\u0022 aparecen cada vez con m\u00E1s frecuencia en fachadas de Barcelona, Palma y San Sebasti\u00E1n.", zh: "2026 年夏天，\u201C旅游恐惧症\u201D一词已从学术术语变为西班牙多个城市街头的日常现实。\u201C游客回家\u201D或\u201C你的奢华，我的苦难\u201D等涂鸦在巴塞罗那、帕尔马和圣塞巴斯蒂安的建筑物外墙越来越频繁地出现。" },
+    { es: "Seg\u00FAn un informe del Observatorio de Turismo Sostenible de la Universidad de las Islas Baleares, el 67% de los residentes de Palma considera que su ciudad ha superado el l\u00EDmite de capacidad tur\u00EDstica. En Barcelona, este porcentaje asciende al 73%, seg\u00FAn una encuesta municipal realizada en mayo de 2026.", zh: "据巴利阿里群岛大学可持续旅游观察站报告，67% 的帕尔马居民认为其城市已超过旅游承载能力上限。据 2026 年 5 月的一项市政调查，巴塞罗那这一比例升至 73%。" },
+    { es: "\u0022La turismofobia no es un rechazo al turista como persona, sino una respuesta a un modelo que prioriza el beneficio econ\u00F3mico inmediato sobre la calidad de vida de los residentes\u0022, explica la doctora Marina Llorente, soci\u00F3loga de la Universidad Pompeu Fabra y autora del libro \u003Ci\u003ECiudades en venta\u003C/i\u003E.", zh: "庞培法布拉大学社会学家、《待售城市》一书作者玛丽娜·略伦特博士解释道：\u201C旅游恐惧症不是对游客个人的排斥，而是对一种将眼前经济利益置于居民生活质量之上的模式的回应。\u201D" },
+    { es: "Los datos econ\u00F3micos ilustran la magnitud del desequilibrio. Seg\u00FAn la consultora Exceltur, los ingresos por turismo en Espa\u00F1a alcanzaron los 125.000 millones de euros en 2025, un 11% m\u00E1s que en 2024. Sin embargo, el salario medio en el sector hotelero apenas supera los 1.300 euros mensuales.", zh: "经济数据说明了失衡的规模。据 Exceltur 咨询公司数据，2025 年西班牙旅游收入达到 1250 亿欧元，比 2024 年增长 11%。然而，酒店业的平均工资勉强超过每月 1300 欧元。" },
+    { es: "La brecha entre los beneficios del turismo y su distribuci\u00F3n social es cada vez m\u00E1s evidente. \u0022Vemos c\u00F3mo los grandes grupos hoteleros y las plataformas de alquiler vacacional acumulan beneficios r\u00E9cord mientras los trabajadores del sector apenas llegan a fin de mes\u0022, denuncia Carlos Ram\u00EDrez, secretario general del sindicato CCOO en Baleares.", zh: "旅游收益与社会分配之间的鸿沟日益明显。CCOO 工会巴利阿里群岛总书记卡洛斯·拉米雷斯谴责道：\u201C我们看到大型酒店集团和度假租赁平台积累创纪录利润，而行业工人却勉强维持生计。\u201D" },
+    { es: "Uno de los detonantes de la turismofobia ha sido el impacto en la vivienda. Seg\u00FAn el Banco de Espa\u00F1a, el precio del alquiler en las zonas tur\u00EDsticas ha crecido un 55% desde 2019, mientras que los salarios solo han aumentado un 9% en el mismo per\u00EDodo.", zh: "旅游恐惧症的导火索之一是对住房的影响。据西班牙央行数据，自 2019 年以来旅游区租金上涨了 55%，而同期工资仅增长 9%。" },
+    { es: "El caso de Ibiza es paradigm\u00E1tico. La isla recibe m\u00E1s de 3 millones de turistas al a\u00F1o, pero muchos trabajadores del sector servicios se ven obligados a vivir en caravanas o a compartir habitaci\u00F3n con desconocidos porque no pueden pagar un alquiler.", zh: "伊维萨岛的情况堪称典型。该岛每年接待超过 300 万游客，但许多服务业工人被迫住在房车中或与陌生人合住一间房，因为他们付不起租金。" },
+    { es: "\u0022En Ibiza hemos llegado a una situaci\u00F3n absurda: los turistas duermen en hoteles de lujo y los trabajadores que les sirven duermen en furgonetas\u0022, relata Joan Ferrer, portavoz de la Plataforma de Afectados por la Vivienda de Ibiza.", zh: "伊维萨住房受影响者平台发言人乔安·费雷尔讲述道：\u201C在伊维萨，我们已到了荒谬的地步：游客睡在豪华酒店，而为他们服务的工人睡在货车里。\u201D" },
+    { es: "Las protestas han escalado. En julio de 2026, m\u00E1s de 20.000 personas se manifestaron en Palma bajo el lema \u0022Mallorca no se vende\u0022. En Barcelona, colectivos vecinales han organizado \u0022paseos reivindicativos\u0022 para se\u00F1alar los pisos tur\u00EDsticos ilegales.", zh: "抗议活动已升级。2026 年 7 月，超过 2 万人在帕尔马举行示威，口号是\u201C马略卡不出售\u201D。在巴塞罗那，居民团体组织了\u201C维权游行\u201D以指认非法旅游公寓。" },
+    { es: "El doctor Josep Antoni P\u00E9rez, economista de la Universidad de Valencia y especialista en pol\u00EDticas tur\u00EDsticas, advierte de las consecuencias de la inacci\u00F3n: \u0022Si no actuamos ya, en cinco a\u00F1os veremos c\u00F3mo el turismo destruye aquello que lo hizo atractivo. Es un suicidio econ\u00F3mico a c\u00E1mara lenta.\u0022", zh: "瓦伦西亚大学经济学家、旅游政策专家何塞普·安东尼·佩雷斯博士警告不作为的后果：\u201C如果我们现在不采取行动，五年内我们将看到旅游业如何摧毁使其有吸引力的东西。这是一场慢动作的经济自杀。\u201D" },
+    { es: "Algunas ciudades han empezado a reaccionar. Barcelona ha anunciado la eliminaci\u00F3n de las 10.101 licencias de piso tur\u00EDstico existentes para 2028. Palma ha limitado la entrada de cruceros a un m\u00E1ximo de tres al d\u00EDa.", zh: "一些城市已开始做出反应。巴塞罗那宣布到 2028 年取消现有的 10,101 个旅游公寓许可证。帕尔马将邮轮停靠限制为每天最多三艘。" },
+    { es: "La doctora Llorente insiste en que el problema no es el turismo en s\u00ED, sino su gesti\u00F3n: \u0022El turismo bien gestionado es una fuente de riqueza y de intercambio cultural. El problema es cuando se convierte en un monocultivo econ\u00F3mico que devora la ciudad.\u0022", zh: "略伦特博士坚持认为问题不在于旅游本身，而在于其管理：\u201C管理得当的旅游业是财富和文化交流的源泉。问题在于当它变成吞噬城市的经济单一作物时。\u201D" },
+    { es: "Seg\u00FAn datos de la Organizaci\u00F3n Mundial del Turismo (OMT), el 40% de los destinos tur\u00EDsticos mundiales carece de un plan de gesti\u00F3n de la capacidad de carga. Espa\u00F1a no es una excepci\u00F3n: solo 3 de sus 50 provincias tienen un plan de turismo sostenible aprobado.", zh: "据世界旅游组织（UNWTO）数据，全球 40% 的旅游目的地缺乏承载能力管理计划。西班牙也不例外：50 个省份中只有 3 个拥有获批的可持续旅游计划。" },
+    { es: "\u0022Necesitamos pasar del turismo de volumen al turismo de valor\u0022, concluye el doctor P\u00E9rez. \u0022Eso implica decisiones pol\u00EDticas valientes: tasas tur\u00EDsticas, l\u00EDmites de aforo, regulaci\u00F3n del alquiler vacacional y, sobre todo, escuchar a los vecinos. Sin cohesi\u00F3n social, el turismo est\u00E1 condenado a devorarse a s\u00ED mismo.\u0022", zh: "佩雷斯博士总结道：\u201C我们需要从数量型旅游转向价值型旅游。这意味着勇敢的政治决策：旅游税、容量限制、度假租赁监管，最重要的是倾听居民的声音。没有社会凝聚力，旅游业注定会自我吞噬。\u201D" },
+    { es: "Mientras el debate contin\u00FAa en los despachos, en las calles la tensi\u00F3n sigue creciendo. La pregunta que flota en el ambiente es si Espa\u00F1a ser\u00E1 capaz de encontrar el equilibrio antes de que la gallina de los huevos de oro deje de ponerlos.", zh: "当争论在办公室里继续进行时，街头的紧张局势仍在加剧。空气中弥漫的问题是：西班牙能否在下金蛋的母鸡停止下蛋之前找到平衡。" }
+    ],
+    dele: "虚拟式过去时(se convirtiera, priorizara)；虚拟式现在时(actuemos, devore, deje de poner)；条件式(ser\u00EDa, implicar\u00EDa)；复合连接词(sin embargo, mientras que, sobre todo)；学术词汇(paradigm\u00E1tico, monocultivo, cohesi\u00F3n social, capacidad de carga, inacci\u00F3n)；被动语态(ha sido identificado, fueron aprobadas)；直接引语(explica, denuncia, relata, advierte, insiste, concluye)。",
+    hardWords: [
+    { w: "turismofobia", m: "旅游恐惧症（对过度旅游的社会反弹）" },
+    { w: "capacidad de carga", m: "承载能力（目的地可承受的最大游客量）" },
+    { w: "monocultivo econ\u00F3mico", m: "经济单一作物（过度依赖单一产业）" },
+    { w: "paradigm\u00E1tico", m: "典型的；典范的" },
+    { w: "inacci\u00F3n", m: "不作为；无行动" },
+    { w: "cohesi\u00F3n social", m: "社会凝聚力" },
+    { w: "detonante", m: "导火索；触发因素" },
+    { w: "suicidio econ\u00F3mico", m: "经济自杀" },
+    { w: "aforo", m: "容量；最大容纳人数" },
+    { w: "gallina de los huevos de oro", m: "下金蛋的母鸡（比喻：自毁财源的短视行为）" }
+    ],
+    quiz: [
+    { q: "\u00BFQu\u00E9 porcentaje de residentes de Barcelona considera que su ciudad ha superado el l\u00EDmite de capacidad tur\u00EDstica?", opts: ["El 57%", "El 67%", "El 73%", "El 83%"], ans: 2, es: "P\u00E1rrafo 2: \u0022En Barcelona, este porcentaje asciende al 73%.\u0022", zh: "巴塞罗那 73% 的居民认为城市已超过旅游承载上限。" },
+    { q: "\u00BFCu\u00E1nto ha crecido el precio del alquiler en zonas tur\u00EDsticas desde 2019 seg\u00FAn el Banco de Espa\u00F1a?", opts: ["Un 35%", "Un 45%", "Un 55%", "Un 65%"], ans: 2, es: "P\u00E1rrafo 6: \u0022El precio del alquiler ha crecido un 55% desde 2019.\u0022", zh: "自 2019 年以来旅游区租金上涨了 55%。" },
+    { q: "\u00BFA qu\u00E9 se refiere \u0022suicidio econ\u00F3mico a c\u00E1mara lenta\u0022 en la cita del doctor P\u00E9rez?", opts: ["A la crisis financiera de 2008", "A la destrucci\u00F3n progresiva del atractivo tur\u00EDstico por la sobreexplotaci\u00F3n", "Al cierre de hoteles", "A la subida de impuestos"], ans: 1, es: "P\u00E1rrafo 10: \u0022El turismo destruye aquello que lo hizo atractivo. Es un suicidio econ\u00F3mico a c\u00E1mara lenta.\u0022", zh: "\u201C慢动作经济自杀\u201D 指过度开发逐步摧毁旅游吸引力。" },
+    { q: "\u00BFSeg\u00FAn la OMT, qu\u00E9 porcentaje de destinos tur\u00EDsticos carece de plan de gesti\u00F3n de capacidad de carga?", opts: ["El 20%", "El 30%", "El 40%", "El 50%"], ans: 2, es: "P\u00E1rrafo 13: \u0022El 40% de los destinos tur\u00EDsticos mundiales carece de un plan de gesti\u00F3n de la capacidad de carga.\u0022", zh: "全球 40% 的旅游目的地缺乏承载能力管理计划。" },
+    { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA?", opts: ["Barcelona eliminar\u00E1 las licencias de piso tur\u00EDstico para 2028", "Palma ha limitado los cruceros a tres al d\u00EDa", "Todos los trabajadores tur\u00EDsticos en Ibiza viven en hoteles de lujo", "M\u00E1s de 20.000 personas se manifestaron en Palma en julio de 2026"], ans: 2, es: "P\u00E1rrafo 7: \u0022Muchos trabajadores se ven obligados a vivir en caravanas.\u0022", zh: "并非所有旅游工人都住在豪华酒店——许多人被迫住在房车里。" },
+    { q: "\u00BFQu\u00E9 medida NO menciona el texto para combatir la turismofobia?", opts: ["Eliminar licencias de pisos tur\u00EDsticos", "Limitar la entrada de cruceros", "Prohibir la entrada de todos los turistas extranjeros", "Aprobar planes de turismo sostenible"], ans: 2, es: "El texto no menciona la prohibici\u00F3n total de turistas extranjeros.", zh: "文章未提及禁止所有外国游客入境。" },
+    { q: "Seg\u00FAn el texto, \u00BFcu\u00E1ntos ingresos por turismo alcanz\u00F3 Espa\u00F1a en 2025?", opts: ["95.000 millones de euros", "105.000 millones de euros", "115.000 millones de euros", "125.000 millones de euros"], ans: 3, es: "P\u00E1rrafo 4: \u0022Los ingresos por turismo alcanzaron los 125.000 millones de euros.\u0022", zh: "2025 年西班牙旅游收入达到 1250 亿欧元。" },
+    { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre la soluci\u00F3n a la turismofobia seg\u00FAn el texto?", opts: ["Construir m\u00E1s hoteles resolver\u00E1 el problema", "La turismofobia es inevitable y no tiene soluci\u00F3n", "Se necesita pasar del turismo de volumen al de valor con decisiones pol\u00EDticas valientes", "Los turistas deben dejar de viajar a Espa\u00F1a"], ans: 2, es: "P\u00E1rrafo 14: \u0022Necesitamos pasar del turismo de volumen al turismo de valor.\u0022", zh: "需要通过勇敢的政治决策从数量型旅游转向价值型旅游。" }
+    ]
+    }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quizEl = document.getElementById(`${key}-quiz`);
+  const quizCount = a.quiz.length;
+  quizEl.innerHTML = `<h3>📝 阅读理解题（${quizCount} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+
+// 给每个 quiz 绑定交互
+['a1','a2','b1','b2'].forEach(level => {
+  const items = document.querySelectorAll(`#${level}-quiz .quiz-item`);
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        opts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(`${level}-explain-${idx}`);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(`${level}-score-${idx}`);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+    };
+  });
+});
+
+
+
+
+
+</script>
+</body>
+</html>
