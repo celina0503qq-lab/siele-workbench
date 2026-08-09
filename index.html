@@ -10496,7 +10496,7 @@ async function renderRefineBody(){
 
       // DELE box (full) + user note
       const noteKey = `refine_note_${currentRefineDate}_${lvKey}`;
-      const savedNote = (window.__refineNotes || {})[noteKey] || '';
+      const savedNote = _getRefineNote(noteKey);
       const deleHtml = a.dele ? `<div class="refine-dele-box">
         <b>🎯 DELE ${lv} 考点：</b>${a.dele}
         <div class="refine-note-block">
@@ -10656,7 +10656,7 @@ window.submitRefineQuiz = function(levelKey, qIdx){
   try {
     const totalQ = (article.quiz||[]).length;
     if(totalQ>0 && typeof RefineQuizDB!=='undefined'){
-      RefineQuizDB.recordAnswer(currentRefineDate, levelKey.toUpperCase(), qIdx, chosen, correct, totalQ);
+      RefineQuizDB.recordAnswer(currentRefineDate, levelKey, qIdx, chosen, correct, totalQ);
     }
   } catch(e){}
 };
@@ -10698,7 +10698,7 @@ window.restoreRefineQuizUI = function(levelKey, attempt){
 // Redo: reset quiz for current level
 window.redoRefineQuiz = function(levelKey){
   if(!confirm('确定要重新做题吗？之前的答题记录会保留在历史中。')) return;
-  try { if(typeof RefineQuizDB!=='undefined') RefineQuizDB.resetQuiz(currentRefineDate, levelKey.toUpperCase()); } catch(e){}
+  try { if(typeof RefineQuizDB!=='undefined') RefineQuizDB.resetQuiz(currentRefineDate, levelKey); } catch(e){}
   // Reset in-memory state
   if(window.__refineQuizState && window.__refineQuizState[levelKey]){
     window.__refineQuizState[levelKey] = { startTs: Date.now(), submitted: 0, correct: 0 };
@@ -10731,7 +10731,7 @@ window.toggleRefineQuizHistory = function(levelKey){
   if(hist.classList.contains('show')){hist.classList.remove('show');return;}
   // Populate history
   var listEl = hist.querySelector('[data-history-list]');
-  var attempts = (typeof RefineQuizDB!=='undefined') ? RefineQuizDB.getAttempts(currentRefineDate, levelKey.toUpperCase()) : [];
+  var attempts = (typeof RefineQuizDB!=='undefined') ? RefineQuizDB.getAttempts(currentRefineDate, levelKey) : [];
   if(!attempts.length){listEl.innerHTML='<span style="color:var(--soft)">暂无记录</span>';}
   else {
     listEl.innerHTML = attempts.map(function(a,i){
@@ -11283,21 +11283,76 @@ function renderScoreCard(lvKey, card, status, score){
   wordPanel.innerHTML = score.wordDetail || '';
 }
 
-// ===== User notes =====
+// ===== User notes (migrated to swa_quiz_v1) =====
 window.__refineNotes = {};
 try { var stored = localStorage.getItem('refine_notes_v1'); if(stored) window.__refineNotes = JSON.parse(stored); } catch(e){}
+
+// Migrate old refine_notes_v1 → swa_quiz_v1 quizzes[date][level].notes
+try {
+  if (typeof RefineQuizDB !== 'undefined' && Object.keys(window.__refineNotes).length > 0) {
+    var _db = RefineQuizDB.load();
+    Object.keys(window.__refineNotes).forEach(function(noteKey) {
+      var parts = noteKey.split('_');
+      if (parts.length < 5) return;
+      var date = parts[2], lv = parts[3];
+      var text = window.__refineNotes[noteKey];
+      if (!text) return;
+      if (!_db.quizzes[date]) _db.quizzes[date] = {};
+      if (!_db.quizzes[date][lv]) _db.quizzes[date][lv] = { attempts: [], notes: '' };
+      if (!_db.quizzes[date][lv].notes) _db.quizzes[date][lv].notes = text;
+    });
+    RefineQuizDB.save(_db);
+  }
+} catch(e){}
+
+// Read note from swa_quiz_v1 (fallback to old refine_notes_v1)
+function _getRefineNote(noteKey) {
+  try {
+    if (typeof RefineQuizDB !== 'undefined') {
+      var parts = noteKey.split('_');
+      if (parts.length >= 5) {
+        var date = parts[2], lv = parts[3];
+        var entry = (RefineQuizDB.load().quizzes[date] || {})[lv];
+        if (entry && entry.notes) return entry.notes;
+      }
+    }
+  } catch(e){}
+  return (window.__refineNotes || {})[noteKey] || '';
+}
+
+// Save note to swa_quiz_v1
+function _setRefineNote(noteKey, text) {
+  try {
+    if (typeof RefineQuizDB !== 'undefined') {
+      var parts = noteKey.split('_');
+      if (parts.length >= 5) {
+        var date = parts[2], lv = parts[3];
+        var db = RefineQuizDB.load();
+        if (!db.quizzes[date]) db.quizzes[date] = {};
+        if (!db.quizzes[date][lv]) db.quizzes[date][lv] = { attempts: [], notes: '' };
+        db.quizzes[date][lv].notes = text;
+        db.quizzes[date][lv].notesTs = Date.now();
+        RefineQuizDB.save(db);
+        return;
+      }
+    }
+  } catch(e){}
+  // Fallback to old storage
+  window.__refineNotes[noteKey] = text;
+  try { localStorage.setItem('refine_notes_v1', JSON.stringify(window.__refineNotes)); } catch(e){}
+}
 
 function toggleRefineNote(toggleEl, noteKey){
   var textarea = document.getElementById('refine-note-' + noteKey);
   if(!textarea) return;
   var isShown = textarea.classList.contains('show');
-  if(isShown){ textarea.classList.remove('show'); toggleEl.textContent = '📝 我的笔记' + (window.__refineNotes[noteKey] ? ' (已保存)' : ''); }
+  var hasNote = !!_getRefineNote(noteKey);
+  if(isShown){ textarea.classList.remove('show'); toggleEl.textContent = '📝 我的笔记' + (hasNote ? ' (已保存)' : ''); }
   else { textarea.classList.add('show'); textarea.focus(); toggleEl.textContent = '📝 收起笔记'; }
 }
 
 function saveRefineNote(key, value){
-  window.__refineNotes[key] = value;
-  try { localStorage.setItem('refine_notes_v1', JSON.stringify(window.__refineNotes)); } catch(e){}
+  _setRefineNote(key, value);
   var savedEl = document.getElementById('note-saved-' + key);
   if(savedEl){ savedEl.classList.add('show'); clearTimeout(savedEl._timer); savedEl._timer = setTimeout(function(){ savedEl.classList.remove('show'); }, 1500); }
 }
@@ -11323,7 +11378,7 @@ window.renderRefineBody = async function(){
         const lvs = currentRefineLevel ? [currentRefineLevel] : ['A1','A2','B1','B2'];
         lvs.forEach(function(lv){
           var lvKey=lv.toLowerCase();
-          var att=RefineQuizDB.getLatestAttempt(currentRefineDate, lv.toUpperCase());
+          var att=RefineQuizDB.getLatestAttempt(currentRefineDate, lv.toLowerCase());
           if(att && att.answers && att.answers.length>0){
             window.restoreRefineQuizUI(lvKey, att);
           }
