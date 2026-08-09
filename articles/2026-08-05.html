@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-05</title>
+<style>
+:root {
+  --brand: #c0392b; --brand2: #e74c3c; --bg: #fefefe; --card: #fff;
+  --text: #2c3e50; --muted: #7f8c8d; --border: #ecf0f1; --shadow: 0 2px 12px rgba(0,0,0,.06);
+  --a1: #27ae60; --a2: #2980b9; --b1: #e67e22; --b2: #8e44ad;
+  --correct: #27ae60; --wrong: #e74c3c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f6fa; color: var(--text); line-height: 1.7; }
+.topbar { background: linear-gradient(135deg, var(--brand), var(--brand2)); color: #fff; padding: 2rem 1.5rem; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(192,57,43,.25); }
+.topbar h1 { font-size: 1.6rem; margin-bottom: .4rem; }
+.topbar .sub { font-size: .9rem; opacity: .9; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+.toc { background: var(--card); border-radius: 12px; padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; }
+.toc h2 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--brand); }
+.toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .6rem; }
+.toc-grid a { display: block; padding: .6rem 1rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: var(--text); font-size: .9rem; transition: .2s; border: 1px solid var(--border); }
+.toc-grid a:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+.jump-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.jump-links a { padding: .35rem .8rem; background: var(--card); border-radius: 20px; text-decoration: none; color: var(--muted); font-size: .82rem; border: 1px solid var(--border); transition: .2s; }
+.jump-links a:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.vocab-card { background: var(--card); border-radius: 10px; padding: 1.2rem; box-shadow: var(--shadow); border-top: 4px solid var(--brand); transition: .2s; }
+.vocab-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.vocab-card .lema { font-size: 1.15rem; font-weight: 700; color: var(--brand); margin-bottom: .3rem; }
+.vocab-card .ipa { font-size: .8rem; color: var(--muted); margin-bottom: .4rem; }
+.vocab-card .pos { display: inline-block; background: #f0f0f0; padding: .1rem .5rem; border-radius: 4px; font-size: .75rem; color: var(--muted); margin-bottom: .5rem; }
+.vocab-card .sig { font-size: .9rem; margin-bottom: .4rem; color: var(--text); }
+.vocab-card .ej { font-size: .85rem; color: #555; margin-bottom: .2rem; font-style: italic; }
+.vocab-card .ej-zh { font-size: .82rem; color: var(--muted); margin-bottom: .5rem; }
+.vocab-card .tip { font-size: .78rem; color: #888; border-top: 1px dashed var(--border); padding-top: .5rem; line-height: 1.5; }
+.article { background: var(--card); border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 2rem; overflow: hidden; }
+.article header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+.article header h2 { font-size: 1.2rem; flex: 1 1 100%; margin-top: .5rem; }
+.level-tag { display: inline-block; padding: .25rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 700; color: #fff; }
+.level-tag.A1 { background: var(--a1); } .level-tag.A2 { background: var(--a2); }
+.level-tag.B1 { background: var(--b1); } .level-tag.B2 { background: var(--b2); }
+.source-cta { padding: .25rem .75rem; border-radius: 20px; font-size: .78rem; text-decoration: none; border: 1px solid; }
+.source-cta.A1 { color: var(--a1); border-color: var(--a1); } .source-cta.A2 { color: var(--a2); border-color: var(--a2); }
+.source-cta.B1 { color: var(--b1); border-color: var(--b1); } .source-cta.B2 { color: var(--b2); border-color: var(--b2); }
+.meta { font-size: .82rem; color: var(--muted); }
+.bilingual { padding: 1.5rem; }
+.para { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid #f0f0f0; align-items: start; }
+.para:last-child { border-bottom: none; }
+.para .es { font-size: .95rem; color: var(--text); }
+.para .zh { font-size: .9rem; color: var(--muted); }
+.hl { background: #fff3cd; padding: 0 .2rem; border-radius: 3px; font-weight: 600; }
+.dele-points { margin: 0 1.5rem 1.5rem; padding: 1rem; background: #f8f4ff; border-left: 4px solid #8e44ad; border-radius: 0 8px 8px 0; font-size: .85rem; color: #555; line-height: 1.7; }
+.quiz-section { padding: 0 1.5rem 1.5rem; }
+.quiz-section h3 { font-size: 1.05rem; margin-bottom: 1rem; color: var(--brand); }
+.quiz-item { background: #fafafa; border-radius: 8px; padding: 1rem; margin-bottom: .8rem; }
+.q-title { font-weight: 600; margin-bottom: .6rem; font-size: .92rem; }
+.quiz-opts { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+.quiz-opts li { padding: .5rem .8rem; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: .88rem; transition: .2s; background: #fff; }
+.quiz-opts li:hover { background: #eef2ff; border-color: #a0a0ff; }
+.quiz-opts li.selected { background: #dbeafe; border-color: #3b82f6; font-weight: 600; }
+.quiz-opts li.correct { background: #d4edda; border-color: var(--correct); color: var(--correct); font-weight: 700; }
+.quiz-opts li.wrong { background: #f8d7da; border-color: var(--wrong); color: var(--wrong); text-decoration: line-through; }
+.quiz-opts li.disabled { pointer-events: none; opacity: .8; }
+.quiz-submit { margin-top: .6rem; padding: .4rem 1.2rem; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: .85rem; transition: .2s; }
+.quiz-submit:hover { background: var(--brand2); }
+.quiz-score { display: none; margin-left: .8rem; font-size: .85rem; font-weight: 700; }
+.quiz-score.show { display: inline; }
+.quiz-score.full { color: var(--correct); }
+.quiz-score.zero { color: var(--wrong); }
+.quiz-explain { display: none; margin-top: .6rem; padding: .8rem; background: #fefefe; border: 1px solid var(--border); border-radius: 6px; font-size: .84rem; line-height: 1.6; }
+.quiz-explain.show { display: block; }
+.footer { text-align: center; padding: 2rem; color: var(--muted); font-size: .82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+.footer p { margin-bottom: .3rem; }
+@media (max-width: 720px) {
+  .para { grid-template-columns: 1fr; gap: .3rem; }
+  .vocab-grid { grid-template-columns: 1fr; }
+  .topbar h1 { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>📚 西语学习每日推送 · 2026-08-05</h1>
+  <div class="sub">第3期 · 周三 · 超市购物 · 西班牙美食文化 · 数字游民潮 · 欧洲干旱危机</div>
+</div>
+
+<div class="wrap">
+<div class="toc" id="toc">
+  <h2>📑 本日内容概览</h2>
+  <div class="toc-grid">
+    <a href="#vocab">🗂️ 15 个高频词</a>
+    <a href="#a1">🟢 A1 精读：超市购物</a>
+    <a href="#a2">🔵 A2 精读：西班牙美食文化</a>
+    <a href="#b1">🟠 B1 精读：数字游民潮</a>
+    <a href="#b2">🟣 B2 精读：欧洲干旱危机</a>
+  </div>
+</div>
+
+<div class="jump-links">
+  <h3 style="font-size:.85rem;color:var(--muted);margin-right:.5rem;">🔗 快速跳转</h3>
+  <a href="#vocab"># 词汇</a>
+  <a href="#a1"># A1 阅读</a>
+  <a href="#a2"># A2 阅读</a>
+  <a href="#b1"># B1 阅读</a>
+  <a href="#b2"># B2 阅读</a>
+</div>
+
+<section id="vocab">
+  <h2 style="color:var(--brand);margin-bottom:.5rem;">🗂️ 今日 15 个高频词</h2>
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<article class="article" id="a1">
+  <header>
+    <span class="level-tag A1">A1</span>
+    <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura/el-fin-de-semana-texto-para-completar" target="_blank" rel="noopener">🔗 DELE Ahora 原文 ↗</a>
+    <span style="font-size:.82rem;color:var(--muted);">10段 · 陈述式现在时</span>
+    <h2>🛒 De compras en el supermercado</h2>
+    <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+  </header>
+  <div class="bilingual" id="a1-content"></div>
+  <div class="dele-points" id="a1-dele"></div>
+  <div class="quiz-section" id="a1-quiz"></div>
+</article>
+
+<article class="article" id="a2">
+  <header>
+    <span class="level-tag A2">A2</span>
+    <a class="source-cta A2" href="https://www.rtve.es/noticias/gastronomia/" target="_blank" rel="noopener">🔗 RTVE 原文 ↗</a>
+    <span style="font-size:.82rem;color:var(--muted);">10段 · 现在完成时</span>
+    <h2>🍽️ La gastronomía española: un viaje por sus regiones</h2>
+    <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+  </header>
+  <div class="bilingual" id="a2-content"></div>
+  <div class="dele-points" id="a2-dele"></div>
+  <div class="quiz-section" id="a2-quiz"></div>
+</article>
+
+<article class="article" id="b1">
+  <header>
+    <span class="level-tag B1">B1</span>
+    <a class="source-cta B1" href="https://www.bbc.com/mundo/articles/c5yw679ggjvo" target="_blank" rel="noopener">🔗 BBC Mundo 原文 ↗</a>
+    <span style="font-size:.82rem;color:var(--muted);">15段 · 虚拟式+条件式</span>
+    <h2>💻 Nómadas digitales en España: ¿oportunidad o amenaza?</h2>
+    <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+  </header>
+  <div class="bilingual" id="b1-content"></div>
+  <div class="dele-points" id="b1-dele"></div>
+  <div class="quiz-section" id="b1-quiz"></div>
+</article>
+
+<article class="article" id="b2">
+  <header>
+    <span class="level-tag B2">B2</span>
+    <a class="source-cta B2" href="https://www.bbc.com/mundo/articles/c5yv2rlzd40o" target="_blank" rel="noopener">🔗 BBC Mundo 原文 ↗</a>
+    <span style="font-size:.82rem;color:var(--muted);">15段 · 虚拟式+条件完成时+被动语态</span>
+    <h2>🌍 La gran sequía europea: crisis hídrica y cambio climático</h2>
+    <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+  </header>
+  <div class="bilingual" id="b2-content"></div>
+  <div class="dele-points" id="b2-dele"></div>
+  <div class="quiz-section" id="b2-quiz"></div>
+</article>
+
+<div class="footer">
+  <p>📅 推送日期：2026-08-05（星期三） · 推送时间：每日 10:30 自动生成</p>
+  <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+  <p>配套 Word 版：articles/2026-08-05.docx</p>
+</div>
+</div>
+
+<script src="data/2026-08-05.js"></script>
+<script>
+(function(){
+  const WORDS = window.WORDS || [];
+  const ARTICLES = window.ARTICLES || {};
+
+  function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  function renderVocab() {
+    const grid = document.getElementById('vocabGrid');
+    if (!grid || !WORDS.length) return;
+    grid.innerHTML = WORDS.map(w => `
+      <div class="vocab-card">
+        <div class="lema">${esc(w.lema)}</div>
+        <div class="ipa">${esc(w.ipa)}</div>
+        <div class="pos">${esc(w.pos)}</div>
+        <div class="sig">${esc(w.significado)}</div>
+        <div class="ej">${esc(w.ejemplo_es)}</div>
+        <div class="ej-zh">${esc(w.ejemplo_zh)}</div>
+        <div class="tip">💡 ${w.tip}</div>
+      </div>
+    `).join('');
+  }
+
+  function highlightWords(text, words) {
+    if (!words || !words.length) return esc(text);
+    let html = esc(text);
+    const sorted = [...words].sort((a, b) => b.w.length - a.w.length);
+    sorted.forEach(hw => {
+      const escaped = hw.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp('(' + escaped + ')', 'gi');
+      html = html.replace(re, '<span class="hl">$1</span>');
+    });
+    return html;
+  }
+
+  function renderArticle(key) {
+    const a = ARTICLES[key];
+    if (!a) return;
+
+    const content = document.getElementById(key + '-content');
+    if (content) {
+      content.innerHTML = a.paragraphs.map(p => `
+        <div class="para">
+          <div class="es">${highlightWords(p.es, a.hardWords)}</div>
+          <div class="zh">${esc(p.zh)}</div>
+        </div>
+      `).join('');
+    }
+
+    const dele = document.getElementById(key + '-dele');
+    if (dele && a.dele) {
+      const hwList = (a.hardWords || []).map(h => `<b>${esc(h.w)}</b>（${esc(h.m)}）`).join(' · ');
+      dele.innerHTML = `<b>🎯 DELE 考点：</b>${esc(a.dele)}<br><br><b>📌 难词清单：</b>${hwList}`;
+    }
+
+    const quiz = document.getElementById(key + '-quiz');
+    if (quiz && a.quiz) {
+      quiz.innerHTML = '<h3>📝 阅读理解题</h3>' + a.quiz.map((q, i) => `
+        <div class="quiz-item" data-idx="${i}">
+          <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+          <ul class="quiz-opts">
+            ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+          </ul>
+          <button class="quiz-submit">提交</button>
+          <span class="quiz-score" id="${key}-score-${i}"></span>
+          <div class="quiz-explain" id="${key}-explain-${i}">
+            <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+            <div style="color:var(--muted);margin-top:.3rem;"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  renderVocab();
+  ['a1','a2','b1','b2'].forEach(renderArticle);
+
+  ['a1','a2','b1','b2'].forEach(level => {
+    const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    items.forEach((item, idx) => {
+      const submit = item.querySelector('.quiz-submit');
+      const opts = item.querySelectorAll('.quiz-opts li');
+      let chosen = -1;
+
+      opts.forEach((li, j) => {
+        li.addEventListener('click', () => {
+          if (li.classList.contains('disabled')) return;
+          opts.forEach(o => o.classList.remove('selected'));
+          li.classList.add('selected');
+          chosen = j;
+        });
+      });
+
+      submit.onclick = () => {
+        if (chosen === -1) { alert('请先选择一个答案！'); return; }
+        const q = ARTICLES[level].quiz[idx];
+        opts.forEach((li, j) => {
+          li.classList.add('disabled');
+          if (j === q.ans) li.classList.add('correct');
+          if (j === chosen && j !== q.ans) li.classList.add('wrong');
+        });
+        const explain = document.getElementById(level + '-explain-' + idx);
+        explain.classList.add('show');
+        const scoreEl = document.getElementById(level + '-score-' + idx);
+        if (chosen === q.ans) {
+          scoreEl.textContent = '✓ 正确！';
+          scoreEl.className = 'quiz-score show full';
+        } else {
+          scoreEl.textContent = '✗ 错误，正确答案已高亮';
+          scoreEl.className = 'quiz-score show zero';
+        }
+      };
+    });
+  });
+})();
+</script>
+</body>
+</html>
