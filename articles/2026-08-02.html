@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-02</title>
+<style>
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-02</h1>
+    <div class="sub">试点期 · 周日 · 家庭日常 · 天气描述 · 西班牙午睡文化 · 四天工作制实验</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10段 · 陈述式现在时</span>
+        <h2>👨‍👩‍👧‍👦 Un domingo en familia: rutinas y actividades</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/tiempo/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10段 · 现在时+简单过去时</span>
+        <h2>🌤️ El tiempo en España: cuatro estaciones, mil climas</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.bbc.com/mundo" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15段 · 虚拟式+复合句</span>
+        <h2>😴 La siesta española: entre el mito y la productividad</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15段 · 议论文体+条件式+被动语态</span>
+        <h2>📅 La semana laboral de cuatro días: el experimento europeo</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-02（星期日） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-02.docx</p>
+    </div>
+  </div>
+
+<script>
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+    {
+    lema: "desayunar",
+    ipa: "[de.sa.ʝuˈnaɾ]",
+    pos: "v.",
+    significado: "吃早餐（早晨第一顿饭的动词形式）",
+    ejemplo_es: "Los domingos desayunamos todos juntos: café con leche, tostadas con aceite y zumo de naranja.",
+    ejemplo_zh: "星期天我们全家一起吃早餐：牛奶咖啡、橄榄油烤面包和橙汁。",
+    tip: "\u003Cb\u003Edesayunar\u003C/b\u003E（动词）→ \u003Cb\u003Eel desayuno\u003C/b\u003E（名词：早餐）。\u003Cb\u003Ealmorzar\u003C/b\u003E = 吃午餐，\u003Cb\u003Ecena\u003C/b\u003E = 晚餐。A1 日常生活高频动词。"
+    },
+    {
+    lema: "recoger",
+    ipa: "[re.koˈxeɾ]",
+    pos: "v.",
+    significado: "收拾；整理；接人（整理物品或去某处接某人）",
+    ejemplo_es: "Después de comer, los niños recogen la mesa y ponen los platos en el lavavajillas.",
+    ejemplo_zh: "饭后，孩子们收拾桌子，把盘子放进洗碗机。",
+    tip: "\u003Cb\u003Erecoger\u003C/b\u003E 不规则变位：yo recojo（\u003Cb\u003Eg→j\u003C/b\u003E）。\u003Cb\u003Erecoger la mesa\u003C/b\u003E = 收拾餐桌。\u003Cb\u003Erecoger a alguien\u003C/b\u003E = 接某人。\u003Cb\u003Eordenar\u003C/b\u003E = 整理（阿根廷更常用）。A1 家务场景高频。"
+    },
+    {
+    lema: "despejado",
+    ipa: "[des.peˈxa.ðo]",
+    pos: "adj.",
+    significado: "晴朗的；无云的（描述天空没有云的状态）",
+    ejemplo_es: "Hoy el cielo está despejado en Madrid, pero en Galicia lloverá por la tarde.",
+    ejemplo_zh: "今天马德里天空晴朗，但加利西亚下午会下雨。",
+    tip: "\u003Cb\u003Ecielo despejado\u003C/b\u003E = 晴朗的天空。\u003Cb\u003Enublado\u003C/b\u003E = 多云的。\u003Cb\u003Edespejar\u003C/b\u003E（动词）= 清理/放晴。\u003Cb\u003Ehace buen tiempo\u003C/b\u003E = 天气好。A1-A2 天气话题必备。"
+    },
+    {
+    lema: "chubasco",
+    ipa: "[tʃuˈβas.ko]",
+    pos: "m.",
+    significado: "阵雨；骤雨（短暂而强烈的降雨）",
+    ejemplo_es: "En el norte de España son frecuentes los chubascos durante el otoño.",
+    ejemplo_zh: "西班牙北部秋季常有阵雨。",
+    tip: "\u003Cb\u003Echubasco\u003C/b\u003E 指突然的短时强降雨。\u003Cb\u003Ellovizna\u003C/b\u003E = 毛毛雨，\u003Cb\u003Etemporal\u003C/b\u003E = 暴风雨，\u003Cb\u003Etormenta\u003C/b\u003E = 雷暴。A2 天气词汇区别重要。"
+    },
+    {
+    lema: "temperatura media",
+    ipa: "[tem.pe.ɾaˈtu.ɾa ˈme.ðja]",
+    pos: "f.",
+    significado: "平均气温（一段时间内的温度平均值）",
+    ejemplo_es: "La temperatura media en agosto supera los 35°C en Sevilla.",
+    ejemplo_zh: "塞维利亚八月平均气温超过 35°C。",
+    tip: "\u003Cb\u003Etemperatura media\u003C/b\u003E = 平均气温。\u003Cb\u003Etemperatura máxima/mínima\u003C/b\u003E = 最高/最低气温。\u003Cb\u003Egrado centígrado (°C)\u003C/b\u003E = 摄氏度。A2 天气/地理话题必考。"
+    },
+    {
+    lema: "siesta",
+    ipa: "[ˈsjes.ta]",
+    pos: "f.",
+    significado: "午睡；午休（西班牙传统午后休息的习惯）",
+    ejemplo_es: "Aunque la siesta es una tradición española, solo el 16% de los españoles la practica a diario.",
+    ejemplo_zh: "虽然午睡是西班牙传统，但只有 16% 的西班牙人每天都午睡。",
+    tip: "\u003Cb\u003Eechar una siesta\u003C/b\u003E / \u003Cb\u003Edormir la siesta\u003C/b\u003E = 睡午觉。\u003Cb\u003Esiestero/a\u003C/b\u003E = 有午睡习惯的人。注意：siesta ≠ 懒散，而是一种适应炎热气候的文化习惯。B1 文化话题核心词。"
+    },
+    {
+    lema: "conciliar",
+    ipa: "[kon.θiˈljaɾ]",
+    pos: "v.",
+    significado: "协调；调和（平衡工作与生活的不同方面）",
+    ejemplo_es: "Muchos padres tienen dificultades para conciliar la vida laboral con la familiar.",
+    ejemplo_zh: "许多父母难以协调工作与家庭生活。",
+    tip: "\u003Cb\u003Econciliar\u003C/b\u003E（动词）= 调和。\u003Cb\u003Econciliación laboral y familiar\u003C/b\u003E = 工作与家庭平衡（常见政策话题）。\u003Cb\u003Ecompatibilizar\u003C/b\u003E 同义（兼容）。B1-B2 社会话题高频。"
+    },
+    {
+    lema: "horario partido",
+    ipa: "[oˈɾa.ɾjo paɾˈti.ðo]",
+    pos: "m.",
+    significado: "分段工时制（上午工作几小时、午休两小时后下午继续上班的模式）",
+    ejemplo_es: "El horario partido es común en España: se trabaja de 9:00 a 14:00 y de 16:00 a 19:00.",
+    ejemplo_zh: "分段工时制在西班牙很常见：上午 9 点到下午 2 点工作，下午 4 点到 7 点继续。",
+    tip: "\u003Cb\u003Ehorario partido\u003C/b\u003E（分段工时）vs \u003Cb\u003Ehorario continuo\u003C/b\u003E（连续工时）。\u003Cb\u003Ejornada intensiva\u003C/b\u003E = 紧凑工时（通常夏季实行）。B1 职场文化核心词。"
+    },
+    {
+    lema: "productividad",
+    ipa: "[pɾo.ðuk.ti.βiˈðað]",
+    pos: "f.",
+    significado: "生产力；生产效率（单位时间内的产出效率）",
+    ejemplo_es: "Según varios estudios, reducir la jornada laboral no disminuye la productividad, sino que la aumenta.",
+    ejemplo_zh: "多项研究表明，减少工作时间不仅不会降低生产力，反而会提高。",
+    tip: "\u003Cb\u003Eproductividad\u003C/b\u003E（生产力）← \u003Cb\u003Eproductivo/a\u003C/b\u003E（高效的）。\u003Cb\u003Erendimiento laboral\u003C/b\u003E = 工作绩效。\u003Cb\u003Eeficiencia\u003C/b\u003E = 效率。B1-B2 职场/经济话题。"
+    },
+    {
+    lema: "jornada laboral",
+    ipa: "[xoɾˈna.ða la.βoˈɾal]",
+    pos: "f.",
+    significado: "工作日时长；工作日（每日或每周的法定工作时间）",
+    ejemplo_es: "La jornada laboral de cuatro días es un experimento que está ganando terreno en varios países europeos.",
+    ejemplo_zh: "四天工作制是一项正在多个欧洲国家推广的实验。",
+    tip: "\u003Cb\u003Ejornada laboral\u003C/b\u003E = 工作日/工时。\u003Cb\u003Ejornada completa\u003C/b\u003E = 全职，\u003Cb\u003Emedia jornada\u003C/b\u003E = 兼职。\u003Cb\u003Ejornada intensiva\u003C/b\u003E = 紧凑工时制。B1-B2 职场话题核心词。"
+    },
+    {
+    lema: "sindicato",
+    ipa: "[sin.diˈka.to]",
+    pos: "m.",
+    significado: "工会（代表工人利益的组织）",
+    ejemplo_es: "Los sindicatos apoyan la semana de cuatro días, pero exigen que no se reduzca el salario.",
+    ejemplo_zh: "工会支持四天工作制，但要求不降低工资。",
+    tip: "\u003Cb\u003Esindicato\u003C/b\u003E（工会）← \u003Cb\u003Esindicalista\u003C/b\u003E（工会成员）。\u003Cb\u003Eafiliarse a un sindicato\u003C/b\u003E = 加入工会。\u003Cb\u003Econvenio colectivo\u003C/b\u003E = 集体协议。B1-B2 社会/职场话题。"
+    },
+    {
+    lema: "teletrabajo",
+    ipa: "[te.le.tɾaˈβa.xo]",
+    pos: "m.",
+    significado: "远程办公（通过互联网在家中或其他地点工作）",
+    ejemplo_es: "El teletrabajo se ha consolidado como una alternativa viable tras la pandemia.",
+    ejemplo_zh: "远程办公在疫情后已成为一种可行的替代方案。",
+    tip: "\u003Cb\u003Eteletrabajo\u003C/b\u003E = 远程办公。\u003Cb\u003Etrabajo en remoto\u003C/b\u003E 同义。\u003Cb\u003Etrabajo presencial\u003C/b\u003E = 线下办公。\u003Cb\u003Etrabajo híbrido\u003C/b\u003E = 混合办公。B1-B2 职场话题高频。"
+    },
+    {
+    lema: "implantar",
+    ipa: "[im.planˈtaɾ]",
+    pos: "v.",
+    significado: "实施；推行；引入（将制度或政策正式落地执行）",
+    ejemplo_es: "Varias empresas españolas han decidido implantar la semana laboral de cuatro días como prueba piloto.",
+    ejemplo_zh: "多家西班牙公司已决定推行四天工作制作为试点。",
+    tip: "\u003Cb\u003Eimplantar\u003C/b\u003E = 实施（制度/政策）。\u003Cb\u003Eponer en marcha\u003C/b\u003E = 启动（更口语）。\u003Cb\u003Eimplementar\u003C/b\u003E = 实施（英语借词，西语中也常用）。B2 行政/经济词汇。"
+    },
+    {
+    lema: "bienestar",
+    ipa: "[bje.nesˈtaɾ]",
+    pos: "m.",
+    significado: "福祉；幸福感（身体和心理的健康状态）",
+    ejemplo_es: "El objetivo de la semana de cuatro días es mejorar el bienestar de los trabajadores sin reducir la productividad.",
+    ejemplo_zh: "四天工作制的目标是在不降低生产力的情况下改善员工福祉。",
+    tip: "\u003Cb\u003Ebienestar\u003C/b\u003E = 福祉/幸福感。\u003Cb\u003Ebienestar laboral\u003C/b\u003E = 职场幸福感。\u003Cb\u003Ecalidad de vida\u003C/b\u003E = 生活质量。\u003Cb\u003Eestado del bienestar\u003C/b\u003E = 福利国家。B2 社会政策话题核心词。"
+    },
+    {
+    lema: "a largo plazo",
+    ipa: "[a ˈlaɾ.ɣo ˈpla.θo]",
+    pos: "loc. adv.",
+    significado: "长期地；从长远来看（表达长期时间维度的副词短语）",
+    ejemplo_es: "A largo plazo, la reducción de la jornada podría beneficiar tanto a trabajadores como a empresas.",
+    ejemplo_zh: "从长远来看，减少工作时间可能对员工和企业都有利。",
+    tip: "\u003Cb\u003Ea largo plazo\u003C/b\u003E = 长期，\u003Cb\u003Ea corto plazo\u003C/b\u003E = 短期，\u003Cb\u003Ea medio plazo\u003C/b\u003E = 中期。\u003Cb\u003Ea la larga\u003C/b\u003E 同义。B1-B2 议论类写作必用。"
+    }
+  ];
+
+/* ==================== 文章数据 ==================== */
+const ARTICLES = {
+  a1:     {
+    paragraphs: [
+    { es: "Hoy es domingo. La familia García no tiene prisa. Todos duermen hasta las nueve de la mañana.", zh: "今天是星期天。加西亚一家不急不忙。大家都睡到早上九点。" },
+    { es: "La madre, Carmen, prepara el desayuno en la cocina: café con leche para los adultos, cola cao para los niños y tostadas con tomate para todos.", zh: "妈妈卡门在厨房准备早餐：大人的牛奶咖啡、孩子们的高乐高可可和所有人的番茄烤面包。" },
+    { es: "Después de desayunar, toda la familia recoge la mesa. Pablo, el hijo mayor, pone los platos en el lavavajillas.", zh: "早餐后，全家人收拾桌子。大儿子巴勃罗把盘子放进洗碗机。" },
+    { es: "Sobre las once, van al parque que está cerca de casa. Los niños juegan al fútbol con otros amigos del barrio.", zh: "十一点左右，他们去离家不远的公园。孩子们和街区的其他朋友踢足球。" },
+    { es: "Carmen y su marido, Miguel, pasean por el parque mientras hablan de la semana que empieza mañana.", zh: "卡门和丈夫米格尔在公园散步，同时聊着明天开始的这一周。" },
+    { es: "A la una, vuelven a casa. Miguel prepara la comida: hoy hace paella, el plato favorito de la familia.", zh: "下午一点，他们回家。米格尔做饭：今天做海鲜饭，这是全家人最爱的菜。" },
+    { es: "Comen todos juntos en la terraza. Hace buen tiempo y el sol brilla. De postre hay fruta y helado.", zh: "大家在露台上一起吃午饭。天气很好，阳光灿烂。甜点有水果和冰淇淋。" },
+    { es: "Por la tarde, los niños hacen los deberes del colegio en su habitación. Carmen lee una revista en el sofá.", zh: "下午，孩子们在房间里做学校作业。卡门在沙发上读杂志。" },
+    { es: "A las seis, toda la familia ve una película juntos en el salón. Hoy eligen una de dibujos animados.", zh: "六点，全家人一起在客厅看电影。今天他们选了一部动画片。" },
+    { es: "A las nueve, después de cenar, los niños se van a la cama. Mañana es lunes y hay que madrugar.", zh: "九点，晚饭后，孩子们上床睡觉。明天是星期一，要早起。" }
+    ],
+    dele: "陈述式现在时(duermen, prepara, desayunan, juegan, comen)；反身动词(se van a la cama, hay que madrugar)；时间表达(a las nueve, a la una, sobre las once)；日常活动词汇(desayuno, parque, deberes, película)；前置词(a, en, de, por, hasta, con)；存在动词(hay fruta y helado)。",
+    hardWords: [
+    { w: "madrugar", m: "早起（早上很早起床）" },
+    { w: "deberes", m: "作业（los deberes del colegio = 学校作业）" },
+    { w: "terraza", m: "露台；阳台（户外用餐空间）" },
+    { w: "lavavajillas", m: "洗碗机（lavar=洗, vajilla=餐具）" },
+    { w: "dibujos animados", m: "动画片（animar=使有生命）" }
+    ],
+    quiz: [
+    { q: "\u00BFA qu\u00E9 hora se despierta la familia Garc\u00EDa el domingo?", opts: ["A las siete", "A las ocho", "A las nueve", "A las diez"], ans: 2, es: "P\u00E1rrafo 1: \u0022Todos duermen hasta las nueve de la ma\u00F1ana.\u0022", zh: "加西亚一家星期天睡到早上九点。" },
+    { q: "\u00BFQu\u00E9 prepara Carmen para el desayuno?", opts: ["Cereales y leche", "Caf\u00E9 con leche y tostadas con tomate", "Huevos fritos y bacon", "Solo fruta"], ans: 1, es: "P\u00E1rrafo 2: \u0022Carmen prepara caf\u00E9 con leche y tostadas con tomate.\u0022", zh: "卡门准备了牛奶咖啡和番茄烤面包。" },
+    { q: "\u00BFQu\u00E9 hace Pablo despu\u00E9s de desayunar?", opts: ["Ve la televisi\u00F3n", "Juega al f\u00FAtbol", "Pone los platos en el lavavajillas", "Hace los deberes"], ans: 2, es: "P\u00E1rrafo 3: \u0022Pablo pone los platos en el lavavajillas.\u0022", zh: "巴勃罗把盘子放进洗碗机。" },
+    { q: "\u00BFQui\u00E9n prepara la comida del mediod\u00EDa?", opts: ["Carmen", "Miguel", "Pablo", "Los ni\u00F1os"], ans: 1, es: "P\u00E1rrafo 6: \u0022Miguel prepara la comida: hoy hace paella.\u0022", zh: "米格尔准备午饭，今天做海鲜饭。" },
+    { q: "\u00BFPor qu\u00E9 los ni\u00F1os se van a la cama a las nueve?", opts: ["Porque est\u00E1n castigados", "Porque ma\u00F1ana es lunes y hay que madrugar", "Porque la pel\u00EDcula ha terminado", "Porque tienen sue\u00F1o"], ans: 1, es: "P\u00E1rrafo 10: \u0022Ma\u00F1ana es lunes y hay que madrugar.\u0022", zh: "明天是星期一，需要早起。" }
+    ]
+    },
+  a2:     {
+    paragraphs: [
+    { es: "Espa\u00F1a es un pa\u00EDs de contrastes clim\u00E1ticos. En un mismo d\u00EDa puedes encontrar nieve en los Pirineos, sol en la Costa del Sol y lluvia en Galicia.", zh: "西班牙是一个气候差异巨大的国家。同一天你可能在比利牛斯山遇到雪、在太阳海岸遇到阳光、在加利西亚遇到雨。" },
+    { es: "La Pen\u00EDnsula Ib\u00E9rica tiene tres grandes zonas clim\u00E1ticas: el clima atl\u00E1ntico en el norte, el clima mediterr\u00E1neo en la costa este y sur, y el clima continental en el interior.", zh: "伊比利亚半岛有三大气候区：北部的大西洋气候、东部和南部沿海的地中海气候以及内陆的大陆性气候。" },
+    { es: "En la cornisa cant\u00E1brica, desde Galicia hasta el Pa\u00EDs Vasco, el clima es suave y h\u00FAmedo. Las temperaturas rara vez superan los 25\u00B0C en verano y bajan de los 5\u00B0C en invierno.", zh: "在坎塔布里亚沿海地区，从加利西亚到巴斯克地区，气候温和湿润。夏季气温很少超过 25\u00B0C，冬季很少低于 5\u00B0C。" },
+    { es: "La costa mediterr\u00E1nea disfruta de veranos calurosos e inviernos templados. Barcelona tiene una temperatura media en agosto de 28\u00B0C, mientras que en enero la media es de 10\u00B0C.", zh: "地中海沿岸享有炎热的夏季和温和的冬季。巴塞罗那八月平均气温为 28\u00B0C，而一月份平均气温为 10\u00B0C。" },
+    { es: "En el interior, el clima es extremo. Madrid registra veranos con temperaturas superiores a los 40\u00B0C e inviernos con heladas frecuentes. Se dice que en Madrid hay \u0022nueve meses de invierno y tres de infierno\u0022.", zh: "在内陆，气候是极端的。马德里夏季气温超过 40\u00B0C，冬季则常有霜冻。人们说马德里是\u201C九个月冬天、三个月地狱\u201D。" },
+    { es: "Las Islas Canarias tienen un clima subtropical privilegiado, conocido como \u0022la eterna primavera\u0022. Las temperaturas oscilan entre los 18\u00B0C y los 25\u00B0C durante todo el a\u00F1o.", zh: "加那利群岛享有独特的亚热带气候，被称为\u201C永恒的春天\u201D。全年气温在 18\u00B0C 到 25\u00B0C 之间。" },
+    { es: "El oto\u00F1o es la estaci\u00F3n m\u00E1s lluviosa en la costa mediterr\u00E1nea. En septiembre y octubre pueden producirse lluvias torrenciales que causan inundaciones.", zh: "秋季是地中海沿岸最多雨的时节。九月和十月可能发生暴雨，引发洪水。" },
+    { es: "Seg\u00FAn la Agencia Estatal de Meteorolog\u00EDa (AEMET), en 2025 Espa\u00F1a registr\u00F3 la temperatura media m\u00E1s alta de su historia: 16,2\u00B0C, superando el r\u00E9cord anterior de 2022.", zh: "据国家气象局（AEMET）数据，2025 年西班牙录得有史以来最高平均气温：16.2\u00B0C，超过了 2022 年的前纪录。" },
+    { es: "El cambio clim\u00E1tico est\u00E1 alterando los patrones meteorol\u00F3gicos. Los veranos son m\u00E1s largos y calurosos, y las sequ\u00EDas son cada vez m\u00E1s frecuentes, especialmente en el sur y el sureste.", zh: "气候变化正在改变天气模式。夏季越来越长、越来越热，干旱也越来越频繁，尤其是在南部和东南部。" },
+    { es: "A pesar de todo, Espa\u00F1a sigue siendo uno de los pa\u00EDses con m\u00E1s horas de sol de Europa, con una media de 2.800 horas anuales. Por eso, millones de turistas la visitan cada a\u00F1o.", zh: "尽管如此，西班牙仍然是欧洲日照时间最多的国家之一，年均约 2800 小时。因此每年有数百万游客来访。" }
+    ],
+    dele: "现在时与简单过去时(registr\u00F3, superando, disfruta, oscilan)；气候相关形容词(caluroso, templado, h\u00FAmedo, extremo, subtropical)；比较级与最高级(m\u00E1s largos, m\u00E1s frecuentes, la m\u00E1s alta)；数据表达(28\u00B0C, 16,2\u00B0C, 2.800 horas)；条件结构(puedes encontrar, pueden producirse)；频率副词(rara vez, cada vez m\u00E1s)。",
+    hardWords: [
+    { w: "contraste clim\u00E1tico", m: "气候差异（contraste = 对比/反差）" },
+    { w: "cornisa cant\u00E1brica", m: "坎塔布里亚沿海地带（西班牙北部沿海）" },
+    { w: "helada", m: "霜冻（helar = 结冰）" },
+    { w: "lluvia torrencial", m: "暴雨；倾盆大雨（torrente = 急流）" },
+    { w: "patr\u00F3n meteorol\u00F3gico", m: "天气模式（meteorolog\u00EDa = 气象学）" }
+    ],
+    quiz: [
+    { q: "\u00BFCu\u00E1les son las tres grandes zonas clim\u00E1ticas de la Pen\u00EDnsula Ib\u00E9rica seg\u00FAn el texto?", opts: ["Tropical, des\u00E9rtico y polar", "Atl\u00E1ntico, mediterr\u00E1neo y continental", "Oce\u00E1nico, alpino y subtropical", "H\u00FAmedo, seco y templado"], ans: 1, es: "P\u00E1rrafo 2: \u0022Clima atl\u00E1ntico, mediterr\u00E1neo y continental.\u0022", zh: "三大气候区是大西洋气候、地中海气候和大陆性气候。" },
+    { q: "\u00BFC\u00F3mo es el clima en la cornisa cant\u00E1brica?", opts: ["C\u00E1lido y seco", "Suave y h\u00FAmedo", "Muy fr\u00EDo todo el a\u00F1o", "Extremadamente caluroso"], ans: 1, es: "P\u00E1rrafo 3: \u0022El clima es suave y h\u00FAmedo.\u0022", zh: "坎塔布里亚沿海地区气候温和湿润。" },
+    { q: "\u00BFQu\u00E9 se dice popularmente del clima de Madrid?", opts: ["Es la ciudad m\u00E1s fr\u00EDa de Espa\u00F1a", "Tiene nueve meses de invierno y tres de infierno", "Nunca llueve", "Siempre hace buen tiempo"], ans: 1, es: "P\u00E1rrafo 5: \u0022Nueve meses de invierno y tres de infierno.\u0022", zh: "马德里民间说法：九个月冬天、三个月地狱。" },
+    { q: "\u00BFCu\u00E1l fue la temperatura media m\u00E1s alta registrada en Espa\u00F1a en 2025?", opts: ["15,0\u00B0C", "15,8\u00B0C", "16,2\u00B0C", "17,0\u00B0C"], ans: 2, es: "P\u00E1rrafo 8: \u0022Espa\u00F1a registr\u00F3 la temperatura media m\u00E1s alta: 16,2\u00B0C.\u0022", zh: "2025 年西班牙录得最高平均气温 16.2\u00B0C。" },
+    { q: "\u00BFPor qu\u00E9 millones de turistas visitan Espa\u00F1a seg\u00FAn el texto?", opts: ["Por su gastronom\u00EDa", "Por sus horas de sol", "Por sus museos", "Por sus playas"], ans: 1, es: "P\u00E1rrafo 10: \u0022Espa\u00F1a tiene 2.800 horas de sol anuales. Por eso, millones de turistas la visitan.\u0022", zh: "西班牙年均日照 2800 小时，吸引数百万游客。" }
+    ]
+    },
+  b1:     {
+    paragraphs: [
+    { es: "Cuando alguien piensa en Espa\u00F1a, una de las primeras im\u00E1genes que le viene a la cabeza es la de una persona durmiendo la siesta. Esta tradici\u00F3n centenaria se ha convertido en uno de los estereotipos m\u00E1s arraigados del pa\u00EDs.", zh: "当人们想到西班牙时，最先浮现在脑海中的画面之一就是有人在睡午觉。这项百年传统已成为这个国家最根深蒂固的刻板印象之一。" },
+    { es: "Pero, \u00BFcu\u00E1nto hay de mito y cu\u00E1nto de realidad? Seg\u00FAn un estudio de la Fundaci\u00F3n de Ciencias de la Salud, solo el 16,2% de los espa\u00F1oles afirma dormir la siesta a diario. La mayor\u00EDa la practica de forma ocasional, especialmente los fines de semana.", zh: "但其中有多少是传说、多少是现实？据健康科学基金会研究，只有 16.2% 的西班牙人称每天午睡。大多数人只是偶尔午睡，尤其是在周末。" },
+    { es: "El origen de la siesta se remonta a la Espa\u00F1a rural del siglo XIX. Los campesinos que trabajaban en el campo bajo el sol abrasador del mediod\u00EDa necesitaban un descanso para reponer fuerzas y evitar las horas de m\u00E1s calor.", zh: "午睡的起源可追溯到 19 世纪的西班牙农村。在正午烈日下劳作的农民需要休息以恢复体力并避开最炎热的时段。" },
+    { es: "\u0022La siesta tiene una l\u00F3gica clim\u00E1tica y fisiol\u00F3gica muy clara\u0022, explica el doctor Antonio Romero, especialista en medicina del sue\u00F1o del Hospital Cl\u00EDnico de Barcelona. \u0022Despu\u00E9s de comer, el cuerpo experimenta una bajada natural de energ\u00EDa. En climas c\u00E1lidos, una siesta corta de 20 a 30 minutos puede mejorar el rendimiento cognitivo.\u0022", zh: "巴塞罗那临床医院睡眠医学专家安东尼奥·罗梅罗博士解释道：\u201C午睡有着非常明确的气候和生理逻辑。饭后人体会自然出现能量下降。在炎热气候下，20 到 30 分钟的短午睡可以改善认知表现。\u201D" },
+    { es: "Sin embargo, la imagen del espa\u00F1ol que se echa la siesta todas las tardes no se corresponde con la realidad laboral actual. Espa\u00F1a tiene una de las jornadas laborales m\u00E1s largas de Europa, con una media de 37,5 horas semanales, y el horario partido hace dif\u00EDcil conciliar el descanso del mediod\u00EDa.", zh: "然而，西班牙人每天下午都睡午觉的形象与当前的劳动现实并不相符。西班牙是欧洲工作时间最长的国家之一，平均每周 37.5 小时，而分段工时制使得午间休息难以协调。" },
+    { es: "De hecho, muchos espa\u00F1oles no duermen la siesta, sino que la desear\u00EDan. Una encuesta de 2024 de la empresa de recursos humanos Adecco revel\u00F3 que el 58% de los trabajadores espa\u00F1oles considera que una siesta corta mejorar\u00EDa su productividad, pero solo el 8% dispone de tiempo para hacerlo durante la jornada laboral.", zh: "事实上，许多西班牙人并不午睡，而是想午睡。人力资源公司 Adecco 2024 年的一项调查显示，58% 的西班牙劳动者认为短午睡会提高生产力，但只有 8% 的人在工作日有时间这样做。" },
+    { es: "El horario partido, t\u00EDpico del modelo laboral espa\u00F1ol, es a menudo confundido con la siesta por los extranjeros. La pausa de dos o tres horas entre la ma\u00F1ana y la tarde no se dedica necesariamente a dormir, sino a comer, recoger a los ni\u00F1os del colegio o hacer recados.", zh: "西班牙劳动模式的典型特征——分段工时制——常被外国人误解为午睡。上午和下午之间两到三小时的休息并不一定是用来睡觉的，而是用来吃饭、接孩子放学或办事。" },
+    { es: "Carmen L\u00F3pez, soci\u00F3loga de la Universidad Complutense de Madrid, a\u00F1ade: \u0022El mito de la siesta oculta un problema m\u00E1s profundo: la dificultad de conciliaci\u00F3n familiar. Muchas mujeres, en particular, utilizan esa pausa para tareas dom\u00E9sticas y cuidado de los hijos, no para descansar.\u0022", zh: "马德里康普顿斯大学社会学家卡门·洛佩斯补充道：\u201C午睡的神话掩盖了一个更深层的问题：家庭协调的困难。特别是许多女性利用这段时间做家务和照顾孩子，而不是休息。\u201D" },
+    { es: "A nivel cient\u00EDfico, los beneficios de la siesta est\u00E1n bien documentados. Un metaan\u00E1lisis publicado en la revista \u0022Sleep Medicine Reviews\u0022 en 2023 concluy\u00F3 que las siestas de menos de 30 minutos se asocian con mejor memoria, menor riesgo cardiovascular y mayor estado de alerta.", zh: "在科学层面，午睡的好处是有充分文献记载的。2023 年发表在《睡眠医学评论》期刊上的一项荟萃分析得出结论：少于 30 分钟的午睡与更好的记忆力、更低的心血管风险和更高的警觉状态相关。" },
+    { es: "No obstante, dormir m\u00E1s de una hora puede ser contraproducente. Las siestas largas se han vinculado con un mayor riesgo de obesidad, diabetes tipo 2 y s\u00EDndrome metab\u00F3lico, seg\u00FAn un estudio de la Universidad de Murcia.", zh: "然而，睡超过一小时可能适得其反。据穆尔西亚大学的一项研究，长时间午睡与更高的肥胖、2 型糖尿病和代谢综合征风险相关。" },
+    { es: "En la cultura empresarial espa\u00F1ola, la siesta ha sido tradicionalmente vista como un signo de pereza. Pero esta percepci\u00F3n est\u00E1 cambiando. Empresas como Google, Nike y Apple han instalado c\u00E1psulas de sue\u00F1o en sus oficinas para que los empleados puedan descansar.", zh: "在西班牙企业文化中，午睡传统上被视为懒惰的标志。但这种观念正在改变。谷歌、耐克和苹果等公司已在办公室安装了睡眠舱，供员工休息。" },
+    { es: "Algunas ciudades espa\u00F1olas han empezado a promover la siesta como un atractivo tur\u00EDstico y un elemento de bienestar. En Madrid existen los llamados \u0022siestarios\u0022, locales donde se puede alquilar una c\u00E1psula por minutos para dormir una siesta reparadora.", zh: "一些西班牙城市已开始将午睡作为旅游吸引力和健康元素来推广。在马德里有所谓的\u201C午睡馆\u201D，可以按分钟租用睡眠舱来睡一个恢复精力的午觉。" },
+    { es: "El debate sobre si la siesta debe desaparecer o reinventarse sigue abierto. Mientras unos defienden que es una tradici\u00F3n que lastra la productividad nacional, otros argumentan que es una pr\u00E1ctica saludable que conviene preservar, adapt\u00E1ndola a los ritmos laborales modernos.", zh: "关于午睡是否应该消失还是重新定义的讨论仍在继续。有人认\u4E3A它是一种拖累国家生产力的传统，而另一些人则认为它是一种值得保留的健康实践，只需适应现代劳动节奏即可。" },
+    { es: "\u0022No se trata de eliminar la siesta, sino de repensar el modelo laboral espa\u00F1ol\u0022, concluye el doctor Romero. \u0022Si tuvi\u00E9ramos horarios m\u00E1s racionales, la siesta no ser\u00EDa una necesidad forzada, sino una elecci\u00F3n saludable.\u0022", zh: "罗梅罗博士总结道：\u201C问题不在于取消午睡，而在于重新思考西班牙的劳动模式。如果我们有更合理的时间表，午睡就不会是被迫的需求，而是一种健康的选择。\u201D" }
+    ],
+    dele: "虚拟式现在时(sea, tuvi\u00E9ramos, ser\u00EDa)；过去未完成时(necesitaban, trabajaban)；现在完成时(se ha convertido, han instalado, han empezado)；条件式(mejorar\u00EDa, desear\u00EDa)；直接引语(explica, a\u00F1ade, concluye)；数据与统计引用(16,2%, 58%, 37,5 horas, 8%)；对立连接词(sin embargo, no obstante, mientras que, sino que)。",
+    hardWords: [
+    { w: "estereotipo", m: "刻板印象；成见（对某群体的固化看法）" },
+    { w: "arraigado/a", m: "根深蒂固的（arraigar = 扎根）" },
+    { w: "rendimiento cognitivo", m: "认知表现（cognitivo = 认知的）" },
+    { w: "conciliaci\u00F3n", m: "协调；平衡（conciliaci\u00F3n laboral y familiar）" },
+    { w: "contraproducente", m: "适得其反的；产生反效果的" },
+    { w: "metaan\u00E1lisis", m: "荟萃分析（对多项研究的综合分析）" },
+    { w: "siestario", m: "午睡馆（按时间收费的午睡场所）" },
+    { w: "lastrar", m: "拖累；阻碍（lastre = 负担）" },
+    { w: "repensar", m: "重新思考；重新审视" },
+    { w: "preservar", m: "保留；保护（conservar 同义）" }
+    ],
+    quiz: [
+    { q: "\u00BFQu\u00E9 porcentaje de espa\u00F1oles duerme la siesta a diario seg\u00FAn el texto?", opts: ["El 8%", "El 16,2%", "El 58%", "El 37,5%"], ans: 1, es: "P\u00E1rrafo 2: \u0022Solo el 16,2% de los espa\u00F1oles afirma dormir la siesta a diario.\u0022", zh: "只有 16.2% 的西班牙人每天午睡。" },
+    { q: "\u00BFCu\u00E1l era el origen hist\u00F3rico de la siesta en Espa\u00F1a?", opts: ["Era una costumbre de la nobleza", "Los campesinos descansaban del sol del mediod\u00EDa", "La inventaron los monjes en los monasterios", "Era obligatoria por ley"], ans: 1, es: "P\u00E1rrafo 3: \u0022Los campesinos necesitaban un descanso para reponer fuerzas y evitar las horas de m\u00E1s calor.\u0022", zh: "农民需要在正午烈日下休息恢复体力并避开最炎热的时段。" },
+    { q: "\u00BFA qu\u00E9 se refiere \u0022esa pausa\u0022 en el p\u00E1rrafo 8?", opts: ["A la pausa para el caf\u00E9", "A la pausa de dos o tres horas del horario partido", "A las vacaciones de verano", "Al fin de semana"], ans: 1, es: "P\u00E1rrafo 7-8: La pausa del horario partido entre la ma\u00F1ana y la tarde.", zh: "\u201C那段休息时间\u201D 指的是分段工时制中上午和下午之间两到三小时的休息。" },
+    { q: "\u00BFCu\u00E1ntos trabajadores disponen de tiempo para la siesta durante la jornada laboral?", opts: ["El 58%", "El 37,5%", "El 16,2%", "El 8%"], ans: 3, es: "P\u00E1rrafo 6: \u0022Solo el 8% dispone de tiempo para hacerlo durante la jornada laboral.\u0022", zh: "只有 8% 的劳动者在工作日有时间午睡。" },
+    { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA?", opts: ["Las siestas cortas mejoran la memoria", "Las siestas largas pueden aumentar el riesgo de obesidad", "La mayor\u00EDa de los espa\u00F1oles duerme la siesta a diario", "El horario partido a menudo se confunde con la siesta"], ans: 2, es: "P\u00E1rrafo 2: \u0022Solo el 16,2% duerme la siesta a diario.\u0022 La mayor\u00EDa no la practica a diario.", zh: "大多数西班牙人并不每天午睡——只有 16.2% 每天午睡。" },
+    { q: "\u00BFQu\u00E9 aspecto NO menciona el texto sobre el horario partido?", opts: ["Se dedica a comer", "Se dedica a dormir la siesta siempre", "Se dedica a recoger a los ni\u00F1os", "Se dedica a hacer recados"], ans: 1, es: "P\u00E1rrafo 7: La pausa no se dedica necesariamente a dormir, sino a comer, recoger ni\u00F1os o hacer recados.", zh: "分段工时制的休息时间不一定是用来午睡的，而是吃饭、接孩子或办事。" },
+    { q: "Seg\u00FAn el texto, \u00BFqu\u00E9 han hecho empresas como Google y Nike?", opts: ["Prohibir la siesta en sus oficinas", "Instalar c\u00E1psulas de sue\u00F1o para empleados", "Aumentar la jornada laboral", "Trasladar sus oficinas a Espa\u00F1a"], ans: 1, es: "P\u00E1rrafo 11: \u0022Han instalado c\u00E1psulas de sue\u00F1o en sus oficinas.\u0022", zh: "谷歌和耐克等公司在办公室安装了睡眠舱。" },
+    { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre el futuro de la siesta en Espa\u00F1a?", opts: ["Desaparecer\u00E1 completamente", "Debe adaptarse a los horarios laborales modernos como pr\u00E1ctica saludable", "Se har\u00E1 obligatoria por ley", "Solo la practicar\u00E1n los turistas"], ans: 1, es: "P\u00E1rrafo 14: \u0022No se trata de eliminar la siesta, sino de repensar el modelo laboral.\u0022", zh: "问题不是取消午睡，而是将其适应现代劳动模式作为一种健康实践。" }
+    ]
+    },
+  b2:     {
+    paragraphs: [
+    { es: "La semana laboral de cuatro d\u00EDas ha pasado de ser una utop\u00EDa a convertirse en un experimento real que divide a gobiernos, empresarios y sindicatos en toda Europa. Lo que empez\u00F3 como una propuesta marginal est\u00E1 ahora en el centro del debate pol\u00EDtico y econ\u00F3mico del continente.", zh: "四天工作制已从乌托邦变成了一个真实的实验，在全欧洲分裂着政府、企业家和工会。这一起初只是边缘提案的想法现在已成为欧洲政治经济讨论的核心。" },
+    { es: "El mayor ensayo mundial hasta la fecha se realiz\u00F3 en Reino Unido entre junio y diciembre de 2022. Participaron 61 empresas y unos 2.900 trabajadores bajo el modelo \u0022100-80-100\u0022: el 100% del salario, el 80% del tiempo y el 100% de la productividad. Los resultados fueron sorprendentes.", zh: "迄今为止全球规模最大的试验于 2022 年 6 月至 12 月在英国进行。61 家公司和约 2900 名员工参与了\u201C100-80-100\u201D模式：100% 工资、80% 工时、100% 生产力。结果令人惊讶。" },
+    { es: "Seg\u00FAn el informe final del ensayo, publicado por la Universidad de Cambridge y el Boston College, el 92% de las empresas participantes decidieron mantener la semana de cuatro d\u00EDas de forma permanente. Los ingresos de las compa\u00F1\u00EDas se mantuvieron estables o incluso aumentaron un 1,4% de media durante el per\u00EDodo de prueba.", zh: "根据剑桥大学和波士顿学院发布的试验最终报告，92% 的参试企业决定永久保持四天工作制。公司收入在试验期间保持稳定，甚至平均增长 1.4%。" },
+    { es: "Adem\u00E1s, la rotaci\u00F3n de personal se redujo un 57% y las bajas por enfermedad disminuyeron un 65%. El 39% de los empleados declar\u00F3 sentirse menos estresado y el 71% report\u00F3 niveles m\u00E1s bajos de agotamiento al final del ensayo.", zh: "此外，员工流失率下降了 57%，病假减少了 65%。39% 的员工表示压力减轻，71% 报告在试验结束时倦怠程度降低。" },
+    { es: "En Espa\u00F1a, el gobierno puso en marcha en 2023 un programa piloto dotado con 10 millones de euros para que peque\u00F1as y medianas empresas industriales probaran la semana de cuatro d\u00EDas. Solo 41 empresas solicitaron participar, una cifra muy inferior a la esperada.", zh: "在西班牙，政府于 2023 年启动了一项 1000 万欧元的试点计划，让中小型工业企业试行四天工作制。只有 41 家企业申请参与，远低于预期。" },
+    { es: "\u0022El problema en Espa\u00F1a no es la falta de voluntad pol\u00EDtica, sino la estructura empresarial\u0022, explica Jos\u00E9 Mar\u00EDa Gonz\u00E1lez, economista laboral de la Universidad Aut\u00F3noma de Barcelona. \u0022M\u00E1s del 95% del tejido empresarial espa\u00F1ol son pymes con menos de 10 empleados. Para ellas, reducir un d\u00EDa de trabajo sin perder producci\u00F3n es un reto organizativo enorme.\u0022", zh: "巴塞罗那自治大学劳动经济学家何塞·玛丽亚·冈萨雷斯解释道：\u201C西班牙的问题不在于缺乏政治意愿，而在于企业结构。西班牙超过 95% 的企业结构是员工不足 10 人的中小微企业。对它们来说，在保持产量的同时减少一天工作是一个巨大的组织挑战。\u201D" },
+    { es: "En B\u00E9lgica, desde noviembre de 2022, los trabajadores tienen derecho a solicitar la semana de cuatro d\u00EDas, aunque con la misma carga horaria semanal (es decir, jornadas m\u00E1s largas los d\u00EDas trabajados). M\u00E1s de 20.000 empleados belgas se han acogido ya a esta modalidad.", zh: "在比利时，自 2022 年 11 月起，劳动者有权申请四天工作制，但保持相同的每周总工时（即工作日内工作时间更长）。已有超过 2 万名比利时员工采用了这一模式。" },
+    { es: "Portugal lanz\u00F3 en 2023 un programa piloto con 39 empresas y ha anunciado que los resultados preliminares muestran mejoras en la salud mental de los trabajadores y una reducci\u00F3n del absentismo del 43%. El gobierno portugu\u00E9s planea extender el programa en 2026.", zh: "葡萄牙于 2023 年启动了 39 家企业的试点项目，并宣布初步结果显示员工心理健康有所改善，缺勤率降低了 43%。葡萄牙政府计划在 2026 年扩展该计划。" },
+    { es: "Alemania, la mayor econom\u00EDa europea, ha adoptado una postura m\u00E1s cautelosa. En febrero de 2024, 45 empresas alemanas iniciaron un experimento de seis meses coordinado por la consultora Intrapren\u00F6r. Los resultados definitivos se conocer\u00E1n a finales de 2026.", zh: "德国作为欧洲最大经济体采取了更为谨慎的态度。2024 年 2 月，45 家德国企业在 Intrapren\u00F6r 咨询公司协调下启动了为期六个月的实验。最终结果将于 2026 年底公布。" },
+    { es: "\u0022El modelo brit\u00E1nico es prometedor, pero no es directamente trasladable a econom\u00EDas industriales como la alemana o la italiana\u0022, advierte la doctora Anna Schneider, investigadora del Instituto de Estudios Laborales de Berl\u00EDn (IZA). \u0022En sectores como la manufactura o la sanidad, la reducci\u00F3n horaria requiere una reorganizaci\u00F3n profunda que no todas las empresas pueden asumir.\u0022", zh: "柏林劳动研究所（IZA）研究员安娜·施奈德博士警告道：\u201C英国模式很有前景，但不能直接照搬到德国或意大利这样的工业经济体。在制造业或医疗等行业，减少工时需要深层的重组，并非所有企业都能承担。\u201D" },
+    { es: "Los cr\u00EDticos de la semana de cuatro d\u00EDas se\u00F1alan varios riesgos: la intensificaci\u00F3n del trabajo en los d\u00EDas laborables, la posible p\u00E9rdida de competitividad frente a pa\u00EDses con jornadas m\u00E1s largas, y el riesgo de que la medida beneficie sobre todo a trabajadores cualificados de oficina, mientras excluye a empleados de servicios, comercio o industria.", zh: "四天工作制的批评者指出了几个风险：工作日劳动强度加大、相对于工时更长国家可能丧失竞争力、以及该措施主要惠及办公室白领而将服务业、商业或工业员工排除在外的风险。" },
+    { es: "Seg\u00FAn un estudio de la consultora McKinsey publicado en 2025, aproximadamente el 38% de los puestos de trabajo en Europa ser\u00EDan compatibles con una semana de cuatro d\u00EDas sin p\u00E9rdida de productividad, mientras que el 62% restante requerir\u00EDa ajustes significativos o simplemente no ser\u00EDa viable.", zh: "据麦肯锡咨询公司 2025 年发布的研究，约 38% 的欧洲工作岗位可以兼容四天工作制而不损失生产力，而其余 62% 则需要重大调整或根本不可行。" },
+    { es: "La resistencia m\u00E1s fuerte proviene de las patronales. La Confederaci\u00F3n Espa\u00F1ola de Organizaciones Empresariales (CEOE) ha calificado la propuesta de \u0022inviable\u0022 para la mayor\u00EDa de las empresas y advierte que podr\u00EDa traducirse en una p\u00E9rdida de 120.000 empleos si se implantara de forma obligatoria.", zh: "最强烈的抵制来自雇主协会。西班牙企业组织联合会（CEOE）将该提案称为对大多数企业\u201C不可行\u201D，并警告如果强制推行可能导致 12 万个工作岗位流失。" },
+    { es: "No obstante, la presi\u00F3n social est\u00E1 creciendo. Una encuesta del Eurobar\u00F3metro de 2025 revel\u00F3 que el 64% de los ciudadanos europeos estar\u00EDa a favor de una reducci\u00F3n de la jornada laboral sin recorte salarial. Entre los j\u00F3venes de 18 a 34 a\u00F1os, el apoyo asciende al 78%.", zh: "然而，社会压力正在增长。2025 年欧洲晴雨表调查显示，64% 的欧洲公民支持不降薪减少工作时间。在 18 至 34 岁的年轻人中，支持率高达 78%。" },
+    { es: "\u0022No estamos hablando de trabajar menos, sino de trabajar mejor\u0022, resume Gonz\u00E1lez. \u0022La semana de cuatro d\u00EDas no es el fin, es un medio para repensar la relaci\u00F3n entre tiempo, productividad y bienestar. El verdadero debate no es cu\u00E1ntos d\u00EDas trabajamos, sino c\u00F3mo medimos el valor del trabajo.\u0022", zh: "冈萨雷斯总结道：\u201C我们不是在谈论少工作，而是在谈论更好地工作。四天工作制不是目的，而是重新思考时间、生产力和福祉之间关系的手段。真正的讨论不是我们工作多少天，而是我们如何衡量工作的价值。\u201D" }
+    ],
+    dele: "条件式(ser\u00EDan, requerir\u00EDa, podr\u00EDa, estar\u00EDa)；虚拟式过去未完成时(implantara, tuviera)；现在完成时(ha pasado, han adoptado, ha calificado)；被动语态与无人称(se realiz\u00F3, se mantuvieron, se redujo, se conocer\u00E1n)；复合连接词(no obstante, mientras que, sin embargo, adem\u00E1s, es decir)；直接引语(explica, advierte, resume, se\u00F1ala)；数据与统计(92%, 57%, 65%, 1,4%, 38%, 64%, 78%, 10 millones)；条件句(si se implantara)；学术词汇(utop\u00EDa, viabilidad, competitividad, intensificaci\u00F3n, reorganizaci\u00F3n)。",
+    hardWords: [
+    { w: "utop\u00EDa", m: "乌托邦；理想化的不可实现目标" },
+    { w: "ensayo", m: "试验；实验（ensayo cl\u00EDnico = 临床试验）" },
+    { w: "rotaci\u00F3n de personal", m: "员工流失率（rotar = 轮换/流动）" },
+    { w: "tejido empresarial", m: "企业结构；商业生态（tejido = 织物/组织）" },
+    { w: "pyme", m: "中小微企业（PYME = peque\u00F1a y mediana empresa）" },
+    { w: "absentismo", m: "缺勤率（absentismo laboral = 工作缺勤）" },
+    { w: "cauteloso/a", m: "谨慎的；小心的（con cautela）" },
+    { w: "intensificaci\u00F3n", m: "加强；加剧（intenso = 强烈的）" },
+    { w: "patronal", m: "雇主协会（代表企业主利益的组织）" },
+    { w: "inviable", m: "不可行的（viable = 可行的，in- = 否定前缀）" }
+    ],
+    quiz: [
+    { q: "\u00BFCu\u00E1ntas empresas participaron en el ensayo brit\u00E1nico de la semana de cuatro d\u00EDas?", opts: ["39", "45", "61", "92"], ans: 2, es: "P\u00E1rrafo 2: \u0022Participaron 61 empresas y unos 2.900 trabajadores.\u0022", zh: "61 家公司和约 2900 名员工参与了英国试验。" },
+    { q: "\u00BFQu\u00E9 porcentaje de empresas brit\u00E1nicas decidieron mantener la semana de cuatro d\u00EDas de forma permanente?", opts: ["El 71%", "El 57%", "El 92%", "El 64%"], ans: 2, es: "P\u00E1rrafo 3: \u0022El 92% de las empresas participantes decidieron mantener la semana de cuatro d\u00EDas.\u0022", zh: "92% 的参试企业决定永久保持四天工作制。" },
+    { q: "\u00BFA qu\u00E9 se refiere \u0022esta modalidad\u0022 en el p\u00E1rrafo 7 sobre B\u00E9lgica?", opts: ["A las vacaciones pagadas", "A la semana de cuatro d\u00EDas con misma carga horaria semanal", "Al teletrabajo obligatorio", "A la jornada intensiva de verano"], ans: 1, es: "P\u00E1rrafo 7: \u0022Semana de cuatro d\u00EDas, aunque con la misma carga horaria semanal.\u0022", zh: "\u201C这一模式\u201D 指的是比利时保持相同周总工时的四天工作制。" },
+    { q: "\u00BFPor qu\u00E9 la CEOE se opone a la semana de cuatro d\u00EDas obligatoria?", opts: ["Porque aumentar\u00EDa los salarios", "Porque la considera inviable y podr\u00EDa destruir 120.000 empleos", "Porque los sindicatos la apoyan", "Porque reducir\u00EDa las exportaciones"], ans: 1, es: "P\u00E1rrafo 13: \u0022La CEOE la califica de inviable y advierte que podr\u00EDa traducirse en una p\u00E9rdida de 120.000 empleos.\u0022", zh: "CEOE 认为四天工作制不可行，警告可能导致 12 万个工作岗位流失。" },
+    { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA seg\u00FAn el texto?", opts: ["El ensayo brit\u00E1nico mostr\u00F3 una reducci\u00F3n del 57% en la rotaci\u00F3n de personal", "El 78% de los j\u00F3venes europeos apoya la reducci\u00F3n de jornada", "Portugal no ha realizado ning\u00FAn programa piloto sobre la semana de cuatro d\u00EDas", "Alemania inici\u00F3 un experimento con 45 empresas en 2024"], ans: 2, es: "P\u00E1rrafo 8: \u0022Portugal lanz\u00F3 en 2023 un programa piloto con 39 empresas.\u0022", zh: "葡萄牙确实启动了试点项目，因此说\u201C葡萄牙没有进行任何试点\u201D是错误的。" },
+    { q: "\u00BFQu\u00E9 aspecto NO menciona el texto como riesgo de la semana de cuatro d\u00EDas?", opts: ["La intensificaci\u00F3n del trabajo", "La p\u00E9rdida de competitividad", "El aumento del desempleo juvenil", "La exclusi\u00F3n de trabajadores del sector servicios"], ans: 2, es: "P\u00E1rrafo 11: Menciona intensificaci\u00F3n, p\u00E9rdida de competitividad y exclusi\u00F3n de servicios, pero no el desempleo juvenil.", zh: "文章未将青年失业增加列为四天工作制的风险。" },
+    { q: "Seg\u00FAn McKinsey, \u00BFqu\u00E9 porcentaje de puestos en Europa ser\u00EDa compatible con la semana de cuatro d\u00EDas?", opts: ["El 38%", "El 50%", "El 62%", "El 78%"], ans: 0, es: "P\u00E1rrafo 12: \u0022El 38% de los puestos de trabajo ser\u00EDan compatibles.\u0022", zh: "据麦肯锡研究，38% 的欧洲岗位可以兼容四天工作制。" },
+    { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre el futuro de la semana de cuatro d\u00EDas en Europa?", opts: ["Se implantar\u00E1 de forma inmediata en todos los pa\u00EDses", "Su adopci\u00F3n depender\u00E1 del sector, el tama\u00F1o de la empresa y la presi\u00F3n social", "Solo funcionar\u00E1 en Reino Unido", "Ser\u00E1 rechazada por todos los gobiernos europeos"], ans: 1, es: "P\u00E1rrafo 15: La semana de cuatro d\u00EDas no es el fin, es un medio. El debate es c\u00F3mo medimos el valor del trabajo. Su adopci\u00F3n var\u00EDa seg\u00FAn sector y pa\u00EDs.", zh: "四天工作制的采用将取决于行业、企业规模和社会压力，而非一刀切的政策。" }
+    ]
+    }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz - A1/A2: 5题, B1/B2: 8题
+  const quizCount = a.quiz.length;
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${quizCount} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+
+// 给每个 quiz 绑定交互
+['a1','a2','b1','b2'].forEach(level => {
+  const items = document.querySelectorAll(`#${level}-quiz .quiz-item`);
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        opts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(`${level}-explain-${idx}`);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(`${level}-score-${idx}`);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+    };
+  });
+});
+
+
+
+
+
+</script>
+</body>
+</html>
