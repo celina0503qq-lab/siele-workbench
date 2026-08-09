@@ -17,6 +17,42 @@
 
 // 1) 2026-08-09 第 8 期 — 主题：周日家庭聚餐 · 橄榄油文化 · 意大利儿童肥胖 · AI设计病毒
 window.REFINE_PACKS = {
+  "2026-08-03": {
+    date: "2026-08-03",
+    weekday: "一",
+    issue: 1,
+    theme: "问路指路 · 餐厅点餐 · 西班牙旅游热潮 · 过度旅游争议",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Perdido en la ciudad: cómo pedir direcciones" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/a1-a2", topic: "En el restaurante: del menú a la cuenta" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "El turismo en España: el motor que mueve el país" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "Turismofobia: el lado oscuro del paraíso turístico" }
+    ]
+  },
+  "2026-08-02": {
+    date: "2026-08-02",
+    weekday: "日",
+    issue: 0,
+    theme: "家庭日常 · 天气描述 · 西班牙午睡文化 · 四天工作制实验",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Un domingo en familia: rutinas y actividades" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/tiempo/", topic: "El tiempo en España: cuatro estaciones, mil climas" },
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La siesta española: entre el mito y la productividad" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La semana laboral de cuatro días: el experimento europeo" }
+    ]
+  },
+  "2026-08-04": {
+    date: "2026-08-04",
+    weekday: "二",
+    issue: 2,
+    theme: "医院看病 · 租房找房 · 西班牙医疗体系 · 欧洲住房危机",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el médico: una consulta rutinaria" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "Buscar piso en España: anuncios, precios y contratos" },
+      { level: "B1", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "El sistema sanitario español: ¿modelo a seguir o en crisis?" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo", topic: "La crisis de vivienda en Europa: precios récord y desahucios" }
+    ]
+  },
   "2026-08-09": {
     date: "2026-08-09",
     weekday: "日",
