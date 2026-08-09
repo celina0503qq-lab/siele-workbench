@@ -1775,11 +1775,20 @@ function mergeQuizzes(localQ,remoteQ){
   for(const date of allDates){merged[date]={};
     const ld=lq[date]||{},rd=rq[date]||{};
     const allLevels=new Set([...Object.keys(ld),...Object.keys(rd)]);
-    for(const level of allLevels){const ll=ld[level]||{attempts:[],notes:''},rl=rd[level]||{attempts:[],notes:''};
+    for(const level of allLevels){const ll=ld[level]||{attempts:[],notes:'',notesTs:0},rl=rd[level]||{attempts:[],notes:'',notesTs:0};
       const am=new Map();(ll.attempts||[]).forEach(a=>am.set(a.id,a));(rl.attempts||[]).forEach(a=>{if(!am.has(a.id))am.set(a.id,a);});
+      // Merge notes: use timestamp to pick the newer one
+      var lNotes=ll.notes||'',rNotes=rl.notes||'';
+      var lTs=ll.notesTs||0,rTs=rl.notesTs||0;
+      var mergedNotes;
+      if(lNotes===rNotes) mergedNotes=lNotes;
+      else if(!lNotes) mergedNotes=rNotes;
+      else if(!rNotes) mergedNotes=lNotes;
+      else mergedNotes=(rTs>lTs)?rNotes:lNotes;
       merged[date][level]={totalQuestions:ll.totalQuestions||rl.totalQuestions,
         attempts:[...am.values()].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)),
-        notes:ll.notes||rl.notes||''};
+        notes:mergedNotes,
+        notesTs:Math.max(lTs,rTs)};
     }
   }
   return {version:Math.max(localQ.version||1,remoteQ.version||1),updatedAt:new Date().toISOString(),quizzes:merged};
