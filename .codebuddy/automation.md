@@ -3,7 +3,7 @@
 > **项目**: SIELE 西语备考工作台 — 外刊精炼模块  
 > **仓库**: `celina0503qq-lab/siele-workbench`  
 > **GitHub Pages**: `https://celina0503qq-lab.github.io/siele-workbench/`  
-> **版本**: v2 (2026-08-09)
+> **版本**: v3 (2026-08-10)
 
 ---
 
@@ -19,7 +19,52 @@
 | B1 精读 | **15 段** | 进阶级，虚拟式+条件式+复合句，8 道阅读理解题 |
 | B2 精读 | **15 段** | 高级，议论文体+学术词汇，8 道阅读理解题 |
 
-每篇文章附带：原文链接、DELE 考点分析、难词清单（含释义）。
+每篇文章附带：原文链接、DELE 考点分析、难词清单（含释义）、**课后习题持久化 + 笔记功能**。
+
+### 1.1 Quiz 持久化与云同步（v3 新增）
+
+所有做题记录和笔记通过 `localStorage` 持久化，并通过工作台 `admin.html` 的云同步功能跨设备同步。
+
+**存储键**: `swa_quiz_v1`
+
+**数据结构**:
+```json
+{
+  "version": 1,
+  "updatedAt": "2026-08-10T...",
+  "quizzes": {
+    "2026-08-10": {
+      "a1": {
+        "totalQuestions": 5,
+        "attempts": [
+          {
+            "id": "timestamp-base36",
+            "timestamp": 1723300000000,
+            "answers": [
+              { "idx": 0, "chosen": 2, "correct": 2 },
+              { "idx": 1, "chosen": 1, "correct": 3 }
+            ],
+            "score": 1,
+            "total": 5,
+            "completed": false
+          }
+        ],
+        "notes": "用户笔记内容",
+        "notesTs": 1723300000000
+      },
+      "a2": { },
+      "b1": { },
+      "b2": { }
+    }
+  }
+}
+```
+
+**关键规则**:
+- Level key **必须全小写**（`a1`/`a2`/`b1`/`b2`），工作台内置页面和独立 HTML 页面共用同一存储键，大小写不一致会导致数据不互通
+- `attempts[0]` 始终是最新一次尝试；重新做题时旧 attempt 标记 `completed: true`，新 attempt 插入数组头部
+- `notesTs` 是笔记的时间戳，用于云同步合并冲突解决（取较新版本）
+- 独立 HTML 页面的 `QuizData` 对象和工作台内置页面的 `RefineQuizDB` 对象都使用同一个 `swa_quiz_v1` 键
 
 ---
 
@@ -86,9 +131,12 @@ window.ARTICLES = {
 
 输出文件：`articles/<date>.html`
 
-**使用 v2 模板**（参考 2026-08-06 至 2026-08-09 任意一期），关键特征：
+**使用 v3 模板**（参考 2026-08-06 至 2026-08-09 任意一期），关键特征：
 
 1. **数据内联**：WORDS 和 ARTICLES 数据直接写在 `<script>` 标签中，不引用外部 JS
+   - 早期（08-02~05）使用外部 `articles/data/<date>.js` + `loadRefineData()` 动态加载
+   - v2+（08-06 起）改为数据内联，独立页面不再依赖外部 JS 文件
+   - **新生成页面一律使用内联模式**；外部 data JS 文件仅在工作台内置页面 `index.html` 中通过 `loadRefineData()` 使用
 2. **CSS 必须包含**：
    - CSS 变量体系（`--brand`, `--a1`~`--b2`, `--es-bg`, `--zh-bg` 等）
    - 段落语言标签 `.lang-tag`（ES / ZH 色块）
@@ -99,15 +147,58 @@ window.ARTICLES = {
    - 提交按钮 disabled 态
    - 中文字体栈（`PingFang SC`, `Microsoft YaHei`）
    - 响应式 `@media (max-width: 720px)`
+   - **Quiz 持久化控件样式**（`.quiz-controls`, `.quiz-reset-btn`, `.quiz-notes-btn`, `.quiz-history` 等）
 3. **HTML 结构必须包含**：
    - 目录含各等级"阅读"和"习题"独立锚点
    - 快速跳转分区（阅读 + 习题分别跳转）
+   - **Quiz 控件区**（重新做题、历史记录、笔记区按钮）
 4. **JS 渲染必须包含**：
    - `renderVocab()` — 词汇卡片含 释义/例句/翻译/记忆提示 标签
    - `renderArticle(key)` — 段落含 ES/ZH 语言标签
    - `highlightWords(text, words)` — 使用 `\b` 词边界，含 `title` tooltip
    - `esc(s)` — HTML 转义
    - Quiz 交互：`onclick` 方式绑定，含正确/错误状态和双语解析
+   - **错题自动记录**：答错时调用 `autoLogLowScore('refineQuiz', { level, question, correct, chosen })`（如存在该函数）
+   - **`QuizData` 对象**（见下方 2.1 节）
+
+> **注意**：旧版页面（v1/v2）若缺少 QuizData 持久化功能，可用 `devext/patch_quiz_persistence.py` 批量打补丁。该脚本通过 4 个锚点（`</style>` 插入 CSS、词汇数据标记前插入 QuizData、quiz block 替换为 `bindQuizInteraction` + `renderQuizControls`、`forEach(renderArticle)` 后插入恢复逻辑）注入代码。新生成页面应直接在模板中包含这些功能，不依赖补丁。
+
+### 2.1 QuizData 对象（独立 HTML 页面）
+
+每个独立 HTML 页面必须包含 `QuizData` 对象，实现以下方法：
+
+```javascript
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+  load() { /* 从 localStorage 读取 swa_quiz_v1，返回 {version,updatedAt,quizzes:{}} */ },
+  save(data) { /* 写入 localStorage，设置 updatedAt = ISO 时间 */ },
+  getDate() { /* 从 document.title 提取日期 */ },
+  getRecord(date, level) { /* 获取 {totalQuestions, attempts, notes} */ },
+  recordAnswer(level, idx, chosen, isCorrect) { /* 记录答题，自动创建/更新 attempt */ },
+  restoreQuizUI(date, level) { /* 页面加载时恢复答题状态（选项高亮、成绩、解析） */ },
+  doResetQuiz(level) { /* 重置 UI + 标记旧 attempt 完成 */ },
+  toggleNotes(level) { /* 切换笔记区显示 */ },
+  saveNotes(level) { /* 保存笔记到 quizzes[date][level].notes + notesTs */ }
+};
+```
+
+**初始化调用**（在 `renderArticle` 之后）：
+```javascript
+// 恢复已保存的答题状态
+QuizData.restoreQuizUI(date, level);
+// 渲染 quiz 控件（重新做题、笔记等）
+renderQuizControls(level);
+// 绑定 quiz 交互
+bindQuizInteraction(level);
+```
+
+**提交答案时**：
+```javascript
+submit.onclick = function() {
+  // ... 现有判定逻辑 ...
+  QuizData.recordAnswer(level, idx, chosen, isCorrect);
+};
+```
 
 ### 第 4 步：生成 DOCX 文件
 
@@ -141,22 +232,32 @@ window.ARTICLES = {
 
 ### 第 6 步：推送到 GitHub
 
-由于沙箱环境 DNS 劫持，使用以下方式推送：
+使用 `gh` CLI 或 GitHub Contents API 推送：
 
 ```bash
-# 1. 修改 /etc/hosts 绕过 DNS 劫持
-echo "140.82.121.5 api.github.com" >> /etc/hosts
+# 认证（使用有 contents:write 权限的 PAT）
+echo "<TOKEN>" | gh auth login --with-token
 
-# 2. 使用 GitHub Contents API 逐个上传（需要有效的 fine-grained PAT）
-#    或使用 curl 直接 PUT 到 API
-#    PUT /repos/celina0503qq-lab/siele-workbench/contents/{path}
+# 上传文件（逐个）
+python3 -c "
+import json, base64
+with open('<file>', 'rb') as f:
+    content = base64.b64encode(f.read()).decode()
+payload = {
+    'message': 'add: <date> 外刊精炼',
+    'content': content
+    # 如更新已有文件需加 'sha': '<existing-sha>'
+}
+with open('/tmp/payload.json', 'w') as f:
+    json.dump(payload, f)
+"
 
-# 3. 恢复 hosts
-#    （操作完成后恢复原始 /etc/hosts）
+gh api -X PUT repos/celina0503qq-lab/siele-workbench/contents/<path> \
+  --input /tmp/payload.json
 ```
 
 需要上传的文件清单：
-1. `articles/data/<date>.js`
+1. `articles/data/<date>.js`（如有外部数据文件）
 2. `articles/<date>.html`
 3. `articles/<date>.docx`
 4. `refine_data.js`
@@ -165,9 +266,128 @@ echo "140.82.121.5 api.github.com" >> /etc/hosts
 
 ---
 
-## 三、模板升级检查清单
+## 三、工作台内置页面 Quiz 持久化
 
-旧版 HTML 升级到 v2 模板时，必须逐项检查：
+工作台主页面 `index.html` 中的外刊精炼模块也内置了 quiz 持久化功能，使用 `RefineQuizDB` 对象（与独立页面的 `QuizData` 对等），共用 `swa_quiz_v1` 存储键。
+
+### 3.1 RefineQuizDB 对象
+
+```javascript
+const RefineQuizDB = {
+  STORAGE_KEY: 'swa_quiz_v1',
+  load() { /* 同 QuizData.load() */ },
+  save(data) { /* 同 QuizData.save() */ },
+  recordAnswer(date, level, qIdx, chosen, correct, totalQuestions) { /* 记录答题 */ },
+  getAttempts(date, level) { /* 获取全部 attempts */ },
+  getLatestAttempt(date, level) { /* 获取最新 attempt */ },
+  resetQuiz(date, level) { /* 标记当前 attempt 完成 */ }
+};
+```
+
+### 3.2 关键函数
+
+- `window.submitRefineQuiz(levelKey, qIdx)` — 提交答案后调用 `RefineQuizDB.recordAnswer()`，同时调用 `autoLogLowScore('refineQuiz', ...)` 记录错题
+- `window.restoreRefineQuizUI(levelKey, attempt)` — 页面渲染后恢复答题状态
+- `window.redoRefineQuiz(levelKey)` — 重新做题（保留历史）
+- `window.toggleRefineQuizHistory(levelKey)` — 查看/折叠历史记录
+- `window.bindRefineQuizClicks()` — 为所有 quiz 选项绑定 click 事件
+- `window.bindRefineSpeaks()` — 绑定单词/段落/全文发音按钮
+
+### 3.3 renderRefineBody Wrapper Hook
+
+工作台内置页面通过 wrapper 模式 hook 渲染时机：
+
+```javascript
+const _origRenderRefineBody = renderRefineBody;
+window.renderRefineBody = async function() {
+  await _origRenderRefineBody.apply(this, arguments);
+  setTimeout(() => {
+    window.bindRefineQuizClicks();   // 绑定 quiz 选项点击
+    window.bindRefineSpeaks();        // 绑定发音按钮
+    // 恢复已保存的答题状态
+    if (typeof RefineQuizDB !== 'undefined' && currentRefineDate) {
+      const lvs = currentRefineLevel ? [currentRefineLevel] : ['A1','A2','B1','B2'];
+      lvs.forEach(lv => {
+        var att = RefineQuizDB.getLatestAttempt(currentRefineDate, lv.toLowerCase());
+        if (att && att.answers && att.answers.length > 0)
+          window.restoreRefineQuizUI(lv.toLowerCase(), att);
+      });
+    }
+  }, 0);
+};
+```
+
+### 3.4 TTS 发音功能
+
+工作台内置页面包含完整的 TTS 发音体系（独立 HTML 页面可选实现）：
+
+| 功能 | 函数 | 说明 |
+|------|------|------|
+| 单词/例句发音 | `_bindRefineWordSpeak()` | 点击 🔊 按钮朗读单个单词或例句 |
+| 段落发音 | `_bindRefineParaSpeak()` | 点击段落旁 🔊 按钮朗读该段 |
+| 全文通读 | `_bindRefinePlayAll()` | ▶ 按钮逐段朗读全文，段间 0.5s 间隔 |
+| 跟读评分 | `_bindRefineScore()` | 🎤 录音后对比评分（需 Web Speech API） |
+| 语速控制 | `_bindRefineRate()` | 1.0x / 0.7x 慢速 / 0.5x 特慢 |
+
+状态管理：`window.__refineSpeakRate`（每等级语速）、`window.__refineSpeakQueue`（通读队列，可 cancel）
+
+### 3.5 笔记系统
+
+工作台内置页面的笔记通过 `_getRefineNote(noteKey)` / `_setRefineNote(noteKey, text)` 函数读写，数据存储在 `swa_quiz_v1` 的 `quizzes[date][level].notes` 字段（不再使用独立的 `refine_notes_v1` 键）。
+
+启动时自动迁移旧 `refine_notes_v1` 数据到 `swa_quiz_v1`。
+
+### 3.6 Level Key 规范
+
+> **重要**：所有 level key 必须使用小写（`a1`/`a2`/`b1`/`b2`）
+
+| 来源 | 正确写法 | 错误写法 |
+|------|----------|----------|
+| 独立 HTML 页面 QuizData | `a1` (小写) | ~~`A1`~~ |
+| 工作台 RefineQuizDB | `a1` (小写) | ~~`A1`~~ |
+| swa_quiz_v1 JSON 键 | `a1` (小写) | ~~`A1`~~ |
+
+不一致会导致云同步时同一日期同一等级的数据被当作不同条目，无法互通。
+
+---
+
+## 四、云同步机制
+
+### 4.1 admin.html 云同步流程
+
+工作台 `admin.html` 的 `serializeCloud()` / `mergeData()` 负责云同步：
+
+1. **上传** (`serializeCloud()`)：将 `swa_quiz_v1` 的全部内容（含做题记录和笔记）打包到云端 JSON
+2. **下载** (`mergeData()`)：拉取云端数据，通过 `mergeQuizzes()` 合并到本地
+3. **写回** (`saveQuizDataToLocal()`)：将合并后的数据写回 `swa_quiz_v1`
+
+### 4.2 mergeQuizzes 合并逻辑
+
+```javascript
+function mergeQuizzes(localQ, remoteQ) {
+  // 按 date → level 遍历
+  // attempts: 按 attempt.id 去重合并，按 timestamp 降序排列
+  // notes: 按 notesTs 时间戳取较新版本
+  //   - 内容相同 → 取任意
+  //   - 一端为空 → 取非空端
+  //   - 两端都有 → 取 notesTs 更大的
+}
+```
+
+### 4.3 支持的云同步 Provider
+
+| Provider | 说明 |
+|----------|------|
+| GitHub Gist | 全球通用，需要 PAT（gist 权限） |
+| Gitee 代码片段 | 国内访问快，推荐 |
+| 腾讯云 CloudBase | 账号体系同源 |
+| JSONBin.io | 配置最简单 |
+
+---
+
+## 五、模板升级检查清单
+
+旧版 HTML 升级到 v3 模板时，必须逐项检查：
 
 | # | 检查项 | 类别 |
 |---|---|---|
@@ -187,29 +407,63 @@ echo "140.82.121.5 api.github.com" >> /etc/hosts
 | 14 | 词汇卡标签头（释义/例句/翻译） | JS |
 | 15 | hardWords title tooltip | JS |
 | 16 | `\b` 词边界匹配 | JS |
+| 17 | **QuizData 对象 + STORAGE_KEY: 'swa_quiz_v1'** | JS |
+| 18 | **renderQuizControls(level) 控件渲染** | JS |
+| 19 | **bindQuizInteraction(level) 交互绑定** | JS |
+| 20 | **restoreQuizUI 页面加载恢复** | JS |
+| 21 | **recordAnswer 提交后持久化** | JS |
+| 22 | **doResetQuiz 重新做题功能** | JS |
+| 23 | **toggleNotes + saveNotes 笔记持久化** | JS |
+| 24 | **Level key 全小写（a1/a2/b1/b2）** | JS |
+| 25 | **sourceUrl 返回 HTTP 200（非首页/列表页）** | 数据 |
+| 26 | **sourceUrl 不可编造，无可用链接时留空** | 数据 |
+| 27 | **错题自动记录 autoLogLowScore('refineQuiz', ...)** | JS |
+| 28 | **renderRefineBody wrapper hook（绑定+恢复）** | 架构 |
+| 29 | **TTS 发音按钮绑定（单词/段落/全文）** | JS |
+| 30 | **数据内联模式（非外部 JS 引用）** | 架构 |
 
 ---
 
-## 四、已知坑点与注意事项
+## 六、已知坑点与注意事项
 
-### 4.1 JS 引号问题
+### 6.1 JS 引号问题
 - JS 数据文件中 `zh` 字段值如果包含中文引号 `""`（Unicode `\u201C`/`\u201D`），在 JS 双引号字符串中会破坏语法
 - **解决方案**：写入前将 `zh` 值内的 ASCII 双引号替换为 `\u201C` / `\u201D` 转义序列
 - **验证方法**：`node -e "new Function(fs.readFileSync('path','utf8'))"` 检查语法
 
-### 4.2 GitHub 推送
+### 6.2 GitHub 推送
 - 沙箱环境 DNS 将 `github.com` 劫持到内网 IP，需通过 `/etc/hosts` 指定真实 IP
 - 可用的 API IP：`140.82.121.5`（已验证）、`140.82.121.6`
-- 必须使用有 `repo` 权限的 fine-grained PAT 或 classic token
-- Git 命令使用 GnuTLS 可能失败，改用 curl + GitHub Contents API 更可靠
+- 必须使用有 `contents:write` 权限的 fine-grained PAT
+- Git 命令使用 GnuTLS 可能失败（TLS 握手错误），改用 `gh` CLI + GitHub API 更可靠
+- 上传大文件（>1MB）时，Contents API 返回的 `content` 字段可能为空；用 HTTP Range 请求分块下载
 
-### 4.3 数据一致性
+### 6.3 数据一致性
 - 高频词应在文章段落中自然出现（用于 `highlightWords` 高亮）
 - 每篇文章的 `hardWords` 应对应段落中的实际难点
 - 阅读题答案必须能从对应段落中直接定位（在解析中标注段落号）
 - 期号必须连续递增
 
-### 4.4 内容质量
+### 6.4 Level Key 大小写
+- `swa_quiz_v1` 中的 level key **必须全小写**（`a1`/`a2`/`b1`/`b2`）
+- 工作台内置页面使用 `lvKey`（已是小写），但早期代码中曾用 `levelKey.toUpperCase()` 导致大小写不一致
+- **后果**：大小写不同的 key 在云同步 `mergeQuizzes` 中被当作不同条目，做题记录和笔记无法跨设备/跨页面同步
+- **修复**：所有 `RefineQuizDB` 调用必须使用小写 level key
+
+### 6.5 笔记云同步
+- 笔记存储在 `swa_quiz_v1` 的 `quizzes[date][level].notes` 字段，附带 `notesTs` 时间戳
+- 云同步合并时按 `notesTs` 取较新版本（而非简单覆盖）
+- 工作台内置页面旧版使用独立的 `refine_notes_v1` 键，启动时自动迁移到 `swa_quiz_v1`
+- 独立 HTML 页面的笔记始终存储在 `swa_quiz_v1` 中
+
+### 6.6 原文链接准确性
+- `sourceUrl` 必须指向**实际文章页面**，不能填网站首页、频道页或列表页
+- 生成时必须用 `curl -s -o /dev/null -w "%{http_code}" <url>` 验证返回 **200**，404/403/301 跳首页均不可用
+- 若来源为付费墙（El País 等），链接仍可填，但页面应标注"可能需要订阅"
+- 同一篇文章不得跨等级复用（A1 和 B2 不能用同一篇原文，难度适配不同）
+- 若临时无法找到可用原文链接，`sourceUrl` 留空 `""`，前端会降级显示来源名（无跳转按钮），**不可编造链接**
+
+### 6.7 内容质量
 - A1 文章：日常生活场景，词汇基础，句式简单
 - A2 文章：社会生活，引入简单时态变化
 - B1 文章：社会/经济议题，复合句，含数据/引语
@@ -218,38 +472,74 @@ echo "140.82.121.5 api.github.com" >> /etc/hosts
 
 ---
 
-## 五、快速参考
+## 七、快速参考
 
 ### 文件结构
 ```
 siele-workbench/
 ├── articles/
 │   ├── data/
-│   │   └── YYYY-MM-DD.js        # 原始数据（外部引用用）
-│   ├── YYYY-MM-DD.html           # 独立页面（数据内联，v2 模板）
+│   │   └── YYYY-MM-DD.js        # 原始数据（工作台内置页面外部引用用）
+│   ├── YYYY-MM-DD.html           # 独立页面（数据内联，v3 模板）
 │   └── YYYY-MM-DD.docx           # Word 文档
-├── refine_data.js                # 索引文件（所有期号元数据）
+├── devext/
+│   ├── gen_docx_YYYYMMDD.py      # DOCX 生成脚本（python-docx）
+│   └── patch_quiz_persistence.py # 批量补丁脚本（给旧 HTML 注入 QuizData）
+├── refine_data.js                # 索引文件（所有期号元数据 + loadRefineData）
+├── index.html                    # 工作台主页面（含 RefineQuizDB + TTS 发音体系）
+├── admin.html                    # 管理后台（含云同步 serializeCloud + mergeQuizzes）
 └── .codebuddy/
     └── automation.md             # 本文件
 ```
 
 ### GitHub API 上传模板
 ```bash
-# 获取文件 SHA（如已存在）
-curl -s --resolve "api.github.com:443:140.82.121.5" \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>?ref=main"
+# 认证
+echo "<TOKEN>" | gh auth login --with-token
 
-# 创建/更新文件
-curl -s -X PUT --resolve "api.github.com:443:140.82.121.5" \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  -H "Content-Type: application/json" \
-  -d '{"message":"commit msg","content":"<base64>","branch":"main","sha":"<sha-if-updating>"}' \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>"
+# 获取文件 SHA（如已存在）
+gh api repos/celina0503qq-lab/siele-workbench/contents/<path> --jq '.sha'
+
+# 构建 base64 payload 并上传
+python3 -c "
+import json, base64
+with open('<file>', 'rb') as f:
+    content = base64.b64encode(f.read()).decode()
+payload = {'message': 'commit msg', 'content': content, 'sha': '<sha>'}
+with open('/tmp/payload.json', 'w') as f:
+    json.dump(payload, f)
+"
+gh api -X PUT repos/celina0503qq-lab/siele-workbench/contents/<path> \
+  --input /tmp/payload.json
+```
+
+### swa_quiz_v1 数据流
+```
+独立 HTML 页面                    工作台内置页面
+    │                                  │
+    ▼                                  ▼
+QuizData.saveNotes()           _setRefineNote()
+QuizData.recordAnswer()         RefineQuizDB.recordAnswer()
+    │                              submitRefineQuiz()
+    │                                  │  + autoLogLowScore() → 错题集
+    │                                  │
+    └──────────┬───────────────────────┘
+               ▼
+        localStorage['swa_quiz_v1']
+               │
+               ▼
+      admin.html serializeCloud()
+               │
+               ▼
+      云端 (GitHub Gist / Gitee / CloudBase)
+               │
+               ▼
+      另一台设备 mergeData() → mergeQuizzes()
+               │
+               ▼
+      localStorage['swa_quiz_v1'] (合并后)
 ```
 
 ---
 
-*最后更新：2026-08-09 · 基于 5 期实际运行经验总结*
+*最后更新：2026-08-10 · 基于 8 期实际运行 + Quiz 持久化与云同步经验总结*
