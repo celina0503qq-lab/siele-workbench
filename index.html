@@ -12345,16 +12345,43 @@ function _renderDeleA1ModeloList(task, mid, items){
     const modeloId = group[0] ? group[0].modelo : '';
     const pct = group.length > 0 ? Math.round(doneCount / group.length * 100) : 0;
     const progressColor = pct >= 80 ? '#10b981' : pct >= 40 ? '#f59e0b' : '#94a3b8';
-    h += '<div class="card" style="background:linear-gradient(135deg,#fff 0%,#f8fafc 100%)">'+
-      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'+
-        '<h3 style="margin:0;font-size:16px;color:var(--fg)">'+esc(tk)+' <span class="sub" style="color:var(--tr);font-size:13px;font-weight:400">· '+group.length+' 题</span></h3>'+
-        '<div style="flex:1;min-width:120px;max-width:200px;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">'+
+    h += '<div class="card" style="background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);margin-bottom:12px">'+
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">'+
+        '<h3 style="margin:0;font-size:17px;font-weight:700;color:#1e293b">'+esc(tk)+' <span style="color:#64748b;font-size:13px;font-weight:400">· '+group.length+' 题</span></h3>'+
+        '<div style="flex:1;min-width:100px;max-width:180px;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">'+
           '<div style="height:100%;width:'+pct+'%;background:'+progressColor+';border-radius:3px;transition:width .3s"></div>'+
         '</div>'+
-        '<span class="sub" style="color:'+progressColor+';font-size:12px;font-weight:600">'+doneCount+'/'+group.length+'</span>'+
+        '<span style="color:'+progressColor+';font-size:12px;font-weight:600">'+doneCount+'/'+group.length+'</span>'+
         (doneCount > 0 ? '<button class="btn sm ol" onclick="_deleRedoTarea(\''+esc(modeloId)+'\','+pruebaNum+','+tareaNum+')" style="font-size:11px">🔄 重做此大题</button>' : '')+
-      '</div>'+
-    '<div class="gp">';
+      '</div>';
+
+    // === Tarea 级别共享原文: 检测 cuerpo 是否所有题共享 ===
+    const firstCuerpo = group[0] && group[0].cuerpo || '';
+    const sharedCuerpo = firstCuerpo.length > 30 && group.every(q => (q.cuerpo||'') === firstCuerpo);
+    if (sharedCuerpo && (pruebaNum === 1 || pruebaNum === 2)) {
+      h += '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:8px;padding:12px 14px;margin-bottom:10px">'+
+        '<div style="font-size:12px;font-weight:600;color:#6366f1;margin-bottom:6px">📄 题目原文</div>'+
+        '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#334155;font-weight:500;max-height:400px;overflow:auto">'+esc(firstCuerpo)+'</div>'+
+      '</div>';
+    }
+    // === Tarea 级别共享听力原文: 检测 transcript 是否所有题共享 ===
+    const firstTranscript = group[0] && group[0].transcript || '';
+    const sharedTranscript = firstTranscript.length > 30 && group.every(q => (q.transcript||'') === firstTranscript);
+    if (sharedTranscript && pruebaNum === 2) {
+      h += '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:12px 14px;margin-bottom:10px">'+
+        '<div style="font-size:12px;font-weight:600;color:#0284c7;margin-bottom:6px">📝 听力原文</div>'+
+        '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#0c4a6e;font-weight:500;max-height:300px;overflow:auto">'+esc(firstTranscript)+'</div>';
+      // TTS for shared transcript
+      var sharedTtsId = 'tts_shared_'+modeloId+'_P'+pruebaNum+'_T'+tareaNum;
+      window._deleTTSStore[sharedTtsId] = firstTranscript;
+      h += '<div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+        '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(sharedTtsId)+'\')" style="font-size:12px">🔊 TTS 播放听力</button>'+
+        '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
+        '<span style="color:#64748b;font-size:11px">浏览器语音合成 (es-ES · 0.9x)</span>'+
+      '</div></div>';
+    }
+
+    h += '<div class="gp">';
     for (const q of group) {
       const answered = !!q.answer;
       // v5 写作/口语题: 走特殊渲染 (无选择题 answer)
@@ -12362,32 +12389,34 @@ function _renderDeleA1ModeloList(task, mid, items){
         h += _renderDeleA1V5TaskCard(q);
         continue;
       }
-      // v5 听力题: 显示 transcript 折叠区 + TTS/音频播放
+      // v5 听力题: 如果 transcript 不共享, 显示 per-question transcript
       let transcriptHtml = '';
-      if (q._v5 && q.transcript && q.prueba === 2) {
-        transcriptHtml = '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📝 听力原文 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.5">'+esc(q.transcript)+'</div></details>';
+      if (q._v5 && q.transcript && q.prueba === 2 && !sharedTranscript) {
+        transcriptHtml = '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📝 听力原文 (点击展开)</summary><div style="background:#f0f9ff;padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:13px;line-height:1.5;color:#0c4a6e">'+esc(q.transcript)+'</div></details>';
         if (q.audio) {
           transcriptHtml += '<div style="margin-top:4px"><audio controls style="width:100%;height:32px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
         } else {
-          // TTS 播放 (用浏览器语音合成朗读 transcript, 替代真实音频)
           var ttsId = 'tts_'+q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
           window._deleTTSStore[ttsId] = q.transcript;
           transcriptHtml += '<div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
             '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(ttsId)+'\')" style="font-size:12px">🔊 TTS 播放听力</button>'+
             '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
-            '<span class="sub" style="color:var(--tr);font-size:11px">浏览器语音合成 (es-ES · 0.9x)</span>'+
+            '<span class="sub" style="color:var(--tr);font-size:11px">es-ES · 0.9x</span>'+
           '</div>';
         }
       }
-      // 渲染 cuerpo (题目原文, v5 才有)
+      // per-question cuerpo (仅在不共享时显示)
       let cuerpoHtml = '';
-      if (q._v5 && q.cuerpo && q.cuerpo.length > 50 && (q.prueba === 1)) {
-        cuerpoHtml = '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目原文 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
+      if (q._v5 && q.cuerpo && q.cuerpo.length > 50 && (q.prueba === 1) && !sharedCuerpo) {
+        cuerpoHtml = '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:8px;padding:10px 12px;margin-top:6px">'+
+          '<div style="font-size:11px;font-weight:600;color:#6366f1;margin-bottom:4px">📄 题目原文</div>'+
+          '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#334155;font-weight:500;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div>'+
+        '</div>';
       }
-      // 渲染 prompt
+      // 渲染 prompt — 加大字体
       let promptHtml = '';
       if (q.prompt) {
-        promptHtml = '<div style="margin-top:6px;font-size:13px;line-height:1.6;color:var(--fg)"><b>题 '+q.q+':</b> '+esc(q.prompt)+'</div>';
+        promptHtml = '<div style="margin-top:8px;font-size:14px;line-height:1.6;color:#1e293b;font-weight:600"><b>题 '+q.q+':</b> '+esc(q.prompt)+'</div>';
       }
       // 渲染选项 — v5 可自测模式
       let optsHtml = '';
@@ -12461,10 +12490,10 @@ function _renderDeleA1ModeloList(task, mid, items){
           }
         }
       }
-      // 题卡头部 — 干净版 (无 type/v5/答案 调试文字)
-      h += '<div class="card dele-qcard" data-qkey="'+esc(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q)+'" style="background:linear-gradient(135deg,#fafbff 0%,#f5f7fb 100%);padding:12px;border-left:3px solid transparent;transition:all .2s">'+
-        '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">'+
-          '<div><b style="color:var(--fg);font-size:14px">题 '+q.q+'</b> <span class="sub" style="color:var(--tr);font-size:12px">· '+esc(q.modelo_name)+' · Tarea '+q.tarea+'</span></div>'+
+      // 题卡头部 — 干净版
+      h += '<div class="card dele-qcard" data-qkey="'+esc(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q)+'" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin:6px 0;transition:all .2s">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
+          '<div style="font-size:13px;color:#64748b;font-weight:500">题 '+q.q+' · Tarea '+q.tarea+'</div>'+
         '</div>'+
         cuerpoHtml+
         promptHtml+
