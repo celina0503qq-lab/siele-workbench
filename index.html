@@ -12334,8 +12334,27 @@ function _renderDeleA1ModeloList(task, mid, items){
   }
   for (const tk in byTarea) {
     const group = byTarea[tk];
-    h += '<div class="card"><h3 style="margin:0 0 10px">'+esc(tk)+' <span class="sub" style="color:var(--tr)">· '+group.length+' 题</span></h3>';
-    h += '<div class="gp">';
+    // 统计本大题已答题数
+    let doneCount = 0;
+    group.forEach(q => {
+      const sk = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+      if (window._deleA1V5Answers && window._deleA1V5Answers[sk] && window._deleA1V5Answers[sk]._submitted) doneCount++;
+    });
+    const tareaNum = group[0] ? group[0].tarea : 0;
+    const pruebaNum = group[0] ? group[0].prueba : 0;
+    const modeloId = group[0] ? group[0].modelo : '';
+    const pct = group.length > 0 ? Math.round(doneCount / group.length * 100) : 0;
+    const progressColor = pct >= 80 ? '#10b981' : pct >= 40 ? '#f59e0b' : '#94a3b8';
+    h += '<div class="card" style="background:linear-gradient(135deg,#fff 0%,#f8fafc 100%)">'+
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">'+
+        '<h3 style="margin:0;font-size:16px;color:var(--fg)">'+esc(tk)+' <span class="sub" style="color:var(--tr);font-size:13px;font-weight:400">· '+group.length+' 题</span></h3>'+
+        '<div style="flex:1;min-width:120px;max-width:200px;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">'+
+          '<div style="height:100%;width:'+pct+'%;background:'+progressColor+';border-radius:3px;transition:width .3s"></div>'+
+        '</div>'+
+        '<span class="sub" style="color:'+progressColor+';font-size:12px;font-weight:600">'+doneCount+'/'+group.length+'</span>'+
+        (doneCount > 0 ? '<button class="btn sm ol" onclick="_deleRedoTarea(\''+esc(modeloId)+'\','+pruebaNum+','+tareaNum+')" style="font-size:11px">🔄 重做此大题</button>' : '')+
+      '</div>'+
+    '<div class="gp">';
     for (const q of group) {
       const answered = !!q.answer;
       // v5 写作/口语题: 走特殊渲染 (无选择题 answer)
@@ -12386,24 +12405,37 @@ function _renderDeleA1ModeloList(task, mid, items){
           '</div>';
         }
       }
-      // 填空题答案 + 解析
+      // 填空题: 输入框 + 答案未提交前隐藏
       if (q.type === 'fill' && q.answer) {
-        optsHtml = '<div style="margin-top:4px;font-size:12px;color:#10b981">答案: <b>'+esc(q.answer)+'</b></div>';
-        if (q.explanation) {
-          optsHtml += '<div style="margin-top:4px;padding:6px 8px;background:#f0f7ff;border-radius:4px;font-size:11px;line-height:1.5;color:#1e40af;border-left:3px solid #3b82f6"><b>💡 解析：</b>'+esc(q.explanation)+'</div>';
+        const fillStateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+        if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+        const fillAns = window._deleA1V5Answers[fillStateKey];
+        const fillSubmitted = fillAns && fillAns._submitted;
+        const userFill = fillAns ? fillAns.key : '';
+        optsHtml = '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+          '<input id="fill_'+esc(fillStateKey)+'" type="text" value="'+esc(userFill)+'" placeholder="在此输入答案..." '+
+          'style="flex:1;min-width:120px;padding:6px 10px;border:1px solid var(--bd,#d1d5db);border-radius:6px;font-size:13px;font-family:inherit" '+
+          'onkeydown="if(event.key===\'Enter\')_deleA1V5FillSubmit(\''+esc(fillStateKey)+'\')" '+
+          (fillSubmitted ? 'disabled' : '')+'/>'+
+          (!fillSubmitted
+            ? '<button class="btn sm pr" onclick="_deleA1V5FillSubmit(\''+esc(fillStateKey)+'\')" style="font-size:12px">提交</button>'
+            : '<button class="btn sm ol" onclick="_deleA1V5FillReset(\''+esc(fillStateKey)+'\')" style="font-size:12px">重做</button>')+
+        '</div>';
+        if (fillSubmitted) {
+          const isCorrect = (userFill || '').trim().toLowerCase() === (q.answer||'').toLowerCase();
+          optsHtml += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+            '<span class="pr-badge" style="background:'+(isCorrect?'#10b98122;color:#10b981':'#ef444422;color:#ef4444')+'">'+
+              (isCorrect ? '✓ 答对了' : '✗ 答错了 · 正确答案: '+esc(q.answer))+
+            '</span></div>';
+          if (q.explanation) {
+            optsHtml += '<div style="margin-top:4px;padding:6px 8px;background:#f0f7ff;border-radius:4px;font-size:11px;line-height:1.5;color:#1e40af;border-left:3px solid #3b82f6"><b>💡 解析：</b>'+esc(q.explanation)+'</div>';
+          }
         }
       }
-      // v5 标记徽章
-      let v5Badge = '';
-      if (q._v5) {
-        v5Badge = ' <span class="sub" style="color:#10b981;font-weight:600">v5 Cervantes</span>';
-      }
-      h += '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
+      // 题卡头部 — 干净版 (无 type/v5/答案 调试文字)
+      h += '<div class="card dele-qcard" data-qkey="'+esc(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q)+'" style="background:linear-gradient(135deg,#fafbff 0%,#f5f7fb 100%);padding:12px;border-left:3px solid transparent;transition:all .2s">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">'+
-          '<div><b>题 '+q.q+'</b> <span class="sub" style="color:var(--tr)">· '+esc(q.modelo_name)+'</span> <span class="sub" style="color:var(--tr)">· '+esc(q.type||'unknown')+'</span>'+v5Badge+'</div>'+
-          (answered
-            ? '<span class="pr-badge" style="background:#10b98122;color:#10b981">答案 '+q.answer+'</span>'
-            : '<span class="pr-badge new">未匹配答案</span>')+
+          '<div><b style="color:var(--fg);font-size:14px">题 '+q.q+'</b> <span class="sub" style="color:var(--tr);font-size:12px">· '+esc(q.modelo_name)+' · Tarea '+q.tarea+'</span></div>'+
         '</div>'+
         cuerpoHtml+
         promptHtml+
@@ -12521,6 +12553,109 @@ window._deleA1V5Reset = function(stateKey){
       for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
       el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
     }
+  }
+};
+
+// ===== 填空题提交/重做 =====
+window._deleA1V5FillSubmit = function(stateKey){
+  var inp = document.getElementById('fill_'+stateKey);
+  if (!inp) return;
+  var val = inp.value.trim();
+  if (!val) { if (window.toast) window.toast('请先输入答案'); return; }
+  if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+  window._deleA1V5Answers[stateKey] = { key: val, _submitted: true };
+  _deleRefreshCurrentTarea();
+  _deleSaveProgress();
+};
+window._deleA1V5FillReset = function(stateKey){
+  if (window._deleA1V5Answers) delete window._deleA1V5Answers[stateKey];
+  _deleRefreshCurrentTarea();
+  _deleSaveProgress();
+};
+
+// ===== DELE 进度持久化 (localStorage + 云同步预留) =====
+const _DELE_PROGRESS_KEY = 'dele_siele_wb_dele_progress_v1';
+window._deleRefreshCurrentTarea = function(){
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  const task = window._deleA1CurrentTask || 'reading';
+  const mid = window._deleA1CurrentModelo;
+  if (!mid) return;
+  const el = document.getElementById('__dele_a1_'+task+'_'+mid);
+  if (!el) return;
+  const bank = (_deleBank[lvl][task] || []);
+  const grupos = {};
+  for (const it of bank) (grupos[it.modelo] = grupos[it.modelo] || []).push(it);
+  el.innerHTML = _renderDeleA1ModeloList(task, mid, grupos[mid] || []);
+};
+window._deleGetProgressScope = function(){
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  const task = window._deleA1CurrentTask || 'reading';
+  return lvl + '::' + task;
+};
+window._deleSaveProgress = function(){
+  if (!window._deleA1V5Answers) return;
+  var scope = window._deleGetProgressScope();
+  var allProgress = {};
+  try { allProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY) || '{}'); } catch(e){}
+  allProgress[scope] = {
+    ts: Date.now(),
+    answers: JSON.parse(JSON.stringify(window._deleA1V5Answers))
+  };
+  try { localStorage.setItem(_DELE_PROGRESS_KEY, JSON.stringify(allProgress)); } catch(e){}
+};
+window._deleLoadProgress = function(){
+  var scope = window._deleGetProgressScope();
+  var allProgress = {};
+  try { allProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY) || '{}'); } catch(e){}
+  var saved = allProgress[scope];
+  if (saved && saved.answers) {
+    window._deleA1V5Answers = saved.answers;
+    return true;
+  }
+  return false;
+};
+window._deleClearProgressForTarea = function(modelo, prueba, tarea){
+  // 重做单个大题: 删除该 Tarea 下所有 stateKey
+  if (!window._deleA1V5Answers) return;
+  const prefix = modelo + '_P' + prueba + '_T' + tarea + '_';
+  Object.keys(window._deleA1V5Answers).forEach(k => {
+    if (k.startsWith(prefix)) delete window._deleA1V5Answers[k];
+  });
+  _deleSaveProgress();
+};
+window._deleRedoTarea = function(modelo, prueba, tarea){
+  if (!confirm('确定要重做 Tarea '+tarea+' 的所有题目吗？此操作会清除该大题下所有答题记录。')) return;
+  _deleClearProgressForTarea(modelo, prueba, tarea);
+  _deleRefreshCurrentTarea();
+  if (window.toast) window.toast('已重置 Tarea '+tarea+' 的答题状态');
+};
+
+// 把以上进度钩子挂到原有的 Pick/Submit/Reset
+const _origPick = window._deleA1V5Pick, _origSubmit = window._deleA1V5Submit, _origReset = window._deleA1V5Reset;
+window._deleA1V5Pick = function(stateKey, key){
+  if (_origPick) _origPick(stateKey, key);
+  _deleSaveProgress();
+};
+window._deleA1V5Submit = function(stateKey){
+  if (_origSubmit) _origSubmit(stateKey);
+  _deleSaveProgress();
+};
+window._deleA1V5Reset = function(stateKey){
+  if (_origReset) _origReset(stateKey);
+  _deleSaveProgress();
+};
+
+// 在 _renderDeleA1ModeloList 渲染时自动加载当前 scope 进度
+// (在 _renderDeleA1Quiz 入口处调用 _deleLoadProgress)
+const _origQuiz = window._renderDeleA1Quiz;
+window._renderDeleA1Quiz = function(level, task, taskLabel, bank){
+  if (_origQuiz) {
+    // 先设置 scope 再加载进度,确保 _deleGetProgressScope 返回正确的 key
+    window._deleA1CurrentLevel = level;
+    window._deleA1CurrentTask = task;
+    window._deleA1V5Answers = {};
+    _deleLoadProgress();
+    return _origQuiz(level, task, taskLabel, bank);
   }
 };
 
@@ -12700,17 +12835,128 @@ function deleTaskMeta(level, taskKey){
 }
 
 // ===== DELE 写作/口语辅助函数 (A2/B1/B2 通用) =====
+// ===== DELE 多维评分标准 (按级别差异化) =====
+const DELE_SCORING_RUBRIC = {
+  A1: {
+    wordRange: [15, 40],
+    wordIdeal: 25,
+    weights: { wordCount: 25, vocabulary: 20, grammar: 25, connectors: 15, taskCompletion: 15 },
+    rubric: {
+      vocabulary: '使用基本日常词汇 (600词范围内)',
+      grammar: '现在时准确、ser/estar基本区分、主谓一致',
+      connectors: '基础连接词: y, pero, porque, también',
+      taskCompletion: '包含题目所有要点 (问候/介绍/喜好/告别)'
+    }
+  },
+  A2: {
+    wordRange: [60, 100],
+    wordIdeal: 80,
+    weights: { wordCount: 20, vocabulary: 20, grammar: 20, connectors: 20, taskCompletion: 20 },
+    rubric: {
+      vocabulary: '日常生活词汇、过去时相关词汇',
+      grammar: 'pretérito imperfecto / indefinido 准确、属格一致',
+      connectors: 'porque, cuando, como, si, aunque 等',
+      taskCompletion: '完整表达观点/经历，包含所有提示要点'
+    }
+  },
+  B1: {
+    wordRange: [100, 150],
+    wordIdeal: 125,
+    weights: { wordCount: 15, vocabulary: 20, grammar: 25, connectors: 20, taskCompletion: 20 },
+    rubric: {
+      vocabulary: '表达观点/情感的丰富词汇、近义词使用',
+      grammar: '虚拟式 presente (que + subj)、复合句 (que/te cual/donde)',
+      connectors: 'sin embargo, por lo tanto, además, en cambio, no obstante',
+      taskCompletion: '清晰论证、给出理由和例子'
+    }
+  },
+  B2: {
+    wordRange: [150, 180],
+    wordIdeal: 170,
+    weights: { wordCount: 15, vocabulary: 20, grammar: 25, connectors: 20, taskCompletion: 20 },
+    rubric: {
+      vocabulary: '高级词汇、近义词辨析、习语使用',
+      grammar: '虚拟式过去/复合时态/条件式/被动语态准确使用',
+      connectors: 'asimismo, no obstante, por ende, en virtud de, cabe destacar',
+      taskCompletion: '完整论辩结构 (论点-论证-结论)、正式语域'
+    }
+  }
+};
+
+// 多维度评分计算
+window._deleCalcWritingScore = function(text, level){
+  var rubric = DELE_SCORING_RUBRIC[level] || DELE_SCORING_RUBRIC.A2;
+  var words = text.split(/\s+/).filter(function(w){return w.length>0;});
+  var wc = words.length;
+  
+  // 维度1: 字数 (越接近 ideal 越高)
+  var wordScore = 0;
+  if (wc >= rubric.wordRange[0] && wc <= rubric.wordRange[1]) {
+    var dist = Math.abs(wc - rubric.wordIdeal);
+    var range = (rubric.wordRange[1] - rubric.wordRange[0]) / 2;
+    wordScore = Math.round(100 * (1 - dist / range));
+  } else {
+    var offRange = wc < rubric.wordRange[0] ? rubric.wordRange[0] - wc : wc - rubric.wordRange[1];
+    wordScore = Math.max(0, 100 - offRange * 5);
+  }
+  
+  // 维度2: 词汇多样性 (unique words / total words)
+  var uniqueWords = [...new Set(words.map(function(w){return w.toLowerCase().replace(/[.,;:!?¿¡()"]/g,'');}))].filter(function(w){return w.length>2;});
+  var vocabScore = words.length > 0 ? Math.min(100, Math.round(uniqueWords.length / Math.max(1, words.length) * 100 * 1.5)) : 0;
+  
+  // 维度3: 语法 (用 SIELE 引擎或启发式)
+  var g = (typeof sieleGradeWriting === 'function') ? sieleGradeWriting(text, 1) : null;
+  var grammarScore = g ? g.score : 70;
+  
+  // 维度4: 连接词多样性
+  var connectorsByLevel = {
+    A1: ['y','pero','porque','también','muy','ahora','después','antes'],
+    A2: ['porque','cuando','como','si','aunque','mientras','por eso','entonces'],
+    B1: ['sin embargo','por lo tanto','además','en cambio','no obstante','por otra parte','así que','aunque'],
+    B2: ['asimismo','no obstante','por ende','en virtud de','cabe destacar','a pesar de','dado que','en tanto que']
+  };
+  var connList = connectorsByLevel[level] || connectorsByLevel.A2;
+  var foundConn = connList.filter(function(c){return text.toLowerCase().includes(c);});
+  var connScore = Math.min(100, Math.round(foundConn.length / 3 * 100));
+  
+  // 维度5: 任务完成度 (基于字数是否达标 + 句号数)
+  var sentenceCount = (text.match(/[.!?¿¡]+/g) || []).length;
+  var taskScore = (wc >= rubric.wordRange[0] ? 50 : 30) + Math.min(50, sentenceCount * 10);
+  taskScore = Math.min(100, taskScore);
+  
+  // 加权总分
+  var totalScore = Math.round(
+    wordScore * rubric.weights.wordCount / 100 +
+    vocabScore * rubric.weights.vocabulary / 100 +
+    grammarScore * rubric.weights.grammar / 100 +
+    connScore * rubric.weights.connectors / 100 +
+    taskScore * rubric.weights.taskCompletion / 100
+  );
+  
+  return {
+    total: totalScore,
+    wordCount: wc,
+    dimensions: {
+      wordCount: { score: wordScore, label: '字数达标', ideal: rubric.wordIdeal + '词', actual: wc + '词', weight: rubric.weights.wordCount },
+      vocabulary: { score: vocabScore, label: '词汇多样性', detail: uniqueWords.length + '个不同词', weight: rubric.weights.vocabulary },
+      grammar: { score: grammarScore, label: '语法准确', detail: g ? ('连接词'+g.uniqueConnectorCount+'种·语法'+g.grammarPassCount+'/'+g.grammarChecks.length) : '启发式评分', weight: rubric.weights.grammar },
+      connectors: { score: connScore, label: '连接词', detail: foundConn.join(', ') || '未检测到', weight: rubric.weights.connectors },
+      taskCompletion: { score: taskScore, label: '任务完成度', detail: sentenceCount + '个完整句', weight: rubric.weights.taskCompletion }
+    },
+    rubric: rubric.rubric,
+    feedback: ''
+  };
+};
+
 window.scoreWritingFromTextarea = function(btn){
   var ta = btn.parentElement.previousElementSibling;
   while(ta && ta.tagName !== 'TEXTAREA') ta = ta.previousElementSibling;
   if(!ta || ta.tagName !== 'TEXTAREA'){ if(window.toast) window.toast('找不到文本框'); return; }
   var text = ta.value.trim();
   if(!text){ if(window.toast) window.toast('请先输入内容'); return; }
-  var words = text.split(/\s+/).filter(function(w){return w.length>0;});
-  var wc = words.length;
-  // 用 SIELE 评分引擎 (如果可用)
-  var g = (typeof sieleGradeWriting === 'function') ? sieleGradeWriting(text, 1) : null;
-  var score = g ? g.score : Math.min(100, Math.round(wc / 50 * 100));
+  var level = window._deleA1CurrentLevel || 'A1';
+  var result = window._deleCalcWritingScore(text, level);
+  var score = result.total;
   var fb = btn.parentElement.querySelector('.dele-write-fb');
   if(!fb){
     fb = document.createElement('div');
@@ -12718,30 +12964,47 @@ window.scoreWritingFromTextarea = function(btn){
     fb.style.cssText = 'margin-top:8px;font-size:13px;line-height:1.6';
     btn.parentElement.appendChild(fb);
   }
-  var html = '<div style="background:var(--bg2,#f5f5f5);padding:8px;border-radius:6px">'+
-    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:4px">'+
-      '<span class="pr-badge" style="background:'+(score>=60?'#10b98122;color:#10b981':'#ef444422;color:#ef4444')+'">评分 '+score+'/100</span>'+
-      '<span class="sub" style="color:var(--tr)">字数: '+wc+'</span>'+
+  var scoreColor = score >= 75 ? '#10b981' : score >= 60 ? '#f59e0b' : '#ef4444';
+  var html = '<div style="background:linear-gradient(135deg,#fff 0%,#f0f9ff 100%);padding:10px;border-radius:8px;border:1px solid #dbeafe">'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px">'+
+      '<span class="pr-badge" style="background:'+scoreColor+'22;color:'+scoreColor+';font-size:14px;font-weight:700">DELE '+level+' 评分 '+score+'/100</span>'+
+      '<span class="sub" style="color:var(--tr)">字数: '+result.wordCount+'</span>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin-bottom:8px">';
+  Object.keys(result.dimensions).forEach(function(k){
+    var d = result.dimensions[k];
+    var dColor = d.score >= 75 ? '#10b981' : d.score >= 60 ? '#f59e0b' : '#ef4444';
+    html += '<div style="background:#fff;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0">'+
+      '<div style="font-size:11px;color:var(--tr);margin-bottom:2px">'+d.label+' ('+d.weight+'%)</div>'+
+      '<div style="display:flex;align-items:center;gap:4px">'+
+        '<span style="color:'+dColor+';font-weight:700;font-size:13px">'+d.score+'</span>'+
+        '<div style="flex:1;height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden"><div style="height:100%;width:'+d.score+'%;background:'+dColor+'"></div></div>'+
+      '</div>'+
+      '<div style="font-size:10px;color:var(--soft);margin-top:2px">'+esc(d.detail)+'</div>'+
     '</div>';
-  if(g){
-    html += '<div class="sub" style="color:var(--tr)">连接词: '+g.uniqueConnectorCount+' 种 · 语法通过: '+g.grammarPassCount+'/'+g.grammarChecks.length+'</div>';
-  }
-  html += '<div class="sub" style="color:var(--tr);margin-top:4px;font-size:11px">' +
-    (score>=90?'优秀！表达丰富，结构清晰。' :
-     score>=75?'良好。基本表达到位，可适当增加复杂句式。' :
-     score>=60?'合格。建议增加连接词和词汇多样性。' :
-     '需要改进。建议增加字数、使用更多连接词和复杂语法结构。') + '</div></div>';
+  });
+  html += '</div>';
+  // DELE 级别评分标准说明
+  html += '<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:var(--tr)">📋 DELE '+level+' 评分标准</summary>'+
+    '<div style="margin-top:4px;padding:6px 8px;background:#fef3c7;border-radius:4px;font-size:11px;line-height:1.5;color:#78350f">'+
+    '<b>词汇：</b>'+result.rubric.vocabulary+'<br>'+
+    '<b>语法：</b>'+result.rubric.grammar+'<br>'+
+    '<b>连接词：</b>'+result.rubric.connectors+'<br>'+
+    '<b>任务完成：</b>'+result.rubric.taskCompletion+
+    '</div></details>';
+  html += '</div>';
   fb.innerHTML = html;
   // 写作 < 60 自动入错题集
   if(score < 60 && typeof autoLogLowScore === 'function'){
-    autoLogLowScore('writing', 'dele_writing', {
-      question: 'DELE 写作任务',
+    autoLogLowScore('writing', 'dele_writing_'+level, {
+      question: 'DELE '+level+' 写作任务',
       myAnswer: text.slice(0,200)+(text.length>200?'…':''),
-      correctAnswer: '参考范文见教材',
-      note: '写作评分 '+score+' 分 · 字数 '+wc,
+      correctAnswer: '参考范文见题目下方',
+      note: '写作评分 '+score+' 分 · 字数 '+result.wordCount+' · '+level,
       score: score
     });
   }
+  _deleSaveProgress();
 };
 window.startSpeakingRecording = function(btn){
   if(window.toast) window.toast('🎤 录音功能即将接入...');
@@ -13827,7 +14090,9 @@ function createGist(){
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
-    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
+    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })(),
+    // DELE 做题进度 (跨设备同步)
+    deleProgress: (function(){ try{ return JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){return{};} })()
   });
   return ghApi('/gists','POST',JSON.stringify({
     description: '西语备考工作台 · DELE & SIELE · 数据同步',
@@ -13862,7 +14127,9 @@ function pushGist(){
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
-    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })()
+    usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })(),
+    // DELE 做题进度 (跨设备同步)
+    deleProgress: (function(){ try{ return JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){return{};} })()
   });
   return ghApi('/gists/'+SCFG.gistId,'PATCH',JSON.stringify({
     files: {'siele-wb-sync.json': {content: data}}
@@ -14135,6 +14402,21 @@ async function standaloneSync(showLog){
         var lsi = JSON.parse(localStorage.getItem('swa_used_invites_v1') || '[]');
         remote.usedInvites.forEach(function(c){ if(c && lsi.indexOf(c)<0) lsi.push(c); });
         localStorage.setItem('swa_used_invites_v1', JSON.stringify(lsi));
+      } catch(e) {}
+    }
+    // DELE 做题进度合并 (LWW: 跨设备选最新时间戳的 scope)
+    if(remote.deleProgress && typeof remote.deleProgress === 'object'){
+      try {
+        var localDele = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY) || '{}');
+        Object.keys(remote.deleProgress).forEach(function(scope){
+          var rs = remote.deleProgress[scope];
+          if(!rs || !rs.answers) return;
+          var ls = localDele[scope];
+          if(!ls || (rs.ts||0) >= (ls.ts||0)){
+            localDele[scope] = rs;
+          }
+        });
+        localStorage.setItem(_DELE_PROGRESS_KEY, JSON.stringify(localDele));
       } catch(e) {}
     }
     save(); saveBackup();
