@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-09</title>
+<style>
+
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-09</h1>
+    <div class="sub">第8期 · 周日 · 周日家庭聚餐 · 橄榄油文化 · 意大利儿童肥胖 · AI设计病毒</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 5 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura/la-importancia" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🥐 Los domingos en familia: comida y tradición</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🌡️ El olivo y la dieta mediterránea: un patrimonio en peligro</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.bbc.com/mundo/articles/cx2mrppm26do" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
+        <h2>📋 Italia y la obesidad infantil: el fin de la dieta mediterránea</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo/articles/cgk4ek6xke3o" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
+        <h2>🏘️ La IA diseña virus completamente nuevos por primera vez en la historia</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-09（星期日） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-09.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== \u6d4b\u9a8c\u6301\u4e45\u5316\u6a21\u5757 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage \u5199\u5165\u5931\u8d25:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '\u2713 \u6b63\u786e\uff01' : '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('\u786e\u5b9a\u8981\u91cd\u505a ' + level.toUpperCase() + ' \u7684\u5168\u90e8\u9898\u76ee\u5417\uff1f\n\u5386\u53f2\u8bb0\u5f55\u5c06\u88ab\u4fdd\u7559\u3002')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+  {
+    lema: "dieta mediterránea",
+    ipa: "[ˈdje.ta me.ði.teˈra.ne.a]",
+    pos: "f.",
+    significado: "地中海饮食；以橄榄油、蔬菜、豆类、全麦和鱼类为基础的传统饮食模式，被联合国教科文组织列为非物质文化遗产",
+    ejemplo_es: "La dieta mediterránea es conocida por ser una de las más saludables del mundo.",
+    ejemplo_zh: "地中海饮食因其是世界上最健康的饮食之一而闻名。",
+    tip: "<b>dieta</b> 在西语中指“饮食模式”而非“减肥”，减肥是 <b>régimen</b>。<b>mediterráneo/a</b> 指“地中海的”。1950年代美国生理学家 Ancel Keys 研究发现，意大利南部居民的饮食习惯与心脏病低发率直接相关。B1 考试常考：区别 dieta/régimen/alimentación。"
+  },
+  {
+    lema: "obesidad infantil",
+    ipa: "[o.βe.siˈðað in.fanˈtil]",
+    pos: "f.",
+    significado: "儿童肥胖；超出健康标准的体重过重，WHO认定为全球流行病",
+    ejemplo_es: "La obesidad infantil se ha cuadruplicado en todo el mundo desde 1990, según la OMS.",
+    ejemplo_zh: "据世卫组织数据，自1990年以来全球儿童肥胖率已增长四倍。",
+    tip: "<b>obesidad</b> 源自拉丁语 obesitas（肥胖），<b>infantil</b> 指“儿童的”。2025年意大利成为首个立法认定肥胖为慢性病的国家。常见搭配：<b>padecer obesidad</b>（患肥胖症）、<b>tener sobrepeso</b>（超重）。B2议论文高频词。"
+  },
+  {
+    lema: "inteligencia artificial",
+    ipa: "[in.te.liˈxen.θja aɾ.ti.fiˈθjal]",
+    pos: "f.",
+    significado: "人工智能（AI）；模拟人类智能的计算机系统",
+    ejemplo_es: "La inteligencia artificial se ha utilizado para diseñar virus completamente nuevos que pueden replicarse.",
+    ejemplo_zh: "人工智能已被用于设计能自我复制的全新病毒。",
+    tip: "西语缩写 <b>IA</b>（读“伊-阿”）。用法：通常使用定冠词 la，而非 una。拼写注意：intel<b>i</b>gencia 中间是 i，不是 e。B2 科技议论文核心词汇，常考搭配：<b>IA generativa</b>（生成式 AI）、<b>modelo de lenguaje</b>（语言模型）、<b>entrenar un modelo</b>（训练模型）。"
+  },
+  {
+    lema: "genoma",
+    ipa: "[xeˈno.ma]",
+    pos: "m.",
+    significado: "基因组；一个生物体的全部遗传信息，包含其所有基因",
+    ejemplo_es: "Los investigadores de Stanford diseñaron 16 genomas virales completamente nuevos mediante IA.",
+    ejemplo_zh: "斯坦福大学的研究人员通过AI设计了16个全新的病毒基因组。",
+    tip: "源自希腊语：<b>génos</b>（基因） + <b>-oma</b>（整体）。人类基因组有 <b>tres mil millones de pares de bases</b>（30亿碱基对）。哄虫病毒基因组仅有 <b>5.400 pares de bases</b>。B2 生物科技议论文核心词汇。"
+  },
+  {
+    lema: "bacteriófago",
+    ipa: "[bak.teˈɾjo.fa.ɣo]",
+    pos: "m.",
+    significado: "噬菌体；专门感染和杀灭细菌的病毒，对人类无害",
+    ejemplo_es: "Los bacteriófagos creados por IA demostraron ser eficaces para eliminar la bacteria E.coli.",
+    ejemplo_zh: "AI创建的噬菌体被证明能有效消灭大肠杆菌。",
+    tip: "源自希腊语：<b>bakterion</b>（细菌） + <b>phagein</b>（吞噬）。眠科常见词汇，与 <b>resistencia a los antibióticos</b>（抗生素耐药性）对比记忆。注意重音在 <b>ó</b>，且是阳性名词。"
+  },
+  {
+    lema: "ultraprocesado",
+    ipa: "[ul.tɾa.pɾo.θeˈsa.ðo]",
+    pos: "adj./m.",
+    significado: "超加工食品；含大量添加剂、缺乏营养价值的工业化食品",
+    ejemplo_es: "Los alimentos ultraprocesados llenan los estantes de los supermercados en todo el mundo.",
+    ejemplo_zh: "超加工食品充斥着全球超市的货架。",
+    tip: "<b>ultra-</b>（极度） + <b>procesado</b>（加工的）。近年西语健康话题高频词。对比：<b>alimento fresco</b>（新鲜食品）、<b>comida casera</b>（家庭烹饪）。B1 健康话题常考。"
+  },
+  {
+    lema: "sobrepeso",
+    ipa: "[so.βɾeˈpe.so]",
+    pos: "m.",
+    significado: "超重；体重超过正常范围但未达到肥胖程度",
+    ejemplo_es: "Más del 40% de los niños de 8 y 9 años tienen sobrepeso en algunas zonas de Campania.",
+    ejemplo_zh: "在坎帕尼亚大区某些地区，超过40%的8和9岁儿童超重。",
+    tip: "<b>sobre-</b>（超过） + <b>peso</b>（体重）。与 <b>obesidad</b> 的区别：超重是前期阶段，肥胖是更严重的状态。常用动词：<b>tener sobrepeso</b>、<b>padecer sobrepeso</b>。A2 身体健康话题常考。"
+  },
+  {
+    lema: "replicarse",
+    ipa: "[re.pliˈkaɾ.se]",
+    pos: "v. prnl.",
+    significado: "自我复制；克隆自己（生物学术语，指病毒或细菌的繁殖）",
+    ejemplo_es: "Los 16 nuevos virus son completamente funcionales y pueden replicarse en el laboratorio.",
+    ejemplo_zh: "这16个新病毒完全具有功能，能在实验室中自我复制。",
+    tip: "注意是 <b>replicarse</b>（自复动词），不是 replicar。核心区别：<b>replicarse</b> = 生物学的“自我复制”，<b>repetir</b> = 日常的“重复”。B2 科学报道高频动词。"
+  },
+  {
+    lema: "sintetizar",
+    ipa: "[sin.te.tiˈθaɾ]",
+    pos: "v.",
+    significado: "合成；人工制造（生物学中指在实验室中构建基因序列）",
+    ejemplo_es: "Los investigadores sintetizaron 302 diseños de IA en el laboratorio.",
+    ejemplo_zh: "研究人员在实验室中合成了302个AI设计方案。",
+    tip: "拼写注意：<b>sintetizar</b>（z，不是c）。同根词：<b>síntesis</b>（合成）、<b>sintético/a</b>（合成的）。<b>biología sintética</b>（合成生物学）是B2阅读常见主题。"
+  },
+  {
+    lema: "ingesta",
+    ipa: "[iŋˈxes.ta]",
+    pos: "f.",
+    significado: "摄入量；食物或液体的摄入（医学/营养学术语）",
+    ejemplo_es: "La ingesta insuficiente de frutas y verduras es uno de los factores de riesgo de la obesidad.",
+    ejemplo_zh: "水果和蔬菜摄入不足是肥胖的风险因素之一。",
+    tip: "源自拉丁语 <b>ingesta</b>（吞下去的东西）。与 <b>consumo</b> 的区别：ingesta 更偏医学/营养学，consumo 更日常。常见搭配：<b>ingesta calórica</b>（热量摄入）、<b>ingesta diaria</b>（每日摄入量）。"
+  },
+  {
+    lema: "sedentario",
+    ipa: "[se.ðenˈta.ɾjo]",
+    pos: "adj.",
+    significado: "久坐的；缺乏运动的生活方式",
+    ejemplo_es: "El estilo de vida sedentario, combinado con una mala alimentación, aumenta el riesgo de obesidad.",
+    ejemplo_zh: "久坐的生活方式加上不良饮食，增加了肥胖的风险。",
+    tip: "注意发音：<b>se-den-ta-rio</b>，重音在 <b>ta</b>。常见搭配：<b>vida sedentaria</b>（久坐生活）、<b>trabajo sedentario</b>（桌面工作）。A2/B1 健康话题常考。"
+  },
+  {
+    lema: "bioseguridad",
+    ipa: "[bi.o.se.ɣu.ɾiˈðað]",
+    pos: "f.",
+    significado: "生物安全；防止生物技术被滥用或造成伤害的安全措施",
+    ejemplo_es: "Los expertos advierten que los virus diseñados con IA plantean cuestiones urgentes de bioseguridad.",
+    ejemplo_zh: "专家警告，AI设计的病毒提出了紧迫的生物安全问题。",
+    tip: "<b>bio-</b>（生物） + <b>seguridad</b>（安全）。相关词：<b>bioprotección</b>（生物防护）、<b>biología sintética</b>（合成生物学）。B2 科技伦理议论文核心词汇。"
+  },
+  {
+    lema: "reinicio metabólico",
+    ipa: "[reiˈni.θjo me.taˈβo.li.ko]",
+    pos: "m.",
+    significado: "代谢重置；通过绝食或低热量饮食让身体代谢系统重新启动的过程",
+    ejemplo_es: "Los investigadores están probando una dieta que imita el ayuno para provocar un reinicio metabólico en adolescentes.",
+    ejemplo_zh: "研究人员正在测试模拟禁食的饮食来触发青少年的代谢重置。",
+    tip: "<b>reinicio</b>（重新启动） + <b>metabólico</b>（代谢的）。常见于B2医学/健康议论文。相关词：<b>ayuno intermitente</b>（间歇性禁食）、<b>restricción calórica</b>（热量限制）。"
+  },
+  {
+    lema: "resistencia a los antibióticos",
+    ipa: "[re.sisˈten.θja a los an.tiˈβjo.ti.kos]",
+    pos: "f.",
+    significado: "抗生素耐药性；细菌对原本有效的抗生素产生抵抗力",
+    ejemplo_es: "El desarrollo de nuevos bacteriófagos podría ayudar a tratar infecciones resistentes a los antibióticos.",
+    ejemplo_zh: "开发新型噬菌体可能有助于治疗抗生素耐药性感染。",
+    tip: "注意介词 <b>a</b> 的使用：resistencia <b>a</b> los antibióticos。全球公共卫生高频词汇。WHO将其列为全球十大健康威胁之一。B2科学报道/议论文必备词汇。"
+  },
+  {
+    lema: "punto de inflexión",
+    ipa: "[ˈpun.to ðe in.flekˈsjon]",
+    pos: "m.",
+    significado: "转折点；事物发展方向发生重大变化的关键时刻",
+    ejemplo_es: "Este avance ha sido calificado como un “punto de inflexión muy significativo” en la ciencia.",
+    ejemplo_zh: "这一进展被称为科学上的“非常重大的转折点”。",
+    tip: "字面意思是“弯曲点”，用于抽象语境（科学、历史、人生等）。B2写作高分表达，替代简单的 <b>cambio importante</b>。类似表达：<b>momento decisivo</b>（决定性时刻）、<b>antes y después</b>（分水岭）。"
+  }
+];
+
+/* ==================== 文章数据 ==================== */
+const ARTICLES = {
+  a1: {
+    paragraphs: [
+      {es: "Hoy es domingo. Los domingos son un día especial para muchas familias en España.", zh: "今天是星期天。对西班牙许多家庭来说，星期天是一个特殊的日子。"},
+      {es: "A las dos de la tarde, toda la familia se sienta a la mesa. La abuela ha preparado una gran comida.", zh: "下午两点，全家人坐到桌前。奶奶准备了一顿丰盛的午餐。"},
+      {es: "En la mesa hay una paella grande con mariscos. También hay pan, aceite de oliva y una ensalada fresca.", zh: "桌上有一大盘海鲜饭。还有面包、橄榄油和一份新鲜沙拉。"},
+      {es: "Mi padre sirve el vino y mi madre corta el pan. Los niños beben agua.", zh: "我爸爸倒葡萄酒，我妈妈切面包。孩子们喝水。"},
+      {es: "Todos hablan y ríen. La conversación es muy importante durante la comida.", zh: "大家说说笑笑。聊天在用餐时非常重要。"},
+      {es: "De primer plato comemos sopa de verduras. Está muy caliente y es muy sana.", zh: "第一道菜我们吃蔬菜汤。它很热，也很健康。"},
+      {es: "De segundo plato hay pollo con patatas. A los niños les encanta.", zh: "第二道菜是土豆烧鸡。孩子们超喜欢。"},
+      {es: "Después del segundo plato, la abuela trae el postre. Es una tarta de manzana casera.", zh: "第二道菜后，奶奶端来甜点。是一个家做的苹果蛋糕。"},
+      {es: "La comida termina a las cuatro de la tarde. Todos ayudan a recoger la mesa.", zh: "午餐下午四点结束。所有人帮忙收拾桌子。"},
+      {es: "Los domingos son así: comer, hablar y estar juntos. Es la mejor tradición de la semana.", zh: "星期天就是这样：吃饭、聊天、在一起。这是一周中最好的传统。"}
+    ],
+    dele: "A1 考点：<b>陈述式现在时</b>(es, hablan, comemos, comen)；<b>钟点表达</b>(A las dos de la tarde)；<b>存在动词 hay</b>(hay una paella, hay pan)；<b>形容词与名词性数一致</b>(una paella grande, una ensalada fresca)；<b>喜好表达</b>(les encanta)；<b>家庭成员词汇</b>(abuela, padre, madre, niños)。",
+    hardWords: [
+      {w: "paella", m: "海鲜饭（西班牙国菜）"},
+      {w: "mariscos", m: "海鲜"},
+      {w: "aceite de oliva", m: "橄榄油"},
+      {w: "casera", m: "家做的，自制的"}
+    ],
+    quiz: [
+      {q: "¿A qué hora se sienta la familia a comer?", opts: ["A la una","A las dos","A las tres","A las cuatro"], ans: 1, es: "A las dos de la tarde, toda la familia se sienta a la mesa. (第二段)", zh: "下午两点全家人坐到桌前。"},
+      {q: "¿Qué hay de primer plato?", opts: ["Pollo con patatas","Sopa de verduras","Paella","Ensalada"], ans: 1, es: "De primer plato comemos sopa de verduras. (第六段)", zh: "第一道菜是蔬菜汤。"},
+      {q: "¿Qué postre prepara la abuela?", opts: ["Tarta de chocolate","Tarta de manzana","Flan","Fruta"], ans: 1, es: "la abuela trae el postre. Es una tarta de manzana casera. (第八段)", zh: "奶奶端来家做的苹果蛋糕。"},
+      {q: "¿A qué hora termina la comida?", opts: ["A las dos","A las tres","A las cuatro","A las cinco"], ans: 2, es: "La comida termina a las cuatro de la tarde. (第九段)", zh: "午餐下午四点结束。"},
+      {q: "¿Por qué son especiales los domingos según el texto?", opts: ["Porque no hay trabajo","Porque toda la familia come y habla junta","Porque la abuela cocina","Porque es un día de fiesta"], ans: 1, es: "Los domingos son así: comer, hablar y estar juntos. (最后一段)", zh: "星期天特殊是因为全家在一起吃饭聊天。"}
+    ]
+  },
+  a2: {
+    paragraphs: [
+      {es: "El olivo es uno de los árboles más antiguos y representativos de la región mediterránea. Se cultiva desde hace más de 6.000 años.", zh: "橄榄树是地中海地区最古老、最具代表性的树木之一。它已被种植了6000多年。"},
+      {es: "España es el mayor productor mundial de aceite de oliva. Las principales regiones productoras son Andalucía, Castilla-La Mancha y Extremadura.", zh: "西班牙是全球最大的橄榄油生产国。主要产区包括安达卢西亚、卡斯蒂利亚-拉曼查和埃斯特雷马杜拉。"},
+      {es: "El aceite de oliva virgen extra es el más valorado. Se obtiene directamente de las aceitunas y solo mediante procedimientos mecánicos.", zh: "特级初榨橄榄油是最受推崇的。它直接从橄榄中提取，仅通过物理方法制成。"},
+      {es: "Los agricultores recogen las aceitunas en otoño, entre octubre y enero. Este trabajo todavía se hace a mano en muchas zonas.", zh: "农民在秋天（十月到一月）采摘橄榄。在许多地区这项工作仍然靠手工完成。"},
+      {es: "El aceite de oliva es la base de la dieta mediterránea. Los científicos han demostrado que consumirlo regularmente es bueno para el corazón.", zh: "橄榄油是地中海饮食的基础。科学家已证明经常食用对心脏有益。"},
+      {es: "Sin embargo, en los últimos años, el consumo de alimentos ultraprocesados ha aumentado mucho en España, especialmente entre los jóvenes.", zh: "然而，近年来，西班牙超加工食品的消费大幅增加，尤其是在年轻人中。"},
+      {es: "Muchas familias ya no cocinan con aceite de oliva todos los días. Prefieren comidas rápidas y precocinadas por falta de tiempo.", zh: "许多家庭已不再每天用橄榄油烹饪。因缺少时间，他们更喜欢快餐和预制菜。"},
+      {es: "Como resultado, los problemas de sobrepeso han crecido. Los expertos dicen que es importante volver a la cocina tradicional.", zh: "结果是超重问题增加了。专家表示回归传统烹饪很重要。"},
+      {es: "La dieta mediterránea fue declarada Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO en 2010, junto con España, Italia, Grecia y Marruecos.", zh: "地中海饮食于2010年被联合国教科文组织列为非物质文化遗产，涵盖西班牙、意大利、希腊和摩洛哥。"},
+      {es: "Proteger el olivo y la cocina tradicional no solo es importante para la salud, sino también para conservar una cultura de miles de años.", zh: "保护橄榄树和传统烹饪不仅对健康重要，对保护数千年的文化同样重要。"}
+    ],
+    dele: "A2 考点：<b>形容词最高级</b>(el más valorado, el mayor productor)；<b>陈述式现在完成时</b>(han demostrado, ha aumentado)；<b>介词</b>(desde hace, en otoño, entre octubre y enero)；<b>原因从句</b>(por falta de tiempo)；<b>被动态</b>(fue declarada)；<b>对立连词</b>(sin embargo, como resultado)。",
+    hardWords: [
+      {w: "olivo", m: "橄榄树"},
+      {w: "aceituna", m: "橄榄果实"},
+      {w: "virgen extra", m: "特级初榨"},
+      {w: "precocinado", m: "预制菜，半成品"},
+      {w: "Patrimonio Cultural Inmaterial", m: "非物质文化遗产"}
+    ],
+    quiz: [
+      {q: "¿Cuánto tiempo hace que se cultiva el olivo?", opts: ["Más de 1.000 años","Más de 3.000 años","Más de 6.000 años","Más de 10.000 años"], ans: 2, es: "Se cultiva desde hace más de 6.000 años. (第一段)", zh: "橄榄树已被种植超过6000年。"},
+      {q: "¿Cuál es la región productora de aceite de oliva más importante de España según el texto?", opts: ["Cataluña","Galicia","Andalucía","País Vasco"], ans: 2, es: "Las principales regiones productoras son Andalucía, Castilla-La Mancha y Extremadura. (第二段)", zh: "安达卢西亚是最重要的橄榄油产区之一。"},
+      {q: "¿Cuándo se recogen las aceitunas?", opts: ["En primavera","En verano","Entre octubre y enero","En febrero"], ans: 2, es: "Los agricultores recogen las aceitunas en otoño, entre octubre y enero. (第四段)", zh: "橄榄在秋天（十月至一月）采摘。"},
+      {q: "¿Por qué muchas familias ya no cocinan con aceite de oliva?", opts: ["Porque es muy caro","Porque no les gusta el sabor","Por falta de tiempo","Porque ya no se vende"], ans: 2, es: "Prefieren comidas rápidas y precocinadas por falta de tiempo. (第七段)", zh: "因缺少时间而偏好快餐和预制菜。"},
+      {q: "¿Qué organización declaró la dieta mediterránea como patrimonio cultural?", opts: ["La OMS","La UNESCO","La Unión Europea","La ONU"], ans: 1, es: "Fue declarada Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO en 2010. (第九段)", zh: "地中海饮食于2010年被联合国教科文组织列为非物质文化遗产。"}
+    ]
+  },
+  b1: {
+    paragraphs: [
+      {es: "Italia ha sido considerada durante décadas como la cuna espiritual de la dieta mediterránea, reconocida mundialmente por sus beneficios para la salud.", zh: "意大利数十年来被视为地中海饮食的精神摇篮，因其对健康的益处而享誉全球。"},
+      {es: "Sin embargo, la realidad actual es muy diferente. Según la Organización Mundial de la Salud (OMS), los niños italianos se encuentran entre los que presentan mayores índices de sobrepeso de toda Europa.", zh: "然而，现实已大不相同。据世界卫生组织（WHO）数据，意大利儿童的超重率位居全欧洲前列。"},
+      {es: "El problema es especialmente grave en el sur del país. En algunas zonas de Campania, más del 40% de los niños de 8 y 9 años tienen sobrepeso, según datos de Eurostat.", zh: "问题在南部尤为严重。据欧盟统计局数据，在坎帕尼亚大区某些地区，超过40%的8和9岁儿童超重。"},
+      {es: "La localidad de Ponticelli, en las afueras de Nápoles, se ha ganado la poco envidiable reputación de ser una de las capitales mundiales de la obesidad infantil.", zh: "那不勒斯郊区的庞蒂切利镇已获得了“全球儿童肥胖之都”的不光彩称号。"},
+      {es: "La doctora Sonja Chiappetta, que lleva 15 años tratando pacientes con obesidad grave en el Hospital Betania de Ponticelli, afirma: “Ahora veo a pacientes adolescentes, algunos de tan solo 16 años. Cada vez son más jóvenes, y eso resulta alarmante.”", zh: "在庞蒂切利贝塔尼亚医院治疗重度肥胖患者15年的奇亚彼塔医生表示：“现在我看到青少年患者，有些才16岁。年龄越来越小，这令人警惕。”"},
+      {es: "El doctor Valter Longo, director del Instituto de Longevidad de la Universidad del Sur de California, resume la situación: “La dieta mediterránea tradicional se ha perdido. Solo el 10% de los italianos la sigue realmente.”", zh: "南加州大学长寿研究所所长瓦尔特·隆戈博士总结道：“传统地中海饮食已经消失了。只有10%的意大利人真正遵循它。”"},
+      {es: "Según el doctor Longo, la dieta italiana moderna se puede resumir con lo que él llama las “cinco P”: pizza, pasta, papas, proteínas y pan, muy alejada del modelo tradicional rico en verduras y legumbres.", zh: "据隆戈博士所述，现代意大利饮食可以用他所谓的“五个P”来总结：比萨、意面、土豆、蛋白质和面包，与传统的蔬菜豆类丰富模式相去甚远。"},
+      {es: "El doctor Roberto Berni Canani, pediatra y especialista en obesidad de la Universidad Federico II de Nápoles, atiende a diario las consecuencias de esta transformación: “He atendido a niños de apenas 2 o 3 años que ya pesan 25 kilos.”", zh: "那不勒斯费德里科二世大学儿科肥胖专家罗贝尔托·贝尼·卡纳尼博士每天面对这一转变的后果：“我接诊过才两三岁就已经25公斤的孩子。”"},
+      {es: "La mayoría de los padres no perciben el problema. Según Berni Canani, acuden a la consulta por otros síntomas como tos o dolor de estómago, sin darse cuenta de que la causa subyacente es el peso del niño.", zh: "大多数家长没有意识到问题。据贝尼·卡纳尼所述，他们因咳嗽或胃痛等其他症状就医，没意识到潜在原因是孩子的体重。"},
+      {es: "Además, en Italia fomentar que los niños sean más activos puede resultar sorprendentemente difícil, ya que muchas escuelas se ubican en antiguos palacios que nunca fueron diseñados pensando en la educación física moderna.", zh: "此外，在意大利鼓励儿童多运动出乎意料地困难，因为许多学校位于古老建筑内，这些建筑从未考虑过现代体育教育的需求。"},
+      {es: "En respuesta a esta crisis, la región de Campania ha puesto en marcha un programa en el que más de 17.000 alumnos de 25 escuelas participan en talleres de nutrición impartidos por la Fundación Valter Longo.", zh: "为应对这一危机，坎帕尼亚大区启动了一项计划，来自25所学校的超过17000名学生参加了由瓦尔特·隆戈基金会举办的营养学工作坊。"},
+      {es: "En 2025, Italia se convirtió en el primer país del mundo en aprobar una ley nacional que reconoce la obesidad como una enfermedad crónica, progresiva y recurrente, en lugar de tratarla simplemente como el resultado de malas decisiones individuales.", zh: "2025年，意大利成为全球首个通过国家法律承认肥胖为慢性、进行性、复发性疾病的国家，而非简单归因于个人不良决策。"},
+      {es: "Los investigadores también están reclutando a 300 adolescentes con sobrepeso para probar una “dieta que imita el ayuno”, con el objetivo de provocar un reinicio metabólico mediante una ingesta controlada de 1.100 calorías el primer día y 770 calorías los cuatro días siguientes.", zh: "研究人员还在招募300名超重青少年测试“模拟禁食饮食”，通过第一天1100卡、后四天每天770卡的控制摄入来触发代谢重置。"},
+      {es: "No obstante, no todos los expertos están de acuerdo. El pediatra Berni Canani teme que imponer restricciones alimentarias a los adolescentes podría aumentar el riesgo de trastornos alimentarios, como la anorexia y la dismorfia corporal.", zh: "然而，并非所有专家都赞同。儿科医生贝尼·卡纳尼担心，对青少年施加饮食限制可能增加进食障碇、厭食症和身体畸形恐惧症的风险。"},
+      {es: "Mientras tanto, la obesidad sigue siendo una epidemia mundial. Según la OMS, más de mil millones de personas padecen obesidad en el mundo y la tasa de obesidad infantil se ha cuadruplicado desde 1990.", zh: "与此同时，肥胖仍是全球流行病。据世卫组织数据，全球超过10亿人患肥胖症，儿童肥胖率自1990年以来已增长四倍。"}
+    ],
+    dele: "B1 考点：<b>陈述式现在完成时</b>(ha sido considerada, se ha perdido, se ha cuadruplicado)；<b>过去未完成时</b>(llevaba, atendía)；<b>虚拟式现在时</b>(para que los niños sean más activos)；<b>条件式</b>(podría aumentar)；<b>被动态</b>(fue diseñado, se puede resumir)；<b>原因从句</b>(ya que, porque)；<b>数据引用表达</b>(según datos de, más del 40%, más de mil millones)。",
+    hardWords: [
+      {w: "cuna espiritual", m: "精神摇篮（起源地）"},
+      {w: "sobrepeso", m: "超重"},
+      {w: "obesidad", m: "肥胖症"},
+      {w: "alarmante", m: "令人警惕的"},
+      {w: "legumbres", m: "豆类"},
+      {w: "subyacente", m: "潜在的，根本的"},
+      {w: "ingesta", m: "摄入量"},
+      {w: "trastorno alimentario", m: "进食障碇"},
+      {w: "cuadruplicarse", m: "增长四倍"},
+      {w: "reinicio metabólico", m: "代谢重置"}
+    ],
+    quiz: [
+      {q: "Según la OMS, ¿qué posición ocupan los niños italianos en cuanto a sobrepeso en Europa?", opts: ["Los que menos sobrepeso tienen","Están en la media europea","Entre los que presentan mayores índices","No hay datos disponibles"], ans: 2, es: "los niños italianos se encuentran entre los que presentan mayores índices de sobrepeso de toda Europa. (第二段)", zh: "意大利儿童的超重率位居全欧洲前列。"},
+      {q: "¿Qué porcentaje de niños tienen sobrepeso en algunas zonas de Campania?", opts: ["Más del 20%","Más del 30%","Más del 40%","Más del 50%"], ans: 2, es: "más del 40% de los niños de 8 y 9 años tienen sobrepeso. (第三段)", zh: "超过40%的8-9岁儿童超重。"},
+      {q: "¿Cuántos pacientes participan en el ensayo de la “dieta que imita el ayuno”?", opts: ["100 adolescentes","200 adolescentes","300 adolescentes","500 adolescentes"], ans: 2, es: "Los investigadores están reclutando a 300 adolescentes con sobrepeso. (第十三段)", zh: "研究人员招募300名超重青少年。"},
+      {q: "La expresión “cinco P” se refiere a:", opts: ["Cinco comidas principales","Pizza, pasta, papas, proteínas y pan","Cinco países mediterráneos","Cinco programas de salud"], ans: 1, es: "Longo resume la dieta italiana moderna con las “cinco P”: pizza, pasta, papas, proteínas y pan. (第七段)", zh: "“五个P”指比萨、意面、土豆、蛋白质和面包。"},
+      {q: "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", opts: ["Italia aprobó una ley reconociendo la obesidad como enfermedad crónica en 2025","La OMS estima que más de mil millones de personas padecen obesidad","Todos los expertos italianos apoyan la dieta que imita el ayuno","La obesidad infantil se ha cuadruplicado desde 1990"], ans: 2, es: "El doctor Berni Canani teme que la dieta restrictiva pueda aumentar el riesgo de trastornos alimentarios. (第十四段)", zh: "并非所有专家都支持“模拟禁食饮食”，贝尼·卡纳尼表示担心。"},
+      {q: "¿Qué consecuencia NO menciona el texto sobre la pérdida de la dieta mediterránea en Italia?", opts: ["Aumento de la obesidad infantil","Mayor consumo de alimentos ultraprocesados","Disminución del número de escuelas","Pacientes de obesidad cada vez más jóvenes"], ans: 2, es: "El texto no menciona una disminución del número de escuelas. Sí menciona los otros tres fenómenos. (全文)", zh: "文中未提及学校数量减少。其他三项均有提到。"},
+      {q: "Según el doctor Valter Longo, ¿qué porcentaje de italianos sigue realmente la dieta mediterránea?", opts: ["El 5%","El 10%","El 25%","El 50%"], ans: 1, es: "Solo el 10% de los italianos la sigue realmente. (第六段)", zh: "只有10%的意大利人真正遵循地中海饮食。"},
+      {q: "¿Qué inferencia es más razonable sobre el futuro de la dieta mediterránea en Italia?", opts: ["Se recuperará automáticamente sin intervención","Requiere políticas públicas y educación para revertir su declive","Ha desaparecido completamente para siempre","Solo es relevante para las personas mayores"], ans: 1, es: "El texto describe programas escolares, leyes nacionales y ensayos clínicos como medidas activas, lo que sugiere que se necesitan intervenciones coordinadas. (第十一、十二、十三段)", zh: "文章描述了学校计划、国家法律和临床试验等积极措施，表明需要协调干预才能扭转衰退趋势。"}
+    ]
+  },
+  b2: {
+    paragraphs: [
+      {es: "Por primera vez en la historia de la ciencia, investigadores de la Universidad de Stanford han utilizado inteligencia artificial para diseñar genomas virales completamente nuevos que son funcionales y pueden replicarse en el laboratorio, según anunciaron en un estudio publicado en la revista Science.", zh: "科学史上首次，斯坦福大学的研究人员利用人工智能设计出了全新的病毒基因组，这些病毒完全具有功能并能在实验室中自我复制，这一成果发表在《Science》期刊上。"},
+      {es: "Los 16 nuevos virus diseñados por IA fueron creados para infectar bacterias —específicamente E.coli— y no representan ninguna amenaza para los seres humanos. Sin embargo, este avance ha sido calificado como “un punto de inflexión muy significativo” que podría inaugurar una nueva era en la biología sintética y el tratamiento de enfermedades.", zh: "这16个AI设计的新病毒被创建来感染细菌——特别是大肠杆菌——对人类不构成任何威胁。然而，这一突破被称为“非常重大的转折点”，可能开创合成生物学和疾病治疗的新时代。"},
+      {es: "“Este es un paso más en la complejidad que puede diseñar la IA generativa; es la primera vez que se utiliza la IA generativa para diseñar un genoma completo, algo que puede replicarse y tener otras funciones dentro de las células... esto era un territorio nuevo para nosotros”, explicó a la BBC Brian Hie, profesor adjunto de la Universidad de Stanford.", zh: "斯坦福大学助理教授布莱恩·希向BBC解释道：“这是生成式AI设计复杂度的又一步提升；这是首次使用生成式AI设计完整基因组，这种基因组能够自我复制并在细胞内执行其他功能……这对我们来说是全新的领域。”"},
+      {es: "La tecnología funciona de manera análoga a los grandes modelos de lenguaje como ChatGPT, pero en lugar de predecir palabras, los modelos Evo1 y Evo2 predicen secuencias de ADN. Fueron entrenados con códigos genéticos de virus, bacterias, plantas y seres humanos, y posteriormente refinados para producir bacteriofagos funcionales.", zh: "该技术的工作原理类似于ChatGPT等大型语言模型，但不是预测单词，而是Evo1和Evo2模型预测DNA序列。它们经过病毒、细菌、植物和人类基因代码的训练，随后被优化以生产功能性噬菌体。"},
+      {es: "De los 302 diseños generados por IA que los investigadores sintetizaron físicamente en el laboratorio, 16 demostraron ser eficaces para eliminar colonias de E.coli. El momento del descubrimiento fue descrito como emocionante: “Empezamos a ver zonas claras y fue realmente emocionante”, relató Samuel King, estudiante de doctorado del laboratorio de Stanford.", zh: "在研究人员在实验室中合成的302个AI设计方案中，16个被证明能有效消灭大肠杆菌菌落。这一发现时刻被描述为令人激动：斯坦福实验室博士生塞缪尔·金叙述道：“我们开始看到清晰区域，真是太激动了。”"},
+      {es: "El profesor Marc Güell, del laboratorio de biología sintética de la Universidad Pompeu Fabra en Barcelona, calificó el estudio como “un punto de inflexión muy significativo” porque “por primera vez en la historia, estamos empezando a diseñar la biología en una computadora”, lo que “nos permite soñar con posibilidades apasionantes para abordar los mayores desafíos de la humanidad”.", zh: "巴塞罗那庞佩法布拉大学合成生物学实验室的马克·古埃尔教授将这项研究称为“非常重大的转折点”，因为“人类历史上首次开始在电脑上设计生物学”，这“让我们能够幻想解决人类最大挑战的激动人心的可能性”。"},
+      {es: "El código genético de estos bacteriofagos tiene aproximadamente 5.400 pares de bases, una cifra modesta en comparación con el genoma humano de 3.000 millones de pares de bases o incluso el genoma más pequeño de una célula viva, de unos 500.000 pares de bases. Pero Hie afirma que intentar crear organismos simples completos “no sería imposible” en el futuro.", zh: "这些噬菌体的基因代码约有5400个碱基对，与人类基因组的30亿碱基对或甚至最小活细胞基因组的约50万碱基对相比，这是一个微不足道的数字。但希表示，尝试创建完整的简单生物体在未来“不是不可能的”。"},
+      {es: "El profesor Patrick Cai, catedrático de genómica sintética del Instituto de Biotecnología de Manchester, afirmó que el estudio representa un “hito importante”: “Su importancia va mucho más allá de los fagos: sugiere que los modelos de lenguaje genómico están empezando a aprender los principios de diseño codificados por la evolución, lo que abre la puerta a la escritura de genomas asistida por IA.”", zh: "曼彻斯特生物技术研究所合成基因组学教授帕特里克·蔡称这项研究是一个“重要的里程碑”：“其重要性远超噬菌体本身：它表明基因组语言模型正在开始学习进化编码的设计原则，为AI辅助基因组编写打开了大门。”"},
+      {es: "Sin embargo, este avance también ha desatado serias preocupaciones en materia de bioseguridad. Thomas Inglesby y Moritz Hanke, del Centro para la Seguridad Sanitaria de la Universidad Johns Hopkins, escribieron en un comentario adjunto en Science que los hallazgos plantean “cuestiones urgentes de bioseguridad y bioprotección”.", zh: "然而，这一突破也引发了严重的生物安全担忧。约翰·霍普金斯大学健康安全中心的托马斯·英格斯尔比和莫里茨·汉克在《Science》的附带评论中写道，这些发现提出了“紧迫的生物安全和生物防护问题”。"},
+      {es: "Los expertos advierten que el problema ya no es “si existirá el diseño generativo de genomas virales”, sino si se puede utilizar sin “causar daños graves”, especialmente si la misma tecnología llegara a ser utilizada con fines maliciosos para crear nuevos patógenos que pudieran afectar a los seres humanos.", zh: "专家警告，问题已不是“是否会出现病毒基因组的生成式设计”，而是能否在不“造成严重伤害”的前提下使用它，尤其是如果同样的技术被用于恶意目的来创造能影响人类的新病原体。"},
+      {es: "Los investigadores de Stanford tomaron medidas de seguridad específicas: excluyeron de la base de datos de entrenamiento los virus capaces de infectar organismos complejos, trabajaron exclusivamente con bacteriofagos inofensivos para humanos y realizaron todos los experimentos en un laboratorio de alta seguridad. “Las medidas de seguridad existentes contribuyen en gran medida a garantizar que la tecnología se utilice para el bien”, sostuvo Hie.", zh: "斯坦福的研究人员采取了具体的安全措施：从训练数据库中排除了能感染复杂生物体的病毒，仅使用对人类无害的噬菌体，并在高安全级别实验室中完成所有实验。希表示：“现有的安全措施大大有助于确保技术被用于善良目的。”"},
+      {es: "El potencial terapéutico de esta tecnología es inmenso —el desarrollo de nuevos fagos podría dar lugar a tratamientos innovadores contra infecciones resistentes a los antibióticos, un problema que, según la OMS, causa aproximadamente 1,27 millones de muertes directas al año en todo el mundo—, pero el equilibrio entre innovación y seguridad será determinante para el futuro de la biología sintética.", zh: "该技术的治疗潜力巨大——新型噬菌体的开发可能催生针对抗生素耐药性感染的创新治疗方法，据WHO数据，这一问题每年在全球导致约127万人直接死亡——但创新与安全之间的平衡将决定合成生物学的未来。"},
+      {es: "El profesor Güell señaló que este avance abre la puerta al desarrollo de enzimas para tratar trastornos genéticos y anticuerpos que podrían utilizarse en inmunoterapia, campos que representan algunas de las fronteras más prometedoras de la medicina moderna.", zh: "古埃尔教授指出，这一突破为开发治疗遗传性疾病的酶和可用于免疫疗法的抗体打开了大门，这些领域代表了现代医学最有前途的前沿。"},
+      {es: "No obstante, la comunidad científica internacional coincide en que será necesario desarrollar marcos regulatorios más robustos. “Por primera vez en la historia, estamos empezando a diseñar la biología en una computadora”, reiteró Güell, subrayando la necesidad de que la gobernanza científica evolucione al mismo ritmo que la tecnología para evitar que los riesgos superen a los beneficios.", zh: "然而，国际科学界一致认为需要建立更加健全的监管框架。古埃尔重申：“人类历史上首次开始在电脑上设计生物学”，强调科学治理必须与技术同步发展，避免风险超过收益。"},
+      {es: "El hallazgo de Stanford marca, sin duda, el inicio de una nueva era en la que la inteligencia artificial no solo lee el código de la vida, sino que también lo escribe. Como concluyó el profesor Cai: “Los modelos de lenguaje genómico están empezando a aprender los principios de diseño codificados por la evolución.”", zh: "斯坦福的发现无疑标志着一个新时代的开端，在这个时代里，人工智能不仅能读取生命的代码，还能编写它。正如蔡教授总结的那样：“基因组语言模型正在开始学习进化编码的设计原则。”"}
+    ],
+    dele: "B2 考点：<b>虚拟式</b>(es necesario que desarrolle, para que los riesgos no superen, que la gobernanza evolucione)；<b>条件式完成时</b>(habría sido utilizado, podrían haberse creado, llegaría a ser)；<b>被动语态与无人称</b>(fueron creados, se ha utilizado, se está empezando a diseñar)；<b>复合连接词</b>(sin embargo, no obstante, por primera vez, en lugar de)；<b>过去完成时</b>(habían entrenado, habían excluido)；<b>抽象学术词汇</b>(bioseguridad, genómico, terapéutico, regulatorio, gobernanza, patógeno)。",
+    hardWords: [
+      {w: "genoma", m: "基因组"},
+      {w: "bacteriófago", m: "噬菌体"},
+      {w: "sintetizar", m: "合成（生物学）"},
+      {w: "bioseguridad", m: "生物安全"},
+      {w: "punto de inflexión", m: "转折点（比喻重大变化）"},
+      {w: "genómico", m: "基因组的（形容词）"},
+      {w: "terapéutico", m: "治疗的，疗法的"},
+      {w: "patógeno", m: "病原体"},
+      {w: "inmunoterapia", m: "免疫疗法"},
+      {w: "gobernanza", m: "治理，管理体制"}
+    ],
+    quiz: [
+      {q: "¿Cuántos virus diseñados por IA demostraron ser eficaces contra E.coli en el laboratorio?", opts: ["8 de 100","16 de 302","5 de 50","32 de 500"], ans: 1, es: "De los 302 diseños generados por IA, 16 demostraron ser eficaces para eliminar colonias de E.coli. (第五段)", zh: "在302个AI设计方案中，16个被证明有效。"},
+      {q: "¿Cuántos pares de bases tiene aproximadamente el genoma de estos bacteriofagos?", opts: ["500","5.400","54.000","500.000"], ans: 1, es: "El código genético de estos bacteriofagos tiene aproximadamente 5.400 pares de bases. (第七段)", zh: "噬菌体基因代码约5400个碱基对。"},
+      {q: "¿Según la OMS, cuántas muertes directas al año causa la resistencia a los antibióticos?", opts: ["500.000","1,27 millones","2,5 millones","5 millones"], ans: 1, es: "La resistencia a los antibióticos causa aproximadamente 1,27 millones de muertes directas al año, según la OMS. (第十二段)", zh: "据WHO数据，抗生素耐药性每年导致约127万人直接死亡。"},
+      {q: "La expresión “punto de inflexión” utilizada por el profesor Güell se refiere a:", opts: ["Un lugar físico del laboratorio","Un momento de cambio fundamental en la ciencia","Un error en el experimento","Un tipo de bacteria"], ans: 1, es: "Güell calificó el estudio como “un punto de inflexión muy significativo” porque “estamos empezando a diseñar la biología en una computadora”. (第六段)", zh: "“转折点”比喻科学发展的重大变化时刻。"},
+      {q: "¿A qué se refiere “la misma tecnología” en “si la misma tecnología llegara a ser utilizada con fines maliciosos”?", opts: ["A los antibióticos tradicionales","Al diseño de genomas virales con IA generativa","A los grandes modelos de lenguaje como ChatGPT","A las vacunas de ARN mensajero"], ans: 1, es: "“La misma tecnología” se refiere al diseño generativo de genomas virales mediante IA, mencionado en el párrafo anterior. (第十段)", zh: "“同样的技术”指生成式AI设计病毒基因组。"},
+      {q: "¿Cuál de las siguientes medidas de seguridad NO fue mencionada en el texto?", opts: ["Excluir virus capaces de infectar organismos complejos de la base de datos","Trabajar exclusivamente con bacteriofagos inofensivos para humanos","Realizar todos los experimentos en un laboratorio de alta seguridad","Destruir todos los datos de investigación después del estudio"], ans: 3, es: "El texto menciona tres medidas de seguridad específicas, pero NO menciona la destrucción de datos. (第十一段)", zh: "文中提及三项具体安全措施，但未提及销毁研究数据。"},
+      {q: "Según el profesor Patrick Cai, ¿qué están aprendiendo los modelos de lenguaje genómico?", opts: ["A traducir idiomas humanos","Los principios de diseño codificados por la evolución","A diagnosticar enfermedades sin médicos","Los nombres de todas las bacterias conocidas"], ans: 1, es: "Cai afirmó que “los modelos de lenguaje genómico están empezando a aprender los principios de diseño codificados por la evolución”. (第八段 + 第十五段)", zh: "蔡教授表示基因组语言模型正在学习进化编码的设计原则。"},
+      {q: "¿Qué inferencia es más razonable sobre el equilibrio entre innovación y seguridad en la biología sintética según el texto?", opts: ["La seguridad debe ignorarse para avanzar más rápido","Es necesario desarrollar marcos regulatorios que evolucionen al ritmo de la tecnología","La biología sintética no presenta ningún riesgo","Solo los gobiernos deben tener acceso a esta tecnología"], ans: 1, es: "El texto subraya la necesidad de “marcos regulatorios más robustos” y que “la gobernanza científica evolucione al mismo ritmo que la tecnología”, sin abogar por prohibiciones absolutas. (第十四段)", zh: "文章强调需要更健全的监管框架，科学治理必须与技术同步发展。"}
+    ]
+  }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${a.quiz.length} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== \u6062\u590d\u5df2\u4fdd\u5b58\u7684\u7b54\u9898\u72b6\u6001 + \u6e32\u67d3\u63a7\u4ef6 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">\u{1F504} \u91cd\u505a</button>' +
+    '<span class="quiz-stats">' +
+      '\u5df2\u7b54\u9898 <b>' + historyCount + '</b> \u6b21' +
+      (latest ? ' \u00b7 \u6700\u8fd1\u6b63\u786e <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">\u{1F4DD} \u7b14\u8bb0</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="\u8bb0\u5f55\u4f60\u7684\u5b66\u4e60\u7b14\u8bb0..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">\u2713 \u5df2\u4fdd\u5b58</span>';
+  section.appendChild(notesArea);
+}
+
+// 给每个 quiz 绑定交互
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('\u8bf7\u5148\u9009\u62e9\u4e00\u4e2a\u7b54\u6848\uff01');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '\u2713 \u6b63\u786e\uff01';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// 初始化
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+</script>
+</body>
+</html>

@@ -8,3 +8,11 @@ cloudfunctions/*-deploy.zip
 Thumbs.db
 .github/
 cloudbaserc.json
+
+# 临时调试/调研文件(不进版本库)
+devext/
+screenshot-*.png
+commit_msg.txt
+漏洞*.md
+泞滩*.md
+部署指南.md

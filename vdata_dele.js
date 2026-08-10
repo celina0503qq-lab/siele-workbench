@@ -2191,8 +2191,22 @@ const VDATA_DELE = [
 {"t": "general", "es": "zoco", "pos": "s.", "zh": "(摩洛哥的)集市；市场", "ex": "Me explicó el zoco con detalle.", "lvl": "B1", "theme": "通用词汇"},
 ];
 
-// Merge into main VDATA
-if(typeof VDATA!=='undefined'){VDATA_DELE.forEach(function(v){VDATA.push(v);});}
+// Merge into main VDATA (去重合并，避免重复加载时翻倍)
+if(typeof VDATA!=='undefined'){
+  var _existing=new Set(VDATA.map(function(v){return v.es;}));
+  VDATA_DELE.forEach(function(v){ if(!_existing.has(v.es)){VDATA.push(v);} });
+}
+
+// 2026-08-05 P0-P-4 性能优化：建立按 lvl 分组的索引（A1/A2/B1/B2）
+// renderDash 之前每次调用都对 VDATA 全量 filter 4 次（O(n)），2758 词×4 ≈ 11k 操作
+// 改为按 lvl 直接查索引（O(1) 查 tot；O(n/4) 算 done），节省 75% CPU
+if(typeof VDATA!=='undefined'){
+if(typeof VDATA_BY_LVL==='undefined'){var VDATA_BY_LVL={A1:[],A2:[],B1:[],B2:[]};}
+VDATA_BY_LVL.A1.length=VDATA_BY_LVL.A2.length=VDATA_BY_LVL.B1.length=VDATA_BY_LVL.B2.length=0;
+VDATA.forEach(function(v){
+  if(VDATA_BY_LVL[v.lvl]) VDATA_BY_LVL[v.lvl].push(v);
+});
+}
 
 // Theme index for category browsing
 if(typeof VDATA_THEMES==='undefined'){var VDATA_THEMES={};}
