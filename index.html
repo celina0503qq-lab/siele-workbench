@@ -12364,21 +12364,21 @@ function _renderDeleA1ModeloList(task, mid, items){
         '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#334155;font-weight:500;max-height:400px;overflow:auto">'+esc(firstCuerpo)+'</div>'+
       '</div>';
     }
-    // === Tarea 级别共享听力原文: 检测 transcript 是否所有题共享 ===
+    // === Tarea 级别共享听力原文: 检测 transcript 是否所有题共享 (点击展开) ===
     const firstTranscript = group[0] && group[0].transcript || '';
     const sharedTranscript = firstTranscript.length > 30 && group.every(q => (q.transcript||'') === firstTranscript);
     if (sharedTranscript && pruebaNum === 2) {
-      h += '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:12px 14px;margin-bottom:10px">'+
-        '<div style="font-size:12px;font-weight:600;color:#0284c7;margin-bottom:6px">📝 听力原文</div>'+
-        '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#0c4a6e;font-weight:500;max-height:300px;overflow:auto">'+esc(firstTranscript)+'</div>';
+      h += '<details style="margin-bottom:12px"><summary style="cursor:pointer;font-size:14px;color:#0284c7;font-weight:700;padding:6px 0">📝 听力原文 (整段 · 点击展开)</summary>'+
+        '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:14px 16px;margin-top:6px">'+
+          '<div style="white-space:pre-wrap;font-size:15px;line-height:1.8;color:#0c4a6e;font-weight:500">'+esc(firstTranscript)+'</div>';
       // TTS for shared transcript
       var sharedTtsId = 'tts_shared_'+modeloId+'_P'+pruebaNum+'_T'+tareaNum;
       window._deleTTSStore[sharedTtsId] = firstTranscript;
-      h += '<div style="margin-top:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+      h += '<div style="margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
         '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(sharedTtsId)+'\')" style="font-size:12px">🔊 TTS 播放听力</button>'+
         '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
         '<span style="color:#64748b;font-size:11px">浏览器语音合成 (es-ES · 0.9x)</span>'+
-      '</div></div>';
+      '</div></div></details>';
     }
 
     h += '<div class="gp">';
@@ -12389,24 +12389,24 @@ function _renderDeleA1ModeloList(task, mid, items){
         h += _renderDeleA1V5TaskCard(q);
         continue;
       }
-      // v5 听力题: 如果 transcript 不共享, 自动展开显示
+      // v5 听力题: per-question transcript (点击展开)
       let transcriptHtml = '';
       if (q._v5 && q.transcript && q.prueba === 2 && !sharedTranscript) {
-        transcriptHtml = '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:10px 12px;margin-top:6px">'+
-          '<div style="font-size:11px;font-weight:600;color:#0284c7;margin-bottom:4px">📝 听力原文</div>'+
-          '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#0c4a6e;font-weight:500;max-height:300px;overflow:auto">'+esc(q.transcript)+'</div>';
+        transcriptHtml = '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:13px;color:#0284c7;font-weight:700;padding:4px 0">📝 听力原文 (点击展开)</summary>'+
+          '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:12px 14px;margin-top:6px">'+
+            '<div style="white-space:pre-wrap;font-size:14px;line-height:1.8;color:#0c4a6e;font-weight:500">'+esc(q.transcript)+'</div>';
         if (q.audio) {
-          transcriptHtml += '<div style="margin-top:6px"><audio controls style="width:100%;height:32px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
+          transcriptHtml += '<div style="margin-top:8px"><audio controls style="width:100%;height:36px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
         } else {
           var ttsId = 'tts_'+q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
           window._deleTTSStore[ttsId] = q.transcript;
-          transcriptHtml += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+          transcriptHtml += '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
             '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(ttsId)+'\')" style="font-size:12px">🔊 TTS 播放听力</button>'+
             '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
             '<span style="color:#64748b;font-size:11px">es-ES · 0.9x</span>'+
           '</div>';
         }
-        transcriptHtml += '</div>';
+        transcriptHtml += '</div></details>';
       }
       // per-question cuerpo (仅在不共享时显示)
       let cuerpoHtml = '';
