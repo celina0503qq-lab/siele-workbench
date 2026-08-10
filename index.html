@@ -12423,25 +12423,41 @@ function _renderDeleA1ModeloList(task, mid, items){
       }
       // 渲染选项 — v5 可自测模式
       let optsHtml = '';
+      // 检测填空题: 选项≥5且单字母答案 → 用填空输入代替按钮
+      const isManyOptionChoice = q.options && q.options.length >= 5 && q.options.some(o => o.text && o.text.trim() !== '') && q.answer && /^[A-Z]$/.test(q.answer);
       // 检测匹配题: 选项全为空(占位符) + 单字母答案 → 用填空输入代替
       const isMatching = q.options && q.options.length > 0 && q.options.every(o => !o.text || o.text.trim()==='') && q.answer && /^[A-Z]$/.test(q.answer);
-      if (isMatching) {
+      if (isMatching || isManyOptionChoice) {
         const matchStateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
         if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
         const mAns = window._deleA1V5Answers[matchStateKey];
         const mSubmitted = mAns && mAns._submitted;
         const userMatch = mAns ? mAns.key : '';
         const optionLetters = q.options.map(o=>o.key).join('');
-        optsHtml = '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-          '<input id="match_'+esc(matchStateKey)+'" type="text" maxlength="1" value="'+esc(userMatch)+'" placeholder="输入选项字母 ('+optionLetters.substring(0,5)+(optionLetters.length>5?'...':'')+')" '+
-          'style="width:60px;padding:6px 10px;border:1px solid var(--bd,#d1d5db);border-radius:6px;font-size:14px;font-weight:600;text-align:center;text-transform:uppercase;font-family:inherit" '+
-          'onkeydown="if(event.key===\'Enter\')_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" '+
-          (mSubmitted ? 'disabled' : '')+'/>'+
-          (!mSubmitted
-            ? '<button class="btn sm pr" onclick="_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" style="font-size:12px">提交</button>'
-            : '<button class="btn sm ol" onclick="_deleA1V5MatchReset(\''+esc(matchStateKey)+'\')" style="font-size:12px">重做</button>')+
-          '<span class="sub" style="color:var(--tr);font-size:11px">可用选项: '+optionLetters+'</span>'+
-        '</div>';
+        // 选项多于 6 个时,显示完整选项列表(供用户参考)
+        const showOptionsList = q.options.length >= 6;
+        optsHtml = '<div style="margin-top:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px">'+
+          '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+            '<input id="match_'+esc(matchStateKey)+'" type="text" maxlength="1" value="'+esc(userMatch)+'" placeholder="输入选项字母" '+
+              'style="width:60px;padding:8px 12px;border:2px solid #3b82f6;border-radius:6px;font-size:16px;font-weight:700;text-align:center;text-transform:uppercase;font-family:inherit" '+
+              'onkeydown="if(event.key===\'Enter\')_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" '+
+              (mSubmitted ? 'disabled' : '')+'/>'+
+            (!mSubmitted
+              ? '<button class="btn sm pr" onclick="_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" style="font-size:12px">提交</button>'
+              : '<button class="btn sm ol" onclick="_deleA1V5MatchReset(\''+esc(matchStateKey)+'\')" style="font-size:12px">重做</button>')+
+            '<span style="color:#64748b;font-size:11px;font-weight:600">可用选项: '+optionLetters+'</span>'+
+          '</div>';
+        // 选项≥6时, 显示完整选项列表作为参考
+        if (showOptionsList) {
+          optsHtml += '<div style="margin-top:8px;padding-top:8px;border-top:1px dashed #cbd5e1">';
+          q.options.forEach(function(o){
+            if (o.text) {
+              optsHtml += '<div style="display:inline-block;margin:2px 6px 2px 0;font-size:12px;color:#475569"><b style="color:#1e293b">'+esc(o.key)+'</b> '+esc(o.text)+'</div>';
+            }
+          });
+          optsHtml += '</div>';
+        }
+        optsHtml += '</div>';
         if (mSubmitted) {
           const isCorrect = userMatch.toUpperCase() === q.answer.toUpperCase();
           optsHtml += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
