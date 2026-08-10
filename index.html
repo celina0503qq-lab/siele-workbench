@@ -12391,7 +12391,36 @@ function _renderDeleA1ModeloList(task, mid, items){
       }
       // 渲染选项 — v5 可自测模式
       let optsHtml = '';
-      if (q.options && q.options.length) {
+      // 检测匹配题: 选项全为空(占位符) + 单字母答案 → 用填空输入代替
+      const isMatching = q.options && q.options.length > 0 && q.options.every(o => !o.text || o.text.trim()==='') && q.answer && /^[A-Z]$/.test(q.answer);
+      if (isMatching) {
+        const matchStateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+        if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+        const mAns = window._deleA1V5Answers[matchStateKey];
+        const mSubmitted = mAns && mAns._submitted;
+        const userMatch = mAns ? mAns.key : '';
+        const optionLetters = q.options.map(o=>o.key).join('');
+        optsHtml = '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+          '<input id="match_'+esc(matchStateKey)+'" type="text" maxlength="1" value="'+esc(userMatch)+'" placeholder="输入选项字母 ('+optionLetters.substring(0,5)+(optionLetters.length>5?'...':'')+')" '+
+          'style="width:60px;padding:6px 10px;border:1px solid var(--bd,#d1d5db);border-radius:6px;font-size:14px;font-weight:600;text-align:center;text-transform:uppercase;font-family:inherit" '+
+          'onkeydown="if(event.key===\'Enter\')_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" '+
+          (mSubmitted ? 'disabled' : '')+'/>'+
+          (!mSubmitted
+            ? '<button class="btn sm pr" onclick="_deleA1V5MatchSubmit(\''+esc(matchStateKey)+'\')" style="font-size:12px">提交</button>'
+            : '<button class="btn sm ol" onclick="_deleA1V5MatchReset(\''+esc(matchStateKey)+'\')" style="font-size:12px">重做</button>')+
+          '<span class="sub" style="color:var(--tr);font-size:11px">可用选项: '+optionLetters+'</span>'+
+        '</div>';
+        if (mSubmitted) {
+          const isCorrect = userMatch.toUpperCase() === q.answer.toUpperCase();
+          optsHtml += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+            '<span class="pr-badge" style="background:'+(isCorrect?'#10b98122;color:#10b981':'#ef444422;color:#ef4444')+'">'+
+              (isCorrect ? '✓ 答对了 · '+q.answer : '✗ 答错了 · 正确 '+q.answer)+
+            '</span></div>';
+          if (q.explanation) {
+            optsHtml += '<div style="margin-top:4px;padding:6px 8px;background:#f0f7ff;border-radius:4px;font-size:11px;line-height:1.5;color:#1e40af;border-left:3px solid #3b82f6"><b>💡 解析：</b>'+esc(q.explanation)+'</div>';
+          }
+        }
+      } else if (q.options && q.options.length) {
         if (q._v5) {
           // v5: 自测模式 (选择题+匹配题可点击)
           optsHtml = _renderDeleA1V5Choice(q);
@@ -12568,6 +12597,23 @@ window._deleA1V5FillSubmit = function(stateKey){
   _deleSaveProgress();
 };
 window._deleA1V5FillReset = function(stateKey){
+  if (window._deleA1V5Answers) delete window._deleA1V5Answers[stateKey];
+  _deleRefreshCurrentTarea();
+  _deleSaveProgress();
+};
+
+// ===== 匹配题提交/重做 (单字母输入) =====
+window._deleA1V5MatchSubmit = function(stateKey){
+  var inp = document.getElementById('match_'+stateKey);
+  if (!inp) return;
+  var val = inp.value.trim().toUpperCase();
+  if (!val) { if (window.toast) window.toast('请输入选项字母'); return; }
+  if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
+  window._deleA1V5Answers[stateKey] = { key: val, _submitted: true };
+  _deleRefreshCurrentTarea();
+  _deleSaveProgress();
+};
+window._deleA1V5MatchReset = function(stateKey){
   if (window._deleA1V5Answers) delete window._deleA1V5Answers[stateKey];
   _deleRefreshCurrentTarea();
   _deleSaveProgress();

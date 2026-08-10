@@ -658,7 +658,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "H",
-      "prompt": "",
+      "prompt": "12. Somos dos amigas de 18 años. Queremos ir una semana a una isla. Nos gusta la fiesta.",
       "options": [
         {
           "key": "A",
@@ -713,7 +713,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "A",
-      "prompt": "",
+      "prompt": "13. Me gusta viajar sola. Quiero hacer un viaje muy largo y conocer monumentos.",
       "options": [
         {
           "key": "A",
@@ -768,7 +768,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "F",
-      "prompt": "",
+      "prompt": "14. Queremos ir con nuestros hijos a un hotel. Nos gusta tomar el sol y bañarnos.",
       "options": [
         {
           "key": "A",
@@ -823,7 +823,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "E",
-      "prompt": "",
+      "prompt": "15. Viajo con mi marido, pero tenemos poco dinero. Preferimos el invierno.",
       "options": [
         {
           "key": "A",
@@ -878,7 +878,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "B",
-      "prompt": "",
+      "prompt": "16. Queremos llevar a nuestra nieta de 6 años a un viaje especial.",
       "options": [
         {
           "key": "A",
@@ -933,7 +933,7 @@ window.DELE_BANK_A1 = {
         17
       ],
       "answer": "G",
-      "prompt": "",
+      "prompt": "17. Quiero un fin de semana en la naturaleza, lejos de la ciudad.",
       "options": [
         {
           "key": "A",
