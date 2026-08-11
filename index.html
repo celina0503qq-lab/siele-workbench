@@ -12054,6 +12054,9 @@ function _injectDeleBankNuevoLevel(level, bankVar){
 function _injectDeleBankNuevoA1(){ return _injectDeleBankNuevoLevel('A1','DELE_BANK_A1_NUEVO_M1'); }
 function _injectDeleBankNuevoA2(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M1'); }
 function _injectDeleBankNuevoB1(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M1'); }
+function _injectDeleBankNuevoB1M2(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M2'); }
+function _injectDeleBankNuevoB1M3(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M3'); }
+function _injectDeleBankNuevoB1M4(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M4'); }
 
 // ===== Nuevo DELE B2 Modelo 01 注入 =====
 function _injectDeleBankNuevoM1(){
@@ -13540,6 +13543,12 @@ window.addEventListener('DOMContentLoaded', () => {
   tryInjectNuevoA1(35);
   tryInjectNuevoA2(35);
   tryInjectNuevoB1(35);
+  function tryInjectNuevoB1M2(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M2!=='undefined'){_injectDeleBankNuevoB1M2();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M2(retries-1);},80);}}
+  function tryInjectNuevoB1M3(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M3!=='undefined'){_injectDeleBankNuevoB1M3();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M3(retries-1);},80);}}
+  function tryInjectNuevoB1M4(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M4!=='undefined'){_injectDeleBankNuevoB1M4();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M4(retries-1);},80);}}
+  tryInjectNuevoB1M2(35);
+  tryInjectNuevoB1M3(35);
+  tryInjectNuevoB1M4(35);
 });
 </script>
 
@@ -13553,6 +13562,9 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./dele_banks/dele_bank_a1_nuevo_m1.js" defer></script>
 <script src="./dele_banks/dele_bank_a2_nuevo_m1.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m1.js" defer></script>
+<script src="./dele_banks/dele_bank_b1_nuevo_m2.js" defer></script>
+<script src="./dele_banks/dele_bank_b1_nuevo_m3.js" defer></script>
+<script src="./dele_banks/dele_bank_b1_nuevo_m4.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
