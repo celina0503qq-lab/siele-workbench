@@ -17,7 +17,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "c",
+      "answer": "A",
       "prompt": "Relacionar persona 1 con su mensaje (A-I)",
       "options": [
         {
@@ -71,7 +71,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "b",
+      "answer": "D",
       "prompt": "Relacionar persona 2 con su mensaje (A-I)",
       "options": [
         {
@@ -125,7 +125,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "a",
+      "answer": "F",
       "prompt": "Relacionar persona 3 con su mensaje (A-I)",
       "options": [
         {
@@ -179,7 +179,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "a",
+      "answer": "B",
       "prompt": "Relacionar persona 4 con su mensaje (A-I)",
       "options": [
         {
@@ -233,7 +233,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "b",
+      "answer": "I",
       "prompt": "Relacionar persona 5 con su mensaje (A-I)",
       "options": [
         {
@@ -287,7 +287,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1,
         6
       ],
-      "answer": "c",
+      "answer": "G",
       "prompt": "Relacionar persona 6 con su mensaje (A-I)",
       "options": [
         {
@@ -401,7 +401,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Que porcentaje come fuera de casa al menos dos veces por semana?",
       "options": [
         {
@@ -431,7 +431,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "A",
       "prompt": "Que problema esta provocando el cambio de habitos alimenticios?",
       "options": [
         {
@@ -621,7 +621,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
@@ -671,7 +671,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "D",
+      "answer": "A",
       "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
@@ -721,7 +721,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "G",
+      "answer": "B",
       "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
@@ -771,7 +771,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "E",
+      "answer": "B",
       "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
@@ -821,7 +821,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "A",
+      "answer": "D",
       "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
@@ -867,7 +867,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
@@ -913,7 +913,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "D",
+      "answer": "F",
       "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
@@ -959,7 +959,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "B",
+      "answer": "H",
       "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
@@ -1005,7 +1005,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "F",
+      "answer": "A",
       "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
@@ -1051,7 +1051,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "E",
+      "answer": "G",
       "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
@@ -1127,7 +1127,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Que ventaja tiene hacer deporte al aire libre?",
       "options": [
         {
@@ -1157,7 +1157,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Cuanto ejercicio recomiendan los medicos?",
       "options": [
         {
@@ -1187,7 +1187,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Que vitamina se obtiene del sol?",
       "options": [
         {
@@ -1217,7 +1217,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Que actividad NO se menciona en el texto?",
       "options": [
         {
@@ -1463,7 +1463,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 7.",
       "options": [
         {
@@ -1494,7 +1494,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 8.",
       "options": [
         {
@@ -1556,7 +1556,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 10.",
       "options": [
         {
@@ -1618,7 +1618,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 12.",
       "options": [
         {
@@ -1649,7 +1649,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "f",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
       "options": [
         {
@@ -1700,7 +1700,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 14.",
       "options": [
         {
@@ -1751,7 +1751,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "g",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
       "options": [
         {
@@ -1802,7 +1802,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "e",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
       "options": [
         {
@@ -1853,7 +1853,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "h",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
       "options": [
         {
@@ -1904,7 +1904,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
       "options": [
         {
@@ -2213,7 +2213,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 25.",
       "options": [
         {
@@ -2244,7 +2244,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 26.",
       "options": [
         {
@@ -2275,7 +2275,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "b",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 27.",
       "options": [
         {
@@ -2306,7 +2306,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 28.",
       "options": [
         {
@@ -2368,7 +2368,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "b",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 30.",
       "options": [
         {

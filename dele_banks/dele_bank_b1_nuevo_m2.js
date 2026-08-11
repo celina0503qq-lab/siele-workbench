@@ -584,7 +584,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
@@ -635,7 +635,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
@@ -686,7 +686,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "D",
+      "answer": "C",
       "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
@@ -737,7 +737,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "G",
+      "answer": "A",
       "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
@@ -788,7 +788,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "E",
+      "answer": "B",
       "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
@@ -839,7 +839,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
+      "answer": "E",
       "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
@@ -886,7 +886,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
@@ -980,7 +980,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "B",
+      "answer": "H",
       "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
@@ -1027,7 +1027,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "F",
+      "answer": "A",
       "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
@@ -1074,7 +1074,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "E",
+      "answer": "F",
       "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
@@ -1245,7 +1245,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "A que edad se recomienda empezar?",
       "options": [
         {
@@ -1276,7 +1276,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Donde esta presente la musica segun el texto?",
       "options": [
         {
@@ -1524,7 +1524,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 8.",
       "options": [
         {
@@ -1555,7 +1555,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         7,
         12
       ],
-      "answer": "b",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 9.",
       "options": [
         {
@@ -1586,7 +1586,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 10.",
       "options": [
         {
@@ -1617,7 +1617,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 11.",
       "options": [
         {
@@ -1679,7 +1679,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "f",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
       "options": [
         {
@@ -1730,7 +1730,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "d",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 14.",
       "options": [
         {
@@ -1781,7 +1781,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "a",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
       "options": [
         {
@@ -1832,7 +1832,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "h",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
       "options": [
         {
@@ -1883,7 +1883,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
       "options": [
         {
@@ -1934,7 +1934,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "b",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
       "options": [
         {

@@ -17,7 +17,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         1,
         6
       ],
-      "answer": "B",
+      "answer": "D",
       "prompt": "A que se dedica Paco actualmente?",
       "options": [
         {
@@ -110,7 +110,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         1,
         6
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Por que Paco no quiere irse de Madrid?",
       "options": [
         {
@@ -141,7 +141,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         1,
         6
       ],
-      "answer": "B",
+      "answer": "F",
       "prompt": "A que se dedica Elena?",
       "options": [
         {
@@ -172,7 +172,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         1,
         6
       ],
-      "answer": "A",
+      "answer": "H",
       "prompt": "Para que estan ahorrando Paco y Elena?",
       "options": [
         {
@@ -203,7 +203,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         7,
         12
       ],
-      "answer": "D",
+      "answer": "B",
       "prompt": "Limpia playas cada mes.",
       "options": [
         {
@@ -289,7 +289,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         7,
         12
       ],
-      "answer": "F",
+      "answer": "B",
       "prompt": "Ayuda a personas mayores.",
       "options": [
         {
@@ -375,7 +375,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         7,
         12
       ],
-      "answer": "B",
+      "answer": "A",
       "prompt": "Da comida a personas sin hogar.",
       "options": [
         {
@@ -418,7 +418,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         7,
         12
       ],
-      "answer": "E",
+      "answer": "C",
       "prompt": "Ensena espanol a inmigrantes.",
       "options": [
         {
@@ -461,7 +461,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "A",
+      "answer": "C",
       "prompt": "Aprendio un idioma por motivos laborales.",
       "options": [
         {
@@ -512,7 +512,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
@@ -563,7 +563,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "B",
+      "answer": "A",
       "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
@@ -614,7 +614,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "D",
+      "answer": "A",
       "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
@@ -665,7 +665,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "G",
+      "answer": "B",
       "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
@@ -716,7 +716,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "E",
+      "answer": "C",
       "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
@@ -767,7 +767,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "A",
+      "answer": "C",
       "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
@@ -814,7 +814,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "C",
+      "answer": "F",
       "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
@@ -861,7 +861,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "D",
+      "answer": "A",
       "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
@@ -908,7 +908,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "B",
+      "answer": "H",
       "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
@@ -955,7 +955,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "F",
+      "answer": "D",
       "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
@@ -1002,7 +1002,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "E",
+      "answer": "B",
       "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
@@ -1049,7 +1049,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Cual es el tema principal del texto?",
       "options": [
         {
@@ -1111,7 +1111,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Que tipo de productos debemos reducir?",
       "options": [
         {
@@ -1142,7 +1142,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "C",
       "prompt": "Que gesto individual se menciona como positivo?",
       "options": [
         {
@@ -1173,7 +1173,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Donde acaban los residuos si no los gestionamos bien?",
       "options": [
         {
@@ -1204,7 +1204,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Que se recomienda hacer con las botellas?",
       "options": [
         {
@@ -1421,7 +1421,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         2,
         12
       ],
-      "answer": "A",
+      "answer": "C",
       "prompt": "Quien fue a la playa el fin de semana?",
       "options": [
         {
@@ -1514,7 +1514,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         5,
         12
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Quien fue a la cafeteria el viernes?",
       "options": [
         {
@@ -1545,7 +1545,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6,
         12
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Quien dice que el cafe es buenisimo?",
       "options": [
         {
@@ -1576,7 +1576,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         7,
         12
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Quien fue a la playa con amigos?",
       "options": [
         {
@@ -1607,7 +1607,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         8,
         12
       ],
-      "answer": "F",
+      "answer": "C",
       "prompt": "Es periodista.",
       "options": [
         {
@@ -1658,7 +1658,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         9,
         12
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Es profesor/a de matematicas.",
       "options": [
         {
@@ -1709,7 +1709,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         10,
         12
       ],
-      "answer": "G",
+      "answer": "B",
       "prompt": "Es abogado/a.",
       "options": [
         {
@@ -1760,7 +1760,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         11,
         12
       ],
-      "answer": "E",
+      "answer": "C",
       "prompt": "Tiene un restaurante.",
       "options": [
         {
@@ -1811,7 +1811,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12,
         12
       ],
-      "answer": "H",
+      "answer": "C",
       "prompt": "Es informatico/a.",
       "options": [
         {
@@ -1862,7 +1862,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         12
       ],
-      "answer": "C",
+      "answer": "B",
       "prompt": "Es arquitecto/a.",
       "options": [
         {
@@ -2171,7 +2171,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Cual es la primera recomendacion del locutor?",
       "options": [
         {
@@ -2202,7 +2202,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Que gesto permite ahorrar agua en casa?",
       "options": [
         {
@@ -2233,7 +2233,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "A",
       "prompt": "Que medio de transporte recomienda el locutor?",
       "options": [
         {
@@ -2264,7 +2264,7 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "C",
       "prompt": "Que debemos hacer con los residuos segun el locutor?",
       "options": [
         {

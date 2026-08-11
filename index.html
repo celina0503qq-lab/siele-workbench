@@ -12429,11 +12429,15 @@ function _renderDeleA1ModeloList(task, mid, items){
   }
   for (const tk in byTarea) {
     const group = byTarea[tk];
-    // 统计本大题已答题数
+    // 统计本大题已答对数（答对才计入进度, 非仅提交）
     let doneCount = 0;
     group.forEach(q => {
       const sk = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
-      if (window._deleA1V5Answers && window._deleA1V5Answers[sk] && window._deleA1V5Answers[sk]._submitted) doneCount++;
+      if (window._deleA1V5Answers && window._deleA1V5Answers[sk] && window._deleA1V5Answers[sk]._submitted) {
+        if (window._deleA1V5Answers[sk].key && String(window._deleA1V5Answers[sk].key).toUpperCase() === String(q.answer).toUpperCase()) {
+          doneCount++;
+        }
+      }
     });
     const tareaNum = group[0] ? group[0].tarea : 0;
     const pruebaNum = group[0] ? group[0].prueba : 0;

@@ -17,7 +17,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "c",
+      "answer": "E",
       "prompt": "Relacionar persona 1 con su mensaje (A-I)",
       "options": [
         {
@@ -125,7 +125,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "a",
+      "answer": "G",
       "prompt": "Relacionar persona 3 con su mensaje (A-I)",
       "options": [
         {
@@ -179,7 +179,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "c",
+      "answer": "I",
       "prompt": "Relacionar persona 4 con su mensaje (A-I)",
       "options": [
         {
@@ -287,7 +287,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "b",
+      "answer": "H",
       "prompt": "Relacionar persona 6 con su mensaje (A-I)",
       "options": [
         {
@@ -341,7 +341,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "b",
+      "answer": "A",
       "prompt": "Cual es la principal causa del cambio climatico segun el texto?",
       "options": [
         {
@@ -401,7 +401,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Que efecto se menciona para Espana?",
       "options": [
         {
@@ -431,7 +431,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "A",
       "prompt": "A que sector afecta especialmente en Espana?",
       "options": [
         {
@@ -461,7 +461,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "b",
+      "answer": "C",
       "prompt": "Que pueden hacer los ciudadanos segun el texto?",
       "options": [
         {
@@ -491,7 +491,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "a",
+      "answer": "B",
       "prompt": "Que energia se menciona como alternativa positiva?",
       "options": [
         {
@@ -521,7 +521,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Aprendio un idioma por motivos laborales.",
       "options": [
         {
@@ -571,7 +571,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "C",
+      "answer": "A",
       "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
@@ -621,7 +621,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
@@ -671,7 +671,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "D",
+      "answer": "B",
       "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
@@ -721,7 +721,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "G",
+      "answer": "C",
       "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
@@ -771,7 +771,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "E",
+      "answer": "A",
       "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
@@ -821,7 +821,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
@@ -867,7 +867,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "C",
+      "answer": "E",
       "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
@@ -913,7 +913,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "D",
+      "answer": "H",
       "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
@@ -959,7 +959,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "B",
+      "answer": "C",
       "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
@@ -1005,7 +1005,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "F",
+      "answer": "A",
       "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
@@ -1051,7 +1051,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "E",
+      "answer": "G",
       "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
@@ -1097,7 +1097,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "A",
+      "answer": "B",
       "prompt": "Cual es el tema principal del texto?",
       "options": [
         {
@@ -1127,7 +1127,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "A",
       "prompt": "Que ventaja tiene el comercio electronico?",
       "options": [
         {
@@ -1217,7 +1217,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "B",
+      "answer": "A",
       "prompt": "Que tipo de productos se pueden comprar?",
       "options": [
         {
@@ -1463,7 +1463,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "b",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 7.",
       "options": [
         {
@@ -1525,7 +1525,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 2, pregunta 9.",
       "options": [
         {
@@ -1649,7 +1649,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "a",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
       "options": [
         {
@@ -1751,7 +1751,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "f",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
       "options": [
         {
@@ -1802,7 +1802,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "e",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
       "options": [
         {
@@ -1853,7 +1853,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "g",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
       "options": [
         {
@@ -1904,7 +1904,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "b",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
       "options": [
         {
@@ -2306,7 +2306,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "b",
+      "answer": "A",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 28.",
       "options": [
         {
@@ -2337,7 +2337,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "a",
+      "answer": "C",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 29.",
       "options": [
         {
@@ -2368,7 +2368,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "c",
+      "answer": "B",
       "prompt": "Escucha el audio y responde. Tarea 5, pregunta 30.",
       "options": [
         {
