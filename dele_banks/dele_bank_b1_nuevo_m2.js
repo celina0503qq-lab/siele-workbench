@@ -1,10 +1,43 @@
 window.DELE_BANK_B1_NUEVO_M2 = {
   "version": "1.0",
   "level": "B1",
-  "source": "Nuevo DELE B1 Modelo 2 - Ramon Diez Galan",
+  "source": "Nuevo DELE B1 Modelo 2 - Ramón Díez Galán (PDF pymupdf extraction)",
   "language": "es-ES",
   "syllabus": {
-    "level": "B1"
+    "level": "B1",
+    "duration_minutes": {
+      "reading": 70,
+      "listening": 40,
+      "writing": 60,
+      "speaking_prep": 15,
+      "speaking_test": 15
+    },
+    "pruebas": {
+      "reading": {
+        "name": "Comprensión de lectura",
+        "duration": 70,
+        "tarea_count": 5,
+        "question_count": 30
+      },
+      "listening": {
+        "name": "Comprensión auditiva",
+        "duration": 40,
+        "tarea_count": 5,
+        "question_count": 30
+      },
+      "writing": {
+        "name": "Expresión e interacción escritas",
+        "duration": 60,
+        "tarea_count": 2,
+        "question_count": 2
+      },
+      "speaking": {
+        "name": "Expresión e interacción orales",
+        "duration_prep": 15,
+        "tarea_count": 3,
+        "question_count": 3
+      }
+    }
   },
   "items": [
     {
@@ -18,49 +51,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "D",
-      "prompt": "Lucía: No podemos tener hijos, parece que es un problema genético. Ayer mi marido me dio una idea genial, vamos a acoger y ayudar a un pobre niño que no tiene familia.",
+      "prompt": "Pregunta 1: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: D"
+      "explanation": "Respuesta correcta: D",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -73,49 +106,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "B",
-      "prompt": "Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.",
+      "prompt": "Pregunta 2: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -128,49 +161,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "I",
-      "prompt": "Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.",
+      "prompt": "Pregunta 3: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: I"
+      "explanation": "Respuesta correcta: I",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -183,49 +216,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "G",
-      "prompt": "Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG.",
+      "prompt": "Pregunta 4: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: G"
+      "explanation": "Respuesta correcta: G",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -238,49 +271,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "E",
-      "prompt": "Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga.",
+      "prompt": "Pregunta 5: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: E"
+      "explanation": "Respuesta correcta: E",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -293,49 +326,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "F",
-      "prompt": "Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.",
+      "prompt": "Pregunta 6: ¿A qué mensaje corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Me ha dicho tu madre que no te encuentras muy bien..."
+          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
         },
         {
           "key": "B",
-          "text": "B) Hola mi amor, ¿recuerdas los pendientes de los que..."
+          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
         },
         {
           "key": "C",
-          "text": "C) La primera vez que lo vi supe que ese chico estaba..."
+          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
         },
         {
           "key": "D",
-          "text": "D) Hola cariño, creo que deberíamos adoptar a un bebé..."
+          "text": "D) Adoptar un bebé para formar una familia feliz"
         },
         {
           "key": "E",
-          "text": "E) Imagino que ya te habrás enterado: a partir de mañ..."
+          "text": "E) Huelga: mañana nadie va a trabajar, los jefes cambiarán cosas"
         },
         {
           "key": "F",
-          "text": "F) Acaban de llamarme de la comisaría de policía. Est..."
+          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
         },
         {
           "key": "G",
-          "text": "G) Hola, soy yo de nuevo. ¿Te has pensado ya lo del v..."
+          "text": "G) Voluntariado en el Tercer Mundo, gente que merece una oportunidad"
         },
         {
           "key": "H",
-          "text": "H) Los abuelos van a estar fuera una temporada, lo me..."
+          "text": "H) Organizarse para regar plantas y dar comida a los peces de los abuelos"
         },
         {
           "key": "I",
-          "text": "I) Hola guapa, tú no me conoces, pero yo te sigo todo..."
+          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol.\n\nB. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta.\n\nC. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada.\n\nD. Hola cariño, creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz.\n\nE. Imagino que ya te habrás enterado: a partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes.\n\nF. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas.\n\nG. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? En el Tercer Mundo la gente se merece una oportunidad.\n\nH. Los abuelos van a estar fuera una temporada, lo mejor será que nos organicemos para ir a su casa y regar las plantas.\n\nI. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos?",
-      "expl": "Respuesta: F"
+      "explanation": "Respuesta correcta: F",
+      "cuerpo": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir.\n\n1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa."
     },
     {
       "modelo": "nuevo_m2",
@@ -356,17 +389,17 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) el palacio de Marivent pertenece a la familia real española."
+          "text": "B) los actuales reyes van a viajar en velero."
         },
         {
           "key": "C",
-          "text": "C) la reina Sofía se quedará a vivir en Marivent."
+          "text": "C) el palacio de verano de los reyes está en Mallorca."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -379,25 +412,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "A",
-      "prompt": "La fotografía tradicional de la familia real…",
+      "prompt": "Juan Carlos…",
       "options": [
         {
           "key": "A",
-          "text": "A) sigue siendo símbolo de unidad familiar."
+          "text": "A) está en el extranjero."
         },
         {
           "key": "B",
-          "text": "B) fue el escenario de varias crisis familiares."
+          "text": "B) tiene dos hijas, Leonor y Sofía."
         },
         {
           "key": "C",
-          "text": "C) se tomó por primera vez este verano."
+          "text": "C) es el actual rey de España."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -410,25 +443,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "C",
-      "prompt": "Durante sus vacaciones en Marivent, la familia real ha recibido la visita de…",
+      "prompt": "La anterior reina…",
       "options": [
         {
           "key": "A",
-          "text": "A) presidentes de varios países."
+          "text": "A) abandonó España el domingo."
         },
         {
           "key": "B",
-          "text": "B) los reyes de Inglaterra y Japón."
+          "text": "B) va a viajar desde Madrid con toda la familia."
         },
         {
           "key": "C",
-          "text": "C) varios personajes ilustres internacionales."
+          "text": "C) fue a unas tiendas el pasado miércoles."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -441,25 +474,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "A",
-      "prompt": "Este año, a causa del coronavirus,…",
+      "prompt": "El palacio de Marivent…",
       "options": [
         {
           "key": "A",
-          "text": "A) no ha habido recepciones oficiales en el palacio."
+          "text": "A) ha recibido visitantes importantes de otros países."
         },
         {
           "key": "B",
-          "text": "B) los reyes no han ido a Marivent."
+          "text": "B) es el lugar donde vive el presidente del gobierno."
         },
         {
           "key": "C",
-          "text": "C) la Copa del Rey de vela se ha celebrado sin público."
+          "text": "C) no tiene jardín."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -472,25 +505,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "B",
-      "prompt": "Felipe VI y Letizia han viajado a otras islas para…",
+      "prompt": "Este año…",
       "options": [
         {
           "key": "A",
-          "text": "A) asistir a varios actos culturales."
+          "text": "A) se celebrará la tradicional reunión con personalidades de Mallorca."
         },
         {
           "key": "B",
-          "text": "B) apoyar al sector turístico de las islas."
+          "text": "B) se han cancelado algunos eventos."
         },
         {
           "key": "C",
-          "text": "C) visitar a la reina Sofía."
+          "text": "C) los reyes participarán en la copa del Rey de vela."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -503,25 +536,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "B",
-      "prompt": "Finalizadas sus vacaciones, los reyes…",
+      "prompt": "Después del viaje, los reyes…",
       "options": [
         {
           "key": "A",
-          "text": "A) regresarán directamente a Madrid."
+          "text": "A) tendrán unas vacaciones privadas."
         },
         {
           "key": "B",
-          "text": "B) visitarán las islas de Ibiza y Menorca."
+          "text": "B) volverán a Madrid."
         },
         {
           "key": "C",
-          "text": "C) se reunirán con el gobierno en Mallorca."
+          "text": "C) viajarán al extranjero."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\nMODELO 2\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al tr",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
     },
     {
       "modelo": "nuevo_m2",
@@ -534,45 +567,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "A",
-      "prompt": "Selecciona respuesta 13",
+      "prompt": "¿Qué persona dice que no soporta que su pareja tome demasiado alcohol?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -585,45 +598,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "A",
-      "prompt": "Selecciona respuesta 14",
+      "prompt": "¿Quién pensaba que la relación con su pareja no iba a funcionar?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -636,45 +629,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "C",
-      "prompt": "Selecciona respuesta 15",
+      "prompt": "¿Quién dice que su pareja toma demasiados dulces?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -687,45 +660,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "C",
-      "prompt": "Selecciona respuesta 16",
+      "prompt": "¿Quién ha confiado en lo que le ha dicho el casero?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -738,45 +691,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "A",
-      "prompt": "Selecciona respuesta 17",
+      "prompt": "¿Quién asegura que el sentido del humor es muy importante en su relación?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -789,45 +722,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "B",
-      "prompt": "Selecciona respuesta 18",
+      "prompt": "¿Quién dice que se enfada cuando su pareja toma mucho embutido?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) BOB — Más de 10 años con su novia, no soporta el olor del embutido que ella desayuna"
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy\nMODELO 2\nPREGUNTAS\n7. Según el texto…\n a) el rey Juan Carlos se reunirá con su familia en Mallorca.\n b) los actuales reyes van a viajar en velero.\n c) el palacio de verano de los reyes está en Mallorca.\n8. Juan Carlos…\n a) está en el extranjero.\nb) tiene dos hijas, Leonor y Sofía.\n c) es el actual rey de España.\n9. La anterior reina…\n a) abandonó España el domingo.\n b) va a viajar desde Madrid con toda la familia.\n c) fue a unas tiendas el pasado miércoles.\n10. El palacio de Marivent…\n a) ha recibido visitantes importantes de otros países en los últimos años.\nb) es el lugar donde vive el presidente del gobierno, Pedro Sánchez.\n c) no tiene jardín.\n11. Este año…\n a) se celebrará la tradicional reunión con personalidades de Mallorca.\n b) se han cancelado algunos eventos.\n c) los reyes participarán en la copa del Rey de vela.\n12. Después del viaje, los reyes…\n a) tendrán unas vacaciones privadas.\n b) volverán a Madrid.\nc) viajarán al extranjero para encontrarse con Juan Carlos.\nMODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
     },
     {
       "modelo": "nuevo_m2",
@@ -840,41 +753,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "E",
-      "prompt": "Elige opcion 19",
+      "prompt": "Pregunta 19",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: E"
+      "explanation": "Respuesta correcta: E",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -887,41 +804,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "B",
-      "prompt": "Elige opcion 20",
+      "prompt": "Pregunta 20",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -934,41 +855,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "D",
-      "prompt": "Elige opcion 21",
+      "prompt": "Pregunta 21",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: D"
+      "explanation": "Respuesta correcta: D",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -981,41 +906,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "H",
-      "prompt": "Elige opcion 22",
+      "prompt": "Pregunta 22",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: H"
+      "explanation": "Respuesta correcta: H",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1028,41 +957,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "A",
-      "prompt": "Elige opcion 23",
+      "prompt": "Pregunta 23",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1075,41 +1008,45 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "F",
-      "prompt": "Elige opcion 24",
+      "prompt": "Pregunta 24",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Hacerlo de ese modo solo resultaría en niños desorientados e inseguros"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+        },
+        {
+          "key": "H",
+          "text": "H) Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
         }
       ],
-      "type": "choice7",
+      "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI\nMODELO 2\nTarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado.\nINSTRUCCIONES",
-      "expl": "Respuesta: F"
+      "explanation": "Respuesta correcta: F",
+      "cuerpo": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\n\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1122,25 +1059,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 25",
+      "prompt": "la reunión _____ anual",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) el"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) la"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) al"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1153,25 +1090,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 26",
+      "prompt": "En cuanto al _____ de las antenas",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) tema"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) cosa"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) ayuda"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1184,25 +1121,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 27",
+      "prompt": "que _____ antes del viernes",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) dinos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) decidirían"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) decidan"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1215,25 +1152,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 28",
+      "prompt": "trataremos de aclarar _____ pasó",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) qué"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) cuál"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) dónde"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1246,25 +1183,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 29",
+      "prompt": "todo el mundo _____",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) colabora"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) colaboró"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) colabore"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1277,25 +1214,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 30",
+      "prompt": "todos _____ sentarnos",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) podremos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) pondremos"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) ponemos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 2\nLa prueba de Comprensión auditiva contiene cinco tareas. Debe\nresponder a 30 preguntas. Duración: 40 minutos. \nMarque sus opciones en la Hoja de respuestas.\nLos audios se encuentran en el  vídeo de YouTube: \n“Prueba de Comprensión Auditiva NUEVO DELE B1”\nINSTRUCCIONES  \nUsted va a escuchar seis mensajes. Escuche cada\nmensaje dos veces. Después debe contestar a las\npreguntas (1-6). Seleccione la opción correcta (a / b\n/ c). Marque las opciones elegidas en la Hoja de\nrespuestas. Tiene 30 segundos para leer las\npreguntas.\nTarea 1. Audio en vídeo de YouTube (11:57)\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nPREGUNTAS\nMensaje 1\n1. ¿A qué se dedica la persona que habla?\n a) Es un entrenador.\n b) Es un locutor.\n c) Es un ingeniero.\nMensaje 2\n2. ¿Qué pasa?\n a) El programa no funciona bien y hay que repararlo.\n b) El archivo está infectado con un virus.\n c) La persona no puede adjuntar un documento al correo electrónico.",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
     },
     {
       "modelo": "nuevo_m2",
@@ -1307,25 +1244,26 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1,
         6
       ],
-      "answer": "A",
-      "prompt": "Mensaje 1",
+      "answer": "B",
+      "prompt": "¿Qué dice esta persona?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Que se ha mudado."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Que el aire acondicionado no funciona."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Que le duele la cabeza."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 1, Mensaje 1 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1337,25 +1275,26 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1,
         6
       ],
-      "answer": "A",
-      "prompt": "Mensaje 2",
+      "answer": "C",
+      "prompt": "¿De qué está hablando?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) De su ropa."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) De sus muebles."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) De su cita en la peluquería."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 1, Mensaje 2 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1368,7 +1307,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "A",
-      "prompt": "De qué habla esta persona?",
+      "prompt": "¿De qué habla esta persona?",
       "options": [
         {
           "key": "A",
@@ -1376,7 +1315,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) De que los médicos se retrasaron como siempre."
+          "text": "B) De que los médicos se retrasaron."
         },
         {
           "key": "C",
@@ -1385,7 +1324,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 1, Mensaje 3 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1398,7 +1338,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "A",
-      "prompt": "De qué habla el anuncio?",
+      "prompt": "¿De qué habla el anuncio?",
       "options": [
         {
           "key": "A",
@@ -1415,7 +1355,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 1, Mensaje 4 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1427,8 +1368,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1,
         6
       ],
-      "answer": "A",
-      "prompt": "Qué no puede comer el hijo?",
+      "answer": "B",
+      "prompt": "¿Qué no puede comer el hijo?",
       "options": [
         {
           "key": "A",
@@ -1445,7 +1386,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 1, Mensaje 5 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1457,8 +1399,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1,
         6
       ],
-      "answer": "A",
-      "prompt": "De qué está hablando?",
+      "answer": "B",
+      "prompt": "¿De qué está hablando?",
       "options": [
         {
           "key": "A",
@@ -1475,7 +1417,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 2)"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 1, Mensaje 6 - Audio en YouTube del libro Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1488,25 +1431,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "C",
-      "prompt": "Natalia dice que...",
+      "prompt": "Natalia dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) sus hijas van a la escuela donde ella trabaja."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) trabaja en el extranjero."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) no se aburre en el trabajo."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1519,25 +1462,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "B",
-      "prompt": "Con quién está casada Natalia?",
+      "prompt": "¿Con quién está casada Natalia?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Con un hombre de Estados Unidos."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Con un deportista."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Con alguien que conoció hace poco tiempo."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1550,25 +1493,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "A",
-      "prompt": "Natalia se lleva bien con...",
+      "prompt": "Natalia comenta que…",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) han pagado la casa sin la ayuda del banco."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) ahora vive en la casa de los padres de su marido."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) le encanta vivir en una casa de alquiler."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1581,25 +1524,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "C",
-      "prompt": "Natalia dice que se lleva mal con...",
+      "prompt": "Natalia…",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) tiene problemas con su rodilla."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) desde pequeña ha querido tener un seguro médico privado."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) piensa que tener un seguro médico podría ser bueno para su familia."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1612,25 +1555,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "A",
-      "prompt": "En el trabajo de Natalia...",
+      "prompt": "El marido de Natalia…",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) siempre quiere ganar."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) es mejor que ella jugando al parchís."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) nunca quiere jugar con los vecinos."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1643,25 +1586,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "B",
-      "prompt": "Natalia se define como...",
+      "prompt": "A Natalia…",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) le encanta escuchar las noticias en otras lenguas."
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) le gusta mantenerse bien informada."
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) le parece crítica la situación política actual."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1674,45 +1617,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "C",
-      "prompt": "Tarea 3 - Pregunta 13",
+      "prompt": "¿Por qué se ha separado la pareja?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Porque no podían tener hijos."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Por lo que han comentado sus conocidos."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) Porque la mujer pensaba que el marido era gay."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1725,45 +1648,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "A",
-      "prompt": "Tarea 3 - Pregunta 14",
+      "prompt": "La reina…",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) es una persona mayor."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) concedió una entrevista a una revista de moda."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) antes era periodista."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1776,45 +1679,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "B",
-      "prompt": "Tarea 3 - Pregunta 15",
+      "prompt": "El tenista…",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) tuvo un problema en su cuello."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) tuvo un problema en un pie."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) tuvo un problema en un brazo."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1827,45 +1710,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "A",
-      "prompt": "Tarea 3 - Pregunta 16",
+      "prompt": "¿Qué le ha sucedido a Max Guerrero?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Le ha tocado la lotería."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ha perdido su boleto de lotería."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) Ha gastado todo el dinero que ganó en la lotería."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1878,45 +1741,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "B",
-      "prompt": "Tarea 3 - Pregunta 17",
+      "prompt": "Manuel Santos…",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) está casado con Cristina Robles."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) avisó a Cristina de que no podría ir al evento."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) tiene otra pareja secreta."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1929,45 +1772,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "C",
-      "prompt": "Tarea 3 - Pregunta 18",
+      "prompt": "Iñaki López…",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) va a ser juez."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) es el actual alcalde de Valencia."
         },
         {
           "key": "C",
-          "text": "C)"
-        },
-        {
-          "key": "D",
-          "text": "D)"
-        },
-        {
-          "key": "E",
-          "text": "E)"
-        },
-        {
-          "key": "F",
-          "text": "F)"
-        },
-        {
-          "key": "G",
-          "text": "G)"
-        },
-        {
-          "key": "H",
-          "text": "H)"
+          "text": "C) va a ir a la cárcel."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1979,38 +1802,50 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 19",
+      "answer": "D",
+      "prompt": "Persona 1: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: D",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2023,37 +1858,49 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 20",
+      "prompt": "Persona 2: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2065,38 +1912,50 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 21",
+      "answer": "F",
+      "prompt": "Persona 3: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: F",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2108,38 +1967,50 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 22",
+      "answer": "B",
+      "prompt": "Persona 4: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2151,38 +2022,50 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 23",
+      "answer": "C",
+      "prompt": "Persona 5: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2194,38 +2077,50 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Tarea 4 - Pregunta 24",
+      "answer": "E",
+      "prompt": "Persona 6: ¿Qué enunciado corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Habla de una persona sincera."
+        },
+        {
+          "key": "G",
+          "text": "G) Habla de una persona que se asusta mucho."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de alguien vago."
+        },
+        {
+          "key": "I",
+          "text": "I) Habla de un amigo que no quiere estudiar."
         }
       ],
-      "type": "choice6",
+      "type": "choice9",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: E",
+      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2238,25 +2133,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "Tarea 5 - Pregunta 25",
+      "prompt": "Tiene molestias en uno de sus brazos.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2269,25 +2164,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "Tarea 5 - Pregunta 26",
+      "prompt": "Toma muchas medicinas cuando tiene la regla.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2300,25 +2195,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "B",
-      "prompt": "Tarea 5 - Pregunta 27",
+      "prompt": "Va a comer carne.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2331,25 +2226,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "B",
-      "prompt": "Tarea 5 - Pregunta 28",
+      "prompt": "No le gusta leer libros.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2362,25 +2257,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "Tarea 5 - Pregunta 29",
+      "prompt": "Le cae muy mal Alicia.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2393,25 +2288,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "B",
-      "prompt": "Tarea 5 - Pregunta 30",
+      "prompt": "Quiere ir a ver a la otra persona.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Juan"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Eli"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ninguno"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Audio YouTube: Nuevo DELE B1 M2)",
-      "expl": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2424,11 +2319,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Expresion e interaccion escritas",
+      "prompt": "Tarea 1: Responder en un foro sobre cuidar bebés (100-120 palabras)",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instr": "Le cae muy mal Alicia.\nQuiere ir a ver a la otra persona.\nMODELO 2\nTarea 5. Audio en vídeo de YouTube (23:32)\nINSTRUCCIONES  \nUsted va a escuchar una conversación entre dos\namigos. Indique si los enunciados (25-30) se\nrefieren a Juan (A), a Eli (B) o a ninguno de los dos\n(C). Escuche la conversación dos veces. \nMarque las opciones elegidas en la Hoja de\nrespuestas. \nTiene 25 segundos para leer los enunciados\nA.\nJUAN\nTiene molestias en uno de sus brazos.\nToma muchas medicinas cuando tiene\nla regl"
+      "explanation": "Respuesta correcta: ",
+      "instrucciones": "La prueba de Expresión e interacción escritas contiene 2 tareas. Duración:\n60 minutos. \nHaga sus tareas en la Hoja de respuestas.\nsaludar;\ncontestar a sus preguntas;\nhablar de la experiencia personal;\ndar un consejo;\ndespedirse.\nINSTRUCCIONES  \nUsted lee un mensaje de alguien que tiene dudas en un foro sobre\ncuidar bebés. Léalo y escriba su respuesta en el foro (entre 100 y \npalabras). \nUsted debe:\nTarea 1\nPRUEBA 3. EXPRESIÓN E INTERACCIÓN ESCRITAS \nPor favor, necesitamos vuestra ayuda. Mi marido y yo estamos muy preocupados porque\nnuestro hijo de tres meses todavía no habla, ¿esto es normal? Creo que puede ser por la\nalimentación, de momento solamente toma leche materna, ¿deberíamos darle algo más? \n¿Cuáles son vuestras experiencias con bebés de esta edad? Si tenéis algún consejo para\nnosotros, por favor, dádnoslo, estamos muy perdidos en este tema. No sabíamos que criar hijos\nera tan difícil. \nSaludos.\nAna y Pablo.",
+      "rango_palabras": "100-120 palabras"
     },
     {
       "modelo": "nuevo_m2",
@@ -2441,11 +2338,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Redaccion",
+      "prompt": "Tarea 2 (Opción 1): La amistad (130-150 palabras)",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instr": "MODELO 2\nLa prueba de Expresión e interacción escritas contiene 2 tareas. Duración:\n60 minutos. \nHaga sus tareas en la Hoja de respuestas.\nsaludar;\ncontestar a sus preguntas;\nhablar de la experiencia personal;\ndar un consejo;\ndespedirse.\nINSTRUCCIONES  \nUsted lee un mensaje de alguien que tiene dudas en un foro sobre\ncuidar bebés. Léalo y escriba su respuesta en el foro (entre 100 y 120\npalabras). \nUsted debe:\nTarea 1\nPRUEBA 3. EXPRESIÓN E INTERACCIÓN ESCRITAS \nPor favor, necesitamos vuestra ayu"
+      "explanation": "Respuesta correcta: ",
+      "instrucciones": "diga cómo y cuándo conoció a su amigo/a;\nmencione algunas actividades que hacen;\nhable de sus gustos.\nEl tema para las discusiones de esta semana es “La amistad”. Dinos cómo es tu relación con tu\nmejor amigo/a. Cuéntanos cómo os conocisteis y qué cosas hacéis juntos. Queremos leer todas\nvuestras historias, porque la amistad es lo más importante que hay en la vida.\n \nTras leer el mensaje de esta web, escriba su comentario y:\n \nTarea 2\nOPCIÓN 1\nINSTRUCCIONES  \nElija solo una de las dos opciones que se le ofrecen a continuación y\nescriba un texto de entre 130 y 150 palabras:\ndecir su opinión sobre el tema;\nexplicar los motivos por los que piensa así;\nimaginar cómo será el futuro con esta nueva ayuda del gobierno para las familias.\n¿Qué opináis sobre lo que ha dicho el presidente del gobierno? Las familias van a recibir 200 € al\nmes por cada hijo que tengan hasta que los niños cumplan 18 años. ¿Creéis que es una buena\nidea? ¿Por qué?\n \nUn amigo ha lanzado una pregunta en las redes sociales, responda, usted debe:\n \nOPCIÓN 2",
+      "rango_palabras": "130-150 palabras"
     },
     {
       "modelo": "nuevo_m2",
@@ -2458,12 +2357,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Exposicion oral (3-4 min)",
+      "prompt": "Tarea 1: Exposición oral (2-3 min) — Juventud o boda",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instr": "MODELO 2\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n____________________________________",
-      "rango": "3-4 min"
+      "explanation": "Respuesta correcta: ",
+      "instrucciones": "Tiene 15 minutos para preparar las Tareas 1 y 2. Usted puede tomar notas y\nescribir un esquema de su exposición que podrá consultar durante el\nexamen; en ningún caso podrá limitarse a leer el esquema. \nINSTRUCCIONES  \nLe proponemos dos temas con algunas indicaciones para preparar\nuna exposición oral. Elija uno de ellos. Tendrá que hablar durante 2 o\n3 minutos sobre el tema elegido. El entrevistador no intervendrá en\nesta parte de la prueba. Diferencie las partes de su exposición\n(introducción, desarrollo y conclusión final), ordene y relacione bien las\nideas y justifique sus opiniones y sentimientos.\nTarea 1\nPRUEBA 4. EXPRESIÓN E INTERACCIÓN ORALES\nqué le gustaba hacer y con quién;\nqué planes y sueños tenía para el futuro;\nqué cosas han cambiado en su vida;\nqué cambiaría de su pasado.\ncuándo y dónde fue;\nquiénes estaban allí y qué hicieron;\nalgo que le contó otra persona que estaba allí;\nsu opinión sobre la boda.\nOPCIÓN 1\nHable de su juventud, diga:\nOPCIÓN 2\nHable sobre la boda de un conocido suyo, comente:"
     },
     {
       "modelo": "nuevo_m2",
@@ -2476,12 +2375,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Descripcion de imagen (2-3 min)",
+      "prompt": "Tarea 2: Conversación con el entrevistador (3-4 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instr": "MODELO 2\nTiene 15 minutos para preparar las Tareas 1 y 2. Usted puede tomar notas y\nescribir un esquema de su exposición que podrá consultar durante el\nexamen; en ningún caso podrá limitarse a leer el esquema. \nINSTRUCCIONES  \nLe proponemos dos temas con algunas indicaciones para preparar\nuna exposición oral. Elija uno de ellos. Tendrá que hablar durante 2 o\n3 minutos sobre el tema elegido. El ent",
-      "rango": "2-3 min"
+      "explanation": "Respuesta correcta: ",
+      "instrucciones": "Tarea 2\nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR:\nINSTRUCCIONES  \nCuando haya terminado su exposición (Tarea 1), usted deberá\nmantener una conversación con el entrevistador sobre el mismo tema\ndurante 3 o 4 minutos.\n¿Cambió usted alguna vez de escuela? ¿Por qué?\n¿Cómo era el barrio donde creció? ¿Qué cosas tenía cerca de su casa?\n¿Qué es lo que más le gustaba de ser un niño? ¿Y lo que menos?\n¿Cómo era su relación con sus amigos? ¿Sigue teniendo contacto con ellos?\n¿Cómo era su mejor amigo/a?\n¿Usted se ha casado o está pensando hacerlo?\n¿Cómo organizó su boda o cómo lo haría?\n¿Piensa que es importante para una pareja casarse?\n¿Cuántos años deben conocerse dos personas antes de casarse? ¿Por qué?\n¿Cree que las personas deberían vivir juntos algún tiempo antes de casarse? ¿Por qué?\nSI ELIGIÓ LA OPCIÓN 1\nSI ELIGIÓ LA OPCIÓN 2"
     },
     {
       "modelo": "nuevo_m2",
@@ -2494,12 +2393,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Conversacion (3-4 min)",
+      "prompt": "Tarea 3: Descripción de imagen + conversación (2-3 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instr": "MODELO 2\nTarea 2\nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR:\nINSTRUCCIONES  \nCuando haya terminado su exposición (Tarea 1), usted deberá\nmantener una conversación con el entrevistador sobre el mismo tema\ndurante 3 o 4 minutos.\n¿Cambió usted alguna vez de escuela? ¿Por qué?\n¿Cómo era el barrio donde creció? ¿Qué cosas tenía cerca de su casa?\n¿Qué es lo que más le gustaba de ser un niño? ¿Y lo que meno",
-      "rango": "3-4 min"
+      "explanation": "Respuesta correcta: ",
+      "instrucciones": "Las personas: dónde están, cómo son, qué hacen. \nEl lugar en el que se encuentran: cómo es. \nLos objetos: qué objetos hay, dónde están, cómo son. \nQué relación cree que existe entre las personas. \n¿Qué pasa, qué piensan o de qué hablan? \nINSTRUCCIONES  \nLe proponemos dos fotografías para esta tarea. Elija una, obsérvela y\ndescríbala con detalle, durante 1 o 2 minutos, lo que ve en la foto y lo\nque imagina que está ocurriendo. \nEstos son algunos aspectos que puede comentar: \nPosteriormente, el entrevistador le hará algunas preguntas. \nLa duración total de esta tarea es de 2 a 3 minutos.\n\nTarea 3 \nOPCIÓN 1\n¿Cómo suele pasar usted las fiestas de Navidad?\n¿Qué tipo de regalos le gusta recibir?\n¿Cómo son sus familiares? ¿Qué les gusta hacer? \nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR"
     }
   ]
 };
