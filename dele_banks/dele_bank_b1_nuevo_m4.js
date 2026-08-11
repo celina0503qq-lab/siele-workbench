@@ -18,49 +18,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "E",
-      "prompt": "Relaciona a la persona 1 con el mensaje correspondiente (A-I)",
+      "prompt": "María: Estoy súper agobiada, no puedo más, tengo que preparar una presentación para mañana y no he empezado.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: E"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m4",
@@ -73,49 +73,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "B",
-      "prompt": "Relaciona a la persona 2 con el mensaje correspondiente (A-I)",
+      "prompt": "Alberto: Llevo tres años en la misma empresa y nunca me han subido el sueldo. Voy a pedir una reunión con mi jefe.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: B"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -128,49 +128,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "G",
-      "prompt": "Relaciona a la persona 3 con el mensaje correspondiente (A-I)",
+      "prompt": "Cristina: Acabo de terminar la carrera y no sé por dónde empezar a buscar trabajo. Estoy un poco perdida.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: G"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: G"
     },
     {
       "modelo": "nuevo_m4",
@@ -183,49 +183,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "I",
-      "prompt": "Relaciona a la persona 4 con el mensaje correspondiente (A-I)",
+      "prompt": "David: Mi empresa ha cerrado y ahora estoy en el paro. Estoy buscando activamente pero no es fácil.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: I"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: I"
     },
     {
       "modelo": "nuevo_m4",
@@ -238,49 +238,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Relaciona a la persona 5 con el mensaje correspondiente (A-I)",
+      "prompt": "Elena: He decidido dejar mi trabajo y emprender mi propio negocio. Sé que es arriesgado.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: A"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -293,49 +293,49 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "H",
-      "prompt": "Relaciona a la persona 6 con el mensaje correspondiente (A-I)",
+      "prompt": "Fernando: Trabajo muchas horas y casi no tengo tiempo para mi familia. Necesito cambiar algo.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Si quieres formar parte de un equipo joven y dinám..."
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Después de revisar tu expediente, nos complace inf..."
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Para encontrar trabajo, te recomiendo que actualic..."
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sentimos comunicarte que tu candidatura no ha sido..."
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) He estado pensando en tu idea de negocio y creo qu..."
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) La empresa ha decidido implantar un nuevo horario ..."
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Estoy buscando financiación para mi proyecto. ¿Con..."
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) He conseguido un nuevo trabajo en el extranjero. M..."
         },
         {
           "key": "I",
-          "text": "I)"
+          "text": "I) Después de 30 años en la misma empresa, por fin me..."
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
-      "explanation": "Respuesta: H"
+      "cuerpo": "A. Si quieres formar parte de un equipo joven y dinámico, esta es tu oportunidad. Buscamos personas con ganas de aprender.\n\nB. Después de revisar tu expediente, nos complace informarte de que has sido seleccionado para el aumento salarial.\n\nC. Para encontrar trabajo, te recomiendo que actualices tu currículum y crees un perfil en LinkedIn.\n\nD. Sentimos comunicarte que tu candidatura no ha sido seleccionada en esta ocasión. Te animamos a seguir intentándolo.\n\nE. He estado pensando en tu idea de negocio y creo que es muy buena. ¿Por qué no nos reunimos para hablarlo?\n\nF. La empresa ha decidido implantar un nuevo horario flexible. A partir del mes que viene podrás elegir tu turno.\n\nG. Estoy buscando financiación para mi proyecto. ¿Conoces a alguien que pueda estar interesado en invertir?\n\nH. He conseguido un nuevo trabajo en el extranjero. Me voy a vivir a Alemania el próximo mes.\n\nI. Después de 30 años en la misma empresa, por fin me jubilo. ¡Estoy deseando tener tiempo libre!",
+      "expl": "Respuesta: H"
     },
     {
       "modelo": "nuevo_m4",
@@ -348,25 +348,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 7",
+      "prompt": "Según el texto…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) puedes necesitar mucho tiempo para encontrar tu primer empleo."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) la mayoría de los jóvenes encuentra trabajo en menos de seis meses."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) es mejor esperar a que te llamen las empresas."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -379,25 +379,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 8",
+      "prompt": "Para encontrar trabajo, el texto recomienda…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) tener un buen currículum y cuidar la presencia en redes sociales."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) esperar a que la situación económica mejore."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) aceptar el primer trabajo que te ofrezcan."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -410,25 +410,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 9",
+      "prompt": "Las redes sociales…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) pueden perjudicar la búsqueda de empleo si no se cuidan."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) son irrelevantes para encontrar trabajo."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) solo sirven para buscar trabajo en empresas tecnológicas."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -441,25 +441,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 10",
+      "prompt": "El texto aconseja que…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) no tengas miedo a pedir ayuda a tus contactos."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) esperes a que te llamen sin molestar."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) solo hables con empresas grandes."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -472,25 +472,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 11",
+      "prompt": "Es recomendable…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) tener un perfil en LinkedIn bien actualizado."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) mantener las mismas fotos de hace años."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) no poner datos personales en internet."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -503,25 +503,25 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "B",
-      "prompt": "Pregunta 12",
+      "prompt": "El empleo es importante también para…",
       "options": [
         {
           "key": "A",
-          "text": "A) Opción A"
+          "text": "A) mantener una vida social activa."
         },
         {
           "key": "B",
-          "text": "B) Opción B"
+          "text": "B) comprar una casa."
         },
         {
           "key": "C",
-          "text": "C) Opción C"
+          "text": "C) viajar al extranjero."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
-      "explanation": "Respuesta: B"
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los empleados de",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -534,7 +534,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "B",
-      "prompt": "Pregunta 13 - Tarea 3",
+      "prompt": "Selecciona respuesta 13",
       "options": [
         {
           "key": "A",
@@ -571,8 +571,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: B"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -585,7 +585,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "prompt": "Selecciona respuesta 14",
       "options": [
         {
           "key": "A",
@@ -622,8 +622,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -636,7 +636,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "prompt": "Selecciona respuesta 15",
       "options": [
         {
           "key": "A",
@@ -673,8 +673,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -687,7 +687,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "B",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "prompt": "Selecciona respuesta 16",
       "options": [
         {
           "key": "A",
@@ -724,8 +724,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: B"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -738,7 +738,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "prompt": "Selecciona respuesta 17",
       "options": [
         {
           "key": "A",
@@ -775,8 +775,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -789,7 +789,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "prompt": "Selecciona respuesta 18",
       "options": [
         {
           "key": "A",
@@ -826,8 +826,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -840,7 +840,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "B",
-      "prompt": "Pregunta 19 - Tarea 4",
+      "prompt": "Elige opcion 19",
       "options": [
         {
           "key": "A",
@@ -873,8 +873,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: B"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -887,7 +887,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "E",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "prompt": "Elige opcion 20",
       "options": [
         {
           "key": "A",
@@ -920,8 +920,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: E"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m4",
@@ -934,7 +934,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "H",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "prompt": "Elige opcion 21",
       "options": [
         {
           "key": "A",
@@ -967,8 +967,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: H"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: H"
     },
     {
       "modelo": "nuevo_m4",
@@ -981,7 +981,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "C",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "prompt": "Elige opcion 22",
       "options": [
         {
           "key": "A",
@@ -1014,8 +1014,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1028,7 +1028,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "A",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "prompt": "Elige opcion 23",
       "options": [
         {
           "key": "A",
@@ -1061,8 +1061,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1075,7 +1075,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "G",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "prompt": "Elige opcion 24",
       "options": [
         {
           "key": "A",
@@ -1108,8 +1108,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
-      "explanation": "Respuesta: G"
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\nB.\nEDU\nC.\nMAR\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito para poder\ncomprar una casa preciosa con jardín y piscina, estamos\nya casi listos para mudarnos. Espero que el sector de la\nsalud no tenga problemas, porque como mi marido y yo\nperdamos el trabajo no podremos devolver el crédito y\nperderemos la casa.\nB. EDU\nUna vida perfectamente planificada por mi padre,\neso es lo que he tenido yo. Me fui con una beca a\nInglaterra y cursé los estudios de mecánica\nindustrial porque mi padre así lo quiso. Mi familia\ntiene una de las mayores fábricas de materiales\nmetálicos para la construcción que hay en Europa.\nSomos líderes en el mercado y nos buscan clientes\nde todo el mundo.\nMi futuro estaba decidido, cuando volví a España empecé a trabajar en la fábrica con un puesto\nsin demasiada responsabilidad, a los pocos meses pasé a ser el jefe del departamento de\nmecánica, ahora ya siento que estaré en esta empresa el resto de mi vida.\nC. MAR\nHace apenas tres meses que acabé la carrera universitaria\nde derecho laboral. Envié una carta de presentación a\nvarias empresas y estoy esperando su respuesta. Tengo\nmuchísima motivación y mi disponibilidad es total, me da\nigual tener que hacer horario nocturno.\nEn mi opinión, dentro de una empresa es muy importante tener opciones reales de promoción y\nun buen sindicato que apoye a los empleados. Por eso, quiero centrarme en las grandes\ncorporaciones, como hizo mi hermana, ella ahora es la directora de contabilidad de una\nem",
+      "expl": "Respuesta: G"
     },
     {
       "modelo": "nuevo_m4",
@@ -1122,7 +1122,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 25 - Tarea 5",
+      "prompt": "Pregunta 25",
       "options": [
         {
           "key": "A",
@@ -1139,8 +1139,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: B"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -1153,7 +1153,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 26 - Tarea 5",
+      "prompt": "Pregunta 26",
       "options": [
         {
           "key": "A",
@@ -1170,8 +1170,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1184,7 +1184,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 27 - Tarea 5",
+      "prompt": "Pregunta 27",
       "options": [
         {
           "key": "A",
@@ -1201,8 +1201,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1215,7 +1215,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 28 - Tarea 5",
+      "prompt": "Pregunta 28",
       "options": [
         {
           "key": "A",
@@ -1232,8 +1232,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1246,7 +1246,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 29 - Tarea 5",
+      "prompt": "Pregunta 29",
       "options": [
         {
           "key": "A",
@@ -1263,8 +1263,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: A"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1277,7 +1277,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 30 - Tarea 5",
+      "prompt": "Pregunta 30",
       "options": [
         {
           "key": "A",
@@ -1294,8 +1294,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
-      "explanation": "Respuesta: C"
+      "cuerpo": "MODELO 4\nMensaje 3\n3. ¿De qué está hablando?\n a) De una reunión con un cliente.\n b) De cómo acceder a un programa informático.\n c) De un nuevo despacho.\nMensaje 4\n4. ¿Qué es este lugar?\n a) Es un campus.\n b) Es una guardería.\n c) Es una cárcel.\nMensaje 5\n5. ¿Qué quiere hacer la persona que habla?\n a) Hablar con Pedro de algo del trabajo.\n b) Verse con Pedro después de mucho tiempo.\n c) Tomar un café con su amigo Pedro.\nMensaje 6\n6. ¿Qué necesita esta persona?\n a) Una impresora.\n b) Papel para imprimir.\n c) Ver al jefe en persona.",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1308,7 +1308,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 1",
+      "prompt": "Mensaje 1",
       "options": [
         {
           "key": "A",
@@ -1325,7 +1325,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1338,7 +1338,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 2",
+      "prompt": "Mensaje 2",
       "options": [
         {
           "key": "A",
@@ -1355,7 +1355,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1368,7 +1368,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 3",
+      "prompt": "Mensaje 3",
       "options": [
         {
           "key": "A",
@@ -1385,7 +1385,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1398,7 +1398,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 4",
+      "prompt": "Mensaje 4",
       "options": [
         {
           "key": "A",
@@ -1415,7 +1415,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1428,7 +1428,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 5",
+      "prompt": "Mensaje 5",
       "options": [
         {
           "key": "A",
@@ -1445,7 +1445,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1458,7 +1458,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "A",
-      "prompt": "Tarea 1 - Pregunta 6",
+      "prompt": "Mensaje 6",
       "options": [
         {
           "key": "A",
@@ -1475,7 +1475,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
+      "transcript": "(Audio original: YouTube - Nuevo DELE B1 Modelo 4)"
     },
     {
       "modelo": "nuevo_m4",
@@ -1488,7 +1488,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Tarea 2 - Pregunta 7",
+      "prompt": "Conversación 1",
       "options": [
         {
           "key": "A",
@@ -1505,8 +1505,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1519,7 +1519,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "Tarea 2 - Pregunta 8",
+      "prompt": "Conversación 2",
       "options": [
         {
           "key": "A",
@@ -1536,8 +1536,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1550,7 +1550,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "B",
-      "prompt": "Tarea 2 - Pregunta 9",
+      "prompt": "Conversación 3",
       "options": [
         {
           "key": "A",
@@ -1567,8 +1567,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -1581,7 +1581,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "Tarea 2 - Pregunta 10",
+      "prompt": "Conversación 4",
       "options": [
         {
           "key": "A",
@@ -1598,8 +1598,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1612,7 +1612,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "B",
-      "prompt": "Tarea 2 - Pregunta 11",
+      "prompt": "Conversación 5",
       "options": [
         {
           "key": "A",
@@ -1629,8 +1629,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -1643,7 +1643,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Tarea 2 - Pregunta 12",
+      "prompt": "Conversación 6",
       "options": [
         {
           "key": "A",
@@ -1660,8 +1660,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1711,8 +1711,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -1762,8 +1762,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1813,8 +1813,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -1864,8 +1864,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1915,8 +1915,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -1966,8 +1966,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -2009,8 +2009,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2052,8 +2052,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2095,8 +2095,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2138,8 +2138,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2181,8 +2181,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2224,8 +2224,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2255,8 +2255,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -2286,8 +2286,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2317,8 +2317,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -2348,8 +2348,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
@@ -2379,8 +2379,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
@@ -2410,8 +2410,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(Ver PDF o audio original)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Audio YouTube: Nuevo DELE B1 M4)",
+      "expl": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
@@ -2424,12 +2424,11 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Expresion escrita",
+      "prompt": "Tarea 1: Expresion e interaccion escritas",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Escriba un texto segun las instrucciones de la Tarea 1.",
-      "rango_palabras": ""
+      "instr": "Dice que algo va a ser más caro.\nDice que la gente en Estados Unidos\ntiene más dinero cada año.\nINSTRUCCIONES  \nUsted va a escuchar una conversación entre dos\namigos. Indique si los enunciados (25-30) se\nrefieren a Noé (A), a Mila (B) o a ninguno de los dos\n(C). Escuche la conversación dos veces. \nMarque las opciones elegidas en la Hoja de\nrespuestas. \nTiene 25 segundos para leer los enunciados\nMODELO 4\nTarea 5. Audio en vídeo de YouTube (23:32)\nA.\nNOÉ\nEs presidente de una empresa.\nNo tiene dine"
     },
     {
       "modelo": "nuevo_m4",
@@ -2446,8 +2445,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Elija una opcion y escriba un texto.",
-      "rango_palabras": ""
+      "instr": "MODELO 4\nLa prueba de Expresión e interacción escritas contiene 2 tareas. Duración:\n60 minutos. \nHaga sus tareas en la Hoja de respuestas.\nsaludar;\ncomentar lo que dice el cliente de Chile;\nconfirmar la asistencia a la reunión;\nopinar sobre la página web;\ndespedirse.\nINSTRUCCIONES  \nUsted recibe un email de una compañera de trabajo. Léalo y escriba\nsu respuesta (entre 100 y 120 palabras). \nUsted debe:\nTarea 1\nPRUEBA 3. EXPRESIÓN E INTERACCIÓN ESCRITAS \nBuenos días, \nMe han dicho que has hablado"
     },
     {
       "modelo": "nuevo_m4",
@@ -2464,8 +2462,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Prepare una exposicion oral sobre el tema propuesto.",
-      "rango_palabras": ""
+      "instr": "MODELO 4\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n____________________________________",
+      "rango": "3-4 min"
     },
     {
       "modelo": "nuevo_m4",
@@ -2482,8 +2480,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Describa la imagen e imagine la situacion.",
-      "rango_palabras": ""
+      "instr": "MODELO 4\nTiene 15 minutos para preparar las Tareas 1 y 2. Usted puede tomar notas y\nescribir un esquema de su exposición que podrá consultar durante el\nexamen; en ningún caso podrá limitarse a leer el esquema. \nINSTRUCCIONES  \nLe proponemos dos temas con algunas indicaciones para preparar\nuna exposición oral. Elija uno de ellos. Tendrá que hablar durante 2 o\n3 minutos sobre el tema elegido. El ent",
+      "rango": "2-3 min"
     },
     {
       "modelo": "nuevo_m4",
@@ -2496,12 +2494,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Conversacion con el entrevistador (3-4 min)",
+      "prompt": "Tarea 3: Conversacion (3-4 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Converse con el entrevistador sobre el tema propuesto.",
-      "rango_palabras": ""
+      "instr": "MODELO 4\nTarea 2\nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR:\nINSTRUCCIONES  \nCuando haya terminado su exposición (Tarea 1), usted deberá\nmantener una conversación con el entrevistador sobre el mismo tema\ndurante 3 o 4 minutos.\n¿Cuál era o es su asignatura preferida? ¿Y la que más problemas le ha dado durante su vida?\n¿Cómo iba todos los días a su escuela? ¿Se tenía que despertar muy pronto?\n¿Tenía o",
+      "rango": "3-4 min"
     }
   ]
 };
