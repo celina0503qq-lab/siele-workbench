@@ -1,7 +1,7 @@
 window.DELE_BANK_B1_NUEVO_M2 = {
   "version": "1.0",
   "level": "B1",
-  "source": "Nuevo DELE B1 Modelo 2 - Ramón Díez Galán (PDF pymupdf extraction)",
+  "source": "Nuevo DELE B1 Modelo 2 — Ramón Díez Galán (exact PDF text extraction)",
   "language": "es-ES",
   "syllabus": {
     "level": "B1",
@@ -11,32 +11,6 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "writing": 60,
       "speaking_prep": 15,
       "speaking_test": 15
-    },
-    "pruebas": {
-      "reading": {
-        "name": "Comprensión de lectura",
-        "duration": 70,
-        "tarea_count": 5,
-        "question_count": 30
-      },
-      "listening": {
-        "name": "Comprensión auditiva",
-        "duration": 40,
-        "tarea_count": 5,
-        "question_count": 30
-      },
-      "writing": {
-        "name": "Expresión e interacción escritas",
-        "duration": 60,
-        "tarea_count": 2,
-        "question_count": 2
-      },
-      "speaking": {
-        "name": "Expresión e interacción orales",
-        "duration_prep": 15,
-        "tarea_count": 3,
-        "question_count": 3
-      }
     }
   },
   "items": [
@@ -51,19 +25,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "D",
-      "prompt": "Pregunta 1: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 1: ¿A qué texto corresponde la persona 1?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -75,7 +49,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -87,14 +61,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -107,19 +81,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "B",
-      "prompt": "Pregunta 2: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 2: ¿A qué texto corresponde la persona 2?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -131,7 +105,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -143,14 +117,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -163,19 +137,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "I",
-      "prompt": "Pregunta 3: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 3: ¿A qué texto corresponde la persona 3?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -187,7 +161,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -199,14 +173,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: I",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -219,19 +193,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "G",
-      "prompt": "Pregunta 4: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 4: ¿A qué texto corresponde la persona 4?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -243,7 +217,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -255,14 +229,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: G",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -275,19 +249,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "E",
-      "prompt": "Pregunta 5: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 5: ¿A qué texto corresponde la persona 5?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -299,7 +273,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -311,14 +285,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -331,19 +305,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "F",
-      "prompt": "Pregunta 6: ¿A qué mensaje corresponde?",
+      "prompt": "Pregunta 6: ¿A qué texto corresponde la persona 6?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ayuda para recoger niños y llevar al entrenamiento"
+          "text": "A) Ayuda para recoger niños del colegio y llevar al entrenamiento de fútbol"
         },
         {
           "key": "B",
-          "text": "B) Joyas: pendientes, pulsera, anillo, collar - de oferta"
+          "text": "B) Pendientes, pulsera, anillo - joyas de oferta que le encantan"
         },
         {
           "key": "C",
-          "text": "C) Chico dulce que regaló entradas de concierto en la primera cita"
+          "text": "C) Chico dulce, primera cita con entradas de concierto"
         },
         {
           "key": "D",
@@ -355,7 +329,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "F",
-          "text": "F) Ladrones entraron por la ventana del baño, se llevaron todo"
+          "text": "F) Ladrones entraron por la ventana, se llevaron hasta el horno estropeado"
         },
         {
           "key": "G",
@@ -367,14 +341,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "I",
-          "text": "I) Chico que sigue a una chica todos los días, la invita a la montaña rusa"
+          "text": "I) Chico que sigue a una chica, la invita a la montaña rusa"
         }
       ],
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "cuerpo": "1. Lucía: No podemos tener hijos... vamos a acoger y ayudar a un pobre niño que no tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi novia, ella tiene muy claro lo que quiere, joyas.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que quería ligar conmigo, pero sonaba tan ridículo que no pude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que colabore con el proyecto de una ONG... ayudar a los países pobres afectados por un devastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de comunicar que estamos en huelga hasta que nos mejoren las condiciones.\n6. Clara: Tengo muy malas noticias, nos han robado todo lo que teníamos. No sé qué voy a hacer.\n\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
-      "instrucciones": "INSTRUCCIONES: Relacione cada persona (1-6) con el mensaje correspondiente (A-I). Hay tres mensajes que no debe elegir."
+      "cuerpo": "1. Lucía: No podemos tener hijos, parece que es un\nproblema genético. Ayer mi marido me dio una idea\ngenial, vamos a acoger y ayudar a un pobre niño que\nno tiene familia.\n2. Mariano: El próximo mes es el cumpleaños de mi\nnovia, ella tiene muy claro lo que quiere, joyas. No sé\ncómo voy a encontrar algo que le guste, es una chica\nmuy específica.\n3. Ágata: Ayer me llamó un chico rarísimo, creo que\nquería ligar conmigo, pero sonaba tan ridículo que no\npude parar de reírme.\n4. Iván: Mi primo me llama todos los días, quiere que\ncolabore con el proyecto de una ONG. Se trata de\nayudar a los países pobres afectados por un\ndevastador terremoto.\n5. Juan: La situación ya era insoportable, me acaban de\ncomunicar que estamos en huelga hasta que nos\nmejoren las condiciones. Pienso que será lo mejor para\nmi familia.\n6. Clara: Tengo muy malas noticias, nos han robado\ntodo lo que teníamos. No sé qué voy a hacer. ¿Por qué\nhay gente tan mala en el mundo?\n\nMODELO 2\nTEXTOS \nA. Mensaje:\nMe ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me\nencargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos\nvemos esta noche.\nB. Mensaje:\nHola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de\noferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo\no un collar? De oro, claro.\nC. Mensaje:\nLa primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que\nme tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi\ncantante preferido. ¿Crees que estamos yendo demasiado rápido?\nD. Mensaje:\nHola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la\nilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que\nadoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?\nE. Mensaje:\nImagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a\ntrabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar\nmuchas cosas. ¡Ánimo! Juntos lo conseguiremos.\nF. Mensaje:\nAcaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la\nventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han\nllevado hasta el horno que estaba estropeado. \nG. Mensaje:\nHola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta\nquiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas\nque nosotros. Se merecen una oportunidad.\nH. Mensaje:\nLos abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para\nir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al\ndía y limpiar antes de que vuelvan.\nI. Mensaje:\nHola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han\ndicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo\ninvitarte a la montaña rusa.",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer seis textos en los que unas personas hablan sobre su vida y diez textos con mensajes que estas personas han recibido. Relacione a las personas (1-6) con los textos que informan sobre los mensajes (A-I). HAY TRES TEXTOS QUE NO DEBE RELACIONAR."
     },
     {
       "modelo": "nuevo_m2",
@@ -405,7 +379,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -436,7 +411,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -467,7 +443,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -484,11 +461,11 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha recibido visitantes importantes de otros países."
+          "text": "A) ha recibido visitantes importantes de otros países en los últimos años."
         },
         {
           "key": "B",
-          "text": "B) es el lugar donde vive el presidente del gobierno."
+          "text": "B) es el lugar donde vive el presidente del gobierno, Pedro Sánchez."
         },
         {
           "key": "C",
@@ -498,7 +475,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -529,7 +507,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -554,13 +533,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) viajarán al extranjero."
+          "text": "C) viajarán al extranjero para encontrarse con Juan Carlos."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy"
+      "cuerpo": "MODELO 2\nLa familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nINSTRUCCIONES  \nUsted va a leer un texto sobre la familia real española. Después,\ndebe contestar a las preguntas (7-12). Seleccione la respuesta\ncorrecta (a / b / c). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 2 \nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\n\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\n \nAdaptado de: www.elpais.com.uy",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -577,7 +557,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -585,13 +565,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -608,7 +589,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -616,13 +597,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -639,7 +621,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -647,13 +629,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -670,7 +653,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -678,13 +661,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -701,7 +685,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -709,13 +693,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -732,7 +717,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA — Lleva 5 años con su novio, se ríen de todo, no soporta que beba alcohol"
+          "text": "A) EVA — 5 años con su novio, se ríen de todo, pero se enfada cuando él vuelve borracho"
         },
         {
           "key": "B",
@@ -740,13 +725,14 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) ELI — Relación a distancia, se preocupa por la dieta, su pareja es adicto a dulces"
+          "text": "C) ELI — Relación a distancia con Marcos, adicto a magdalenas y bizcochos, se mudan a Madrid"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Tarea 3 \nA.EVA \nLlevo ya cinco años con mi novio, a pesar de que al principio de la relación yo era un poco\npesimista al pensar sobre nuestro futuro, ahora nos va genial, apenas discutimos y siempre lo\npasamos muy bien. ¿Que cuál es el secreto? Pues bromear constantemente y reírnos de todo lo\nque nos pasa, a los dos nos encanta contar chistes a cualquier hora del día. \nLo que me enfada muchísimo de él es que a veces salga\na “tomar una copa” con sus amigos de la infancia y\nacabe volviendo a las tantas de la noche borrachísimo,\nsin apenas mantener el equilibrio, el día siguiente tiene\nuna resaca horrible. Por suerte, esto no sucede con\ndemasiada frecuencia. \nB. BOB\nMi novia y yo nos conocemos desde el instituto y\nestamos juntos ya más de diez años, sin embargo\napenas llevamos unos meses viviendo juntos. No\nsoporto los olores fuertes y a mi chica le encanta\ndesayunar chorizo, lomo y salchichón de su pueblo.\nMe pongo de muy mal humor cuando hace esto,\nespecialmente porque no se lava los dientes hasta\ndos o tres horas después. \nElla es directora de recursos humanos de una gran empresa y casi nunca tiene tiempo libre para\nmí, estoy muy orgulloso de su carrera profesional, pero me gustaría que pasara más tiempo en\ncasa. \nC.ELI \nMarcos y yo empezamos una relación a distancia, yo\nestaba estudiando fuera del país con una beca de la\nuniversidad y él contactó conmigo en un chat, poco a\npoco, surgió el amor. Yo soy una persona muy sana que\nse preocupa por la dieta, Marcos es todo lo contrario, un\nadicto a las magdalenas y los bizcochos, odio esta\ncaracterística suya, pero bueno, nadie es perfecto.\nAhora hemos decidido dar un paso adelante en nuestra vida y nos vamos a mudar a un\npequeño estudio que hemos alquilado en Madrid. No lo hemos visto en persona, pero el\npropietario nos ha garantizado que está en buen estado."
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus relaciones de pareja. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \n.Marque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nEVA\n¿Qué persona dice que no soporta que su\npareja tome demasiado alcohol?\n¿Quién pensaba que la relación con su\npareja no iba a funcionar?\n¿Quién dice que su pareja toma\ndemasiados dulces?\n¿Quién ha confiado en lo que le ha dicho\nel casero?\n¿Quién asegura que el sentido del humor\nes muy importante en su relación?\n¿Quién dice que se enfada cuando su\npareja toma mucho embutido?\nB.\nBOB\nC.\nELI",
+      "instrucciones": "INSTRUCCIONES: Usted va a leer tres textos en los que unas personas nos hablan de sus relaciones de pareja. Relacione las preguntas (13-18) con los textos (A, B o C)."
     },
     {
       "modelo": "nuevo_m2",
@@ -767,27 +753,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -797,8 +783,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -819,27 +805,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -849,8 +835,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -871,27 +857,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -901,8 +887,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -923,27 +909,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -953,8 +939,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: H",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -975,27 +961,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -1005,8 +991,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -1027,27 +1013,27 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar"
+          "text": "B) sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles"
+          "text": "C) si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable"
+          "text": "D) donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E) Por ello, hablamos de cómo criar hijos felices y compartimos las claves"
+          "text": "E) Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F) ¿Cómo educar niños felices si nosotros mismos no cuidamos esos aspectos?"
+          "text": "F) ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G) para ella, tener un hijo sin ser mayor de edad puede suponer un trauma"
+          "text": "G) para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
@@ -1057,8 +1043,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "cuerpo": "Tarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
-      "instrucciones": "INSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la \nHoja de respuestas.\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos."
+      "cuerpo": "CÓMO CRIAR HIJOS FELICES\n\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)………….... \nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nTarea 4 \nCómo criar hijos felices\nAdaptado de: www.bebesymas.com\n\nFRAGMENTOS:\nMODELO 2\nFRAGMENTOS\nA. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca\nnadie les dijo hasta dónde podían llegar\nB. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro\nC. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino\nD. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible\nE. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una\ncrianza positiva\nF. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos\naspectos de nuestra vida?\nG. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable\nH. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos",
+      "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
     },
     {
       "modelo": "nuevo_m2",
@@ -1071,7 +1057,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "B",
-      "prompt": "la reunión _____ anual",
+      "prompt": "…tendrá lugar _____ reunión anual…",
       "options": [
         {
           "key": "A",
@@ -1089,7 +1075,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1102,7 +1089,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "En cuanto al _____ de las antenas",
+      "prompt": "En cuanto al _____ de las antenas…",
       "options": [
         {
           "key": "A",
@@ -1120,7 +1107,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1133,7 +1121,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "que _____ antes del viernes",
+      "prompt": "que _____ antes del viernes…",
       "options": [
         {
           "key": "A",
@@ -1151,7 +1139,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1164,7 +1153,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "A",
-      "prompt": "trataremos de aclarar _____ pasó",
+      "prompt": "trataremos de aclarar _____ pasó…",
       "options": [
         {
           "key": "A",
@@ -1182,7 +1171,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1195,7 +1185,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "C",
-      "prompt": "todo el mundo _____",
+      "prompt": "todo el mundo _____…",
       "options": [
         {
           "key": "A",
@@ -1213,7 +1203,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1244,7 +1235,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "INSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos"
+      "cuerpo": "MODELO 2\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nREUNIÓN DE VECINOS\nEl próximo viernes 23 de enero tendrá lugar …..25….. reunión anual de la comunidad de vecinos\nde la calle Velarde nº23. Debatiremos sobre las plazas de aparcamiento y trataremos de\nalcanzar un acuerdo que a todos nos satisfaga. En cuanto al …..26….. de las antenas, pedimos a\nlos representantes de cada vivienda que …..27….. antes del viernes a qué operador de Internet\ndesean conectarse. \nEn la reunión trataremos de aclarar …..28….. pasó el pasado mes de septiembre en la piscina y\nquiénes fueron los responsables de la rotura de la ducha. Necesitamos que todo el mundo\n…..29….. para poder solucionar esta situación sin tener que llegar a los tribunales.\nLa reunión tendrá lugar en el garaje a las 20:00, que cada vecino baje una silla y así todos\n…..30….. sentarnos. Por favor, esperad a hacer las preguntas al turno de preguntas y evitad las\ndiscusiones que estén fuera de lugar, no queremos que se alargue demasiado.\nOpciones\n25.      a) el\n26.      a) tema\n27.      a) dinos\n28.      a) qué \n29.      a) colabora \n30.      a) podremos  \nb la \n   \nb) cosa\n \nb) decidirían   \nb) cuál \n  \nb) colaboró \n  \nb) pondremos\nc) al \nc) ayuda \nc) decidan \nc) dónde \nc) colabore \nc) ponemos",
+      "instrucciones": "INSTRUCCIONES: Lea el texto y rellene los huecos (25-30) con la opción correcta (a / b / c)."
     },
     {
       "modelo": "nuevo_m2",
@@ -1275,7 +1267,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 1 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 1 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1306,7 +1298,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 1, Mensaje 2 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 2 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1327,7 +1319,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "B",
-          "text": "B) De que los médicos se retrasaron."
+          "text": "B) De que los médicos se retrasaron como siempre."
         },
         {
           "key": "C",
@@ -1337,7 +1329,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 1, Mensaje 3 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 3 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1368,7 +1360,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 1, Mensaje 4 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 4 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1399,7 +1391,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 5 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 5 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1430,7 +1422,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 6 - Audio en YouTube del libro Nuevo DELE B1)"
+      "transcript": "(Tarea 1, Mensaje 6 — Audio en YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1461,7 +1453,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1492,7 +1484,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1523,7 +1515,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1548,13 +1540,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "C) piensa que tener un seguro médico podría ser bueno para su familia."
+          "text": "C) piensa que en este momento tener un seguro médico podría ser bueno."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1585,7 +1577,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1616,7 +1608,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 2 - Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1647,7 +1639,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1678,7 +1670,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1709,7 +1701,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1740,7 +1732,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1771,7 +1763,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1802,7 +1794,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 3 - Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1857,7 +1849,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1912,7 +1904,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -1967,7 +1959,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2022,7 +2014,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2077,7 +2069,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2132,7 +2124,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "transcript": "(Tarea 4 - Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2163,7 +2155,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2194,7 +2186,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2225,7 +2217,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2256,7 +2248,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2287,7 +2279,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2318,7 +2310,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5 - Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
     },
     {
       "modelo": "nuevo_m2",
@@ -2331,12 +2323,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Responder en un foro sobre cuidar bebés (100-120 palabras)",
+      "prompt": "Tarea 1: Responder en foro sobre cuidados de bebés",
       "options": [],
       "type": "writing",
       "_v5": true,
       "explanation": "Respuesta correcta: ",
-      "instrucciones": "La prueba de Expresión e interacción escritas contiene 2 tareas. Duración:\n60 minutos. \nHaga sus tareas en la Hoja de respuestas.\nsaludar;\ncontestar a sus preguntas;\nhablar de la experiencia personal;\ndar un consejo;\ndespedirse.\nINSTRUCCIONES  \nUsted lee un mensaje de alguien que tiene dudas en un foro sobre\ncuidar bebés. Léalo y escriba su respuesta en el foro (entre 100 y \npalabras). \nUsted debe:\nTarea 1\nPRUEBA 3. EXPRESIÓN E INTERACCIÓN ESCRITAS \nPor favor, necesitamos vuestra ayuda. Mi marido y yo estamos muy preocupados porque\nnuestro hijo de tres meses todavía no habla, ¿esto es normal? Creo que puede ser por la\nalimentación, de momento solamente toma leche materna, ¿deberíamos darle algo más? \n¿Cuáles son vuestras experiencias con bebés de esta edad? Si tenéis algún consejo para\nnosotros, por favor, dádnoslo, estamos muy perdidos en este tema. No sabíamos que criar hijos\nera tan difícil. \nSaludos.\nAna y Pablo.",
+      "instrucciones": "INSTRUCCIONES: Usted lee un mensaje de alguien que tiene dudas en un foro sobre cuidar bebés. Léalo y escriba su respuesta en el foro (entre 100 y 120 palabras). Debe: saludar; contestar a sus preguntas; hablar de la experiencia personal; dar un consejo; despedirse.",
       "rango_palabras": "100-120 palabras"
     },
     {
@@ -2350,12 +2342,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2 (Opción 1): La amistad (130-150 palabras)",
+      "prompt": "Tarea 2: Elegir opción y escribir (130-150 palabras)",
       "options": [],
       "type": "writing",
       "_v5": true,
       "explanation": "Respuesta correcta: ",
-      "instrucciones": "diga cómo y cuándo conoció a su amigo/a;\nmencione algunas actividades que hacen;\nhable de sus gustos.\nEl tema para las discusiones de esta semana es “La amistad”. Dinos cómo es tu relación con tu\nmejor amigo/a. Cuéntanos cómo os conocisteis y qué cosas hacéis juntos. Queremos leer todas\nvuestras historias, porque la amistad es lo más importante que hay en la vida.\n \nTras leer el mensaje de esta web, escriba su comentario y:\n \nTarea 2\nOPCIÓN 1\nINSTRUCCIONES  \nElija solo una de las dos opciones que se le ofrecen a continuación y\nescriba un texto de entre 130 y 150 palabras:\ndecir su opinión sobre el tema;\nexplicar los motivos por los que piensa así;\nimaginar cómo será el futuro con esta nueva ayuda del gobierno para las familias.\n¿Qué opináis sobre lo que ha dicho el presidente del gobierno? Las familias van a recibir 200 € al\nmes por cada hijo que tengan hasta que los niños cumplan 18 años. ¿Creéis que es una buena\nidea? ¿Por qué?\n \nUn amigo ha lanzado una pregunta en las redes sociales, responda, usted debe:\n \nOPCIÓN 2",
+      "instrucciones": "INSTRUCCIONES: Elija solo una de las dos opciones y escriba un texto de entre 130 y 150 palabras. Opción 1: \"La amistad\" — diga cómo y cuándo conoció a su amigo/a; mencione algunas actividades que hacen; hable de sus gustos. Opción 2: ¿Qué opináis sobre la ayuda del gobierno de 200€/mes por hijo?",
       "rango_palabras": "130-150 palabras"
     },
     {
@@ -2369,12 +2361,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Exposición oral (2-3 min) — Juventud o boda",
+      "prompt": "Tarea 1 — Exposición oral (2-3 min): Elija Opción 1 (su juventud) o Opción 2 (boda de un conocido).",
       "options": [],
       "type": "speaking",
       "_v5": true,
       "explanation": "Respuesta correcta: ",
-      "instrucciones": "Tiene 15 minutos para preparar las Tareas 1 y 2. Usted puede tomar notas y\nescribir un esquema de su exposición que podrá consultar durante el\nexamen; en ningún caso podrá limitarse a leer el esquema. \nINSTRUCCIONES  \nLe proponemos dos temas con algunas indicaciones para preparar\nuna exposición oral. Elija uno de ellos. Tendrá que hablar durante 2 o\n3 minutos sobre el tema elegido. El entrevistador no intervendrá en\nesta parte de la prueba. Diferencie las partes de su exposición\n(introducción, desarrollo y conclusión final), ordene y relacione bien las\nideas y justifique sus opiniones y sentimientos.\nTarea 1\nPRUEBA 4. EXPRESIÓN E INTERACCIÓN ORALES\nqué le gustaba hacer y con quién;\nqué planes y sueños tenía para el futuro;\nqué cosas han cambiado en su vida;\nqué cambiaría de su pasado.\ncuándo y dónde fue;\nquiénes estaban allí y qué hicieron;\nalgo que le contó otra persona que estaba allí;\nsu opinión sobre la boda.\nOPCIÓN 1\nHable de su juventud, diga:\nOPCIÓN 2\nHable sobre la boda de un conocido suyo, comente:"
+      "instrucciones": "MODELO 2\nTiene 15 minutos para preparar las Tareas 1 y 2. Usted puede tomar notas y\nescribir un esquema de su exposición que podrá consultar durante el\nexamen; en ningún caso podrá limitarse a leer el esquema. \nINSTRUCCIONES  \nLe proponemos dos temas con algunas indicaciones para preparar\nuna exposición oral. Elija uno de ellos. Tendrá que hablar durante 2 o\n3 minutos sobre el tema elegido. El entrevistador no intervendrá en\nesta parte de la prueba. Diferencie las partes de su exposición\n(introducción, desarrollo y conclusión final), ordene y relacione bien las\nideas y justifique sus opiniones y sentimientos.\nTarea 1\nPRUEBA 4. EXPRESIÓN E INTERACCIÓN ORALES\nqué le gustaba hacer y con quién;\nqué planes y sueños tenía para el futuro;\nqué cosas han cambiado en su vida;\nqué cambiaría de su pasado.\ncuándo y dónde fue;\nquiénes estaban allí y qué hicieron;\nalgo que le contó otra persona que estaba allí;\nsu opinión sobre la boda.\nOPCIÓN 1\nHable de su juventud, diga:\nOPCIÓN 2\nHable sobre la boda de un conocido suyo, comente:"
     },
     {
       "modelo": "nuevo_m2",
@@ -2387,12 +2379,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Conversación con el entrevistador (3-4 min)",
+      "prompt": "Tarea 2 — Conversación con el entrevistador (3-4 min) sobre el tema elegido en Tarea 1.",
       "options": [],
       "type": "speaking",
       "_v5": true,
       "explanation": "Respuesta correcta: ",
-      "instrucciones": "Tarea 2\nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR:\nINSTRUCCIONES  \nCuando haya terminado su exposición (Tarea 1), usted deberá\nmantener una conversación con el entrevistador sobre el mismo tema\ndurante 3 o 4 minutos.\n¿Cambió usted alguna vez de escuela? ¿Por qué?\n¿Cómo era el barrio donde creció? ¿Qué cosas tenía cerca de su casa?\n¿Qué es lo que más le gustaba de ser un niño? ¿Y lo que menos?\n¿Cómo era su relación con sus amigos? ¿Sigue teniendo contacto con ellos?\n¿Cómo era su mejor amigo/a?\n¿Usted se ha casado o está pensando hacerlo?\n¿Cómo organizó su boda o cómo lo haría?\n¿Piensa que es importante para una pareja casarse?\n¿Cuántos años deben conocerse dos personas antes de casarse? ¿Por qué?\n¿Cree que las personas deberían vivir juntos algún tiempo antes de casarse? ¿Por qué?\nSI ELIGIÓ LA OPCIÓN 1\nSI ELIGIÓ LA OPCIÓN 2"
+      "instrucciones": "MODELO 2\nTarea 2\nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR:\nINSTRUCCIONES  \nCuando haya terminado su exposición (Tarea 1), usted deberá\nmantener una conversación con el entrevistador sobre el mismo tema\ndurante 3 o 4 minutos.\n¿Cambió usted alguna vez de escuela? ¿Por qué?\n¿Cómo era el barrio donde creció? ¿Qué cosas tenía cerca de su casa?\n¿Qué es lo que más le gustaba de ser un niño? ¿Y lo que menos?\n¿Cómo era su relación con sus amigos? ¿Sigue teniendo contacto con ellos?\n¿Cómo era su mejor amigo/a?\n¿Usted se ha casado o está pensando hacerlo?\n¿Cómo organizó su boda o cómo lo haría?\n¿Piensa que es importante para una pareja casarse?\n¿Cuántos años deben conocerse dos personas antes de casarse? ¿Por qué?\n¿Cree que las personas deberían vivir juntos algún tiempo antes de casarse? ¿Por qué?\nSI ELIGIÓ LA OPCIÓN 1\nSI ELIGIÓ LA OPCIÓN 2"
     },
     {
       "modelo": "nuevo_m2",
@@ -2405,12 +2397,12 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Descripción de imagen + conversación (2-3 min)",
+      "prompt": "Tarea 3 — Descripción de imagen (1-2 min) + conversación (2-3 min). Opción 1: Navidad en familia. Opción 2: Fiesta religiosa.",
       "options": [],
       "type": "speaking",
       "_v5": true,
       "explanation": "Respuesta correcta: ",
-      "instrucciones": "Las personas: dónde están, cómo son, qué hacen. \nEl lugar en el que se encuentran: cómo es. \nLos objetos: qué objetos hay, dónde están, cómo son. \nQué relación cree que existe entre las personas. \n¿Qué pasa, qué piensan o de qué hablan? \nINSTRUCCIONES  \nLe proponemos dos fotografías para esta tarea. Elija una, obsérvela y\ndescríbala con detalle, durante 1 o 2 minutos, lo que ve en la foto y lo\nque imagina que está ocurriendo. \nEstos son algunos aspectos que puede comentar: \nPosteriormente, el entrevistador le hará algunas preguntas. \nLa duración total de esta tarea es de 2 a 3 minutos.\n\nTarea 3 \nOPCIÓN 1\n¿Cómo suele pasar usted las fiestas de Navidad?\n¿Qué tipo de regalos le gusta recibir?\n¿Cómo son sus familiares? ¿Qué les gusta hacer? \nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR"
+      "instrucciones": "Las personas: dónde están, cómo son, qué hacen. \nEl lugar en el que se encuentran: cómo es. \nLos objetos: qué objetos hay, dónde están, cómo son. \nQué relación cree que existe entre las personas. \n¿Qué pasa, qué piensan o de qué hablan? \nINSTRUCCIONES  \nLe proponemos dos fotografías para esta tarea. Elija una, obsérvela y\ndescríbala con detalle, durante 1 o 2 minutos, lo que ve en la foto y lo\nque imagina que está ocurriendo. \nEstos son algunos aspectos que puede comentar: \nPosteriormente, el entrevistador le hará algunas preguntas. \nLa duración total de esta tarea es de 2 a 3 minutos.\nTarea 3 \nOPCIÓN 1\n¿Cómo suele pasar usted las fiestas de Navidad?\n¿Qué tipo de regalos le gusta recibir?\n¿Cómo son sus familiares? ¿Qué les gusta hacer? \nEJEMPLOS DE PREGUNTAS DEL ENTREVISTADOR"
     }
   ]
 };
