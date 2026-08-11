@@ -3,7 +3,7 @@
 > **项目**: SIELE 西语备考工作台 — 外刊精炼模块  
 > **仓库**: `celina0503qq-lab/siele-workbench`  
 > **GitHub Pages**: `https://celina0503qq-lab.github.io/siele-workbench/`  
-> **版本**: v3.1 (2026-08-10 · 第 9 期实战修订)
+> **版本**: v3.2 (2026-08-11 · 第 10 期实战修订)
 
 ---
 
@@ -80,6 +80,29 @@
 - **期号**（递增，查看 `refine_data.js` 中最大 issue + 1）
 - **4 个主题方向**（A1 生活场景 → A2 文化/社会 → B1 经济/科技趋势 → B2 深度分析/争议话题）
 
+> 🚫 **【最高优先级】禁止覆盖前一期（第 10 期教训）**
+> 
+> 执行本步骤时，**必须先从线上拉取 `refine_data.js`**，确认当前最大期号和已有日期条目。不得依赖本地缓存或上一次执行的记忆。
+>
+> ```bash
+> # 强制在线检查（不可跳过）
+> TOKEN=$(cat /tmp/gh_token)
+> curl -s --resolve api.github.com:443:140.82.121.5 \
+>   -H "Authorization: Bearer ${TOKEN}" \
+>   -H "Accept: application/vnd.github+json" \
+>   "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
+>   | python3 -c "import json,sys,base64; d=json.load(sys.stdin); print(base64.b64decode(d['content']).decode())" \
+>   | grep "issue:" | head -5
+> ```
+>
+> **期号分配铁律**：
+> - `max_issue = max(all issue values from online refine_data.js)`
+> - `new_issue = max_issue + 1`
+> - **绝对禁止**：把当天日期硬编码为某个期号
+> - **绝对禁止**：跳过某一天不写 refine_data.js 条目（即使那天没有手动推送，也要补条目）
+> - 如果发现前一天缺失条目 → **先补充前一天**，再生成当天的
+> - 推送前再次从线上拉取 `refine_data.js` 的最新 SHA，防止并发覆盖
+
 ### 第 2 步：生成数据 JS 文件
 
 输出文件：`articles/data/<date>.js`
@@ -130,6 +153,43 @@ window.ARTICLES = {
 ### 第 3 步：生成独立 HTML 页面
 
 输出文件：`articles/<date>.html`
+
+> 🚫 **【最高优先级】HTML 数据内联方式（第 10 期教训）**
+>
+> **禁止**让 Agent 直接在 HTML 中手写 WORDS/ARTICLES 数据。Agent 生成的 `zh` 值必然包含未转义的 ASCII 双引号 `"`（中文引号 `""` 在 Agent 输出中默认为 ASCII `"`），导致 JS 语法错误，页面无法打开。
+>
+> **强制做法**：第 2 步生成 data JS 后已经验证语法正确。第 3 步的 HTML 数据块必须通过以下方式生成：
+>
+> ```bash
+> # 从已验证的 data JS 提取数据，用 JSON.stringify 生成安全的内联代码
+> node -e "
+> const vm = require('vm'); const fs = require('fs');
+> const ctx = { window: {} }; vm.createContext(ctx);
+> vm.runInContext(fs.readFileSync('articles/data/<date>.js', 'utf8'), ctx);
+> const wordsJson = JSON.stringify(ctx.window.WORDS, null, 2);
+> const articlesJson = JSON.stringify(ctx.window.ARTICLES, null, 2);
+> fs.writeFileSync('/tmp/words_safe.json', wordsJson);
+> fs.writeFileSync('/tmp/articles_safe.json', articlesJson);
+> console.log('Data extracted OK, WORDS:', ctx.window.WORDS.length);
+> "
+> ```
+>
+> 然后将 `/tmp/words_safe.json` 和 `/tmp/articles_safe.json` 的内容注入 HTML 模板中：
+> ```javascript
+> const WORDS = <words_safe.json 内容>;
+> const ARTICLES = <articles_safe.json 内容>;
+> ```
+>
+> **原理**：`JSON.stringify` 自动将所有 `"` 转义为 `\"`，将 Unicode 字符正确处理，产出的 JS 字面量 100% 语法安全。
+>
+> **HTML 组装流程**：
+> 1. 从 GitHub API 拉取最新一期模板 HTML（参考 6.9 节）
+> 2. 找到模板中 `const WORDS = [` 到 `/* ==================== 渲染函数 ==================== */` 之间的部分
+> 3. 用安全生成的 `const WORDS = <json>;\n\nconst ARTICLES = <json>;\n\n` 替换
+> 4. 更新 topbar 中的日期/期号/主题文字
+> 5. 更新各 article 的 source-cta href 和 h2 标题
+> 6. **验证**：`node -e "new Function(fs.readFileSync('articles/<date>.html','utf8').match(/<script>([\\s\\S]*?)<\\/script>/)[1])"` 必须通过
+> 7. **内容验证**：用 `vm.runInContext` 确认 15 WORDS + 各等级段数/题数正确
 
 **使用 v3 模板**（参考 2026-08-09 即第 8 期），关键特征：
 
@@ -242,6 +302,36 @@ submit.onclick = function() {
 
 ### 第 5 步：更新索引文件
 
+> 🚫 **【最高优先级】索引更新安全检查（第 10 期教训）**
+
+更新 `refine_data.js` 前，**必须**执行以下检查：
+
+```bash
+# 1. 从线上拉取最新版本（防止 SHA 过期导致 409 Conflict）
+SHA=$(curl -s --resolve api.github.com:443:140.82.121.5 \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
+  | python3 -c "import json,sys; print(json.load(sys.stdin)['sha'])")
+
+# 2. 拉取内容，检查是否已有今天条目
+curl -s --resolve api.github.com:443:140.82.121.5 \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Accept: application/vnd.github+json" \
+  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
+  | python3 -c "import json,sys,base64; print(base64.b64decode(json.load(sys.stdin)['content']).decode())" \
+  > /tmp/refine_online.js
+
+# 3. 检查是否已有当天条目
+grep "\"<date>\"" /tmp/refine_online.js && echo "WARNING: 当天条目已存在！" || echo "OK: 可以新增"
+
+# 4. 检查前一天的条目是否存在
+PREV_DATE=$(date -d "<date> -1 day" +%Y-%m-%d)
+grep "\"${PREV_DATE}\"" /tmp/refine_online.js || echo "WARNING: 前一天 ${PREV_DATE} 条目缺失！"
+```
+
+**如果前一天条目缺失**：必须在今天条目之前先补充前一天的条目，保持期号连续。
+
 更新 `refine_data.js`，在 `window.REFINE_PACKS` 对象最前面插入新日期条目：
 
 ```javascript
@@ -260,6 +350,47 @@ submit.onclick = function() {
 ```
 
 ### 第 6 步：推送到 GitHub
+
+> 🚫 **【最高优先级】推送前最终验证（第 10 期教训）**
+
+推送前必须执行以下检查，全部通过才能推送：
+
+```bash
+# === 验证 1: refine_data.js 条目完整性 ===
+echo "=== 检查 refine_data.js 条目 ==="
+grep -c '"<date>"' /tmp/refine_data_final.js  # 必须输出 1
+
+# === 验证 2: 期号连续性 ===
+grep "issue:" /tmp/refine_data_final.js | head -5
+# 必须看到 issue: N（今天）, issue: N-1（昨天）, ... 连续不跳号
+
+# === 验证 3: 前一期条目存在 ===
+PREV_DATE=$(date -d "<date> -1 day" +%Y-%m-%d)
+grep "\"${PREV_DATE}\"" /tmp/refine_data_final.js || { echo "FATAL: 前一天条目缺失！"; exit 1; }
+
+# === 验证 4: HTML JS 语法 ===
+node -e "
+const fs=require('fs');
+const html=fs.readFileSync('articles/<date>.html','utf8');
+const m=/<script>([\s\S]*?)<\/script>/g;
+const sc=m.exec(html);
+new Function(sc[1]);
+console.log('HTML JS syntax: OK');
+"
+
+# === 验证 5: 数据完整性 ===
+node -e "
+const vm=require('vm');const fs=require('fs');
+const ctx={window:{}};vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('articles/data/<date>.js','utf8'),ctx);
+const W=ctx.window.WORDS,A=ctx.window.ARTICLES;
+console.log('WORDS:',W.length,'A1:',A.a1.paragraphs.length+'p/'+A.a1.quiz.length+'q',
+  'A2:',A.a2.paragraphs.length+'p/'+A.a2.quiz.length+'q',
+  'B1:',A.b1.paragraphs.length+'p/'+A.b1.quiz.length+'q',
+  'B2:',A.b2.paragraphs.length+'p/'+A.b2.quiz.length+'q');
+"
+# 期望输出: WORDS: 15 A1: 10p/5q A2: 10p/5q B1: 15p/8q B2: 15p/8q
+```
 
 使用 GitHub Contents API 推送（沙箱环境 `git`/`gh` CLI 的 TLS 握手不可靠，**必须用 curl + API**）：
 
@@ -548,6 +679,96 @@ curl -s --resolve api.github.com:443:140.82.121.5 \
 
 然后以 `/tmp/template.html` 的 CSS 和 JS 结构为蓝本，只替换数据内容（WORDS + ARTICLES），保持所有样式和交互逻辑不变。
 
+### 6.10 HTML 数据内联引号安全（v3.2 新增 · 第 10 期教训）
+
+> 🔴 **严重度：P0 阻塞性 Bug** — 页面完全无法打开
+
+**问题**：Agent 在生成 HTML 时直接内联 WORDS/ARTICLES 数据，其中 `zh`（中文翻译）、`es`（西语解析）、`m`（难词释义）字段值必然包含中文双引号 `""`。Agent 输出的这些引号是 **ASCII `"` (U+0022)**，与 JS 字符串分隔符相同，导致：
+
+```javascript
+// Agent 生成的代码（语法错误！）
+{ zh: "出门前，她亲了一下睡在沙发上的猫。"再见啦，Michi。"" }
+//                                   ↑ JS 解析器在此结束字符串
+//                                     再见啦 变成裸露标识符 → SyntaxError
+```
+
+**影响范围**（第 10 期实测）：
+- 14 处 `zh` 字段值含未转义 ASCII `"`
+- 26 处 quiz 解析（`es`/`zh`）含未转义 ASCII `"`
+- 1 处 `hardWords[].m` 含未转义 ASCII `"`
+- 总计 41+ 处语法错误，页面完全白屏
+
+**为什么简单正则无法修复**：
+- Python `re.match(r'zh:\s*"([^"]*)"')` 在遇到第一个内部 `"` 时就截断，漏检后续内容
+- `rfind('"')` 可能找到**其他字段的关闭引号**（如 `es` 字段的 `rfind` 可能匹配到 `zh` 字段末尾的 `"`），导致错误地修改字符串边界
+
+**唯一正确做法**（见第 3 步）：
+1. 从已验证语法正确的 data JS 文件提取数据
+2. 用 `JSON.stringify()` 生成安全的 JS 字面量
+3. 注入 HTML 模板
+
+```bash
+node -e "
+const vm=require('vm');const fs=require('fs');
+const ctx={window:{}};vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('articles/data/<date>.js','utf8'),ctx);
+fs.writeFileSync('/tmp/words.json', JSON.stringify(ctx.window.WORDS, null, 2));
+fs.writeFileSync('/tmp/articles.json', JSON.stringify(ctx.window.ARTICLES, null, 2));
+"
+```
+
+### 6.11 索引覆盖防护与期号连续性（v3.2 新增 · 第 10 期教训）
+
+> 🔴 **严重度：P0 数据完整性** — 导致前期推送"消失"
+
+**问题**：第 10 期推送时，`refine_data.js` 缺少第 9 期（08-10）的条目，导致工作台目录中第 9 期不可见。且第 10 期被错误标注为 issue: 9。
+
+**根因**：
+1. 08-10 的 HTML/DOCX 文件已上传，但 `refine_data.js` 条目遗漏
+2. 08-11 推送时直接从 08-09（issue: 8）推算期号为 9，未检查 08-10 是否存在
+3. 没有「前一天条目存在性」的强制检查
+
+**防护规则**（已纳入第 1 步和第 5 步）：
+
+| 规则 | 说明 |
+|------|------|
+| **在线为准** | 期号从线上 `refine_data.js` 实时拉取计算，不依赖本地文件或记忆 |
+| **前一天检查** | 推送前强制检查前一天条目是否存在，缺失则先补充 |
+| **期号连续** | 每天推送后验证 `issue: N, N-1, N-2, ...` 连续不跳号 |
+| **SHA 刷新** | 推送 `refine_data.js` 前重新获取最新 SHA，防止 409 Conflict |
+| **条目去重** | 推送前检查当天条目是否已存在，避免重复插入 |
+
+**补条目模板**（如发现前一天缺失）：
+```javascript
+"<PREV_DATE>": {
+  date: "<PREV_DATE>",
+  weekday: "X",
+  issue: <PREV_ISSUE>,
+  theme: "主题1 · 主题2 · 主题3 · 主题4",
+  sources: [
+    { level: "A1", source: "...", sourceUrl: "...", topic: "..." },
+    { level: "A2", source: "...", sourceUrl: "...", topic: "..." },
+    { level: "B1", source: "...", sourceUrl: "...", topic: "..." },
+    { level: "B2", source: "...", sourceUrl: "...", topic: "..." }
+  ]
+},
+```
+
+可从当天的 HTML 文件（`articles/<PREV_DATE>.html`）中提取主题信息（`<h2>` 标签内容）和来源 URL（`source-cta` 的 `href`）。
+
+### 6.12 已废弃的修复方式（第 10 期记忆）
+
+以下方法在第 10 期修复过程中被证明不可靠，**禁止使用**：
+
+| 废弃方法 | 失败原因 |
+|----------|----------|
+| Python `rfind('"')` 找字段关闭引号 | 跨字段匹配——`es` 的 rfind 可能匹配到 `zh` 的关闭引号 |
+| 正则 `([^"]*)` 匹配字段值 | 遇到值内第一个 `"` 就截断，漏检后续内容 |
+| 逐行扫描替换内部 `"` 为 `\u201C`/`\u201D` | 无法区分"内容中的引号"和"字符串分隔引号" |
+| Agent 直接手写 HTML 内联数据 | Agent 输出的 `"` 永远是 ASCII，无法可靠转义 |
+
+**唯一可靠方案**：`JSON.stringify` 从已验证 data JS 生成内联代码（见 6.10 节）。
+
 ---
 
 ## 七、快速参考
@@ -627,4 +848,4 @@ QuizData.recordAnswer()         RefineQuizDB.recordAnswer()
 
 ---
 
-*最后更新：2026-08-10 · v3.1 基于第 9 期实战修订（CSS配色一致性 + zh引号处理 + Agent模板锚定 + Token安全）*
+*最后更新：2026-08-11 · v3.2 基于第 10 期实战修订（HTML数据内联引号安全 + 索引覆盖防护 + 期号连续性 + JSON.stringify 强制方案）*
