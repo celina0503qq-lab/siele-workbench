@@ -1236,19 +1236,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "A",
-      "prompt": "De que hablan las dos personas? Del nuevo centro comercial.",
+      "prompt": "De que hablan las dos personas?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) Del nuevo centro comercial"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) De un restaurante"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) De una tienda de ropa"
         }
       ],
       "type": "choice3",
@@ -1267,19 +1267,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "B",
-      "prompt": "Para que llama el hombre? Para reservar una mesa el viernes.",
+      "prompt": "Que pide el hombre por telefono?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) Informacion de horarios"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) Una mesa para cenar"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) Una habitacion de hotel"
         }
       ],
       "type": "choice3",
@@ -1298,19 +1298,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "C",
-      "prompt": "De que informa el locutor? Del tiempo para manana.",
+      "prompt": "Como sera el tiempo manana en el sur?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) Lluvioso y frio"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) Nublado con viento"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) Soleado con 30 grados"
         }
       ],
       "type": "choice3",
@@ -1329,19 +1329,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "A",
-      "prompt": "Que ha decidido hacer la mujer? Apuntarse a yoga.",
+      "prompt": "Que actividad va a empezar la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) Clases de yoga"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) Clases de ingles"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) Clases de cocina"
         }
       ],
       "type": "choice3",
@@ -1360,19 +1360,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "B",
-      "prompt": "De que concurso hablan? De fotografia de monumentos.",
+      "prompt": "De que trata el concurso?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) De cocina tradicional"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) De fotografia de monumentos"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) De pintura al aire libre"
         }
       ],
       "type": "choice3",
@@ -1391,19 +1391,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "C",
-      "prompt": "Que esta pensando la mujer? Adoptar un perro.",
+      "prompt": "Que animal quiere adoptar la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) Un gato"
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) Un pajaro"
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) Un perro"
         }
       ],
       "type": "choice3",
@@ -2172,19 +2172,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Cual es la primera recomendacion?",
+      "prompt": "Cual es la primera recomendacion del locutor?",
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) Reciclar los residuos"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) Comprar menos plastico"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) Usar menos el coche"
         }
       ],
       "type": "choice3",
@@ -2203,19 +2203,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Cual es una medida para ahorrar en casa?",
+      "prompt": "Que gesto permite ahorrar agua en casa?",
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) Apagar las luces al salir"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) Comprar electrodomesticos eficientes"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) Cerrar el grifo al lavarse los dientes"
         }
       ],
       "type": "choice3",
@@ -2234,19 +2234,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Que medio de transporte se recomienda?",
+      "prompt": "Que medio de transporte recomienda el locutor?",
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) La bicicleta"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) El transporte publico"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) El coche electrico"
         }
       ],
       "type": "choice3",
@@ -2265,19 +2265,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Que hacer con los residuos?",
+      "prompt": "Que debemos hacer con los residuos segun el locutor?",
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) Reciclarlos correctamente"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) Quemarlos en casa"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) Enterrarlos en el jardin"
         }
       ],
       "type": "choice3",
@@ -2300,15 +2300,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) Diez personas"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) Cuarenta personas"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) Cien personas"
         }
       ],
       "type": "choice3",
@@ -2327,19 +2327,19 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Cuantos litros se ahorran al cerrar el grifo?",
+      "prompt": "Cuantos litros de agua se ahorran al cerrar el grifo al lavarse los dientes?",
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar mas"
+          "text": "A) Cinco litros"
         },
         {
           "key": "B",
-          "text": "B) Usar transporte publico"
+          "text": "B) Ocho litros"
         },
         {
           "key": "C",
-          "text": "C) Ahorrar agua"
+          "text": "C) Doce litros"
         }
       ],
       "type": "choice3",
