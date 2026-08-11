@@ -12032,6 +12032,29 @@ function _injectDeleBankGeneric(level){
   return true;
 }
 
+// ===== Nuevo DELE A1/A2/B1 Modelo 01 注入 (2026-08-11) =====
+function _injectDeleBankNuevoLevel(level, bankVar){
+  if (typeof window[bankVar] === 'undefined') return false;
+  const bank = window[bankVar];
+  if (!bank.items || !bank.items.length) return false;
+  for (const it of bank.items) {
+    let targetKey = null;
+    if (it.prueba === 1) targetKey = 'reading';
+    else if (it.prueba === 2) targetKey = 'listening';
+    else if (it.prueba === 3) targetKey = 'writing';
+    else if (it.prueba === 4) targetKey = 'speaking';
+    if (!targetKey || !_deleBank[level] || !_deleBank[level][targetKey]) continue;
+    const normalized = {modelo:it.modelo, modelo_name:it.modelo_name, prueba:it.prueba, tarea:it.tarea, q:it.q, q_range:it.q_range||[it.q,it.q], answer:it.answer||'', body_excerpt:(it.cuerpo||it.transcript||'').slice(0,800), prompt:it.prompt||'', options:it.options||[], type:it.type||'choice3', instrucciones:it.instrucciones||'', cuerpo:it.cuerpo||'', transcript:it.transcript||'', audio:it.audio||'', explanation:it.explanation||'', modelo_essay:it.modelo_essay||'', modelo_response:it.modelo_response||'', rango_palabras:it.rango_palabras||'', _v5:true};
+    _deleBank[level][targetKey].push(normalized);
+  }
+  if (_deleBank[level].reading.length || _deleBank[level].listening.length)
+    _deleBank[level].mock = _deleBank[level].reading.concat(_deleBank[level].listening);
+  return true;
+}
+function _injectDeleBankNuevoA1(){ return _injectDeleBankNuevoLevel('A1','DELE_BANK_A1_NUEVO_M1'); }
+function _injectDeleBankNuevoA2(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M1'); }
+function _injectDeleBankNuevoB1(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M1'); }
+
 // ===== Nuevo DELE B2 Modelo 01 注入 =====
 function _injectDeleBankNuevoM1(){
   if (typeof window.DELE_BANK_B2_NUEVO_M1 === 'undefined') return false;
@@ -13486,6 +13509,18 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   tryInjectNuevoM1(35);
+  function tryInjectNuevoA1(retries){
+    if (typeof window.DELE_BANK_A1_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoA1(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoA1(retries-1);}, 80); }
+  }
+  function tryInjectNuevoA2(retries){
+    if (typeof window.DELE_BANK_A2_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoA2(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoA2(retries-1);}, 80); }
+  }
+  function tryInjectNuevoB1(retries){
+    if (typeof window.DELE_BANK_B1_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoB1(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoB1(retries-1);}, 80); }
+  }
+  tryInjectNuevoA1(35);
+  tryInjectNuevoA2(35);
+  tryInjectNuevoB1(35);
 });
 </script>
 
@@ -13496,6 +13531,9 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./dele_bank_b1.js" defer></script>
 <script src="./dele_bank_b2.js" defer></script>
 <script src="./dele_bank_b2_nuevo_m1.js" defer></script>
+<script src="./dele_bank_a1_nuevo_m1.js" defer></script>
+<script src="./dele_bank_a2_nuevo_m1.js" defer></script>
+<script src="./dele_bank_b1_nuevo_m1.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
