@@ -1,7 +1,7 @@
 window.DELE_BANK_B1_NUEVO_M4 = {
   "version": "1.0",
   "level": "B1",
-  "source": "Nuevo DELE B1 Modelo 04 - Ramon Diez Galan",
+  "source": "Nuevo DELE B1 Modelo 4 - Ramon Diez Galan",
   "language": "es-ES",
   "syllabus": {
     "level": "B1"
@@ -9,7 +9,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
   "items": [
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 1,
@@ -18,52 +18,53 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "E",
-      "prompt": "Relacionar persona 1 con su mensaje (A-I)",
+      "prompt": "Relaciona a la persona 1 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 2,
@@ -71,53 +72,54 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "b",
-      "prompt": "Relacionar persona 2 con su mensaje (A-I)",
+      "answer": "B",
+      "prompt": "Relaciona a la persona 2 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 3,
@@ -126,52 +128,53 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "G",
-      "prompt": "Relacionar persona 3 con su mensaje (A-I)",
+      "prompt": "Relaciona a la persona 3 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: G"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 4,
@@ -180,52 +183,53 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "I",
-      "prompt": "Relacionar persona 4 con su mensaje (A-I)",
+      "prompt": "Relaciona a la persona 4 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: I"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 5,
@@ -233,53 +237,54 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "a",
-      "prompt": "Relacionar persona 5 con su mensaje (A-I)",
+      "answer": "A",
+      "prompt": "Relaciona a la persona 5 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 1,
       "q": 6,
@@ -288,52 +293,53 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         6
       ],
       "answer": "H",
-      "prompt": "Relacionar persona 6 con su mensaje (A-I)",
+      "prompt": "Relaciona a la persona 6 con el mensaje correspondiente (A-I)",
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje A"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Mensaje B"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Mensaje C"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Mensaje D"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Mensaje E"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Mensaje F"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Mensaje G"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Mensaje H"
+          "text": "H)"
         },
         {
           "key": "I",
-          "text": "I) Mensaje I"
+          "text": "I)"
         }
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "Personas:\n1. Miguel: Llevo tres meses en el paro y no encuentro nada. Estoy empezando a desesperarme.\n2. Nuria: He decidido dejar mi trabajo y montar mi propio negocio. Se que es arriesgado pero es mi sueno.\n3. Oscar: Mi empresa me ha ofrecido un ascenso pero tendria que mudarme a otra ciudad.\n4. Patricia: Llevo 25 anos en la misma empresa. He visto como cambiaba todo, desde las maquinas de escribir hasta los ordenadores.\n5. Raul: Estoy haciendo un master mientras trabajo. Es muy duro pero merece la pena.\n6. Silvia: Despues de 10 anos como abogada, he decidido cambiar de profesion y ser profesora.\n\nMensajes:\nA. Enhorabuena! Has sido seleccionado para la segunda entrevista. Te esperamos el lunes a las 10:00.\nB. Llevamos tres meses sin pagar el alquiler. Si en una semana no recibimos el pago, tendremos que tomar medidas.\nC. El curso de marketing digital empieza el proximo mes. Las plazas son limitadas.\nD. Hemos recibido tu curriculum y nos gustaria concertar una entrevista.\nE. Se vende pequeno restaurante en el centro. Muy buena oportunidad de negocio.\nF. La empresa ha decidido cerrar la oficina de Madrid. Todos los empleados seran trasladados a Barcelona.\nG. Manana hay una huelga de transporte. No habra servicio de autobuses ni metro.\nH. Estamos organizando una reunion de antiguos alumnos. Te esperamos el sabado.\nI. Necesito un prestatamo para abrir mi propio negocio. Cuanto tardan en concederlo?"
+      "cuerpo": "MODELO 4\nPRUEBA 2. COMPRENSIÓN AUDITIVA \nTarea 1\nA\nB\nC\n1\nA\nB\nC\n2\nA\nB\nC\n3\nA\nB\nC\n4\nA\nB\nC\n5\nTarea 2 \nA\nB\nC\n6\nA\nB\nC\n7\nA\nB\nC\n8\nA\nB\nC\n9\nA\nB\nC\n10\nA\nB\nC\n11\nA\nB\nC\n12\nTarea 3 \nA\nB\nC\n13\nA\nB\nC\n14\nA\nB\nC\n15\nA\nB\nC\n16\nA\nB\nC\n17\nA\nB\nC\n18\nTarea 4 \nA\nB\nC\n19\nA\nB\nC\n20\nA\nB\nC\n21\nA\nB\nC\n22\nA\nB\nC\n23\nA\nB\nC\n24\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nD\nE\nF\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nG\nH\nI\nI\nI\nI\nI\nI\nTarea 5 \nA\nB\nC\n25\nA\nB\nC\n26\nA\nB\nC\n27\nA\nB\nC\n28\nA\nB\nC\n29\nA\nB\nC\n30\n109MODELO 4\nLa prueba de Comprensión de lectura contiene cinco tareas. Usted debe\nresponder a 30 preguntas. Duración: 70 minutos. Marque sus opciones\núnicamente en la Hoja de respuestas.\nINSTRUCCIONES  \nUsted va a leer seis textos en los que unas personas hablan sobre la\nlectura y diez textos que informan sobre estudios y trabajos.\nRelacione a las personas (1-6) con los anuncios y mensajes (A-I). \nHAY TRES TEXTOS QUE NO DEBE RELACIONAR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA \nPERSONA\nTEXTO\nMaría\nRaúl\nAna\nRamón\nPedro\nLuisa\n1\n3\n2    \n4    \n5\n6\n110",
+      "explanation": "Respuesta: H"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 7,
@@ -342,28 +348,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "Cual es la principal causa del cambio climatico segun el texto?",
+      "prompt": "Pregunta 7",
       "options": [
         {
           "key": "A",
-          "text": "A) El aumento del nivel del mar."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) Las emisiones de gases de efecto invernadero."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) La perdida de biodiversidad."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 8,
@@ -371,29 +378,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "c",
-      "prompt": "Cuanto podria aumentar la temperatura global?",
+      "answer": "C",
+      "prompt": "Pregunta 8",
       "options": [
         {
           "key": "A",
-          "text": "A) Un grado."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) Tres grados."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) Mas de dos grados."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 9,
@@ -402,28 +410,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Que efecto se menciona para Espana?",
+      "prompt": "Pregunta 9",
       "options": [
         {
           "key": "A",
-          "text": "A) Veranos mas largos y calurosos."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) Inviernos mas frios."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) Mas tormentas tropicales."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 10,
@@ -432,28 +441,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "A",
-      "prompt": "A que sector afecta especialmente en Espana?",
+      "prompt": "Pregunta 10",
       "options": [
         {
           "key": "A",
-          "text": "A) Al turismo."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) A la construccion."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) A la agricultura."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 11,
@@ -462,28 +472,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Que pueden hacer los ciudadanos segun el texto?",
+      "prompt": "Pregunta 11",
       "options": [
         {
           "key": "A",
-          "text": "A) Comprar mas coches."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) Usar el transporte publico y reciclar."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) Consumir mas plastico."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 2,
       "q": 12,
@@ -492,28 +503,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "B",
-      "prompt": "Que energia se menciona como alternativa positiva?",
+      "prompt": "Pregunta 12",
       "options": [
         {
           "key": "A",
-          "text": "A) Las energias renovables."
+          "text": "A) Opción A"
         },
         {
           "key": "B",
-          "text": "B) El carbon."
+          "text": "B) Opción B"
         },
         {
           "key": "C",
-          "text": "C) El petroleo."
+          "text": "C) Opción C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El cambio climatico es uno de los mayores desafios a los que se enfrenta la humanidad. Segun los expertos, si no reducimos las emisiones de gases de efecto invernadero, la temperatura global podria aumentar mas de dos grados antes de finales de siglo. Las consecuencias serian devastadoras: aumento del nivel del mar, fenomenos meteorologicos extremos y perdida de biodiversidad. En Espana, los efectos ya se estan notando. Los veranos son cada vez mas largos y calurosos, y las lluvias mas escasas. Esto afecta especialmente a la agricultura, un sector clave para la economia. Sin embargo, hay motivos para la esperanza. Cada vez mas paises apuestan por las energias renovables y muchos ciudadanos estan cambiando sus habitos. Pequenas acciones como reciclar, usar el transporte publico o reducir el consumo de plastico pueden marcar una gran diferencia si las hacemos todos."
+      "cuerpo": "MODELO 4\n1. María: Estoy súper agobiada, no puedo más,\ntengo que preparar una presentación con los\nresultados del mes para los jefes de la empresa.\nDebo utilizar el programa PowerPoint o alguno\nsimilar.\n2. Raúl: Tengo un problema, por mi culpa, mi\nempresa va a tener que pagar una compensación\nmuy grande a otra compañía. Adiós a mis opciones\nde promoción.\n3. Ana: Para matricularme este año en la universidad\nvoy a necesitar una ayuda económica. Han subido\nmuchísimo los pagos mensuales que tenemos que\nhacer.\n4. Ramón: Mi hijo ha suspendido todos los controles\nque ha hecho este año. El jueves tiene su última\noportunidad para no quedarse atrás. Quiero que el\npróximo curso continúe con sus compañeros.\n5. Pedro: Estoy muy emocionado, acabo de terminar de\nhacer mi primer currículum y ahora voy a presentárselo\na diferentes compañías del sector turístico.\n6. Luisa: Me parece increíble que en mi nuevo puesto\nde trabajo nos obliguen a buscar y pagar nosotros\nmismos el equipamiento de seguridad, la empresa\ndebería encargarse de esto.\n111\n\nMODELO 4\nA. MUNDO.COM\nSi quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti.\nBuscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo.\nNo se requiere experiencia previa, pero sí ilusión y ganas de trabajar. \nB. URGENTE\n¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el\nordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo.\nPuedes olvidarte del puesto de subdirector de departamento que pedías.\nC. CAMBIOS EN EL HORARIO \nLas clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras\ntanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus\ndudas y resolver los conflictos internos de la clase.\nD. ACCIDENTE \nComo bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente\nlaboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se\ncayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos.\nE. AVISO \nTe recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de\nmayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el\nproyector. Tráelo todo preparado en un USB.\nF. COMPROBAR E-MAIL \nEl departamento de informática ha detectado un error con los correos electrónicos. Al\nintroducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene\neste problema debe hablar con Juan para que lo corrija.\nG. MENSAJE DEL DIRECTOR REENVIADO \nSi alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el\nformulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector\ntodavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca.\nH. RECORDATORIO \nSe recuerda a todos los emplead",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 13,
@@ -522,7 +534,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "B",
-      "prompt": "Aprendio un idioma por motivos laborales.",
+      "prompt": "Pregunta 13 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -559,11 +571,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 14,
@@ -572,7 +585,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
+      "prompt": "Pregunta 14 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -609,11 +622,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 15,
@@ -622,7 +636,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Aprendio un idioma viendo la television.",
+      "prompt": "Pregunta 15 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -659,11 +673,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 16,
@@ -672,7 +687,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "B",
-      "prompt": "Estudia un idioma por su pareja.",
+      "prompt": "Pregunta 16 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -709,11 +724,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 17,
@@ -722,7 +738,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Domina mas de tres idiomas.",
+      "prompt": "Pregunta 17 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -759,11 +775,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 3,
       "q": 18,
@@ -772,7 +789,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Estudia un idioma muy dificil por su cuenta.",
+      "prompt": "Pregunta 18 - Tarea 3",
       "options": [
         {
           "key": "A",
@@ -809,11 +826,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas nos cuentan como se organizan con las tareas del hogar.\nAna: En mi casa nos repartimos las tareas. Yo cocino y mi marido limpia los banos.\nLuis: Vivo solo, asi que no tengo mas remedio que hacerlo todo yo. Lo que menos me gusta es planchar.\nCarmen: Tengo una senora que viene dos dias a la semana a limpiar. Es un lujo, pero me facilita mucho la vida.\nPedro: Mi mujer y yo hacemos la compra juntos los sabados. Es una forma de pasar tiempo juntos.\nElena: Odio cocinar, asi que pido comida a domicilio casi todos los dias. No es muy economico que digamos.\nJavier: Desde que tengo lavavajillas y aspiradora robot, mi vida ha cambiado. La tecnologia es maravillosa.\nMarta: Mis hijos ya son mayores y cada uno se encarga de su habitacion. Es importante que aprendan responsabilidad.\nRoberto: Los domingos por la manana me gusta poner musica y limpiar toda la casa. Me relaja."
+      "cuerpo": "MODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114\n\nMODELO 4\nPREGUNTAS\n7. Según el texto…\n a) puedes necesitar mucho tiempo para encontrar tu primer trabajo.\n b) debes realizar tu currículum antes de terminar tus estudios.\n c) encontrar trabajo tras los estudios es sencillo.\n8. El currículum…\n a) siempre debe estar escrito en una lengua extranjera.\n b) debe ser igual al de otros candidatos.\n c) se hace para poder tener una entrevista de trabajo.\n9. El texto dice que, gracias a la Universidad,…\n a) todos los alumnos hacen prácticas o voluntariados.\n b) cualquier empresa aceptará tener entrevistas de trabajo contigo.\n c) algunos estudiantes pueden obtener experiencia con becas y programas especiales de\nprácticas.\n10. El texto comenta que…\n a) puedes recibir dinero por realizar algunas prácticas en empresas.\n b) las prácticas siempre deben tener un sueldo fijo.\n c) las empresas prefieren a los trabajadores sin experiencia.\n11. El texto dice que en las redes sociales…\n a) es mejor no tener una foto personal.\n b) hay prácticas online a buen precio.\n c) debes ofrecer una buena imagen.\n12. El autor del texto recomienda…\n a) crear una pequeña empresa.\n b) aprender diferentes lenguas.\nc) trabajar en lo primero que se encuentre.\n115\n\nMODELO 4\nINSTRUCCIONES  \nUsted va a leer tres textos en los que unas personas nos hablan de\nsus estudios y trabajos. Relacione las preguntas (13-18) con los\ntextos (A, B o C). \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 3 \nA.\nADA\n¿Quién dice que se dedica al sector de\nla producción?\n¿Qué persona dice que en la actualidad\ntiene una hipoteca?\n¿Quién dice que tiene muchas ganas de\nencontrar un trabajo?\n¿Quién comenta que obtuvo un ascenso\nen su empleo?\n¿Quién valora sobre todo la seguridad y la\nposibilidad de crecer dentro de la\nempresa?\n¿Qué persona dice que no le parece bien\nque haya impuestos en las carreras\nuniversitarias?\n13\n15\n14\n16\n17\n18\nB.\nEDU\nC.\nMAR\n116\n\nA. ADA\nEstudié enfermería en una universidad privada en Valencia. Recuerdo que mis padres pagaron\nmuchísimo, no entiendo por qué, además de las tasas, debemos pagar el IVA por los estudios,\nme parece un robo. Lo único bueno de aquella época es que conocí a mi marido, los dos\ntrabajamos en el mismo centro de salud.\nMODELO 4\nTarea 3 \nEste año es muy importante en nuestras vidas, hace\nunos meses decidimos pedir un crédito par",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 19,
@@ -822,44 +840,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "B",
-      "prompt": "Que tipo de bombillas se recomiendan?",
+      "prompt": "Pregunta 19 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 20,
@@ -868,44 +887,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "E",
-      "prompt": "Que hacer con las cortinas durante el dia?",
+      "prompt": "Pregunta 20 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 21,
@@ -914,44 +934,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "H",
-      "prompt": "Cuando hay que poner la lavadora?",
+      "prompt": "Pregunta 21 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: H"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 22,
@@ -960,44 +981,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "C",
-      "prompt": "Que hacer con los aparatos que no se usan?",
+      "prompt": "Pregunta 22 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 23,
@@ -1006,44 +1028,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "A",
-      "prompt": "Que temperatura tener en el congelador?",
+      "prompt": "Pregunta 23 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 4,
       "q": 24,
@@ -1052,44 +1075,45 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         24
       ],
       "answer": "G",
-      "prompt": "Que ajuste hacer en el frigorifico?",
+      "prompt": "Pregunta 24 - Tarea 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Reservar antes"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Temporada baja"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Alojamiento alternativo"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Comer local"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Transporte publico"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Equipaje mano"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Viajar en grupo"
+          "text": "G)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para viajar de forma economica:\n1. Reserva los vuelos con antelacion. Los precios suelen ser mas bajos dos o tres meses antes.\n2. Viaja en temporada baja si puedes. Los destinos son mas baratos y hay menos turistas.\n3. Busca alojamientos alternativos como apartamentos turisticos o intercambio de casas.\n4. Come donde comen los locales. Los restaurantes turisticos suelen ser mas caros y de peor calidad.\n5. Usa el transporte publico en vez de taxis. Es mucho mas economico y conoceras mejor la ciudad.\n6. Lleva solo equipaje de mano para evitar pagar tasas por maletas facturadas."
+      "cuerpo": "El trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n …………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nMODELO 4\nINSTRUCCIONES  \nLea el siguiente texto, del que se han extraído seis fragmentos. A\ncontinuación lea los ocho fragmentos propuestos (A-H) y decida en\nqué lugar del texto (19-24) hay que colocar cada uno de ellos. \nHAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR. \nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 4 \nEl trabajo en la historia\n \nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías \nque \ndieron \norigen \nal\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, \nsin \nprotección \nde \nla\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118\n\n",
+      "explanation": "Respuesta: G"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 25,
@@ -1098,28 +1122,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "B",
-      "prompt": "Cual es el tema principal del texto?",
+      "prompt": "Pregunta 25 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) El reciclaje y el medio ambiente"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) La musica y sus beneficios"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) El deporte al aire libre"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 26,
@@ -1128,28 +1153,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Que ventaja tiene el comercio electronico?",
+      "prompt": "Pregunta 26 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) Tirarlos todos juntos"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Separarlos por tipos"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Quemarlos en casa"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 27,
@@ -1158,28 +1184,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "C",
-      "prompt": "Cual es un inconveniente de comprar por internet?",
+      "prompt": "Pregunta 27 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) Productos caros"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Productos electronicos"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Productos de un solo uso"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 28,
@@ -1188,28 +1215,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Como crece el comercio electronico?",
+      "prompt": "Pregunta 28 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) Llevar tu propia bolsa al supermercado"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Comprar mas plastico"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Tirar las botellas"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 29,
@@ -1218,28 +1246,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Que tipo de productos se pueden comprar?",
+      "prompt": "Pregunta 29 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) En fabricas de reciclaje"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) En centros comerciales"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) En vertederos o en el mar"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 1,
       "tarea": 5,
       "q": 30,
@@ -1248,28 +1277,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "C",
-      "prompt": "Por que prefieren las personas comprar desde casa?",
+      "prompt": "Pregunta 30 - Tarea 5",
       "options": [
         {
           "key": "A",
-          "text": "A) Regalarlas a amigos"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Reutilizarlas"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Tirarlas a la basura"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Internet ha transformado la forma en que compramos. El comercio electronico crece cada ano y cada vez son mas las personas que prefieren comprar desde casa en lugar de ir a las tiendas fisicas. Las ventajas son evidentes: comodidad, horarios flexibles y acceso a productos de todo el mundo. Sin embargo, tambien tiene inconvenientes como la imposibilidad de ver o probar el producto antes de comprarlo."
+      "cuerpo": "MODELO 4\nINSTRUCCIONES  \nLea el texto y rellene los huecos (25-30) con la opción correcta (a / b /\nc).\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 5 \nQueda totalmente prohibido comer y beber …..26….. de la sala de estudio. Hemos decidido\nadoptar esta medida tras las numerosas quejas de varios usuarios. \nNo se permite tener los teléfonos …..27….., incluso si están en modo silencioso. La sala de\nestudio debe ser un lugar de concentración y tranquilidad, esto no es compatible con que\nlos estudiantes estén pendientes de las …..28….. sociales.\nLos viernes y sábados por la noche se debe abandonar la sala de estudio antes de las 21:00.\nTodo el recinto de la Universidad permanecerá cerrado durante las noches de los fines de\nsemana. El rector ha …..29….. esta decisión puesto que había algunos individuos que no\nsabían comportarse.\nLos libros, mochilas, estuches y cualquier otro tipo de material de estudio no se puede\n…..30….. ocupando espacio sobre la mesa si el estudiante no está en la sala, especialmente\nen temporada de exámenes.\nNUEVAS NORMAS DE LA SALA DE ESTUDIO\n \nA partir del lunes 1 de marzo entran en vigor las …..25….. normas:\nOpciones\n25.      a) antes \n26.      a) dentro \n27.      a) rotos \n28.      a) redes \n29.      a) tomado \n30.      a) cambiar \nb) siguientes \n   \nb) entro \n \nb) prestados \nb) red \n  \nb) tocado \n  \nb) probar\nc) después \nc) debajo \nc) encendidos \nc) olas \nc) navegado \nc) dejar \n120\n\n",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 1,
@@ -1277,30 +1307,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 1.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 1",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: C"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 2,
@@ -1308,30 +1337,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 2.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 2",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: A"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 3,
@@ -1339,30 +1367,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "b",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 3.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 3",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 4,
@@ -1370,30 +1397,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 4.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 4",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: A"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 5,
@@ -1401,30 +1427,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 5.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 5",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: C"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 1,
       "q": 6,
@@ -1432,30 +1457,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "b",
-      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 6.",
+      "answer": "A",
+      "prompt": "Tarea 1 - Pregunta 6",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Transcripciones (SOLUCIONES PDF): Conversaciones breves sobre situaciones cotidianas. Consultar audio en YouTube: Nuevo DELE B1 Modelo 4.",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio YouTube: Nuevo DELE B1)"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 7,
@@ -1464,29 +1488,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "C",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 7.",
+      "prompt": "Tarea 2 - Pregunta 7",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 8,
@@ -1494,30 +1518,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 8.",
+      "answer": "A",
+      "prompt": "Tarea 2 - Pregunta 8",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 9,
@@ -1526,29 +1550,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         12
       ],
       "answer": "B",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 9.",
+      "prompt": "Tarea 2 - Pregunta 9",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 10,
@@ -1556,30 +1580,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 10.",
+      "answer": "A",
+      "prompt": "Tarea 2 - Pregunta 10",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 11,
@@ -1587,30 +1611,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "b",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 11.",
+      "answer": "B",
+      "prompt": "Tarea 2 - Pregunta 11",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 2,
       "q": 12,
@@ -1618,30 +1642,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         7,
         12
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 12.",
+      "answer": "C",
+      "prompt": "Tarea 2 - Pregunta 12",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 7b, 8a, 9c, 10a, 11b, 12c. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 13,
@@ -1650,7 +1674,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "B",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
+      "prompt": "Tarea 3 - Pregunta 13",
       "options": [
         {
           "key": "A",
@@ -1687,12 +1711,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
-      "explanation": "Respuesta: A"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 14,
@@ -1700,8 +1724,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         13,
         18
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 14.",
+      "answer": "C",
+      "prompt": "Tarea 3 - Pregunta 14",
       "options": [
         {
           "key": "A",
@@ -1738,12 +1762,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 15,
@@ -1752,7 +1776,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
+      "prompt": "Tarea 3 - Pregunta 15",
       "options": [
         {
           "key": "A",
@@ -1789,12 +1813,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
-      "explanation": "Respuesta: F"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 16,
@@ -1803,7 +1827,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
+      "prompt": "Tarea 3 - Pregunta 16",
       "options": [
         {
           "key": "A",
@@ -1840,12 +1864,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
-      "explanation": "Respuesta: E"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 17,
@@ -1854,7 +1878,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
+      "prompt": "Tarea 3 - Pregunta 17",
       "options": [
         {
           "key": "A",
@@ -1891,12 +1915,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
-      "explanation": "Respuesta: G"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 3,
       "q": 18,
@@ -1905,7 +1929,7 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         18
       ],
       "answer": "C",
-      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
+      "prompt": "Tarea 3 - Pregunta 18",
       "options": [
         {
           "key": "A",
@@ -1942,12 +1966,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Soluciones: 13a, 14c, 15f, 16e, 17g, 18b. (Consultar audio YouTube)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 19,
@@ -1955,8 +1979,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 19.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 19",
       "options": [
         {
           "key": "A",
@@ -1985,12 +2009,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
-      "explanation": "Respuesta: C"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 20,
@@ -1998,8 +2022,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "e",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 20.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 20",
       "options": [
         {
           "key": "A",
@@ -2028,12 +2052,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
-      "explanation": "Respuesta: E"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 21,
@@ -2041,8 +2065,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 21.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 21",
       "options": [
         {
           "key": "A",
@@ -2071,12 +2095,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 22,
@@ -2084,8 +2108,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "d",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 22.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 22",
       "options": [
         {
           "key": "A",
@@ -2114,12 +2138,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
-      "explanation": "Respuesta: D"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 23,
@@ -2127,8 +2151,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "b",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 23.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 23",
       "options": [
         {
           "key": "A",
@@ -2157,12 +2181,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 4,
       "q": 24,
@@ -2170,8 +2194,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         19,
         24
       ],
-      "answer": "f",
-      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 24.",
+      "answer": "A",
+      "prompt": "Tarea 4 - Pregunta 24",
       "options": [
         {
           "key": "A",
@@ -2200,12 +2224,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "Soluciones: 19c, 20e, 21a, 22d, 23b, 24f. (Consultar audio YouTube)",
-      "explanation": "Respuesta: F"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 25,
@@ -2213,30 +2237,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "c",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 25.",
+      "answer": "C",
+      "prompt": "Tarea 5 - Pregunta 25",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 26,
@@ -2244,30 +2268,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 26.",
+      "answer": "A",
+      "prompt": "Tarea 5 - Pregunta 26",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 27,
@@ -2275,30 +2299,30 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         25,
         30
       ],
-      "answer": "b",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 27.",
+      "answer": "B",
+      "prompt": "Tarea 5 - Pregunta 27",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
+      "transcript": "(Ver PDF o audio original)",
       "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 28,
@@ -2307,29 +2331,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "A",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 28.",
+      "prompt": "Tarea 5 - Pregunta 28",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
-      "explanation": "Respuesta: B"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 29,
@@ -2338,29 +2362,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "C",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 29.",
+      "prompt": "Tarea 5 - Pregunta 29",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
-      "explanation": "Respuesta: A"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 2,
       "tarea": 5,
       "q": 30,
@@ -2369,29 +2393,29 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         30
       ],
       "answer": "B",
-      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 30.",
+      "prompt": "Tarea 5 - Pregunta 30",
       "options": [
         {
           "key": "A",
-          "text": "A) Opcion A"
+          "text": "A) "
         },
         {
           "key": "B",
-          "text": "B) Opcion B"
+          "text": "B) "
         },
         {
           "key": "C",
-          "text": "C) Opcion C"
+          "text": "C) "
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Soluciones: 25c, 26a, 27b, 28b, 29a, 30c.",
-      "explanation": "Respuesta: C"
+      "transcript": "(Ver PDF o audio original)",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 3,
       "tarea": 1,
       "q": 1,
@@ -2400,17 +2424,16 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Correo a un amigo invitandole a un evento (100-120 palabras)",
+      "prompt": "Tarea 1: Expresion escrita",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Escriba un correo a un amigo para invitarle a un concierto o evento cultural.",
-      "modelo_essay": "Querido Pablo: Te escribo para contarte una noticia estupenda: he conseguido dos entradas para el concierto de Vetusta Morla el proximo sabado en el Palacio de los Deportes. Como se que tambien te gustan mucho, he pensado que podriamos ir juntos. El concierto empieza a las nueve, asi que podriamos quedar sobre las siete y media para cenar algo por la zona antes de entrar. Hace siglos que no nos vemos y tengo muchas ganas de ponernos al dia. Dime si puedes venir cuanto antes para confirmarte los detalles. La entrada es un regalo, asi que no tienes excusa. Espero tu respuesta. Un abrazo, Rodrigo.",
-      "rango_palabras": "100-120"
+      "instrucciones": "Escriba un texto segun las instrucciones de la Tarea 1.",
+      "rango_palabras": ""
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 3,
       "tarea": 2,
       "q": 2,
@@ -2419,17 +2442,16 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Articulo sobre el teletrabajo (130-150 palabras)",
+      "prompt": "Tarea 2: Redaccion",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Escriba un articulo expresando las ventajas y desventajas del teletrabajo.",
-      "modelo_essay": "El teletrabajo se ha convertido en una realidad para millones de personas tras la pandemia. En mi opinion, esta modalidad tiene tantas ventajas como inconvenientes. Entre los aspectos positivos, destacaria el ahorro de tiempo en desplazamientos y la flexibilidad horaria, que permite conciliar mejor la vida personal y laboral. Ademas, trabajar desde casa puede aumentar la productividad al reducir las distracciones tipicas de la oficina. Sin embargo, no todo es positivo. El teletrabajo puede provocar aislamiento social, ya que echamos de menos el contacto diario con los companeros. Tambien es mas dificil separar el trabajo de la vida personal cuando la oficina esta en el salon de casa. En conclusion, creo que el modelo ideal es el hibrido: combinar dias de oficina con dias de teletrabajo para aprovechar lo mejor de ambos mundos.",
-      "rango_palabras": "130-150"
+      "instrucciones": "Elija una opcion y escriba un texto.",
+      "rango_palabras": ""
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 4,
       "tarea": 1,
       "q": 1,
@@ -2438,17 +2460,16 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Exposicion oral - Modelo 4",
+      "prompt": "Tarea 1: Exposicion oral (3-4 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "Voy a hablar sobre las redes sociales y su influencia en los jovenes. Hoy en dia, practicamente todos los jovenes tienen al menos una red social. Por un lado, ofrecen ventajas indiscutibles: nos permiten estar conectados con amigos y familia, acceder a informacion de forma inmediata y expresar nuestras opiniones. Sin embargo, tambien presentan riesgos importantes. El ciberacoso, la adiccion a las pantallas y la comparacion constante con vidas aparentemente perfectas pueden afectar gravemente a la salud mental. Creo que la clave esta en la educacion. Padres y profesores deberian ensenar a los jovenes a usar las redes de forma responsable: establecer limites de tiempo, no compartir datos personales y ser criticos con lo que ven. Las redes sociales son una herramienta, no un fin en si mismas.",
-      "instrucciones": "Prepare una exposicion oral de 3-4 minutos sobre el tema propuesto. Exponga ventajas e inconvenientes y de su opinion personal.",
-      "rango_palabras": "3-4 min"
+      "instrucciones": "Prepare una exposicion oral sobre el tema propuesto.",
+      "rango_palabras": ""
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 4,
       "tarea": 2,
       "q": 2,
@@ -2457,17 +2478,16 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Descripcion de imagen - Modelo 4",
+      "prompt": "Tarea 2: Descripcion de imagen (2-3 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "Veo un parque urbano en un dia soleado. Hay ninos jugando en los columpios mientras sus padres los observan desde un banco. Un grupo de ancianos juega a las cartas en una mesa de piedra. Al fondo, una pareja pasea de la mano por un sendero rodeado de arboles. Tambien veo a un joven haciendo deporte. Esta imagen me transmite tranquilidad y me recuerda la importancia de los espacios verdes en las ciudades. Creo que todos los barrios deberian tener parques como este, donde la gente pueda relajarse, hacer ejercicio y socializar.",
-      "instrucciones": "Observe la imagen y describala durante 2-3 minutos. Imagine la situacion: que esta pasando, donde estan, que sienten los personajes.",
-      "rango_palabras": "3-4 min"
+      "instrucciones": "Describa la imagen e imagine la situacion.",
+      "rango_palabras": ""
     },
     {
       "modelo": "nuevo_m4",
-      "modelo_name": "Nuevo DELE B1 Modelo 04",
+      "modelo_name": "Nuevo DELE B1 Modelo 4",
       "prueba": 4,
       "tarea": 3,
       "q": 3,
@@ -2476,13 +2496,12 @@ window.DELE_BANK_B1_NUEVO_M4 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Conversacion sobre grafico - Modelo 4",
+      "prompt": "Tarea 3: Conversacion con el entrevistador (3-4 min)",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "El grafico muestra el consumo de energia en los hogares espanoles. La calefaccion representa el mayor gasto, con un 47%, seguida de los electrodomesticos con un 19%. Esto me hace pensar que deberiamos mejorar el aislamiento de nuestras viviendas para reducir el consumo. Tambien seria buena idea usar electrodomesticos mas eficientes, de clase A o superior. En mi casa, intentamos apagar las luces cuando no las necesitamos y usar bombillas LED. Son pequenos gestos pero creo que, entre todos, podemos ahorrar mucha energia y ayudar al medio ambiente.",
-      "instrucciones": "Observe el grafico y converse con el entrevistador durante 3-4 minutos. Comente los datos, haga comparaciones y de su opinion.",
-      "rango_palabras": "3-4 min"
+      "instrucciones": "Converse con el entrevistador sobre el tema propuesto.",
+      "rango_palabras": ""
     }
   ]
 };
