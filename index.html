@@ -12454,12 +12454,21 @@ function _renderDeleA1ModeloList(task, mid, items){
         (doneCount > 0 ? '<button class="btn sm ol" onclick="_deleRedoTarea(\''+esc(modeloId)+'\','+pruebaNum+','+tareaNum+')" style="font-size:11px">🔄 重做此大题</button>' : '')+
       '</div>';
 
+    // === Tarea 级别共享 instrucciones: 在原文之前单独显示 ===
+    const firstInstr = group[0] && group[0].instrucciones || '';
+    const sharedInstr = firstInstr.length > 20 && group.every(q => (q.instrucciones||'') === firstInstr);
+    if (sharedInstr) {
+      h += '<div style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:10px;padding:14px 16px;margin-bottom:10px">'+
+        '<div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:8px;display:flex;align-items:center;gap:6px">📋 题目说明</div>'+
+        '<div style="white-space:pre-wrap;font-size:14px;line-height:1.75;color:#1e3a5f;font-weight:500">'+esc(firstInstr)+'</div>'+
+      '</div>';
+    }
     // === Tarea 级别共享原文: 检测 cuerpo 是否所有题共享 ===
     const firstCuerpo = group[0] && group[0].cuerpo || '';
     const sharedCuerpo = firstCuerpo.length > 30 && group.every(q => (q.cuerpo||'') === firstCuerpo);
     if (sharedCuerpo && (pruebaNum === 1 || pruebaNum === 2)) {
       h += '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:8px;padding:12px 14px;margin-bottom:10px">'+
-        '<div style="font-size:12px;font-weight:600;color:#6366f1;margin-bottom:6px">📄 题目原文</div>'+
+        '<div style="font-size:12px;font-weight:600;color:#6366f1;margin-bottom:6px">📄 阅读原文</div>'+
         '<div style="white-space:pre-wrap;font-size:14px;line-height:1.7;color:#334155;font-weight:500;max-height:400px;overflow:auto">'+esc(firstCuerpo)+'</div>'+
       '</div>';
     }
@@ -12516,6 +12525,14 @@ function _renderDeleA1ModeloList(task, mid, items){
           transcriptHtml += '<div style="margin-top:8px"><audio controls style="width:100%;height:36px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
         }
         transcriptHtml += '</div></details>';
+      }
+      // per-question instrucciones (在不共享时显示, 写作/口语在 _renderDeleA1V5TaskCard 中处理)
+      let instrHtml = '';
+      if (q._v5 && q.instrucciones && q.instrucciones.length > 20 && !sharedInstr && q.prueba >= 3) {
+        instrHtml = '<div style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:10px;padding:12px 14px;margin-bottom:8px">'+
+          '<div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px;display:flex;align-items:center;gap:6px">📋 题目说明</div>'+
+          '<div style="white-space:pre-wrap;font-size:14px;line-height:1.75;color:#1e3a5f;font-weight:500">'+esc(q.instrucciones)+'</div>'+
+        '</div>';
       }
       // per-question cuerpo (仅在不共享时显示)
       let cuerpoHtml = '';
@@ -12623,6 +12640,7 @@ function _renderDeleA1ModeloList(task, mid, items){
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
           '<div style="font-size:13px;color:#64748b;font-weight:500">题 '+q.q+' · Tarea '+q.tarea+'</div>'+
         '</div>'+
+        instrHtml+
         cuerpoHtml+
         promptHtml+
         optsHtml+
