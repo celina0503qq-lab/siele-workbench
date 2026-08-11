@@ -581,40 +581,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "F",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "prompt": "Quiere ser medico como su padre.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: F"
     },
     {
@@ -628,40 +628,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "E",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "prompt": "Trabaja en una tienda de ropa.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: E"
     },
     {
@@ -675,40 +675,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "G",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "prompt": "Prefiere la comida casera.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: G"
     },
     {
@@ -722,40 +722,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "B",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "prompt": "Le encanta la montana.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: B"
     },
     {
@@ -769,40 +769,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "D",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "prompt": "Es profesor y le gusta ayudar.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: D"
     },
     {
@@ -816,40 +816,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "A",
-      "prompt": "Pregunta 19 - Tarea 3",
+      "prompt": "Va a misa todos los domingos.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana (religiosa)"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis (montana)"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen (piso centro)"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pablo (profesor)"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena (tienda)"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier (medicina)"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Marta (cocinar)"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
       "explanation": "Respuesta: A"
     },
     {
@@ -863,24 +863,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "prompt": "Que actividad es para ninos de 6 a 10 anos?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: B"
     },
     {
@@ -894,24 +894,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "prompt": "Que actividad necesita ordenador?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: B"
     },
     {
@@ -925,24 +925,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "prompt": "Que actividad es gratuita con inscripcion?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: C"
     },
     {
@@ -956,24 +956,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "prompt": "Que dias abre la biblioteca en agosto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: A"
     },
     {
@@ -987,24 +987,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "prompt": "Quien puede participar en el curso de informatica?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1018,24 +1018,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Pregunta 25 - Tarea 4",
+      "prompt": "Que dia hay taller de lectura?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Taller de lectura para ninos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Curso de informatica para mayores"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Club de ajedrez los sabados"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 3 y 4, consultar el PDF original: Nuevo DELE A2 (Ramon Diez Galan).",
+      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
       "explanation": "Respuesta: B"
     },
     {

@@ -204,36 +204,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "D",
-      "prompt": "Pregunta 7 - Tarea 2",
+      "prompt": "Limpia playas cada mes.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: D"
     },
     {
@@ -247,36 +247,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 8 - Tarea 2",
+      "prompt": "Trabaja con animales.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: A"
     },
     {
@@ -290,36 +290,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "F",
-      "prompt": "Pregunta 9 - Tarea 2",
+      "prompt": "Ayuda a personas mayores.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: F"
     },
     {
@@ -333,36 +333,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 10 - Tarea 2",
+      "prompt": "Trabaja con ninos enfermos.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: C"
     },
     {
@@ -376,36 +376,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "B",
-      "prompt": "Pregunta 11 - Tarea 2",
+      "prompt": "Da comida a personas sin hogar.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: B"
     },
     {
@@ -419,36 +419,36 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "E",
-      "prompt": "Pregunta 12 - Tarea 2",
+      "prompt": "Ensena espanol a inmigrantes.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Luis"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Carmen"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Pedro"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Elena"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Javier"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas comparten sus experiencias sobre el voluntariado.\nAna: Hago voluntariado en un refugio de animales desde hace tres anos. Es una experiencia muy gratificante.\nLuis: Todos los sabados ayudo en un comedor social. Damos comida a personas sin hogar.\nCarmen: Soy voluntaria en un hospital infantil. Juego con los ninos que estan enfermos.\nPedro: Participo en un programa de limpieza de playas cada mes.\nElena: Enseno espanol a inmigrantes los martes y jueves por la tarde.\nJavier: Trabajo como voluntario en una residencia de ancianos. Les leo libros y les hago compania.",
       "explanation": "Respuesta: E"
     },
     {
@@ -462,44 +462,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "H",
-      "prompt": "Pregunta 13 - Tarea 3",
+      "prompt": "Hace senderismo con su perro.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: H"
     },
     {
@@ -513,44 +513,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "D",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "prompt": "Nada tres veces por semana.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: D"
     },
     {
@@ -564,44 +564,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "B",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "prompt": "Hace yoga en casa.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: B"
     },
     {
@@ -615,44 +615,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "G",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "prompt": "Corre por el parque cada manana.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: G"
     },
     {
@@ -666,44 +666,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "A",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "prompt": "Va al gimnasio a levantar pesas.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: A"
     },
     {
@@ -717,44 +717,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "F",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "prompt": "Baila salsa y bachata.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Laura"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diego"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Sofia"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Claudia"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Roberto"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Natalia"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
       "explanation": "Respuesta: F"
     },
     {
@@ -768,40 +768,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "C",
-      "prompt": "Pregunta 19 - Tarea 4",
+      "prompt": "Que hay que hacer antes de la entrevista? Investigar la empresa.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: C"
     },
     {
@@ -815,40 +815,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "G",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "prompt": "Que hay que hacer al llegar? Ser puntual.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: G"
     },
     {
@@ -862,40 +862,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "A",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "prompt": "Como hay que vestir? De forma adecuada.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: A"
     },
     {
@@ -909,40 +909,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "D",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "prompt": "Como hay que hablar? Con claridad y mirando a los ojos.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: D"
     },
     {
@@ -956,40 +956,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "F",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "prompt": "Que hacer despues? Enviar correo de agradecimiento.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: F"
     },
     {
@@ -1003,40 +1003,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "B",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "prompt": "Que actitud mantener? Tener paciencia.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Vestir adecuado"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Tener paciencia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Investigar empresa"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Hablar con claridad"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Hacer preguntas"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Correo agradecimiento"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Ser puntual"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1050,24 +1050,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 25 - Tarea 5",
+      "prompt": "Que porcentaje prefiere el modelo hibrido?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1081,24 +1081,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 26 - Tarea 5",
+      "prompt": "Cual es un beneficio del teletrabajo?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1112,24 +1112,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 27 - Tarea 5",
+      "prompt": "Cual es una desventaja del teletrabajo?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1143,24 +1143,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 28 - Tarea 5",
+      "prompt": "Que recomiendan los expertos?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1174,24 +1174,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 29 - Tarea 5",
+      "prompt": "Que porcentaje quiere volver a la oficina siempre?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1205,24 +1205,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 30 - Tarea 5",
+      "prompt": "Que es importante mantener?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) 15% oficina / Desventaja: aislamiento"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Recomendacion: horario fijo"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Para las tareas 2-5, consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan).",
+      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1236,24 +1236,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "A",
-      "prompt": "Pregunta 1",
+      "prompt": "De que hablan las dos personas? Del nuevo centro comercial.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Has visto el nuevo centro comercial? Hombre: Si, fui el sabado. Es enorme, mas de cien tiendas. Mujer: Quiero ir este fin de semana. Hombre: La zona de restaurantes es espectacular."
+      "transcript": "Mujer: Has visto el nuevo centro comercial? Hombre: Si, fui el sabado. Es enorme, mas de cien tiendas. Mujer: Quiero ir este fin de semana. Hombre: La zona de restaurantes es espectacular.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -1266,24 +1267,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "B",
-      "prompt": "Pregunta 2",
+      "prompt": "Para que llama el hombre? Para reservar una mesa el viernes.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Hombre: Buenos dias, queria reservar una mesa para cuatro el viernes a las nueve. Mujer: Muy bien, reserva confirmada. Algun requisito? Hombre: Si, uno es vegetariano."
+      "transcript": "Hombre: Buenos dias, queria reservar una mesa para cuatro el viernes a las nueve. Mujer: Muy bien, reserva confirmada. Algun requisito? Hombre: Si, uno es vegetariano.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -1296,24 +1298,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "C",
-      "prompt": "Pregunta 3",
+      "prompt": "De que informa el locutor? Del tiempo para manana.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: El tiempo para manana. Lluvias en el norte, Galicia y Asturias. Temperaturas bajaran cinco grados. En el sur, soleado con maximas de 30 grados. Canarias, vientos moderados."
+      "transcript": "Locutor: El tiempo para manana. Lluvias en el norte, Galicia y Asturias. Temperaturas bajaran cinco grados. En el sur, soleado con maximas de 30 grados. Canarias, vientos moderados.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -1326,24 +1329,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "A",
-      "prompt": "Pregunta 4",
+      "prompt": "Que ha decidido hacer la mujer? Apuntarse a yoga.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: He decidido apuntarme a yoga. Hombre: Que bien! Donde? Mujer: En un centro nuevo cerca de casa. Martes y jueves. Hombre: A mi me ayudo mucho con el estres."
+      "transcript": "Mujer: He decidido apuntarme a yoga. Hombre: Que bien! Donde? Mujer: En un centro nuevo cerca de casa. Martes y jueves. Hombre: A mi me ayudo mucho con el estres.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -1356,24 +1360,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "B",
-      "prompt": "Pregunta 5",
+      "prompt": "De que concurso hablan? De fotografia de monumentos.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Hombre: Te has enterado del concurso de fotografia? Mujer: No, que concurso? Hombre: El ayuntamiento, sobre monumentos historicos. Primer premio: 500 euros."
+      "transcript": "Hombre: Te has enterado del concurso de fotografia? Mujer: No, que concurso? Hombre: El ayuntamiento, sobre monumentos historicos. Primer premio: 500 euros.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -1386,24 +1391,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         6
       ],
       "answer": "C",
-      "prompt": "Pregunta 6",
+      "prompt": "Que esta pensando la mujer? Adoptar un perro.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Estoy pensando en adoptar un perro. Hombre: Es una gran decision. Tienes tiempo? Mujer: Si, ahora trabajo desde casa dos dias. Hombre: Te recomiendo la protectora del barrio."
+      "transcript": "Mujer: Estoy pensando en adoptar un perro. Hombre: Es una gran decision. Tienes tiempo? Mujer: Si, ahora trabajo desde casa dos dias. Hombre: Te recomiendo la protectora del barrio.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
