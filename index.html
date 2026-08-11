@@ -12301,6 +12301,26 @@ window._deleAdminEditBtn = function(key, field, isShared){
   return h;
 };
 // ===== v4 题库 OCR 解析器 =====
+// ===== 用户范文自动保存 =====
+window._deleUserEssayTimers = {};
+window._deleUserEssayAutoSave = function(ta){
+  var key = ta.getAttribute('data-essaykey');
+  if (!key) return;
+  // 防抖: 1秒后保存
+  if (window._deleUserEssayTimers[key]) clearTimeout(window._deleUserEssayTimers[key]);
+  var statusEl = document.getElementById('essay_status_'+key);
+  if (statusEl) { statusEl.textContent = '编辑中...'; statusEl.style.color = '#f59e0b'; }
+  window._deleUserEssayTimers[key] = setTimeout(function(){
+    window._deleAdminSaveEdit(key, 'modelo_essay', ta.value);
+    if (statusEl) { statusEl.textContent = '✅ 已保存'; statusEl.style.color = '#10b981'; }
+    setTimeout(function(){ if (statusEl) statusEl.textContent = ''; }, 2000);
+  }, 1000);
+};
+window._deleUserEssayRevert = function(btn){
+  var key = btn.getAttribute('data-essaykey');
+  if (!key) return;
+  window._deleAdminRevertEdit(key, 'modelo_essay');
+};
 // 把 passage_raw (Edelsa 题目段) 切成:
 //   body_excerpt: 题目原文 (邮件/笔记/广告/通知 整段)
 //   questions: [{id, type, prompt, options}]  每道题
@@ -12820,6 +12840,14 @@ function _renderDeleA1ModeloList(task, mid, items){
         promptHtml+
         optsHtml+
         transcriptHtml+
+        (function(){
+          var optsKey = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+          var btn = _deleAdminEditBtn(optsKey, 'options', false);
+          if (btn && q.options && q.options.length > 0) {
+            return '<div style="margin-top:4px;padding-top:4px;border-top:1px dashed #e2e8f0;font-size:10px;color:#94a3b8">选项管理: '+btn+' <span style="font-size:9px">('+q.options.length+'个选项, 点击编辑JSON)</span></div>';
+          }
+          return '';
+        })()+
       '</div>';
     }
     h += '</div></div>';
@@ -13126,14 +13154,19 @@ function _renderDeleA1V5TaskCard(q){
       '<button class="btn sm pr" onclick="scoreWritingFromTextarea(this)">📝 提交评分</button>'+
       '<span class="sub" style="color:var(--tr);font-size:11px">提交后自动统计字数+AI评分</span>'+
     '</div>';
-    // AI 范文 (可展开编辑)
+    // AI 范文 (可展开编辑, 支持用户保存自己的版本)
     if (q.modelo_essay) {
-      body += '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:13px;color:#8b5cf6;font-weight:600">📖 参考范文 (AI生成 · 可编辑)</summary>'+
+      var essayKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+      var userEssay = window._deleAdminGetField(essayKey, 'modelo_essay', '');
+      // 管理员编辑优先, 其次用户保存的版本, 最后原始范文
+      var essayContent = userEssay || q.modelo_essay;
+      body += '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:13px;color:#8b5cf6;font-weight:600">📖 参考范文 (可编辑 · 自动保存)</summary>'+
         '<div style="margin-top:6px">'+
-        '<textarea class="dele-modelo-essay" style="width:100%;min-height:120px;padding:8px;border:1px solid #c4b5fd;border-radius:6px;font-size:13px;line-height:1.6;resize:vertical;background:#faf5ff;color:#4c1d95;font-family:inherit">'+esc(q.modelo_essay)+'</textarea>'+
-        '<div style="margin-top:4px;display:flex;gap:6px;align-items:center">'+
+        '<textarea class="dele-modelo-essay" id="essay_'+esc(essayKey)+'" data-essaykey="'+esc(essayKey)+'" oninput="_deleUserEssayAutoSave(this)" style="width:100%;min-height:120px;padding:8px;border:1px solid #c4b5fd;border-radius:6px;font-size:13px;line-height:1.6;resize:vertical;background:#faf5ff;color:#4c1d95;font-family:inherit">'+esc(essayContent)+'</textarea>'+
+        '<div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
         '<button class="btn sm ol" onclick="speakDeleModelo(this)" style="font-size:11px">🔊 朗读范文</button>'+
-        '<span class="sub" style="color:var(--tr);font-size:11px">可修改文本后朗读</span>'+
+        '<button class="btn sm ol" onclick="_deleUserEssayRevert(this)" data-essaykey="'+esc(essayKey)+'" style="font-size:11px">↩️ 还原原始范文</button>'+
+        '<span class="sub" style="color:var(--tr);font-size:10px;margin-left:4px" id="essay_status_'+esc(essayKey)+'"></span>'+
         '</div></div></details>';
     }
   }
