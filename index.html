@@ -1416,7 +1416,7 @@ function renderNav(){
   const navOnId = (typeof currentPage === 'string' && /^dele(A[12]|B[12])_/.test(currentPage))
     ? 'dele' + currentPage.match(/^dele(A[12]|B[12])_/)[1]
     : currentPage;
-  // 管理员独占项 (DELE 专项目前仅 Serena 可见, 题库完善中不对所有用户展示)
+  // 管理员独占项的过滤逻辑（当前 NAV 中无 adminOnly 项，保留以备后续使用）
   // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处不依赖跨块引用
   // 直接读 localStorage 解 swa_cloud_session_v1
   let isAdmin = false;
@@ -1448,10 +1448,7 @@ function go(page){
   // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处直接读 localStorage
   let isAdmin = false;
   try { var _raw2 = localStorage.getItem('swa_cloud_session_v1'); var _ses2 = _raw2 ? JSON.parse(_raw2) : null; isAdmin = !!(_ses2 && _ses2.role === 'admin'); } catch(e) {}
-  if (!isAdmin && /^dele(A[12]|B[12])(_|$)/.test(page)) {
-    (typeof toast === 'function' ? toast : function(m){})( 'DELE 专项题库完善中, 暂未对所有用户开放');
-    page = 'dash';
-  }
+  // DELE 专项已对所有用户开放（2026-08-11 移除 adminOnly 限制）
   currentPage = page;
   // 已登录则自动隐藏覆盖层 (P0 fix: overlay blocks all button clicks if not hidden)
   try {
