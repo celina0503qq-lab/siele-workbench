@@ -533,8 +533,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "a",
-      "prompt": "Pregunta 13 - Tarea 3 (consultar PDF original)",
+      "answer": "A",
+      "prompt": "Aprendio un idioma por motivos laborales.",
       "options": [
         {
           "key": "A",
@@ -571,7 +571,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: A"
     },
     {
@@ -584,8 +584,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "a",
-      "prompt": "Pregunta 14 - Tarea 3 (consultar PDF original)",
+      "answer": "C",
+      "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
           "key": "A",
@@ -622,7 +622,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: A"
     },
     {
@@ -635,8 +635,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "c",
-      "prompt": "Pregunta 15 - Tarea 3 (consultar PDF original)",
+      "answer": "B",
+      "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
           "key": "A",
@@ -673,7 +673,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: C"
     },
     {
@@ -686,8 +686,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "c",
-      "prompt": "Pregunta 16 - Tarea 3 (consultar PDF original)",
+      "answer": "D",
+      "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
           "key": "A",
@@ -724,7 +724,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: C"
     },
     {
@@ -737,8 +737,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "a",
-      "prompt": "Pregunta 17 - Tarea 3 (consultar PDF original)",
+      "answer": "G",
+      "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
           "key": "A",
@@ -775,7 +775,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: A"
     },
     {
@@ -788,8 +788,8 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         13,
         18
       ],
-      "answer": "b",
-      "prompt": "Pregunta 18 - Tarea 3 (consultar PDF original)",
+      "answer": "E",
+      "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
           "key": "A",
@@ -826,7 +826,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Varias personas comparten sus opiniones sobre la vida en el campo y la ciudad.\nAna: Me mude al campo hace dos anos y no me arrepiento. La tranquilidad y el aire puro no tienen precio.\nLuis: Vivo en Madrid desde que naci. Me encanta el ruido, la gente y tener todo cerca.\nCarmen: Creci en un pueblo pequeno pero me fui a la ciudad a estudiar. Echo de menos la vida tranquila.\nPedro: Tengo un apartamento en la ciudad pero los fines de semana me escapo a mi casa rural.\nElena: No podria vivir sin teatros, cines y restaurantes. La ciudad es mi habitat natural.\nJavier: Trabajo desde casa, asi que puedo vivir donde quiera. Elegi un pueblo cerca de la playa.\nMarta: El problema del campo es que necesitas coche para todo. En la ciudad puedes ir andando.\nRoberto: Mis hijos crecieron en la ciudad pero creo que habrian sido mas felices en el campo.",
       "explanation": "Respuesta: B"
     },
     {
@@ -839,41 +839,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "e",
-      "prompt": "Pregunta 19 - Tarea 4 (consultar PDF original)",
+      "answer": "A",
+      "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: E"
     },
     {
@@ -886,41 +886,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "b",
-      "prompt": "Pregunta 20 - Tarea 4 (consultar PDF original)",
+      "answer": "C",
+      "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: B"
     },
     {
@@ -933,41 +933,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "d",
-      "prompt": "Pregunta 21 - Tarea 4 (consultar PDF original)",
+      "answer": "D",
+      "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: D"
     },
     {
@@ -980,41 +980,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "h",
-      "prompt": "Pregunta 22 - Tarea 4 (consultar PDF original)",
+      "answer": "B",
+      "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: H"
     },
     {
@@ -1027,41 +1027,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "a",
-      "prompt": "Pregunta 23 - Tarea 4 (consultar PDF original)",
+      "answer": "F",
+      "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1074,41 +1074,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         19,
         24
       ],
-      "answer": "f",
-      "prompt": "Pregunta 24 - Tarea 4 (consultar PDF original)",
+      "answer": "E",
+      "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Investigar empresa"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Preparar respuestas"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ropa adecuada"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ser puntual"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Llevar CV"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Hacer preguntas"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Hablar rapido"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "Como preparar una entrevista de trabajo con exito:\n1. Investiga sobre la empresa antes de la entrevista. Conoce su historia, sus productos y sus valores.\n2. Prepara respuestas para las preguntas mas frecuentes como 'Hablame de ti' y 'Cuales son tus puntos fuertes'.\n3. Elige la ropa adecuada. Es mejor ir un poco mas formal que demasiado informal.\n4. Llega puntual. Lo ideal es llegar unos diez minutos antes de la hora.\n5. Lleva copias de tu curriculum y una libreta para tomar notas.\n6. Prepara algunas preguntas para hacer tu al final. Demuestra interes por el puesto.",
       "explanation": "Respuesta: F"
     },
     {
@@ -1121,25 +1121,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "b",
-      "prompt": "Pregunta 25 - Tarea 5 (consultar PDF original)",
+      "answer": "B",
+      "prompt": "Cual es el tema principal del texto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) El reciclaje y el medio ambiente"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) La musica y sus beneficios"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El deporte al aire libre"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1152,25 +1152,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Pregunta 26 - Tarea 5 (consultar PDF original)",
+      "answer": "A",
+      "prompt": "Segun el texto, que beneficios tiene escuchar musica?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Tirarlos todos juntos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Separarlos por tipos"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Quemarlos en casa"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1183,25 +1183,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "c",
-      "prompt": "Pregunta 27 - Tarea 5 (consultar PDF original)",
+      "answer": "C",
+      "prompt": "Que instrumento se recomienda aprender?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Productos caros"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Productos electronicos"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Productos de un solo uso"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1214,25 +1214,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Pregunta 28 - Tarea 5 (consultar PDF original)",
+      "answer": "A",
+      "prompt": "Que desarrolla aprender un instrumento?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Llevar tu propia bolsa al supermercado"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Comprar mas plastico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Tirar las botellas"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1245,25 +1245,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "c",
-      "prompt": "Pregunta 29 - Tarea 5 (consultar PDF original)",
+      "answer": "B",
+      "prompt": "A que edad se recomienda empezar?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) En fabricas de reciclaje"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) En centros comerciales"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) En vertederos o en el mar"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1276,25 +1276,25 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Pregunta 30 - Tarea 5 (consultar PDF original)",
+      "answer": "C",
+      "prompt": "Donde esta presente la musica segun el texto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Regalarlas a amigos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Reutilizarlas"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Tirarlas a la basura"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original: Nuevo DELE B1 (Ramon Diez Galan) para el texto completo de esta tarea.",
+      "cuerpo": "La musica forma parte de nuestras vidas desde que nacemos. Esta presente en celebraciones, momentos tristes e incluso en la publicidad. Los expertos aseguran que escuchar musica tiene muchos beneficios: reduce el estres, mejora el estado de animo y ayuda a concentrarse. Ademas, aprender a tocar un instrumento desarrolla la coordinacion y la disciplina. No importa la edad que tengas, nunca es tarde para empezar a aprender musica.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1308,19 +1308,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "c",
-      "prompt": "Tarea 1 - Pregunta 1",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 1.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1339,19 +1339,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "c",
-      "prompt": "Tarea 1 - Pregunta 2",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 2.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1370,19 +1370,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "a",
-      "prompt": "Tarea 1 - Pregunta 3",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 3.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1401,19 +1401,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "b",
-      "prompt": "Tarea 1 - Pregunta 4",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 4.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1432,19 +1432,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "c",
-      "prompt": "Tarea 1 - Pregunta 5",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 5.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1463,19 +1463,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         6
       ],
       "answer": "a",
-      "prompt": "Tarea 1 - Pregunta 6",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 6.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1494,19 +1494,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "c",
-      "prompt": "Tarea 2 - Pregunta 7",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 7.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1525,19 +1525,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "a",
-      "prompt": "Tarea 2 - Pregunta 8",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 8.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1556,19 +1556,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "b",
-      "prompt": "Tarea 2 - Pregunta 9",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 9.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1587,19 +1587,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "a",
-      "prompt": "Tarea 2 - Pregunta 10",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 10.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1618,19 +1618,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "c",
-      "prompt": "Tarea 2 - Pregunta 11",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 11.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1649,19 +1649,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         12
       ],
       "answer": "b",
-      "prompt": "Tarea 2 - Pregunta 12",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 12.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1680,7 +1680,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "f",
-      "prompt": "Tarea 3 - Pregunta 13",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
       "options": [
         {
           "key": "A",
@@ -1731,7 +1731,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "d",
-      "prompt": "Tarea 3 - Pregunta 14",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 14.",
       "options": [
         {
           "key": "A",
@@ -1782,7 +1782,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "a",
-      "prompt": "Tarea 3 - Pregunta 15",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
       "options": [
         {
           "key": "A",
@@ -1833,7 +1833,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "h",
-      "prompt": "Tarea 3 - Pregunta 16",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
       "options": [
         {
           "key": "A",
@@ -1884,7 +1884,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "c",
-      "prompt": "Tarea 3 - Pregunta 17",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
       "options": [
         {
           "key": "A",
@@ -1935,7 +1935,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         18
       ],
       "answer": "b",
-      "prompt": "Tarea 3 - Pregunta 18",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
       "options": [
         {
           "key": "A",
@@ -1986,7 +1986,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "c",
-      "prompt": "Tarea 4 - Pregunta 19",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 19.",
       "options": [
         {
           "key": "A",
@@ -2029,7 +2029,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "g",
-      "prompt": "Tarea 4 - Pregunta 20",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 20.",
       "options": [
         {
           "key": "A",
@@ -2072,7 +2072,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "a",
-      "prompt": "Tarea 4 - Pregunta 21",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 21.",
       "options": [
         {
           "key": "A",
@@ -2115,7 +2115,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "d",
-      "prompt": "Tarea 4 - Pregunta 22",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 22.",
       "options": [
         {
           "key": "A",
@@ -2158,7 +2158,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "f",
-      "prompt": "Tarea 4 - Pregunta 23",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 23.",
       "options": [
         {
           "key": "A",
@@ -2201,7 +2201,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         24
       ],
       "answer": "e",
-      "prompt": "Tarea 4 - Pregunta 24",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 24.",
       "options": [
         {
           "key": "A",
@@ -2244,19 +2244,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "a",
-      "prompt": "Tarea 5 - Pregunta 25",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 25.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2275,19 +2275,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "c",
-      "prompt": "Tarea 5 - Pregunta 26",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 26.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2306,19 +2306,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "b",
-      "prompt": "Tarea 5 - Pregunta 27",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 27.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2337,19 +2337,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "b",
-      "prompt": "Tarea 5 - Pregunta 28",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 28.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2368,19 +2368,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "c",
-      "prompt": "Tarea 5 - Pregunta 29",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 29.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2399,19 +2399,19 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         30
       ],
       "answer": "b",
-      "prompt": "Tarea 5 - Pregunta 30",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 30.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2468,12 +2468,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Exposicion oral - El voluntariado (3-4 min)",
+      "prompt": "Tarea 1: Exposicion oral - Modelo 2",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Exponga su opinion sobre la importancia del voluntariado en la sociedad actual.",
-      "modelo_response": "Buenos dias. Hoy quisiera reflexionar sobre un tema que considero fundamental: el voluntariado. Pienso que el trabajo voluntario no solo beneficia a quienes reciben la ayuda, sino tambien a quienes la ofrecen. En primer lugar, gracias a los voluntarios, muchas organizaciones pueden desarrollar proyectos que de otra manera serian inviables. En segundo lugar, el voluntariado nos permite conocer realidades diferentes, desarrollar habilidades como la empatia y el trabajo en equipo, y sentirnos utiles. Sin embargo, creo que en nuestro pais el voluntariado no esta suficientemente valorado. Muchas personas piensan que no tienen tiempo, cuando en realidad dedicar dos horas a la semana puede marcar una gran diferencia. En conclusion, animo a todos a explorar las opciones de voluntariado que existen en su comunidad. No solo ayudaran a los demas, sino que tambien creceran como personas. Muchas gracias."
+      "instrucciones": "Prepare una exposicion oral de 3-4 minutos sobre el tema propuesto. Exponga ventajas e inconvenientes y de su opinion personal.",
+      "modelo_response": "Buenos dias. Hoy quisiera reflexionar sobre un tema que considero fundamental: el voluntariado. Pienso que el trabajo voluntario no solo beneficia a quienes reciben la ayuda, sino tambien a quienes la ofrecen. En primer lugar, gracias a los voluntarios, muchas organizaciones pueden desarrollar proyectos que de otra manera serian inviables. En segundo lugar, el voluntariado nos permite conocer realidades diferentes, desarrollar habilidades como la empatia y el trabajo en equipo, y sentirnos utiles. Sin embargo, creo que en nuestro pais el voluntariado no esta suficientemente valorado. Muchas personas piensan que no tienen tiempo, cuando en realidad dedicar dos horas a la semana puede marcar una gran diferencia. En conclusion, animo a todos a explorar las opciones de voluntariado que existen en su comunidad. No solo ayudaran a los demas, sino que tambien creceran como personas. Muchas gracias.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m2",
@@ -2486,11 +2487,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Descripcion de imagen - Mercado tradicional (3-4 min)",
+      "prompt": "Tarea 2: Descripcion de imagen - Modelo 2",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "En esta imagen podemos ver un mercado tradicional al aire libre. En primer plano hay varios puestos de frutas y verduras con colores muy vivos: tomates rojos, limones amarillos y lechugas verdes. Los vendedores estan atendiendo a los clientes, que parecen estar eligiendo los productos con cuidado. Al fondo se ven mas puestos de ropa y artesania. Me imagino que es sabado por la manana porque hay bastante gente. Esta escena me recuerda al mercado de mi barrio, donde suelo ir con mi madre los fines de semana. Me gusta comprar en el mercado porque los productos son mas frescos y puedes hablar directamente con los vendedores, que siempre te dan buenos consejos. Ademas, creo que es importante apoyar el comercio local frente a las grandes superficies."
+      "modelo_response": "En esta imagen podemos ver un mercado tradicional al aire libre. En primer plano hay varios puestos de frutas y verduras con colores muy vivos: tomates rojos, limones amarillos y lechugas verdes. Los vendedores estan atendiendo a los clientes, que parecen estar eligiendo los productos con cuidado. Al fondo se ven mas puestos de ropa y artesania. Me imagino que es sabado por la manana porque hay bastante gente. Esta escena me recuerda al mercado de mi barrio, donde suelo ir con mi madre los fines de semana. Me gusta comprar en el mercado porque los productos son mas frescos y puedes hablar directamente con los vendedores, que siempre te dan buenos consejos. Ademas, creo que es importante apoyar el comercio local frente a las grandes superficies.",
+      "instrucciones": "Observe la imagen y describala durante 2-3 minutos. Imagine la situacion: que esta pasando, donde estan, que sienten los personajes.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m2",
@@ -2503,11 +2506,13 @@ window.DELE_BANK_B1_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Conversacion - Grafico sobre habitos de lectura (3-4 min)",
+      "prompt": "Tarea 3: Conversacion sobre grafico - Modelo 2",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "El grafico muestra los habitos de lectura en Espana. Lo que mas me sorprende es que casi el 40% de los espanoles no lee nunca o casi nunca. Esto me parece preocupante porque la lectura tiene muchos beneficios: mejora el vocabulario, la ortografia y la capacidad de concentracion. Por otro lado, el dato positivo es que las mujeres leen mas que los hombres en todas las franjas de edad. En mi caso, intento leer al menos un libro al mes. Creo que los padres y los profesores tienen un papel fundamental para fomentar la lectura desde pequenos. Si los ninos ven a los adultos leer, es mas probable que ellos tambien desarrollen ese habito."
+      "modelo_response": "El grafico muestra los habitos de lectura en Espana. Lo que mas me sorprende es que casi el 40% de los espanoles no lee nunca o casi nunca. Esto me parece preocupante porque la lectura tiene muchos beneficios: mejora el vocabulario, la ortografia y la capacidad de concentracion. Por otro lado, el dato positivo es que las mujeres leen mas que los hombres en todas las franjas de edad. En mi caso, intento leer al menos un libro al mes. Creo que los padres y los profesores tienen un papel fundamental para fomentar la lectura desde pequenos. Si los ninos ven a los adultos leer, es mas probable que ellos tambien desarrollen ese habito.",
+      "instrucciones": "Observe el grafico y converse con el entrevistador durante 3-4 minutos. Comente los datos, haga comparaciones y de su opinion.",
+      "rango_palabras": "3-4 min"
     }
   ]
 };

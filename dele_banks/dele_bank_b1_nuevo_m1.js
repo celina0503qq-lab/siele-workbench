@@ -461,45 +461,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "H",
-      "prompt": "Hace senderismo con su perro.",
+      "answer": "A",
+      "prompt": "Aprendio un idioma por motivos laborales.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: H"
     },
     {
@@ -512,45 +512,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "D",
-      "prompt": "Nada tres veces por semana.",
+      "answer": "C",
+      "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: D"
     },
     {
@@ -564,44 +564,44 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         18
       ],
       "answer": "B",
-      "prompt": "Hace yoga en casa.",
+      "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: B"
     },
     {
@@ -614,45 +614,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "G",
-      "prompt": "Corre por el parque cada manana.",
+      "answer": "D",
+      "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: G"
     },
     {
@@ -665,45 +665,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "A",
-      "prompt": "Va al gimnasio a levantar pesas.",
+      "answer": "G",
+      "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: A"
     },
     {
@@ -716,45 +716,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         13,
         18
       ],
-      "answer": "F",
-      "prompt": "Baila salsa y bachata.",
+      "answer": "E",
+      "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Laura"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diego"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Sofia"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Andres"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Claudia"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Roberto"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Natalia"
+          "text": "H)"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Varias personas hablan sobre como se mantienen en forma.\nMarcos: Voy al gimnasio cinco dias a la semana. Me encanta levantar pesas.\nLaura: Prefiero hacer yoga en casa. Es mas relajante y no necesito salir.\nDiego: Juego al futbol con mis amigos todos los domingos.\nSofia: Me gusta nadar. Voy a la piscina municipal tres veces por semana.\nAndres: Monto en bicicleta para ir al trabajo. Son unos 10 kilometros cada dia.\nClaudia: Bailo salsa y bachata. Es divertido y ademas hago ejercicio.\nRoberto: Corro por el parque todas las mananas antes de desayunar.\nNatalia: Hago senderismo los fines de semana con mi perro.",
+      "cuerpo": "Varias personas nos cuentan sus experiencias con el aprendizaje de idiomas.\nAna: Empece a estudiar frances hace tres anos por trabajo. Al principio fue muy dificil, pero ahora puedo mantener conversaciones basicas.\nLuis: Aprendi ingles viendo series y peliculas con subtitulos. Creo que es la mejor forma de aprender un idioma.\nCarmen: Fui a vivir a Alemania durante un ano. Alli aprendi aleman por necesidad, hablando con la gente todos los dias.\nPedro: Estudio italiano porque mi novia es de Roma. Quiero poder hablar con su familia cuando vayamos a visitarlos.\nElena: Me gusta mucho el japones. Estudio por mi cuenta con aplicaciones y libros, pero es un idioma muy dificil.\nJavier: Aprendi portugues en Brasil durante un intercambio universitario. Fue una experiencia increible.\nMarta: Hablo cuatro idiomas: espanol, catalan, ingles y frances. Los aprendi todos en la escuela y en la universidad.\nRoberto: Nunca he sido bueno con los idiomas. Lo intente con el ingles durante anos pero no hay manera.",
       "explanation": "Respuesta: F"
     },
     {
@@ -767,41 +767,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "C",
-      "prompt": "Que hay que hacer antes de la entrevista? Investigar la empresa.",
+      "answer": "A",
+      "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: C"
     },
     {
@@ -814,41 +814,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "G",
-      "prompt": "Que hay que hacer al llegar? Ser puntual.",
+      "answer": "C",
+      "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: G"
     },
     {
@@ -861,41 +861,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "A",
-      "prompt": "Como hay que vestir? De forma adecuada.",
+      "answer": "D",
+      "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: A"
     },
     {
@@ -908,41 +908,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "D",
-      "prompt": "Como hay que hablar? Con claridad y mirando a los ojos.",
+      "answer": "B",
+      "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: D"
     },
     {
@@ -956,40 +956,40 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         24
       ],
       "answer": "F",
-      "prompt": "Que hacer despues? Enviar correo de agradecimiento.",
+      "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: F"
     },
     {
@@ -1002,41 +1002,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         19,
         24
       ],
-      "answer": "B",
-      "prompt": "Que actitud mantener? Tener paciencia.",
+      "answer": "E",
+      "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
           "key": "A",
-          "text": "A) Vestir adecuado"
+          "text": "A) LED duran mas"
         },
         {
           "key": "B",
-          "text": "B) Tener paciencia"
+          "text": "B) Apagar standby"
         },
         {
           "key": "C",
-          "text": "C) Investigar empresa"
+          "text": "C) Luz natural"
         },
         {
           "key": "D",
-          "text": "D) Hablar con claridad"
+          "text": "D) Cargas completas"
         },
         {
           "key": "E",
-          "text": "E) Hacer preguntas"
+          "text": "E) Temperatura nevera"
         },
         {
           "key": "F",
-          "text": "F) Correo agradecimiento"
+          "text": "F) Bajar calefaccion"
         },
         {
           "key": "G",
-          "text": "G) Ser puntual"
+          "text": "G) Abrir ventanas"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consejos para una entrevista de trabajo.\nAntes de la entrevista, es fundamental investigar sobre la empresa. Busca informacion en su pagina web y en redes sociales.\nEl dia de la entrevista, llega puntual, mejor diez minutos antes que un minuto tarde.\nViste de forma adecuada. No hace falta ir muy elegante, pero tampoco en chandal.\nDurante la entrevista, habla con claridad y mira a los ojos. No tengas miedo de hacer preguntas.\nDespues de la entrevista, envia un correo de agradecimiento. Es un detalle que los entrevistadores valoran mucho.\nPor ultimo, ten paciencia. Los procesos de seleccion pueden durar varias semanas.",
+      "cuerpo": "Consejos para ahorrar energia en casa:\n1. Cambia las bombillas tradicionales por LED. Duran mas y consumen hasta un 80% menos.\n2. No dejes los aparatos en modo 'standby'. Aunque parezca que estan apagados, siguen consumiendo electricidad.\n3. Aprovecha la luz natural. Abre las cortinas y persianas durante el dia en vez de encender lamparas.\n4. Pon la lavadora y el lavavajillas solo cuando esten llenos. Asi ahorraras agua y electricidad.\n5. Ajusta la temperatura del frigorifico. Con 5 grados en la nevera y -18 en el congelador es suficiente.\n6. Si tienes calefaccion, baja la temperatura un grado. Ahorraras un 7% de energia y apenas notaras la diferencia.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1050,24 +1050,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Que porcentaje prefiere el modelo hibrido?",
+      "prompt": "Cual es el tema principal del texto?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) El reciclaje y el medio ambiente"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) La musica y sus beneficios"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) El deporte al aire libre"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1081,24 +1081,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Cual es un beneficio del teletrabajo?",
+      "prompt": "Segun el texto, que debemos hacer con los residuos en casa?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) Tirarlos todos juntos"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) Separarlos por tipos"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) Quemarlos en casa"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1112,24 +1112,24 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Cual es una desventaja del teletrabajo?",
+      "prompt": "Que tipo de productos debemos reducir?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) Productos caros"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) Productos electronicos"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) Productos de un solo uso"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1142,25 +1142,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "B",
-      "prompt": "Que recomiendan los expertos?",
+      "answer": "A",
+      "prompt": "Que gesto individual se menciona como positivo?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) Llevar tu propia bolsa al supermercado"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) Comprar mas plastico"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) Tirar las botellas"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: B"
     },
     {
@@ -1173,25 +1173,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "A",
-      "prompt": "Que porcentaje quiere volver a la oficina siempre?",
+      "answer": "C",
+      "prompt": "Donde acaban los residuos si no los gestionamos bien?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) En fabricas de reciclaje"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) En centros comerciales"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) En vertederos o en el mar"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: A"
     },
     {
@@ -1204,25 +1204,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         25,
         30
       ],
-      "answer": "C",
-      "prompt": "Que es importante mantener?",
+      "answer": "B",
+      "prompt": "Que se recomienda hacer con las botellas?",
       "options": [
         {
           "key": "A",
-          "text": "A) 65% hibrido / Beneficio: ahorro tiempo"
+          "text": "A) Regalarlas a amigos"
         },
         {
           "key": "B",
-          "text": "B) 15% oficina / Desventaja: aislamiento"
+          "text": "B) Reutilizarlas"
         },
         {
           "key": "C",
-          "text": "C) Recomendacion: horario fijo"
+          "text": "C) Tirarlas a la basura"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "El teletrabajo ha cambiado la forma en que muchas personas trabajan. Segun un estudio reciente, el 65% de los trabajadores espanoles prefieren un modelo hibrido, combinando dias de oficina con dias en casa. Solo el 15% quiere volver a la oficina todos los dias.\nLos principales beneficios del teletrabajo son el ahorro de tiempo en desplazamientos y la mayor flexibilidad horaria. Sin embargo, tambien existen desventajas como el aislamiento social y la dificultad para separar la vida laboral de la personal.\nLos expertos recomiendan establecer un horario fijo, tener un espacio de trabajo dedicado y hacer pausas regulares. Ademas, es importante mantener el contacto con los companeros a traves de videollamadas.",
+      "cuerpo": "El reciclaje es una de las acciones mas importantes que podemos hacer para proteger el medio ambiente. Cada dia generamos una gran cantidad de residuos y, si no los gestionamos bien, acaban en vertederos o en el mar. Por eso, es fundamental separar los residuos en casa: plastico, papel, vidrio y materia organica. Ademas, es importante reducir el consumo de productos de un solo uso y reutilizar todo lo que podamos. Pequenos gestos como llevar tu propia bolsa al supermercado o usar botellas reutilizables pueden marcar una gran diferencia.",
       "explanation": "Respuesta: C"
     },
     {
@@ -1240,15 +1240,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Del nuevo centro comercial"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) De un restaurante"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) De una tienda de ropa"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1271,15 +1271,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Informacion de horarios"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Una mesa para cenar"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Una habitacion de hotel"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1302,15 +1302,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Lluvioso y frio"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Nublado con viento"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Soleado con 30 grados"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1333,15 +1333,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Clases de yoga"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Clases de ingles"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Clases de cocina"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1364,15 +1364,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De cocina tradicional"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) De fotografia de monumentos"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) De pintura al aire libre"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1395,15 +1395,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Un gato"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Un pajaro"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Un perro"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1426,15 +1426,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1457,15 +1457,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1488,15 +1488,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1519,15 +1519,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1550,15 +1550,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1581,15 +1581,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luis"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Marta"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Ninguno de los dos"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1612,35 +1612,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1663,35 +1663,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1714,35 +1714,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1765,35 +1765,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1816,35 +1816,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1867,35 +1867,35 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ana"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Carlos"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Diana"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Ernesto"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Fatima"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Gonzalo"
+          "text": "F)"
         },
         {
           "key": "G",
-          "text": "G) Helena"
+          "text": "G)"
         },
         {
           "key": "H",
-          "text": "H) Ignacio"
+          "text": "H)"
         }
       ],
       "type": "choice8",
@@ -1918,27 +1918,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -1961,27 +1961,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -2004,27 +2004,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -2047,27 +2047,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -2090,27 +2090,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -2133,27 +2133,27 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Leer en el parque"
+          "text": "A)"
         },
         {
           "key": "B",
-          "text": "B) Ver series en casa"
+          "text": "B)"
         },
         {
           "key": "C",
-          "text": "C) Salir a correr"
+          "text": "C)"
         },
         {
           "key": "D",
-          "text": "D) Cocinar con amigos"
+          "text": "D)"
         },
         {
           "key": "E",
-          "text": "E) Viajar los fines de semana"
+          "text": "E)"
         },
         {
           "key": "F",
-          "text": "F) Ir al gimnasio"
+          "text": "F)"
         }
       ],
       "type": "choice6",
@@ -2176,15 +2176,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclar los residuos"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Comprar menos plastico"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Usar menos el coche"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2207,15 +2207,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Apagar las luces al salir"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Comprar electrodomesticos eficientes"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Cerrar el grifo al lavarse los dientes"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2238,15 +2238,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) La bicicleta"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) El transporte publico"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) El coche electrico"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2269,15 +2269,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Reciclarlos correctamente"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Quemarlos en casa"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Enterrarlos en el jardin"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2300,15 +2300,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Diez personas"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Cuarenta personas"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Cien personas"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2331,15 +2331,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Cinco litros"
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) Ocho litros"
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) Doce litros"
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2396,12 +2396,13 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         1
       ],
       "answer": "",
-      "prompt": "Exposicion: Turismo sostenible (3-4 min)",
+      "prompt": "Tarea 1: Exposicion oral - Modelo 1",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Exponga su opinion sobre el turismo sostenible.",
-      "modelo_response": "Buenos dias. Voy a hablar sobre el turismo sostenible. El turismo es una gran industria pero tiene impacto negativo en el medio ambiente. El turismo de masas contamina y hace subir los precios de vivienda. El turismo sostenible ofrece una alternativa: alojamientos ecologicos, consumir productos locales, evitar temporada alta. Todos tenemos la responsabilidad de viajar de forma consciente. No se trata de dejar de viajar, sino de hacerlo mejor. Muchas gracias."
+      "instrucciones": "Prepare una exposicion oral de 3-4 minutos sobre el tema propuesto. Exponga ventajas e inconvenientes y de su opinion personal.",
+      "modelo_response": "Buenos dias. Voy a hablar sobre el turismo sostenible. El turismo es una gran industria pero tiene impacto negativo en el medio ambiente. El turismo de masas contamina y hace subir los precios de vivienda. El turismo sostenible ofrece una alternativa: alojamientos ecologicos, consumir productos locales, evitar temporada alta. Todos tenemos la responsabilidad de viajar de forma consciente. No se trata de dejar de viajar, sino de hacerlo mejor. Muchas gracias.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m1",
@@ -2414,12 +2415,13 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         2
       ],
       "answer": "",
-      "prompt": "Descripcion de imagen: Estacion de tren",
+      "prompt": "Tarea 2: Descripcion de imagen - Modelo 1",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Describa la imagen.",
-      "modelo_response": "Veo varias personas en una estacion de tren. Parece por la manana. Una mujer compra un billete mientras un hombre espera con dos maletas. Al fondo, el panel de salidas. Creo que estan de viaje. Me gusta viajar en tren porque es comodo, ves el paisaje y es mas ecologico que el avion."
+      "instrucciones": "Observe la imagen y describala durante 2-3 minutos. Imagine la situacion: que esta pasando, donde estan, que sienten los personajes.",
+      "modelo_response": "Veo varias personas en una estacion de tren. Parece por la manana. Una mujer compra un billete mientras un hombre espera con dos maletas. Al fondo, el panel de salidas. Creo que estan de viaje. Me gusta viajar en tren porque es comodo, ves el paisaje y es mas ecologico que el avion.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m1",
@@ -2432,12 +2434,13 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         3
       ],
       "answer": "",
-      "prompt": "Conversacion: Consumo de agua",
+      "prompt": "Tarea 3: Conversacion sobre grafico - Modelo 1",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Comente el grafico sobre consumo de agua.",
-      "modelo_response": "El grafico muestra el consumo de agua por persona. Me llama la atencion la gran diferencia: EE.UU. consume casi 300 litros diarios mientras en paises africanos es menos de 20 litros. Esto es muy injusto. Debemos reducir el consumo con gestos como cerrar el grifo al lavarse los dientes. Los gobiernos deberian invertir en riego agricola eficiente. El agua es un recurso limitado y debemos cuidarlo."
+      "instrucciones": "Observe el grafico y converse con el entrevistador durante 3-4 minutos. Comente los datos, haga comparaciones y de su opinion.",
+      "modelo_response": "El grafico muestra el consumo de agua por persona. Me llama la atencion la gran diferencia: EE.UU. consume casi 300 litros diarios mientras en paises africanos es menos de 20 litros. Esto es muy injusto. Debemos reducir el consumo con gestos como cerrar el grifo al lavarse los dientes. Los gobiernos deberian invertir en riego agricola eficiente. El agua es un recurso limitado y debemos cuidarlo.",
+      "rango_palabras": "3-4 min"
     }
   ]
 };

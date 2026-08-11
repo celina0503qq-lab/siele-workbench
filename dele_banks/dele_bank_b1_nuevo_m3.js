@@ -521,8 +521,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "f",
-      "prompt": "Pregunta 13 - Tarea 3",
+      "answer": "A",
+      "prompt": "Aprendio un idioma por motivos laborales.",
       "options": [
         {
           "key": "A",
@@ -559,7 +559,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -571,8 +571,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "d",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "answer": "C",
+      "prompt": "Vivio en otro pais y aprendio el idioma por inmersion.",
       "options": [
         {
           "key": "A",
@@ -609,7 +609,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -621,8 +621,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "h",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "answer": "B",
+      "prompt": "Aprendio un idioma viendo la television.",
       "options": [
         {
           "key": "A",
@@ -659,7 +659,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -671,8 +671,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "a",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "answer": "D",
+      "prompt": "Estudia un idioma por su pareja.",
       "options": [
         {
           "key": "A",
@@ -709,7 +709,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -721,8 +721,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "e",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "answer": "G",
+      "prompt": "Domina mas de tres idiomas.",
       "options": [
         {
           "key": "A",
@@ -759,7 +759,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -771,8 +771,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         13,
         18
       ],
-      "answer": "g",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "answer": "E",
+      "prompt": "Estudia un idioma muy dificil por su cuenta.",
       "options": [
         {
           "key": "A",
@@ -809,7 +809,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Varias personas comparten sus experiencias con diferentes medios de transporte.\nAna: Uso el metro todos los dias. Es rapido, puntual y no tengo que preocuparme por el trafico.\nLuis: Prefiero la bicicleta. Voy al trabajo en bici todos los dias y asi hago ejercicio.\nCarmen: Me acabo de comprar un coche electrico. Estoy encantada, gasta muy poco y no contamina.\nPedro: Viajo mucho por trabajo, asi que el avion es mi segundo hogar. Este ano he hecho mas de 50 vuelos.\nElena: Me gusta caminar. Si el sitio esta a menos de media hora, voy andando.\nJavier: Uso el autobus porque la parada esta justo al lado de mi casa. Es comodo y barato.\nMarta: Tengo moto desde los 18 anos. Es la mejor forma de moverse por la ciudad, aparcas en cualquier sitio.\nRoberto: Prefiero el tren para viajes largos. Es mas comodo que el avion y puedes ver el paisaje."
     },
     {
       "modelo": "nuevo_m3",
@@ -821,41 +821,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "e",
-      "prompt": "Pregunta 19 - Tarea 4",
+      "answer": "A",
+      "prompt": "Que tipo de bombillas se recomiendan?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -867,41 +867,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "b",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "answer": "C",
+      "prompt": "Que hacer con las cortinas durante el dia?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -913,41 +913,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "c",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "answer": "D",
+      "prompt": "Cuando hay que poner la lavadora?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -959,41 +959,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "g",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "answer": "B",
+      "prompt": "Que hacer con los aparatos que no se usan?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -1005,41 +1005,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "a",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "answer": "F",
+      "prompt": "Que temperatura tener en el congelador?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -1051,41 +1051,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         19,
         24
       ],
-      "answer": "d",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "answer": "E",
+      "prompt": "Que ajuste hacer en el frigorifico?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Mejora memoria"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ayuda a dormir"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Vocabulario rico"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Reduce estres"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Desarrolla empatia"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ejercicio mental"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Cansa la vista"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Beneficios de leer todos los dias:\n1. La lectura mejora la memoria y la concentracion. Al leer, tu cerebro crea nuevas conexiones.\n2. Leer antes de dormir ayuda a conciliar el sueno mejor que mirar pantallas.\n3. Las personas que leen habitualmente tienen un vocabulario mas rico y se expresan mejor.\n4. La lectura reduce el estres. Segun un estudio, leer solo seis minutos al dia reduce el estres un 68%.\n5. Leer ficcion desarrolla la empatia, ya que te pone en el lugar de otros personajes.\n6. La lectura es un ejercicio mental que ayuda a prevenir el deterioro cognitivo en la vejez."
     },
     {
       "modelo": "nuevo_m3",
@@ -1097,25 +1097,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "b",
-      "prompt": "Pregunta 25 - Tarea 5",
+      "answer": "A",
+      "prompt": "Cual es el tema principal del texto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) El reciclaje y el medio ambiente"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) La musica y sus beneficios"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El deporte al aire libre"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1127,25 +1127,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Pregunta 26 - Tarea 5",
+      "answer": "B",
+      "prompt": "Que ventaja tiene hacer deporte al aire libre?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Tirarlos todos juntos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Separarlos por tipos"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Quemarlos en casa"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1157,25 +1157,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "c",
-      "prompt": "Pregunta 27 - Tarea 5",
+      "answer": "C",
+      "prompt": "Cuanto ejercicio recomiendan los medicos?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Productos caros"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Productos electronicos"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Productos de un solo uso"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1187,25 +1187,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "b",
-      "prompt": "Pregunta 28 - Tarea 5",
+      "answer": "A",
+      "prompt": "Que vitamina se obtiene del sol?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Llevar tu propia bolsa al supermercado"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Comprar mas plastico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Tirar las botellas"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1217,25 +1217,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "c",
-      "prompt": "Pregunta 29 - Tarea 5",
+      "answer": "C",
+      "prompt": "Que actividad NO se menciona en el texto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) En fabricas de reciclaje"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) En centros comerciales"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) En vertederos o en el mar"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1247,25 +1247,25 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         25,
         30
       ],
-      "answer": "a",
-      "prompt": "Pregunta 30 - Tarea 5",
+      "answer": "B",
+      "prompt": "Que sensacion produce el deporte al aire libre?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Regalarlas a amigos"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Reutilizarlas"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Tirarlas a la basura"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Consultar el PDF original para el texto completo de esta tarea."
+      "cuerpo": "Cada vez son mas las personas que deciden hacer deporte al aire libre en lugar de ir al gimnasio. Correr por el parque, hacer senderismo o montar en bicicleta son actividades que no requieren una gran inversion y permiten disfrutar de la naturaleza. Ademas, hacer ejercicio al aire libre tiene beneficios adicionales como la vitamina D del sol y la sensacion de libertad. Los medicos recomiendan al menos 30 minutos de actividad fisica moderada al dia."
     },
     {
       "modelo": "nuevo_m3",
@@ -1278,19 +1278,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "a",
-      "prompt": "Tarea 1 - Pregunta 1",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 1.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1309,19 +1309,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "c",
-      "prompt": "Tarea 1 - Pregunta 2",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 2.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1340,19 +1340,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "b",
-      "prompt": "Tarea 1 - Pregunta 3",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 3.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1371,19 +1371,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "a",
-      "prompt": "Tarea 1 - Pregunta 4",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 4.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1402,19 +1402,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "c",
-      "prompt": "Tarea 1 - Pregunta 5",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 5.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1433,19 +1433,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         6
       ],
       "answer": "b",
-      "prompt": "Tarea 1 - Pregunta 6",
+      "prompt": "Escucha el audio y responde. Tarea 1, pregunta 6.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1464,19 +1464,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "c",
-      "prompt": "Tarea 2 - Pregunta 7",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 7.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1495,19 +1495,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "a",
-      "prompt": "Tarea 2 - Pregunta 8",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 8.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1526,19 +1526,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "b",
-      "prompt": "Tarea 2 - Pregunta 9",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 9.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1557,19 +1557,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "a",
-      "prompt": "Tarea 2 - Pregunta 10",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 10.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1588,19 +1588,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "b",
-      "prompt": "Tarea 2 - Pregunta 11",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 11.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1619,19 +1619,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         12
       ],
       "answer": "c",
-      "prompt": "Tarea 2 - Pregunta 12",
+      "prompt": "Escucha el audio y responde. Tarea 2, pregunta 12.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -1650,7 +1650,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "f",
-      "prompt": "Tarea 3 - Pregunta 13",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 13.",
       "options": [
         {
           "key": "A",
@@ -1701,7 +1701,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "a",
-      "prompt": "Tarea 3 - Pregunta 14",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 14.",
       "options": [
         {
           "key": "A",
@@ -1752,7 +1752,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "g",
-      "prompt": "Tarea 3 - Pregunta 15",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 15.",
       "options": [
         {
           "key": "A",
@@ -1803,7 +1803,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "e",
-      "prompt": "Tarea 3 - Pregunta 16",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 16.",
       "options": [
         {
           "key": "A",
@@ -1854,7 +1854,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "h",
-      "prompt": "Tarea 3 - Pregunta 17",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 17.",
       "options": [
         {
           "key": "A",
@@ -1905,7 +1905,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         18
       ],
       "answer": "c",
-      "prompt": "Tarea 3 - Pregunta 18",
+      "prompt": "Escucha el audio y responde. Tarea 3, pregunta 18.",
       "options": [
         {
           "key": "A",
@@ -1956,7 +1956,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "h",
-      "prompt": "Tarea 4 - Pregunta 19",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 19.",
       "options": [
         {
           "key": "A",
@@ -1999,7 +1999,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "f",
-      "prompt": "Tarea 4 - Pregunta 20",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 20.",
       "options": [
         {
           "key": "A",
@@ -2042,7 +2042,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "d",
-      "prompt": "Tarea 4 - Pregunta 21",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 21.",
       "options": [
         {
           "key": "A",
@@ -2085,7 +2085,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "b",
-      "prompt": "Tarea 4 - Pregunta 22",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 22.",
       "options": [
         {
           "key": "A",
@@ -2128,7 +2128,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "a",
-      "prompt": "Tarea 4 - Pregunta 23",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 23.",
       "options": [
         {
           "key": "A",
@@ -2171,7 +2171,7 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         24
       ],
       "answer": "e",
-      "prompt": "Tarea 4 - Pregunta 24",
+      "prompt": "Escucha el audio y responde. Tarea 4, pregunta 24.",
       "options": [
         {
           "key": "A",
@@ -2214,19 +2214,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "c",
-      "prompt": "Tarea 5 - Pregunta 25",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 25.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2245,19 +2245,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "a",
-      "prompt": "Tarea 5 - Pregunta 26",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 26.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2276,19 +2276,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "b",
-      "prompt": "Tarea 5 - Pregunta 27",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 27.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2307,19 +2307,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "c",
-      "prompt": "Tarea 5 - Pregunta 28",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 28.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2338,19 +2338,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "a",
-      "prompt": "Tarea 5 - Pregunta 29",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 29.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2369,19 +2369,19 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         30
       ],
       "answer": "b",
-      "prompt": "Tarea 5 - Pregunta 30",
+      "prompt": "Escucha el audio y responde. Tarea 5, pregunta 30.",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Opcion A"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Opcion B"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Opcion C"
         }
       ],
       "type": "choice3",
@@ -2438,11 +2438,13 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         1
       ],
       "answer": "",
-      "prompt": "Tarea 1: Exposicion oral - Ventajas del deporte (3-4 min)",
+      "prompt": "Tarea 1: Exposicion oral - Modelo 3",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "Hoy quiero hablar de los beneficios del deporte. Practicar ejercicio regularmente no solo mejora nuestra salud fisica sino tambien la mental. Por un lado, hacer deporte reduce el riesgo de enfermedades cardiovasculares, ayuda a controlar el peso y fortalece los huesos. Por otro lado, esta demostrado que libera endorfinas, las hormonas de la felicidad, que nos ayudan a combatir el estres y la ansiedad. Ademas, el deporte en equipo fomenta valores como el companerismo y el respeto. Sin embargo, en nuestra sociedad cada vez somos mas sedentarios. Pasamos demasiadas horas sentados frente al ordenador. Por eso creo que es fundamental que desde la infancia se fomente la actividad fisica en las escuelas. En conclusion, animo a todos a encontrar un deporte que les guste y a practicarlo con regularidad."
+      "modelo_response": "Hoy quiero hablar de los beneficios del deporte. Practicar ejercicio regularmente no solo mejora nuestra salud fisica sino tambien la mental. Por un lado, hacer deporte reduce el riesgo de enfermedades cardiovasculares, ayuda a controlar el peso y fortalece los huesos. Por otro lado, esta demostrado que libera endorfinas, las hormonas de la felicidad, que nos ayudan a combatir el estres y la ansiedad. Ademas, el deporte en equipo fomenta valores como el companerismo y el respeto. Sin embargo, en nuestra sociedad cada vez somos mas sedentarios. Pasamos demasiadas horas sentados frente al ordenador. Por eso creo que es fundamental que desde la infancia se fomente la actividad fisica en las escuelas. En conclusion, animo a todos a encontrar un deporte que les guste y a practicarlo con regularidad.",
+      "instrucciones": "Prepare una exposicion oral de 3-4 minutos sobre el tema propuesto. Exponga ventajas e inconvenientes y de su opinion personal.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m3",
@@ -2455,11 +2457,13 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2: Descripcion de imagen - Biblioteca (3-4 min)",
+      "prompt": "Tarea 2: Descripcion de imagen - Modelo 3",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "Veo una biblioteca moderna con grandes ventanales. Hay varias personas leyendo y estudiando en silencio. En las mesas del fondo veo a un grupo de jovenes que parecen estar preparando un examen. Una senora mayor hojea una revista en la zona de lectura. Me gusta el ambiente tranquilo de las bibliotecas, son lugares perfectos para concentrarse. Creo que las bibliotecas son espacios muy valiosos para la comunidad porque ofrecen acceso gratuito a la cultura y al conocimiento. Deberiamos utilizarlas mas."
+      "modelo_response": "Veo una biblioteca moderna con grandes ventanales. Hay varias personas leyendo y estudiando en silencio. En las mesas del fondo veo a un grupo de jovenes que parecen estar preparando un examen. Una senora mayor hojea una revista en la zona de lectura. Me gusta el ambiente tranquilo de las bibliotecas, son lugares perfectos para concentrarse. Creo que las bibliotecas son espacios muy valiosos para la comunidad porque ofrecen acceso gratuito a la cultura y al conocimiento. Deberiamos utilizarlas mas.",
+      "instrucciones": "Observe la imagen y describala durante 2-3 minutos. Imagine la situacion: que esta pasando, donde estan, que sienten los personajes.",
+      "rango_palabras": "3-4 min"
     },
     {
       "modelo": "nuevo_m3",
@@ -2472,11 +2476,13 @@ window.DELE_BANK_B1_NUEVO_M3 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3: Conversacion - Grafico sobre uso del transporte (3-4 min)",
+      "prompt": "Tarea 3: Conversacion sobre grafico - Modelo 3",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "modelo_response": "El grafico muestra el uso de diferentes medios de transporte en las ciudades espanolas. El coche sigue siendo el mas utilizado, con un 45%, lo que me parece preocupante por la contaminacion que genera. El transporte publico representa un 30%, una cifra que deberia ser mayor. La bicicleta solo supone un 10%, aunque esta creciendo en los ultimos anos. Personalmente, uso el metro para ir al trabajo porque es rapido y evito los atascos. Creo que los ayuntamientos deberian invertir mas en carriles bici y en mejorar el transporte publico para animar a la gente a dejar el coche en casa."
+      "modelo_response": "El grafico muestra el uso de diferentes medios de transporte en las ciudades espanolas. El coche sigue siendo el mas utilizado, con un 45%, lo que me parece preocupante por la contaminacion que genera. El transporte publico representa un 30%, una cifra que deberia ser mayor. La bicicleta solo supone un 10%, aunque esta creciendo en los ultimos anos. Personalmente, uso el metro para ir al trabajo porque es rapido y evito los atascos. Creo que los ayuntamientos deberian invertir mas en carriles bici y en mejorar el transporte publico para animar a la gente a dejar el coche en casa.",
+      "instrucciones": "Observe el grafico y converse con el entrevistador durante 3-4 minutos. Comente los datos, haga comparaciones y de su opinion.",
+      "rango_palabras": "3-4 min"
     }
   ]
 };
