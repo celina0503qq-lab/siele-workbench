@@ -15,18 +15,18 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-08-10 第 9 期 — 主题：晨间日常 · 西班牙节日传统 · 数字化转型 · 欧洲移民辩论
+// 1) 2026-08-09 第 8 期 — 主题：周日家庭聚餐 · 橄榄油文化 · 意大利儿童肥胖 · AI设计病毒
 window.REFINE_PACKS = {
-  "2026-08-10": {
-    date: "2026-08-10",
-    weekday: "一",
+  "2026-08-11": {
+    date: "2026-08-11",
+    weekday: "二",
     issue: 9,
-    theme: "晨间日常 · 西班牙节日传统 · 数字化转型 · 欧洲移民辩论",
+    theme: "早上日常 · 西班牙音乐节 · 远程办公与城市 · 地震与城市韧性",
     sources: [
-      { level: "A1", source: "DELE Ahora", sourceUrl: "", topic: "La rutina matutina de Carlos" },
-      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Las fiestas populares en España" },
-      { level: "B1", source: "Fundación Telefónica", sourceUrl: "", topic: "La transformación digital en España" },
-      { level: "B2", source: "BBC Mundo / RTVE", sourceUrl: "https://www.rtve.es/noticias/20260612/claves-pacto-europeo-sobre-migracion-asilo/17110937.shtml", topic: "El debate migratorio en Europa" }
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La rutina de la mañana: un día normal en España" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Festivales de verano en España: música, cultura y turismo" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Teletrabajo y transformación urbana en España" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/cly5720pnz4o", topic: "Resiliencia urbana: lecciones del terremoto en Colombia" }
     ]
   },
   "2026-08-03": {
