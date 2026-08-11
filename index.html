@@ -12274,9 +12274,15 @@ window._deleAdminCancelEdit = function(btn){
 };
 // 渲染管理员编辑按钮标签 (仅管理员可见)
 window._deleAdminEditBtn = function(key, field, isShared){
-  if (typeof isMainAdmin !== 'function' || !isMainAdmin()) return '';
+  // 直接读 session 判断管理员, 不依赖 isMainAdmin (跨script块可能未定义)
+  var isAdmin = false;
+  try {
+    var _raw = localStorage.getItem('swa_cloud_session_v1');
+    if (_raw) { var _s = JSON.parse(_raw); isAdmin = !!(_s && _s.role === 'admin'); }
+  } catch(e) {}
+  if (!isAdmin) return '';
   var hasEdit = window._deleAdminEdits && window._deleAdminEdits[key] && window._deleAdminEdits[key][field] !== undefined;
-  var h = '<span class="dele-admin-edit-btn" data-key="' + esc(key) + '" data-field="' + esc(field) + '" onclick="_deleAdminStartEdit(this)" style="cursor:pointer;font-size:12px;opacity:0.4;transition:opacity .2s;margin-left:4px;user-select:none" title="管理员编辑: ' + esc(field) + '" onmouseenter="this.style.opacity=\'1\'" onmouseleave="this.style.opacity=\'0.4\'">✏️</span>';
+  var h = '<span class="dele-admin-edit-btn" data-key="' + esc(key) + '" data-field="' + esc(field) + '" onclick="_deleAdminStartEdit(this)" style="cursor:pointer;font-size:13px;color:#3b82f6;opacity:0.5;transition:opacity .2s;margin-left:6px;user-select:none;display:inline-block;vertical-align:middle" title="点击编辑: ' + esc(field) + '" onmouseenter="this.style.opacity=\'1\'" onmouseleave="this.style.opacity=\'0.5\'">✏️</span>';
   if (hasEdit) {
     h += '<span onclick="_deleAdminRevertEdit(\'' + esc(key) + '\',\'' + esc(field) + '\')" style="cursor:pointer;font-size:11px;opacity:0.5;margin-left:2px;user-select:none" title="还原原始内容" onmouseenter="this.style.opacity=\'1\'" onmouseleave="this.style.opacity=\'0.5\'">↩️</span>';
   }
