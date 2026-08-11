@@ -1085,15 +1085,15 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🐟 Pescado con patatas"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🥩 Carne con arroz"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🥗 Ensalada verde"
         }
       ],
       "type": "choice3",
@@ -1116,15 +1116,15 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 👨‍🏫 Profesor de escuela"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🚕 Taxista conduciendo"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 👨‍🍳 Cocinero en cocina"
         }
       ],
       "type": "choice3",
@@ -1147,15 +1147,15 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 👗 Vestido de fiesta"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 👟 Zapatos deportivos"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 👜 Bolso de mano"
         }
       ],
       "type": "choice3",
@@ -1178,15 +1178,15 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 👛 Cartera con dinero"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 💳 Tarjeta de crédito"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🔑 Llaves de casa"
         }
       ],
       "type": "choice3",
@@ -1209,15 +1209,15 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🥤 Refresco con hielo"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🍺 Cerveza fría"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) ☕ Café caliente"
         }
       ],
       "type": "choice3",
@@ -1240,35 +1240,35 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🏛️ Horario de museo 08:00-12:00"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🎬 Cartel de cine Star Wars"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🏫 Escuela de idiomas (inglés, francés)"
         },
         {
           "key": "D",
-          "text": "D) Imagen D"
+          "text": "D) 📅 Calendario: 29 julio - 8 agosto"
         },
         {
           "key": "E",
-          "text": "E) Imagen E"
+          "text": "E) 🪩 Discoteca con luces y DJ"
         },
         {
           "key": "F",
-          "text": "F) Imagen F"
+          "text": "F) 🚫 No escribir en la pizarra"
         },
         {
           "key": "G",
-          "text": "G) Imagen G"
+          "text": "G) 💻 Persona trabajando en oficina"
         },
         {
           "key": "H",
-          "text": "H) Imagen H"
+          "text": "H) ✈️ Billete de avión: 425€"
         }
       ],
       "type": "choice8",
@@ -1291,35 +1291,35 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🏛️ Horario de museo 08:00-12:00"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🎬 Cartel de cine Star Wars"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🏫 Escuela de idiomas (inglés, francés)"
         },
         {
           "key": "D",
-          "text": "D) Imagen D"
+          "text": "D) 📅 Calendario: 29 julio - 8 agosto"
         },
         {
           "key": "E",
-          "text": "E) Imagen E"
+          "text": "E) 🪩 Discoteca con luces y DJ"
         },
         {
           "key": "F",
-          "text": "F) Imagen F"
+          "text": "F) 🚫 No escribir en la pizarra"
         },
         {
           "key": "G",
-          "text": "G) Imagen G"
+          "text": "G) 💻 Persona trabajando en oficina"
         },
         {
           "key": "H",
-          "text": "H) Imagen H"
+          "text": "H) ✈️ Billete de avión: 425€"
         }
       ],
       "type": "choice8",
@@ -1342,35 +1342,35 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🏛️ Horario de museo 08:00-12:00"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🎬 Cartel de cine Star Wars"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🏫 Escuela de idiomas (inglés, francés)"
         },
         {
           "key": "D",
-          "text": "D) Imagen D"
+          "text": "D) 📅 Calendario: 29 julio - 8 agosto"
         },
         {
           "key": "E",
-          "text": "E) Imagen E"
+          "text": "E) 🪩 Discoteca con luces y DJ"
         },
         {
           "key": "F",
-          "text": "F) Imagen F"
+          "text": "F) 🚫 No escribir en la pizarra"
         },
         {
           "key": "G",
-          "text": "G) Imagen G"
+          "text": "G) 💻 Persona trabajando en oficina"
         },
         {
           "key": "H",
-          "text": "H) Imagen H"
+          "text": "H) ✈️ Billete de avión: 425€"
         }
       ],
       "type": "choice8",
@@ -1393,35 +1393,35 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🏛️ Horario de museo 08:00-12:00"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🎬 Cartel de cine Star Wars"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🏫 Escuela de idiomas (inglés, francés)"
         },
         {
           "key": "D",
-          "text": "D) Imagen D"
+          "text": "D) 📅 Calendario: 29 julio - 8 agosto"
         },
         {
           "key": "E",
-          "text": "E) Imagen E"
+          "text": "E) 🪩 Discoteca con luces y DJ"
         },
         {
           "key": "F",
-          "text": "F) Imagen F"
+          "text": "F) 🚫 No escribir en la pizarra"
         },
         {
           "key": "G",
-          "text": "G) Imagen G"
+          "text": "G) 💻 Persona trabajando en oficina"
         },
         {
           "key": "H",
-          "text": "H) Imagen H"
+          "text": "H) ✈️ Billete de avión: 425€"
         }
       ],
       "type": "choice8",
@@ -1444,35 +1444,35 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Imagen A"
+          "text": "A) 🏛️ Horario de museo 08:00-12:00"
         },
         {
           "key": "B",
-          "text": "B) Imagen B"
+          "text": "B) 🎬 Cartel de cine Star Wars"
         },
         {
           "key": "C",
-          "text": "C) Imagen C"
+          "text": "C) 🏫 Escuela de idiomas (inglés, francés)"
         },
         {
           "key": "D",
-          "text": "D) Imagen D"
+          "text": "D) 📅 Calendario: 29 julio - 8 agosto"
         },
         {
           "key": "E",
-          "text": "E) Imagen E"
+          "text": "E) 🪩 Discoteca con luces y DJ"
         },
         {
           "key": "F",
-          "text": "F) Imagen F"
+          "text": "F) 🚫 No escribir en la pizarra"
         },
         {
           "key": "G",
-          "text": "G) Imagen G"
+          "text": "G) 💻 Persona trabajando en oficina"
         },
         {
           "key": "H",
-          "text": "H) Imagen H"
+          "text": "H) ✈️ Billete de avión: 425€"
         }
       ],
       "type": "choice8",
