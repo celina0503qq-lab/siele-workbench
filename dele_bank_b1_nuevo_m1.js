@@ -1416,24 +1416,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 7 - Tarea 2",
+      "prompt": "Quien fue a la playa el fin de semana?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -1446,24 +1447,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "B",
-      "prompt": "Pregunta 8 - Tarea 2",
+      "prompt": "Quien fue a la cafeteria el sabado?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -1476,24 +1478,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 9 - Tarea 2",
+      "prompt": "Quien se quedo en casa estudiando?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -1506,24 +1509,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 10 - Tarea 2",
+      "prompt": "Quien fue a la cafeteria el viernes?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -1536,24 +1540,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "B",
-      "prompt": "Pregunta 11 - Tarea 2",
+      "prompt": "Quien dice que el cafe es buenisimo?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -1566,24 +1571,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 12 - Tarea 2",
+      "prompt": "Quien fue a la playa con amigos?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Luis"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Marta"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Ninguno de los dos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Luis: Hola Marta, que tal el fin de semana? Marta: Muy bien, fui a la playa con unos amigos. Luis: Que suerte! Yo me quede en casa estudiando. Marta: Tienes que salir mas. Por cierto, has visto la nueva cafeteria? Luis: Si, fui el viernes. El cafe es buenisimo. Marta: Yo fui el sabado. Me encanto el ambiente. Luis: Deberiamos ir juntos algun dia. Marta: Claro, esta semana si quieres.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -1596,44 +1602,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "F",
-      "prompt": "Pregunta 13 - Tarea 3",
+      "prompt": "Es periodista.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: F"
     },
     {
       "modelo": "nuevo_m1",
@@ -1646,44 +1653,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "prompt": "Es profesor/a de matematicas.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -1696,44 +1704,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "G",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "prompt": "Es abogado/a.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: G"
     },
     {
       "modelo": "nuevo_m1",
@@ -1746,44 +1755,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "E",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "prompt": "Tiene un restaurante.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m1",
@@ -1796,44 +1806,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "H",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "prompt": "Es informatico/a.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: H"
     },
     {
       "modelo": "nuevo_m1",
@@ -1846,44 +1857,45 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "prompt": "Es arquitecto/a.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Ana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Carlos"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Diana"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Ernesto"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Fatima"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Gonzalo"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Helena"
         },
         {
           "key": "H",
-          "text": "H)"
+          "text": "H) Ignacio"
         }
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Ocho personas hablan sobre sus profesiones. Ana: Soy profesora de matematicas en un instituto. Carlos: Trabajo en un hospital, soy enfermero. Diana: Soy arquitecta, diseno edificios. Ernesto: Tengo un restaurante, soy cocinero. Fatima: Soy periodista, escribo para un periodico. Gonzalo: Soy taxista, conozco todas las calles. Helena: Soy abogada, trabajo en un bufete. Ignacio: Soy informatico, arreglo ordenadores.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -1896,36 +1908,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "D",
-      "prompt": "Pregunta 19 - Tarea 4",
+      "prompt": "Cocina con amigos los sabados.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: D"
     },
     {
       "modelo": "nuevo_m1",
@@ -1938,36 +1951,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "A",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "prompt": "Lee en el parque cuando hace bueno.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -1980,36 +1994,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "F",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "prompt": "Va al gimnasio tres veces por semana.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: F"
     },
     {
       "modelo": "nuevo_m1",
@@ -2022,36 +2037,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "B",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "prompt": "Prefiere ver series en casa.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -2064,36 +2080,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "C",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "prompt": "Sale a correr todas las mananas.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -2106,36 +2123,37 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         12
       ],
       "answer": "E",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "prompt": "Le gusta viajar los fines de semana.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Leer en el parque"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver series en casa"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Salir a correr"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Cocinar con amigos"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Viajar los fines de semana"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Ir al gimnasio"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Seis personas hablan de sus aficiones. Persona 1: Me encanta leer en el parque cuando hace buen tiempo. Persona 2: Todos los sabados cocino con mis amigos. Persona 3: Me gusta mucho viajar, aunque solo sea por un fin de semana. Persona 4: Voy al gimnasio tres veces por semana. Persona 5: Salgo a correr todas las mananas antes de trabajar. Persona 6: Prefiero quedarme en casa y ver series.",
+      "explanation": "Respuesta: E"
     },
     {
       "modelo": "nuevo_m1",
@@ -2148,24 +2166,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 25 - Tarea 5",
+      "prompt": "Cual es la primera recomendacion?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -2178,24 +2197,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 26 - Tarea 5",
+      "prompt": "Cual es una medida para ahorrar en casa?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",
@@ -2208,24 +2228,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 27 - Tarea 5",
+      "prompt": "Que medio de transporte se recomienda?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -2238,24 +2259,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "A",
-      "prompt": "Pregunta 28 - Tarea 5",
+      "prompt": "Que hacer con los residuos?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: A"
     },
     {
       "modelo": "nuevo_m1",
@@ -2268,24 +2290,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "B",
-      "prompt": "Pregunta 29 - Tarea 5",
+      "prompt": "Cuantas personas puede llevar un autobus?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: B"
     },
     {
       "modelo": "nuevo_m1",
@@ -2298,24 +2321,25 @@ window.DELE_BANK_B1_NUEVO_M1 = {
         30
       ],
       "answer": "C",
-      "prompt": "Pregunta 30 - Tarea 5",
+      "prompt": "Cuantos litros se ahorran al cerrar el grifo?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Reciclar mas"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Usar transporte publico"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Ahorrar agua"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "(consultar audio YouTube: Nuevo DELE B1)"
+      "transcript": "Locutor: Hoy vamos a hablar de como podemos ayudar al medio ambiente. En primer lugar, es importante reciclar mas. Muchos residuos acaban en vertederos cuando podrian reutilizarse. En segundo lugar, debemos usar mas el transporte publico. Un autobus puede llevar a cuarenta personas mientras que la mayoria de los coches solo llevan una. Por ultimo, tenemos que ahorrar agua. Cerrar el grifo al lavarse los dientes puede ahorrar hasta doce litros de agua al dia.",
+      "explanation": "Respuesta: C"
     },
     {
       "modelo": "nuevo_m1",

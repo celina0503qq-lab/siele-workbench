@@ -1049,24 +1049,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "A",
-      "prompt": "Conversacion 1",
+      "prompt": "Para que llama la mujer al medico?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Para pedir una cita"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Para cancelar una cita"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Para preguntar el horario"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 1: Mujer llama al medico para pedir cita. Recepcionista ofrece el jueves a las 10:00.",
+      "transcript": "Mujer: Buenos dias, llamaba para pedir cita con el doctor Garcia. Recepcionista: Le va bien el jueves a las diez? Mujer: Si, perfecto. Recepcionista: Muy bien, reserva confirmada.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1080,24 +1080,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "C",
-      "prompt": "Conversacion 2",
+      "prompt": "De que hablan los dos amigos?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) De un partido de futbol"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) De un examen"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) De una fiesta de cumpleanos"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 2: Dos amigos hablan sobre una fiesta de cumpleanos el sabado. Van a comprar un regalo.",
+      "transcript": "Hombre: Vas a ir a la fiesta de cumpleanos de Marta el sabado? Mujer: Claro, no me lo pierdo. Que le vamos a regalar? Hombre: Podemos comprarle algo entre los dos. Mujer: Buena idea, un libro o unos pendientes?",
       "explanation": "正确答案: C。"
     },
     {
@@ -1111,24 +1111,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "B",
-      "prompt": "Conversacion 3",
+      "prompt": "Que informacion pide el hombre en la estacion?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) El precio del billete"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) El horario del proximo tren"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El numero del anden"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 3: Hombre pregunta en la estacion por el proximo tren a Barcelona. Sale a las 14:15.",
+      "transcript": "Hombre: Perdone, a que hora sale el proximo tren a Barcelona? Empleado: A las 14:15 del anden numero 3. Hombre: Gracias. Queda mucho tiempo? Empleado: Unos veinte minutos.",
       "explanation": "正确答案: B。"
     },
     {
@@ -1142,24 +1142,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "A",
-      "prompt": "Conversacion 4",
+      "prompt": "Que busca la senora en la tienda?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Un vestido para una boda"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Unos zapatos para una fiesta"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) Un regalo para su hija"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 4: Senora busca un vestido para una boda. Dependienta muestra varios modelos.",
+      "transcript": "Senora: Buenos dias, estoy buscando un vestido para la boda de mi sobrina. Dependienta: Tenemos varios modelos muy bonitos. De que color lo prefiere? Senora: Azul o verde. Dependienta: Mire estos de la nueva coleccion.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1173,24 +1173,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "C",
-      "prompt": "Conversacion 5",
+      "prompt": "Que necesita el estudiante para usar el ordenador de la biblioteca?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) Pagar una tarifa"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) El permiso del profesor"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El carne de la universidad"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 5: Estudiante pregunta en la biblioteca si puede usar el ordenador. Necesita el carne.",
+      "transcript": "Estudiante: Hola, puedo usar uno de los ordenadores? Bibliotecaria: Si, pero necesitas tu carne de la universidad. Estudiante: Aqui lo tengo. Bibliotecaria: Perfecto, el ordenador numero 5 esta libre.",
       "explanation": "正确答案: C。"
     },
     {
@@ -1204,24 +1204,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "B",
-      "prompt": "Conversacion 6",
+      "prompt": "Cuando tienen que terminar el proyecto?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) El lunes"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) Antes del viernes"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El proximo mes"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 6: Companeros de trabajo hablan sobre un proyecto urgente. Tienen que terminarlo antes del viernes.",
+      "transcript": "Mujer: Has terminado tu parte del proyecto? Hombre: Casi, me queda poco. Mujer: Date prisa, tenemos que entregarlo antes del viernes. Hombre: No te preocupes, manana lo termino.",
       "explanation": "正确答案: B。"
     },
     {
@@ -1235,24 +1235,24 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         7
       ],
       "answer": "A",
-      "prompt": "Conversacion 7",
+      "prompt": "Que curso de cocina le interesa a la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) "
+          "text": "A) El de cocina italiana"
         },
         {
           "key": "B",
-          "text": "B) "
+          "text": "B) El de cocina japonesa"
         },
         {
           "key": "C",
-          "text": "C) "
+          "text": "C) El de reposteria"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Conversacion 7: Mujer pide informacion sobre cursos de cocina. Hay uno de cocina italiana que empieza el lunes.",
+      "transcript": "Mujer: Buenos dias, llamaba para informarme sobre los cursos de cocina. Recepcionista: Tenemos de cocina italiana, japonesa y de reposteria. Mujer: Me interesa el de cocina italiana. Cuando empieza? Recepcionista: El proximo lunes.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1266,36 +1266,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "F",
-      "prompt": "Pregunta 8 - Tarea 2",
+      "prompt": "Tuvo un accidente hace poco.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1308,36 +1308,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "D",
-      "prompt": "Pregunta 9 - Tarea 2",
+      "prompt": "Cambio de trabajo por salud.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1350,36 +1350,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "A",
-      "prompt": "Pregunta 10 - Tarea 2",
+      "prompt": "Se mudo a otra ciudad.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1392,36 +1392,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "E",
-      "prompt": "Pregunta 11 - Tarea 2",
+      "prompt": "Estudia por las noches.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1434,36 +1434,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "C",
-      "prompt": "Pregunta 12 - Tarea 2",
+      "prompt": "Hace deporte por recomendacion medica.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1476,36 +1476,36 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "B",
-      "prompt": "Pregunta 13 - Tarea 2",
+      "prompt": "Trabaja desde casa.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Marcos"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Lucia"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Javier"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Carmen"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Andres"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Elena"
         }
       ],
       "type": "choice6",
       "_v5": true,
-      "transcript": "(Tarea 2 - consultar audio YouTube)"
+      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
     },
     {
       "modelo": "nuevo_m1",
@@ -1518,40 +1518,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "E",
-      "prompt": "Pregunta 14 - Tarea 3",
+      "prompt": "Va al supermercado los sabados.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1564,40 +1564,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "F",
-      "prompt": "Pregunta 15 - Tarea 3",
+      "prompt": "No le gusta cocinar.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1610,40 +1610,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "C",
-      "prompt": "Pregunta 16 - Tarea 3",
+      "prompt": "Come mucha fruta y verdura.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1656,40 +1656,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "G",
-      "prompt": "Pregunta 17 - Tarea 3",
+      "prompt": "Le encantan los dulces.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1702,40 +1702,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "A",
-      "prompt": "Pregunta 18 - Tarea 3",
+      "prompt": "Bebe dos litros de agua al dia.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1748,40 +1748,40 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         19
       ],
       "answer": "B",
-      "prompt": "Pregunta 19 - Tarea 3",
+      "prompt": "Nunca desayuna.",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) Alicia"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Pablo"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) Marta"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) Diego"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Laura"
         },
         {
           "key": "F",
-          "text": "F)"
+          "text": "F) Sergio"
         },
         {
           "key": "G",
-          "text": "G)"
+          "text": "G) Claudia"
         }
       ],
       "type": "choice7",
       "_v5": true,
-      "transcript": "(Tarea 3 - consultar audio YouTube)"
+      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
     },
     {
       "modelo": "nuevo_m1",
@@ -1794,32 +1794,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "Pregunta 20 - Tarea 4",
+      "prompt": "Que dia van a quedar?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
@@ -1832,32 +1832,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "D",
-      "prompt": "Pregunta 21 - Tarea 4",
+      "prompt": "Donde van a encontrarse?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
@@ -1870,32 +1870,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "E",
-      "prompt": "Pregunta 22 - Tarea 4",
+      "prompt": "Que van a hacer despues de comer?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
@@ -1908,32 +1908,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Pregunta 23 - Tarea 4",
+      "prompt": "Que pelicula quieren ver?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
@@ -1946,32 +1946,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Pregunta 24 - Tarea 4",
+      "prompt": "A que hora empieza la pelicula?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
@@ -1984,32 +1984,32 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "Pregunta 25 - Tarea 4",
+      "prompt": "Como van a volver a casa?",
       "options": [
         {
           "key": "A",
-          "text": "A)"
+          "text": "A) El sabado por la manana"
         },
         {
           "key": "B",
-          "text": "B)"
+          "text": "B) Ver una pelicula de accion"
         },
         {
           "key": "C",
-          "text": "C)"
+          "text": "C) A las seis y media"
         },
         {
           "key": "D",
-          "text": "D)"
+          "text": "D) En la plaza del Ayuntamiento"
         },
         {
           "key": "E",
-          "text": "E)"
+          "text": "E) Ir al cine"
         }
       ],
       "type": "choice5",
       "_v5": true,
-      "transcript": "(Tarea 4 - consultar audio YouTube)"
+      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
     },
     {
       "modelo": "nuevo_m1",
