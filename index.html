@@ -12233,6 +12233,25 @@ window._deleAdminStartEdit = function(btn){
     outer = outer.parentElement;
   }
   if (!outer) return;
+  // 选项字段特殊处理: 显示JSON编辑器
+  if (field === 'options') {
+    var origHTML = outer.innerHTML;
+    var optsJSON = '[\n  {"key": "A", "text": "A) ..."},\n  {"key": "B", "text": "B) ..."},\n  {"key": "C", "text": "C) ..."}\n]';
+    if (window._deleAdminEdits && window._deleAdminEdits[key] && window._deleAdminEdits[key].options) {
+      optsJSON = JSON.stringify(window._deleAdminEdits[key].options, null, 2);
+    }
+    outer.setAttribute('data-orig-html', origHTML);
+    outer.innerHTML = '<div style="font-size:12px;color:#64748b;margin-bottom:4px">编辑选项 (JSON格式, key+text):</div>'+
+      '<textarea id="deleEditTA" style="width:100%;min-height:120px;padding:8px;border:2px solid #3b82f6;border-radius:8px;font-size:12px;font-family:monospace;line-height:1.5;resize:vertical">' + esc(optsJSON) + '</textarea>'+
+      '<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+        '<button class="btn sm pr" onclick="_deleAdminDoSave(this)" data-key="' + esc(key) + '" data-field="options" style="font-size:12px">💾 保存</button>'+
+        '<button class="btn sm ol" onclick="_deleAdminCancelEdit(this)" style="font-size:12px">❌ 取消</button>'+
+        '<span style="color:#64748b;font-size:10px">保存为JSON数组</span>'+
+      '</div>';
+    var ta = document.getElementById('deleEditTA');
+    if (ta) ta.focus();
+    return;
+  }
   var displayEl = outer.querySelector('.dele-editable-content');
   if (!displayEl) return;
   var currentVal = displayEl.textContent || displayEl.innerText || '';
@@ -12262,14 +12281,26 @@ window._deleAdminDoSave = function(btn){
   var ta = document.getElementById('deleEditTA');
   if (!ta) return;
   var val = ta.value;
-  window._deleAdminSaveEdit(key, field, val);
+  // 特殊处理: options字段需要解析JSON
+  if (field === 'options') {
+    try {
+      var parsed = JSON.parse(val);
+      if (!Array.isArray(parsed)) throw new Error('Not an array');
+      window._deleAdminSaveEdit(key, field, parsed);
+    } catch(e) {
+      if (window.toast) window.toast('JSON格式错误: ' + e.message);
+      return;
+    }
+  } else {
+    window._deleAdminSaveEdit(key, field, val);
+  }
 };
 window._deleAdminCancelEdit = function(btn){
-  // Walk up to find the container with data-orig-html
   var c = btn.parentElement;
   while (c && !c.hasAttribute('data-orig-html')) c = c.parentElement;
   if (c) {
     c.innerHTML = c.getAttribute('data-orig-html');
+    c.removeAttribute('data-orig-html');
   }
 };
 // 渲染管理员编辑按钮标签 (仅管理员可见)
