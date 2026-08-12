@@ -12349,55 +12349,79 @@ window._deleAdminEditBtn = function(key, field, isShared){
   }
   return h;
 };
-// ===== 管理员编辑 云同步 (GitHub Gist) =====
-var ADMIN_GIST_ID = (function(){ try { return JSON.parse(localStorage.getItem('dele_admin_gist_cfg')||'{}').gistId || ''; } catch(e) { return ''; } })();
-window._deleAdminSyncPending = false;
-window._deleAdminSyncToCloud = function(){
-  if (window._deleAdminSyncPending) return;
-  window._deleAdminSyncPending = true;
-  setTimeout(function(){
-    var edits = window._deleAdminEdits || {};
-    var data = JSON.stringify({v:1, ts: Date.now(), edits: edits});
-    // 使用 Gist API (需要 token) 或推送 JSON 文件到 GitHub Pages
-    // 优先尝试 Gist API
-    var cfg = (function(){ try { return JSON.parse(localStorage.getItem('dele_admin_gist_cfg')||'{}'); } catch(e) { return {}; } })();
-    if (cfg.token && cfg.gistId) {
-      fetch('https://api.github.com/gists/'+cfg.gistId, {
-        method: 'PATCH',
-        headers: {'Authorization':'token '+cfg.token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
-        body: JSON.stringify({files:{'dele_admin_edits.json':{content:data}}})
-      }).then(function(r){ return r.json(); }).then(function(d){
-        console.log('[AdminSync] Gist updated:', d.id);
-      }).catch(function(e){
-        console.warn('[AdminSync] Gist failed:', e.message);
-      }).finally(function(){ window._deleAdminSyncPending = false; });
-    } else {
-      // 无 Gist 配置: 仅 localStorage
-      window._deleAdminSyncPending = false;
+// ===== 管理员编辑 云同步 (CloudBase NoSQL + GitHub Pages备用) =====
+window._deleCloudBridgeReady = false;
+window._deleCloudBridgeQueue = [];
+window._deleCloudBridgeInit = function(){
+  if (document.getElementById('wbAdminCloudBridge')) return;
+  var ifr = document.createElement('iframe');
+  ifr.id = 'wbAdminCloudBridge';
+  ifr.src = './admin.html';
+  ifr.style.cssText = 'display:none;width:0;height:0;border:0';
+  ifr.onload = function(){
+    window._deleCloudBridgeReady = true;
+    var q = window._deleCloudBridgeQueue;
+    window._deleCloudBridgeQueue = [];
+    for (var i = 0; i < q.length; i++) {
+      try { ifr.contentWindow.postMessage(q[i], location.origin); } catch(e) {}
     }
-  }, 2000); // 2秒防抖
+  };
+  document.body.appendChild(ifr);
 };
-// 从云端拉取管理员编辑 (所有用户页面加载时调用)
+// 通过 CloudBase 保存编辑
+window._deleAdminSyncToCloud = function(){
+  var msg = {type:'siele-admin-edits-save', edits: window._deleAdminEdits || {}};
+  var ifr = document.getElementById('wbAdminCloudBridge');
+  if (ifr && window._deleCloudBridgeReady) {
+    try { ifr.contentWindow.postMessage(msg, location.origin); } catch(e) {}
+  } else {
+    window._deleCloudBridgeQueue.push(msg);
+    if (!ifr) window._deleCloudBridgeInit();
+  }
+};
+// 从 CloudBase 拉取 (保存后延迟调用)
+window._deleAdminCloudFetch = function(){
+  var msg = {type:'siele-admin-edits-fetch'};
+  var ifr = document.getElementById('wbAdminCloudBridge');
+  if (ifr && window._deleCloudBridgeReady) {
+    try { ifr.contentWindow.postMessage(msg, location.origin); } catch(e) {}
+  } else {
+    window._deleCloudBridgeQueue.push(msg);
+    if (!ifr) window._deleCloudBridgeInit();
+  }
+};
+// 接收 CloudBase 返回
+window.addEventListener('message', function(e){
+  if (e.data && e.data.type === 'siele-admin-edits-result') {
+    if (e.data.edits && Object.keys(e.data.edits).length > 0) {
+      window._deleAdminEdits = e.data.edits;
+      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(e.data.edits)); } catch(x) {}
+      console.log('[CloudSync] Received ' + Object.keys(e.data.edits).length + ' edits');
+      if (typeof currentPage === 'string' && /^dele/.test(currentPage) && typeof activate === 'function') {
+        setTimeout(function(){ activate(); }, 300);
+      }
+    }
+  }
+});
+// 页面加载时从 GitHub Pages 拉取 (备用, 无 CloudBase 时使用)
 window._deleAdminFetchFromCloud = function(){
+  window._deleCloudBridgeInit();
+  setTimeout(function(){ window._deleAdminCloudFetch(); }, 3000);
+  // GitHub Pages 备用
   var url = 'https://celina0503qq-lab.github.io/siele-workbench/dele_admin_edits.json';
-  // 加时间戳避免缓存
   fetch(url + '?t=' + Date.now(), {cache: 'no-store'}).then(function(r){
     if (!r.ok) throw new Error('HTTP '+r.status);
     return r.json();
   }).then(function(d){
     if (d && d.edits && Object.keys(d.edits).length > 0) {
-      window._deleAdminEdits = d.edits;
-      // 同时更新 localStorage
-      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(d.edits)); } catch(e) {}
-      console.log('[AdminSync] Fetched ' + Object.keys(d.edits).length + ' edit keys from cloud');
+      var merged = Object.assign({}, d.edits, window._deleAdminEdits || {});
+      window._deleAdminEdits = merged;
+      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(merged)); } catch(e) {}
+      console.log('[GH Sync] Merged ' + Object.keys(d.edits).length + ' edits');
     }
-  }).catch(function(e){
-    // 云端不可用时回退到 localStorage
-    console.log('[AdminSync] Cloud fetch failed, using localStorage fallback');
-  });
+  }).catch(function(e){});
 };
-// 页面加载时自动从云端拉取
-window._deleAdminFetchFromCloud();
+setTimeout(function(){ window._deleAdminFetchFromCloud(); }, 500);
 
 // ===== 管理员选项编辑器 (增删选项) =====
 window._deleAdminNextOptKey = function(existing){
@@ -12838,30 +12862,25 @@ function _renderDeleA1ModeloList(task, mid, items){
         h += _renderDeleA1V5TaskCard(q);
         continue;
       }
-      // v5 听力题: per-question transcript (点击展开 · 管理员可编辑)
+      // v5 听力题: per-question transcript (点击展开, 管理员可点击 ✏️ 编辑)
       let transcriptHtml = '';
       if (q._v5 && q.transcript && q.prueba === 2 && !sharedTranscript) {
         var perQttsId = 'tts_'+q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
         var editedPerQTrans = window._deleAdminGetField(perQKey, 'transcript', q.transcript);
         window._deleTTSStore[perQttsId] = editedPerQTrans;
+        var ttsPlayBtn = '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(perQttsId)+'\')" style="font-size:12px">🔊 播放听力</button>';
+        var ttsStopBtn = '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>';
         transcriptHtml = '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-          '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(perQttsId)+'\')" style="font-size:12px">🔊 播放听力</button>'+
-          '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
+          ttsPlayBtn + ttsStopBtn +
           '<span style="display:inline-flex;gap:2px;align-items:center;font-size:10px;margin-left:2px">'+
             '<button class="btn sm dele-speed-btn on" data-rate="0.8" onclick="_deleTTSetRate(0.8)" style="font-size:9px;padding:1px 4px;min-width:unset">0.8x</button>'+
             '<button class="btn sm dele-speed-btn" data-rate="0.9" onclick="_deleTTSetRate(0.9)" style="font-size:9px;padding:1px 4px;min-width:unset">1x</button>'+
             '<button class="btn sm dele-speed-btn" data-rate="1.3" onclick="_deleTTSetRate(1.3)" style="font-size:9px;padding:1px 4px;min-width:unset">1.3x</button>'+
-          '</span>'+
-          '<button class="btn sm ol" onclick="_deleTTStop()" style="font-size:12px">⏹ 停止</button>'+
-          '<span style="color:#64748b;font-size:10px">TTS es-ES</span>'+
-          '</div>'+
-          '<details style="margin-top:4px"><summary style="cursor:pointer;font-size:12px;color:#94a3b8;font-weight:600;padding:2px 0">📝 听力原文 '+_deleAdminEditBtn(perQKey, 'transcript', false)+'</summary>'+
+          '</span></div>'+
+          '<details style="margin-top:4px"><summary style="cursor:pointer;font-size:12px;color:#64748b;font-weight:600;padding:2px 0">📝 听力原文 '+_deleAdminEditBtn(perQKey, 'transcript', false)+'</summary>'+
           '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-left:4px solid #0ea5e9;border-radius:8px;padding:12px 14px;margin-top:4px">'+
-            '<div class="dele-editable-content" style="white-space:pre-wrap;font-size:14px;line-height:1.8;color:#0c4a6e;font-weight:500">'+esc(editedPerQTrans)+'</div>';
-        if (q.audio) {
-          transcriptHtml += '<div style="margin-top:8px"><audio controls style="width:100%;height:36px" src="./assets/audio/'+esc(q.audio)+'"></audio></div>';
-        }
-        transcriptHtml += '</div></details>';
+            '<div class="dele-editable-content" style="white-space:pre-wrap;font-size:14px;line-height:1.8;color:#0c4a6e;font-weight:500">'+esc(editedPerQTrans)+'</div>'+
+          '</div></details>';
       }
       // per-question instrucciones (在不共享时显示, 写作/口语在 _renderDeleA1V5TaskCard 中处理)
       let instrHtml = '';
