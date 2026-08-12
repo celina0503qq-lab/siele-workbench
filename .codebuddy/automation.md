@@ -3,7 +3,7 @@
 > **项目**: SIELE 西语备考工作台 — 外刊精炼模块  
 > **仓库**: `celina0503qq-lab/siele-workbench`  
 > **GitHub Pages**: `https://celina0503qq-lab.github.io/siele-workbench/`  
-> **版本**: v3.2 (2026-08-11 · 第 10 期实战修订)
+> **版本**: v4 (2026-08-12 · 第 11 期实战修订)
 
 ---
 
@@ -80,29 +80,6 @@
 - **期号**（递增，查看 `refine_data.js` 中最大 issue + 1）
 - **4 个主题方向**（A1 生活场景 → A2 文化/社会 → B1 经济/科技趋势 → B2 深度分析/争议话题）
 
-> 🚫 **【最高优先级】禁止覆盖前一期（第 10 期教训）**
-> 
-> 执行本步骤时，**必须先从线上拉取 `refine_data.js`**，确认当前最大期号和已有日期条目。不得依赖本地缓存或上一次执行的记忆。
->
-> ```bash
-> # 强制在线检查（不可跳过）
-> TOKEN=$(cat /tmp/gh_token)
-> curl -s --resolve api.github.com:443:140.82.121.5 \
->   -H "Authorization: Bearer ${TOKEN}" \
->   -H "Accept: application/vnd.github+json" \
->   "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
->   | python3 -c "import json,sys,base64; d=json.load(sys.stdin); print(base64.b64decode(d['content']).decode())" \
->   | grep "issue:" | head -5
-> ```
->
-> **期号分配铁律**：
-> - `max_issue = max(all issue values from online refine_data.js)`
-> - `new_issue = max_issue + 1`
-> - **绝对禁止**：把当天日期硬编码为某个期号
-> - **绝对禁止**：跳过某一天不写 refine_data.js 条目（即使那天没有手动推送，也要补条目）
-> - 如果发现前一天缺失条目 → **先补充前一天**，再生成当天的
-> - 推送前再次从线上拉取 `refine_data.js` 的最新 SHA，防止并发覆盖
-
 ### 第 2 步：生成数据 JS 文件
 
 输出文件：`articles/data/<date>.js`
@@ -154,93 +131,27 @@ window.ARTICLES = {
 
 输出文件：`articles/<date>.html`
 
-> 🚫 **【最高优先级】HTML 数据内联方式（第 10 期教训）**
->
-> **禁止**让 Agent 直接在 HTML 中手写 WORDS/ARTICLES 数据。Agent 生成的 `zh` 值必然包含未转义的 ASCII 双引号 `"`（中文引号 `""` 在 Agent 输出中默认为 ASCII `"`），导致 JS 语法错误，页面无法打开。
->
-> **强制做法**：第 2 步生成 data JS 后已经验证语法正确。第 3 步的 HTML 数据块必须通过以下方式生成：
->
-> ```bash
-> # 从已验证的 data JS 提取数据，用 JSON.stringify 生成安全的内联代码
-> node -e "
-> const vm = require('vm'); const fs = require('fs');
-> const ctx = { window: {} }; vm.createContext(ctx);
-> vm.runInContext(fs.readFileSync('articles/data/<date>.js', 'utf8'), ctx);
-> const wordsJson = JSON.stringify(ctx.window.WORDS, null, 2);
-> const articlesJson = JSON.stringify(ctx.window.ARTICLES, null, 2);
-> fs.writeFileSync('/tmp/words_safe.json', wordsJson);
-> fs.writeFileSync('/tmp/articles_safe.json', articlesJson);
-> console.log('Data extracted OK, WORDS:', ctx.window.WORDS.length);
-> "
-> ```
->
-> 然后将 `/tmp/words_safe.json` 和 `/tmp/articles_safe.json` 的内容注入 HTML 模板中：
-> ```javascript
-> const WORDS = <words_safe.json 内容>;
-> const ARTICLES = <articles_safe.json 内容>;
-> ```
->
-> **原理**：`JSON.stringify` 自动将所有 `"` 转义为 `\"`，将 Unicode 字符正确处理，产出的 JS 字面量 100% 语法安全。
->
-> **HTML 组装流程**：
-> 1. 从 GitHub API 拉取最新一期模板 HTML（参考 6.9 节）
-> 2. 找到模板中 `const WORDS = [` 到 `/* ==================== 渲染函数 ==================== */` 之间的部分
-> 3. 用安全生成的 `const WORDS = <json>;\n\nconst ARTICLES = <json>;\n\n` 替换
-> 4. 更新 topbar 中的日期/期号/主题文字
-> 5. 更新各 article 的 source-cta href 和 h2 标题
-> 6. **验证**：`node -e "new Function(fs.readFileSync('articles/<date>.html','utf8').match(/<script>([\\s\\S]*?)<\\/script>/)[1])"` 必须通过
-> 7. **内容验证**：用 `vm.runInContext` 确认 15 WORDS + 各等级段数/题数正确
-
-**使用 v3 模板**（参考 2026-08-09 即第 8 期），关键特征：
+**使用 v3 模板**（参考 2026-08-06 至 2026-08-09 任意一期），关键特征：
 
 1. **数据内联**：WORDS 和 ARTICLES 数据直接写在 `<script>` 标签中，不引用外部 JS
    - 早期（08-02~05）使用外部 `articles/data/<date>.js` + `loadRefineData()` 动态加载
    - v2+（08-06 起）改为数据内联，独立页面不再依赖外部 JS 文件
    - **新生成页面一律使用内联模式**；外部 data JS 文件仅在工作台内置页面 `index.html` 中通过 `loadRefineData()` 使用
-
-2. **CSS 变量体系（骨架必须一致）**：
-   > ⚠️ **主体风格一致性原则**：允许每日微调色值，但 CSS 变量**名称**和**引用关系**必须严格沿用第 8 期模板。Agent 不可自创新的变量体系（如紫色 brand → 红色 brand 这种属于「换皮」而非「微调」）。
-
-   必须包含的 CSS 变量（参考第 8 期 `2026-08-09.html`）：
-   ```css
-   :root {
-     --bg: #f6f7fb;
-     --card: #ffffff;
-     --ink: #1f2937;
-     --muted: #6b7280;
-     --line: #e5e7eb;
-     --brand: #c0392b;        /* 品牌色，允许微调深浅 */
-     --brand-soft: #fff5f3;    /* 品牌淡色背景 */
-     --a1: #2e7d32;            /* A1 绿色系 */
-     --a2: #1565c0;            /* A2 蓝色系 */
-     --b1: #c12a2a;            /* B1 红色系 */
-     --b2: #6a1b9a;            /* B2 紫色系 */
-     --highlight: #e07a1f;     /* 高亮强调色（橙色） */
-     --highlight-bg: #fff3e0;  /* 高亮背景色 */
-     --es-bg: #f0f6fc;         /* ES 段落背景（淡蓝） */
-     --zh-bg: #fefcf5;         /* ZH 段落背景（暖白） */
-     --es-ink: #1b496b;        /* ES 文字色 */
-     --zh-ink: #2a2a2a;        /* ZH 文字色 */
-     --correct: #16a34a;       /* 正确答案绿 */
-     --wrong: #dc2626;         /* 错误答案红 */
-     --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
-   }
-   ```
+2. **CSS 必须包含**：
+   - CSS 变量体系（`--brand`, `--a1`~`--b2`, `--es-bg`, `--zh-bg` 等）
    - 段落语言标签 `.lang-tag`（ES / ZH 色块）
    - 原文链接按钮化 `.source-cta`（实心彩色按钮）
    - 高亮词后标记 `hl::after`（✦ 菱形符号）
-   - DELE 考点渐变背景（`brand-soft → #fff8e1`）
+   - DELE 考点渐变背景（紫色渐变）
    - Quiz 解析渐变背景（黄色渐变）
    - 提交按钮 disabled 态
    - 中文字体栈（`PingFang SC`, `Microsoft YaHei`）
    - 响应式 `@media (max-width: 720px)`
    - **Quiz 持久化控件样式**（`.quiz-controls`, `.quiz-reset-btn`, `.quiz-notes-btn`, `.quiz-history` 等）
-
 3. **HTML 结构必须包含**：
    - 目录含各等级"阅读"和"习题"独立锚点
    - 快速跳转分区（阅读 + 习题分别跳转）
    - **Quiz 控件区**（重新做题、历史记录、笔记区按钮）
-
 4. **JS 渲染必须包含**：
    - `renderVocab()` — 词汇卡片含 释义/例句/翻译/记忆提示 标签
    - `renderArticle(key)` — 段落含 ES/ZH 语言标签
@@ -302,36 +213,6 @@ submit.onclick = function() {
 
 ### 第 5 步：更新索引文件
 
-> 🚫 **【最高优先级】索引更新安全检查（第 10 期教训）**
-
-更新 `refine_data.js` 前，**必须**执行以下检查：
-
-```bash
-# 1. 从线上拉取最新版本（防止 SHA 过期导致 409 Conflict）
-SHA=$(curl -s --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
-  | python3 -c "import json,sys; print(json.load(sys.stdin)['sha'])")
-
-# 2. 拉取内容，检查是否已有今天条目
-curl -s --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/refine_data.js" \
-  | python3 -c "import json,sys,base64; print(base64.b64decode(json.load(sys.stdin)['content']).decode())" \
-  > /tmp/refine_online.js
-
-# 3. 检查是否已有当天条目
-grep "\"<date>\"" /tmp/refine_online.js && echo "WARNING: 当天条目已存在！" || echo "OK: 可以新增"
-
-# 4. 检查前一天的条目是否存在
-PREV_DATE=$(date -d "<date> -1 day" +%Y-%m-%d)
-grep "\"${PREV_DATE}\"" /tmp/refine_online.js || echo "WARNING: 前一天 ${PREV_DATE} 条目缺失！"
-```
-
-**如果前一天条目缺失**：必须在今天条目之前先补充前一天的条目，保持期号连续。
-
 更新 `refine_data.js`，在 `window.REFINE_PACKS` 对象最前面插入新日期条目：
 
 ```javascript
@@ -351,79 +232,32 @@ grep "\"${PREV_DATE}\"" /tmp/refine_online.js || echo "WARNING: 前一天 ${PREV
 
 ### 第 6 步：推送到 GitHub
 
-> 🚫 **【最高优先级】推送前最终验证（第 10 期教训）**
-
-推送前必须执行以下检查，全部通过才能推送：
+使用 `gh` CLI 或 GitHub Contents API 推送：
 
 ```bash
-# === 验证 1: refine_data.js 条目完整性 ===
-echo "=== 检查 refine_data.js 条目 ==="
-grep -c '"<date>"' /tmp/refine_data_final.js  # 必须输出 1
+# 认证（使用有 contents:write 权限的 PAT）
+echo "<TOKEN>" | gh auth login --with-token
 
-# === 验证 2: 期号连续性 ===
-grep "issue:" /tmp/refine_data_final.js | head -5
-# 必须看到 issue: N（今天）, issue: N-1（昨天）, ... 连续不跳号
-
-# === 验证 3: 前一期条目存在 ===
-PREV_DATE=$(date -d "<date> -1 day" +%Y-%m-%d)
-grep "\"${PREV_DATE}\"" /tmp/refine_data_final.js || { echo "FATAL: 前一天条目缺失！"; exit 1; }
-
-# === 验证 4: HTML JS 语法 ===
-node -e "
-const fs=require('fs');
-const html=fs.readFileSync('articles/<date>.html','utf8');
-const m=/<script>([\s\S]*?)<\/script>/g;
-const sc=m.exec(html);
-new Function(sc[1]);
-console.log('HTML JS syntax: OK');
-"
-
-# === 验证 5: 数据完整性 ===
-node -e "
-const vm=require('vm');const fs=require('fs');
-const ctx={window:{}};vm.createContext(ctx);
-vm.runInContext(fs.readFileSync('articles/data/<date>.js','utf8'),ctx);
-const W=ctx.window.WORDS,A=ctx.window.ARTICLES;
-console.log('WORDS:',W.length,'A1:',A.a1.paragraphs.length+'p/'+A.a1.quiz.length+'q',
-  'A2:',A.a2.paragraphs.length+'p/'+A.a2.quiz.length+'q',
-  'B1:',A.b1.paragraphs.length+'p/'+A.b1.quiz.length+'q',
-  'B2:',A.b2.paragraphs.length+'p/'+A.b2.quiz.length+'q');
-"
-# 期望输出: WORDS: 15 A1: 10p/5q A2: 10p/5q B1: 15p/8q B2: 15p/8q
-```
-
-使用 GitHub Contents API 推送（沙箱环境 `git`/`gh` CLI 的 TLS 握手不可靠，**必须用 curl + API**）：
-
-```bash
-# 步骤 A：获取文件 SHA（如已存在则需更新）
-SHA=$(curl -s --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>" \
-  | python3 -c "import json,sys; print(json.load(sys.stdin).get('sha',''))")
-
-# 步骤 B：构建 base64 payload 并上传
+# 上传文件（逐个）
 python3 -c "
 import json, base64
-with open('<local-file>', 'rb') as f:
+with open('<file>', 'rb') as f:
     content = base64.b64encode(f.read()).decode()
-payload = {'message': 'add: <date> 外刊精炼 · 第N期', 'content': content, 'branch': 'main'}
-if '<sha>':
-    payload['sha'] = '<sha>'
+payload = {
+    'message': 'add: <date> 外刊精炼',
+    'content': content
+    # 如更新已有文件需加 'sha': '<existing-sha>'
+}
 with open('/tmp/payload.json', 'w') as f:
     json.dump(payload, f)
 "
 
-curl -s -X PUT --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  -H "Content-Type: application/json" \
-  -d @/tmp/payload.json \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>"
+gh api -X PUT repos/celina0503qq-lab/siele-workbench/contents/<path> \
+  --input /tmp/payload.json
 ```
 
-**需要上传的文件清单**（共 4 个）：
-1. `articles/data/<date>.js`
+需要上传的文件清单：
+1. `articles/data/<date>.js`（如有外部数据文件）
 2. `articles/<date>.html`
 3. `articles/<date>.docx`
 4. `refine_data.js`
@@ -587,7 +421,6 @@ function mergeQuizzes(localQ, remoteQ) {
 | 28 | **renderRefineBody wrapper hook（绑定+恢复）** | 架构 |
 | 29 | **TTS 发音按钮绑定（单词/段落/全文）** | JS |
 | 30 | **数据内联模式（非外部 JS 引用）** | 架构 |
-| 31 | **CSS 变量体系对齐第 8 期模板（见 6.8 节）** | CSS |
 
 ---
 
@@ -597,16 +430,13 @@ function mergeQuizzes(localQ, remoteQ) {
 - JS 数据文件中 `zh` 字段值如果包含中文引号 `""`（Unicode `\u201C`/`\u201D`），在 JS 双引号字符串中会破坏语法
 - **解决方案**：写入前将 `zh` 值内的 ASCII 双引号替换为 `\u201C` / `\u201D` 转义序列
 - **验证方法**：`node -e "new Function(fs.readFileSync('path','utf8'))"` 检查语法
-- ⚠️ **第 9 期教训**：Python 的 `re.match(r'^zh:\s*"([^"]*)"')` 无法处理 zh 值内部含 `"` 的行——正则会在第一个内部 `"` 处截断，把后续内容当作文本导致漏检。正确做法是**逐字符扫描**跟踪 zh 字符串的起止边界，将内部 `"` 替换为 Unicode 转义后再做语法验证。
 
 ### 6.2 GitHub 推送
-- 沙箱环境 DNS 将 `github.com` 和 `api.github.com` 劫持到内网 IP（`198.18.0.x`），TLS 握手必然失败
-- **解决方案**：curl 使用 `--resolve api.github.com:443:140.82.121.5` 指定真实 IP
-- 备用 IP：`140.82.121.6`（已验证可用）
-- **Token 类型**：`github_pat_`（Classic PAT / Fine-grained PAT）可通过 Bearer 认证正常使用；`ghu_` 开头的是 GitHub App user-to-server token，需 OAuth 授权且可能过期。优先使用 `github_pat_` 类型
-- Git 命令使用 GnuTLS 可能失败（TLS 握手错误），**改用 curl + GitHub Contents API 更可靠**
+- 沙箱环境 DNS 将 `github.com` 劫持到内网 IP，需通过 `/etc/hosts` 指定真实 IP
+- 可用的 API IP：`140.82.121.5`（已验证）、`140.82.121.6`
+- 必须使用有 `contents:write` 权限的 fine-grained PAT
+- Git 命令使用 GnuTLS 可能失败（TLS 握手错误），改用 `gh` CLI + GitHub API 更可靠
 - 上传大文件（>1MB）时，Contents API 返回的 `content` 字段可能为空；用 HTTP Range 请求分块下载
-- ⚠️ **安全注意**：Token 不要直接写在命令中（会被沙箱安全策略拦截），应写入临时文件后通过 `TOKEN=$(cat /tmp/gh_token)` 引用，用完立即 `rm -f`
 
 ### 6.3 数据一致性
 - 高频词应在文章段落中自然出现（用于 `highlightWords` 高亮）
@@ -640,134 +470,60 @@ function mergeQuizzes(localQ, remoteQ) {
 - B2 文章：深度分析/争议话题，学术词汇，多观点呈现
 - 来源优先选择：DELE Ahora（A1/A2）→ RTVE（A2/B1）→ BBC Mundo（B1/B2）→ El País（B2）
 
-### 6.8 CSS 配色一致性（v3.1 新增 · 第 9 期教训）
+---
 
-> ⚠️ **主体风格一致性原则**：CSS 变量**名称**和**引用关系**必须严格沿用第 8 期（`2026-08-09.html`）模板。Agent 在生成 HTML 时不得自创新的变量体系。
+## 六之二、第 11 期实战修订（2026-08-12）
 
-**允许的微调**：
-- 色值可以微调深浅（如 `--brand` 从 `#c0392b` 变为 `#c2412b`）
-- 渐变方向、圆角、间距等可微调
+> 本节收录 8.11（第10期）和 8.12（第11期）两轮实战中发现的问题与修复方案，是 **v3.2 → v4** 的核心升级依据。**所有自动化生成流程必须严格遵守本节规则。**
 
-**禁止的操作**：
-- ❌ 改变变量名称（如把 `--brand` 改成 `--accent`）
-- ❌ 改变变量语义（如把 brand 从红色系改成紫色系）
-- ❌ 删除模板中已有的变量（如删除 `--es-ink`、`--zh-ink`）
-- ❌ 新增与模板不兼容的变量替代已有变量
-- ❌ 改变组件对变量的引用关系（如 vocab 左边框从 `var(--highlight)` 改为 `var(--brand)`）
+### 6.8 HTML 数据内联引号安全（最高优先级）
+- **问题**：8.11 独立 HTML 曾因数据字段值内含未转义的 ASCII 双引号 `"`（U+0022）导致 `missing ) after argument list` JS 语法错误，页面无法打开。
+- **根因**：人工手写/拼接 HTML 内联数据时，`zh`/`es`/`m` 等字段中的英文引号与 JS 字符串分隔符冲突，破坏了字符串字面量。
+- **禁止的修复方式**（已踩坑，勿再尝试）：
+  - `rfind('"')` 跨字段匹配 → 会误改 `es` 字符串边界
+  - 正则 `([^"]*)` → 在第一个内部引号处截断
+  - 逐行扫描 → 无法区分内容引号和分隔符引号
+- **唯一可靠方案（必须采用）**：
+  1. 先在独立数据文件 `articles/data/<date>.js` 中**生成并验证数据**（该文件用 `window.WORDS`/`window.ARTICLES` 结构）
+  2. 用 `node -e` + `vm.runInContext` 提取数据为 JSON 对象
+  3. 用 **`JSON.stringify`** 将 WORDS/ARTICLES 序列化为内联数据，插入 HTML 的 `<script>` 中
+  4. `JSON.stringify` 会自动把 ASCII `"` 转义为 `\"`，天然保证 JS 语法正确，**无需手工处理引号**
+- **验证**：`node -e "new Function('<script>内容</script>')"` 检查整个 script 块语法；再 `vm.runInContext` 验证数据完整（15词 + 4级段/题数）。
 
-**生成验证**：HTML 生成后必须对比第 8 期模板，逐项确认：
-1. `:root` 变量名完全一致
-2. 各组件引用的变量与模板一致（topbar 用 `--brand`，vocab 左边框用 `--highlight`，lema 用 `--highlight`，submit 按钮用 `--b1`，dele-points 渐变用 `--brand-soft` 等）
-3. `.lang-tag` ES/ZH 色块存在
-4. `hl::after` 菱形符号存在
-5. QuizData 对象完整
+### 6.9 期号连续性与索引覆盖防护（防止覆盖前期）
+- **问题**：曾出现 8.10（第9期）索引条目缺失、8.11 被误标为第9期，导致期号错乱。
+- **在线期号计算（必须）**：生成前**强制读取线上 `refine_data.js`**，找到当前最大 issue 编号，新期号 = `max + 1`。禁止凭本地记忆或猜测。
+- **期号校验（推送前）**：用 `vm.runInContext` 读取 `window.REFINE_PACKS`，断言期号从最新到最旧严格递减且连续（如 11,10,9,...,1）。任何断裂/跳号都视为错误，不得推送。
+- **索引覆盖防护**：新日期条目**只插入 `REFINE_PACKS` 最前面**，绝不删除/覆盖任何已存在的前期条目。推送 `refine_data.js` 前必须带上**线上最新 SHA**（先 `GET` 拿 sha，再 `PUT` 带 sha），避免并发覆盖。
+- **日期对应期号对照**（防错参考）：08-02(1) … 08-10(9) 08-11(10) 08-12(11)。weekday 同步核对：08-12 为星期三。
 
-### 6.9 Agent 生成 HTML 时的模板锚定（v3.1 新增 · 第 9 期教训）
+### 6.10 模板复用与 HTML 生成
+- **禁止**：不要手工从零写 HTML，更不要沿用旧版（v1/v2）模板——旧模板用 `var QuizData = (function(){})()` 结构且无完整 QuizData 持久化，易产生语法错误、功能缺失。
+- **必须**：以**最近一期已验证可用的 v3 模板**（如 `2026-08-11.html`，含完整 QuizData、swa_quiz_v1 持久化、渲染函数）为基准，复制后仅替换：
+  - `<title>` / topbar h1 / topbar sub（期号、星期、4主题）
+  - 4 篇文章的 `<h2>` 标题、`.source-cta` 的 href 来源链接
+  - footer 日期、`articles/<date>.docx` 链接
+  - WORDS / ARTICLES 数据块（用 6.8 的 JSON.stringify 方案）
+- **完成后**：用 playwright/chromium 无头渲染实际打开页面，断言 `JS 运行时错误数 = 0`、词汇卡 = 15、各级段落/题目数正确。**这一步是"页面能否打开"的最终裁决。**
 
-Agent 在生成 HTML 时，**必须先从线上拉取最新一期的 HTML 作为模板参考**。由于沙箱环境 HTTPS 直连不可用，正确做法是：
+### 6.11 推送与 GitHub Pages 部署验证
+- **token 必须显式传入**：沙箱中 `GH_TOKEN` 环境变量通常为空，需在命令中直接写入 PAT，或用 `export GH_TOKEN="<pat>"` 后调用 API。
+- **认证检查**：先 `GET` 仓库某个已知文件（如 `refine_data.js`）拿到 sha；若返回 `Bad credentials`(401)，说明 token 未生效，先修复再继续。
+- **新文件 / 更新文件**：
+  - 新增文件（data JS、HTML、DOCX）：`PUT` 不带 sha
+  - 更新已有文件（refine_data.js）：`PUT` 必须带线上 sha，否则报 409 冲突
+- **GitHub Pages 部署延迟**：推送后 Pages 自动构建，**约 1-2 分钟**。期间访问新页面返回 404（"Page not found"）是**正常现象**，需等待构建状态变为 `built`/`deployed` 后再验证。
+  - 检查构建状态：`GET /repos/<repo>/pages/builds/latest` 的 `status` 字段
+  - 不要因 404 就误判推送失败而重复推送（会产生冲突）
+- **DNS 处理**：
+  - API：`api.github.com` → hosts 已配 `140.82.121.5`
+  - Pages：`*.github.io` 也需 `--resolve <host>:443:185.199.108.153`（或 185.199.109.153/110/111），否则 curl 返回 000
+- **最终验证**：线上页面 `curl` 应返回 200，且 grep 到正确 title / 期号 / 主题文字；DOCX、data JS 同样返回 200。
 
-```bash
-# 通过 GitHub API 拉取模板（使用 --resolve 指定真实 IP）
-TOKEN=$(cat /tmp/gh_token)
-curl -s --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/articles/2026-08-09.html" \
-  | python3 -c "import json,sys,base64; print(base64.b64decode(json.load(sys.stdin)['content']).decode())" \
-  > /tmp/template.html
-```
-
-然后以 `/tmp/template.html` 的 CSS 和 JS 结构为蓝本，只替换数据内容（WORDS + ARTICLES），保持所有样式和交互逻辑不变。
-
-### 6.10 HTML 数据内联引号安全（v3.2 新增 · 第 10 期教训）
-
-> 🔴 **严重度：P0 阻塞性 Bug** — 页面完全无法打开
-
-**问题**：Agent 在生成 HTML 时直接内联 WORDS/ARTICLES 数据，其中 `zh`（中文翻译）、`es`（西语解析）、`m`（难词释义）字段值必然包含中文双引号 `""`。Agent 输出的这些引号是 **ASCII `"` (U+0022)**，与 JS 字符串分隔符相同，导致：
-
-```javascript
-// Agent 生成的代码（语法错误！）
-{ zh: "出门前，她亲了一下睡在沙发上的猫。"再见啦，Michi。"" }
-//                                   ↑ JS 解析器在此结束字符串
-//                                     再见啦 变成裸露标识符 → SyntaxError
-```
-
-**影响范围**（第 10 期实测）：
-- 14 处 `zh` 字段值含未转义 ASCII `"`
-- 26 处 quiz 解析（`es`/`zh`）含未转义 ASCII `"`
-- 1 处 `hardWords[].m` 含未转义 ASCII `"`
-- 总计 41+ 处语法错误，页面完全白屏
-
-**为什么简单正则无法修复**：
-- Python `re.match(r'zh:\s*"([^"]*)"')` 在遇到第一个内部 `"` 时就截断，漏检后续内容
-- `rfind('"')` 可能找到**其他字段的关闭引号**（如 `es` 字段的 `rfind` 可能匹配到 `zh` 字段末尾的 `"`），导致错误地修改字符串边界
-
-**唯一正确做法**（见第 3 步）：
-1. 从已验证语法正确的 data JS 文件提取数据
-2. 用 `JSON.stringify()` 生成安全的 JS 字面量
-3. 注入 HTML 模板
-
-```bash
-node -e "
-const vm=require('vm');const fs=require('fs');
-const ctx={window:{}};vm.createContext(ctx);
-vm.runInContext(fs.readFileSync('articles/data/<date>.js','utf8'),ctx);
-fs.writeFileSync('/tmp/words.json', JSON.stringify(ctx.window.WORDS, null, 2));
-fs.writeFileSync('/tmp/articles.json', JSON.stringify(ctx.window.ARTICLES, null, 2));
-"
-```
-
-### 6.11 索引覆盖防护与期号连续性（v3.2 新增 · 第 10 期教训）
-
-> 🔴 **严重度：P0 数据完整性** — 导致前期推送"消失"
-
-**问题**：第 10 期推送时，`refine_data.js` 缺少第 9 期（08-10）的条目，导致工作台目录中第 9 期不可见。且第 10 期被错误标注为 issue: 9。
-
-**根因**：
-1. 08-10 的 HTML/DOCX 文件已上传，但 `refine_data.js` 条目遗漏
-2. 08-11 推送时直接从 08-09（issue: 8）推算期号为 9，未检查 08-10 是否存在
-3. 没有「前一天条目存在性」的强制检查
-
-**防护规则**（已纳入第 1 步和第 5 步）：
-
-| 规则 | 说明 |
-|------|------|
-| **在线为准** | 期号从线上 `refine_data.js` 实时拉取计算，不依赖本地文件或记忆 |
-| **前一天检查** | 推送前强制检查前一天条目是否存在，缺失则先补充 |
-| **期号连续** | 每天推送后验证 `issue: N, N-1, N-2, ...` 连续不跳号 |
-| **SHA 刷新** | 推送 `refine_data.js` 前重新获取最新 SHA，防止 409 Conflict |
-| **条目去重** | 推送前检查当天条目是否已存在，避免重复插入 |
-
-**补条目模板**（如发现前一天缺失）：
-```javascript
-"<PREV_DATE>": {
-  date: "<PREV_DATE>",
-  weekday: "X",
-  issue: <PREV_ISSUE>,
-  theme: "主题1 · 主题2 · 主题3 · 主题4",
-  sources: [
-    { level: "A1", source: "...", sourceUrl: "...", topic: "..." },
-    { level: "A2", source: "...", sourceUrl: "...", topic: "..." },
-    { level: "B1", source: "...", sourceUrl: "...", topic: "..." },
-    { level: "B2", source: "...", sourceUrl: "...", topic: "..." }
-  ]
-},
-```
-
-可从当天的 HTML 文件（`articles/<PREV_DATE>.html`）中提取主题信息（`<h2>` 标签内容）和来源 URL（`source-cta` 的 `href`）。
-
-### 6.12 已废弃的修复方式（第 10 期记忆）
-
-以下方法在第 10 期修复过程中被证明不可靠，**禁止使用**：
-
-| 废弃方法 | 失败原因 |
-|----------|----------|
-| Python `rfind('"')` 找字段关闭引号 | 跨字段匹配——`es` 的 rfind 可能匹配到 `zh` 的关闭引号 |
-| 正则 `([^"]*)` 匹配字段值 | 遇到值内第一个 `"` 就截断，漏检后续内容 |
-| 逐行扫描替换内部 `"` 为 `\u201C`/`\u201D` | 无法区分"内容中的引号"和"字符串分隔引号" |
-| Agent 直接手写 HTML 内联数据 | Agent 输出的 `"` 永远是 ASCII，无法可靠转义 |
-
-**唯一可靠方案**：`JSON.stringify` 从已验证 data JS 生成内联代码（见 6.10 节）。
+### 6.12 数据字段结构对齐（v3 模板）
+- 独立页面内联数据与工作台内置页面的数据文件**结构一致**：`WORDS` 数组项为 `{lema, ipa, pos, significado, ejemplo_es, ejemplo_zh, tip}`；`ARTICLES[level]` 为 `{paragraphs[{es,zh}], dele, hardWords[{w,m}], quiz[{q,opts,ans,es,zh}]}`。
+- 文章标题、来源名、来源链接**不内嵌在数据中**，而是硬编码在 HTML 的 `<h2>` 与 `.source-cta` 中，替换模板时需一并更新。
+- level key 必须小写（`a1`/`a2`/`b1`/`b2`），与 `swa_quiz_v1` 存储键一致。
 
 ---
 
@@ -793,30 +549,23 @@ siele-workbench/
 
 ### GitHub API 上传模板
 ```bash
+# 认证
+echo "<TOKEN>" | gh auth login --with-token
+
 # 获取文件 SHA（如已存在）
-SHA=$(curl -s --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>" \
-  | python3 -c "import json,sys; print(json.load(sys.stdin).get('sha',''))")
+gh api repos/celina0503qq-lab/siele-workbench/contents/<path> --jq '.sha'
 
 # 构建 base64 payload 并上传
 python3 -c "
 import json, base64
 with open('<file>', 'rb') as f:
     content = base64.b64encode(f.read()).decode()
-payload = {'message': 'commit msg', 'content': content, 'branch': 'main'}
-if '<sha>': payload['sha'] = '<sha>'
+payload = {'message': 'commit msg', 'content': content, 'sha': '<sha>'}
 with open('/tmp/payload.json', 'w') as f:
     json.dump(payload, f)
 "
-
-curl -s -X PUT --resolve api.github.com:443:140.82.121.5 \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Accept: application/vnd.github+json" \
-  -H "Content-Type: application/json" \
-  -d @/tmp/payload.json \
-  "https://api.github.com/repos/celina0503qq-lab/siele-workbench/contents/<path>"
+gh api -X PUT repos/celina0503qq-lab/siele-workbench/contents/<path> \
+  --input /tmp/payload.json
 ```
 
 ### swa_quiz_v1 数据流
@@ -848,4 +597,4 @@ QuizData.recordAnswer()         RefineQuizDB.recordAnswer()
 
 ---
 
-*最后更新：2026-08-11 · v3.2 基于第 10 期实战修订（HTML数据内联引号安全 + 索引覆盖防护 + 期号连续性 + JSON.stringify 强制方案）*
+*最后更新：2026-08-12 · 基于 11 期实际运行 + Quiz 持久化与云同步 + 期号连续性/HTML 内联安全经验总结*
