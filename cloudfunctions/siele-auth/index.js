@@ -431,12 +431,11 @@ async function getAdminEdits(event) {
   await requireActiveSession(event);
   let edits = {};
   try {
-    const result = await db.collection("admin_edits").doc("current").get();
-    if (result.data && result.data.length && result.data[0].edits) {
+    const result = await db.collection("admin_edits").where({ key: "global" }).limit(1).get();
+    if (result.data.length && result.data[0].edits) {
       edits = result.data[0].edits;
     }
   } catch (e) {
-    // 文档不存在时 get 可能抛错，视为无编辑
     edits = {};
   }
   return response(true, "ADMIN_EDITS", { edits });
@@ -446,11 +445,11 @@ async function setAdminEdits(event) {
   const edits = event.edits;
   if (!edits || typeof edits !== "object") return response(false, "INVALID_PAYLOAD");
   if (Buffer.byteLength(JSON.stringify(edits), "utf8") > 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
-  const existing = await db.collection("admin_edits").doc("current").get();
-  if (existing.data && existing.data.length) {
-    await db.collection("admin_edits").doc("current").update({ edits, updatedAt: now() });
+  const existing = await db.collection("admin_edits").where({ key: "global" }).limit(1).get();
+  if (existing.data.length) {
+    await db.collection("admin_edits").doc(existing.data[0]._id).update({ edits, updatedAt: now() });
   } else {
-    await db.collection("admin_edits").doc("current").set({ edits, updatedAt: now() });
+    await db.collection("admin_edits").add({ key: "global", edits, updatedAt: now() });
   }
   return response(true, "ADMIN_EDITS_SAVED");
 }
