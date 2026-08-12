@@ -12492,7 +12492,19 @@ window._deleCloudBridgeInit = function(){
   };
   document.body.appendChild(ifr);
 };
+// 从主站 localStorage 读取当前登录 session 的 sessionToken
+window._deleGetSessionToken = function(){
+  try {
+    var raw = localStorage.getItem('swa_cloud_session_v1');
+    if (!raw) return null;
+    var s = JSON.parse(raw);
+    return (s && s.sessionToken) || null;
+  } catch(e) { return null; }
+};
 window._delePostToBridge = function(msg){
+  // 自动附带 sessionToken, 让 admin.html 不依赖自身的登录态
+  var token = window._deleGetSessionToken();
+  if (token) msg.sessionToken = token;
   var ifr = document.getElementById('wbAdminCloudBridge');
   if (ifr && window._deleCloudBridgeReady) {
     try { ifr.contentWindow.postMessage(msg, location.origin); } catch(e) {}
@@ -14824,6 +14836,8 @@ function activate(){
   if(typeof startWorkbenchStatusPing==='function')startWorkbenchStatusPing();
   try{if(typeof currentPage!=='undefined'&&currentPage==='dash'&&typeof renderMain==='function')renderMain();}catch(e){}
   if(ADB.syncCfg)setTimeout(function(){cloudSync(true);},800);
+  // 登录成功后拉取管理员编辑 (跨设备同步)
+  try{if(typeof window._deleAdminFetchFromCloud==='function')setTimeout(function(){window._deleAdminFetchFromCloud();},1200);}catch(e){}
 }
 
 /* 跨标签页感知（后台改数据 / 登录状态变化） */

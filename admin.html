@@ -1157,7 +1157,8 @@ window.addEventListener('message',function(ev){
     (async function(){
       try {
         var ses = cloudSession();
-        var result = await callSieleAuth({action:'setAdminEdits', sessionToken: ses && ses.sessionToken, edits: ev.data.edits || {}});
+        var token = (ev.data && ev.data.sessionToken) || (ses && ses.sessionToken);
+        var result = await callSieleAuth({action:'setAdminEdits', sessionToken: token, edits: ev.data.edits || {}});
         if (result && result.ok) console.log('[AdminEdits] saved via cloud function');
         else console.warn('[AdminEdits] save rejected:', result && result.code);
       } catch(e) {
@@ -1169,7 +1170,8 @@ window.addEventListener('message',function(ev){
     (async function(){
       try {
         var ses = cloudSession();
-        var result = await callSieleAuth({action:'getAdminEdits', sessionToken: ses && ses.sessionToken});
+        var token = (ev.data && ev.data.sessionToken) || (ses && ses.sessionToken);
+        var result = await callSieleAuth({action:'getAdminEdits', sessionToken: token});
         var edits = (result && result.ok && result.edits) ? result.edits : {};
         window.parent.postMessage({type:'siele-admin-edits-result', edits: edits}, location.origin);
         console.log('[AdminEdits] fetch OK, ' + Object.keys(edits).length + ' keys');
