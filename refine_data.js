@@ -15,8 +15,20 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-08-11 第 10 期 — 主题：早上日常 · 西班牙音乐节 · 远程办公与城市 · 地震与城市韧性
+// 1) 2026-08-12 第 11 期 — 主题：超市购物 · 社区生活 · 西班牙可再生能源 · 拉丁美洲移民危机
 window.REFINE_PACKS = {
+  "2026-08-12": {
+    date: "2026-08-12",
+    weekday: "三",
+    issue: 11,
+    theme: "超市购物 · 社区生活 · 西班牙可再生能源 · 拉丁美洲移民危机",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "De compras en el supermercado" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/sociedad/", topic: "El alma del barrio: comunidad y convivencia" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "La revolución verde de España" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "https://www.bbc.com/mundo/articles/c5yv2rlzd40o", topic: "La crisis migratoria en América Latina" }
+    ]
+  },
   "2026-08-11": {
     date: "2026-08-11",
     weekday: "二",
