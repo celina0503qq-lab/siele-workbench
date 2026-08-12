@@ -1267,7 +1267,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 1 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "Estás escuchando \"A todo gol\", el programa de referencia de tu emisora preferida. Hoy vamos a entrevistar al entrenador del único equipo que todavía no ha perdido ni un solo partido en esta competición. No cambies de cadena y quédate con nosotros."
     },
     {
       "modelo": "nuevo_m2",
@@ -1298,7 +1298,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 1, Mensaje 2 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "Tengo un problema cuando intento añadir el archivo, no sé qué pasa. Tiene más de doscientas páginas, quizás sea demasiado grande para enviarlo por email. Voy a tener que utilizar un programa especial para enviártelo. Lo haré cuando vuelva a casa."
     },
     {
       "modelo": "nuevo_m2",
@@ -1329,7 +1329,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 1, Mensaje 3 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "La situación, que empezó como la típica discusión en un bar, acabó de forma trágica. El asesino se levantó de la mesa, cogió un cuchillo y atacó a la víctima por la espalda ante la mirada de sorpresa de los otros clientes. Los servicios médicos llegaron rápidamente, pero no pudieron hacer nada para salvar la vida del pobre hombre."
     },
     {
       "modelo": "nuevo_m2",
@@ -1360,7 +1360,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 1, Mensaje 4 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "Si ya tienes más de dieciocho años este es tu momento. Abre una cuenta con nosotros y disfruta de todas las ventajas que tenemos para jóvenes. Cambio de moneda instantáneo, cuentas de ahorro a cinco años y servicio automático de pago de recibos de luz y agua."
     },
     {
       "modelo": "nuevo_m2",
@@ -1391,7 +1391,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 5 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "El médico le ha dicho a mi hijo que tiene que controlar su dieta. Lo mejor es que evite por completo las chuletas, los solomillos y demás. El doctor le ha recomendado comer cosas más suaves, como el arroz con calabacín o las ensaladas de espinacas."
     },
     {
       "modelo": "nuevo_m2",
@@ -1422,7 +1422,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 1, Mensaje 6 — Audio en YouTube: Nuevo DELE B1)"
+      "transcript": "Tienes que pelar y cortar las patatas, después las fríes con abundante aceite. Bate cinco o seis huevos y, cuando las patatas ya estén fritas, quita el aceite y añade el huevo batido. Debes cocinar la tortilla por los dos lados, para darle la vuelta en la sartén puedes utilizar un plato."
     },
     {
       "modelo": "nuevo_m2",
@@ -1453,7 +1453,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1484,7 +1484,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1515,7 +1515,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1546,7 +1546,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1577,7 +1577,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1608,7 +1608,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 2, Natalia — Audio en YouTube: Nuevo DELE B1, 14:24)"
+      "transcript": "Buenos días, me llamo Natalia, soy profesora en una escuela infantil. Creo que este es el trabajo más divertido del mundo, no hay un solo día en el que no vuelva a casa con una sonrisa de oreja a oreja. Quiero tanto a mis alumnos que a veces pienso que son mis propios hijos, sufro mucho cuando los veo tristes y lloro de alegría cuando se hacen grandes y abandonan la escuela, es un momento muy emotivo.\n\nMi marido es jugador de baloncesto profesional, hace unos años le hicieron una oferta para ir a jugar a un equipo de Estados Unidos, pero decidió rechazarla y quedarse aquí conmigo. No me imagino cómo habría sido nuestra vida allí. Nos conocimos hace muchísimo tiempo, nuestras madres eran muy amigas y nosotros jugábamos juntos de pequeños. En nuestra relación lo más importante es la confianza que tenemos el uno en el otro.\n\nEstoy muy feliz, la semana pasada compramos una casa en las afueras de Madrid, ya no vamos a tener que vivir de alquiler, era horrible. Los padres de mi marido nos han ayudado un poco a pagar la casa y, gracias a esto, no hemos tenido que pedirle dinero al banco. Creo que tener un crédito es algo muy estresante para las personas. Y aún más teniendo en cuenta que el trabajo de mi marido no es muy estable, un año podría sufrir una lesión grave, por ejemplo, romperse una rodilla, y adiós a su carrera. Nunca me han gustado los seguros médicos privados, pero creo que es algo en lo que deberíamos pensar ahora.\n\nEn nuestro tiempo libre nos encanta jugar a las cartas o a juegos de mesa, siempre nos divertimos muchísimo juntos, aunque a veces mi marido no sepa perder, creo que él es demasiado competitivo. Tiene que aprender a controlar sus emociones, no me gusta que se enfade con los vecinos si nos ganan jugando al parchís.\n\nSigo la información política de mi país muy de cerca, pienso que es algo muy importante en nuestras vidas, no entiendo cómo hay gente que va a votar sin ni siquiera saber lo que quieren hacer los políticos con su dinero. Me gusta leer varios periódicos para contrastar la información, además, cuando estoy en la sala de profesores de la escuela siempre tengo la radio encendida con una emisora que da noticias las veinticuatro horas del día."
     },
     {
       "modelo": "nuevo_m2",
@@ -1639,7 +1639,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1670,7 +1670,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1701,7 +1701,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1732,7 +1732,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1763,7 +1763,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1794,7 +1794,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 3, 6 noticias — Audio en YouTube: Nuevo DELE B1, 17:30)"
+      "transcript": "Iniciamos nuestro informativo sobre la actualidad de nuestros famosos con el divorcio del siglo, Lola Flor y Marco Velázquez se separan y nos dejan a todos sorprendidos. Según nos informan varios conocidos de la pareja, Lola llevaba un tiempo sospechando que su marido era homosexual, puede que estos rumores sean ciertos ya que últimamente hemos visto a Marco en varios actos públicos acompañado de un amigo suyo.\n\nEl periodista Rogelio Fuentes escribió en la revista \"Moda y hogar\" un artículo de opinión muy crítico con la actual reina del país, se refería a ella con frases como: \"esta anciana ya no sabe lo que hace, todos pensamos que ha perdido la cabeza\" o \"ha demostrado por qué ya nadie la quiere en el trono, es hora de que se vaya\". La reina ha asegurado que no le importa la opinión de un periodista que ni siquiera acabó la carrera universitaria.\n\nNos llegan buenas noticias desde el hospital \"La Paz\", y es que el tenista Rafael Moyá ha sido operado con éxito de su tobillo derecho y podrá volver a competir en menos de un mes. Recordamos que Rafael se rompió el tobillo hace dos días en el partido de semifinales de Roland Garros y fue trasladado inmediatamente al hospital en el que permanece ingresado desde entonces.\n\nMax Guerrero, el cantante de moda ha publicado en su cuenta de Facebook que es uno de los ganadores del premio Gordo de la lotería de este año. Max asegura estar muy contento y dice que va a utilizar el dinero para viajar con su familia alrededor del mundo y promocionar su nuevo proyecto musical.\n\nNos llegan noticias de otra pareja que no pasa por su mejor momento, Cristina Robles y Manuel Santos no fueron juntos a la gala de los premios Albacete. Cristina asegura que esto puede significar el final de la relación. Por su parte, Manuel Santos ha hablado con varios medios de comunicación y ha dicho que le dejó hasta tres mensajes en el teléfono móvil de su novia.\n\nY por último hablamos del juicio de Iñaki López, según nos confirman varias fuentes oficiales, el ex alcalde de Valencia había gastado más de cinco millones de euros del ayuntamiento en asuntos personales. La policía ha descubierto facturas falsas y todo parece indicar que Iñaki pasará como mínimo los próximos nueve años en prisión."
     },
     {
       "modelo": "nuevo_m2",
@@ -1849,7 +1849,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Pedro y yo nos conocemos desde que éramos pequeños, nuestras madres eran muy amigas y nosotros íbamos juntos a la guardería. Cuando teníamos cinco años nos apuntaron al mismo equipo de fútbol y desde entonces somos inseparables. Ahora nos vemos menos porque cada uno estudiamos en una ciudad diferente, pero nos escribimos mensajes casi todos los días."
     },
     {
       "modelo": "nuevo_m2",
@@ -1904,7 +1904,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Mi madre es la mejor del mundo, siempre me ayuda, incluso cuando está cansada. Hay días que vuelve del trabajo a las diez de la noche y lo primero que hace es preguntarme si necesito algo. Además, creo que ella es la única persona del mundo que dice la verdad en todo momento, nunca miente, ni cuando es un tema delicado."
     },
     {
       "modelo": "nuevo_m2",
@@ -1959,7 +1959,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Conocí a mi marido cuando iba a la Universidad. Yo estudiaba medicina y él arquitectura. Al principio hacíamos muchas cosas juntos, pero ahora no quiere salir de casa, se pasa todo el día tumbado en el sofá viendo series de superhéroes. Estoy ya un poco cansada de esta situación, he hablado varias veces con él, pero sigue sin hacer nada."
     },
     {
       "modelo": "nuevo_m2",
@@ -2014,7 +2014,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Mi hija Lucía tiene ahora cinco años, la verdad es que no se porta muy bien, mi hermana dice que es por mi culpa, porque no le grito nunca, pero yo no estoy de acuerdo. El otro día, Lucía tiró mi móvil por la ventana, vivimos en un tercer piso y el teléfono se destrozó por completo, ese día grité tanto que me escucharon hasta los vecinos del primero."
     },
     {
       "modelo": "nuevo_m2",
@@ -2069,7 +2069,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Tengo muchos sobrinos, pero estoy especialmente preocupada por uno de ellos. Tiene miedo de todo: de los perros, gatos, ascensores, coches, aviones y de muchísimas más cosas. Nunca quiere salir de su habitación y se despierta por las noches porque tiene pesadillas. Creo que sus padres deberían llevarle a una consulta con un psicólogo."
     },
     {
       "modelo": "nuevo_m2",
@@ -2124,7 +2124,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice9",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "transcript": "(Tarea 4, 6 anécdotas — Audio en YouTube: Nuevo DELE B1, 20:40)"
+      "transcript": "Mi amigo Paco se va a vivir a San Francisco. Todavía no sé cómo lo ha decidido así de rápido, casi sin pensarlo. Conoció a una chica de allí hace unos meses por las redes sociales y han decidido que van a alquilar un piso juntos, sin haberse visto nunca en persona. ¡Están locos!"
     },
     {
       "modelo": "nuevo_m2",
@@ -2155,7 +2155,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
@@ -2186,7 +2186,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
@@ -2217,7 +2217,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
@@ -2248,7 +2248,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
@@ -2279,7 +2279,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
@@ -2310,7 +2310,7 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "transcript": "(Tarea 5, Juan y Eli — Audio en YouTube: Nuevo DELE B1, 23:32)"
+      "transcript": "HOMBRE: Buenos días, Eli.\nMUJER: Hola, Juan. ¿Qué tal estás? Me dijeron que te caíste de la bicicleta.\nHOMBRE: Sí, me rompí varios huesos. Ahora mismo solo me duele el codo derecho, creo que no podré jugar al tenis en un tiempo. Estoy en el hospital, pero no te preocupes, que yo me siento muy bien, quizás sea por la medicación que me dan.\nMUJER: Vaya, espero que te recuperes pronto. Yo odio los calmantes para el dolor, no me tomo pastillas ni cuando tengo la regla.\nHOMBRE: Eso mismo me dijo Alicia, mi vecina del tercero.\nMUJER: Uhh, no me hables de ella, íbamos juntas a la escuela y no la soporto, es una persona muy arrogante.\nHOMBRE: Bueno, en esas cosas yo no me meto. Acaba de entrar la enfermera y me ha traído mi comida de hoy: cerezas, piña y un vaso de agua.\nMUJER: No quiero darte envidia, pero yo estoy en un restaurante y no sé si pedir chuletas o solomillo.\nHOMBRE: Ohh, no seas mala, no me digas esas cosas.\nMUJER: Lo siento, Juan. Entonces, ¿cuándo podremos quedar para jugar al tenis?\nHOMBRE: Creo que la recuperación del codo va a ser larga, tres o cuatro meses sin deporte. De momento, se acerca Nochebuena, ojalá Papá Noel me traiga un buen libro.\nMUJER: Sí, pues hablaré con Papá Noel, a ver qué puede hacer. Yo terminé hace poco la novela de Carlos Ruiz Zafón, \"La sombra del viento\", te la recomiendo.\nHOMBRE: Gracias, Eli. Tengo que colgar ya porque voy a comer.\nMUJER: Yo también, cuídate mucho, voy a intentar ir a visitarte el fin de semana. Un beso."
     },
     {
       "modelo": "nuevo_m2",
