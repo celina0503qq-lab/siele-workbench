@@ -1152,43 +1152,29 @@ window.addEventListener('message',function(ev){
       showAuthPasswdView();
     }
   }
-  // === CloudBase 管理员编辑同步 ===
+  // === CloudBase 管理员编辑同步 (走云函数, 无需 NoSQL 直连权限) ===
   if(ev.data&&ev.data.type==='siele-admin-edits-save'){
     (async function(){
       try {
-        var app = await window.__sieleCloudBaseReady;
-        var db = app.database();
-        var edits = ev.data.edits || {};
-        // 写入 NoSQL collection: admin_edits, doc id: 'current'
-        var coll = db.collection('admin_edits');
-        // 先查询是否有已有文档
-        var existing = await coll.doc('current').get();
-        var data = {edits: edits, ts: Date.now(), v: (existing.data && existing.data[0] ? (existing.data[0].v||0)+1 : 1)};
-        if (existing.data && existing.data.length > 0) {
-          await coll.doc('current').update(data);
-        } else {
-          await coll.doc('current').set(data);
-        }
-        console.log('[AdminEdits] CloudBase save OK, v=' + data.v);
+        var ses = cloudSession();
+        var result = await callSieleAuth({action:'setAdminEdits', sessionToken: ses && ses.sessionToken, edits: ev.data.edits || {}});
+        if (result && result.ok) console.log('[AdminEdits] saved via cloud function');
+        else console.warn('[AdminEdits] save rejected:', result && result.code);
       } catch(e) {
-        console.error('[AdminEdits] CloudBase save failed:', e.message);
+        console.error('[AdminEdits] save failed:', e.message);
       }
     })();
   }
   if(ev.data&&ev.data.type==='siele-admin-edits-fetch'){
     (async function(){
       try {
-        var app = await window.__sieleCloudBaseReady;
-        var db = app.database();
-        var result = await db.collection('admin_edits').doc('current').get();
-        var edits = {};
-        if (result.data && result.data.length > 0) {
-          edits = result.data[0].edits || {};
-        }
+        var ses = cloudSession();
+        var result = await callSieleAuth({action:'getAdminEdits', sessionToken: ses && ses.sessionToken});
+        var edits = (result && result.ok && result.edits) ? result.edits : {};
         window.parent.postMessage({type:'siele-admin-edits-result', edits: edits}, location.origin);
-        console.log('[AdminEdits] CloudBase fetch OK, ' + Object.keys(edits).length + ' keys');
+        console.log('[AdminEdits] fetch OK, ' + Object.keys(edits).length + ' keys');
       } catch(e) {
-        console.error('[AdminEdits] CloudBase fetch failed:', e.message);
+        console.error('[AdminEdits] fetch failed:', e.message);
         window.parent.postMessage({type:'siele-admin-edits-result', edits: {}}, location.origin);
       }
     })();

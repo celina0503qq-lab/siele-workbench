@@ -12473,47 +12473,43 @@ window._deleAdminEditBtn = function(key, field, isShared){
   return h;
 };
 // ===== 管理员编辑 云同步 (复用 GitHub Gist 通道, 所有用户共享 token+gistId) =====
-// 写入: 管理员保存后, 把 adminEdits 推送到 Gist 的 dele-admin-edits.json 文件
-window._deleAdminSyncToCloud = function(){
-  try {
-    if (typeof SCFG === 'undefined' || !SCFG.token || !SCFG.gistId) {
-      console.log('[AdminSync] Gist 未配置, 仅本地保存');
-      return;
+// ===== 管理员编辑 云同步 (CloudBase 云函数, 所有登录用户自动同步, 无需手动配置) =====
+window._deleCloudBridgeReady = false;
+window._deleCloudBridgeQueue = [];
+window._deleCloudBridgeInit = function(){
+  if (document.getElementById('wbAdminCloudBridge')) return;
+  var ifr = document.createElement('iframe');
+  ifr.id = 'wbAdminCloudBridge';
+  ifr.src = './admin.html';
+  ifr.style.cssText = 'display:none;width:0;height:0;border:0';
+  ifr.onload = function(){
+    window._deleCloudBridgeReady = true;
+    var q = window._deleCloudBridgeQueue;
+    window._deleCloudBridgeQueue = [];
+    for (var i = 0; i < q.length; i++) {
+      try { ifr.contentWindow.postMessage(q[i], location.origin); } catch(e) {}
     }
-    var data = JSON.stringify({v:1, ts: Date.now(), edits: window._deleAdminEdits || {}});
-    fetch('https://api.github.com/gists/'+SCFG.gistId, {
-      method: 'PATCH',
-      headers: {'Authorization':'token '+SCFG.token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},
-      body: JSON.stringify({files: {'dele-admin-edits.json': {content: data}}})
-    }).then(function(r){ return r.json(); }).then(function(d){
-      if (d && d.id) console.log('[AdminSync] Gist 已更新');
-      else console.warn('[AdminSync] Gist 更新异常:', d && d.message);
-    }).catch(function(e){ console.warn('[AdminSync] 写入失败:', e.message); });
-  } catch(e) {}
+  };
+  document.body.appendChild(ifr);
 };
-// 读取: 页面加载时从 Gist 拉取 adminEdits
+window._delePostToBridge = function(msg){
+  var ifr = document.getElementById('wbAdminCloudBridge');
+  if (ifr && window._deleCloudBridgeReady) {
+    try { ifr.contentWindow.postMessage(msg, location.origin); } catch(e) {}
+  } else {
+    window._deleCloudBridgeQueue.push(msg);
+    if (!ifr) window._deleCloudBridgeInit();
+  }
+};
+// 保存编辑 → 云函数 setAdminEdits (仅管理员)
+window._deleAdminSyncToCloud = function(){
+  window._delePostToBridge({type:'siele-admin-edits-save', edits: window._deleAdminEdits || {}});
+};
+// 拉取编辑 → 云函数 getAdminEdits (所有登录用户)
 window._deleAdminFetchFromCloud = function(){
-  // 通道1: GitHub Gist (带 token, 共享配置)
-  try {
-    if (typeof SCFG !== 'undefined' && SCFG.token && SCFG.gistId) {
-      fetch('https://api.github.com/gists/'+SCFG.gistId, {
-        headers: {'Authorization':'token '+SCFG.token,'Accept':'application/vnd.github.v3+json'}
-      }).then(function(r){ return r.json(); }).then(function(g){
-        var f = g && g.files && g.files['dele-admin-edits.json'];
-        var content = f && (f.truncated ? null : f.content);
-        if (content) {
-          var d = JSON.parse(content);
-          if (d.edits && Object.keys(d.edits).length > 0) {
-            window._deleAdminEdits = d.edits;
-            try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(d.edits)); } catch(x) {}
-            console.log('[AdminSync] Gist 拉取 ' + Object.keys(d.edits).length + ' 项编辑');
-            window._deleAdminApplyEdits();
-          }
-        }
-      }).catch(function(e){ console.log('[AdminSync] Gist 拉取失败:', e.message); });
-    }
-  } catch(e) {}
-  // 通道2: GitHub Pages 静态 JSON (兜底, 无需 token)
+  window._deleCloudBridgeInit();
+  window._delePostToBridge({type:'siele-admin-edits-fetch'});
+  // GitHub Pages 静态 JSON 兜底 (无 CloudBase 时)
   var url = 'https://celina0503qq-lab.github.io/siele-workbench/dele_admin_edits.json';
   fetch(url + '?t=' + Date.now(), {cache: 'no-store'}).then(function(r){
     if (!r.ok) throw new Error('HTTP '+r.status);
@@ -12523,11 +12519,21 @@ window._deleAdminFetchFromCloud = function(){
       var merged = Object.assign({}, d.edits, window._deleAdminEdits || {});
       window._deleAdminEdits = merged;
       try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(merged)); } catch(e) {}
-      console.log('[AdminSync] GitHub Pages 合并 ' + Object.keys(d.edits).length + ' 项编辑');
       window._deleAdminApplyEdits();
     }
   }).catch(function(e){});
 };
+// 接收 CloudBase 返回的编辑
+window.addEventListener('message', function(e){
+  if (e.data && e.data.type === 'siele-admin-edits-result') {
+    if (e.data.edits && Object.keys(e.data.edits).length > 0) {
+      window._deleAdminEdits = e.data.edits;
+      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(e.data.edits)); } catch(x) {}
+      console.log('[AdminSync] CloudBase 拉取 ' + Object.keys(e.data.edits).length + ' 项编辑');
+      window._deleAdminApplyEdits();
+    }
+  }
+});
 // 应用编辑到当前页面 (若在 DELE 页面则重渲染)
 window._deleAdminApplyEdits = function(){
   var lvl = window._deleA1CurrentLevel;

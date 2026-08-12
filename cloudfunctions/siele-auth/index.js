@@ -421,6 +421,40 @@ async function pushLearning(event) {
   return response(true, "LEARNING_SAVED", { revision: 1 });
 }
 
+// ========================================================================
+// DELE 管理员编辑（跨设备/跨用户同步）
+//   getAdminEdits: 所有登录用户可读（requireActiveSession）
+//   setAdminEdits: 仅管理员可写（requireAdmin）
+// 存储于 admin_edits 集合，固定 doc id = "current"（全局唯一一份）
+// ========================================================================
+async function getAdminEdits(event) {
+  await requireActiveSession(event);
+  let edits = {};
+  try {
+    const result = await db.collection("admin_edits").doc("current").get();
+    if (result.data && result.data.length && result.data[0].edits) {
+      edits = result.data[0].edits;
+    }
+  } catch (e) {
+    // 文档不存在时 get 可能抛错，视为无编辑
+    edits = {};
+  }
+  return response(true, "ADMIN_EDITS", { edits });
+}
+async function setAdminEdits(event) {
+  await requireAdmin(event);
+  const edits = event.edits;
+  if (!edits || typeof edits !== "object") return response(false, "INVALID_PAYLOAD");
+  if (Buffer.byteLength(JSON.stringify(edits), "utf8") > 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
+  const existing = await db.collection("admin_edits").doc("current").get();
+  if (existing.data && existing.data.length) {
+    await db.collection("admin_edits").doc("current").update({ edits, updatedAt: now() });
+  } else {
+    await db.collection("admin_edits").doc("current").set({ edits, updatedAt: now() });
+  }
+  return response(true, "ADMIN_EDITS_SAVED");
+}
+
 exports.main = async (event) => {
   const input = event && event.data && typeof event.data === "object" ? event.data : (event || {});
   const action = String(input.action || "");
@@ -448,6 +482,8 @@ exports.main = async (event) => {
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
+    if (action === "getAdminEdits") return await getAdminEdits(input);
+    if (action === "setAdminEdits") return await setAdminEdits(input);
     if (action === "checkStatus") return await checkStatus(input);
     if (action === "changePasswordWithOld") return await changePasswordWithOld(input);
     if (action === "resetPasswordWithInvite") return await resetPasswordWithInvite(input);
