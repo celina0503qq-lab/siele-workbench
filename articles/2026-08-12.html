@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-12</title>
+<style>
+
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-12</h1>
+    <div class="sub">第11期 · 周三 · 超市购物 · 社区生活 · 西班牙可再生能源 · 拉丁美洲移民危机</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🛒 De compras en el supermercado</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/sociedad/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🏘️ El alma del barrio: comunidad y convivencia</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.rtve.es/noticias/economia/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
+        <h2>🌱 La revolución verde de España</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo/articles/c5yv2rlzd40o" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
+        <h2>🌎 La crisis migratoria en América Latina</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-12（星期三） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-12.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== 测试持久化模块 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage 写入失败:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '✓ 正确！' : '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('确定要重做 ' + level.toUpperCase() + ' 的全部题目吗？\n历史记录将被保留。')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [{"lema":"carrito","ipa":"[kaˈri.to]","pos":"m.","significado":"购物车（超市购物时使用的推车）","ejemplo_es":"Antes de entrar al supermercado, siempre cojo un carrito para no cargar con las bolsas.","ejemplo_zh":"进超市之前，我总是拿一辆购物车，免得提着袋子。","tip":"<b>carrito</b> 是 <b>carro</b> 的指小词。<b>carro de la compra</b> = 购物车。<b>cesta</b> = 购物篮。<b>hacer la compra</b> = 购物。A1 购物场景核心词汇。"},{"lema":"pasillo","ipa":"[paˈsi.ʎo]","pos":"m.","significado":"过道；走廊（超市里的货架通道）","ejemplo_es":"Los productos lácteos están en el pasillo tres, al fondo a la derecha.","ejemplo_zh":"乳制品在三号通道，走到尽头右手边。","tip":"<b>pasillo</b> 来自 <b>paso</b>（步伐），也指走廊。<b>estantería</b> = 货架。<b>al fondo</b> = 尽头。A1-A2 场所方位表达。"},{"lema":"rebaja","ipa":"[reˈβa.xa]","pos":"f.","significado":"降价；折扣（商品价格的降低）","ejemplo_es":"Estas galletas tienen un 30% de rebaja porque la fecha de caducidad está próxima.","ejemplo_zh":"这些饼干打七折，因为保质期快到了。","tip":"<b>rebaja</b> 常以复数 <b>rebajas</b> 出现（大减价季）。<b>descuento</b> = 折扣。<b>estar de rebajas</b> = 正在打折。<b>fecha de caducidad</b> = 保质期。A1-A2 购物必考。"},{"lema":"vecindario","ipa":"[be.θinˈda.ɾjo]","pos":"m.","significado":"邻里；社区（居住在一定区域的人群）","ejemplo_es":"En nuestro vecindario organizamos una fiesta cada verano para que todos los vecinos se conozcan mejor.","ejemplo_zh":"在我们社区，每年夏天都会组织一次聚会，让所有邻居更好地认识彼此。","tip":"<b>vecindario</b> 来自 <b>vecino</b>（邻居）。<b>barrio</b> = 城区/街区。<b>comunidad de vecinos</b> = 业主社区。A2 社会生活词汇。"},{"lema":"convivencia","ipa":"[kom.biˈβen.θja]","pos":"f.","significado":"共处；共存（不同人群和谐生活在一起）","ejemplo_es":"La convivencia entre personas de distintas culturas enriquece la vida del barrio.","ejemplo_zh":"不同文化背景的人们共处丰富了街区的生活。","tip":"<b>convivencia</b> 来自 <b>convivir</b>（共同生活）。<b>convivencia escolar</b> = 校园共处。<b>normas de convivencia</b> = 共处规范。A2-B1 社会话题高频。"},{"lema":"voluntariado","ipa":"[bo.lun.taˈɾja.ðo]","pos":"m.","significado":"志愿服务（自愿无偿为社会服务的行为）","ejemplo_es":"Muchos jóvenes participan en actividades de voluntariado durante las vacaciones de verano.","ejemplo_zh":"许多年轻人在暑假期间参加志愿服务活动。","tip":"<b>voluntariado</b> 来自 <b>voluntario/a</b>（志愿者）。<b>hacer voluntariado</b> = 做志愿服务。<b>ONG</b> = 非政府组织。A2-B1 社会参与话题。"},{"lema":"energía renovable","ipa":"[e.neɾˈxi.a re.noˈβa.βle]","pos":"f.","significado":"可再生能源（太阳能、风能等可再生的能源）","ejemplo_es":"España se ha convertido en uno de los líderes europeos en energía renovable gracias a sus horas de sol y sus parques eólicos.","ejemplo_zh":"得益于充足的日照时间和风力发电场，西班牙已成为欧洲可再生能源的领先者之一。","tip":"<b>energía renovable</b> 对义词：<b>energía fósil</b>（化石能源）。<b>energía solar/eólica/hidráulica</b> = 太阳/风/水力能。<b>parque eólico</b> = 风力发电场。B1 环境/科技话题必考。"},{"lema":"autoconsumo","ipa":"[au̯.to.konˈsu.mo]","pos":"m.","significado":"自发自用（自己生产能源供自己使用）","ejemplo_es":"El autoconsumo fotovoltaico ha crecido un 40% en España en el último año gracias a las ayudas del gobierno.","ejemplo_zh":"得益于政府补贴，西班牙光伏自发自用去年增长了40%。","tip":"<b>autoconsumo</b> = <b>auto-</b>（自己）+ <b>consumo</b>（消费）。<b>autoconsumo eléctrico</b> = 电力自发自用。<b>placa solar</b> = 太阳能板。B1 能源/科技话题。"},{"lema":"transición energética","ipa":"[tɾan.siˈθjon e.neɾˈxe.ti.ka]","pos":"f.","significado":"能源转型（从化石能源向清洁能源的转变过程）","ejemplo_es":"La transición energética es uno de los pilares del Plan Nacional Integrado de Energía y Clima de España.","ejemplo_zh":"能源转型是西班牙国家综合能源与气候计划的支柱之一。","tip":"<b>transición</b> = 过渡/转型。<b>transición ecológica</b> = 生态转型。<b>descarbonización</b> = 脱碳。B1-B2 环境政策高频词汇。"},{"lema":"huella de carbono","ipa":"[uˈe.ʎa ðe kaɾˈβo.no]","pos":"f.","significado":"碳足迹（个人或组织活动产生的温室气体总量）","ejemplo_es":"Reducir la huella de carbono es una responsabilidad compartida entre gobiernos, empresas y ciudadanos.","ejemplo_zh":"减少碳足迹是政府、企业和公民的共同责任。","tip":"<b>huella</b> = 足迹/印记。<b>huella ecológica</b> = 生态足迹。<b>emisiones de CO₂</b> = 二氧化碳排放。<b>efecto invernadero</b> = 温室效应。B1-B2 环保话题。"},{"lema":"crisis humanitaria","ipa":"[ˈkɾi.sis u.ma.niˈta.ɾja]","pos":"f.","significado":"人道主义危机（因冲突或灾害导致的大规模人类苦难）","ejemplo_es":"La crisis humanitaria en la frontera ha movilizado a organizaciones internacionales de todo el mundo.","ejemplo_zh":"边境的人道主义危机动员了世界各地的国际组织。","tip":"<b>crisis</b> 单复数同形：<b>la crisis / las crisis</b>。<b>crisis migratoria</b> = 移民危机。<b>ayuda humanitaria</b> = 人道主义援助。B2 国际关系话题。"},{"lema":"desplazado","ipa":"[des.plaˈθa.ðo]","pos":"m./f.","significado":"流离失所者（因冲突或灾害被迫离开家园的人）","ejemplo_es":"Miles de desplazados cruzaron la selva del Darién en busca de un futuro mejor.","ejemplo_zh":"成千上万的流离失所者穿越达连丛林，寻找更美好的未来。","tip":"<b>desplazado</b> 来自 <b>desplazar</b>（使迁移）。<b>refugiado</b> = 难民（法律身份）。<b>migrante</b> = 移民。<b>desplazamiento forzado</b> = 被迫流离失所。B2 人权话题。"},{"lema":"xenofobia","ipa":"[se.noˈfo.βja]","pos":"f.","significado":"仇外心理；排外情绪（对外国人的恐惧或仇恨）","ejemplo_es":"Los discursos de odio y la xenofobia han aumentado en varios países europeos en los últimos años.","ejemplo_zh":"近年来，仇恨言论和排外情绪在多个欧洲国家有所增加。","tip":"<b>xenofobia</b> 来自希腊语 <b>xenos</b>（外来者）+ <b>phobos</b>（恐惧）。<b>racismo</b> = 种族主义。<b>discriminación</b> = 歧视。<b>discurso de odio</b> = 仇恨言论。B2 社会议题。"},{"lema":"integración","ipa":"[in.te.ɣɾaˈθjon]","pos":"f.","significado":"融合；融入（移民融入新社会的过程）","ejemplo_es":"La integración de los inmigrantes es un proceso largo que requiere esfuerzo tanto de los recién llegados como de la sociedad de acogida.","ejemplo_zh":"移民的融合是一个漫长的过程，需要新来者和接收社会双方的努力。","tip":"<b>integración</b> 来自 <b>integrar</b>（融入）。<b>integración social/laboral</b> = 社会/就业融入。<b>asimilación</b> = 同化。B2 移民话题核心词汇。"},{"lema":"solidaridad","ipa":"[so.li.ða.ɾiˈðað]","pos":"f.","significado":"团结；休戚与共（人与人之间的互相支持和关爱）","ejemplo_es":"La solidaridad de los ciudadanos con los damnificados fue impresionante: en solo tres días se recaudaron más de dos millones de euros.","ejemplo_zh":"市民对受灾者的团结令人感动：仅三天就筹集了超过两百万欧元。","tip":"<b>solidaridad</b> 来自 <b>solidario/a</b>（团结的）。<b>mostrar solidaridad</b> = 表达团结。<b>cadena de solidaridad</b> = 爱心接力。B2 社会价值话题。"}];
+
+const ARTICLES = {"a1":{"paragraphs":[{"es":"Son las diez de la mañana del sábado. Marta se despierta tranquila porque hoy no tiene que trabajar. Después de desayunar, decide ir al supermercado.","zh":"周六上午十点。玛尔塔平静地醒来，因为今天不用上班。早餐后，她决定去超市。"},{"es":"Coge su bolsa reutilizable, las llaves y la lista de la compra que preparó anoche. “Voy a comprar solo lo necesario”, se dice a sí misma.","zh":"她拿起环保购物袋、钥匙和昨晚准备好的购物清单。“我只买需要的东西”，她对自己说。"},{"es":"El supermercado está a cinco minutos caminando. Al llegar, Marta coge un carrito y saca su lista. Necesita fruta, verdura, leche, pan, huevos y un poco de pollo.","zh":"超市走路五分钟就到。到了之后，玛尔塔推了一辆购物车，拿出清单。她需要水果、蔬菜、牛奶、面包、鸡蛋和一点鸡肉。"},{"es":"Primero va al pasillo de las frutas y verduras. Coge cuatro manzanas rojas, un kilo de tomates, dos lechugas y un manojo de zanahorias.","zh":"她先去了水果和蔬菜通道。拿了四个红苹果、一公斤番茄、两棵生菜和一把胡萝卜。"},{"es":"Después pasa por la sección de lácteos. Coge un cartón de leche semidesnatada, un paquete de queso fresco y seis huevos de gallinas criadas en libertad.","zh":"然后她经过乳制品区。拿了一盒半脱脂牛奶、一包新鲜奶酪和六个散养鸡蛋。"},{"es":"En la panadería, el olor a pan recién horneado es delicioso. Marta pide una barra de pan integral. “Está calentito”, le dice la dependienta con una sonrisa.","zh":"在面包店，新鲜出炉的面包香气诱人。玛尔塔要了一根全麦面包。“还热着呢”，店员微笑着对她说。"},{"es":"Marta mira su lista. Solo le falta el pollo. Va a la carnicería y pide dos pechugas de pollo. El carnicero las envuelve en papel y se las da.","zh":"玛尔塔看了看清单。只差鸡肉了。她去肉店要了两块鸡胸肉。肉贩用纸包好递给她。"},{"es":"Antes de ir a la caja, Marta pasa por el pasillo de los productos de limpieza. Coge un detergente que está de oferta: “3x2”, dice el cartel amarillo.","zh":"去收银台之前，玛尔塔经过清洁用品通道。拿了一款促销的洗衣液：黄色牌子上写着“买二送一”。"},{"es":"En la caja, la cajera pasa los productos por el escáner. “Son 28 euros con 45 céntimos”, dice. Marta paga con tarjeta y guarda todo en su bolsa reutilizable.","zh":"在收银台，收银员扫描商品。“一共 28 欧元 45 分”，她说。玛尔塔刷卡付款，把所有东西装进环保购物袋。"},{"es":"De vuelta a casa, Marta guarda la compra en la nevera y en la despensa. Se siente satisfecha: ha comprado todo lo que necesitaba y no ha gastado de más. “¡Misión cumplida!”, piensa.","zh":"回到家，玛尔塔把买的东西放进冰箱和储藏室。她感到满意：买了所有需要的东西，也没有多花钱。“任务完成！”，她想。"}],"dele":"A1 考点：<b>陈述式现在时</b> — 本段大量使用规则和不规则动词的陈述式现在时（se despierta, decide, coge, va, pide, paga, guarda）。特别注意 <b>ir + a + infinitivo</b>（ir a comprar, ir a la caja）表示近未来或目的。<b>自复动词</b>（se despierta, se dice, se siente）的代词位置。<b>直接宾语代词</b>（las envuelve, se las da）。A1 级别还需掌握<b>超市购物相关词汇</b>和<b>数量表达</b>（un kilo de, un manojo de, un cartón de）。","hardWords":[{"w":"reutilizable","m":"可重复使用的（re- + utilizar + -able）"},{"w":"manojo","m":"一把；一束（量词，用于成束的物品如 zanahorias）"},{"w":"semidesnatada","m":"半脱脂的（semi- 一半 + desnatada 脱脂，形容牛奶）"},{"w":"dependienta","m":"女店员（dependiente 的女性形式）"},{"w":"despensa","m":"储藏室；食品储藏柜（存放干货和食品的地方）"}],"quiz":[{"q":"¿Qué hace Marta el sábado por la mañana?","opts":["Va a la oficina","Va al supermercado","Va al cine","Se queda en la cama"],"ans":1,"es":"Párrafo 1: “Después de desayunar, decide ir al supermercado.”","zh":"玛尔塔早餐后决定去超市。"},{"q":"¿Qué tipo de leche compra Marta?","opts":["Leche entera","Leche semidesnatada","Leche de soja","Leche sin lactosa"],"ans":1,"es":"Párrafo 5: “Coge un cartón de leche semidesnatada.”","zh":"玛尔塔买了半脱脂牛奶。"},{"q":"¿Qué oferta encuentra Marta en el pasillo de limpieza?","opts":["2x1","3x2","50% de descuento","Segunda unidad a mitad de precio"],"ans":1,"es":"Párrafo 8: “3x2, dice el cartel amarillo.”","zh":"黄色牌子上写着买二送一。"},{"q":"¿Cuánto paga Marta en total?","opts":["18,45 €","22,30 €","28,45 €","32,50 €"],"ans":2,"es":"Párrafo 9: “Son 28 euros con 45 céntimos.”","zh":"玛尔塔一共付了 28.45 欧元。"},{"q":"¿Con qué paga Marta?","opts":["En efectivo","Con tarjeta","Con el móvil","Con un cheque"],"ans":1,"es":"Párrafo 9: “Marta paga con tarjeta.”","zh":"玛尔塔用银行卡付款。"}]},"a2":{"paragraphs":[{"es":"En muchos barrios de España, la vida comunitaria sigue siendo un pilar fundamental. Las fiestas de barrio, las comidas populares y las actividades vecinales son mucho más que simples eventos sociales.","zh":"在西班牙的许多街区，社区生活仍然是基本支柱。街区节日、大众聚餐和邻里活动远不止是简单的社交活动。"},{"es":"Carmen tiene 62 años y vive en el barrio de Lavapiés, en Madrid, desde que nació. “Antes esto era un pueblo dentro de la ciudad. Todos nos conocíamos y nos ayudábamos”, recuerda con nostalgia.","zh":"卡门 62 岁，从出生起就住在马德里的拉瓦皮耶斯街区。“以前这里是城里的一个村。大家都互相认识、互相帮助”，她怀念地回忆道。"},{"es":"En las últimas décadas, Lavapiés se ha transformado en uno de los barrios más multiculturales de Europa. Conviven personas de más de 80 nacionalidades diferentes, lo que ha creado un ambiente único.","zh":"近几十年来，拉瓦皮耶斯已转变为欧洲最具多元文化特色的街区之一。超过 80 个不同国籍的人在这里共处，营造出独特的氛围。"},{"es":"Cada mes de junio, la Asociación de Vecinos organiza la “Fiesta de la Primavera”. Los vecinos decoran las calles con guirnaldas de colores, montan mesas largas en las plazas y cada familia trae un plato típico para compartir.","zh":"每年六月，邻里协会组织“春节”。邻居们用彩色花环装饰街道，在广场上摆长桌，每家带一道特色菜来分享。"},{"es":"“Lo mejor es ver a una familia senegalesa compartiendo su plato de arroz con una abuela española que ha traído tortilla de patatas. Eso es la verdadera integración”, explica Mohamed, presidente de la asociación vecinal.","zh":"“最美好的是看到塞内加尔家庭和带着土豆饼的西班牙老奶奶分享饭菜。这才是真正的融合”，邻里协会主席穆罕默德解释道。"},{"es":"Además de las fiestas, el barrio cuenta con un programa de voluntariado muy activo. Jóvenes del barrio ayudan a las personas mayores con la compra, las gestiones digitales o simplemente les hacen compañía.","zh":"除了节日，街区还有一个非常活跃的志愿服务项目。社区的年轻人帮助老人购物、办理线上事务，或者仅仅是陪伴他们。"},{"es":"Lucía, una estudiante universitaria de 20 años, es voluntaria desde hace dos años. “Voy a casa de doña Pilar dos veces por semana. Me cuenta historias de cuando era joven y yo la ayudo con el móvil. Hemos creado una amistad preciosa”.","zh":"20 岁的大学生露西亚已经做了两年志愿者。“我每周去皮拉尔太太家两次。她给我讲她年轻时的故事，我帮她用手机。我们建立了美好的友谊。”"},{"es":"Sin embargo, no todo es perfecto. El aumento del precio de los alquileres está expulsando a muchos vecinos de toda la vida. Carmen se preocupa: “Cada mes veo cerrar un comercio de los de siempre y abrir un piso turístico. Eso mata el alma del barrio”.","zh":"然而，并非一切都完美。房租上涨正在赶走许多老邻居。卡门担忧道：“每个月我都看到一家老店关门，然后开出一套旅游公寓。这扼杀了街区的灵魂。”"},{"es":"A pesar de las dificultades, el espíritu comunitario resiste. Los vecinos han creado una red de apoyo mutuo que incluye un banco de alimentos, clases gratuitas de español para inmigrantes y un grupo de WhatsApp para emergencias.","zh":"尽管困难重重，社区精神依然顽强。邻居们创建了一个互助网络，包括食物银行、免费移民西语课程和一个应急 WhatsApp 群组。"},{"es":"“Un barrio no son sus edificios, son sus personas”, concluye Carmen. “Mientras sigamos cuidándonos unos a otros, Lavapiés seguirá siendo un lugar especial para vivir.”","zh":"“一个街区不是它的建筑，而是它的人”，卡门总结道。“只要我们继续互相照应，拉瓦皮耶斯就依然是一个特别的生活之地。”"}],"dele":"A2 考点：<b>简单过去时 vs. 过去未完成时</b> — 简单过去时（se ha transformado, ha creado）用于完成的变化；过去未完成时（era, conocíamos, ayudábamos）用于过去的习惯和背景描述。<b>现在完成时</b>（ha traído, hemos creado）表达延续到现在的过去动作。<b>直接引语</b>和<b>间接引语</b>的转述结构。<b>最高级</b>（lo mejor, uno de los más multiculturales）。A2 级别还需掌握<b>社区生活词汇</b>和<b>情感表达</b>。","hardWords":[{"w":"multicultural","m":"多元文化的（multi- 多 + cultural 文化的）"},{"w":"guirnaldas","m":"花环；彩带（节日装饰用的彩色纸带或花环）"},{"w":"alquiler","m":"房租；租金（alquilar 的名词形式）"},{"w":"banco de alimentos","m":"食物银行（收集和分发食品给有需要者的慈善机构）"},{"w":"expulsar","m":"驱逐；赶走（此指因租金上涨被迫搬离）"}],"quiz":[{"q":"¿En qué barrio de Madrid vive Carmen?","opts":["Malasaña","Lavapiés","Chueca","La Latina"],"ans":1,"es":"Párrafo 2: “Carmen vive en el barrio de Lavapiés, en Madrid.”","zh":"卡门住在马德里的拉瓦皮耶斯街区。"},{"q":"¿Cuántas nacionalidades diferentes conviven en Lavapiés según el texto?","opts":["Más de 40","Más de 60","Más de 80","Más de 100"],"ans":2,"es":"Párrafo 3: “Conviven personas de más de 80 nacionalidades diferentes.”","zh":"超过 80 个不同国籍的人在此共处。"},{"q":"¿Qué hace Lucía como voluntaria?","opts":["Enseña inglés a niños","Ayuda a Pilar con el móvil y le hace compañía","Cocina para todo el barrio","Organiza las fiestas del barrio"],"ans":1,"es":"Párrafo 7: “Le cuenta historias... y yo la ayudo con el móvil. Hemos creado una amistad preciosa.”","zh":"露西亚帮皮拉尔太太用手机并陪伴她。"},{"q":"¿Qué problema menciona Carmen sobre el barrio?","opts":["Hay demasiado ruido","Faltan zonas verdes","El aumento de alquileres expulsa a los vecinos","No hay suficiente transporte público"],"ans":2,"es":"Párrafo 8: “El aumento del precio de los alquileres está expulsando a muchos vecinos.”","zh":"房租上涨赶走了许多老邻居。"},{"q":"¿Qué servicios ofrece la red de apoyo del barrio?","opts":["Banco de alimentos, clases de español y grupo de WhatsApp","Gimnasio gratuito y piscina","Servicio de taxi compartido","Guardería para niños"],"ans":0,"es":"Párrafo 9: “Un banco de alimentos, clases gratuitas de español para inmigrantes y un grupo de WhatsApp para emergencias.”","zh":"食物银行、免费西语课和应急 WhatsApp 群。"}]},"b1":{"paragraphs":[{"es":"España se ha posicionado en los últimos años como uno de los referentes europeos en energías renovables. Según el informe anual de Red Eléctrica de España, en 2025 más del 56% de la electricidad generada en el país provino de fuentes renovables, un récord histórico que sitúa a España en el podio europeo.","zh":"近年来，西班牙已定位为欧洲可再生能源的标杆之一。据西班牙电网公司年度报告，2025 年全国超过 56% 的发电量来自可再生能源，创历史纪录，将西班牙置于欧洲领奖台。"},{"es":"La energía eólica es la principal fuente de generación eléctrica del país, con más de 1.300 parques eólicos repartidos por toda la geografía española. En días de viento intenso, los aerogeneradores pueden llegar a cubrir más del 70% de la demanda nacional.","zh":"风能是全国最主要的发电来源，全境分布超过 1,300 个风力发电场。在强风天气，风力发电机可以覆盖全国 70% 以上的电力需求。"},{"es":"La energía solar fotovoltaica, por su parte, ha experimentado un crecimiento explosivo. Según la Unión Española Fotovoltaica (UNEF), en 2025 se instalaron más de 7.000 megavatios de nueva potencia solar, un 35% más que el año anterior. España es ya el segundo país europeo con más capacidad solar instalada, solo por detrás de Alemania.","zh":"太阳能光伏发电则经历了爆发式增长。据西班牙光伏联盟（UNEF）数据，2025 年新增太阳能装机容量超过 7,000 兆瓦，比前一年增长 35%。西班牙已是欧洲太阳能装机容量第二大国，仅次于德国。"},{"es":"Uno de los fenómenos más destacados es el auge del autoconsumo. Cada vez más hogares y empresas instalan placas solares en sus tejados para generar su propia electricidad. Las ayudas del Plan de Recuperación y los fondos europeos Next Generation han sido determinantes en este crecimiento.","zh":"最突出的现象之一是自发自用的兴起。越来越多的家庭和企业在屋顶安装太阳能板来自己发电。复苏计划补贴和欧洲下一代基金对此增长起到了决定性作用。"},{"es":"“El autoconsumo ha democratizado la energía”, afirma Antonio Barrero, director de la revista Energías Renovables. “Por primera vez, los ciudadanos no son solo consumidores, sino también productores. Es un cambio de paradigma.”","zh":"“自发自用使能源大众化了”，《可再生能源》杂志总监安东尼奥·巴雷罗表示。“有史以来第一次，公民不仅是消费者，也是生产者。这是一个范式转变。”"},{"es":"La transición energética no solo tiene beneficios medioambientales. Según un estudio del Instituto para la Diversificación y Ahorro de la Energía (IDAE), el sector de las energías renovables emplea ya a más de 130.000 personas en España, y se espera que esta cifra alcance los 250.000 en 2030.","zh":"能源转型不仅带来环境效益。据能源多样化与节约研究所（IDAE）的研究，西班牙可再生能源行业已雇用超过 13 万人，预计到 2030 年将达到 25 万人。"},{"es":"Sin embargo, el camino no está exento de obstáculos. La lentitud de los trámites administrativos es uno de los principales frenos al desarrollo renovable. En algunas comunidades autónomas, obtener los permisos para un parque solar puede llevar más de tres años.","zh":"然而，道路并非没有障碍。行政审批缓慢是可再生能源发展的主要制约因素之一。在一些自治区，获得太阳能发电场的许可可能需要三年以上时间。"},{"es":"Otro desafío importante es la gestión de los excedentes. Cuando la producción renovable supera la demanda, los precios de la electricidad pueden llegar a ser negativos, lo que desincentiva nuevas inversiones. Mejorar las infraestructuras de almacenamiento, como las baterías y las centrales hidroeléctricas de bombeo, es clave para resolver este problema.","zh":"另一个重要挑战是盈余管理。当可再生能源产量超过需求时，电价可能变为负值，从而抑制新投资。改善储能基础设施，如电池和抽水蓄能电站，是解决这一问题的关键。"},{"es":"A nivel europeo, España defiende una postura ambiciosa. El gobierno ha propuesto acelerar la reducción de emisiones para alcanzar la neutralidad climática en 2045, cinco años antes del objetivo comunitario. Esta propuesta ha sido bien recibida por los socios del sur, pero ha encontrado reticencias en algunos países del este, más dependientes del carbón.","zh":"在欧洲层面，西班牙主张雄心勃勃的立场。政府提议加快减排，在 2045 年实现气候中和，比欧盟目标提前五年。这一提议受到南部伙伴的欢迎，但在一些更依赖煤炭的东欧国家遇到了阻力。"},{"es":"El hidrógeno verde es la gran apuesta de futuro. España aspira a convertirse en el principal hub europeo de producción y exportación de hidrógeno verde gracias a su abundante recurso solar y eólico. El corredor H2Med, que conectará la península ibérica con el resto de Europa a través de Francia, es el proyecto estrella.","zh":"绿氢是未来的重大赌注。西班牙凭借丰富的太阳能和风能资源，立志成为欧洲主要的绿氢生产和出口枢纽。将通过法国连接伊比利亚半岛与欧洲其他地区的 H2Med 走廊是旗舰项目。"},{"es":"Las empresas también están dando pasos firmes. Grandes corporaciones como Iberdrola, Endesa y Repsol han anunciado inversiones multimillonarias en proyectos renovables. Pero el tejido de pymes innovadoras también está floreciendo, con startups que desarrollan desde paneles solares más eficientes hasta sistemas de gestión inteligente de la energía.","zh":"企业也在坚定前行。Iberdrola、Endesa 和 Repsol 等大型企业已宣布对可再生能源项目投入数十亿欧元。但创新型中小企业也在蓬勃发展，创业公司从更高效的太阳能板到智能能源管理系统，各展所长。"},{"es":"La aceptación social es otro factor crítico. Aunque las encuestas muestran un apoyo mayoritario a las renovables, algunos proyectos han generado rechazo local por su impacto paisajístico o por el uso de terrenos agrícolas. Encontrar el equilibrio entre desarrollo renovable y protección del territorio es un debate creciente.","zh":"社会接受度是另一个关键因素。尽管民调显示多数人支持可再生能源，但一些项目因景观影响或占用农业用地而遭到当地反对。在可再生能源开发与土地保护之间找到平衡是一个日益激烈的辩论。"},{"es":"Los expertos coinciden en que la transición energética es irreversible. “España tiene todos los ingredientes para liderar la revolución verde europea: sol, viento, territorio y talento”, concluye Barrero. “El reto no es técnico, es político y social: necesitamos consenso y visión a largo plazo.”","zh":"专家一致认为能源转型是不可逆转的。“西班牙具备领导欧洲绿色革命的所有要素：阳光、风力、土地和人才”，巴雷罗总结道。“挑战不是技术性的，而是政治性和社会性的：我们需要共识和长远眼光。”"},{"es":"Mientras tanto, los ciudadanos empiezan a notar los efectos en sus facturas. Los hogares con autoconsumo ahorran una media de 500 euros al año en electricidad. La energía limpia no solo es buena para el planeta: también lo es para el bolsillo.","zh":"与此同时，市民开始感受到账单上的效果。自发自用家庭平均每年节省 500 欧元电费。清洁能源不仅对地球有益，对钱包也有益。"},{"es":"El camino hacia un modelo energético sostenible es largo, pero España avanza con paso firme. Si se mantienen las políticas de apoyo y se agilizan los trámites, el país podría alcanzar el 80% de generación renovable antes de 2030, una meta que hace apenas una década parecía imposible.","zh":"通往可持续能源模式的道路漫长，但西班牙步伐坚定。如果保持支持政策并加快审批流程，国家可能在 2030 年前达到 80% 的可再生能源发电比例，这在十年前还是看似不可能的目标。"}],"dele":"B1 考点：<b>现在完成时</b>（se ha posicionado, ha experimentado, ha propuesto）+ <b>过去未完成时 vs. 简单过去时</b>（era, parecía vs. se instalaron, anunciaron）+ <b>虚拟式现在时</b>（para que los ciudadanos sean, cuando la producción supere）。<b>数据引用结构</b>（Según el informe..., un estudio de... sitúa..., la UNEF señala que...）。<b>比较级和最高级</b>（más del 70%, segundo país con más capacidad, solo por detrás de）。<b>条件句</b>（Si se mantienen las políticas..., el país podría alcanzar...）。<b>被动语态和无人称</b>（se espera que, se han instalado）。B1 级别还需掌握<b>百分比和数据表达</b>（56%, 7.000 megavatios, 35%）和<b>转折/让步连接词</b>（sin embargo, por su parte, aunque, mientras tanto）。","hardWords":[{"w":"aerogenerador","m":"风力发电机（aero- 空气 + generador 发电机）"},{"w":"paradigma","m":"范式；模式（理论框架或思维方式）"},{"w":"excedente","m":"盈余；过剩（超过需求的部分）"},{"w":"desincentivar","m":"抑制；使失去动力（des- 否定 + incentivar 激励）"},{"w":"hidrógeno verde","m":"绿氢（通过可再生能源电解水产生的氢气）"},{"w":"hub","m":"枢纽；中心（英语借词，指集散中心）"},{"w":"paisajístico","m":"景观的（paisaje 景观 + -ístico 形容词后缀）"},{"w":"consenso","m":"共识（普遍同意的意见或决定）"},{"w":"neutralidad climática","m":"气候中和（碳排放与吸收平衡的状态）"},{"w":"tejido empresarial","m":"企业结构；企业网络（tejido 织物，喻指企业生态系统）"}],"quiz":[{"q":"¿Qué porcentaje de electricidad provino de fuentes renovables en España en 2025?","opts":["Más del 46%","Más del 56%","Más del 66%","Más del 76%"],"ans":1,"es":"Párrafo 1: “más del 56% de la electricidad generada en el país provino de fuentes renovables.”","zh":"2025 年超过 56% 的电力来自可再生能源。"},{"q":"¿Cuántos megavatios de nueva potencia solar se instalaron en 2025?","opts":["Más de 5.000 MW","Más de 7.000 MW","Más de 9.000 MW","Más de 11.000 MW"],"ans":1,"es":"Párrafo 3: “Se instalaron más de 7.000 megavatios de nueva potencia solar.”","zh":"2025 年新增了超过 7,000 兆瓦太阳能装机容量。"},{"q":"¿Según Antonio Barrero, qué ha supuesto el autoconsumo?","opts":["Ha encarecido la electricidad","Ha democratizado la energía","Ha reducido el empleo","Ha frenado la innovación"],"ans":1,"es":"Párrafo 5: “El autoconsumo ha democratizado la energía. Por primera vez, los ciudadanos no son solo consumidores, sino también productores.”","zh":"自发自用使能源大众化，公民不再只是消费者也是生产者。"},{"q":"¿Cuántas personas trabajan actualmente en el sector renovable español?","opts":["Más de 80.000","Más de 100.000","Más de 130.000","Más de 200.000"],"ans":2,"es":"Párrafo 6: “El sector de las energías renovables emplea ya a más de 130.000 personas.”","zh":"可再生能源行业已雇用超过 13 万人。"},{"q":"¿Qué problema genera el exceso de producción renovable?","opts":["Aumenta el precio de la luz","Los precios pueden volverse negativos","Las centrales tienen que cerrar","Se desperdicia toda la energía"],"ans":1,"es":"Párrafo 8: “Cuando la producción renovable supera la demanda, los precios de la electricidad pueden llegar a ser negativos.”","zh":"当产量超过需求时，电价可能变为负值。"},{"q":"¿En qué año propone España alcanzar la neutralidad climática?","opts":["En 2035","En 2040","En 2045","En 2050"],"ans":2,"es":"Párrafo 9: “El gobierno ha propuesto acelerar la reducción de emisiones para alcanzar la neutralidad climática en 2045.”","zh":"西班牙提议在 2045 年实现气候中和。"},{"q":"¿Qué es el corredor H2Med?","opts":["Un tren de alta velocidad","Un gasoducto de gas natural","Un proyecto de conexión de hidrógeno verde con Europa","Una autopista ecológica"],"ans":2,"es":"Párrafo 10: “El corredor H2Med, que conectará la península ibérica con el resto de Europa a través de Francia.”","zh":"H2Med 是通过法国连接伊比利亚与欧洲的绿氢走廊。"},{"q":"¿Cuánto ahorran los hogares con autoconsumo al año?","opts":["200 euros","350 euros","500 euros","700 euros"],"ans":2,"es":"Párrafo 14: “Los hogares con autoconsumo ahorran una media de 500 euros al año en electricidad.”","zh":"自发自用家庭每年平均节省 500 欧元电费。"}]},"b2":{"paragraphs":[{"es":"La crisis migratoria en América Latina ha alcanzado proporciones sin precedentes en la última década. Según el Alto Comisionado de las Naciones Unidas para los Refugiados (ACNUR), más de 22 millones de personas se han visto obligadas a abandonar sus hogares en la región, una cifra que supera incluso los desplazamientos registrados durante las guerras de los Balcanes en los años noventa.","zh":"过去十年，拉丁美洲的移民危机已达到前所未有的规模。据联合国难民署（ACNUR）数据，该地区超过 2,200 万人被迫离开家园，这一数字甚至超过了九十年代巴尔干战争期间记录的流离失所人数。"},{"es":"Venezuela sigue siendo el principal país emisor de migrantes. Más de 7,7 millones de venezolanos han salido de su país desde 2014, en lo que constituye el mayor éxodo de la historia reciente de América Latina. Colombia, Perú, Ecuador y Chile son los principales países de acogida.","zh":"委内瑞拉仍然是最大的移民输出国。自 2014 年以来，超过 770 万委内瑞拉人离开祖国，这是拉丁美洲近代史上最大规模的出走。哥伦比亚、秘鲁、厄瓜多尔和智利是主要接收国。"},{"es":"Sin embargo, la narrativa que reduce la crisis a un solo país es engañosa. Centroamérica —especialmente Honduras, El Salvador y Guatemala— sigue expulsando población debido a la violencia de las pandillas, la inestabilidad política y la pobreza extrema. Las caravanas migrantes que atraviesan México hacia Estados Unidos son la manifestación más visible de este drama.","zh":"然而，将危机归结为单一国家的叙事具有误导性。中美洲——特别是洪都拉斯、萨尔瓦多和危地马拉——由于帮派暴力、政治动荡和极端贫困，仍在持续输出人口。穿越墨西哥前往美国的移民大篷车队是这一悲剧最明显的表现。"},{"es":"La selva del Darién, que separa Colombia de Panamá, se ha convertido en uno de los corredores migratorios más peligrosos del mundo. En 2025, más de 500.000 personas cruzaron esta jungla inhóspita, según datos de la Organización Internacional para las Migraciones (OIM). Muchos no sobreviven al trayecto: ríos caudalosos, animales salvajes, grupos armados y la falta de agua potable convierten cada paso en un riesgo mortal.","zh":"分隔哥伦比亚和巴拿马的达连丛林已成为世界上最危险的移民通道之一。据国际移民组织（OIM）数据，2025 年超过 50 万人穿越了这片不毛丛林。许多人无法活着走完全程：汹涌的河流、野生动物、武装团体和缺乏饮用水让每一步都成为致命风险。"},{"es":"La doctora Mariana Restrepo, investigadora del Centro de Estudios Migratorios Latinoamericanos, describe la situación como “una tormenta perfecta de vulnerabilidad humana”. “Estamos ante personas que huyen de situaciones extremas y se encuentran con políticas cada vez más restrictivas. El resultado es una crisis humanitaria de dimensiones colosales.”","zh":"拉丁美洲移民研究中心研究员玛丽安娜·雷斯特雷波博士将这一局势描述为“人类脆弱性的完美风暴”。“我们面对的是逃离极端境遇的人们，却遭遇越来越严格的限制政策。结果是一场规模巨大的人道主义危机。”"},{"es":"Los países receptores, muchos de ellos con recursos limitados, se enfrentan a un dilema complejo. Colombia, por ejemplo, ha acogido a más de 2,8 millones de venezolanos y ha implementado el Estatuto Temporal de Protección, un modelo elogiado internacionalmente por su enfoque integrador. Sin embargo, los servicios públicos —salud, educación, vivienda— están al límite de su capacidad.","zh":"接收国中许多资源有限，面临复杂困境。例如哥伦比亚接收了超过 280 万委内瑞拉人，并实施了《临时保护条例》，该模式因其融合导向而受到国际赞誉。然而，公共服务——医疗、教育、住房——已接近承载极限。"},{"es":"“Colombia ha dado una lección de humanidad al mundo”, afirma Filippo Grandi, Alto Comisionado de ACNUR. “Pero la comunidad internacional no puede dejar que países de renta media asuman solos esta carga. Se necesita un mecanismo de responsabilidad compartida real, no solo declaraciones de buena voluntad.”","zh":"“哥伦比亚给世界上了一堂人性课”，联合国难民署高级专员菲利波·格兰迪表示。“但国际社会不能让中等收入国家独自承担这一重担。需要一个真正的责任分担机制，而不仅仅是善意的声明。”"},{"es":"El impacto económico de la migración es objeto de un intenso debate académico y político. Un estudio del Banco Interamericano de Desarrollo (BID) estima que los migrantes venezolanos podrían contribuir con hasta un 2,5% adicional al PIB de los países receptores para 2030, siempre que se implementen políticas efectivas de integración laboral.","zh":"移民的经济影响是学术和政治激烈辩论的议题。美洲开发银行（BID）的一项研究估计，只要实施有效的就业融合政策，委内瑞拉移民到 2030 年可为接收国 GDP 额外贡献高达 2.5%。"},{"es":"No obstante, el corto plazo es doloroso. La competencia por empleos informales, la presión sobre los salarios más bajos y la saturación de los servicios sociales generan tensiones que a menudo son explotadas políticamente. En varios países de la región han surgido discursos xenófobos que culpan a los migrantes de problemas estructurales preexistentes.","zh":"然而，短期内是痛苦的。非正规就业的竞争、对最低工资的压力和社会服务的饱和引发紧张局势，常常被政治利用。在该地区多个国家，出现了将原有结构性问题归咎于移民的排外言论。"},{"es":"Chile es un caso paradigmático. Tras una década de recepción migratoria relativamente abierta, el país ha virado hacia políticas más restrictivas. El gobierno impuso en 2025 la exigencia de visado consular para ciudadanos venezolanos, una medida que, según organizaciones de derechos humanos, empuja a los migrantes hacia cruces irregulares y redes de tráfico de personas.","zh":"智利是一个典型案例。经过十年相对开放的移民接收政策，该国已转向更严格的限制措施。政府于 2025 年对委内瑞拉公民实施领事签证要求，人权组织称此举将移民推向非法越境和人口贩运网络。"},{"es":"El sociólogo ecuatoriano Dr. Carlos Maldonado, autor del libro “Fronteras de la desigualdad”, ofrece una perspectiva crítica: “La migración masiva no es la enfermedad, es el síntoma. La enfermedad es un sistema económico global que concentra la riqueza en pocas manos mientras condena a regiones enteras a la precariedad. Si no atacamos las causas, seguiremos gestionando consecuencias.”","zh":"厄瓜多尔社会学家、《不平等的前沿》一书作者卡洛斯·马尔多纳多博士提供了一个批判性视角：“大规模移民不是疾病，而是症状。疾病是一个将财富集中在少数人手中、同时让整个地区陷入困境的全球经济体系。如果我们不解决原因，就会一直处理后果。”"},{"es":"La respuesta internacional ha sido insuficiente. Aunque la ONU ha lanzado varios llamamientos humanitarios, la financiación cubre apenas el 30% de las necesidades estimadas. Mientras tanto, los países donantes destinan recursos muy superiores al control de fronteras que a la cooperación para el desarrollo en los países de origen.","zh":"国际应对措施不足。尽管联合国发起了多次人道主义呼吁，但资金仅覆盖估计需求的 30%。与此同时，捐助国用于边境控制的资源远高于用于来源国发展合作的资源。"},{"es":"En medio de este panorama desolador, surgen iniciativas esperanzadoras. En Medellín, Colombia, el programa “Cocinas que unen” reúne a mujeres colombianas y venezolanas para gestionar restaurantes comunitarios. En Lima, una red de más de 200 empresas ofrece empleo formal a migrantes con el apoyo de la OIM. Son ejemplos de que la integración es posible cuando hay voluntad.","zh":"在这片令人沮丧的景象中，出现了充满希望的倡议。在哥伦比亚麦德林，“团结厨房”项目将哥伦比亚和委内瑞拉妇女聚集在一起，经营社区餐厅。在利马，一个由 200 多家企业组成的网络在国际移民组织支持下为移民提供正规就业。这些例子表明，只要有意愿，融合是可能的。"},{"es":"“La integración no es un acto de caridad, es una inversión en el futuro de todos”, subraya la doctora Restrepo. “Cuando un migrante puede trabajar legalmente, pagar impuestos, llevar a sus hijos al colegio y contribuir a su comunidad, todos ganan. El desafío es crear las condiciones para que eso ocurra.”","zh":"“融合不是慈善行为，而是对所有人未来的投资”，雷斯特雷波博士强调。“当一个移民可以合法工作、纳税、送孩子上学并为社区做贡献时，所有人都赢了。”气候变化增添了紧迫性：世界银行预测，到 2050 年全球变暖可能导致拉美超过 1,700 万人流离失所。"},{"es":"Al final, la crisis migratoria latinoamericana plantea preguntas incómodas sobre el modelo de desarrollo global, la responsabilidad de los países ricos y el verdadero significado de la solidaridad internacional. Como escribe el periodista Martín Caparrós: “Nadie abandona su tierra, su lengua y sus afectos si no es empujado por una fuerza más grande que el arraigo. Entender eso es el primer paso para responder con humanidad.”","zh":"最终，拉美移民危机对全球发展模式、富国的责任和国际团结的真正意义提出了令人不安的问题。正如记者马丁·卡帕罗斯所写：“没有人会抛弃自己的土地、语言和情感，除非被比扎根更强大的力量所驱使。理解这一点是人性化回应的第一步。”"}],"dele":"B2 考点：<b>虚拟式过去未完成时</b>（como si no hubiera, que asuman solos, que eso ocurra）+ <b>复合条件式</b>（podrían contribuir, habría que atacar）+ <b>学术引用结构</b>（Según ACNUR..., un estudio del BID estima..., la doctora Restrepo describe..., el sociólogo Maldonado ofrece...）+ <b>抽象名词化</b>（la externalización, la saturación, la precariedad, el arraigo）。<b>对立观点衔接</b>（sin embargo, no obstante, mientras tanto, en medio de, al final）+ <b>引语嵌套</b>（直接引语和间接引语的交错使用）。<b>数据对比</b>（22 millones vs. 7,7 millones vs. 500.000）。B2 级别需展示对复杂社会议题的<b>批判性分析</b>、<b>多视角呈现</b>和<b>修辞性语言理解</b>（tormenta perfecta, síntoma vs. enfermedad）。","hardWords":[{"w":"éxodo","m":"大规模出走；出走潮（大批人同时离开一个地方）"},{"w":"inhóspita","m":"不适宜居住的；荒凉的（in- 否定 + hospitalario 好客的）"},{"w":"dilema","m":"困境；两难选择（在两种或多种选择间难以抉择）"},{"w":"paradigmático","m":"典范的；典型的（paradigma 的形容词，代表性案例）"},{"w":"xenófobo","m":"排外的；仇外的（xenofobia 的形容词形式）"},{"w":"precariedad","m":"不稳定；不牢靠（precario 的名词，指生活/工作条件缺乏保障）"},{"w":"arraigo","m":"扎根；归属感（来自 arraigar 扎根，指对土地的情感联系）"},{"w":"llamamiento","m":"呼吁；号召（llamar 的名词，指正式请求帮助或行动）"},{"w":"virado","m":"转向（virar 的过去分词，指政策方向的改变）"},{"w":"Corredor Seco","m":"干旱走廊（中美洲受气候变化影响最严重的干旱地区）"}],"quiz":[{"q":"¿Según ACNUR, cuántas personas se han visto obligadas a abandonar sus hogares en América Latina?","opts":["Más de 12 millones","Más de 17 millones","Más de 22 millones","Más de 30 millones"],"ans":2,"es":"Párrafo 1: “Más de 22 millones de personas se han visto obligadas a abandonar sus hogares en la región.”","zh":"超过 2,200 万人在拉美被迫离开家园。"},{"q":"¿Cuántos venezolanos han salido de su país desde 2014 según el texto?","opts":["Más de 3,7 millones","Más de 5,7 millones","Más de 7,7 millones","Más de 9,7 millones"],"ans":2,"es":"Párrafo 2: “Más de 7,7 millones de venezolanos han salido de su país desde 2014.”","zh":"自 2014 年以来超过 770 万委内瑞拉人离开祖国。"},{"q":"¿Por qué la selva del Darién es considerada uno de los corredores migratorios más peligrosos?","opts":["Por la presencia de animales salvajes y grupos armados","Porque está demasiado lejos de las ciudades","Porque no hay mapas de la zona","Por las bajas temperaturas"],"ans":0,"es":"Párrafo 4: “Ríos caudalosos, animales salvajes, grupos armados y la falta de agua potable convierten cada paso en un riesgo mortal.”","zh":"汹涌的河流、野生动物、武装团体和缺乏饮用水使每一步都成为致命风险。"},{"q":"¿A qué se refiere “una tormenta perfecta de vulnerabilidad humana” en el párrafo 5?","opts":["A un fenómeno meteorológico","A una combinación extrema de factores que agravan la situación de los migrantes","A una protesta social","A un programa de ayuda internacional"],"ans":1,"es":"Párrafo 5: personas que huyen de situaciones extremas + políticas restrictivas = crisis humanitaria colosal.","zh":"指逃离极端境遇的人们遭遇严格限制政策，形成严重人道主义危机。"},{"q":"¿Qué medida tomó Chile en 2025 respecto a los migrantes venezolanos?","opts":["Ofreció la nacionalidad automática","Impuso la exigencia de visado consular","Abrió la frontera sin restricciones","Prohibió totalmente la entrada"],"ans":1,"es":"Párrafo 10: “El gobierno impuso la exigencia de visado consular para ciudadanos venezolanos.”","zh":"智利对委内瑞拉公民实施领事签证要求。"},{"q":"¿Según el sociólogo Carlos Maldonado, qué representa la migración masiva?","opts":["La enfermedad del sistema","El síntoma, no la enfermedad","La solución al problema económico","Un fenómeno inexplicable"],"ans":1,"es":"Párrafo 11: “La migración masiva no es la enfermedad, es el síntoma. La enfermedad es un sistema económico global.”","zh":"大规模移民是症状而非疾病，疾病是不平等的全球经济体系。"},{"q":"¿Qué porcentaje de las necesidades humanitarias está cubierto por la financiación internacional?","opts":["Apenas el 20%","Apenas el 30%","Aproximadamente el 50%","Más del 60%"],"ans":1,"es":"Párrafo 12: “La financiación cubre apenas el 30% de las necesidades estimadas.”","zh":"资金仅覆盖估计需求的 30%。"},{"q":"¿Según el Banco Mundial, cuántas personas podría desplazar el cambio climático en América Latina para 2050?","opts":["Más de 7 millones","Más de 12 millones","Más de 17 millones","Más de 22 millones"],"ans":2,"es":"Párrafo 15: “El calentamiento global podría desplazar internamente a más de 17 millones de personas en América Latina.”","zh":"气候变化可能到 2050 年使拉美超过 1,700 万人流离失所。"}]}};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${a.quiz.length} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== 恢复已保存的答题状态 + 渲染控件 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">🔄 重做</button>' +
+    '<span class="quiz-stats">' +
+      '已答题 <b>' + historyCount + '</b> 次' +
+      (latest ? ' · 最近正确 <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">📝 笔记</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="记录你的学习笔记..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">✓ 已保存</span>';
+  section.appendChild(notesArea);
+}
+
+// 给每个 quiz 绑定交互
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// 初始化
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+</script>
+</body>
+</html>
