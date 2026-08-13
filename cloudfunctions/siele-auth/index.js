@@ -414,7 +414,8 @@ async function pushLearning(event) {
     const current = existing.data[0];
     if (revision !== Number(current.revision || 0)) return response(false, "REVISION_CONFLICT", { snapshot: current });
     const nextRevision = revision + 1;
-    await db.collection("learning_snapshots").doc(current._id).update({ payload, revision: nextRevision, updatedAt: now() });
+    // 用 set 整文档覆盖，避免 update 深度合并时"null → 对象"报 Cannot create field 错误
+    await db.collection("learning_snapshots").doc(current._id).set({ uid, payload, revision: nextRevision, updatedAt: now() });
     return response(true, "LEARNING_SAVED", { revision: nextRevision });
   }
   await db.collection("learning_snapshots").add({ uid, payload, revision: 1, updatedAt: now() });
@@ -445,7 +446,8 @@ async function pushLearningSession(event) {
     const current = existing.data[0];
     if (revision !== Number(current.revision || 0)) return response(false, "REVISION_CONFLICT", { snapshot: current });
     const nextRevision = revision + 1;
-    await db.collection("learning_snapshots").doc(current._id).update({ payload, revision: nextRevision, updatedAt: now() });
+    // 用 set 整文档覆盖，避免 update 深度合并时"null → 对象"报 Cannot create field 错误
+    await db.collection("learning_snapshots").doc(current._id).set({ uid, payload, revision: nextRevision, updatedAt: now() });
     return response(true, "LEARNING_SAVED", { revision: nextRevision });
   }
   await db.collection("learning_snapshots").add({ uid, payload, revision: 1, updatedAt: now() });
