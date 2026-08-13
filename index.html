@@ -3916,6 +3916,7 @@ function renderSpeakingTopicsAdmin(){
     h += '<div style="margin:4px 0;font-size:12px"><b>题目（西语）：</b><textarea id="sadm_topic_'+ti+'" rows="2" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(t.topic||'')+'</textarea></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>中文释义：</b><input id="sadm_zh_'+ti+'" value="'+esc(t.zh||'')+'" style="width:100%"></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>准备提示：</b><textarea id="sadm_prep_'+ti+'" rows="2" style="width:100%;font-size:12px">'+esc(t.prep||'')+'</textarea></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>范文（可选）：</b><textarea id="sadm_essay_'+ti+'" rows="4" style="width:100%;font-size:12px;font-family:var(--serif)" placeholder="手动填写范文，或点下方AI生成">'+esc(t.essay||'')+'</textarea><button class="btn xs ol" style="margin-top:4px" onclick="genSpeakingEssay('+ti+')">🤖 AI生成范文</button></div>';
     h += '</div>';
   });
   h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addSpeakingTopic()">➕ 新增话题</button><button class="btn pr" onclick="saveSpeakingTopicsAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div></div>';
@@ -3934,6 +3935,18 @@ function delSpeakingTopic(ti){
   _sadmTopics.splice(ti,1);
   renderSpeakingTopicsAdmin();
 }
+function genSpeakingEssay(ti){
+  if(!_sadmTopics||!_sadmTopics[ti]) return;
+  var t = _sadmTopics[ti];
+  var topicObj = {lvl:t.lvl, title:t.topic, zh:t.zh};
+  var keys = {must:[], good:[]};
+  // 尝试从准备提示中提取关键词
+  if(t.prep){ keys.must = t.prep.split(/[,，、]/).map(function(s){return s.trim();}).filter(Boolean).slice(0,5); }
+  var essay = generateModelEssay(topicObj, '', keys);
+  var ta = document.getElementById('sadm_essay_'+ti);
+  if(ta && essay){ ta.value = essay; ta.focus(); toast('✅ 已生成范文，可手动修改','ok'); }
+  else if(ta){ ta.value = ''; toast('⚠️ 生成失败，请手动填写','err'); }
+}
 function saveSpeakingTopicsAdmin(){
   if(!_sadmTopics) return;
   const topics = [];
@@ -3944,8 +3957,9 @@ function saveSpeakingTopicsAdmin(){
     const topic=(document.getElementById('sadm_topic_'+i)||{}).value.trim();
     const zh=(document.getElementById('sadm_zh_'+i)||{}).value||'';
     const prep=(document.getElementById('sadm_prep_'+i)||{}).value||'';
+    const essay=(document.getElementById('sadm_essay_'+i)||{}).value||'';
     if(!topic){ alert('话题 '+(i+1)+' 题目不能为空'); return; }
-    topics.push({lvl:lvl, cat:cat, topic:topic, zh:zh, prep:prep});
+    topics.push({lvl:lvl, cat:cat, topic:topic, zh:zh, prep:prep, essay:essay});
   }
   window._deleSyncContentEdits('speakingTopics', {topics: topics});
   window._contentEdits.speakingTopics = {topics: topics};
@@ -4224,8 +4238,15 @@ function scoreSpeaking(text){
   // P2-5: 完成后鼓励文案
   showEncouragement('speaking', score);
 
-  /* FEAT-5: 口语范文生成 — 评分完成后生成模板范文 */
-  var essay = generateModelEssay(topic, text, kw);
+  /* FEAT-5: 口语范文生成 — 优先使用管理员定义范文，否则生成模板范文 */
+  var essay = null;
+  if(topic && topic.essay && topic.essay.trim()){
+    essay = {full: topic.essay, level: topic.lvl||'B1', dimensions: {
+      coherencia:'管理员提供范文', fluidez:'参考管理员范文练习', correccion:'注意语法和词汇用法', alcance:'积累范文中的高级表达'
+    }};
+  } else {
+    essay = generateModelEssay(topic, text, kw);
+  }
   var essayEl = document.getElementById('speakModelEssay');
   if(essayEl && essay){
     essayEl.innerHTML = renderModelEssayHTML(essay, text);
@@ -5321,11 +5342,90 @@ const SIELE_TOPICS_EXTRA = [
   {n:30,es:'Las compras por internet vs. las tiendas fisicas',t5model:'Es cierto que las compras en línea pueden estimular el deseo de compra de los consumidores y llevarlos a adquirir más productos. La comodidad de comprar desde casa y la disponibilidad de una amplia variedad de opciones en línea pueden influir en el comportamiento del consumidor. Las tiendas en línea suelen utilizar estrategias de marketing digital, como recomendaciones personalizadas y promociones especiales, para atraer a los consumidores y alentarlos a comprar más. Además, la posibilidad de comparar precios y leer reseñas de otros clientes puede generar un impulso de compra. Sin embargo, es importante que los consumidores sean conscientes de sus necesidades reales y establezcan límites en sus compras en línea. La tentación de gastar más de lo necesario puede ser fuerte, por lo que es fundamental tener un control consciente sobre los hábitos de consumo. En última instancia, cada consumidor es responsable de tomar decisiones informadas y racionales al hacer compras en línea. Si se utiliza de manera adecuada, el comercio electrónico puede ser una herramienta conveniente y beneficiosa.'}
 ];
 SIELE_TOPICS_EXTRA.forEach(function(t){var topic='hf'+t.n;if(!SIELE_ORAL_BANK[4].some(function(x){return x.topic===topic;}))SIELE_ORAL_BANK[4].push({id:'t4-'+topic,topic:topic,sec:60,title:t.es,q:'¿Qué experiencia tiene con este tema? ¿Qué ventajas y problemas observa? ¿Qué medida propondría?',keys:['experiencia','ventaja','sin embargo','propondría','porque'],model:'Desde mi experiencia, '+t.es.toLowerCase()+' es un tema muy relevante. Por una parte ofrece oportunidades; sin embargo, también plantea dificultades. Propondría combinar educación, responsabilidad y medidas concretas.'});if(!SIELE_ORAL_BANK[5].some(function(x){return x.topic===topic;}))SIELE_ORAL_BANK[5].push({id:'t5-'+topic,topic:topic,sec:240,title:t.es,q:'Presente una postura clara, dos argumentos, un contraargumento y una conclusión.',keys:['considero','por una parte','además','aunque','en definitiva'],model:t.t5model});});
+// ===== 口语真题题库管理员编辑（content_edits.oralbank，全量覆盖存储） =====
+let _obadmBank = null;
+function _oralBankClone(){ var out={}; [1,2,3,4,5].forEach(function(n){ out[n]=(getSieleOralBank()[n]||[]).map(function(q){return JSON.parse(JSON.stringify(q));}); }); return out; }
+function renderOralBankAdmin(){
+  _obadmBank = _oralBankClone();
+  var tareaNames = {1:'Tarea 1 · 短答',2:'Tarea 2 · 看图描述',3:'Tarea 3 · 情景对话',4:'Tarea 4 · 话题表达',5:'Tarea 5 · 议论文'};
+  var h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语真题题库</h2><div class="sub" style="margin-bottom:10px">Tarea 1-5 全部题目，每题可编辑题目描述/内容/范例答案/关键词，支持增删改。保存后覆盖到所有用户。</div>';
+  [1,2,3,4,5].forEach(function(n){
+    var list = _obadmBank[n]||[];
+    h += '<div class="card" style="margin:10px 0">';
+    h += '<h3 style="margin-bottom:6px">'+esc(tareaNames[n])+' <span class="sub" style="font-size:12px">'+list.length+' 题</span></h3>';
+    list.forEach(function(q, qi){
+      h += '<div style="border:1px dashed var(--line);padding:8px;margin:6px 0;border-radius:6px;background:#fafafa">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--soft)">题 '+(qi+1)+'</span><button class="btn xs dgr" onclick="delOralBankQ('+n+','+qi+')">✕ 删除</button></div>';
+      if(q.title) h += '<div style="margin:3px 0;font-size:12px"><b>标题：</b><input id="obadm_title_'+n+'_'+qi+'" value="'+esc(q.title)+'" style="width:100%"></div>';
+      h += '<div style="margin:3px 0;font-size:12px"><b>题目描述：</b><textarea id="obadm_q_'+n+'_'+qi+'" rows="2" style="width:100%;font-size:12px">'+esc(q.q||'')+'</textarea></div>';
+      h += '<div style="margin:3px 0;font-size:12px"><b>范例答案：</b><textarea id="obadm_model_'+n+'_'+qi+'" rows="4" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(q.model||'')+'</textarea></div>';
+      h += '<div style="margin:3px 0;font-size:12px"><b>关键词：</b><input id="obadm_keys_'+n+'_'+qi+'" value="'+esc((q.keys||[]).join(', '))+'" style="width:100%"><span class="sub" style="font-size:10px">逗号分隔</span></div>';
+      h += '<div style="display:flex;gap:8px;margin:3px 0;font-size:12px"><div><b>时长(秒)：</b><input id="obadm_sec_'+n+'_'+qi+'" value="'+esc(String(q.sec||''))+'" style="width:60px"></div></div>';
+      h += '</div>';
+    });
+    h += '<button class="btn sm" onclick="addOralBankQ('+n+')">➕ 加题</button>';
+    h += '</div>';
+  });
+  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn pr" onclick="saveOralBankAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div></div>';
+  var m = document.getElementById('main');
+  if(m) m.innerHTML = h;
+  window.scrollTo(0,0);
+}
+function addOralBankQ(n){
+  if(!_obadmBank) return;
+  _obadmBank[n] = _obadmBank[n]||[];
+  _obadmBank[n].push({id:'t'+n+'_new_'+Date.now().toString(36),sec:10,q:'',keys:[],model:''});
+  renderOralBankAdmin();
+}
+function delOralBankQ(n, qi){
+  if(!_obadmBank||!_obadmBank[n]) return;
+  if(!confirm('确定删除 Tarea '+n+' 第 '+(qi+1)+' 题？')) return;
+  _obadmBank[n].splice(qi,1);
+  renderOralBankAdmin();
+}
+function saveOralBankAdmin(){
+  if(!_obadmBank) return;
+  var bank = {};
+  [1,2,3,4,5].forEach(function(n){
+    var list = _obadmBank[n]||[];
+    var out = [];
+    for(var qi=0; qi<list.length; qi++){
+      var q = list[qi];
+      var o = {id:q.id||('t'+n+'_'+qi), sec:Number((document.getElementById('obadm_sec_'+n+'_'+qi)||{}).value||q.sec||10)};
+      var titleEl = document.getElementById('obadm_title_'+n+'_'+qi);
+      if(titleEl) o.title = titleEl.value;
+      o.q = (document.getElementById('obadm_q_'+n+'_'+qi)||{}).value||'';
+      o.model = (document.getElementById('obadm_model_'+n+'_'+qi)||{}).value||'';
+      var keysVal = (document.getElementById('obadm_keys_'+n+'_'+qi)||{}).value||'';
+      o.keys = keysVal.split(',').map(function(k){return k.trim();}).filter(Boolean);
+      if(q.topic) o.topic = q.topic;
+      if(q.formal!==undefined) o.formal = q.formal;
+      if(q.photo!==undefined) o.photo = q.photo;
+      out.push(o);
+    }
+    bank[n] = out;
+  });
+  window._deleSyncContentEdits('oralbank', {bank: bank});
+  window._contentEdits.oralbank = {bank: bank};
+  toast('✅ 已保存并同步给所有用户','ok');
+  renderMain();
+}
+
+// 获取最终口语真题题库（管理员编辑 > 默认），全量覆盖
+function getSieleOralBank(){
+  var ed = window._contentEdits && window._contentEdits.oralbank;
+  if(ed && ed.bank && typeof ed.bank === 'object'){
+    var out = {};
+    [1,2,3,4,5].forEach(function(n){ out[n] = ed.bank[n] ? ed.bank[n].slice() : []; });
+    return out;
+  }
+  return SIELE_ORAL_BANK;
+}
 let _sieleOralTarea=1,_sieleOralIdx=0,_sieleOralRecognition=null,_sieleOralRecording=false,_sieleOralShown=false,_sieleOralTimer=null,_sieleOralLeft=0,_sieleOralTranscript='';
-function getSieleOralItem(){var bank=SIELE_ORAL_BANK[_sieleOralTarea]||[];if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
-function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=SIELE_ORAL_BANK[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
-function randomSieleOral(){var b=SIELE_ORAL_BANK[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}var x=b[_sieleOralIdx];if(x&&x.topic){ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=x.topic;save();}_sieleOralShown=false;stopSieleOral(true);renderMain();}
-function chooseSieleTopic(topic){var b=SIELE_ORAL_BANK[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;save();renderMain();}}
+function getSieleOralItem(){var bank=getSieleOralBank()[_sieleOralTarea]||[];if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
+function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=getSieleOralBank()[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
+function randomSieleOral(){var b=getSieleOralBank()[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}var x=b[_sieleOralIdx];if(x&&x.topic){ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=x.topic;save();}_sieleOralShown=false;stopSieleOral(true);renderMain();}
+function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;save();renderMain();}}
 function playSielePrompt(){var x=getSieleOralItem();if(x)speak(x.q,null,'es');}
 function revealSielePrompt(){_sieleOralShown=true;var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.textContent=(getSieleOralItem()||{}).q||'';}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
 function startSieleTimer(sec){clearInterval(_sieleOralTimer);_sieleOralLeft=sec||60;var el=document.getElementById('soTimer');function paint(){if(el)el.textContent=String(Math.floor(_sieleOralLeft/60)).padStart(2,'0')+':'+String(_sieleOralLeft%60).padStart(2,'0');}paint();_sieleOralTimer=setInterval(function(){_sieleOralLeft--;paint();if(_sieleOralLeft<=0){clearInterval(_sieleOralTimer);if(_sieleOralRecording)stopSieleOral();}},1000);}
@@ -5386,7 +5486,7 @@ function editT2Model(id, currentText) {
   box.innerHTML = '<div style="margin-top:8px;border:1px solid var(--ac);border-radius:8px;padding:10px;background:var(--bg)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;font-weight:600">编辑范文 / Editar modelo</span><span id="soModelEditStatus" style="font-size:11px;color:var(--am)">' + statusText + '</span></div><textarea id="soModelEditTA" style="width:100%;height:180px;font-size:12px;font-family:inherit;padding:8px;border:1px solid var(--bd);border-radius:6px;resize:vertical;line-height:1.6" placeholder="编辑或粘贴你的范文..." oninput="updateT2CharCount()">' + esc(text) + '</textarea><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center"><button class="btn sm ol" onclick="saveT2ModelChanges(\'' + id + '\')">保存范文</button><button class="btn sm" onclick="confirmResetT2Model(\'' + id + '\')">恢复默认</button><span id="soModelCC" style="font-size:11px;color:var(--am);margin-left:auto">' + charCount + ' 字符</span></div></div>';
   box.style.display = 'block';
   // Save original model if not yet captured
-  var x = SIELE_ORAL_BANK[2].filter(function(q) { return q.id === id; })[0];
+  var x = getSieleOralBank()[2].filter(function(q) { return q.id === id; })[0];
   if (x) captureOriginalModel(x);
 }
 function updateT2CharCount() {
@@ -5404,7 +5504,7 @@ function saveT2ModelChanges(id) {
   var text = ta.value.trim();
   if (text) {
     saveUserT2Model(id, text);
-    var x = SIELE_ORAL_BANK[2].filter(function(q) { return q.id === id; })[0];
+    var x = getSieleOralBank()[2].filter(function(q) { return q.id === id; })[0];
     if (x) x.model = text;
     flashToast('范文已保存 / Modelo guardado');
   } else {
@@ -5437,7 +5537,7 @@ function confirmResetT2Model(id) {
 }
 function resetT2Model(id) {
   deleteUserT2Model(id);
-  var x = SIELE_ORAL_BANK[2].filter(function(q) { return q.id === id; })[0];
+  var x = getSieleOralBank()[2].filter(function(q) { return q.id === id; })[0];
   if (x && typeof x._originalModel === 'undefined') x._originalModel = makeT2Model(x);
   if (x) x.model = x._originalModel || makeT2Model(x);
   var ta = document.getElementById('soModelEditTA');
@@ -5568,7 +5668,7 @@ function renderSielePhoto(x){
   var hintPart = x.hintCn ? '<p style="margin-top:6px;font-size:11px;color:var(--tr)"><b>考生回忆：</b>'+esc(x.hintCn.slice(0,200))+'</p>' : '';
   return '<aside class="so-scene-card" aria-label="回忆场景观察提示"><span>回忆题场景 · 观察提示</span><strong>'+esc(x.title||'图片描述')+'</strong><p><b>重点：</b>'+esc((x.overview||'人物、地点和动作')+';'+(x.object||'画面细节')+'.')+'</p>'+hintPart+'<small>该题根据回忆版资料整理；练习时请围绕人物、空间、动作、氛围和谨慎推测展开。</small></aside>';
 }
-function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=SIELE_ORAL_BANK[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div><h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
+function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralBank()[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div><h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
 }
 
 // ===== PAGE: SIELE SPECIAL =====
@@ -5576,6 +5676,9 @@ function renderSiele(){
   if(ST.sieleOralProgress&&ST.sieleOralProgress.tarea&&!renderSiele._restored){_sieleOralTarea=ST.sieleOralProgress.tarea;renderSiele._restored=true;}
   let h = `<div class="tb"><div><h2>SIELE 专项训练${renderModuleAccentToggle('siele')}</h2><div class="d">口语 Tarea 1-5 · 音频先行 · 录音评分 · 答后范例 · 基于回忆版真题资料</div></div></div>`;
 
+  if(isContentAdmin()){
+    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:10px"><button class="btn sm pr" onclick="renderOralBankAdmin()">🔧 管理员编辑口语真题题库</button><span class="sub" style="margin-left:8px;font-size:11px">增删改 Tarea 1-5 题目/范例答案/关键词，保存后所有用户可见</span></div>`;
+  }
   h += renderSieleOralTrainer();
   h += `<div class="tb" style="margin-top:20px"><div><h2 style="font-size:17px">考试结构与答题工具</h2><div class="d">先练习，再查看五项任务策略和连接词</div></div></div>`;
 
@@ -13134,7 +13237,7 @@ window._deleCloudCall = function(action, params){
 };
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
-window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {} };
+window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {} };
 window._contentEditsCb = {};
 // 拉取 content_edits（namespace: writing / oral），结果经 message 监听写入 _contentEdits[ns]
 window._deleFetchContentEdits = function(namespace, callback){
@@ -15766,6 +15869,7 @@ function activate(){
       setTimeout(function(){window._deleFetchContentEdits('essays');},1400);
       setTimeout(function(){window._deleFetchContentEdits('speakingTopics');},1600);
       setTimeout(function(){window._deleFetchContentEdits('tareas');},1800);
+      setTimeout(function(){window._deleFetchContentEdits('oralbank');},2000);
     }
   }catch(e){}
 }
