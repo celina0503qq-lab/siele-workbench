@@ -422,6 +422,37 @@ async function pushLearning(event) {
 }
 
 // ========================================================================
+// 用户学习数据同步（sessionToken 通道，登录即同步、零配置）
+//   pullLearningSession / pushLearningSession：用 requireActiveSession（sessionToken）鉴权，
+//   读写 learning_snapshots 集合（与 syncToken 通道共用同一集合，按 uid 隔离）。
+//   这样用户登录后仅凭账号密码即可跨设备/跨 IP 同步，无需额外配置 token。
+//   快照上限放宽到 3 MiB，覆盖错题集/外刊阅读/口语评分等大字段。
+// ========================================================================
+async function pullLearningSession(event) {
+  const { session } = await requireActiveSession(event);
+  const result = await db.collection("learning_snapshots").where({ uid: session.uid }).limit(1).get();
+  return response(true, "LEARNING_DATA", { snapshot: result.data[0] || null });
+}
+async function pushLearningSession(event) {
+  const { session } = await requireActiveSession(event);
+  const uid = session.uid;
+  const payload = event.payload;
+  if (!payload || typeof payload !== "object") return response(false, "INVALID_PAYLOAD");
+  if (Buffer.byteLength(JSON.stringify(payload), "utf8") > 3 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
+  const revision = Number(event.revision || 0);
+  const existing = await db.collection("learning_snapshots").where({ uid }).limit(1).get();
+  if (existing.data.length) {
+    const current = existing.data[0];
+    if (revision !== Number(current.revision || 0)) return response(false, "REVISION_CONFLICT", { snapshot: current });
+    const nextRevision = revision + 1;
+    await db.collection("learning_snapshots").doc(current._id).update({ payload, revision: nextRevision, updatedAt: now() });
+    return response(true, "LEARNING_SAVED", { revision: nextRevision });
+  }
+  await db.collection("learning_snapshots").add({ uid, payload, revision: 1, updatedAt: now() });
+  return response(true, "LEARNING_SAVED", { revision: 1 });
+}
+
+// ========================================================================
 // DELE 管理员编辑（跨设备/跨用户同步）
 //   getAdminEdits: 所有登录用户可读（requireActiveSession）
 //   setAdminEdits: 仅管理员可写（requireAdmin）
@@ -481,6 +512,8 @@ exports.main = async (event) => {
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
+    if (action === "pullLearningSession") return await pullLearningSession(input);
+    if (action === "pushLearningSession") return await pushLearningSession(input);
     if (action === "getAdminEdits") return await getAdminEdits(input);
     if (action === "setAdminEdits") return await setAdminEdits(input);
     if (action === "checkStatus") return await checkStatus(input);

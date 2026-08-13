@@ -1181,6 +1181,29 @@ window.addEventListener('message',function(ev){
       }
     })();
   }
+  // === 用户学习数据云同步（sessionToken 通道，登录即同步、零配置） ===
+  if(ev.data&&ev.data.type==='siele-learning-request'){
+    var lReqId = ev.data.reqId || '';
+    var lAct = ev.data.action || '';
+    var lToken = ev.data.sessionToken || (cloudSession() && cloudSession().sessionToken);
+    (async function(){
+      var lResult = {ok:false, code:'BRIDGE_ERROR'};
+      try {
+        if(lAct==='pull'){
+          lResult = await callSieleAuth({action:'pullLearningSession', sessionToken: lToken});
+        } else if(lAct==='push'){
+          lResult = await callSieleAuth({action:'pushLearningSession', sessionToken: lToken,
+            revision: Number((ev.data.params && ev.data.params.revision) || 0),
+            payload: (ev.data.params && ev.data.params.payload) || {}});
+        } else {
+          lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
+        }
+      } catch(e) {
+        lResult = {ok:false, code:'BRIDGE_ERROR', message: (e && e.message) || String(e)};
+      }
+      try { window.parent.postMessage({type:'siele-learning-result', reqId: lReqId, result: lResult}, location.origin); } catch(e) {}
+    })();
+  }
 });
 function refreshBadges(){
   if(!DB)return;

@@ -12513,6 +12513,24 @@ window._delePostToBridge = function(msg){
     if (!ifr) window._deleCloudBridgeInit();
   }
 };
+// ===== 用户学习数据云同步（sessionToken 通道，登录即同步、零配置） =====
+// 通过 admin.html iframe 桥接调云函数，返回 Promise（reqId 配对 + 超时）
+window._deleCloudPending = {};
+window._deleCloudCall = function(action, params){
+  return new Promise(function(resolve, reject){
+    var reqId = 'lc' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+    window._deleCloudPending[reqId] = {resolve: resolve, reject: reject};
+    setTimeout(function(){
+      if (window._deleCloudPending[reqId]) {
+        delete window._deleCloudPending[reqId];
+        reject(new Error('云同步请求超时'));
+      }
+    }, 20000);
+    window._deleCloudBridgeInit();
+    window._delePostToBridge({type:'siele-learning-request', reqId: reqId, action: action, params: params || {}});
+  });
+};
+
 // 保存编辑 → 云函数 setAdminEdits (仅管理员)
 window._deleAdminSyncToCloud = function(){
   window._delePostToBridge({type:'siele-admin-edits-save', edits: window._deleAdminEdits || {}});
@@ -12543,6 +12561,15 @@ window.addEventListener('message', function(e){
       try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(e.data.edits)); } catch(x) {}
       console.log('[AdminSync] CloudBase 拉取 ' + Object.keys(e.data.edits).length + ' 项编辑');
       window._deleAdminApplyEdits();
+    }
+  }
+  // 用户学习数据同步结果：resolve 对应请求的 Promise
+  if (e.data && e.data.type === 'siele-learning-result') {
+    var reqId = e.data.reqId;
+    var pending = window._deleCloudPending && window._deleCloudPending[reqId];
+    if (pending) {
+      delete window._deleCloudPending[reqId];
+      pending.resolve(e.data.result);
     }
   }
 });
@@ -14478,24 +14505,58 @@ function doPush(){
   if(ADB.syncCfg){clearTimeout(cloudT);cloudT=setTimeout(function(){cloudSync(true);},dirty?5000:12000);}
 }
 
-/* ---------- 云同步（拉取合并 + 推送，重试3次） ---------- */
+/* ---------- 云同步（sessionToken 通道，登录即同步、零配置） ---------- */
+function cloudSyncErrMsg(code){
+  if(code==='UNAUTHORIZED')return '登录已过期，请重新登录';
+  if(code==='USER_DISABLED')return '账号已被停用';
+  if(code==='PAYLOAD_TOO_LARGE')return '学习数据过大，超出单次同步上限';
+  if(code==='BRIDGE_ERROR')return '云端服务暂不可用';
+  if(code==='REVISION_CONFLICT')return '云端版本冲突，已自动合并';
+  return code||'网络异常';
+}
+// 旧 Gist 数据一次性迁移：拉取旧云端数据合并，然后切换到云函数通道
+async function migrateLegacyGist(){
+  if(!AU||!ADB)return;
+  var cfg=ADB.syncCfg;
+  if(!cfg||cfg.provider==='cloudbase')return; // 无旧配置或已是新通道
+  try{
+    var p=PROV[cfg.provider];
+    if(p&&cfg.gistId){
+      var txt=await p.pull(cfg);
+      if(txt){
+        var rem=null;try{rem=JSON.parse(txt);}catch(e){}
+        if(rem&&rem.v===1){mergeData(ADB,rem);console.log('[Migrate] 已合并旧 Gist 云端数据');}
+      }
+    }
+  }catch(e){
+    console.warn('[Migrate] 旧 Gist 数据拉取失败，跳过迁移', e&&e.message);
+  }
+  // 切换为云函数通道（迁移只做一次，之后彻底弃用 Gist）
+  ADB.syncCfg={provider:'cloudbase'};
+  lss(dataKey(AU),ADB);
+}
 async function cloudSync(silent){
-  if(!AU||!ADB||!ADB.syncCfg||syncing)return;
-  var cfg=ADB.syncCfg,p=PROV[cfg.provider];
-  if(!p)return;
+  if(!AU||!ADB||syncing)return;
+  // 登录即自动启用云同步，无需手动配置 token
+  var token=window._deleGetSessionToken&&window._deleGetSessionToken();
+  if(!token){setChip('local');return;}
+  if(ADB.syncCfg&&ADB.syncCfg.provider!=='cloudbase'){await migrateLegacyGist();}
   syncing=true;setChip('ing');
   var lastErr=null;
   for(var a=1;a<=3;a++){
     try{
-      if(!cfg.gistId){
-        cfg.gistId=await p.create(cfg,JSON.stringify(serializeCloud(ADB)));
-      }else{
-        var txt=await p.pull(cfg);
-        if(txt){
-          var rem=null;try{rem=JSON.parse(txt);}catch(e){}
-          if(rem&&rem.v===1){mergeData(ADB,rem);}
-        }
-        await p.push(cfg,JSON.stringify(serializeCloud(ADB)));
+      var pull=await window._deleCloudCall('pull',{});
+      if(!pull||pull.ok===false)throw new Error(cloudSyncErrMsg(pull&&pull.code));
+      var remote=pull.snapshot;
+      if(remote&&remote.payload&&remote.payload.v===1){mergeData(ADB,remote.payload);}
+      var revision=remote?Number(remote.revision||0):0;
+      var push=await window._deleCloudCall('push',{revision:revision,payload:serializeCloud(ADB)});
+      if(push&&push.ok===false&&push.code==='REVISION_CONFLICT'&&push.snapshot&&push.snapshot.payload){
+        mergeData(ADB,push.snapshot.payload);
+        var retry=await window._deleCloudCall('push',{revision:Number(push.snapshot.revision||0),payload:serializeCloud(ADB)});
+        if(!retry||retry.ok===false)throw new Error(cloudSyncErrMsg(retry&&retry.code));
+      }else if(!push||push.ok===false){
+        throw new Error(cloudSyncErrMsg(push&&push.code));
       }
       ADB.meta.lastSync=Date.now();ADB.meta.lastPushTs=Date.now();
       lss(dataKey(AU),ADB);
@@ -14505,6 +14566,7 @@ async function cloudSync(silent){
     }catch(e){lastErr=e;if(a<3)await new Promise(function(r){setTimeout(r,a*1500);});}
   }
   syncing=false;setChip('err',lastErr&&lastErr.message);
+  if(!silent)toast('云同步失败：'+(lastErr&&lastErr.message||'网络异常')+'（已重试3次，点右上角同步角标可重试）','err');
 }
 
 /* ---------- 挂钩 save() ---------- */
@@ -14831,6 +14893,13 @@ function activate(){
   MIR=lsg(mirKey(AU),{w:{},wbTs:0,qn:0});
   hydrate();
   SIG='';doPush(); // 把本机已有进度推入后台数据库
+  // 登录即自动启用云同步（sessionToken 通道，零配置）：
+  //   无 syncCfg 的新用户 → 自动设为 cloudbase 通道；旧 Gist 配置保留，由 cloudSync 内迁移。
+  var _tk=window._deleGetSessionToken&&window._deleGetSessionToken();
+  if(_tk && !ADB.syncCfg){
+    ADB.syncCfg={provider:'cloudbase'};
+    lss(dataKey(AU),ADB);
+  }
   setChip(ADB.syncCfg?(hasConfirmedCloudSync()?'ok':'local'):'local');
   // 启动云端状态心跳：每 60s 检查用户是否被管理员停用。
   if(typeof startWorkbenchStatusPing==='function')startWorkbenchStatusPing();
