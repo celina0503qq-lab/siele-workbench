@@ -56,7 +56,7 @@ C:\Users\33835\Desktop\Dele\1. Dele资料（六册备考A1-C2）\Nuevo DELE\
 - Single-file HTML app: index.html (~1.9MB, ~14700 lines)
 - Data files: `window.DELE_BANK_{LEVEL}_NUEVO_M{num} = { ... };`
 - Deployment: `git push origin main` → GitHub Pages (`celina0503qq-lab/siele-workbench`)
-- Login: CloudBase | Sync: GitHub Gist LWW merge
+- Login: CloudBase | Sync: CloudBase sessionToken 通道（登录即同步零配置，弃用 Gist，见 cloudbase-cross-device-sync skill）
 - STORE_KEY: `dele_siele_wb_v3`
 - Memory: `.workbuddy/memory/YYYY-MM-DD.md` + `MEMORY.md`
 

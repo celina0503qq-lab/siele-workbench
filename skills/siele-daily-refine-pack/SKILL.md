@@ -1,6 +1,6 @@
 ---
 name: siele-daily-refine-pack
-description: SIELE 工作台每日外刊精炼推送流程 — 5 词 + 4 篇分级精读 (A1/A2/B1/B2) + 20 道题 + Word 下载 + 在线阅读 + 原文链接, 落到 GitHub Pages siele-workbench-deploy/articles/<date>/
+description: SIELE 工作台每日外刊精炼推送流程 — 15 词 + 4 篇分级精读 (A1/A2/B1/B2) + 20 道题 + Word 下载 + 在线阅读 + 原文链接, 落到 GitHub Pages siele-workbench-deploy/articles/<date>/
 read_when:
   - 用户要求生成每日西语外刊精炼推送
   - 自动化 (10:30) 每日推送触发
@@ -17,9 +17,9 @@ read_when:
 
 所有文件落 `siele-workbench-deploy/articles/`:
 
-1. **`<date>.html`** (在线阅读版) — 单文件 HTML, 顶部 5 词卡 → 4 篇文章 (10/10/15/15 段) → 20 道阅读题
+1. **`<date>.html`** (在线阅读版) — 单文件 HTML, 顶部 15 词卡 → 4 篇文章 (10/10/15/15 段) → 20 道阅读题
 2. **`<date>.docx`** (Word 下载) — python-docx 生成, 难词橙色加粗
-3. **`data/<date>.js`** (题库数据) — 暴露 `window.WORDS` (5 词) + `window.ARTICLES` (A1/A2/B1/B2)
+3. **`data/<date>.js`** (题库数据) — 暴露 `window.WORDS` (15 词) + `window.ARTICLES` (A1/A2/B1/B2)
 
 外加: `siele-workbench-deploy/refine_data.js` 内 `REFINE_PACKS` 加新 date key。
 
@@ -36,7 +36,7 @@ window.WORDS = [
     ejemplo_zh: "八月我上集中工时。",
     tip: "对比 jornada partida (分时段工时)"   // 记忆提示
   }
-  // 5 个
+  // 15 个
 ];
 
 window.ARTICLES = {
@@ -149,7 +149,7 @@ add_hyperlink(p2, f"🔗 {art['src']} 原文链接(点击打开)", art["url"], f
    ```
 5. **等 60s** 让 GitHub Pages CDN 刷缓存
 6. **E2E 验证**:
-   - `node siele-test/test_refine_live_final.js` (5词/4文章/4链接/1docx/1html/0 4xx)
+   - `node siele-test/test_refine_live_final.js` (15词/4文章/4链接/1docx/1html/0 4xx)
    - `node siele-test/menu_regression.js` (19/19 菜单 PASS, 0 pageerror)
 7. **curl 关键资源**:
    ```bash
@@ -167,7 +167,7 @@ add_hyperlink(p2, f"🔗 {art['src']} 原文链接(点击打开)", art["url"], f
 ## renderRefine 模块 (在 index.html 内)
 
 - `renderRefine()` 静态壳: 日期 chip + 主题 + Word/在线按钮 + 等级过滤 + body 占位
-- `renderRefineBody()` 异步: 调 `window.loadRefineData(date)` → 渲染 5 词卡 + 4 篇文章 + 20 题
+- `renderRefineBody()` 异步: 调 `window.loadRefineData(date)` → 渲染 15 词卡 + 4 篇文章 + 20 题
 - `selectRefineDate(d)` 切日期时: `currentRefineDate = d; renderMain(); setTimeout(renderRefineBody, 30)`
 - `selectRefineLevel(l)` 切等级: 隐藏非该级文章卡片
 - **关键 hook**: 包裹原 `renderMain` 注入 `_refineAutoLoad()`, 避免手动二次调用
@@ -215,7 +215,7 @@ else { html = highlightByHardWords(p.es, a.hardWords); }
 
 ## 验收标准 (commit 前必查)
 
-- [ ] 5 词卡有完整 lemma/IPA/释义/例句/记忆提示
+- [ ] 15 词卡有完整 lemma/IPA/释义/例句/记忆提示
 - [ ] 4 篇文章 10/10/15/15 段
 - [ ] 4 个真实原文链接 (BBC Mundo / El País)
 - [ ] 1 个 docx 下载链接 + 1 个 html 在线阅读链接
