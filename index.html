@@ -11581,7 +11581,7 @@ try {
     var _db = RefineQuizDB.load();
     Object.keys(window.__refineNotes).forEach(function(noteKey) {
       var parts = noteKey.split('_');
-      if (parts.length < 5) return;
+      if (parts.length < 4) return;
       var date = parts[2], lv = parts[3];
       var text = window.__refineNotes[noteKey];
       if (!text) return;
@@ -11598,7 +11598,7 @@ function _getRefineNote(noteKey) {
   try {
     if (typeof RefineQuizDB !== 'undefined') {
       var parts = noteKey.split('_');
-      if (parts.length >= 5) {
+      if (parts.length >= 4) {
         var date = parts[2], lv = parts[3];
         var entry = (RefineQuizDB.load().quizzes[date] || {})[lv];
         if (entry && entry.notes) return entry.notes;
@@ -11613,7 +11613,7 @@ function _setRefineNote(noteKey, text) {
   try {
     if (typeof RefineQuizDB !== 'undefined') {
       var parts = noteKey.split('_');
-      if (parts.length >= 5) {
+      if (parts.length >= 4) {
         var date = parts[2], lv = parts[3];
         var db = RefineQuizDB.load();
         if (!db.quizzes[date]) db.quizzes[date] = {};
@@ -11621,6 +11621,8 @@ function _setRefineNote(noteKey, text) {
         db.quizzes[date][lv].notes = text;
         db.quizzes[date][lv].notesTs = Date.now();
         RefineQuizDB.save(db);
+        // 触发云同步（save 挂钩 → doPush → calcSig 识别 refineQuizData 变化）
+        try{ if(typeof save==='function') save(); }catch(e){}
         return;
       }
     }
@@ -11628,6 +11630,7 @@ function _setRefineNote(noteKey, text) {
   // Fallback to old storage
   window.__refineNotes[noteKey] = text;
   try { localStorage.setItem('refine_notes_v1', JSON.stringify(window.__refineNotes)); } catch(e){}
+  try{ if(typeof save==='function') save(); }catch(e){}
 }
 
 function toggleRefineNote(toggleEl, noteKey){
@@ -14722,7 +14725,10 @@ function hydrate(){
 function calcSig(){
   var oralSig='';
   if(ST.sieleOralScores){Object.keys(ST.sieleOralScores).forEach(function(id){var s=ST.sieleOralScores[id];oralSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank]);
+  // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
+  var refineSig='';
+  try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -14753,6 +14759,8 @@ function wbSnap(){
   }
   // DELE 做题进度（存独立 localStorage 键，随 wb 快照跨设备同步）
   try{ c.deleProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){ c.deleProgress = {}; }
+  // 外刊精炼笔记 + 做题答案历史（存独立 localStorage swa_quiz_v1，随 wb 快照跨设备同步）
+  try{ c.refineQuizData = (typeof RefineQuizDB!=='undefined') ? RefineQuizDB.load() : {}; }catch(e){ c.refineQuizData = {}; }
   return c;
 }
 function doPush(){
@@ -14965,6 +14973,43 @@ function mergeWbSnapshot(remote){
         }
       });
     });
+  }
+  // 外刊精炼笔记 + 做题答案历史 refineQuizData：按 date+level 键，notes 取新(notesTs LWW)、attempts 按 id 并集，写回 RefineQuizDB
+  if(remote.refineQuizData && typeof remote.refineQuizData==='object' && typeof RefineQuizDB!=='undefined'){
+    try{
+      var rq = remote.refineQuizData.quizzes || {};
+      var ldb = RefineQuizDB.load();
+      if(!ldb.quizzes) ldb.quizzes = {};
+      Object.keys(rq).forEach(function(dt){
+        var rDate = rq[dt];
+        if(!rDate || typeof rDate!=='object') return;
+        if(!ldb.quizzes[dt]) ldb.quizzes[dt] = {};
+        Object.keys(rDate).forEach(function(lv){
+          var rEntry = rDate[lv] || {};
+          var lEntry = ldb.quizzes[dt][lv] || {attempts:[],notes:''};
+          // 笔记：时间戳新的为准（LWW）
+          if((rEntry.notes||'') && ((rEntry.notesTs||0) > (lEntry.notesTs||0) || !lEntry.notes)){
+            lEntry.notes = rEntry.notes;
+            lEntry.notesTs = rEntry.notesTs||0;
+          }
+          // 做题答案历史：按 id 并集去重
+          if(Array.isArray(rEntry.attempts) && rEntry.attempts.length){
+            var lAtts = lEntry.attempts || [];
+            var lIds = {};
+            lAtts.forEach(function(a){ if(a && a.id) lIds[a.id] = a; });
+            rEntry.attempts.forEach(function(a){
+              if(!a || !a.id) return;
+              var la = lIds[a.id];
+              if(!la) { lIds[a.id] = a; lAtts.push(a); }
+              else if((a.timestamp||0) > (la.timestamp||0)) { lAtts[lAtts.indexOf(la)] = a; lIds[a.id] = a; }
+            });
+            lEntry.attempts = lAtts;
+          }
+          ldb.quizzes[dt][lv] = lEntry;
+        });
+      });
+      RefineQuizDB.save(ldb);
+    }catch(e){}
   }
   // 合并后持久化
   try{save();saveBackup();}catch(e){}
