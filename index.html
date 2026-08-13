@@ -1655,7 +1655,7 @@ function renderDash(){
       <h3><span class="ic">⏱</span>番茄钟</h3>
       <div class="pomo">
         <div class="ring">
-          <svg width="150" height="150" viewBox="0 0 150 150">
+          <svg width="112" height="112" viewBox="0 0 150 150">
             <circle cx="75" cy="75" r="65" fill="none" stroke="#f0e6d2" stroke-width="8"/>
             <circle id="pomoCircle" cx="75" cy="75" r="65" fill="none" stroke="url(#pomoGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="408" stroke-dashoffset="0"/>
             <defs><linearGradient id="pomoGrad"><stop offset="0%" stop-color="#C0392B"/><stop offset="100%" stop-color="#E08E0B"/></linearGradient></defs>
@@ -4531,17 +4531,14 @@ function generateDailyTasks(){
   }));
 
   ST.dailyTasks[today] = tasks;
-  // Sync generated tasks to dailyTodos (take top 5) /* FEAT-2: date-keyed format */
+  // 同步到 dailyTodos（仅当今日待办为空时才写入系统生成；用户自定义优先，不覆盖）
   if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
-  var existingDone = {};
   var existingTodos = ST.dailyTodos[today] || [];
-  existingTodos.forEach(function(t){ if(t.done) existingDone[t.text] = true; });
-  var syncedTodos = tasks.slice(0, 5).map(function(t){
-    return {text: t.text, done: !!existingDone[t.text]};
-  });
-  ST.dailyTodos[today] = syncedTodos;
-  if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
-  if(ST.dailyTodoDates.indexOf(today)<0) ST.dailyTodoDates.push(today);
+  if(!existingTodos.length){
+    ST.dailyTodos[today] = tasks.slice(0, 5).map(function(t){ return {text: t.text, done: false}; });
+    if(!ST.dailyTodoDates) ST.dailyTodoDates = [];
+    if(ST.dailyTodoDates.indexOf(today)<0) ST.dailyTodoDates.push(today);
+  }
   save();
 }
 
@@ -10838,12 +10835,23 @@ async function renderRefineBody(){
 
     el.innerHTML = jumpHtml + wordsHtml + articlesHtml;
 
-    // Track first quiz time when user starts
+    // Track first quiz time when user starts（做题记录持久化到 ST，跨设备同步）
     window.__refineQuizState = window.__refineQuizState || {};
-    visibleLevels.forEach(lv => {
-      const lvKey = lv.toLowerCase();
-      if(!window.__refineQuizState[lvKey]) window.__refineQuizState[lvKey] = { startTs: Date.now(), submitted: 0, correct: 0 };
-    });
+    if(typeof ST !== 'undefined'){
+      if(!ST.refineQuizState) ST.refineQuizState = {};
+      const dateState = ST.refineQuizState[currentRefineDate] || {};
+      visibleLevels.forEach(lv => {
+        const lvKey = lv.toLowerCase();
+        if(!window.__refineQuizState[lvKey]){
+          window.__refineQuizState[lvKey] = dateState[lvKey] ? Object.assign({startTs: Date.now()}, dateState[lvKey]) : { startTs: Date.now(), submitted: 0, correct: 0 };
+        }
+      });
+    } else {
+      visibleLevels.forEach(lv => {
+        const lvKey = lv.toLowerCase();
+        if(!window.__refineQuizState[lvKey]) window.__refineQuizState[lvKey] = { startTs: Date.now(), submitted: 0, correct: 0 };
+      });
+    }
 
     if(typeof ST !== 'undefined' && ST.checkIns){
       try { checkOffTodayByCat('refine'); } catch(e){}
@@ -10905,6 +10913,15 @@ window.submitRefineQuiz = function(levelKey, qIdx){
   st.submitted = (st.submitted||0) + 1;
   if(chosen === correct) st.correct = (st.correct||0) + 1;
   if(window.__refineQuizState) window.__refineQuizState[levelKey] = st;
+  // 持久化做题记录到 ST（跨设备同步）
+  try{
+    if(typeof ST !== 'undefined'){
+      if(!ST.refineQuizState) ST.refineQuizState = {};
+      if(!ST.refineQuizState[currentRefineDate]) ST.refineQuizState[currentRefineDate] = {};
+      ST.refineQuizState[currentRefineDate][levelKey] = {submitted: st.submitted, correct: st.correct, ts: Date.now()};
+      save();
+    }
+  }catch(e){}
 
   const area = document.getElementById(`refine-${levelKey}-quiz`);
   const stats = area && area.querySelector('.refine-quiz-stats');
@@ -14734,6 +14751,8 @@ function wbSnap(){
     });
     c.sieleOralScores=trimmed;
   }
+  // DELE 做题进度（存独立 localStorage 键，随 wb 快照跨设备同步）
+  try{ c.deleProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){ c.deleProgress = {}; }
   return c;
 }
 function doPush(){
@@ -14931,6 +14950,22 @@ function mergeWbSnapshot(remote){
     });
   }
   ST.quizDoneTotal = ST.quizHistory ? Object.keys(ST.quizHistory).length : 0;
+  // 外刊精炼做题记录 refineQuizState：按 date+level 键，submitted/correct 取最大（同一套题取做得多的）
+  if(remote.refineQuizState && typeof remote.refineQuizState==='object'){
+    ST.refineQuizState = ST.refineQuizState || {};
+    Object.keys(remote.refineQuizState).forEach(function(dt){
+      var rDate = remote.refineQuizState[dt];
+      if(!rDate || typeof rDate!=='object') return;
+      if(!ST.refineQuizState[dt]) ST.refineQuizState[dt] = {};
+      Object.keys(rDate).forEach(function(lv){
+        var rv = rDate[lv] || {};
+        var lv2 = ST.refineQuizState[dt][lv];
+        if(!lv2 || (rv.submitted||0) > (lv2.submitted||0)){
+          ST.refineQuizState[dt][lv] = {submitted: rv.submitted||0, correct: rv.correct||0, ts: rv.ts||0};
+        }
+      });
+    });
+  }
   // 合并后持久化
   try{save();saveBackup();}catch(e){}
 }
@@ -15273,24 +15308,35 @@ function escB(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
 function todoCardHtml(){
   try{
     if(typeof generateDailyTasks==='function')generateDailyTasks();
-    var today=todayStr2();
-    var tasks=(ST.dailyTasks&&ST.dailyTasks[today])||[];
+    var today=todayStr();
+    // 统一用 dailyTodos（可编辑+可勾选；用户自定义优先，否则系统生成）
+    var tasks=(function(){
+      if(!ST.dailyTodos || typeof ST.dailyTodos!=='object' || Array.isArray(ST.dailyTodos)) ST.dailyTodos = {};
+      if(!ST.dailyTodos[today] || !ST.dailyTodos[today].length){
+        ST.dailyTodos[today] = [
+          {text:'复习今日所学单词',done:false},
+          {text:'完成今日跟读训练',done:false},
+          {text:'整理今日错题',done:false}
+        ];
+      }
+      return ST.dailyTodos[today];
+    })();
     var done=tasks.filter(function(t){return t.done;}).length;
     var pct=tasks.length?Math.round(done/tasks.length*100):0;
-    var icons={vocab:'🃏',grammar:'📐',listening:'🎧',quiz:'✏️',writing:'✍️',speaking:'🗣',shadow:'🎤',reading:'📰',errors:'🚨'};
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图']]
       .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
     // 附加云同步入口（弹窗而非路由跳转）
-    quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="GitHub Gist 云同步 · 单词卡片/SIELE/测验/错题集跨设备同步">☁️ 云同步</button>';
+    quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="云同步 · 学习数据/做题记录跨设备同步">☁️ 云同步</button>';
     var lis=tasks.map(function(t,i){
       return '<li class="'+(t.done?'done':'')+'" style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,.06)'+(t.done?';opacity:.55':'')+'">'+
-        '<input type="checkbox" '+(t.done?'checked':'')+' onchange="wbToggleTask('+i+')">'+
-        '<span style="font-size:12.5px;flex:1;'+(t.done?'text-decoration:line-through':'')+'">'+(icons[t.cat]||'•')+' '+escB(t.text)+'</span>'+
-        (!t.done&&t.link?'<button class="btn sm ol" onclick="go(\''+t.link+'\')">前往 →</button>':'')+'</li>';
+        '<input type="checkbox" '+(t.done?'checked':'')+' onchange="toggleDailyTodo('+i+')">'+
+        '<span style="font-size:12.5px;flex:1;'+(t.done?'text-decoration:line-through':'')+'" contenteditable="true" onblur="editDailyTodo('+i+',this.textContent)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();this.blur()}">'+escB(t.text)+'</span>'+
+        '<button class="btn sm ol" style="font-size:10px" onclick="delDailyTodo('+i+')" title="删除">✕</button>'+
+        '</li>';
     }).join('');
     return '<div class="g g2" style="margin-bottom:18px">'+
       '<div class="card" style="border-left:4px solid var(--tr)">'+
-        '<h3><span class="ic">📋</span>今日待办<span style="margin-left:auto;font-size:11px;color:var(--soft);font-weight:400">'+done+'/'+tasks.length+' · '+pct+'%</span></h3>'+
+        '<h3><span class="ic">📋</span>今日待办<span style="margin-left:auto;font-size:11px;color:var(--soft);font-weight:400">'+done+'/'+tasks.length+' · '+pct+'% · 点文字可编辑</span></h3>'+
         '<div class="fcp" style="margin-bottom:8px"><div class="bar"><i style="width:'+pct+'%"></i></div></div>'+
         (tasks.length?('<ul style="list-style:none;margin:0;padding:0;max-height:220px;overflow:auto">'+lis+'</ul>'):'<div style="font-size:12px;color:var(--soft)">暂无任务，去「学习计划」设置备考起始日即可自动生成每日任务</div>')+
         (done===tasks.length&&tasks.length?'<div class="note" style="margin-top:8px"><b>🎉 今日全部完成！</b></div>':'')+
