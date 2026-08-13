@@ -3208,7 +3208,14 @@ function buildQuizSession(){
     const j = Math.floor(Math.random()*(i+1));
     [ST.quizSession[i], ST.quizSession[j]] = [ST.quizSession[j], ST.quizSession[i]];
   }
+  // 已做过的题排到后面（未做优先，自动跳转到最新未做位置）
+  const doneQ = ST.quizSession.filter(q => isQuizDone(q));
+  const todoQ = ST.quizSession.filter(q => !isQuizDone(q));
+  ST.quizSession = todoQ.concat(doneQ);
   ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
+  // 累计已做题数（跨设备合并：quizHistory 的总数即累计已做数）
+  if(!ST.quizHistory) ST.quizHistory = {};
+  ST.quizDoneTotal = Object.keys(ST.quizHistory).length;
   save();
 }
 
@@ -3258,7 +3265,20 @@ function renderQuizQuestion(){
   _quizOpts = opts;
   _quizAnswered = !!questionState.answered;
 
-  let h = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)}</div>`;
+  // 跨设备做题进度：标记已做 + 累计已做数 + 上次答案
+  const qKey = quizQuestionKey(q);
+  const hist = (ST.quizHistory && ST.quizHistory[qKey]) || null;
+  let doneMark = '';
+  if(hist){
+    doneMark = ' · <span style="color:#059669;font-weight:700">✅ 已做过</span>';
+    // 保留上次答案：若本次会话未作答，高亮上次选的选项（不锁定，可重新作答）
+    if(!questionState.answered && questionState.selected === -1 && hist.answerText){
+      const prevIdx = opts.findIndex(o => o.text === hist.answerText);
+      if(prevIdx >= 0) questionState.selected = prevIdx;
+    }
+  }
+
+  let h = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · 累计已做 ${ST.quizDoneTotal||0} 题${doneMark}</div>`;
   if(q.type === 'listening'){
     h += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\\'")}',this)">🔊 点击听音频</button></div>`;
     h += `<div class="qq">听音频回答问题</div>`;
@@ -3268,9 +3288,10 @@ function renderQuizQuestion(){
   }
   h += `<div class="qo">`;
   opts.forEach((o,i) => {
-    const resultClass = questionState.answered ? (o.correct ? ' cor' : (i===questionState.selected ? ' wrg' : '')) : '';
+    const isPrevSel = (!questionState.answered && hist && i===questionState.selected);
+    const resultClass = questionState.answered ? (o.correct ? ' cor' : (i===questionState.selected ? ' wrg' : '')) : (isPrevSel ? ' prev' : '');
     const click = questionState.answered ? '' : ` onclick="answerQuiz(${i},${o.correct})"`;
-    h += `<div class="qopt${resultClass}" id="opt${i}"${click}><span class="L">${letters[i]}</span><span>${esc(o.text)}</span></div>`;
+    h += `<div class="qopt${resultClass}" id="opt${i}"${click}><span class="L">${letters[i]}</span><span>${esc(o.text)}</span>${isPrevSel?'<span style="font-size:10px;color:var(--tr);margin-left:4px">上次答案</span>':''}</div>`;
   });
   h += `</div>`;
   const feedback = questionState.answered ? ((opts[questionState.selected] && opts[questionState.selected].correct ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + esc(q.fb)) : '';
@@ -3288,6 +3309,18 @@ function typeLabel(t){ return {reading:'阅读',grammar:'语法',listening:'听�
 
 let _quizAnswered = false;
 let _quizOpts = [];
+// 题目内容唯一键：跨设备一致（与题号无关，解决 A/B 设备题目顺序不一致问题）
+function quizQuestionKey(q){
+  var s = (q.ex||'') + '::' + (q.type||'') + '::' + (q.q||'');
+  var h = 0;
+  for(var i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) | 0; }
+  return 'qh' + Math.abs(h).toString(36);
+}
+// 记录某题是否已做过（按题目内容唯一键，跨设备合并做题进度）
+function isQuizDone(q){
+  var k = quizQuestionKey(q);
+  return !!(ST.quizHistory && ST.quizHistory[k]);
+}
 function answerQuiz(optIdx, isCorrect){
   if(_quizAnswered) return;
   _quizAnswered = true;
@@ -3297,6 +3330,11 @@ function answerQuiz(optIdx, isCorrect){
   questionState.selected = optIdx;
   ST.quizQuestionState[ST.quizIdx] = questionState;
   const opt = document.getElementById('opt'+optIdx);
+  const curQ = ST.quizSession[ST.quizIdx];
+  const myAnsText = _quizOpts[optIdx] ? _quizOpts[optIdx].text : '';
+  // 写入做题进度（按题目内容唯一键，跨设备合并 + 保留答案文本）
+  if(!ST.quizHistory) ST.quizHistory = {};
+  ST.quizHistory[quizQuestionKey(curQ)] = {correct: isCorrect, answerText: myAnsText, date: todayStr(), ts: Date.now()};
   if(isCorrect){
     opt.classList.add('cor');
     ST.quizScore++;
@@ -3382,16 +3420,59 @@ const WRITING_EXTRA = [
 
 WRITING_TASKS.push(...WRITING_EXTRA);
 
+// 给写作任务分配稳定 id（wt0~wtN），供管理员编辑与用户范文按 id 关联（增删任务后索引不变）
+WRITING_TASKS.forEach(function(t, i){ if(!t.id) t.id = 'wt' + i; });
+
+// 全局管理员检测（写作/口语模块在 IIFE 外，不能引用 IIFE 内的 isMainAdmin）
+function isContentAdmin(){
+  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
+}
+
+// 用户写作数据迁移：旧按索引键 writing_0~13 / writing_essay_edit_0~13 → 新按 id 键
+function migrateWritingKeys(){
+  if(ST.__writingIdMigrated) return;
+  try{
+    WRITING_TASKS.forEach(function(t, i){
+      var oldKey='writing_'+i, newKey='writing_'+t.id;
+      if(ST[oldKey]!==undefined && ST[newKey]===undefined){ ST[newKey]=ST[oldKey]; delete ST[oldKey]; }
+      var oldEdit='writing_essay_edit_'+i, newEdit='writing_essay_edit_'+t.id;
+      if(ST[oldEdit]!==undefined && ST[newEdit]===undefined){ ST[newEdit]=ST[oldEdit]; delete ST[oldEdit]; }
+    });
+    ST.__writingIdMigrated = true;
+    save();
+  }catch(e){}
+}
+
+// 获取最终写作任务列表（管理员编辑 > 默认）
+function getWritingTasks(){
+  var ed = window._contentEdits && window._contentEdits.writing;
+  return (ed && ed.tasks && ed.tasks.length) ? ed.tasks : WRITING_TASKS;
+}
+
+// 获取某任务的范文（合并默认 + 管理员，用户范文文本优先）
+function getEffectiveEssay(taskId, idx){
+  var def = WRITING_TASK_ESSAYS[idx] || WRITING_TASK_ESSAYS[0] || {};
+  var ed = window._contentEdits && window._contentEdits.writing;
+  var admin = (ed && ed.essays && ed.essays[taskId]) || {};
+  var merged = Object.assign({}, def, admin);
+  var userEdit = ST['writing_essay_edit_'+taskId];
+  if(userEdit && String(userEdit).trim()) merged.text = userEdit;
+  return merged;
+}
 
 function renderWriting(){
-  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${WRITING_TASKS.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  const tasks = getWritingTasks();
+  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
+  if(isContentAdmin()){
+    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
+  }
   h += `<div class="rg">`;
-  WRITING_TASKS.forEach((t,i) => {
+  tasks.forEach((t,i) => {
     h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i})">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${i+1}</span>
-      <h5>${esc(t.task.slice(0,50))}...</h5>
-      <p>${esc(t.tips)}</p>
+      <h5>${esc((t.task||'').slice(0,50))}...</h5>
+      <p>${esc(t.tips||'')}</p>
     </div>`;
   });
   h += `</div>`;
@@ -3440,12 +3521,13 @@ function renderWriting(){
 let _writingIdx = -1;
 function selectWriting(i){
   _writingIdx = i;
-  const t = WRITING_TASKS[i];
+  const t = getWritingTasks()[i];
+  if(!t) return;
   document.getElementById('writingTask').innerHTML = `<b><span class="tm l${t.lvl}">${t.lvl}</span> 任务：</b>${esc(t.task)}`;
   document.getElementById('writingTips').style.display = 'block';
   document.getElementById('writingTips').innerHTML = `<b>写作提示：</b>${esc(t.tips)}`;
   const ta = document.getElementById('writingText');
-  ta.value = ST['writing_'+i] || '';
+  ta.value = ST['writing_'+(t.id||i)] || ST['writing_'+i] || '';
   countWords();
 }
 function countWords(){
@@ -3456,7 +3538,10 @@ function countWords(){
 function saveWriting(){
   if(_writingIdx < 0){ alert('请先选择一个写作任务'); return; }
   const text = document.getElementById('writingText').value;
-  ST['writing_'+_writingIdx] = text;
+  const t = getWritingTasks()[_writingIdx];
+  const wk = t && t.id ? ('writing_'+t.id) : ('writing_'+_writingIdx);
+  ST[wk] = text;
+  migrateWritingKeys();
   save(); updateStreak();
   // AI 批改 (使用新评分引擎)
   const tareaType = _writingIdx <= 7 ? 1 : 2;  // 前 8 个为 Tarea 1 风格, 后 6 个为 Tarea 2 风格
@@ -3559,15 +3644,18 @@ function showRelatedEssay(taskIdx){
   if(typeof WRITING_TASK_ESSAYS === 'undefined') return;
   const eEl = document.getElementById('writingEssay');
   if(!eEl) return;
-  // 用户编辑过的范文 key
-  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  const t = getWritingTasks()[taskIdx];
+  const taskId = (t && t.id) ? t.id : ('wt' + taskIdx);
+  // 用户编辑过的范文 key（按稳定 id，增删任务后不错位）
+  const userEditKey = 'writing_essay_edit_' + taskId;
   const userEdit = ST[userEditKey];
-  const essay = WRITING_TASK_ESSAYS[taskIdx] || WRITING_TASK_ESSAYS[0];
+  // 范文 = 默认 + 管理员覆盖，用户范文文本优先
+  const essay = getEffectiveEssay(taskId, taskIdx);
   // 用户文本
-  const userText = (ST['writing_'+taskIdx] || '').trim();
+  const userText = (ST['writing_'+taskId] || ST['writing_'+taskIdx] || '').trim();
   const showCompare = userText.length > 0;
-  // 渲染当前范文(用户版优先)
-  const currentEssayText = userEdit || essay.text;
+  // 渲染当前范文(用户版 > 管理员版 > 默认版)
+  const currentEssayText = essay.text || '';
   const currentWordCount = currentEssayText.split(/\s+/).filter(Boolean).length;
   // 高亮连接词
   const connsToHighlight = essay.highlights || [];
@@ -3620,11 +3708,13 @@ function showRelatedEssay(taskIdx){
   `;
 }
 
-// 编辑范文
+// 编辑范文（用户自编辑，优先级高于管理员范文，管理员覆盖时以用户为准）
 function editEssay(taskIdx){
   if(typeof WRITING_TASK_ESSAYS === 'undefined') return;
-  const essay = WRITING_TASK_ESSAYS[taskIdx] || WRITING_TASK_ESSAYS[0];
-  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  const t = getWritingTasks()[taskIdx];
+  const taskId = (t && t.id) ? t.id : ('wt' + taskIdx);
+  const essay = getEffectiveEssay(taskId, taskIdx);
+  const userEditKey = 'writing_essay_edit_' + taskId;
   const current = ST[userEditKey] || essay.text;
   const newText = prompt('编辑范文 (点取消则不保存):\n\n当前内容:\n' + current, current);
   if(newText === null) return;
@@ -3635,13 +3725,75 @@ function editEssay(taskIdx){
 }
 // 恢复原文
 function resetEssay(taskIdx){
-  const userEditKey = 'writing_essay_edit_' + taskIdx;
+  const t = getWritingTasks()[taskIdx];
+  const taskId = (t && t.id) ? t.id : ('wt' + taskIdx);
+  const userEditKey = 'writing_essay_edit_' + taskId;
   if(!ST[userEditKey]) return;
-  if(!confirm('确定要恢复为系统默认范文吗?你的编辑会丢失。')) return;
+  if(!confirm('确定要恢复为默认范文吗?你的编辑会丢失。')) return;
   delete ST[userEditKey];
   save();
   showRelatedEssay(taskIdx);
 }
+// ===== 写作任务管理员编辑（content_edits.writing，保存后所有用户可见） =====
+let _wadmTasks = null;
+function renderWritingAdmin(){
+  const tasks = getWritingTasks();
+  const ed = window._contentEdits.writing || {};
+  _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
+  const adminEssays = ed.essays || {};
+  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。</div>';
+  _wadmTasks.forEach(function(t,i){
+    const e = adminEssays[t.id] || {};
+    h += '<div class="card" style="margin:10px 0">';
+    h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>任务 '+(i+1)+'</b>'
+      + '<select id="wadm_lvl_'+i+'">'+['A1','A2','B1','B2'].map(function(l){return '<option '+(t.lvl===l?'selected':'')+'>'+l+'</option>';}).join('')+'</select>'
+      + '<button class="btn sm dgr" onclick="delWritingTask('+i+')">🗑 删除</button></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>任务描述：</b><textarea id="wadm_task_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(t.task||'')+'</textarea></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>写作提示：</b><textarea id="wadm_tips_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(t.tips||'')+'</textarea></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>范文：</b><textarea id="wadm_essay_'+i+'" rows="5" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(e.text||'')+'</textarea></div>';
+    h += '</div>';
+  });
+  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addWritingTask()">➕ 新增任务</button><button class="btn pr" onclick="saveWritingAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div>';
+  h += '</div>';
+  const m = document.getElementById('main');
+  if(m) m.innerHTML = h;
+  window.scrollTo(0,0);
+}
+function addWritingTask(){
+  if(!_wadmTasks) return;
+  _wadmTasks.push({id:'wt_new_'+Date.now().toString(36), lvl:'B1', task:'', tips:''});
+  renderWritingAdmin();
+}
+function delWritingTask(i){
+  if(!_wadmTasks) return;
+  if(!confirm('确定删除任务 '+(i+1)+'？')) return;
+  _wadmTasks.splice(i,1);
+  renderWritingAdmin();
+}
+function saveWritingAdmin(){
+  if(!_wadmTasks) return;
+  const tasks = [];
+  const essays = {};
+  for(let i=0;i<_wadmTasks.length;i++){
+    const t = _wadmTasks[i];
+    const lvlEl=document.getElementById('wadm_lvl_'+i);
+    const taskEl=document.getElementById('wadm_task_'+i);
+    const tipsEl=document.getElementById('wadm_tips_'+i);
+    const essayEl=document.getElementById('wadm_essay_'+i);
+    const lvl = lvlEl?lvlEl.value:(t.lvl||'B1');
+    const task = taskEl?taskEl.value.trim():'';
+    const tips = tipsEl?tipsEl.value.trim():'';
+    const essayText = essayEl?essayEl.value.trim():'';
+    if(!task){ alert('任务 '+(i+1)+' 描述不能为空'); return; }
+    tasks.push({id:t.id, lvl:lvl, task:task, tips:tips});
+    if(essayText) essays[t.id] = {text: essayText};
+  }
+  window._deleSyncContentEdits('writing', {tasks: tasks, essays: essays});
+  window._contentEdits.writing = {tasks: tasks, essays: essays};
+  toast('✅ 已保存并同步给所有用户','ok');
+  renderMain();
+}
+
 function useEssay(idx){
   if(typeof SIELE_WRITING_ESSAYS === 'undefined') return;
   const e = SIELE_WRITING_ESSAYS[idx];
@@ -4044,8 +4196,10 @@ function toggleAcc(id){
 
 function renderSieleSpeaking(){
   let h = '<div class="tb" style="margin-top:20px"><div><h2 style="font-size:18px">🎯 SIELE 口语题库与模板</h2><div class="d">5个Tarea完整题库 · 范文朗读 · 答题结构指引</div></div></div>';
-
-  SIELE_ORAL_TEMPLATES.forEach((t, idx) => {
+  if(isContentAdmin()){
+    h += '<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderOralAdmin()">🔧 管理员编辑口语 Tarea</button><span class="sub" style="margin-left:8px;font-size:11px">逐题增删改题目/范文/重点，保存后所有用户可见</span></div>';
+  }
+  getOralTareas().forEach((t, idx) => {
     h += `<div class="acc" id="siele_sa_${idx}">
       <div class="ah" onclick="toggleAcc('siele_sa_${idx}')">
         <h4>${esc(t.name)}</h4>
@@ -8830,6 +8984,126 @@ En cuanto a la formación complementaria, hoy en día, se ofrecen cada día más
   }
 ];
 
+// 获取最终口语 Tarea 列表（管理员编辑 > 默认）
+function getOralTareas(){
+  const ed = window._contentEdits && window._contentEdits.oral;
+  return (ed && ed.tareas && ed.tareas.length) ? ed.tareas : SIELE_ORAL_TEMPLATES;
+}
+
+// ===== 口语 Tarea 管理员编辑（content_edits.oral，逐题增删改） =====
+let _oadmTareas = null;
+function _oralClone(t){ return JSON.parse(JSON.stringify(t)); }
+function renderOralAdmin(){
+  const ed = window._contentEdits.oral || {};
+  _oadmTareas = (ed.tareas && ed.tareas.length) ? ed.tareas.map(_oralClone) : SIELE_ORAL_TEMPLATES.map(_oralClone);
+  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语 Tarea</h2><div class="sub" style="margin-bottom:10px">逐题增删改题目/范文/重点内容，保存后所有用户立即看到最新版。若某题用户已自编辑范文，则以用户版为准，不被覆盖。</div>';
+  _oadmTareas.forEach(function(t, ti){
+    h += '<div class="card" style="margin:10px 0">';
+    h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>Tarea '+(ti+1)+'</b><input id="oadm_name_'+ti+'" value="'+esc(t.name||'')+'" style="flex:1;padding:6px"><button class="btn sm dgr" onclick="delOralTarea('+ti+')">🗑 删除</button></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>描述：</b><textarea id="oadm_desc_'+ti+'" rows="2" style="width:100%;font-size:12px">'+esc(t.desc||'')+'</textarea></div>';
+    // 题目列表
+    if(t.questions){
+      h += '<div style="margin:6px 0;font-size:12px"><b>题目列表：</b></div>';
+      t.questions.forEach(function(q, qi){
+        h += '<div style="border:1px dashed var(--line);padding:8px;margin:6px 0;border-radius:6px;background:#fafafa">';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--soft)">题 '+(qi+1)+'</span><button class="btn xs dgr" onclick="delOralQ('+ti+',\'questions\','+qi+')">✕ 删除</button></div>';
+        h += '<div style="margin:3px 0"><b>题目：</b><textarea id="oadm_q_'+ti+'_'+qi+'" rows="2" style="width:100%;font-size:12px">'+esc(q.q||q.label||'')+'</textarea></div>';
+        h += '<div style="margin:3px 0"><b>范文：</b><textarea id="oadm_qm_'+ti+'_'+qi+'" rows="3" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(q.model||q.examples_model||'')+'</textarea></div>';
+        h += '</div>';
+      });
+      h += '<button class="btn sm" onclick="addOralQ('+ti+',\'questions\')">➕ 加题</button>';
+    }
+    if(t.sample_scenarios){
+      h += '<div style="margin:6px 0;font-size:12px"><b>情境列表：</b></div>';
+      t.sample_scenarios.forEach(function(s, si){
+        h += '<div style="border:1px dashed var(--line);padding:8px;margin:6px 0;border-radius:6px;background:#fafafa">';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--soft)">情境 '+(si+1)+'</span><button class="btn xs dgr" onclick="delOralQ('+ti+',\'sample_scenarios\','+si+')">✕ 删除</button></div>';
+        h += '<div style="margin:3px 0"><b>标题：</b><input id="oadm_q_'+ti+'_'+si+'" value="'+esc(s.scenario||'')+'" style="width:100%"></div>';
+        h += '<div style="margin:3px 0"><b>要求：</b><textarea id="oadm_qp_'+ti+'_'+si+'" rows="2" style="width:100%;font-size:12px">'+esc(s.prompt||'')+'</textarea></div>';
+        h += '<div style="margin:3px 0"><b>范文：</b><textarea id="oadm_qm_'+ti+'_'+si+'" rows="3" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(s.model||'')+'</textarea></div>';
+        h += '</div>';
+      });
+      h += '<button class="btn sm" onclick="addOralQ('+ti+',\'sample_scenarios\')">➕ 加情境</button>';
+    }
+    // model 范文
+    if(t.model){
+      const modelText = t.model.text || t.model.body || '';
+      h += '<div style="margin:4px 0;font-size:12px"><b>范文：</b><textarea id="oadm_model_'+ti+'" rows="5" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(modelText)+'</textarea></div>';
+    }
+    // structure/vocab 重点内容（JSON 编辑，保留完整结构）
+    h += '<div style="margin:4px 0;font-size:12px"><b>重点内容（答题结构/词汇，JSON）：</b><textarea id="oadm_meta_'+ti+'" rows="3" style="width:100%;font-size:11px;font-family:monospace">'+esc(JSON.stringify({structure:t.structure||null, vocab:t.vocab||null}))+'</textarea></div>';
+    h += '</div>';
+  });
+  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addOralTarea()">➕ 新增 Tarea</button><button class="btn pr" onclick="saveOralAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div></div>';
+  const m = document.getElementById('main');
+  if(m) m.innerHTML = h;
+  window.scrollTo(0,0);
+}
+function addOralQ(ti, kind){
+  if(!_oadmTareas) return;
+  const t = _oadmTareas[ti];
+  if(!t) return;
+  if(kind==='questions'){ t.questions = t.questions||[]; t.questions.push({q:'', model:''}); }
+  else { t.sample_scenarios = t.sample_scenarios||[]; t.sample_scenarios.push({scenario:'', prompt:'', model:''}); }
+  renderOralAdmin();
+}
+function delOralQ(ti, kind, qi){
+  if(!_oadmTareas) return;
+  const t = _oadmTareas[ti];
+  if(t && t[kind]){ t[kind].splice(qi,1); renderOralAdmin(); }
+}
+function addOralTarea(){
+  if(!_oadmTareas) return;
+  _oadmTareas.push({id:'t_new_'+Date.now().toString(36), name:'新 Tarea', duration:'', desc:'', questions:[{q:'', model:''}]});
+  renderOralAdmin();
+}
+function delOralTarea(ti){
+  if(!_oadmTareas) return;
+  if(!confirm('确定删除 Tarea '+(ti+1)+'？')) return;
+  _oadmTareas.splice(ti,1);
+  renderOralAdmin();
+}
+function saveOralAdmin(){
+  if(!_oadmTareas) return;
+  const tareas = [];
+  for(let ti=0; ti<_oadmTareas.length; ti++){
+    const t = _oadmTareas[ti];
+    const name = (document.getElementById('oadm_name_'+ti)||{}).value || t.name;
+    const desc = (document.getElementById('oadm_desc_'+ti)||{}).value || '';
+    const out = {id: t.id, name: name, desc: desc, duration: t.duration||''};
+    if(t.questions){
+      out.questions = [];
+      t.questions.forEach(function(q, qi){
+        const qq = (document.getElementById('oadm_q_'+ti+'_'+qi)||{}).value || '';
+        const mm = (document.getElementById('oadm_qm_'+ti+'_'+qi)||{}).value || '';
+        out.questions.push({lvl:q.lvl||'B1', type:q.type||'问答', q:qq, model:mm});
+      });
+    }
+    if(t.sample_scenarios){
+      out.sample_scenarios = [];
+      t.sample_scenarios.forEach(function(s, si){
+        const sc = (document.getElementById('oadm_q_'+ti+'_'+si)||{}).value || '';
+        const pp = (document.getElementById('oadm_qp_'+ti+'_'+si)||{}).value || '';
+        const mm = (document.getElementById('oadm_qm_'+ti+'_'+si)||{}).value || '';
+        out.sample_scenarios.push({scenario:sc, prompt:pp, model:mm});
+      });
+    }
+    if(t.model){
+      const mt = (document.getElementById('oadm_model_'+ti)||{}).value || '';
+      out.model = {photo:t.model.photo||'', topic:t.model.topic||'', stance:t.model.stance||'', body:mt, text:mt, conclusion:t.model.conclusion||''};
+    }
+    const metaEl = document.getElementById('oadm_meta_'+ti);
+    if(metaEl && metaEl.value.trim()){
+      try{ const meta = JSON.parse(metaEl.value); if(meta.structure) out.structure = meta.structure; if(meta.vocab) out.vocab = meta.vocab; }catch(e){ alert('Tarea '+(ti+1)+' 重点内容 JSON 格式错误'); return; }
+    }
+    tareas.push(out);
+  }
+  window._deleSyncContentEdits('oral', {tareas: tareas});
+  window._contentEdits.oral = {tareas: tareas};
+  toast('✅ 已保存并同步给所有用户','ok');
+  renderMain();
+}
+
 const SIELE_WRITING_ESSAYS = [
   {
     id:'t1_informal_refuse',
@@ -12531,6 +12805,20 @@ window._deleCloudCall = function(action, params){
   });
 };
 
+// ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
+window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {} };
+window._contentEditsCb = {};
+// 拉取 content_edits（namespace: writing / oral），结果经 message 监听写入 _contentEdits[ns]
+window._deleFetchContentEdits = function(namespace, callback){
+  window._deleCloudBridgeInit();
+  window._delePostToBridge({type:'siele-content-edits-fetch', namespace: namespace});
+  if(callback) window._contentEditsCb[namespace] = callback;
+};
+// 保存 content_edits（仅管理员可写，云函数 requireAdmin 校验）
+window._deleSyncContentEdits = function(namespace, edits){
+  window._delePostToBridge({type:'siele-content-edits-save', namespace: namespace, edits: edits});
+};
+
 // 保存编辑 → 云函数 setAdminEdits (仅管理员)
 window._deleAdminSyncToCloud = function(){
   window._delePostToBridge({type:'siele-admin-edits-save', edits: window._deleAdminEdits || {}});
@@ -12571,6 +12859,13 @@ window.addEventListener('message', function(e){
       delete window._deleCloudPending[reqId];
       pending.resolve(e.data.result);
     }
+  }
+  // 管理员内容编辑结果（写作/口语）
+  if (e.data && e.data.type === 'siele-content-edits-result') {
+    var ns = e.data.namespace || 'writing';
+    window._contentEdits[ns] = e.data.edits || {};
+    var cb = window._contentEditsCb && window._contentEditsCb[ns];
+    if (cb) { cb(e.data.edits || {}); delete window._contentEditsCb[ns]; }
   }
 });
 // 应用编辑到当前页面 (若在 DELE 页面则重渲染)
@@ -14616,6 +14911,26 @@ function mergeWbSnapshot(remote){
       localStorage.setItem(_DELE_PROGRESS_KEY,JSON.stringify(localDele));
     }catch(e){}
   }
+  // 考试日期/类型/目标等级：远端非空则采用（低频设置，云端最后写入为准，跨设备正确显示倒数日期）
+  if(typeof remote.examDate==='string' && remote.examDate) ST.examDate = remote.examDate;
+  if(typeof remote.examType==='string' && remote.examType) ST.examType = remote.examType;
+  if(typeof remote.targetLevel==='string' && remote.targetLevel) ST.targetLevel = remote.targetLevel;
+  // 用户写作内容 writing_0~N：本地优先（本地已写保留，远端有且本地空则采用），跨设备同步作文
+  Object.keys(remote).forEach(function(k){
+    if(k.indexOf('writing_')===0 && typeof remote[k]==='string' && remote[k].trim()){
+      if(!ST[k] || !String(ST[k]||'').trim()) ST[k] = remote[k];
+    }
+  });
+  // 做题进度 quizHistory：按题目内容唯一键并集合并（ts LWW），跨设备累计已做数 + 保留答案
+  if(remote.quizHistory && typeof remote.quizHistory==='object'){
+    ST.quizHistory = ST.quizHistory || {};
+    Object.keys(remote.quizHistory).forEach(function(k){
+      var rv = remote.quizHistory[k];
+      var lv = ST.quizHistory[k];
+      if(!lv || (rv.ts||0) > (lv.ts||0)) ST.quizHistory[k] = rv;
+    });
+  }
+  ST.quizDoneTotal = ST.quizHistory ? Object.keys(ST.quizHistory).length : 0;
   // 合并后持久化
   try{save();saveBackup();}catch(e){}
 }
@@ -15033,6 +15348,14 @@ function activate(){
   if(ADB.syncCfg)setTimeout(function(){cloudSync(true);},800);
   // 登录成功后拉取管理员编辑 (跨设备同步)
   try{if(typeof window._deleAdminFetchFromCloud==='function')setTimeout(function(){window._deleAdminFetchFromCloud();},1200);}catch(e){}
+  // 登录后拉取写作/口语管理员内容编辑 + 迁移用户写作数据到稳定 id 键
+  try{migrateWritingKeys();}catch(e){}
+  try{
+    if(typeof window._deleFetchContentEdits==='function'){
+      setTimeout(function(){window._deleFetchContentEdits('writing');},1000);
+      setTimeout(function(){window._deleFetchContentEdits('oral');},1200);
+    }
+  }catch(e){}
 }
 
 /* 跨标签页感知（后台改数据 / 登录状态变化） */

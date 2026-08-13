@@ -490,6 +490,41 @@ async function setAdminEdits(event) {
   return response(true, "ADMIN_EDITS_SAVED");
 }
 
+// ========================================================================
+// 管理员内容编辑（写作练习 / SIELE 口语，跨设备/跨用户同步）
+//   getContentEdits: 所有登录用户可读（requireActiveSession）
+//   setContentEdits: 仅管理员可写（requireAdmin）
+// 存储于 content_edits 集合，按 namespace 分文档：
+//   { key: "writing", edits, updatedAt }  → 写作练习任务/范文编辑
+//   { key: "oral", edits, updatedAt }     → SIELE 口语 Tarea1~5 编辑
+// ========================================================================
+async function getContentEdits(event) {
+  await requireActiveSession(event);
+  const namespace = String(event.namespace || "writing");
+  let edits = {};
+  try {
+    const result = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
+    if (result.data.length && result.data[0].edits) edits = result.data[0].edits;
+  } catch (e) {
+    edits = {};
+  }
+  return response(true, "CONTENT_EDITS", { namespace, edits });
+}
+async function setContentEdits(event) {
+  await requireAdmin(event);
+  const namespace = String(event.namespace || "writing");
+  const edits = event.edits;
+  if (!edits || typeof edits !== "object") return response(false, "INVALID_PAYLOAD");
+  if (Buffer.byteLength(JSON.stringify(edits), "utf8") > 2 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
+  const existing = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
+  if (existing.data.length) {
+    await db.collection("content_edits").doc(existing.data[0]._id).update({ edits, updatedAt: now() });
+  } else {
+    await db.collection("content_edits").add({ key: namespace, edits, updatedAt: now() });
+  }
+  return response(true, "CONTENT_EDITS_SAVED");
+}
+
 exports.main = async (event) => {
   const input = event && event.data && typeof event.data === "object" ? event.data : (event || {});
   const action = String(input.action || "");
@@ -521,6 +556,8 @@ exports.main = async (event) => {
     if (action === "pushLearningSession") return await pushLearningSession(input);
     if (action === "getAdminEdits") return await getAdminEdits(input);
     if (action === "setAdminEdits") return await setAdminEdits(input);
+    if (action === "getContentEdits") return await getContentEdits(input);
+    if (action === "setContentEdits") return await setContentEdits(input);
     if (action === "checkStatus") return await checkStatus(input);
     if (action === "changePasswordWithOld") return await changePasswordWithOld(input);
     if (action === "resetPasswordWithInvite") return await resetPasswordWithInvite(input);

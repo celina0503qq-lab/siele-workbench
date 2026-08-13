@@ -1204,6 +1204,33 @@ window.addEventListener('message',function(ev){
       try { window.parent.postMessage({type:'siele-learning-result', reqId: lReqId, result: lResult}, location.origin); } catch(e) {}
     })();
   }
+  // === 管理员内容编辑同步（写作练习 / SIELE 口语，content_edits 集合，按 namespace 分文档） ===
+  if(ev.data&&ev.data.type==='siele-content-edits-fetch'){
+    (async function(){
+      try {
+        var token = ev.data.sessionToken || (cloudSession() && cloudSession().sessionToken);
+        var namespace = ev.data.namespace || 'writing';
+        var result = await callSieleAuth({action:'getContentEdits', sessionToken: token, namespace: namespace});
+        var edits = (result && result.ok && result.edits) ? result.edits : {};
+        window.parent.postMessage({type:'siele-content-edits-result', namespace: namespace, edits: edits}, location.origin);
+      } catch(e) {
+        window.parent.postMessage({type:'siele-content-edits-result', namespace: (ev.data && ev.data.namespace) || 'writing', edits: {}}, location.origin);
+      }
+    })();
+  }
+  if(ev.data&&ev.data.type==='siele-content-edits-save'){
+    (async function(){
+      try {
+        var token = ev.data.sessionToken || (cloudSession() && cloudSession().sessionToken);
+        var namespace = ev.data.namespace || 'writing';
+        var result = await callSieleAuth({action:'setContentEdits', sessionToken: token, namespace: namespace, edits: ev.data.edits || {}});
+        if (result && result.ok) console.log('[ContentEdits] ' + namespace + ' saved via cloud function');
+        else console.warn('[ContentEdits] save rejected:', result && result.code);
+      } catch(e) {
+        console.error('[ContentEdits] save failed:', e.message);
+      }
+    })();
+  }
 });
 function refreshBadges(){
   if(!DB)return;
