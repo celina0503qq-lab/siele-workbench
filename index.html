@@ -2972,6 +2972,15 @@ function _grammarApplyOverride(item){
 function _grammarAddedFor(lvl){
   return (_grammarEdits().added || []).filter(function(a){ return a.lvl === lvl; });
 }
+// 查找语法点（GFLAT 默认 + added 增量），供就地编辑/保存定位
+function _grammarFindItem(t){
+  let item = GFLAT.find(function(g){ return g.t === t; });
+  if(item) return { item: item, isAdded: false };
+  const added = _grammarEdits().added || [];
+  const a = added.find(function(x){ return x.t === t; });
+  if(a) return { item: a, isAdded: true };
+  return null;
+}
 // 详解优先级：管理员 override.detail > GRAMMAR_DETAIL 扩充 > item.detail 原值
 function _grammarDetailContent(item){
   const ov = (_grammarEdits().overrides || {})[item.t] || {};
@@ -2979,8 +2988,9 @@ function _grammarDetailContent(item){
 }
 // 语法点就地编辑（d 简述 / ex 例句 / detail 详解 / ref 参考）
 window._grammarEdit = function(t, field, label){
-  const item = GFLAT.find(function(g){ return g.t === t; });
-  if(!item) return;
+  const found = _grammarFindItem(t);
+  if(!found) return;
+  const item = found.item;
   let cur;
   if(field === 'detail'){ cur = _grammarDetailContent(item); }
   else { cur = _grammarApplyOverride(item)[field] || ''; }
@@ -9617,13 +9627,24 @@ window._oralInlineSave = function(btn){
       var gt = ta.getAttribute('data-t');
       var gfield = ta.getAttribute('data-field');
       var ged = _grammarEdits();
-      var gov = JSON.parse(JSON.stringify(ged.overrides || {}));
-      var gitem = GFLAT.find(function(g){ return g.t === gt; });
-      if(!gitem) throw new Error('语法点不存在');
-      var gcur = gov[gt] || {};
-      gcur[gfield] = ta.value;
-      gov[gt] = gcur;
-      var gedits = { overrides: gov, added: ged.added || [], deleted: ged.deleted || [] };
+      var gfound = _grammarFindItem(gt);
+      if(!gfound) throw new Error('语法点不存在');
+      var gedits;
+      if(gfound.isAdded){
+        // added 增量语法点 → 更新 added 数组对应项
+        var gadded = (ged.added || []).map(function(a){ return Object.assign({}, a); });
+        var ga = gadded.find(function(a){ return a.t === gt; });
+        if(!ga) throw new Error('语法点不存在');
+        ga[gfield] = ta.value;
+        gedits = { overrides: ged.overrides || {}, added: gadded, deleted: ged.deleted || [] };
+      } else {
+        // GFLAT 默认语法点 → overrides
+        var gov = JSON.parse(JSON.stringify(ged.overrides || {}));
+        var gcur = gov[gt] || {};
+        gcur[gfield] = ta.value;
+        gov[gt] = gcur;
+        gedits = { overrides: gov, added: ged.added || [], deleted: ged.deleted || [] };
+      }
       window._deleSyncContentEdits('grammar', gedits);
       window._contentEdits.grammar = gedits;
     } else {
@@ -15461,8 +15482,9 @@ function renderGrammarAdmin(keep){
   }
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑语法库</h2><div class="sub" style="margin-bottom:10px">编辑每个语法点的标题/简述/例句/详解，增删语法点；保存后所有用户立即看到最新版。详解支持 &lt;b&gt;加粗&lt;/b&gt;、&lt;br&gt;换行。</div>';
   _gadmItems.forEach(function(it, i){
+    const isNativeTitle = GFLAT.some(function(g){ return g.t === it.t; });
     h += '<div class="card" style="margin:10px 0">';
-    h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>'+(i+1)+'.</b><span class="lt l'+it.lvl+'">'+it.lvl+'</span><input id="gadm_t_'+i+'" value="'+esc(it.t)+'" style="flex:1;font-weight:700;padding:4px 8px" placeholder="语法点标题">'
+    h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>'+(i+1)+'.</b><span class="lt l'+it.lvl+'">'+it.lvl+'</span><input id="gadm_t_'+i+'" value="'+esc(it.t)+'"'+(isNativeTitle?' readonly title="原生语法点标题是唯一标识，不可修改；如需改名请删除后新增" style="flex:1;font-weight:700;padding:4px 8px;background:#f1f5f9;color:#64748b;cursor:not-allowed"':' style="flex:1;font-weight:700;padding:4px 8px"')+' placeholder="语法点标题">'
       + '<button class="btn sm dgr" onclick="delGrammarAdmin('+i+')">🗑 删除</button></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>简述：</b><textarea id="gadm_d_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(it.d)+'</textarea></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>例句：</b><textarea id="gadm_ex_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(it.ex)+'</textarea></div>';
