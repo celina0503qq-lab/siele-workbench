@@ -15354,6 +15354,7 @@ function renderVocabVerbUsage(){
   verbs.forEach(v => {
     const u = vu[v];
     const group = (VERB_USAGE_GROUPS && VERB_USAGE_GROUPS[v]) || [v];
+    const groupForSpeak = [v].concat(group.filter(w => w !== v));
     const groupHtml = group.map(w => w === v
       ? '<b style="color:var(--tr)">' + esc(w) + '</b>'
       : '<span style="color:var(--ink)">' + esc(w) + '</span>').join('<span style="color:var(--soft)"> / </span>');
@@ -15362,7 +15363,7 @@ function renderVocabVerbUsage(){
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
         <span style="font-size:15px;font-weight:800;font-family:var(--serif)">${groupHtml}</span>
         <span style="font-size:11px;color:var(--soft)">${esc(u.zh||'')}${eb('zh','中文释义')}</span>
-        <button class="spk" style="width:22px;height:22px;font-size:10px;margin-left:auto" onclick="speak('${esc(v)}',this)">🔊</button>
+        <button class="spk" style="width:22px;height:22px;font-size:10px;margin-left:auto" onclick="speak('${esc(groupForSpeak.join(', '))}',this)">🔊</button>
         ${ed?'<span onclick="_verbUsageDel(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6;user-select:none" title="删除词条">✕</span>':''}
       </div>
       <div style="font-size:11.5px;line-height:1.5;margin-bottom:5px"><b style="color:var(--tr)">辨析：</b>${esc(u.discrimination||'')}${eb('discrimination','辨析说明')}</div>
@@ -15484,7 +15485,11 @@ function saveGrammarAdmin(){
     const detailEl=document.getElementById('gadm_detail_'+i);
     const newT = tEl?tEl.value.trim():it.t;
     if(!newT){ alert('语法点 '+(i+1)+' 标题不能为空'); return; }
-    const obj = { d: dEl?dEl.value.trim():'', ex: exEl?exEl.value.trim():'', detail: detailEl?detailEl.value.trim():'' };
+    // detail 仅在管理员实际修改过时才写入 overrides（避免把 GRAMMAR_DETAIL 默认详解快照覆盖，导致后续默认扩充失效）
+    const detailVal = detailEl ? detailEl.value.trim() : '';
+    const defaultDetail = (typeof GRAMMAR_DETAIL !== 'undefined' && GRAMMAR_DETAIL[it.t]) || it.detail || '';
+    const obj = { d: dEl?dEl.value.trim():'', ex: exEl?exEl.value.trim():'', ref: it.ref };
+    if (detailVal && detailVal !== defaultDetail) obj.detail = detailVal;
     if(newT === it.t && gflatTitles.indexOf(it.t) >= 0){
       overrides[it.t] = obj;
       keepTitles.push(it.t);
