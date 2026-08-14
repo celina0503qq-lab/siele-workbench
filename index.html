@@ -5691,7 +5691,7 @@ function getOralPracticeStats(id) {
   return { count: s.history.length, avgScore: Math.round(sum / s.history.length), bestScore: best, lastDate: s.lastDate || s.history[s.history.length - 1].date || '' };
 }
 function smartSieleOral() {
-  var bank = SIELE_ORAL_BANK[_sieleOralTarea] || [];
+  var bank = getSieleOralBank()[_sieleOralTarea] || [];
   if (bank.length <= 1) { renderMain(); return; }
   // 分组：0=没练过, 1=低分(<60), 2=中分(60-80), 3=高分(>80)
   var groups = [[], [], [], []];
@@ -5721,13 +5721,13 @@ function smartSieleOral() {
   _sieleOralShown = false; stopSieleOral(true); renderMain();
 }
 function prevSieleOral() {
-  var bank = SIELE_ORAL_BANK[_sieleOralTarea] || [];
+  var bank = getSieleOralBank()[_sieleOralTarea] || [];
   if (bank.length <= 1) return;
   _sieleOralIdx = (_sieleOralIdx - 1 + bank.length) % bank.length;
   _sieleOralShown = false; stopSieleOral(true); renderMain();
 }
 function nextSieleOral() {
-  var bank = SIELE_ORAL_BANK[_sieleOralTarea] || [];
+  var bank = getSieleOralBank()[_sieleOralTarea] || [];
   if (bank.length <= 1) return;
   _sieleOralIdx = (_sieleOralIdx + 1) % bank.length;
   _sieleOralShown = false; stopSieleOral(true); renderMain();
