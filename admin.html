@@ -1223,12 +1223,21 @@ window.addEventListener('message',function(ev){
       var namespace = (ev.data && ev.data.namespace) || 'writing';
       try {
         var token = ev.data.sessionToken || (cloudSession() && cloudSession().sessionToken);
-        var result = await callSieleAuth({action:'setContentEdits', sessionToken: token, namespace: namespace, edits: ev.data.edits || {}});
+        // edits 含非 ASCII 字符键/值(重音/箭头/中文)时，app.callFunction 直接传对象或字符串会编码损坏；
+        // 用 UTF-8 base64 编码(纯 ASCII)再传，云函数收到后 base64 解码 JSON.parse 还原
+        var editsPayload = '';
+        if (ev.data.edits != null) {
+          // URL-safe base64：app.callFunction 会对 data 做 URL 编码，反斜杠/+/= 会被转义；
+          // 用 URL-safe base64(字母数字+-_)不触发编码，云函数还原 +/= 后再解码
+          try {
+            editsPayload = btoa(unescape(encodeURIComponent(JSON.stringify(ev.data.edits)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+          } catch(e) { editsPayload = ''; }
+        }
+        var result = await callSieleAuth({action:'setContentEdits', sessionToken: token, namespace: namespace, edits: editsPayload});
         if (result && result.ok) console.log('[ContentEdits] ' + namespace + ' saved via cloud function');
         else {
-          console.warn('[ContentEdits] save rejected:', result && result.code);
-          // 保存失败（如登录过期 UNAUTHORIZED），通知主站提示重新登录
-          window.parent.postMessage({type:'siele-content-edits-save-failed', namespace: namespace, code: (result && result.code) || 'SAVE_FAILED'}, location.origin);
+          console.warn('[ContentEdits] save rejected:', result && result.code, '| detail:', result && result.detail);
+          window.parent.postMessage({type:'siele-content-edits-save-failed', namespace: namespace, code: (result && result.code) || 'SAVE_FAILED', detail: (result && result.detail) || ''}, location.origin);
         }
       } catch(e) {
         console.error('[ContentEdits] save failed:', e.message);

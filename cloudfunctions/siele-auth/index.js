@@ -505,8 +505,34 @@ async function getContentEdits(event) {
 async function setContentEdits(event) {
   await requireAdmin(event);
   const namespace = String(event.namespace || "writing");
-  const edits = event.edits;
-  if (!edits || typeof edits !== "object") return response(false, "INVALID_PAYLOAD");
+  const editsRaw = event.edits;
+  // 前端传 URL-safe base64(纯字母数字+-_)，兼容 url-safe base64/普通 base64/JSON字符串/对象四种
+  let edits;
+  if (typeof editsRaw === 'string') {
+    let decoded = null;
+    // URL-safe base64 还原
+    try {
+      let b64 = editsRaw.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      decoded = JSON.parse(Buffer.from(b64, 'base64').toString('utf8'));
+    } catch(e) { decoded = null; }
+    if (decoded == null) {
+      try { decoded = JSON.parse(Buffer.from(editsRaw, 'base64').toString('utf8')); }
+      catch(e) { decoded = null; }
+    }
+    if (decoded != null) {
+      edits = decoded;
+    } else {
+      try { edits = JSON.parse(editsRaw); }
+      catch(e2) {
+        return response(false, "INVALID_PAYLOAD", { rtype: typeof editsRaw, rlen: editsRaw ? editsRaw.length : 0, rhead: editsRaw ? editsRaw.slice(0, 200) : '' });
+      }
+    }
+  } else if (editsRaw && typeof editsRaw === 'object') {
+    edits = editsRaw;
+  } else {
+    return response(false, "INVALID_PAYLOAD");
+  }
   const editsJson = JSON.stringify(edits);
   if (Buffer.byteLength(editsJson, "utf8") > 2 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
   const existing = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
@@ -558,7 +584,6 @@ exports.main = async (event) => {
     if (action === "resetPasswordWithInvite") return await resetPasswordWithInvite(input);
     return response(false, "UNKNOWN_ACTION");
   } catch (e) {
-    console.error("siele-auth request failed", { action, code: e && e.code, message: e && e.message });
-    return response(false, e.code || "SERVER_ERROR");
+    return response(false, (e && e.code) || "SERVER_ERROR", { detail: (e && e.message) || String(e) });
   }
 };
