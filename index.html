@@ -3795,10 +3795,10 @@ function resetEssay(taskIdx){
 }
 // ===== 写作任务管理员编辑（content_edits.writing，保存后所有用户可见） =====
 let _wadmTasks = null;
-function renderWritingAdmin(){
+function renderWritingAdmin(keep){
   const tasks = getWritingTasks();
   const ed = window._contentEdits.writing || {};
-  _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
+  if(!keep) _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
   const adminEssays = ed.essays || {};
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。</div>';
   _wadmTasks.forEach(function(t,i){
@@ -3821,13 +3821,13 @@ function renderWritingAdmin(){
 function addWritingTask(){
   if(!_wadmTasks) return;
   _wadmTasks.push({id:'wt_new_'+Date.now().toString(36), lvl:'B1', task:'', tips:''});
-  renderWritingAdmin();
+  renderWritingAdmin(true);
 }
 function delWritingTask(i){
   if(!_wadmTasks) return;
   if(!confirm('确定删除任务 '+(i+1)+'？')) return;
   _wadmTasks.splice(i,1);
-  renderWritingAdmin();
+  renderWritingAdmin(true);
 }
 function saveWritingAdmin(){
   if(!_wadmTasks) return;
@@ -3903,9 +3903,9 @@ function getSpeakingTopics(){
 // ===== 口语话题管理员编辑（content_edits.speakingTopics） =====
 let _sadmTopics = null;
 function _topicClone(t){ return JSON.parse(JSON.stringify(t)); }
-function renderSpeakingTopicsAdmin(){
+function renderSpeakingTopicsAdmin(keep){
   const ed = window._contentEdits.speakingTopics || {};
-  _sadmTopics = (ed.topics && ed.topics.length) ? ed.topics.map(_topicClone) : SPEAKING_TOPICS.map(_topicClone);
+  if(!keep) _sadmTopics = (ed.topics && ed.topics.length) ? ed.topics.map(_topicClone) : SPEAKING_TOPICS.map(_topicClone);
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语话题</h2><div class="sub" style="margin-bottom:10px">增删改口语话题（等级/分类/题目/中文/提示），保存后所有用户立即看到最新版。</div>';
   _sadmTopics.forEach(function(t, ti){
     h += '<div class="card" style="margin:10px 0">';
@@ -3927,13 +3927,13 @@ function renderSpeakingTopicsAdmin(){
 function addSpeakingTopic(){
   if(!_sadmTopics) return;
   _sadmTopics.push({lvl:'B1', cat:'', topic:'', zh:'', prep:''});
-  renderSpeakingTopicsAdmin();
+  renderSpeakingTopicsAdmin(true);
 }
 function delSpeakingTopic(ti){
   if(!_sadmTopics) return;
   if(!confirm('确定删除话题 '+(ti+1)+'？')) return;
   _sadmTopics.splice(ti,1);
-  renderSpeakingTopicsAdmin();
+  renderSpeakingTopicsAdmin(true);
 }
 function genSpeakingEssay(ti){
   if(!_sadmTopics||!_sadmTopics[ti]) return;
@@ -3944,7 +3944,8 @@ function genSpeakingEssay(ti){
   if(t.prep){ keys.must = t.prep.split(/[,，、]/).map(function(s){return s.trim();}).filter(Boolean).slice(0,5); }
   var essay = generateModelEssay(topicObj, '', keys);
   var ta = document.getElementById('sadm_essay_'+ti);
-  if(ta && essay){ ta.value = essay; ta.focus(); toast('✅ 已生成范文，可手动修改','ok'); }
+  // generateModelEssay 返回对象 {full,introduction,body,conclusion,...}，须取 .full 文本，否则 textarea 显示 [object Object]
+  if(ta && essay && essay.full){ ta.value = essay.full; ta.focus(); toast('✅ 已生成范文，可手动修改','ok'); }
   else if(ta){ ta.value = ''; toast('⚠️ 生成失败，请手动填写','err'); }
 }
 function saveSpeakingTopicsAdmin(){
@@ -3997,6 +3998,7 @@ function renderSpeaking(){
           <button class="btn gh" onclick="speak(document.getElementById('speakTarget').textContent,this)">🔊 听题目</button>
           <button class="rb idle" id="speakRecBtn" onclick="toggleSpeakRecord()">🎤 录音回答</button>
         </div>
+        <div id="speakLive" style="display:none;margin-top:8px;font-size:13px;line-height:1.6;color:#1e293b;min-height:20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px"></div>
       </div>
       <div class="sh-res" id="speakRes">
         <div style="display:flex;align-items:center;gap:14px">
@@ -4070,6 +4072,9 @@ function toggleSpeakRecord(){
     // #237: 立即给 UI 反馈 (< 50ms)
     const recogEl = document.getElementById('speakRecog');
     if(recogEl) recogEl.innerHTML = '<span style="color:var(--soft);font-size:11px">● 正在听...</span>';
+    // 实时转文字：独立显示区，录音时始终可见
+    const liveEl = document.getElementById('speakLive');
+    if(liveEl){ liveEl.style.display = 'block'; liveEl.innerHTML = '<span style="color:var(--soft);font-size:12px">🎙 正在聆听，请开始说西语…</span>'; }
     let fullText = '';
     let interimText = '';
     let lastFinal = '';
@@ -4088,16 +4093,25 @@ function toggleSpeakRecord(){
       if(recogEl){
         recogEl.innerHTML = esc(fullText) + (interimText ? '<span style="color:var(--soft)"> ' + esc(interimText) + '</span>' : '');
       }
+      // 实时转文字：独立区实时显示
+      const liveEl = document.getElementById('speakLive');
+      if(liveEl){
+        liveEl.innerHTML = '<span style="font-weight:600">📝 </span>' + esc(fullText) + (interimText ? '<span style="color:var(--soft)">' + esc(interimText) + '</span>' : '');
+      }
       lastFinal = fullText;
     };
     _speakRecognition.onend = () => {
       _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
       clearTimeout(_speakTimer);
+      const liveEl = document.getElementById('speakLive');
+      if(liveEl){ liveEl.style.display = 'none'; }
       if((lastFinal || fullText).trim()) scoreSpeaking(lastFinal || fullText);
     };
     _speakRecognition.onerror = (event) => {
       _speakRec = false; btn.className = 'rb idle'; btn.textContent = '录音回答';
       clearTimeout(_speakTimer);
+      const liveEl = document.getElementById('speakLive');
+      if(liveEl){ liveEl.style.display = 'none'; }
       if(event.error === 'not-allowed'){
         alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');
       } else if(event.error === 'no-speech'){
@@ -4345,16 +4359,16 @@ function renderSieleSpeaking(){
   getOralTareas().forEach((t, idx) => {
     h += `<div class="acc" id="siele_sa_${idx}">
       <div class="ah" onclick="toggleAcc('siele_sa_${idx}')">
-        <h4>${esc(t.name)}</h4>
-        <span class="cnt">${esc(t.duration || '')}</span>
+        <h4>${esc(t.name)}${_oralEditBtn(idx,'name','编辑 Tarea 名称')}</h4>
+        <span class="cnt">${esc(t.duration || '')}${_oralEditBtn(idx,'duration','编辑时长')}</span>
       </div>
       <div class="ab" style="padding:10px 14px">`;
 
-    h += `<div class="note" style="margin-bottom:8px">${esc(t.desc || '')}</div>`;
+    h += `<div class="note" style="margin-bottom:8px">${esc(t.desc || '')}${_oralEditBtn(idx,'desc','编辑 Tarea 描述')}</div>`;
 
     // Structure guide
     if(t.structure){
-      h += '<div style="margin-bottom:8px"><b style="font-size:12px;color:var(--tr)">📋 答题结构</b>';
+      h += '<div style="margin-bottom:8px"><b style="font-size:12px;color:var(--tr)">📋 答题结构</b>'+_oralEditBtn(idx,'structure','编辑答题结构(JSON)');
       t.structure.forEach(s => {
         h += `<div style="font-size:11.5px;margin:3px 0;padding-left:8px;border-left:2px solid var(--line)"><b>${esc(s.label)}</b> — ${esc(s.vocab || '')}</div>`;
       });
@@ -4367,12 +4381,12 @@ function renderSieleSpeaking(){
         h += `<div class="card" style="margin:6px 0;padding:10px">`;
         if(q.lvl) h += `<span class="tm l${q.lvl}" style="margin-right:6px">${q.lvl}</span>`;
         if(q.type) h += `<span style="font-size:10px;color:var(--soft)">${esc(q.type)}</span>`;
-        if(q.q) h += `<div style="font-size:13px;font-weight:600;margin:4px 0;font-family:var(--serif)">${esc(q.q)}</div>`;
+        if(q.q) h += `<div style="font-size:13px;font-weight:600;margin:4px 0;font-family:var(--serif)">${esc(q.q)}${_oralEditBtn(idx,'q:'+i+':q','编辑题目')}${_oralDelBtn(idx,'questions',i)}</div>`;
         if(q.label) h += `<div style="font-size:13px;font-weight:600;margin:4px 0">${esc(q.label)}</div>`;
         if(q.ph) h += `<div style="font-size:11px;color:var(--soft)">${esc(q.ph)}</div>`;
         if(q.model){
           h += `<div style="background:#f0f7f4;border-radius:7px;padding:8px;margin-top:5px;font-size:12px;line-height:1.5;font-family:var(--serif);white-space:pre-wrap">${esc(q.model)}</div>`;
-          h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(q.model)}">🔊 朗读范文</button>`;
+          h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(q.model)}">🔊 朗读范文</button>${_oralEditBtn(idx,'q:'+i+':model','编辑范文')}`;
         }
         if(q.examples){
           h += '<div style="margin-top:5px;font-size:11px;color:var(--teal)">例句：</div>';
@@ -4385,11 +4399,12 @@ function renderSieleSpeaking(){
         }
         h += '</div>';
       });
+      h += _oralAddBtn(idx,'questions','加题');
     }
 
     // Vocab banks (Tarea 2)
     if(t.vocab){
-      h += '<div style="margin-bottom:8px"><b style="font-size:12px;color:var(--tr)">📚 词汇与句型库</b>';
+      h += '<div style="margin-bottom:8px"><b style="font-size:12px;color:var(--tr)">📚 词汇与句型库</b>'+_oralEditBtn(idx,'vocab','编辑词汇库(JSON)');
       t.vocab.forEach(v => {
         h += `<div style="font-size:11.5px;margin:4px 0"><b>${esc(v.label)}</b></div>`;
         if(v.examples){
@@ -4415,7 +4430,7 @@ function renderSieleSpeaking(){
       const bodyText = t.model.body || t.model.text || '';
       if(bodyText){
         h += `<div style="background:#f0f7f4;border-radius:7px;padding:10px;margin-top:5px;font-size:12px;line-height:1.65;font-family:var(--serif);white-space:pre-wrap">${esc(bodyText)}</div>`;
-        h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(bodyText.replace(/\n/g,' '))}">🔊 朗读范文</button>`;
+        h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(bodyText.replace(/\n/g,' '))}">🔊 朗读范文</button>${_oralEditBtn(idx,'model:body','编辑范文')}`;
       }
     }
 
@@ -4423,14 +4438,15 @@ function renderSieleSpeaking(){
     if(t.sample_scenarios){
       t.sample_scenarios.forEach((sc,i) => {
         h += `<div class="card" style="margin:6px 0;padding:10px">`;
-        h += `<div style="font-size:12px;font-weight:700;color:var(--tr)">${esc(sc.scenario)}</div>`;
-        h += `<div style="font-size:11px;color:var(--soft);margin:3px 0">${esc(sc.prompt)}</div>`;
+        h += `<div style="font-size:12px;font-weight:700;color:var(--tr)">${esc(sc.scenario)}${_oralEditBtn(idx,'sc:'+i+':scenario','编辑情境标题')}${_oralDelBtn(idx,'sample_scenarios',i)}</div>`;
+        h += `<div style="font-size:11px;color:var(--soft);margin:3px 0">${esc(sc.prompt)}${_oralEditBtn(idx,'sc:'+i+':prompt','编辑情境要求')}</div>`;
         if(sc.model){
           h += `<div style="background:#f0f7f4;border-radius:7px;padding:8px;margin-top:5px;font-size:12px;line-height:1.5;font-family:var(--serif);white-space:pre-wrap">${esc(sc.model)}</div>`;
-          h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(sc.model.replace(/\n/g,' '))}">🔊 朗读范文</button>`;
+          h += `<button class="btn sm" style="margin-top:5px" onclick="speak(this.getAttribute('data-text'),this)" data-text="${esc(sc.model.replace(/\n/g,' '))}">🔊 朗读范文</button>${_oralEditBtn(idx,'sc:'+i+':model','编辑情境范文')}`;
         }
         h += '</div>';
       });
+      h += _oralAddBtn(idx,'sample_scenarios','加情境');
     }
 
     h += '</div></div>';
@@ -5345,8 +5361,8 @@ SIELE_TOPICS_EXTRA.forEach(function(t){var topic='hf'+t.n;if(!SIELE_ORAL_BANK[4]
 // ===== 口语真题题库管理员编辑（content_edits.oralbank，全量覆盖存储） =====
 let _obadmBank = null;
 function _oralBankClone(){ var out={}; [1,2,3,4,5].forEach(function(n){ out[n]=(getSieleOralBank()[n]||[]).map(function(q){return JSON.parse(JSON.stringify(q));}); }); return out; }
-function renderOralBankAdmin(){
-  _obadmBank = _oralBankClone();
+function renderOralBankAdmin(keep){
+  if(!keep) _obadmBank = _oralBankClone();
   var tareaNames = {1:'Tarea 1 · 短答',2:'Tarea 2 · 看图描述',3:'Tarea 3 · 情景对话',4:'Tarea 4 · 话题表达',5:'Tarea 5 · 议论文'};
   var h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语真题题库</h2><div class="sub" style="margin-bottom:10px">Tarea 1-5 全部题目，每题可编辑题目描述/内容/范例答案/关键词，支持增删改。保存后覆盖到所有用户。</div>';
   [1,2,3,4,5].forEach(function(n){
@@ -5375,13 +5391,13 @@ function addOralBankQ(n){
   if(!_obadmBank) return;
   _obadmBank[n] = _obadmBank[n]||[];
   _obadmBank[n].push({id:'t'+n+'_new_'+Date.now().toString(36),sec:10,q:'',keys:[],model:''});
-  renderOralBankAdmin();
+  renderOralBankAdmin(true);
 }
 function delOralBankQ(n, qi){
   if(!_obadmBank||!_obadmBank[n]) return;
   if(!confirm('确定删除 Tarea '+n+' 第 '+(qi+1)+' 题？')) return;
   _obadmBank[n].splice(qi,1);
-  renderOralBankAdmin();
+  renderOralBankAdmin(true);
 }
 function saveOralBankAdmin(){
   if(!_obadmBank) return;
@@ -9232,6 +9248,113 @@ function getOralTareas(){
   return (ed && ed.tareas && ed.tareas.length) ? ed.tareas : SIELE_ORAL_TEMPLATES;
 }
 
+// ===== 口语 Tarea 就地编辑（参考 DELE，直接在题干界面内编辑，不跳独立页） =====
+// path 约定: 'name'/'desc'/'duration' | 'q:{i}:{field}' | 'sc:{i}:{field}' | 'model:{field}' | 'structure' | 'vocab'
+function _oralPathGet(t, path){
+  if(!t) return '';
+  var parts = path.split(':');
+  if(parts[0]==='q'){ return ((t.questions||[])[Number(parts[1])]||{})[parts[2]] || ''; }
+  if(parts[0]==='sc'){ return ((t.sample_scenarios||[])[Number(parts[1])]||{})[parts[2]] || ''; }
+  if(parts[0]==='model'){ return (t.model||{})[parts[1]] || ''; }
+  if(parts[0]==='structure'){ return JSON.stringify(t.structure||null); }
+  if(parts[0]==='vocab'){ return JSON.stringify(t.vocab||null); }
+  return t[path] || '';
+}
+function _oralPathSet(t, path, val){
+  if(!t) return;
+  var parts = path.split(':');
+  if(parts[0]==='q'){ t.questions = t.questions||[]; var q = t.questions[Number(parts[1])] = t.questions[Number(parts[1])]||{}; q[parts[2]] = val; return; }
+  if(parts[0]==='sc'){ t.sample_scenarios = t.sample_scenarios||[]; var s = t.sample_scenarios[Number(parts[1])] = t.sample_scenarios[Number(parts[1])]||{}; s[parts[2]] = val; return; }
+  if(parts[0]==='model'){ t.model = t.model||{}; t.model[parts[1]] = val; return; }
+  if(parts[0]==='structure'){ try{ t.structure = JSON.parse(val); }catch(e){ throw new Error('答题结构 JSON 格式错误'); } return; }
+  if(parts[0]==='vocab'){ try{ t.vocab = JSON.parse(val); }catch(e){ throw new Error('词汇库 JSON 格式错误'); } return; }
+  t[path] = val;
+}
+function _oralEditTareas(){
+  var ed = window._contentEdits.oral || {};
+  var src = (ed.tareas && ed.tareas.length) ? ed.tareas : SIELE_ORAL_TEMPLATES;
+  return src.map(function(t){ return JSON.parse(JSON.stringify(t)); });
+}
+window._oralInlineEdit = function(ti, path, label){
+  var t = getOralTareas()[ti];
+  var cur = _oralPathGet(t, path);
+  var isJson = (path==='structure' || path==='vocab');
+  // 复用/创建 modal
+  var m = document.getElementById('oralEditModal');
+  if(!m){
+    m = document.createElement('div');
+    m.id = 'oralEditModal';
+    m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px';
+    m.innerHTML = '<div style="background:#fff;border-radius:12px;max-width:640px;width:100%;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.2)">'+
+      '<div id="oralEditTitle" style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:10px"></div>'+
+      '<textarea id="oralEditTA" style="width:100%;min-height:160px;padding:10px 12px;border:2px solid #3b82f6;border-radius:8px;font-size:13px;font-family:inherit;line-height:1.7;resize:vertical"></textarea>'+
+      '<div style="margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+        '<button class="btn sm pr" onclick="_oralInlineSave(this)" style="font-size:12px">💾 保存</button>'+
+        '<button class="btn sm ol" onclick="_oralInlineCancel()" style="font-size:12px">❌ 取消</button>'+
+        '<span id="oralEditHint" style="color:#64748b;font-size:11px"></span>'+
+      '</div></div>';
+    document.body.appendChild(m);
+  }
+  m.style.display = 'flex';
+  document.getElementById('oralEditTitle').textContent = label;
+  document.getElementById('oralEditHint').textContent = isJson ? 'JSON 格式（结构/词汇）' : 'Tarea '+(ti+1);
+  var ta = document.getElementById('oralEditTA');
+  ta.value = cur;
+  ta.setAttribute('data-ti', ti);
+  ta.setAttribute('data-path', path);
+  ta.focus();
+};
+window._oralInlineSave = function(btn){
+  var ta = document.getElementById('oralEditTA');
+  var ti = Number(ta.getAttribute('data-ti'));
+  var path = ta.getAttribute('data-path');
+  try{
+    var tareas = _oralEditTareas();
+    _oralPathSet(tareas[ti], path, ta.value);
+    window._deleSyncContentEdits('oral', {tareas: tareas});
+    window._contentEdits.oral = {tareas: tareas};
+    toast('✅ 已保存并同步给所有用户','ok');
+    _oralInlineCancel();
+    renderMain();
+  }catch(e){ toast('⚠️ '+e.message,'err'); }
+};
+window._oralInlineCancel = function(){
+  var m = document.getElementById('oralEditModal');
+  if(m) m.style.display = 'none';
+};
+window._oralInlineAdd = function(ti, kind){
+  var tareas = _oralEditTareas();
+  var t = tareas[ti];
+  if(kind==='questions'){ t.questions = t.questions||[]; t.questions.push({lvl:'B1', type:'问答', label:'', q:'', ph:'', examples:[], model:'', examples_model:''}); }
+  else { t.sample_scenarios = t.sample_scenarios||[]; t.sample_scenarios.push({scenario:'', prompt:'', model:''}); }
+  window._deleSyncContentEdits('oral', {tareas: tareas});
+  window._contentEdits.oral = {tareas: tareas};
+  toast('✅ 已添加，请编辑新题内容','ok');
+  renderMain();
+};
+window._oralInlineDel = function(ti, kind, qi){
+  if(!confirm('确定删除这道题？')) return;
+  var tareas = _oralEditTareas();
+  var t = tareas[ti];
+  if(t && t[kind]){ t[kind].splice(qi,1); }
+  window._deleSyncContentEdits('oral', {tareas: tareas});
+  window._contentEdits.oral = {tareas: tareas};
+  toast('✅ 已删除','ok');
+  renderMain();
+};
+function _oralEditBtn(ti, path, label){
+  if(!isContentAdmin()) return '';
+  return '<span onclick="_oralInlineEdit('+ti+',\''+path+'\',\''+esc(label)+'\')" style="cursor:pointer;font-size:13px;color:#3b82f6;opacity:.55;margin-left:4px;user-select:none;vertical-align:middle" title="编辑">✏️</span>';
+}
+function _oralAddBtn(ti, kind, label){
+  if(!isContentAdmin()) return '';
+  return '<button class="btn xs ol" onclick="_oralInlineAdd('+ti+',\''+kind+'\')" style="margin-top:6px;font-size:11px">➕ '+esc(label)+'</button>';
+}
+function _oralDelBtn(ti, kind, qi){
+  if(!isContentAdmin()) return '';
+  return '<span onclick="_oralInlineDel('+ti+',\''+kind+'\','+qi+')" style="cursor:pointer;font-size:12px;color:#ef4444;opacity:.55;margin-left:4px;user-select:none" title="删除">✕</span>';
+}
+
 // 获取最终考试结构五项任务（管理员编辑 > 默认）
 function getSieleTareas(){
   const ed = window._contentEdits && window._contentEdits.tareas;
@@ -9290,9 +9413,11 @@ function saveTareasAdmin(){
 // ===== 口语 Tarea 管理员编辑（content_edits.oral，逐题增删改全部字段） =====
 let _oadmTareas = null;
 function _oralClone(t){ return JSON.parse(JSON.stringify(t)); }
-function renderOralAdmin(){
-  const ed = window._contentEdits.oral || {};
-  _oadmTareas = (ed.tareas && ed.tareas.length) ? ed.tareas.map(_oralClone) : SIELE_ORAL_TEMPLATES.map(_oralClone);
+function renderOralAdmin(keep){
+  if(!keep){
+    const ed = window._contentEdits.oral || {};
+    _oadmTareas = (ed.tareas && ed.tareas.length) ? ed.tareas.map(_oralClone) : SIELE_ORAL_TEMPLATES.map(_oralClone);
+  }
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语 Tarea</h2><div class="sub" style="margin-bottom:10px">逐题增删改题目/范文/结构/词汇/情境/立场独白的全部字段，保存后所有用户立即看到最新版。若某题用户已自编辑范文，则以用户版为准，不被覆盖。</div>';
   _oadmTareas.forEach(function(t, ti){
     h += '<div class="card" style="margin:10px 0">';
@@ -9353,23 +9478,23 @@ function addOralQ(ti, kind){
   if(!t) return;
   if(kind==='questions'){ t.questions = t.questions||[]; t.questions.push({lvl:'B1', type:'问答', label:'', q:'', ph:'', examples:[], model:'', examples_model:''}); }
   else { t.sample_scenarios = t.sample_scenarios||[]; t.sample_scenarios.push({scenario:'', prompt:'', model:''}); }
-  renderOralAdmin();
+  renderOralAdmin(true);
 }
 function delOralQ(ti, kind, qi){
   if(!_oadmTareas) return;
   const t = _oadmTareas[ti];
-  if(t && t[kind]){ t[kind].splice(qi,1); renderOralAdmin(); }
+  if(t && t[kind]){ t[kind].splice(qi,1); renderOralAdmin(true); }
 }
 function addOralTarea(){
   if(!_oadmTareas) return;
   _oadmTareas.push({id:'t_new_'+Date.now().toString(36), name:'新 Tarea', duration:'', desc:'', questions:[{lvl:'B1', type:'问答', q:'', model:''}]});
-  renderOralAdmin();
+  renderOralAdmin(true);
 }
 function delOralTarea(ti){
   if(!_oadmTareas) return;
   if(!confirm('确定删除 Tarea '+(ti+1)+'？')) return;
   _oadmTareas.splice(ti,1);
-  renderOralAdmin();
+  renderOralAdmin(true);
 }
 function saveOralAdmin(){
   if(!_oadmTareas) return;
@@ -12962,6 +13087,11 @@ window._deleAdminEdits = (function(){
   try { return JSON.parse(localStorage.getItem('dele_admin_edits_v1') || '{}'); }
   catch(e) { return {}; }
 })();
+// 编辑/答题记录 key 统一加 level 前缀，解决 A1/A2/B1/B2 四级别共用同一套 key 命名空间导致的数据互相覆盖问题
+window._deleLk = function(baseKey){
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  return lvl + '_' + baseKey;
+};
 window._deleAdminGetField = function(itemKey, field, original){
   var e = window._deleAdminEdits;
   return (e && e[itemKey] && e[itemKey][field] !== undefined) ? e[itemKey][field] : original;
@@ -13657,7 +13787,7 @@ function _renderDeleA1ModeloList(task, mid, items){
   // ===== 合并管理员编辑 =====
   if (window._deleAdminEdits && Object.keys(window._deleAdminEdits).length > 0) {
     items = items.map(function(it){
-      var key = it.modelo + '_P' + it.prueba + '_T' + it.tarea + '_Q' + it.q;
+      var key = window._deleLk(it.modelo + '_P' + it.prueba + '_T' + it.tarea + '_Q' + it.q);
       var edits = window._deleAdminEdits[key];
       if (!edits) return it;
       var copy = Object.assign({}, it);
@@ -13669,7 +13799,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     });
     // Also check shared edits (cuerpo/transcript/instrucciones)
     for (var i = 0; i < items.length; i++) {
-      var shKey = items[i].modelo + '_P' + items[i].prueba + '_T' + items[i].tarea;
+      var shKey = window._deleLk(items[i].modelo + '_P' + items[i].prueba + '_T' + items[i].tarea);
       var shEdits = window._deleAdminEdits[shKey];
       if (shEdits) {
         items[i] = Object.assign({}, items[i], shEdits);
@@ -13698,7 +13828,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     // 统计本大题已答对数（答对才计入进度, 非仅提交）
     let doneCount = 0;
     group.forEach(q => {
-      const sk = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+      const sk = window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
       if (window._deleA1V5Answers && window._deleA1V5Answers[sk] && window._deleA1V5Answers[sk]._submitted) {
         if (window._deleA1V5Answers[sk].key && String(window._deleA1V5Answers[sk].key).toUpperCase() === String(q.answer).toUpperCase()) {
           doneCount++;
@@ -13724,7 +13854,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     const firstInstr = group[0] && group[0].instrucciones || '';
     const sharedInstr = firstInstr.length > 20 && group.every(q => (q.instrucciones||'') === firstInstr);
     if (sharedInstr) {
-      var sharedInstrKey = modeloId + '_P' + pruebaNum + '_T' + tareaNum;
+      var sharedInstrKey = window._deleLk(modeloId + '_P' + pruebaNum + '_T' + tareaNum);
       var editedInstr = window._deleAdminGetField(sharedInstrKey, 'instrucciones', firstInstr);
       h += '<div style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:10px;padding:14px 16px;margin-bottom:10px;position:relative">'+
         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">'+
@@ -13738,7 +13868,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     const firstCuerpo = group[0] && group[0].cuerpo || '';
     const sharedCuerpo = firstCuerpo.length > 30 && group.every(q => (q.cuerpo||'') === firstCuerpo);
     if (sharedCuerpo && (pruebaNum === 1 || pruebaNum === 2)) {
-      var sharedCuerpoKey = modeloId + '_P' + pruebaNum + '_T' + tareaNum;
+      var sharedCuerpoKey = window._deleLk(modeloId + '_P' + pruebaNum + '_T' + tareaNum);
       var editedCuerpo = window._deleAdminGetField(sharedCuerpoKey, 'cuerpo', firstCuerpo);
       h += '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #6366f1;border-radius:8px;padding:12px 14px;margin-bottom:10px;position:relative">'+
         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">'+
@@ -13752,8 +13882,8 @@ function _renderDeleA1ModeloList(task, mid, items){
     const firstTranscript = group[0] && group[0].transcript || '';
     const sharedTranscript = firstTranscript.length > 30 && group.every(q => (q.transcript||'') === firstTranscript);
     if (sharedTranscript && pruebaNum === 2) {
-      var sharedTtsId = 'tts_shared_'+modeloId+'_P'+pruebaNum+'_T'+tareaNum;
-      var sharedTransKey = modeloId + '_P' + pruebaNum + '_T' + tareaNum;
+      var sharedTtsId = 'tts_shared_'+window._deleLk(modeloId+'_P'+pruebaNum+'_T'+tareaNum);
+      var sharedTransKey = window._deleLk(modeloId + '_P' + pruebaNum + '_T' + tareaNum);
       var editedTrans = window._deleAdminGetField(sharedTransKey, 'transcript', firstTranscript);
       window._deleTTSStore[sharedTtsId] = editedTrans;
       h += '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
@@ -13782,7 +13912,7 @@ function _renderDeleA1ModeloList(task, mid, items){
       // v5 听力题: per-question transcript (点击展开, 管理员可点击 ✏️ 编辑)
       let transcriptHtml = '';
       if (q._v5 && q.transcript && q.prueba === 2 && !sharedTranscript) {
-        var perQttsId = 'tts_'+q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+        var perQttsId = 'tts_'+window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
         var editedPerQTrans = window._deleAdminGetField(perQKey, 'transcript', q.transcript);
         window._deleTTSStore[perQttsId] = editedPerQTrans;
         var ttsPlayBtn = '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(perQttsId)+'\')" style="font-size:12px">🔊 播放听力</button>';
@@ -13817,7 +13947,7 @@ function _renderDeleA1ModeloList(task, mid, items){
       }
       // 渲染 prompt — 加大字体, 管理员可编辑
       let promptHtml = '';
-      var perQKey = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+      var perQKey = window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
       if (q.prompt) {
         var editedPrompt = window._deleAdminGetField(perQKey, 'prompt', q.prompt);
         promptHtml = '<div style="margin-top:8px;font-size:14px;line-height:1.6;color:#1e293b;font-weight:600">'+
@@ -13833,7 +13963,7 @@ function _renderDeleA1ModeloList(task, mid, items){
       // 检测匹配题: 选项全为空(占位符) + 单字母答案 → 用填空输入代替
       const isMatching = q.options && q.options.length > 0 && q.options.every(o => !o.text || o.text.trim()==='') && q.answer && /^[A-Z]$/.test(q.answer);
       if (isMatching || isManyOptionChoice) {
-        const matchStateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+        const matchStateKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
         if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
         const mAns = window._deleA1V5Answers[matchStateKey];
         const mSubmitted = mAns && mAns._submitted;
@@ -13889,7 +14019,7 @@ function _renderDeleA1ModeloList(task, mid, items){
       }
       // 填空题: 输入框 + 答案未提交前隐藏
       if (q.type === 'fill' && q.answer) {
-        const fillStateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+        const fillStateKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
         if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
         const fillAns = window._deleA1V5Answers[fillStateKey];
         const fillSubmitted = fillAns && fillAns._submitted;
@@ -13915,7 +14045,7 @@ function _renderDeleA1ModeloList(task, mid, items){
         }
       }
       // 题卡头部 — 干净版
-      h += '<div class="card dele-qcard" data-qkey="'+esc(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q)+'" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin:6px 0;transition:all .2s">'+
+      h += '<div class="card dele-qcard" data-qkey="'+esc(window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q))+'" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin:6px 0;transition:all .2s">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
           '<div style="font-size:13px;color:#64748b;font-weight:500">题 '+q.q+' · Tarea '+q.tarea+'</div>'+
         '</div>'+
@@ -13925,7 +14055,7 @@ function _renderDeleA1ModeloList(task, mid, items){
         optsHtml+
         transcriptHtml+
         (function(){
-          var optsKey = q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q;
+          var optsKey = window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
           var optBtn = _deleAdminEditBtn(optsKey, 'options', false);
           var ansBtn = _deleAdminEditBtn(optsKey, 'answer', false);
           var parts = [];
@@ -13953,7 +14083,7 @@ function _renderDeleA1ModeloList(task, mid, items){
 // ===== v5 选择题自测模式渲染 =====
 // 状态保存在 window._deleA1V5Answers (key: modelo+prueba+tarea+q, value: 用户选的 key)
 function _renderDeleA1V5Choice(q){
-  const stateKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+  const stateKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
   if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
   const userChoice = window._deleA1V5Answers[stateKey];
   const isSubmitted = !!userChoice && userChoice._submitted;
@@ -14136,7 +14266,7 @@ window._deleLoadProgress = function(){
 window._deleClearProgressForTarea = function(modelo, prueba, tarea){
   // 重做单个大题: 删除该 Tarea 下所有 stateKey
   if (!window._deleA1V5Answers) return;
-  const prefix = modelo + '_P' + prueba + '_T' + tarea + '_';
+  const prefix = window._deleLk(modelo + '_P' + prueba + '_T' + tarea + '_');
   Object.keys(window._deleA1V5Answers).forEach(k => {
     if (k.startsWith(prefix)) delete window._deleA1V5Answers[k];
   });
@@ -14251,7 +14381,7 @@ function _renderDeleA1V5TaskCard(q){
     '</div>';
     // AI 范文 (可展开编辑, 支持用户保存自己的版本)
     if (q.modelo_essay) {
-      var essayKey = q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q;
+      var essayKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
       var userEssay = window._deleAdminGetField(essayKey, 'modelo_essay', '');
       // 管理员编辑优先, 其次用户保存的版本, 最后原始范文
       var essayContent = userEssay || q.modelo_essay;

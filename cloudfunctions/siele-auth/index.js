@@ -10,23 +10,11 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const PASSWORD_PEPPER = process.env.PASSWORD_PEPPER;
 const WEB_ORIGIN = process.env.WEB_ORIGIN || "https://celina0503qq-lab.github.io";
 const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 14;
-const INVITE_CODES = new Set([
-  // 已使用/历史码（保留供 adminListInvites 显示历史占用）
-  "SIELE-2026-VERDE", "SIELE-2026-ROJO", "SIELE-2026-AZUL",
-  "SIELE-2026-ORO", "SIELE-2026-LUNA",
-  "SIELE-2026-RIO-7K4M", "SIELE-2026-NUBE-9Q2X",
-  "SIELE-2026-MAR-3H7T", "SIELE-2026-SIERRA-8D6N",
-  "SIELE-2026-GLACIAR-4W6R", "SIELE-2026-ESTRELLA-2J8F",
-  "SIELE-2026-XKQHM", "SIELE-2026-PTBDF",
-  "SIELE-2026-VLRNC", "SIELE-2026-JGWYZ",
-  "SIELE-2026-MNQSB",
-  // 2026-08-13 换新：替换 9 个旧可用码 + 新增 5 个（共 14 个新码）
-  "SIELE-2026-FLOR-CAYJ", "SIELE-2026-LAGO-UQED", "SIELE-2026-VALLE-VC5R",
-  "SIELE-2026-ISLA-EK46", "SIELE-2026-PLAYA-RLZ8", "SIELE-2026-NIEVE-ULTB",
-  "SIELE-2026-FUEGO-9TIX", "SIELE-2026-TIERRA-JQ0I", "SIELE-2026-VIENTO-JYVU",
-  "SIELE-2026-CAMPO-ZEQ8", "SIELE-2026-MONTE-J0EC", "SIELE-2026-ROCA-8QYD",
-  "SIELE-2026-NIDO-GLPA", "SIELE-2026-OLA-6E97"
-]);
+// 邀请码从环境变量 INVITE_CODES 读取（逗号分隔），避免明文泄露在公开仓库源码中。
+// 环境变量在 cloudbaserc.json 的 envVariables 里配置（该文件被 .gitignore 忽略，不入公开仓库）。
+const INVITE_CODES = new Set(
+  (process.env.INVITE_CODES || "").split(",").map(function(s){ return s.trim(); }).filter(Boolean)
+);
 // VERDE/ROJO 曾仅存于浏览器本地，无法证明历史占用归属；为防止再次被利用，首次云端初始化时永久停用。
 const LEGACY_REVOKED_INVITES = new Set(["SIELE-2026-VERDE", "SIELE-2026-ROJO"]);
 
