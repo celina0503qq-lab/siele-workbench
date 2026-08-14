@@ -5444,6 +5444,57 @@ function getSieleOralBank(){
   }
   return SIELE_ORAL_BANK;
 }
+
+// ===== 口语真题题库就地编辑（oralbank namespace，训练器内直接编辑，不跳独立页） =====
+function _bankEditClone(){
+  var bank = getSieleOralBank();
+  var out = {};
+  [1,2,3,4,5].forEach(function(n){ out[n] = (bank[n]||[]).map(function(q){return JSON.parse(JSON.stringify(q));}); });
+  return out;
+}
+window._bankInlineEdit = function(field, label){
+  var q = getSieleOralItem();
+  if(!q) return;
+  var cur = (field==='keys') ? ((q.keys||[]).join(', ')) : (q[field]||'');
+  _showEditModal(label, cur, 'Tarea '+_sieleOralTarea+' · 第 '+(_sieleOralIdx+1)+' 题', {'data-ns':'oralbank','data-tarea':_sieleOralTarea,'data-idx':_sieleOralIdx,'data-field':field});
+};
+window._bankInlineAdd = function(){
+  var tarea = _sieleOralTarea;
+  var bank = _bankEditClone();
+  bank[tarea] = bank[tarea]||[];
+  var defSec = (tarea===2?120:(tarea===3?90:(tarea===5?240:(tarea===4?60:12))));
+  bank[tarea].push({id:'t'+tarea+'_new_'+Date.now().toString(36), sec:defSec, q:'', keys:[], model:''});
+  window._deleSyncContentEdits('oralbank', {bank: bank});
+  window._contentEdits.oralbank = {bank: bank};
+  toast('✅ 已添加新题，可点 ✏️ 编辑内容','ok');
+  renderMain();
+};
+window._bankInlineDel = function(){
+  if(!confirm('确定删除当前这道题？')) return;
+  var bank = _bankEditClone();
+  bank[_sieleOralTarea].splice(_sieleOralIdx, 1);
+  window._deleSyncContentEdits('oralbank', {bank: bank});
+  window._contentEdits.oralbank = {bank: bank};
+  toast('✅ 已删除','ok');
+  renderMain();
+};
+function _bankEditBtn(field, label){
+  if(!isContentAdmin()) return '';
+  return '<span onclick="event.stopPropagation();_bankInlineEdit(\''+field+'\',\''+esc(label)+'\')" style="cursor:pointer;font-size:13px;color:#3b82f6;opacity:.55;margin-left:4px;user-select:none" title="编辑">✏️</span>';
+}
+function _bankAdminTools(){
+  if(!isContentAdmin()) return '';
+  return '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:6px 0;padding:6px 8px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px">'+
+    '<button class="btn xs pr" onclick="_bankInlineAdd()" style="font-size:11px">➕ 加题</button>'+
+    '<button class="btn xs dgr" onclick="_bankInlineDel()" style="font-size:11px">✕ 删此题</button>'+
+    _bankEditBtn('q','题干')+
+    _bankEditBtn('title','标题')+
+    _bankEditBtn('model','范文')+
+    _bankEditBtn('keys','关键词')+
+    _bankEditBtn('sec','时长')+
+    '<span class="sub" style="font-size:10px;color:#64748b">就地编辑，保存后覆盖所有用户</span>'+
+  '</div>';
+}
 let _sieleOralTarea=1,_sieleOralIdx=0,_sieleOralRecognition=null,_sieleOralRecording=false,_sieleOralShown=false,_sieleOralTimer=null,_sieleOralLeft=0,_sieleOralTranscript='';
 function getSieleOralItem(){var bank=getSieleOralBank()[_sieleOralTarea]||[];if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
 function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=getSieleOralBank()[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
@@ -5691,7 +5742,7 @@ function renderSielePhoto(x){
   var hintPart = x.hintCn ? '<p style="margin-top:6px;font-size:11px;color:var(--tr)"><b>考生回忆：</b>'+esc(x.hintCn.slice(0,200))+'</p>' : '';
   return '<aside class="so-scene-card" aria-label="回忆场景观察提示"><span>回忆题场景 · 观察提示</span><strong>'+esc(x.title||'图片描述')+'</strong><p><b>重点：</b>'+esc((x.overview||'人物、地点和动作')+';'+(x.object||'画面细节')+'.')+'</p>'+hintPart+'<small>该题根据回忆版资料整理；练习时请围绕人物、空间、动作、氛围和谨慎推测展开。</small></aside>';
 }
-function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralBank()[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div><h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
+function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralBank()[_sieleOralTarea]||[];if(!x)return '<div class="so-empty">暂无题目</div>';var saved=ST.sieleOralScores&&ST.sieleOralScores[x.id];var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';SIELE_TAREAS.forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var topics='';if(_sieleOralTarea>=4){topics='<div class="so-topic-list">';['tecnologia','educacion','medioambiente','salud'].forEach(function(t){topics+='<button class="so-topic '+(x.topic===t?'on':'')+'" onclick="chooseSieleTopic(\''+t+'\')">'+({tecnologia:'科技',educacion:'教育',medioambiente:'环境',salud:'健康'})[t]+'</button>';});topics+='</div>';}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+esc(x.q)+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+' · '+(_sieleOralIdx+1)+' / '+bank.length+'</div>'+_bankAdminTools()+'<h3>'+esc(x.title||'Pregunta oral')+'</h3><div class="so-meta">'+esc(SIELE_TAREAS[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+photo+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button><button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button><button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button><button class="btn gh" onclick="smartSieleOral()">智能换题</button><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b><div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← 上一题</button><span class="so-nav-pos">'+(_sieleOralIdx+1)+' / '+bank.length+'</span><button class="btn sm" onclick="nextSieleOral()">下一题 →</button></div></section>';
 }
 
 // ===== PAGE: SIELE SPECIAL =====
@@ -9346,6 +9397,18 @@ window._oralInlineSave = function(btn){
       var wessays = wed.essays || {};
       window._deleSyncContentEdits('writing', {tasks: wtasks, essays: wessays});
       window._contentEdits.writing = {tasks: wtasks, essays: wessays};
+    } else if(ns === 'oralbank'){
+      var btarea = Number(ta.getAttribute('data-tarea'));
+      var bidx = Number(ta.getAttribute('data-idx'));
+      var bfield = ta.getAttribute('data-field');
+      var bank = _bankEditClone();
+      var bq = (bank[btarea]||[])[bidx];
+      if(!bq) throw new Error('题目不存在');
+      if(bfield === 'keys'){ bq.keys = ta.value.split(',').map(function(s){return s.trim();}).filter(Boolean); }
+      else if(bfield === 'sec'){ bq.sec = Number(ta.value)||10; }
+      else { bq[bfield] = ta.value; }
+      window._deleSyncContentEdits('oralbank', {bank: bank});
+      window._contentEdits.oralbank = {bank: bank};
     } else {
       var ti = Number(ta.getAttribute('data-ti'));
       var path = ta.getAttribute('data-path');
