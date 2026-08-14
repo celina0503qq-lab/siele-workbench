@@ -506,7 +506,9 @@ async function setContentEdits(event) {
   if (Buffer.byteLength(JSON.stringify(edits), "utf8") > 2 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
   const existing = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
   if (existing.data.length) {
-    await db.collection("content_edits").doc(existing.data[0]._id).update({ edits, updatedAt: now() });
+    // 用 set() 整文档覆盖而非 update()：update() 会对嵌套对象深度合并，
+    // 且 edits.overrides 的键含点号(如 "Ser vs. Estar")/双引号/箭头会被解析为路径，导致 InvalidBSON 保存失败
+    await db.collection("content_edits").doc(existing.data[0]._id).set({ key: namespace, edits, updatedAt: now() });
   } else {
     await db.collection("content_edits").add({ key: namespace, edits, updatedAt: now() });
   }
