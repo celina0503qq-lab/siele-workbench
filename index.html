@@ -3517,8 +3517,8 @@ function renderWriting(){
   tasks.forEach((t,i) => {
     h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i})">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${i+1}</span>
-      <h5>${esc((t.task||'').slice(0,50))}...</h5>
-      <p>${esc(t.tips||'')}</p>
+      <h5>${esc((t.task||'').slice(0,50))}...${_writingEditBtn(i,'task','编辑任务描述')}</h5>
+      <p>${esc(t.tips||'')}${_writingEditBtn(i,'tips','编辑写作提示')}</p>
     </div>`;
   });
   h += `</div>`;
@@ -3980,9 +3980,9 @@ function renderSpeaking(){
   topics.forEach((t,i) => {
     h += `<div class="rc" onclick="selectSpeaking(${i})" id="spk_${i}">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> · ${t.cat}</span>
-      <h5>${esc(t.topic.slice(0,60))}...</h5>
+      <h5>${esc(t.topic.slice(0,60))}...${_topicEditBtn(i,'topic','编辑题目')}</h5>
       <p>${esc(t.zh)}</p>
-      <p style="margin-top:4px;font-size:10px;color:var(--am)">${esc(t.prep)}</p>
+      <p style="margin-top:4px;font-size:10px;color:var(--am)">${esc(t.prep)}${_topicEditBtn(i,'prep','编辑提示')}</p>
     </div>`;
   });
   h += `</div>`;
@@ -4051,6 +4051,12 @@ function selectSpeaking(i){
   document.getElementById('speakTarget').textContent = t.topic;
   document.getElementById('speakZh').textContent = t.prep;
   document.getElementById('speakRes').classList.remove('show');
+  // 重置范文区（切换话题时清空并隐藏）
+  const essayEl = document.getElementById('speakModelEssay');
+  if(essayEl){ essayEl.innerHTML = ''; essayEl.style.display = 'none'; }
+  // 重置实时转文字区
+  const liveEl = document.getElementById('speakLive');
+  if(liveEl){ liveEl.style.display = 'none'; liveEl.innerHTML = ''; }
   // 重置录音按钮
   const btn = document.getElementById('speakRecBtn');
   if(btn){ btn.className = 'rb idle'; btn.textContent = '录音回答'; }
@@ -4264,7 +4270,8 @@ function scoreSpeaking(text){
   var essayEl = document.getElementById('speakModelEssay');
   if(essayEl && essay){
     essayEl.innerHTML = renderModelEssayHTML(essay, text);
-    essayEl.classList.add('show');
+    // 根因修复: speakModelEssay 用内联 style="display:none" 隐藏，classList.add('show') 无法覆盖内联样式，必须直接改 style.display
+    essayEl.style.display = 'block';
   }
 }
 /* FEAT-5: 口语范文生成器 — 纯客户端模板 + 关键词填充, 按 A1/B1/C1 分级复杂度 */
@@ -5451,7 +5458,7 @@ function stopSieleOral(silent){clearInterval(_sieleOralTimer);if(_sieleOralRecog
 function normalizeOral(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zñü\s]/g,' ').replace(/\s+/g,' ').trim();}
 function finishSieleOral(){if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
 function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var links=(normalizeOral(text).match(/\b(porque|ademas|aunque|sin embargo|por eso|mientras|cuando|si|para que|en definitiva)\b/g)||[]).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();
-var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);}updateStreak();}
+var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);}updateStreak();showEncouragement('siele_oral', total);}
 function oralBar(label,val){return '<div class="so-bar"><span>'+label+'</span><i><b style="width:'+val+'%"></b></i><strong>'+val+'</strong></div>';}
 function renderSieleScore(r,x){var improve=[];if(r.content<70)improve.push('补齐题目关键词：'+(x.keys||[]).join('、'));if(r.fluency<70)improve.push('延长回答并减少过短停顿，目标约 '+Math.max(20,Math.round((x.sec||60)*1.1))+' 词。');if(r.grammar<70)improve.push('加入 porque、aunque、por eso 等连接词，并检查过去/将来时。');if(!improve.length)improve.push('结构完整；下一次尝试加入更具体的例子和自我修正。');return '<div class="so-score"><div class="total">'+r.score+'</div><div class="so-bars">'+oralBar('内容',r.content)+oralBar('流利',r.fluency)+oralBar('词汇',r.vocab)+oralBar('语法',r.grammar)+oralBar('完成度',r.task)+'</div></div><div class="so-feedback"><b>识别：</b>'+esc(r.text||'未识别到有效西语')+'<br><b>改进：</b>'+improve.join('；')+'</div><button class="btn sm ol" style="margin-top:8px" onclick="showSieleModel()">显示范例与重点</button>';
 }
@@ -9275,11 +9282,8 @@ function _oralEditTareas(){
   var src = (ed.tareas && ed.tareas.length) ? ed.tareas : SIELE_ORAL_TEMPLATES;
   return src.map(function(t){ return JSON.parse(JSON.stringify(t)); });
 }
-window._oralInlineEdit = function(ti, path, label){
-  var t = getOralTareas()[ti];
-  var cur = _oralPathGet(t, path);
-  var isJson = (path==='structure' || path==='vocab');
-  // 复用/创建 modal
+// 通用编辑 modal：打开编辑框，保存时按 data-ns 分发
+function _showEditModal(label, curVal, hint, attrs){
   var m = document.getElementById('oralEditModal');
   if(!m){
     m = document.createElement('div');
@@ -9297,22 +9301,59 @@ window._oralInlineEdit = function(ti, path, label){
   }
   m.style.display = 'flex';
   document.getElementById('oralEditTitle').textContent = label;
-  document.getElementById('oralEditHint').textContent = isJson ? 'JSON 格式（结构/词汇）' : 'Tarea '+(ti+1);
+  document.getElementById('oralEditHint').textContent = hint || '';
   var ta = document.getElementById('oralEditTA');
-  ta.value = cur;
-  ta.setAttribute('data-ti', ti);
-  ta.setAttribute('data-path', path);
+  ta.value = curVal == null ? '' : curVal;
+  for(var k in attrs) ta.setAttribute(k, attrs[k]);
   ta.focus();
+}
+window._oralInlineEdit = function(ti, path, label){
+  var t = getOralTareas()[ti];
+  var cur = _oralPathGet(t, path);
+  var isJson = (path==='structure' || path==='vocab');
+  _showEditModal(label, cur, isJson ? 'JSON 格式（结构/词汇）' : 'Tarea '+(ti+1), {'data-ns':'oral','data-ti':ti,'data-path':path});
+};
+// 口语话题就地编辑（speakingTopics namespace）
+window._topicInlineEdit = function(i, field, label){
+  var t = getSpeakingTopics()[i];
+  var cur = t ? (t[field]||'') : '';
+  _showEditModal(label, cur, '话题 '+(i+1), {'data-ns':'speakingTopics','data-idx':i,'data-field':field});
+};
+// 写作任务就地编辑（writing namespace）
+window._writingInlineEdit = function(i, field, label){
+  var t = getWritingTasks()[i];
+  var cur = t ? (t[field]||'') : '';
+  _showEditModal(label, cur, '任务 '+(i+1), {'data-ns':'writing','data-idx':i,'data-field':field});
 };
 window._oralInlineSave = function(btn){
   var ta = document.getElementById('oralEditTA');
-  var ti = Number(ta.getAttribute('data-ti'));
-  var path = ta.getAttribute('data-path');
+  var ns = ta.getAttribute('data-ns') || 'oral';
   try{
-    var tareas = _oralEditTareas();
-    _oralPathSet(tareas[ti], path, ta.value);
-    window._deleSyncContentEdits('oral', {tareas: tareas});
-    window._contentEdits.oral = {tareas: tareas};
+    if(ns === 'speakingTopics'){
+      var ti2 = Number(ta.getAttribute('data-idx'));
+      var field2 = ta.getAttribute('data-field');
+      var topics = getSpeakingTopics().map(function(t){ return Object.assign({},t); });
+      topics[ti2][field2] = ta.value;
+      window._deleSyncContentEdits('speakingTopics', {topics: topics});
+      window._contentEdits.speakingTopics = {topics: topics};
+    } else if(ns === 'writing'){
+      var wi = Number(ta.getAttribute('data-idx'));
+      var wfield = ta.getAttribute('data-field');
+      var wtasks = getWritingTasks().map(function(t){ return Object.assign({},t); });
+      wtasks[wi][wfield] = ta.value;
+      // 保留现有 essays 编辑
+      var wed = window._contentEdits.writing || {};
+      var wessays = wed.essays || {};
+      window._deleSyncContentEdits('writing', {tasks: wtasks, essays: wessays});
+      window._contentEdits.writing = {tasks: wtasks, essays: wessays};
+    } else {
+      var ti = Number(ta.getAttribute('data-ti'));
+      var path = ta.getAttribute('data-path');
+      var tareas = _oralEditTareas();
+      _oralPathSet(tareas[ti], path, ta.value);
+      window._deleSyncContentEdits('oral', {tareas: tareas});
+      window._contentEdits.oral = {tareas: tareas};
+    }
     toast('✅ 已保存并同步给所有用户','ok');
     _oralInlineCancel();
     renderMain();
@@ -9325,12 +9366,14 @@ window._oralInlineCancel = function(){
 window._oralInlineAdd = function(ti, kind){
   var tareas = _oralEditTareas();
   var t = tareas[ti];
-  if(kind==='questions'){ t.questions = t.questions||[]; t.questions.push({lvl:'B1', type:'问答', label:'', q:'', ph:'', examples:[], model:'', examples_model:''}); }
-  else { t.sample_scenarios = t.sample_scenarios||[]; t.sample_scenarios.push({scenario:'', prompt:'', model:''}); }
+  var newIdx;
+  if(kind==='questions'){ t.questions = t.questions||[]; t.questions.push({lvl:'B1', type:'问答', label:'', q:'', ph:'', examples:[], model:'', examples_model:''}); newIdx = t.questions.length-1; }
+  else { t.sample_scenarios = t.sample_scenarios||[]; t.sample_scenarios.push({scenario:'', prompt:'', model:''}); newIdx = t.sample_scenarios.length-1; }
   window._deleSyncContentEdits('oral', {tareas: tareas});
   window._contentEdits.oral = {tareas: tareas};
-  toast('✅ 已添加，请编辑新题内容','ok');
-  renderMain();
+  // 加题后自动弹出编辑框，让管理员立即填写新题内容
+  var path = (kind==='questions') ? ('q:'+newIdx+':q') : ('sc:'+newIdx+':scenario');
+  _oralInlineEdit(ti, path, '✏️ 请填写新加的题（题目内容）');
 };
 window._oralInlineDel = function(ti, kind, qi){
   if(!confirm('确定删除这道题？')) return;
@@ -9353,6 +9396,14 @@ function _oralAddBtn(ti, kind, label){
 function _oralDelBtn(ti, kind, qi){
   if(!isContentAdmin()) return '';
   return '<span onclick="_oralInlineDel('+ti+',\''+kind+'\','+qi+')" style="cursor:pointer;font-size:12px;color:#ef4444;opacity:.55;margin-left:4px;user-select:none" title="删除">✕</span>';
+}
+function _topicEditBtn(i, field, label){
+  if(!isContentAdmin()) return '';
+  return '<span onclick="event.stopPropagation();_topicInlineEdit('+i+',\''+field+'\',\''+esc(label)+'\')" style="cursor:pointer;font-size:13px;color:#3b82f6;opacity:.55;margin-left:4px;user-select:none" title="编辑">✏️</span>';
+}
+function _writingEditBtn(i, field, label){
+  if(!isContentAdmin()) return '';
+  return '<span onclick="event.stopPropagation();_writingInlineEdit('+i+',\''+field+'\',\''+esc(label)+'\')" style="cursor:pointer;font-size:13px;color:#3b82f6;opacity:.55;margin-left:4px;user-select:none" title="编辑">✏️</span>';
 }
 
 // 获取最终考试结构五项任务（管理员编辑 > 默认）
@@ -14659,6 +14710,7 @@ window.scoreWritingFromTextarea = function(btn){
     });
   }
   _deleSaveProgress();
+  showEncouragement('writing', score);
 };
 window.startSpeakingRecording = function(btn){
   if(window.toast) window.toast('🎤 录音功能即将接入...');
