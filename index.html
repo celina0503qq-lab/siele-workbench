@@ -1131,7 +1131,7 @@ function getDefaultState(){
     flashPraStats: {correct:0, wrong:0, streak:0, bestStreak:0},
     globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
     accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
-    vocabMastery: {}, grammarDone: {},
+    vocabMastery: {}, grammarDone: {}, grammarDoneTs: {},
     quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all'},
     quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
     tasks: [], plannerStart: '',
@@ -3066,7 +3066,7 @@ function renderGrammar(){
       const eb = (field,label) => isAdm ? ' <span onclick="event.stopPropagation();_grammarEdit(\''+esc(item.t)+'\',\''+field+'\',\''+esc(label)+'\')" style="cursor:pointer;font-size:12px;color:#3b82f6;opacity:.6;user-select:none" title="编辑">✏️</span>' : '';
       const delBtn = isAdm ? '<span onclick="_grammarDel(\''+esc(item.t)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6;margin-left:6px;user-select:none" title="删除语法点">✕</span>' : '';
       h += `<div class="gi">
-        <input type="checkbox" ${d?'checked':''} onchange="ST.grammarDone['${item.t.replace(/'/g,"\\'")}']=this.checked;save();renderMain()">
+        <input type="checkbox" ${d?'checked':''} onchange="ST.grammarDone['${item.t.replace(/'/g,"\\'")}']=this.checked;(ST.grammarDoneTs=ST.grammarDoneTs||{})['${item.t.replace(/'/g,"\\'")}']=Date.now();save();renderMain()">
         <div class="gb">
           <div class="gt ${d?'done':''}">${esc(item.t)}${delBtn}</div>
           <div class="gd">${esc(item.d)}${eb('d','简述')}</div>
@@ -13758,6 +13758,13 @@ window.addEventListener('message', function(e){
     window._contentEdits[ns] = e.data.edits || {};
     var cb = window._contentEditsCb && window._contentEditsCb[ns];
     if (cb) { cb(e.data.edits || {}); delete window._contentEditsCb[ns]; }
+    // 若当前正停留在对应页面，立即重新渲染，让用户端实时看到管理员同步的最新内容
+    try {
+      if (typeof currentPage === 'string' && typeof renderMain === 'function') {
+        var _pgMap = { grammar:'grammar', verbUsage:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele' };
+        if (_pgMap[ns] && currentPage === _pgMap[ns]) renderMain();
+      }
+    } catch(e) {}
   }
 });
 // 应用编辑到当前页面 (若在 DELE 页面则重渲染)
@@ -15346,7 +15353,13 @@ window._verbUsageDel = function(key){
 };
 function renderVocabVerbUsage(){
   const vu = getVerbUsage();
-  const verbs = Object.keys(vu);
+  // 固定排序：按 VERB_USAGE 源码定义顺序，管理员新增的词条排最后(按字母)，避免刷新后顺序漂移
+  const _defaultOrder = Object.keys(VERB_USAGE);
+  const verbs = Object.keys(vu).sort(function(a,b){
+    const ia = _defaultOrder.indexOf(a), ib = _defaultOrder.indexOf(b);
+    const ra = ia === -1 ? 9999 : ia, rb = ib === -1 ? 9999 : ib;
+    return ra - rb || (a < b ? -1 : (a > b ? 1 : 0));
+  });
   const ed = isContentAdmin();
   const adminBar = ed ? '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式（保存后覆盖所有用户）<button class="btn sm pr" style="margin:0 6px" onclick="_verbUsageAdd()">➕ 新增词条</button><span style="color:#64748b">点各字段旁 ✏️ 就地编辑，✕ 删除词条</span></div>' : '';
   let h = '<div class="acc open" id="verbUsageAcc"><div class="ah" onclick="toggleAcc(\'verbUsageAcc\')"><h4>📖 动词用法详解 · 易混词辨析</h4><span class="cnt">' + verbs.length + ' 个核心动词 ▾</span></div><div class="ab" style="padding:8px 14px">';
@@ -15898,7 +15911,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -15932,6 +15945,23 @@ function wbSnap(){
   // 外刊精炼笔记 + 做题答案历史（存独立 localStorage swa_quiz_v1，随 wb 快照跨设备同步）
   try{ c.refineQuizData = (typeof RefineQuizDB!=='undefined') ? RefineQuizDB.load() : {}; }catch(e){ c.refineQuizData = {}; }
   return c;
+}
+// grammarDone 时间戳 LWW 合并（支持取消勾选；旧的"并集"逻辑只加 true 不加 false，导致取消勾选被云端旧值覆盖）
+function _mergeGrammarDone(remote){
+  if(!remote || (!remote.grammarDone && !remote.grammarDoneTs)) return;
+  if(!ST.grammarDone) ST.grammarDone = {};
+  ST.grammarDoneTs = ST.grammarDoneTs || {};
+  Object.keys(remote.grammarDone || {}).forEach(function(k){
+    var rt = (remote.grammarDoneTs && remote.grammarDoneTs[k]) || 0;
+    var lt = ST.grammarDoneTs[k] || 0;
+    if(rt > lt){
+      ST.grammarDone[k] = !!remote.grammarDone[k];
+      ST.grammarDoneTs[k] = rt;
+    } else if(rt === 0 && remote.grammarDone[k] && !ST.grammarDone[k]){
+      // 老数据（无时间戳）：远端 true 且本地未勾选 → 合并 true（向后兼容）
+      ST.grammarDone[k] = true;
+    }
+  });
 }
 function doPush(){
   if(!AU||!ADB)return;
@@ -16078,7 +16108,7 @@ function mergeWbSnapshot(remote){
   if(remote.readingProgress)Object.keys(remote.readingProgress).forEach(function(k){ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k];});
   if(remote.streak>ST.streak)ST.streak=remote.streak;
   if(remote.totalStudy>ST.totalStudy)ST.totalStudy=remote.totalStudy;
-  if(remote.grammarDone)Object.keys(remote.grammarDone).forEach(function(k){if(remote.grammarDone[k])ST.grammarDone[k]=true;});
+  _mergeGrammarDone(remote);
   if(remote.shadowScores)Object.keys(remote.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=remote.shadowScores[k];});
   if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(typeof mergeSieleOralScore==='function')mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
   if(remote.sieleOralProgress)ST.sieleOralProgress=remote.sieleOralProgress;
@@ -16684,7 +16714,7 @@ function createGist(){
     vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
-    vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
+    vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone, grammarDoneTs: ST.grammarDoneTs,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
@@ -16721,7 +16751,7 @@ function pushGist(){
     vocabDictation: ST.vocabDictation, flashReviewSession: ST.flashReviewSession, flashLastPositionTs: ST.flashLastPositionTs,
     recentlyStudiedWords: ST.recentlyStudiedWords,
     dictationErrorBank: ST.dictationErrorBank,
-    vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone,
+    vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone, grammarDoneTs: ST.grammarDoneTs,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
     shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
@@ -16985,7 +17015,7 @@ async function standaloneSync(showLog){
     if(remote.readingProgress) Object.keys(remote.readingProgress).forEach(function(k){ ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k]; });
     if(remote.streak > ST.streak) ST.streak = remote.streak;
     if(remote.totalStudy > ST.totalStudy) ST.totalStudy = remote.totalStudy;
-    if(remote.grammarDone) Object.keys(remote.grammarDone).forEach(function(k){ if(remote.grammarDone[k]) ST.grammarDone[k]=true; });
+    _mergeGrammarDone(remote);
     if(remote.shadowScores) Object.keys(remote.shadowScores).forEach(function(k){
       if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0)) ST.shadowScores[k]=remote.shadowScores[k];
     });
@@ -17106,7 +17136,7 @@ function importDataPrompt_(){
         if(!data.vocabMastery&&!data.quizResults){appendSyncLog('⚠️ 无效备份文件','err');return;}
         var merged=0;
         if(data.vocabMastery){Object.keys(data.vocabMastery).forEach(function(es){var m=data.vocabMastery[es]||0;if(m>(ST.vocabMastery[es]||0)){ST.vocabMastery[es]=m;ST.flashMastery[es]=m;merged++;}});}
-        if(data.grammarDone)Object.keys(data.grammarDone).forEach(function(k){if(data.grammarDone[k])ST.grammarDone[k]=true;});
+        _mergeGrammarDone(data);
         if(data.quizResults&&data.quizResults.length>(ST.quizResults||[]).length)ST.quizResults=data.quizResults;
         if(data.tasks&&data.tasks.length>(ST.tasks||[]).length)ST.tasks=data.tasks;
         if(data.errors&&data.errors.length>(ST.errors||[]).length)ST.errors=data.errors;
