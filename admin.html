@@ -1220,14 +1220,19 @@ window.addEventListener('message',function(ev){
   }
   if(ev.data&&ev.data.type==='siele-content-edits-save'){
     (async function(){
+      var namespace = (ev.data && ev.data.namespace) || 'writing';
       try {
         var token = ev.data.sessionToken || (cloudSession() && cloudSession().sessionToken);
-        var namespace = ev.data.namespace || 'writing';
         var result = await callSieleAuth({action:'setContentEdits', sessionToken: token, namespace: namespace, edits: ev.data.edits || {}});
         if (result && result.ok) console.log('[ContentEdits] ' + namespace + ' saved via cloud function');
-        else console.warn('[ContentEdits] save rejected:', result && result.code);
+        else {
+          console.warn('[ContentEdits] save rejected:', result && result.code);
+          // 保存失败（如登录过期 UNAUTHORIZED），通知主站提示重新登录
+          window.parent.postMessage({type:'siele-content-edits-save-failed', namespace: namespace, code: (result && result.code) || 'SAVE_FAILED'}, location.origin);
+        }
       } catch(e) {
         console.error('[ContentEdits] save failed:', e.message);
+        window.parent.postMessage({type:'siele-content-edits-save-failed', namespace: namespace, code: 'NETWORK_ERROR'}, location.origin);
       }
     })();
   }

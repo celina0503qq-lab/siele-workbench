@@ -13787,6 +13787,19 @@ window.addEventListener('message', function(e){
       }
     } catch(e) {}
   }
+  // 管理员内容编辑保存失败（如登录过期 UNAUTHORIZED）→ 提示重新登录
+  if (e.data && e.data.type === 'siele-content-edits-save-failed') {
+    if (e.data.code === 'UNAUTHORIZED') {
+      if (typeof toast === 'function') toast('⚠️ 登录状态已过期，请重新登录后再保存','err');
+      // 引导重新登录
+      try {
+        var _cf = document.getElementById('wbAdminCloudBridge');
+        if (_cf && _cf.contentWindow) _cf.contentWindow.postMessage({type:'siele-cloud-login-prompt'}, location.origin);
+      } catch(e) {}
+    } else {
+      if (typeof toast === 'function') toast('⚠️ 保存失败（'+e.data.code+'），请稍后重试','err');
+    }
+  }
 });
 // 应用编辑到当前页面 (若在 DELE 页面则重渲染)
 window._deleAdminApplyEdits = function(){
