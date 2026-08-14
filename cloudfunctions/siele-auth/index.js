@@ -492,7 +492,11 @@ async function getContentEdits(event) {
   let edits = {};
   try {
     const result = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
-    if (result.data.length && result.data[0].edits) edits = result.data[0].edits;
+    if (result.data.length && result.data[0].edits) {
+      const raw = result.data[0].edits;
+      // 新数据存 JSON 字符串（避免 MongoDB 对非 ASCII 字符键序列化失败），旧数据存对象，两者兼容
+      edits = (typeof raw === 'string') ? JSON.parse(raw) : raw;
+    }
   } catch (e) {
     edits = {};
   }
@@ -503,14 +507,15 @@ async function setContentEdits(event) {
   const namespace = String(event.namespace || "writing");
   const edits = event.edits;
   if (!edits || typeof edits !== "object") return response(false, "INVALID_PAYLOAD");
-  if (Buffer.byteLength(JSON.stringify(edits), "utf8") > 2 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
+  const editsJson = JSON.stringify(edits);
+  if (Buffer.byteLength(editsJson, "utf8") > 2 * 1024 * 1024) return response(false, "PAYLOAD_TOO_LARGE");
   const existing = await db.collection("content_edits").where({ key: namespace }).limit(1).get();
   if (existing.data.length) {
-    // 用 set() 整文档覆盖而非 update()：update() 会对嵌套对象深度合并，
-    // 且 edits.overrides 的键含点号(如 "Ser vs. Estar")/双引号/箭头会被解析为路径，导致 InvalidBSON 保存失败
-    await db.collection("content_edits").doc(existing.data[0]._id).set({ key: namespace, edits, updatedAt: now() });
+    // 存 JSON 字符串：edits.overrides 的键含点号/双引号/箭头/重音等特殊字符，
+    // 直接存对象会被 CloudBase SDK 序列化失败(SERVER_ERROR/InvalidBSON)，字符串化后特殊字符转义为 \uXXXX 安全存储
+    await db.collection("content_edits").doc(existing.data[0]._id).set({ key: namespace, edits: editsJson, updatedAt: now() });
   } else {
-    await db.collection("content_edits").add({ key: namespace, edits, updatedAt: now() });
+    await db.collection("content_edits").add({ key: namespace, edits: editsJson, updatedAt: now() });
   }
   return response(true, "CONTENT_EDITS_SAVED");
 }
