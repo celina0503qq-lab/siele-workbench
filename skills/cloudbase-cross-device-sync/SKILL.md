@@ -282,9 +282,9 @@ if(ev.data&&ev.data.type==='siele-content-edits-fetch'){
 ### 主站（index.html）
 ```javascript
 // 初始化（全局）
-window._contentEdits = { writing:{tasks:null,essays:{}}, oral:{}, essays:{}, speakingTopics:{}, tareas:{}, oralbank:{} };
+window._contentEdits = { writing:{tasks:null,essays:{}}, oral:{}, essays:{}, speakingTopics:{}, tareas:{}, oralbank:{}, verbUsage:{}, grammar:{} };
 // 拉取（activate 内，登录后 setTimeout 逐个拉 namespace）
-window._deleFetchContentEdits('writing'); // oral / essays / speakingTopics / tareas / oralbank
+window._deleFetchContentEdits('writing'); // oral / essays / speakingTopics / tareas / oralbank / verbUsage / grammar
 // 保存（管理员编辑面板 save 时调用）
 window._deleSyncContentEdits(namespace, editsObj);
 // 合并读取（每模块一个 getXxx()，edits > 默认）
@@ -304,8 +304,12 @@ function getSieleOralBank(){
 | essays | 范文库 SIELE_WRITING_ESSAYS | `{essays:[...]}` |
 | speakingTopics | 16 个口语话题 | `{topics:[...]}`（含 essay 范文字段） |
 | oralbank | 口语真题题库 SIELE_ORAL_BANK（约230题） | `{bank:{1:[],2:[],3:[],4:[],5:[]}}` 全量覆盖 |
+| verbUsage | 动词用法详解·易混词辨析 VERB_USAGE（29条） | `{list:{词条:{zh,discrimination,collocations[],commonErrors,phrases[]}}}` 全量覆盖 |
+| grammar | 语法库 GDATA+GRAMMAR_EXTRA（98点） | `{overrides:{标题:{d,ex,detail}}, added:[{lvl,t,...}], deleted:[标题]}` 增量 |
 
-**标准模式**：`getXxx()`（edits>默认合并读取）+ `renderXxxAdmin()`/`saveXxxAdmin()`（全量覆盖存储）+ `isContentAdmin()`（管理员按钮显隐）。
+**标准模式**：`getXxx()`（edits>默认合并读取）+ `renderXxxAdmin()`/`saveXxxAdmin()`（批量页）+ `isContentAdmin()`（管理员按钮显隐）+ **就地编辑**（`_showEditModal` 通用弹框 + `_oralInlineSave` 按 `data-ns` 分发保存）。
+
+**编辑粒度按数据形状选**：小数据集（verbUsage 29 条、oralbank 230 题）→ **整库覆盖**（`list`/`bank` 全量存）；分组/大结构（grammar 98 点 GDATA 分组）→ **overrides + added + deleted 增量**（不整库覆盖）。改标题类操作 = 旧键进 deleted + 新键进 added（overrides 用标题作键，改键会失配）。
 
 ### 关键规则：范文优先级 用户 > 管理员 > 默认
 写作范文（`writing_essay_edit_<id>`）和口语话题范文（`essay` 字段）都是：**用户自编辑 > 管理员 content_edits > 系统默认**。管理员覆盖不得冲掉用户已编辑的内容。AI 生成范文走客户端模板（`generateModelEssay`），管理员点按钮即时生成填入文本框，无需后端。
