@@ -15817,8 +15817,10 @@ async function wbDoLogin(e){
 }
 
 function activeUser(){
-  var s=lsg(LSS,null),cloud=lsg('swa_cloud_session_v1',null),u=(cloud&&cloud.username)||(s&&s.u);
-  return u||null;
+  // 2026-08-16 封堵：只认云端 session（swa_cloud_session_v1），不再回退到本地旧 session（swa_session_v1）。
+  // 早期本地注册账户/游客没有云端 session，将看到登录框，无法绕过登录门禁。
+  var cloud=lsg('swa_cloud_session_v1',null);
+  return (cloud&&cloud.username)||null;
 }
 function todayStr2(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 
@@ -16466,8 +16468,7 @@ function isCurrentLoggedInUser(username){
   try{
     var cloud=lsg('swa_cloud_session_v1',null);
     if(cloud && cloud.username===username)return true;
-    var s=lsg(LSS,null);
-    if(s && s.u===username)return true;
+    // 2026-08-16 封堵：不再回退到本地旧 session，保持与 activeUser() 一致。
   }catch(e){}
   return false;
 }

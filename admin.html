@@ -774,6 +774,67 @@ function saveCloudSession(session){
   return lsSet(CLOUD_SESSION_KEY,{uid:session.uid,username:session.username,role:session.role||'learner',sessionToken:session.sessionToken,ts:Date.now()});
 }
 
+// ===== 早期本地账户数据迁移（2026-08-16）=====
+// 早期（08-03 22:36 云端上线前）账户是纯本地注册，数据存 swa_data_v1_<用户名>。
+// 这些账户没有云端账号；当他们用邀请码注册/登录云端新账号后，提供迁移入口。
+// 检测：遍历 localStorage 里 swa_data_v1_* 键，排除当前登录用户名，找出仍带学习数据的旧账户。
+function detectLegacyLocalData(currentUser){
+  const legacy = [];
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const key = localStorage.key(i);
+      if(!key || key.indexOf('swa_data_v1_') !== 0) continue;
+      const u = key.slice('swa_data_v1_'.length);
+      if(u === currentUser) continue;
+      let db = null;
+      try{ db = JSON.parse(localStorage.getItem(key)); }catch(e){}
+      const hasData = db && (
+        (db.words && db.words.length) ||
+        (db.questions && db.questions.length) ||
+        (db.reviews && db.reviews.length) ||
+        (db.plans && db.plans.length) ||
+        db.wb
+      );
+      if(hasData) legacy.push(u);
+    }
+  }catch(e){}
+  return legacy;
+}
+// 迁移：把旧账户的后台数据（词库 mastery/题库/复习/计划/工作台快照）合并进当前账号，旧 key 保留不动。
+function migrateLegacyToCurrent(currentUser, legacyUsers){
+  const curDB = lsGet(dataKey(currentUser), null) || blankData(true);
+  let migrated = 0;
+  legacyUsers.forEach(function(u){
+    let oldDB = null;
+    try{ oldDB = JSON.parse(localStorage.getItem('swa_data_v1_' + u)); }catch(e){}
+    if(!oldDB) return;
+    mergeData(curDB, {
+      settings: oldDB.settings,
+      words: oldDB.words || [],
+      questions: oldDB.questions || [],
+      reviews: oldDB.reviews || [],
+      plans: oldDB.plans || [],
+      trash: oldDB.trash || {},
+      wb: oldDB.wb || null
+    });
+    migrated++;
+  });
+  if(migrated > 0) lsSet(dataKey(currentUser), curDB);
+  return migrated;
+}
+// 登录/注册成功后调用：检测到旧本地账户数据则弹窗询问是否迁移。
+function maybeMigrateLegacyData(username){
+  try{
+    const legacy = detectLegacyLocalData(username);
+    if(!legacy.length) return;
+    const ok = confirm('检测到本机存在旧账号的学习数据（' + legacy.join('、') + '）。\n\n是否迁移到当前账号「' + username + '」？\n迁移后旧数据仍会保留在原位置，可继续在后台访问。');
+    if(ok){
+      const n = migrateLegacyToCurrent(username, legacy);
+      if(n > 0) toast('已迁移 ' + n + ' 个旧账号的学习数据到当前账号', 'ok');
+    }
+  }catch(e){ console.warn('legacy migrate check failed', e); }
+}
+
 // ---- 种子数据实例化 ----
 function seedWords(){return SEED.words.map((w,i)=>({id:'sw'+i,es:w.es||'',zh:w.zh||'',pos:w.pos||'',ex:w.ex||'',lvl:w.lvl||'A1',t:w.t||'general',diff:w.lvl==='B2'||w.lvl==='C1'?3:(w.lvl==='B1'?2:1),mastery:0,src:'seed',updatedAt:0}));}
 function seedQuiz(){return SEED.questions.map((q,i)=>({id:'sq'+i,ex:q.ex||'siele',lvl:q.lvl||'A1',type:q.type||'grammar',q:q.q||'',opts:(q.opts||[]).slice(),ans:q.ans||0,fb:q.fb||'',done:false,correct:false,src:'seed',updatedAt:0}));}
@@ -824,6 +885,7 @@ async function doRegister(e){
     }
     saveCloudSession(result);
     if(!lsGet(dataKey(result.username),null))lsSet(dataKey(result.username),blankData(true));
+    maybeMigrateLegacyData(result.username);
     toast('注册成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
     gotoWorkbench();
@@ -866,6 +928,7 @@ async function doLogin(e,credentials){
     saveCloudSession(result);
     // 新设备没有本地后台镜像时初始化空学习库；之后由独立同步 Token 拉取云端进度。
     if(!lsGet(dataKey(result.username),null))lsSet(dataKey(result.username),blankData(true));
+    maybeMigrateLegacyData(result.username);
     toast('登录成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
     gotoWorkbench();
