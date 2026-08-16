@@ -15,8 +15,20 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-08-13 第 12 期 — 主题：咖啡馆早餐 · 西班牙传统市集 · 高铁网络扩张 · AI与就业市场
+// 1) 2026-08-16 第 13 期 — 主题：公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机
 window.REFINE_PACKS = {
+  "2026-08-16": {
+    date: "2026-08-16",
+    weekday: "日",
+    issue: 13,
+    theme: "公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Un domingo en el parque" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Las bibliotecas: un nuevo espacio de encuentro" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "El turismo en España: entre el récord y la sostenibilidad" },
+      { level: "B2", source: "BBC Mundo", sourceUrl: "", topic: "La sequía que asola Europa: crisis climática y gestión del agua" }
+    ]
+  },
   "2026-08-13": {
     date: "2026-08-13",
     weekday: "四",
