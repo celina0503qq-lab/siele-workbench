@@ -967,10 +967,29 @@ const GRAMMAR_EXTRA = [
 
 
 // Push extra grammar into GDATA groups and GFLAT
+// 2026-08-16 修复：EXTRA 与 GDATA 同名（7处）时替换简版而非追加，避免同名条目渲染两次导致 detailId 冲突（展开详解按钮点击无反应）。
+// 同名不限 lvl 全局查找（Estilo indirecto / Pretérito pluscuamperfecto 在 GDATA 标 B2、EXTRA 标 B1，按 lvl 找组会漏掉重复）。
 GRAMMAR_EXTRA.forEach(it => {
-  const group = GDATA.find(g => g.lvl === it.lvl);
-  if(group) group.items.push(it);
-  GFLAT.push(it);
+  let replaced = false;
+  for (const group of GDATA) {
+    const dupIdx = group.items.findIndex(x => x.t === it.t);
+    if (dupIdx >= 0) {
+      group.items[dupIdx] = it;          // 同名：详版覆盖简版，保持 GDATA 原分组位置
+      replaced = true;
+      break;
+    }
+  }
+  if (!replaced) {
+    const group = GDATA.find(g => g.lvl === it.lvl);
+    if (group) group.items.push(it);
+  }
+  const gIdx = GFLAT.findIndex(x => x.t === it.t);
+  if (gIdx >= 0) {
+    const origLvl = GFLAT[gIdx].lvl;     // GFLAT 同名：保留原 lvl，覆盖内容
+    GFLAT[gIdx] = Object.assign({}, it, { lvl: origLvl });
+  } else {
+    GFLAT.push(it);
+  }
 });
 const GRAMMAR_DETAIL = {
 "Ser vs. Estar": "<b>📌 核心规则</b> ser 表<b>本质/身份/固有属性</b>；estar 表<b>状态/位置/暂时性</b>。<br><b>🔹 ser 的用法</b> ①身份职业：Soy estudiante（我是学生）②国籍出身：Es de Madrid（来自马德里）③固有特征：La casa es grande（房子大）④时间日期：Hoy es lunes ⑤材料：La mesa es de madera。<br><b>🔹 estar 的用法</b> ①位置：Estoy en casa ②暂时状态：Está cansado（他累了）③进行时：Está comiendo ④天气：Está lloviendo。<br><b>💬 对比例句</b> Ella es guapa（天生漂亮）vs Ella está guapa（今天打扮漂亮）；El café está frío（凉了-暂时）vs El hielo es frío（冰是冷的-本质）。<br><b>⚠️ 易错</b> ①Estoy estudiante ❌→Soy estudiante ✅（身份用 ser）②Es en casa ❌→Está en casa ✅（位置用 estar）③形容词随动词变义：ser listo（聪明）/estar listo（准备好）。<br><b>🎯 考点</b> DELE/SIELE A1 必考，重点区分同一形容词在不同动词下的语义变化（bueno/rico/listo/malo/aburrido）。",
