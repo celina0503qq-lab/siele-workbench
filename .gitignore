@@ -16,3 +16,7 @@ commit_msg.txt
 漏洞*.md
 泞滩*.md
 部署指南.md
+
+# 本地工作数据/自动化临时文件
+.workbuddy/
+articles/data/__*.json
