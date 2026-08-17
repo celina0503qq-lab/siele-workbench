@@ -811,6 +811,12 @@ const VDATA_BATCH3 = [
   if(typeof VDATA==='undefined'||typeof VDATA_BATCH3==='undefined') return;
   var _existingB3=new Set(VDATA.map(function(v){return v.es;}));
   VDATA_BATCH3.forEach(function(v){ if(!_existingB3.has(v.es)){VDATA.push(v);} });
+  // 全量去重(保留每个词首个出现的词条, 清理历史跨源重复)
+  var _seen3 = new Set();
+  for(var _i3 = 0; _i3 < VDATA.length; _i3++){
+    if(_seen3.has(VDATA[_i3].es)){ VDATA.splice(_i3, 1); _i3--; }
+    else _seen3.add(VDATA[_i3].es);
+  }
   // 重建 VDATA_BY_LVL 静态索引: 纳入全部批次词 + 专四桶
   if(typeof VDATA_BY_LVL!=='undefined'){
     VDATA_BY_LVL.A1.length=VDATA_BY_LVL.A2.length=VDATA_BY_LVL.B1.length=VDATA_BY_LVL.B2.length=0;
