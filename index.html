@@ -16074,8 +16074,9 @@ function renderConjCard(v, ed){
           var ps = (tk==='imperativoAf'||tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
           speakTxt = row.cells.map(function(c,ci){ return ps[ci] + ' ' + c; }).join(', ');
         }
-        h += '<div style="display:flex;align-items:center;gap:6px;margin:3px 0">';
-        h += '<span style="font-size:11px;color:var(--soft);width:130px;flex-shrink:0;font-weight:600">'+esc(row.label)+'</span>';
+        var isHot = CONJ_HOT_TENSES[tk] ? true : false;
+        h += '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;background:'+(isHot?'#fdf6f0':'transparent')+';border-radius:6px;padding:2px 4px'+(isHot?';border-left:3px solid #f0997b':'')+'">';
+        h += '<span style="font-size:11px;color:'+(isHot?'#d85a30':'var(--soft)')+';width:130px;flex-shrink:0;font-weight:600">'+esc(row.label)+(isHot?' 🔥':'')+'</span>';
         h += '<span style="flex:1">'+conjCellsHtml(v, tk, row.cells, ed, row.dual || '', ovr, row.mono)+'</span>';
         h += '<button class="spk" style="width:20px;height:20px;font-size:9px;flex-shrink:0;border-radius:6px" title="朗读该时态" onclick="speak(\''+esc(speakTxt.replace(/'/g,"\\'"))+'\',this)">🔊</button>';
         h += '</div>';
@@ -16148,29 +16149,62 @@ window._conjFilter = function(q){
 };
 
 // ===== 变位巩固板块（顺序学习 / 默写 / 听写） =====
-let _conjPractice = null; // {mode, items:[{verb, tk, label, persons, cells, idx}], idx, correct, wrong, hidden}
-function conjBuildItems(){
-  const verbs = getConjVerbs();
+// 常考易错时态（渲染高亮 + 练习加权）
+const CONJ_HOT_TENSES = {
+  presente:1, indefinido:1, subjPresente:1, subjImperfecto:1, imperativoAf:1, imperativoNeg:1, perfecto:1, pluscuamperfecto:1
+};
+let _conjPractice = null; // {mode, items:[...], idx, correct, wrong}
+const CONJ_PRACTICE_ROUND = 12; // 每轮 12 题自动结束
+// 最近学习过的变位动词（浏览卡片/练习过 → 记入 ST.conjRecent, 供选词优先）
+function conjTouchRecent(v){
+  try{
+    if(!ST) return;
+    if(!ST.conjRecent) ST.conjRecent = {};
+    ST.conjRecent[v] = Date.now();
+    // 只保留最近 20 个
+    const keys = Object.keys(ST.conjRecent).sort(function(a,b){ return ST.conjRecent[b]-ST.conjRecent[a]; });
+    keys.slice(20).forEach(function(k){ delete ST.conjRecent[k]; });
+    _save0();
+  }catch(e){}
+}
+function conjBuildItems(filterVerbs){
+  const verbs = filterVerbs && filterVerbs.length ? filterVerbs : getConjVerbs();
   const items = [];
   verbs.forEach(function(v){
     const r = window.verbConj ? window.verbConj.conj(v) : null;
     if(!r) return;
     window.verbConj.TENSES.forEach(function(t){
       if(t.k==='gerundio'||t.k==='participio') return; // 单行形式不用于默写/听写
+      const hot = CONJ_HOT_TENSES[t.k] ? 1 : 0;
       if(t.dual){
-        items.push({verb:v, tk:t.k, dual:'ra', label:t.zh+' (ra)', cells:r.forms[t.k].ra});
-        items.push({verb:v, tk:t.k, dual:'se', label:t.zh+' (se)', cells:r.forms[t.k].se});
+        items.push({verb:v, tk:t.k, dual:'ra', label:t.zh+' (ra)', cells:r.forms[t.k].ra, hot:hot});
+        items.push({verb:v, tk:t.k, dual:'se', label:t.zh+' (se)', cells:r.forms[t.k].se, hot:hot});
       } else {
-        items.push({verb:v, tk:t.k, label:t.zh, cells:r.forms[t.k]});
+        items.push({verb:v, tk:t.k, label:t.zh, cells:r.forms[t.k], hot:hot});
       }
     });
   });
   return items;
 }
 window.conjPractice = function(mode){
-  const items = conjBuildItems();
+  let items;
+  // 选词策略：优先最近学习过的变位动词（ST.conjRecent），无记录则全库
+  let recent = [];
+  try{ if(ST && ST.conjRecent && typeof ST.conjRecent==='object'){
+    recent = Object.keys(ST.conjRecent).sort(function(a,b){ return ST.conjRecent[b]-ST.conjRecent[a]; });
+  }}catch(e){}
+  let recentItems = [];
+  if(recent.length){
+    recentItems = conjBuildItems(recent.slice(0,8));
+    if(recentItems.length){ items = recentItems; }
+  }
+  if(!items || !items.length) items = conjBuildItems();
   if(!items.length){ toast('暂无变位数据','err'); return; }
-  _conjPractice = { mode: mode, items: items, idx: 0, correct: 0, wrong: 0 };
+  // 打乱顺序，取一轮 12 题（hot 时态加权后仍随机）
+  const shuffled = items.slice();
+  for(let i=shuffled.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=shuffled[i]; shuffled[i]=shuffled[j]; shuffled[j]=t; }
+  const round = shuffled.slice(0, CONJ_PRACTICE_ROUND);
+  _conjPractice = { mode: mode, items: round, idx: 0, correct: 0, wrong: 0, totalRound: round.length };
   showConjPractice();
 };
 function conjPracticeItem(){
@@ -16185,13 +16219,20 @@ function showConjPractice(){
   overlay.className='dictation-overlay';
   const persons = (it.tk==='imperativoAf'||it.tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
   const total = st.items.length;
+  // 常考易错徽标
+  const hotBadge = it.hot ? ' <span style="font-size:9.5px;background:#fdf0e9;color:#d85a30;border-radius:5px;padding:1px 6px;font-weight:700">🔥 常考易错</span>' : '';
   let h = '<div class="dictation-modal" style="max-width:520px">';
+  // 顶部关闭按钮
+  h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+  h += '<div></div>';
+  h += '<button class="btn sm ol" style="font-size:10px;padding:3px 10px" onclick="closeConjPractice()" title="随时退出">✕ 退出</button>';
+  h += '</div>';
   if(st.mode==='study'){
     // 顺序学习：显示变位，翻下一组
     h += '<h3>📖 顺序学习 · 变位</h3>';
-    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+'</div>';
-    h += '<div style="text-align:center;margin:10px 0"><span style="font-size:15px;font-weight:800;font-family:var(--serif)">'+esc(it.verb)+'</span> <span style="font-size:12px;color:var(--soft)">· '+esc(it.label)+'</span></div>';
-    h += '<div style="background:#f6f7fb;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.9">';
+    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+hotBadge+'</div>';
+    h += '<div style="text-align:center;margin:10px 0"><span style="font-size:15px;font-weight:800;font-family:var(--serif)">'+esc(it.verb)+'</span> <span style="font-size:12px;color:var(--soft)">· '+esc(it.label)+'</span>'+hotBadge+'</div>';
+    h += '<div style="background:#f6f7fb;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.9'+(it.hot?';border:1px solid #f0997b':';border:1px solid transparent')+'">';
     it.cells.forEach(function(c,i){ h += '<div><b style="color:var(--soft);font-weight:600;width:110px;display:inline-block">'+persons[i]+'</b><span style="font-weight:700">'+esc(c)+'</span></div>'; });
     h += '</div>';
     h += '<div style="text-align:center;margin:8px 0"><button class="btn sm" onclick="speak(\''+esc(it.cells.join(' , ').replace(/'/g,"\\'"))+'\',null)">🔊 朗读</button></div>';
@@ -16202,19 +16243,18 @@ function showConjPractice(){
     const targetIdx = st.idx % it.cells.length; // 每时态逐人称出题
     const target = it.cells[targetIdx];
     const person = persons[targetIdx];
-    const hintVerb = isListen ? '听发音写出' : ('写出 ' + it.verb + ' 的变位');
     h += '<h3>'+(isListen?'🎧 变位听写':'✍️ 变位默写')+'</h3>';
-    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+' · <b>'+esc(person)+'</b></div>';
+    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+' · <b>'+esc(person)+'</b>'+hotBadge+'</div>';
     h += '<div style="text-align:center;margin:8px 0;font-size:14px;color:var(--ink)">';
     h += isListen
       ? '<button class="btn sm" onclick="speak(\''+esc(target.replace(/'/g,"\\'"))+'\',null)">🔊 播放</button><div style="color:var(--soft);font-size:12px;margin-top:4px">听发音，写出西班牙语变位</div>'
-      : '<div><b style="color:var(--tr)">'+esc(it.verb)+'</b> · '+esc(it.label)+' · <b>'+esc(person)+'</b></div>';
+      : '<div><b style="color:var(--tr)">'+esc(it.verb)+'</b> · '+esc(it.label)+' · <b>'+esc(person)+'</b>'+hotBadge+'</div>';
     h += '</div>';
     h += '<div style="margin-top:10px"><input class="dm-input" id="conjPInput" placeholder="输入变位..." onkeydown="if(event.key===\'Enter\')checkConjPractice()" autofocus></div>';
     h += '<div class="dm-result" id="conjPResult"></div>';
-    h += '<div class="dm-actions"><button class="btn sm ol" onclick="skipConjPractice()">跳过</button><button class="btn sm" onclick="checkConjPractice()">✓ 提交</button></div>';
+    h += '<div class="dm-actions"><button class="btn sm ol" onclick="skipConjPractice()">跳过</button><button class="btn sm" onclick="checkConjPractice()">✓ 提交</button><button class="btn sm ol" onclick="closeConjPractice()">✕ 退出</button></div>';
     // 预填充待办：先存 target 供判对
-    st._currentTarget = { verb: it.verb, tk: it.tk, dual: it.dual, label: it.label, person: person, target: target };
+    st._currentTarget = { verb: it.verb, tk: it.tk, dual: it.dual, label: it.label, person: person, target: target, hot: it.hot };
     if(isListen) setTimeout(function(){ speak(target,null); }, 400);
   }
   h += '</div>';
@@ -16241,6 +16281,8 @@ window.checkConjPractice = function(){
     resultEl.className='dm-result no';
     resultEl.innerHTML='❌ 答案：<b>'+esc(target)+'</b>（你写的是：'+esc(input.value)+'）';
   }
+  // 记录最近学习（供下次选词优先）
+  if(st._currentTarget && st._currentTarget.verb) conjTouchRecent(st._currentTarget.verb);
   input.disabled = true;
   // 自动下一个
   setTimeout(conjPracticeNext, 1400);
@@ -16813,7 +16855,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -16982,6 +17024,8 @@ function mergeWbSnapshot(remote){
   if(remote.speakModelEssays&&typeof remote.speakModelEssays==='object'){ST.speakModelEssays=ST.speakModelEssays||{};Object.keys(remote.speakModelEssays).forEach(function(t){var rt=remote.speakModelEssays[t];if(!ST.speakModelEssays[t]||(rt.createdAt||0)>(ST.speakModelEssays[t].createdAt||0))ST.speakModelEssays[t]=rt;});}
   // 变位笔记：按动词 key 合并，同 key 取 ts 较新者（LWW）
   if(remote.conjNotes&&typeof remote.conjNotes==='object'){ST.conjNotes=ST.conjNotes||{};Object.keys(remote.conjNotes).forEach(function(v){var rt=remote.conjNotes[v];if(rt&&typeof rt==='object'){var lt=ST.conjNotes[v];if(!lt||!lt.ts||(rt.ts||0)>=(lt.ts||0))ST.conjNotes[v]=rt;else ST.conjNotes[v]=lt;}});}
+  // 变位最近学习：按 ts 取较新者合并
+  if(remote.conjRecent&&typeof remote.conjRecent==='object'){ST.conjRecent=ST.conjRecent||{};Object.keys(remote.conjRecent).forEach(function(v){if(!ST.conjRecent[v]||(remote.conjRecent[v]||0)>(ST.conjRecent[v]||0))ST.conjRecent[v]=remote.conjRecent[v];});}
   if(typeof remote.globalAccent==='string'&&(remote.globalAccent==='la'||remote.globalAccent==='es'))ST.globalAccent=remote.globalAccent;
   // 最近学过的词：并集保留10个
   if(Array.isArray(remote.recentlyStudiedWords)&&remote.recentlyStudiedWords.length){
