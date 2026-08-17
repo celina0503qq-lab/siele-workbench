@@ -9838,6 +9838,9 @@ window._oralInlineSave = function(btn){
       if(!cclone[ckey]) cclone[ckey] = {zh:'', note:{}};
       if(cfield === '__meta__'){
         cclone[ckey].zh = ta.value;
+      } else if(cfield === '__tips__'){
+        // 每行一条 → 数组
+        cclone[ckey].tips = ta.value.split(/\n+/).map(function(s){return s.trim();}).filter(Boolean);
       } else {
         var parts = cfield.split('_');
         var tk = parts.slice(0, parts.length-1).join('_');
@@ -15957,7 +15960,7 @@ window._conjEditNote = function(v, field, label){
 window._conjAddVerb = function(){
   const clone = JSON.parse(JSON.stringify(getConjEdits() || {}));
   const key = 'nuevo_' + Date.now().toString(36);
-  clone[key] = {zh:'', note:''};
+  clone[key] = {zh:'', tips:[], note:{}};
   window._deleSyncContentEdits('verbConj', {list: clone});
   window._contentEdits.verbConj = {list: clone};
   toast('✅ 已添加动词占位，请编辑中文释义','ok');
@@ -15971,6 +15974,11 @@ window._conjDelVerb = function(v){
   window._contentEdits.verbConj = {list: clone};
   toast('✅ 已删除','ok');
   renderMain();
+};
+window._conjEditTips = function(v){
+  const m = conjVerbMeta(v) || {};
+  const cur = (m.tips && m.tips.length) ? m.tips.join('\n') : '';
+  _showEditModal('编辑易错点（每行一条）', cur, '变位词条 ' + v + ' · 易错点', {'data-ns':'verbConj','data-key':v,'data-field':'__tips__'});
 };
 // 变位格就地编辑: t=k, i=人称下标, dual=ra|se
 window._conjCellEdit = function(v, t, i, dual){
@@ -15991,6 +15999,11 @@ function renderVerbConjSection(){
     h += '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式<button class="btn sm pr" style="margin:0 6px" onclick="_conjAddVerb()">➕ 新增动词</button><span style="color:#64748b">点变位格/要点旁 ✏️ 就地编辑，✕ 删除词条</span></div>';
   }
   h += '<div class="search-wrap" style="margin:6px 0"><div class="sb" style="margin-bottom:0"><input id="conjSearch" placeholder="🔍 搜索动词（如 ser、trabajar、vestirse）..." autocomplete="off" oninput="_conjFilter(this.value)"></div></div>';
+  h += '<div style="margin:6px 0;display:flex;gap:6px;flex-wrap:wrap">';
+  h += '<button class="btn sm pr" onclick="conjPractice(\'study\')">📖 顺序学习</button>';
+  h += '<button class="btn sm" onclick="conjPractice(\'spell\')">✍️ 默写</button>';
+  h += '<button class="btn sm" onclick="conjPractice(\'listen\')">🎧 听写</button>';
+  h += '</div>';
   h += '<div id="conjList">';
   verbs.forEach(function(v){ h += renderConjCard(v, ed); });
   h += '</div></div></div>';
@@ -16015,6 +16028,18 @@ function renderConjCard(v, ed){
   h += '<button class="spk" style="width:26px;height:26px;font-size:11px;margin-left:auto;border-radius:8px" onclick="speak(\''+esc(v)+'\',this)">🔊</button>';
   h += ed ? '<span onclick="_conjDelVerb(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6;padding:2px" title="删除词条要点">✕</span>' : '';
   h += '</div>';
+  // ===== 易错点(RAE 默认 + 管理员覆盖) =====
+  var tipsList = (m.tips && m.tips.length) ? m.tips : (r.tips || []);
+  if(tipsList.length){
+    h += '<div style="padding:8px 14px 0">';
+    h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><span style="font-size:10.5px;font-weight:700;color:#d85a30;background:#fdf0e9;border-radius:6px;padding:2px 8px">⚠️ 易错点 · RAE</span>'+(ed?'<span style="font-size:10px;color:#3b82f6;cursor:pointer" onclick="_conjEditTips(\''+esc(v)+'\')">✏️ 编辑易错点</span>':'')+'</div>';
+    tipsList.forEach(function(tp){
+      h += '<div style="font-size:11px;line-height:1.55;color:var(--ink);margin:3px 0 3px 2px">'+esc(tp)+'</div>';
+    });
+    h += '</div>';
+  } else if(ed){
+    h += '<div style="padding:8px 14px 0"><span style="font-size:10.5px;font-weight:700;color:#d85a30;background:#fdf0e9;border-radius:6px;padding:2px 8px">⚠️ 易错点 · RAE</span> <span style="font-size:10px;color:#3b82f6;cursor:pointer" onclick="_conjEditTips(\''+esc(v)+'\')">✏️ 添加易错点</span></div>';
+  }
   if(m.desc) h += '<div style="font-size:11.5px;line-height:1.5;padding:8px 14px 0"><b style="color:var(--tr)">📌 要点：</b>'+esc(m.desc)+'</div>';
   // ===== 时态分组 =====
   h += '<div style="padding:10px 14px">';
@@ -16042,9 +16067,17 @@ function renderConjCard(v, ed){
         rows.push({ label: t.zh, cells: r.forms[tk] });
       }
       rows.forEach(function(row){
-        h += '<div style="display:flex;align-items:baseline;gap:6px;margin:3px 0">';
+        // 该时态朗读文本: 人称+变位 (复合时态直接读变位串)
+        var speakTxt;
+        if(row.mono) speakTxt = row.cells[0];
+        else {
+          var ps = (tk==='imperativoAf'||tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
+          speakTxt = row.cells.map(function(c,ci){ return ps[ci] + ' ' + c; }).join(', ');
+        }
+        h += '<div style="display:flex;align-items:center;gap:6px;margin:3px 0">';
         h += '<span style="font-size:11px;color:var(--soft);width:130px;flex-shrink:0;font-weight:600">'+esc(row.label)+'</span>';
         h += '<span style="flex:1">'+conjCellsHtml(v, tk, row.cells, ed, row.dual || '', ovr, row.mono)+'</span>';
+        h += '<button class="spk" style="width:20px;height:20px;font-size:9px;flex-shrink:0;border-radius:6px" title="朗读该时态" onclick="speak(\''+esc(speakTxt.replace(/'/g,"\\'"))+'\',this)">🔊</button>';
         h += '</div>';
       });
     });
@@ -16113,6 +16146,147 @@ window._conjFilter = function(q){
     return v.toLowerCase().indexOf(q)>=0 || (m.zh||'').toLowerCase().indexOf(q)>=0;
   }).map(function(v){ return renderConjCard(v, ed); }).join('') || '<div class="search-empty" style="padding:10px;font-size:12px;color:var(--soft)">未找到匹配动词</div>';
 };
+
+// ===== 变位巩固板块（顺序学习 / 默写 / 听写） =====
+let _conjPractice = null; // {mode, items:[{verb, tk, label, persons, cells, idx}], idx, correct, wrong, hidden}
+function conjBuildItems(){
+  const verbs = getConjVerbs();
+  const items = [];
+  verbs.forEach(function(v){
+    const r = window.verbConj ? window.verbConj.conj(v) : null;
+    if(!r) return;
+    window.verbConj.TENSES.forEach(function(t){
+      if(t.k==='gerundio'||t.k==='participio') return; // 单行形式不用于默写/听写
+      if(t.dual){
+        items.push({verb:v, tk:t.k, dual:'ra', label:t.zh+' (ra)', cells:r.forms[t.k].ra});
+        items.push({verb:v, tk:t.k, dual:'se', label:t.zh+' (se)', cells:r.forms[t.k].se});
+      } else {
+        items.push({verb:v, tk:t.k, label:t.zh, cells:r.forms[t.k]});
+      }
+    });
+  });
+  return items;
+}
+window.conjPractice = function(mode){
+  const items = conjBuildItems();
+  if(!items.length){ toast('暂无变位数据','err'); return; }
+  _conjPractice = { mode: mode, items: items, idx: 0, correct: 0, wrong: 0 };
+  showConjPractice();
+};
+function conjPracticeItem(){
+  return _conjPractice.items[_conjPractice.idx];
+}
+function showConjPractice(){
+  const st = _conjPractice;
+  if(!st) return;
+  if(st.idx >= st.items.length){ finishConjPractice(); return; }
+  const it = conjPracticeItem();
+  const overlay = document.createElement('div'); overlay.id='conjPracticeOverlay';
+  overlay.className='dictation-overlay';
+  const persons = (it.tk==='imperativoAf'||it.tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
+  const total = st.items.length;
+  let h = '<div class="dictation-modal" style="max-width:520px">';
+  if(st.mode==='study'){
+    // 顺序学习：显示变位，翻下一组
+    h += '<h3>📖 顺序学习 · 变位</h3>';
+    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+'</div>';
+    h += '<div style="text-align:center;margin:10px 0"><span style="font-size:15px;font-weight:800;font-family:var(--serif)">'+esc(it.verb)+'</span> <span style="font-size:12px;color:var(--soft)">· '+esc(it.label)+'</span></div>';
+    h += '<div style="background:#f6f7fb;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.9">';
+    it.cells.forEach(function(c,i){ h += '<div><b style="color:var(--soft);font-weight:600;width:110px;display:inline-block">'+persons[i]+'</b><span style="font-weight:700">'+esc(c)+'</span></div>'; });
+    h += '</div>';
+    h += '<div style="text-align:center;margin:8px 0"><button class="btn sm" onclick="speak(\''+esc(it.cells.join(' , ').replace(/'/g,"\\'"))+'\',null)">🔊 朗读</button></div>';
+    h += '<div class="dm-actions"><button class="btn sm ol" onclick="closeConjPractice()">退出</button><button class="btn sm" onclick="conjPracticeNext()">下一个 →</button></div>';
+  } else {
+    // 默写/听写：出题 → 输入 → 判对错
+    const isListen = st.mode==='listen';
+    const targetIdx = st.idx % it.cells.length; // 每时态逐人称出题
+    const target = it.cells[targetIdx];
+    const person = persons[targetIdx];
+    const hintVerb = isListen ? '听发音写出' : ('写出 ' + it.verb + ' 的变位');
+    h += '<h3>'+(isListen?'🎧 变位听写':'✍️ 变位默写')+'</h3>';
+    h += '<div class="dm-hint">第 '+ (st.idx+1) +'/' + total + ' · '+esc(it.verb)+' · '+esc(it.label)+' · <b>'+esc(person)+'</b></div>';
+    h += '<div style="text-align:center;margin:8px 0;font-size:14px;color:var(--ink)">';
+    h += isListen
+      ? '<button class="btn sm" onclick="speak(\''+esc(target.replace(/'/g,"\\'"))+'\',null)">🔊 播放</button><div style="color:var(--soft);font-size:12px;margin-top:4px">听发音，写出西班牙语变位</div>'
+      : '<div><b style="color:var(--tr)">'+esc(it.verb)+'</b> · '+esc(it.label)+' · <b>'+esc(person)+'</b></div>';
+    h += '</div>';
+    h += '<div style="margin-top:10px"><input class="dm-input" id="conjPInput" placeholder="输入变位..." onkeydown="if(event.key===\'Enter\')checkConjPractice()" autofocus></div>';
+    h += '<div class="dm-result" id="conjPResult"></div>';
+    h += '<div class="dm-actions"><button class="btn sm ol" onclick="skipConjPractice()">跳过</button><button class="btn sm" onclick="checkConjPractice()">✓ 提交</button></div>';
+    // 预填充待办：先存 target 供判对
+    st._currentTarget = { verb: it.verb, tk: it.tk, dual: it.dual, label: it.label, person: person, target: target };
+    if(isListen) setTimeout(function(){ speak(target,null); }, 400);
+  }
+  h += '</div>';
+  overlay.innerHTML = h;
+  document.body.appendChild(overlay);
+  setTimeout(function(){ const inp=document.getElementById('conjPInput'); if(inp) inp.focus(); }, 200);
+}
+window.checkConjPractice = function(){
+  const st = _conjPractice;
+  const input = document.getElementById('conjPInput');
+  const resultEl = document.getElementById('conjPResult');
+  if(!st || !input || !st._currentTarget) return;
+  const ans = input.value.trim().toLowerCase();
+  const target = st._currentTarget.target.toLowerCase();
+  // 容忍大小写/重音差异：重音按无重音比较
+  const norm = function(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); };
+  const isCorrect = norm(ans) === norm(target);
+  if(isCorrect){
+    st.correct++;
+    resultEl.className='dm-result ok';
+    resultEl.innerHTML='✅ 正确！ <b>'+esc(target)+'</b>';
+  } else {
+    st.wrong++;
+    resultEl.className='dm-result no';
+    resultEl.innerHTML='❌ 答案：<b>'+esc(target)+'</b>（你写的是：'+esc(input.value)+'）';
+  }
+  input.disabled = true;
+  // 自动下一个
+  setTimeout(conjPracticeNext, 1400);
+};
+window.skipConjPractice = function(){
+  const st = _conjPractice;
+  if(!st) return;
+  st.wrong++;
+  const resultEl = document.getElementById('conjPResult');
+  if(resultEl && st._currentTarget){
+    resultEl.className='dm-result no';
+    resultEl.innerHTML='跳过 · 答案：<b>'+esc(st._currentTarget.target)+'</b>';
+  }
+  setTimeout(conjPracticeNext, 900);
+};
+window.conjPracticeNext = function(){
+  const st = _conjPractice;
+  if(!st) return;
+  st.idx++;
+  const ov = document.getElementById('conjPracticeOverlay');
+  if(ov) ov.remove();
+  showConjPractice();
+};
+window.closeConjPractice = function(){
+  const st = _conjPractice;
+  if(!st) return;
+  const ov = document.getElementById('conjPracticeOverlay');
+  if(ov) ov.remove();
+  _conjPractice = null;
+  toast('已退出','');
+};
+function finishConjPractice(){
+  const st = _conjPractice;
+  if(!st) return;
+  const total = st.correct + st.wrong;
+  const pct = total ? Math.round(st.correct/total*100) : 0;
+  const ov = document.getElementById('conjPracticeOverlay');
+  if(ov) ov.remove();
+  const overlay = document.createElement('div'); overlay.id='conjPracticeOverlay';
+  overlay.className='dictation-overlay';
+  overlay.innerHTML = '<div class="dictation-modal"><h3>🏁 练习完成</h3>'+
+    '<div style="text-align:center;padding:16px 0"><div style="font-size:36px;font-weight:800;color:var(--tr)">'+pct+'%</div>'+
+    '<div style="color:var(--soft);font-size:12px;margin-top:4px">答对 '+st.correct+' / '+total+'</div></div>'+
+    '<div class="dm-actions"><button class="btn sm" onclick="document.getElementById(\'conjPracticeOverlay\').remove();_conjPractice=null">完成</button></div></div>';
+  document.body.appendChild(overlay);
+}
 
 // ===== 词汇库批量管理页 =====
 let _vuadmKeys = [];function renderVerbUsageAdmin(keep){

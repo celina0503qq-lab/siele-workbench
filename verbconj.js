@@ -57,7 +57,8 @@
       imperativoAf: ['sé', 'sed', 'sea', 'sean'],
       imperativoNeg: ['no seas', 'no seáis', 'no sea', 'no sean'],
       gerundio: 'siendo',
-      participio: 'sido'
+      participio: 'sido',
+      tips: ["⚠️ RAE 辨析：ser 表本质/身份/属性，estar 表状态/位置（Ella es guapa 天生漂亮 vs está guapa 今天打扮漂亮）。","⚠️ 命令式 tú 是 sé（带重音符号），不是 se！sé = 命令式\"你是\"，se = 自复代词。","⚠️ 简单过去式 fui/fuiste/fue... 与 ir 完全相同，靠上下文判断。","⚠️ 虚拟式过去未完成时 fuera/fuese 两形都正确，考试可任选。"]
     },
     'estar': {
       presente: ['estoy', 'estás', 'está', 'estamos', 'estáis', 'están'],
@@ -70,7 +71,8 @@
       imperativoAf: ['está', 'estad', 'esté', 'estén'],
       imperativoNeg: ['no estés', 'no estéis', 'no esté', 'no estén'],
       gerundio: 'estando',
-      participio: 'estado'
+      participio: 'estado',
+      tips: ["⚠️ 现在时重音：estoy/estás/está 三处带重音，estamos/estáis 也有。","⚠️ 简单过去式词干是 estuv-（estuve/estuviste/estuvo），不是 est-。","⚠️ 副动词是 estando，过去分词是 estado（estar + 分词表状态）。","⚠️ 命令式 tú 是 está（重音），与陈述式 él 相同。"]
     },
     'haber': {
       presente: ['he', 'has', 'ha', 'hemos', 'habéis', 'han'],
@@ -83,7 +85,8 @@
       imperativoAf: ['he', 'habed', 'haya', 'hayan'],
       imperativoNeg: ['no hayas', 'no hayáis', 'no haya', 'no hayan'],
       gerundio: 'habiendo',
-      participio: 'habido'
+      participio: 'habido',
+      tips: ["⚠️ hay 是无人称\"有\"，haber 作为助动词时变位：he/has/ha/hemos/habéis/han。","⚠️ 简单过去式 hube/hubiste/hubo（词干 hub-），非常用但 DELE 会考。","⚠️ 虚拟式现在时 haya/hayas/haya（不要写成 haiga ❌，这是不规范口语）。","⚠️ 命令式极少用；hube 表示\"刚做完\"的完成用法更书面。"]
     },
     'ir': {
       presente: ['voy', 'vas', 'va', 'vamos', 'vais', 'van'],
@@ -96,7 +99,8 @@
       imperativoAf: ['ve', 'id', 'vaya', 'vayan'],
       imperativoNeg: ['no vayas', 'no vayáis', 'no vaya', 'no vayan'],
       gerundio: 'yendo',
-      participio: 'ido'
+      participio: 'ido',
+      tips: ["⚠️ 现在时完全不规则：voy/vas/va/vamos/vais/van（无 -ir 规律）。","⚠️ 简单过去式 fui/fuiste/fue 与 ser 完全相同！","⚠️ 副动词是 yendo（不是 iendo ❌），过去分词 ido。","⚠️ 命令式 tú 是 ve（不是 va ❌），vosotros 是 id。","⚠️ ir a + 不定式 = 将来意图（Voy a estudiar）。"]
     },
     'tener': {
       presente: ['tengo', 'tienes', 'tiene', 'tenemos', 'tenéis', 'tienen'],
@@ -109,7 +113,8 @@
       imperativoAf: ['ten', 'tened', 'tenga', 'tengan'],
       imperativoNeg: ['no tengas', 'no tengáis', 'no tenga', 'no tengan'],
       gerundio: 'teniendo',
-      participio: 'tenido'
+      participio: 'tenido',
+      tips: ["⚠️ 现在时第一人称 tengo 加 g；tú tienes/él tiene 变 e→ie。","⚠️ 简单过去式词干 tuv-（tuve/tuviste/tuvo），不是 ten-。","⚠️ 将来时 tendré/tendrás（去 e 加 dr-），条件式 tendría。","⚠️ 命令式 tú 是 ten，vosotros 是 tened。","⚠️ 固定搭配：tener hambre/sueño/prisa/razón（不用 ser/estar）。"]
     },
     'hacer': {
       presente: ['hago', 'haces', 'hace', 'hacemos', 'hacéis', 'hacen'],
@@ -122,7 +127,8 @@
       imperativoAf: ['haz', 'haced', 'haga', 'hagan'],
       imperativoNeg: ['no hagas', 'no hagáis', 'no haga', 'no hagan'],
       gerundio: 'haciendo',
-      participio: 'hecho'
+      participio: 'hecho',
+      tips: ["⚠️ 现在时第一人称 hago（加 g）。","⚠️ 简单过去式：hice/hiciste/hizo（z 代替 c 保持 /θ/ 音！hizo 不是 hico ❌）。","⚠️ 将来时 haré/harás（去 ce 加 r-），条件式 haría。","⚠️ 命令式 tú 是 haz（不是 hace ❌）。","⚠️ 过去分词 hecho（不是 hacho/hacido ❌），用于 he hecho。"]
     },
     'venir': {
       presente: ['vengo', 'vienes', 'viene', 'venimos', 'venís', 'vienen'],
@@ -135,7 +141,8 @@
       imperativoAf: ['ven', 'venid', 'venga', 'vengan'],
       imperativoNeg: ['no vengas', 'no vengáis', 'no venga', 'no vengan'],
       gerundio: 'viniendo',
-      participio: 'venido'
+      participio: 'venido',
+      tips: ["⚠️ 现在时第一人称 vengo（加 g）；tú vienes/él viene 变 e→ie。","⚠️ 简单过去式词干 vin-（vine/viniste/vino）。","⚠️ 将来时 vendré/vendrás（去 e 加 dr-），条件式 vendría。","⚠️ 副动词 viniendo（注意双 n：ven- → vin-）。","⚠️ 命令式 tú 是 ven（与陈述式 él viene 不同）。"]
     },
     'poder': {
       presente: ['puedo', 'puedes', 'puede', 'podemos', 'podéis', 'pueden'],
@@ -148,7 +155,8 @@
       imperativoAf: ['puede', 'podéis', 'pueda', 'puedan'],
       imperativoNeg: ['no puedas', 'no podáis', 'no pueda', 'no puedan'],
       gerundio: 'pudiendo',
-      participio: 'podido'
+      participio: 'podido',
+      tips: ["⚠️ 现在时 o→ue：puedo/puedes/puede，nosotros/vosotros 保留 o（podemos/podéis）。","⚠️ 简单过去式词干 pud-（pude/pudiste/pudo）。","⚠️ 将来时 podré/podrás（去 er 加 dr-）。","⚠️ 虚拟式现在时 pueda/puedas...podamos/podáis/puedan。","⚠️ 命令式实际很少用（poder 表能力，命令语气弱）。"]
     },
     'decir': {
       presente: ['digo', 'dices', 'dice', 'decimos', 'decís', 'dicen'],
@@ -161,7 +169,8 @@
       imperativoAf: ['di', 'decid', 'diga', 'digan'],
       imperativoNeg: ['no digas', 'no digáis', 'no diga', 'no digan'],
       gerundio: 'diciendo',
-      participio: 'dicho'
+      participio: 'dicho',
+      tips: ["⚠️ 现在时第一人称 digo（g）；tú dices/él dice 变 e→i。","⚠️ 简单过去式词干 dij-（dije/dijiste/dijo），第三人称复数 dijeron（不是 dijieron ❌）。","⚠️ 将来时 diré/dirás（去 ec 加 r-），条件式 diría。","⚠️ 命令式 tú 是 di（与陈述式 él dice 不同）。","⚠️ 过去分词 dicho：he dicho（不是 decido ❌）。"]
     },
     'salir': {
       presente: ['salgo', 'sales', 'sale', 'salimos', 'salís', 'salen'],
@@ -174,7 +183,8 @@
       imperativoAf: ['sal', 'salid', 'salga', 'salgan'],
       imperativoNeg: ['no salgas', 'no salgáis', 'no salga', 'no salgan'],
       gerundio: 'saliendo',
-      participio: 'salido'
+      participio: 'salido',
+      tips: ["⚠️ 现在时第一人称 salgo（加 g）。","⚠️ 将来时 saldré/saldrás（加 dr-），条件式 saldría。","⚠️ 命令式 tú 是 sal（与 salir 原形同形）。","⚠️ 虚拟式现在时 salga/salgas/salga...salgan。","⚠️ 简单过去式是规则的：salí/saliste/salió。"]
     }
   };
 
@@ -284,15 +294,18 @@
     var core = stripPronoun(verb);
     if (core !== verb) pronominal = true;
     var forms;
+    var tipsArr = null;
     if (isIrregular(core)) {
       forms = JSON.parse(JSON.stringify(IRREGULAR[core]));
+      tipsArr = forms.tips || null;
+      delete forms.tips; // tips 单独返回，不进 forms
       forms = buildCompound(forms);
     } else {
       forms = conjRegular(core);
       if (!forms) return null;
       forms = buildCompound(forms);
     }
-    return { verb: original, core: core, pronominal: pronominal, forms: forms, irregular: isIrregular(core), source: isIrregular(core) ? 'irregular-builtin' : 'engine-regular' };
+    return { verb: original, core: core, pronominal: pronominal, forms: forms, irregular: isIrregular(core), source: isIrregular(core) ? 'irregular-builtin' : 'engine-regular', tips: tipsArr };
   }
 
   // 组装完整展示结构: [{t:{k,zh,n,dual}, cells:[...]}]
