@@ -15861,7 +15861,7 @@ function renderVocabVerbUsage(){
   });
   const ed = isContentAdmin();
   const adminBar = ed ? '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式（保存后覆盖所有用户）<button class="btn sm pr" style="margin:0 6px" onclick="_verbUsageAdd()">➕ 新增词条</button><span style="color:#64748b">点各字段旁 ✏️ 就地编辑，✕ 删除词条</span></div>' : '';
-  let h = '<div class="acc open" id="verbUsageAcc"><div class="ah" onclick="toggleAcc(\'verbUsageAcc\')"><h4>📖 动词用法详解 · 易混词辨析</h4><span class="cnt">' + verbs.length + ' 个核心动词 ▾</span></div><div class="ab" style="padding:8px 14px">';
+  let h = '<div class="acc" id="verbUsageAcc"><div class="ah" onclick="toggleAcc(\'verbUsageAcc\')"><h4>📖 动词用法详解 · 易混词辨析</h4><span class="cnt">' + verbs.length + ' 个核心动词 ▾</span></div><div class="ab" style="padding:8px 14px">';
   // 易混词搜索（跳转式：输入中文/西语 → 匹配列表 → 点击跳转高亮）
   h += '<div class="search-wrap" style="margin:6px 0"><div class="sb" style="margin-bottom:0"><input id="verbUsageSearch" placeholder="🔍 搜索易混词：输入中文或西语（如「借」「prestar」）..." autocomplete="off" oninput="_verbUsageSearch(this.value)"></div><div class="search-drop" id="verbUsageSearchDrop"></div></div>';
   h += adminBar;
@@ -15994,7 +15994,7 @@ window._conjCellEdit = function(v, t, i, dual){
 function renderVerbConjSection(){
   const verbs = getConjVerbs();
   const ed = isContentAdmin();
-  let h = '<div class="acc open" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个动词 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
+  let h = '<div class="acc" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个动词 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
   if(ed){
     h += '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式<button class="btn sm pr" style="margin:0 6px" onclick="_conjAddVerb()">➕ 新增动词</button><span style="color:#64748b">点变位格/要点旁 ✏️ 就地编辑，✕ 删除词条</span></div>';
   }
