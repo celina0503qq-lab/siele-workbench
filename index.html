@@ -15813,7 +15813,10 @@ GRAMMAR_PRACTICE['Pasiva y pasiva refleja'] = [
 // 获取最终动词用法词条（管理员编辑 > 默认）
 function getVerbUsage(){
   const ed = window._contentEdits && window._contentEdits.verbUsage && window._contentEdits.verbUsage.list;
-  return (ed && Object.keys(ed).length) ? ed : VERB_USAGE;
+  if(!ed || !Object.keys(ed).length) return VERB_USAGE;
+  // 合并而非整体替换：默认词条永远兜底（管理员旧快照不会丢新词），管理员修改/新增的覆盖叠加
+  const merged = Object.assign({}, VERB_USAGE, ed);
+  return merged;
 }
 // 词汇库就地编辑：词条字段
 window._verbUsageEdit = function(key, field, label){
@@ -15999,45 +16002,71 @@ function renderConjCard(v, ed){
   const m = conjVerbMeta(v) || {};
   const ovr = (m.note && typeof m.note === 'object') ? m.note : null; // 管理员逐格覆盖 {t:[...], t:{ra,se}}
   const eb = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\'__meta__\',0)" style="cursor:pointer;font-size:12px;color:#3b82f6;opacity:.6" title="编辑要点">✏️</span>' : '';
-  let h = '<div class="card" style="margin:6px 0;padding:11px" id="conj_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'">';
-  h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
-  h += '<span style="font-size:15px;font-weight:800;font-family:var(--serif)">'+esc(v)+'</span>';
-  h += '<span style="font-size:11px;color:var(--soft)">'+esc(m.zh||'')+' '+eb+'</span>';
-  if(r.pronominal) h += '<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:4px;padding:1px 6px">代词式</span>';
-  if(r.irregular) h += '<span style="font-size:10px;background:#fdf3e3;color:#854f0b;border-radius:4px;padding:1px 6px">不规则</span>';
-  else h += '<span style="font-size:10px;background:#e6f1fb;color:#185fa5;border-radius:4px;padding:1px 6px">规则</span>';
-  h += '<button class="spk" style="width:22px;height:22px;font-size:10px;margin-left:auto" onclick="speak(\''+esc(v)+'\',this)">🔊</button>';
-  h += ed ? '<span onclick="_conjDelVerb(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6" title="删除词条要点">✕</span>' : '';
+  const typeColor = r.irregular ? '#d85a30' : '#185fa5';
+  const typeBg = r.irregular ? '#fdf0e9' : '#e6f1fb';
+  let h = '<div class="card" style="margin:8px 0;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:12px" id="conj_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'">';
+  // ===== 卡片头 =====
+  h += '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(90deg,'+typeBg+',transparent 60%)">';
+  h += '<span style="font-size:17px;font-weight:800;font-family:var(--serif);color:'+typeColor+'">'+esc(v)+'</span>';
+  h += '<span style="font-size:12px;color:var(--ink);opacity:.75">'+esc(m.zh||'')+eb+'</span>';
+  if(r.pronominal) h += '<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:6px;padding:2px 7px;font-weight:600">代词式</span>';
+  if(r.irregular) h += '<span style="font-size:10px;background:'+typeBg+';color:'+typeColor+';border-radius:6px;padding:2px 7px;font-weight:600">不规则</span>';
+  else h += '<span style="font-size:10px;background:'+typeBg+';color:'+typeColor+';border-radius:6px;padding:2px 7px;font-weight:600">规则</span>';
+  h += '<button class="spk" style="width:26px;height:26px;font-size:11px;margin-left:auto;border-radius:8px" onclick="speak(\''+esc(v)+'\',this)">🔊</button>';
+  h += ed ? '<span onclick="_conjDelVerb(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6;padding:2px" title="删除词条要点">✕</span>' : '';
   h += '</div>';
-  if(m.desc) h += '<div style="font-size:11.5px;line-height:1.5;margin-bottom:6px"><b style="color:var(--tr)">📌 要点：</b>'+esc(m.desc)+'</div>';
-  // 变位表(引擎结果 + 管理员逐格覆盖)
-  h += '<table style="width:100%;border-collapse:collapse;font-size:11px">';
-  h += '<tr style="background:var(--bg2,#f6f7fb)"><td style="padding:4px 8px;font-weight:700;color:var(--tr);width:180px">时态</td><td style="padding:4px 8px;color:var(--soft)">变位</td></tr>';
-  window.verbConj.TENSES.forEach(function(t){
-    let cells;
-    if(t.k==='gerundio') cells = [r.forms.gerundio];
-    else if(t.k==='participio') cells = [r.forms.participio];
-    else if(t.dual){
-      h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+' <span style="color:var(--soft);font-size:10px">(ra)</span></td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, r.forms[t.k].ra, ed, 'ra', ovr)+'</td></tr>';
-      h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+' <span style="color:var(--soft);font-size:10px">(se)</span></td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, r.forms[t.k].se, ed, 'se', ovr)+'</td></tr>';
-      return;
-    }
-    else cells = r.forms[t.k];
-    h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+'</td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, cells, ed, '', ovr)+'</td></tr>';
+  if(m.desc) h += '<div style="font-size:11.5px;line-height:1.5;padding:8px 14px 0"><b style="color:var(--tr)">📌 要点：</b>'+esc(m.desc)+'</div>';
+  // ===== 时态分组 =====
+  h += '<div style="padding:10px 14px">';
+  const groups = [
+    { name: '陈述式', color: '#185fa5', bg: '#e6f1fb', tenses: ['presente','indefinido','imperfecto','futuro','condicional'] },
+    { name: '复合时态', color: '#0f6e56', bg: '#e1f5ee', tenses: ['perfecto','pluscuamperfecto'] },
+    { name: '虚拟式', color: '#534ab7', bg: '#eeedfe', tenses: ['subjPresente','subjImperfecto','subjPluscuamperfecto'] },
+    { name: '命令式', color: '#993c1d', bg: '#faeee7', tenses: ['imperativoAf','imperativoNeg'] },
+    { name: '非人称形式', color: '#854f0b', bg: '#faeeda', tenses: ['gerundio','participio'] }
+  ];
+  groups.forEach(function(g){
+    h += '<div style="margin:10px 0 4px;display:flex;align-items:center;gap:6px"><span style="font-size:10.5px;font-weight:700;color:'+g.color+';background:'+g.bg+';border-radius:6px;padding:2px 8px">'+g.name+'</span><span style="flex:1;height:1px;background:var(--line)"></span></div>';
+    g.tenses.forEach(function(tk){
+      const t = window.verbConj.TENSES.filter(function(x){ return x.k === tk; })[0];
+      if(!t) return;
+      let rows = [];
+      if(t.dual){
+        rows.push({ label: t.zh + ' (ra)', cells: r.forms[tk].ra, dual: 'ra' });
+        rows.push({ label: t.zh + ' (se)', cells: r.forms[tk].se, dual: 'se' });
+      } else if(tk === 'gerundio'){
+        rows.push({ label: t.zh, cells: [r.forms.gerundio], mono: true });
+      } else if(tk === 'participio'){
+        rows.push({ label: t.zh, cells: [r.forms.participio], mono: true });
+      } else {
+        rows.push({ label: t.zh, cells: r.forms[tk] });
+      }
+      rows.forEach(function(row){
+        h += '<div style="display:flex;align-items:baseline;gap:6px;margin:3px 0">';
+        h += '<span style="font-size:11px;color:var(--soft);width:130px;flex-shrink:0;font-weight:600">'+esc(row.label)+'</span>';
+        h += '<span style="flex:1">'+conjCellsHtml(v, tk, row.cells, ed, row.dual || '', ovr, row.mono)+'</span>';
+        h += '</div>';
+      });
+    });
   });
-  h += '</table>';
+  h += '</div>';
   // 笔记(云同步)
   const noteKey = 'conj_note_' + v;
   let saved = window.__conjNotes ? window.__conjNotes[v] : '';
   try{ if(ST && ST.conjNotes && ST.conjNotes[v] && ST.conjNotes[v].text != null) saved = ST.conjNotes[v].text; }catch(e){}
-  h += '<div style="margin-top:6px"><span style="font-size:11px;color:var(--soft)">📝 我的笔记</span>';
+  h += '<div style="padding:0 14px 12px;border-top:1px dashed var(--line);margin-top:4px"><div style="margin-top:8px"><span style="font-size:11px;color:var(--soft)">📝 我的笔记</span>';
   h += '<textarea id="conjnote_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'" style="width:100%;margin-top:3px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:11.5px;min-height:34px" placeholder="记录变位难点、易错点..." oninput="saveConjNote(\''+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'\', this.value)">'+esc(saved)+'</textarea>';
-  h += '</div>';
+  h += '</div></div>';
   h += '</div>';
   return h;
 }
-function conjCellsHtml(v, tk, cells, ed, dual, ovr){
+function conjCellsHtml(v, tk, cells, ed, dual, ovr, mono){
   const persons = (tk==='imperativoAf'||tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
+  if(mono){
+    const disp = cells[0];
+    const edit = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\''+tk+'\',0)" style="cursor:pointer;font-size:10px;color:#3b82f6;opacity:.5">✏️</span>' : '';
+    return '<span style="font-size:12.5px;font-weight:700;color:var(--tr)">'+esc(disp)+'</span>'+edit;
+  }
   return cells.map(function(c, i){
     // 管理员逐格覆盖: ovr[tk][i] 或 ovr[tk][i][dual]
     let disp = c;
@@ -16046,7 +16075,7 @@ function conjCellsHtml(v, tk, cells, ed, dual, ovr){
       if(o != null) disp = (typeof o === 'object') ? (o[dual] != null ? o[dual] : c) : (dual ? c : o);
     }
     const edit = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\''+tk+'\','+i+(dual?',\''+dual+'\'':'')+')" style="cursor:pointer;font-size:10px;color:#3b82f6;opacity:.5">✏️</span>' : '';
-    return '<span style="display:inline-block;margin:1px 8px 1px 0"><b style="color:var(--soft);font-weight:500">'+persons[i]+':</b> '+esc(disp)+edit+'</span>';
+    return '<span style="display:inline-block;margin:1px 10px 1px 0;white-space:nowrap"><b style="color:var(--soft);font-weight:500;font-size:10.5px">'+persons[i]+'</b> <span style="font-size:12px;font-weight:600;color:var(--ink)">'+esc(disp)+'</span>'+edit+'</span>';
   }).join('');
 }
 // 笔记保存(进 ST 云同步, LWW ts)
