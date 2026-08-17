@@ -488,7 +488,7 @@ const VDATA_BATCH3 = [
 {"es":"materia","pos":"f.","zh":"物质；物体；实体；材料；内容；素材","ex":"La materia cambia de estado con la temperatura.","lvl":"B1","tag":"专四","dialect":0,"t":"general"},
 {"es":"matrimonio","pos":"m.","zh":"婚姻；夫妻","ex":"El matrimonio celebró sus bodas de plata.","lvl":"B1","tag":"专四","dialect":0,"t":"familia_y_personas"},
 {"es":"matriz","pos":"f.","zh":"子宫；模子；母本；螺母；母体的；原始的","ex":"El bebé crece en la matriz de la madre.","lvl":"B2","tag":"专四","dialect":0,"t":"salud_y_cuerpo"},
-{"es":"mayo","pos":"m.","zh":"五月","ex":"En mayo celebramos la fiesta de la madre.","lvl":"A1","tag":"专四","dialect":0,"t":"tiempo_y_naturaleza"},
+{"es":"mayo","pos":"m.","zh":"五月","ex":"En mayo celebramos el Día de la Madre.","lvl":"A1","tag":"专四","dialect":0,"t":"tiempo_y_naturaleza"},
 {"es":"mayordomo","pos":"m.","zh":"管家；总管；(某些宗教团体的）督管","ex":"El mayordomo abrió la puerta del castillo.","lvl":"B1","tag":"专四","dialect":0,"t":"trabajo_y_profesiones"},
 {"es":"mecanógrafo","pos":"m.","zh":"打字员","ex":"El mecanógrafo escribió el informe rápido.","lvl":"B2","tag":"专四","dialect":0,"t":"trabajo_y_profesiones"},
 {"es":"mechero","pos":"m.","zh":"打火机；灯嘴；灯具；蜡座","ex":"El mechero encendió la vela de la mesa.","lvl":"B1","tag":"专四","dialect":0,"t":"general"},

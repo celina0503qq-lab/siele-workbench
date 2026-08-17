@@ -93,7 +93,7 @@ const VDATA_BATCH1 = [
 {"t": "emo", "es": "aficionarse", "pos": "v.", "zh": "喜欢；喜爱", "ex": "Me he aficionado al fútbol gracias a mi hermano.", "lvl": "B1"},
 {"t": "general", "es": "concibe", "pos": "v.", "zh": "受孕；构思", "ex": "El escritor concibe nuevas ideas para su novela.", "lvl": "B2"},
 {"t": "general", "es": "constituye", "pos": "v.", "zh": "组成；是；建立；设立；指派；到达；担任", "ex": "El agua constituye la mayor parte de nuestro cuerpo.", "lvl": "B2"},
-{"t": "general", "es": "convirtiendo", "pos": "v.", "zh": "使变成；使成为；使信教；使改变信仰；使转向；成为；皈依", "ex": "La ciudad se fue convirtiendo en un gran centro turístico.", "lvl": "B1"},
+{"t": "general", "es": "convertir", "pos": "v.", "zh": "使变成；使成为；使信教；使改变信仰；使转向；成为；皈依", "ex": "La ciudad se fue convirtiendo en un gran centro turístico.", "lvl": "B1"},
 {"t": "general", "es": "creerse", "pos": "v.", "zh": "相信；以为；信教", "ex": "No te creas todo lo que lees en Internet.", "lvl": "A2"},
 {"t": "diario", "es": "cumplan", "pos": "v.", "zh": "执行；完成；提供；满...岁；服刑；尽到责任；方便；到期；适合；满 (多少时间、年、月等)；实现", "ex": "Espero que todos cumplan sus promesas.", "lvl": "A2"},
 {"t": "general", "es": "definía", "pos": "v.", "zh": "下定义；表明；确定；最后完成 (作品)", "ex": "El profesor definía los conceptos con ejemplos claros.", "lvl": "B1"},
