@@ -17,4 +17,13 @@ const VDATA_BATCH3 = [
   if(typeof VDATA==='undefined'||typeof VDATA_BATCH3==='undefined') return;
   var _existingB3=new Set(VDATA.map(function(v){return v.es;}));
   VDATA_BATCH3.forEach(function(v){ if(!_existingB3.has(v.es)){VDATA.push(v);} });
+  // 重建 VDATA_BY_LVL 静态索引: 纳入全部批次词 + 专四桶
+  if(typeof VDATA_BY_LVL!=='undefined'){
+    VDATA_BY_LVL.A1.length=VDATA_BY_LVL.A2.length=VDATA_BY_LVL.B1.length=VDATA_BY_LVL.B2.length=0;
+    if(!VDATA_BY_LVL['专四']) VDATA_BY_LVL['专四']=[]; else VDATA_BY_LVL['专四'].length=0;
+    VDATA.forEach(function(v){
+      if(VDATA_BY_LVL[v.lvl]) VDATA_BY_LVL[v.lvl].push(v);
+      if(v.tag==='专四') VDATA_BY_LVL['专四'].push(v);
+    });
+  }
 })();

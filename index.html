@@ -2552,7 +2552,7 @@ function updatePomoDisplay(){
 // ===== PAGE: FLASHCARDS =====
 function getFlashPool(){
   if(typeof VDATA==='undefined') return [];
-  var pool=ST.flashLevel==='all'?VDATA:VDATA.filter(function(v){return v.lvl===ST.flashLevel;});
+  var pool=ST.flashLevel==='all'?VDATA:(ST.flashLevel==='专四'?VDATA.filter(function(v){return v.tag==='专四';}):VDATA.filter(function(v){return v.lvl===ST.flashLevel;}));
   return pool.length?pool:VDATA;
 }
 function syncFlashPosition(pool){
@@ -2562,7 +2562,7 @@ function syncFlashPosition(pool){
   var found=saved?pool.findIndex(function(v){return v.es===saved;}):-1;
   if(found>=0){ST.flashIdx=found;return pool;}
   // 2) 词已被移除/未保存 → 按 per-level idx 恢复 (v2.1 修复, 之前用 flashProgressByLevel 不准)
-  if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+  if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0,'专四':0};
   var key = (ST.flashLevel==='all') ? 'all' : (ST.flashLevel || 'all');
   var savedIdx = Number(ST.flashIdxByLevel[key]||0);
   var safe = Math.max(0, Math.min(savedIdx, pool.length-1));
@@ -2589,7 +2589,7 @@ function setFlashPosition(index,pool){
   // v2.1 修复 BUG: per-level 断点续背 — 翻页时同步写 flashIdxByLevel + ts
   try{
     var curLvl = ST.flashLevel || 'all';
-    if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+    if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0,'专四':0};
     ST.flashIdxByLevel[curLvl] = newIdx;
     if(!ST.flashLastPositionTs || typeof ST.flashLastPositionTs!=='object') ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
     ST.flashLastPositionTs[curLvl] = Date.now();
@@ -2625,7 +2625,7 @@ function renderFlash(){
   // Filter chips
   h += `<div class="fcb">
     <span style="font-size:11px;color:var(--soft)">等级：</span>`;
-  ['all','A1','A2','B1','B2'].forEach(l => {
+  ['all','A1','A2','B1','B2','专四'].forEach(l => {
     h += `<button class="chip ${ST.flashLevel===l?'on':''}" onclick="changeFlashLevel('${l}')">${l==='all'?'全部':l}</button>`;
   });
   h += `</div>`;
