@@ -261,13 +261,15 @@
     var end = endingOf(verb);
     var tpl = RULE_TEMPLATES[end];
     if (!tpl) return null;
+    // 模板后缀用连字符作占位标记（如 '-o'），拼接时去掉，产出真实变位（vivo 而非 viv-o）
+    var glue = function (suf) { return stem + suf.replace(/^-/, ''); };
     var out = {};
     Object.keys(tpl).forEach(function (tk) {
       var val = tpl[tk];
-      if (Array.isArray(val)) out[tk] = val.map(function (suf) { return stem + suf; });
+      if (Array.isArray(val)) out[tk] = val.map(glue);
       else if (val && typeof val === 'object') {
-        out[tk] = { ra: val.ra.map(function (s) { return stem + s; }), se: val.se.map(function (s) { return stem + s; }) };
-      } else out[tk] = stem + val;
+        out[tk] = { ra: val.ra.map(glue), se: val.se.map(glue) };
+      } else out[tk] = glue(val);
     });
     return out;
   }
