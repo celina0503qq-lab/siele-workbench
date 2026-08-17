@@ -2954,6 +2954,9 @@ function renderVocab(){
   }
   h += renderVocabVerbUsage();
 
+  // ==== 动词变位速查（MVP: 3 规则模板 + 10 高频不规则） ====
+  h += renderVerbConjSection();
+
   h += `<div class="sb">
     <input id="vocabSearch" placeholder="搜索单词或释义..." oninput="filterVocabDebounced()">
     <select id="vocabLvl" onchange="filterVocab()">
@@ -9827,6 +9830,34 @@ window._oralInlineSave = function(btn){
       }
       window._deleSyncContentEdits('grammar', gedits);
       window._contentEdits.grammar = gedits;
+    } else if(ns === 'verbConj'){
+      // 动词变位: data-key=动词, data-field=要点字段或 变位格 (t_i / t_i_ra|se)
+      var ckey = ta.getAttribute('data-key');
+      var cfield = ta.getAttribute('data-field');
+      var cclone = JSON.parse(JSON.stringify(getConjEdits() || {}));
+      if(!cclone[ckey]) cclone[ckey] = {zh:'', note:{}};
+      if(cfield === '__meta__'){
+        cclone[ckey].zh = ta.value;
+      } else {
+        var parts = cfield.split('_');
+        var tk = parts.slice(0, parts.length-1).join('_');
+        var ci = Number(parts[parts.length-1]);
+        if(!isNaN(ci) && tk){
+          var dual = cfield.indexOf('_ra') >= 0 ? 'ra' : (cfield.indexOf('_se') >= 0 ? 'se' : '');
+          var base = tk;
+          if(dual) base = tk;
+          if(!cclone[ckey].note) cclone[ckey].note = {};
+          if(!cclone[ckey].note[base]) cclone[ckey].note[base] = [];
+          if(dual){
+            if(!cclone[ckey].note[base][ci]) cclone[ckey].note[base][ci] = {};
+            cclone[ckey].note[base][ci][dual] = ta.value;
+          } else {
+            cclone[ckey].note[base][ci] = ta.value;
+          }
+        }
+      }
+      window._deleSyncContentEdits('verbConj', {list: cclone});
+      window._contentEdits.verbConj = {list: cclone};
     } else {
       var ti = Number(ta.getAttribute('data-ti'));
       var path = ta.getAttribute('data-path');
@@ -12646,6 +12677,7 @@ function renderScoreCard(lvKey, card, status, score){
 // ===== User notes (migrated to swa_quiz_v1) =====
 window.__refineNotes = {};
 try { var stored = localStorage.getItem('refine_notes_v1'); if(stored) window.__refineNotes = JSON.parse(stored); } catch(e){}
+try { loadConjNotes(); } catch(e){}
 
 // Migrate old refine_notes_v1 → swa_quiz_v1 quizzes[date][level].notes
 try {
@@ -13903,7 +13935,7 @@ window._deleCloudCall = function(action, params){
 };
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
-window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {} };
+window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {} };
 window._contentEditsCb = {};
 // 拉取 content_edits（namespace: writing / oral），结果经 message 监听写入 _contentEdits[ns]
 window._deleFetchContentEdits = function(namespace, callback){
@@ -13966,7 +13998,7 @@ window.addEventListener('message', function(e){
     // 若当前正停留在对应页面，立即重新渲染，让用户端实时看到管理员同步的最新内容
     try {
       if (typeof currentPage === 'string' && typeof renderMain === 'function') {
-        var _pgMap = { grammar:'grammar', verbUsage:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele' };
+        var _pgMap = { grammar:'grammar', verbUsage:'vocab', verbConj:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele' };
         if (_pgMap[ns] && currentPage === _pgMap[ns]) renderMain();
       }
     } catch(e) {}
@@ -15895,9 +15927,166 @@ window._verbUsageJumpTo = function(id){
   }
 };
 
+// ===== 动词变位速查 (MVP) =====
+// 数据源: verbconj.js 引擎(规则模板+10不规则) + content_edits(verbConj) 管理员覆盖
+const CONJ_BUILTIN = ['trabajar','comer','vivir','ser','estar','haber','ir','tener','hacer','venir','poder','decir','salir'];
+function getConjEdits(){
+  const ed = window._contentEdits && window._contentEdits.verbConj && window._contentEdits.verbConj.list;
+  return (ed && Object.keys(ed).length) ? ed : null;
+}
+function getConjVerbs(){
+  const ed = getConjEdits();
+  if(!ed) return CONJ_BUILTIN.slice();
+  const set = CONJ_BUILTIN.slice();
+  Object.keys(ed).forEach(function(k){ if(set.indexOf(k)<0) set.push(k); });
+  return set;
+}
+function conjVerbMeta(v){
+  const ed = getConjEdits();
+  return (ed && ed[v]) || null;
+}
+window._conjEditNote = function(v, field, label){
+  const m = conjVerbMeta(v) || {};
+  let cur = m[field];
+  if(Array.isArray(cur)) cur = cur.join(', ');
+  _showEditModal(label, cur == null ? '' : cur, '变位词条 ' + v, {'data-ns':'verbConj','data-key':v,'data-field':field});
+};
+window._conjAddVerb = function(){
+  const clone = JSON.parse(JSON.stringify(getConjEdits() || {}));
+  const key = 'nuevo_' + Date.now().toString(36);
+  clone[key] = {zh:'', note:''};
+  window._deleSyncContentEdits('verbConj', {list: clone});
+  window._contentEdits.verbConj = {list: clone};
+  toast('✅ 已添加动词占位，请编辑中文释义','ok');
+  renderMain();
+};
+window._conjDelVerb = function(v){
+  if(!confirm('确定删除动词「'+v+'」的要点信息？（变位仍由引擎生成）')) return;
+  const clone = JSON.parse(JSON.stringify(getConjEdits() || {}));
+  delete clone[v];
+  window._deleSyncContentEdits('verbConj', {list: clone});
+  window._contentEdits.verbConj = {list: clone};
+  toast('✅ 已删除','ok');
+  renderMain();
+};
+// 变位格就地编辑: t=k, i=人称下标, dual=ra|se
+window._conjCellEdit = function(v, t, i, dual){
+  const r = window.verbConj.conj(v);
+  if(!r) return;
+  let cur = '';
+  const f = r.forms[t];
+  if(t==='gerundio'||t==='participio') cur = f;
+  else if(dual) cur = f[dual][i];
+  else cur = f[i];
+  _showEditModal('编辑变位 '+v+' · '+t+(dual?'('+dual+')':'')+' · '+i, cur, '变位 '+v+' '+t+' '+i+(dual?' '+dual:''), {'data-ns':'verbConj','data-key':v,'data-field':t+'_'+i+(dual?'_'+dual:'')});
+};
+function renderVerbConjSection(){
+  const verbs = getConjVerbs();
+  const ed = isContentAdmin();
+  let h = '<div class="acc open" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个动词 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
+  if(ed){
+    h += '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式<button class="btn sm pr" style="margin:0 6px" onclick="_conjAddVerb()">➕ 新增动词</button><span style="color:#64748b">点变位格/要点旁 ✏️ 就地编辑，✕ 删除词条</span></div>';
+  }
+  h += '<div class="search-wrap" style="margin:6px 0"><div class="sb" style="margin-bottom:0"><input id="conjSearch" placeholder="🔍 搜索动词（如 ser、trabajar、vestirse）..." autocomplete="off" oninput="_conjFilter(this.value)"></div></div>';
+  h += '<div id="conjList">';
+  verbs.forEach(function(v){ h += renderConjCard(v, ed); });
+  h += '</div></div></div>';
+  return h;
+}
+function renderConjCard(v, ed){
+  const r = window.verbConj ? window.verbConj.conj(v) : null;
+  if(!r) return '';
+  const m = conjVerbMeta(v) || {};
+  const ovr = (m.note && typeof m.note === 'object') ? m.note : null; // 管理员逐格覆盖 {t:[...], t:{ra,se}}
+  const eb = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\'__meta__\',0)" style="cursor:pointer;font-size:12px;color:#3b82f6;opacity:.6" title="编辑要点">✏️</span>' : '';
+  let h = '<div class="card" style="margin:6px 0;padding:11px" id="conj_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'">';
+  h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+  h += '<span style="font-size:15px;font-weight:800;font-family:var(--serif)">'+esc(v)+'</span>';
+  h += '<span style="font-size:11px;color:var(--soft)">'+esc(m.zh||'')+' '+eb+'</span>';
+  if(r.pronominal) h += '<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:4px;padding:1px 6px">代词式</span>';
+  if(r.irregular) h += '<span style="font-size:10px;background:#fdf3e3;color:#854f0b;border-radius:4px;padding:1px 6px">不规则</span>';
+  else h += '<span style="font-size:10px;background:#e6f1fb;color:#185fa5;border-radius:4px;padding:1px 6px">规则</span>';
+  h += '<button class="spk" style="width:22px;height:22px;font-size:10px;margin-left:auto" onclick="speak(\''+esc(v)+'\',this)">🔊</button>';
+  h += ed ? '<span onclick="_conjDelVerb(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6" title="删除词条要点">✕</span>' : '';
+  h += '</div>';
+  if(m.desc) h += '<div style="font-size:11.5px;line-height:1.5;margin-bottom:6px"><b style="color:var(--tr)">📌 要点：</b>'+esc(m.desc)+'</div>';
+  // 变位表(引擎结果 + 管理员逐格覆盖)
+  h += '<table style="width:100%;border-collapse:collapse;font-size:11px">';
+  h += '<tr style="background:var(--bg2,#f6f7fb)"><td style="padding:4px 8px;font-weight:700;color:var(--tr);width:180px">时态</td><td style="padding:4px 8px;color:var(--soft)">变位</td></tr>';
+  window.verbConj.TENSES.forEach(function(t){
+    let cells;
+    if(t.k==='gerundio') cells = [r.forms.gerundio];
+    else if(t.k==='participio') cells = [r.forms.participio];
+    else if(t.dual){
+      h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+' <span style="color:var(--soft);font-size:10px">(ra)</span></td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, r.forms[t.k].ra, ed, 'ra', ovr)+'</td></tr>';
+      h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+' <span style="color:var(--soft);font-size:10px">(se)</span></td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, r.forms[t.k].se, ed, 'se', ovr)+'</td></tr>';
+      return;
+    }
+    else cells = r.forms[t.k];
+    h += '<tr><td style="padding:4px 8px;font-weight:600">'+esc(t.zh)+'</td><td style="padding:4px 8px;color:var(--ink)">'+conjCellsHtml(v, t.k, cells, ed, '', ovr)+'</td></tr>';
+  });
+  h += '</table>';
+  // 笔记(云同步)
+  const noteKey = 'conj_note_' + v;
+  let saved = window.__conjNotes ? window.__conjNotes[v] : '';
+  try{ if(ST && ST.conjNotes && ST.conjNotes[v] && ST.conjNotes[v].text != null) saved = ST.conjNotes[v].text; }catch(e){}
+  h += '<div style="margin-top:6px"><span style="font-size:11px;color:var(--soft)">📝 我的笔记</span>';
+  h += '<textarea id="conjnote_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'" style="width:100%;margin-top:3px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:11.5px;min-height:34px" placeholder="记录变位难点、易错点..." oninput="saveConjNote(\''+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'\', this.value)">'+esc(saved)+'</textarea>';
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
+function conjCellsHtml(v, tk, cells, ed, dual, ovr){
+  const persons = (tk==='imperativoAf'||tk==='imperativoNeg') ? window.verbConj.PERSONS_IMP : window.verbConj.PERSONS;
+  return cells.map(function(c, i){
+    // 管理员逐格覆盖: ovr[tk][i] 或 ovr[tk][i][dual]
+    let disp = c;
+    if(ovr && ovr[tk]){
+      const o = ovr[tk][i];
+      if(o != null) disp = (typeof o === 'object') ? (o[dual] != null ? o[dual] : c) : (dual ? c : o);
+    }
+    const edit = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\''+tk+'\','+i+(dual?',\''+dual+'\'':'')+')" style="cursor:pointer;font-size:10px;color:#3b82f6;opacity:.5">✏️</span>' : '';
+    return '<span style="display:inline-block;margin:1px 8px 1px 0"><b style="color:var(--soft);font-weight:500">'+persons[i]+':</b> '+esc(disp)+edit+'</span>';
+  }).join('');
+}
+// 笔记保存(进 ST 云同步, LWW ts)
+window.__conjNotes = {};
+function loadConjNotes(){
+  try{ const s = JSON.parse(localStorage.getItem('conj_notes_v1')||'{}'); window.__conjNotes = s; }catch(e){ window.__conjNotes = {}; }
+  // 优先取云同步下来的 ST.conjNotes
+  try{ if(ST && ST.conjNotes && typeof ST.conjNotes==='object'){
+    Object.keys(ST.conjNotes).forEach(function(v){ var n=ST.conjNotes[v]; if(n && typeof n==='object') window.__conjNotes[v]=n.text||''; });
+  }}catch(e){}
+}
+window.saveConjNote = function(key, val){
+  try{
+    const v = decodeURIComponent(key);
+    window.__conjNotes[v] = val;
+    localStorage.setItem('conj_notes_v1', JSON.stringify(window.__conjNotes));
+    try{
+      if(ST){
+        if(!ST.conjNotes) ST.conjNotes = {};
+        ST.conjNotes[v] = { text: val, ts: Date.now() };
+        _save0();
+      }
+    }catch(e){}
+  }catch(e){}
+};
+window._conjFilter = function(q){
+  const list = document.getElementById('conjList');
+  if(!list) return;
+  q = (q||'').trim().toLowerCase();
+  const verbs = getConjVerbs();
+  const ed = isContentAdmin();
+  list.innerHTML = verbs.filter(function(v){
+    if(!q) return true;
+    const m = conjVerbMeta(v)||{};
+    return v.toLowerCase().indexOf(q)>=0 || (m.zh||'').toLowerCase().indexOf(q)>=0;
+  }).map(function(v){ return renderConjCard(v, ed); }).join('') || '<div class="search-empty" style="padding:10px;font-size:12px;color:var(--soft)">未找到匹配动词</div>';
+};
+
 // ===== 词汇库批量管理页 =====
-let _vuadmKeys = [];
-function renderVerbUsageAdmin(keep){
+let _vuadmKeys = [];function renderVerbUsageAdmin(keep){
   if(!keep) _vuadmKeys = Object.keys(getVerbUsage());
   const vu = getVerbUsage();
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑动词用法详解 · 易混词辨析</h2><div class="sub" style="margin-bottom:10px">编辑每个词条的释义/辨析/搭配/易错/短语，增删词条；保存后所有用户立即看到最新版。搭配、短语用逗号分隔。</div>';
@@ -16150,6 +16339,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="./refine_data.js" defer></script>
+<script src="./verbconj.js" defer></script>
 <script src="./vdata_dele.js" defer></script>
 <script src="./dele_banks/dele_bank_a1.js" defer></script>
 <script src="./dele_banks/dele_bank_a2.js" defer></script>
@@ -16420,7 +16610,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -16587,6 +16777,8 @@ function mergeWbSnapshot(remote){
   // 口音本地优先
   if(remote.accentOverride&&typeof remote.accentOverride==='object'){ST.accentOverride=ST.accentOverride||{};Object.keys(remote.accentOverride).forEach(function(m){if(!ST.accentOverride[m])ST.accentOverride[m]=remote.accentOverride[m];});}
   if(remote.speakModelEssays&&typeof remote.speakModelEssays==='object'){ST.speakModelEssays=ST.speakModelEssays||{};Object.keys(remote.speakModelEssays).forEach(function(t){var rt=remote.speakModelEssays[t];if(!ST.speakModelEssays[t]||(rt.createdAt||0)>(ST.speakModelEssays[t].createdAt||0))ST.speakModelEssays[t]=rt;});}
+  // 变位笔记：按动词 key 合并，同 key 取 ts 较新者（LWW）
+  if(remote.conjNotes&&typeof remote.conjNotes==='object'){ST.conjNotes=ST.conjNotes||{};Object.keys(remote.conjNotes).forEach(function(v){var rt=remote.conjNotes[v];if(rt&&typeof rt==='object'){var lt=ST.conjNotes[v];if(!lt||!lt.ts||(rt.ts||0)>=(lt.ts||0))ST.conjNotes[v]=rt;else ST.conjNotes[v]=lt;}});}
   if(typeof remote.globalAccent==='string'&&(remote.globalAccent==='la'||remote.globalAccent==='es'))ST.globalAccent=remote.globalAccent;
   // 最近学过的词：并集保留10个
   if(Array.isArray(remote.recentlyStudiedWords)&&remote.recentlyStudiedWords.length){
@@ -17162,6 +17354,7 @@ function activate(){
       setTimeout(function(){window._deleFetchContentEdits('oralbank');},2000);
       setTimeout(function(){window._deleFetchContentEdits('verbUsage');},2200);
       setTimeout(function(){window._deleFetchContentEdits('grammar');},2400);
+      setTimeout(function(){window._deleFetchContentEdits('verbConj');},2600);
     }
   }catch(e){}
 }
