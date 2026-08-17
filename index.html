@@ -11842,9 +11842,13 @@ async function renderRefineBody(){
         </div>
       </div>` : '';
 
-      // Hard words box
+      // Hard words box (v4.3: B1/B2 难词可带 ejemplo/analisis 详细分析字段；缺失时保持原有紧凑渲染，零影响)
       const hwHtml = (a.hardWords && a.hardWords.length) ? `<div class="refine-hardwords-box">
-        <b>🧠 难词速查：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}
+        <b>🧠 难词速查：</b>${a.hardWords.map(h => {
+          const chip = `<code>${esc(h.w)}</code>=${esc(h.m)}`;
+          if(!(h.ejemplo || h.analisis)) return chip;
+          return `<details style="display:inline-block;vertical-align:middle;margin:2px 8px 2px 0"><summary style="cursor:pointer;list-style:none;display:inline">${chip} <span style="color:var(--am);font-size:10px">▼ 详解</span></summary><div style="margin-top:4px;padding:6px 8px;background:#fff8e6;border-left:3px solid var(--am);border-radius:4px;font-size:11px;line-height:1.55;max-width:560px">${h.ejemplo ? `<div><b style="color:var(--tr)">✍️ 例句：</b>${esc(h.ejemplo)}</div>` : ''}${h.analisis ? `<div style="margin-top:2px"><b style="color:var(--tr)">🔎 分析：</b>${esc(h.analisis)}</div>` : ''}</div></details>`;
+        }).join(' · ')}
       </div>` : '';
 
       // Interactive quiz
