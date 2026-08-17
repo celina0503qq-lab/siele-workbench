@@ -3328,8 +3328,12 @@ function renderVocab(){
 let _vocabPage = 1;
 const VOCAB_PAGE_SIZE = 100; // P2-1 方案B: 每页 100 条
 
+// 搜索归一化: 小写 + 去重音(输入 esta 可匹配 está, cafe 可匹配 café)
+function normSearch(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
 function filterVocab(){
-  const q = (document.getElementById('vocabSearch')?.value || '').toLowerCase();
+  const q = (document.getElementById('vocabSearch')?.value || '').trim();
+  const nq = normSearch(q);
   const lvl = document.getElementById('vocabLvl')?.value || 'all';
   const topic = document.getElementById('vocabTopic')?.value || 'all';
   if(typeof VDATA==='undefined') return;
@@ -3339,9 +3343,22 @@ function filterVocab(){
       else if(v.lvl !== lvl) return false;
     }
     if(topic !== 'all' && v.t !== topic) return false;
-    if(q && !v.es.toLowerCase().includes(q) && !v.zh.toLowerCase().includes(q) && !v.ex.toLowerCase().includes(q)) return false;
+    if(nq){
+      // 匹配优先级: es完全=3 > es前缀=2 > es包含=1 > 释义/例句=0.5
+      const nes = normSearch(v.es), nzh = normSearch(v.zh), nex = normSearch(v.ex);
+      let score = 0;
+      if(nes === nq) score = 3;
+      else if(nes.startsWith(nq)) score = 2;
+      else if(nes.includes(nq)) score = 1;
+      else if(nzh.includes(nq) || nex.includes(nq)) score = 0.5;
+      if(score === 0) return false;
+      v._score = score;
+    }
     return true;
   });
+  // 按匹配分排序(完全匹配/前缀匹配置顶), 同分保持原序
+  if(nq) filtered.sort((a,b) => ((b._score||0) - (a._score||0)));
+
 
   const tb = document.getElementById('vocabTable');
   if(!tb) return;
