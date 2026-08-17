@@ -2962,6 +2962,7 @@ function renderVocab(){
     <select id="vocabLvl" onchange="filterVocab()">
       <option value="all">全部等级</option>
       <option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option>
+      <option value="专四">专四</option>
     </select>
     <select id="vocabTopic" onchange="filterVocab()">
       <option value="all">全部主题</option>
@@ -2998,7 +2999,10 @@ function filterVocab(){
   const topic = document.getElementById('vocabTopic')?.value || 'all';
   if(typeof VDATA==='undefined') return;
   let filtered = VDATA.filter(v => {
-    if(lvl !== 'all' && v.lvl !== lvl) return false;
+    if(lvl !== 'all'){
+      if(lvl === '专四'){ if(v.tag !== '专四') return false; }
+      else if(v.lvl !== lvl) return false;
+    }
     if(topic !== 'all' && v.t !== topic) return false;
     if(q && !v.es.toLowerCase().includes(q) && !v.zh.toLowerCase().includes(q) && !v.ex.toLowerCase().includes(q)) return false;
     return true;
@@ -3066,7 +3070,7 @@ function renderVocabRow(v){
     <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">${esc(v.es)}</td>
     <td>${esc(v.zh)}</td>
     <td class="pc">${v.pos}</td>
-    <td><span class="tm l${v.lvl}">${v.lvl}</span></td>
+    <td><span class="tm l${v.lvl}">${v.lvl}</span>${v.tag==='专四'?' <span class="tm" style="background:#fdf3e3;color:#854f0b;border:1px solid #e8cfa0">专四</span>':''}${v.dialect?' <span class="tm" style="background:#e8f5ee;color:#0f6e56;border:1px solid #bcdcc9">拉美</span>':''}</td>
     <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
     <td>${masteryHtml}</td>
   </tr>`;
@@ -16588,6 +16592,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./vdata_dele.js" defer></script>
 <script src="./vdata_batch1.js" defer></script>
 <script src="./vdata_batch2.js" defer></script>
+<script src="./vdata_batch3.js" defer></script>
 <script src="./dele_banks/dele_bank_a1.js" defer></script>
 <script src="./dele_banks/dele_bank_a2.js" defer></script>
 <script src="./dele_banks/dele_bank_b1.js" defer></script>
