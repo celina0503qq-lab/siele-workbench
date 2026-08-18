@@ -617,9 +617,11 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
   <div style="display:flex;gap:8px;margin-bottom:13px;flex-wrap:wrap">
     <button class="btn sm" id="tabUsersBtn" onclick="switchAdminTab('users')" style="font-weight:700">📊 用户列表</button>
     <button class="btn sm gh" id="tabInvitesBtn" onclick="switchAdminTab('invites')">🎫 邀请码管理</button>
+    <button class="btn sm gh" id="tabSecurityBtn" onclick="switchAdminTab('security')">🔐 安全日志</button>
   </div>
   <div id="adminUsersContent"></div>
   <div id="adminInvitesContent" style="display:none"></div>
+  <div id="adminSecurityContent" style="display:none"></div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -2206,17 +2208,25 @@ async function revokeCloudSyncToken(id){
 
 // ============ 管理员 · 用户管理 ============
 function switchAdminTab(tab){
-  var uc=$('adminUsersContent'),ic=$('adminInvitesContent');
-  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn');
+  var uc=$('adminUsersContent'),ic=$('adminInvitesContent'),sc=$('adminSecurityContent');
+  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn'),sb=$('tabSecurityBtn');
   if(tab==='users'){
-    if(uc)uc.style.display='';if(ic)ic.style.display='none';
+    if(uc)uc.style.display='';if(ic)ic.style.display='none';if(sc)sc.style.display='none';
     if(ub){ub.style.fontWeight='700';ub.classList.remove('gh');}
     if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
+    if(sb){sb.style.fontWeight='400';sb.classList.add('gh');}
     renderAdminUsers();
+  }else if(tab==='security'){
+    if(uc)uc.style.display='none';if(ic)ic.style.display='none';if(sc)sc.style.display='';
+    if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
+    if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
+    if(sb){sb.style.fontWeight='700';sb.classList.remove('gh');}
+    renderAdminSecurityLogs();
   }else{
-    if(uc)uc.style.display='none';if(ic)ic.style.display='';
+    if(uc)uc.style.display='none';if(ic)ic.style.display='';if(sc)sc.style.display='none';
     if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
     if(ib){ib.style.fontWeight='700';ib.classList.remove('gh');}
+    if(sb){sb.style.fontWeight='400';sb.classList.add('gh');}
     renderAdminInvites();
   }
 }
@@ -2269,6 +2279,53 @@ async function renderAdminInvites(){
       +'</table></div>';
   }catch(err){
     el.innerHTML='<div class="note err">无法加载邀请码列表：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminInvites()">重试</button></div>';
+  }
+}
+// ============ 管理员 · 安全日志 ============
+async function renderAdminSecurityLogs(type){
+  var el=$('adminSecurityContent');
+  if(!el)return;
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+    el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
+    return;
+  }
+  var curType=type||'';
+  var filters=[['','全部'],['login','✅ 登录成功'],['login_locked','🔒 锁定'],['register','📝 注册'],['password_changed','🔑 改密'],['admin_user_status','⚙️ 管理操作'],['rate_limited','⏱ 限流']];
+  var filterBar='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px">'
+    +filters.map(function(f){
+      return '<button class="btn sm '+(f[0]===curType?'t':'gh')+'" onclick="renderAdminSecurityLogs(\''+f[0]+'\')">'+f[1]+'</button>';
+    }).join('')+'</div>';
+  el.innerHTML=filterBar+'<div class="empty">正在加载安全日志…</div>';
+  try{
+    var params={action:'adminListSecurityLogs',sessionToken:ses.sessionToken,limit:100};
+    if(curType)params.type=curType;
+    var result=await callSieleAuth(params);
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    var logs=result.logs||[];
+    if(!logs.length){
+      el.innerHTML=filterBar+'<div class="empty"><span class="big">📭</span>暂无安全日志</div>';
+      return;
+    }
+    var labels={'login':'✅ 登录成功','login_locked':'🔒 锁定','register':'📝 注册','password_changed':'🔑 修改密码','password_reset':'🔓 重置密码','sync_token_created':'🔗 创建同步令牌','admin_user_status':'⚙️ 管理操作','admin_sync_tokens_revoked':'⚙️ 撤销令牌','rate_limited':'⏱ 限流','unknown':'❓ 其他'};
+    var rows=logs.map(function(l){
+      var who=l.username||l.uid||l.adminUid||l.targetUid||'—';
+      var detail='';
+      if(l.type==='register'&&l.inviteCode)detail='邀请码 '+l.inviteCode;
+      else if(l.type==='admin_user_status')detail='目标 '+l.targetUid+' → '+l.status;
+      else if(l.type==='rate_limited')detail=(l.scope||'')+(l.action?' · '+l.action:'')+(l.count?' ×'+l.count:'');
+      else if(l.type==='sync_token_created')detail='设备:'+(l.status||l.method||'');
+      else if(l.type==='password_changed'||l.type==='password_reset')detail='方式:'+(l.method||'');
+      var t=new Date(l.at||Date.now());
+      var p2=function(n){return String(n).padStart(2,'0');};
+      var ts=t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate())+' '+p2(t.getHours())+':'+p2(t.getMinutes());
+      return '<tr style="border-top:1px solid rgba(0,0,0,.05)"><td style="padding:8px 12px;white-space:nowrap;font-size:12px;color:var(--soft)">'+ts+'</td><td style="padding:8px 12px">'+(labels[l.type]||l.type)+'</td><td style="padding:8px 12px"><b>'+esc(who)+'</b></td><td style="padding:8px 12px;font-size:12px;color:var(--soft)">'+esc(detail)+'</td></tr>';
+    }).join('');
+    el.innerHTML=filterBar
+      +'<div class="card" style="padding:0;overflow:auto;max-height:540px"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:rgba(0,0,0,.04);text-align:left;position:sticky;top:0"><th style="padding:9px 12px">时间</th><th style="padding:9px 12px">事件</th><th style="padding:9px 12px">用户</th><th style="padding:9px 12px">详情</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+      +'<div style="font-size:11.5px;color:var(--soft);margin-top:8px">共 '+logs.length+' 条 · 显示最近记录，完整审计保留在云端</div>';
+  }catch(err){
+    el.innerHTML=filterBar+'<div class="note err">无法加载安全日志：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminSecurityLogs()">重试</button></div>';
   }
 }
 async function renderAdminUsers(){

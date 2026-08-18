@@ -406,6 +406,35 @@ async function adminListInvites(event) {
   });
   return response(true, "ADMIN_INVITES", { invites });
 }
+// 管理员安全日志查询：security_audit 集合按时间倒序，可按类型过滤
+async function adminListSecurityLogs(event) {
+  await requireAdmin(event);
+  const limit = Math.min(Number(event.limit || 50), 200);
+  const type = event.type ? String(event.type) : "";
+  try {
+    let query = db.collection("security_audit");
+    if (type) query = query.where({ type });
+    const result = await query.orderBy("at", "desc").limit(limit).get();
+    const logs = result.data.map((l) => ({
+      id: l._id,
+      type: l.type || "",
+      username: l.username || null,
+      uid: l.uid || null,
+      adminUid: l.adminUid || null,
+      targetUid: l.targetUid || null,
+      status: l.status || null,
+      inviteCode: l.inviteCode || null,
+      method: l.method || null,
+      scope: l.scope || null,
+      action: l.action || null,
+      count: l.count != null ? l.count : null,
+      at: l.at || null
+    }));
+    return response(true, "SECURITY_LOGS", { logs });
+  } catch (e) {
+    return response(false, "LOG_QUERY_FAILED");
+  }
+}
 async function adminSetUserStatus(event) {
   const admin = await requireAdmin(event);
   const uid = String(event.uid || "");
@@ -611,6 +640,7 @@ exports.main = async (event) => {
     if (action === "revokeSyncToken") return await revokeSyncToken(input);
     if (action === "adminListUsers") return await adminListUsers(input);
     if (action === "adminListInvites") return await adminListInvites(input);
+    if (action === "adminListSecurityLogs") return await adminListSecurityLogs(input);
     if (action === "adminSetUserStatus") return await adminSetUserStatus(input);
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
     if (action === "pullLearning") return await pullLearning(input);
