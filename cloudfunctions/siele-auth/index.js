@@ -226,14 +226,56 @@ async function register(event) {
   } catch (e) { return response(false, e.code || "REGISTER_FAILED"); }
 }
 
+// 登录失败锁定：同账号连续失败 5 次锁 15 分钟（防暴力破解）
+// 登录失败锁定：同账号连续失败 5 次锁 15 分钟（防暴力破解）
+// 计数持久化到 user_profiles 文档（failedLoginAttempts / lockedUntil 字段），
+// 多实例/实例回收下依然准确（内存 Map 方案在多实例下计数会丢失，故弃用）。
+// 锁定期内返回 LOCKED + retryAfterMs；登录成功即清除计数。
+const LOGIN_LOCK_CONFIG = { MAX_ATTEMPTS: 5, LOCK_MS: 15 * 60 * 1000 };
+async function _getLoginLock(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return 0;
+  const lockedUntil = found.data[0].lockedUntil || 0;
+  if (lockedUntil > Date.now()) return lockedUntil;
+  return 0;
+}
+// 记录一次登录失败；返回本次是否触发锁定（>0 表示已锁定，值为锁到期时间戳）
+async function _recordLoginFail(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return 0; // 不存在的账号不计数（爆破目标是有效账号）
+  const u = found.data[0];
+  const fail = (u.failedLoginAttempts || 0) + 1;
+  let lockUntil = 0;
+  if (fail >= LOGIN_LOCK_CONFIG.MAX_ATTEMPTS) {
+    lockUntil = Date.now() + LOGIN_LOCK_CONFIG.LOCK_MS;
+    await db.collection("user_profiles").doc(u._id).update({ failedLoginAttempts: 0, lockedUntil: lockUntil, lastFailedAt: Date.now() });
+    try { await db.collection("security_audit").add({ type: "login_locked", username, at: Date.now() }); } catch (e) {}
+  } else {
+    await db.collection("user_profiles").doc(u._id).update({ failedLoginAttempts: fail, lastFailedAt: Date.now() });
+  }
+  return lockUntil;
+}
+async function _clearLoginLock(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return;
+  await db.collection("user_profiles").doc(found.data[0]._id).update({ failedLoginAttempts: 0, lockedUntil: null });
+}
+
 async function login(event) {
   const username = normalizeUsername(event.username);
   const password = String(event.password || "");
+  const lockedUntil = await _getLoginLock(username);
+  if (lockedUntil) return response(false, "LOCKED", { retryAfterMs: Math.max(0, lockedUntil - Date.now()) });
   const found = await db.collection("user_profiles").where({ username, status: "active" }).limit(1).get();
   if (!found.data.length) return response(false, "INVALID_CREDENTIALS");
   const user = found.data[0];
   const candidate = passwordHash(password, user.passwordSalt);
-  if (candidate.length !== user.passwordHash.length || !crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(user.passwordHash))) return response(false, "INVALID_CREDENTIALS");
+  if (candidate.length !== user.passwordHash.length || !crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(user.passwordHash))) {
+    const newLock = await _recordLoginFail(username);
+    if (newLock) return response(false, "LOCKED", { retryAfterMs: Math.max(0, newLock - Date.now()) });
+    return response(false, "INVALID_CREDENTIALS");
+  }
+  await _clearLoginLock(username);
   await db.collection("user_profiles").doc(user._id).update({ lastLoginAt: now() });
   await db.collection("security_audit").add({ type: "login", uid: user.uid, username, at: now() });
   const role = user.role === "admin" ? "admin" : "learner";

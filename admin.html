@@ -921,7 +921,7 @@ async function doLogin(e,credentials){
       if(result.code==='INVALID_CREDENTIALS'){fldErr('f_lp',true,cloudAuthMessage(result.code));}
       else toast(cloudAuthMessage(result.code),'err');
       if(credentials&&window.parent&&window.parent!==window){
-        window.parent.postMessage({type:'siele-login-failed',code:result.code||'LOGIN_FAILED'},location.origin);
+        window.parent.postMessage({type:'siele-login-failed',code:result.code||'LOGIN_FAILED',retryAfterMs:result.retryAfterMs||0},location.origin);
       }
       return false;
     }
