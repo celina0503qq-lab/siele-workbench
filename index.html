@@ -2336,7 +2336,70 @@ function renderDash(){
   // 显示工作台云同步角标（固定定位，在后台同步芯片上方）
   setTimeout(function(){ ensureSyncBadge(); }, 0);
 
+  h += renderAbilityRadar();
+
   return h;
+}
+
+// ===== 能力雷达图（新增卡片，2026-08-20）=====
+// 五维：词汇掌握 / 语法完成 / 跟读均分 / 测验均分 / 口语均分（全部基于真实 ST 数据）
+function abilityScores(){
+  const total = (typeof VDATA!=='undefined' && VDATA.length) ? VDATA.length : 4866;
+  const mastered = Object.keys(ST.vocabMastery||{}).filter(function(k){ return ST.vocabMastery[k]>=1; }).length;
+  const vocab = Math.min(100, Math.round(mastered/total*100));
+  const gramTotal = (typeof GFLAT!=='undefined' && GFLAT.length) ? GFLAT.length : 111;
+  const gramDone = Object.keys(ST.grammarDone||{}).filter(function(k){ return ST.grammarDone[k]; }).length;
+  const gram = Math.min(100, Math.round(gramDone/Math.max(1,gramTotal)*100));
+  const shadowArr = Object.keys(ST.shadowScores||{}).map(function(k){ var v=ST.shadowScores[k]; return (v&&v.score)||0; });
+  const shadow = shadowArr.length ? Math.round(shadowArr.reduce(function(a,b){return a+b;},0)/shadowArr.length) : 0;
+  const quizArr = (ST.quizResults||[]).filter(function(x){ return typeof x==='number'; });
+  const quiz = quizArr.length ? Math.round(quizArr.reduce(function(a,b){return a+b;},0)/quizArr.length) : 0;
+  const oralArr = Object.keys(ST.sieleOralScores||{}).map(function(k){ var s=ST.sieleOralScores[k]; return (s&&(s.bestScore||s.score))||0; });
+  const oral = oralArr.length ? Math.round(oralArr.reduce(function(a,b){return a+b;},0)/oralArr.length) : 0;
+  return { vocab:vocab, gram:gram, shadow:shadow, quiz:quiz, oral:oral };
+}
+function renderAbilityRadar(){
+  const s = abilityScores();
+  const dims = [
+    { label:'词汇', color:'#10b981' },
+    { label:'语法', color:'#3b82f6' },
+    { label:'跟读', color:'#f59e0b' },
+    { label:'测验', color:'#ef4444' },
+    { label:'口语', color:'#8b5cf6' }
+  ];
+  const vals = [s.vocab, s.gram, s.shadow, s.quiz, s.oral];
+  const cx=100, cy=95, R=62;
+  function pt(i, r){
+    const ang = -Math.PI/2 + i*2*Math.PI/5;
+    return (cx + r*Math.cos(ang)).toFixed(1) + ',' + (cy + r*Math.sin(ang)).toFixed(1);
+  }
+  let grid = '';
+  for(let ring=1; ring<=3; ring++){
+    const pts = [];
+    for(let i=0;i<5;i++) pts.push(pt(i, R*ring/3));
+    grid += '<polygon points="'+pts.join(' ')+'" fill="none" stroke="#ece3da" stroke-width="1"/>';
+  }
+  let axes = '';
+  for(let i=0;i<5;i++){
+    const p = pt(i,R).split(',');
+    axes += '<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#ece3da" stroke-width="1"/>';
+  }
+  const dataPts = [];
+  for(let i=0;i<5;i++) dataPts.push(pt(i, R*Math.max(0.05, Math.min(1, vals[i]/100))));
+  let labels = '';
+  for(let i=0;i<5;i++){
+    const p = pt(i, R+16).split(',');
+    labels += '<text x="'+p[0]+'" y="'+p[1]+'" font-size="10" fill="#8c7e76" text-anchor="middle" dominant-baseline="middle">'+dims[i].label+' '+vals[i]+'</text>';
+  }
+  const radarSvg = '<svg viewBox="0 0 200 200" style="width:150px;height:150px;flex-shrink:0">'+
+    grid+axes+
+    '<polygon points="'+dataPts.join(' ')+'" fill="rgba(192,57,43,.18)" stroke="#C0392B" stroke-width="2"/>'+
+    labels+'</svg>';
+  const rows = dims.map(function(d,i){
+    return '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:30px;color:var(--soft)">'+d.label+'</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:'+vals[i]+'%;background:'+d.color+';border-radius:3px"></i></div><b style="width:28px;text-align:right">'+vals[i]+'</b></div>';
+  }).join('');
+  return '<div class="card" style="margin-top:14px;border-left:4px solid var(--am)"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">基于真实学习数据 · 练习后自动更新</span></h3>'+
+    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div></div>';
 }
 
 // ===== FEAT-2: 日期联动待办 =====
