@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>西语备考工作台 · 全功能新版 UI 预览 v2</title>
+<style>
+:root{
+  --bg:#FAF6F1;            /* 米白底 */
+  --bg2:#F4EAE0;           /* 浅米 */
+  --card:#FFFFFF;
+  --ink:#3F3631;           /* 深棕文字 */
+  --ink2:#8C7E76;
+  --brand:#C0392B;         /* 西班牙红（原品牌色） */
+  --brand2:#E08E0B;        /* 金橙 */
+  --accent:#D35D3B;        /* 橙红主强调 */
+  --accent2:#E8A87C;       /* 浅橙 */
+  --rose:#C9A29A;
+  --line:#ECE3DA;
+  --good:#6B8E6E;
+  --warn:#C17B5C;
+  --radius:16px;
+  --shadow:0 6px 24px rgba(120,60,40,.09);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+.banner{background:linear-gradient(90deg,#C0392B,#D35D3B);color:#fff;text-align:center;padding:9px;font-size:12.5px}
+.banner b{font-weight:800}
+.wrap{display:flex;min-height:calc(100vh - 37px)}
+
+/* 侧边栏 */
+.side{width:224px;background:var(--card);border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:3px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 10px 14px}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#C0392B,#E08E0B);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;font-family:Georgia,serif;flex:none}
+.brand h1{font-size:14px;font-weight:800}
+.brand .sub{font-size:10.5px;color:var(--ink2)}
+.ns{font-size:10px;color:var(--ink2);letter-spacing:1.5px;text-transform:uppercase;padding:12px 10px 3px}
+.ni{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:11px;color:var(--ink);cursor:pointer;border:none;background:none;width:100%;text-align:left;font-size:13px;font-family:inherit}
+.ni:hover{background:var(--bg)}
+.ni.on{background:var(--bg2);color:var(--brand);font-weight:700}
+.ni .ic{width:20px;text-align:center;font-size:15px}
+.side-user{margin-top:auto;display:flex;align-items:center;gap:9px;padding:10px;border-top:1px solid var(--line)}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C0392B,#E8A87C);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.side-user .nm{font-size:12.5px;font-weight:700}
+.side-user .lv{font-size:10px;color:var(--ink2)}
+
+/* 主区 */
+.main{flex:1;padding:22px 26px;max-width:1220px;margin:0 auto}
+.page{display:none}
+.page.on{display:block}
+.card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{font-size:13.5px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tag{font-size:10px;background:var(--bg2);color:var(--brand);padding:2px 8px;border-radius:20px;font-weight:600;margin-left:auto}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap}
+.hello h2{font-size:26px;font-weight:800}
+.hello .sub{color:var(--ink2);font-size:13px;margin-top:3px}
+.countdown{background:linear-gradient(135deg,#C0392B,#E2574C);color:#fff;border-radius:var(--radius);padding:14px 22px;text-align:center;box-shadow:var(--shadow)}
+.countdown .lb{font-size:11px;opacity:.88;letter-spacing:1px}
+.countdown .num{font-size:34px;font-weight:800;line-height:1.15}
+.countdown .unit{font-size:12px;opacity:.92}
+.grid{display:grid;grid-template-columns:1.35fr .9fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border-radius:14px;padding:13px 10px;text-align:center;box-shadow:var(--shadow)}
+.stat .v{font-size:21px;font-weight:800;color:var(--brand)}
+.stat .l{font-size:10.5px;color:var(--ink2);margin-top:2px}
+.goal-bar{height:10px;background:var(--bg2);border-radius:8px;overflow:hidden;margin:10px 0 6px}
+.goal-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#C0392B,#E8A87C)}
+.goal-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink2)}
+.prio{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.prio .it{background:var(--bg);border-radius:12px;padding:9px 4px;text-align:center}
+.prio .it .sc{font-size:19px;font-weight:800}
+.prio .it .nm{font-size:10.5px;color:var(--ink2)}
+.prio .it.hot{background:linear-gradient(135deg,#C0392B,#D35D3B);color:#fff}
+.prio .it.hot .nm{color:rgba(255,255,255,.78)}
+.tasks{display:flex;flex-direction:column;gap:9px}
+.task{display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer}
+.task .done{width:19px;height:19px;border-radius:6px;border:2px solid var(--rose);flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.task .done.checked{background:var(--good);border-color:var(--good)}
+.task .tt{flex:1;min-width:0}
+.task .tt .n{font-size:13px;font-weight:700}
+.task .tt .s{font-size:10.5px;color:var(--ink2)}
+.task .dur{font-size:11px;color:var(--brand);font-weight:700;background:var(--bg2);padding:3px 9px;border-radius:20px;white-space:nowrap}
+.task.main-task{border-left:4px solid var(--brand);background:linear-gradient(180deg,#FFFDFB,#FCF3EC)}
+.loop{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.loop .step{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1}
+.loop .step .ci{width:38px;height:38px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:17px}
+.loop .step .n{font-size:10px;color:var(--ink2);text-align:center}
+.loop .arrow{color:var(--rose);font-size:13px}
+.radar{display:flex;align-items:center;gap:16px}
+.radar .lg{font-size:11px;color:var(--ink2);display:grid;gap:6px}
+.radar .lg .row{display:flex;align-items:center;gap:6px}
+.radar .lg .dot{width:8px;height:8px;border-radius:50%}
+.radar .lg b{margin-left:auto}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.quick button{background:var(--bg);border:none;border-radius:12px;padding:11px 6px;font-size:12px;cursor:pointer;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:5px;font-family:inherit}
+.quick button .i{font-size:18px}
+.quick button:hover{background:var(--bg2)}
+.pomo{display:flex;align-items:center;gap:14px}
+.pomo-ring{width:88px;height:88px;border-radius:50%;background:conic-gradient(var(--accent) 0 96%,var(--bg2) 96% 100%);display:flex;align-items:center;justify-content:center;position:relative}
+.pomo-ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:#fff}
+.pomo-ring b{position:relative;font-size:15px}
+.pomo .info{font-size:11.5px;color:var(--ink2);line-height:1.8}
+.err-dist{display:flex;flex-direction:column;gap:8px}
+.err-dist .row{display:flex;align-items:center;gap:8px;font-size:11.5px}
+.err-dist .row .n{width:74px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.err-dist .bar{flex:1;height:9px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.err-dist .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#C0392B,#E8A87C)}
+.err-dist .row .p{width:38px;text-align:right;font-weight:700}
+.count-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.count-cards .c{background:var(--bg);border-radius:13px;padding:12px;text-align:center}
+.count-cards .c .v{font-size:20px;font-weight:800;color:var(--brand)}
+.count-cards .c .l{font-size:10.5px;color:var(--ink2)}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 13px;font-size:12px;cursor:pointer;color:var(--ink);font-family:inherit}
+.tabs button.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:700}
+
+/* 工具条 */
+.toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12.5px;background:#fff;color:var(--ink);font-family:inherit}
+.toolbar input{flex:1;min-width:180px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;font-size:12.5px;cursor:pointer;color:var(--ink);font-family:inherit}
+.btn:hover{background:var(--bg)}
+.btn.prim{background:linear-gradient(135deg,#C0392B,#D35D3B);color:#fff;border:none;font-weight:700}
+.btn.acc{background:linear-gradient(135deg,#D35D3B,#E08E0B);color:#fff;border:none;font-weight:700}
+.btn.sm{padding:5px 10px;font-size:11.5px;border-radius:8px}
+
+/* 词汇卡 */
+.vlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px}
+.vcard .es{font-size:16px;font-weight:800;font-family:Georgia,serif}
+.vcard .zh{font-size:12.5px;color:var(--ink2);margin-top:2px}
+.vcard .lv{margin-top:7px;display:inline-block;font-size:10px;background:var(--bg2);color:var(--brand);padding:2px 8px;border-radius:12px}
+.vcard .spk{margin-left:6px;border:none;background:var(--bg2);border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:12px}
+
+/* 语法 */
+.acc{border:1px solid var(--line);border-radius:13px;margin-bottom:8px;overflow:hidden;background:#fff}
+.acc .ah{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;font-weight:700;font-size:13px}
+.acc .ah .lv{font-size:10px;background:var(--bg2);color:var(--brand);padding:2px 8px;border-radius:12px}
+.acc .ab{display:none;padding:12px 14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);line-height:1.8}
+.acc.open .ab{display:block}
+.acc.open .ah::after{transform:rotate(180deg)}
+.acc .ah::after{content:"▾";margin-left:auto;color:var(--rose);transition:.2s}
+
+/* 闪卡 */
+.flash-stage{max-width:420px;margin:10px auto;perspective:900px}
+.flash-card{height:230px;border-radius:18px;background:linear-gradient(160deg,#FFFDFB,#F8EFE6);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s;position:relative}
+.flash-card .es{font-size:26px;font-weight:800;font-family:Georgia,serif}
+.flash-card .zh{font-size:15px;color:var(--brand);font-weight:700}
+.flash-card .hint{position:absolute;top:10px;right:14px;font-size:11px;color:var(--ink2)}
+.flash-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.flash-actions button{flex:1;max-width:150px}
+
+/* 测验 */
+.qz{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.qz .q{font-size:14px;font-weight:700;margin-bottom:12px}
+.qz .opts{display:flex;flex-direction:column;gap:8px}
+.qz .opt{padding:11px 13px;border:1px solid var(--line);border-radius:11px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:9px}
+.qz .opt:hover{background:var(--bg)}
+.qz .opt.sel{background:var(--bg2);border-color:var(--brand);font-weight:700}
+.qz .opt.right{background:#EDF4ED;border-color:var(--good)}
+.qz .opt.wrong{background:#FAECE5;border-color:var(--warn)}
+.qz .fb{margin-top:12px;font-size:12px;color:var(--ink2)}
+
+/* 口语/写作 */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.topic{border:1px solid var(--line);border-radius:13px;padding:13px;cursor:pointer;background:#fff}
+.topic:hover{border-color:var(--rose)}
+.topic .t{font-weight:700;font-size:13px}
+.topic .d{font-size:11px;color:var(--ink2);margin-top:3px}
+textarea{border:1px solid var(--line);border-radius:12px;padding:12px;width:100%;min-height:130px;font-size:13px;font-family:inherit;color:var(--ink);resize:vertical}
+
+/* 文章列表 */
+.art{border:1px solid var(--line);border-radius:13px;padding:13px;margin-bottom:9px;cursor:pointer;background:#fff}
+.art .t{font-weight:700;font-size:13px}
+.art .m{font-size:11px;color:var(--ink2);margin-top:3px;display:flex;gap:10px}
+
+/* DELE 入口 */
+.dele-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dele-ent{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center;cursor:pointer;transition:.15s}
+.dele-ent:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--rose)}
+.dele-ent .lv{font-size:26px;font-weight:800;font-family:Georgia,serif;color:var(--brand)}
+.dele-ent .nm{font-size:12px;color:var(--ink2);margin-top:4px}
+.dele-ent .cnt{font-size:10.5px;background:var(--bg2);color:var(--brand);border-radius:12px;padding:2px 10px;display:inline-block;margin-top:8px}
+.dele-tasks{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.dele-tasks .dt{border:1px solid var(--line);border-radius:11px;padding:10px 6px;text-align:center;font-size:12px;cursor:pointer;background:#fff}
+.dele-tasks .dt:hover{border-color:var(--rose)}
+.dele-tasks .dt .i{font-size:17px;display:block;margin-bottom:3px}
+
+.foot{text-align:center;color:var(--ink2);font-size:11.5px;padding:20px 0 10px}
+.note{margin-top:10px;font-size:11px;color:var(--ink2);background:var(--bg2);border-radius:10px;padding:8px 12px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="banner">🎨 <b>全功能新版 UI 预览 v2</b> · 米白底 + 橙红点缀 · 覆盖全部 15 板块 + 全部入口 · 功能保留 · 未修改线上工作台</div>
+<div class="wrap">
+
+<!-- ========== 侧边栏 ========== -->
+<aside class="side">
+  <div class="brand"><div class="logo">Ñ</div><div><h1>西语备考工作台</h1><div class="sub">DELE · SIELE · A1–B2</div></div></div>
+  <div class="ns">main</div>
+  <button class="ni on" data-p="dash"><span class="ic">🏠</span>仪表盘</button>
+  <button class="ni" data-p="flash"><span class="ic">🃏</span>单词卡片</button>
+  <button class="ni" data-p="vocab"><span class="ic">📚</span>词汇库</button>
+  <div class="ns">学习</div>
+  <button class="ni" data-p="grammar"><span class="ic">📐</span>语法库</button>
+  <button class="ni" data-p="shadow"><span class="ic">🎤</span>跟读训练</button>
+  <button class="ni" data-p="siele"><span class="ic">🎯</span>SIELE 专项</button>
+  <div class="ns">练习</div>
+  <button class="ni" data-p="quiz"><span class="ic">✏️</span>题库测验</button>
+  <button class="ni" data-p="writing"><span class="ic">✍️</span>写作练习</button>
+  <button class="ni" data-p="speaking"><span class="ic">🗣</span>口语话题</button>
+  <div class="ns">备考</div>
+  <button class="ni" data-p="planner"><span class="ic">📅</span>学习计划</button>
+  <button class="ni" data-p="errors"><span class="ic">🚨</span>错题集</button>
+  <button class="ni" data-p="reading"><span class="ic">📰</span>外刊阅读</button>
+  <button class="ni" data-p="refine"><span class="ic">📚</span>外刊精炼</button>
+  <div class="ns">DELE 专项</div>
+  <button class="ni" data-p="dele"><span class="ic">📝</span>DELE 专项</button>
+  <div class="ns">系统</div>
+  <button class="ni" data-p="admin"><span class="ic">⚙️</span>后台管理</button>
+  <div class="side-user">
+    <div class="avatar">S</div>
+    <div><div class="nm">Serena</div><div class="lv">SIELE · B2 备考中 · 管理员</div></div>
+  </div>
+</aside>
+
+<!-- ========== 主区 ========== -->
+<main class="main">
+
+<!-- ===== 仪表盘 ===== -->
+<section class="page on" id="pg-dash">
+  <div class="hero">
+    <div class="hello"><h2>¡Hola, Serena! 👋</h2><div class="sub">坚持今天，你一定可以拿下 DELE B2！· 上次学习 2026-08-18</div></div>
+    <div class="countdown"><div class="lb">距离 DELE B2 考试还有</div><div class="num">63 <span style="font-size:15px;font-weight:600">天</span></div><div class="unit">今日进度 45 / 60 min</div></div>
+  </div>
+
+  <!-- 学习统计（原工作台仪表盘核心统计） -->
+  <div class="stats">
+    <div class="stat"><div class="v">553</div><div class="l">已学单词</div></div>
+    <div class="stat"><div class="v">120</div><div class="l">已掌握 ⭐⭐⭐</div></div>
+    <div class="stat"><div class="v">77</div><div class="l">语法已学</div></div>
+    <div class="stat"><div class="v">86</div><div class="l">测验均分</div></div>
+    <div class="stat"><div class="v">86</div><div class="l">跟读句子</div></div>
+  </div>
+
+  <!-- 考试设置（原工作台顶栏：考试类型/目标等级/考试日期） -->
+  <div class="card">
+    <h3>🎫 考试设置 <span class="tag">原工作台顶栏功能</span></h3>
+    <div class="toolbar" style="margin:0">
+      <select onchange="this.style.borderColor='var(--brand)'"><option selected>DELE</option><option>SIELE</option></select>
+      <select><option>A1</option><option>A2</option><option selected>B2</option><option>C1</option></select>
+      <input type="date" value="2026-10-20">
+      <button class="btn acc sm">✓ 已保存</button>
+      <button class="btn sm" onclick="go('planner')">📅 调整学习计划</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card"><h3>🎯 今日目标 <span class="tag">建议 45–60 分钟</span></h3>
+        <div class="goal-bar"><i style="width:75%"></i></div><div class="goal-meta"><span>45 / 60 分钟</span><span>已完成 3 项</span></div></div>
+      <div class="card"><h3>🧠 能力优先级 <span class="tag">基于最近 7 天 · 越高越需加强</span></h3>
+        <div class="prio">
+          <div class="it"><div class="sc">95</div><div class="nm">词汇</div></div>
+          <div class="it hot"><div class="sc">82</div><div class="nm">阅读</div></div>
+          <div class="it"><div class="sc">64</div><div class="nm">听力</div></div>
+          <div class="it"><div class="sc">55</div><div class="nm">写作</div></div>
+          <div class="it"><div class="sc">45</div><div class="nm">语法</div></div>
+        </div></div>
+      <div class="card"><h3>📋 今日任务清单 <span class="tag">0 / 4</span></h3>
+        <div class="tasks">
+          <div class="task main-task" onclick="tog(this)"><span style="font-size:13px">📌</span><span class="done"></span><div class="tt"><div class="n">完成 DELE B2 阅读训练 · Tarea 1</div><div class="s">今日最重要 · 建议优先</div></div><span class="dur">25 分钟</span></div>
+          <div class="task" onclick="tog(this)"><span class="done"></span><div class="tt"><div class="n">复习 20 张单词卡</div><div class="s">词汇 · 高频错词优先</div></div><span class="dur">15 分钟</span></div>
+          <div class="task" onclick="tog(this)"><span class="done"></span><div class="tt"><div class="n">整理 5 个错题</div><div class="s">错题集 · Ser vs Estar</div></div><span class="dur">10 分钟</span></div>
+          <div class="task" onclick="tog(this)"><span class="done"></span><div class="tt"><div class="n">跟读练习 10 分钟</div><div class="s">口语 · 语音语调</div></div><span class="dur">10 分钟</span></div>
+        </div></div>
+      <div class="card"><h3>🔄 学习闭环 <span class="tag">数据驱动</span></h3>
+        <div class="loop">
+          <div class="step"><div class="ci">📖</div><div class="n">学习&amp;练习</div></div><span class="arrow">→</span>
+          <div class="step"><div class="ci">📊</div><div class="n">数据记录</div></div><span class="arrow">→</span>
+          <div class="step"><div class="ci">🔍</div><div class="n">错题分析</div></div><span class="arrow">→</span>
+          <div class="step"><div class="ci">🤖</div><div class="n">智能推荐</div></div><span class="arrow">→</span>
+          <div class="step"><div class="ci">🔁</div><div class="n">再次练习</div></div>
+        </div></div>
+      <div class="card"><h3>⚡ 快捷操作 <span class="tag">全部入口</span></h3>
+        <div class="quick">
+          <button onclick="go('flash')"><span class="i">🃏</span>背单词</button>
+          <button onclick="go('quiz')"><span class="i">✏️</span>做测验</button>
+          <button onclick="go('siele')"><span class="i">🎯</span>SIELE 专项</button>
+          <button onclick="go('errors')"><span class="i">🚨</span>错题集</button>
+          <button onclick="go('writing')"><span class="i">✍️</span>写作</button>
+          <button onclick="go('speaking')"><span class="i">🗣</span>口语</button>
+          <button onclick="go('shadow')"><span class="i">🎤</span>跟读</button>
+          <button onclick="go('grammar')"><span class="i">📐</span>语法</button>
+          <button onclick="go('reading')"><span class="i">📰</span>外刊</button>
+          <button onclick="go('refine')"><span class="i">📚</span>精炼</button>
+          <button onclick="go('dele')"><span class="i">📝</span>DELE</button>
+          <button onclick="go('admin')"><span class="i">⚙️</span>后台</button>
+        </div></div>
+    </div>
+    <div>
+      <div class="card"><h3>📡 能力雷达</h3>
+        <div class="radar">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <polygon points="60,12 104,42 88,94 32,94 16,42" fill="none" stroke="#ECE3DA" stroke-width="2"/>
+            <polygon points="60,30 90,50 79,82 41,82 30,50" fill="rgba(192,57,43,.14)" stroke="#C0392B" stroke-width="2"/>
+            <circle cx="60" cy="30" r="3" fill="#C0392B"/><circle cx="90" cy="50" r="3" fill="#C0392B"/><circle cx="79" cy="82" r="3" fill="#C0392B"/><circle cx="41" cy="82" r="3" fill="#C0392B"/><circle cx="30" cy="50" r="3" fill="#C0392B"/>
+          </svg>
+          <div class="lg">
+            <div class="row"><span class="dot" style="background:#C0392B"></span>阅读<b>82</b></div>
+            <div class="row"><span class="dot" style="background:#D35D3B"></span>词汇<b>95</b></div>
+            <div class="row"><span class="dot" style="background:#E8A87C"></span>听力<b>64</b></div>
+            <div class="row"><span class="dot" style="background:#E3CFC2"></span>语法<b>45</b></div>
+            <div class="row"><span class="dot" style="background:#EFE2D9"></span>写作<b>55</b></div>
+          </div>
+        </div>
+        <div class="note">📊 SIELE 准备度 <b style="color:var(--brand)">67%</b> · 优先攻克：B2 阅读</div>
+      </div>
+      <div class="card"><h3>🚨 错题集 2.0</h3>
+        <div class="err-dist">
+          <div class="row"><span class="n">Ser vs Estar</span><span class="bar"><i style="width:100%"></i></span><span class="p">26.9%</span></div>
+          <div class="row"><span class="n">过去时态</span><span class="bar"><i style="width:71%"></i></span><span class="p">19.2%</span></div>
+          <div class="row"><span class="n">por/para</span><span class="bar"><i style="width:57%"></i></span><span class="p">15.4%</span></div>
+        </div>
+        <button class="btn acc sm" style="margin-top:10px;width:100%" onclick="go('errors')">进入错题集 →</button>
+      </div>
+      <div class="card"><h3>⏱ 番茄钟</h3>
+        <div class="pomo">
+          <div class="pomo-ring"><b id="pomoT">25:00</b></div>
+          <div class="info">今日番茄 <b style="color:var(--brand)">4</b> 个<br>专注总时长 <b>95</b> 分钟<br><button class="btn sm acc" onclick="pomoGo()">▶ 开始</button></div>
+        </div></div>
+      <div class="card"><h3>📆 备考倒计时</h3>
+        <div class="count-cards">
+          <div class="c"><div class="v">63 天</div><div class="l">距 DELE B2</div></div>
+          <div class="c"><div class="v">45 天</div><div class="l">距 SIELE</div></div>
+        </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 单词卡片 ===== -->
+<section class="page" id="pg-flash">
+  <div class="hero"><div class="hello"><h2>🃏 单词卡片</h2><div class="sub">翻牌记忆 · 即时默写 · 错词二次巩固 · 发音跟读</div></div></div>
+  <div class="card">
+    <div class="tabs" style="margin-bottom:12px">
+      <button id="fmFlip" class="on" onclick="setFlashMode('flip')">🃏 翻牌记忆</button>
+      <button id="fmPrac" onclick="setFlashMode('practice')">🎯 中西对应练习</button>
+    </div>
+    <div class="tabs" style="margin-bottom:14px">
+      <button id="fvCard" class="on" onclick="setFlashView('card')">📇 卡片</button>
+      <button id="fvDict" onclick="setFlashView('dict')">✍️ 听写</button>
+      <button id="fvRein" onclick="setFlashView('rein')">🛠 默写二次巩固 <span id="reinCnt">(2)</span></button>
+    </div>
+    <div id="flashBody">
+      <div class="flash-stage"><div class="flash-card" onclick="flip()">
+        <span class="hint" id="flashHint">点击翻转 · 1/6</span><div class="es" id="flashEs">el ordenador</div><div class="zh" style="display:none" id="flashZh">电脑 · 计算机</div>
+      </div></div>
+      <div class="flash-actions">
+        <button class="btn" onclick="flashNext(0)">😵 不认识</button>
+        <button class="btn prim" onclick="flashNext(1)">😊 认识</button>
+        <button class="btn" onclick="speakT(document.getElementById('flashEs').textContent,'es-ES')">🔊 发音</button>
+      </div>
+      <div class="goal-bar" style="margin-top:14px"><i id="flashBar" style="width:20%"></i></div>
+      <div class="goal-meta"><span id="flashProg">本轮 1/6 · 已认识 0</span><span>复习队列 2 · ⭐ 掌握 120</span></div>
+    </div>
+  </div>
+  <div class="card"><h3>📋 本轮词卡</h3><div class="vlist" id="flashList"></div></div>
+</section>
+
+<!-- ===== 词汇库 ===== -->
+<section class="page" id="pg-vocab">
+  <div class="hero"><div class="hello"><h2>📚 词汇库</h2><div class="sub">4,866 词 · CEFR 分级 + 专四维度 · AI 例句 · 30 主题双语</div></div></div>
+  <div class="toolbar">
+    <input id="vocabSearch" placeholder="🔍 搜索西语/中文…（如 ser、casa、家）" oninput="renderVocab()">
+    <select id="vocabLvl" onchange="renderVocab()"><option value="">全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>专四</option></select>
+    <select id="vocabTopic" onchange="renderVocab()"><option value="">全部主题</option><option>comida_y_bebida</option><option>salud_y_cuerpo</option><option>tiempo_y_naturaleza</option><option>trabajo_y_profesiones</option><option>general</option></select>
+    <button class="btn acc sm" onclick="alert('生词本：演示中，真实版可增删自己的生词')">➕ 生词本</button>
+    <button class="btn sm" onclick="vocabShowZhuansi()">🏷 专四词表</button>
+    <button class="btn sm" onclick="speakT('hola','es-ES')">🔊 发音</button>
+  </div>
+  <div class="vlist" id="vocabList"></div>
+  <div class="card" style="margin-top:12px">
+    <h3>📖 动词用法详解 · 易混词辨析 <span class="tag">表头并列对比组 · RAE 溯源</span></h3>
+    <div id="verbUsageList"></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <h3>🔀 动词变位速查 <span class="tag">13 内置 · 词库 1297 个可查 · 14 时态</span></h3>
+    <div class="toolbar" style="margin-bottom:8px">
+      <input id="conjSearch" placeholder="🔍 搜索动词（如 ser、trabajar、vestirse）..." oninput="renderConj()" style="flex:1">
+      <button class="btn acc sm" onclick="conjPractice()">📖 顺序学习</button>
+      <button class="btn sm" onclick="conjPractice()">✍️ 默写</button>
+      <button class="btn sm" onclick="conjPractice()">🎧 听写</button>
+    </div>
+    <div id="conjList"></div>
+  </div>
+</section>
+
+<!-- ===== 语法库 ===== -->
+<section class="page" id="pg-grammar">
+  <div class="hero"><div class="hello"><h2>📐 语法库</h2><div class="sub">98 个语法点 · CEFR 分级 · 详解 + 例句 · RAE 参考 · 搜索跳转</div></div></div>
+  <div class="toolbar">
+    <input id="grammarSearch" placeholder="🔍 搜索语法点（如：过去时、subjuntivo、por）..." oninput="renderGrammar()" style="flex:1">
+    <button class="btn sm" onclick="speakT('La gramática española es muy interesante','es-ES')">🔊 朗读</button>
+  </div>
+  <div id="grammarList"></div>
+</section>
+
+<!-- ===== 跟读训练 ===== -->
+<section class="page" id="pg-shadow">
+  <div class="hero"><div class="hello"><h2>🎤 跟读训练</h2><div class="sub">TTS 朗读 · 录音回放 · 评分 · 按等级筛选</div></div></div>
+  <div class="toolbar">
+    <select id="shadowLvl" onchange="renderShadow()"><option value="all">全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select>
+    <button class="btn acc sm">▶ 开始跟读模式</button>
+    <button class="btn sm">📊 我的成绩</button>
+  </div>
+  <div class="card"><div id="shadowList"></div><div id="shadowScore"></div></div>
+</section>
+
+<!-- ===== SIELE 专项 ===== -->
+<section class="page" id="pg-siele">
+  <div class="hero"><div class="hello"><h2>🎯 SIELE 专项</h2><div class="sub">阅读 / 听力 / 写作 / 口语 四维训练</div></div></div>
+  <div class="card">
+    <div class="tabs" style="margin-bottom:12px">
+      <button class="on">🎧 口语 Tarea</button>
+      <button>📖 阅读</button>
+      <button>🎧 听力</button>
+      <button>✍️ 写作</button>
+    </div>
+    <div class="tabs" id="sieleTabs"></div>
+    <div id="sieleBody" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- ===== 题库测验 ===== -->
+<section class="page" id="pg-quiz">
+  <div class="hero"><div class="hello"><h2>✏️ 题库测验</h2><div class="sub">先选等级再选科目 · 即时判分 · 错题自动入库</div></div></div>
+  <div class="card">
+    <div class="toolbar" style="margin-bottom:12px">
+      <span style="font-size:12px;color:var(--ink2)">等级：</span>
+      <select id="quizLvl" onchange="quizReset()"><option value="all">全部等级</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select>
+      <span style="font-size:12px;color:var(--ink2);margin-left:10px">科目：</span>
+    </div>
+    <div class="tabs" id="quizTabs"></div>
+    <div id="quizBody" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- ===== 写作练习 ===== -->
+<section class="page" id="pg-writing">
+  <div class="hero"><div class="hello"><h2>✍️ 写作练习</h2><div class="sub">SIELE 写作 Tarea 1–2 · AI 评分建议 · 范文对照</div></div></div>
+  <div class="card">
+    <h3>📝 Tarea 1 · 电子邮件（约 120 词）</h3>
+    <div class="topic-grid" style="grid-template-columns:1fr">
+      <div class="topic"><div class="t">Has recibido un mensaje de tu amigo Carlos: te invita a su fiesta de cumpleaños.</div><div class="d">Responde al mensaje: acepta la invitación, pregunta qué llevar y confirma la hora.</div></div>
+    </div>
+    <textarea id="writeBox" placeholder="Escribe aquí tu respuesta…（点击下方评分获取建议）"></textarea>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="btn acc" onclick="scoreWrite()">📊 获取评分建议</button>
+      <button class="btn" onclick="speakT('Querido Carlos, gracias por la invitación.','es-ES')">🔊 朗读题目</button>
+      <button class="btn" onclick="document.getElementById('writeBox').value='Querido Carlos, gracias por la invitación. Estaré encantado de ir a tu fiesta de cumpleaños. ¿Qué debo llevar? ¿A qué hora empieza? Un abrazo, Serena.'">📄 填入范文</button>
+    </div>
+    <div id="writeFb"></div>
+  </div>
+</section>
+
+<!-- ===== 口语话题 ===== -->
+<section class="page" id="pg-speaking">
+  <div class="hero"><div class="hello"><h2>🗣 口语话题</h2><div class="sub">情景应答 · 语音评测 · 范例对照 · 高赞范文库</div></div></div>
+  <div class="card"><div class="topic-grid" id="speakGrid"></div></div>
+</section>
+
+<!-- ===== 学习计划 ===== -->
+<section class="page" id="pg-planner">
+  <div class="hero"><div class="hello"><h2>📅 学习计划</h2><div class="sub">每周目标 · 打卡跟踪 · 进度一览</div></div></div>
+  <div class="grid3">
+    <div class="card"><h3>📈 本周进度</h3><div class="goal-bar"><i style="width:64%"></i></div><div class="goal-meta"><span>9 / 14 项完成</span><span>64%</span></div></div>
+    <div class="card"><h3>🔥 连续学习</h3><div style="font-size:30px;font-weight:800;color:var(--brand)">12 <span style="font-size:14px">天</span></div><div class="note">最佳纪录 21 天 · 今日已打卡 ✓</div></div>
+    <div class="card"><h3>🗓 本周任务</h3>
+      <div class="tasks">
+        <div class="task" onclick="tog(this)"><span class="done checked">✓</span><div class="tt"><div class="n">背 60 个新词（A1/A2）</div></div></div>
+        <div class="task" onclick="tog(this)"><span class="done checked">✓</span><div class="tt"><div class="n">学完虚拟式现在时</div></div></div>
+        <div class="task" onclick="tog(this)"><span class="done"></span><div class="tt"><div class="n">完成 2 篇 B2 阅读</div></div></div>
+        <div class="task" onclick="tog(this)"><span class="done"></span><div class="tt"><div class="n">1 次写作批改</div></div></div>
+      </div></div>
+  </div>
+</section>
+
+<!-- ===== 错题集 ===== -->
+<section class="page" id="pg-errors">
+  <div class="hero"><div class="hello"><h2>🚨 错题集 2.0</h2><div class="sub">记录 · 分析 · 攻克你的薄弱点（共 26 题）· 导出/筛选/巩固</div></div></div>
+  <div class="toolbar">
+    <select><option>全部科目</option><option>词汇</option><option>语法</option><option>阅读</option><option>听力</option></select>
+    <select><option>全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select>
+    <button class="btn sm">📤 导出错题</button>
+    <button class="btn sm acc">🎯 错题统计</button>
+  </div>
+  <div class="grid">
+    <div>
+      <div class="card"><h3>📊 知识点分布</h3>
+        <div class="err-dist">
+          <div class="row"><span class="n">Ser vs Estar</span><span class="bar"><i style="width:100%"></i></span><span class="p">26.9%</span></div>
+          <div class="row"><span class="n">过去时态</span><span class="bar"><i style="width:71%"></i></span><span class="p">19.2%</span></div>
+          <div class="row"><span class="n">por/para</span><span class="bar"><i style="width:57%"></i></span><span class="p">15.4%</span></div>
+          <div class="row"><span class="n">连接词</span><span class="bar"><i style="width:43%"></i></span><span class="p">11.5%</span></div>
+        </div></div>
+      <div class="card"><h3>💡 改进建议</h3>
+        <div class="note">优先复习 <b style="color:var(--brand)">Ser vs Estar</b>：ser 表本质/身份，estar 表状态/位置。建议先看语法库详解，再做 5 道专项练习。</div>
+      </div>
+    </div>
+    <div>
+      <div class="card"><h3>📋 错题列表 <span class="tag">高频优先</span></h3><div id="errList"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 外刊阅读 ===== -->
+<section class="page" id="pg-reading">
+  <div class="hero"><div class="hello"><h2>📰 外刊阅读</h2><div class="sub">精选西语外刊 · 分级标注 · 词汇高亮 · 阅读进度同步</div></div></div>
+  <div class="card"><div id="readList"></div></div>
+</section>
+
+<!-- ===== 外刊精炼 ===== -->
+<section class="page" id="pg-refine">
+  <div class="hero"><div class="hello"><h2>📚 外刊精炼</h2><div class="sub">每日精炼 · quiz 巩固 · 云端同步 · 历史回溯</div></div></div>
+  <div class="card"><div id="refineList"></div></div>
+</section>
+
+<!-- ===== DELE 专项 ===== -->
+<section class="page" id="pg-dele">
+  <div class="hero"><div class="hello"><h2>📝 DELE 专项</h2><div class="sub">四级真题题库 · 阅读/听力/写作/口语 · 全真模拟</div></div></div>
+  <div class="dele-grid">
+    <div class="dele-ent"><div class="lv">A1</div><div class="nm">DELE A1 · 入门</div><div class="cnt">350 题</div></div>
+    <div class="dele-ent"><div class="lv">A2</div><div class="nm">DELE A2 · 初级</div><div class="cnt">53 题</div></div>
+    <div class="dele-ent"><div class="lv">B1</div><div class="nm">DELE B1 · 中级</div><div class="cnt">65 题</div></div>
+    <div class="dele-ent"><div class="lv">B2</div><div class="nm">DELE B2 · 中高级</div><div class="cnt">137 题</div></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h3>📋 每级任务入口</h3>
+    <div class="dele-tasks">
+      <div class="dt"><span class="i">📖</span>阅读</div>
+      <div class="dt"><span class="i">🎧</span>听力</div>
+      <div class="dt"><span class="i">✍️</span>写作</div>
+      <div class="dt"><span class="i">🗣</span>口语</div>
+      <div class="dt"><span class="i">🏁</span>全真模拟</div>
+    </div>
+    <div class="note">已整合 26.6.24 锦鲤西语资料包 · 听力 TTS 播放 · 自动判分 · 进度云端同步</div>
+  </div>
+</section>
+
+<!-- ===== 后台管理 ===== -->
+<section class="page" id="pg-admin">
+  <div class="hero"><div class="hello"><h2>⚙️ 后台管理</h2><div class="sub">账号 / 内容 / 数据（管理员）</div></div></div>
+  <div class="grid3">
+    <div class="card"><h3>👥 用户管理</h3><div class="note">账号、角色、邀请码、安全日志、停用</div><button class="btn sm acc" style="margin-top:8px">进入（iframe 桥接）</button></div>
+    <div class="card"><h3>📝 内容编辑</h3><div class="note">词汇 / 语法 / 写作 / 口语 / 易混词 管理员编辑</div></div>
+    <div class="card"><h3>🔐 安全日志</h3><div class="note">登录 / 锁定 / 注册 / 管理操作审计</div></div>
+    <div class="card"><h3>☁️ 云同步</h3><div class="note">跨设备同步 · 传输码 · 同步令牌</div></div>
+    <div class="card"><h3>📊 数据备份</h3><div class="note">导出 / 导入 / 本地备份</div></div>
+    <div class="card"><h3>🔑 账号安全</h3><div class="note">改密 / 忘记密码 / 邀请码重置</div></div>
+  </div>
+</section>
+
+<div class="foot">西语备考工作台 · 全功能新版 UI 预览 v2（数据为演示样例）· 米白底 + 橙红点缀 · 全部功能入口保留 · 未修改线上工作台</div>
+</main>
+</div>
+
+<script>
+/* ===== 数据（演示样例，结构对应真实数据）===== */
+const WORDS=[
+  {es:"hola",zh:"你好",lv:"A1",tp:"general"}, {es:"casa",zh:"房子",lv:"A1",tp:"general"},
+  {es:"comer",zh:"吃",lv:"A1",tp:"general"}, {es:"el ordenador",zh:"电脑",lv:"A2",tp:"general"},
+  {es:"la manzana",zh:"苹果",lv:"A1",tp:"comida_y_bebida"}, {es:"el agua",zh:"水",lv:"A1",tp:"comida_y_bebida"},
+  {es:"la cabeza",zh:"头",lv:"A1",tp:"salud_y_cuerpo"}, {es:"la salud",zh:"健康",lv:"B1",tp:"salud_y_cuerpo"},
+  {es:"el tiempo",zh:"时间/天气",lv:"A1",tp:"tiempo_y_naturaleza"}, {es:"la lluvia",zh:"雨",lv:"A2",tp:"tiempo_y_naturaleza"},
+  {es:"estudiar",zh:"学习",lv:"A1",tp:"general"}, {es:"viajar",zh:"旅行",lv:"A2",tp:"general"},
+  {es:"conseguir",zh:"获得",lv:"B1",tp:"general"}, {es:"embargo",zh:"然而",lv:"B2",tp:"general"},
+  {es:"la solicitud",zh:"申请",lv:"B2",tp:"general"}, {es:"tortilla",zh:"西班牙土豆饼",lv:"A2",tp:"comida_y_bebida"},
+  {es:"queque",zh:"蛋糕(拉美)",lv:"专四",tp:"comida_y_bebida",dialect:1}, {es:"maní",zh:"花生(拉美)",lv:"专四",tp:"comida_y_bebida",dialect:1},
+  {es:"abogado",zh:"律师",lv:"B1",tp:"trabajo_y_profesiones",tag:"专四"}, {es:"albañil",zh:"泥瓦工",lv:"B1",tp:"trabajo_y_profesiones",tag:"专四"},
+  {es:"cocodrilo",zh:"鳄鱼",lv:"B2",tp:"tiempo_y_naturaleza",tag:"专四"}, {es:"delfín",zh:"海豚",lv:"B2",tp:"tiempo_y_naturaleza",tag:"专四"},
+  {es:"foca",zh:"海豹",lv:"B2",tp:"tiempo_y_naturaleza",tag:"专四"},
+];
+// 动词用法详解 · 易混词辨析（表头并列对比组）
+const VERB_USAGE=[
+  {key:"decir",group:"decir / hablar / contar",zh:"说/讲/讲述",discrimination:"decir=传达信息；hablar=说话的行为；contar=讲述故事",collocations:"decir la verdad · hablar español · contar un cuento",commonErrors:"decir 不能用于'说某种语言'"},
+  {key:"ser",group:"ser / estar",zh:"是/处于",discrimination:"ser 本质身份，estar 状态位置",collocations:"ser feliz · estar cansado",commonErrors:"ser 表身份，estar 表临时状态"},
+  {key:"por",group:"por / para",zh:"为了/由于",discrimination:"por 原因途径，para 目的对象",collocations:"por la mañana · para ti",commonErrors:"por/para 不可互换"},
+  {key:"saber",group:"saber / conocer",zh:"知道/认识",discrimination:"saber 知识技能，conocer 熟悉人或地",collocations:"saber nadar · conocer Madrid",commonErrors:"conocer 后不加动词不定式"},
+  {key:"llevar",group:"llevar / traer",zh:"带走/带来",discrimination:"llevar 带去别处，traer 带来这里",collocations:"llevar a casa · traer de la tienda",commonErrors:"方向相反"},
+  {key:"poner",group:"poner / ponerse",zh:"放置/变得",discrimination:"poner 放，ponerse 穿/变得",collocations:"poner la mesa · ponerse nervioso",commonErrors:"代词式表状态变化"},
+];
+// 动词变位速查（内置13个：3规则模板+10高频不规则）
+const CONJ=[
+  {v:"trabajar",type:"规则 -ar",zh:"工作",form:"trabajo · trabajas · trabaja · trabajamos · trabajáis · trabajan"},
+  {v:"comer",type:"规则 -er",zh:"吃",form:"como · comes · come · comemos · coméis · comen"},
+  {v:"vivir",type:"规则 -ir",zh:"生活",form:"vivo · vives · vive · vivimos · vivís · viven"},
+  {v:"ser",type:"不规则",zh:"是",form:"soy · eres · es · somos · sois · son",hot:true},
+  {v:"estar",type:"不规则",zh:"处于",form:"estoy · estás · está · estamos · estáis · están",hot:true},
+  {v:"haber",type:"不规则",zh:"有/助动",form:"he · has · ha · hemos · habéis · han",hot:true},
+  {v:"ir",type:"不规则",zh:"去",form:"voy · vas · va · vamos · vais · van",hot:true},
+  {v:"tener",type:"不规则",zh:"拥有",form:"tengo · tienes · tiene · tenemos · tenéis · tienen",hot:true},
+  {v:"hacer",type:"不规则",zh:"做",form:"hago · haces · hace · hacemos · hacéis · hacen",hot:true},
+  {v:"venir",type:"不规则",zh:"来",form:"vengo · vienes · viene · venimos · venís · vienen"},
+  {v:"poder",type:"不规则",zh:"能够",form:"puedo · puedes · puede · podemos · podéis · pueden",hot:true},
+  {v:"decir",type:"不规则",zh:"说",form:"digo · dices · dice · decimos · decís · dicen"},
+  {v:"salir",type:"不规则",zh:"出去",form:"salgo · sales · sale · salimos · salís · salen"},
+];
+const GRAMMAR=[
+  {lv:"A1",t:"Ser vs. Estar",d:"ser 表本质/身份，estar 表状态/位置",ex:"Ella es profesora; está cansada.",ref:"https://dle.rae.es/ser",detail:"🔹 ser：永久本质（Ella es alta.）🔹 estar：临时状态/位置（Está en casa.）"},
+  {lv:"A1",t:"Presente de indicativo",d:"陈述式现在时",ex:"Yo estudio español cada día.",ref:"https://dle.rae.es/estudiar",detail:"🔹 表示习惯动作（Tomo café por la mañana.）🔹 客观事实（El sol sale por el este.）"},
+  {lv:"A1",t:"Artículos definidos",d:"定冠词 el/la/los/las",ex:"La casa es grande.",ref:"https://dle.rae.es/el",detail:"🔹 el/la 单数，los/las 复数 🔹 阴性 a- 开头重音词用 el（el agua）"},
+  {lv:"A1",t:"Hay vs. Está(n)",d:"存在 vs 位置",ex:"Hay un libro en la mesa; el libro está aquí.",detail:"🔹 hay=存在（不定位）🔹 está=具体位置（需定冠词）"},
+  {lv:"A1",t:"Género de sustantivos",d:"名词的性",ex:"El niño / la niña.",detail:"🔹 -o 多数阳性，-a 多数阴性 🔹 例外：el día, la mano"},
+  {lv:"A1",t:"Interrogativos",d:"疑问词",ex:"¿Qué? ¿Quién? ¿Dónde? ¿Cuándo?",detail:"🔹 qué=什么，quién=谁，dónde=哪里，cuándo=何时"},
+  {lv:"A2",t:"Pretérito indefinido",d:"简单过去时",ex:"Ayer visité el museo.",ref:"https://dle.rae.es/visitar",detail:"🔹 过去一次性完成动作（Ayer comí paella.）🔹 注意不规则：fui/fuiste/fue"},
+  {lv:"A2",t:"Por vs. Para",d:"por 表原因/途径，para 表目的",ex:"Viajo por trabajo; compro para ti.",ref:"https://dle.rae.es/por",detail:"🔹 por：原因、途径、时间段、交换（por la mañana, pagar por）🔹 para：目的、方向、接受者（para ti, para mañana）"},
+  {lv:"A2",t:"Pretérito imperfecto",d:"过去未完成时",ex:"Cuando era niño, jugaba en el parque.",detail:"🔹 描述过去背景/习惯（De pequeño, corría mucho.）🔹 与 indefinido 对比：持续 vs 一次性"},
+  {lv:"A2",t:"Muy vs. Mucho",d:"很 vs 很多",ex:"Muy cansado / mucho trabajo.",detail:"🔹 muy+形容词/副词 🔹 mucho+名词（mucho dinero）"},
+  {lv:"A2",t:"Ir a + infinitivo",d:"一般将来时",ex:"Voy a estudiar mañana.",detail:"🔹 ir a + 动词原形 = 计划中的未来（Vamos a viajar.）"},
+  {lv:"A2",t:"Verbos reflexivos",d:"代词式动词",ex:"Me levanto a las siete.",detail:"🔹 me/te/se/nos/os/se + 动词（levantarse, vestirse）🔹 动作作用于自身"},
+  {lv:"B1",t:"Subjuntivo presente",d:"虚拟式现在时",ex:"Espero que vengas pronto.",ref:"https://dle.rae.es/venir",detail:"🔹 表达愿望/情感/怀疑（Quiero que estudies.）🔹 触发词：esperar, querer, ojalá"},
+  {lv:"B1",t:"Imperfecto de subjuntivo",d:"虚拟式过去时",ex:"Si tuviera dinero, viajaría.",detail:"🔹 与条件式搭配（Si + imperfecto subj, condicional）🔹 -ra/-se 两形（tuviera/tuviese）"},
+  {lv:"B1",t:"Condicional simple",d:"简单条件式",ex:"Me gustaría un café.",detail:"🔹 礼貌请求（¿Podría ayudarme?）🔹 虚拟条件（Si pudiera, iría.）"},
+  {lv:"B1",t:"Pretérito perfecto",d:"现在完成时",ex:"He comido ya.",detail:"🔹 haber + 过去分词 🔹 与现在的关联（Hoy he visto a Juan.）"},
+  {lv:"B1",t:"Conectores discursivos",d:"连接词",ex:"Sin embargo, no estoy de acuerdo.",detail:"🔹 sin embargo/pero（转折）🔹 además（补充）🔹 por lo tanto（因此）"},
+  {lv:"B1",t:"Imperativo",d:"命令式",ex:"¡Ven aquí!",detail:"🔹 肯定命令（Ven, come, habla）🔹 tú/vosotros 有专用形式"},
+  {lv:"B2",t:"Pluscuamperfecto de subjuntivo",d:"虚拟式过去完成时",ex:"Si hubiera estudiado, habría aprobado.",detail:"🔹 hubiera/hubiese + 过去分词 🔹 与条件式完成搭配（habría + 分词）"},
+  {lv:"B2",t:"Todos los usos de \"se\"",d:"se 的所有用法",ex:"Se vende piso.",ref:"https://dle.rae.es/se",detail:"🔹 代词式（se levanta）🔹 无人称（Se habla español）🔹 被动（Se venden casas）🔹 意外（Se me cayó）"},
+  {lv:"B2",t:"Correlación de tiempos",d:"时态呼应",ex:"Dijo que vendría mañana.",detail:"🔹 主句过去时 → 从句相应过去（dijo que iba / había ido）"},
+  {lv:"B2",t:"Perífrasis verbales",d:"动词短语",ex:"Estoy estudiando; acabo de llegar.",detail:"🔹 estar+gerundio（进行中）🔹 acabar de+inf（刚刚）🔹 ir a+inf（将来）"},
+  {lv:"B2",t:"Estilo indirecto",d:"间接引语",ex:"Dijo que estaba cansado.",detail:"🔹 时态后移（dice→dijo que estaba）🔹 人称/时间词调整"},
+];
+const SHADOW=[
+  {es:"Hoy es un día perfecto para aprender español.",zh:"今天是学习西语的好日子",lv:"A1"},
+  {es:"Me gusta mucho la comida española.",zh:"我很喜欢西班牙菜",lv:"A2"},
+  {es:"¿Qué vas a hacer este fin de semana?",zh:"这个周末你打算做什么？",lv:"A2"},
+  {es:"El tiempo está cambiando en toda España.",zh:"西班牙的天气正在变化",lv:"B1"},
+  {es:"La tecnología mejora realmente nuestra calidad de vida.",zh:"科技确实改善了我们的生活质量",lv:"B2"},
+  {es:"Si hubiera sabido, habría venido antes.",zh:"如果早知道，我就会早点来",lv:"B2"},
+  {es:"Me llamo Ana y tengo veinte años.",zh:"我叫安娜，今年二十岁",lv:"A1"},
+  {es:"Voy a la playa con mis amigos cada verano.",zh:"每年夏天我都和朋友去海滩",lv:"A2"},
+  {es:"El gobierno ha aprobado una nueva ley de vivienda.",zh:"政府通过了新的住房法",lv:"B1"},
+  {es:"A pesar de la crisis, la economía sigue creciendo.",zh:"尽管有危机，经济仍在增长",lv:"B2"},
+];
+const TAREAS=[
+  {n:1,nm:"Tarea 1",t:"自我介绍",d:"回答 3 个关于你本人的问题",sec:45},
+  {n:2,nm:"Tarea 2",t:"情景应答",d:"模拟真实情景回答",sec:60},
+  {n:3,nm:"Tarea 3",t:"看图说话",d:"描述图片 + 观点",sec:120},
+  {n:4,nm:"Tarea 4",t:"图片对比",d:"比较两幅图并发表观点",sec:180},
+  {n:5,nm:"Tarea 5",t:"观点论述",d:"就给定话题阐述立场",sec:180},
+];
+const QUIZZES={
+  "A1":{
+    "词汇":[{q:"el ordenador 的中文是？",o:["电脑","手机","打印机"],a:0},
+           {q:"casa 的意思是？",o:["家/房子","学校","商店"],a:0},
+           {q:"¿Cómo estás? 的正确回答是？",o:["Estoy bien, gracias.","Soy Madrid.","Tengo 20 años."],a:0}],
+    "语法":[{q:"Ella ___ profesora.",o:["es","está","hay"],a:0},
+           {q:"Yo ___ español cada día.",o:["estudio","estudias","estudian"],a:0},
+           {q:"___ es la casa grande?",o:["La","El","Los"],a:0}]
+  },
+  "A2":{
+    "词汇":[{q:"viajar 的意思是？",o:["旅行","跑步","唱歌"],a:0},
+           {q:"la lluvia 是？",o:["雪","雨","风"],a:0},
+           {q:"la manzana 是？",o:["香蕉","苹果","橙子"],a:1}],
+    "语法":[{q:"Ayer ___ al museo.",o:["fui","voy","iré"],a:0},
+           {q:"Viajo a Madrid ___ tren.",o:["en","por","para"],a:0},
+           {q:"___ hay un banco cerca?",o:["¿Qué","¿Dónde","¿Cuál"],a:1}]
+  },
+  "B1":{
+    "词汇":[{q:"conseguir 的意思是？",o:["获得","失去","给予"],a:0},
+           {q:"la salud 是？",o:["金钱","健康","幸福"],a:1},
+           {q:"embargo 出现在？",o:["sin embargo=然而","por embargo=因此","a embargo=虽然"],a:0}],
+    "语法":[{q:"Espero que ___ pronto.",o:["vengas","vienes","vendrás"],a:0},
+           {q:"Si tuviera dinero, ___ un coche.",o:["compraría","compro","compré"],a:0},
+           {q:"Busco a alguien que ___ chino.",o:["hable","habla","habló"],a:0}]
+  },
+  "B2":{
+    "词汇":[{q:"la solicitud 是？",o:["申请/请求","解决方案","签名"],a:0},
+           {q:"el objetivo 是？",o:["目标","障碍","主题"],a:0},
+           {q:"lograr 是？",o:["实现/达成","失败","寻找"],a:0}],
+    "语法":[{q:"Si hubiera estudiado, ___ aprobado.",o:["habría","he","habré"],a:0},
+           {q:"Habla como si no ___ pasado nada.",o:["hubiera","ha","haya"],a:0},
+           {q:"Dudo que ___ a la fiesta.",o:["venga","viene","vino"],a:0}]
+  }
+};
+const QUIZ_SUBJECTS=["词汇","语法"];
+const ERRORS=[
+  {d:"2026-08-12",tp:"语法 · Ser/Estar",lv:"B1",q:"Ella ___ guapa e inteligente.",wrong:"está",right:"es"},
+  {d:"2026-08-11",tp:"阅读 · 推断题",lv:"B2",q:"Según el texto, ¿qué ocurrió en los últimos años?",wrong:"A ✗",right:"B ✓"},
+  {d:"2026-08-10",tp:"听力 · 主旨题",lv:"B2",q:"¿De qué hablan principalmente?",wrong:"A ✗",right:"C ✓"},
+];
+const ARTS=[
+  {t:"第 9 期 · 西班牙橄榄油文化",m:"2026-08-10",lv:"B1",min:3,vocab:8,quiz:"4/5"},
+  {t:"第 8 期 · 周日家庭聚餐的传统",m:"2026-08-09",lv:"A2",min:2,vocab:5,quiz:"5/5"},
+  {t:"第 7 期 · 意大利儿童肥胖问题",m:"2026-08-08",lv:"B2",min:4,vocab:12,quiz:"3/5"},
+  {t:"第 6 期 · 八月西班牙生活变化",m:"2026-08-06",lv:"B1",min:3,vocab:7,quiz:"—"},
+  {t:"第 5 期 · 咖啡文化（每日清晨）",m:"2026-08-05",lv:"A1",min:2,vocab:4,quiz:"—"},
+];
+const REFINES=[
+  {t:"2026-08-10 精炼 · 第 9 期",m:"quiz 3/5 · 已巩固 · 云端已同步",lv:"B1"},
+  {t:"2026-08-09 精炼 · 第 8 期",m:"quiz 5/5 · 已巩固",lv:"A2"},
+  {t:"2026-08-06 精炼 · 第 6 期",m:"quiz 4/5 · 待巩固",lv:"B2"},
+];
+const SPEAK=[
+  {t:"情景：订酒店",d:"电话预订 7 月 15 日双人间",keys:"reserva · habitación · doble · fecha"},
+  {t:"情景：餐厅点餐",d:"给朋友推荐并点西班牙菜",keys:"recomendar · pedir · especialidad · cuenta"},
+  {t:"情景：问路",d:"向路人询问火车站的路线",keys:"estación · tren · llegar · cerca"},
+  {t:"话题：科技改变生活",d:"阐述科技如何影响生活质量",keys:"tecnología · mejorar · comunicación · futuro"},
+  {t:"情景：看病",d:"向医生描述症状并拿药",keys:"síntoma · dolor · receta · farmacia"},
+  {t:"话题：环境保护",d:"谈环保行动与个人责任",keys:"medio ambiente · reciclar · contaminación"},
+  {t:"话题：教育",d:"谈谈在线教育的利弊",keys:"educación · online · ventaja · desventaja"},
+  {t:"情景：求职面试",d:"自我介绍并回答面试问题",keys:"entrevista · experiencia · trabajo"},
+  {t:"话题：健康生活",d:"谈谈健康饮食与运动习惯",keys:"salud · ejercicio · alimentación"},
+  {t:"情景：购物退货",d:"在商店退货或换货",keys:"devolver · cambiar · recibo · talla"},
+  {t:"话题：旅行经历",d:"讲述一次难忘的旅行",keys:"viaje · conocer · cultura · experiencia"},
+  {t:"情景：机场值机",d:"办理登机手续并托运行李",keys:"facturación · equipaje · vuelo · pasaporte"},
+  {t:"话题：社交媒体",d:"谈社交媒体的利与弊",keys:"redes sociales · privacidad · comunicación"},
+  {t:"情景：租房咨询",d:"询问房源信息并预约看房",keys:"alquilar · piso · precio · visita"},
+  {t:"话题：工作与生活平衡",d:"谈谈如何平衡工作与生活",keys:"equilibrio · trabajo · vida · descanso"},
+  {t:"话题：西班牙文化",d:"介绍一项西班牙文化传统",keys:"cultura · tradición · fiesta · España"},
+];
+
+/* ===== 页面切换 ===== */
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  var el=document.getElementById('pg-'+p); if(el)el.classList.add('on');
+  document.querySelectorAll('.side .ni').forEach(x=>x.classList.toggle('on',x.dataset.p===p));
+  if(p==='vocab')renderVocab(); if(p==='grammar')renderGrammar(); if(p==='flash')renderFlash();
+  if(p==='shadow')renderShadow(); if(p==='siele')renderSiele(); if(p==='quiz')renderQuiz();
+  if(p==='speaking')renderSpeak(); if(p==='errors')renderErrors(); if(p==='reading')renderRead();
+  if(p==='refine')renderRefine();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.side .ni').forEach(b=>b.addEventListener('click',()=>go(b.dataset.p)));
+
+/* 任务勾选 */
+function tog(el){var d=el.querySelector('.done');d.classList.toggle('checked');d.textContent=d.classList.contains('checked')?'✓':'';}
+
+/* 番茄钟 */
+var pomoSec=1500,pomoTimer=null;
+function pomoGo(){
+  var b=event&&event.target; if(b&&b.textContent.includes('开始')){b.textContent='⏸ 暂停';pomoTimer=setInterval(function(){pomoSec--;var m=String(Math.floor(pomoSec/60)).padStart(2,'0'),s=String(pomoSec%60).padStart(2,'0');var el=document.getElementById('pomoT');if(el)el.textContent=m+':'+s;if(pomoSec<=0){clearInterval(pomoTimer);pomoSec=1500;}},1000);}
+  else if(b&&pomoTimer){clearInterval(pomoTimer);pomoTimer=null;b.textContent='▶ 继续';}
+}
+
+/* 发音 */
+function speakT(t,lang){try{var u=new SpeechSynthesisUtterance(t);u.lang=lang||'es-ES';speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+
+/* ===== 词汇库 ===== */
+function renderVocab(){
+  var q=(document.getElementById('vocabSearch').value||'').toLowerCase();
+  var lv=document.getElementById('vocabLvl').value;
+  var tp=document.getElementById('vocabTopic').value;
+  var list=WORDS.filter(w=>(!lv||w.lv===lv)&&(!tp||w.tp===tp)&&(!q||w.es.toLowerCase().includes(q)||w.zh.includes(q)));
+  document.getElementById('vocabList').innerHTML=list.map(w=>
+    '<div class="vcard"><div class="es">'+w.es+' <button class="spk" onclick="speakT(\''+w.es+'\',\'\')">🔊</button></div><div class="zh">'+w.zh+'</div><span class="lv">'+w.lv+'</span>'+(w.tag?' <span class="tag" style="background:#fdf3e3;color:#854f0b">专四</span>':'')+(w.dialect?' <span class="tag" style="background:#e8f5ee;color:#0f6e56">拉美</span>':'')+(w.tp!=='general'?' <span style="font-size:10px;color:var(--ink2)">'+w.tp+'</span>':'')+'</div>'
+  ).join('')||'<div class="note">没有匹配的词，换个关键词试试</div>';
+  renderVerbUsage();
+  renderConj();
+}
+/* 动词用法详解 · 易混词辨析 */
+function renderVerbUsage(){
+  var el=document.getElementById('verbUsageList'); if(!el)return;
+  el.innerHTML=VERB_USAGE.map(u=>
+    '<div class="acc"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')"><b>'+u.group+'</b> · '+u.zh+' <button class="spk" style="float:right" onclick="event.stopPropagation();speakT(\''+u.key+'\',\'\')">🔊</button></div>'+
+    '<div class="ab" style="font-size:11.5px;line-height:1.6"><b>🔹 辨析：</b>'+u.discrimination+'<br><b>🔹 搭配：</b>'+u.collocations+'<br><b>⚠️ 易错：</b>'+u.commonErrors+'</div></div>'
+  ).join('');
+}
+/* 动词变位速查 */
+function renderConj(){
+  var el=document.getElementById('conjList'); if(!el)return;
+  var q=(document.getElementById('conjSearch')?document.getElementById('conjSearch').value:'').toLowerCase();
+  var list=CONJ.filter(c=>!q||c.v.toLowerCase().includes(q)||c.zh.includes(q));
+  el.innerHTML=list.map(c=>
+    '<div class="card" style="padding:10px 12px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'+
+    '<b style="font-size:16px;color:'+(c.type==='不规则'?'#d85a30':'#185fa5')+'">'+c.v+'</b>'+
+    '<span class="tag" style="background:'+(c.type==='不规则'?'#fdf0e9;color:#d85a30':'#e6f1fb;color:#185fa5')+'">'+c.type+'</span>'+
+    (c.hot?'<span class="tag" style="background:#fff3e0;color:#b45309">🔥 常考易错</span>':'')+
+    '<span style="font-size:12px;color:var(--ink2)">'+c.zh+'</span>'+
+    '<button class="spk" style="margin-left:auto" onclick="speakT(\''+c.v+'\',\'\')">🔊</button></div>'+
+    '<div style="font-size:12px;color:var(--ink);margin-top:4px">presente: <b>'+c.form+'</b></div></div>'
+  ).join('')||'<div class="note">未找到匹配动词（词库 1297 个动词均可查）</div>';
+}
+function vocabShowZhuansi(){
+  document.getElementById('vocabLvl').value='专四';
+  renderVocab();
+}
+function conjPractice(){
+  alert('巩固练习：演示中。真实版含顺序学习/默写/听写（12题一轮+最近学习选词+常考时态高亮）');
+}
+
+/* ===== 语法库（搜索 + 分级 + RAE 溯源 + 详解 + 重点⭐）===== */
+const GRAMMAR_KEY=["Ser vs. Estar","Por vs. Para","Subjuntivo presente","Todos los usos de \"se\"","Pluscuamperfecto de subjuntivo","Ir a + infinitivo","Condicional simple","Estilo indirecto"];
+function renderGrammar(){
+  var q=(document.getElementById('grammarSearch')?document.getElementById('grammarSearch').value:'').toLowerCase();
+  var ls={};GRAMMAR.forEach(g=>{(ls[g.lv]=ls[g.lv]||[]).push(g);});
+  document.getElementById('grammarList').innerHTML=Object.keys(ls).map(lv=>
+    '<div class="acc open"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')"><span class="lv">'+lv+'</span>'+ls[lv].length+' 个语法点</div><div class="ab">'+
+    ls[lv].filter(g=>!q||g.t.toLowerCase().includes(q)||g.d.toLowerCase().includes(q)||g.ex.toLowerCase().includes(q)).map(g=>
+      '<div class="acc" style="margin:6px 0"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')">'+(GRAMMAR_KEY.indexOf(g.t)>=0?'⭐ ':'')+g.t+(g.ref?' <a href="'+g.ref+'" target="_blank" onclick="event.stopPropagation()" style="font-size:10px;color:var(--brand)">RAE ↗</a>':'')+'</div><div class="ab"><b>'+g.d+'</b><br>📌 '+g.ex+(g.detail?'<br><span style="font-size:11px;color:var(--ink2)">'+g.detail+'</span>':'')+'</div></div>'
+    ).join('')+'</div></div>').join('')||'<div class="note">没有匹配的语法点</div>';
+}
+
+/* ===== 闪卡（翻牌/练习/听写/巩固）===== */
+var flashWords=[
+  {es:"el ordenador",zh:"电脑",lv:"A2"},{es:"conseguir",zh:"获得",lv:"B1"},{es:"la lluvia",zh:"雨",lv:"A2"},
+  {es:"viajar",zh:"旅行",lv:"A2"},{es:"embargo",zh:"然而",lv:"B2"},{es:"la salud",zh:"健康",lv:"B1"},
+  {es:"lograr",zh:"实现",lv:"B2"},{es:"el objetivo",zh:"目标",lv:"B2"},{es:"estudiar",zh:"学习",lv:"A1"}
+];
+var flashIdx=0,flashKnown=0,flashMode='flip',flashView='card',flashWrong=[],flashQueue=[];
+function renderFlash(){
+  flashIdx=0;flashKnown=0;flashWrong=[];flashQueue=[];
+  var el=document.getElementById('flashList');
+  el.innerHTML=flashWords.map(w=>'<div class="vcard"><div class="es">'+w.es+' <button class="spk" onclick="speakT(\''+w.es+'\',\'\')">🔊</button></div><div class="zh">'+w.zh+'</div><span class="lv">'+w.lv+'</span></div>').join('');
+  flashShow();
+}
+function setFlashMode(m){
+  flashMode=m;
+  document.getElementById('fmFlip').className= m==='flip'?'on':'';
+  document.getElementById('fmPrac').className= m==='practice'?'on':'';
+  flashShow();
+}
+function setFlashView(v){
+  flashView=v;
+  document.getElementById('fvCard').className= v==='card'?'on':'';
+  document.getElementById('fvDict').className= v==='dict'?'on':'';
+  document.getElementById('fvRein').className= v==='rein'?'on':'';
+  var b=document.getElementById('flashBody');
+  if(v==='card'){b.innerHTML=flashCardHtml();flashShow();}
+  else if(v==='dict'){b.innerHTML='<div style="max-width:420px;margin:0 auto"><div class="qz"><div class="q">✍️ 听写 · 听发音写单词</div><div style="text-align:center;padding:10px 0"><button class="btn acc" onclick="speakT(\''+(flashWords[flashIdx%flashWords.length].es)+'\',\'\')">🔊 播放发音（再听一次）</button></div><input id="dictIn" placeholder="输入听到的单词…" style="width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;font-size:14px;font-family:inherit" onkeydown="if(event.key===\'Enter\')dictCheck()"><div class="fb" id="dictFb"></div><div style="text-align:center;margin-top:10px"><button class="btn prim" onclick="dictCheck()">✓ 提交</button> <button class="btn" onclick="dictSkip()">跳过</button></div></div></div>';}
+  else{b.innerHTML=flashReinHtml();}
+}
+function flashCardHtml(){
+  var w=flashWords[flashIdx%flashWords.length];
+  return '<div class="flash-stage"><div class="flash-card" onclick="flip()"><span class="hint" id="flashHint">点击翻转 · '+(flashIdx+1)+'/'+flashWords.length+'</span><div class="es" id="flashEs">'+w.es+'</div><div class="zh" style="display:none" id="flashZh">'+w.zh+'</div></div></div>'+
+    '<div class="flash-actions"><button class="btn" onclick="flashNext(0)">😵 不认识</button><button class="btn prim" onclick="flashNext(1)">😊 认识</button><button class="btn" onclick="speakT(\''+w.es+'\',\'\')">🔊 发音</button></div>'+
+    '<div class="goal-bar" style="margin-top:14px"><i id="flashBar" style="width:'+Math.round(flashIdx/flashWords.length*100)+'%"></i></div>'+
+    '<div class="goal-meta"><span id="flashProg">本轮 '+(flashIdx+1)+'/'+flashWords.length+' · 已认识 '+flashKnown+'</span><span>复习队列 '+flashQueue.length+' · ⭐ 掌握 120</span></div>';
+}
+function flashShow(){
+  if(flashView!=='card')return;
+  var b=document.getElementById('flashBody');b.innerHTML=flashCardHtml();
+}
+function flip(){var z=document.getElementById('flashZh');if(z)z.style.display=z.style.display==='none'?'':'none';}
+function flashNext(known){
+  var w=flashWords[flashIdx%flashWords.length];
+  if(known)flashKnown++;else flashQueue.push(w);
+  flashIdx++;
+  if(flashIdx>=flashWords.length){document.getElementById('flashBody').innerHTML='<div style="text-align:center;padding:26px"><div style="font-size:36px">🎉</div><b>本轮完成！认识 '+flashKnown+'/'+flashWords.length+'</b><div class="note" style="max-width:300px;margin:12px auto">'+flashQueue.length+' 个词进入复习队列 → 可到「默写二次巩固」重练</div><div style="margin-top:10px"><button class="btn prim" onclick="renderFlash()">再来一轮</button></div></div>';return;}
+  flashShow();
+}
+function flashReinHtml(){
+  if(!flashQueue.length)return '<div style="text-align:center;padding:26px"><div style="font-size:34px">🌱</div><b>目前没有待巩固错词</b><br><span style="font-size:12px;color:var(--ink2)">本轮「不认识」的词会进到这里，先做一轮卡片吧</span></div>';
+  return '<h4 style="margin-bottom:10px">待巩固 ' + flashQueue.length + ' 词</h4>' + flashQueue.map(function(w,i){
+    return '<div class="task" style="cursor:default"><span style="font-size:15px">✍️</span><div class="tt"><div class="n">'+w.es+' <button class="spk" style="border:none;background:var(--bg2);border-radius:50%;width:22px;height:22px;font-size:11px;cursor:pointer" onclick="speakT(\''+w.es+'\',\'\')">🔊</button></div><div class="s">'+w.zh+' · '+w.lv+'</div></div><button class="btn sm acc" onclick="this.textContent=\'✅ 已巩固\'">练这个词</button></div>';
+  }).join('');
+}
+var dictQ=0,dictRight=0;
+function dictCheck(){
+  var v=(document.getElementById('dictIn').value||'').trim().toLowerCase();
+  var w=flashWords[dictQ%flashWords.length];
+  var ok=v===w.es.toLowerCase();
+  if(ok)dictRight++;
+  document.getElementById('dictFb').innerHTML=ok?'✅ 正确！':'❌ 正确答案：'+w.es+'（'+w.zh+'）';
+  dictQ++;
+  setTimeout(function(){setFlashView('dict');},1100);
+}
+function dictSkip(){flashWrong.push(flashWords[dictQ%flashWords.length]);dictQ++;setFlashView('dict');}
+
+/* ===== 跟读 ===== */
+function renderShadow(){
+  var lvl=document.getElementById('shadowLvl').value||'all';
+  var list=SHADOW.filter(s=>lvl==='all'||s.lv===lvl);
+  document.getElementById('shadowList').innerHTML=list.map(function(s){
+    return '<div class="task" style="cursor:default"><span style="font-size:16px">🎧</span><div class="tt"><div class="n">'+s.es+'</div><div class="s">'+s.zh+' · '+s.lv+'</div></div><button class="btn sm acc" onclick="speakT(\''+s.es+'\',\'\')">🔊 播放</button><button class="btn sm" onclick="this.textContent=\'🎙 已录音\'">🎙 录音</button></div>';
+  }).join('')||'<div class="note">该等级暂无句子</div>';
+  document.getElementById('shadowScore')?document.getElementById('shadowScore').innerHTML=
+    '<div class="card" style="margin-top:10px"><h3>📊 评分维度（共 5 维）</h3><div class="err-dist">'+
+    '<div class="row"><span class="n">单词准确度 40%</span><span class="bar"><i style="width:85%"></i></span><span class="p">85</span></div>'+
+    '<div class="row"><span class="n">流利度 25%</span><span class="bar"><i style="width:70%"></i></span><span class="p">70</span></div>'+
+    '<div class="row"><span class="n">语序正确 15%</span><span class="bar"><i style="width:90%"></i></span><span class="p">90</span></div>'+
+    '<div class="row"><span class="n">词数匹配 10%</span><span class="bar"><i style="width:60%"></i></span><span class="p">60</span></div>'+
+    '<div class="row"><span class="n">发音置信 10%</span><span class="bar"><i style="width:75%"></i></span><span class="p">75</span></div></div>'+
+    '<div class="note" style="margin-top:8px">🔊 支持 0.7x 慢速 · 🎤 需 Chrome/Edge 麦克风权限 · 成绩保留最高分</div></div>':0;
+}
+
+/* ===== SIELE 专项 ===== */
+var curTarea=1;
+function renderSiele(){
+  document.getElementById('sieleTabs').innerHTML=TAREAS.map(t=>
+    '<button class="'+(t.n===curTarea?'on':'')+'" onclick="curTarea='+t.n+';renderSiele()">Tarea '+t.n+'</button>').join('');
+  var t=TAREAS[curTarea-1];
+  var hist=[{d:"08-19",sc:92},{d:"08-17",sc:78},{d:"08-15",sc:85}].slice(0,Math.max(0,curTarea-2)).concat([{d:"08-19",sc:88},{d:"08-18",sc:81}]);
+  document.getElementById('sieleBody').innerHTML=
+    '<div class="topic"><div class="t">🎧 '+t.nm+' · '+t.t+'</div><div class="d">'+t.d+' · 时长 '+t.sec+' 秒 · 已练 '+hist.length+' 次 · 最高 92 分</div></div>'+
+    '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn acc" onclick="speakT(\'Vamos a empezar. '+t.t+'.\',\'\')">🔊 播放题目</button><button class="btn" onclick="this.textContent=\'🎙 录音中…\'">🎙 录音回答</button><button class="btn" onclick="this.textContent=\'✅ 已显示范例\'">📄 答后范例</button><button class="btn sm" onclick="this.textContent=\'↺ 已换题\'">↺ 智能换题</button></div>'+
+    '<div style="margin-top:12px;font-size:11px;color:var(--ink2)">📈 作答记录：'+hist.map(function(h){return h.d+' '+h.sc+'分';}).join(' · ')+'</div>'+
+    '<div class="note" style="margin-top:12px">题源：用户提供的 2026 回忆版真题 · 训练题经整理与纠错，不冒充官方原题 · 录音后五维评分（内容/流利/词汇/语法/任务完成度）</div>';
+}
+
+/* ===== 测验（按等级 + 科目）===== */
+var curQuiz=0,quizQ=0,quizScore=0;
+function quizReset(){curQuiz=0;quizQ=0;quizScore=0;renderQuiz();}
+function renderQuiz(){
+  var lvl=document.getElementById('quizLvl').value||'all';
+  var pool={};
+  Object.keys(QUIZZES).forEach(function(l){ if(lvl==='all'||lvl===l){ Object.keys(QUIZZES[l]).forEach(function(s){ (pool[s]=pool[s]||[]).push.apply(pool[s],QUIZZES[l][s]); }); } });
+  document.getElementById('quizTabs').innerHTML=Object.keys(pool).map(function(k,i){
+    return '<button class="'+(i===curQuiz?'on':'')+'" onclick="curQuiz='+i+';quizQ=0;quizScore=0;renderQuiz()">'+k+'（'+pool[k].length+' 题）</button>';
+  }).join('')||'<button class="on">暂无题目</button>';
+  var subs=Object.keys(pool),qs=pool[subs[curQuiz]]||[];
+  if(!qs.length){document.getElementById('quizBody').innerHTML='<div class="note">该等级暂无题目，请换一个等级。</div>';return;}
+  if(quizQ>=qs.length){
+    document.getElementById('quizBody').innerHTML='<div style="text-align:center;padding:30px"><div style="font-size:38px">🏆</div><b style="font-size:17px">完成！得分 '+quizScore+'/'+qs.length+'</b><div style="margin-top:14px"><button class="btn acc" onclick="quizQ=0;quizScore=0;renderQuiz()">重新开始</button></div></div>';
+    return;
+  }
+  var q=qs[quizQ];
+  document.getElementById('quizBody').innerHTML=
+    '<div class="qz"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink2);margin-bottom:6px"><span>'+subs[curQuiz]+' · '+lvl+'</span><span>'+(quizQ+1)+' / '+qs.length+'</span></div><div class="q">'+q.q+'</div><div class="opts">'+q.o.map(function(o,i){
+    return '<div class="opt" onclick="pickQuiz(this,'+i+','+q.a+','+(quizQ)+')"><span>'+String.fromCharCode(65+i)+'.</span>'+o+'</div>';
+    }).join('')+
+    '</div><div class="fb" id="qzFb"></div></div>';
+}
+function pickQuiz(el,i,right,qIdx){
+  var lvl=document.getElementById('quizLvl').value||'all';
+  var pool={};
+  Object.keys(QUIZZES).forEach(function(l){ if(lvl==='all'||lvl===l){ Object.keys(QUIZZES[l]).forEach(function(s){ (pool[s]=pool[s]||[]).push.apply(pool[s],QUIZZES[l][s]); }); } });
+  var subs=Object.keys(pool),qs=pool[subs[curQuiz]];
+  document.querySelectorAll('.qz .opt').forEach(function(x){x.classList.remove('sel');x.onclick=null;});
+  el.classList.add(i===right?'right':'wrong');
+  if(i===right)quizScore++;
+  document.getElementById('qzFb').innerHTML=i===right?'✅ 正确！':'❌ 错误，正确答案：'+String.fromCharCode(65+right)+'. '+qs[qIdx].o[right]+'（已加入错题集）';
+  setTimeout(function(){quizQ++;renderQuiz();},1200);
+}
+
+/* ===== 写作 ===== */
+function scoreWrite(){
+  var t=(document.getElementById('writeBox').value||'').trim();
+  var el=document.getElementById('writeFb');
+  if(!t){el.innerHTML='<div class="note" style="margin-top:10px">请先写一点内容再评分。</div>';return;}
+  var w=t.split(/\s+/).length;
+  el.innerHTML='<div class="note" style="margin-top:10px">📊 评分预览：内容覆盖 <b>B+</b> · 词数 '+w+' · 建议：多用连接词（además / sin embargo），检查动词变位。</div>';
+}
+
+/* ===== 口语 ===== */
+function renderSpeak(){
+  document.getElementById('speakGrid').innerHTML=SPEAK.map(s=>
+    '<div class="topic"><div class="t">🗣 '+s.t+'</div><div class="d">'+s.d+'</div><div style="font-size:10.5px;color:var(--ink2);margin-top:4px">🔑 '+s.keys+'</div><div style="margin-top:8px;display:flex;gap:6px"><button class="btn sm" onclick="speakT(\''+s.t.replace('：',':')+'\',\'\')">🔊 听题</button><button class="btn sm acc" onclick="this.textContent=\'🎙 已录音\'">🎙 录音</button><button class="btn sm" onclick="this.nextSibling.textContent=\'📄 已显示范文\'">📄 范文</button></div></div>'
+  ).join('');
+}
+
+/* ===== 错题集 ===== */
+function renderErrors(){
+  document.getElementById('errList').innerHTML=ERRORS.map(e=>
+    '<div class="acc"><div class="ah"><span style="font-size:12px">'+e.d+'</span> <b>'+e.q+'</b> <span class="lv">'+e.lv+'</span></div><div class="ab">你的答案：<b style="color:var(--warn)">'+e.wrong+'</b> · 正确答案：<b style="color:var(--good)">'+e.right+'</b><br>题型：'+e.tp+'</div></div>'
+  ).join('')+'<div style="margin-top:10px"><button class="btn acc sm" onclick="speakT(\'Vamos a repasar los errores.\',\'\')">▶ 开始巩固复习</button></div>';
+}
+
+/* ===== 外刊 ===== */
+function renderRead(){
+  document.getElementById('readList').innerHTML=ARTS.map(a=>
+    '<div class="art" onclick="this.nextSibling.classList.toggle(\'on\')"><div class="t">📰 '+a.t+'</div><div class="m"><span class="lv">'+a.lv+'</span><span style="margin-left:6px">'+a.m+' · ⏱ '+a.min+' 分钟</span><span style="margin-left:auto;color:var(--brand)">开始阅读 →</span></div>'+
+    '<div style="font-size:10.5px;color:var(--ink2);margin-top:4px">📚 难词 '+a.vocab+' 个 · 📝 阅读题 '+(a.quiz==='—'?'待生成':a.quiz)+'</div></div>'+
+    '<div class="note" style="display:none;margin:6px 0"><b>🔍 阅读中…</b> 双语段落对照 · 难词高亮 · 5 道理解题 · 原文链接（BBC Mundo / El País）</div>'
+  ).join('');
+}
+function renderRefine(){
+  document.getElementById('refineList').innerHTML=REFINES.map(r=>
+    '<div class="art" onclick="this.nextSibling.classList.toggle(\'on\')"><div class="t">📚 '+r.t+'</div><div class="m"><span class="lv">'+r.lv+'</span><span style="margin-left:6px">'+r.m+'</span><span style="margin-left:auto;color:var(--brand)">进入精炼 →</span></div></div>'+
+    '<div class="note" style="display:none;margin:6px 0"><b>📖 精炼内容：</b>5 词卡 · 4 篇双语文章（A1-A2-B1-B2）· 26 道题 · 🔊 全文朗读/慢速 · 📝 我的笔记</div>'
+  ).join('');
+}
+
+/* 初始化 */
+renderVocab();renderFlash();renderGrammar();renderShadow();renderSiele();renderQuiz();renderSpeak();renderErrors();renderRead();renderRefine();
+</script>
+</body>
+</html>
