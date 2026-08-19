@@ -193,6 +193,34 @@ textarea{border:1px solid var(--line);border-radius:12px;padding:12px;width:100%
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
 th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
+
+/* ===== 补齐：口音切换 / 学习打卡 / 签到 / 成长树 / 管理员编辑 ===== */
+.chip{display:inline-block;padding:3px 10px;font-size:11px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);cursor:pointer;line-height:1.5}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:700}
+.accent-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0;font-size:11px;color:var(--ink2)}
+.checkin-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fdf6ec;border:1px solid #f0e2c8;border-radius:12px;padding:8px 12px;margin:6px 0;font-size:11px}
+.checkin-bar .btn{padding:3px 10px}
+.checkin-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px}
+.checkin-cal .day-hd{font-size:9.5px;text-align:center;color:var(--ink2);font-weight:700;padding:1px 0}
+.checkin-cal .day-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:11px;font-weight:600;background:#faf5ec;color:var(--ink);cursor:pointer}
+.checkin-cal .day-cell.checked{background:#4CAF50;color:#fff}
+.checkin-cal .day-cell.today{border:2px solid var(--brand);font-weight:800}
+.checkin-cal .day-cell.out{opacity:.35}
+.garden{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#f0f7ee,#e8f1e4);border:1px solid #cfe3c9;border-radius:14px;padding:12px 16px;margin:8px 0}
+.garden .g-icon{font-size:40px;line-height:1}
+.garden .g-name{font-size:15px;font-weight:800;color:#2e6b34}
+.garden .g-bar{height:6px;background:#e2ecd8;border-radius:3px;overflow:hidden;margin-top:6px;width:180px}
+.garden .g-bar i{display:block;height:100%;background:linear-gradient(90deg,#6b8e6e,#4CAF50);border-radius:3px}
+.adminbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#eef4ff;border:1px solid #d4e2f8;border-radius:10px;padding:7px 11px;margin:6px 0;font-size:11px;color:#3b82f6}
+.adminbar .btn{padding:3px 10px;font-size:11px}
+.adminbar .sub{color:#64748b;font-size:10.5px}
+.exam-struct{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.exam-struct .es-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.exam-struct .es-card b{color:var(--brand);font-size:13px}
+.exam-struct .es-row{font-size:10.5px;color:var(--ink2);margin:3px 0}
+.streak-card{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff7ed,#ffe8cc);border:1px solid #f5d9a8;border-radius:12px;padding:10px 14px;margin:6px 0}
+.streak-card .fire{font-size:26px}
+.streak-card .num{font-size:20px;font-weight:800;color:#c2410c}
 </style>
 </head>
 <body>
@@ -237,14 +265,39 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
   <div class="hero">
     <div class="hello"><h2>¡Hola, Serena! 👋</h2><div class="sub">坚持今天，你一定可以拿下 DELE B2！· 上次学习 2026-08-18</div></div>
     <div class="countdown"><div class="lb">距离 DELE B2 考试还有</div><div class="num">63 <span style="font-size:15px;font-weight:600">天</span></div><div class="unit">今日进度 45 / 60 min</div></div>
+  <!-- 全局口音切换 + 连续学习打卡 -->
+  <div class="toolbar" style="margin:10px 0">
+    <span style="font-size:11px;color:var(--ink2)">🌎 全局口音：</span>
+    <button class="chip on" onclick="chipOn(this)">🇲🇽 拉美</button>
+    <button class="chip" onclick="chipOn(this)">🇪🇸 西班牙</button>
+    <span style="margin-left:14px;font-size:11px;color:var(--ink2)">口音影响：单词卡/词汇库/语法/跟读/SIELE 全局</span>
+  </div>
+  <div class="streak-card"><span class="fire">🔥</span><div><div style="font-size:12px;color:var(--ink2)">连续学习打卡</div><div><span class="num">12</span> <span style="font-size:12px">天连续</span> · 最佳纪录 <b>21</b> 天</div></div><button class="btn acc sm" style="margin-left:auto" onclick="this.textContent='✓ 今日已打卡'">📅 今日打卡</button></div>
+  <div class="card"><h3>📅 每日签到 <span class="tag">点击日期编辑当天待办</span></h3>
+    <div class="checkin-cal">
+      <div class="day-hd">日</div><div class="day-hd">一</div><div class="day-hd">二</div><div class="day-hd">三</div><div class="day-hd">四</div><div class="day-hd">五</div><div class="day-hd">六</div>
+      <div class="day-cell out">27</div><div class="day-cell out">28</div><div class="day-cell out">29</div><div class="day-cell out">30</div><div class="day-cell out">31</div><div class="day-cell checked">1</div><div class="day-cell checked">2</div>
+      <div class="day-cell checked">3</div><div class="day-cell checked">4</div><div class="day-cell checked">5</div><div class="day-cell checked">6</div><div class="day-cell checked">7</div><div class="day-cell checked">8</div><div class="day-cell checked">9</div>
+      <div class="day-cell checked">10</div><div class="day-cell checked">11</div><div class="day-cell checked">12</div><div class="day-cell checked">13</div><div class="day-cell checked">14</div><div class="day-cell checked">15</div><div class="day-cell checked">16</div>
+      <div class="day-cell checked">17</div><div class="day-cell checked">18</div><div class="day-cell checked">19</div><div class="day-cell today">20</div><div class="day-cell">21</div><div class="day-cell">22</div><div class="day-cell">23</div>
+      <div class="day-cell">24</div><div class="day-cell">25</div><div class="day-cell">26</div><div class="day-cell">27</div><div class="day-cell">28</div><div class="day-cell">29</div><div class="day-cell">30</div>
+    </div>
+    <div class="note" style="margin-top:6px">本月已签到 <b>19</b> 天 · 点击任意日期可编辑该日待办</div>
+  </div>
+  <div class="card"><h3>📋 考试结构 · DELE & SIELE <span class="tag">倒计时联动</span></h3>
+    <div class="exam-struct">
+      <div class="es-card"><b>DELE</b><div class="es-row">目标：B2 · 2026-10-20 · 距考试 63 天</div><div class="es-row">阅读 60min · 听力 40min · 写作 60min · 口语 20min</div><div class="es-row">等级：A1 A2 B1 B2 C1 C2 · 单项 70/100 通过</div></div>
+      <div class="es-card"><b>SIELE</b><div class="es-row">目标：B2 · 计划 2026-11-05 · 距考试 45 天</div><div class="es-row">阅读 60min · 听力 40min · 写作 50min · 口语 30min</div><div class="es-row">综合 S1-S4 四证书 · 全程机考</div></div>
+    </div>
+  </div>
   </div>
 
   <!-- 学习统计（原工作台仪表盘核心统计） -->
   <div class="stats">
     <div class="stat"><div class="v">553</div><div class="l">已学单词</div></div>
     <div class="stat"><div class="v">120</div><div class="l">已掌握 ⭐⭐⭐</div></div>
-    <div class="stat"><div class="v">77</div><div class="l">语法已学</div></div>
-    <div class="stat"><div class="v">86</div><div class="l">测验均分</div></div>
+    <div class="stat"><div class="v">77</div><div class="l">语法已学(共111)</div></div>
+    <div class="stat"><div class="v">86</div><div class="l">测验均分</div></div><div class="stat"><div class="v">14</div><div class="l">测验完成</div></div>
     <div class="stat"><div class="v">86</div><div class="l">跟读句子</div></div>
   </div>
 
@@ -300,6 +353,10 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
           <button onclick="go('reading')"><span class="i">📰</span>外刊</button>
           <button onclick="go('refine')"><span class="i">📚</span>精炼</button>
           <button onclick="go('dele')"><span class="i">📝</span>DELE</button>
+          <button onclick="go('planner')"><span class="i">📅</span>学习计划</button>
+          <button onclick="go('reading')"><span class="i">📚</span>资源推荐</button>
+          <button onclick="go('refine')"><span class="i">🗺️</span>资料地图</button>
+          <button onclick="this.textContent='☁️ 已同步'"><span class="i">☁️</span>云同步</button>
           <button onclick="go('admin')"><span class="i">⚙️</span>后台</button>
         </div></div>
     </div>
@@ -349,6 +406,8 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
   <div class="card">
     <div class="tabs" style="margin-bottom:12px">
       <button id="fmFlip" class="on" onclick="setFlashMode('flip')">🃏 翻牌记忆</button>
+    <div class="accent-row" style="margin-top:8px"><span>等级：</span><button class="chip on" onclick="chipOn(this)">全部</button><button class="chip" onclick="chipOn(this)">A1</button><button class="chip" onclick="chipOn(this)">A2</button><button class="chip" onclick="chipOn(this)">B1</button><button class="chip" onclick="chipOn(this)">B2</button><button class="chip" onclick="chipOn(this)">专四</button><span style="margin-left:10px">口音：</span><button class="chip on" onclick="chipOn(this)">🌎 拉美</button><button class="chip" onclick="chipOn(this)">🇪🇸 西班牙</button></div>
+    <div class="garden"><div class="g-icon">🌳</div><div><div class="g-name">默写成长树 · 小树苗</div><div class="g-bar"><i style="width:35%"></i></div><div style="font-size:10.5px;color:#5c8a5e;margin-top:4px">总默写正确率 35% · 每提升 10% 树长大一级 → 🌱 🌿 🌳 🌲</div></div></div>
       <button id="fmPrac" onclick="setFlashMode('practice')">🎯 中西对应练习</button>
     </div>
     <div class="tabs" style="margin-bottom:14px">
@@ -375,6 +434,10 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 <!-- ===== 词汇库 ===== -->
 <section class="page" id="pg-vocab">
   <div class="hero"><div class="hello"><h2>📚 词汇库</h2><div class="sub">4,866 词 · CEFR 分级 + 专四维度 · AI 例句 · 30 主题双语</div></div></div>
+  <div class="checkin-bar"><span>📅 词汇学习打卡</span><button class="btn acc sm" onclick="this.textContent='✓ 今日已学 30 词'">✅ 今日打卡</button><span class="sub" style="color:var(--ink2)">已连续打卡 <b>12</b> 天</span></div>
+  <div class="accent-row"><span>🌎 口音：</span><button class="chip on" onclick="chipOn(this)">拉美</button><button class="chip" onclick="chipOn(this)">🇪🇸 西班牙</button><span style="margin-left:10px;color:var(--ink2)">影响单词发音与例句朗读</span></div>
+  <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑动词用法详解（56 组）</button><span class="sub">增删改易混词对比/辨析/搭配/短语，保存后所有用户可见</span></div>
+  <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑动词变位（13 内置 + 1297 词库可查）</button><span class="sub">逐格编辑变位/RAE 易错点/新增动词，云端同步</span></div>
   <div class="toolbar">
     <input id="vocabSearch" placeholder="🔍 搜索西语/中文…（如 ser、casa、家）" oninput="renderVocab()">
     <select id="vocabLvl" onchange="renderVocab()"><option value="">全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>专四</option></select>
@@ -403,6 +466,9 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 <!-- ===== 语法库 ===== -->
 <section class="page" id="pg-grammar">
   <div class="hero"><div class="hello"><h2>📐 语法库</h2><div class="sub">98 个语法点 · CEFR 分级 · 详解 + 例句 · RAE 参考 · 搜索跳转</div></div></div>
+  <div class="checkin-bar"><span>📅 语法学习打卡</span><button class="btn acc sm" onclick="this.textContent='✓ 今日已学 3 点'">✅ 今日打卡</button><span class="sub" style="color:var(--ink2)">已连续打卡 <b>12</b> 天</span></div>
+  <div class="accent-row"><span>🌎 口音：</span><button class="chip on" onclick="chipOn(this)">拉美</button><button class="chip" onclick="chipOn(this)">🇪🇸 西班牙</button></div>
+  <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑语法库（111 条 · 四级）</button><span class="sub">就地编辑 + 独立批量页双通道，保存后所有用户可见</span></div>
   <div class="toolbar">
     <input id="grammarSearch" placeholder="🔍 搜索语法点（如：过去时、subjuntivo、por）..." oninput="renderGrammar()" style="flex:1">
     <button class="btn sm" onclick="speakT('La gramática española es muy interesante','es-ES')">🔊 朗读</button>
@@ -415,7 +481,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
   <div class="hero"><div class="hello"><h2>🎤 跟读训练</h2><div class="sub">TTS 朗读 · 录音回放 · 评分 · 按等级筛选</div></div></div>
   <div class="toolbar">
     <select id="shadowLvl" onchange="renderShadow()"><option value="all">全部等级</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select>
-    <button class="btn acc sm">▶ 开始跟读模式</button>
+    <span style="font-size:11px;color:var(--ink2)">🌎 口音：</span><button class="chip on" onclick="chipOn(this)">拉美</button><button class="chip" onclick="chipOn(this)">🇪🇸 西班牙</button><span style="margin-left:8px;font-size:11px;color:var(--ink2)">倍速：</span><button class="chip on" onclick="chipOn(this)">1.0x</button><button class="chip" onclick="chipOn(this)">0.7x</button><button class="chip" onclick="chipOn(this)">0.5x</button><button class="btn acc sm">▶ 开始跟读模式</button>
     <button class="btn sm">📊 我的成绩</button>
   </div>
   <div class="card"><div id="shadowList"></div><div id="shadowScore"></div></div>
@@ -431,7 +497,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
       <button>🎧 听力</button>
       <button>✍️ 写作</button>
     </div>
-    <div class="tabs" id="sieleTabs"></div>
+    <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑口语 Tarea 1-5 题库</button><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">✏️ 高频主题编辑</button><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔗 逻辑连接词编辑</button><span class="sub">Tarea 2 含 42 张 AI 场景配图 · 编辑后音频自动跟随题目</span></div><div class="tabs" id="sieleTabs"></div>
     <div id="sieleBody" style="margin-top:14px"></div>
   </div>
 </section>
@@ -442,7 +508,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
   <div class="card">
     <div class="toolbar" style="margin-bottom:12px">
       <span style="font-size:12px;color:var(--ink2)">等级：</span>
-      <select id="quizLvl" onchange="quizReset()"><option value="all">全部等级</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select>
+      <select id="quizType" onchange="renderQuiz()" style="margin-right:6px"><option value="all">考试类型：全部</option><option>DELE</option><option>SIELE</option><option>自测</option></select><select id="quizLvl" onchange="quizReset()"><option value="all">全部等级</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select>
       <span style="font-size:12px;color:var(--ink2);margin-left:10px">科目：</span>
     </div>
     <div class="tabs" id="quizTabs"></div>
@@ -452,7 +518,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 
 <!-- ===== 写作练习 ===== -->
 <section class="page" id="pg-writing">
-  <div class="hero"><div class="hello"><h2>✍️ 写作练习</h2><div class="sub">SIELE 写作 Tarea 1–2 · AI 评分建议 · 范文对照</div></div></div>
+  <div class="hero"><div class="hello"><h2>✍️ 写作练习</h2><div class="sub">SIELE 写作 Tarea 1–2 · AI 评分建议 · 范文对照</div></div></div><div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑写作任务</button><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">📚 范文库编辑（14 篇）</button><span class="sub">14 个写作任务 · 范文可编辑/恢复原文 · 完成后左右对比</span></div>
   <div class="card">
     <h3>📝 Tarea 1 · 电子邮件（约 120 词）</h3>
     <div class="topic-grid" style="grid-template-columns:1fr">
@@ -471,7 +537,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 <!-- ===== 口语话题 ===== -->
 <section class="page" id="pg-speaking">
   <div class="hero"><div class="hello"><h2>🗣 口语话题</h2><div class="sub">情景应答 · 语音评测 · 范例对照 · 高赞范文库</div></div></div>
-  <div class="card"><div class="topic-grid" id="speakGrid"></div></div>
+  <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑口语话题（17 个）</button><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🗂 SIELE 口语题库与模板</button><span class="sub">话题范文 AI 生成 · 关键词评分 · 错题自动入错题集</span></div><div class="card"><div class="topic-grid" id="speakGrid"></div></div>
 </section>
 
 <!-- ===== 学习计划 ===== -->
@@ -480,7 +546,7 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
   <div class="grid3">
     <div class="card"><h3>📈 本周进度</h3><div class="goal-bar"><i style="width:64%"></i></div><div class="goal-meta"><span>9 / 14 项完成</span><span>64%</span></div></div>
     <div class="card"><h3>🔥 连续学习</h3><div style="font-size:30px;font-weight:800;color:var(--brand)">12 <span style="font-size:14px">天</span></div><div class="note">最佳纪录 21 天 · 今日已打卡 ✓</div></div>
-    <div class="card"><h3>🗓 本周任务</h3>
+    <div class="card"><h3><div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已保存'">💾 保存计划</button><span class="sub">☁️ 跨 IP / 跨设备云端同步 · 每日 09:00 自动生成今日任务</span></div>🗓 本周任务</h3>
       <div class="tasks">
         <div class="task" onclick="tog(this)"><span class="done checked">✓</span><div class="tt"><div class="n">背 60 个新词（A1/A2）</div></div></div>
         <div class="task" onclick="tog(this)"><span class="done checked">✓</span><div class="tt"><div class="n">学完虚拟式现在时</div></div></div>
@@ -526,14 +592,14 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 
 <!-- ===== 外刊精炼 ===== -->
 <section class="page" id="pg-refine">
-  <div class="hero"><div class="hello"><h2>📚 外刊精炼</h2><div class="sub">每日精炼 · quiz 巩固 · 云端同步 · 历史回溯</div></div></div>
+  <div class="hero"><div class="hello"><h2>📚 外刊精炼</h2><div class="sub">每日精炼 · quiz 巩固 · 云端同步 · 历史回溯</div></div></div><div class="note" style="margin-bottom:8px">⏰ 外部定时任务每 4 天 09:00 自动更新（5 词卡 + 4 篇双语文章 + 26 题 + 原文链接）· 本次仅改配色不动布局</div>
   <div class="card"><div id="refineList"></div></div>
 </section>
 
 <!-- ===== DELE 专项 ===== -->
 <section class="page" id="pg-dele">
   <div class="hero"><div class="hello"><h2>📝 DELE 专项</h2><div class="sub">四级真题题库 · 阅读/听力/写作/口语 · 全真模拟</div></div></div>
-  <div class="dele-grid">
+  <div class="adminbar"><button class="btn pr sm" onclick="this.textContent='✓ 已打开编辑器'">🔧 管理员编辑 DELE 题库（A1-B2 四级）</button><span class="sub">逐题编辑题干/选项/答案/解析/范文 · 答题记录按题目内容键跨设备同步</span></div><div class="dele-grid">
     <div class="dele-ent"><div class="lv">A1</div><div class="nm">DELE A1 · 入门</div><div class="cnt">350 题</div></div>
     <div class="dele-ent"><div class="lv">A2</div><div class="nm">DELE A2 · 初级</div><div class="cnt">53 题</div></div>
     <div class="dele-ent"><div class="lv">B1</div><div class="nm">DELE B1 · 中级</div><div class="cnt">65 题</div></div>
@@ -555,6 +621,22 @@ th{color:var(--ink2);font-size:11px;letter-spacing:.5px}
 <!-- ===== 后台管理 ===== -->
 <section class="page" id="pg-admin">
   <div class="hero"><div class="hello"><h2>⚙️ 后台管理</h2><div class="sub">账号 / 内容 / 数据（管理员）</div></div></div>
+  <div class="toolbar" style="margin-bottom:8px"><button class="btn acc sm" onclick="go('dash')">🏠 返回工作台</button><button class="btn sm" onclick="this.textContent='✓ 已退出'">🚪 退出登录</button><span style="font-size:10.5px;color:var(--ink2);margin-left:auto">管理员：Serena（admin）</span></div>
+  <div class="card"><h3>📊 数据看板</h3><div class="stats" style="grid-template-columns:repeat(4,1fr)"><div class="stat"><div class="v">15</div><div class="l">总用户</div></div><div class="stat"><div class="v">4,866</div><div class="l">词汇</div></div><div class="stat"><div class="v">3,106</div><div class="l">题目</div></div><div class="stat"><div class="v">282</div><div class="l">口语题</div></div></div></div>
+  <div class="card"><h3>🗂 管理功能</h3><div class="err-dist">
+    <div class="row"><span class="n">📚 单词管理</span><span class="p" style="font-size:10.5px">增删改 · 熟练度 · 专四标注</span></div>
+    <div class="row"><span class="n">📝 题库管理</span><span class="p" style="font-size:10.5px">按等级/科目/来源筛选 · 编辑</span></div>
+    <div class="row"><span class="n">📒 复习记录</span><span class="p" style="font-size:10.5px">历史测验 · 正确率 · 错题溯源</span></div>
+    <div class="row"><span class="n">📅 复习计划</span><span class="p" style="font-size:10.5px">每日任务 · 间隔重复</span></div>
+    <div class="row"><span class="n">📥 导入备份</span><span class="p" style="font-size:10.5px">JSON 导出/导入 · 传输码迁移</span></div>
+    <div class="row"><span class="n">☁️ 云同步</span><span class="p" style="font-size:10.5px">账号登录即同步 · 跨设备</span></div>
+    <div class="row"><span class="n">🔑 密码修改</span><span class="p" style="font-size:10.5px">原密码 / 邀请码两种方式</span></div>
+  </div></div>
+  <div class="card"><h3>👥 用户管理（管理员）</h3><div class="err-dist">
+    <div class="row"><span class="n">👤 用户列表</span><span class="p" style="font-size:10.5px">角色/状态/邀请码/注册时间 · 停用/启用</span></div>
+    <div class="row"><span class="n">🎟 邀请码管理</span><span class="p" style="font-size:10.5px">30 个码 · 未用/已用/停用实时可见</span></div>
+    <div class="row"><span class="n">🔐 安全日志</span><span class="p" style="font-size:10.5px">全部 · 登录成功 · 锁定 · 注册 · 改密 · 管理操作 · 限流</span></div>
+  </div></div>
   <div class="grid3">
     <div class="card"><h3>👥 用户管理</h3><div class="note">账号、角色、邀请码、安全日志、停用</div><button class="btn sm acc" style="margin-top:8px">进入（iframe 桥接）</button></div>
     <div class="card"><h3>📝 内容编辑</h3><div class="note">词汇 / 语法 / 写作 / 口语 / 易混词 管理员编辑</div></div>
@@ -723,6 +805,7 @@ const SPEAK=[
   {t:"情景：租房咨询",d:"询问房源信息并预约看房",keys:"alquilar · piso · precio · visita"},
   {t:"话题：工作与生活平衡",d:"谈谈如何平衡工作与生活",keys:"equilibrio · trabajo · vida · descanso"},
   {t:"话题：西班牙文化",d:"介绍一项西班牙文化传统",keys:"cultura · tradición · fiesta · España"},
+  {t:"话题：人工智能",d:"谈 AI 对学习和工作的影响",keys:"inteligencia artificial · aprendizaje · futuro"},
 ];
 
 /* ===== 页面切换 ===== */
@@ -802,7 +885,7 @@ function renderGrammar(){
   document.getElementById('grammarList').innerHTML=Object.keys(ls).map(lv=>
     '<div class="acc open"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')"><span class="lv">'+lv+'</span>'+ls[lv].length+' 个语法点</div><div class="ab">'+
     ls[lv].filter(g=>!q||g.t.toLowerCase().includes(q)||g.d.toLowerCase().includes(q)||g.ex.toLowerCase().includes(q)).map(g=>
-      '<div class="acc" style="margin:6px 0"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')">'+(GRAMMAR_KEY.indexOf(g.t)>=0?'⭐ ':'')+g.t+(g.ref?' <a href="'+g.ref+'" target="_blank" onclick="event.stopPropagation()" style="font-size:10px;color:var(--brand)">RAE ↗</a>':'')+'</div><div class="ab"><b>'+g.d+'</b><br>📌 '+g.ex+(g.detail?'<br><span style="font-size:11px;color:var(--ink2)">'+g.detail+'</span>':'')+'</div></div>'
+      '<div class="acc" style="margin:6px 0"><div class="ah" onclick="this.parentNode.classList.toggle(\'open\')">'+(GRAMMAR_KEY.indexOf(g.t)>=0?'⭐ ':'')+'📖 '+g.t+(g.ref?' <a href="'+g.ref+'" target="_blank" onclick="event.stopPropagation()" style="font-size:10px;color:var(--brand)">RAE ↗</a>':'')+'</div><div class="ab"><b>'+g.d+'</b><br>📌 '+g.ex+(g.detail?'<br><span style="font-size:11px;color:var(--ink2)">'+g.detail+'</span>':'')+'</div></div>'
     ).join('')+'</div></div>').join('')||'<div class="note">没有匹配的语法点</div>';
 }
 
@@ -978,6 +1061,13 @@ function renderRefine(){
 
 /* 初始化 */
 renderVocab();renderFlash();renderGrammar();renderShadow();renderSiele();renderQuiz();renderSpeak();renderErrors();renderRead();renderRefine();
+
+/* chip 切换辅助（预览交互） */
+function chipOn(btn){
+  var row=btn.parentNode;
+  row.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
+  btn.classList.add('on');
+}
 </script>
 </body>
 </html>
