@@ -11831,7 +11831,44 @@ function renderErrors(){
 
   return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">题目错误 · 作文不足 · 单词错误 分类管理</div></div>
     <span class="dp">共 ${ST.errors.length} 条 · 已掌握 ${ST.errors.filter(e=>e.reviewed).length} 条</span>
-  </div>${tabs}${form}${list}`;
+  </div>${tabs}${renderErrorsStats()}${form}${list}`;
+}
+
+// ===== 错题集统计区（新增卡片，2026-08-20）=====
+function renderErrorsStats(){
+  if(!ST.errors || !ST.errors.length) return '';
+  const total = ST.errors.length;
+  const typeDefs = [
+    {key:'quiz', label:'✏️ 题目错误', color:'var(--tr)'},
+    {key:'writing', label:'✍️ 作文不足', color:'var(--am)'},
+    {key:'vocab', label:'📚 单词错误', color:'var(--teal)'}
+  ];
+  const typeRows = typeDefs.map(t=>{
+    const n = ST.errors.filter(e=>e.type===t.key).length;
+    const pct = total ? Math.round(n/total*100) : 0;
+    if(!n) return '';
+    return `<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:84px">${t.label}</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${pct}%;background:${t.color};border-radius:3px"></i></div><b style="width:46px;text-align:right">${n} 条 · ${pct}%</b></div>`;
+  }).join('') || '<div style="font-size:11px;color:var(--soft)">暂无分类数据</div>';
+
+  // 知识点聚合：从 question 里提取高频关键词（取前3）
+  const kwCount = {};
+  ST.errors.forEach(e=>{
+    const q = String(e.question||'');
+    ['ser','estar','por','para','subjuntivo','indefinido','imperfecto','preterito','preposición','conector','pasado','futuro','condicional','se ','pronombre','acento'].forEach(kw=>{
+      if(q.toLowerCase().includes(kw)) kwCount[kw] = (kwCount[kw]||0)+1;
+    });
+  });
+  const topKw = Object.entries(kwCount).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const kwHtml = topKw.length ? topKw.map(k=>`<span class="chip" style="background:#fdf0e9;color:#d85a30;border-color:#f3d5c3">${k[0]} ×${k[1]}</span>`).join('') : '<span style="font-size:11px;color:var(--soft)">练习后自动聚合高频知识点</span>';
+
+  const reviewedPct = total ? Math.round(ST.errors.filter(e=>e.reviewed).length/total*100) : 0;
+  return `<div class="card" style="margin:10px 0;border-left:4px solid var(--am)">
+    <h3>📊 错题统计 <span class="sub" style="font-size:10.5px;color:var(--soft)">基于 ${total} 条记录 · 自动更新</span></h3>
+    <div style="margin-top:6px">${typeRows}</div>
+    <div style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px"><span style="width:84px">✅ 已掌握率</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${reviewedPct}%;background:var(--ok);border-radius:3px"></i></div><b style="width:46px;text-align:right">${reviewedPct}%</b></div>
+    <div style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px"><span style="width:84px">🎯 高频考点</span><div style="display:flex;gap:4px;flex-wrap:wrap">${kwHtml}</div></div>
+    ${topKw.length ? `<div class="note" style="margin-top:8px">💡 建议：优先复习「${topKw[0][0]}」相关知识点，可去语法库搜索对应详解，再回到错题集做 3 道同考点巩固题。</div>` : ''}
+  </div>`;
 }
 
 function filterErrors(type){
