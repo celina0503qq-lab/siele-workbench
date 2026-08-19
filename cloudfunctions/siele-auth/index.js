@@ -169,6 +169,13 @@ function issueSession(uid, username, role) {
 function tokenHash(value) { return crypto.createHash("sha256").update(value).digest("base64url"); }
 function randomToken() { return "siele_sync_" + crypto.randomBytes(32).toString("base64url"); }
 function now() { return Date.now(); }
+// 密码强度校验（安全加固 P1）：至少 8 位，且必须同时包含字母和数字。
+// 覆盖注册 / 改密 / 邀请码重置三处入口，弱密码一律拒绝（WEAK_PASSWORD）。
+function isStrongPassword(pwd) {
+  if (!pwd || typeof pwd !== "string" || pwd.length < 8) return false;
+  if (!/[A-Za-z]/.test(pwd) || !/\d/.test(pwd)) return false;
+  return true;
+}
 function requireSession(event) {
   const token = event && (event.sessionToken || event.token || (event.headers && event.headers.authorization || "").replace(/^Bearer\s+/i, ""));
   const session = parseSession(token);
@@ -207,7 +214,7 @@ async function register(event) {
   const password = String(event.password || "");
   const inviteCode = normalizeInvite(event.inviteCode);
   if (!validUsername(username)) return response(false, "INVALID_USERNAME");
-  if (password.length < 6) return response(false, "WEAK_PASSWORD");
+  if (!isStrongPassword(password)) return response(false, "WEAK_PASSWORD");
   if (!INVITE_CODES.has(inviteCode)) return response(false, "INVALID_INVITE");
   const uid = "usr_" + crypto.randomUUID().replace(/-/g, "");
   const salt = crypto.randomBytes(16).toString("base64url");
@@ -289,7 +296,7 @@ async function changePasswordWithOld(event) {
   const { session } = await requireActiveSession(event);
   const oldPassword = String(event.oldPassword || "");
   const newPassword = String(event.newPassword || "");
-  if (newPassword.length < 6) return response(false, "WEAK_PASSWORD");
+  if (!isStrongPassword(newPassword)) return response(false, "WEAK_PASSWORD");
   if (oldPassword === newPassword) return response(false, "PWD_SAME_AS_OLD");
   const found = await db.collection("user_profiles").where({ uid: session.uid }).limit(1).get();
   if (!found.data.length) return response(false, "PWD_USER_NOT_FOUND");
@@ -307,22 +314,62 @@ async function changePasswordWithOld(event) {
 // 用注册时的邀请码重置密码（无 session 入口，专为忘记密码 / 新设备登录设计）
 // 强约束：必须与该用户档案入库时使用的 inviteCode 严格一致（不区分大小写、走 normalizeInvite）
 // 这样攻击者无法用自己持有的任何邀请码重置别人的密码。
+// 防爆破（安全加固 P1）：同用户名连续失败 5 次锁 15 分钟（独立于登录锁，字段 resetAttempts/resetLockedUntil）。
+const RESET_LOCK_CONFIG = { MAX_ATTEMPTS: 5, LOCK_MS: 15 * 60 * 1000 };
+async function _getResetLock(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return 0;
+  const lockedUntil = found.data[0].resetLockedUntil || 0;
+  if (lockedUntil > Date.now()) return lockedUntil;
+  return 0;
+}
+async function _recordResetFail(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return 0;
+  const u = found.data[0];
+  const fail = (u.resetAttempts || 0) + 1;
+  let lockUntil = 0;
+  if (fail >= RESET_LOCK_CONFIG.MAX_ATTEMPTS) {
+    lockUntil = Date.now() + RESET_LOCK_CONFIG.LOCK_MS;
+    await db.collection("user_profiles").doc(u._id).update({ resetAttempts: 0, resetLockedUntil: lockUntil, lastResetFailAt: Date.now() });
+    try { await db.collection("security_audit").add({ type: "password_reset_locked", username, at: Date.now() }); } catch (e) {}
+  } else {
+    await db.collection("user_profiles").doc(u._id).update({ resetAttempts: fail, lastResetFailAt: Date.now() });
+  }
+  return lockUntil;
+}
+async function _clearResetLock(username) {
+  const found = await db.collection("user_profiles").where({ username }).limit(1).get();
+  if (!found.data.length) return;
+  await db.collection("user_profiles").doc(found.data[0]._id).update({ resetAttempts: 0, resetLockedUntil: null });
+}
 async function resetPasswordWithInvite(event) {
   const username = normalizeUsername(event.username);
   const newPassword = String(event.newPassword || "");
   const inviteCode = normalizeInvite(event.inviteCode);
   if (!validUsername(username)) return response(false, "INVALID_USERNAME");
-  if (newPassword.length < 6) return response(false, "WEAK_PASSWORD");
+  if (!isStrongPassword(newPassword)) return response(false, "WEAK_PASSWORD");
   if (!INVITE_CODES.has(inviteCode)) return response(false, "INVALID_INVITE");
+  const resetLocked = await _getResetLock(username);
+  if (resetLocked) return response(false, "LOCKED", { retryAfterMs: Math.max(0, resetLocked - Date.now()) });
   const found = await db.collection("user_profiles").where({ username }).limit(1).get();
-  if (!found.data.length) return response(false, "PWD_USER_NOT_FOUND");
+  if (!found.data.length) {
+    const nl = await _recordResetFail(username);
+    if (nl) return response(false, "LOCKED", { retryAfterMs: Math.max(0, nl - Date.now()) });
+    return response(false, "PWD_USER_NOT_FOUND");
+  }
   const user = found.data[0];
   if (user.status === "disabled") return response(false, "USER_DISABLED");
   // 用户档案里的 inviteCode 是注册时使用的唯一标识，必须与本次输入严格匹配
-  if (normalizeInvite(user.inviteCode || "") !== inviteCode) return response(false, "PWD_INVITE_MISMATCH");
+  if (normalizeInvite(user.inviteCode || "") !== inviteCode) {
+    const nl = await _recordResetFail(username);
+    if (nl) return response(false, "LOCKED", { retryAfterMs: Math.max(0, nl - Date.now()) });
+    return response(false, "PWD_INVITE_MISMATCH");
+  }
   const newSalt = crypto.randomBytes(16).toString("base64url");
   const newHash = passwordHash(newPassword, newSalt);
   await db.collection("user_profiles").doc(user._id).update({ passwordSalt: newSalt, passwordHash: newHash, passwordUpdatedAt: now() });
+  await _clearResetLock(username);
   await db.collection("security_audit").add({ type: "password_reset", uid: user.uid, username, method: "invite_code", at: now() });
   return response(true, "PASSWORD_RESET");
 }

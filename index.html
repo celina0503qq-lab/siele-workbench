@@ -2879,7 +2879,7 @@ function renderFlash(){
           <span class="lvl">${v.lvl}</span>
           ${reviewCount>0?`<span class="review-badge">已背${reviewCount}次</span>`:''}
           <div class="word">${esc(v.es)}</div>
-          <div class="pos">${v.pos} · ${v.t}</div>
+          <div class="pos">${v.pos} · ${topicLabel(v.t)}</div>
           <div style="margin-top:10px">${spkBtnHTML(v.es,getEffectiveAccent('flash'))}</div>
           <div class="hint">点击翻转查看释义 →</div>
         </div>
@@ -3071,7 +3071,7 @@ function renderFlashPractice(pool){
   h += `<div class="flash-q">
     <div style="font-size:11px;color:var(--soft);margin-bottom:5px">请选择正确的西语单词：</div>
     <div class="zh">${esc(v.zh)}</div>
-    <div class="pos">${v.pos} · ${esc(v.t)} · ${v.lvl}${v.ex?` · ${esc(v.ex)}`:''}</div>
+    <div class="pos">${v.pos} · ${esc(topicLabel(v.t))} · ${v.lvl}${v.ex?` · ${esc(v.ex)}`:''}</div>
   </div>`;
   h += `<div class="pra">`;
   options.forEach((o, i) => {
@@ -3188,6 +3188,12 @@ const VOCAB_TOPIC_LABELS = {
   'familia_y_personas':'familia_y_personas · 家庭与人物','casa':'casa · 家居',
   'intermedio':'intermedio · 中级','avanzado':'avanzado · 高级'
 };
+// 主题双语显示 helper：优先返回 VOCAB_TOPIC_LABELS 映射（'西语key · 中文'），否则返回原始 key
+function topicLabel(t){
+  if(typeof t !== 'string' || !t) return 'general · 通用';
+  if(typeof VOCAB_TOPIC_LABELS !== 'undefined' && VOCAB_TOPIC_LABELS[t]) return VOCAB_TOPIC_LABELS[t];
+  return t;
+}
 // 拉美方言词 → 西班牙对应词
 const VOCAB_DIALECT_PE = {
   'queque':'pastel','polera':'camiseta','remera':'camiseta','yuyo':'mala hierba',

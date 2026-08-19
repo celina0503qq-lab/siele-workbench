@@ -309,8 +309,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <div class="fld" id="f_rp">
         <label>密码 <span class="req">*</span></label>
-        <input id="regPass" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
-        <div class="err-msg">密码至少 6 位</div>
+        <input id="regPass" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+        <div class="err-msg">密码至少 8 位，且需同时包含字母和数字</div>
       </div>
       <div class="fld" id="f_rp2">
         <label>确认密码 <span class="req">*</span></label>
@@ -356,8 +356,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <div class="fld" id="f_apr_new1">
         <label>新密码 <span class="req">*</span></label>
-        <input id="aprNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
-        <div class="err-msg">新密码至少 6 位</div>
+        <input id="aprNewPwd1" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+        <div class="err-msg">新密码至少 8 位，且需同时包含字母和数字</div>
       </div>
       <div class="fld" id="f_apr_new2">
         <label>确认新密码 <span class="req">*</span></label>
@@ -555,8 +555,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
         </div>
         <div class="fld" id="f_po_new1">
           <label>新密码 <span class="req">*</span></label>
-          <input id="poNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
-          <div class="err-msg">新密码至少 6 位</div>
+          <input id="poNewPwd1" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+          <div class="err-msg">新密码至少 8 位，且需同时包含字母和数字</div>
         </div>
         <div class="fld" id="f_po_new2">
           <label>确认新密码 <span class="req">*</span></label>
@@ -585,8 +585,8 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
         </div>
         <div class="fld" id="f_pr_new1">
           <label>新密码 <span class="req">*</span></label>
-          <input id="prNewPwd1" type="password" autocomplete="new-password" placeholder="至少 6 位" maxlength="32">
-          <div class="err-msg">新密码至少 6 位</div>
+          <input id="prNewPwd1" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+          <div class="err-msg">新密码至少 8 位，且需同时包含字母和数字</div>
         </div>
         <div class="fld" id="f_pr_new2">
           <label>确认新密码 <span class="req">*</span></label>
@@ -731,7 +731,7 @@ const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true;}c
 const CLOUD_SESSION_KEY='swa_cloud_session_v1';
 const CLOUD_AUTH_MESSAGES={
   INVALID_USERNAME:'请输入有效邮箱或 2-20 位用户名',
-  WEAK_PASSWORD:'密码至少需要 6 位',
+  WEAK_PASSWORD:'密码至少 8 位，且需同时包含字母和数字',
   INVALID_INVITE:'邀请码不存在',
   INVITE_USED:'邀请码无效、已被使用或已停用',
   USERNAME_TAKEN:'该用户名已被注册',
@@ -748,6 +748,8 @@ const CLOUD_AUTH_MESSAGES={
   PASSWORD_CHANGED:'密码已成功修改，请用新密码重新登录',
   PASSWORD_RESET:'密码已通过邀请码重置，请用新密码重新登录'
 };
+// 本地密码强度校验（与云函数 isStrongPassword 一致）：≥8 位且同时包含字母和数字
+function isStrongPwd(p){ return typeof p==='string' && p.length>=8 && /[A-Za-z]/.test(p) && /\d/.test(p); }
 function cloudAuthMessage(code){
   const known=CLOUD_AUTH_MESSAGES[code];
   if(known)return known;
@@ -871,7 +873,7 @@ async function doRegister(e){
   const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
   let ok=fldErr('f_ri',!iv,'请输入邀请码');
   ok=fldErr('f_ru',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名')&&ok;
-  ok=fldErr('f_rp',p.length<6)&&ok;
+  ok=fldErr('f_rp',!isStrongPwd(p),'密码至少 8 位，且需同时包含字母和数字')&&ok;
   ok=fldErr('f_rp2',p!==p2)&&ok;
   if(!ok)return false;
   const submit=e.currentTarget.querySelector('button[type="submit"]');
@@ -953,7 +955,7 @@ async function doChangePwdWithOld(e){
   e.preventDefault();
   const oldP=$('poOldPwd').value,newP=$('poNewPwd1').value,newP2=$('poNewPwd2').value;
   let ok=fldErr('f_po_old',!oldP,'请输入当前密码');
-  ok=fldErr('f_po_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_po_new1',!isStrongPwd(newP),'新密码至少 8 位，且需同时包含字母和数字')&&ok;
   ok=fldErr('f_po_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
   if(oldP && newP && oldP===newP){
     fldErr('f_po_new1',true,cloudAuthMessage('PWD_SAME_AS_OLD'));
@@ -996,7 +998,7 @@ async function doResetPwdWithInviteAnon(e){
   const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
   let ok=fldErr('f_apr_user',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名');
   ok=fldErr('f_apr_invite',!inv,'请输入邀请码')&&ok;
-  ok=fldErr('f_apr_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_apr_new1',!isStrongPwd(newP),'新密码至少 8 位，且需同时包含字母和数字')&&ok;
   ok=fldErr('f_apr_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
   if(!ok)return false;
   const submit=e.currentTarget.querySelector('button[type="submit"]');
@@ -1009,6 +1011,7 @@ async function doResetPwdWithInviteAnon(e){
       else if(result.code==='PWD_USER_NOT_FOUND')fldErr('f_apr_user',true,cloudAuthMessage(result.code));
       else if(result.code==='USER_DISABLED'||result.code==='PWD_USER_DISABLED'){fldErr('f_apr_user',true,cloudAuthMessage(result.code));}
       else if(result.code==='WEAK_PASSWORD')fldErr('f_apr_new1',true,cloudAuthMessage(result.code));
+      else if(result.code==='LOCKED')fldErr('f_apr_invite',true,'尝试次数过多，请 15 分钟后再试（'+Math.ceil((result.retryAfterMs||900000)/60000)+' 分钟）');
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
@@ -1041,7 +1044,7 @@ async function doResetPwdWithInvite(e){
   const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
   let ok=fldErr('f_pr_user',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名');
   ok=fldErr('f_pr_invite',!inv,'请输入邀请码')&&ok;
-  ok=fldErr('f_pr_new1',newP.length<6,'新密码至少 6 位')&&ok;
+  ok=fldErr('f_pr_new1',!isStrongPwd(newP),'新密码至少 8 位，且需同时包含字母和数字')&&ok;
   ok=fldErr('f_pr_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
   if(!ok)return false;
   const submit=e.currentTarget.querySelector('button[type="submit"]');
@@ -1054,6 +1057,7 @@ async function doResetPwdWithInvite(e){
       else if(result.code==='PWD_USER_NOT_FOUND')fldErr('f_pr_user',true,cloudAuthMessage(result.code));
       else if(result.code==='USER_DISABLED'||result.code==='PWD_USER_DISABLED'){fldErr('f_pr_user',true,cloudAuthMessage(result.code));}
       else if(result.code==='WEAK_PASSWORD')fldErr('f_pr_new1',true,cloudAuthMessage(result.code));
+      else if(result.code==='LOCKED')fldErr('f_pr_invite',true,'尝试次数过多，请 15 分钟后再试（'+Math.ceil((result.retryAfterMs||900000)/60000)+' 分钟）');
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
