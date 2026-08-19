@@ -16273,11 +16273,13 @@ window._conjCellEdit = function(v, t, i, dual){
 function renderVerbConjSection(){
   const verbs = getConjVerbs();
   const ed = isContentAdmin();
-  let h = '<div class="acc" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个动词 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
+  const vocabCount = countVocabVerbs().total;
+  let h = '<div class="acc" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个内置 · 词库 '+vocabCount+' 个可查 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
   if(ed){
     h += '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式<button class="btn sm pr" style="margin:0 6px" onclick="_conjAddVerb()">➕ 新增动词</button><span style="color:#64748b">点变位格/要点旁 ✏️ 就地编辑，✕ 删除词条</span></div>';
   }
   h += '<div class="search-wrap" style="margin:6px 0"><div class="sb" style="margin-bottom:0"><input id="conjSearch" placeholder="🔍 搜索动词（如 ser、trabajar、vestirse）..." autocomplete="off" oninput="_conjFilter(this.value)"></div></div>';
+  h += '<div style="margin:4px 0;padding:6px 10px;background:#f0f7ee;border:1px solid #cfe3c9;border-radius:8px;font-size:11px;color:#2e6b34">🔍 词库共 <b>'+vocabCount+'</b> 个动词，输入任意动词即可查变位；也可在下方「词库动词速查」按分类浏览</div>';
   h += '<div style="margin:6px 0;display:flex;gap:6px;flex-wrap:wrap">';
   h += '<button class="btn sm pr" onclick="conjPractice(\'study\')">📖 顺序学习</button>';
   h += '<button class="btn sm" onclick="conjPractice(\'spell\')">✍️ 默写</button>';
@@ -16285,9 +16287,96 @@ function renderVerbConjSection(){
   h += '</div>';
   h += '<div id="conjList">';
   verbs.forEach(function(v){ h += renderConjCard(v, ed); });
-  h += '</div></div></div>';
+  h += '</div>';
+  h += renderConjVocabBank();
+  h += '</div></div>';
   return h;
 }
+// ===== 词库动词速查（B）：按词尾分类浏览全部词库动词，点击展开变位 =====
+const CONJ_VOCAB_PAGE_SIZE = 60; // 每页词数
+let _conjVocabState = { cat: 'all', page: 0, opened: {} }; // opened: {es:true}
+function _vocabVerbInfo(v){
+  // 返回 {es, se, cat}: cat ∈ ar/er/ir/se/other
+  if(!v || !v.es || typeof v.pos !== 'string' || v.pos.charAt(0) !== 'v') return null;
+  if(v.es.indexOf(' ')>0 || v.es.indexOf('-')>0) return null;
+  const es = v.es;
+  const isSe = es.length>2 && es.slice(-2)==='se';
+  const stem = isSe ? es.slice(0,-2) : es;
+  let cat;
+  if(isSe) cat = 'se';
+  else if(stem.slice(-2)==='ar') cat = 'ar';
+  else if(stem.slice(-2)==='er') cat = 'er';
+  else if(stem.slice(-2)==='ir') cat = 'ir';
+  else cat = 'other';
+  return { es, se: isSe, cat };
+}
+function countVocabVerbs(){
+  if(typeof VDATA === 'undefined') return { total: 0 };
+  const set = {}; let n = 0;
+  VDATA.forEach(function(v){
+    const info = _vocabVerbInfo(v);
+    if(!info || set[info.es]) return;
+    set[info.es] = 1; n++;
+  });
+  return { total: n };
+}
+function getVocabVerbsByCat(cat){
+  if(typeof VDATA === 'undefined') return [];
+  const set = {}; const out = [];
+  VDATA.forEach(function(v){
+    const info = _vocabVerbInfo(v);
+    if(!info || set[info.es]) return;
+    set[info.es] = 1;
+    if(cat==='all' || info.cat===cat) out.push(info.es);
+  });
+  return out.sort(function(a,b){ return a.localeCompare(b); });
+}
+function renderConjVocabBank(){
+  if(typeof VDATA === 'undefined') return '';
+  const cats = [['all','全部'],['ar','-ar 动词'],['er','-er 动词'],['ir','-ir 动词'],['se','代词式 (-se)'],['other','其他']];
+  const st = _conjVocabState;
+  let h = '<div style="margin:10px 0 4px;border-top:1px dashed var(--line);padding-top:10px">';
+  h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+  h += '<span style="font-size:12px;font-weight:700;color:var(--ink)">📚 词库动词速查</span>';
+  cats.forEach(function(c){
+    const cnt = c[0]==='all' ? countVocabVerbs().total : getVocabVerbsByCat(c[0]).length;
+    h += '<button class="chip '+(st.cat===c[0]?'on':'')+'" style="font-size:11px" onclick="conjVocabSetCat(\''+c[0]+'\')">'+c[1]+' ('+cnt+')</button>';
+  });
+  h += '</div>';
+  const list = getVocabVerbsByCat(st.cat);
+  const pages = Math.ceil(list.length / CONJ_VOCAB_PAGE_SIZE);
+  if(st.page >= pages) st.page = 0;
+  const start = st.page * CONJ_VOCAB_PAGE_SIZE;
+  const slice = list.slice(start, start + CONJ_VOCAB_PAGE_SIZE);
+  h += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;max-height:320px;overflow-y:auto;padding:2px">';
+  slice.forEach(function(es){
+    const zh = (function(){ const f = VDATA.find(function(w){ return w.es===es; }); return f && f.zh ? f.zh : ''; })();
+    h += '<button class="chip" style="font-size:11px" title="'+esc(zh)+'" onclick="conjVocabOpen(\''+esc(es)+'\')">'+esc(es)+'</button>';
+  });
+  h += '</div>';
+  if(pages > 1){
+    h += '<div style="display:flex;gap:4px;align-items:center;margin-top:6px;flex-wrap:wrap">';
+    h += '<button class="btn sm ol" '+(st.page>0?'':'disabled')+' onclick="conjVocabPage(-1)">← 上一页</button>';
+    h += '<span style="font-size:11px;color:var(--soft)">第 '+(st.page+1)+' / '+pages+' 页 · '+list.length+' 词</span>';
+    h += '<button class="btn sm ol" '+(st.page<pages-1?'':'disabled')+' onclick="conjVocabPage(1)">下一页 →</button>';
+    h += '</div>';
+  }
+  const opened = Object.keys(st.opened);
+  if(opened.length){
+    opened.forEach(function(es){
+      h += renderConjCard(es, false);
+    });
+  }
+  h += '</div>';
+  return h;
+}
+window.conjVocabSetCat = function(cat){ _conjVocabState.cat = cat; _conjVocabState.page = 0; renderMain(); };
+window.conjVocabPage = function(d){ _conjVocabState.page += d; renderMain(); };
+window.conjVocabOpen = function(es){
+  if(_conjVocabState.opened[es]) delete _conjVocabState.opened[es];
+  else _conjVocabState.opened[es] = true;
+  renderMain();
+};
 function renderConjCard(v, ed){
   const r = window.verbConj ? window.verbConj.conj(v) : null;
   if(!r) return '';
