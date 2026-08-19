@@ -16292,6 +16292,10 @@ function renderConjCard(v, ed){
   const r = window.verbConj ? window.verbConj.conj(v) : null;
   if(!r) return '';
   const m = conjVerbMeta(v) || {};
+  if(!m.zh && typeof VDATA !== 'undefined'){
+    const f = VDATA.find(function(w){ return w && w.es === v; });
+    if(f && f.zh) m.zh = f.zh;
+  }
   const ovr = (m.note && typeof m.note === 'object') ? m.note : null; // 管理员逐格覆盖 {t:[...], t:{ra,se}}
   const eb = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\'__meta__\',0)" style="cursor:pointer;font-size:12px;color:#3b82f6;opacity:.6" title="编辑要点">✏️</span>' : '';
   const typeColor = r.irregular ? '#d85a30' : '#185fa5';
@@ -16418,7 +16422,17 @@ window._conjFilter = function(q){
   const list = document.getElementById('conjList');
   if(!list) return;
   q = (q||'').trim().toLowerCase();
-  const verbs = getConjVerbs();
+  let verbs = getConjVerbs();
+  // 搜索时动态纳入词库中的动词（VDATA pos 以 v 开头），使专四等词条对应的原形动词可查变位
+  if(q && typeof VDATA !== 'undefined'){
+    const known = {}; verbs.forEach(function(v){ known[v]=1; });
+    VDATA.forEach(function(w){
+      if(!w || !w.es || known[w.es]) return;
+      if(typeof w.pos === 'string' && w.pos.charAt(0)==='v' && !w.es.includes(' ') && !w.es.includes('-')){
+        known[w.es]=1; verbs.push(w.es);
+      }
+    });
+  }
   const ed = isContentAdmin();
   list.innerHTML = verbs.filter(function(v){
     if(!q) return true;
