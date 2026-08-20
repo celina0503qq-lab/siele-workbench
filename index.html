@@ -1475,7 +1475,7 @@ function getDefaultState(){
     quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all'},
     quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
     tasks: [], plannerStart: '',
-    weeklyPlan: null, weeklyGoals: null, // 周计划总览/每周目标（null=用系统默认，用户编辑后覆盖）
+    weeklyPlan: null, weeklyGoals: null, weeklyPlanTs: 0, weeklyGoalsTs: 0, // 周计划总览/每周目标（null=用系统默认，用户编辑后覆盖；Ts 供跨设备 LWW 合并）
     streak: 0, lastStudy: '', totalStudy: 0,
     shadowScores: {},
     sieleOralScores: {},
@@ -2510,6 +2510,7 @@ function editWeeklyPlan(i, field, text){
   if(!cur[i]) cur[i] = {w:'第'+(i+1)+'周', title:'', desc:''};
   cur[i][field] = (text||'').trim();
   ST.weeklyPlan = cur;
+  ST.weeklyPlanTs = Date.now(); // 跨设备 LWW：本机编辑记录时间戳
   save();
 }
 function editWeeklyGoal(i, field, text){
@@ -2517,7 +2518,18 @@ function editWeeklyGoal(i, field, text){
   if(!cur[i]) cur[i] = {skill:'', daily:'', weekly:'', target:''};
   cur[i][field] = (text||'').trim();
   ST.weeklyGoals = cur;
+  ST.weeklyGoalsTs = Date.now(); // 跨设备 LWW：本机编辑记录时间戳
   save();
+}
+// 实时编辑（oninput 触发）：防抖 600ms 写盘，避免每次按键都 save；配合 onblur 兜底保存
+let _weeklyPlanLiveT = null, _weeklyGoalLiveT = null;
+function editWeeklyPlanLive(i, field, text){
+  clearTimeout(_weeklyPlanLiveT);
+  _weeklyPlanLiveT = setTimeout(function(){ editWeeklyPlan(i, field, text); }, 600);
+}
+function editWeeklyGoalLive(i, field, text){
+  clearTimeout(_weeklyGoalLiveT);
+  _weeklyGoalLiveT = setTimeout(function(){ editWeeklyGoal(i, field, text); }, 600);
 }
 /* FEAT-2: 签到日历点击 → 待办 Modal */
 function openDayTodoModal(dateStr, d){
@@ -3314,15 +3326,7 @@ function renderVocab(){
   let h = `<div class="tb"><div><h2>词汇库${renderModuleAccentToggle('vocab')}</h2><div class="d">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
   h += renderModuleCheckinBar('vocab','词汇学习','🃏');
 
-  // Verb usage section
-  if(isContentAdmin()){
-    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:8px"><button class="btn sm pr" onclick="renderVerbUsageAdmin()">🔧 管理员编辑动词用法详解</button><span class="sub" style="margin-left:8px;font-size:11px">增删改易混词对比/辨析/搭配/短语，保存后所有用户可见</span></div>`;
-  }
-  h += renderVocabVerbUsage();
-
-  // ==== 动词变位速查（MVP: 3 规则模板 + 10 高频不规则） ====
-  h += renderVerbConjSection();
-
+  // ===== 搜索表格置顶（主功能优先）=====
   h += `<div class="sb">
     <input id="vocabSearch" placeholder="搜索单词或释义..." oninput="filterVocabDebounced()">
     <select id="vocabLvl" onchange="filterVocab()">
@@ -3341,11 +3345,22 @@ function renderVocab(){
   h += `<div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px" id="vocabPager"></div>`;
   h += `<div style="margin-top:4px;font-size:11px;color:var(--soft)" id="vocabCount"></div>`;
 
+  // Verb usage section（搜索表格之后）
+  if(isContentAdmin()){
+    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:8px"><button class="btn sm pr" onclick="renderVerbUsageAdmin()">🔧 管理员编辑动词用法详解</button><span class="sub" style="margin-left:8px;font-size:11px">增删改易混词对比/辨析/搭配/短语，保存后所有用户可见</span></div>`;
+  }
+  h += renderVocabVerbUsage();
+
+  // ==== 动词变位速查（MVP: 3 规则模板 + 10 高频不规则） ====
+  h += renderVerbConjSection();
+
   // Populate topics after render
   setTimeout(() => {
     if(typeof VDATA==='undefined') return;
-    const topics = [...new Set(VDATA.map(v=>v.t))];
     const sel = document.getElementById('vocabTopic');
+    // 防御：renderMain 快速重渲染时旧回调可能拿到已移除的 DOM，直接跳过
+    if(!sel) return;
+    const topics = [...new Set(VDATA.map(v=>v.t))];
     topics.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=(typeof VOCAB_TOPIC_LABELS!=='undefined'&&VOCAB_TOPIC_LABELS[t])?VOCAB_TOPIC_LABELS[t]:t; sel.appendChild(o); });
     // Set initial level filter
     document.getElementById('vocabLvl').value = 'all';
@@ -5609,8 +5624,8 @@ function renderPlanner(){
     h += `<div class="pgc" style="${isCurrent?'border-color:var(--tr);background:#fdeee9':''}">
       <span class="wk">${esc(p.w||('第'+(i+1)+'周'))}</span>
       ${isCurrent ? '<span style="font-size:8px;background:var(--ok);color:#fff;padding:1px 5px;border-radius:4px;margin-left:4px">当前</span>' : ''}
-      <h5 contenteditable="true" onblur="editWeeklyPlan(${i},'title',this.textContent)">${esc(p.title)}</h5>
-      <p contenteditable="true" onblur="editWeeklyPlan(${i},'desc',this.textContent)">${esc(p.desc)}</p>
+      <h5 contenteditable="true" oninput="editWeeklyPlanLive(${i},'title',this.textContent)" onblur="editWeeklyPlan(${i},'title',this.textContent)">${esc(p.title)}</h5>
+      <p contenteditable="true" oninput="editWeeklyPlanLive(${i},'desc',this.textContent)" onblur="editWeeklyPlan(${i},'desc',this.textContent)">${esc(p.desc)}</p>
     </div>`;
   });
   h += `</div>`;
@@ -5633,10 +5648,10 @@ function renderPlanner(){
       <tbody>`;
   goals.forEach((g,gi) => {
     h += `<tr>
-      <td contenteditable="true" onblur="editWeeklyGoal(${gi},'skill',this.textContent)">${esc(g.skill)}</td>
-      <td contenteditable="true" onblur="editWeeklyGoal(${gi},'daily',this.textContent)">${esc(g.daily)}</td>
-      <td contenteditable="true" onblur="editWeeklyGoal(${gi},'weekly',this.textContent)">${esc(g.weekly)}</td>
-      <td contenteditable="true" onblur="editWeeklyGoal(${gi},'target',this.textContent)">${esc(g.target)}</td>
+      <td contenteditable="true" oninput="editWeeklyGoalLive(${gi},'skill',this.textContent)" onblur="editWeeklyGoal(${gi},'skill',this.textContent)">${esc(g.skill)}</td>
+      <td contenteditable="true" oninput="editWeeklyGoalLive(${gi},'daily',this.textContent)" onblur="editWeeklyGoal(${gi},'daily',this.textContent)">${esc(g.daily)}</td>
+      <td contenteditable="true" oninput="editWeeklyGoalLive(${gi},'weekly',this.textContent)" onblur="editWeeklyGoal(${gi},'weekly',this.textContent)">${esc(g.weekly)}</td>
+      <td contenteditable="true" oninput="editWeeklyGoalLive(${gi},'target',this.textContent)" onblur="editWeeklyGoal(${gi},'target',this.textContent)">${esc(g.target)}</td>
     </tr>`;
   });
   h += `</tbody>
@@ -16419,7 +16434,8 @@ function renderVerbConjSection(){
   const verbs = getConjVerbs();
   const ed = isContentAdmin();
   const vocabCount = countVocabVerbs().total;
-  let h = '<div class="acc" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个内置 · 词库 '+vocabCount+' 个可查 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
+  const accOpen = _conjVocabState.open ? ' open' : '';
+  let h = '<div class="acc'+accOpen+'" id="verbConjAcc"><div class="ah" onclick="toggleAcc(\'verbConjAcc\')"><h4>🔀 动词变位速查</h4><span class="cnt">'+verbs.length+' 个内置 · 词库 '+vocabCount+' 个可查 · 14 时态 ▾</span></div><div class="ab" style="padding:8px 14px">';
   if(ed){
     h += '<div style="margin:6px 0;padding:8px 10px;background:#eef4ff;border-radius:8px;font-size:11px;color:#3b82f6">🛠️ 管理员编辑模式<button class="btn sm pr" style="margin:0 6px" onclick="_conjAddVerb()">➕ 新增动词</button><span style="color:#64748b">点变位格/要点旁 ✏️ 就地编辑，✕ 删除词条</span></div>';
   }
@@ -16439,7 +16455,7 @@ function renderVerbConjSection(){
 }
 // ===== 词库动词速查（B）：按词尾分类浏览全部词库动词，点击展开变位 =====
 const CONJ_VOCAB_PAGE_SIZE = 60; // 每页词数
-let _conjVocabState = { cat: 'all', page: 0, opened: {} }; // opened: {es:true}
+let _conjVocabState = { cat: 'all', page: 0, opened: {}, open: false }; // opened: {es:true}, open: 手风琴保持展开
 function _vocabVerbInfo(v){
   // 返回 {es, se, cat}: cat ∈ ar/er/ir/se/other
   if(!v || !v.es || typeof v.pos !== 'string' || v.pos.charAt(0) !== 'v') return null;
@@ -16515,11 +16531,12 @@ function renderConjVocabBank(){
   h += '</div>';
   return h;
 }
-window.conjVocabSetCat = function(cat){ _conjVocabState.cat = cat; _conjVocabState.page = 0; renderMain(); };
-window.conjVocabPage = function(d){ _conjVocabState.page += d; renderMain(); };
+window.conjVocabSetCat = function(cat){ _conjVocabState.cat = cat; _conjVocabState.page = 0; _conjVocabState.open = true; renderMain(); };
+window.conjVocabPage = function(d){ _conjVocabState.page += d; _conjVocabState.open = true; renderMain(); };
 window.conjVocabOpen = function(es){
   if(_conjVocabState.opened[es]) delete _conjVocabState.opened[es];
   else _conjVocabState.opened[es] = true;
+  _conjVocabState.open = true;
   renderMain();
 };
 function renderConjCard(v, ed){
@@ -17158,7 +17175,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v15-2026082001';;;
+    var swVer = 'v16-2026082001';;;;
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17361,7 +17378,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     if(rm.pomodoro&&typeof rm.pomodoro.completed==='number'&&ST.pomodoro)
@@ -17620,9 +17637,9 @@ function mergeWbSnapshot(remote){
   if(typeof remote.examDate==='string' && remote.examDate && (remote.examDateTs||0) >= (ST.examDateTs||0)){ ST.examDate = remote.examDate; ST.examDateTs = remote.examDateTs||0; }
   if(typeof remote.examType==='string' && remote.examType && (remote.examTypeTs||0) >= (ST.examTypeTs||0)){ ST.examType = remote.examType; ST.examTypeTs = remote.examTypeTs||0; }
   if(typeof remote.targetLevel==='string' && remote.targetLevel && (remote.targetLevelTs||0) >= (ST.targetLevelTs||0)){ ST.targetLevel = remote.targetLevel; ST.targetLevelTs = remote.targetLevelTs||0; }
-  // 周计划总览/每周目标：非空则采用（用户编辑覆盖，跨设备同步）
-  if(remote.weeklyPlan && typeof remote.weeklyPlan==='object') ST.weeklyPlan = remote.weeklyPlan;
-  if(remote.weeklyGoals && typeof remote.weeklyGoals==='object') ST.weeklyGoals = remote.weeklyGoals;
+  // 周计划总览/每周目标：时间戳 LWW（本机编辑 Ts 更大则保留本地，远端更新则采用远端）——修复"编辑后刷新/跨设备被旧值覆盖"
+  if(remote.weeklyPlan && typeof remote.weeklyPlan==='object' && (remote.weeklyPlanTs||0) >= (ST.weeklyPlanTs||0)){ ST.weeklyPlan = remote.weeklyPlan; ST.weeklyPlanTs = remote.weeklyPlanTs||ST.weeklyPlanTs; }
+  if(remote.weeklyGoals && typeof remote.weeklyGoals==='object' && (remote.weeklyGoalsTs||0) >= (ST.weeklyGoalsTs||0)){ ST.weeklyGoals = remote.weeklyGoals; ST.weeklyGoalsTs = remote.weeklyGoalsTs||ST.weeklyGoalsTs; }
   // 用户写作内容 writing_0~N：本地优先（本地已写保留，远端有且本地空则采用），跨设备同步作文
   Object.keys(remote).forEach(function(k){
     if(k.indexOf('writing_')===0 && typeof remote[k]==='string' && remote[k].trim()){
