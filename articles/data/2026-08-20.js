@@ -136,156 +136,745 @@ window.WORDS = [
     tip: "<b>viabilidad</b> = 可行性。<b>viable</b> = 可行的。<b>inviable</b> = 不可行的。<b>factible</b> = 可行的（同义词）。B2 学术写作高频词。"
   }
 ];
-
 window.ARTICLES = {
-  a1: {
-    paragraphs: [
-      { es: "Es jueves por la tarde. La familia García está muy contenta porque mañana empiezan sus vacaciones de verano.", zh: "星期四下午。加西亚一家非常开心，因为明天他们的暑假就要开始了。" },
-      { es: "El padre, Luis, mira el mapa en el teléfono. Quiere ir a la playa, pero la carretera está muy llena en agosto.", zh: "爸爸路易斯在手机上看地图。他想去海滩，但八月的公路非常拥堵。" },
-      { es: "La madre, Carmen, hace las maletas en el dormitorio. Mete ropa ligera, toallas, protector solar y los bañadores de los niños.", zh: "妈妈卡门在卧室里收拾行李。她放进轻便的衣服、毛巾、防晒霜和孩子们的泳衣。" },
-      { es: "—¡Mamá, no olvides mi pelota! —dice el niño, Pablo. —Y mis gafas de sol —añade la niña, Lucía.", zh: "—妈妈，别忘了我的球！—男孩巴勃罗说。—还有我的太阳镜—女孩露西亚补充道。" },
-      { es: "Hace mucho calor. La familia decide salir muy temprano, a las seis de la mañana, para evitar el tráfico.", zh: "天气很热。一家人决定很早出发，早上六点，以避开交通拥堵。" },
-      { es: "Por la noche, Luis revisa el coche. Mira el aceite, el agua y la presión de las ruedas. Todo está bien.", zh: "晚上，路易斯检查汽车。他查看了机油、水和轮胎气压。一切正常。" },
-      { es: "Carmen prepara bocadillos y una botella grande de agua para el viaje. También lleva fruta y galletas para los niños.", zh: "卡门为旅途准备了三明治和一大瓶水。她还带了水果和饼干给孩子们。" },
-      { es: "Los niños están nerviosos y no quieren dormir. Piensan en el mar, en la arena y en los helados.", zh: "孩子们很兴奋，不想睡觉。他们想着大海、沙滩和冰淇淋。" },
-      { es: "—¿A qué hora llegamos, papá? —pregunta Lucía. —Si salimos a las seis, llegamos antes de las diez —responde Luis.", zh: "—爸爸，我们几点到？—露西亚问。—如果六点出发，我们十点前就能到—路易斯回答。" },
-      { es: "A las once, todos se acuestan. Mañana será un gran día de playa. —¡Buenas noches y felices vacaciones! —dice Carmen.", zh: "十一点，大家都上床睡觉了。明天将是美好的海边一天。—晚安，假期愉快！—卡门说。" }
+  "a1": {
+    "paragraphs": [
+      {
+        "es": "Es jueves por la tarde. La familia García está muy contenta porque mañana empiezan sus vacaciones de verano.",
+        "zh": "星期四下午。加西亚一家非常开心，因为明天他们的暑假就要开始了。"
+      },
+      {
+        "es": "El padre, Luis, mira el mapa en el teléfono. Quiere ir a la playa, pero la carretera está muy llena en agosto.",
+        "zh": "爸爸路易斯在手机上看地图。他想去海滩，但八月的公路非常拥堵。"
+      },
+      {
+        "es": "La madre, Carmen, hace las maletas en el dormitorio. Mete ropa ligera, toallas, protector solar y los bañadores de los niños.",
+        "zh": "妈妈卡门在卧室里收拾行李。她放进轻便的衣服、毛巾、防晒霜和孩子们的泳衣。"
+      },
+      {
+        "es": "—¡Mamá, no olvides mi pelota! —dice el niño, Pablo. —Y mis gafas de sol —añade la niña, Lucía.",
+        "zh": "—妈妈，别忘了我的球！—男孩巴勃罗说。—还有我的太阳镜—女孩露西亚补充道。"
+      },
+      {
+        "es": "Hace mucho calor. La familia decide salir muy temprano, a las seis de la mañana, para evitar el tráfico.",
+        "zh": "天气很热。一家人决定很早出发，早上六点，以避开交通拥堵。"
+      },
+      {
+        "es": "Por la noche, Luis revisa el coche. Mira el aceite, el agua y la presión de las ruedas. Todo está bien.",
+        "zh": "晚上，路易斯检查汽车。他查看了机油、水和轮胎气压。一切正常。"
+      },
+      {
+        "es": "Carmen prepara bocadillos y una botella grande de agua para el viaje. También lleva fruta y galletas para los niños.",
+        "zh": "卡门为旅途准备了三明治和一大瓶水。她还带了水果和饼干给孩子们。"
+      },
+      {
+        "es": "Los niños están nerviosos y no quieren dormir. Piensan en el mar, en la arena y en los helados.",
+        "zh": "孩子们很兴奋，不想睡觉。他们想着大海、沙滩和冰淇淋。"
+      },
+      {
+        "es": "—¿A qué hora llegamos, papá? —pregunta Lucía. —Si salimos a las seis, llegamos antes de las diez —responde Luis.",
+        "zh": "—爸爸，我们几点到？—露西亚问。—如果六点出发，我们十点前就能到—路易斯回答。"
+      },
+      {
+        "es": "A las once, todos se acuestan. Mañana será un gran día de playa. —¡Buenas noches y felices vacaciones! —dice Carmen.",
+        "zh": "十一点，大家都上床睡觉了。明天将是美好的海边一天。—晚安，假期愉快！—卡门说。"
+      }
     ],
-    dele: "A1 考点：<b>陈述式现在时</b> — 全文以规则动词（mirar, meter, preparar, revisar）和少量不规则动词（hacer→hace, decir→dice, querer→quiere, ir→va）为主。<b>自复动词</b>（se acuestan）表示\u201C上床睡觉\u201D。<b>直接引语</b>用破折号引导对话。<b>时间表达</b>（por la tarde, a las seis, por la noche, mañana）。<b>hay/hace</b> 表示存在与天气（hace mucho calor）。<b>祈使句</b>（no olvides, mira）。<b>物主形容词</b>（mi, mis）。<b>si</b> 引导条件句（si salimos...）。",
-    hardWords: [
-      { w: "maleta", m: "行李箱" },
-      { w: "vacaciones", m: "假期" },
-      { w: "carretera", m: "公路" },
-      { w: "protector solar", m: "防晒霜" },
-      { w: "bañador", m: "泳衣" }
+    "dele": "A1 考点：<b>陈述式现在时</b> — 全文以规则动词（mirar, meter, preparar, revisar）和少量不规则动词（hacer→hace, decir→dice, querer→quiere, ir→va）为主。<b>自复动词</b>（se acuestan）表示“上床睡觉”。<b>直接引语</b>用破折号引导对话。<b>时间表达</b>（por la tarde, a las seis, por la noche, mañana）。<b>hay/hace</b> 表示存在与天气（hace mucho calor）。<b>祈使句</b>（no olvides, mira）。<b>物主形容词</b>（mi, mis）。<b>si</b> 引导条件句（si salimos...）。",
+    "hardWords": [
+      {
+        "w": "maleta",
+        "m": "行李箱"
+      },
+      {
+        "w": "vacaciones",
+        "m": "假期"
+      },
+      {
+        "w": "carretera",
+        "m": "公路"
+      },
+      {
+        "w": "protector solar",
+        "m": "防晒霜"
+      },
+      {
+        "w": "bañador",
+        "m": "泳衣"
+      }
     ],
-    quiz: [
-      { q: "¿Por qué la familia García decide salir a las seis de la mañana?", opts: ["Porque les gusta madrugar.", "Porque el padre tiene que trabajar.", "Para evitar el tráfico de agosto.", "Porque la playa está muy lejos."], ans: 2, es: "El texto dice (párrafo 5): \u201CLa familia decide salir muy temprano... para evitar el tráfico\u201D.", zh: "原文第 5 段说\u201C一家人决定很早出发……以避开交通拥堵\u201D，故选 C（Para evitar el tráfico de agosto = 为了避开八月的交通）。此题考查直接定位。" },
-      { q: "¿Qué mete Carmen en las maletas?", opts: ["Libros y cuadernos.", "Ropa ligera, toallas, protector solar y bañadores.", "Paraguas y abrigos.", "Juguetes y videojuegos."], ans: 1, es: "El texto dice (párrafo 3) que Carmen mete \u201Cropa ligera, toallas, protector solar y los bañadores de los niños\u201D.", zh: "原文第 3 段说卡门放入\u201C轻便衣服、毛巾、防晒霜和孩子们的泳衣\u201D，故选 B。此题考查直接定位。" },
-      { q: "¿Qué partes del coche revisa Luis?", opts: ["Las luces y el claxon.", "La música y el aire acondicionado.", "El aceite, el agua y la presión de las ruedas.", "Las ventanas y los espejos."], ans: 2, es: "El texto dice (párrafo 6) que Luis \u201Cmira el aceite, el agua y la presión de las ruedas\u201D.", zh: "原文第 6 段说路易斯\u201C查看了机油、水和轮胎气压\u201D，故选 C（aceite=机油, agua=水, presión de las ruedas=轮胎气压）。此题考查直接定位。" },
-      { q: "¿Por qué los niños no quieren dormir?", opts: ["Porque hace mucho calor.", "Porque están nerviosos y piensan en el mar, la arena y los helados.", "Porque mañana tienen colegio.", "Porque tienen hambre."], ans: 1, es: "El texto dice (párrafo 8) que los niños están \u201Cnerviosos\u201D y \u201Cpiensan en el mar, en la arena y en los helados\u201D.", zh: "原文第 8 段说孩子们很\u201C兴奋\u201D，\u201C想着大海、沙滩和冰淇淋\u201D，故选 B（están nerviosos = 他们很兴奋）。此题考查直接定位。" },
-      { q: "Si salen a las seis, ¿a qué hora llegan?", opts: ["Antes de las diez.", "A las doce del mediodía.", "A las tres de la tarde.", "A las ocho de la noche."], ans: 0, es: "El texto dice (párrafo 9): \u201CSi salimos a las seis, llegamos antes de las diez\u201D.", zh: "原文第 9 段路易斯说\u201C如果六点出发，我们十点前就能到\u201D，故选 A（Antes de las diez = 十点前）。此题考查直接定位。" }
+    "quiz": [
+      {
+        "q": "¿Por qué la familia García decide salir a las seis de la mañana?",
+        "opts": [
+          "Porque les gusta madrugar.",
+          "Porque el padre tiene que trabajar.",
+          "Para evitar el tráfico de agosto.",
+          "Porque la playa está muy lejos."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 5): “La familia decide salir muy temprano... para evitar el tráfico”.",
+        "zh": "原文第 5 段说“一家人决定很早出发……以避开交通拥堵”，故选 C（Para evitar el tráfico de agosto = 为了避开八月的交通）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué mete Carmen en las maletas?",
+        "opts": [
+          "Libros y cuadernos.",
+          "Ropa ligera, toallas, protector solar y bañadores.",
+          "Paraguas y abrigos.",
+          "Juguetes y videojuegos."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 3) que Carmen mete “ropa ligera, toallas, protector solar y los bañadores de los niños”.",
+        "zh": "原文第 3 段说卡门放入“轻便衣服、毛巾、防晒霜和孩子们的泳衣”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué partes del coche revisa Luis?",
+        "opts": [
+          "Las luces y el claxon.",
+          "La música y el aire acondicionado.",
+          "El aceite, el agua y la presión de las ruedas.",
+          "Las ventanas y los espejos."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 6) que Luis “mira el aceite, el agua y la presión de las ruedas”.",
+        "zh": "原文第 6 段说路易斯“查看了机油、水和轮胎气压”，故选 C（aceite=机油, agua=水, presión de las ruedas=轮胎气压）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Por qué los niños no quieren dormir?",
+        "opts": [
+          "Porque hace mucho calor.",
+          "Porque están nerviosos y piensan en el mar, la arena y los helados.",
+          "Porque mañana tienen colegio.",
+          "Porque tienen hambre."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 8) que los niños están “nerviosos” y “piensan en el mar, en la arena y en los helados”.",
+        "zh": "原文第 8 段说孩子们很“兴奋”，“想着大海、沙滩和冰淇淋”，故选 B（están nerviosos = 他们很兴奋）。此题考查直接定位。"
+      },
+      {
+        "q": "Si salen a las seis, ¿a qué hora llegan?",
+        "opts": [
+          "Antes de las diez.",
+          "A las doce del mediodía.",
+          "A las tres de la tarde.",
+          "A las ocho de la noche."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 9): “Si salimos a las seis, llegamos antes de las diez”.",
+        "zh": "原文第 9 段路易斯说“如果六点出发，我们十点前就能到”，故选 A（Antes de las diez = 十点前）。此题考查直接定位。"
+      }
     ]
   },
-  a2: {
-    paragraphs: [
-      { es: "Agosto es el mes de las fiestas en España. Muchas ciudades y pueblos celebran sus fiestas mayores con música, bailes y comida.", zh: "八月是西班牙的节庆月。许多城市和村镇以音乐、舞蹈和美食来庆祝它们的主节。" },
-      { es: "En Málaga, la feria empieza a mediados de agosto y dura una semana. Las calles se llenan de luces, casetas y gente que baila.", zh: "在马拉加，八月集市于八月中旬开始，持续一周。街道上满是灯火、帐篷和跳舞的人群。" },
-      { es: "En Bilbao, la Aste Nagusia o Semana Grande se celebra a finales de agosto en honor a la Virgen de Begoña.", zh: "在毕尔巴鄂，\u201C大周\u201D（Aste Nagusia）于八月底举行，以纪念贝戈尼亚圣母。" },
-      { es: "Durante las fiestas hay conciertos al aire libre, fuegos artificiales, competiciones deportivas y juegos tradicionales vascos.", zh: "节日期间有露天音乐会、烟花、体育比赛和巴斯克传统游戏。" },
-      { es: "Las familias salen a la calle para comer juntas, ver los desfiles y disfrutar del buen ambiente.", zh: "家庭们走上街头，一起吃饭、观看游行，享受欢乐的氛围。" },
-      { es: "La feria de Málaga tiene dos partes: la feria de día en el centro y la feria de noche en el recinto ferial.", zh: "马拉加集市分为两部分：市中心的日间集市和展览场地上的夜间集市。" },
-      { es: "En la feria de día, la gente come pescado frito y bebe vino dulce. Por la noche, la música y las luces llenan el recinto.", zh: "在日间集市，人们吃炸鱼、喝甜酒。到了晚上，音乐和灯光充满了整个场地。" },
-      { es: "Muchos turistas viajan a España en agosto solo para vivir estas fiestas. Las reservas de hoteles suben mucho en estas fechas.", zh: "许多游客八月专程前往西班牙，只为体验这些节日。这段时间酒店预订量大增。" },
-      { es: "Estas celebraciones son una parte importante de la cultura española y ayudan a la economía local.", zh: "这些庆祝活动是西班牙文化的重要组成部分，也促进了当地经济。" },
-      { es: "Si visitas España en verano, no te pierdas sus fiestas: son una experiencia única e inolvidable.", zh: "如果你夏天来西班牙，别错过它的节日：那是一次独一无二、令人难忘的体验。" }
+  "a2": {
+    "paragraphs": [
+      {
+        "es": "Agosto es el mes de las fiestas en España. Muchas ciudades y pueblos celebran sus fiestas mayores con música, bailes y comida.",
+        "zh": "八月是西班牙的节庆月。许多城市和村镇以音乐、舞蹈和美食来庆祝它们的主节。"
+      },
+      {
+        "es": "En Málaga, la feria empieza a mediados de agosto y dura una semana. Las calles se llenan de luces, casetas y gente que baila.",
+        "zh": "在马拉加，八月集市于八月中旬开始，持续一周。街道上满是灯火、帐篷和跳舞的人群。"
+      },
+      {
+        "es": "En Bilbao, la Aste Nagusia o Semana Grande se celebra a finales de agosto en honor a la Virgen de Begoña.",
+        "zh": "在毕尔巴鄂，“大周”（Aste Nagusia）于八月底举行，以纪念贝戈尼亚圣母。"
+      },
+      {
+        "es": "Durante las fiestas hay conciertos al aire libre, fuegos artificiales, competiciones deportivas y juegos tradicionales vascos.",
+        "zh": "节日期间有露天音乐会、烟花、体育比赛和巴斯克传统游戏。"
+      },
+      {
+        "es": "Las familias salen a la calle para comer juntas, ver los desfiles y disfrutar del buen ambiente.",
+        "zh": "家庭们走上街头，一起吃饭、观看游行，享受欢乐的氛围。"
+      },
+      {
+        "es": "La feria de Málaga tiene dos partes: la feria de día en el centro y la feria de noche en el recinto ferial.",
+        "zh": "马拉加集市分为两部分：市中心的日间集市和展览场地上的夜间集市。"
+      },
+      {
+        "es": "En la feria de día, la gente come pescado frito y bebe vino dulce. Por la noche, la música y las luces llenan el recinto.",
+        "zh": "在日间集市，人们吃炸鱼、喝甜酒。到了晚上，音乐和灯光充满了整个场地。"
+      },
+      {
+        "es": "Muchos turistas viajan a España en agosto solo para vivir estas fiestas. Las reservas de hoteles suben mucho en estas fechas.",
+        "zh": "许多游客八月专程前往西班牙，只为体验这些节日。这段时间酒店预订量大增。"
+      },
+      {
+        "es": "Estas celebraciones son una parte importante de la cultura española y ayudan a la economía local.",
+        "zh": "这些庆祝活动是西班牙文化的重要组成部分，也促进了当地经济。"
+      },
+      {
+        "es": "Si visitas España en verano, no te pierdas sus fiestas: son una experiencia única e inolvidable.",
+        "zh": "如果你夏天来西班牙，别错过它的节日：那是一次独一无二、令人难忘的体验。"
+      }
     ],
-    dele: "A2 考点：<b>简单过去时与现在时</b> — 描述节日用现在时（celebra, se llena），叙述过去发生的事件可用简单过去时。<b>无人称句</b>（hay conciertos）。<b>自复动词</b>（se celebra, se llena, no te pierdas）。<b>地点表达</b>（en Málaga, en Bilbao, al aire libre, en el centro）。<b>si</b> 引导条件句（si visitas...）。<b>频率与时间</b>（a mediados de, a finales de, durante）。<b>动词 gustar 结构</b>（disfrutar del...）。",
-    hardWords: [
-      { w: "feria", m: "集市；庙会" },
-      { w: "casetas", m: "帐篷（节庆摊位）" },
-      { w: "fuegos artificiales", m: "烟花" },
-      { w: "desfile", m: "游行" },
-      { w: "reserva", m: "预订" }
+    "dele": "A2 考点：<b>简单过去时与现在时</b> — 描述节日用现在时（celebra, se llena），叙述过去发生的事件可用简单过去时。<b>无人称句</b>（hay conciertos）。<b>自复动词</b>（se celebra, se llena, no te pierdas）。<b>地点表达</b>（en Málaga, en Bilbao, al aire libre, en el centro）。<b>si</b> 引导条件句（si visitas...）。<b>频率与时间</b>（a mediados de, a finales de, durante）。<b>动词 gustar 结构</b>（disfrutar del...）。",
+    "hardWords": [
+      {
+        "w": "feria",
+        "m": "集市；庙会"
+      },
+      {
+        "w": "casetas",
+        "m": "帐篷（节庆摊位）"
+      },
+      {
+        "w": "fuegos artificiales",
+        "m": "烟花"
+      },
+      {
+        "w": "desfile",
+        "m": "游行"
+      },
+      {
+        "w": "reserva",
+        "m": "预订"
+      }
     ],
-    quiz: [
-      { q: "¿En honor de qué se celebra la Aste Nagusia en Bilbao?", opts: ["De la fundación de la ciudad.", "De la Virgen de Begoña.", "De la llegada del verano.", "De la temporada de cosecha."], ans: 1, es: "El texto dice (párrafo 3) que la Aste Nagusia \u201Cse celebra... en honor a la Virgen de Begoña\u201D.", zh: "原文第 3 段说\u201C大周\u201D\u201C是为了纪念贝戈尼亚圣母而庆祝\u201D，故选 B（la Virgen de Begoña = 贝戈尼亚圣母）。此题考查直接定位。" },
-      { q: "¿En qué dos partes se divide la feria de Málaga?", opts: ["La feria de día y la feria de noche.", "La feria del centro y la de la playa.", "La zona infantil y la de adultos.", "Los conciertos y las exposiciones."], ans: 0, es: "El texto dice (párrafo 6): \u201Cla feria de día en el centro y la feria de noche en el recinto ferial\u201D.", zh: "原文第 6 段说\u201C市中心的日间集市和展览场地上的夜间集市\u201D，故选 A（feria de día y feria de noche = 日间集市和夜间集市）。此题考查直接定位。" },
-      { q: "¿Qué come la gente en la feria de día de Málaga?", opts: ["Pizza y cerveza.", "Pescado frito y vino dulce.", "Hamburguesas y refrescos.", "Paella."], ans: 1, es: "El texto dice (párrafo 7): \u201CEn la feria de día, la gente come pescado frito y bebe vino dulce\u201D.", zh: "原文第 7 段说\u201C日间集市上，人们吃炸鱼、喝甜酒\u201D，故选 B（pescado frito=炸鱼, vino dulce=甜酒）。此题考查直接定位。" },
-      { q: "¿Qué actividades hay durante las fiestas?", opts: ["Solo ceremonias religiosas.", "Conciertos, fuegos artificiales, competiciones y juegos tradicionales.", "Solo actividades de compras.", "Solo proyecciones de cine."], ans: 1, es: "El texto dice (párrafo 4): \u201Cconciertos al aire libre, fuegos artificiales, competiciones deportivas y juegos tradicionales vascos\u201D.", zh: "原文第 4 段说\u201C露天音乐会、烟花、体育比赛和巴斯克传统游戏\u201D，故选 B。此题考查直接定位。" },
-      { q: "¿Por qué suben mucho las reservas de hoteles en agosto?", opts: ["Porque el tiempo se vuelve frío.", "Porque muchos turistas viajan solo para vivir estas fiestas.", "Porque los hoteles hacen descuentos.", "Porque empieza el curso escolar."], ans: 1, es: "El texto dice (párrafo 8): \u201CMuchos turistas viajan... solo para vivir estas fiestas. Las reservas de hoteles suben mucho\u201D.", zh: "原文第 8 段说\u201C许多游客专程来体验节日，酒店预订量大增\u201D，故选 B（viajan solo para vivir estas fiestas = 专程来体验节日）。此题考查直接定位。" }
+    "quiz": [
+      {
+        "q": "¿En honor de qué se celebra la Aste Nagusia en Bilbao?",
+        "opts": [
+          "De la fundación de la ciudad.",
+          "De la Virgen de Begoña.",
+          "De la llegada del verano.",
+          "De la temporada de cosecha."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 3) que la Aste Nagusia “se celebra... en honor a la Virgen de Begoña”.",
+        "zh": "原文第 3 段说“大周”“是为了纪念贝戈尼亚圣母而庆祝”，故选 B（la Virgen de Begoña = 贝戈尼亚圣母）。此题考查直接定位。"
+      },
+      {
+        "q": "¿En qué dos partes se divide la feria de Málaga?",
+        "opts": [
+          "La feria de día y la feria de noche.",
+          "La feria del centro y la de la playa.",
+          "La zona infantil y la de adultos.",
+          "Los conciertos y las exposiciones."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 6): “la feria de día en el centro y la feria de noche en el recinto ferial”.",
+        "zh": "原文第 6 段说“市中心的日间集市和展览场地上的夜间集市”，故选 A（feria de día y feria de noche = 日间集市和夜间集市）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué come la gente en la feria de día de Málaga?",
+        "opts": [
+          "Pizza y cerveza.",
+          "Pescado frito y vino dulce.",
+          "Hamburguesas y refrescos.",
+          "Paella."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 7): “En la feria de día, la gente come pescado frito y bebe vino dulce”.",
+        "zh": "原文第 7 段说“日间集市上，人们吃炸鱼、喝甜酒”，故选 B（pescado frito=炸鱼, vino dulce=甜酒）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué actividades hay durante las fiestas?",
+        "opts": [
+          "Solo ceremonias religiosas.",
+          "Conciertos, fuegos artificiales, competiciones y juegos tradicionales.",
+          "Solo actividades de compras.",
+          "Solo proyecciones de cine."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 4): “conciertos al aire libre, fuegos artificiales, competiciones deportivas y juegos tradicionales vascos”.",
+        "zh": "原文第 4 段说“露天音乐会、烟花、体育比赛和巴斯克传统游戏”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Por qué suben mucho las reservas de hoteles en agosto?",
+        "opts": [
+          "Porque el tiempo se vuelve frío.",
+          "Porque muchos turistas viajan solo para vivir estas fiestas.",
+          "Porque los hoteles hacen descuentos.",
+          "Porque empieza el curso escolar."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 8): “Muchos turistas viajan... solo para vivir estas fiestas. Las reservas de hoteles suben mucho”.",
+        "zh": "原文第 8 段说“许多游客专程来体验节日，酒店预订量大增”，故选 B（viajan solo para vivir estas fiestas = 专程来体验节日）。此题考查直接定位。"
+      }
     ]
   },
-  b1: {
-    paragraphs: [
-      { es: "España está viviendo una auténtica revolución en el sector de la energía. Las fuentes renovables, sobre todo la solar y la eólica, crecen cada año con fuerza.", zh: "西班牙的能源行业正在经历一场真正的革命。可再生能源，尤其是太阳能和风能，每年都在强劲增长。" },
-      { es: "El Ministerio para la Transición Ecológica ha concedido recientemente ayudas por valor de 433,44 millones de euros a 524 proyectos innovadores.", zh: "生态转型部最近向 524 个创新项目发放了价值 4.3344 亿欧元的补助。" },
-      { es: "Estas subvenciones forman parte del programa RENOINN 2, financiado con los fondos europeos Next Generation.", zh: "这些补贴属于 RENOINN 2 计划的一部分，由欧洲\u201C下一代\u201D基金资助。" },
-      { es: "Los proyectos seleccionados añadirán 1.225,66 megavatios de capacidad de generación renovable, en su mayoría fotovoltaica, al sistema eléctrico español.", zh: "入选项目将为西班牙电力系统增加 1225.66 兆瓦的可再生发电能力，其中大部分为光伏。" },
-      { es: "Además, incorporarán 2.320,72 megavatios-hora de capacidad de almacenamiento de energía, un elemento cada vez más decisivo.", zh: "此外，它们还将带来 2320.72 兆瓦时的储能能力，这是一个日益关键的要素。" },
-      { es: "El almacenamiento es fundamental porque la energía solar solo se produce cuando hay sol. Si queremos aprovecharla por la noche, necesitamos baterías.", zh: "储能至关重要，因为太阳能只有在有阳光时才能产生。如果我们想在夜间利用它，就需要电池。" },
-      { es: "El programa inicialmente iba a repartir 202,5 millones de euros. Sin embargo, la agencia IDAE recibió 882 solicitudes, casi el triple que en la primera edición.", zh: "该计划最初打算分配 2.025 亿欧元。然而，IDAE 机构收到了 882 份申请，几乎是第一期的三倍。" },
-      { es: "Ante esta enorme demanda, las autoridades decidieron aumentar el presupuesto en un 110% para apoyar a más proyectos.", zh: "面对如此巨大的需求，当局决定将预算提高 110%，以支持更多项目。" },
-      { es: "La mayor parte del dinero, 234 millones de euros, se destinó a 118 proyectos agrivoltaicos, que combinan la generación solar con la actividad agrícola.", zh: "大部分资金，2.34 亿欧元，被分配给了 118 个农业光伏项目，这些项目将太阳能发电与农业活动结合起来。" },
-      { es: "En estos proyectos, los paneles solares se instalan a más de cuatro metros de altura, de modo que los cultivos puedan seguir creciendo debajo.", zh: "在这些项目中，太阳能板安装在四米以上的高度，这样下面的农作物就能继续生长。" },
-      { es: "El programa también financió 29 proyectos de energía solar flotante, la mayoría ubicados en embalses de riego agrícola.", zh: "该计划还资助了 29 个漂浮太阳能项目，其中大部分位于农业灌溉水库上。" },
-      { es: "Otros 65,4 millones de euros se concedieron a 47 proyectos que integran energías renovables en infraestructuras ya existentes, como depuradoras o antiguas minas.", zh: "另有 6540 万欧元被授予 47 个项目，这些项目将可再生能源整合到现有基础设施中，例如污水处理厂或旧矿区。" },
-      { es: "El autoconsumo colectivo también recibió un fuerte impulso: 45,7 millones de euros para 274 instalaciones que beneficiarán a más de 9.000 consumidores vulnerables.", zh: "集体自用也获得了大力推动：4570 万欧元用于 274 个设施，将惠及 9000 多名弱势消费者。" },
-      { es: "Estos proyectos de autoconsumo suelen estar promovidos por ayuntamientos, diputaciones o comunidades energéticas, no solo por grandes empresas.", zh: "这些自用项目通常由市政府、省议会或能源社区推动，而不仅仅是大企业。" },
-      { es: "La apuesta por el almacenamiento refleja un cambio profundo: España ya no financia la energía solar sola, sino siempre acompañada de baterías.", zh: "对储能的重视反映了一个深刻的变化：西班牙不再单独资助太阳能，而是始终配套电池。" },
-      { es: "Según los expertos, la clave está en captar el excedente de electricidad del mediodía y liberarlo por la tarde, cuando la demanda es más alta.", zh: "专家指出，关键在于捕捉正午多余的电力，并在傍晚需求较高时释放出来。" },
-      { es: "Este modelo no solo mejora la estabilidad de la red eléctrica, sino que también abarata la factura de los consumidores a largo plazo.", zh: "这种模式不仅提高了电网的稳定性，而且从长远来看还能降低消费者的电费。" },
-      { es: "Cataluña fue la comunidad con más proyectos aprobados, con 189, seguida de la Comunidad Valenciana con 69 y de Extremadura y Andalucía con 19 cada una.", zh: "加泰罗尼亚是获批项目最多的自治区，有 189 个，其次是瓦伦西亚自治区 69 个，埃斯特雷马杜拉和安达卢西亚各 19 个。" }
+  "b1": {
+    "paragraphs": [
+      {
+        "es": "España está viviendo una auténtica revolución en el sector de la energía. Las fuentes renovables, sobre todo la solar y la eólica, crecen cada año con fuerza, y el Ministerio para la Transición Ecológica ha puesto en marcha programas de ayudas para impulsar proyectos innovadores que combinan la generación limpia con el almacenamiento.",
+        "zh": "西班牙的能源行业正在经历一场真正的革命。可再生能源，尤其是太阳能和风能，每年都在强劲增长，生态转型部也已启动补贴计划，以推动将清洁发电与储能相结合的创新项目。"
+      },
+      {
+        "es": "El programa RENOINN 2, gestionado por el Instituto para la Diversificación y Ahorro de la Energía (IDAE), fue publicado el 18 de diciembre de 2025 con una dotación inicial de 202,5 millones de euros del Plan de Recuperación, Transformación y Resiliencia, financiado con los fondos europeos Next Generation.",
+        "zh": "RENOINN 2 计划由能源多样化与节能研究所（IDAE）管理，于 2025 年 12 月 18 日公布，初始预算为 2.025 亿欧元，来自复苏、转型与韧性计划，由欧洲“下一代”基金资助。"
+      },
+      {
+        "es": "Debido al gran interés despertado entre los promotores, las autoridades aprobaron una ampliación del presupuesto mediante resolución del 4 de junio de 2026, elevando la dotación inicial desde los 202,5 millones hasta los 368,5 millones de euros para financiar más proyectos.",
+        "zh": "由于在项目方中激起巨大兴趣，当局通过 2026 年 6 月 4 日的决议批准了预算扩充，将初始预算从 2.025 亿欧元提高到 3.685 亿欧元，以资助更多项目。"
+      },
+      {
+        "es": "El objetivo principal de este programa es desplegar renovables que presentan un alto grado de innovación o un valor añadido por su capacidad de integración en el territorio y en los sectores productivos, impulsando así la transición energética y la creación de empleo.",
+        "zh": "该计划的主要目标是部署具有高度创新性或因融入地方和生产部门而具有附加价值的可再生能源，从而推动能源转型和就业创造。"
+      },
+      {
+        "es": "La convocatoria se divide en cinco líneas de incentivos, cada una con sus propias condiciones técnicas: la agrivoltaica con almacenamiento, la fotovoltaica flotante en espacios artificiales, la integración de renovables en infraestructuras, el autoconsumo colectivo con consumidores vulnerables y las instalaciones de bombas de calor renovables.",
+        "zh": "本次征集分为五个补贴子项：带储能的农业光伏、人工水体上的漂浮光伏、基础设施上的可再生能源整合、惠及弱势消费者的集体自用，以及可再生热泵装置。"
+      },
+      {
+        "es": "Entre los proyectos subvencionables destaca la agrivoltaica, que permite un uso simultáneo del suelo: los paneles se colocan sobre los cultivos, de modo que la tierra produce a la vez alimentos y electricidad, una fórmula con muy buena acogida en los últimos años.",
+        "zh": "在可补贴的项目中，农业光伏尤为突出：它实现了土地的双重利用——太阳能板架设在农作物上方，让土地同时产出粮食和电力。近年来这一模式广受欢迎。"
+      },
+      {
+        "es": "La tecnología agrivoltaica permite, entre otras ventajas, modular la radiación solar sobre el cultivo, evitando el exceso de radiación y disminuyendo los requerimientos de agua, algo especialmente importante en las regiones del sur que sufren escasez de lluvias y sequías prolongadas.",
+        "zh": "农业光伏技术的一大优点是能够调节照射到作物上的太阳辐射，避免辐射过强，并减少用水需求——这在降雨稀缺的地区尤为重要。"
+      },
+      {
+        "es": "El programa ya demostró su éxito en la primera convocatoria, en la que el Ministerio asignó 148,5 millones de euros a 199 proyectos de renovables innovadoras como la agrivoltaica o la fotovoltaica flotante, que incorporaban almacenamiento en todos los casos.",
+        "zh": "该计划在第一期就已大获成功：当时生态转型部向 199 个创新可再生能源项目发放了 1.485 亿欧元，涉及农业光伏、漂浮光伏等，且所有项目均配备储能。"
+      },
+      {
+        "es": "Estas iniciativas de la primera edición prevén aportar al sistema eléctrico 299,6 megavatios de generación, mayoritariamente fotovoltaica, así como 351,6 megavatios-hora de capacidad de almacenamiento, una cifra que refleja la apuesta decidida por la energía solar en el conjunto del país.",
+        "zh": "第一期这些项目预计将为电力系统贡献 299.6 兆瓦的发电能力（大部分为光伏）以及 351.6 兆瓦时的储能能力，这一数字体现了对太阳能的坚定投入。"
+      },
+      {
+        "es": "En aquella primera convocatoria, la línea de incentivos que recibió más subvención fue la agrivoltaica con almacenamiento, con 77,1 millones de euros para 62 proyectos agrivoltaicos, la mayoría ubicados en explotaciones dedicadas a cultivos arbóreos como olivar, viñedos y frutales.",
+        "zh": "在第一期征集中，获得补贴最多的子项是带储能的农业光伏，共 7710 万欧元、62 个项目，其中大部分位于种植橄榄、葡萄和水果等木本作物的农场。"
+      },
+      {
+        "es": "En estos proyectos de agrivoltaica, los paneles fotovoltaicos se sitúan sobre estructuras elevadas a más de cuatro metros de altura, de modo que los cultivos puedan seguir creciendo debajo y las máquinas agrícolas puedan trabajar con total normalidad por el campo.",
+        "zh": "在这些农业光伏项目中，太阳能板被架设在四米以上的高架结构上，这样下方的农作物就能继续生长，农机也能完全正常作业。"
+      },
+      {
+        "es": "La convocatoria impulsa también el autoconsumo colectivo con participación de consumidores vulnerables. El despliegue masivo del autoconsumo en España de los últimos años no ha sido igual en instalaciones individuales que colectivas, suponiendo estas últimas un porcentaje todavía muy bajo.",
+        "zh": "本次征集还推动惠及弱势消费者的集体自用。近年来西班牙自用光伏的大规模推广在个人与集体装置之间并不均衡，集体自用所占比例仍然很低。"
+      },
+      {
+        "es": "Además, debido a la casuística de la vivienda en España, donde más del 70% de la población vive en edificios de pisos, se considera primordial continuar impulsando el desarrollo del autoconsumo colectivo entre las comunidades de vecinos y los pequeños municipios.",
+        "zh": "此外，由于西班牙的住房情况特殊——超过 70% 的人口住在公寓楼里——在街坊社区和小城镇中继续推动集体自用被视为重中之重。"
+      },
+      {
+        "es": "Por último, también son subvencionables las instalaciones de bombas de calor renovables, una tecnología que permite avanzar en la electrificación de los procesos térmicos con fuentes renovables y que contribuye de forma directa a reducir las emisiones de los edificios.",
+        "zh": "该计划将继续提高西班牙已安装的自用发电功率，从而帮助实现新版国家综合能源与气候计划中提出的 2030 年 19 吉瓦的宏伟目标。"
+      },
+      {
+        "es": "La fotovoltaica flotante, por su parte, se instala en espacios artificiales como embalses, balsas de riego o antiguas explotaciones mineras, aprovechando superficies acuáticas que no compiten con el suelo agrícola ni con la actividad productiva del territorio donde se ubican.",
+        "zh": "最后，可再生热泵装置同样可获得补贴。这项技术能够利用可再生能源推动供热工艺电气化，并有助于减少建筑物的排放。"
+      },
+      {
+        "es": "El plazo para la realización de las inversiones subvencionables y la ejecución de las actuaciones se extenderá hasta el 30 de junio de 2030. Todos los proyectos financiados deberán respetar además el principio europeo de no causar un daño significativo al medioambiente.",
+        "zh": "漂浮光伏则安装在人工水体上，例如水库、灌溉池塘或旧矿区，利用不与耕地和农业生产争地的水面。"
+      },
+      {
+        "es": "El plazo para la realización de las inversiones subvencionables y la ejecución de las actuaciones se extenderá hasta el 30 de junio de 2030. Todos los proyectos financiados deberán respetar el principio europeo de no causar un daño significativo al medioambiente.",
+        "zh": "可补贴投资和项目实施的期限将延至 2030 年 6 月 30 日。所有受资助项目都必须遵守欧洲“不对环境造成重大损害”的原则。"
+      },
+      {
+        "es": "En la valoración de los proyectos se tendrán en cuenta los criterios económicos, así como el grado de madurez de cada propuesta y las externalidades positivas que generen en su entorno. Esta iniciativa está en línea con el plan REPowerEU, donde la energía solar juega un papel determinante y el almacenamiento permite captar el excedente del mediodía para liberarlo cuando la demanda aumenta.",
+        "zh": "项目评审将考虑经济标准、每份提案的成熟度及其在周边产生的正外部性。这一举措符合欧盟 REPowerEU 计划——在该计划中太阳能发挥决定性作用，而储能能够在正午捕捉盈余电力、在需求增加时释放。"
+      }
     ],
-    dele: "B1 考点：<b>陈述式过去时与现在完成时</b>（ha concedido, recibió, decidieron）— 叙述已完成的动作与持续至今的结果。<b>条件式/条件句</b>（si queremos aprovecharla... necesitamos baterías）。<b>被动结构</b>（se destinó, se concedieron, se instalaron）。<b>数据与百分比的表达</b>（433,44 millones, 110%, 1.225,66 MW）。<b>目的连词</b>（para que + 虚拟式：para que los cultivos puedan seguir creciendo）。<b>长句中的关系从句</b>（proyectos que combinan...）。<b>无人称结构</b>（se trata de, hay que）。",
-    hardWords: [
-      { w: "subvención", m: "补贴；补助", ejemplo: "Estas subvenciones forman parte del programa RENOINN 2.", analisis: "源自拉丁语 subventio（援助），词根 sub-（在下）+ venire（来），指\u201C从上级/公共机构下达的资金援助\u201D。常见搭配 conceder/otorgar una subvención（发放补贴）、solicitar una subvención（申请补贴）、subvención pública（公共补助）。在 B1 经济类阅读中常与 ayuda、financiación、préstamo 并列考查辨析：subvención 通常无需偿还，préstamo 需偿还。语境义：本文中指政府用公共资金支持能源项目。" },
-      { w: "almacenamiento", m: "储存；蓄能", ejemplo: "incorporarán 2.320,72 megavatios-hora de capacidad de almacenamiento de energía.", analisis: "由动词 almacenar（储存）+ 名词后缀 -miento 构成，词根为 almacén（仓库，源自阿拉伯语 al-maḫzan）。常见搭配 almacenamiento de energía（储能）、capacidad de almacenamiento（储存容量）、almacenamiento de datos（数据存储）。语法上为阳性名词（el almacenamiento）。语境义：本文特指\u201C电力蓄能\u201D，而非普通仓储。DELE B1 常考查其在能源/科技语境中的专业含义。" },
-      { w: "agrivoltaico", m: "农业光伏的", ejemplo: "234 millones de euros se destinó a 118 proyectos agrivoltaicos.", analisis: "复合词，由 agri-（农业，源自拉丁语 ager\u201C田地\u201D）+ voltaico（光伏的，源自意大利物理学家 Volta 伏特）构成，指\u201C农业与光伏发电结合\u201D。这是近年能源转型领域的新词，DELE 阅读中常以学术新词形式出现。语境义：本文指在农田上方架设太阳能板，实现\u201C板上发电、板下种田\u201D。搭配 instalación agrivoltaica、parque agrivoltaico。" },
-      { w: "autoconsumo", m: "自发自用；自用", ejemplo: "El autoconsumo colectivo también recibió un fuerte impulso.", analisis: "由前缀 auto-（自己）+ consumo（消费）构成，指\u201C自己生产并消费（能源）\u201D。常见搭配 autoconsumo fotovoltaico（光伏自用）、autoconsumo colectivo（集体自用）、autoconsumo individual（个人自用）。语法上为阳性名词。语境义：本文指社区/家庭自建光伏设施自发电自用。DELE B1 考查其与 consumo（消费）、autonomía（自主）的词义区分。" },
-      { w: "embalse", m: "水库；蓄水", ejemplo: "la mayoría ubicados en embalses de riego agrícola.", analisis: "源自动词 embalsar（筑坝蓄水），词根 balso 与水坝相关。常见搭配 embalse de riego（灌溉水库）、construir un embalse（建水库）、nivel del embalse（水库水位）。语法上为阳性名词，注意与 embalsar（蓄水）区分。语境义：本文指农业灌溉用水库，用于在其上安装漂浮太阳能板。易混淆词：presa（大坝，指建筑本身）vs embalse（水库，指蓄水的水体）。" },
-      { w: "excedente", m: "盈余；多余量", ejemplo: "captar el excedente de electricidad del mediodía.", analisis: "源自拉丁语 excedere（超出），由 ex-（向外）+ cedere（走）构成，形容词/名词均可用（el excedente = 盈余）。常见搭配 excedente de producción（生产过剩）、excedente eléctrico（电力盈余）、generar excedente（产生盈余）。语境义：本文指正午太阳能发电超出需求的\u201C多余电力\u201D。DELE B1 常考 excedente（名词）与 exceder（动词）、exceso（过量）的辨析。" },
-      { w: "fotovoltaica", m: "光伏的（太阳能发电）", ejemplo: "en su mayoría fotovoltaica, al sistema eléctrico español.", analisis: "由 foto-（光，源自希腊语 phōs）+ voltaica（伏打的）构成，指\u201C利用光能直接发电\u201D。常见搭配 energía fotovoltaica（光伏能源）、panel fotovoltaico（光伏板）、planta fotovoltaica（光伏电站）。这是能源领域的专业形容词。语境义：本文指西班牙新增的可再生发电能力\u201C大部分是光伏\u201D。DELE B1 科技阅读高频词，常与 solar（太阳能的）、térmica（热力的）辨析。" },
-      { w: "financiar", m: "资助；提供资金", ejemplo: "financiado con los fondos europeos Next Generation.", analisis: "源自法语 financer，词根 finance（财政，源自拉丁语 finis\u201C终结、结算\u201D）。常见搭配 financiar un proyecto（资助项目）、financiación pública/privada（公共/私人融资）、fondos para financiar（用于资助的资金）。语法上为规则 -ar 动词。语境义：本文指 RENOINN 2 计划\u201C由欧洲下一代基金资助\u201D。易混淆词：financiar（提供资金）vs invertir（投资，期望回报）vs subvencionar（补贴，无需偿还）。" },
-      { w: "infraestructura", m: "基础设施", ejemplo: "integran energías renovables en infraestructuras ya existentes.", analisis: "由前缀 infra-（在下、基础）+ estructura（结构）构成，指\u201C支撑经济/社会运转的基础设施\u201D。常见搭配 infraestructura energética（能源基础设施）、infraestructuras públicas（公共基础设施）、construir infraestructuras（建设基础设施）。语法上为阴性名词。语境义：本文指污水处理厂、旧矿区等\u201C现有基础设施\u201D，在其上整合可再生能源。DELE B1 经济/城市话题高频词。" },
-      { w: "vulnerable", m: "弱势的；易受伤害的", ejemplo: "beneficiarán a más de 9.000 consumidores vulnerables.", analisis: "源自拉丁语 vulnerabilis（可受伤的），词根 vulnus（伤口）。常见搭配 consumidores vulnerables（弱势消费者）、grupos vulnerables（弱势群体）、situación vulnerable（脆弱的处境）。语法上为形容词，阴阳同形（vulnerable）。语境义：本文指\u201C经济上脆弱的能源消费者\u201D，即难以负担电费的人群。DELE B1 社会议题常考，与 pobre（贫穷）、desfavorecido（处于不利地位的）辨析。" }
+    "dele": "B1 考点：<b>陈述式过去时与现在完成时</b>（fue publicado, recibió, asignó, ha puesto en marcha）— 叙述已完成的动作与持续至今的结果。<b>被动结构</b>（son subvencionables, se divide, se tendrán en cuenta）。<b>数据与百分比的表达</b>（202,5 millones, 368,5 millones, 148,5 millones, 70%, 19 gigavatios, 4 metros）。<b>目的与结果从句</b>（de modo que + 虚拟式：de modo que los cultivos puedan seguir creciendo）。<b>关系从句</b>（proyectos que incorporaban...; una tecnología que permite...）。<b>无人称与泛指结构</b>（se considera primordial, se trata de）。<b>机构与计划名称</b>（IDAE, PNIEC, REPowerEU, Next Generation）。",
+    "hardWords": [
+      {
+        "w": "subvención",
+        "m": "补贴；补助",
+        "ejemplo": "Estas subvenciones forman parte del programa RENOINN 2.",
+        "analisis": "源自拉丁语 subventio（援助），词根 sub-（在下）+ venire（来），指“从上级/公共机构下达的资金援助”。常见搭配 conceder/otorgar una subvención（发放补贴）、solicitar una subvención（申请补贴）、subvención pública（公共补助）。在 B1 经济类阅读中常与 ayuda、financiación、préstamo 并列考查辨析：subvención 通常无需偿还，préstamo 需偿还。语境义：本文中指政府用公共资金支持能源项目。"
+      },
+      {
+        "w": "almacenamiento",
+        "m": "储存；蓄能",
+        "ejemplo": "incorporarán 2.320,72 megavatios-hora de capacidad de almacenamiento de energía.",
+        "analisis": "由动词 almacenar（储存）+ 名词后缀 -miento 构成，词根为 almacén（仓库，源自阿拉伯语 al-maḫzan）。常见搭配 almacenamiento de energía（储能）、capacidad de almacenamiento（储存容量）、almacenamiento de datos（数据存储）。语法上为阳性名词（el almacenamiento）。语境义：本文特指“电力蓄能”，而非普通仓储。DELE B1 常考查其在能源/科技语境中的专业含义。"
+      },
+      {
+        "w": "agrivoltaico",
+        "m": "农业光伏的",
+        "ejemplo": "234 millones de euros se destinó a 118 proyectos agrivoltaicos.",
+        "analisis": "复合词，由 agri-（农业，源自拉丁语 ager“田地”）+ voltaico（光伏的，源自意大利物理学家 Volta 伏特）构成，指“农业与光伏发电结合”。这是近年能源转型领域的新词，DELE 阅读中常以学术新词形式出现。语境义：本文指在农田上方架设太阳能板，实现“板上发电、板下种田”。搭配 instalación agrivoltaica、parque agrivoltaico。"
+      },
+      {
+        "w": "autoconsumo",
+        "m": "自发自用；自用",
+        "ejemplo": "El autoconsumo colectivo también recibió un fuerte impulso.",
+        "analisis": "由前缀 auto-（自己）+ consumo（消费）构成，指“自己生产并消费（能源）”。常见搭配 autoconsumo fotovoltaico（光伏自用）、autoconsumo colectivo（集体自用）、autoconsumo individual（个人自用）。语法上为阳性名词。语境义：本文指社区/家庭自建光伏设施自发电自用。DELE B1 考查其与 consumo（消费）、autonomía（自主）的词义区分。"
+      },
+      {
+        "w": "embalse",
+        "m": "水库；蓄水",
+        "ejemplo": "la mayoría ubicados en embalses de riego agrícola.",
+        "analisis": "源自动词 embalsar（筑坝蓄水），词根 balso 与水坝相关。常见搭配 embalse de riego（灌溉水库）、construir un embalse（建水库）、nivel del embalse（水库水位）。语法上为阳性名词，注意与 embalsar（蓄水）区分。语境义：本文指农业灌溉用水库，用于在其上安装漂浮太阳能板。易混淆词：presa（大坝，指建筑本身）vs embalse（水库，指蓄水的水体）。"
+      },
+      {
+        "w": "excedente",
+        "m": "盈余；多余量",
+        "ejemplo": "captar el excedente de electricidad del mediodía.",
+        "analisis": "源自拉丁语 excedere（超出），由 ex-（向外）+ cedere（走）构成，形容词/名词均可用（el excedente = 盈余）。常见搭配 excedente de producción（生产过剩）、excedente eléctrico（电力盈余）、generar excedente（产生盈余）。语境义：本文指正午太阳能发电超出需求的“多余电力”。DELE B1 常考 excedente（名词）与 exceder（动词）、exceso（过量）的辨析。"
+      },
+      {
+        "w": "fotovoltaica",
+        "m": "光伏的（太阳能发电）",
+        "ejemplo": "en su mayoría fotovoltaica, al sistema eléctrico español.",
+        "analisis": "由 foto-（光，源自希腊语 phōs）+ voltaica（伏打的）构成，指“利用光能直接发电”。常见搭配 energía fotovoltaica（光伏能源）、panel fotovoltaico（光伏板）、planta fotovoltaica（光伏电站）。这是能源领域的专业形容词。语境义：本文指西班牙新增的可再生发电能力“大部分是光伏”。DELE B1 科技阅读高频词，常与 solar（太阳能的）、térmica（热力的）辨析。"
+      },
+      {
+        "w": "financiar",
+        "m": "资助；提供资金",
+        "ejemplo": "financiado con los fondos europeos Next Generation.",
+        "analisis": "源自法语 financer，词根 finance（财政，源自拉丁语 finis“终结、结算”）。常见搭配 financiar un proyecto（资助项目）、financiación pública/privada（公共/私人融资）、fondos para financiar（用于资助的资金）。语法上为规则 -ar 动词。语境义：本文指 RENOINN 2 计划“由欧洲下一代基金资助”。易混淆词：financiar（提供资金）vs invertir（投资，期望回报）vs subvencionar（补贴，无需偿还）。"
+      },
+      {
+        "w": "infraestructura",
+        "m": "基础设施",
+        "ejemplo": "integran energías renovables en infraestructuras ya existentes.",
+        "analisis": "由前缀 infra-（在下、基础）+ estructura（结构）构成，指“支撑经济/社会运转的基础设施”。常见搭配 infraestructura energética（能源基础设施）、infraestructuras públicas（公共基础设施）、construir infraestructuras（建设基础设施）。语法上为阴性名词。语境义：本文指污水处理厂、旧矿区等“现有基础设施”，在其上整合可再生能源。DELE B1 经济/城市话题高频词。"
+      },
+      {
+        "w": "vulnerable",
+        "m": "弱势的；易受伤害的",
+        "ejemplo": "beneficiarán a más de 9.000 consumidores vulnerables.",
+        "analisis": "源自拉丁语 vulnerabilis（可受伤的），词根 vulnus（伤口）。常见搭配 consumidores vulnerables（弱势消费者）、grupos vulnerables（弱势群体）、situación vulnerable（脆弱的处境）。语法上为形容词，阴阳同形（vulnerable）。语境义：本文指“经济上脆弱的能源消费者”，即难以负担电费的人群。DELE B1 社会议题常考，与 pobre（贫穷）、desfavorecido（处于不利地位的）辨析。"
+      }
     ],
-    quiz: [
-      { q: "¿Cuánto dinero concedió finalmente el programa RENOINN 2?", opts: ["202,5 millones de euros.", "433,44 millones de euros.", "882 millones de euros.", "110 millones de euros."], ans: 1, es: "El texto dice (párrafo 2) que se han concedido \u201C433,44 millones de euros a 524 proyectos innovadores\u201D.", zh: "原文第 2 段明确说\u201C向 524 个创新项目发放了 4.3344 亿欧元\u201D，故选 B。此题考查直接定位。" },
-      { q: "Según el texto, ¿por qué las autoridades aumentaron el presupuesto un 110%?", opts: ["Porque subió el coste de los proyectos.", "Porque el número de solicitudes superó con creces lo esperado, casi el triple de la primera edición.", "Porque la Unión Europea lo exigió.", "Porque bajó el precio del petróleo."], ans: 1, es: "El texto (párrafos 7-8) dice que IDAE recibió 882 solicitudes, \u201Ccasi el triple que en la primera edición\u201D, y por eso \u201Cdecidieron aumentar el presupuesto en un 110%\u201D. Hay que relacionar la alta demanda con la decisión.", zh: "原文第 7-8 段说 IDAE 收到 882 份申请，\u201C几乎是第一期的三倍\u201D，因此\u201C决定将预算提高 110%\u201D。需要把\u201C高需求\u201D与\u201C增加预算\u201D这一因果关系联系起来推理，故选 B。此题考查因果推理，非字面定位。" },
-      { q: "¿Dónde se ubican la mayoría de los proyectos de energía solar flotante?", opts: ["En el mar.", "En embalses de riego agrícola.", "En los tejados.", "En el desierto."], ans: 1, es: "El texto (párrafo 11) menciona \u201Cenergía solar flotante, la mayoría ubicados en embalses de riego agrícola\u201D. Hay que entender que embalse = 水库（非普通水面）y riego = 灌溉.", zh: "原文第 11 段提到\u201C漂浮太阳能……大部分位于农业灌溉水库上\u201D。需理解 embalse 意为\u201C水库\u201D，riego 意为\u201C灌溉\u201D，从而锁定\u201C农业灌溉水库\u201D，故选 B。此题考查 embalse/riego 等词汇的语境义。" },
-      { q: "¿Cómo logran los proyectos agrivoltaicos combinar energía y agricultura?", opts: ["Convirtiendo los campos en fábricas.", "Instalando los paneles a más de cuatro metros de altura para que los cultivos sigan creciendo debajo.", "Generando electricidad solo sobre el agua.", "Plantando cultivos sobre los paneles."], ans: 1, es: "La frase (párrafo 10) \u201Clos paneles solares se instalan a más de cuatro metros de altura, de modo que los cultivos puedan seguir creciendo debajo\u201D contiene una cláusula de finalidad con subjuntivo (de modo que + puedan).", zh: "原句（第 10 段）\u201C太阳能板安装在四米以上高度，这样下面的农作物就能继续生长\u201D中，de modo que + 虚拟式（puedan）表达目的，需理解这一复杂结构才能选出正确答案，故选 B。此题考查目的从句中的虚拟式理解。" },
-      { q: "¿A cuántas personas beneficiarán los proyectos de autoconsumo colectivo?", opts: ["A más de 9.000 consumidores vulnerables.", "A 274 personas.", "A 47 familias.", "A 882 personas."], ans: 0, es: "El texto dice (párrafo 13) que 274 instalaciones \u201Cbeneficiarán a más de 9.000 consumidores vulnerables\u201D.", zh: "原文第 13 段说 274 个设施\u201C将惠及 9000 多名弱势消费者\u201D，故选 A。此题考查直接定位。" },
-      { q: "Según el artículo, ¿cuál es la función más importante del almacenamiento para el sistema eléctrico español?", opts: ["Hacer los paneles solares más baratos.", "Captar el excedente del mediodía y liberarlo por la tarde, estabilizando la red y abaratando la factura a largo plazo.", "Sustituir todas las centrales térmicas.", "Hacer las centrales nucleares más seguras."], ans: 1, es: "Hay que integrar los párrafos 6, 15, 16 y 17: el 6 dice que la solar solo se produce con sol, el 15-16 dice \u201Ccaptar el excedente del mediodía y liberarlo por la tarde\u201D, y el 17 concluye que \u201Cmejora la estabilidad de la red\u201D y \u201Cabarata la factura\u201D.", zh: "需综合第 6、15、16、17 段：第 6 段说太阳能只在有太阳时产生，第 15-16 段说\u201C捕捉正午盈余并在傍晚释放\u201D，第 17 段总结\u201C提高电网稳定性\u201D并\u201C降低电费\u201D。整合这些信息才能得出完整答案，故选 B。此题考查跨段落综合。" },
-      { q: "¿Qué comunidad autónoma obtuvo más proyectos aprobados?", opts: ["La Comunidad Valenciana.", "Andalucía.", "Cataluña.", "Extremadura."], ans: 2, es: "El texto dice (párrafo 18) que \u201CCataluña fue la comunidad con más proyectos aprobados, con 189\u201D.", zh: "原文第 18 段说\u201C加泰罗尼亚是获批项目最多的自治区，有 189 个\u201D，故选 C。此题考查直接定位。" },
-      { q: "¿Qué tendencia principal de la política energética española se puede deducir del artículo?", opts: ["Abandonar por completo la energía nuclear.", "La energía solar debe ir acompañada de almacenamiento, hacia una transición más refinada.", "Desarrollar solo la energía eólica.", "Dejar de usar energías renovables."], ans: 1, es: "Integrando el párrafo 15 (\u201Cya no financia la energía solar sola, sino siempre acompañada de baterías\u201D) y el énfasis repetido en el almacenamiento, se deduce una transición \u201Csolar + almacenamiento\u201D, no una afirmación literal.", zh: "综合第 15 段\u201C不再单独资助太阳能，而是始终配套电池\u201D以及全文对储能的反复强调，可推断出政策趋势是\u201C太阳能+储能\u201D的精细化转型。这是需要归纳推断的结论，故选 B。此题考查态度/趋势推断。" }
+    "quiz": [
+      {
+        "q": "¿Cuál era la dotación inicial del programa RENOINN 2?",
+        "opts": [
+          "202,5 millones de euros.",
+          "368,5 millones de euros.",
+          "148,5 millones de euros.",
+          "433,44 millones de euros."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 2) que el programa fue publicado con “una dotación inicial de 202,5 millones de euros”.",
+        "zh": "原文第 2 段说该计划公布时“初始预算为 2.025 亿欧元”，故选 A。此题考查直接定位。"
+      },
+      {
+        "q": "¿En cuánto se amplió el presupuesto del programa según la resolución de junio de 2026?",
+        "opts": [
+          "Hasta 202,5 millones.",
+          "Hasta 148,5 millones.",
+          "Hasta 368,5 millones.",
+          "Hasta 433,44 millones."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 3) que la resolución del 4 de junio de 2026 elevó la dotación “desde los 202,5 millones hasta los 368,5 millones de euros”.",
+        "zh": "原文第 3 段说 2026 年 6 月 4 日的决议把预算“从 2.025 亿提高到 3.685 亿欧元”，故选 C。此题考查直接定位与数字理解。"
+      },
+      {
+        "q": "¿Cuántas líneas de incentivos incluye la convocatoria de RENOINN 2?",
+        "opts": [
+          "Tres líneas.",
+          "Cinco líneas.",
+          "Siete líneas.",
+          "Dos líneas."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 5) que “la convocatoria se divide en cinco líneas de incentivos” y enumera cada una de ellas.",
+        "zh": "原文第 5 段说“本次征集分为五个补贴子项”，并逐一列举，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "Según el texto, ¿qué ventaja principal aporta la tecnología agrivoltaica?",
+        "opts": [
+          "Aumenta el consumo de agua.",
+          "Modula la radiación solar sobre el cultivo y disminuye los requerimientos de agua.",
+          "Impide el crecimiento de los cultivos.",
+          "Solo produce electricidad sobre el agua."
+        ],
+        "ans": 1,
+        "es": "El párrafo 7 contiene una oración larga: la agrivoltaica permite “modular la radiación solar sobre el cultivo, evitando el exceso de radiación y disminuyendo los requerimientos de agua”. Hay que desentrañar esta estructura compleja para responder.",
+        "zh": "第 7 段是一个长句：农业光伏能够“调节照射到作物上的太阳辐射，避免辐射过强，并减少用水需求”。需理解这一复杂句式的完整语义才能作答，故选 B。此题考查长句理解。"
+      },
+      {
+        "q": "¿Cuántos proyectos recibieron ayudas en la primera convocatoria del programa?",
+        "opts": [
+          "199 proyectos.",
+          "62 proyectos.",
+          "118 proyectos.",
+          "524 proyectos."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 8) que en la primera convocatoria el Ministerio asignó ayudas “a 199 proyectos de renovables innovadoras”.",
+        "zh": "原文第 8 段说在第一期征集中，生态转型部向“199 个创新可再生能源项目”发放了补贴，故选 A。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué línea de incentivos recibió más ayuda en la primera convocatoria?",
+        "opts": [
+          "La fotovoltaica flotante.",
+          "La agrivoltaica con almacenamiento.",
+          "Las bombas de calor.",
+          "El autoconsumo colectivo."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 10) que “la línea de incentivos que recibió más ayuda fue la agrivoltaica con almacenamiento, con 77,1 millones de euros para 62 proyectos”.",
+        "zh": "原文第 10 段说“获得补贴最多的子项是带储能的农业光伏，共 7710 万欧元、62 个项目”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "Según el texto, ¿por qué se considera primordial impulsar el autoconsumo colectivo en España?",
+        "opts": [
+          "Porque es la tecnología más barata del mercado.",
+          "Porque más del 70% de la población vive en edificios y el autoconsumo colectivo todavía representa un porcentaje muy bajo.",
+          "Porque la Unión Europea lo exige por ley.",
+          "Porque no hay suficiente sol en el norte de España."
+        ],
+        "ans": 1,
+        "es": "Hay que integrar los párrafos 12 y 13: el 12 explica que el autoconsumo colectivo supone “un porcentaje todavía muy bajo” frente al individual, y el 13 añade que “más del 70% de la población vive en edificios”. La conclusión es que hay que impulsarlo por esa combinación de causas.",
+        "zh": "需综合第 12、13 段：第 12 段说集体自用所占“比例仍然很低”，第 13 段补充“超过 70% 的人口住在公寓楼里”。将两者结合才能推出结论，故选 B。此题考查跨段落综合。"
+      },
+      {
+        "q": "¿Hasta cuándo deben ejecutarse las actuaciones subvencionadas?",
+        "opts": [
+          "Hasta el 30 de junio de 2030.",
+          "Hasta 2027.",
+          "Hasta diciembre de 2026.",
+          "Hasta 2035."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 17) que “el plazo para la realización de las inversiones... se extenderá hasta el 30 de junio de 2030”.",
+        "zh": "原文第 17 段说“投资实施的期限将延至 2030 年 6 月 30 日”，故选 A。此题考查直接定位。"
+      }
     ]
   },
-  b2: {
-    paragraphs: [
-      { es: "El Gobierno ha dado una patada hacia adelante con la prórroga de la central nuclear de Almaraz, anunciada por el Ministerio para la Transición Ecológica.", zh: "政府通过生态转型部宣布的阿尔马拉斯核电站延期，实际上是把问题“往后踢了一脚”。" },
-      { es: "La instalación, que produce en sus dos reactores en torno al 7% de la energía eléctrica que consume España, seguirá abierta hasta junio de 2030.", zh: "该设施的两个反应堆生产着西班牙约 7% 的电力，将继续运行到 2030 年 6 月。" },
-      { es: "Con esta decisión, se incumple el calendario de clausura pactado entre los socios de la coalición del Gobierno.", zh: "这一决定违反了执政联盟各政党之间达成的关闭时间表。" },
-      { es: "Aunque el Ejecutivo asegura que el impacto es limitado, lo cierto es que el primer cierre queda ahora fijado para una nueva legislatura, con una nueva administración en La Moncloa.", zh: "尽管政府保证影响有限，但事实上第一次关闭现在被推迟到了新一届议会任期，届时蒙克洛亚宫（首相府）将是新的执政班子。" },
-      { es: "El Partido Popular dejó claro que la moratoria es “insuficiente” y fue un paso más allá al insistir en que debe “cancelarse” el calendario de cierres.", zh: "人民党明确表示，这次“暂停关闭”是“不够的”，并进一步坚持应该“取消”整个关闭时间表。" },
-      { es: "Fuentes del sector eléctrico aseguran que parte de la estrategia de las compañías y de la propia central pasaba por ganar tiempo y conseguir una revisión de la política nuclear.", zh: "电力行业消息人士称，各公司和核电站本身的策略之一，就是争取时间，并推动对核电政策的重新审查。" },
-      { es: "Aspiran a llevar la clausura de la central hasta 2060, mucho más allá del calendario actual.", zh: "它们希望把核电站的关闭推迟到 2060 年，远超当前的时间表。" },
-      { es: "Para el PSOE, que en octubre de 2023 pactó con Sumar un cierre “planificado, seguro, ordenado y justo socialmente” entre 2027 y 2035, la cuestión tampoco es sencilla.", zh: "对工人社会党（PSOE）来说，这也不是个简单的问题——它曾在 2023 年 10 月与苏马尔党商定，在 2027 至 2035 年间“有计划、安全、有序且社会公正地”关闭核电站。" },
-      { es: "Con la última decisión, el Gobierno no solo cede a las presiones de los municipios cercanos y de las energéticas dueñas de la central (Iberdrola, Endesa y Naturgy), sino también a las de los partidos políticos de la región.", zh: "通过这项最新决定，政府不仅屈服于核电站周边市镇和业主公司（伊维尔德罗拉、恩德萨、纳图尔吉）的压力，也屈服于当地政党的压力。" },
-      { es: "El propio PSOE extremeño celebró la decisión en un comunicado, calificándola de “una muy buena noticia para Extremadura, para el Campo Arañuelo, para Almaraz y para España en su conjunto”.", zh: "埃斯特雷马杜拉的工人社会党在一份声明中对这一决定表示欢迎，称这是“对埃斯特雷马杜拉、对阿拉纽埃洛地区、对阿尔马拉斯乃至对整个西班牙都非常好的消息”。" },
-      { es: "El Ministerio de Transición Ecológica defendió la decisión argumentando que la prórroga es segura, no compromete el suministro y no supondrá un coste extra.", zh: "生态转型部为这一决定辩护，称延期是安全的、不会危及电力供应，也不会带来额外成本。" },
-      { es: "Cabe recordar que la instalación está valorada en 15.000 millones de euros.", zh: "需要提醒的是，该设施估值高达 150 亿欧元。" },
-      { es: "Además, el Ministerio resaltó que el escenario geopolítico actual ha generado “una volatilidad de precios” en la energía.", zh: "此外，该部强调，当前的地缘政治局势造成了能源“价格波动”。" },
-      { es: "Según el Gobierno, “la prórroga, coyuntural, puede contribuir a moderar la exposición de los consumidores a unos picos de precios de los combustibles fósiles no previstos anteriormente”.", zh: "据政府称，“这一临时性的延期有助于减轻消费者面临化石燃料价格此前未预见的飙升的风险敞口”。" },
-      { es: "“España no puede permitirse el lujo de cerrar las nucleares”, aseguraba hace tan solo un par de meses el consejero delegado de Iberdrola España, Mario Ruiz-Tagle.", zh: "“西班牙承受不起关闭核电站的代价”，伊维尔德罗拉西班牙公司首席执行官马里奥·鲁伊斯-塔格莱就在两个月前还这样表示。" },
-      { es: "Estas declaraciones se produjeron poco antes de conocerse el informe del Consejo de Seguridad Nuclear, que daba luz verde a la prórroga hasta 2030 con ciertas condiciones.", zh: "这些表态发表后不久，核安全委员会的报告出炉，为延至 2030 年开绿灯，但附带一定条件。" },
-      { es: "Dicho informe respondía a la petición formal que las energéticas habían hecho en octubre del año pasado.", zh: "该报告是对电力公司去年 10 月提出的正式申请的回应。" },
-      { es: "“A los extremeños nos pusieron la central nuclear de Almaraz porque nadie la quería y ahora que la queremos nos la van a quitar”, dijo el presidente de la plataforma Sí a Almaraz, Sí al futuro, Fernando Sánchez.", zh: "“当年把阿尔马拉斯核电站塞给我们埃斯特雷马杜拉人，是因为没人要；如今我们想要了，却又来把它夺走”，“支持阿尔马拉斯、支持未来”平台主席费尔南多·桑切斯这样说道。" },
-      { es: "A esta organización la han apoyado partidos políticos de todo color en la región, incluido el propio PSOE, donde este asunto ha generado una clara discrepancia entre la dirección nacional y la regional.", zh: "这个组织得到了当地各党派的支持，包括工人社会党本身；在这个问题上，该党全国领导层与地区领导层之间出现了明显的分歧。" },
-      { es: "En este contexto, la continuidad de Almaraz ayudará a descomprimir la difícil situación del PSOE en la región, castigado en las últimas elecciones autonómicas.", zh: "在此背景下，让阿尔马拉斯继续运行，将有助于缓解工人社会党在该地区的困境——该党在最近的自治区选举中遭到重创。" }
+  "b2": {
+    "paragraphs": [
+      {
+        "es": "El Gobierno ha dado una patada hacia adelante con la prórroga de la central nuclear de Almaraz, anunciada este viernes por el Ministerio para la Transición Ecológica. La instalación seguirá abierta hasta junio de 2030, una decisión que llega tras años de presiones de las empresas eléctricas y de los municipios de la zona.",
+        "zh": "政府通过生态转型部于本周五宣布的阿尔马拉斯核电站延期，实际上是把问题“往后踢了一脚”。该设施将继续运行至 2030 年 6 月，这一决定是在电力公司和当地市镇多年施压之后做出的。"
+      },
+      {
+        "es": "La instalación, que produce en sus dos reactores en torno al 7% de la energía eléctrica que consume España, seguirá operativa durante tres años más, incumpliendo así el calendario de clausura pactado entre los socios del Ejecutivo de coalición en su día.",
+        "zh": "这座拥有两座反应堆、发电量约占西班牙电力消费 7% 的设施将再运营三年，从而违反了政府联盟伙伴之间商定的关闭时间表。"
+      },
+      {
+        "es": "Con esta decisión, el cierre definitivo de la planta queda ahora fijado para una nueva legislatura, con una nueva administración en La Moncloa, ya sea del mismo o de distinto signo político. El Ejecutivo asegura que el impacto es limitado y que la hoja de ruta de cierres no cambia, pero lo cierto es que el primero de ellos se aplaza.",
+        "zh": "通过这一决定，电站的最终关闭现在被推迟到新一届议会任期，届时蒙克洛亚宫将迎来新的政府班子，无论是否同属一派。政府声称影响有限、关闭路线图不变，但事实上首个关闭节点已被推迟。"
+      },
+      {
+        "es": "Aunque el Ejecutivo asegura que la decisión tiene un impacto limitado y que no afectará a la hoja de ruta de cierres de las plantas atómicas, lo cierto es que el primero de esos cierres queda ahora en manos de un futuro Gobierno, que deberá decidir sobre el destino de la instalación.",
+        "zh": "尽管政府保证这一决定影响有限、不会影响核电站关闭路线图，但事实上，第一个关闭节点如今掌握在未来政府手中，由其决定这座设施的命运。"
+      },
+      {
+        "es": "El Partido Popular, por ejemplo, dejó claro este viernes que la moratoria es “insuficiente” y fue un paso más allá al insistir en que debe “cancelarse” el calendario de cierres de las centrales nucleares, una postura que contrasta con la del Gobierno.",
+        "zh": "例如，人民党本周五明确表示，这次暂停“不够”，并更进一步，坚持要求“取消”核电站关闭时间表，这一立场与政府形成鲜明对比。"
+      },
+      {
+        "es": "Fuentes del sector eléctrico aseguran que parte de la estrategia diseñada por las compañías y por la propia central de Almaraz a la hora de reclamar esa prórroga de tres años pasaba por ganar tiempo y conseguir, cambio de gobierno mediante, una revisión de la política general sobre las nucleares.",
+        "zh": "电力行业消息人士称，各公司及阿尔马拉斯电站自身在争取这三年延期时设计的策略，部分在于争取时间，并通过政府换届推动对整个核电政策进行重新审议。"
+      },
+      {
+        "es": "Las empresas aspiran a llevar la clausura de la central hasta 2060, mucho más allá del calendario actual. De hecho, la primera fase del plan para mantener la central con vida, implementado por todos los interesados en la continuidad de la planta, ya se ha completado.",
+        "zh": "各公司希望将电站的关闭推迟到 2060 年，远超当前时间表。事实上，由所有希望电站存续的相关方共同实施的“维持电站生命”计划第一阶段已经完成。"
+      },
+      {
+        "es": "Para el PSOE, que en octubre de 2023 pactó con Sumar un cierre de las nucleares “planificado, seguro, ordenado y justo socialmente, escalonando el cese de operación de todas las plantas españolas entre 2027 y 2035”, la cuestión tampoco es sencilla.",
+        "zh": "对工人社会党而言，问题同样不简单。2023 年 10 月，该党与苏马尔党达成协议，要在 2027 至 2035 年间“有计划、安全、有序且社会公正地”逐步关闭西班牙所有核电站。"
+      },
+      {
+        "es": "Con la última decisión, el Gobierno no solo cede a las múltiples presiones provenientes de los municipios más cercanos a la planta, sino también a las de las energéticas dueñas de la central, entre ellas Iberdrola, Endesa y Naturgy, así como a los partidos de la región.",
+        "zh": "通过最新决定，政府不仅屈服于电站周边市镇的多重压力，也向电站的所有者——包括伊维尔德罗拉、恩德萨和纳图尔希在内的能源公司，以及该地区的各政党作出了让步。"
+      },
+      {
+        "es": "El propio PSOE extremeño celebró la decisión en un comunicado en el que indicó que es “una muy buena noticia para Extremadura, para el Campo Arañuelo, para Almaraz y para España en su conjunto”, evidenciando la división interna dentro del partido.",
+        "zh": "埃斯特雷马杜拉的工人社会党自身也发表声明庆祝这一决定，称这是“对埃斯特雷马杜拉、坎波阿劳埃洛、阿尔马拉斯乃至整个西班牙而言的大好消息”，这凸显了党内的分歧。"
+      },
+      {
+        "es": "El Ministerio de Transición Ecológica defendió la decisión argumentando que la prórroga es segura para los ciudadanos, no compromete la seguridad de suministro y no supondrá un coste extra para el sistema eléctrico ni para los bolsillos de los consumidores.",
+        "zh": "生态转型部为这一决定辩护，称延期对市民是安全的、不会危及电力供应安全，也不会给电力系统或消费者带来额外成本。"
+      },
+      {
+        "es": "Cabe recordar que la instalación está valorada en 15.000 millones de euros, una cifra que explica el enorme interés económico que despierta la continuidad de la central entre las empresas propietarias y entre los municipios que dependen de su actividad.",
+        "zh": "值得提醒的是，该设施估值高达 150 亿欧元。这一数字解释了电站存续为何会在所有方企业和依赖其活动的市镇中激起巨大的经济利益。"
+      },
+      {
+        "es": "Además, el Ministerio resaltó que el escenario geopolítico actual, marcado por las tensiones internacionales y la guerra en Oriente Próximo, ha generado “una volatilidad de precios” en la energía, un contexto de incertidumbre que condiciona todas las decisiones sobre el futuro del parque nuclear español.",
+        "zh": "此外，该部强调，当前地缘政治格局已在能源领域造成“价格波动”，这种国际不确定性的背景影响着所有关于西班牙核电格局未来的决策。"
+      },
+      {
+        "es": "Según el Gobierno, “la prórroga, coyuntural, puede contribuir a moderar la exposición de los consumidores a unos picos de precios de los combustibles fósiles no previstos anteriormente”, un argumento que el Ejecutivo defiende tras años de discusiones con las compañías eléctricas.",
+        "zh": "据政府称，“这一临时性的延期有助于减轻消费者面临化石燃料价格此前未预见的飙升的风险敞口”——这是政府在与电力公司多年讨论后坚持的论据。"
+      },
+      {
+        "es": "“España no puede permitirse el lujo de cerrar las nucleares”, aseguraba hace tan solo un par de meses el consejero delegado de Iberdrola España, Mario Ruiz-Tagle, en una declaración que resume la posición de las grandes eléctricas ante el debate nuclear.",
+        "zh": "“西班牙不能承受关闭核电站的奢侈”，伊维尔德罗拉西班牙公司首席执行官马里奥·鲁伊斯-塔格莱仅仅两个月前还这样断言。这番表态概括了大型电力公司在核电争论中的立场。"
+      },
+      {
+        "es": "Estas declaraciones se produjeron poco antes de conocerse el informe del Consejo de Seguridad Nuclear, el organismo regulador independiente, que daba luz verde a la prórroga de la instalación hasta 2030 con ciertas condiciones técnicas que la planta deberá cumplir.",
+        "zh": "这些表态发表后不久，核安全委员会的报告出炉，为电站延至 2030 年开绿灯，但附带电站必须满足的某些技术条件。"
+      },
+      {
+        "es": "Dicho informe respondía a la petición formal que las energéticas habían hecho en octubre del año pasado, pidiendo una prórroga en torno a la cual se había generado un intenso revuelo mediático por el peso de la central en la región extremeña.",
+        "zh": "该报告是对能源公司去年 10 月提出的正式请求的回应。围绕这一延期请求，由于电站对埃斯特雷马杜拉地区的重要性，媒体早已掀起激烈争论。"
+      },
+      {
+        "es": "“A los extremeños nos pusieron la central nuclear de Almaraz porque nadie la quería y ahora que la queremos nos la van a quitar”, dijo en una entrevista a este medio el presidente de la plataforma Sí a Almaraz, Sí al futuro, Fernando Sánchez.",
+        "zh": "“当年没人要，才把阿尔马拉斯核电站塞给我们埃斯特雷马杜拉人；如今我们想要了，他们却要夺走”，支持阿尔马拉斯平台“阿尔马拉斯，要；未来，要”的主席费尔南多·桑切斯在接受本报采访时这样说。"
+      },
+      {
+        "es": "A esta organización la han apoyado partidos políticos de todo color en la región, incluyendo el propio PSOE, donde este asunto ha generado una clara discrepancia entre la dirección nacional y la regional, sobre todo tras el fuerte varapalo electoral de diciembre, cuando el partido tocó un suelo histórico del 25,7% de los votos y fue castigado en las urnas.",
+        "zh": "该组织得到了该地区各党派的支持，包括工人社会党自身。在这个问题上，工人社会党的全国领导层与地区领导层之间出现了明显分歧，尤其是在选举失利之后。"
+      },
+      {
+        "es": "En este contexto, la continuidad de Almaraz ayudará a descomprimir la difícil situación del PSOE en la región, aunque la decisión final sobre el futuro de la central quedará en manos de un nuevo Gobierno tras las próximas elecciones generales.",
+        "zh": "在此背景下，阿尔马拉斯的延续将有助于缓解工人社会党在该地区的艰难处境。不过，关于电站未来的最终决定，将留待下次大选后的新一届政府作出。"
+      }
     ],
-    dele: "B2 考点：<b>虚拟式与条件式</b>（puede contribuir a moderar; dependería de...）。<b>间接引语与官方引语</b>（el Gobierno defendió... argumentando que; aseguraba...; dijo...）。<b>让步与转折</b>（Aunque...; Sin embargo...; no solo... sino también...）。<b>被动与无人称</b>（queda fijado, fue anunciada, se produce）。<b>正式学术语体</b>（prórroga, moratoria, clausura, exposición, volatilidad, discrepancia）。<b>观点辨析</b>（政府 vs PP vs PSOE vs Sumar vs 电力公司 vs 地方平台）。<b>复杂复合句</b>（关系从句 + 引语从句 + 让步从句叠加）。<b>数据引用</b>（7%, 15.000 millones, 2027-2035, 2060）。",
-    hardWords: [
-      { w: "patada hacia adelante", m: "把问题往后拖；踢皮球", ejemplo: "El Gobierno ha dado una patada hacia adelante con la prórroga.", analisis: "字面义为“向前踢一脚”，是西班牙语中表示“把难题推迟到以后、逃避当下解决”的惯用表达。常见搭配 dar una patada hacia adelante（把问题往后拖）。语境义：本文指政府用延期的方式回避了核电站关闭这一棘手决定，把它推给下一届政府。DELE B2 常考这类习语/惯用表达的语境义，不能按字面理解。" },
-      { w: "prórroga", m: "延期；展期", ejemplo: "la prórroga de la central nuclear de Almaraz.", analisis: "源自拉丁语 prorogare（延长），由 pro-（向前）+ rogare（请求）构成。常见搭配 prórroga de un contrato（合同延期）、conceder una prórroga（批准延期）、solicitar una prórroga（申请延期）。语法上为阴性名词。语境义：本文特指核电站运行许可的续期。DELE B2 常考其与 ampliación、extensión 的辨析：prórroga 侧重“期限届满前的续期”。" },
-      { w: "clausura", m: "关闭；停运", ejemplo: "se incumple el calendario de clausura pactado.", analisis: "源自拉丁语 clausura（封闭），词根 claudere（关闭）。常见搭配 clausura de una central（核电站关闭）、calendario de clausura（关闭时间表）、acto de clausura（闭幕式）。语境义：本文指核电站的“退役关闭”。易混淆词：clausura（关闭/闭幕）vs cierre（关闭，更通用）vs cese（停止/终止）。在核电语境中 clausura 更正式、更常用于“永久关闭”。" },
-      { w: "moratoria", m: "暂停；延期偿付", ejemplo: "el Partido Popular dejó claro que la moratoria es “insuficiente”.", analisis: "源自拉丁语 moratorius（延迟的），词根 mora（延迟）。指“正式宣布的暂停或延期”。常见搭配 moratoria nuclear（核电暂停）、declarar una moratoria（宣布暂停）、moratoria de pagos（延期偿付）。语境义：本文中 PP 用 moratoria 指代政府“暂停关闭核电站”的决定，并认为它不够彻底。DELE B2 政治/经济语篇高频词。" },
-      { w: "volatilidad", m: "波动性；不稳定性", ejemplo: "el escenario geopolítico actual ha generado “una volatilidad de precios”.", analisis: "源自拉丁语 volatilis（会飞的、易变的），词根 volare（飞）。指“价格或市场剧烈、频繁变动的特性”。常见搭配 volatilidad de precios（价格波动）、volatilidad del mercado（市场波动）、alta volatilidad（高波动性）。语境义：本文指中东局势导致的能源价格剧烈波动，是政府为延期辩护的核心论据。DELE B2 经济类阅读高频词。" },
-      { w: "exposición", m: "暴露；风险敞口", ejemplo: "moderar la exposición de los consumidores a unos picos de precios.", analisis: "源自拉丁语 expositio，由 ex-（向外）+ ponere（放置）构成。一词多义：①暴露（exposición al sol）②风险敞口（exposición al riesgo，金融/能源语境）③展览（exposición de arte）。语境义：本文取“风险敞口”这一专业义，指消费者面临价格飙升风险的程度。DELE B2 常考多义辨析。易混淆词：exposición vs explosión（爆炸，词形相近）。" },
-      { w: "coalición", m: "联盟；联合政府", ejemplo: "el calendario pactado entre los socios de la coalición del Gobierno.", analisis: "源自拉丁语 coalitio（联合）。指“政党为共同执政组成的联盟”。常见搭配 coalición de Gobierno（执政联盟）、socio de coalición（联盟伙伴）、formar una coalición（组建联盟）。语法上为阴性名词。语境义：本文指西班牙 PSOE 与 Sumar 组成的左翼执政联盟。DELE B2 政治语篇常考，与 alianza（同盟）、pacto（协议）辨析。" },
-      { w: "discrepancia", m: "分歧；不一致", ejemplo: "este asunto ha generado una clara discrepancia entre la dirección nacional y la regional.", analisis: "源自拉丁语 discrepantia，由 dis-（分离）+ crepare（发出声响）构成，本义“声音不协调”，引申为“意见分歧”。常见搭配 discrepancia entre（……之间的分歧）、discrepancia de opiniones（意见分歧）、surgir una discrepancia（出现分歧）。语法上为阴性名词。语境义：本文指 PSOE 全国领导层与埃斯特雷马杜拉地区领导层在核电问题上的立场分歧。DELE B2 常考其与 diferencia（差异）、conflicto（冲突）的辨析。" },
-      { w: "descomprimir", m: "缓解；减压", ejemplo: "la continuidad de Almaraz ayudará a descomprimir la difícil situación del PSOE.", analisis: "由前缀 des-（去除）+ comprimir（压缩）构成，本义“减压”，引申为“缓解紧张/压力”。常见搭配 descomprimir la situación（缓解局势）、descomprimir la tensión（缓解紧张）、descomprimir un archivo（解压文件，计算机义）。语境义：本文用比喻义，指核电站延期能“缓解” PSOE 在当地的选举困境。DELE B2 常考其引申义（政治/社会语境）vs 本义（技术语境）的区分。" },
-      { w: "castigado", m: "受惩罚的；受重创的", ejemplo: "el PSOE en la región, castigado en las últimas elecciones autonómicas.", analisis: "源自动词 castigar（惩罚，源自拉丁语 castigare），此处用过去分词作形容词，指“在选举中遭受挫败、被选民惩罚”。常见搭配 partido castigado（受挫的政党）、castigar en las urnas（在投票中惩罚）、castigo electoral（选举惩罚）。语境义：本文指 PSOE 在埃斯特雷马杜拉自治区选举中得票大跌、被选民“惩罚”。DELE B2 政治语篇常考 castigado 的比喻义（非字面“体罚”）。" }
+    "dele": "B2 考点：<b>虚拟式与条件式</b>（puede contribuir a moderar; dependería de...）。<b>间接引语与官方引语</b>（el Gobierno defendió... argumentando que; aseguraba...; dijo...）。<b>让步与转折</b>（Aunque...; Sin embargo...; no solo... sino también...）。<b>被动与无人称</b>（queda fijado, fue anunciada, se produce）。<b>正式学术语体</b>（prórroga, moratoria, clausura, exposición, volatilidad, discrepancia）。<b>观点辨析</b>（政府 vs PP vs PSOE vs Sumar vs 电力公司 vs 地方平台）。<b>复杂复合句</b>（关系从句 + 引语从句 + 让步从句叠加）。<b>数据引用</b>（7%, 15.000 millones, 2027-2035, 2060）。",
+    "hardWords": [
+      {
+        "w": "patada hacia adelante",
+        "m": "把问题往后拖；踢皮球",
+        "ejemplo": "El Gobierno ha dado una patada hacia adelante con la prórroga.",
+        "analisis": "字面义为“向前踢一脚”，是西班牙语中表示“把难题推迟到以后、逃避当下解决”的惯用表达。常见搭配 dar una patada hacia adelante（把问题往后拖）。语境义：本文指政府用延期的方式回避了核电站关闭这一棘手决定，把它推给下一届政府。DELE B2 常考这类习语/惯用表达的语境义，不能按字面理解。"
+      },
+      {
+        "w": "prórroga",
+        "m": "延期；展期",
+        "ejemplo": "la prórroga de la central nuclear de Almaraz.",
+        "analisis": "源自拉丁语 prorogare（延长），由 pro-（向前）+ rogare（请求）构成。常见搭配 prórroga de un contrato（合同延期）、conceder una prórroga（批准延期）、solicitar una prórroga（申请延期）。语法上为阴性名词。语境义：本文特指核电站运行许可的续期。DELE B2 常考其与 ampliación、extensión 的辨析：prórroga 侧重“期限届满前的续期”。"
+      },
+      {
+        "w": "clausura",
+        "m": "关闭；停运",
+        "ejemplo": "se incumple el calendario de clausura pactado.",
+        "analisis": "源自拉丁语 clausura（封闭），词根 claudere（关闭）。常见搭配 clausura de una central（核电站关闭）、calendario de clausura（关闭时间表）、acto de clausura（闭幕式）。语境义：本文指核电站的“退役关闭”。易混淆词：clausura（关闭/闭幕）vs cierre（关闭，更通用）vs cese（停止/终止）。在核电语境中 clausura 更正式、更常用于“永久关闭”。"
+      },
+      {
+        "w": "moratoria",
+        "m": "暂停；延期偿付",
+        "ejemplo": "el Partido Popular dejó claro que la moratoria es “insuficiente”.",
+        "analisis": "源自拉丁语 moratorius（延迟的），词根 mora（延迟）。指“正式宣布的暂停或延期”。常见搭配 moratoria nuclear（核电暂停）、declarar una moratoria（宣布暂停）、moratoria de pagos（延期偿付）。语境义：本文中 PP 用 moratoria 指代政府“暂停关闭核电站”的决定，并认为它不够彻底。DELE B2 政治/经济语篇高频词。"
+      },
+      {
+        "w": "volatilidad",
+        "m": "波动性；不稳定性",
+        "ejemplo": "el escenario geopolítico actual ha generado “una volatilidad de precios”.",
+        "analisis": "源自拉丁语 volatilis（会飞的、易变的），词根 volare（飞）。指“价格或市场剧烈、频繁变动的特性”。常见搭配 volatilidad de precios（价格波动）、volatilidad del mercado（市场波动）、alta volatilidad（高波动性）。语境义：本文指中东局势导致的能源价格剧烈波动，是政府为延期辩护的核心论据。DELE B2 经济类阅读高频词。"
+      },
+      {
+        "w": "exposición",
+        "m": "暴露；风险敞口",
+        "ejemplo": "moderar la exposición de los consumidores a unos picos de precios.",
+        "analisis": "源自拉丁语 expositio，由 ex-（向外）+ ponere（放置）构成。一词多义：①暴露（exposición al sol）②风险敞口（exposición al riesgo，金融/能源语境）③展览（exposición de arte）。语境义：本文取“风险敞口”这一专业义，指消费者面临价格飙升风险的程度。DELE B2 常考多义辨析。易混淆词：exposición vs explosión（爆炸，词形相近）。"
+      },
+      {
+        "w": "coalición",
+        "m": "联盟；联合政府",
+        "ejemplo": "el calendario pactado entre los socios de la coalición del Gobierno.",
+        "analisis": "源自拉丁语 coalitio（联合）。指“政党为共同执政组成的联盟”。常见搭配 coalición de Gobierno（执政联盟）、socio de coalición（联盟伙伴）、formar una coalición（组建联盟）。语法上为阴性名词。语境义：本文指西班牙 PSOE 与 Sumar 组成的左翼执政联盟。DELE B2 政治语篇常考，与 alianza（同盟）、pacto（协议）辨析。"
+      },
+      {
+        "w": "discrepancia",
+        "m": "分歧；不一致",
+        "ejemplo": "este asunto ha generado una clara discrepancia entre la dirección nacional y la regional.",
+        "analisis": "源自拉丁语 discrepantia，由 dis-（分离）+ crepare（发出声响）构成，本义“声音不协调”，引申为“意见分歧”。常见搭配 discrepancia entre（……之间的分歧）、discrepancia de opiniones（意见分歧）、surgir una discrepancia（出现分歧）。语法上为阴性名词。语境义：本文指 PSOE 全国领导层与埃斯特雷马杜拉地区领导层在核电问题上的立场分歧。DELE B2 常考其与 diferencia（差异）、conflicto（冲突）的辨析。"
+      },
+      {
+        "w": "descomprimir",
+        "m": "缓解；减压",
+        "ejemplo": "la continuidad de Almaraz ayudará a descomprimir la difícil situación del PSOE.",
+        "analisis": "由前缀 des-（去除）+ comprimir（压缩）构成，本义“减压”，引申为“缓解紧张/压力”。常见搭配 descomprimir la situación（缓解局势）、descomprimir la tensión（缓解紧张）、descomprimir un archivo（解压文件，计算机义）。语境义：本文用比喻义，指核电站延期能“缓解” PSOE 在当地的选举困境。DELE B2 常考其引申义（政治/社会语境）vs 本义（技术语境）的区分。"
+      },
+      {
+        "w": "castigado",
+        "m": "受惩罚的；受重创的",
+        "ejemplo": "el PSOE en la región, castigado en las últimas elecciones autonómicas.",
+        "analisis": "源自动词 castigar（惩罚，源自拉丁语 castigare），此处用过去分词作形容词，指“在选举中遭受挫败、被选民惩罚”。常见搭配 partido castigado（受挫的政党）、castigar en las urnas（在投票中惩罚）、castigo electoral（选举惩罚）。语境义：本文指 PSOE 在埃斯特雷马杜拉自治区选举中得票大跌、被选民“惩罚”。DELE B2 政治语篇常考 castigado 的比喻义（非字面“体罚”）。"
+      }
     ],
-    quiz: [
-      { q: "¿Qué porcentaje de la electricidad que consume España produce la central de Almaraz?", opts: ["Alrededor del 3%.", "En torno al 7%.", "Cerca del 15%.", "Más del 20%."], ans: 1, es: "El texto dice (párrafo 2) que Almaraz produce “en torno al 7% de la energía eléctrica que consume España”.", zh: "原文第 2 段说阿尔马拉斯生产“西班牙约 7% 的电力”，故选 B（En torno al 7% = 约 7%）。此题考查直接定位。" },
-      { q: "¿Qué postura adoptó el Partido Popular ante la moratoria?", opts: ["La consideró suficiente.", "La consideró insuficiente y pidió cancelar el calendario de cierres.", "Se opuso a la energía nuclear.", "No se pronunció."], ans: 1, es: "El párrafo 5 muestra que el PP calificó la moratoria de “insuficiente” y pidió “cancelar” el calendario de cierres. Hay que identificar la postura específica de este actor político frente a la del Gobierno.", zh: "第 5 段显示人民党认为这次暂停“不够”，并要求“取消”关闭时间表。需识别这一政治主体的具体立场（与政府立场相区别），故选 B。此题考查观点辨析。" },
-      { q: "¿Hasta qué año aspiran a llevar la clausura de la central las compañías eléctricas?", opts: ["Hasta 2030.", "Hasta 2035.", "Hasta 2060.", "Hasta 2028."], ans: 2, es: "El párrafo 7 dice que las compañías “aspiran a llevar su clausura hasta 2060, mucho más allá del calendario actual”. Hay que inferir que 2060 es su objetivo a largo plazo, distinto de la fecha oficial de 2030.", zh: "第 7 段说电力公司“希望把关闭推迟到 2060 年，远超当前时间表”。需推断出 2060 是它们的长期目标，与官方 2030 年不同，故选 C。此题考查推理判断。" },
-      { q: "¿Cuál es el argumento central del Gobierno para justificar la prórroga?", opts: ["Que la central genera beneficios.", "Que la prórroga coyuntural puede moderar la exposición de los consumidores a picos de precios no previstos.", "Que la central no tiene riesgos.", "Que es una exigencia de la UE."], ans: 1, es: "La cita del párrafo 14 (“la prórroga, coyuntural, puede contribuir a moderar la exposición... a unos picos de precios... no previstos”) es una oración compleja con léxico técnico (exposición, picos, coyuntural), cuyo sentido completo hay que desentrañar.", zh: "第 14 段引语“这一临时性延期有助于减轻消费者面临……此前未预见的……价格飙升的风险敞口”是含专业词（exposición、picos、coyuntural）的复合句，需完整理解语义才能作答，故选 B。此题考查长句理解与词汇深度。" },
-      { q: "¿Cuánto está valorada la instalación de Almaraz?", opts: ["15.000 millones de euros.", "7.000 millones de euros.", "1.500 millones de euros.", "20.000 millones de euros."], ans: 0, es: "El texto dice (párrafo 12) que “la instalación está valorada en 15.000 millones de euros”.", zh: "原文第 12 段说“该设施估值高达 150 亿欧元”，故选 A。此题考查直接定位。" },
-      { q: "¿Quién dijo que “España no puede permitirse el lujo de cerrar las nucleares”?", opts: ["El ministro de Transición Ecológica.", "Mario Ruiz-Tagle, consejero delegado de Iberdrola España.", "Fernando Sánchez.", "El presidente del Partido Popular."], ans: 1, es: "El párrafo 15 atribuye esta cita a “el consejero delegado de Iberdrola España, Mario Ruiz-Tagle”.", zh: "第 15 段明确这句话出自“伊维尔德罗拉西班牙公司首席执行官马里奥·鲁伊斯-塔格莱”，故选 B。此题考查直接定位与引语归属。" },
-      { q: "¿Qué revela la cita de Fernando Sánchez sobre la relación de los extremeños con la central?", opts: ["Que siempre quisieron la central.", "Que antes nadie quería la central, pero ahora los extremeños defienden su continuidad.", "Que quieren cerrarla inmediatamente.", "Que no les importa la central."], ans: 1, es: "La cita del párrafo 18 (“nos pusieron la central... porque nadie la quería y ahora que la queremos nos la van a quitar”) revela un cambio de actitud: de rechazo inicial a defensa actual. Hay que interpretar el tono irónico y la evolución de la postura local.", zh: "第 18 段引语“当年没人要才塞给我们，如今我们想要了却要夺走”揭示了当地人态度的转变：从最初的排斥到现在的捍卫。需解读其中的反讽语气和立场演变，故选 B。此题考查观点辨析与推理。" },
-      { q: "¿Qué conclusión general se puede extraer del artículo sobre la política nuclear española?", opts: ["La decisión está cerrada de forma definitiva.", "La prórroga traslada la decisión final a un futuro Gobierno y refleja un profundo conflicto político, económico y territorial.", "Todas las partes están de acuerdo.", "La energía nuclear dejará de usarse en 2026."], ans: 1, es: "Hay que integrar los párrafos 1, 4, 5, 8-10 y 20: la decisión se describe como “una patada hacia adelante”, el cierre queda para “una nueva legislatura”, y hay conflicto entre Gobierno, PP, PSOE regional, Sumar, eléctricas y plataformas locales. La conclusión es que se trata de un conflicto abierto y trasladado al futuro.", zh: "需综合第 1、4、5、8-10、20 段：决定被描述为“把问题往后踢”，关闭被推到“新一届议会任期”，且政府、人民党、地区工人社会党、苏马尔党、电力公司和地方平台之间存在冲突。结论是这是一个悬而未决、被推迟到未来的深层政治经济领土冲突，故选 B。此题考查跨段落综合。" }
+    "quiz": [
+      {
+        "q": "¿Qué porcentaje de la electricidad que consume España produce la central de Almaraz?",
+        "opts": [
+          "Alrededor del 3%.",
+          "En torno al 7%.",
+          "Cerca del 15%.",
+          "Más del 20%."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 2) que Almaraz produce “en torno al 7% de la energía eléctrica que consume España”.",
+        "zh": "原文第 2 段说阿尔马拉斯生产“西班牙约 7% 的电力”，故选 B（En torno al 7% = 约 7%）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué postura adoptó el Partido Popular ante la moratoria?",
+        "opts": [
+          "La consideró suficiente.",
+          "La consideró insuficiente y pidió cancelar el calendario de cierres.",
+          "Se opuso a la energía nuclear.",
+          "No se pronunció."
+        ],
+        "ans": 1,
+        "es": "El párrafo 5 muestra que el PP calificó la moratoria de “insuficiente” y pidió “cancelar” el calendario de cierres. Hay que identificar la postura específica de este actor político frente a la del Gobierno.",
+        "zh": "第 5 段显示人民党认为这次暂停“不够”，并要求“取消”关闭时间表。需识别这一政治主体的具体立场（与政府立场相区别），故选 B。此题考查观点辨析。"
+      },
+      {
+        "q": "¿Hasta qué año aspiran a llevar la clausura de la central las compañías eléctricas?",
+        "opts": [
+          "Hasta 2030.",
+          "Hasta 2035.",
+          "Hasta 2060.",
+          "Hasta 2028."
+        ],
+        "ans": 2,
+        "es": "El párrafo 7 dice que las compañías “aspiran a llevar su clausura hasta 2060, mucho más allá del calendario actual”. Hay que inferir que 2060 es su objetivo a largo plazo, distinto de la fecha oficial de 2030.",
+        "zh": "第 7 段说电力公司“希望把关闭推迟到 2060 年，远超当前时间表”。需推断出 2060 是它们的长期目标，与官方 2030 年不同，故选 C。此题考查推理判断。"
+      },
+      {
+        "q": "¿Cuál es el argumento central del Gobierno para justificar la prórroga?",
+        "opts": [
+          "Que la central genera beneficios.",
+          "Que la prórroga coyuntural puede moderar la exposición de los consumidores a picos de precios no previstos.",
+          "Que la central no tiene riesgos.",
+          "Que es una exigencia de la UE."
+        ],
+        "ans": 1,
+        "es": "La cita del párrafo 14 (“la prórroga, coyuntural, puede contribuir a moderar la exposición... a unos picos de precios... no previstos”) es una oración compleja con léxico técnico (exposición, picos, coyuntural), cuyo sentido completo hay que desentrañar.",
+        "zh": "第 14 段引语“这一临时性延期有助于减轻消费者面临……此前未预见的……价格飙升的风险敞口”是含专业词（exposición、picos、coyuntural）的复合句，需完整理解语义才能作答，故选 B。此题考查长句理解与词汇深度。"
+      },
+      {
+        "q": "¿Cuánto está valorada la instalación de Almaraz?",
+        "opts": [
+          "15.000 millones de euros.",
+          "7.000 millones de euros.",
+          "1.500 millones de euros.",
+          "20.000 millones de euros."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 12) que “la instalación está valorada en 15.000 millones de euros”.",
+        "zh": "原文第 12 段说“该设施估值高达 150 亿欧元”，故选 A。此题考查直接定位。"
+      },
+      {
+        "q": "¿Quién dijo que “España no puede permitirse el lujo de cerrar las nucleares”?",
+        "opts": [
+          "El ministro de Transición Ecológica.",
+          "Mario Ruiz-Tagle, consejero delegado de Iberdrola España.",
+          "Fernando Sánchez.",
+          "El presidente del Partido Popular."
+        ],
+        "ans": 1,
+        "es": "El párrafo 15 atribuye esta cita a “el consejero delegado de Iberdrola España, Mario Ruiz-Tagle”.",
+        "zh": "第 15 段明确这句话出自“伊维尔德罗拉西班牙公司首席执行官马里奥·鲁伊斯-塔格莱”，故选 B。此题考查直接定位与引语归属。"
+      },
+      {
+        "q": "¿Qué revela la cita de Fernando Sánchez sobre la relación de los extremeños con la central?",
+        "opts": [
+          "Que siempre quisieron la central.",
+          "Que antes nadie quería la central, pero ahora los extremeños defienden su continuidad.",
+          "Que quieren cerrarla inmediatamente.",
+          "Que no les importa la central."
+        ],
+        "ans": 1,
+        "es": "La cita del párrafo 18 (“nos pusieron la central... porque nadie la quería y ahora que la queremos nos la van a quitar”) revela un cambio de actitud: de rechazo inicial a defensa actual. Hay que interpretar el tono irónico y la evolución de la postura local.",
+        "zh": "第 18 段引语“当年没人要才塞给我们，如今我们想要了却要夺走”揭示了当地人态度的转变：从最初的排斥到现在的捍卫。需解读其中的反讽语气和立场演变，故选 B。此题考查观点辨析与推理。"
+      },
+      {
+        "q": "¿Qué conclusión general se puede extraer del artículo sobre la política nuclear española?",
+        "opts": [
+          "La decisión está cerrada de forma definitiva.",
+          "La prórroga traslada la decisión final a un futuro Gobierno y refleja un profundo conflicto político, económico y territorial.",
+          "Todas las partes están de acuerdo.",
+          "La energía nuclear dejará de usarse en 2026."
+        ],
+        "ans": 1,
+        "es": "Hay que integrar los párrafos 1, 4, 5, 8-10 y 20: la decisión se describe como “una patada hacia adelante”, el cierre queda para “una nueva legislatura”, y hay conflicto entre Gobierno, PP, PSOE regional, Sumar, eléctricas y plataformas locales. La conclusión es que se trata de un conflicto abierto y trasladado al futuro.",
+        "zh": "需综合第 1、4、5、8-10、20 段：决定被描述为“把问题往后踢”，关闭被推到“新一届议会任期”，且政府、人民党、地区工人社会党、苏马尔党、电力公司和地方平台之间存在冲突。结论是这是一个悬而未决、被推迟到未来的深层政治经济领土冲突，故选 B。此题考查跨段落综合。"
+      }
     ]
   }
 };
