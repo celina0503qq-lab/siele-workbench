@@ -25,7 +25,7 @@ window.REFINE_PACKS = {
     sources: [
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Preparando las vacaciones de verano" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Las fiestas de agosto en España" },
-      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Energía renovable y almacenamiento: la nueva apuesta de España" },
+      { level: "B1", source: "IDAE", sourceUrl: "https://www.idae.es/ayudas-y-financiacion/programa-energias-renovables-innovadoras", topic: "Energía renovable y almacenamiento: la nueva apuesta de España" },
       { level: "B2", source: "El País", sourceUrl: "https://elpais.com/economia/2026-08-15/la-prorroga-de-almaraz-dejara-en-manos-del-nuevo-gobierno-la-decision-sobre-su-cierre.html", topic: "La prórroga de Almaraz dejará en manos de un futuro Gobierno la decisión sobre su cierre" }
     ]
   },
