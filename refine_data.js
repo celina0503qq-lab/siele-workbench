@@ -26,7 +26,7 @@ window.REFINE_PACKS = {
       { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Preparando las vacaciones de verano" },
       { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Las fiestas de agosto en España" },
       { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Energía renovable y almacenamiento: la nueva apuesta de España" },
-      { level: "B2", source: "Japan Times", sourceUrl: "https://www.thejapantimes.jp/Economy/716124-spain-extends-largest-nuclear-plant-in-policy-u-turn.html", topic: "La prórroga de la central nuclear de Almaraz: un debate europeo" }
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/economia/2026-08-15/la-prorroga-de-almaraz-dejara-en-manos-del-nuevo-gobierno-la-decision-sobre-su-cierre.html", topic: "La prórroga de Almaraz dejará en manos de un futuro Gobierno la decisión sobre su cierre" }
     ]
   },
   "2026-08-16": {
