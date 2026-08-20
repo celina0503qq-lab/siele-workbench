@@ -505,6 +505,18 @@ function mergeQuizzes(localQ, remoteQ) {
 - **三级来源优先级**（B1/B2 尤其 B2 严格执行）：El País 原文 > BBC Mundo 原文 > RTVE 原文。找不到 El País/BBC 的可用原文时，宁可降低难度适配或用 RTVE，**也不得换用非西语媒体**。
 - **验证闭环**：推送前必须用 `WebFetch`（或 curl，若沙箱可直连）实际打开 `sourceUrl`，确认返回 200 且正文确为该主题，再写入数据。若 curl 因 TLS 直连失败（沙箱常见），**改用 WebFetch 工具**（走不同网络路径）获取原文，不可因 curl 失败就改用其他来源凑数。
 
+### 6.6.2 内置页与独立页「双入口」来源一致性（v4.4 · 第 14 期教训）
+- **工作台有两条展示路径，必须同时改对**：
+  1. **内置页**（`index.html`）：运行时通过 `<script src="./refine_data.js" defer>` 加载索引 `REFINE_PACKS`，再按 `currentRefineDate` 动态 fetch `articles/data/<date>.js` 渲染正文。**内置页的「来源名 + sourceUrl」取自 `refine_data.js` 的 `sources[]`，正文取自 `articles/data/<date>.js`。**
+  2. **独立页**（`articles/<date>.html`）：数据内联，`<h2>` 标题与 `.source-cta` 的 href 硬编码在 HTML 中。
+- **致命坑（第 14 期实测）**：只改了本地 `refine_data.js` 但**漏推送**，导致内置页线上仍跳旧来源（Japan Times）。教训：**任何本地改动的文件都必须逐个确认已推送到线上**，不能"以为改过了"。
+- **强制校验**：每期推送后，必须**分别核对**以下三处的四个等级（A1/A2/B1/B2）来源名 + sourceUrl **逐字一致**：
+  1. `refine_data.js` 中该期 `sources[level].source` / `.sourceUrl`
+  2. `articles/<date>.html` 中 `.source-cta` 的 href 与可见来源名
+  3. `articles/data/<date>.js` 的正文主题与上述来源相符
+- **校验脚本**：用正则抽取两处的 sourceUrl 做全等比对（含 A1/A2/B1/B2 四级），不一致即报错拦截，禁止发布。
+- **内置页默认展示期**：由 `currentRefineDate` 决定（优先取 `REFINE_PACKS` 中最新 key），推送新期后内置页会自动切到最新期，无需改 `index.html`。
+
 ### 6.7 内容质量
 - A1 文章：日常生活场景，词汇基础，句式简单，10 段
 - A2 文章：社会生活，引入简单时态变化，10 段
@@ -749,7 +761,8 @@ QuizData.recordAnswer()         RefineQuizDB.recordAnswer()
 | 39 | **B1/B2 选文必须取自 El País / BBC Mundo 等西语媒体原文，禁用他语种媒体（v4.4 第 14 期教训）** | 数据 |
 | 40 | **「尽量不改原文」= 真实链接 + 真实原文事实 + 按难度分级尽量不大改** | 数据 |
 | 41 | **curl 因 TLS 直连失败时改用 WebFetch 获取原文，不可因此换用其他来源** | 数据 |
+| 42 | **内置页 + 独立页四等级 sourceUrl 逐字一致（refine_data.js 必须实际推送，不能只改本地）** | 数据 |
 
 ---
 
-*最后更新：2026-08-20 · v4.4：阅读题题干/选项纯西语 + 解析定位原文（标段落号）+ B1/B2 难词提升至 8–10 个 + B1/B2 选文来源硬约束（El País/BBC Mundo 真实原文） · 基于 v4.3 演进*
+*最后更新：2026-08-20 · v4.4：阅读题题干/选项纯西语 + 解析定位原文（标段落号）+ B1/B2 难词提升至 8–10 个 + B1/B2 选文来源硬约束（El País/BBC Mundo 真实原文）+ 内置页/独立页双入口来源一致性校验 · 基于 v4.3 演进*
