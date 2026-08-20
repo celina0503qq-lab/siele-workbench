@@ -17,6 +17,18 @@
 
 // 1) 2026-08-16 第 13 期 — 主题：公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机
 window.REFINE_PACKS = {
+  "2026-08-20": {
+    date: "2026-08-20",
+    weekday: "四",
+    issue: 14,
+    theme: "暑假出行准备 · 西班牙八月节庆 · 可再生能源与储能 · 阿尔马拉斯核电站延期",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Preparando las vacaciones de verano" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "Las fiestas de agosto en España" },
+      { level: "B1", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/economia/", topic: "Energía renovable y almacenamiento: la nueva apuesta de España" },
+      { level: "B2", source: "Japan Times", sourceUrl: "https://www.thejapantimes.jp/Economy/716124-spain-extends-largest-nuclear-plant-in-policy-u-turn.html", topic: "La prórroga de la central nuclear de Almaraz: un debate europeo" }
+    ]
+  },
   "2026-08-16": {
     date: "2026-08-16",
     weekday: "日",
