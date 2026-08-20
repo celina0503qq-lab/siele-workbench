@@ -668,6 +668,11 @@ function mergeQuizzes(localQ, remoteQ) {
 - **GitHub Pages 部署延迟**：推送后 Pages 自动构建，**约 1-2 分钟**。期间访问新页面返回 404（"Page not found"）是**正常现象**，需等待构建状态变为 `built`/`deployed` 后再验证。
   - 检查构建状态：`GET /repos/<repo>/pages/builds/latest` 的 `status` 字段
   - 不要因 404 就误判推送失败而重复推送（会产生冲突）
+- **构建状态误报（v4.5 实测，勿被吓到）**：连续快速推送多个文件时，GitHub Pages 有并发控制——**新推送会取消仍在跑的旧构建**，被取消的构建在 `pages/builds` 中记录为 `errored` 并可能触发失败邮件通知。**判定标准**：
+  1. 查 Actions：`GET /repos/<repo>/actions/runs?per_page=5` 中最新一条 `pages build and deployment` 的 `conclusion`——若为 `success` 则部署成功
+  2. 以**线上实际访问**为最终裁决：curl 目标页面返回 200 且内容与本地最新版一致（可对比字节数），即为成功
+  3. `pages/builds` 的 `errored` 若对应的是被 `cancelled` 的旧构建，忽略之
+  - 规避：多文件推送尽量一次批量完成（本项目固定 4 文件一次推送），避免几十秒内连续多次 PUT 触发并发取消
 - **DNS 处理**：
   - API：`api.github.com` → `--resolve api.github.com:443:140.82.121.5`
   - Pages：`*.github.io` 也需 `--resolve <host>:443:185.199.108.153`（或 185.199.109.153/110/111），否则 curl 返回 000
