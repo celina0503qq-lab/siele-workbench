@@ -17,6 +17,18 @@
 
 // 1) 2026-08-16 第 13 期 — 主题：公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机
 window.REFINE_PACKS = {
+  "2026-08-24": {
+    date: "2026-08-24",
+    weekday: "一",
+    issue: 15,
+    theme: "邮局寄包裹 · 西班牙圣周与传统节日 · 八月电价上涨 · 租房成本升至收入39%",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la oficina de correos" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "La Semana Santa y las fiestas populares de España" },
+      { level: "B1", source: "Europa Press", sourceUrl: "https://www.europapress.es/economia/energia-00341/noticia-factura-electrica-apunta-subida-20-agosto-precio-luz-disparado-20260823113050.html", topic: "La factura de la luz sube más del 20% en agosto" },
+      { level: "B2", source: "Europa Press", sourceUrl: "https://www.europapress.es/economia/construccion-y-vivienda-00342/noticia-esfuerzo-alquilar-vivienda-sube-39-ingresos-familiares-espana-idealista-20260818100651.html", topic: "El esfuerzo para alquilar una vivienda sube al 39%" }
+    ]
+  },
   "2026-08-20": {
     date: "2026-08-20",
     weekday: "四",
