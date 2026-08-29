@@ -1,17 +1,17 @@
 ---
 name: siele-daily-refine-pack
-description: SIELE 工作台外刊精炼推送流程 v4.5 完整执行版 — 每 4 天一期（自动化 siele-v3 触发，也可手动触发）· 15 词 + 4 篇分级精读 (A1:10段5题/A2:10段5题/B1:≥18段8题/B2:≥20段8题，共26题) + Word 下载 + 在线阅读 + 原文链接，落到 GitHub Pages celina0503qq-lab.github.io/siele-workbench/articles/<date>/。硬性规范：题干/选项纯西语 + 解析标段落号、B1/B2 每段 35-50 词、B1/B2 难词 8-10 个含 ejemplo+analisis、B2 难题 ≥4/8 + B1 ≥2/8（此题考查…标签机器校验）、B1/B2 禁取材 RTVE（El País/BBC Mundo/官方专页）、内置页/独立页来源一致性、认证用 ~/.config/gh/hosts.yml oauth_token（禁明文 token/gh CLI/fine-grained PAT）、期号在线计算、HTML JSON.stringify 内联、四重验证、4 文件推送缺一不可
+description: SIELE 工作台外刊精炼推送流程 v5.0 完整执行版 — 每 7 天一期（每周五，自动化 siele-v3 触发，也可手动触发）· 15 词 + 4 篇分级精读 (A1:10段5题/A2:10段5题/B1:≥18段8题/B2:≥20段8题，共26题) + Word 下载 + 在线阅读 + 原文链接，落到 GitHub Pages celina0503qq-lab.github.io/siele-workbench/articles/<date>/。硬性规范：题干/选项纯西语 + 解析标段落号、B1/B2 每段 35-50 词、B1/B2 难词 8-10 个含 ejemplo+analisis、B2 难题 ≥4/8 + B1 ≥2/8（此题考查…标签机器校验）、B1/B2 禁取材 RTVE（El País/BBC Mundo/官方专页）、内置页/独立页来源一致性、认证用 ~/.config/gh/hosts.yml oauth_token（禁明文 token/gh CLI/fine-grained PAT）、期号在线计算、HTML JSON.stringify 内联、四重验证、4 文件推送缺一不可
 read_when:
   - 用户要求生成西语外刊精炼推送（手动触发）
-  - 自动化 (每 4 天 00:00) 推送触发
+  - 自动化 (每 7 天/每周五 00:00) 推送触发
   - 需要把外刊内容接入 📚外刊精炼 菜单
   - 排查外刊期号错乱 / 引号语法错误 / 推送 404 / 链接失效 / 来源错误 / 段落过短 / 难词过少 / 题干中文
 ---
 
-# SIELE 外刊精炼推送 (Daily Refine Pack) v4.5 完整执行版
+# SIELE 外刊精炼推送 (Daily Refine Pack) v5.0 完整执行版
 
-> **权威源**：仓库 `.codebuddy/automation.md`（v4.5, 2026-08-20）。本 skill 是可直接执行的浓缩版，两者冲突时以 automation.md 为准。
-> **双触发**：① 自动化任务 `siele-v3`（id=5100839，cron `0 0 0 */4 * *` 即每 4 天 00:00 Asia/Shanghai）② 用户手动要求「生成 X 月 X 号外刊精炼」。
+> **权威源**：仓库 `.codebuddy/automation.md`（v5.0, 2026-08-29）。本 skill 是可直接执行的浓缩版，两者冲突时以 automation.md 为准。
+> **双触发**：① 自动化任务 `siele-v3`（id=5100839，cron `0 0 0 * * 5` 即每 7 天/每周五 00:00 Asia/Shanghai）② 用户手动要求「生成 X 月 X 号外刊精炼」。
 > **仓库**：`celina0503qq-lab/siele-workbench`（GitHub Pages: `celina0503qq-lab.github.io/siele-workbench/`）。
 
 ---
@@ -281,7 +281,7 @@ with zipfile.ZipFile('X.docx') as z:
 
 ## 十二、本 SKILL 与「自动化指令」的关系
 
-- **自动化任务 `siele-v3` 的 prompt**（WorkBuddy 侧）：每 4 天自动触发时直接读取，是常规推送的执行入口
+- **自动化任务 `siele-v3` 的 prompt**（WorkBuddy 侧）：每 7 天（每周五 00:00）自动触发时直接读取，是常规推送的执行入口
 - **`.codebuddy/automation.md`**：完整权威规范（含历史版本记录），任务 prompt 引用它为权威源
-- **本 SKILL**：手动触发场景（用户直接说「生成外刊精炼」）时的执行指南，内容与 automation.md v4.5 一致
+- **本 SKILL**：手动触发场景（用户直接说「生成外刊精炼」）时的执行指南，内容与 automation.md v5.0 一致
 - 三处规则必须保持同步；更新任一版本规范后，其余两处需一并更新（本仓库 `skills/` 与本地 `~/.codebuddy/skills/` 也需同步，本地不会自动同步仓库更新，需手动复制或运行同步脚本）
