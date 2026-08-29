@@ -654,7 +654,7 @@ function mergeQuizzes(localQ, remoteQ) {
 - **必须**：以**最近一期已验证可用的 v3 模板**（如 `2026-08-11.html`，含完整 QuizData、swa_quiz_v1 持久化、渲染函数）为基准，复制后仅替换：
   - `<title>` / topbar h1 / topbar sub（期号、星期、4主题）
   - 4 篇文章的 `<h2>` 标题、`.source-cta` 的 href 来源链接
-  - footer 日期、`articles/<date>.docx` 链接
+  - footer 日期、`articles/<date>.docx` 链接、footer 频率文案（模板中「每 4 天自动生成」→ 改为「每 7 天自动生成」，v5.0 起）
   - WORDS / ARTICLES 数据块（用 6.8 的 JSON.stringify 方案）
 - **完成后**：用 playwright/chromium 无头渲染实际打开页面，断言 `JS 运行时错误数 = 0`、词汇卡 = 15、各级段落/题目数正确。**这一步是"页面能否打开"的最终裁决。**
 - **验证脚本期望值必须从数据 JS 动态读取，不要硬编码**（段落数、题目数、难词数等）——数据规模参数调整时同步更新，避免把正确结果误判为失败（第 14 期已踩坑，见 6.15）。
