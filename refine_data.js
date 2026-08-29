@@ -17,6 +17,18 @@
 
 // 1) 2026-08-16 第 13 期 — 主题：公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机
 window.REFINE_PACKS = {
+  "2026-08-28": {
+    date: "2026-08-28",
+    weekday: "五",
+    issue: 16,
+    theme: "药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la farmacia" },
+      { level: "A2", source: "RTVE", sourceUrl: "https://www.rtve.es/noticias/cultura/", topic: "El flamenco: más que un baile" },
+      { level: "B1", source: "Europa Press", sourceUrl: "https://www.europapress.es/economia/laboral-00346/noticia-cada-tres-trabajadores-abierto-cambiar-empleo-proximos-12-meses-20260825121209.html", topic: "Uno de cada tres trabajadores está abierto a cambiar de empleo" },
+      { level: "B2", source: "Europa Press", sourceUrl: "https://www.europapress.es/illes-balears/noticia-gob-terraferida-piden-acabar-alquiler-turistico-no-urbanizar-suelo-rustico-respuesta-26j-20260804114838.html", topic: "Mallorca frente a la masificación turística" }
+    ]
+  },
   "2026-08-24": {
     date: "2026-08-24",
     weekday: "一",
