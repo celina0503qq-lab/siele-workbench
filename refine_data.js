@@ -15,8 +15,21 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-08-16 第 13 期 — 主题：公园野餐 · 图书馆文化复兴 · 西班牙旅游业转型 · 欧洲干旱危机
+// 1) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
+// 2) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-09-02": {
+    date: "2026-09-02",
+    weekday: "三",
+    issue: 17,
+    theme: "超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el supermercado" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La biblioteca y el hábito de leer en España" },
+      { level: "B1", source: "Europa Press", sourceUrl: "https://www.europapress.es/epsocial/sostenibilidad/noticia-clima-extremo-verano-podria-reducir-pib-ue-torno-11-2026-triodos-bank-20260818150516.html", topic: "El calor extremo golpea la economía europea" },
+      { level: "B2", source: "Europa Press", sourceUrl: "https://www.europapress.es/epsocial/infancia/noticia-crue-celebra-concesion-45-millones-ministerio-vivienda-alojamientos-universitarios-asequibles-20260901135156.html", topic: "Vivienda universitaria y desigualdad" }
+    ]
+  },
   "2026-08-28": {
     date: "2026-08-28",
     weekday: "五",
