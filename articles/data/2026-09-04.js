@@ -1,0 +1,881 @@
+window.__REFINE_DATE__ = "2026-09-04";
+window.WORDS = [
+  {
+    "lema": "médico",
+    "ipa": "[ˈme.ði.ko]",
+    "pos": "m./f.",
+    "significado": "医生（诊断和治疗疾病的专业人员）",
+    "ejemplo_es": "Voy al médico porque me duele la garganta desde hace tres días.",
+    "ejemplo_zh": "我去看医生，因为嗓子已经疼了三天。",
+    "tip": "<b>médico/médica</b> = 医生。<b>consulta</b> = 诊室/就诊。<b>cita</b> = 预约。<b>receta</b> = 处方。A1 健康场景核心词。"
+  },
+  {
+    "lema": "receta",
+    "ipa": "[reˈθe.ta]",
+    "pos": "f.",
+    "significado": "处方；药方（医生开的取药单）",
+    "ejemplo_es": "El médico me da una receta y voy a la farmacia a comprar las pastillas.",
+    "ejemplo_zh": "医生给我开了处方，我去药店买药片。",
+    "tip": "<b>receta</b> = 处方。<b>farmacia</b> = 药店。<b>pastilla</b> = 药片。<b>medicamento</b> = 药物。A1 看病场景词。"
+  },
+  {
+    "lema": "fiesta",
+    "ipa": "[ˈfjes.ta]",
+    "pos": "f.",
+    "significado": "节日；聚会（庆祝活动或假日）",
+    "ejemplo_es": "En verano, muchos pueblos de España celebran sus fiestas con música, baile y fuegos artificiales.",
+    "ejemplo_zh": "夏天，西班牙许多村镇用音乐、舞蹈和烟花庆祝他们的节日。",
+    "tip": "<b>fiesta</b> = 节日/聚会。<b>fiesta popular</b> = 民间节日。<b>celebrar</b> = 庆祝。<b>fuegos artificiales</b> = 烟花。A2 文化场景词。"
+  },
+  {
+    "lema": "tradición",
+    "ipa": "[tɾa.ðiˈθjon]",
+    "pos": "f.",
+    "significado": "传统（世代相传的习俗与文化）",
+    "ejemplo_es": "Cada región de España conserva sus propias tradiciones y costumbres durante las fiestas.",
+    "ejemplo_zh": "西班牙每个地区在节日期间都保留着自己独特的传统和习俗。",
+    "tip": "<b>tradición</b> = 传统。<b>costumbre</b> = 习俗。<b>conservar</b> = 保留。<b>regional</b> = 地区的。A2 文化话题词。"
+  },
+  {
+    "lema": "hidrógeno",
+    "ipa": "[iˈðɾo.xe.no]",
+    "pos": "m.",
+    "significado": "氢（一种化学元素，可作清洁能源）",
+    "ejemplo_es": "El hidrógeno verde se produce con electricidad renovable y no emite dióxido de carbono.",
+    "ejemplo_zh": "绿色氢能由可再生电力生产，不排放二氧化碳。",
+    "tip": "<b>hidrógeno</b> = 氢。<b>hidrógeno verde</b> = 绿色氢能。<b>renovable</b> = 可再生的。<b>electrolizador</b> = 电解槽。B1 能源话题词。"
+  },
+  {
+    "lema": "electrolizador",
+    "ipa": "[e.lek.tɾo.li.θaˈðoɾ]",
+    "pos": "m.",
+    "significado": "电解槽（用电把水分解为氢和氧的装置）",
+    "ejemplo_es": "Un electrolizador de cien megavatios puede separar el agua en oxígeno e hidrógeno sin emitir carbono.",
+    "ejemplo_zh": "一台一百兆瓦的电解槽可以把水分解成氧气和氢气，且不排放碳。",
+    "tip": "<b>electrolizador</b> = 电解槽。<b>electrólisis</b> = 电解。<b>megavatio</b> = 兆瓦。<b>capacidad</b> = 产能。B1 能源科技词。"
+  },
+  {
+    "lema": "inversión",
+    "ipa": "[im.beɾˈsjon]",
+    "pos": "f.",
+    "significado": "投资（为获取收益而投入资金）",
+    "ejemplo_es": "La inversión en energías limpias supera los mil millones de euros en este proyecto.",
+    "ejemplo_zh": "这个项目在清洁能源上的投资超过十亿欧元。",
+    "tip": "<b>inversión</b> = 投资。<b>invertir</b> = 投资。<b>inversor/a</b> = 投资者。<b>presupuesto</b> = 预算。B1 经济话题词。"
+  },
+  {
+    "lema": "descarbonizar",
+    "ipa": "[des.kaɾ.βo.niˈθaɾ]",
+    "pos": "v.",
+    "significado": "脱碳（减少或消除二氧化碳排放）",
+    "ejemplo_es": "El hidrógeno renovable ayuda a descarbonizar sectores difíciles de electrificar, como el transporte pesado.",
+    "ejemplo_zh": "可再生氢能有助于为重型运输等难以电气化的行业脱碳。",
+    "tip": "<b>descarbonizar</b> = 脱碳。<b>descarbonización</b> = 脱碳（名词）。<b>emisiones</b> = 排放。<b>neutralidad climática</b> = 气候中和。B1 能源政策词。"
+  },
+  {
+    "lema": "vivienda",
+    "ipa": "[biˈβjen.da]",
+    "pos": "f.",
+    "significado": "住房；住宅（供人居住的房屋）",
+    "ejemplo_es": "El precio de la vivienda ha subido de forma constante durante más de una década en España.",
+    "ejemplo_zh": "西班牙的房价已经持续上涨了十多年。",
+    "tip": "<b>vivienda</b> = 住房。<b>vivienda de segunda mano</b> = 二手房。<b>obra nueva</b> = 新房。<b>piso</b> = 公寓。B2 住房话题词。"
+  },
+  {
+    "lema": "encarecer",
+    "ipa": "[en.ka.ɾeˈθeɾ]",
+    "pos": "v.",
+    "significado": "使变贵；涨价（使价格上涨）",
+    "ejemplo_es": "La escasez de oferta ha encarecido la vivienda y ha dificultado el acceso de los jóvenes.",
+    "ejemplo_zh": "供给短缺使住房变贵，也加大了年轻人的购房难度。",
+    "tip": "<b>encarecer</b> = 使变贵。<b>encarecimiento</b> = 涨价。<b>caro/cara</b> = 贵的。<b>abaratar</b> = 使降价。B2 经济话题词。"
+  },
+  {
+    "lema": "burbuja",
+    "ipa": "[buɾˈβu.xa]",
+    "pos": "f.",
+    "significado": "泡沫；气泡（经济中指价格虚高）",
+    "ejemplo_es": "El precio de la vivienda registra su mayor subida desde la burbuja inmobiliaria de 2007.",
+    "ejemplo_zh": "房价录得自 2007 年房地产泡沫以来的最大涨幅。",
+    "tip": "<b>burbuja</b> = 泡沫/气泡。<b>burbuja inmobiliaria</b> = 房地产泡沫。<b>estallar</b> = 破裂。<b>especulación</b> = 投机。B2 经济高频词。"
+  },
+  {
+    "lema": "especulativo",
+    "ipa": "[es.pe.ku.laˈti.βo]",
+    "pos": "adj.",
+    "significado": "投机的；投机性的（以价格差牟利为目的）",
+    "ejemplo_es": "La demanda no solo residencial sino también especulativa ha empujado los precios de la vivienda usada.",
+    "ejemplo_zh": "不仅是居住需求，投机性需求也推高了二手房的价格。",
+    "tip": "<b>especulativo/a</b> = 投机的。<b>especulación</b> = 投机。<b>especulador/a</b> = 投机者。<b>inversor</b> = 投资者。B2 经济议题词。"
+  },
+  {
+    "lema": "transacción",
+    "ipa": "[tɾan.sakˈθjon]",
+    "pos": "f.",
+    "significado": "交易；买卖（一次商业成交行为）",
+    "ejemplo_es": "De las más de setecientas mil operaciones del año pasado, solo el veintiuno por ciento fueron de vivienda nueva.",
+    "ejemplo_zh": "在去年七十多万笔交易中，只有百分之二十一是新房交易。",
+    "tip": "<b>transacción</b> = 交易。<b>operación</b> = 交易/操作。<b>compraventa</b> = 买卖。<b>mercado</b> = 市场。B2 经济词汇。"
+  },
+  {
+    "lema": "construcción",
+    "ipa": "[kons.tɾukˈθjon]",
+    "pos": "f.",
+    "significado": "建设；建造（房屋的施工过程）",
+    "ejemplo_es": "El ritmo de construcción de viviendas se sitúa en torno a cien mil unidades al año.",
+    "ejemplo_zh": "住房建设速度约为每年十万套。",
+    "tip": "<b>construcción</b> = 建设。<b>construir</b> = 建造。<b>obra</b> = 工程。<b>promotor/a</b> = 开发商。B2 住房话题词。"
+  },
+  {
+    "lema": "inmobiliario",
+    "ipa": "[in.mo.βiˈlja.ɾjo]",
+    "pos": "adj.",
+    "significado": "房地产的；不动产的（与房屋买卖租赁相关）",
+    "ejemplo_es": "El mercado inmobiliario no da tregua y los precios siguen apretando a las familias.",
+    "ejemplo_zh": "房地产市场毫不放松，房价持续挤压着家庭。",
+    "tip": "<b>inmobiliario/a</b> = 房地产的。<b>mercado inmobiliario</b> = 房地产市场。<b>inmueble</b> = 不动产。<b>agencia inmobiliaria</b> = 房产中介。B2 经济高频词。"
+  }
+];
+
+window.ARTICLES = {
+  "a1": {
+    "paragraphs": [
+      {
+        "es": "Hoy es viernes por la mañana. Marta no se encuentra bien porque le duele la cabeza y tiene tos.",
+        "zh": "今天是星期五早上。玛尔塔感觉不舒服，因为她头疼并且咳嗽。"
+      },
+      {
+        "es": "Por eso llama por teléfono al centro de salud de su barrio para pedir una cita con el médico.",
+        "zh": "因此她打电话给社区健康中心，预约看医生。"
+      },
+      {
+        "es": "—Buenos días. Necesito una cita con el médico, por favor —dice Marta a la recepcionista.",
+        "zh": "—早上好。我需要预约看医生，麻烦了—玛尔塔对前台接待员说。"
+      },
+      {
+        "es": "—Claro. ¿Le viene bien a las diez y media? —responde la recepcionista con amabilidad.",
+        "zh": "—当然。上午十点半您方便吗？—接待员友善地回应。"
+      },
+      {
+        "es": "Marta llega a la consulta a las diez y veinticinco y espera un poco en la sala de espera.",
+        "zh": "玛尔塔十点二十五分到达诊室，在候诊室稍等了一会儿。"
+      },
+      {
+        "es": "El médico le pregunta cómo se siente y le toma la temperatura con un termómetro.",
+        "zh": "医生询问她的感觉，并用体温计给她量体温。"
+      },
+      {
+        "es": "—Tiene un poco de fiebre, pero no es grave. Tiene que descansar y beber mucha agua —le dice el médico.",
+        "zh": "—您有点发烧，但不严重。您需要休息，并且多喝水—医生对她说。"
+      },
+      {
+        "es": "El médico le da una receta con unas pastillas para la tos y un jarabe para la garganta.",
+        "zh": "医生给她开了一张处方，有止咳药片和润喉糖浆。"
+      },
+      {
+        "es": "Después, Marta va a la farmacia que está al lado del centro de salud para comprar los medicamentos.",
+        "zh": "之后，玛尔塔去健康中心旁边的药店买药。"
+      },
+      {
+        "es": "Al final, Marta vuelve a casa, se toma la medicina y se acuesta un rato para descansar tranquila.",
+        "zh": "最后，玛尔塔回到家，吃了药，躺下休息了一会儿，安心地歇息。"
+      }
+    ],
+    "dele": "A1 考点：<b>陈述式现在时</b> — 规则动词（llamar, preguntar, comprar, descansar）与不规则动词（tener→tiene, ir→va, dar→da, volver→vuelve）。<b>自复动词</b>（encontrarse, acostarse, tomarse）。<b>无人称结构</b>（¿Le viene bien...?）。<b>直接引语</b>用破折号（—Buenos días...）。<b>身体不适表达</b>（me duele la cabeza, tiene tos, un poco de fiebre）。<b>时间表达</b>（a las diez y media, a las diez y veinticinco）。",
+    "hardWords": [
+      {
+        "w": "consulta",
+        "m": "诊室；就诊"
+      },
+      {
+        "w": "termómetro",
+        "m": "体温计"
+      },
+      {
+        "w": "jarabe",
+        "m": "糖浆"
+      },
+      {
+        "w": "receta",
+        "m": "处方"
+      },
+      {
+        "w": "farmacia",
+        "m": "药店"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Por qué llama Marta al centro de salud?",
+        "opts": [
+          "Para pedir una cita con el médico.",
+          "Para comprar medicamentos.",
+          "Para visitar a una amiga.",
+          "Para trabajar allí."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 2) que Marta llama “para pedir una cita con el médico”.",
+        "zh": "原文第 2 段说玛尔塔打电话“预约看医生”，故选 A。"
+      },
+      {
+        "q": "¿A qué hora tiene la cita Marta?",
+        "opts": [
+          "A las nueve.",
+          "A las diez y media.",
+          "A las once.",
+          "A las doce."
+        ],
+        "ans": 1,
+        "es": "La recepcionista pregunta (párrafo 4): “¿Le viene bien a las diez y media?”.",
+        "zh": "原文第 4 段接待员问“上午十点半您方便吗”，故选 B。"
+      },
+      {
+        "q": "¿Qué le hace el médico a Marta en la consulta?",
+        "opts": [
+          "Le toma la temperatura.",
+          "Le vende pastillas.",
+          "Le pone una inyección.",
+          "Le hace una foto."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 6) que el médico “le toma la temperatura con un termómetro”.",
+        "zh": "原文第 6 段说医生“用体温计给她量体温”，故选 A。"
+      },
+      {
+        "q": "¿Qué le da el médico a Marta?",
+        "opts": [
+          "Una receta con pastillas y un jarabe.",
+          "Un regalo.",
+          "Dinero.",
+          "Una comida."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 8) que el médico “le da una receta con unas pastillas para la tos y un jarabe”.",
+        "zh": "原文第 8 段说医生“给她开了一张处方，有止咳药片和润喉糖浆”，故选 A。"
+      },
+      {
+        "q": "¿Qué hace Marta al final?",
+        "opts": [
+          "Va a trabajar.",
+          "Se va de vacaciones.",
+          "Vuelve a casa y descansa.",
+          "Sale a cenar."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 10) que Marta “vuelve a casa, se toma la medicina y se acuesta un rato para descansar”.",
+        "zh": "原文第 10 段说玛尔塔“回到家，吃了药，躺下休息”，故选 C。"
+      }
+    ]
+  },
+  "a2": {
+    "paragraphs": [
+      {
+        "es": "España es un país famoso por sus fiestas, y casi cada pueblo tiene una celebración especial a lo largo del año.",
+        "zh": "西班牙以其节日而闻名，几乎每个村镇在一年中都有一场特别的庆祝活动。"
+      },
+      {
+        "es": "Una de las fiestas más conocidas es la Semana Santa, que se celebra en primavera en muchas ciudades.",
+        "zh": "最著名的节日之一是圣周，它在春季于许多城市举行。"
+      },
+      {
+        "es": "Durante la Semana Santa, las hermandades salen a la calle con sus pasos y recorren la ciudad con música y velas.",
+        "zh": "圣周期间，各兄弟会抬着圣像走上街头，伴着音乐和蜡烛穿行城市。"
+      },
+      {
+        "es": "En el mes de abril, Sevilla acoge su famosa Feria, donde la gente baila sevillanas y se viste con trajes típicos.",
+        "zh": "四月，塞维利亚举办著名的集市节，人们跳塞维利亚舞，身穿传统服装。"
+      },
+      {
+        "es": "En verano, muchos pueblos celebran las fiestas de agosto con encierros, música y fuegos artificiales por la noche.",
+        "zh": "夏天，许多村镇在八月庆祝节日，有奔牛、音乐和夜间烟花。"
+      },
+      {
+        "es": "Los Sanfermines de Pamplona son conocidos en todo el mundo por el encierro de toros que se celebra cada julio.",
+        "zh": "潘普洛纳的圣费尔明节因每年七月的奔牛活动而闻名世界。"
+      },
+      {
+        "es": "Las Fallas de Valencia tienen lugar en marzo, cuando se plantan enormes figuras de cartón y madera en las calles.",
+        "zh": "瓦伦西亚的法雅节在三月举行，届时街上会竖起巨大的纸板和木制人偶。"
+      },
+      {
+        "es": "Estas fiestas no solo son divertidas, sino que también mantienen vivas las tradiciones y unen a las familias y vecinos.",
+        "zh": "这些节日不仅有趣，还让传统保持鲜活，并拉近了家庭和邻里之间的距离。"
+      },
+      {
+        "es": "Muchos extranjeros viajan a España cada año para conocer estas celebraciones y probar la comida típica de cada región.",
+        "zh": "每年都有许多外国人前往西班牙，了解这些庆祝活动，品尝每个地区的特色美食。"
+      },
+      {
+        "es": "Por eso, las fiestas son una parte importante de la cultura española y atraen a visitantes de todo el mundo.",
+        "zh": "因此，节日是西班牙文化的重要组成部分，吸引着来自世界各地的游客。"
+      }
+    ],
+    "dele": "A2 考点：<b>现在时与简单过去时</b>的混用（se celebra, acoge, tienen lugar, se plantan）。<b>自复动词</b>（celebrarse, vestirse, divertirse）。<b>无人称/se 被动</b>（se celebra, se plantan, son conocidas）。<b>关系从句</b>（que se celebra, donde la gente baila）。<b>时间表达</b>（en primavera, en el mes de abril, cada julio）。<b>最高级与比较级</b>（las más conocidas, más divertidas）。",
+    "hardWords": [
+      {
+        "w": "hermandad",
+        "m": "兄弟会（宗教团体）"
+      },
+      {
+        "w": "paso",
+        "m": "圣像（宗教游行中的神龛）"
+      },
+      {
+        "w": "encierro",
+        "m": "奔牛（活动）"
+      },
+      {
+        "w": "figura",
+        "m": "人偶；雕像"
+      },
+      {
+        "w": "mantener viva",
+        "m": "保持鲜活"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿En qué estación se celebra la Semana Santa?",
+        "opts": [
+          "En invierno.",
+          "En primavera.",
+          "En otoño.",
+          "En verano."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 2) que la Semana Santa “se celebra en primavera en muchas ciudades”.",
+        "zh": "原文第 2 段说圣周“在春季于许多城市举行”，故选 B。"
+      },
+      {
+        "q": "¿Qué se hace durante la Feria de Sevilla?",
+        "opts": [
+          "Se bailan sevillanas y se visten trajes típicos.",
+          "Se corren toros por la calle.",
+          "Se plantan figuras de cartón.",
+          "Se encienden hogueras."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 4) que en la Feria de Sevilla “la gente baila sevillanas y se viste con trajes típicos”.",
+        "zh": "原文第 4 段说塞维利亚集市节上“人们跳塞维利亚舞，身穿传统服装”，故选 A。"
+      },
+      {
+        "q": "¿Por qué son famosos los Sanfermines de Pamplona?",
+        "opts": [
+          "Por la música.",
+          "Por el encierro de toros.",
+          "Por la comida.",
+          "Por los trajes."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 6) que los Sanfermines “son conocidos en todo el mundo por el encierro de toros”.",
+        "zh": "原文第 6 段说圣费尔明节“因每年七月的奔牛活动而闻名世界”，故选 B。"
+      },
+      {
+        "q": "¿Cuándo tienen lugar las Fallas de Valencia?",
+        "opts": [
+          "En enero.",
+          "En marzo.",
+          "En julio.",
+          "En agosto."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 7) que “las Fallas de Valencia tienen lugar en marzo”.",
+        "zh": "原文第 7 段说“瓦伦西亚的法雅节在三月举行”，故选 B。"
+      },
+      {
+        "q": "¿Cuál es una función importante de las fiestas según el texto?",
+        "opts": [
+          "Mantener vivas las tradiciones y unir a las personas.",
+          "Aumentar los precios.",
+          "Reducir el turismo.",
+          "Cerrar las ciudades."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 8) que las fiestas “mantienen vivas las tradiciones y unen a las familias y vecinos”.",
+        "zh": "原文第 8 段说节日“让传统保持鲜活，并拉近了家庭和邻里之间的距离”，故选 A。"
+      }
+    ]
+  },
+  "b1": {
+    "paragraphs": [
+      {
+        "es": "El hidrógeno renovable ha entrado en una etapa decisiva en España. Las perspectivas que hace unos años existían solo sobre el papel se están convirtiendo en proyectos reales, impulsados por decisiones de inversión y con aplicación práctica en la industria.",
+        "zh": "西班牙的可再生氢能已经进入决定性阶段。几年前还只停留在纸面上的设想，正在变为真实项目，受到投资决策推动，并在工业中得到实际应用。"
+      },
+      {
+        "es": "Según el censo más reciente de la Asociación Española del Hidrógeno, existen cerca de cuatrocientos proyectos de hidrógeno renovable con un presupuesto conjunto que supera los treinta y tres mil millones de euros, repartidos a lo largo de toda la cadena de valor.",
+        "zh": "根据西班牙氢能协会最新的普查，全国有近四百个可再生氢能项目，总预算超过三百三十亿欧元，分布在整个价值链的各个环节。"
+      },
+      {
+        "es": "Ese censo incluye ciento veinticuatro proyectos de investigación, ciento veinticinco proyectos demostradores en entornos reales y ciento cuarenta y cinco iniciativas comerciales, lo que demuestra la madurez creciente del sector en todo el país y su gran dinamismo.",
+        "zh": "这份普查涵盖一百二十四个研究项目、一百二十五个真实环境示范项目，以及一百四十五个商业项目，显示出全国该行业日益成熟。"
+      },
+      {
+        "es": "Además, el censo estima que la capacidad de electrólisis para dos mil treinta se situará por encima de los objetivos nacionales anteriores. Se habla de trece coma tres gigavatios, una cifra superior a los doce gigavatios previstos en el Plan Nacional Integrado de Energía y Clima.",
+        "zh": "此外，普查估计到 2030 年的电解能力将超过此前的国家目标，达到 13.3 吉瓦，高于《国家能源与气候综合计划》规划的 12 吉瓦。"
+      },
+      {
+        "es": "Si se ejecuta la totalidad de los ciento cuarenta y cinco proyectos comerciales registrados, la capacidad total podría ascender a veinte gigavatios, con una producción anual de dos coma sesenta y cinco millones de toneladas de hidrógeno, según el citado censo.",
+        "zh": "根据该普查，如果已登记的一百四十五个商业项目全部落地，总产能可能达到 20 吉瓦，年产氢量达 265 万吨。"
+      },
+      {
+        "es": "La amplia cartera de iniciativas no es una casualidad. Responde a una hoja de ruta estratégica para descarbonizar sectores difíciles de electrificar, como el transporte pesado o la industria intensiva, al tiempo que se construye una transición energética con empleo, tecnología y mayor autonomía.",
+        "zh": "如此丰富的项目储备并非偶然。它对应一条战略路线图，旨在为重型运输、高耗能工业等难以电气化的行业脱碳，同时打造一个带来就业、技术与更大自主权的能源转型。"
+      },
+      {
+        "es": "En marzo de dos mil veintiséis, el consejo de administración de Moeve aprobó la decisión final de inversión para iniciar la construcción del Valle Andaluz del Hidrógeno Verde, situado entre Huelva y Cádiz, en el sur de España.",
+        "zh": "2026 年 3 月，Moeve 公司董事会批准了最终投资决定，启动位于西班牙南部韦尔瓦和加的斯之间的安达卢西亚绿色氢能谷的建设。"
+      },
+      {
+        "es": "Este proyecto, en el que participa Enagás Renovable a través de la sociedad Enalter, contará con una inversión conjunta de más de mil millones de euros para su primera fase, conocida como Onuba y situada en Huelva, que tendrá una capacidad de trescientos megavatios.",
+        "zh": "这个项目由 Enagás Renovable 通过 Enalter 公司参与，其第一阶段（称为 Onuba，位于韦尔瓦）将获得超过十亿欧元的联合投资，产能达三百兆瓦。"
+      },
+      {
+        "es": "Esa primera fase incluye una planta fotovoltaica de autoconsumo, así como infraestructuras asociadas, y alcanzará una producción cercana a las cuarenta y cinco mil toneladas de hidrógeno verde al año, lo que la convierte en la mayor iniciativa de este tipo en el sur de Europa.",
+        "zh": "第一阶段包括一座自用光伏电站及相关基础设施，年产绿色氢能近四万五千吨，这使它成为南欧同类项目中规模最大的一项。"
+      },
+      {
+        "es": "El proyecto ha sido reconocido como Proyecto de Interés Común Europeo por la Comisión Europea, y ha recibido trescientos cuatro millones de euros del Gobierno de España a través del Plan de Recuperación, Transformación y Resiliencia, financiado con fondos europeos NextGenerationEU.",
+        "zh": "该项目被欧盟委员会认定为“欧洲共同利益项目”，并已通过由 NextGenerationEU 基金资助的西班牙复苏、转型与韧性计划获得三亿零四百万欧元。"
+      },
+      {
+        "es": "El hidrógeno verde producido en Onuba se utilizará en sectores como el transporte terrestre, aéreo y marítimo, así como en la industria química y de fertilizantes, donde sustituirá a combustibles de origen fósil y reducirá la huella de carbono.",
+        "zh": "Onuba 生产的绿色氢能将用于陆运、空运和海运，以及化工和化肥工业，在这些领域替代化石燃料并减少碳足迹。"
+      },
+      {
+        "es": "Otro proyecto destacado es el Cartagena Large Scale Electrolyzer, una planta de cien megavatios prevista junto a la refinería de Repsol en el Valle del Hidrógeno de Cartagena, en la Región de Murcia, que producirá hasta quince mil toneladas de hidrógeno verde al año.",
+        "zh": "另一个重点项目是卡塔赫纳大型电解槽，这是一座一百兆瓦的工厂，规划建于穆尔西亚大区卡塔赫纳氢能谷雷普索尔炼油厂旁，年产绿色氢能高达一万五千吨。"
+      },
+      {
+        "es": "Esta instalación utilizará electricidad de fuentes renovables, como la solar y la eólica, para separar el agua en oxígeno e hidrógeno sin emisiones de carbono, y recibirá una ayuda pública de ciento cincuenta y cinco millones de euros del Plan de Recuperación.",
+        "zh": "该设施将使用太阳能、风能等可再生电力，把水分解为氧气和氢气而不产生碳排放，并将从复苏计划中获得一亿五千五百万欧元的公共援助。"
+      },
+      {
+        "es": "El presupuesto total de esta gran infraestructura supera los trescientos millones de euros, y está previsto que entre en funcionamiento en dos mil veintinueve, posicionando así a Cartagena como un referente europeo en energía limpia.",
+        "zh": "该基础设施总预算超过三亿欧元，预计 2029 年投运，将使卡塔赫纳成为欧洲清洁能源的一个标杆。"
+      },
+      {
+        "es": "En Castellón, la empresa conjunta de bp e Iberdrola está construyendo una planta de veinticinco megavatios que producirá unas dos mil ochocientas toneladas anuales de hidrógeno verde, con una inversión cercana a los setenta millones de euros y puesta en marcha prevista para la segunda mitad de dos mil veintiséis.",
+        "zh": "在卡斯特利翁，bp 与 Iberdrola 的合资公司正在建设一座二十五兆瓦的工厂，年产约两千八百吨绿色氢能，投资近七千万欧元，预计 2026 年下半年投产。"
+      },
+      {
+        "es": "En el norte, el proyecto Bilbao Large Scale Electrolyzer, impulsado por Petronor, producirá hasta quince mil toneladas de hidrógeno verde al año para sustituir parte del hidrógeno gris que se usa en la refinería de Muskiz, con una inversión cercana a doscientos noventa y dos millones de euros.",
+        "zh": "在北部，Petronor 推动的毕尔巴鄂大型电解槽项目将年产高达一万五千吨绿色氢能，以替代 Muskiz 炼油厂所用的部分灰氢，投资近二亿九千二百万欧元。"
+      },
+      {
+        "es": "Estos proyectos demuestran que dos mil veintiséis es un año clave para la infraestructura del hidrógeno renovable en España, con hitos como el cierre de la tercera subasta del Banco Europeo del Hidrógeno y el avance del corredor H2med que conectará la península ibérica con el noroeste de Europa.",
+        "zh": "这些项目表明，2026 年是西班牙可再生氢能基础设施的关键之年，其中包括欧洲氢能银行第三轮拍卖的收官，以及连接伊比利亚半岛与欧洲西北部的 H2med 走廊的推进。"
+      },
+      {
+        "es": "En definitiva, el hidrógeno renovable se consolida como una apuesta central para la descarbonización de la industria y el transporte, y como una oportunidad para que España refuerce su autonomía energética y su competitividad en el conjunto de Europa.",
+        "zh": "总之，可再生氢能正巩固其作为工业与交通脱碳核心选择的地位，也成为西班牙在欧洲范围内增强能源自主性和竞争力的机遇。"
+      }
+    ],
+    "dele": "B1 考点：<b>现在完成时</b>（ha entrado, ha sido reconocido, ha recibido）表示近期成就。<b>被动语态</b>（ha sido reconocido, está previsto, se utilizará）。<b>将来时</b>（se situará, podrá ascender, producirá, sustituirá）表达预测与规划。<b>无人称/se 被动</b>（se habla, se estima, se usa）。<b>数字与百分比表达</b>（treinta y tres mil millones, trece coma tres gigavatios）。<b>关系从句</b>（que tendrá una capacidad, donde sustituirá）。<b>专业词汇</b>（electrolizador, descarbonización, hidroducto, cadena de valor）。",
+    "hardWords": [
+      {
+        "w": "electrólisis",
+        "m": "电解（用电分解水制氢）",
+        "ejemplo": "La capacidad de electrólisis para 2030 se situará por encima de los doce gigavatios previstos en el plan nacional.",
+        "analisis": "源自希腊语 elektro-（电）+ lysis（分解），指用电将水分解为氢气和氧气的化学过程。常见搭配：capacidad de electrólisis（电解能力）、planta de electrólisis（电解厂）、electrólisis del agua（水的电解）。语境义：本文指绿色氢能生产的核心技术环节。语法上为阴性名词。DELE B1 科技类阅读高频词，常与 electrolizador（电解槽）搭配，需区分：electrólisis 是过程，electrolizador 是设备。"
+      },
+      {
+        "w": "cadena de valor",
+        "m": "价值链（从研发到销售的各环节）",
+        "ejemplo": "Los cuatrocientos proyectos se reparten a lo largo de toda la cadena de valor, desde la investigación hasta las iniciativas comerciales.",
+        "analisis": "经济学与管理学术语，由 cadena（链条）+ valor（价值）构成，指产品从研发、生产到销售的完整流程。常见搭配：eslabón de la cadena de valor（价值链环节）、toda la cadena de valor（整个价值链）。语境义：本文指氢能产业从研究到商业化的全流程。DELE B1/B2 经济类阅读常考，需理解其比喻义，而非字面“链子”。"
+      },
+      {
+        "w": "hoja de ruta",
+        "m": "路线图（战略规划）",
+        "ejemplo": "La cartera de proyectos responde a una hoja de ruta estratégica para descarbonizar la industria y el transporte.",
+        "analisis": "固定表达，字面意为“路线图”，引申为“行动规划、战略方案”。常见搭配：hoja de ruta estratégica（战略路线图）、definir una hoja de ruta（制定路线图）、seguir la hoja de ruta（遵循路线图）。语境义：本文指西班牙氢能发展的总体规划。DELE B1 政治经济类文本高频词，需与 mapa（地图）、itinerario（行程）区分。"
+      },
+      {
+        "w": "gigavatio",
+        "m": "吉瓦（功率单位，十亿瓦）",
+        "ejemplo": "Se habla de trece coma tres gigavatios de capacidad, una cifra superior a los doce gigavatios del plan nacional.",
+        "analisis": "由前缀 giga-（十亿）+ vatio（瓦特）构成，是功率计量单位，缩写 GW。相关单位链：vatio（瓦）→ kilovatio（千瓦）→ megavatio（兆瓦）→ gigavatio（吉瓦）。常见搭配：capacidad de X gigavatios（X 吉瓦产能）、gigavatio de potencia（吉瓦功率）。语境义：本文指电解槽总功率。DELE B1 科技类阅读需掌握国际单位制前缀与缩写对应关系。"
+      },
+      {
+        "w": "decisión final de inversión",
+        "m": "最终投资决定（项目正式启动的审批）",
+        "ejemplo": "El consejo de administración de Moeve aprobó la decisión final de inversión para iniciar la construcción del Valle Andaluz.",
+        "analisis": "企业金融术语，对应英文 Final Investment Decision（FID），指公司董事会批准并正式启动大型投资项目的关键决定。常见搭配：aprobar la decisión final de inversión（批准最终投资决定）、tomar la decisión final de inversión（作出最终投资决定）。语境义：本文指 Moeve 正式批准氢能项目启动。DELE B2 经济类阅读常见缩写 FID，需理解其商业语境义。"
+      },
+      {
+        "w": "autoconsumo",
+        "m": "自用；自发自用（自己生产自己消费）",
+        "ejemplo": "La primera fase incluye una planta fotovoltaica de autoconsumo, así como infraestructuras asociadas.",
+        "analisis": "由前缀 auto-（自己）+ consumo（消费）构成，指生产者自行使用所生产的能源，而非出售给电网。常见搭配：planta de autoconsumo（自用电站）、autoconsumo eléctrico（电力自发自用）、autoconsumo industrial（工业自用）。语境义：本文指氢能项目配套的专用光伏电站。DELE B1/B2 能源类文本高频词，与 venta a la red（并网销售）相对。"
+      },
+      {
+        "w": "huella de carbono",
+        "m": "碳足迹（活动产生的温室气体量）",
+        "ejemplo": "El hidrógeno verde sustituirá a los combustibles fósiles y reducirá la huella de carbono de la industria.",
+        "analisis": "环境学术语，由 huella（足迹）+ carbono（碳）构成，指个人或活动直接间接产生的二氧化碳等温室气体总量。常见搭配：reducir la huella de carbono（减少碳足迹）、calcular la huella de carbono（计算碳足迹）、huella ecológica（生态足迹）。语境义：本文指工业活动对气候的影响。DELE B1/B2 环境类阅读高频词，常与 emisiones（排放）、neutralidad climática（气候中和）搭配。"
+      },
+      {
+        "w": "hidrógeno gris",
+        "m": "灰氢（化石燃料制氢，含碳排放）",
+        "ejemplo": "El proyecto de Bilbao sustituirá parte del hidrógeno gris que se usa hoy en la refinería de Muskiz.",
+        "analisis": "能源行业新术语，用颜色区分氢能生产方式。常见分类：hidrógeno gris（灰氢，天然气制取，排放高）、hidrógeno azul（蓝氢，灰氢+碳捕集）、hidrógeno verde（绿氢，可再生电力电解，零排放）。常见搭配：sustituir el hidrógeno gris（替代灰氢）、producir hidrógeno verde（生产绿氢）。语境义：本文强调以绿氢替代高排放的灰氢。DELE B1 科技类阅读需掌握这一颜色分类体系。"
+      },
+      {
+        "w": "corredor",
+        "m": "走廊；通道（连接区域的基础设施带）",
+        "ejemplo": "El corredor H2med conectará la península ibérica con el noroeste de Europa a través de dos grandes infraestructuras.",
+        "analisis": "源自拉丁语 currere（跑），本义为“奔跑者/走廊”，引申为“连接两地的通道或基础设施带”。常见搭配：corredor de hidrógeno（氢能走廊）、corredor ferroviario（铁路走廊）、corredor verde（绿色走廊）。语境义：本文特指连接伊比利亚半岛与欧洲的氢能输送通道 H2med。DELE B1/B2 基础设施类文本高频词，需理解其“连接通道”的引申义，区别于 pasillo（室内走廊）。"
+      },
+      {
+        "w": "subasta",
+        "m": "拍卖；竞标（公开竞价分配机制）",
+        "ejemplo": "Uno de los hitos de 2026 es el cierre de la tercera subasta del Banco Europeo del Hidrógeno.",
+        "analisis": "源自拉丁语 sub hasta（在长矛之下，古罗马拍卖以矛为标志），指公开竞价出售或分配资源的方式。常见搭配：subasta pública（公开拍卖）、subasta de hidrógeno（氢能拍卖）、ganar una subasta（赢得拍卖）。语境义：本文指欧盟通过竞价机制分配氢能补贴。为阴性名词。DELE B1/B2 经济类阅读常考，需与 licitación（招标）、concurso（竞赛/招标）辨析。"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuántos proyectos de hidrógeno renovable existen en España según el censo?",
+        "opts": [
+          "Unos cien proyectos.",
+          "Cerca de cuatrocientos proyectos.",
+          "Más de mil proyectos.",
+          "Solo diez proyectos."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 2) que “existen cerca de cuatrocientos proyectos de hidrógeno renovable”.",
+        "zh": "原文第 2 段说“有近四百个可再生氢能项目”，故选 B。"
+      },
+      {
+        "q": "¿Qué capacidad de electrólisis se estima para 2030?",
+        "opts": [
+          "12 gigavatios.",
+          "13,3 gigavatios.",
+          "20 gigavatios.",
+          "2,65 gigavatios."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 4) que “se habla de trece coma tres gigavatios, una cifra superior a los doce gigavatios previstos”.",
+        "zh": "原文第 4 段说“达到 13.3 吉瓦，高于……规划的 12 吉瓦”，故选 B。"
+      },
+      {
+        "q": "¿Cómo se llama la primera fase del Valle Andaluz del Hidrógeno Verde?",
+        "opts": [
+          "Onuba.",
+          "BarMar.",
+          "Celza.",
+          "Muskiz."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 8) que la primera fase es “conocida como Onuba y situada en Huelva”.",
+        "zh": "原文第 8 段说第一阶段“称为 Onuba，位于韦尔瓦”，故选 A。"
+      },
+      {
+        "q": "¿Qué producción anual de hidrógeno verde alcanzará la primera fase de Onuba?",
+        "opts": [
+          "Unas 2.800 toneladas.",
+          "Unas 15.000 toneladas.",
+          "Unas 45.000 toneladas.",
+          "Unas 2,65 millones de toneladas."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 9) que la primera fase alcanzará “una producción cercana a las cuarenta y cinco mil toneladas de hidrógeno verde al año”.",
+        "zh": "原文第 9 段说第一阶段“年产绿色氢能近四万五千吨”，故选 C。"
+      },
+      {
+        "q": "¿Qué organismo ha reconocido el proyecto de Moeve como Proyecto de Interés Común Europeo?",
+        "opts": [
+          "El Gobierno de España.",
+          "La Comisión Europea.",
+          "La Asociación Española del Hidrógeno.",
+          "La refinería de Repsol."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 10) que el proyecto “ha sido reconocido como Proyecto de Interés Común Europeo por la Comisión Europea”.",
+        "zh": "原文第 10 段说该项目“被欧盟委员会认定为欧洲共同利益项目”，故选 B。"
+      },
+      {
+        "q": "¿Dónde se ubica el proyecto Cartagena Large Scale Electrolyzer?",
+        "opts": [
+          "Junto a la refinería de Repsol en Murcia.",
+          "En Castellón.",
+          "En el Puerto de Bilbao.",
+          "En Huelva."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 12) que la planta está “prevista junto a la refinería de Repsol en el Valle del Hidrógeno de Cartagena, en la Región de Murcia”.",
+        "zh": "原文第 12 段说该工厂“规划建于穆尔西亚大区卡塔赫纳氢能谷雷普索尔炼油厂旁”，故选 A。"
+      },
+      {
+        "q": "¿Por qué 2026 es un año clave para el hidrógeno renovable, según el texto?",
+        "opts": [
+          "Porque se cierra la tercera subasta del Banco Europeo y avanza el corredor H2med.",
+          "Porque se prohíbe el uso de hidrógeno gris.",
+          "Porque termina la producción de energía solar.",
+          "Porque todas las plantas cierran sus puertas."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 17) que 2026 es clave “con hitos como el cierre de la tercera subasta del Banco Europeo del Hidrógeno y el avance del corredor H2med”.",
+        "zh": "原文第 17 段说 2026 年关键是因为“欧洲氢能银行第三轮拍卖的收官，以及 H2med 走廊的推进”，故选 A。此题考查长句理解。"
+      },
+      {
+        "q": "¿Qué sector NO se menciona como destinatario del hidrógeno verde producido?",
+        "opts": [
+          "El transporte marítimo.",
+          "La industria química.",
+          "La industria de fertilizantes.",
+          "La industria textil."
+        ],
+        "ans": 3,
+        "es": "El texto menciona (párrafo 11) el transporte terrestre, aéreo y marítimo, así como la industria química y de fertilizantes, pero no la industria textil.",
+        "zh": "原文第 11 段提到陆运、空运、海运以及化工和化肥工业，但未提及纺织业，故选 D。此题考查词汇深度。"
+      }
+    ]
+  },
+  "b2": {
+    "paragraphs": [
+      {
+        "es": "El mercado inmobiliario español no da tregua y los precios siguen apretando a las familias. La vivienda subió en dos mil veinticinco una media del doce coma siete por ciento, el incremento más pronunciado desde dos mil siete, el año previo al estallido de la burbuja inmobiliaria.",
+        "zh": "西班牙房地产市场毫不放松，房价持续挤压着家庭。2025 年住房均价上涨了 12.7%，这是自 2007 年——房地产泡沫破裂前一年——以来的最大涨幅。"
+      },
+      {
+        "es": "Con los datos publicados por el Instituto Nacional de Estadística, se encadenan ya doce años de subidas constantes, más o menos pronunciadas. A tenor de esa estadística, una casa cuesta hoy un ochenta por ciento más que en dos mil quince.",
+        "zh": "根据国家统计局公布的数据，房价已连续十二年上涨，幅度或大或小。照此统计，如今一套房子的价格比 2015 年高出 80%。"
+      },
+      {
+        "es": "Las subidas afectan tanto a las viviendas de segunda mano como a las de obra nueva, con incrementos del doce coma nueve y del once coma tres por ciento en dos mil veinticinco, respectivamente. El mercado de casas usadas sostiene buena parte de las transacciones.",
+        "zh": "涨价同时波及二手房和新房，2025 年分别上涨 12.9% 和 11.3%。二手房市场支撑了大部分交易。"
+      },
+      {
+        "es": "El ritmo actual de construcción se sitúa en torno a las cien mil viviendas al año, mientras los precios de las casas nuevas no dejan de subir. De las más de setecientas mil operaciones realizadas el año pasado, solo el veintiuno por ciento fueron de vivienda nueva.",
+        "zh": "目前的建房速度约为每年十万套，而新房价格却持续攀升。在去年完成的七十多万笔交易中，只有 21% 是新房交易。"
+      },
+      {
+        "es": "En la vivienda usada, el aumento de la demanda, no solo residencial sino también especulativa, ha hecho que los precios suban incluso más que en la obra nueva, hasta el doce coma nueve por ciento, cinco puntos más que en dos mil veinticuatro.",
+        "zh": "在二手房领域，需求的增长——不仅是居住需求，还有投机需求——使价格上涨甚至超过新房，达到 12.9%，比 2024 年高出五个百分点。"
+      },
+      {
+        "es": "Los precios han subido en todas las comunidades autónomas, aunque dentro de un margen relativamente estrecho. Cataluña, un mercado más intervenido, con topes al alquiler y un mecanismo para limitar la compra especulativa, registró un incremento del diez coma nueve por ciento, dos puntos por debajo de la media.",
+        "zh": "所有自治区房价都在上涨，但幅度相对接近。加泰罗尼亚是一个干预更多的市场，有租金上限和限制投机购房的机制，其涨幅为 10.9%，比平均水平低两个百分点。"
+      },
+      {
+        "es": "Esa comunidad es la que registra el menor incremento, seguida de Canarias con el once por ciento, Navarra con el once coma cuatro y Euskadi con el doce coma tres, donde también se han declarado zonas tensionadas de vivienda.",
+        "zh": "加泰罗尼亚是涨幅最小的地区，其后是加那利群岛 11%、纳瓦拉 11.4% 和巴斯克 12.3%，后几个地区也被宣布为住房紧张区。"
+      },
+      {
+        "es": "En el extremo opuesto, Castilla y León encabeza la tabla con un incremento del quince coma tres por ciento. En Aragón, Murcia y La Rioja los precios subieron un catorce coma cuatro por ciento, mientras que en Madrid el alza fue del catorce coma dos por ciento.",
+        "zh": "在另一端，卡斯蒂利亚-莱昂以 15.3% 的涨幅居首。阿拉贡、穆尔西亚和拉里奥哈房价上涨了 14.4%，马德里的涨幅则为 14.2%。"
+      },
+      {
+        "es": "Los expertos discrepan sobre las causas de esta escalada. Para el economista Ignacio Ezquiaga, la crisis financiera dejó una oportunidad perdida para corregir el mercado, que ahora se aleja cada vez más de las rentas medias de los ciudadanos.",
+        "zh": "专家们对这一涨势的成因意见不一。经济学家伊格纳西奥·埃斯基亚加认为，金融危机错失了纠正市场的机会，如今市场与民众的中等收入越拉越远。"
+      },
+      {
+        "es": "El profesor Pau A. Montserrat, en cambio, apunta a una simple crisis de oferta y defiende que se debe construir más antes que intervenir directamente sobre los precios, en un debate que divide tanto a académicos como a responsables políticos.",
+        "zh": "而保·A·蒙塞拉特教授则指出这只是供给危机，主张应多建房，而不是直接干预价格——这一争论在学者和决策者中都存在分歧。"
+      },
+      {
+        "es": "Los datos recientes de la tasadora Tinsa muestran que el precio medio subió un quince coma cinco por ciento interanual en julio y ya supera en un uno coma ocho por ciento los máximos alcanzados durante la burbuja, con alzas del diecisiete coma nueve por ciento en las áreas metropolitanas.",
+        "zh": "评估机构 Tinsa 的最新数据显示，7 月房价同比上涨 15.5%，已比泡沫时期的历史高点高出 1.8%，大都市区的涨幅更是达到 17.9%。"
+      },
+      {
+        "es": "La escasez de oferta frente a una demanda creciente sigue impulsando los precios y dificultando el acceso a la vivienda, especialmente entre los jóvenes, que continúan a la cola de Europa en edad de emancipación por culpa de unos alquileres inalcanzables.",
+        "zh": "供给短缺叠加需求增长，持续推高房价，也加大了人们买房的难度，尤其是年轻人——由于难以承受的租金，他们仍是欧洲独立年龄最晚的群体之一。"
+      },
+      {
+        "es": "El fenómeno no es nuevo, pero su persistencia ha reavivado el debate sobre si la vivienda debe tratarse como un bien de mercado o como un derecho básico que el Estado tiene la obligación de garantizar a todos los ciudadanos.",
+        "zh": "这一现象并不新鲜，但其持续存在重新引发了关于住房究竟应被视为市场商品，还是国家有义务保障全体公民的基本权利的争论。"
+      },
+      {
+        "es": "Quienes defienden la primera postura sostienen que solo una mayor construcción y una liberalización del suelo pueden equilibrar el mercado y moderar los precios de forma sostenible y duradera, sin distorsionar la oferta con intervenciones artificiales.",
+        "zh": "持第一种观点的人认为，只有增加建设、放开土地供给，才能平衡市场、可持续地平抑价格，而不以人为干预扭曲供给。"
+      },
+      {
+        "es": "Enfrente, los partidarios de considerar la vivienda un derecho reclaman una intervención pública más firme, con control de precios, parque público de alquiler y límites a la compra especulativa, argumentando que dejar el problema al mercado solo ha agravado la desigualdad entre generaciones.",
+        "zh": "另一边，主张住房是权利的一方要求更强有力的公共干预，包括价格管控、公共租赁房源和限制投机购房，他们认为把问题交给市场只会加剧代际不平等。"
+      },
+      {
+        "es": "La evidencia sugiere que ambas aproximaciones tienen límites. Construir más lleva tiempo y choca con la escasez de suelo urbanizable, mientras que los topes de precios pueden desincentivar la inversión y reducir todavía más la oferta disponible en el corto plazo.",
+        "zh": "证据表明，两种思路各有局限。多建房需要时间，且受制于可开发土地稀缺；而价格上限可能抑制投资，反而在短期内进一步减少可用的房源。"
+      },
+      {
+        "es": "Más allá del diagnóstico, los analistas coinciden en que la clave está en combinar medidas de oferta y de demanda, y en coordinar a las administraciones central, autonómica y municipal, que hoy actúan con instrumentos dispersos y a menudo contradictorios.",
+        "zh": "抛开诊断不谈，分析人士一致认为，关键在于结合供给端和需求端的措施，并协调中央、自治区和市三级政府——它们目前各自为政，工具分散且常常相互矛盾。"
+      },
+      {
+        "es": "El problema trasciende lo económico: una generación que no puede acceder a una vivienda digna ve aplazados sus proyectos de vida, desde la formación de una familia hasta la decisión de tener hijos, lo que acaba lastrando la natalidad y la cohesión social del país.",
+        "zh": "这个问题超越了经济范畴：一代无法获得体面住房的年轻人，其人生规划被推迟，从组建家庭到生育子女的决定都受到影响，最终拖累整个国家的生育率和社会凝聚力。"
+      },
+      {
+        "es": "Mientras tanto, las familias siguen destinando una parte cada vez mayor de sus ingresos al pago de la hipoteca o del alquiler, en un contexto de tipos de interés todavía elevados que encarece la financiación y reduce la capacidad de ahorro de los hogares.",
+        "zh": "与此同时，在利率依然高企、融资成本上升、家庭储蓄能力下降的背景下，家庭把越来越大比例的收入用于偿还房贷或支付租金。"
+      },
+      {
+        "es": "En última instancia, la cuestión de la vivienda condensa una pregunta más amplia sobre el modelo de sociedad deseado: si se apuesta por la equidad y el acceso universal a un techo digno, o si se acepta que el lugar donde se vive dependa del origen económico de cada persona.",
+        "zh": "归根结底，住房问题浓缩了一个更宏大的命题：我们究竟想建设怎样的社会——是押注公平与人人享有体面居所，还是接受一个人住在哪里，主要取决于其经济出身。"
+      }
+    ],
+    "dele": "B2 考点：<b>条件式</b>（podrían, permitiría, acabaría）表达推测与假设。<b>虚拟式</b>（es importante que, aunque + subj., para que + subj.）。<b>让步与对比</b>（aunque, en cambio, mientras tanto, enfrente）。<b>无人称/se 被动</b>（se encadenan, se registró, se ha reavivado）。<b>关系从句</b>（que ahora se aleja, quienes defienden, donde también）。<b>学术议论文词汇</b>（estallido, especulativo, emancipación, cohesión, distorsionar）。<b>专家观点呈现</b>（según Ignacio Ezquiaga, apunta Pau A. Montserrat, los analistas coinciden）。<b>因果与目的</b>（por culpa de, dado que, de modo que）。",
+    "hardWords": [
+      {
+        "w": "estallido",
+        "m": "爆发；破裂（突然发生）",
+        "ejemplo": "El precio de la vivienda registra su mayor subida desde dos mil siete, el año previo al estallido de la burbuja inmobiliaria.",
+        "analisis": "由动词 estallar（爆炸、爆发）+ 名词后缀 -ido 构成，本义为“爆炸”，引申为“突然爆发”。常见搭配：estallido de la burbuja（泡沫破裂）、estallido social（社会动乱）、estallido de la guerra（战争爆发）。语境义：本文指房地产泡沫的破裂。语法上为阳性名词。DELE B2 常考其与 explosión（爆炸）、crisis（危机）的辨析，estallido 强调“突然、猛烈地发生”。"
+      },
+      {
+        "w": "tregua",
+        "m": "休战；喘息（暂时停止）",
+        "ejemplo": "El mercado inmobiliario no da tregua y los precios siguen apretando a las familias.",
+        "analisis": "源自哥特语 triggwa（契约、停战），本义为交战双方的停火，引申为“暂时的喘息、缓解”。常见搭配：no dar tregua（毫不放松）、sin tregua（无休止地）、pedir tregua（请求休战）。语境义：本文指房地产市场持续紧张、不给家庭喘息机会。为阴性名词。DELE B2 常考其引申义“喘息之机”，区别于 descanso（休息）、pausa（停顿）。"
+      },
+      {
+        "w": "encarecer",
+        "m": "使变贵；推高价格",
+        "ejemplo": "La escasez de oferta ha encarecido la financiación y ha reducido la capacidad de ahorro de los hogares.",
+        "analisis": "由前缀 en-（使…）+ caro（贵）+ 动词后缀 -ecer 构成，意为“使变贵”。属 -ecer 类动词，注意第三人称变位 encarece，第一人称单数 encarezco（词根变 z）。常见搭配：encarecer la vivienda（推高房价）、encarecer el crédito（使信贷变贵）、encarecerse（变得昂贵，自复用法）。语境义：本文指成本上涨。DELE B2 常考其及物/自复两种用法，以及反义词 abaratar（使降价）。"
+      },
+      {
+        "w": "intervenir",
+        "m": "干预；介入",
+        "ejemplo": "El profesor defiende que se debe construir más antes que intervenir directamente sobre los precios.",
+        "analisis": "源自拉丁语 intervenire（插入、介入），由 inter-（之间）+ venire（来）构成。为不规则动词，变位类似 venir（intervengo, interviene, intervinieron）。常见搭配：intervenir en el mercado（干预市场）、intervenir los precios（干预价格）、intervención pública（公共干预，名词）。语境义：本文指政府对房价的直接干预。DELE B2 常考其变位不规则性，以及名词 intervención 的搭配。"
+      },
+      {
+        "w": "emancipación",
+        "m": "独立；解放",
+        "ejemplo": "Los jóvenes continúan a la cola de Europa en edad de emancipación por culpa de unos alquileres inalcanzables.",
+        "analisis": "源自拉丁语 emancipatio，由动词 emancipar（使独立）构成，指摆脱依附、获得自主。常见搭配：emancipación juvenil（青年独立）、edad de emancipación（独立年龄）、emancipación económica（经济独立）。语境义：本文特指年轻人离开父母家独立生活。为阴性名词。DELE B2 社会类高频词，需与 independencia（独立）辨析：emancipación 更强调摆脱依附关系。"
+      },
+      {
+        "w": "cohesión",
+        "m": "凝聚力；团结",
+        "ejemplo": "El retraso en la emancipación acaba lastrando la natalidad y la cohesión social del país.",
+        "analisis": "源自拉丁语 cohaerere（粘合），由 co-（共同）+ haerere（粘）构成，指使整体紧密联结的力量。常见搭配：cohesión social（社会凝聚力）、cohesión territorial（地区凝聚力）、cohesión de grupo（团队凝聚力）。语境义：本文指社会的团结与稳定。为阴性名词。DELE B2 社会类阅读常考 cohesión social 这一概念，指社会成员间的团结与认同感。"
+      },
+      {
+        "w": "lastrar",
+        "m": "拖累；妨碍（使进展受阻）",
+        "ejemplo": "Una generación sin acceso a la vivienda ve aplazados sus proyectos de vida, lo que acaba lastrando la natalidad.",
+        "analisis": "由名词 lastre（压舱物、负担）动词化而来，本义为“给船加压舱物”，引申为“拖累、阻碍”。常见搭配：lastrar el crecimiento（拖累增长）、lastrar la economía（拖累经济）、lastrar el futuro（拖累未来）。语境义：本文指高房价拖累生育率。为第一变位规则动词。DELE B2 常考其引申义“拖累”，区别于 pesar（使沉重）、frenar（阻止）。"
+      },
+      {
+        "w": "distorsionar",
+        "m": "扭曲；使失真",
+        "ejemplo": "La liberalización del suelo puede moderar los precios sin distorsionar la oferta con intervenciones artificiales.",
+        "analisis": "源自拉丁语 distorquere（扭转），由 dis-（分离）+ torquere（扭）构成，指使事物偏离正常状态。常见搭配：distorsionar el mercado（扭曲市场）、distorsionar la realidad（歪曲事实）、distorsionar la competencia（扭曲竞争）。语境义：本文指人为干预可能扭曲房源供给。DELE B2 议论文高频词，常与 falsear（篡改）、deformar（使变形）辨析。"
+      },
+      {
+        "w": "encabezar",
+        "m": "居于首位；领衔",
+        "ejemplo": "Castilla y León encabeza la tabla con un incremento del quince coma tres por ciento.",
+        "analisis": "由前缀 en- + cabeza（头）+ 动词后缀 -ar 构成，字面意为“置于头部”，引申为“名列第一、领衔”。常见搭配：encabezar la lista（位列榜首）、encabezar el ranking（领跑榜单）、encabezar una manifestación（走在游行前列）。语境义：本文指卡斯蒂利亚-莱昂涨幅居首。DELE B2 常考其“居首”引申义，以及由 cabeza 派生的一系列词（cabecera、encabezamiento）。"
+      },
+      {
+        "w": "zona tensionada",
+        "m": "紧张区（房价压力大的区域）",
+        "ejemplo": "Euskadi, donde también se han declarado zonas tensionadas de vivienda, registró un incremento del doce coma tres por ciento.",
+        "analisis": "住房政策术语，由 zona（区域）+ tensionada（紧张的，tensionar 的过去分词）构成，指因房价或租金上涨过快而被官方认定需要特殊调控的区域。常见搭配：declarar una zona tensionada（宣布紧张区）、mercado tensionado（紧张市场）、zona de mercado residencial tensionado（住房市场紧张区）。语境义：本文指西班牙《住房法》规定的价格调控区。DELE B2 政策类阅读高频词，需理解其法律与政策语境义。"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Cuál fue el incremento medio del precio de la vivienda en España en 2025?",
+        "opts": [
+          "El 11,3%.",
+          "El 12,7%.",
+          "El 15,5%.",
+          "El 80%."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 1) que la vivienda “subió en dos mil veinticinco una media del doce coma siete por ciento”.",
+        "zh": "原文第 1 段说 2025 年住房“均价上涨了 12.7%”，故选 B。"
+      },
+      {
+        "q": "¿Qué porcentaje de las operaciones del año pasado correspondió a vivienda nueva?",
+        "opts": [
+          "El 21%.",
+          "El 11,3%.",
+          "El 12,9%.",
+          "El 80%."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 4) que “solo el veintiuno por ciento” de las operaciones “fueron de vivienda nueva”.",
+        "zh": "原文第 4 段说“只有 21%”的交易“是新房交易”，故选 A。"
+      },
+      {
+        "q": "¿Qué comunidad autónoma registró el menor incremento de precios?",
+        "opts": [
+          "Castilla y León.",
+          "Madrid.",
+          "Cataluña.",
+          "Navarra."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 7) que Cataluña “es la que registra el menor incremento”, con un 10,9%.",
+        "zh": "原文第 7 段说加泰罗尼亚“是涨幅最小的地区”，为 10.9%，故选 C。"
+      },
+      {
+        "q": "¿Qué comunidad encabeza la tabla de subidas de precios?",
+        "opts": [
+          "Castilla y León.",
+          "Aragón.",
+          "Murcia.",
+          "La Rioja."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 8) que “Castilla y León encabeza la tabla con un incremento del quince coma tres por ciento”.",
+        "zh": "原文第 8 段说“卡斯蒂利亚-莱昂以 15.3% 的涨幅居首”，故选 A。"
+      },
+      {
+        "q": "¿Qué causa señala el profesor Pau A. Montserrat para la subida de precios?",
+        "opts": [
+          "Una crisis de oferta.",
+          "La especulación financiera.",
+          "El exceso de construcción.",
+          "La caída de la demanda."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 10) que Montserrat “apunta a una simple crisis de oferta y defiende que se debe construir más”.",
+        "zh": "原文第 10 段说蒙塞拉特“指出这只是供给危机，主张应多建房”，故选 A。此题考查观点辨析。"
+      },
+      {
+        "q": "¿Qué cifra muestra la tasadora Tinsa para el precio medio en julio?",
+        "opts": [
+          "Una subida interanual del 15,5%.",
+          "Una bajada del 1,8%.",
+          "Una subida del 12,7%.",
+          "Un estancamiento total."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 11) que Tinsa muestra que “el precio medio subió un quince coma cinco por ciento interanual en julio”.",
+        "zh": "原文第 11 段说 Tinsa 显示“7 月房价同比上涨 15.5%”，且“已比泡沫时期的历史高点高出 1.8%”。由此可推断当前房价已超越上次泡沫的顶点，市场处于过热状态，故选 A。此题考查推理判断。"
+      },
+      {
+        "q": "¿Qué postura defienden quienes consideran la vivienda un derecho básico?",
+        "opts": [
+          "Liberalizar el suelo sin límites.",
+          "Una intervención pública firme con control de precios y parque público de alquiler.",
+          "Eliminar toda regulación.",
+          "Dejar el problema solo al mercado."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 15) que los partidarios de la vivienda como derecho “reclaman una intervención pública más firme, con control de precios, parque público de alquiler y límites a la compra especulativa”.",
+        "zh": "原文第 15 段说主张住房是权利的一方“要求更强有力的公共干预，包括价格管控、公共租赁房源和限制投机购房”，故选 B。此题考查观点辨析。"
+      },
+      {
+        "q": "¿Qué consecuencia social de la crisis de vivienda destaca el texto?",
+        "opts": [
+          "El aumento de la natalidad.",
+          "El retraso en la emancipación y en los proyectos de vida de los jóvenes.",
+          "La reducción de la desigualdad.",
+          "El fortalecimiento de la cohesión social."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 18) que una generación sin acceso a la vivienda “ve aplazados sus proyectos de vida”, lo que lastra la natalidad y la cohesión social.",
+        "zh": "原文第 18 段说无法获得住房的一代人“人生规划被推迟”，这拖累了生育率和社会凝聚力，故选 B。此题考查跨段落综合。"
+      }
+    ]
+  }
+};
