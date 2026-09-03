@@ -15,9 +15,22 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
-// 2) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
+// 1) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
+// 2) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
+// 3) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-09-04": {
+    date: "2026-09-04",
+    weekday: "五",
+    issue: 18,
+    theme: "去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el médico" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Las fiestas populares de España" },
+      { level: "B1", source: "Enagás", sourceUrl: "https://goodnewenergy.enagas.es/innovadores/hidrogeno-renovable-espana-proyectos-electrolizadores-2026/", topic: "El hidrógeno verde en España" },
+      { level: "B2", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/economia/precio-vivienda-dispara-12-7-mayor-incremento-burbuja-inmobiliaria_1_13045552.html", topic: "El precio de la vivienda: doce años de subidas" }
+    ]
+  },
   "2026-09-02": {
     date: "2026-09-02",
     weekday: "三",
