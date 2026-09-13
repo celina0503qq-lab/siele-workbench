@@ -15,10 +15,23 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
-// 2) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
-// 3) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
+// 1) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
+// 2) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
+// 3) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
+// 4) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-09-11": {
+    date: "2026-09-11",
+    weekday: "五",
+    issue: 19,
+    theme: "餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el restaurante" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La vuelta al cole en España" },
+      { level: "B1", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/canariasahora/opinion/datos-onu-turismo-anticipan-record_132_13462538.html", topic: "Un verano récord para el turismo" },
+      { level: "B2", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/economia/subida-precio-carburantes-acelera-inflacion-4-3-agosto-alta-2023_1_13471795.html", topic: "La inflación golpea los bolsillos" }
+    ]
+  },
   "2026-09-04": {
     date: "2026-09-04",
     weekday: "五",
