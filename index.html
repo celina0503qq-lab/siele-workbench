@@ -16340,7 +16340,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v19-2026082101';
+    var swVer = 'v20-2026091701';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17291,7 +17291,15 @@ function activate(){
   if(!AU){showLoginOverlay();setChip('nologin');return;}
   hideLoginOverlay();
   ADB=lsg(dataKey(AU),null);
-  if(!ADB){showLoginOverlay();setChip('nologin');AU=null;return;}
+  if(!ADB){
+    showLoginOverlay();setChip('nologin');AU=null;
+    // 2026-09-17: session 在但本地学习数据缺失 → 多为存储空间不足导致后台写入失败，给出明确自救指引
+    try{
+      var _pf=document.getElementById('wbLfP');
+      if(_pf){var _pe=_pf.querySelector('.err');if(_pe)_pe.textContent='本地学习数据缺失（多为浏览器存储空间不足所致）。请进入后台管理 →「🧹 存储空间」清理旧账号数据后重新登录。';}
+    }catch(e){}
+    return;
+  }
   MIR=lsg(mirKey(AU),{w:{},wbTs:0,qn:0});
   hydrate();
   SIG='';doPush(); // 把本机已有进度推入后台数据库

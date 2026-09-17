@@ -400,6 +400,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="ni" data-p="plans" onclick="go('plans')"><span class="ic">📅</span>复习计划<span class="bdg" id="bdgPlan">0</span></button>
     <div class="ns">数据中心</div>
     <button class="ni" data-p="io" onclick="go('io')"><span class="ic">📦</span>导入 / 备份</button>
+    <button class="ni" onclick="openStoragePanel()"><span class="ic">🧹</span>存储空间</button>
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
     <div class="ns">账户设置</div>
     <button class="ni" data-p="passwd" onclick="go('passwd')"><span class="ic">🔑</span>密码修改</button>
@@ -860,6 +861,74 @@ function saveDB(opts){
   if(!(opts&&opts.noSync))scheduleSync();
 }
 
+// ---- 存储空间管理（2026-09-17 修复：空间不足导致登录后无法进入工作台）----
+function storageReport(){
+  const items=[]; let total=0;
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i); const v=localStorage.getItem(k)||'';
+    const kb=Math.round((k.length+v.length)*2/1024); total+=kb;
+    items.push({k:k,kb:kb});
+  }
+  items.sort((a,b)=>b.kb-a.kb);
+  return {items:items,total:total};
+}
+function openStoragePanel(){
+  const old=document.getElementById('storagePanelOverlay'); if(old)old.remove();
+  const rep=storageReport();
+  const cur=CUR||(cloudSession()&&cloudSession().username)||'';
+  const rows=rep.items.map(it=>{
+    const isCurData=(it.k==='swa_data_v1_'+cur);
+    const protectedKey=(it.k==='swa_cloud_session_v1'||isCurData);
+    const tag=it.k.indexOf('swa_data_v1_')===0?('<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:5px;padding:1px 6px;white-space:nowrap">账号数据</span>'):'';
+    const del=protectedKey
+      ?'<span style="font-size:10px;color:#94a3b8;white-space:nowrap">保留中</span>'
+      :'<button class="btn sm dgr" onclick="delLSKey(\''+String(it.k).replace(/'/g,"\\'")+'\')">删除</button>';
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0e6d8;font-size:12px">'+
+      '<span style="flex:1;word-break:break-all;font-family:monospace">'+it.k+'</span>'+tag+
+      '<span style="min-width:64px;text-align:right;color:'+(it.kb>200?'#d35d3b':'#64748b')+';font-weight:700">'+it.kb+' KB</span>'+del+'</div>';
+  }).join('');
+  const overlay=document.createElement('div');
+  overlay.id='storagePanelOverlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(30,20,10,.45);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px';
+  overlay.innerHTML='<div style="background:#fffaf2;border-radius:14px;max-width:660px;width:100%;max-height:86vh;display:flex;flex-direction:column;padding:18px 20px;box-shadow:0 12px 40px rgba(60,30,10,.3)">'+
+    '<div style="display:flex;align-items:center;gap:8px"><h3 style="margin:0;flex:1">🧹 存储空间管理</h3>'+
+    '<span style="font-size:12px;color:#64748b">总占用约 <b>'+rep.total+' KB</b> / ~5120 KB</span>'+
+    '<button class="btn sm" onclick="document.getElementById(\'storagePanelOverlay\').remove()">✕</button></div>'+
+    '<div style="font-size:12px;color:#b45309;background:#fef3c7;border-radius:8px;padding:8px 10px;margin:10px 0">⚠️ 存储空间不足会导致：登录后无法进入工作台、进度保存失败。建议先「一键清理旧账号数据」（只保留当前账号'+(cur?'「'+cur+'」':'')+'），或逐个删除不需要的大键。</div>'+
+    '<div style="margin:6px 0"><button class="btn sm pr" onclick="cleanOtherAccountData()">🧹 一键清理旧账号数据</button></div>'+
+    '<div style="overflow-y:auto;border:1px solid #f0e2c8;border-radius:10px;padding:4px 12px">'+rows+'</div></div>';
+  document.body.appendChild(overlay);
+}
+function delLSKey(k){
+  if(!confirm('确定删除「'+k+'」？该操作不可恢复。'))return;
+  try{localStorage.removeItem(k);}catch(e){}
+  toast('已删除 '+k,'ok');
+  openStoragePanel();
+}
+function cleanOtherAccountData(){
+  const cur=CUR||(cloudSession()&&cloudSession().username)||'';
+  let n=0; const removed=[];
+  for(let i=localStorage.length-1;i>=0;i--){
+    const k=localStorage.key(i);
+    if(k&&k.indexOf('swa_data_v1_')===0){
+      const u=k.slice('swa_data_v1_'.length);
+      if(u!==cur){ removed.push(u); try{localStorage.removeItem(k);}catch(e){} n++; }
+    }
+  }
+  toast(n?('已清理 '+n+' 个旧账号的本地数据（'+removed.join('、')+'），当前账号「'+cur+'」数据未动'):'没有需要清理的旧账号数据',n?'ok':'info');
+  if(n)openStoragePanel();
+}
+// 登录/注册成功后的本地写入准备：逐笔校验，任一失败返回 false（不跳转工作台，引导清理）
+function postLoginLocalPrepare(result){
+  const s=saveCloudSession(result);
+  if(!s){ openStoragePanel(); return false; }
+  if(!lsGet(dataKey(result.username),null)){
+    const ok=lsSet(dataKey(result.username),blankData(true));
+    if(!ok){ openStoragePanel(); return false; }
+  }
+  return true;
+}
+
 // ---- 注册 / 登录 ----
 function authTab(t){
   $('tabLogin').classList.toggle('on',t==='login');$('tabReg').classList.toggle('on',t==='reg');
@@ -887,8 +956,11 @@ async function doRegister(e){
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
-    saveCloudSession(result);
-    if(!lsGet(dataKey(result.username),null))lsSet(dataKey(result.username),blankData(true));
+    // 本地写入逐笔校验（同登录）：空间不足时不跳转，引导清理
+    if(!postLoginLocalPrepare(result)){
+      toast('本地存储空间不足，注册数据写入失败。请在「存储空间管理」中清理后重试','err');
+      return false;
+    }
     maybeMigrateLegacyData(result.username);
     toast('注册成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
@@ -929,9 +1001,11 @@ async function doLogin(e,credentials){
       }
       return false;
     }
-    saveCloudSession(result);
-    // 新设备没有本地后台镜像时初始化空学习库；之后由独立同步 Token 拉取云端进度。
-    if(!lsGet(dataKey(result.username),null))lsSet(dataKey(result.username),blankData(true));
+    // 本地写入逐笔校验：空间不足时不跳转，打开存储管理面板引导清理（修复"登录后被门禁拦截"）
+    if(!postLoginLocalPrepare(result)){
+      toast('本地存储空间不足，登录数据写入失败。请在「存储空间管理」中清理后重新登录','err');
+      return false;
+    }
     maybeMigrateLegacyData(result.username);
     toast('登录成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
