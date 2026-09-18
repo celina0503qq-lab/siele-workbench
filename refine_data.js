@@ -15,11 +15,24 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
-// 2) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
-// 3) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
-// 4) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
+// 1) 2026-09-18 第 20 期 — 主题：火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全
+// 2) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
+// 3) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
+// 4) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
+// 5) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-09-18": {
+    date: "2026-09-18",
+    weekday: "五",
+    issue: 20,
+    theme: "火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la estación de tren" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "El otoño y la vuelta a las aulas" },
+      { level: "B1", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/navarra/navarra-registra-tres-muertes-golpe-calor-213-casos-patologias-asociadas-altas-temperaturas-mayo_1_13429402.html", topic: "El calor golpea la salud en Navarra" },
+      { level: "B2", source: "Europa Press", sourceUrl: "https://www.europapress.es/portaltic/ciberseguridad/noticia-65-empresas-espana-carece-planes-ciberresiliencia-nueva-ola-ataques-ia-20260618124055.html", topic: "La IA amenaza la ciberresiliencia" }
+    ]
+  },
   "2026-09-11": {
     date: "2026-09-11",
     weekday: "五",
