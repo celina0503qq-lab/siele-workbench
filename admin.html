@@ -876,14 +876,19 @@ function openStoragePanel(){
   const old=document.getElementById('storagePanelOverlay'); if(old)old.remove();
   const rep=storageReport();
   const cur=CUR||(cloudSession()&&cloudSession().username)||'';
-  // 水位线（2026-09-17 预防）：总占用 / ~5120KB 配额，颜色分级
-  const pct=Math.min(100,Math.round(rep.total/5120*100));
+  // 水位线（2026-09-21 修正）：Chrome/Edge 配额按 UTF-16 计为 10MB 字节（5M 字符×2），旧基准 5120KB 虚高一倍
+  const pct=Math.min(100,Math.round(rep.total/10240*100));
   const barColor=pct>=80?'#d35d3b':(pct>=60?'#e08e0b':'#4CAF50');
   const levelMsg=pct>=80?'🔴 危险水位——即将占满，登录可能被拦截，请立即清理！':(pct>=60?'🟠 偏高——建议清理旧账号数据释放空间':'🟢 健康');
   const rows=rep.items.map(it=>{
     const isCurData=(it.k==='swa_data_v1_'+cur);
     const protectedKey=(it.k==='swa_cloud_session_v1'||isCurData);
-    const tag=it.k.indexOf('swa_data_v1_')===0?('<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:5px;padding:1px 6px;white-space:nowrap">账号数据</span>'):'';
+    // 键用途说明标签（2026-09-21）：让用户一眼看懂哪些能删
+    let tag='';
+    if(it.k.indexOf('swa_data_v1_')===0) tag='<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:5px;padding:1px 6px;white-space:nowrap">账号数据</span>';
+    else if(it.k==='dele_siele_wb_v3') tag='<span style="font-size:10px;background:#fde8e8;color:#c0392b;border-radius:5px;padding:1px 6px;white-space:nowrap;font-weight:700">⚠️ 主数据·勿删</span>';
+    else if(it.k==='dele_siele_wb_v3_bak') tag='<span style="font-size:10px;background:#e6f1fb;color:#185fa5;border-radius:5px;padding:1px 6px;white-space:nowrap">自动备份·可删</span>';
+    else if(it.k.indexOf('siele_daily_bilingual_reading')===0) tag='<span style="font-size:10px;background:#f0e8fb;color:#6b46a8;border-radius:5px;padding:1px 6px;white-space:nowrap">外刊缓存</span>';
     const del=protectedKey
       ?'<span style="font-size:10px;color:#94a3b8;white-space:nowrap">保留中</span>'
       :'<button class="btn sm dgr" onclick="delLSKey(\''+String(it.k).replace(/'/g,"\\'")+'\')">删除</button>';
@@ -896,7 +901,7 @@ function openStoragePanel(){
   overlay.style.cssText='position:fixed;inset:0;background:rgba(30,20,10,.45);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px';
   overlay.innerHTML='<div style="background:#fffaf2;border-radius:14px;max-width:660px;width:100%;max-height:86vh;display:flex;flex-direction:column;padding:18px 20px;box-shadow:0 12px 40px rgba(60,30,10,.3)">'+
     '<div style="display:flex;align-items:center;gap:8px"><h3 style="margin:0;flex:1">🧹 存储空间管理</h3>'+
-    '<span style="font-size:12px;color:#64748b">总占用约 <b>'+rep.total+' KB</b> / ~5120 KB</span>'+
+    '<span style="font-size:12px;color:#64748b">总占用约 <b>'+rep.total+' KB</b> / ~10240 KB</span>'+
     '<button class="btn sm" onclick="document.getElementById(\'storagePanelOverlay\').remove()">✕</button></div>'+
     '<div style="margin:12px 0 4px"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink2, #64748b);margin-bottom:4px"><span>存储水位</span><b style="color:'+barColor+'">'+pct+'%</b></div>'+
     '<div style="height:10px;background:#f1e8da;border-radius:5px;overflow:hidden"><i style="display:block;height:100%;width:'+pct+'%;background:'+barColor+';border-radius:5px;transition:width .4s"></i></div>'+
@@ -907,6 +912,11 @@ function openStoragePanel(){
   document.body.appendChild(overlay);
 }
 function delLSKey(k){
+  // 主数据特殊保护（2026-09-21）：双重确认 + 强警告
+  if(k==='dele_siele_wb_v3'){
+    if(!confirm('⚠️⚠️ 「'+k+'」是学习数据主文件（词汇掌握/错题/成绩/打卡全在这里）！\n\n删除后本机学习数据将清零，云端仅能恢复大部分内容，打卡历史与笔记等细节可能永久丢失。\n\n强烈不建议删除。确定要继续吗？'))return;
+    if(!confirm('最后确认：真的要删除学习数据主文件吗？\n（如果是想释放空间，删除 dele_siele_wb_v3_bak 自动备份是更安全的选择）'))return;
+  }
   if(!confirm('确定删除「'+k+'」？该操作不可恢复。'))return;
   try{localStorage.removeItem(k);}catch(e){}
   toast('已删除 '+k,'ok');
@@ -940,7 +950,7 @@ function postLoginLocalPrepare(result){
 // 存储水位检查：>=85% 红色警告，70-85% 黄色提醒
 function checkStorageWaterLevel(){
   const rep=storageReport();
-  const pct=Math.min(100,Math.round(rep.total/5120*100));
+  const pct=Math.min(100,Math.round(rep.total/10240*100));
   if(pct>=85){
     toast('⚠️ 本地存储已用 '+pct+'%，即将占满（下次登录可能被拦截）！请到侧边栏「🧹 存储空间」清理旧账号数据','err');
   }else if(pct>=70){
