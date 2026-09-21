@@ -1078,8 +1078,10 @@ async function doChangePwdWithOld(e){
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
+    var _chgUser='';
+    try{var _cs=cloudSession();_chgUser=(_cs&&_cs.username)||'';}catch(_){}
     try{lsDel(CLOUD_SESSION_KEY);}catch(_){}
-    addPwdHistoryEntry('✅ 已通过原密码验证修改成功');
+    addPwdHistoryEntry('✅ 已通过原密码验证修改成功', _chgUser);
     toast(cloudAuthMessage('PASSWORD_CHANGED'),'ok');
     $('poOldPwd').value='';$('poNewPwd1').value='';$('poNewPwd2').value='';
     setTimeout(function(){doLogout({silent:true});},1200);
@@ -1118,7 +1120,7 @@ async function doResetPwdWithInviteAnon(e){
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
-    addPwdHistoryEntry('✓ 未登录态已通过邀请码重置成功（用户：'+u+'）');
+    addPwdHistoryEntry('✓ 未登录态已通过邀请码重置成功（用户：'+u+'）', u);
     toast(cloudAuthMessage('PASSWORD_RESET'),'ok');
     // 清空输入并把用户名回填到登录框，引导用户用新密码登录
     $('aprUser').value='';$('aprInvite').value='';$('aprNewPwd1').value='';$('aprNewPwd2').value='';
@@ -1164,7 +1166,7 @@ async function doResetPwdWithInvite(e){
       else toast(cloudAuthMessage(result.code),'err');
       return false;
     }
-    addPwdHistoryEntry('✅ 已通过邀请码重置成功（用户：'+u+'）');
+    addPwdHistoryEntry('✅ 已通过邀请码重置成功（用户：'+u+'）', u);
     toast(cloudAuthMessage('PASSWORD_RESET'),'ok');
     $('prUser').value='';$('prInvite').value='';$('prNewPwd1').value='';$('prNewPwd2').value='';
   }catch(err){
@@ -1176,13 +1178,17 @@ async function doResetPwdWithInvite(e){
   return false;
 }
 
-// 本地记录最近一次本机密码变更事件（审计展示）
-function addPwdHistoryEntry(text){
+// 本地记录本机密码变更事件（审计展示）
+// 2026-09-21 隐私修复：记录带 user 字段；渲染时普通用户只能看到与本账号相关的记录，
+// 未登录态不显示任何记录；管理员可见全部（本机审计视野）。旧记录无 user 字段，仅管理员可见。
+function addPwdHistoryEntry(text, user){
   try{
     const key='swa_pwd_history_v1';
     const arr=lsGet(key,[]);
-    arr.unshift({ts:Date.now(),text:text});
-    if(arr.length>10)arr.length=10;
+    let cu='';
+    try{const s=cloudSession();cu=(s&&s.username)||'';}catch(_){}
+    arr.unshift({ts:Date.now(),text:text,user:(user||cu||'')});
+    if(arr.length>30)arr.length=30;
     lsSet(key,arr);
   }catch(_){}
   renderPwdHistory();
@@ -1190,11 +1196,19 @@ function addPwdHistoryEntry(text){
 function renderPwdHistory(){
   const el=$('passwdHistory');if(!el)return;
   let arr=[];try{arr=lsGet('swa_pwd_history_v1',[]);}catch(_){}
-  if(!arr.length){el.innerHTML='<div style="color:var(--soft)">暂无本机记录。</div>';return;}
-  el.innerHTML=arr.map(function(x){
+  if(!arr.length){el.innerHTML='<div style="color:var(--soft)">暂无记录。</div>';return;}
+  let cu='';let role='';
+  try{const s=cloudSession();cu=(s&&s.username)||'';role=(s&&s.role)||'';}catch(_){}
+  // 未登录：不显示任何记录（登录页/重置页不可窥探他人操作）
+  if(!cu){el.innerHTML='<div style="color:var(--soft)">登录后可查看与本账号相关的密码修改记录。</div>';return;}
+  const isAdmin=(role==='admin');
+  // 普通用户：仅显示 user 字段等于当前登录者的记录；管理员可见全部
+  const visible=isAdmin?arr:arr.filter(function(x){return x.user===cu;});
+  if(!visible.length){el.innerHTML='<div style="color:var(--soft)">暂无与本账号相关的记录。</div>';return;}
+  el.innerHTML=visible.map(function(x){
     const t=new Date(x.ts).toLocaleString();
     return '<div style="padding:6px 0;border-bottom:1px dashed var(--line)"><span style="color:var(--soft);font-size:11px">'+esc(t)+'</span> · '+esc(x.text)+'</div>';
-  }).join('');
+  }).join('')+(isAdmin&&visible.length<arr.length?'<div style="padding:5px 0;color:var(--soft);font-size:10.5px">（管理员视图：显示本机全部 '+arr.length+' 条记录）</div>':'');
 }
 
 // 登录页"忘记密码"入口
