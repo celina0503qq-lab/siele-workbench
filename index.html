@@ -1090,7 +1090,7 @@ function getDefaultState(){
     globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
     accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
     vocabMastery: {}, grammarDone: {}, grammarDoneTs: {},
-    quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all'},
+    quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all',order:'shuffle'},
     quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
     tasks: [], plannerStart: '',
     weeklyPlan: null, weeklyGoals: null, weeklyPlanTs: 0, weeklyGoalsTs: 0, // 周计划总览/每周目标（null=用系统默认，用户编辑后覆盖；Ts 供跨设备 LWW 合并）
@@ -3626,6 +3626,7 @@ function renderQuiz(){
       <option value="listening">听力</option>
       <option value="word">词汇</option>
     </select>
+    <button class="btn sm" id="qOrder" onclick="toggleQuizOrder()">🔀 随机</button>
     <button class="btn sm" onclick="resetQuiz()">重新开始</button>
   </div>`;
 
@@ -3638,6 +3639,7 @@ function initQuiz(){
   if(document.getElementById('qEx')) document.getElementById('qEx').value = ST.quizFilter.ex;
   if(document.getElementById('qLvl')) document.getElementById('qLvl').value = ST.quizFilter.lvl;
   if(document.getElementById('qType')) document.getElementById('qType').value = ST.quizFilter.type;
+  if(document.getElementById('qOrder')) document.getElementById('qOrder').textContent = (ST.quizFilter.order === 'order') ? '📋 顺序' : '🔀 随机';
   // Build session if empty
   if(ST.quizSession.length === 0) buildQuizSession();
   renderQuizQuestion();
@@ -3647,17 +3649,20 @@ function buildQuizSession(){
   const ex = document.getElementById('qEx')?.value || 'all';
   const lvl = document.getElementById('qLvl')?.value || 'all';
   const type = document.getElementById('qType')?.value || 'all';
-  ST.quizFilter = {ex, lvl, type};
+  const order = ST.quizFilter && ST.quizFilter.order ? ST.quizFilter.order : 'shuffle';
+  ST.quizFilter = {ex, lvl, type, order};
   ST.quizSession = QDATA.filter(q => {
     if(ex !== 'all' && q.ex !== ex) return false;
     if(lvl !== 'all' && q.lvl !== lvl) return false;
     if(type !== 'all' && q.type !== type) return false;
     return true;
   }).map((_,i,a) => a[i]); // copy
-  // Shuffle
-  for(let i = ST.quizSession.length-1; i>0; i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [ST.quizSession[i], ST.quizSession[j]] = [ST.quizSession[j], ST.quizSession[i]];
+  // Shuffle (仅随机模式；顺序模式保留数据原始顺序，如 B1 按语法G001-G750→词汇V001-V750)
+  if(order !== 'order'){
+    for(let i = ST.quizSession.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [ST.quizSession[i], ST.quizSession[j]] = [ST.quizSession[j], ST.quizSession[i]];
+    }
   }
   // 已做过的题排到后面（未做优先，自动跳转到最新未做位置）
   const doneQ = ST.quizSession.filter(q => isQuizDone(q));
@@ -3675,6 +3680,13 @@ function resetQuiz(){
   save();
   buildQuizSession();
   renderQuizQuestion();
+}
+
+function toggleQuizOrder(){
+  if(!ST.quizFilter) ST.quizFilter = {ex:'all',lvl:'all',type:'all'};
+  ST.quizFilter.order = (ST.quizFilter.order === 'order') ? 'shuffle' : 'order';
+  if(document.getElementById('qOrder')) document.getElementById('qOrder').textContent = (ST.quizFilter.order === 'order') ? '📋 顺序' : '🔀 随机';
+  resetQuiz();
 }
 
 function renderQuizQuestion(){
