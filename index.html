@@ -16289,6 +16289,26 @@ window.addEventListener('DOMContentLoaded', () => {
   tryInjectNuevoB1M2(35);
   tryInjectNuevoB1M3(35);
   tryInjectNuevoB1M4(35);
+
+  // ===== B1 测验题库整体替换 (2026-09-22): 清除现有所有B1题，注入新1500题 =====
+  function tryReplaceB1Quiz(retries){
+    if (typeof window.QDATA_B1_REPLACE !== 'undefined' && Array.isArray(window.QDATA_B1_REPLACE)) {
+      var before = QDATA.length;
+      // 移除现有所有 lvl=B1 题（含 QDATA主/QDATA_EXTRA/QDATA_PDF 中的旧B1题）
+      for (var i = QDATA.length - 1; i >= 0; i--) {
+        if (QDATA[i].lvl === 'B1') QDATA.splice(i, 1);
+      }
+      var removed = before - QDATA.length;
+      // 注入新 B1 题（语法750 + 词汇750）
+      QDATA.push.apply(QDATA, window.QDATA_B1_REPLACE);
+      console.log('[B1题库替换] 移除旧B1题', removed, '题，注入新B1题', window.QDATA_B1_REPLACE.length, '题，当前QDATA总', QDATA.length);
+      // 若用户正在测验页，重建会话
+      if (ST && ST.page === 'quiz') { resetQuiz(); }
+    } else if (retries > 0) {
+      setTimeout(function(){ tryReplaceB1Quiz(retries-1); }, 80);
+    }
+  }
+  tryReplaceB1Quiz(35);
 });
 </script>
 
@@ -16309,6 +16329,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./dele_banks/dele_bank_b1_nuevo_m2.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m3.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m4.js" defer></script>
+<script src="./dele_banks/quiz_b1_new.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
