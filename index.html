@@ -1636,6 +1636,7 @@ function el(tag, cls, html){
   return e;
 }
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/\\/g,'&#92;'); }
+function linkify(s){ return String(s).replace(/(https?:\/\/[^\s<>&"'\)]+)/g, function(u){ return '<a href="'+u+'" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">'+u+'</a>'; }); }
 // 安全解码 HTML 实体（如 RSS 标题中的 &amp; &quot; 等），绝不解析/执行标签脚本
 var _decodeTplEl;
 function decodeArticleHtml(s){
@@ -3757,7 +3758,7 @@ function renderQuizQuestion(){
     h += `<div class="qopt${resultClass}" id="opt${i}"${click}><span class="L">${letters[i]}</span><span>${esc(o.text)}</span>${isPrevSel?'<span style="font-size:10px;color:var(--tr);margin-left:4px">上次答案</span>':''}</div>`;
   });
   h += `</div>`;
-  const feedback = questionState.answered ? ((opts[questionState.selected] && opts[questionState.selected].correct ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + esc(q.fb)) : '';
+  const feedback = questionState.answered ? ((opts[questionState.selected] && opts[questionState.selected].correct ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + linkify(esc(q.fb))) : '';
   h += `<div class="qfb${questionState.answered ? ' show '+(opts[questionState.selected]&&opts[questionState.selected].correct ? 'ok' : 'no') : ''}" id="quizFb">${feedback}</div>`;
   h += `<div class="qnav"><span class="qscore">得分：${ST.quizScore}/${ST.quizAnswered}</span>
     <div class="qnav-btns">
