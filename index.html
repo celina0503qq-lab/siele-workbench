@@ -1334,65 +1334,220 @@ function updateStreak(){
 
 // ===== AUDIO SYSTEM (three-tier fallback) =====
 // Tier 1: speechSynthesis (built-in, offline)
-// Tier 2: Google Translate TTS via <audio> (works on file://)
-// Tier 3: ResponsiveVoice-style error message
+// Tier 2: 设备无对应口音时逐级降级（始终保证「有声音」而不是静音）
+// Tier 3: 错误提示条
 let _audioEl = null;
 let _currentSpeakBtn = null;
+
+/* ---------- 口音 → 语音选择工具箱 ----------
+   旧版问题：拉美模式下把 u.lang 强制设成 'es-MX'，却借用设备上的 es-ES 语音。
+   语音与 lang 不一致时，不少浏览器（Chrome/Edge/Safari 各版本行为不同）会直接
+   静音不报错 —— 于是「拉美」全部不发声、「西班牙」正常。现在：
+   1) 语音与 lang 永远保持一致（lang 取语音自身的 lang）；
+   2) 候选语音按「本地优先 + 口音优先」排序，逐个尝试，onstart 才算成功；
+   3) 全部失败才提示，并明确告诉用户本机缺哪个语音包、怎么装。 */
+var TTS_ACCENT_SPEC = {
+  la: { lang:'es-MX', re:/^es[-_]?(mx|419|us|ar|co|cl|pe|ve|ec|uy|py|bo|cr|do|gt|hn|ni|pa|pr|sv)/i, name:'拉美' },
+  es: { lang:'es-ES', re:/^es[-_]?es/i, name:'西班牙' }
+};
+function _ttsNormLang(l){ return String(l||'').replace(/_/g,'-'); }
+function _ttsAllVoices(){
+  try{ return (window.speechSynthesis && window.speechSynthesis.getVoices()) || []; }catch(e){ return []; }
+}
+function _ttsSpanishVoices(){
+  return _ttsAllVoices().filter(function(v){ return v && v.lang && /^es/i.test(_ttsNormLang(v.lang)); });
+}
+function _ttsIsLocal(v){ return !v || v.localService === undefined || v.localService !== false; }
+function _ttsMatchAccent(v, re){ return !!v && !!v.lang && re.test(_ttsNormLang(v.lang)); }
+/* 本机是否真的装了某个口音的语音包（用于提示 + 自检） */
+function _ttsHasAccent(accKey){
+  var spec = TTS_ACCENT_SPEC[accKey] || TTS_ACCENT_SPEC.la;
+  return _ttsSpanishVoices().some(function(v){ return _ttsMatchAccent(v, spec.re); });
+}
+/* 候选语音顺序：本地+目标口音 > 本地+非对立口音 > 本地任意西语 > 在线+目标口音 > 在线任意西语 */
+function _ttsCandidates(accKey){
+  var spec = TTS_ACCENT_SPEC[accKey] || TTS_ACCENT_SPEC.la;
+  var other = accKey === 'es' ? TTS_ACCENT_SPEC.la : TTS_ACCENT_SPEC.es;
+  var all = _ttsSpanishVoices();
+  var buckets = [
+    all.filter(function(v){ return _ttsIsLocal(v) && _ttsMatchAccent(v, spec.re); }),
+    all.filter(function(v){ return _ttsIsLocal(v) && !_ttsMatchAccent(v, other.re); }),
+    all.filter(function(v){ return _ttsIsLocal(v); }),
+    all.filter(function(v){ return _ttsMatchAccent(v, spec.re); }),
+    all
+  ];
+  var out = [], seen = {};
+  buckets.forEach(function(list){
+    list.forEach(function(v){
+      var k = _ttsNormLang(v.lang) + '|' + v.name;
+      if(!seen[k]){ seen[k] = 1; out.push(v); }
+    });
+  });
+  return out;
+}
+var _ttsSession = 0;
+/* 播放单个候选语音：只有 onstart 才算成功；超时/报错返回失败以便降级 */
+function _ttsSpeakOne(text, voice, lang, rate){
+  return new Promise(function(resolve){
+    var settled = false, timer = null;
+    var finish = function(res){ if(settled) return; settled = true; if(timer) clearTimeout(timer); resolve(res); };
+    try{
+      var u = new SpeechSynthesisUtterance(text);
+      window.__currentUtterance = u;  // Keep alive to prevent GC in Chrome
+      if(voice) u.voice = voice;
+      u.lang = lang;
+      u.rate = rate;
+      u.volume = 1.0;
+      u.onstart = function(){ finish({ ok:true, u:u }); };
+      u.onerror = function(e){ finish({ ok:false, why:(e && e.error) || 'error' }); };
+      u.onend = function(){ window.__currentUtterance = null; };
+      // 兜底：1.8s 内没有 start 视为该语音不可用（静音失败）
+      timer = setTimeout(function(){ finish({ ok:false, why:'no-start' }); }, 1800);
+      window.speechSynthesis.speak(u);
+    }catch(err){ finish({ ok:false, why:'throw' }); }
+  });
+}
+function _ttsClearPlaying(btn, text){
+  if(!btn) return;
+  clearTimeout(btn.__ttsTimer);
+  btn.__ttsTimer = setTimeout(function(){ btn.classList.remove('playing'); }, Math.max(1500, (text||'').length * 120 + 2000));
+}
+/* 只提示一次（每个会话），说明本机缺拉美语音包 */
+function _ttsLaVoiceNotice(){
+  try{
+    if(sessionStorage.getItem('tts_la_warned_v1')) return;
+    sessionStorage.setItem('tts_la_warned_v1','1');
+  }catch(e){}
+  if(window.toast){
+    window.toast('本机未安装「拉美(墨西哥)」语音包，已自动改用西班牙语音。想听真拉美口音 → 系统设置 › 时间和语言 › 语音 › 添加语音 › 西班牙语(墨西哥)');
+  }
+}
+function _ttsFailBanner(){
+  var b = document.getElementById('audioBanner');
+  if(b){
+    b.classList.add('show','err');
+    b.innerHTML = '<b>音频提示：</b>当前浏览器不支持语音合成。请使用 Chrome/Edge/Safari/Firefox 最新版，或允许麦克风权限后重试。';
+    setTimeout(function(){ b.classList.remove('show','err'); }, 6000);
+  }
+}
 
 async function speak(text, btn, accent, rate){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
-  let played = false;
+  var clearBtn = function(){ if(btn) btn.classList.remove('playing'); };
   // 口音优先级：显式传入 > 模块覆盖 > 全局设定 > 默认拉美(es-MX) /* FEAT-3 */
   var effectiveAccent = accent || (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent(currentPage||'dash') : null) || (ST && ST.globalAccent) || 'la';
-  // Latin American accent: es-MX (default); es-ES for Spain
-  const langCode = effectiveAccent==='es' ? 'es-ES' : 'es-MX';
+  var accKey = (effectiveAccent === 'es') ? 'es' : 'la';
+  var spec = TTS_ACCENT_SPEC[accKey];
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
-  const playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
+  var playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
+  var session = ++_ttsSession;   // 新请求作废旧降级链，避免重复发声
 
   // Tier 1: speechSynthesis（双口音通用 — 跨设备/离线/无CORS限制）
   if(window.speechSynthesis){
     try{
       window.speechSynthesis.cancel();
-      let voices = window.speechSynthesis.getVoices();
-      if(!voices.length){
-        await new Promise(r => setTimeout(r, 200));
-        voices = window.speechSynthesis.getVoices();
+      // voices 可能在页面加载后才异步就绪（尤其移动端/首次调用）
+      if(!_ttsAllVoices().length){
+        await new Promise(function(r){ setTimeout(r, 250); });
+        if(session !== _ttsSession) { clearBtn(); return; }
       }
-      // 按口音选语音：拉美优先 es-MX/419/AR/CO/CL/PE/US；西班牙优先 es-ES
-      let esVoice = null;
-      if(effectiveAccent==='es'){
-        esVoice = voices.find(v => v.lang && /^es-es/i.test((v.lang||'').replace(/_/g,'-')));
-        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')));
-      } else {
-        esVoice = voices.find(v => v.lang && /^es-(mx|419|ar|co|cl|pe|us)/i.test((v.lang||'').replace(/_/g,'-')));
-        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')) && !/^es-es/i.test((v.lang||'').replace(/_/g,'-')));
-        if(!esVoice) esVoice = voices.find(v => v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-')));
+      var cands = _ttsCandidates(accKey);
+      var tried = [];
+      for(var i = 0; i < cands.length; i++){
+        if(session !== _ttsSession){ clearBtn(); return; }
+        var v = cands[i];
+        var vlang = _ttsNormLang(v.lang) || spec.lang;
+        var r = await _ttsSpeakOne(text, v, vlang, playRate);
+        if(session !== _ttsSession){ clearBtn(); return; }
+        tried.push(vlang + (r.ok ? '\u2713' : '(' + r.why + ')'));
+        if(r.ok){
+          window.__esVoiceCache = v;
+          // 播完立即取消高亮；同时保留兜底定时器防 onend 不触发
+          if(btn && r.u){
+            r.u.addEventListener('end', function(){ clearTimeout(btn.__ttsTimer); btn.classList.remove('playing'); });
+            r.u.addEventListener('error', function(){ clearTimeout(btn.__ttsTimer); btn.classList.remove('playing'); });
+          }
+          _ttsClearPlaying(btn, text);
+          // 拉美模式下实际用上了非拉美语音 → 提示安装语音包
+          if(accKey === 'la' && !_ttsMatchAccent(v, TTS_ACCENT_SPEC.la.re)) _ttsLaVoiceNotice();
+          return;
+        }
+        try{ window.speechSynthesis.cancel(); }catch(e){}
       }
-      window.__esVoiceCache = esVoice || null;
-      const u = new SpeechSynthesisUtterance(text);
-      window.__currentUtterance = u;  // Keep alive to prevent GC in Chrome
-      if(esVoice) u.voice = esVoice;
-      u.lang = langCode;  // 强制目标语言：无匹配语音时由系统/在线TTS引擎按 lang 发音（拉美=es-MX）
-      u.rate = playRate;
-      u.onend = () => { if(btn) btn.classList.remove('playing'); played = true; window.__currentUtterance = null; };
-      u.onerror = () => { if(btn) btn.classList.remove('playing'); window.__currentUtterance = null; };
-      window.speechSynthesis.speak(u);
-      // Fallback timer in case onend doesn't fire
-      setTimeout(() => { if(btn) btn.classList.remove('playing'); }, text.length * 120 + 2000);
-      return;
+      // 设备完全没有西语语音：只给 lang，交给系统兜底引擎
+      if(session !== _ttsSession){ clearBtn(); return; }
+      var r2 = await _ttsSpeakOne(text, null, spec.lang, playRate);
+      tried.push(spec.lang + (r2.ok ? '\u2713' : '(' + r2.why + ')'));
+      if(r2.ok){
+        if(accKey === 'la') _ttsLaVoiceNotice();
+        _ttsClearPlaying(btn, text);
+        return;
+      }
+      console.warn('[TTS] 播放失败 候选:', tried.join(' , '),
+        '| 本机西语语音:', _ttsSpanishVoices().map(function(x){ return _ttsNormLang(x.lang) + '/' + x.name; }).join(' , ') || '无');
     }catch(e){ console.warn('speechSynthesis failed:', e); }
   }
 
-  // Tier 2: 语音合成不可用时给出引导（Google TTS 免费端点已下线，不再尝试）
-  if(btn) btn.classList.remove('playing');
-  const b = document.getElementById('audioBanner');
-  if(b){
-    b.classList.add('show','err');
-    b.innerHTML = '<b>音频提示：</b>当前浏览器不支持语音合成。请使用 Chrome/Edge/Safari/Firefox 最新版，或允许麦克风权限后重试。';
-    setTimeout(() => b.classList.remove('show','err'), 5000);
-  }
+  // Tier 2: 语音合成不可用 → 引导提示
+  clearBtn();
+  _ttsFailBanner();
 }
+
+/* ---------- 语音自检（设置面板「检测本机语音」按钮调用） ---------- */
+window.ttsVoiceReport = function(){
+  var all = _ttsSpanishVoices();
+  var la = _ttsCandidates('la')[0] || null;
+  var es = _ttsCandidates('es')[0] || null;
+  return {
+    laInstalled: _ttsHasAccent('la'),
+    esInstalled: _ttsHasAccent('es'),
+    laActual: la ? (_ttsNormLang(la.lang) + ' · ' + la.name) : '（无西语语音）',
+    esActual: es ? (_ttsNormLang(es.lang) + ' · ' + es.name) : '（无西语语音）',
+    voices: all.map(function(v){ return { lang:_ttsNormLang(v.lang), name:v.name, local:_ttsIsLocal(v) }; }),
+    rawCount: _ttsAllVoices().length
+  };
+};
+window.ttsTestAccent = function(a){
+  speak(a === 'es' ? 'Hola, ¿qué tal? Vale, muy bien.' : 'Hola, ¿qué onda? Bien, gracias.', null, a);
+};
+window.ttsSelfCheck = function(){
+  var r = window.ttsVoiceReport();
+  var old = document.getElementById('ttsDiagPop'); if(old) old.remove();
+  var rows = r.voices.length
+    ? r.voices.map(function(v){
+        return '<div style="padding:2px 0">· <b>' + v.lang + '</b> — ' + v.name +
+          ' <span style="color:' + (v.local ? '#0f6e56' : '#854f0b') + '">[' + (v.local ? '本地/离线可用' : '在线语音') + ']</span></div>';
+      }).join('')
+    : '<div style="color:#b71c1c">· 未检测到任何西语语音（浏览器可能尚未加载语音列表，请稍后再试）</div>';
+  var laVerdict = r.laInstalled
+    ? '<span style="color:#0f6e56">✔ 已安装拉美(es-MX 等)语音，拉美模式下是真正的拉美口音</span>'
+    : '<span style="color:#b71c1c">✘ 未安装拉美语音 → 拉美模式会自动改用西班牙语音播放（不会再静音）</span>' +
+      '<div style="margin-top:6px;background:#fff8e6;border:1px solid #f0dfae;border-radius:8px;padding:8px 10px;color:#7a5a12">' +
+      '安装真拉美口音：<b>Windows</b> 设置 › 时间和语言 › 语音 › 添加语音 › 选择「西班牙语(墨西哥)」→ 装完重启浏览器；' +
+      '<b>iPhone/iPad</b> 设置 › 辅助功能 › 朗读内容 › 声音 › 西班牙语 › 默认语言选「西班牙语(墨西哥)」；' +
+      '<b>安卓</b> 设置 › 系统 › 语言和输入法 › 文字转语音 › 安装「西班牙语(美国)」语音数据。</div>';
+  var cur = (ST && ST.globalAccent === 'es') ? '西班牙 🇪🇸' : '拉美 🌎';
+  var d = document.createElement('div');
+  d.id = 'ttsDiagPop';
+  d.style.cssText = 'position:fixed;z-index:99999;left:50%;top:12%;transform:translateX(-50%);max-width:540px;width:92%;max-height:74vh;overflow:auto;background:#fffdf9;border:1px solid #e3ddd2;border-radius:14px;box-shadow:0 14px 44px rgba(0,0,0,.2);padding:16px 18px;font-size:13px;line-height:1.75;color:#2b2b2b';
+  d.innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">' +
+      '<b style="font-size:15px">🎧 本机语音自检</b>' +
+      '<button onclick="document.getElementById(\'ttsDiagPop\').remove()" style="border:0;background:#f2efe9;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:12px">关闭</button>' +
+    '</div>' +
+    '<div>当前口音设置：<b>' + cur + '</b></div>' +
+    '<div>拉美模式实际使用：<b>' + r.laActual + '</b></div>' +
+    '<div>西班牙模式实际使用：<b>' + r.esActual + '</b></div>' +
+    '<div style="margin:8px 0 4px">诊断：' + laVerdict + '</div>' +
+    '<div style="margin:8px 0 4px"><b>设备西语语音（共 ' + r.voices.length + ' / 全部语音 ' + r.rawCount + '）</b></div>' +
+    '<div style="font-size:12px">' + rows + '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">' +
+      '<button onclick="ttsTestAccent(\'la\')" style="border:0;background:#e8f5ee;color:#0f6e56;border-radius:9px;padding:6px 12px;cursor:pointer;font-size:12.5px">▶ 测试拉美发音</button>' +
+      '<button onclick="ttsTestAccent(\'es\')" style="border:0;background:#fdeee8;color:#9a4a2a;border-radius:9px;padding:6px 12px;cursor:pointer;font-size:12.5px">▶ 测试西班牙发音</button>' +
+    '</div>';
+  document.body.appendChild(d);
+};
 
 function showAudioBanner(){
   const b = document.getElementById('audioBanner');
@@ -1407,10 +1562,9 @@ function showAudioBanner(){
 if(window.speechSynthesis){
   window.speechSynthesis.onvoiceschanged = function(){
     try{
-      var _vs = window.speechSynthesis.getVoices();
-      if(_vs.length){
-        window.__esVoiceCache = _vs.find(function(v){return v.lang && /^es-(mx|419|ar|co|cl|pe|us)/i.test((v.lang||'').replace(/_/g,'-'));})
-          || _vs.find(function(v){return v.lang && /^es-/i.test((v.lang||'').replace(/_/g,'-'));});
+      if(_ttsAllVoices().length){
+        window.__esVoiceCache = _ttsCandidates('la')[0] || null;
+        window.__ttsVoicesReady = true;
       }
     }catch(e){}
   };
@@ -1716,6 +1870,7 @@ function renderDash(){
       <div><label>目标等级</label><select onchange="setTargetLevel(this.value)"><option ${ST.targetLevel==='A1'?'selected':''}>A1</option><option ${ST.targetLevel==='A2'?'selected':''}>A2</option><option ${ST.targetLevel==='B1'?'selected':''}>B1</option><option ${ST.targetLevel==='B2'?'selected':''}>B2</option></select></div>
       <div><label>考试日期</label><input type="date" value="${ST.examDate||''}" onchange="setExamDate(this.value)"></div>
       <div><label>发音口音</label><div class="mode-toggle" style="display:inline-flex"><button class="${(!ST.globalAccent||ST.globalAccent==='la')?'on':''}" style="padding:4px 10px;font-size:12px" onclick="setGlobalAccent('la')">🌎 拉美</button><button class="${ST.globalAccent==='es'?'on':''}" style="padding:4px 10px;font-size:12px" onclick="setGlobalAccent('es')">🇪🇸 西班牙</button></div></div>
+      <div><label>语音检测</label><button class="btn sm ol" style="padding:4px 10px;font-size:12px" onclick="ttsSelfCheck()" title="查看本机装了哪些西语语音、拉美/西班牙口音分别会用什么">🎧 检测本机语音</button></div>
     </div>
   </div>`;
 
@@ -11842,6 +11997,8 @@ function _bindRefinePlayAll(){
 
       const playNext = () => {
         if(!window.__refineSpeakQueue || window.__refineSpeakQueue !== queue) return;
+        // 口音（提到外层作用域：在线兜底分支也要用）
+        const accent = (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent('refine') : null) || (ST && ST.globalAccent) || 'la'; /* FEAT-3 */
         if(queue.idx >= queue.list.length){
           queue.done = true;
           btn.textContent = '▶ 通读全文';
@@ -11862,19 +12019,14 @@ function _bindRefinePlayAll(){
             window.speechSynthesis.cancel();
             const u = new SpeechSynthesisUtterance(text);
             window.__refineCurrentUtterance = u;  // GC guard
-            // 选口音
-            const voices = window.speechSynthesis.getVoices();
-            const accent = (ST && typeof getEffectiveAccent==='function' ? getEffectiveAccent('refine') : null) || (ST && ST.globalAccent) || 'la'; /* FEAT-3 */
-            const langCode = accent === 'es' ? 'es-ES' : 'es-MX';
-            let esVoice;
-            if(accent === 'es'){
-              esVoice = voices.find(v => v.lang && /es[-_]?es/i.test(v.lang));
-            } else {
-              esVoice = voices.find(v => v.lang && /(es[-_]?mx|es[-_]?419|es[-_]?ar|es[-_]?co)/i.test(v.lang));
-            }
-            if(!esVoice) esVoice = voices.find(v => v.lang && /^es/i.test(v.lang));
+            // 选口音（走统一候选器：本地优先、口音优先）
+            const accentKey = accent === 'es' ? 'es' : 'la';
+            const langCode = TTS_ACCENT_SPEC[accentKey].lang;
+            let esVoice = (typeof _ttsCandidates === 'function') ? (_ttsCandidates(accentKey)[0] || null) : null;
+            if(!esVoice) esVoice = window.speechSynthesis.getVoices().find(v => v.lang && /^es/i.test(v.lang)) || null;
             if(esVoice) u.voice = esVoice;
-            u.lang = langCode;
+            // lang 必须与所选语音一致，否则部分浏览器会静音（拉美模式下尤甚）
+            u.lang = esVoice ? _ttsNormLang(esVoice.lang) : langCode;
             u.rate = rate;
             u.onend = () => {
               window.__refineCurrentUtterance = null;
@@ -13185,6 +13337,8 @@ window._deleTTPlay = function(storeId){
   }
   window.__deleTTSRetryCount = 0;
   var voice = window._deleTTSelectVoice(accent);
+  // 拉美模式但本机没有拉美语音包 → 提示（只提示一次）
+  if(accent === 'es-MX' && voice && !_ttsMatchAccent(voice, TTS_ACCENT_SPEC.la.re)) _ttsLaVoiceNotice();
   window._deleTTSpeakWithVoice(text, rate, accent, voice);
 };
 // 用指定 voice 播放
@@ -16392,7 +16546,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v23-2026092102';
+    var swVer = 'v24-2026092201';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
