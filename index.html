@@ -1412,6 +1412,23 @@ function _ttsClearPlaying(btn, text){
   clearTimeout(btn.__ttsTimer);
   btn.__ttsTimer = setTimeout(function(){ btn.classList.remove('playing'); }, Math.max(1500, (text||'').length * 120 + 2000));
 }
+/* 设备判断 + 按平台给出「装西语语音」的具体路径 */
+function _ttsIsIOS(){ return /iPhone|iPad|iPod/i.test(navigator.userAgent); }
+function _ttsIsAndroid(){ return /Android/i.test(navigator.userAgent); }
+function _ttsIsWeChat(){
+  var ua = navigator.userAgent || '';
+  return /MicroMessenger|QQ\/|Weibo|AlipayClient|baiduboxapp/i.test(ua);
+}
+function _ttsDeviceLabel(){
+  if(_ttsIsIOS()) return 'iPhone/iPad';
+  if(_ttsIsAndroid()) return '安卓';
+  return 'Windows/Mac';
+}
+function _ttsInstallHint(){
+  if(_ttsIsIOS()) return '安装路径：设置 › 辅助功能 › 朗读内容 › 声音 › 西班牙语 → 选择「西班牙语(墨西哥)」或「西班牙语(西班牙)」（如显示"下载"就点它）。';
+  if(_ttsIsAndroid()) return '安装路径：设置 › 系统 › 语言和输入法 › 文字转语音 → 选一个带「西班牙语」的引擎/安装西班牙语语音数据（国产系统可装「讯飞语记」或 Google 语音服务）。';
+  return '安装路径：设置 › 时间和语言 › 语音 › 添加语音 › 选择「西班牙语(墨西哥)」（约 20MB，装完重启浏览器）。';
+}
 /* 只提示一次（每个会话），说明本机缺拉美语音包 */
 function _ttsLaVoiceNotice(){
   try{
@@ -1419,15 +1436,16 @@ function _ttsLaVoiceNotice(){
     sessionStorage.setItem('tts_la_warned_v1','1');
   }catch(e){}
   if(window.toast){
-    window.toast('本机未安装「拉美(墨西哥)」语音包，已自动改用西班牙语音。想听真拉美口音 → 系统设置 › 时间和语言 › 语音 › 添加语音 › 西班牙语(墨西哥)');
+    window.toast('本机未安装「拉美(墨西哥)」语音，已自动改用西班牙语音播放。' + _ttsInstallHint());
   }
 }
 function _ttsFailBanner(){
   var b = document.getElementById('audioBanner');
   if(b){
     b.classList.add('show','err');
-    b.innerHTML = '<b>音频提示：</b>当前浏览器不支持语音合成。请使用 Chrome/Edge/Safari/Firefox 最新版，或允许麦克风权限后重试。';
-    setTimeout(function(){ b.classList.remove('show','err'); }, 6000);
+    b.innerHTML = '<b>音频提示：</b>当前浏览器不支持语音合成。请使用 Chrome/Edge/Safari/Firefox 最新版，或允许麦克风权限后重试。'
+      + (_ttsIsWeChat() ? ' 你现在是在微信/QQ 等 App 内置浏览器里打开的 —— 请点右上角「···」选择「在浏览器打开」，内置浏览器通常不支持语音朗读。' : '');
+    setTimeout(function(){ b.classList.remove('show','err'); }, 8000);
   }
 }
 
@@ -1447,13 +1465,24 @@ async function speak(text, btn, accent, rate){
   if(window.speechSynthesis){
     try{
       window.speechSynthesis.cancel();
-      // voices 可能在页面加载后才异步就绪（尤其移动端/首次调用）
-      if(!_ttsAllVoices().length){
-        await new Promise(function(r){ setTimeout(r, 250); });
-        if(session !== _ttsSession) { clearBtn(); return; }
-      }
+      // 注意：这里**不能**先 await 等 voices —— 移动端(iOS/Android)要求首句发声
+      // 必须落在用户手势的同一个同步任务里，await 之后会被系统拒绝 → 完全没声音。
       var cands = _ttsCandidates(accKey);
       var tried = [];
+      if(!cands.length){
+        // 语音列表还没就绪（iOS 首次点击常见）：同步发声一次并交给系统按 lang 选，
+        // 同时这次发声会触发系统加载语音列表，下次点击就能选到正确语音。
+        var r0 = await _ttsSpeakOne(text, null, spec.lang, playRate);
+        tried.push(spec.lang + (r0.ok ? '\u2713' : '(' + r0.why + ')'));
+        if(r0.ok){
+          if(!_ttsSpanishVoices().length) _ttsNoSpanishVoiceNotice();
+          else if(accKey === 'la') _ttsLaVoiceNotice();
+          _ttsClearPlaying(btn, text);
+          return;
+        }
+        console.warn('[TTS] 语音列表未就绪且兜底失败:', tried.join(' , '), '| 全部语音:', _ttsAllVoices().length);
+        clearBtn(); _ttsFailBanner(); return;
+      }
       for(var i = 0; i < cands.length; i++){
         if(session !== _ttsSession){ clearBtn(); return; }
         var v = cands[i];
@@ -1475,12 +1504,13 @@ async function speak(text, btn, accent, rate){
         }
         try{ window.speechSynthesis.cancel(); }catch(e){}
       }
-      // 设备完全没有西语语音：只给 lang，交给系统兜底引擎
+      // 西语语音存在但都发不出声 → 最后只给 lang，交给系统兜底引擎
       if(session !== _ttsSession){ clearBtn(); return; }
       var r2 = await _ttsSpeakOne(text, null, spec.lang, playRate);
       tried.push(spec.lang + (r2.ok ? '\u2713' : '(' + r2.why + ')'));
       if(r2.ok){
-        if(accKey === 'la') _ttsLaVoiceNotice();
+        if(!_ttsSpanishVoices().length) _ttsNoSpanishVoiceNotice();
+        else if(accKey === 'la') _ttsLaVoiceNotice();
         _ttsClearPlaying(btn, text);
         return;
       }
@@ -1492,6 +1522,16 @@ async function speak(text, btn, accent, rate){
   // Tier 2: 语音合成不可用 → 引导提示
   clearBtn();
   _ttsFailBanner();
+}
+/* 本机一个西语语音都没有时（手机会拿默认语音念西语 → 听起来像英语）的强提示 */
+function _ttsNoSpanishVoiceNotice(){
+  try{
+    if(sessionStorage.getItem('tts_nospanish_warned_v1')) return;
+    sessionStorage.setItem('tts_nospanish_warned_v1','1');
+  }catch(e){}
+  if(window.toast){
+    window.toast('本机没有安装西班牙语语音，系统正用默认语音念西语（所以听起来像英语）。' + _ttsInstallHint());
+  }
 }
 
 /* ---------- 语音自检（设置面板「检测本机语音」按钮调用） ---------- */
@@ -1520,13 +1560,16 @@ window.ttsSelfCheck = function(){
           ' <span style="color:' + (v.local ? '#0f6e56' : '#854f0b') + '">[' + (v.local ? '本地/离线可用' : '在线语音') + ']</span></div>';
       }).join('')
     : '<div style="color:#b71c1c">· 未检测到任何西语语音（浏览器可能尚未加载语音列表，请稍后再试）</div>';
-  var laVerdict = r.laInstalled
-    ? '<span style="color:#0f6e56">✔ 已安装拉美(es-MX 等)语音，拉美模式下是真正的拉美口音</span>'
-    : '<span style="color:#b71c1c">✘ 未安装拉美语音 → 拉美模式会自动改用西班牙语音播放（不会再静音）</span>' +
+  var noSpanish = !r.voices.length;
+  var laVerdict = noSpanish
+    ? '<span style="color:#b71c1c">✘ 本机没有安装任何西班牙语语音</span> —— 系统会拿默认语音（中文/英语）去念西语，所以听起来像英语。' +
       '<div style="margin-top:6px;background:#fff8e6;border:1px solid #f0dfae;border-radius:8px;padding:8px 10px;color:#7a5a12">' +
-      '安装真拉美口音：<b>Windows</b> 设置 › 时间和语言 › 语音 › 添加语音 › 选择「西班牙语(墨西哥)」→ 装完重启浏览器；' +
-      '<b>iPhone/iPad</b> 设置 › 辅助功能 › 朗读内容 › 声音 › 西班牙语 › 默认语言选「西班牙语(墨西哥)」；' +
-      '<b>安卓</b> 设置 › 系统 › 语言和输入法 › 文字转语音 › 安装「西班牙语(美国)」语音数据。</div>';
+      _ttsInstallHint() + '<br>装好后回到这里点下面两个按钮试听确认。</div>'
+    : (r.laInstalled
+      ? '<span style="color:#0f6e56">✔ 已安装拉美(es-MX 等)语音，拉美模式下是真正的拉美口音</span>'
+      : '<span style="color:#b71c1c">✘ 未安装拉美语音 → 拉美模式会自动改用西班牙语音播放（不会再静音）</span>' +
+        '<div style="margin-top:6px;background:#fff8e6;border:1px solid #f0dfae;border-radius:8px;padding:8px 10px;color:#7a5a12">' +
+        '想要真拉美口音：' + _ttsInstallHint() + '</div>');
   var cur = (ST && ST.globalAccent === 'es') ? '西班牙 🇪🇸' : '拉美 🌎';
   var d = document.createElement('div');
   d.id = 'ttsDiagPop';
@@ -1537,6 +1580,7 @@ window.ttsSelfCheck = function(){
       '<button onclick="document.getElementById(\'ttsDiagPop\').remove()" style="border:0;background:#f2efe9;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:12px">关闭</button>' +
     '</div>' +
     '<div>当前口音设置：<b>' + cur + '</b></div>' +
+    '<div>设备/环境：<b>' + _ttsDeviceLabel() + '</b>' + (_ttsIsWeChat() ? ' <span style="color:#b71c1c">（App 内置浏览器：语音朗读常被屏蔽，请改用系统浏览器打开）</span>' : '') + '</div>' +
     '<div>拉美模式实际使用：<b>' + r.laActual + '</b></div>' +
     '<div>西班牙模式实际使用：<b>' + r.esActual + '</b></div>' +
     '<div style="margin:8px 0 4px">诊断：' + laVerdict + '</div>' +
@@ -1570,6 +1614,21 @@ if(window.speechSynthesis){
   };
   window.speechSynthesis.getVoices();
 }
+// 移动端（iOS 尤其）语音列表要等首次交互之后才就绪 → 第一次点击/触摸时预热一次
+(function(){
+  var warm = function(){
+    try{
+      if(window.speechSynthesis && !_ttsAllVoices().length){
+        window.speechSynthesis.getVoices();
+        window.__ttsVoicesReady = _ttsAllVoices().length > 0;
+      }
+    }catch(e){}
+    document.removeEventListener('touchend', warm, true);
+    document.removeEventListener('click', warm, true);
+  };
+  document.addEventListener('touchend', warm, true);
+  document.addEventListener('click', warm, true);
+})();
 
 function spkBtn(text, cls){
   const b = document.createElement('button');
@@ -16546,7 +16605,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v24-2026092201';
+    var swVer = 'v25-2026092202';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
