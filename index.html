@@ -3882,11 +3882,14 @@ function buildQuizSession(){
     if(type !== 'all' && q.type !== type) return false;
     return true;
   }).map((_,i,a) => a[i]); // copy
-  // ===== 顺序模式：原序排列，位置由 quizHistory 推导（跨设备续做）=====
+  // ===== 顺序模式：原序排列，位置由游标 quizOrderPos 决定（随云同步跨设备）=====
   if(order === 'order'){
-    ST.quizIdx = _orderResumeIdx(ST.quizSession);
+    // 顺序模式位置 = 游标 quizOrderPos[组合key].next；无游标时回退 _orderResumeIdx（第一个没做的题）
+    var _okey = _quizFilterKey();
+    var _opos = ST.quizOrderPos ? ST.quizOrderPos[_okey] : null;
+    ST.quizIdx = (_opos && typeof _opos.next === 'number') ? Math.min(_opos.next, ST.quizSession.length) : _orderResumeIdx(ST.quizSession);
     ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
-    // 不写 quizResume（位置靠 quizHistory，换设备也能续）
+    // 不写 quizResume（位置靠游标+quizHistory，换设备也能续）
   } else {
     // ===== 随机模式：per-combo 本地快照 =====
     for(let i = ST.quizSession.length-1; i>0; i--){
@@ -3932,7 +3935,12 @@ function restartQuiz(){
   ST.quizSession = [];
   save();
   buildQuizSession();
-  if(ST.quizFilter.order === 'order'){ ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {}; save(); }
+  if(ST.quizFilter.order === 'order'){
+    // 顺序模式重开：游标归零（下次从第 1 题开始，之后按游标推进）
+    if(!ST.quizOrderPos) ST.quizOrderPos = {};
+    ST.quizOrderPos[_quizFilterKey()] = { next: 0, ts: Date.now() };
+    ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {}; save();
+  }
   renderQuizQuestion();
 }
 
@@ -4065,9 +4073,9 @@ function _restoreFromKeys(orderKeys){
 }
 // 顺序模式：在有序列表里找最大的已做题索引（位置=该索引+1；位置靠已上云的 quizHistory 推导，跨设备天然同步）
 function _orderResumeIdx(list){
-  var maxDone = -1;
-  for(var i=0;i<list.length;i++){ if(isQuizDone(list[i])) maxDone = i; }
-  return maxDone + 1; // 全部没做过返回 0；全部做完返回 list.length（触发完成页）
+  // 兜底位置 = 第一个没做过的题（避免"历史里高位记录"把位置拉到很后面）；全部做完返回 list.length 触发完成页
+  for(var i=0;i<list.length;i++){ if(!isQuizDone(list[i])) return i; }
+  return list.length;
 }
 function answerQuiz(optIdx, isCorrect){
   if(_quizAnswered) return;
@@ -4083,6 +4091,14 @@ function answerQuiz(optIdx, isCorrect){
   // 写入做题进度（按题目内容唯一键，跨设备合并 + 保留答案文本）
   if(!ST.quizHistory) ST.quizHistory = {};
   ST.quizHistory[quizQuestionKey(curQ)] = {correct: isCorrect, answerText: myAnsText, date: todayStr(), ts: Date.now()};
+  // 顺序模式：前进游标到「当前题下一题」（只前进不后退，答更早的题不回拉游标）
+  if(ST.quizFilter && ST.quizFilter.order === 'order'){
+    if(!ST.quizOrderPos) ST.quizOrderPos = {};
+    var _ok = _quizFilterKey();
+    var _prev = ST.quizOrderPos[_ok];
+    var _next = Math.max(ST.quizIdx + 1, (_prev && typeof _prev.next === 'number') ? _prev.next : 0);
+    ST.quizOrderPos[_ok] = { next: _next, ts: Date.now() };
+  }
   if(isCorrect){
     opt.classList.add('cor');
     ST.quizScore++;
@@ -17197,6 +17213,15 @@ function mergeWbSnapshot(remote){
     });
   }
   ST.quizDoneTotal = ST.quizHistory ? Object.keys(ST.quizHistory).length : 0;
+  // 顺序模式游标：按组合 key 取 ts 较新者（跨设备续做位置）
+  if(remote.quizOrderPos && typeof remote.quizOrderPos==='object'){
+    ST.quizOrderPos = ST.quizOrderPos || {};
+    Object.keys(remote.quizOrderPos).forEach(function(k){
+      var rv = remote.quizOrderPos[k];
+      var lv = ST.quizOrderPos[k];
+      if(!lv || (rv.ts||0) > (lv.ts||0)) ST.quizOrderPos[k] = rv;
+    });
+  }
   // 进度记忆v2：合并到新做题进度后，若正处在题库页且为顺序模式，立即重建会话跳到跨设备续做位置
   if(typeof currentPage!=='undefined' && currentPage==='quiz' && ST.quizFilter && ST.quizFilter.order==='order' && typeof buildQuizSession==='function'){
     try{ ST.quizSession = []; buildQuizSession(); if(typeof renderQuizQuestion==='function') renderQuizQuestion(); }catch(e){}
