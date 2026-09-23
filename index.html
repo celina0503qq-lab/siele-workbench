@@ -1229,7 +1229,12 @@ function runPendingVocabMigration(){
 }
 function save(){
   try{
-    var json = JSON.stringify(ST);
+    // quizSession(6000题完整对象~3.7MB)与quizQuestionState(逐题选项快照)不持久化：
+    // 逼近Chrome 5MB配额时setItem抛错会被catch吞掉→做题不落盘。刷新后按模式从QDATA重建。
+    var copy = Object.assign({}, ST);
+    delete copy.quizSession;
+    delete copy.quizQuestionState;
+    var json = JSON.stringify(copy);
     localStorage.setItem(STORE_KEY, json);
     // 双写备份键（每10次save写一次备份，减少IO但保证安全）
     if(!save._cnt) save._cnt=0;
@@ -3842,7 +3847,7 @@ function renderQuiz(){
       <option value="word">词汇</option>
     </select>
     <button class="btn sm" id="qOrder" onclick="toggleQuizOrder()">🔀 随机</button>
-    <button class="btn sm" onclick="resetQuiz()">重新开始</button>
+    <button class="btn sm" onclick="restartQuiz()">重新开始</button>
   </div>`;
 
   h += `<div class="qb" id="quizBox"></div>`;
@@ -3872,34 +3877,64 @@ function buildQuizSession(){
     if(type !== 'all' && q.type !== type) return false;
     return true;
   }).map((_,i,a) => a[i]); // copy
-  // Shuffle (仅随机模式；顺序模式保留数据原始顺序，如 B1 按语法G001-G750→词汇V001-V750)
-  if(order !== 'order'){
+  // ===== 顺序模式：原序排列，位置由 quizHistory 推导（跨设备续做）=====
+  if(order === 'order'){
+    ST.quizIdx = _orderResumeIdx(ST.quizSession);
+    ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
+    // 不写 quizResume（位置靠 quizHistory，换设备也能续）
+  } else {
+    // ===== 随机模式：per-combo 本地快照 =====
     for(let i = ST.quizSession.length-1; i>0; i--){
       const j = Math.floor(Math.random()*(i+1));
       [ST.quizSession[i], ST.quizSession[j]] = [ST.quizSession[j], ST.quizSession[i]];
     }
+    var snap = ST.quizResume ? ST.quizResume[_quizFilterKey()] : null;
+    if(snap && snap.order && snap.order.length){
+      // 有快照：原位恢复（题目序列/位置/得分/作答状态）
+      ST.quizSession = _restoreFromKeys(snap.order);
+      ST.quizIdx = snap.idx || 0;
+      ST.quizScore = snap.score || 0;
+      ST.quizAnswered = snap.answered || 0;
+      ST.quizQuestionState = snap.questionState || {};
+    } else {
+      // 无快照：未做排前、已做排后（原逻辑）
+      const doneQ = ST.quizSession.filter(q => isQuizDone(q));
+      const todoQ = ST.quizSession.filter(q => !isQuizDone(q));
+      ST.quizSession = todoQ.concat(doneQ);
+      ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
+      _saveResumeCurrent();
+    }
   }
-  // 已做过的题排到后面（未做优先，自动跳转到最新未做位置）
-  const doneQ = ST.quizSession.filter(q => isQuizDone(q));
-  const todoQ = ST.quizSession.filter(q => !isQuizDone(q));
-  ST.quizSession = todoQ.concat(doneQ);
-  ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
   // 累计已做题数（跨设备合并：quizHistory 的总数即累计已做数）
   if(!ST.quizHistory) ST.quizHistory = {};
   ST.quizDoneTotal = Object.keys(ST.quizHistory).length;
   save();
 }
 
+let _quizSkipSnapshot = false; // 模式切换时置位：旧会话不写入快照
 function resetQuiz(){
+  // 筛选切换：随机模式把当前会话存入快照（切回来可原位继续）；顺序模式不存（位置靠 quizHistory）
+  if(!_quizSkipSnapshot && ST.quizFilter && ST.quizFilter.order !== 'order') _saveResumeCurrent();
+  _quizSkipSnapshot = false;
   ST.quizSession = [];
   save();
   buildQuizSession();
+  renderQuizQuestion();
+}
+// "重新开始"：顺序模式回第 1 题；随机模式清快照重洗牌
+function restartQuiz(){
+  if(ST.quizFilter && ST.quizFilter.order !== 'order' && ST.quizResume) delete ST.quizResume[_quizFilterKey()];
+  ST.quizSession = [];
+  save();
+  buildQuizSession();
+  if(ST.quizFilter.order === 'order'){ ST.quizIdx = 0; ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {}; save(); }
   renderQuizQuestion();
 }
 
 function toggleQuizOrder(){
   if(!ST.quizFilter) ST.quizFilter = {ex:'all',lvl:'all',type:'all'};
   ST.quizFilter.order = (ST.quizFilter.order === 'order') ? 'shuffle' : 'order';
+  _quizSkipSnapshot = true; // 切模式：旧会话属于另一模式，不存快照
   if(document.getElementById('qOrder')) document.getElementById('qOrder').textContent = (ST.quizFilter.order === 'order') ? '📋 顺序' : '🔀 随机';
   resetQuiz();
 }
@@ -3923,7 +3958,7 @@ function renderQuizQuestion(){
         <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="none" stroke="#f0e6d2" stroke-width="5"/><circle cx="30" cy="30" r="25" fill="none" stroke="var(--tr)" stroke-width="5" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="${157*(1-pct/100)}"/></svg>
         <div style="font-size:22px;font-weight:800">${pct}%</div>
       </div>
-      <button class="btn" onclick="resetQuiz()" style="margin-top:8px">再做一次</button>
+      <button class="btn" onclick="restartQuiz()" style="margin-top:8px">再做一次</button>
     </div>`;
     return;
   }
@@ -3999,6 +4034,36 @@ function isQuizDone(q){
   var k = quizQuestionKey(q);
   return !!(ST.quizHistory && ST.quizHistory[k]);
 }
+// ===== 测验进度记忆 v2 (2026-09-23) =====
+// 当前筛选组合 key（仅随机模式快照用）
+function _quizFilterKey(){
+  var f = ST.quizFilter || {};
+  return (f.ex||'all') + '|' + (f.lvl||'all') + '|' + (f.type||'all') + '|' + (f.order||'shuffle');
+}
+// 随机模式：把当前会话进度快照存入 quizResume[当前key]
+function _saveResumeCurrent(){
+  if(!ST.quizSession || !ST.quizSession.length) return;
+  if(!ST.quizResume) ST.quizResume = {};
+  ST.quizResume[_quizFilterKey()] = {
+    order: ST.quizSession.map(quizQuestionKey),
+    idx: ST.quizIdx, score: ST.quizScore, answered: ST.quizAnswered,
+    questionState: ST.quizQuestionState
+  };
+}
+// 按 key 数组从内存 QDATA 还原题目对象
+function _restoreFromKeys(orderKeys){
+  var byKey = {};
+  for(var i=0;i<QDATA.length;i++) byKey[quizQuestionKey(QDATA[i])] = QDATA[i];
+  var out = [];
+  for(var j=0;j<orderKeys.length;j++){ if(byKey[orderKeys[j]]) out.push(byKey[orderKeys[j]]); }
+  return out;
+}
+// 顺序模式：在有序列表里找最大的已做题索引（位置=该索引+1；位置靠已上云的 quizHistory 推导，跨设备天然同步）
+function _orderResumeIdx(list){
+  var maxDone = -1;
+  for(var i=0;i<list.length;i++){ if(isQuizDone(list[i])) maxDone = i; }
+  return maxDone + 1; // 全部没做过返回 0；全部做完返回 list.length（触发完成页）
+}
 function answerQuiz(optIdx, isCorrect){
   if(_quizAnswered) return;
   _quizAnswered = true;
@@ -4049,6 +4114,7 @@ function answerQuiz(optIdx, isCorrect){
   });
   // Keep log manageable
   if(ST.quizAnsweredLog.length > 200) ST.quizAnsweredLog = ST.quizAnsweredLog.slice(-100);
+  if(ST.quizFilter && ST.quizFilter.order !== 'order') _saveResumeCurrent();
   save(); updateStreak();
 
   // Sync to admin dashboard immediately
@@ -4063,6 +4129,7 @@ function answerQuiz(optIdx, isCorrect){
 function nextQuiz(){
   ST.quizIdx++;
   _quizAnswered = !!(ST.quizQuestionState && ST.quizQuestionState[ST.quizIdx] && ST.quizQuestionState[ST.quizIdx].answered);
+  if(ST.quizFilter && ST.quizFilter.order !== 'order') _saveResumeCurrent();
   save();
   renderQuizQuestion();
 }
@@ -4070,6 +4137,7 @@ function prevQuiz(){
   if(ST.quizIdx <= 0) return;
   ST.quizIdx--;
   _quizAnswered = !!(ST.quizQuestionState && ST.quizQuestionState[ST.quizIdx] && ST.quizQuestionState[ST.quizIdx].answered);
+  if(ST.quizFilter && ST.quizFilter.order !== 'order') _saveResumeCurrent();
   save();
   renderQuizQuestion();
 }
@@ -11239,6 +11307,8 @@ function renderErrors(){
 
   // Filter
   let filtered = ST.errorFilter==='all' ? ST.errors : ST.errors.filter(e=>e.type===ST.errorFilter);
+  // 按日期倒序（最新在前）：本地新增用 unshift，云端合并用 push，数组原序混乱 → 展示层统一排序（稳定排序保持同日内原相对顺序）
+  filtered = filtered.slice().sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
 
   // List
   let list = '';
