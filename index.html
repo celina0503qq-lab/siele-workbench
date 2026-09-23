@@ -16552,6 +16552,40 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   tryReplaceA2Quiz(35);
+
+  // ===== A1 测验题库整体替换 (2026-09-23): 清除现有所有A1题，注入新1500题 =====
+  function tryReplaceA1Quiz(retries){
+    if (typeof window.QDATA_A1_REPLACE !== 'undefined' && Array.isArray(window.QDATA_A1_REPLACE)) {
+      var before = QDATA.length;
+      for (var i = QDATA.length - 1; i >= 0; i--) {
+        if (QDATA[i].lvl === 'A1') QDATA.splice(i, 1);
+      }
+      var removed = before - QDATA.length;
+      QDATA.push.apply(QDATA, window.QDATA_A1_REPLACE);
+      console.log('[A1题库替换] 移除旧A1题', removed, '题，注入新A1题', window.QDATA_A1_REPLACE.length, '题，当前QDATA总', QDATA.length);
+      if (ST && ST.page === 'quiz') { resetQuiz(); }
+    } else if (retries > 0) {
+      setTimeout(function(){ tryReplaceA1Quiz(retries-1); }, 80);
+    }
+  }
+  tryReplaceA1Quiz(35);
+
+  // ===== B2 测验题库整体替换 (2026-09-23): 清除现有所有B2题，注入新1500题 =====
+  function tryReplaceB2Quiz(retries){
+    if (typeof window.QDATA_B2_REPLACE !== 'undefined' && Array.isArray(window.QDATA_B2_REPLACE)) {
+      var before = QDATA.length;
+      for (var i = QDATA.length - 1; i >= 0; i--) {
+        if (QDATA[i].lvl === 'B2') QDATA.splice(i, 1);
+      }
+      var removed = before - QDATA.length;
+      QDATA.push.apply(QDATA, window.QDATA_B2_REPLACE);
+      console.log('[B2题库替换] 移除旧B2题', removed, '题，注入新B2题', window.QDATA_B2_REPLACE.length, '题，当前QDATA总', QDATA.length);
+      if (ST && ST.page === 'quiz') { resetQuiz(); }
+    } else if (retries > 0) {
+      setTimeout(function(){ tryReplaceB2Quiz(retries-1); }, 80);
+    }
+  }
+  tryReplaceB2Quiz(35);
 });
 </script>
 
@@ -16574,6 +16608,8 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./dele_banks/dele_bank_b1_nuevo_m4.js" defer></script>
 <script src="./dele_banks/quiz_b1_new.js" defer></script>
 <script src="./dele_banks/quiz_a2_new.js" defer></script>
+<script src="./dele_banks/quiz_a1_new.js" defer></script>
+<script src="./dele_banks/quiz_b2_new.js" defer></script>
 <script>
 /* vdata_dele.js 已自行去重合并到 VDATA；此处仅通知后台 iframe 更新种子词计数 */
 (function(){
