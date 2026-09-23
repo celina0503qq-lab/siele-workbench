@@ -1195,6 +1195,11 @@ function load(){
       s._appVer = curVer;
       save();
     }
+    // 进度记忆v2：quizSession/quizQuestionState 不再持久化（save 已剥离）；旧存储里的残留会话直接丢弃，按模式重建
+    // 字段完整性兜底：合并默认字段(用户数据优先)。缺失字段曾导致 renderDash 抛错→boot 处理器中止→题库替换永不执行
+    s = Object.assign(getDefaultState(), s);
+    s.quizSession = [];
+    s.quizQuestionState = {};
     return s;
   }
   // 尝试备份键（恢复）
@@ -3860,8 +3865,8 @@ function initQuiz(){
   if(document.getElementById('qLvl')) document.getElementById('qLvl').value = ST.quizFilter.lvl;
   if(document.getElementById('qType')) document.getElementById('qType').value = ST.quizFilter.type;
   if(document.getElementById('qOrder')) document.getElementById('qOrder').textContent = (ST.quizFilter.order === 'order') ? '📋 顺序' : '🔀 随机';
-  // Build session if empty
-  if(ST.quizSession.length === 0) buildQuizSession();
+  // Build session if empty（刷新后 quizSession 已被 save() 剥离，统一走 buildQuizSession 恢复；必须兜底 undefined）
+  if(!ST.quizSession || ST.quizSession.length === 0){ ST.quizSession = []; buildQuizSession(); }
   renderQuizQuestion();
 }
 
@@ -16539,8 +16544,8 @@ function renderGrammarPracticeHTML(){
 window.addEventListener('DOMContentLoaded', () => {
   // Load voices
   if(window.speechSynthesis) window.speechSynthesis.getVoices();
-  renderNav();
-  renderMain();
+  try{ renderNav(); }catch(e){}
+  try{ renderMain(); }catch(e){}
   // 全部 4 级题库统一注入 (A1/A2/B1/B2 同格式)
   function tryInjectGeneric(level, retries){
     var varName = 'DELE_BANK_' + level;
@@ -16552,10 +16557,10 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(function(){tryInjectGeneric(level, retries-1);}, 80);
     }
   }
-  tryInjectGeneric('A1', 35);
-  tryInjectGeneric('A2', 35);
-  tryInjectGeneric('B1', 35);
-  tryInjectGeneric('B2', 35);
+  try{ tryInjectGeneric('A1', 35); }catch(e){}
+  try{ tryInjectGeneric('A2', 35); }catch(e){}
+  try{ tryInjectGeneric('B1', 35); }catch(e){}
+  try{ tryInjectGeneric('B2', 35); }catch(e){}
   // Nuevo DELE B2 Modelo 01 注入 (独立题库, 角标 Nuevo DELE B2 Modelo 01)
   function tryInjectNuevoM1(retries){
     if (typeof window.DELE_BANK_B2_NUEVO_M1 !== 'undefined') {
@@ -16566,7 +16571,7 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(function(){tryInjectNuevoM1(retries-1);}, 80);
     }
   }
-  tryInjectNuevoM1(35);
+  try{ tryInjectNuevoM1(35); }catch(e){}
   function tryInjectNuevoA1(retries){
     if (typeof window.DELE_BANK_A1_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoA1(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoA1(retries-1);}, 80); }
   }
@@ -16576,15 +16581,15 @@ window.addEventListener('DOMContentLoaded', () => {
   function tryInjectNuevoB1(retries){
     if (typeof window.DELE_BANK_B1_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoB1(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoB1(retries-1);}, 80); }
   }
-  tryInjectNuevoA1(35);
-  tryInjectNuevoA2(35);
-  tryInjectNuevoB1(35);
+  try{ tryInjectNuevoA1(35); }catch(e){}
+  try{ tryInjectNuevoA2(35); }catch(e){}
+  try{ tryInjectNuevoB1(35); }catch(e){}
   function tryInjectNuevoB1M2(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M2!=='undefined'){_injectDeleBankNuevoB1M2();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M2(retries-1);},80);}}
   function tryInjectNuevoB1M3(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M3!=='undefined'){_injectDeleBankNuevoB1M3();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M3(retries-1);},80);}}
   function tryInjectNuevoB1M4(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M4!=='undefined'){_injectDeleBankNuevoB1M4();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M4(retries-1);},80);}}
-  tryInjectNuevoB1M2(35);
-  tryInjectNuevoB1M3(35);
-  tryInjectNuevoB1M4(35);
+  try{ tryInjectNuevoB1M2(35); }catch(e){}
+  try{ tryInjectNuevoB1M3(35); }catch(e){}
+  try{ tryInjectNuevoB1M4(35); }catch(e){}
 
   // ===== B1 测验题库整体替换 (2026-09-22): 清除现有所有B1题，注入新1500题 =====
   function tryReplaceB1Quiz(retries){
@@ -16599,12 +16604,12 @@ window.addEventListener('DOMContentLoaded', () => {
       QDATA.push.apply(QDATA, window.QDATA_B1_REPLACE);
       console.log('[B1题库替换] 移除旧B1题', removed, '题，注入新B1题', window.QDATA_B1_REPLACE.length, '题，当前QDATA总', QDATA.length);
       // 若用户正在测验页，重建会话
-      if (ST && ST.page === 'quiz') { resetQuiz(); }
+      if (typeof currentPage!=='undefined' && currentPage==='quiz') { resetQuiz(); }
     } else if (retries > 0) {
       setTimeout(function(){ tryReplaceB1Quiz(retries-1); }, 80);
     }
   }
-  tryReplaceB1Quiz(35);
+  try{ tryReplaceB1Quiz(35); }catch(e){}
 
   // ===== A2 测验题库整体替换：清除现有所有A2题，注入新1500题 =====
   function tryReplaceA2Quiz(retries){
@@ -16616,12 +16621,12 @@ window.addEventListener('DOMContentLoaded', () => {
       var removed = before - QDATA.length;
       QDATA.push.apply(QDATA, window.QDATA_A2_REPLACE);
       console.log('[A2题库替换] 移除旧A2题', removed, '题，注入新A2题', window.QDATA_A2_REPLACE.length, '题，当前QDATA总', QDATA.length);
-      if (ST && ST.page === 'quiz') { resetQuiz(); }
+      if (typeof currentPage!=='undefined' && currentPage==='quiz') { resetQuiz(); }
     } else if (retries > 0) {
       setTimeout(function(){ tryReplaceA2Quiz(retries-1); }, 80);
     }
   }
-  tryReplaceA2Quiz(35);
+  try{ tryReplaceA2Quiz(35); }catch(e){}
 
   // ===== A1 测验题库整体替换 (2026-09-23): 清除现有所有A1题，注入新1500题 =====
   function tryReplaceA1Quiz(retries){
@@ -16633,12 +16638,12 @@ window.addEventListener('DOMContentLoaded', () => {
       var removed = before - QDATA.length;
       QDATA.push.apply(QDATA, window.QDATA_A1_REPLACE);
       console.log('[A1题库替换] 移除旧A1题', removed, '题，注入新A1题', window.QDATA_A1_REPLACE.length, '题，当前QDATA总', QDATA.length);
-      if (ST && ST.page === 'quiz') { resetQuiz(); }
+      if (typeof currentPage!=='undefined' && currentPage==='quiz') { resetQuiz(); }
     } else if (retries > 0) {
       setTimeout(function(){ tryReplaceA1Quiz(retries-1); }, 80);
     }
   }
-  tryReplaceA1Quiz(35);
+  try{ tryReplaceA1Quiz(35); }catch(e){}
 
   // ===== B2 测验题库整体替换 (2026-09-23): 清除现有所有B2题，注入新1500题 =====
   function tryReplaceB2Quiz(retries){
@@ -16650,12 +16655,12 @@ window.addEventListener('DOMContentLoaded', () => {
       var removed = before - QDATA.length;
       QDATA.push.apply(QDATA, window.QDATA_B2_REPLACE);
       console.log('[B2题库替换] 移除旧B2题', removed, '题，注入新B2题', window.QDATA_B2_REPLACE.length, '题，当前QDATA总', QDATA.length);
-      if (ST && ST.page === 'quiz') { resetQuiz(); }
+      if (typeof currentPage!=='undefined' && currentPage==='quiz') { resetQuiz(); }
     } else if (retries > 0) {
       setTimeout(function(){ tryReplaceB2Quiz(retries-1); }, 80);
     }
   }
-  tryReplaceB2Quiz(35);
+  try{ tryReplaceB2Quiz(35); }catch(e){}
 });
 </script>
 
@@ -17192,6 +17197,10 @@ function mergeWbSnapshot(remote){
     });
   }
   ST.quizDoneTotal = ST.quizHistory ? Object.keys(ST.quizHistory).length : 0;
+  // 进度记忆v2：合并到新做题进度后，若正处在题库页且为顺序模式，立即重建会话跳到跨设备续做位置
+  if(typeof currentPage!=='undefined' && currentPage==='quiz' && ST.quizFilter && ST.quizFilter.order==='order' && typeof buildQuizSession==='function'){
+    try{ ST.quizSession = []; buildQuizSession(); if(typeof renderQuizQuestion==='function') renderQuizQuestion(); }catch(e){}
+  }
   // 外刊精炼做题记录 refineQuizState：按 date+level 键，submitted/correct 取最大（同一套题取做得多的）
   if(remote.refineQuizState && typeof remote.refineQuizState==='object'){
     ST.refineQuizState = ST.refineQuizState || {};
