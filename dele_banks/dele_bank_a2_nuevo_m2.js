@@ -29,15 +29,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) encontró una oferta muy buena y consiguió algo muy barato."
+          "text": "encontró una oferta muy buena y consiguió algo muy barato."
         },
         {
           "key": "B",
-          "text": "B) se puso enferma en el centro comercial."
+          "text": "se puso enferma en el centro comercial."
         },
         {
           "key": "C",
-          "text": "C) conoció a su novio en el centro comercial."
+          "text": "conoció a su novio en el centro comercial."
         }
       ],
       "type": "choice3",
@@ -64,15 +64,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no puede comer tarta de manzana porque es alérgica."
+          "text": "no puede comer tarta de manzana porque es alérgica."
         },
         {
           "key": "B",
-          "text": "B) está enferma en su casa."
+          "text": "está enferma en su casa."
         },
         {
           "key": "C",
-          "text": "C) vive con su novio. 51 MODELO 2"
+          "text": "vive con su novio. 51 MODELO 2"
         }
       ],
       "type": "choice3",
@@ -99,15 +99,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no tiene hermanos y odia ir de compras."
+          "text": "no tiene hermanos y odia ir de compras."
         },
         {
           "key": "B",
-          "text": "B) es un apasionado de las compras y tiene un hermano."
+          "text": "es un apasionado de las compras y tiene un hermano."
         },
         {
           "key": "C",
-          "text": "C) disfrutó más que ella yendo de compras porque es hijo único."
+          "text": "disfrutó más que ella yendo de compras porque es hijo único."
         }
       ],
       "type": "choice3",
@@ -134,15 +134,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) quiere ir de compras con ella"
+          "text": "quiere ir de compras con ella"
         },
         {
           "key": "B",
-          "text": "B) su novio no se encuentra bien."
+          "text": "su novio no se encuentra bien."
         },
         {
           "key": "C",
-          "text": "C) necesita su impresora."
+          "text": "necesita su impresora."
         }
       ],
       "type": "choice3",
@@ -169,15 +169,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) hacer ejercicio con su amiga"
+          "text": "hacer ejercicio con su amiga"
         },
         {
           "key": "B",
-          "text": "B) volver a ir al centro comercial con su novio."
+          "text": "volver a ir al centro comercial con su novio."
         },
         {
           "key": "C",
-          "text": "C) abrir una pastelería. 52"
+          "text": "abrir una pastelería. 52"
         }
       ],
       "type": "choice3",
@@ -204,21 +204,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tienen productos demasiado caros."
+          "text": "tienen productos demasiado caros."
         },
         {
           "key": "B",
-          "text": "B) podemos comprar algo para el cumpleaños"
+          "text": "podemos comprar algo para el cumpleaños"
         },
         {
           "key": "C",
-          "text": "C) podemos comprar ya porque ya está abierto. 53"
+          "text": "podemos comprar ya porque ya está abierto. 53"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -239,21 +239,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) de una tienda en Internet."
+          "text": "de una tienda en Internet."
         },
         {
           "key": "B",
-          "text": "B) de una tienda de instrumentos musicales."
+          "text": "de una tienda de instrumentos musicales."
         },
         {
           "key": "C",
-          "text": "C) de una nueva tienda que abre el viernes. TEXTO 3 ASISTENTE DE COMPRAS Ofrezco mis servicios para ayudarte durante tus compras, tres años de experiencia en el mundo de la moda. Gracias a mis consejos vas a vestirte con arte y un toque especial. Cobro quince euros por una hora de trabajo, diecisiete los fines de semana. Puedes contactar conmigo a través del email: modasuperguai@gmail.com 54"
+          "text": "de una nueva tienda que abre el viernes. TEXTO 3 ASISTENTE DE COMPRAS Ofrezco mis servicios para ayudarte durante tus compras, tres años de experiencia en el mundo de la moda. Gracias a mis consejos vas a vestirte con arte y un toque especial. Cobro quince euros por una hora de trabajo, diecisiete los fines de semana. Puedes contactar conmigo a través del email: modasuperguai@gmail.com 54"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -274,21 +274,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) quiere ayudar a la gente sin moda. recibir dinero a cambio. con"
+          "text": "quiere ayudar a la gente sin moda. recibir dinero a cambio. con"
         },
         {
           "key": "B",
-          "text": "B) es experta en encontrar ropa por menos de quince euros. del"
+          "text": "es experta en encontrar ropa por menos de quince euros. del"
         },
         {
           "key": "C",
-          "text": "C) quiere más dinero por trabajar los sábados y domingos. 54"
+          "text": "quiere más dinero por trabajar los sábados y domingos. 54"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -309,21 +309,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no necesita tener una moto."
+          "text": "no necesita tener una moto."
         },
         {
           "key": "B",
-          "text": "B) no necesita tener formación."
+          "text": "no necesita tener formación."
         },
         {
           "key": "C",
-          "text": "C) no necesita ser agradable con los clientes. TEXTO 5 VENDO PRODUCTOS NUEVOS Mi marido trabaja en la empresa Exeam productos, los vendemos a mitad de desodorantes, cremas, etc. Si quieres alguno un mensaje en nuestra página de Facebook. los martes o jueves en nuestra casa en la"
+          "text": "no necesita ser agradable con los clientes. TEXTO 5 VENDO PRODUCTOS NUEVOS Mi marido trabaja en la empresa Exeam productos, los vendemos a mitad de desodorantes, cremas, etc. Si quieres alguno un mensaje en nuestra página de Facebook. los martes o jueves en nuestra casa en la"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -344,21 +344,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) trabaja en una empresa de cosméticos."
+          "text": "trabaja en una empresa de cosméticos."
         },
         {
           "key": "B",
-          "text": "B) utiliza el Facebook los martes y jueves."
+          "text": "utiliza el Facebook los martes y jueves."
         },
         {
           "key": "C",
-          "text": "C) vende productos de higiene con un 50% 55"
+          "text": "vende productos de higiene con un 50% 55"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -379,21 +379,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) hay artículos usados."
+          "text": "hay artículos usados."
         },
         {
           "key": "B",
-          "text": "B) puedes comprar artículos para tu despacho."
+          "text": "puedes comprar artículos para tu despacho."
         },
         {
           "key": "C",
-          "text": "C) es fácil encontrar trabajo. TEXTO 7 MODA PILAR RUBIO Los vestidos más elegantes, faldas de interior femenina. Vestimos a las mujeres mismas. Durante la campaña de primavera colección, con más colores y energía que ropa a Moda Pilar Rubio, en la calle Pasarela"
+          "text": "es fácil encontrar trabajo. TEXTO 7 MODA PILAR RUBIO Los vestidos más elegantes, faldas de interior femenina. Vestimos a las mujeres mismas. Durante la campaña de primavera colección, con más colores y energía que ropa a Moda Pilar Rubio, en la calle Pasarela"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -414,21 +414,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se pueden sujetador."
+          "text": "se pueden sujetador."
         },
         {
           "key": "B",
-          "text": "B) venden"
+          "text": "venden"
         },
         {
           "key": "C",
-          "text": "C) tienen primavera. 56"
+          "text": "tienen primavera. 56"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -449,21 +449,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) si vives en Berlín."
+          "text": "si vives en Berlín."
         },
         {
           "key": "B",
-          "text": "B) si te gusta tocar algún instrumento."
+          "text": "si te gusta tocar algún instrumento."
         },
         {
           "key": "C",
-          "text": "C) si quieres ver conciertos que están grabados. 57"
+          "text": "si quieres ver conciertos que están grabados. 57"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.\n57",
+      "cuerpo": "TEXTO 1\nBAZAR AMIR\nGran inauguración del Bazar Amir, el\npróximo viernes 12 de noviembre. Si estás\npensando en regalar algo a una persona\nespecial, este es tu lugar. Descuentos\nincreíbles durante la primera semana. Si\nencuentras nuestros productos más\nbaratos en otra tienda de la ciudad, te\ndevolvemos la diferencia.\nTe esperamos en el Bazar Amir. Recuerda,\nlos mejores precios ahora están muy cerca\nde tu casa.\n6. En este lugar...\nA) tienen productos demasiado caros.\nB) podemos comprar algo para el cumpleaños de nuestro amigo.\npodemos comprar ya porque ya está abierto.\nTEXTO 2\n¡¡¡BLACK FRIDAY!!!\nMicrófono USB por tan solo 9,99 €, altavoces de\nalta calidad por 12,99 €, auriculares para\nvideojuegos por 19,99 €. ¿Te lo vas a perder?\nTodas estas ofertas y muchas más haciendo solo\nunos pocos clics, en nuestra tienda en línea. Los\nproductos llegan a tu casa en menos de 48 horas.\nDevoluciones gratuitas. Servicio de atención al\ncliente 24 horas.\nAprovecha esta oportunidad, solo hasta el viernes.\n7. El anuncio es…\nA) de una tienda en Internet.\nB) de una tienda de instrumentos musicales.\nde una nueva tienda que abre el viernes.\nTEXTO 3\nASISTENTE DE COMPRAS\n8. Esta persona…\nOfrezco mis servicios para ayudarte\ndurante tus compras, tres años de A) quiere ayudar a la gente sin\nexperiencia en el mundo de la moda. recibir dinero a cambio.\nGracias a mis consejos vas a vestirte con\narte y un toque especial. Cobro quince B) es experta en encontrar\neuros por una hora de trabajo, diecisiete ropa por menos de quince\nlos fines de semana. euros.\nPuedes contactar conmigo a través del quiere más dinero por\nemail: modasuperguai@gmail.com trabajar los sábados y\ndomingos.\nTEXTO 4\nBUSCAMOS REPARTIDOR\nTienda de productos ecológicos busca repartidor\ncon moto propia para llevar los productos a las\ncasas de nuestros clientes. Imprescindible ser una\npersona responsable y con ganas de trabajar en\nequipo. No es necesario tener estudios, pero sí que\nqueremos repartidores simpáticos y puntuales.\nTratar bien a nuestros clientes es la clave del éxito.\n9. El trabajador…\nA) no necesita tener una moto.\nB) no necesita tener formación.\nno necesita ser agradable con los clientes.\nTEXTO 5\nVENDO PRODUCTOS NUEVOS\nMi marido trabaja en la empresa Exeam y tenemos la casa llena de\nproductos, los vendemos a mitad de precio. Tenemos gel de ducha,\ndesodorantes, cremas, etc. Si quieres alguno de estos productos, escríbenos\nun mensaje en nuestra página de Facebook. Todos los artículos se recogen\nlos martes o jueves en nuestra casa en la calle Almansa.\n10. Esta persona…\nA) trabaja en una empresa de cosméticos.\nB) utiliza el Facebook los martes y jueves.\nvende productos de higiene con un 50% de descuento.\nTEXTO 6\nEL RAVAL\nTienda de interiorismo con todo lo que\nnecesitas para decorar tu oficina:\nescritorios de madera de la más alta\ncalidad, estanterías con cristales de\nSwarovski, sillones presidenciales de\ncuero ecológico. Ven y comprueba\nnuestra nueva oferta en iluminación de\noficinas, la estética es la carta de\n11. En “El Raval”… presentación de tu negocio.\nA) hay artículos usados.\nB) puedes comprar artículos para tu despacho.\nes fácil encontrar trabajo.\nTEXTO 7\nMODA PILAR RUBIO\nLos vestidos más elegantes, faldas de diseñadores internacionales, ropa\ninterior femenina. Vestimos a las mujeres para que estén enamoradas de sí\nmismas. Durante la campaña de primavera presentamos nuestra nueva\ncolección, con más colores y energía que nunca. Siéntete guapa, ven a por tu\nropa a Moda Pilar Rubio, en la calle Pasarela número 12.\n12. En esta tienda…\nA) se pueden comprar unas bragas o un\nsujetador.\nB) venden ropa de segunda mano.\ntienen precios más bajos durante la\nprimavera.\nTEXTO 8\nEL LAGO DE LOS CISNES\nNos apasiona la vida, por eso ofrecemos productos para disfrutar de ella:\nviolines con un sonido único, pianos, guitarras eléctricas y mucho más.\nTenemos también flautas para escolares.\nTodos nuestros artículos tienen un 20% de descuento para los socios de la\ntienda.Todos los jueves ofrecemos clases de música clásica con nuestro ilustre\nprofesor, el director de orquesta Carlos Berlín.\nVen con tus hijos y disfruta de los conciertos que ofrece nuestro coro en\ndirecto cada fin de semana.\n13. Es un buen lugar para ir…\nA) si vives en Berlín.\nB) si te gusta tocar algún instrumento.\nsi quieres ver conciertos que están grabados.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -484,21 +484,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -519,21 +519,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -554,21 +554,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -589,21 +589,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -624,21 +624,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -659,21 +659,21 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) PEPE"
+          "text": "PEPE"
         },
         {
           "key": "B",
-          "text": "B) FRAN"
+          "text": "FRAN"
         },
         {
           "key": "C",
-          "text": "C) ANA"
+          "text": "ANA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!\n60",
+      "cuerpo": "TEXTOS\nA. PEPE\nSoy entrenador de un equipo de fútbol de\nniños, son muy pequeños, tienen 3, 4 y 5\naños, lo que más hacemos son juegos, nos lo\npasamos muy bien juntos.\nEl año pasado decidimos comprar un\nconjunto de ropa igual para todos los niños,\nde color azul, como el escudo del equipo, en\neste momento empezaron los problemas.\nUna madre me dijo que su hijo no podía llevar\nropa de poliéster porque era alérgico, otra\ncomentó que las camisetas eran muy feas,\nalgunos se quejaron del precio y decían que\nyo ganaba dinero con esto (lo cual es\nmentira).\nEs más difícil tratar con los padres que con los hijos, finalmente decidí no\ncambiar nada, ahora los niños están tristes porque no tienen uniformes.\nB. FRAN\nTengo una nueva novia, empecé mal con ella, con mentiras, en nuestra\nprimera cita le dije que era rico, le enseñé fotos de una mansión y le dije que\nera la casa de mis padres. También descargué algunas imágenes de viajes\nexóticos y le dije que eran de mis vacaciones.\nAhora tengo un problema, ella quiere vivir\nconmigo, está buscando pisos para alquilar y\ntodos los que me enseña son carísimos. Pero\nesto no es lo peor de todo, a ella le encanta\ncomprar ropa, los últimos tres fines de\nsemana hemos ido al centro comercial y he\ntenido que pagar un montón de cosas, no\nsabía que las mujeres podían gastar tanto\ndinero en un solo día. No sé qué hacer, estoy\npensando en pedir un crédito.\nTEXTOS\nC. ANA\nHace unos meses descubrí una página\nweb súper interesante, gracias a ella\npuedo cambiar la ropa que ya no utilizo\npor cosas de otras personas. La página\nfunciona de una forma muy simple, tú\npones las fotos de las cosas que ya no\nquieres y buscas lo que otra gente\nofrece. Puedes enviar mensajes privados\no poner anuncios del estilo: “Busco\nvestido azul para ir a una boda”.\nSe lo he dicho a todas mis amigas y\nestamos muy contentas. Mi novio lo ha\nprobado también y ahora está todos los\ndías buscando algo para cambiar, él está\nintentando ahorrar para el nuevo coche y\nno quiere gastar mucho en ropa.\nEs como comprar ropa gratis, ¡me\nencanta!",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -694,15 +694,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Rosalía formaba parte de una familia numerosa."
+          "text": "Rosalía formaba parte de una familia numerosa."
         },
         {
           "key": "B",
-          "text": "B) los padres de Rosalía siempre han sido optimistas."
+          "text": "los padres de Rosalía siempre han sido optimistas."
         },
         {
           "key": "C",
-          "text": "C) Rosalía ha vivido en varias ciudades."
+          "text": "Rosalía ha vivido en varias ciudades."
         }
       ],
       "type": "choice3",
@@ -729,15 +729,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) combina varios estilos musicales."
+          "text": "combina varios estilos musicales."
         },
         {
           "key": "B",
-          "text": "B) aprendió música sin ayuda de nadie."
+          "text": "aprendió música sin ayuda de nadie."
         },
         {
           "key": "C",
-          "text": "C) odia vivir en París y Barcelona. 62 MODELO 2"
+          "text": "odia vivir en París y Barcelona. 62 MODELO 2"
         }
       ],
       "type": "choice3",
@@ -764,15 +764,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) cada año gana más y más premios."
+          "text": "cada año gana más y más premios."
         },
         {
           "key": "B",
-          "text": "B) nunca ha ganado un premio."
+          "text": "nunca ha ganado un premio."
         },
         {
           "key": "C",
-          "text": "C) está cansada porque ha ganado 7 Grammys Latinos en tota"
+          "text": "está cansada porque ha ganado 7 Grammys Latinos en tota"
         }
       ],
       "type": "choice3",
@@ -799,15 +799,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) sigue a 6 millones de personas en Instagram."
+          "text": "sigue a 6 millones de personas en Instagram."
         },
         {
           "key": "B",
-          "text": "B) tiene fans en diferentes países."
+          "text": "tiene fans en diferentes países."
         },
         {
           "key": "C",
-          "text": "C) se apellida Rosalía."
+          "text": "se apellida Rosalía."
         }
       ],
       "type": "choice3",
@@ -834,15 +834,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) a la joven cantante no le importa la moda."
+          "text": "a la joven cantante no le importa la moda."
         },
         {
           "key": "B",
-          "text": "B) Rosalía hace deporte a diario."
+          "text": "Rosalía hace deporte a diario."
         },
         {
           "key": "C",
-          "text": "C) algunas marcas de ropa utilizan a Rosalía para hacer publicidad."
+          "text": "algunas marcas de ropa utilizan a Rosalía para hacer publicidad."
         }
       ],
       "type": "choice3",
@@ -869,15 +869,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) muchas chicas quieren llevar la ropa igual que Rosalía."
+          "text": "muchas chicas quieren llevar la ropa igual que Rosalía."
         },
         {
           "key": "B",
-          "text": "B) Rosalía quiere dejar la música y trabajar como diseñadora."
+          "text": "Rosalía quiere dejar la música y trabajar como diseñadora."
         },
         {
           "key": "C",
-          "text": "C) Pull&Bear ha ayudado a Rosalía a producir sus discos. 63"
+          "text": "Pull&Bear ha ayudado a Rosalía a producir sus discos. 63"
         }
       ],
       "type": "choice3",
@@ -904,15 +904,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Micrófono (micrófono antiguo)"
+          "text": "Micrófono (micrófono antiguo)"
         },
         {
           "key": "B",
-          "text": "B) Lavadora (lavadora blanca)"
+          "text": "Lavadora (lavadora blanca)"
         },
         {
           "key": "C",
-          "text": "C) Nevera (frigorífico verde)"
+          "text": "Nevera (frigorífico verde)"
         }
       ],
       "type": "choice3",
@@ -940,15 +940,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Videojuegos (jugar a videojuegos con consola)"
+          "text": "Videojuegos (jugar a videojuegos con consola)"
         },
         {
           "key": "B",
-          "text": "B) Leer (leer un libro)"
+          "text": "Leer (leer un libro)"
         },
         {
           "key": "C",
-          "text": "C) Escribir (escribir / tomar apuntes)"
+          "text": "Escribir (escribir / tomar apuntes)"
         }
       ],
       "type": "choice3",
@@ -976,15 +976,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Feliz (hombre feliz con corazón)"
+          "text": "Feliz (hombre feliz con corazón)"
         },
         {
           "key": "B",
-          "text": "B) Enfadado (hombre gritando)"
+          "text": "Enfadado (hombre gritando)"
         },
         {
           "key": "C",
-          "text": "C) Tranquilo (hombre sonriente)"
+          "text": "Tranquilo (hombre sonriente)"
         }
       ],
       "type": "choice3",
@@ -1012,15 +1012,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Queso (queso con pan)"
+          "text": "Queso (queso con pan)"
         },
         {
           "key": "B",
-          "text": "B) Zanahoria (zanahoria)"
+          "text": "Zanahoria (zanahoria)"
         },
         {
           "key": "C",
-          "text": "C) Manzana (manzana roja)"
+          "text": "Manzana (manzana roja)"
         }
       ],
       "type": "choice3",
@@ -1048,15 +1048,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Caravana (autocaravana)"
+          "text": "Caravana (autocaravana)"
         },
         {
           "key": "B",
-          "text": "B) Piso alto (piso en rascacielos)"
+          "text": "Piso alto (piso en rascacielos)"
         },
         {
           "key": "C",
-          "text": "C) Casa (casa unifamiliar con jardín)"
+          "text": "Casa (casa unifamiliar con jardín)"
         }
       ],
       "type": "choice3",
@@ -1084,15 +1084,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Puerta (puerta blanca)"
+          "text": "Puerta (puerta blanca)"
         },
         {
           "key": "B",
-          "text": "B) Lavabo (lavabo / baño)"
+          "text": "Lavabo (lavabo / baño)"
         },
         {
           "key": "C",
-          "text": "C) Ventanas (ventanas grandes)"
+          "text": "Ventanas (ventanas grandes)"
         }
       ],
       "type": "choice3",
@@ -1120,15 +1120,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tienes miedo de la oscuridad."
+          "text": "tienes miedo de la oscuridad."
         },
         {
           "key": "B",
-          "text": "B) tienes hambre."
+          "text": "tienes hambre."
         },
         {
           "key": "C",
-          "text": "C) tienes dolor de cabeza. AUDIO 2"
+          "text": "tienes dolor de cabeza. AUDIO 2"
         }
       ],
       "type": "choice3",
@@ -1155,15 +1155,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) venden sofás por Internet."
+          "text": "venden sofás por Internet."
         },
         {
           "key": "B",
-          "text": "B) los productos comprados se pueden devolver."
+          "text": "los productos comprados se pueden devolver."
         },
         {
           "key": "C",
-          "text": "C) vas a poder comprar productos utilizando tu ordenador. 67 MODELO 2 PREGUNTAS AUDIO 3"
+          "text": "vas a poder comprar productos utilizando tu ordenador. 67 MODELO 2 PREGUNTAS AUDIO 3"
         }
       ],
       "type": "choice3",
@@ -1190,15 +1190,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es un buen lugar para comprar una cámara profesional."
+          "text": "es un buen lugar para comprar una cámara profesional."
         },
         {
           "key": "B",
-          "text": "B) vende películas que están en el cine."
+          "text": "vende películas que están en el cine."
         },
         {
           "key": "C",
-          "text": "C) abre los sábados por la tarde. AUDIO 4"
+          "text": "abre los sábados por la tarde. AUDIO 4"
         }
       ],
       "type": "choice3",
@@ -1225,15 +1225,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) están buscando trabajadores."
+          "text": "están buscando trabajadores."
         },
         {
           "key": "B",
-          "text": "B) puedes devolver los productos que no te gustan."
+          "text": "puedes devolver los productos que no te gustan."
         },
         {
           "key": "C",
-          "text": "C) hay productos de baja calidad, pero baratos. AUDIO 5"
+          "text": "hay productos de baja calidad, pero baratos. AUDIO 5"
         }
       ],
       "type": "choice3",
@@ -1260,15 +1260,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) puedes comprar un lavaplatos."
+          "text": "puedes comprar un lavaplatos."
         },
         {
           "key": "B",
-          "text": "B) la promoción ha terminado."
+          "text": "la promoción ha terminado."
         },
         {
           "key": "C",
-          "text": "C) van a tener una nueva colección de productos. AUDIO 6"
+          "text": "van a tener una nueva colección de productos. AUDIO 6"
         }
       ],
       "type": "choice3",
@@ -1295,15 +1295,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tienen una nueva dirección de correo."
+          "text": "tienen una nueva dirección de correo."
         },
         {
           "key": "B",
-          "text": "B) venden artículos congelados."
+          "text": "venden artículos congelados."
         },
         {
           "key": "C",
-          "text": "C) buscan un panadero. 68"
+          "text": "buscan un panadero. 68"
         }
       ],
       "type": "choice3",
@@ -1330,15 +1330,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1365,15 +1365,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1400,15 +1400,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1435,15 +1435,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1470,15 +1470,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1505,15 +1505,15 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1540,43 +1540,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1603,43 +1603,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1666,43 +1666,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1729,43 +1729,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1792,43 +1792,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1855,43 +1855,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
@@ -1918,43 +1918,43 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es el anuncio de un dentista."
+          "text": "Es el anuncio de un dentista."
         },
         {
           "key": "B",
-          "text": "B) En este lugar puedes ganar premios el fin de semana."
+          "text": "En este lugar puedes ganar premios el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) Una persona se ha puesto enferma."
+          "text": "Una persona se ha puesto enferma."
         },
         {
           "key": "D",
-          "text": "D) Hace muy mal tiempo.."
+          "text": "Hace muy mal tiempo.."
         },
         {
           "key": "E",
-          "text": "E) La tienda va a cerrar esta semana."
+          "text": "La tienda va a cerrar esta semana."
         },
         {
           "key": "F",
-          "text": "F) Si compras un producto te regalan el segundo."
+          "text": "Si compras un producto te regalan el segundo."
         },
         {
           "key": "G",
-          "text": "G) Es esta tienda puedes jugar al ajedrez."
+          "text": "Es esta tienda puedes jugar al ajedrez."
         },
         {
           "key": "H",
-          "text": "H) Tienen un descuento para jubilados."
+          "text": "Tienen un descuento para jubilados."
         },
         {
           "key": "I",
-          "text": "I) Necesitan a varios trabajadores."
+          "text": "Necesitan a varios trabajadores."
         },
         {
           "key": "J",
-          "text": "J) A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
         }
       ],
       "type": "choice10",
