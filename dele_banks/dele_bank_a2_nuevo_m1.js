@@ -29,15 +29,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) proponerle un viaje a Las Vegas."
+          "text": "proponerle un viaje a Las Vegas."
         },
         {
           "key": "B",
-          "text": "B) contarle una historia de una de sus estudiantes."
+          "text": "contarle una historia de una de sus estudiantes."
         },
         {
           "key": "C",
-          "text": "C) pedirle consejo sobre la ropa XXXXXL."
+          "text": "pedirle consejo sobre la ropa XXXXXL."
         }
       ],
       "type": "choice3",
@@ -64,15 +64,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no confiaba mucho en la promoción."
+          "text": "no confiaba mucho en la promoción."
         },
         {
           "key": "B",
-          "text": "B) se fue a Las Vegas con ellas."
+          "text": "se fue a Las Vegas con ellas."
         },
         {
           "key": "C",
-          "text": "C) bebió café con ellas."
+          "text": "bebió café con ellas."
         }
       ],
       "type": "choice3",
@@ -99,15 +99,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) estaban tristes y lloraron."
+          "text": "estaban tristes y lloraron."
         },
         {
           "key": "B",
-          "text": "B) compraron unos boletos de lotería."
+          "text": "compraron unos boletos de lotería."
         },
         {
           "key": "C",
-          "text": "C) se alegraron muchísimo."
+          "text": "se alegraron muchísimo."
         }
       ],
       "type": "choice3",
@@ -134,15 +134,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se puso los pantalones XXXXXL para pasar el control."
+          "text": "se puso los pantalones XXXXXL para pasar el control."
         },
         {
           "key": "B",
-          "text": "B) les dijo a sus amigas que podían ir las tres a Las Vegas."
+          "text": "les dijo a sus amigas que podían ir las tres a Las Vegas."
         },
         {
           "key": "C",
-          "text": "C) perdió el vuelo porque no fue al aeropuerto. 13 MODELO 1"
+          "text": "perdió el vuelo porque no fue al aeropuerto. 13 MODELO 1"
         }
       ],
       "type": "choice3",
@@ -169,15 +169,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es el profesor de las chicas."
+          "text": "es el profesor de las chicas."
         },
         {
           "key": "B",
-          "text": "B) estuvo en Las Vegas."
+          "text": "estuvo en Las Vegas."
         },
         {
           "key": "C",
-          "text": "C) está casado. 14"
+          "text": "está casado. 14"
         }
       ],
       "type": "choice3",
@@ -204,21 +204,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) hay varias piscinas."
+          "text": "hay varias piscinas."
         },
         {
           "key": "B",
-          "text": "B) podemos descansar con nuestros hijos ."
+          "text": "podemos descansar con nuestros hijos ."
         },
         {
           "key": "C",
-          "text": "C) se puede pedir comida para llevar. 15"
+          "text": "se puede pedir comida para llevar. 15"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -239,21 +239,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los adolescentes."
+          "text": "los adolescentes."
         },
         {
           "key": "B",
-          "text": "B) los ancianos."
+          "text": "los ancianos."
         },
         {
           "key": "C",
-          "text": "C) las personas que trabajan en una oficina. TEXTO 3 HOTEL RAMÍREZ *** Situado en el centro de la ciudad, a pocos hermoso edificio histórico reconvertido para Cerca de los principales monumentos, museos, La zona no tiene aparcamiento, pero se desde la estación. Precio: 25€/noche. 16"
+          "text": "las personas que trabajan en una oficina. TEXTO 3 HOTEL RAMÍREZ *** Situado en el centro de la ciudad, a pocos hermoso edificio histórico reconvertido para Cerca de los principales monumentos, museos, La zona no tiene aparcamiento, pero se desde la estación. Precio: 25€/noche. 16"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -274,21 +274,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ir en coche."
+          "text": "ir en coche."
         },
         {
           "key": "B",
-          "text": "B) alojarse."
+          "text": "alojarse."
         },
         {
           "key": "C",
-          "text": "C) visitar el centro. 17"
+          "text": "visitar el centro. 17"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -309,21 +309,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) una persona puede acompañarte durante"
+          "text": "una persona puede acompañarte durante"
         },
         {
           "key": "B",
-          "text": "B) hay recuerdos gratis para todos."
+          "text": "hay recuerdos gratis para todos."
         },
         {
           "key": "C",
-          "text": "C) los clientes deben ser mayores de edad.. TEXTO 5 HOSTAL MERCEDES A dos paradas de metro del centro compartidas y una gran cocina común. La opción más económica de la ciudad, lado de nuestro hostal hay un supermercado Precio por persona: 10€/noche."
+          "text": "los clientes deben ser mayores de edad.. TEXTO 5 HOSTAL MERCEDES A dos paradas de metro del centro compartidas y una gran cocina común. La opción más económica de la ciudad, lado de nuestro hostal hay un supermercado Precio por persona: 10€/noche."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -344,21 +344,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no podemos hacer nuestra propia comida."
+          "text": "no podemos hacer nuestra propia comida."
         },
         {
           "key": "B",
-          "text": "B) se paga poco por pasar la noche."
+          "text": "se paga poco por pasar la noche."
         },
         {
           "key": "C",
-          "text": "C) hay una tienda. 18"
+          "text": "hay una tienda. 18"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -379,21 +379,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) hay productos viejos y de segunda mano."
+          "text": "hay productos viejos y de segunda mano."
         },
         {
           "key": "B",
-          "text": "B) se pueden comprar mascotas."
+          "text": "se pueden comprar mascotas."
         },
         {
           "key": "C",
-          "text": "C) podemos comprar artículos para ir a la TEXTO 7 HOTEL LEWANDOSKI Somos fans del famoso jugador polaco, en con cuadros, fotos y pinturas del mejor jugador Robert Lewandowski. Todas las habitaciones tienen el número en las televisiones solo se pueden ver partidos marca goles. Precio: 40 €/noche."
+          "text": "podemos comprar artículos para ir a la TEXTO 7 HOTEL LEWANDOSKI Somos fans del famoso jugador polaco, en con cuadros, fotos y pinturas del mejor jugador Robert Lewandowski. Todas las habitaciones tienen el número en las televisiones solo se pueden ver partidos marca goles. Precio: 40 €/noche."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -414,21 +414,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) las camas no son cómodas."
+          "text": "las camas no son cómodas."
         },
         {
           "key": "B",
-          "text": "B) se puede hacer deporte."
+          "text": "se puede hacer deporte."
         },
         {
           "key": "C",
-          "text": "C) todas las habitaciones tienen el mismo 19"
+          "text": "todas las habitaciones tienen el mismo 19"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -449,21 +449,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) dormir en tienda de campaña es más caro"
+          "text": "dormir en tienda de campaña es más caro"
         },
         {
           "key": "B",
-          "text": "B) el camping está bien comunicado."
+          "text": "el camping está bien comunicado."
         },
         {
           "key": "C",
-          "text": "C) los clientes se preocupan al dormir en 20"
+          "text": "los clientes se preocupan al dormir en 20"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "cuerpo": "TEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nse puede pedir comida para llevar.\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nlas personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nvisitar el centro.\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nlos clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nhay una tienda.\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\npodemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\ntodas las habitaciones tienen el mismo número.\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nlos clientes se preocupan al dormir en tiendas de campaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -484,21 +484,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -519,21 +519,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -554,21 +554,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -589,21 +589,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -624,21 +624,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -659,21 +659,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) C"
+          "text": "C"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "cuerpo": "TEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -694,15 +694,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) en España hace mucho sol."
+          "text": "en España hace mucho sol."
         },
         {
           "key": "B",
-          "text": "B) el sol de España no calienta."
+          "text": "el sol de España no calienta."
         },
         {
           "key": "C",
-          "text": "C) en invierno no hace sol en España. 25 MODELO 1"
+          "text": "en invierno no hace sol en España. 25 MODELO 1"
         }
       ],
       "type": "choice3",
@@ -729,15 +729,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) todo el mundo va a Fuengirola."
+          "text": "todo el mundo va a Fuengirola."
         },
         {
           "key": "B",
-          "text": "B) no se pasa tanto calor como en verano."
+          "text": "no se pasa tanto calor como en verano."
         },
         {
           "key": "C",
-          "text": "C) los españoles sufren más que en verano."
+          "text": "los españoles sufren más que en verano."
         }
       ],
       "type": "choice3",
@@ -764,15 +764,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) está en el extranjero."
+          "text": "está en el extranjero."
         },
         {
           "key": "B",
-          "text": "B) tiene demasiados españoles."
+          "text": "tiene demasiados españoles."
         },
         {
           "key": "C",
-          "text": "C) le gusta mucho a la gente de otros países."
+          "text": "le gusta mucho a la gente de otros países."
         }
       ],
       "type": "choice3",
@@ -799,15 +799,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) del fondo del mar."
+          "text": "del fondo del mar."
         },
         {
           "key": "B",
-          "text": "B) de una buena acampada."
+          "text": "de una buena acampada."
         },
         {
           "key": "C",
-          "text": "C) de temperaturas muy cambiantes."
+          "text": "de temperaturas muy cambiantes."
         }
       ],
       "type": "choice3",
@@ -834,15 +834,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tiene playas espectaculares."
+          "text": "tiene playas espectaculares."
         },
         {
           "key": "B",
-          "text": "B) es un plato típico de la gastronomía marroquí."
+          "text": "es un plato típico de la gastronomía marroquí."
         },
         {
           "key": "C",
-          "text": "C) está en Marruecos."
+          "text": "está en Marruecos."
         }
       ],
       "type": "choice3",
@@ -869,15 +869,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) típicos de Tailandia en cualquier restaurante."
+          "text": "típicos de Tailandia en cualquier restaurante."
         },
         {
           "key": "B",
-          "text": "B) incluidos en el precio de la mayoría de hoteles en México."
+          "text": "incluidos en el precio de la mayoría de hoteles en México."
         },
         {
           "key": "C",
-          "text": "C) en las películas que hablan de Panamá. 26"
+          "text": "en las películas que hablan de Panamá. 26"
         }
       ],
       "type": "choice3",
@@ -904,15 +904,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Playa (playa con concha marina)"
+          "text": "Playa (playa con concha marina)"
         },
         {
           "key": "B",
-          "text": "B) Montaña (montañas nevadas)"
+          "text": "Montaña (montañas nevadas)"
         },
         {
           "key": "C",
-          "text": "C) Ciudad (ciudad con rascacielos)"
+          "text": "Ciudad (ciudad con rascacielos)"
         }
       ],
       "type": "choice3",
@@ -940,15 +940,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ensalada (ensalada mixta)"
+          "text": "Ensalada (ensalada mixta)"
         },
         {
           "key": "B",
-          "text": "B) Sopa (sopa de calabaza)"
+          "text": "Sopa (sopa de calabaza)"
         },
         {
           "key": "C",
-          "text": "C) Croquetas (croquetas fritas)"
+          "text": "Croquetas (croquetas fritas)"
         }
       ],
       "type": "choice3",
@@ -976,15 +976,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) 11:45"
+          "text": "11:45"
         },
         {
           "key": "B",
-          "text": "B) 12:15"
+          "text": "12:15"
         },
         {
           "key": "C",
-          "text": "C) 10:30"
+          "text": "10:30"
         }
       ],
       "type": "choice3",
@@ -1012,15 +1012,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Dinero (mujer con dinero en efectivo)"
+          "text": "Dinero (mujer con dinero en efectivo)"
         },
         {
           "key": "B",
-          "text": "B) Coche (coche deportivo amarillo)"
+          "text": "Coche (coche deportivo amarillo)"
         },
         {
           "key": "C",
-          "text": "C) Móvil (teléfono móvil)"
+          "text": "Móvil (teléfono móvil)"
         }
       ],
       "type": "choice3",
@@ -1048,15 +1048,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Tarjeta (pago con tarjeta en datáfono)"
+          "text": "Tarjeta (pago con tarjeta en datáfono)"
         },
         {
           "key": "B",
-          "text": "B) Efectivo (dinero en efectivo / billetes)"
+          "text": "Efectivo (dinero en efectivo / billetes)"
         },
         {
           "key": "C",
-          "text": "C) Cheque (pago con cheque)"
+          "text": "Cheque (pago con cheque)"
         }
       ],
       "type": "choice3",
@@ -1084,15 +1084,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Taxi (taxi amarillo)"
+          "text": "Taxi (taxi amarillo)"
         },
         {
           "key": "B",
-          "text": "B) Tren (tren de alta velocidad)"
+          "text": "Tren (tren de alta velocidad)"
         },
         {
           "key": "C",
-          "text": "C) Avión (avión comercial)"
+          "text": "Avión (avión comercial)"
         }
       ],
       "type": "choice3",
@@ -1120,15 +1120,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los hoteles de la Costa Blanca son los mejores."
+          "text": "los hoteles de la Costa Blanca son los mejores."
         },
         {
           "key": "B",
-          "text": "B) la Costa Blanca va a tener nuevos hoteles."
+          "text": "la Costa Blanca va a tener nuevos hoteles."
         },
         {
           "key": "C",
-          "text": "C) puedes pagar menos por la habitación de hotel. AUDIO 2"
+          "text": "puedes pagar menos por la habitación de hotel. AUDIO 2"
         }
       ],
       "type": "choice3",
@@ -1155,15 +1155,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es a las montañas."
+          "text": "es a las montañas."
         },
         {
           "key": "B",
-          "text": "B) incluye el desayuno, la comida y la cena."
+          "text": "incluye el desayuno, la comida y la cena."
         },
         {
           "key": "C",
-          "text": "C) es más barato en invierno. 30 MODELO 1 AUDIO 3"
+          "text": "es más barato en invierno. 30 MODELO 1 AUDIO 3"
         }
       ],
       "type": "choice3",
@@ -1190,15 +1190,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) van a viajar en otros transportes, como por ejemplo, autobuses."
+          "text": "van a viajar en otros transportes, como por ejemplo, autobuses."
         },
         {
           "key": "B",
-          "text": "B) han cancelado sus vuelos porque no querían viajar."
+          "text": "han cancelado sus vuelos porque no querían viajar."
         },
         {
           "key": "C",
-          "text": "C) han bloqueado la terminal del aeropuerto. AUDIO 4"
+          "text": "han bloqueado la terminal del aeropuerto. AUDIO 4"
         }
       ],
       "type": "choice3",
@@ -1225,15 +1225,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) una sala de banquetes para bodas y comuniones."
+          "text": "una sala de banquetes para bodas y comuniones."
         },
         {
           "key": "B",
-          "text": "B) un restaurante de comida rápida."
+          "text": "un restaurante de comida rápida."
         },
         {
           "key": "C",
-          "text": "C) una cafetería donde se puede comer carne de toro. AUDIO 5"
+          "text": "una cafetería donde se puede comer carne de toro. AUDIO 5"
         }
       ],
       "type": "choice3",
@@ -1260,15 +1260,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el concierto fue un éxito."
+          "text": "el concierto fue un éxito."
         },
         {
           "key": "B",
-          "text": "B) Maná es un grupo de la ciudad."
+          "text": "Maná es un grupo de la ciudad."
         },
         {
           "key": "C",
-          "text": "C) las entradas son más baratas si se compran antes. AUDIO 6"
+          "text": "las entradas son más baratas si se compran antes. AUDIO 6"
         }
       ],
       "type": "choice3",
@@ -1295,15 +1295,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tiene redes sociales."
+          "text": "tiene redes sociales."
         },
         {
           "key": "B",
-          "text": "B) abre todas las noches del año."
+          "text": "abre todas las noches del año."
         },
         {
           "key": "C",
-          "text": "C) se cerró el sábado pasado. 31"
+          "text": "se cerró el sábado pasado. 31"
         }
       ],
       "type": "choice3",
@@ -1330,15 +1330,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1365,15 +1365,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1400,15 +1400,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1435,15 +1435,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1470,15 +1470,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1505,15 +1505,15 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1540,43 +1540,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1603,43 +1603,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1666,43 +1666,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1729,43 +1729,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1792,43 +1792,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1855,43 +1855,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
@@ -1918,43 +1918,43 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a llegar más tarde de lo esperado."
+          "text": "Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Van a ver un espectáculo con unos familiares."
+          "text": "Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Está disfrutando como nunca."
+          "text": "Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Va a pagar más."
+          "text": "Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+          "text": "Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Tiene un problema con una rueda."
+          "text": "Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Sus familiares están muy enfermos."
+          "text": "Sus familiares están muy enfermos."
         },
         {
           "key": "H",
-          "text": "H) Habla de un alojamiento con todo incluido."
+          "text": "Habla de un alojamiento con todo incluido."
         },
         {
           "key": "I",
-          "text": "I) El mensaje es para una chica que trabaja como guía."
+          "text": "El mensaje es para una chica que trabaja como guía."
         },
         {
           "key": "J",
-          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
       "type": "choice10",
