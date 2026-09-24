@@ -29,39 +29,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -87,39 +87,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -145,39 +145,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -203,39 +203,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -261,39 +261,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -319,39 +319,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de em…"
+          "text": "MUNDO.COM. Si quieres formar parte de un equipo joven y dinámico esta oferta de empleo es para ti. Buscamos gente que ayude a expandir nuestra empresa online a diferentes partes del mundo. No se requiere experiencia previa, pero sí ilusión y ganas de trabajar."
         },
         {
           "key": "B",
-          "text": "B) URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la…"
+          "text": "URGENTE. ¿En qué estabas pensando? Te has equivocado al introducir los datos de la factura en el ordenador. A partir de ahora, la empresa productora nos va a subir los precios muchísimo. Puedes olvidarte del puesto de subdirector de departamento que pedías."
         },
         {
           "key": "C",
-          "text": "C) CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los …"
+          "text": "CAMBIOS EN EL HORARIO. Las clases de historia del profesor Martínez pasarán a los martes a la misma hora, mientras tanto, los miércoles tendremos una hora de tutoría en la que los alumnos podrán preguntar sus dudas y resolver los conflictos internos de la clase."
         },
         {
           "key": "D",
-          "text": "D) ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un des…"
+          "text": "ACCIDENTE. Como bien sabéis todos, el pasado lunes por la mañana tuvo lugar un desafortunado accidente laboral en nuestra empresa. Matías, un empleado del departamento de recursos humanos se cayó por las escaleras y se rompió la rodilla derecha. Tened cuidado al caminar por los pasillos."
         },
         {
           "key": "E",
-          "text": "E) AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próxi…"
+          "text": "AVISO. Te recuerdo que tienes la exposición del informe económico mensual el próximo martes 3 de mayo. Nos vemos en la sala 23, junto al comedor, allí podremos ver mejor las diapositivas con el proyector. Tráelo todo preparado en un USB."
         },
         {
           "key": "F",
-          "text": "F) COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los cor…"
+          "text": "COMPROBAR E-MAIL. El departamento de informática ha detectado un error con los correos electrónicos. Al introducir la contraseña algunos usuarios no podían escribir más de cinco letras. Si alguien tiene este problema debe hablar con Juan para que lo corrija."
         },
         {
           "key": "G",
-          "text": "G) MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una …"
+          "text": "MENSAJE DEL DIRECTOR REENVIADO. Si alguien de vosotros está pensando en pedir una beca para este curso debe rellenar el formulario que adjunto en este email y entregarlo en la secretaría antes del viernes. El rector todavía no ha decidido cuál será la cantidad que recibirán los estudiantes que obtengan la beca."
         },
         {
           "key": "H",
-          "text": "H) RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deb…"
+          "text": "RECORDATORIO. Se recuerda a todos los empleados de la planta de producción que deben comprar unas botas de trabajo y un casco homologado. Será obligatorio llevar botas y casco en toda la zona de producción y en el almacén. De este modo, nos adaptaremos a las nuevas normas del Ministerio de Trabajo."
         },
         {
           "key": "I",
-          "text": "I) RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas pers…"
+          "text": "RECUPERACIÓN. El día 13 tendremos el test de recuperación para todas aquellas personas que no han aprobado alguna asignatura. Recordad, es muy importante, si en este test se obtiene una mala nota, el alumno tendrá que repetir el curso. 112"
         }
       ],
       "type": "choice9",
@@ -377,21 +377,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) puedes necesitar mucho tiempo para encontrar tu primer trabajo."
+          "text": "puedes necesitar mucho tiempo para encontrar tu primer trabajo."
         },
         {
           "key": "B",
-          "text": "B) debes realizar tu currículum antes de terminar tus estudios."
+          "text": "debes realizar tu currículum antes de terminar tus estudios."
         },
         {
           "key": "C",
-          "text": "C) encontrar trabajo tras los estudios es sencillo."
+          "text": "encontrar trabajo tras los estudios es sencillo."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -411,21 +411,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) siempre debe estar escrito en una lengua extranjera."
+          "text": "siempre debe estar escrito en una lengua extranjera."
         },
         {
           "key": "B",
-          "text": "B) debe ser igual al de otros candidatos."
+          "text": "debe ser igual al de otros candidatos."
         },
         {
           "key": "C",
-          "text": "C) se hace para poder tener una entrevista de trabajo."
+          "text": "se hace para poder tener una entrevista de trabajo."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -445,21 +445,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) todos los alumnos hacen prácticas o voluntariados."
+          "text": "todos los alumnos hacen prácticas o voluntariados."
         },
         {
           "key": "B",
-          "text": "B) cualquier empresa aceptará tener entrevistas de trabajo contigo."
+          "text": "cualquier empresa aceptará tener entrevistas de trabajo contigo."
         },
         {
           "key": "C",
-          "text": "C) algunos estudiantes pueden obtener experiencia con becas y programas especiales de prácticas."
+          "text": "algunos estudiantes pueden obtener experiencia con becas y programas especiales de prácticas."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -479,21 +479,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) puedes recibir dinero por realizar algunas prácticas en empresas."
+          "text": "puedes recibir dinero por realizar algunas prácticas en empresas."
         },
         {
           "key": "B",
-          "text": "B) las prácticas siempre deben tener un sueldo fijo."
+          "text": "las prácticas siempre deben tener un sueldo fijo."
         },
         {
           "key": "C",
-          "text": "C) las empresas prefieren a los trabajadores sin experiencia."
+          "text": "las empresas prefieren a los trabajadores sin experiencia."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -513,21 +513,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es mejor no tener una foto personal."
+          "text": "es mejor no tener una foto personal."
         },
         {
           "key": "B",
-          "text": "B) hay prácticas online a buen precio."
+          "text": "hay prácticas online a buen precio."
         },
         {
           "key": "C",
-          "text": "C) debes ofrecer una buena imagen."
+          "text": "debes ofrecer una buena imagen."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -547,21 +547,21 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) crear una pequeña empresa."
+          "text": "crear una pequeña empresa."
         },
         {
           "key": "B",
-          "text": "B) aprender diferentes lenguas."
+          "text": "aprender diferentes lenguas."
         },
         {
           "key": "C",
-          "text": "C) trabajar en lo primero que se encuentre."
+          "text": "trabajar en lo primero que se encuentre."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\n113\nMODELO 4\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org\n114",
+      "cuerpo": "Cómo buscar tu primer empleo tras finalizar la carrera\nEncontrar empleo tras finalizar la carrera es complicado, no todo el mundo puede acceder a un\npuesto de trabajo nada más finalizar los estudios. Menos aún, trabajar de lo que has estudiado.\nEl proceso de buscar tu primer empleo puede llevar mucho tiempo. No te pongas nervioso,\ntodo llega a su momento.\nUn buen currículum siempre destacará sobre el resto. Tienes que crear un currículum perfecto,\nno lo desarrolles a la ligera para enviarlo cuanto antes a las ofertas de empleo que van\napareciendo. Dedica el tiempo que se merece a crear un currículum que impresione.\nEl objetivo principal del currículum a día de hoy es\nconseguir una entrevista de trabajo. Muchos\nconfunden la función del currículum creyendo que\nun currículum es para encontrar trabajo. No, no es\nasí. En un currículum debes captar la atención de la\npersona que está buscando empleados. Debe ser\natractivo, que se diferencie del resto.\nLo ideal es que te pongas en contacto con la Universidad para que te orienten sobre los\ndiferentes programas a los que puedes tener acceso tras acabar tus estudios. No sólo hay\noportunidades para realizar prácticas. También hay oportunidades para obtener una beca o\nrealizar un voluntariado y así tener experiencia laboral. Lógicamente, no pueden entrar todos\nlos estudiantes universitarios a estos puestos.\nSi necesitas experiencia para acceder a un puesto de empleo en la empresa, no dudes en\nbuscar la forma de obtener experiencia y, en un futuro, optar a este puesto de trabajo. A veces\nhay que invertir, en este caso tiempo, para conseguir un objetivo, trabajo. Hay diversas formas\npara adquirir experiencia profesional. A día de hoy aparecen muchas oportunidades para\nrealizar prácticas en empresas, muchas de ellas, pagadas.\nHay prácticas a nivel nacional como a nivel internacional. Las hay para todo tipo de\nprofesionales. Algunas convocatorias tienen fecha y otras están permanentes durante todo el\naño. Sólo tienes que buscar la que mejor se adapte a tu perfil.\nRepasa tus redes sociales y limpia todo aquello que pueda perjudicar a tu imagen para ser\ncontratado. Hay personas que, para acceder a un puesto de empleo concreto, llegan a cerrar\ntodas sus redes sociales. Usa una foto profesional. La foto será la primera imagen visual que\ndes al mundo.\nNunca dejes de aprender. La correcta formación te abrirá las puertas no sólo a tu primer\nempleo tras finalizar la carrera, también a los empleos a los que quieras optar después. Los\nidiomas serán otro de los factores claves a la hora de acceder a un primer empleo. No te\nquedes sólo con una lengua. Ahora, sólo queda ponerse a buscar tu primer empleo.\nAdaptado de: www.trabajarporelmundo.org",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre cómo buscar el primer empleo. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -581,15 +581,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -615,15 +615,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -649,15 +649,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -683,15 +683,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -717,15 +717,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -751,15 +751,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ADA"
+          "text": "ADA"
         },
         {
           "key": "B",
-          "text": "B) EDU"
+          "text": "EDU"
         },
         {
           "key": "C",
-          "text": "C) MAR"
+          "text": "MAR"
         }
       ],
       "type": "choice3",
@@ -785,41 +785,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -839,41 +839,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -893,41 +893,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: H",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -947,41 +947,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1001,41 +1001,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1055,41 +1055,41 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
+          "text": "Marx y Engels en su “Manifiesto comunista” de 1848, realizaron una denuncia al trabajo de la sociedad capitalista, que formaría las bases del comunismo soviético"
         },
         {
           "key": "B",
-          "text": "B. El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
+          "text": "El esclavo trabajaba para su dueño, que había invertido dinero en su compra, o había nacido de una esclava suya"
         },
         {
           "key": "C",
-          "text": "C. Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
+          "text": "Junto al trabajo asalariado, y a la Revolución Industrial, creció la explotación de los trabajadores de fábricas"
         },
         {
           "key": "D",
-          "text": "D. El actual puesto de director de recursos humanos proviene precisamente de este empleo"
+          "text": "El actual puesto de director de recursos humanos proviene precisamente de este empleo"
         },
         {
           "key": "E",
-          "text": "E. Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
+          "text": "Así, en la Edad Media, existía una distribución de funciones entre quienes peleaban para defender todo el reino en guerras (los nobles)"
         },
         {
           "key": "F",
-          "text": "F. Varios de estos países se sumaron a las protestas y la situación se descontroló"
+          "text": "Varios de estos países se sumaron a las protestas y la situación se descontroló"
         },
         {
           "key": "G",
-          "text": "G. Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
+          "text": "Al firmarse el Tratado de Versalles en 1919 como culminación de este conflicto mundial"
         },
         {
           "key": "H",
-          "text": "H. En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
+          "text": "En la etapa medieval el trabajo estaba a cargo de los vasallos, siendo los siervos de los ricos 119"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: G",
-      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.\n118",
+      "cuerpo": "El trabajo en la historia\nEl trabajo que predominó en la Edad Antigua fue bajo la forma de esclavitud, donde quien lo\nrealizaba no tenía derechos y proporcionaba un alto beneficio económico, ya que no tenía\nningún tipo de salario. …………(19)…………... Esta forma persistió hasta el siglo XIX. Había algunos\ntrabajos en esta etapa que eran más prestigiosos que otros, como el de los escribas, los\nescultores o constructores de templos, cuyas actividades estuvieron protegidas en el Código de\nHammurabi.\nLas actividades agrícolas si bien fueron fundamentales para la economía antigua y medieval, no\ncolocaron a quienes las ejercían en un lugar de privilegio, sino más bien era considerada como\nuna actividad que sustentaba a las clases más calificadas. …………(20)…………..., los que rezaban\npara el bien de todos (el clero) y los que trabajaban para todos (los campesinos) que\nalimentaban a aquellos que no producían.\n…………(21)…………..., eran los últimos de la cadena, estaban tan unidos a la tierra que trabajaban,\nque se vendían junto a ella. Las actividades independientes se reglaban a través de los gremios.\nEn la Edad Moderna, cobró auge la\nactividad comercial, con las nuevas\ntecnologías que dieron origen al\ndespegue de la producción en cadena, y\nal nacimiento del capitalismo. …………\n(22)…………..., sin leyes protectoras, por lo\nque sus condiciones de trabajo eran\ninsalubres, sin protección de la\nmaternidad, ni de la familia, ni del trabajo\nde menores; sin descansos y con\njornadas laborales agotadoras.",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1109,15 +1109,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) antes"
+          "text": "antes"
         },
         {
           "key": "B",
-          "text": "B) siguientes"
+          "text": "siguientes"
         },
         {
           "key": "C",
-          "text": "C) después"
+          "text": "después"
         }
       ],
       "type": "choice3",
@@ -1143,15 +1143,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) dentro"
+          "text": "dentro"
         },
         {
           "key": "B",
-          "text": "B) entro"
+          "text": "entro"
         },
         {
           "key": "C",
-          "text": "C) debajo"
+          "text": "debajo"
         }
       ],
       "type": "choice3",
@@ -1177,15 +1177,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) rotos"
+          "text": "rotos"
         },
         {
           "key": "B",
-          "text": "B) prestados"
+          "text": "prestados"
         },
         {
           "key": "C",
-          "text": "C) encendidos"
+          "text": "encendidos"
         }
       ],
       "type": "choice3",
@@ -1211,15 +1211,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) redes"
+          "text": "redes"
         },
         {
           "key": "B",
-          "text": "B) red"
+          "text": "red"
         },
         {
           "key": "C",
-          "text": "C) olas"
+          "text": "olas"
         }
       ],
       "type": "choice3",
@@ -1245,15 +1245,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tomado"
+          "text": "tomado"
         },
         {
           "key": "B",
-          "text": "B) tocado"
+          "text": "tocado"
         },
         {
           "key": "C",
-          "text": "C) navegado"
+          "text": "navegado"
         }
       ],
       "type": "choice3",
@@ -1279,15 +1279,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) cambiar"
+          "text": "cambiar"
         },
         {
           "key": "B",
-          "text": "B) probar"
+          "text": "probar"
         },
         {
           "key": "C",
-          "text": "C) dejar"
+          "text": "dejar"
         }
       ],
       "type": "choice3",
@@ -1313,15 +1313,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Que no vive en el centro de la ciudad."
+          "text": "Que no vive en el centro de la ciudad."
         },
         {
           "key": "B",
-          "text": "B) Que no tiene animales en casa."
+          "text": "Que no tiene animales en casa."
         },
         {
           "key": "C",
-          "text": "C) Que no tiene prisa por las mañanas."
+          "text": "Que no tiene prisa por las mañanas."
         }
       ],
       "type": "choice3",
@@ -1346,15 +1346,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Fregar el suelo de la cafetería."
+          "text": "Fregar el suelo de la cafetería."
         },
         {
           "key": "B",
-          "text": "B) Traer el café de sus casas."
+          "text": "Traer el café de sus casas."
         },
         {
           "key": "C",
-          "text": "C) Limpiar los utensilios de la cocina de la empresa."
+          "text": "Limpiar los utensilios de la cocina de la empresa."
         }
       ],
       "type": "choice3",
@@ -1379,15 +1379,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De una reunión con un cliente."
+          "text": "De una reunión con un cliente."
         },
         {
           "key": "B",
-          "text": "B) De cómo acceder a un programa informático."
+          "text": "De cómo acceder a un programa informático."
         },
         {
           "key": "C",
-          "text": "C) De un nuevo despacho."
+          "text": "De un nuevo despacho."
         }
       ],
       "type": "choice3",
@@ -1412,15 +1412,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es un campus."
+          "text": "Es un campus."
         },
         {
           "key": "B",
-          "text": "B) Es una guardería."
+          "text": "Es una guardería."
         },
         {
           "key": "C",
-          "text": "C) Es una cárcel."
+          "text": "Es una cárcel."
         }
       ],
       "type": "choice3",
@@ -1445,15 +1445,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Hablar con Pedro de algo del trabajo."
+          "text": "Hablar con Pedro de algo del trabajo."
         },
         {
           "key": "B",
-          "text": "B) Verse con Pedro después de mucho tiempo."
+          "text": "Verse con Pedro después de mucho tiempo."
         },
         {
           "key": "C",
-          "text": "C) Tomar un café con su amigo Pedro."
+          "text": "Tomar un café con su amigo Pedro."
         }
       ],
       "type": "choice3",
@@ -1478,15 +1478,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Una impresora."
+          "text": "Una impresora."
         },
         {
           "key": "B",
-          "text": "B) Papel para imprimir."
+          "text": "Papel para imprimir."
         },
         {
           "key": "C",
-          "text": "C) Ver al jefe en persona."
+          "text": "Ver al jefe en persona."
         }
       ],
       "type": "choice3",
@@ -1511,15 +1511,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) gana mucho dinero en Valencia."
+          "text": "gana mucho dinero en Valencia."
         },
         {
           "key": "B",
-          "text": "B) trabaja en la ciudad donde nació."
+          "text": "trabaja en la ciudad donde nació."
         },
         {
           "key": "C",
-          "text": "C) se dedica a la investigación médica."
+          "text": "se dedica a la investigación médica."
         }
       ],
       "type": "choice3",
@@ -1544,15 +1544,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Que trabajan en la administración pública."
+          "text": "Que trabajan en la administración pública."
         },
         {
           "key": "B",
-          "text": "B) Que trabajan en diferentes lugares."
+          "text": "Que trabajan en diferentes lugares."
         },
         {
           "key": "C",
-          "text": "C) Que tienen su propia empresa."
+          "text": "Que tienen su propia empresa."
         }
       ],
       "type": "choice3",
@@ -1577,15 +1577,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tiene buenos recuerdos de sus jefes."
+          "text": "tiene buenos recuerdos de sus jefes."
         },
         {
           "key": "B",
-          "text": "B) durante sus estudios tuvo trabajos malos."
+          "text": "durante sus estudios tuvo trabajos malos."
         },
         {
           "key": "C",
-          "text": "C) sus padres le ayudaron económicamente cuando estaba en la universidad."
+          "text": "sus padres le ayudaron económicamente cuando estaba en la universidad."
         }
       ],
       "type": "choice3",
@@ -1610,15 +1610,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no hace caso de los consejos que le dan otras personas para freír."
+          "text": "no hace caso de los consejos que le dan otras personas para freír."
         },
         {
           "key": "B",
-          "text": "B) le gusta probar diferentes tipos de aceites."
+          "text": "le gusta probar diferentes tipos de aceites."
         },
         {
           "key": "C",
-          "text": "C) en su casa nunca hay huevos."
+          "text": "en su casa nunca hay huevos."
         }
       ],
       "type": "choice3",
@@ -1643,15 +1643,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) habla con sus padres."
+          "text": "habla con sus padres."
         },
         {
           "key": "B",
-          "text": "B) para varias veces para comer."
+          "text": "para varias veces para comer."
         },
         {
           "key": "C",
-          "text": "C) utiliza las redes sociales."
+          "text": "utiliza las redes sociales."
         }
       ],
       "type": "choice3",
@@ -1676,15 +1676,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) siempre ha sido una persona muy agradable."
+          "text": "siempre ha sido una persona muy agradable."
         },
         {
           "key": "B",
-          "text": "B) empezó trabajando de recepcionista."
+          "text": "empezó trabajando de recepcionista."
         },
         {
           "key": "C",
-          "text": "C) tiene una novia nueva."
+          "text": "tiene una novia nueva."
         }
       ],
       "type": "choice3",
@@ -1709,15 +1709,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no trabajaba los sábados."
+          "text": "no trabajaba los sábados."
         },
         {
           "key": "B",
-          "text": "B) trabajaba cuidando niños."
+          "text": "trabajaba cuidando niños."
         },
         {
           "key": "C",
-          "text": "C) trabajaba en una oficina."
+          "text": "trabajaba en una oficina."
         }
       ],
       "type": "choice3",
@@ -1742,15 +1742,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) dice que pagará todo en marzo."
+          "text": "dice que pagará todo en marzo."
         },
         {
           "key": "B",
-          "text": "B) dice que los jubilados ya han recibido el dinero de las ayudas."
+          "text": "dice que los jubilados ya han recibido el dinero de las ayudas."
         },
         {
           "key": "C",
-          "text": "C) dice que todavía no ha recibido el dinero de la Unión Europea."
+          "text": "dice que todavía no ha recibido el dinero de la Unión Europea."
         }
       ],
       "type": "choice3",
@@ -1775,15 +1775,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Cerró hace 5 años."
+          "text": "Cerró hace 5 años."
         },
         {
           "key": "B",
-          "text": "B) El presidente ha cambiado."
+          "text": "El presidente ha cambiado."
         },
         {
           "key": "C",
-          "text": "C) Había errores en las facturas."
+          "text": "Había errores en las facturas."
         }
       ],
       "type": "choice3",
@@ -1808,15 +1808,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) va a haber hierba."
+          "text": "va a haber hierba."
         },
         {
           "key": "B",
-          "text": "B) se van a renovar las aulas el próximo curso."
+          "text": "se van a renovar las aulas el próximo curso."
         },
         {
           "key": "C",
-          "text": "C) hay obras en este momento."
+          "text": "hay obras en este momento."
         }
       ],
       "type": "choice3",
@@ -1841,15 +1841,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es un lugar de ocio."
+          "text": "es un lugar de ocio."
         },
         {
           "key": "B",
-          "text": "B) está cerca del centro de la ciudad."
+          "text": "está cerca del centro de la ciudad."
         },
         {
           "key": "C",
-          "text": "C) es para gente joven."
+          "text": "es para gente joven."
         }
       ],
       "type": "choice3",
@@ -1874,15 +1874,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) comentan que se paga para instalar la aplicación."
+          "text": "comentan que se paga para instalar la aplicación."
         },
         {
           "key": "B",
-          "text": "B) dicen que en el futuro solo se podrán ver las noticias en la aplicación."
+          "text": "dicen que en el futuro solo se podrán ver las noticias en la aplicación."
         },
         {
           "key": "C",
-          "text": "C) recomiendan a los espectadores bajar su aplicación."
+          "text": "recomiendan a los espectadores bajar su aplicación."
         }
       ],
       "type": "choice3",
@@ -1907,39 +1907,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -1964,39 +1964,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -2021,39 +2021,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -2078,39 +2078,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -2135,39 +2135,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -2192,39 +2192,39 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "B",
-          "text": "B) Necesita ir a la peluquería."
+          "text": "Necesita ir a la peluquería."
         },
         {
           "key": "C",
-          "text": "C) Viajó a un lugar muy tranquilo."
+          "text": "Viajó a un lugar muy tranquilo."
         },
         {
           "key": "D",
-          "text": "D) Estuvo en la iglesia."
+          "text": "Estuvo en la iglesia."
         },
         {
           "key": "E",
-          "text": "E) Se hizo heridas con cristales."
+          "text": "Se hizo heridas con cristales."
         },
         {
           "key": "F",
-          "text": "F) Puede empezar a trabajar ahora."
+          "text": "Puede empezar a trabajar ahora."
         },
         {
           "key": "G",
-          "text": "G) Ha nacido alguien muy importante para esta persona."
+          "text": "Ha nacido alguien muy importante para esta persona."
         },
         {
           "key": "H",
-          "text": "H) Dice que cultivaba plantas."
+          "text": "Dice que cultivaba plantas."
         },
         {
           "key": "I",
-          "text": "I) Conoció a una persona en la clase de idiomas."
+          "text": "Conoció a una persona en la clase de idiomas."
         }
       ],
       "type": "choice9",
@@ -2249,15 +2249,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2282,15 +2282,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2315,15 +2315,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2348,15 +2348,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2381,15 +2381,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2414,15 +2414,15 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) NOÉ"
+          "text": "NOÉ"
         },
         {
           "key": "B",
-          "text": "B) MILA"
+          "text": "MILA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
