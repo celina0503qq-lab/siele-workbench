@@ -72,7 +72,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "va a trabajar en la empresa con Alberto. 89 MODELO 3"
+          "text": "va a trabajar en la empresa con Alberto."
         }
       ],
       "type": "choice3",
@@ -177,7 +177,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "tiene muy buena comida. 90"
+          "text": "tiene muy buena comida."
         }
       ],
       "type": "choice3",
@@ -212,7 +212,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "hay un dormitorio vacío en el piso. 91"
+          "text": "hay un dormitorio vacío en el piso."
         }
       ],
       "type": "choice3",
@@ -247,7 +247,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "se habla de unos productos para hombres. TEXTO 3 MARCELO, EL LOBO Soy Marcelo, pero todos me llaman “El lobo”, tu entrenador personal con 5 años de experiencia, puedo acompañarte gimnasio y ayudarte a conseguir los mejores resultados. Una hora de entrenamiento conmigo cuesta doce euros. Trabajo de lunes a viernes, de ocho de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona centro, no tengo vehículo propio. 92"
+          "text": "se habla de unos productos para hombres. TEXTO 3 MARCELO, EL LOBO Soy Marcelo, pero todos me llaman “El lobo”, tu entrenador personal con 5 años de experiencia, puedo acompañarte gimnasio y ayudarte a conseguir los mejores resultados. Una hora de entrenamiento conmigo cuesta doce euros. Trabajo de lunes a viernes, de ocho de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona centro, no tengo vehículo propio."
         }
       ],
       "type": "choice3",
@@ -282,7 +282,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "entrena todos los días centro, no tengo vehículo propio. ocho horas. 92 MODELO 3"
+          "text": "entrena todos los días centro, no tengo vehículo propio. ocho horas."
         }
       ],
       "type": "choice3",
@@ -352,7 +352,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "unos profesionales ya están intentando 93"
+          "text": "unos profesionales ya están intentando"
         }
       ],
       "type": "choice3",
@@ -422,7 +422,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "debes de teléfono. 94"
+          "text": "debes de teléfono."
         }
       ],
       "type": "choice3",
@@ -457,7 +457,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "ha empezado a trabajar como profesor hace poco tiempo. 95"
+          "text": "ha empezado a trabajar como profesor hace poco tiempo."
         }
       ],
       "type": "choice3",
@@ -807,7 +807,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "organizó una situación falsa y el Rey le regaló ropa elegante a Juan.. 101 MODELO 3"
+          "text": "organizó una situación falsa y el Rey le regaló ropa elegante a Juan.."
         }
       ],
       "type": "choice3",
@@ -877,7 +877,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "se quería casar con la princesa. 102"
+          "text": "se quería casar con la princesa."
         }
       ],
       "type": "choice3",
@@ -1128,7 +1128,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "están buscando nuevos empleados. AUDIO 2"
+          "text": "están buscando nuevos empleados."
         }
       ],
       "type": "choice3",
@@ -1163,7 +1163,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "no saben que tienen un problema. 106 2 MODELO 3 AUDIO 3"
+          "text": "no saben que tienen un problema."
         }
       ],
       "type": "choice3",
@@ -1198,7 +1198,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "alguien que ya ha terminado sus estudios. AUDIO 4"
+          "text": "alguien que ya ha terminado sus estudios."
         }
       ],
       "type": "choice3",
@@ -1233,7 +1233,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "necesita nuevos trabajadores. AUDIO 5"
+          "text": "necesita nuevos trabajadores."
         }
       ],
       "type": "choice3",
@@ -1268,7 +1268,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "ha hecho algo que ninguna otra persona ha podido hacer. AUDIO 6"
+          "text": "ha hecho algo que ninguna otra persona ha podido hacer."
         }
       ],
       "type": "choice3",
@@ -1303,7 +1303,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "C",
-          "text": "que ha ganado un premio internacional para sus empleados. 107"
+          "text": "que ha ganado un premio internacional para sus empleados."
         }
       ],
       "type": "choice3",
@@ -1501,7 +1501,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         18
       ],
       "answer": "C",
-      "prompt": "En este momento, trabaja en un bar. 108",
+      "prompt": "En este momento, trabaja en un bar.",
       "options": [
         {
           "key": "A",
@@ -1536,7 +1536,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "E",
-      "prompt": "Mensaje 1",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1576,7 +1576,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1599,7 +1599,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "G",
-      "prompt": "Mensaje 2",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1639,7 +1639,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1662,7 +1662,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "A",
-      "prompt": "Mensaje 3",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1702,7 +1702,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1725,7 +1725,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "C",
-      "prompt": "Mensaje 4",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1765,7 +1765,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1788,7 +1788,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "J",
-      "prompt": "Mensaje 5",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1828,7 +1828,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1851,7 +1851,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "F",
-      "prompt": "Mensaje 6",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1891,7 +1891,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1914,7 +1914,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         25
       ],
       "answer": "B",
-      "prompt": "Mensaje 7",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1954,7 +1954,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         },
         {
           "key": "J",
-          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar."
         }
       ],
       "type": "choice10",
@@ -1977,7 +1977,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2000,7 +2000,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2023,7 +2023,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2046,7 +2046,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2069,7 +2069,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
