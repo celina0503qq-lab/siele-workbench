@@ -142,7 +142,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "Luisa estuvo en otro país con Jenifer. 129 MODELO 4"
+          "text": "Luisa estuvo en otro país con Jenifer."
         }
       ],
       "type": "choice3",
@@ -177,7 +177,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "habló con una persona extranjera en la fiesta. 130"
+          "text": "habló con una persona extranjera en la fiesta."
         }
       ],
       "type": "choice3",
@@ -212,7 +212,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "si vas disfrazado tienes algo gratis. 131"
+          "text": "si vas disfrazado tienes algo gratis."
         }
       ],
       "type": "choice3",
@@ -282,7 +282,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "hay profesores 132"
+          "text": "hay profesores"
         }
       ],
       "type": "choice3",
@@ -387,7 +387,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "no se puede ir con niños. TEXTO 7 PARQUE DE ATRACCIONES Un lugar para pasarlo bomba en familia. agua para la temporada de verano, además abrimos hasta las 22:30. Este año restaurante de comida rápida junto a la entrada. Precio: adultos 15€, jóvenes de más de 10"
+          "text": "no se puede ir con niños. TEXTO 7 PARQUE DE ATRACCIONES Un lugar para pasarlo bomba en familia. agua para la temporada de verano, además abrimos hasta las 22:30. Este año restaurante de comida rápida junto a la entrada. Precio: adultos 15€, jóvenes de más de"
         }
       ],
       "type": "choice3",
@@ -422,7 +422,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "el parque de atracciones va a abrir más pronto de lo normal. 134"
+          "text": "el parque de atracciones va a abrir más pronto de lo normal."
         }
       ],
       "type": "choice3",
@@ -457,7 +457,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "van a hablar con el hijo del rey. 135"
+          "text": "van a hablar con el hijo del rey."
         }
       ],
       "type": "choice3",
@@ -702,7 +702,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "había mucha cola en las tiendas de los centros comerciales. 140 MODELO 4"
+          "text": "había mucha cola en las tiendas de los centros comerciales."
         }
       ],
       "type": "choice3",
@@ -877,7 +877,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "han perdido clientes. 141"
+          "text": "han perdido clientes."
         }
       ],
       "type": "choice3",
@@ -1128,7 +1128,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "los niños pueden hacer deporte en este lugar. AUDIO 2"
+          "text": "los niños pueden hacer deporte en este lugar."
         }
       ],
       "type": "choice3",
@@ -1163,7 +1163,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "es gratuita para el ganador. 145 MODELO 4 AUDIO 3"
+          "text": "es gratuita para el ganador."
         }
       ],
       "type": "choice3",
@@ -1198,7 +1198,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "es hijo único. AUDIO 4"
+          "text": "es hijo único."
         }
       ],
       "type": "choice3",
@@ -1233,7 +1233,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "solo va gente que tiene prisa. AUDIO 5"
+          "text": "solo va gente que tiene prisa."
         }
       ],
       "type": "choice3",
@@ -1268,7 +1268,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "tienen ofertas por las mañanas. AUDIO 6"
+          "text": "tienen ofertas por las mañanas."
         }
       ],
       "type": "choice3",
@@ -1303,7 +1303,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "C",
-          "text": "se habla de una piscina. 146"
+          "text": "se habla de una piscina."
         }
       ],
       "type": "choice3",
@@ -1501,7 +1501,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         18
       ],
       "answer": "A",
-      "prompt": "No va a salir por la noche. 147",
+      "prompt": "No va a salir por la noche.",
       "options": [
         {
           "key": "A",
@@ -1536,7 +1536,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "E",
-      "prompt": "Mensaje 1",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1576,7 +1576,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1599,7 +1599,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "H",
-      "prompt": "Mensaje 2",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1639,7 +1639,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1662,7 +1662,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "F",
-      "prompt": "Mensaje 3",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1702,7 +1702,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1725,7 +1725,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "A",
-      "prompt": "Mensaje 4",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1765,7 +1765,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1788,7 +1788,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "D",
-      "prompt": "Mensaje 5",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1828,7 +1828,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1851,7 +1851,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "J",
-      "prompt": "Mensaje 6",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1891,7 +1891,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1914,7 +1914,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         25
       ],
       "answer": "",
-      "prompt": "⚠️ 原书答案与听力原文均缺失，待管理员补充：Mensaje 7",
+      "prompt": "⚠️ 原书答案与听力原文均缺失，待管理员补充：Mensaje",
       "options": [
         {
           "key": "A",
@@ -1954,7 +1954,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         },
         {
           "key": "J",
-          "text": "Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista."
         }
       ],
       "type": "choice10",
@@ -1977,7 +1977,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2000,7 +2000,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2023,7 +2023,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2046,7 +2046,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2069,7 +2069,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
