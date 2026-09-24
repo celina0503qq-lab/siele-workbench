@@ -142,7 +142,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "perdió el vuelo porque no fue al aeropuerto. 13 MODELO 1"
+          "text": "perdió el vuelo porque no fue al aeropuerto."
         }
       ],
       "type": "choice3",
@@ -177,7 +177,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "está casado. 14"
+          "text": "está casado."
         }
       ],
       "type": "choice3",
@@ -212,7 +212,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "se puede pedir comida para llevar. 15"
+          "text": "se puede pedir comida para llevar."
         }
       ],
       "type": "choice3",
@@ -247,7 +247,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "las personas que trabajan en una oficina. TEXTO 3 HOTEL RAMÍREZ *** Situado en el centro de la ciudad, a pocos hermoso edificio histórico reconvertido para Cerca de los principales monumentos, museos, La zona no tiene aparcamiento, pero se desde la estación. Precio: 25€/noche. 16"
+          "text": "las personas que trabajan en una oficina. TEXTO 3 HOTEL RAMÍREZ *** Situado en el centro de la ciudad, a pocos hermoso edificio histórico reconvertido para Cerca de los principales monumentos, museos, La zona no tiene aparcamiento, pero se desde la estación. Precio: 25€/noche."
         }
       ],
       "type": "choice3",
@@ -282,7 +282,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "visitar el centro. 17"
+          "text": "visitar el centro."
         }
       ],
       "type": "choice3",
@@ -352,7 +352,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "hay una tienda. 18"
+          "text": "hay una tienda."
         }
       ],
       "type": "choice3",
@@ -422,7 +422,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "todas las habitaciones tienen el mismo 19"
+          "text": "todas las habitaciones tienen el mismo"
         }
       ],
       "type": "choice3",
@@ -457,7 +457,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "los clientes se preocupan al dormir en 20"
+          "text": "los clientes se preocupan al dormir en"
         }
       ],
       "type": "choice3",
@@ -702,7 +702,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "en invierno no hace sol en España. 25 MODELO 1"
+          "text": "en invierno no hace sol en España."
         }
       ],
       "type": "choice3",
@@ -877,7 +877,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "en las películas que hablan de Panamá. 26"
+          "text": "en las películas que hablan de Panamá."
         }
       ],
       "type": "choice3",
@@ -1128,7 +1128,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "puedes pagar menos por la habitación de hotel. AUDIO 2"
+          "text": "puedes pagar menos por la habitación de hotel."
         }
       ],
       "type": "choice3",
@@ -1163,7 +1163,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "es más barato en invierno. 30 MODELO 1 AUDIO 3"
+          "text": "es más barato en invierno."
         }
       ],
       "type": "choice3",
@@ -1198,7 +1198,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "han bloqueado la terminal del aeropuerto. AUDIO 4"
+          "text": "han bloqueado la terminal del aeropuerto."
         }
       ],
       "type": "choice3",
@@ -1233,7 +1233,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "una cafetería donde se puede comer carne de toro. AUDIO 5"
+          "text": "una cafetería donde se puede comer carne de toro."
         }
       ],
       "type": "choice3",
@@ -1268,7 +1268,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "las entradas son más baratas si se compran antes. AUDIO 6"
+          "text": "las entradas son más baratas si se compran antes."
         }
       ],
       "type": "choice3",
@@ -1303,7 +1303,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "se cerró el sábado pasado. 31"
+          "text": "se cerró el sábado pasado."
         }
       ],
       "type": "choice3",
@@ -1501,7 +1501,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         18
       ],
       "answer": "C",
-      "prompt": "Ha comprado muchos recuerdos del viaje. 32",
+      "prompt": "Ha comprado muchos recuerdos del viaje.",
       "options": [
         {
           "key": "A",
@@ -1536,7 +1536,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "E",
-      "prompt": "Mensaje 1",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1576,7 +1576,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1599,7 +1599,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "Mensaje 2",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1639,7 +1639,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1662,7 +1662,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "I",
-      "prompt": "Mensaje 3",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1702,7 +1702,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1725,7 +1725,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Mensaje 4",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1765,7 +1765,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1788,7 +1788,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "H",
-      "prompt": "Mensaje 5",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1828,7 +1828,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1851,7 +1851,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Mensaje 6",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1891,7 +1891,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1914,7 +1914,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "D",
-      "prompt": "Mensaje 7",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1954,7 +1954,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "J",
-          "text": "Ha comido demasiado y no se siente bien. 33 MODELO 1"
+          "text": "Ha comido demasiado y no se siente bien."
         }
       ],
       "type": "choice10",
@@ -1977,7 +1977,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2000,7 +2000,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2023,7 +2023,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2046,7 +2046,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2069,7 +2069,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
