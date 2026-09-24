@@ -4020,8 +4020,18 @@ function renderQuizQuestion(){
     h += `<div class="qopt${resultClass}" id="opt${i}"${click}><span class="L">${letters[i]}</span><span>${esc(o.text)}</span>${isPrevSel?'<span style="font-size:10px;color:var(--tr);margin-left:4px">上次答案</span>':''}</div>`;
   });
   h += `</div>`;
-  const feedback = questionState.answered ? ((opts[questionState.selected] && opts[questionState.selected].correct ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + linkify(esc(q.fb))) : '';
-  h += `<div class="qfb${questionState.answered ? ' show '+(opts[questionState.selected]&&opts[questionState.selected].correct ? 'ok' : 'no') : ''}" id="quizFb">${feedback}</div>`;
+  // BUG-3 修复：解析显示条件放宽为「本次已作答 或 历史已做过」——回看已做题也能看到解析
+  let feedback = '';
+  if(questionState.answered){
+    feedback = (opts[questionState.selected] && opts[questionState.selected].correct ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + linkify(esc(q.fb));
+  } else if(hist){
+    feedback = '<span style="color:var(--soft)">上次作答：' + (hist.correct ? '✓ 正确' : '✗ 错误') + '（本题已做过，仍可重新作答）</span> <b>解析：</b>' + linkify(esc(q.fb));
+  }
+  // BUG-3: 已做过的题(hist)也要显示解析容器（按历史对错着色）
+  const _fbShowCls = questionState.answered
+    ? ' show ' + (opts[questionState.selected] && opts[questionState.selected].correct ? 'ok' : 'no')
+    : (hist ? ' show ' + (hist.correct ? 'ok' : 'no') : '');
+  h += `<div class="qfb${_fbShowCls}" id="quizFb">${feedback}</div>`;
   h += `<div class="qnav"><span class="qscore">得分：${ST.quizScore}/${ST.quizAnswered}</span>
     <div class="qnav-btns">
       <button class="btn sm ol" onclick="prevQuiz()" ${ST.quizIdx===0?'disabled':''}>← 上一题</button>
@@ -4143,7 +4153,7 @@ function answerQuiz(optIdx, isCorrect){
 
   const fb = document.getElementById('quizFb');
   fb.className = 'qfb show ' + (isCorrect ? 'ok' : 'no');
-  fb.innerHTML = (isCorrect ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + esc(ST.quizSession[ST.quizIdx].fb);
+  fb.innerHTML = (isCorrect ? '✓ 正确！' : '✗ 不正确。正确答案已标绿。') + ' <b>解析：</b>' + linkify(esc(ST.quizSession[ST.quizIdx].fb));
   document.getElementById('nextBtn').style.display = 'inline-flex';
 }
 
@@ -14352,9 +14362,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     // === Tarea 级别共享 instrucciones: 在原文之前单独显示 ===
     const firstInstr = group[0] && group[0].instrucciones || '';
     const sharedInstr = firstInstr.length > 20 && group.every(q => (q.instrucciones||'') === firstInstr);
-    // 口语(4)/写作(3): 说明已并入每题卡片内的折叠区(带播放键与管理员编辑按钮), 此处不重复渲染
-    const _instrInCard = (pruebaNum === 3 || pruebaNum === 4);
-    if (sharedInstr && !_instrInCard) {
+    if (sharedInstr) {
       var sharedInstrKey = window._deleLk(modeloId + '_P' + pruebaNum + '_T' + tareaNum);
       var editedInstr = window._deleAdminGetField(sharedInstrKey, 'instrucciones', firstInstr);
       h += '<div style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:10px;padding:14px 16px;margin-bottom:10px;position:relative">'+
@@ -14809,47 +14817,12 @@ window._renderDeleA1Quiz = function(level, task, taskLabel, bank){
   }
 };
 
-// ===== 口语/写作专项: 题目音频文本 + 折叠开关 (2026-09-23) =====
-// 直接由题目数据拼出要朗读的西语文本（不解析 DOM，避免把 HTML 念出来）
-window._deleTaskAudioText = function(q){
-  var parts = [];
-  var push = function(v){ if (v && String(v).trim()) parts.push(String(v).replace(/\s+/g,' ').trim()); };
-  push(q.instrucciones);            // 题目说明（完整版）
-  push(q.cuerpo);                   // 题面材料（如收到的邮件/消息、活动通知）
-  if (Array.isArray(q.requisitos)) push(q.requisitos.join(' '));
-  if (Array.isArray(q.aspectos)) push(q.aspectos.join(' '));
-  if (Array.isArray(q.temas)) push(q.temas.join(' '));
-  if (q.formulario && Array.isArray(q.formulario.preguntas)) push(q.formulario.preguntas.map(function(p){ return p.pregunta; }).join(' '));
-  if (q.ejemplos_preguntas && typeof q.ejemplos_preguntas === 'object') {
-    Object.keys(q.ejemplos_preguntas).forEach(function(k){ if (Array.isArray(q.ejemplos_preguntas[k])) push(q.ejemplos_preguntas[k].join(' ')); });
-  }
-  if (!parts.length) push(q.prompt);   // 兜底：只有 prompt 的题
-  return parts.join('.\n');
-};
-// 显示/隐藏 题目与说明（按钮紧邻折叠容器，用 .nextElementSibling 定位最稳）
-window._deleToggleTaskText = function(btn){
-  var bar = btn && btn.closest ? btn.closest('.dele-task-audio-bar') : null;
-  var box = bar ? bar.nextElementSibling : null;
-  if (!box || !box.classList || !box.classList.contains('dele-task-hidden')) return;
-  var willShow = (box.style.display === 'none');
-  box.style.display = willShow ? '' : 'none';
-  btn.innerHTML = willShow ? '🙈 隐藏题目与说明' : '👁 显示题目与说明';
-};
-
 // ===== v5 写作/口语任务卡片渲染 =====
 function _renderDeleA1V5TaskCard(q){
   let body = '';
-  // === 口语/写作专项: 说明与题面默认隐藏 + 逐题音频播报 (2026-09-23) ===
-  // 真实考试中这两项的说明与题目以考官/录音播报形式给出, 故默认折叠
-  var _qHide = (q.prueba === 3 || q.prueba === 4);
-  var _qInstr = '';   // 题目说明（折叠）
-  var _qStem = '';    // 题面材料（折叠；答题控件仍留在 body 中保持可见）
   // instrucciones
   if (q.instrucciones) {
-    // 折叠模式下说明并入折叠区; 管理员编辑按钮也一并放进来, 否则口语/写作就没法改 instrucciones 了
-    var _qInstrKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea);
-    _qInstr += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+' '+
-      (_qHide ? _deleAdminEditBtn(_qInstrKey, 'instrucciones', true) : '')+'</div>';
+    body += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+'</div>';
   }
   // form_fill: 表单
   if (q.type === 'form_fill' && q.formulario) {
@@ -14905,7 +14878,7 @@ function _renderDeleA1V5TaskCard(q){
   // writing: 通用写作题 (A1/A2/B1/B2)
   else if (q.type === 'writing') {
     if (q.cuerpo) {
-      _qStem += '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目材料 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
+      body += '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目材料 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
     }
     if (q.rango_palabras) {
       body += '<div class="sub" style="color:var(--tr);font-size:12px;margin-top:4px">字数要求: '+esc(q.rango_palabras)+'</div>';
@@ -14950,21 +14923,6 @@ function _renderDeleA1V5TaskCard(q){
         '<span class="sub" style="color:var(--tr);font-size:11px">可修改文本后朗读</span>'+
         '</div></div></details>';
     }
-  }
-  // === 组装: 音频工具栏 + 默认折叠的「说明+题面」+ 保持可见的答题控件 ===
-  if (_qHide) {
-    var _taskTxtId = 'tasktxt_' + window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
-    window._deleTTSStore[_taskTxtId] = window._deleTaskAudioText(q);
-    var _qFolded = _qInstr + _qStem;
-    body = '<div class="dele-task-audio-bar" style="margin:6px 0;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-        '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(_taskTxtId)+'\')" style="font-size:12px">🔊 播放题目音频</button>'+
-        '<button class="btn sm ol" onclick="_deleToggleTaskText(this)" style="font-size:12px">👁 显示题目与说明</button>'+
-        '<span class="sub" style="color:var(--tr);font-size:10px">考试时说明与题目以音频播报为准</span>'+
-      '</div>'+
-      (_qFolded ? '<div class="dele-task-hidden" style="display:none">'+_qFolded+'</div>' : '')+
-      body;
-  } else {
-    body = _qInstr + body;
   }
   return '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
@@ -17266,16 +17224,18 @@ function mergeWbSnapshot(remote){
   }
   ST.quizDoneTotal = ST.quizHistory ? Object.keys(ST.quizHistory).length : 0;
   // 顺序模式游标：按组合 key 取 ts 较新者（跨设备续做位置）
+  // BUG-1 修复：只有「远端游标 ts 更新（另一设备确实推进过）」才允许中途重建会话；
+  // 本机作答 → 上云 → 回拉的同一游标不会触发重建，避免答完 ~2 秒被强制跳题、解析被销毁。
+  var _quizPosFromRemote = false;
   if(remote.quizOrderPos && typeof remote.quizOrderPos==='object'){
     ST.quizOrderPos = ST.quizOrderPos || {};
     Object.keys(remote.quizOrderPos).forEach(function(k){
       var rv = remote.quizOrderPos[k];
       var lv = ST.quizOrderPos[k];
-      if(!lv || (rv.ts||0) > (lv.ts||0)) ST.quizOrderPos[k] = rv;
+      if(!lv || (rv.ts||0) > (lv.ts||0)){ ST.quizOrderPos[k] = rv; _quizPosFromRemote = true; }
     });
   }
-  // 进度记忆v2：合并到新做题进度后，若正处在题库页且为顺序模式，立即重建会话跳到跨设备续做位置
-  if(typeof currentPage!=='undefined' && currentPage==='quiz' && ST.quizFilter && ST.quizFilter.order==='order' && typeof buildQuizSession==='function'){
+  if(_quizPosFromRemote && typeof currentPage!=='undefined' && currentPage==='quiz' && ST.quizFilter && ST.quizFilter.order==='order' && typeof buildQuizSession==='function'){
     try{ ST.quizSession = []; buildQuizSession(); if(typeof renderQuizQuestion==='function') renderQuizQuestion(); }catch(e){}
   }
   // 外刊精炼做题记录 refineQuizState：按 date+level 键，submitted/correct 取最大（同一套题取做得多的）
