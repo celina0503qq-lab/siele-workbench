@@ -1,15 +1,22 @@
 window.DELE_BANK_A2_NUEVO_M1 = {
-  "version": "1.0",
+  "version": "2.0",
   "level": "A2",
-  "source": "Nuevo DELE A2 Modelo 01 - Ramon Diez Galan",
+  "source": "Nuevo DELE A2 Modelo 1. Lectura 25 + auditiva 25 (transcripciones) + escritura 2 + oral 3.",
   "language": "es-ES",
   "syllabus": {
-    "level": "A2"
+    "level": "A2",
+    "duration_minutes": {
+      "reading": 60,
+      "listening": 40,
+      "writing": 45,
+      "speaking_prep": 15,
+      "speaking_test": 15
+    }
   },
   "items": [
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 1,
       "q": 1,
@@ -18,7 +25,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         5
       ],
       "answer": "B",
-      "prompt": "Raul escribe a Cristian para...",
+      "prompt": "Raúl escribe a Cristian para…",
       "options": [
         {
           "key": "A",
@@ -35,12 +42,16 @@ window.DELE_BANK_A2_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola, Cristian: No te vas a creer lo que me conto ayer Natalia, una de mis alumnas. El ano pasado estaba con dos amigas suyas en una cafeteria del centro y vieron un cartel que decia: GANA UN VIAJE A LAS VEGAS. El camarero se rio de ellas al verlas tan interesadas y les dijo: Se llama Golden America y es una nueva promocion, pero pienso que es todo mentira. Las chicas, ignorando las palabras del camarero, pidieron tres Golden America. Natalia fue la que encontro el premio en su cafe. Las tres amigas lloraban de la emocion y alegria. El boleto decia: PREMIO Un viaje para dos personas a Las Vegas! Tuvieron una idea loca: comprar ropa XXXXXL para que dos se escondieran y asi viajar las tres. Pero los policias del aeropuerto las pararon y perdieron el vuelo. Natalia disfruto tanto aquel dia que no le importo quedarse sin el viaje.",
-      "explanation": "正确答案: B。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA\nEsta prueba tiene cuatro tareas. Usted debe responder a 25 preguntas.\nLa duración es de 60 minutos.\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\n\nGANA UN VIAJE A LAS VEGAS\nEl camarero se rio de ellas al verlas tan interesadas y les dijo: \"Se llama\nGolden América y es una nueva promoción, pero pienso que es todo\nmentira\".\n11\nMODELO 1\nLas chicas, ignorando las palabras del camarero, pidieron tres Golden\nAmérica. Natalia fue la que encontró el premio en su café, gritó con tanta\nfuerza que todos los clientes de la cafetería se asustaron. Las tres amigas\nlloraban de la emoción y alegría, entonces una de ellas leyó el boleto\npremiado:\nPREMIO ¡Un viaje para dos personas a Las Vegas!\nCuando mi alumna me contó eso, yo pensaba que iba a continuar\ndiciéndome que se pusieron tristes porque el viaje era solo para dos\npersonas, pero todo lo contrario, tuvieron una idea muy loca.\n\"Ya sé lo que vamos a hacer, compramos una\nchaqueta y unos pantalones muy grandes, nos\nescondemos dos personas en esta ropa y así\nvamos a pasar el control de seguridad del\naeropuerto. ¡Vamos a ir las tres a Las Vegas!\"\nEsas fueron las palabras de Natalia para sus\namigas, ¿te lo puedes creer?\nLo peor es que lo intentaron hacer, fueron a\nuna tienda de ropa y compraron los\npantalones y la chaqueta de la talla XXXXXL.\nFueron al aeropuerto y las dos amigas de Natalia se metieron en los\npantalones y la chaqueta XXXXXL, convirtiéndose en un gigante sin ritmo\npara andar bien. Por supuesto, los policías del control de seguridad no son\ntontos y pararon a las chicas, perdieron el vuelo y no pudieron ir a Las Vegas.\nNatalia me dijo que disfrutó tanto aquel día que no le importó quedarse sin\nel viaje. Al escuchar su historia, recordé las locuras que hacíamos de\npequeños, ¿te acuerdas?\nAvísame si puedes dejar a tu esposa algún día de estos y salimos a tomar\nalgo.\n¡Hasta pronto!\nRaúl\n12",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 1,
       "q": 2,
@@ -49,11 +60,11 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         5
       ],
       "answer": "A",
-      "prompt": "El camarero de la cafeteria...",
+      "prompt": "El camarero de la cafetería…",
       "options": [
         {
           "key": "A",
-          "text": "A) no confiaba mucho en la promocion."
+          "text": "A) no confiaba mucho en la promoción."
         },
         {
           "key": "B",
@@ -61,17 +72,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "C) bebio cafe con ellas."
+          "text": "C) bebió café con ellas."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola, Cristian: No te vas a creer lo que me conto ayer Natalia, una de mis alumnas. El ano pasado estaba con dos amigas suyas en una cafeteria del centro y vieron un cartel que decia: GANA UN VIAJE A LAS VEGAS. El camarero se rio de ellas al verlas tan interesadas y les dijo: Se llama Golden America y es una nueva promocion, pero pienso que es todo mentira. Las chicas, ignorando las palabras del camarero, pidieron tres Golden America. Natalia fue la que encontro el premio en su cafe. Las tres amigas lloraban de la emocion y alegria. El boleto decia: PREMIO Un viaje para dos personas a Las Vegas! Tuvieron una idea loca: comprar ropa XXXXXL para que dos se escondieran y asi viajar las tres. Pero los policias del aeropuerto las pararon y perdieron el vuelo. Natalia disfruto tanto aquel dia que no le importo quedarse sin el viaje.",
-      "explanation": "正确答案: A。"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA\nEsta prueba tiene cuatro tareas. Usted debe responder a 25 preguntas.\nLa duración es de 60 minutos.\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\n\nGANA UN VIAJE A LAS VEGAS\nEl camarero se rio de ellas al verlas tan interesadas y les dijo: \"Se llama\nGolden América y es una nueva promoción, pero pienso que es todo\nmentira\".\n11\nMODELO 1\nLas chicas, ignorando las palabras del camarero, pidieron tres Golden\nAmérica. Natalia fue la que encontró el premio en su café, gritó con tanta\nfuerza que todos los clientes de la cafetería se asustaron. Las tres amigas\nlloraban de la emoción y alegría, entonces una de ellas leyó el boleto\npremiado:\nPREMIO ¡Un viaje para dos personas a Las Vegas!\nCuando mi alumna me contó eso, yo pensaba que iba a continuar\ndiciéndome que se pusieron tristes porque el viaje era solo para dos\npersonas, pero todo lo contrario, tuvieron una idea muy loca.\n\"Ya sé lo que vamos a hacer, compramos una\nchaqueta y unos pantalones muy grandes, nos\nescondemos dos personas en esta ropa y así\nvamos a pasar el control de seguridad del\naeropuerto. ¡Vamos a ir las tres a Las Vegas!\"\nEsas fueron las palabras de Natalia para sus\namigas, ¿te lo puedes creer?\nLo peor es que lo intentaron hacer, fueron a\nuna tienda de ropa y compraron los\npantalones y la chaqueta de la talla XXXXXL.\nFueron al aeropuerto y las dos amigas de Natalia se metieron en los\npantalones y la chaqueta XXXXXL, convirtiéndose en un gigante sin ritmo\npara andar bien. Por supuesto, los policías del control de seguridad no son\ntontos y pararon a las chicas, perdieron el vuelo y no pudieron ir a Las Vegas.\nNatalia me dijo que disfrutó tanto aquel día que no le importó quedarse sin\nel viaje. Al escuchar su historia, recordé las locuras que hacíamos de\npequeños, ¿te acuerdas?\nAvísame si puedes dejar a tu esposa algún día de estos y salimos a tomar\nalgo.\n¡Hasta pronto!\nRaúl\n12",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 1,
       "q": 3,
@@ -80,7 +95,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         5
       ],
       "answer": "C",
-      "prompt": "Cuando las chicas descubrieron que habian ganado...",
+      "prompt": "Cuando las chicas descubrieron que habían ganado un viaje…",
       "options": [
         {
           "key": "A",
@@ -88,21 +103,25 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "B",
-          "text": "B) compraron boletos de loteria."
+          "text": "B) compraron unos boletos de lotería."
         },
         {
           "key": "C",
-          "text": "C) se alegraron muchisimo."
+          "text": "C) se alegraron muchísimo."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola, Cristian: No te vas a creer lo que me conto ayer Natalia, una de mis alumnas. El ano pasado estaba con dos amigas suyas en una cafeteria del centro y vieron un cartel que decia: GANA UN VIAJE A LAS VEGAS. El camarero se rio de ellas al verlas tan interesadas y les dijo: Se llama Golden America y es una nueva promocion, pero pienso que es todo mentira. Las chicas, ignorando las palabras del camarero, pidieron tres Golden America. Natalia fue la que encontro el premio en su cafe. Las tres amigas lloraban de la emocion y alegria. El boleto decia: PREMIO Un viaje para dos personas a Las Vegas! Tuvieron una idea loca: comprar ropa XXXXXL para que dos se escondieran y asi viajar las tres. Pero los policias del aeropuerto las pararon y perdieron el vuelo. Natalia disfruto tanto aquel dia que no le importo quedarse sin el viaje.",
-      "explanation": "正确答案: C。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA\nEsta prueba tiene cuatro tareas. Usted debe responder a 25 preguntas.\nLa duración es de 60 minutos.\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\n\nGANA UN VIAJE A LAS VEGAS\nEl camarero se rio de ellas al verlas tan interesadas y les dijo: \"Se llama\nGolden América y es una nueva promoción, pero pienso que es todo\nmentira\".\n11\nMODELO 1\nLas chicas, ignorando las palabras del camarero, pidieron tres Golden\nAmérica. Natalia fue la que encontró el premio en su café, gritó con tanta\nfuerza que todos los clientes de la cafetería se asustaron. Las tres amigas\nlloraban de la emoción y alegría, entonces una de ellas leyó el boleto\npremiado:\nPREMIO ¡Un viaje para dos personas a Las Vegas!\nCuando mi alumna me contó eso, yo pensaba que iba a continuar\ndiciéndome que se pusieron tristes porque el viaje era solo para dos\npersonas, pero todo lo contrario, tuvieron una idea muy loca.\n\"Ya sé lo que vamos a hacer, compramos una\nchaqueta y unos pantalones muy grandes, nos\nescondemos dos personas en esta ropa y así\nvamos a pasar el control de seguridad del\naeropuerto. ¡Vamos a ir las tres a Las Vegas!\"\nEsas fueron las palabras de Natalia para sus\namigas, ¿te lo puedes creer?\nLo peor es que lo intentaron hacer, fueron a\nuna tienda de ropa y compraron los\npantalones y la chaqueta de la talla XXXXXL.\nFueron al aeropuerto y las dos amigas de Natalia se metieron en los\npantalones y la chaqueta XXXXXL, convirtiéndose en un gigante sin ritmo\npara andar bien. Por supuesto, los policías del control de seguridad no son\ntontos y pararon a las chicas, perdieron el vuelo y no pudieron ir a Las Vegas.\nNatalia me dijo que disfrutó tanto aquel día que no le importó quedarse sin\nel viaje. Al escuchar su historia, recordé las locuras que hacíamos de\npequeños, ¿te acuerdas?\nAvísame si puedes dejar a tu esposa algún día de estos y salimos a tomar\nalgo.\n¡Hasta pronto!\nRaúl\n12",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 1,
       "q": 4,
@@ -111,29 +130,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         5
       ],
       "answer": "B",
-      "prompt": "En el texto se dice que Natalia...",
+      "prompt": "En el texto se dice que Natalia…",
       "options": [
         {
           "key": "A",
-          "text": "A) se puso los pantalones XXXXXL."
+          "text": "A) se puso los pantalones XXXXXL para pasar el control."
         },
         {
           "key": "B",
-          "text": "B) les dijo a sus amigas que podian ir las tres."
+          "text": "B) les dijo a sus amigas que podían ir las tres a Las Vegas."
         },
         {
           "key": "C",
-          "text": "C) perdio el vuelo por no ir al aeropuerto."
+          "text": "C) perdió el vuelo porque no fue al aeropuerto. 13 MODELO 1"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola, Cristian: No te vas a creer lo que me conto ayer Natalia, una de mis alumnas. El ano pasado estaba con dos amigas suyas en una cafeteria del centro y vieron un cartel que decia: GANA UN VIAJE A LAS VEGAS. El camarero se rio de ellas al verlas tan interesadas y les dijo: Se llama Golden America y es una nueva promocion, pero pienso que es todo mentira. Las chicas, ignorando las palabras del camarero, pidieron tres Golden America. Natalia fue la que encontro el premio en su cafe. Las tres amigas lloraban de la emocion y alegria. El boleto decia: PREMIO Un viaje para dos personas a Las Vegas! Tuvieron una idea loca: comprar ropa XXXXXL para que dos se escondieran y asi viajar las tres. Pero los policias del aeropuerto las pararon y perdieron el vuelo. Natalia disfruto tanto aquel dia que no le importo quedarse sin el viaje.",
-      "explanation": "正确答案: B。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA\nEsta prueba tiene cuatro tareas. Usted debe responder a 25 preguntas.\nLa duración es de 60 minutos.\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\n\nGANA UN VIAJE A LAS VEGAS\nEl camarero se rio de ellas al verlas tan interesadas y les dijo: \"Se llama\nGolden América y es una nueva promoción, pero pienso que es todo\nmentira\".\n11\nMODELO 1\nLas chicas, ignorando las palabras del camarero, pidieron tres Golden\nAmérica. Natalia fue la que encontró el premio en su café, gritó con tanta\nfuerza que todos los clientes de la cafetería se asustaron. Las tres amigas\nlloraban de la emoción y alegría, entonces una de ellas leyó el boleto\npremiado:\nPREMIO ¡Un viaje para dos personas a Las Vegas!\nCuando mi alumna me contó eso, yo pensaba que iba a continuar\ndiciéndome que se pusieron tristes porque el viaje era solo para dos\npersonas, pero todo lo contrario, tuvieron una idea muy loca.\n\"Ya sé lo que vamos a hacer, compramos una\nchaqueta y unos pantalones muy grandes, nos\nescondemos dos personas en esta ropa y así\nvamos a pasar el control de seguridad del\naeropuerto. ¡Vamos a ir las tres a Las Vegas!\"\nEsas fueron las palabras de Natalia para sus\namigas, ¿te lo puedes creer?\nLo peor es que lo intentaron hacer, fueron a\nuna tienda de ropa y compraron los\npantalones y la chaqueta de la talla XXXXXL.\nFueron al aeropuerto y las dos amigas de Natalia se metieron en los\npantalones y la chaqueta XXXXXL, convirtiéndose en un gigante sin ritmo\npara andar bien. Por supuesto, los policías del control de seguridad no son\ntontos y pararon a las chicas, perdieron el vuelo y no pudieron ir a Las Vegas.\nNatalia me dijo que disfrutó tanto aquel día que no le importó quedarse sin\nel viaje. Al escuchar su historia, recordé las locuras que hacíamos de\npequeños, ¿te acuerdas?\nAvísame si puedes dejar a tu esposa algún día de estos y salimos a tomar\nalgo.\n¡Hasta pronto!\nRaúl\n12",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 1,
       "q": 5,
@@ -142,7 +165,7 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         5
       ],
       "answer": "C",
-      "prompt": "El amigo de Raul, Cristian,...",
+      "prompt": "El amigo de Raúl, Cristian,…",
       "options": [
         {
           "key": "A",
@@ -154,17 +177,21 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "C) esta casado."
+          "text": "C) está casado. 14"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola, Cristian: No te vas a creer lo que me conto ayer Natalia, una de mis alumnas. El ano pasado estaba con dos amigas suyas en una cafeteria del centro y vieron un cartel que decia: GANA UN VIAJE A LAS VEGAS. El camarero se rio de ellas al verlas tan interesadas y les dijo: Se llama Golden America y es una nueva promocion, pero pienso que es todo mentira. Las chicas, ignorando las palabras del camarero, pidieron tres Golden America. Natalia fue la que encontro el premio en su cafe. Las tres amigas lloraban de la emocion y alegria. El boleto decia: PREMIO Un viaje para dos personas a Las Vegas! Tuvieron una idea loca: comprar ropa XXXXXL para que dos se escondieran y asi viajar las tres. Pero los policias del aeropuerto las pararon y perdieron el vuelo. Natalia disfruto tanto aquel dia que no le importo quedarse sin el viaje.",
-      "explanation": "正确答案: C。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nPRUEBA 1. COMPRENSIÓN DE LECTURA\nEsta prueba tiene cuatro tareas. Usted debe responder a 25 preguntas.\nLa duración es de 60 minutos.\nMarque las opciones elegidas en la Hoja de respuestas.\nTarea 1\n\nGANA UN VIAJE A LAS VEGAS\nEl camarero se rio de ellas al verlas tan interesadas y les dijo: \"Se llama\nGolden América y es una nueva promoción, pero pienso que es todo\nmentira\".\n11\nMODELO 1\nLas chicas, ignorando las palabras del camarero, pidieron tres Golden\nAmérica. Natalia fue la que encontró el premio en su café, gritó con tanta\nfuerza que todos los clientes de la cafetería se asustaron. Las tres amigas\nlloraban de la emoción y alegría, entonces una de ellas leyó el boleto\npremiado:\nPREMIO ¡Un viaje para dos personas a Las Vegas!\nCuando mi alumna me contó eso, yo pensaba que iba a continuar\ndiciéndome que se pusieron tristes porque el viaje era solo para dos\npersonas, pero todo lo contrario, tuvieron una idea muy loca.\n\"Ya sé lo que vamos a hacer, compramos una\nchaqueta y unos pantalones muy grandes, nos\nescondemos dos personas en esta ropa y así\nvamos a pasar el control de seguridad del\naeropuerto. ¡Vamos a ir las tres a Las Vegas!\"\nEsas fueron las palabras de Natalia para sus\namigas, ¿te lo puedes creer?\nLo peor es que lo intentaron hacer, fueron a\nuna tienda de ropa y compraron los\npantalones y la chaqueta de la talla XXXXXL.\nFueron al aeropuerto y las dos amigas de Natalia se metieron en los\npantalones y la chaqueta XXXXXL, convirtiéndose en un gigante sin ritmo\npara andar bien. Por supuesto, los policías del control de seguridad no son\ntontos y pararon a las chicas, perdieron el vuelo y no pudieron ir a Las Vegas.\nNatalia me dijo que disfrutó tanto aquel día que no le importó quedarse sin\nel viaje. Al escuchar su historia, recordé las locuras que hacíamos de\npequeños, ¿te acuerdas?\nAvísame si puedes dejar a tu esposa algún día de estos y salimos a tomar\nalgo.\n¡Hasta pronto!\nRaúl\n12",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 6,
@@ -172,50 +199,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "D",
-      "prompt": "Cual es el alojamiento mas economico?",
+      "answer": "B",
+      "prompt": "En este lugar...",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) hay varias piscinas."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) podemos descansar con nuestros hijos ."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) se puede pedir comida para llevar. 15"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: D。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 7,
@@ -223,50 +234,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "F",
-      "prompt": "Donde pueden disfrutar las parejas?",
+      "answer": "B",
+      "prompt": "Solo pueden viajar…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) los adolescentes."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) los ancianos."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) las personas que trabajan en una oficina. TEXTO 3 HOTEL RAMÍREZ *** Situado en el centro de la ciudad, a pocos hermoso edificio histórico reconvertido para Cerca de los principales monumentos, museos, La zona no tiene aparcamiento, pero se desde la estación. Precio: 25€/noche. 16"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: F。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 8,
@@ -275,49 +270,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "A",
-      "prompt": "Cual es ideal para una familia con hijos pequenos?",
+      "prompt": "No es un buen lugar para…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) ir en coche."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) alojarse."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) visitar el centro. 17"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: A。"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 9,
@@ -325,50 +304,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "C",
-      "prompt": "Donde se alojan jovenes que quieren naturaleza?",
+      "answer": "A",
+      "prompt": "El anuncio dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) una persona puede acompañarte durante"
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) hay recuerdos gratis para todos."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) los clientes deben ser mayores de edad.. TEXTO 5 HOSTAL MERCEDES A dos paradas de metro del centro compartidas y una gran cocina común. La opción más económica de la ciudad, lado de nuestro hostal hay un supermercado Precio por persona: 10€/noche."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: C。"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 10,
@@ -376,50 +339,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "E",
-      "prompt": "Que hotel ofrece vistas al mar?",
+      "answer": "B",
+      "prompt": "En el hostal Mercedes…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) no podemos hacer nuestra propia comida."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) se paga poco por pasar la noche."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) hay una tienda. 18"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: E。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 11,
@@ -427,50 +374,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "H",
-      "prompt": "Cual ofrece el servicio mas lujoso?",
+      "answer": "C",
+      "prompt": "En “La Gaviota”…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) hay productos viejos y de segunda mano."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) se pueden comprar mascotas."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) podemos comprar artículos para ir a la TEXTO 7 HOTEL LEWANDOSKI Somos fans del famoso jugador polaco, en con cuadros, fotos y pinturas del mejor jugador Robert Lewandowski. Todas las habitaciones tienen el número en las televisiones solo se pueden ver partidos marca goles. Precio: 40 €/noche."
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: H。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 12,
@@ -478,50 +409,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         6,
         13
       ],
-      "answer": "G",
-      "prompt": "Donde duermen los excursionistas de montana?",
+      "answer": "C",
+      "prompt": "En este hotel…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) las camas no son cómodas."
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) se puede hacer deporte."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) todas las habitaciones tienen el mismo 19"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: G。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 2,
       "q": 13,
@@ -530,237 +445,173 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         13
       ],
       "answer": "B",
-      "prompt": "Que hotel esta en el centro con descuentos para grupos?",
+      "prompt": "El anuncio dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) Apartamentos Celeste"
+          "text": "A) dormir en tienda de campaña es más caro"
         },
         {
           "key": "B",
-          "text": "B) Hotel Paris"
+          "text": "B) el camping está bien comunicado."
         },
         {
           "key": "C",
-          "text": "C) Camping Sol"
-        },
-        {
-          "key": "D",
-          "text": "D) Hostal Luna"
-        },
-        {
-          "key": "E",
-          "text": "E) Hotel Playa Azul"
-        },
-        {
-          "key": "F",
-          "text": "F) Casa Rural El Roble"
-        },
-        {
-          "key": "G",
-          "text": "G) Albergue Montana"
-        },
-        {
-          "key": "H",
-          "text": "H) Hotel Gran Via"
+          "text": "C) los clientes se preocupan al dormir en 20"
         }
       ],
-      "type": "choice8",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "TEXTO 1 - APARTAMENTOS CELESTE: Apartamentos para familias. Cama matrimonio + 2 individuales. Cocina moderna, bano con hidromasaje y sauna. TEXTO 2 - HOTEL PARIS: Centro ciudad. Habitaciones individuales y dobles. Restaurante buffet. Descuentos grupos. TEXTO 3 - CAMPING SOL: Jovenes y mochileros. Tiendas y cabanas. Piscina natural. TEXTO 4 - HOSTAL LUNA: Economico. Bano compartido. Desayuno incluido. WiFi gratis. TEXTO 5 - HOTEL PLAYA AZUL: Frente al mar. Vistas al oceano. Piscina climatizada. Spa y gimnasio. TEXTO 6 - CASA RURAL EL ROBLE: Casa tradicional restaurada. Chimenea, barbacoa. Naturaleza. Perfecto parejas. TEXTO 7 - ALBERGUE MONTANA: Excursionistas. Literas. Cocina compartida. Rutas guiadas. TEXTO 8 - HOTEL GRAN VIA: Lujo. Suites con jacuzzi. Servicio 24h.",
-      "explanation": "正确答案: B。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 2\n\nTEXTO 1\nAPARTAMENTOS CELESTE\nApartamentos con un encanto especial,\npara relajarse y disfrutar en familia. Una\ncama de matrimonio y dos camas\nindividuales en cada apartamento.\nCocina moderna. Baño completo con\nbañera de hidromasaje y sauna.\nDisponemos de servicio de guardería,\ntelevisión digital e Internet. Se pueden\nhacer barbacoas en el jardín trasero.\nPrecio: 45 €/noche.\n6. En este lugar...\nA) hay varias piscinas.\nB) podemos descansar con nuestros hijos\n.\nC) se puede pedir comida para llevar.\n15\nMODELO 1\nTEXTO 2\nAGENCIA DE VIAJES \"EL ALA\"\nViajes organizados exclusivamente para jubilados, descuentos insuperables\ncon la tarjeta de la tercera edad.\nOficina abierta de lunes a viernes de 08:00 a 18:00.\nBenidorm, 27 mayo – 13 junio, todo incluido, 250 €\nMálaga, 5 junio – 15 junio, media pensión, 160 €\n7. Solo pueden viajar…\nA) los adolescentes.\nB) los ancianos.\nC) las personas que trabajan en una oficina.\nTEXTO 3\nHOTEL RAMÍREZ ***\nSituado en el centro de la ciudad, a pocos metros de la estatua de Colón. Un\nhermoso edificio histórico reconvertido para el disfrute de los turistas.\nCerca de los principales monumentos, museos, bares y restaurantes.\nLa zona no tiene aparcamiento, pero se puede llegar andando 15 minutos\ndesde la estación.\nPrecio: 25€/noche.\n16\nMODELO 1\n8. No es un buen lugar para…\nA) ir en coche.\nB) alojarse.\nC) visitar el centro.\n17\nMODELO 1\nTEXTO 4\nAVENTURILANDIA\nOrganizamos excursiones para grupos\nescolares y de adultos. Servicio de guías\nturísticos para visitar los bosques de los\nalrededores. Deportes de riesgo, montar a\ncaballo, alquiler de bicicletas y mucho más.\nTodo en un mismo lugar. Para grupos de más\nde 15 personas, regalo de souvenirs artesanales\n9. El anuncio dice que…\nA) una persona puede acompañarte durante tu excursión.\nB) hay recuerdos gratis para todos.\nC) los clientes deben ser mayores de edad..\nTEXTO 5\nHOSTAL MERCEDES\nA dos paradas de metro del centro de la ciudad, con habitaciones\ncompartidas y una gran cocina común.\nLa opción más económica de la ciudad, para viajar sin vaciar la cartera. Al\nlado de nuestro hostal hay un supermercado que está abierto 24 horas.\nPrecio por persona: 10€/noche.\n10. En el hostal Mercedes…\nA) no podemos hacer nuestra propia comida.\nB) se paga poco por pasar la noche.\nC) hay una tienda.\n18\nMODELO 1\nTEXTO 6\nLA GAVIOTA\nUna pequeña tienda en el corazón de la hermosa ciudad de Altea. Todo lo\nque el turista necesita: bañadores, gorras, sombreros, toallas, sombrillas,\nmochilas, etc.\nSomos un comercio familiar con más de 50 años de historia, atendemos al\ncliente siempre con una sonrisa en la cara.\n11. En “La Gaviota”…\nA) hay productos viejos y de segunda mano.\nB) se pueden comprar mascotas.\nC) podemos comprar artículos para ir a la playa.\nTEXTO 7\nHOTEL LEWANDOSKI\nSomos fans del famoso jugador polaco, en nuestro hotel todo está decorado\ncon cuadros, fotos y pinturas del mejor jugador del mundo, nuestro ídolo,\nRobert Lewandowski.\nTodas las habitaciones tienen el número 9, las camas son rojas y blancas y\nen las televisiones solo se pueden ver partidos de fútbol en los que Robert\nmarca goles.\nPrecio: 40 €/noche.\n12. En este hotel…\nA) las camas no son cómodas.\nB) se puede hacer deporte.\nC) todas las habitaciones tienen el mismo número.\n19\nMODELO 1\nTEXTO 8\nCAMPING EL GORRIÓN\nSituado al lado de la parada de tranvía “Avenida Libertad”, a cinco\nminutos en coche del aeropuerto y a pocos metros de un hermoso\nparque.\nTodas nuestras habitaciones son dobles. También existe la posibilidad de\ndormir en tienda de campaña, en nuestra zona de acampada.\nEn el camping “El Gorrión” el cliente disfruta al máximo, preocupándose\nlo mínimo.\nPrecio por habitación: 35€/noche.\nPrecio en tienda de campaña: 10€/persona.\n13. El anuncio dice que…\nA) dormir en tienda de campaña es más caro que en habitaciones.\nB) el camping está bien comunicado.\nC) los clientes se preocupan al dormir en tiendas de campaña.\n20",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 14,
       "q_range": [
-        10,
+        14,
         19
       ],
-      "answer": "F",
-      "prompt": "Quiere ser medico como su padre.",
+      "answer": "C",
+      "prompt": "¿Quién dice que no le gustó su viaje?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: F"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 15,
       "q_range": [
-        11,
+        14,
         19
       ],
-      "answer": "E",
-      "prompt": "Trabaja en una tienda de ropa.",
+      "answer": "A",
+      "prompt": "¿Quién estuvo en varios países?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: E"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 16,
       "q_range": [
-        12,
+        14,
         19
       ],
-      "answer": "G",
-      "prompt": "Prefiere la comida casera.",
+      "answer": "B",
+      "prompt": "¿Quién viajó sin acompañante?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: G"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 17,
       "q_range": [
-        13,
+        14,
         19
       ],
       "answer": "B",
-      "prompt": "Le encanta la montana.",
+      "prompt": "¿Quién hizo amigos durante el viaje?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 18,
@@ -768,93 +619,69 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         14,
         19
       ],
-      "answer": "D",
-      "prompt": "Es profesor y le gusta ayudar.",
+      "answer": "C",
+      "prompt": "¿Quién tuvo problemas de salud?",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: D"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 3,
       "q": 19,
       "q_range": [
-        15,
+        14,
         19
       ],
       "answer": "A",
-      "prompt": "Va a misa todos los domingos.",
+      "prompt": "¿Quién tuvo problemas para comunicarse con otras personas? 21 MODELO 1 TEXTOS A. RAÚL Hace dos meses estuve con mi familia en Roma, París y Ámsterdam. Queríamos conocer la cultura de las tres ciudades, así que visitamos los museos y monumentos más importantes de cada una de ellas. Teníamos muchos lugares que visitar y poco tiempo, por eso, fuimos con prisas todos los días. No fue un viaje muy relajante, pero descubrimos muchísimos lugares interesantes. En el futuro, me gustaría volver a visitar las tres ciudades, pero por separado. Nosotros no hablamos inglés muy bien, en Roma la gente nos entendía, pero en París y en Ámsterdam nos resultó bastante difícil hablar con la gente. B. ANA Era la primera vez que viajaba sola y la verdad es que me gustó mucho la experiencia. Estuve en el norte de España haciendo el Camino de Santiago, un peregrinaje muy popular. En total, yo caminé unos ochocientos kilómetros. Viajar en solitario es algo que recomiendo a todo el mundo, te ayuda a conocerte a ti mismo. Las sensaciones que tuve cuando llegué a la catedral de Santiago son imposibles de describir con palabras, es algo mágico. Durante el Camino de Santiago conocí a muchísima gente muy interesante. Ahora seguimos en contacto, hemos creado un grupo de Whatsapp y estamos planeando más viajes juntos. 22 MODELO 1 TEXTOS C. EDU Y BEA Mi novio Edu quiso hacerme una sorpresa por mi cumpleaños y me llevó a Sierra Nevada. Su intención era muy buena, pero el viaje resultó ser un desastre. Estuvimos en una zona de alta montaña en medio de una tormenta, llovió sin parar durante cuatro días.. Fue horrible, solo salimos una vez del hotel y fue para buscar una farmacia, no sé qué comí o bebí, pero tuve diarrea durante tres días. Además, nuestro coche no funcionaba bien y no pudimos volver el día que teníamos pensado, tuve que llamar a mi jefe para decirle que no podía volver a casa y tampoco podía ir al trabajo. La verdad es que no le recomiendo este tipo de viaje a nadie, creo que voy a estar un largo periodo de tiempo sin ir a la montaña. 23",
       "options": [
         {
           "key": "A",
-          "text": "A) Ana (religiosa)"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Luis (montana)"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Carmen (piso centro)"
-        },
-        {
-          "key": "D",
-          "text": "D) Pablo (profesor)"
-        },
-        {
-          "key": "E",
-          "text": "E) Elena (tienda)"
-        },
-        {
-          "key": "F",
-          "text": "F) Javier (medicina)"
-        },
-        {
-          "key": "G",
-          "text": "G) Marta (cocinar)"
+          "text": "C) C"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "cuerpo": "Siete personas nos cuentan algo sobre su vida diaria.\nAna: Todos los domingos voy a misa con mi familia. Soy una persona muy religiosa.\nLuis: Me encanta la montaña. El mes pasado hice una ruta de tres dias por los Pirineos.\nCarmen: Vivo en un piso pequeno en el centro. Antes tenia una casa grande en las afueras pero prefiero estar cerca del trabajo.\nPablo: Soy profesor de matematicas. Me gusta mucho mi trabajo porque puedo ayudar a los jovenes.\nElena: Trabajo en una tienda de ropa. Atiendo a los clientes y organizo los escaparates.\nJavier: Estudio Medicina. Quiero ser medico para ayudar a la gente, como mi padre.\nMarta: Cocino todos los dias en casa. No me gusta comer en restaurantes, prefiero la comida casera.",
-      "explanation": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 3\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nPREGUNTAS\nC. EDU\nA. RAÚL B. ANA Y\nBEA\n14. ¿Quién dice que no le gustó su viaje?\n15. ¿Quién estuvo en varios países?\n16. ¿Quién viajó sin acompañante?\n17. ¿Quién hizo amigos durante el viaje?\n18. ¿Quién tuvo problemas de salud?\n19. ¿Quién tuvo problemas para\ncomunicarse con otras personas?\n21\nMODELO 1\nTEXTOS\nA. RAÚL\nHace dos meses estuve con mi familia en\nRoma, París y Ámsterdam. Queríamos conocer\nla cultura de las tres ciudades, así que\nvisitamos los museos y monumentos más\nimportantes de cada una de ellas. Teníamos\nmuchos lugares que visitar y poco tiempo, por\neso, fuimos con prisas todos los días.\nNo fue un viaje muy relajante, pero\ndescubrimos muchísimos lugares interesantes.\nEn el futuro, me gustaría volver a visitar las tres\nciudades, pero por separado. Nosotros no\nhablamos inglés muy bien, en Roma la gente\nnos entendía, pero en París y en Ámsterdam\nnos resultó bastante difícil hablar con la gente.\nB. ANA\nEra la primera vez que viajaba sola y la\nverdad es que me gustó mucho la\nexperiencia. Estuve en el norte de España\nhaciendo el Camino de Santiago, un\nperegrinaje muy popular. En total, yo\ncaminé unos ochocientos kilómetros.\nViajar en solitario es algo que recomiendo\na todo el mundo, te ayuda a conocerte a ti\nmismo.\nLas sensaciones que tuve cuando llegué a la catedral de Santiago son\nimposibles de describir con palabras, es algo mágico.\nDurante el Camino de Santiago conocí a muchísima gente muy interesante.\nAhora seguimos en contacto, hemos creado un grupo de Whatsapp y\nestamos planeando más viajes juntos.\n22\nMODELO 1\nTEXTOS\nC. EDU Y BEA\nMi novio Edu quiso hacerme una sorpresa\npor mi cumpleaños y me llevó a Sierra\nNevada. Su intención era muy buena, pero\nel viaje resultó ser un desastre. Estuvimos\nen una zona de alta montaña en medio de\nuna tormenta, llovió sin parar durante\ncuatro días..\nFue horrible, solo salimos una vez del hotel\ny fue para buscar una farmacia, no sé qué\ncomí o bebí, pero tuve diarrea durante tres\ndías. Además, nuestro coche no\nfuncionaba bien y no pudimos volver el día\nque teníamos pensado, tuve que llamar a\nmi jefe para decirle que no podía volver a\ncasa y tampoco podía ir al trabajo. La\nverdad es que no le recomiendo este tipo\nde viaje a nadie, creo que voy a estar un\nlargo periodo de tiempo sin ir a la\nmontaña.\n23",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 20,
@@ -862,30 +689,34 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         20,
         25
       ],
-      "answer": "B",
-      "prompt": "Que actividad es para ninos de 6 a 10 anos?",
+      "answer": "A",
+      "prompt": "El texto dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) en España hace mucho sol."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) el sol de España no calienta."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) en invierno no hace sol en España. 25 MODELO 1"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: B"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 21,
@@ -894,29 +725,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Que actividad necesita ordenador?",
+      "prompt": "Cuando hace sol en invierno…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) todo el mundo va a Fuengirola."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) no se pasa tanto calor como en verano."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) los españoles sufren más que en verano."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 22,
@@ -925,29 +760,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Que actividad es gratuita con inscripcion?",
+      "prompt": "Canarias…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) está en el extranjero."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) tiene demasiados españoles."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) le gusta mucho a la gente de otros países."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 23,
@@ -956,29 +795,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "Que dias abre la biblioteca en agosto?",
+      "prompt": "Israel es interesante para disfrutar…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) del fondo del mar."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) de una buena acampada."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) de temperaturas muy cambiantes."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: A"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 24,
@@ -987,29 +830,33 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "Quien puede participar en el curso de informatica?",
+      "prompt": "Marrakech…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) tiene playas espectaculares."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) es un plato típico de la gastronomía marroquí."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) está en Marruecos."
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: C"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 1,
       "tarea": 4,
       "q": 25,
@@ -1018,1090 +865,1222 @@ window.DELE_BANK_A2_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "Que dia hay taller de lectura?",
+      "prompt": "Tienes el desayuno, la comida y la cena…",
       "options": [
         {
           "key": "A",
-          "text": "A) Taller de lectura para ninos"
+          "text": "A) típicos de Tailandia en cualquier restaurante."
         },
         {
           "key": "B",
-          "text": "B) Curso de informatica para mayores"
+          "text": "B) incluidos en el precio de la mayoría de hoteles en México."
         },
         {
           "key": "C",
-          "text": "C) Club de ajedrez los sabados"
+          "text": "C) en las películas que hablan de Panamá. 26"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "La biblioteca municipal ha anunciado nuevas actividades para este verano.\nEn primer lugar, todos los lunes y miercoles de 10:00 a 11:30 habra un taller de lectura para ninos de 6 a 10 anos. Los ninos podran leer cuentos y hacer dibujos sobre las historias.\nLos martes y jueves por la tarde se ofrecera un curso de informatica basica para personas mayores. No es necesario traer ordenador, la biblioteca tiene equipos disponibles.\nLos sabados por la manana habra un club de ajedrez para todas las edades. Es una actividad gratuita, pero hay que inscribirse antes en la recepcion de la biblioteca.\nAdemas, durante todo el mes de agosto, la biblioteca permanecera abierta tambien los domingos por la manana, de 9:00 a 13:00.",
-      "explanation": "Respuesta: B"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "MODELO 1\nTarea 4\n\nC).\nMarque las opciones elegidas en la Hoja de respuestas.\nVacaciones al sol en invierno\nSe pueden realizar algunas mini vacaciones para no tener la depresión de la\nvuelta a la rutina. Para las personas que son amantes del sol, vivir en España\nes sinónimo de disfrutar de ello prácticamente todo el año.\nPor eso, una opción es disfrutar de la playa alojándose en un hotel en\nFuengirola (Málaga). Sin embargo, también encontramos más lugares donde\npoder disfrutar del sol en invierno. ¿Quieres conocer cuáles son? En este\nartículo te los mostramos.\nEl sol en invierno es otro mundo. Se trata de una verdadera maravilla puesto\nque nos permite disfrutar de él sin sufrir el calor del verano.\nExisten muchos lugares que merecen una mención especial. Este es el caso\nde Canarias, que es uno de los destinos más queridos, no solo para los\nespañoles, sino también para los extranjeros. Su oferta de sol y playa, unida\na su gastronomía, hacen que el disfrute esté asegurado.\nSin embargo, hay personas que prefieren salir fuera de nuestro país para\ndisfrutar de unos días de descanso. Israel es otro sitio muy interesante.\nGeneralmente, las temperaturas rondan los 30 grados durante todo el año y\ntiene una oferta de ocio increíble,además de ser diferente a los demás\ndestinos. Si quieres bucear y observar los corales del Mar Rojo, este es tu\ndestino.\n24\nMODELO 1\nPor otra parte, en Marruecos se pueden conocer nuevas culturas sin viajar\ndemasiadas horas en avión. Es un destino curioso, bonito y diferente, donde\npodemos vivir multitud de aventuras, como, por ejemplo, en Marrakech. Se\ntrata de un lugar con mucho encanto, destacado por sus diferentes culturas\ny gastronomía singular.\nPara las personas más valientes y aventureras, un buen plan puede ser\nvisitar las islas de Tailandia, son un lugar ideal. Allí puedes disfrutar de\nmaravillosas playas, una gastronomía exótica y una cultura por descubrir que\nte va a encantar.\nNos trasladamos a América para hablar de México, otro de los destinos más\nespeciales. Aquí, la oferta estrella son los hoteles “todo incluido”, para así\nrelajarse al máximo y disfrutar del sol y la buena vida.\nPor otra parte, en Panamá puedes encontrar playas de película de color azul\nclaro y arena blanca para tomar tanto el sol como fotografías.\nAhora que conoces cuáles son las opciones más recomendables para poder\ndisfrutar de tus vacaciones al sol, es el momento de planificar los días, hacer\ntu maleta y meter en ella las ganas de desconectar por unos días y disfrutar\nde todos los beneficios que tiene para el cuerpo calentarse bajo la luz del\nsol.(Adaptado de www.elblogdeviajes.com)",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 1,
       "q_range": [
         1,
-        7
+        6
       ],
       "answer": "A",
-      "prompt": "Para que llama la mujer al medico?",
+      "prompt": "¿Dónde quiere pasar las vacaciones la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) Para pedir una cita"
+          "text": "A) Playa (playa con concha marina)"
         },
         {
           "key": "B",
-          "text": "B) Para cancelar una cita"
+          "text": "B) Montaña (montañas nevadas)"
         },
         {
           "key": "C",
-          "text": "C) Para preguntar el horario"
+          "text": "C) Ciudad (ciudad con rascacielos)"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Buenos dias, llamaba para pedir cita con el doctor Garcia. Recepcionista: Le va bien el jueves a las diez? Mujer: Si, perfecto. Recepcionista: Muy bien, reserva confirmada.",
-      "explanation": "正确答案: A。"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "MUJER: Cariño, ¿sabes ya cuándo vas a tener vacaciones?\nHOMBRE: Sí, del 27 de junio al 12 de julio.\nMUJER: ¡Perfecto! ¿Qué te parece si vamos a la costa este año?\nHOMBRE: Bueno… Yo pensaba ir al pueblo de mi familia, en las montañas,\npara ver a mis abuelos…\nMUJER: A ellos podemos enviarles fotos de la piscina del hotel. Además, me\nhe comprado un bañador nuevo, ya está decidido, nos vamos a la costa.\nHOMBRE: Muy bien, voy a buscar un hotel en Internet.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 2,
       "q_range": [
         1,
-        7
+        6
       ],
       "answer": "C",
-      "prompt": "De que hablan los dos amigos?",
+      "prompt": "¿Qué va a comer la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) De un partido de futbol"
+          "text": "A) Ensalada (ensalada mixta)"
         },
         {
           "key": "B",
-          "text": "B) De un examen"
+          "text": "B) Sopa (sopa de calabaza)"
         },
         {
           "key": "C",
-          "text": "C) De una fiesta de cumpleanos"
+          "text": "C) Croquetas (croquetas fritas)"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Hombre: Vas a ir a la fiesta de cumpleanos de Marta el sabado? Mujer: Claro, no me lo pierdo. Que le vamos a regalar? Hombre: Podemos comprarle algo entre los dos. Mujer: Buena idea, un libro o unos pendientes?",
-      "explanation": "正确答案: C。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "HOMBRE: Bienvenida al restaurante El Botxo.\nMUJER: Buenos días, ¿qué tienen de primeros? HOMBRE: Pues tenemos sopa\nde verduras, ensalada de queso y croquetas de jamón.\nMUJER: ¿Las croquetas son caseras?\nHOMBRE: Sí, las prepara nuestra cocinera todas las mañanas.\nMUJER: Pues creo que voy a probar las croquetas.\nHOMBRE: Buena elección, enseguida se las traigo.\n163\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 3,
       "q_range": [
         1,
-        7
+        6
       ],
       "answer": "B",
-      "prompt": "Que informacion pide el hombre en la estacion?",
+      "prompt": "¿A qué hora llega el tren a la estación?",
       "options": [
         {
           "key": "A",
-          "text": "A) El precio del billete"
+          "text": "A) 11:45"
         },
         {
           "key": "B",
-          "text": "B) El horario del proximo tren"
+          "text": "B) 12:15"
         },
         {
           "key": "C",
-          "text": "C) El numero del anden"
+          "text": "C) 10:30"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Hombre: Perdone, a que hora sale el proximo tren a Barcelona? Empleado: A las 14:15 del anden numero 3. Hombre: Gracias. Queda mucho tiempo? Empleado: Unos veinte minutos.",
-      "explanation": "正确答案: B。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "MUJER: Buenos días, ¿en qué puedo ayudarle?\nHOMBRE: Buenos días, ¿sabe a qué hora llega el tren de Valencia?\nMUJER: Hoy hay dos trenes. ¿Quiere información sobre el Talgo o el AVE?\nHOMBRE: El Talgo, creo que salió de Valencia a las 10:30.\nMUJER: Exacto, pues tiene planeada su llegada en 20 minutos, a las 12:15.\nHOMBRE: Muchas gracias.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 4,
       "q_range": [
         1,
-        7
+        6
       ],
       "answer": "A",
-      "prompt": "Que busca la senora en la tienda?",
+      "prompt": "¿Qué desea la mujer?",
       "options": [
         {
           "key": "A",
-          "text": "A) Un vestido para una boda"
+          "text": "A) Dinero (mujer con dinero en efectivo)"
         },
         {
           "key": "B",
-          "text": "B) Unos zapatos para una fiesta"
+          "text": "B) Coche (coche deportivo amarillo)"
         },
         {
           "key": "C",
-          "text": "C) Un regalo para su hija"
+          "text": "C) Móvil (teléfono móvil)"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Senora: Buenos dias, estoy buscando un vestido para la boda de mi sobrina. Dependienta: Tenemos varios modelos muy bonitos. De que color lo prefiere? Senora: Azul o verde. Dependienta: Mire estos de la nueva coleccion.",
-      "explanation": "正确答案: A。"
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "HOMBRE: Supercar, dígame.\nMUJER: Buenos días, ¿es la empresa de alquiler de coches?\nHOMBRE: Sí, ¿en qué puedo ayudarle?\nMUJER: Hace dos días alquilé un coche, no para de tener problemas y no\npuedo utilizarlo.\nHOMBRE: De acuerdo, vamos a intentar encontrar una solución\nMUJER: No, no quiero buscar ninguna solución, ni tampoco un segundo\nvehículo, quiero mi dinero, todo lo que pagué, este coche no funciona.\n164\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 5,
       "q_range": [
         1,
-        7
+        6
       ],
-      "answer": "C",
-      "prompt": "Que necesita el estudiante para usar el ordenador de la biblioteca?",
+      "answer": "B",
+      "prompt": "¿Cómo se puede pagar en la tienda?",
       "options": [
         {
           "key": "A",
-          "text": "A) Pagar una tarifa"
+          "text": "A) Tarjeta (pago con tarjeta en datáfono)"
         },
         {
           "key": "B",
-          "text": "B) El permiso del profesor"
+          "text": "B) Efectivo (dinero en efectivo / billetes)"
         },
         {
           "key": "C",
-          "text": "C) El carne de la universidad"
+          "text": "C) Cheque (pago con cheque)"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Estudiante: Hola, puedo usar uno de los ordenadores? Bibliotecaria: Si, pero necesitas tu carne de la universidad. Estudiante: Aqui lo tengo. Bibliotecaria: Perfecto, el ordenador numero 5 esta libre.",
-      "explanation": "正确答案: C。"
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "HOMBRE: Buenos días, ¿tenéis esta misma chaqueta, pero en una talla más\ngrande?\nMUJER: Sí, aquí tienes, la talla XL.\nHOMBRE: Perfecto, ¿dónde puedo probármela?\nMUJER: Aquí mismo, no tenemos probadores, la tienda es demasiado\npequeña.\nHOMBRE: Muy bien, me gusta mucho, me la llevo. ¿Puedo pagar con tarjeta?\nMUJER: No, lo siento mucho, solo aceptamos pagos en efectivo.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 1,
       "q": 6,
       "q_range": [
         1,
-        7
+        6
       ],
-      "answer": "B",
-      "prompt": "Cuando tienen que terminar el proyecto?",
+      "answer": "C",
+      "prompt": "¿En qué transporte viaja el hijo?",
       "options": [
         {
           "key": "A",
-          "text": "A) El lunes"
+          "text": "A) Taxi (taxi amarillo)"
         },
         {
           "key": "B",
-          "text": "B) Antes del viernes"
+          "text": "B) Tren (tren de alta velocidad)"
         },
         {
           "key": "C",
-          "text": "C) El proximo mes"
+          "text": "C) Avión (avión comercial)"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Has terminado tu parte del proyecto? Hombre: Casi, me queda poco. Mujer: Date prisa, tenemos que entregarlo antes del viernes. Hombre: No te preocupes, manana lo termino.",
-      "explanation": "正确答案: B。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "HOMBRE: ¿Le has pagado al taxista?\nMUJER: Sí, ya estamos aquí. Ahora tenemos que buscar a nuestro hijo.\nHOMBRE: No veo a nadie, ¿estás segura de que llegaba a las 9:00?\nMUJER: Sí, eso me dijo ayer.\nHOMBRE: ¿Pero estás segura? ¿Lo has mirado en Internet?\nMUJER: No es necesario, tranquilo.\nHOMBRE: Espera, vamos a confirmarlo, ¿qué pone allí?\nMUJER: El vuelo 743 procedente de Alicante aterriza a las 9:00, mira, allí\nestán los pasajeros.\nHOMBRE: ¡Allí está Marcos!\n165\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": "",
+      "_image_options": true
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
-      "tarea": 1,
+      "tarea": 2,
       "q": 7,
       "q_range": [
-        1,
-        7
+        7,
+        12
       ],
-      "answer": "A",
-      "prompt": "Que curso de cocina le interesa a la mujer?",
+      "answer": "C",
+      "prompt": "El anuncio dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) El de cocina italiana"
+          "text": "A) los hoteles de la Costa Blanca son los mejores."
         },
         {
           "key": "B",
-          "text": "B) El de cocina japonesa"
+          "text": "B) la Costa Blanca va a tener nuevos hoteles."
         },
         {
           "key": "C",
-          "text": "C) El de reposteria"
+          "text": "C) puedes pagar menos por la habitación de hotel. AUDIO 2"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Buenos dias, llamaba para informarme sobre los cursos de cocina. Recepcionista: Tenemos de cocina italiana, japonesa y de reposteria. Mujer: Me interesa el de cocina italiana. Cuando empieza? Recepcionista: El proximo lunes.",
-      "explanation": "正确答案: A。"
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "Los hoteles de la Costa Blanca están de rebajas, en sus páginas web oficiales\nofrecen descuentos de hasta el 50%. ¿Qué hay que hacer para poder\ndisfrutar de ellos? Nada, simplemente debes reservar tu habitación hasta el\ndía 30 de este mes y disfrutar del descuento.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 2,
       "q": 8,
       "q_range": [
-        8,
-        13
+        7,
+        12
       ],
-      "answer": "F",
-      "prompt": "Tuvo un accidente hace poco.",
+      "answer": "B",
+      "prompt": "El viaje…",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) es a las montañas."
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) incluye el desayuno, la comida y la cena."
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) es más barato en invierno. 30 MODELO 1 AUDIO 3"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "¡Tenemos un ganador! Enhorabuena Felipe García, has ganado un fantástico\nviaje para dos personas a la isla de Lanzarote, en un fantástico hotel, con\npensión completa y con excursiones a los lugares más interesantes de la\nisla. Y a vosotros os digo: ¡Mucha suerte! ¡Seguid participando en el\nconcurso!",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 2,
       "q": 9,
       "q_range": [
-        8,
-        13
+        7,
+        12
       ],
-      "answer": "D",
-      "prompt": "Cambio de trabajo por salud.",
+      "answer": "A",
+      "prompt": "Algunos pasajeros…",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) van a viajar en otros transportes, como por ejemplo, autobuses."
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) han cancelado sus vuelos porque no querían viajar."
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) han bloqueado la terminal del aeropuerto. AUDIO 4"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "Noticia de última hora, todos los vuelos del aeropuerto de Barajas han sido\ncancelados por alerta terrorista, los pasajeros están saliendo en estos\nmomentos de la terminal y no saben cuándo van a poder volver. Las líneas\naéreas están buscando alternativas y ofrecen a muchos pasajeros el\ntransporte por carretera hasta los destinos más cercanos.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 2,
       "q": 10,
       "q_range": [
-        8,
-        13
+        7,
+        12
       ],
-      "answer": "A",
-      "prompt": "Se mudo a otra ciudad.",
+      "answer": "B",
+      "prompt": "“El glotón” es…",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) una sala de banquetes para bodas y comuniones."
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) un restaurante de comida rápida."
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) una cafetería donde se puede comer carne de toro. AUDIO 5"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "Restaurante “El Glotón”: hamburguesas, perritos calientes, pizzas,\nsándwiches, patatas fritas y mucho más. Ahora también para llevar y a\ndomicilio. El sabor más intenso servido en tu mesa en pocos minutos. Ven a\nvisitarnos, estamos enfrente de la plaza de toros. Abrimos todos los días.\n166\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 2,
       "q": 11,
       "q_range": [
-        8,
-        13
+        7,
+        12
       ],
-      "answer": "E",
-      "prompt": "Estudia por las noches.",
+      "answer": "C",
+      "prompt": "El anuncio dice que…",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) el concierto fue un éxito."
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) Maná es un grupo de la ciudad."
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) las entradas son más baratas si se compran antes. AUDIO 6"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "Ya a la venta las entradas para el concierto de Maná del próximo 23 de enero,\nno te pierdas esta oportunidad única de ver al fantástico grupo mexicano en\nnuestra ciudad. Precio de las entradas hasta un día antes del concierto: 15 €.\nPrecio de las entradas en taquilla el día del concierto: 20 €",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 2,
       "q": 12,
       "q_range": [
-        8,
-        13
+        7,
+        12
       ],
-      "answer": "C",
-      "prompt": "Hace deporte por recomendacion medica.",
+      "answer": "A",
+      "prompt": "El museo…",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) tiene redes sociales."
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) abre todas las noches del año."
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) se cerró el sábado pasado. 31"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "El pasado sábado las puertas del museo Nacional de Historia estuvieron\nabiertas durante toda la noche. Miles de turistas disfrutaron del arte de forma\ncompletamente gratuita, esta idea ha gustado tanto que en la cuenta oficial de\nTwitter del museo ya han dicho que lo van a hacer como mínimo una vez al\naño.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
-      "tarea": 2,
+      "tarea": 3,
       "q": 13,
       "q_range": [
-        8,
-        13
+        13,
+        18
       ],
-      "answer": "B",
-      "prompt": "Trabaja desde casa.",
+      "answer": "C",
+      "prompt": "Ha viajado en solitario.",
       "options": [
         {
           "key": "A",
-          "text": "A) Marcos"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Lucia"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Javier"
-        },
-        {
-          "key": "D",
-          "text": "D) Carmen"
-        },
-        {
-          "key": "E",
-          "text": "E) Andres"
-        },
-        {
-          "key": "F",
-          "text": "F) Elena"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice6",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Seis personas nos cuentan algo sobre su vida. Persona 1 (Marcos): Me mude a Barcelona por trabajo hace tres meses. Persona 2 (Lucia): Desde que empece a trabajar desde casa soy mucho mas feliz. Persona 3 (Javier): Despues del accidente de coche, el medico me recomendo hacer natacion. Persona 4 (Carmen): Trabajaba en una fabrica pero el ambiente era malo para mis pulmones. Ahora trabajo en una oficina. Persona 5 (Andres): Estudio marketing por las noches despues de trabajar. Persona 6 (Elena): Hace dos meses tuve un pequeno accidente con la bicicleta."
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 3,
       "q": 14,
       "q_range": [
-        14,
-        19
+        13,
+        18
       ],
-      "answer": "E",
-      "prompt": "Va al supermercado los sabados.",
+      "answer": "A",
+      "prompt": "Ha hecho un examen hoy.",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Marta"
-        },
-        {
-          "key": "D",
-          "text": "D) Diego"
-        },
-        {
-          "key": "E",
-          "text": "E) Laura"
-        },
-        {
-          "key": "F",
-          "text": "F) Sergio"
-        },
-        {
-          "key": "G",
-          "text": "G) Claudia"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 3,
       "q": 15,
       "q_range": [
-        14,
-        19
+        13,
+        18
       ],
-      "answer": "F",
-      "prompt": "No le gusta cocinar.",
+      "answer": "B",
+      "prompt": "Ha disfrutado de la gastronomía.",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Marta"
-        },
-        {
-          "key": "D",
-          "text": "D) Diego"
-        },
-        {
-          "key": "E",
-          "text": "E) Laura"
-        },
-        {
-          "key": "F",
-          "text": "F) Sergio"
-        },
-        {
-          "key": "G",
-          "text": "G) Claudia"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 3,
       "q": 16,
       "q_range": [
-        14,
-        19
+        13,
+        18
       ],
-      "answer": "C",
-      "prompt": "Come mucha fruta y verdura.",
+      "answer": "A",
+      "prompt": "Estuvo hace tiempo en la Alhambra.",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Marta"
-        },
-        {
-          "key": "D",
-          "text": "D) Diego"
-        },
-        {
-          "key": "E",
-          "text": "E) Laura"
-        },
-        {
-          "key": "F",
-          "text": "F) Sergio"
-        },
-        {
-          "key": "G",
-          "text": "G) Claudia"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 3,
       "q": 17,
       "q_range": [
-        14,
-        19
+        13,
+        18
       ],
-      "answer": "G",
-      "prompt": "Le encantan los dulces.",
+      "answer": "A",
+      "prompt": "Va a ir a la costa con su familia..",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Marta"
-        },
-        {
-          "key": "D",
-          "text": "D) Diego"
-        },
-        {
-          "key": "E",
-          "text": "E) Laura"
-        },
-        {
-          "key": "F",
-          "text": "F) Sergio"
-        },
-        {
-          "key": "G",
-          "text": "G) Claudia"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 3,
       "q": 18,
       "q_range": [
-        14,
-        19
+        13,
+        18
       ],
-      "answer": "A",
-      "prompt": "Bebe dos litros de agua al dia.",
+      "answer": "C",
+      "prompt": "Ha comprado muchos recuerdos del viaje. 32",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) A"
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) B"
         },
         {
           "key": "C",
-          "text": "C) Marta"
-        },
-        {
-          "key": "D",
-          "text": "D) Diego"
-        },
-        {
-          "key": "E",
-          "text": "E) Laura"
-        },
-        {
-          "key": "F",
-          "text": "F) Sergio"
-        },
-        {
-          "key": "G",
-          "text": "G) Claudia"
+          "text": "C) NINGUNO"
         }
       ],
-      "type": "choice7",
+      "type": "choice3",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "JOSÉ: Buenos días, ¿qué tal el fin de semana?\nEVA: Pues muy bien, estuve en Granada con unos amigos. ¿Y tú?\nJOSÉ: Yo me quedé en casa, tenía que estudiar.\nEVA: Vaya, ¿y cuándo tienes el examen?\nJOSÉ: Lo he hecho esta mañana, creo que me ha salido bastante bien. Pero\nháblame de tu viaje, ¿cómo es Granada?\nEVA: Pues me ha gustado muchísimo, he probado tapas deliciosas en un\nmontón de bares.\nJOSÉ: Sí, Granada es famosa por sus bares de cañas y tapas. ¿Y qué tal la\nAlhambra? ¿Te gustó?\n167\nSOLUCIONES\nEVA: La Alhambra… Bueno, no te lo vas a creer, pero no tuvimos tiempo de ir\na visitarla.\nJOSÉ: Pues muy mal, es preciosa, yo estuve allí con mi familia cuando era\npequeño y me encantó, me gustaría volver.\nEVA: Pues podemos ir juntos, ¿tienes algún plan para el próximo fin de\nsemana?\nJOSÉ: Sí, voy a ir con mis tíos a la playa. Queremos hacer surf.\nEVA: Me encanta hacer surf, pero no sé si es muy buena idea ir el próximo\nfin de semana. ¿Has visto la previsión del tiempo? Dicen que va a haber\ntormentas por todo el país.\nJOSÉ: A nosotros no nos importa, vamos a ir igualmente, uno de mis tíos es\nsocorrista, así que, si tenemos problemas, él nos puede salvar.\nEVA: Bueno, veo que eres bastante optimista, tened mucho cuidado, yo creo\nque me voy a quedar en casa, tengo que limpiar un poco.\nJOSÉ: Muy bien, pero si cambias de opinión, sabes que estás invitada, puedes\nvenir con nosotros.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
-      "tarea": 3,
+      "tarea": 4,
       "q": 19,
       "q_range": [
-        14,
-        19
+        19,
+        25
       ],
-      "answer": "B",
-      "prompt": "Nunca desayuna.",
+      "answer": "E",
+      "prompt": "Mensaje 1",
       "options": [
         {
           "key": "A",
-          "text": "A) Alicia"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Pablo"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) Marta"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) Diego"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Laura"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
         },
         {
           "key": "F",
-          "text": "F) Sergio"
+          "text": "F) Tiene un problema con una rueda."
         },
         {
           "key": "G",
-          "text": "G) Claudia"
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice7",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Locutor: Varias personas hablan sobre sus habitos alimenticios. Alicia: Intento beber dos litros de agua al dia. Pablo: No suelo desayunar. Solo tomo un cafe. Marta: Como mucha fruta y verdura. Laura: Voy al supermercado todos los sabados. Sergio: No me gusta nada cocinar. Claudia: Me encantan los dulces."
+      "explanation": "Respuesta correcta: E",
+      "cuerpo": "",
+      "transcript": "Señor, le informo de que hemos recibido el pago y su reserva se ha realizado\ncon éxito, su habitación ya está lista. Hemos añadido una cama extra, como\nusted nos pidió. Le esperamos.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 20,
       "q_range": [
-        20,
+        19,
         25
       ],
       "answer": "A",
-      "prompt": "Que dia van a quedar?",
+      "prompt": "Mensaje 2",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: A",
+      "cuerpo": "",
+      "transcript": "Señores pasajeros, lamentamos informarles de que, por motivos de\nseguridad, el tren debe permanecer parado durante 40 minutos, llegaremos\ncon retraso a la estación. Disculpen las molestias.\n168\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 21,
       "q_range": [
-        20,
+        19,
         25
       ],
-      "answer": "D",
-      "prompt": "Donde van a encontrarse?",
+      "answer": "I",
+      "prompt": "Mensaje 3",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: I",
+      "cuerpo": "",
+      "transcript": "Escúchame bien, Marta, tienes un grupo de turistas a las ocho de la tarde,\nquieren visitar el centro de la ciudad y el jardín botánico. Enséñales también\nun poco del barrio árabe. Es un grupo de 15 personas, todos ellos jubilados.\nHablan solo en inglés. Creo que te van a dejar buenas propinas.",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 22,
       "q_range": [
-        20,
+        19,
         25
       ],
-      "answer": "E",
-      "prompt": "Que van a hacer despues de comer?",
+      "answer": "B",
+      "prompt": "Mensaje 4",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: B",
+      "cuerpo": "",
+      "transcript": "¿Has reservado ya las entradas para el teatro? Recuerda que vamos a ir con\nmis primos pequeños, por eso es mejor si tenemos las entradas cerca del\nescenario. Llámame después de la reunión. ¡Un beso!",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 23,
       "q_range": [
-        20,
+        19,
         25
       ],
-      "answer": "B",
-      "prompt": "Que pelicula quieren ver?",
+      "answer": "H",
+      "prompt": "Mensaje 5",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: H",
+      "cuerpo": "",
+      "transcript": "Este año tenemos que ir al hotel Varadero. He oído que tienen una\npromoción especial, por 50 € al día te incluyen: la habitación para dos\npersonas, el desayuno, la comida, la cena y todas las bebidas en el bar de la\npiscina. Está muy bien, ¿no crees?",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 24,
       "q_range": [
-        20,
+        19,
         25
       ],
       "answer": "C",
-      "prompt": "A que hora empieza la pelicula?",
+      "prompt": "Mensaje 6",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: C",
+      "cuerpo": "",
+      "transcript": "Hola mamá, estamos en Ibiza, lo estoy pasando en grande con mis amigos.\nAnoche estuve toda la noche bailando en una discoteca y hoy vamos a\nalquilar unas motos de agua. Es el mejor viaje de mi vida. Os quiero mucho,\n¡adiós!\n169\nSOLUCIONES",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 2,
       "tarea": 4,
       "q": 25,
       "q_range": [
-        20,
+        19,
         25
       ],
-      "answer": "A",
-      "prompt": "Como van a volver a casa?",
+      "answer": "D",
+      "prompt": "Mensaje 7",
       "options": [
         {
           "key": "A",
-          "text": "A) El sabado por la manana"
+          "text": "A) Va a llegar más tarde de lo esperado."
         },
         {
           "key": "B",
-          "text": "B) Ver una pelicula de accion"
+          "text": "B) Van a ver un espectáculo con unos familiares."
         },
         {
           "key": "C",
-          "text": "C) A las seis y media"
+          "text": "C) Está disfrutando como nunca."
         },
         {
           "key": "D",
-          "text": "D) En la plaza del Ayuntamiento"
+          "text": "D) Va a pagar más."
         },
         {
           "key": "E",
-          "text": "E) Ir al cine"
+          "text": "E) Es un mensaje de un trabajador de un alojamiento."
+        },
+        {
+          "key": "F",
+          "text": "F) Tiene un problema con una rueda."
+        },
+        {
+          "key": "G",
+          "text": "G) Sus familiares están muy enfermos."
+        },
+        {
+          "key": "H",
+          "text": "H) Habla de un alojamiento con todo incluido."
+        },
+        {
+          "key": "I",
+          "text": "I) El mensaje es para una chica que trabaja como guía."
+        },
+        {
+          "key": "J",
+          "text": "J) Ha comido demasiado y no se siente bien. 33 MODELO 1"
         }
       ],
-      "type": "choice5",
+      "type": "choice10",
       "_v5": true,
-      "transcript": "Hombre: Quedamos el sabado? Mujer: Vale, por la manana? Hombre: Si, a las once en la plaza del Ayuntamiento. Mujer: Perfecto. Podemos comer algo y luego ir al cine. Hombre: Buena idea. Que pelicula quieres ver? Mujer: La nueva de accion. Hombre: La ponen a las seis y media. Mujer: Genial. Luego volvemos en metro."
+      "explanation": "Respuesta correcta: D",
+      "cuerpo": "",
+      "transcript": "Le recordamos que no ha devuelto la bicicleta antes de las ocho de la tarde,\npor esto, va a tener que pagar un día más de alquiler, además de una\npenalización de 10 €.\n170",
+      "audio": "",
+      "instrucciones": "",
+      "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 3,
       "tarea": 1,
       "q": 1,
       "q_range": [
         1,
-        1
+        2
       ],
       "answer": "",
-      "prompt": "Escribir un correo a un amigo sobre planes de vacaciones",
+      "prompt": "Tarea 1",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Escriba un correo contando sus planes de vacaciones. 60-80 palabras.",
-      "modelo_essay": "Hola, Carlos! Como estas? Te escribo para contarte mis planes para el verano. Voy a ir a la playa con mi familia en agosto. Vamos a alquilar un apartamento en Valencia durante una semana. Me gusta mucho Valencia porque hay playa y monumentos. Tu que vas a hacer? Si quieres, puedes venir con nosotros unos dias. Seria genial! Escribeme pronto. Un abrazo, Miguel.",
-      "rango_palabras": "60-80"
+      "explanation": "",
+      "cuerpo": "",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "INSTRUCCIONES\nUn amigo le escribe para proponerle un viaje.\nHola,\nSe acercan las vacaciones de verano y todavía no tenemos nada\nreservado. Creo que deberíamos ir pensando ya en un destino. ¿Qué te\nparece? ¿Dónde podemos ir?\nNos vemos un día de esta semana y reservamos ya el alojamiento,\n¿vale?\nUn abrazo,\nAdrián\nConteste a su amigo. En el correo tiene que:\nsaludar;\nproponer un lugar para pasar las vacaciones;\nexplicar qué cosas interesantes tiene este lugar;\ndecir un día, un lugar y una hora para quedar;\nhacerle alguna pregunta y despedirse.\nNúmero de palabras recomendadas: entre 60 y 70.\n35\nMODELO 1\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n36\nMODELO 1",
+      "rango_palabras": "entre 60 y 70.",
+      "modelo_essay": "Hola Adrián,\n\n¡Qué buena idea! Sí, deberíamos reservar algo ya para las vacaciones de verano. Yo propongo ir a la playa de Cádiz, porque hace mucho sol y hay fiesta por las noches. Además, podemos alquilar un piso cerca del mar con varios amigos y así no gastamos mucho dinero. Allí podemos visitar el centro histórico, comer pescado fresco en los chiringuitos y disfrutar de las playas.\n\n¿Quedamos el jueves a las seis en la cafetería de siempre para hablar del alojamiento? ¿Te parece bien?\n\nUn abrazo,\nCarlos"
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 3,
       "tarea": 2,
       "q": 2,
       "q_range": [
-        2,
+        1,
         2
       ],
       "answer": "",
-      "prompt": "Describir una fotografia de vacaciones",
+      "prompt": "Tarea 2",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Describa una foto de sus ultimas vacaciones. 60-80 palabras.",
-      "modelo_essay": "En la fotografia se ve una playa preciosa con arena blanca y agua azul. En primer plano estan mis padres sentados en toallas, sonriendo. Detras se ve el mar y palmeras. Hace mucho sol. Esta foto es del verano pasado en Mallorca. Fue un viaje maravilloso. Nadamos mucho y comimos paella en un restaurante cerca del mar. Uno de los mejores dias de mis vacaciones.",
-      "rango_palabras": "60-80"
+      "explanation": "",
+      "cuerpo": "",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "INSTRUCCIONES\nElija solo una de las dos opciones. En cada opción tiene que tratar\ntodos los puntos.\nOPCIÓN 1\nEscriba un texto sobre sus pasadas vacaciones. Hable de:\ndónde estuvo, cuándo y con quién;\nqué hicieron (qué visitaron, qué comieron, etc.);\nqué cosas le gustaron (o no) y por qué;\nqué cosas compró y cuánto dinero gastó.\nOPCIÓN 2\nUn amigo suyo estuvo de viaje hace poco tiempo, sin embargo,\ntuvo varios problemas:\n37\nMODELO 1\nDebe escribir un texto sobre el viaje de su amigo, y decir:\ndónde estuvo;\nqué problemas tuvo;\ncómo se solucionaron estos problemas (o no).\nNúmero de palabras recomendadas: entre 70 y 80.\n38\nMODELO 1\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n______________________________________________________________________\n39",
+      "rango_palabras": "entre 70 y 80.",
+      "modelo_essay": "Mis pasadas vacaciones\n\nEl verano pasado fui a Valencia con mi novia durante dos semanas. Fuimos en coche y llegamos el primer día por la tarde. Nos alojamos en un pequeño apartamento cerca del centro, muy cómodo y barato.\n\nDurante las vacaciones hicimos muchas cosas: visitamos la Ciudad de las Artes y las Ciencias, fuimos a la playa de la Malvarrosa casi todos los días y comimos paella en un restaurante tradicional. También conocimos a unos amigos españoles que viven allí y nos llevaron de tapas por el barrio de El Carmen.\n\nLo que más me gustó fue la comida, especialmente la paella y los churros con chocolate. También me encantó el ambiente de la ciudad, muy alegre y relajado. Lo que menos me gustó fue el calor, porque a mediodía hacía más de treinta y cinco grados y no podíamos caminar mucho.\n\nRepetiría sin dudarlo, pero la próxima vez iría en primavera para no sufrir tanto calor."
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 4,
       "tarea": 1,
       "q": 1,
       "q_range": [
         1,
-        1
+        3
       ],
       "answer": "",
-      "prompt": "Presentacion personal",
+      "prompt": "Tarea 1",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Presentese: nombre, edad, estudios, gustos.",
-      "modelo_response": "Buenos dias. Me llamo Ana y tengo 22 anos. Soy estudiante de Turismo en la Universidad de Sevilla. Me gusta mucho viajar y conocer nuevos lugares. El ano pasado fui a Italia con mis amigas. Tambien me gusta nadar y jugar al tenis. En el futuro me gustaria trabajar en un hotel. Muchas gracias."
+      "explanation": "",
+      "cuerpo": "",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "INSTRUCCIONES\nUsted debe elegir una de las dos opciones y preparar una exposición\npara hablar de 2 a 3 minutos, siguiendo las pautas que se le dan. El\nentrevistador puede dar instrucciones, pero no interviene durante el\ndesarrollo de la tarea, ya que se trata de un monólogo.\nOPCIÓN 1\nEl turismo en su ciudad. Hable de:\nlos principales atractivos turísticos de su ciudad;\nlugares donde alojarse y comer en su ciudad;\nel tipo de turistas que visitan su ciudad (procedencia, edad, gustos, etc.);\nel dinero que se gasta un turista en su ciudad durante un día\n(aproximadamente), y qué cosas hace con este dinero;\nun plan de viaje para un fin de semana en su ciudad.\n40\nMODELO 1\nOPCIÓN 2\nLa situación durante el viaje. Hable de:\nalgo que le sucedió durante uno de sus viajes;\nlos motivos por los que ocurrió esto;\nqué personas estaban allí y cómo reaccionaron;\ncómo acabó todo y qué consecuencias tuvo.\n41\nMODELO 1",
+      "rango_palabras": "",
+      "modelo_response": "Buenas tardes. He elegido la opción uno, el turismo sostenible.\n\nEn mi opinión, el turismo sostenible es muy importante hoy en día porque cada vez más gente viaja y esto puede dañar el medio ambiente si no tenemos cuidado. El turismo sostenible consiste en viajar de forma responsable, respetando la naturaleza, la cultura y la economía de los lugares que visitamos.\n\nHay muchas formas de practicar el turismo sostenible. Por ejemplo, podemos elegir alojamientos que usan energía renovable o que reciclan los residuos. También podemos usar el transporte público en lugar de alquilar un coche, o ir en bicicleta. Además, es importante comprar productos locales y probar la comida tradicional, porque así ayudamos a la economía del lugar.\n\nEn mi caso, el año pasado fui a un pueblo pequeño en Asturias y me alojé en una casa rural que producía su propia comida. Fue una experiencia maravillosa porque conocí a la gente del pueblo y aprendí sobre su cultura. Creo que este tipo de turismo es mucho más auténtico que ir a un hotel grande en una ciudad turística.\n\nPara concluir, el turismo sostenible no es solo una tendencia, es una necesidad. Si todos viajamos de forma más responsable, podremos disfrutar de los viajes sin destruir los lugares que amamos. Muchas gracias."
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 4,
       "tarea": 2,
       "q": 2,
       "q_range": [
-        2,
-        2
+        1,
+        3
       ],
       "answer": "",
-      "prompt": "Describir imagen: Plaza con gente",
+      "prompt": "Tarea 2",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Describa la imagen.",
-      "modelo_response": "Veo una plaza en el centro de una ciudad. Hay muchas personas paseando y en terrazas. Hace buen tiempo. En el centro hay una fuente con flores. Algunas personas toman cafe y otras miran escaparates. Parece un lugar agradable para pasar el tiempo con amigos."
+      "explanation": "",
+      "cuerpo": "",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "INSTRUCCIONES\nDebe elegir una de las dos fotos que se le ofrecen y preparar un\nmonólogo de 2 a 3 minutos con la descripción de la fotografía\nsiguiendo unas preguntas que se le facilitan. El entrevistador, puede\ndar instrucciones, pero no interviene durante el desarrollo de la tarea,\nya que se trata de un monólogo.\nHable de la foto durante dos o tres minutos. Usted debe hablar de:\n¿Cómo son las personas de la foto (físico, personalidad que crees\nque tienen…)? ¿Qué ropa llevan?\n¿Dónde están esas personas? ¿Qué objetos hay? Describa el lugar.\n¿Qué están haciendo las personas de la foto\n¿Qué relación cree que hay entre ellas?\n¿Qué cree que piensan, o cómo cree que se sienten, estas\npersonas? ¿Por qué?\n¿Qué cree que han hecho antes? ¿Y qué van a hacer después?\nOPCIÓN 1 OPCIÓN 2\nViaje a las montañas. El trabajo en un restaurante.\n42\nMODELO 1",
+      "rango_palabras": "",
+      "modelo_response": "Voy a describir la foto que he elegido.\n\nEn la foto veo a un grupo de jóvenes sentados en una terraza al aire libre. Parece que están en una ciudad europea, porque al fondo se ven edificios antiguos con balcones. Hay cuatro personas: dos chicos y dos chicas, todos con ropa informal de verano. Están sentados alrededor de una mesa de madera y tienen bebidas delante, probablemente refrescos o café.\n\nEl ambiente parece muy relajado y alegre. Una de las chicas está riendo y los demás le escuchan atentamente. La luz del sol indica que es por la tarde, un día despejado y agradable. Creo que son amigos que han quedado para charlar después de clase o del trabajo.\n\nEsta foto me recuerda a mis propias tardes con los amigos. Me parece una escena muy cotidiana y feliz, que muestra la importancia de los momentos sencillos compartidos con las personas que queremos. En el mundo de hoy, con tanta prisa y tanto uso del móvil, es valioso parar y conversar cara a cara.\n\nEn resumen, es una foto que transmite amistad, relax y alegría, capturando un momento ordinario pero especial de la vida joven."
     },
     {
-      "modelo": "nuevo_m1",
-      "modelo_name": "Nuevo DELE A2 Modelo 01",
+      "modelo": "nuevo_m1_2026",
+      "modelo_name": "Nuevo DELE A2 Modelo 1",
       "prueba": 4,
       "tarea": 3,
       "q": 3,
       "q_range": [
-        3,
+        1,
         3
       ],
       "answer": "",
-      "prompt": "Conversacion: Medios de transporte",
+      "prompt": "Tarea 3",
       "options": [],
       "type": "speaking",
       "_v5": true,
-      "instrucciones": "Hable sobre los medios de transporte en su ciudad.",
-      "modelo_response": "En mi ciudad hay varios medios de transporte. El mas usado es el autobus porque es barato. Tambien hay metro, mas rapido pero mas caro. A mi me gusta ir en bicicleta, es bueno para la salud y el medio ambiente. Cuando llueve prefiero el coche. Creo que deberia haber mas carriles para bicicletas."
+      "explanation": "",
+      "cuerpo": "",
+      "transcript": "",
+      "audio": "",
+      "instrucciones": "La tarea 3 depende de la imagen elegida en la tarea 2. Usted debe mantener\nuna conversación sobre una situación imaginaria con el entrevistador.\nSi usted eligió la opción 1. Viaje a las montañas.\nUsted va de viaje a las montañas con un grupo de gente de su edad. Durante\nla conversación con uno de sus amigos tiene que:\nsaludar;\nhablar de cómo es el lugar;\nhablar del tiempo atmosférico;\nproponer algún plan para el día siguiente;\ndecidir dónde cenar por la noche;\ndespedirse.\nEjemplo de preguntas que puede hacerle el examinador:\nSaludar Hola, ¿qué tal lo estás pasando?\n¿Qué te parece este sitio? ¿Te gusta? ¿Qué es lo más\nLugar\ninteresante en tu opinión?\n¡Vaya tiempo está haciendo! ¿Qué piensas? ¿Crees que va a\nTiempo\nllover?\nPlan ¿Qué podemos hacer mañana? ¿Crees que hay algo por\naquí para divertirnos?\nCenar ¿Dónde vamos esta noche? ¿Qué te apetece cenar?\n¿Conoces algún buen restaurante en esta zona? ¿Qué\ncomida sirven? ¿Cuál es tu plato preferido? ¿Qué te gustaría\ncenar?\nDespedirse ¿Quieres decirme algo más? ¿Necesitas algo? Adiós, nos\nvemos mañana\n43\nMODELO 1\nSi usted eligió la opción 2. El trabajo en un restaurante.\nUsted habla con un compañero de trabajo, los dos sois camareros. Durante\nla conversación con su compañero tiene que:\nsaludar;\nhablar del día a día en el trabajo;\nrecordar alguna situación pasada;\nhablar de las propinas, del dinero que se gana y de otros trabajos;\norganizar el trabajo del día;\ndespedirse.\nEjemplo de preguntas que puede hacerle el examinador:\nSaludar Hola, ¿qué tal va el día? ¿Muchos clientes?\n¿No estás cansado de hacer esto? ¿Qué tipo de clientes son\nDía a día\nlos que más te gustan? ¿Y los que menos?\n¿Qué piensas del sábado pasado? ¿Estabas tú trabajando\nSituación cuando sucedió aquello? ¿Viste lo que pasó el otro día?\n¿Recuerdas cuál ha sido tu peor día de trabajo aquí?\n¿Qué te suelen dejar de propina a ti? ¿No crees que nos\nDinero\npagan poco? ¿Estás pensando en cambiar de trabajo?\n¿Cómo podemos organizar la limpieza del restaurante?\nOrganizar Esta noche tenemos un grupo muy grande, ¿cómo lo\npodemos organizar todo?\nDespedirse Descansa mucho, que mañana tenemos que trabajar otra\nvez, buenas noches.\n44\n2\nCOMPRAS\nEste segundo bloque y modelo de examen están diseñados para\npracticar todo el vocabulario y las expresiones del ámbito de las\ntiendas.\n1. COMPLETA UTILIZANDO LAS SIGUIENTES PALABRAS:\nmantequilla rico salmón microondas\nlata lavadora pañuelos calcetines\npobre corbata regalo traje\nnevera hielo champú impresora\nbotella dependiente gamba mochila\npeluquería portátil guantes bufanda\ntaza ajo panadería\n45\nCOMPRAS\n46\nCOMPRAS\n47\nCOMPRAS\n2. COMPLETA LAS FRASES CON LAS SIGUENTES PALABRAS:\nPROBADORES RAMO SERVILLETA PESAR\nIVA CUENTO CUADRO RUEDA\nCOLONIA LISTA\n1. Cuando mi hijo era pequeño, siempre le leía el ………………… de los tres cerditos\npor las noches.\n2. Ayer quería comprarle un ………………… de flores a mi novia, por eso fui a la\nfloristería.\n3. El impuesto que tienen los productos que compramos en España se llama\n…………………\n4. Tu hermano tenía la boca sucia de salsa de tomate, por eso le di una ………………….\n5. El otro día tuve un problema con el coche y tuve que cambiar la …………………, era\nla primera vez que lo hacía.\n6. No hueles muy bien, ¿te has puesto ………………… esta mañana?\n7. Quiero ver qué tal me queda este vestido. ¿Dónde están los …………………?\n8. Los tomates que compré ayer eran gigantes, podían ………………… fácilmente 300\ngramos cada uno.\n9. Antes de ir al supermercado, vamos a hacer la ………………… de la compra.\n10. La pared estaba muy vacía, por eso compré un …………………. de un pintor local y\nlo colgué.\n48",
+      "rango_palabras": "",
+      "modelo_response": "Entrevistador: Hola, ¿qué tal? ¿Estás listo para empezar la conversación?\n\nCandidato: ¡Hola! Sí, muchas gracias, estoy listo.\n\nE: Muy bien. Estamos de viaje a las montañas con el grupo. ¿Qué te parece el lugar hasta ahora?\n\nC: La verdad es que me encanta. El aire es muy limpio y las vistas son espectaculares. Aunque tengo que admitir que anoche hizo mucho frío en la cabaña, ¿no crees?\n\nE: Sí, la verdad es que heló. Por cierto, ¿sabes qué planes tenemos para hoy? Yo me perdí la reunión de esta mañana.\n\nC: No te preocupes, te cuento. A las diez vamos a hacer una ruta de senderismo hasta el pico más alto. Después comemos en un refugio que hay por la zona. Por la tarde hay tiempo libre, algunos quieren alquilar bicicletas de montaña.\n\nE: ¡Qué bien! ¿Y hay que llevar algo especial para la ruta?\n\nC: El monitor dijo que llevemos agua, algo de comer y ropa de abrigo porque arriba hace más viento. También recomienda llevar calzado adecuado, porque el camino tiene piedras. ¿Tienes botas de montaña?\n\nE: La verdad es que no, solo tengo zapatillas de deporte. ¿Crees que serán suficientes?\n\nC: Hmm, para la subida al pico quizás no sean las mejores, porque hay zonas resbaladizas. Puedo preguntarle al monitor si tiene unas botas de repuesto, creo que trajo varias tallas por si acaso.\n\nE: ¡Genial, muchas gracias! ¿Y a ti qué es lo que más te gusta de este viaje?\n\nC: Sobre todo desconectar de la ciudad y del móvil. Aquí no hay cobertura en casi ninguna parte y eso me ayuda a relajarme. También me gusta conocer gente nueva del grupo. ¿Y a ti?\n\nE: A mí me gusta la aventura. La verdad es que nunca había hecho senderismo y estoy un poco nervioso por la subida.\n\nC: ¡No te preocupes! Vamos todos juntos y el ritmo es tranquilo. Si te cansas, paramos. Además, las vistas desde arriba merecen la pena. ¡Seguro que te encanta!\n\nE: ¡Vale, me animo! Gracias por la ayuda.\n\nC: De nada, ¡nos vemos en la salida!"
     }
   ]
 };
+//（注：内容由AI生成）
