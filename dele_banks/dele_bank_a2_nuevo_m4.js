@@ -29,15 +29,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha ido a una discoteca."
+          "text": "ha ido a una discoteca."
         },
         {
           "key": "B",
-          "text": "B) ha hecho muchas cosas durante el fin de semana."
+          "text": "ha hecho muchas cosas durante el fin de semana."
         },
         {
           "key": "C",
-          "text": "C) va a ir mañana en tren."
+          "text": "va a ir mañana en tren."
         }
       ],
       "type": "choice3",
@@ -64,15 +64,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es la novia de Pedro."
+          "text": "es la novia de Pedro."
         },
         {
           "key": "B",
-          "text": "B) estuvo en la fiesta con Jenifer."
+          "text": "estuvo en la fiesta con Jenifer."
         },
         {
           "key": "C",
-          "text": "C) está soltera."
+          "text": "está soltera."
         }
       ],
       "type": "choice3",
@@ -99,15 +99,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Pedro estuvo en Colombia."
+          "text": "Pedro estuvo en Colombia."
         },
         {
           "key": "B",
-          "text": "B) Luisa tuvo que pagar mucho por cortarse el pelo."
+          "text": "Luisa tuvo que pagar mucho por cortarse el pelo."
         },
         {
           "key": "C",
-          "text": "C) la prima de Luisa es de otro país."
+          "text": "la prima de Luisa es de otro país."
         }
       ],
       "type": "choice3",
@@ -134,15 +134,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Luisa hizo deporte."
+          "text": "Luisa hizo deporte."
         },
         {
           "key": "B",
-          "text": "B) Luisa estuvo jugando a juegos de mesa en casa de sus abuelos."
+          "text": "Luisa estuvo jugando a juegos de mesa en casa de sus abuelos."
         },
         {
           "key": "C",
-          "text": "C) Luisa estuvo en otro país con Jenifer. 129 MODELO 4"
+          "text": "Luisa estuvo en otro país con Jenifer. 129 MODELO 4"
         }
       ],
       "type": "choice3",
@@ -169,15 +169,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el tren llega con retraso."
+          "text": "el tren llega con retraso."
         },
         {
           "key": "B",
-          "text": "B) no ha podido dormir bien."
+          "text": "no ha podido dormir bien."
         },
         {
           "key": "C",
-          "text": "C) habló con una persona extranjera en la fiesta. 130"
+          "text": "habló con una persona extranjera en la fiesta. 130"
         }
       ],
       "type": "choice3",
@@ -204,21 +204,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) la discoteca abre antes de lo normal."
+          "text": "la discoteca abre antes de lo normal."
         },
         {
           "key": "B",
-          "text": "B) hay bailarines especiales."
+          "text": "hay bailarines especiales."
         },
         {
           "key": "C",
-          "text": "C) si vas disfrazado tienes algo gratis. 131"
+          "text": "si vas disfrazado tienes algo gratis. 131"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -239,21 +239,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) la gente puede pagar con su tarjeta de estudiante."
+          "text": "la gente puede pagar con su tarjeta de estudiante."
         },
         {
           "key": "B",
-          "text": "B) una de las clases va a ser en un día diferente."
+          "text": "una de las clases va a ser en un día diferente."
         },
         {
           "key": "C",
-          "text": "C) buscan trabajadores para la recepción. TEXTO 3 Si a tus hijos venir a conocer ESCUELA DE PING PONG moderna individuales martes y viernes miércoles"
+          "text": "buscan trabajadores para la recepción. TEXTO 3 Si a tus hijos venir a conocer ESCUELA DE PING PONG moderna individuales martes y viernes miércoles"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -274,21 +274,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) si vas por"
+          "text": "si vas por"
         },
         {
           "key": "B",
-          "text": "B) tienen el"
+          "text": "tienen el"
         },
         {
           "key": "C",
-          "text": "C) hay profesores 132"
+          "text": "hay profesores 132"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -309,21 +309,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) —"
+          "text": "—"
         },
         {
           "key": "B",
-          "text": "B) —"
+          "text": "—"
         },
         {
           "key": "C",
-          "text": "C) —"
+          "text": "—"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -344,21 +344,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) —"
+          "text": "—"
         },
         {
           "key": "B",
-          "text": "B) —"
+          "text": "—"
         },
         {
           "key": "C",
-          "text": "C) —"
+          "text": "—"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -379,21 +379,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) cada uno debe llevar su propia bebida."
+          "text": "cada uno debe llevar su propia bebida."
         },
         {
           "key": "B",
-          "text": "B) van a ir personas que viven cerca los unos"
+          "text": "van a ir personas que viven cerca los unos"
         },
         {
           "key": "C",
-          "text": "C) no se puede ir con niños. TEXTO 7 PARQUE DE ATRACCIONES Un lugar para pasarlo bomba en familia. agua para la temporada de verano, además abrimos hasta las 22:30. Este año restaurante de comida rápida junto a la entrada. Precio: adultos 15€, jóvenes de más de 10"
+          "text": "no se puede ir con niños. TEXTO 7 PARQUE DE ATRACCIONES Un lugar para pasarlo bomba en familia. agua para la temporada de verano, además abrimos hasta las 22:30. Este año restaurante de comida rápida junto a la entrada. Precio: adultos 15€, jóvenes de más de 10"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -414,21 +414,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) en verano puedes trabajar en este lugar."
+          "text": "en verano puedes trabajar en este lugar."
         },
         {
           "key": "B",
-          "text": "B) se paga diferente dependiendo de edad del cliente."
+          "text": "se paga diferente dependiendo de edad del cliente."
         },
         {
           "key": "C",
-          "text": "C) el parque de atracciones va a abrir más pronto de lo normal. 134"
+          "text": "el parque de atracciones va a abrir más pronto de lo normal. 134"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -449,21 +449,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) van a repetir un programa que grabaron"
+          "text": "van a repetir un programa que grabaron"
         },
         {
           "key": "B",
-          "text": "B) tienen un presentador que es un príncipe."
+          "text": "tienen un presentador que es un príncipe."
         },
         {
           "key": "C",
-          "text": "C) van a hablar con el hijo del rey. 135"
+          "text": "van a hablar con el hijo del rey. 135"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.\n135",
+      "cuerpo": "TEXTO 1 El próximo viernes 15 de septiembre\nabre sus puertas la discoteca Maravilla.\nDISCOTECA MARAVILLA Ven a disfrutar con nosotros de noches\ninterminables de diversión en nuestras 3\nsalas con música diferente, conoce a\ncientos de personas interesantes y\nprueba nuestros cócteles únicos.\nEl último fin de semana de cada mes\norganizamos una fiesta temática, el 30 de\nseptiembre si vienes vestido de vampiro\nte invitamos a la primera bebida.\nAbrimos todos los viernes y sábados, de\n23:00 a 06:00. Venta de entradas\nanticipadas en nuestra página web.\n6. Durante las fiestas temáticas…\nA) la discoteca abre antes de lo normal.\nB) hay bailarines especiales.\nsi vas disfrazado tienes algo gratis.\nTEXTO 2\nGIMNASIO ESPARTA\nTenemos dos comunicados para nuestros clientes:\n1. La semana pasada alguien olvidó su tarjeta de estudiante en la sala de\nfitness del gimnasio. La persona puede pasar a recogerla por nuestra\nrecepción de lunes a viernes de 8:00 a 21:00.\n2. Las clases de Zumba cambian de los martes a las 19:00 a los jueves a las\n19:15. Nuestra instructora no puede continuar teniendo clases los martes.\n7. En el gimnasio Esparta…\nA) la gente puede pagar con su tarjeta de\nestudiante.\nB) una de las clases va a ser en un día\ndiferente.\nbuscan trabajadores para la recepción.\nTEXTO 3\nSi a tus hijos les gusta el deporte tienen que\nvenir a conocer la escuela de ping pong más\nESCUELA DE PING PONG\nmoderna de la ciudad. Reserva ya tus clases\nindividuales o en grupo. Individuales: lunes,\nmartes y viernes de 17:00 a 20:00. En grupo:\nmiércoles y jueves de 10:30 a 13:30.\n8. En la escuela de ping pong…\nA) si vas por la tarde puedes tener clases tú solo.\nB) tienen el equipamiento más antiguo de la ciudad.\nhay profesores extranjeros.\nTEXTO 6\nFIESTA DE SAN JUAN\nEl próximo 24 de junio, todos los vecinos vamos a organizar una fiesta de\nSan Juan en el jardín María y Jorge. El plan es hacer una barbacoa, cada uno\ntiene que llevar algo de carne o verduras, María y Jorge han dicho que ellos\nvan a comprar la bebida para todos. Tenemos que confirmar la asistencia\ncuanto antes en el grupo de WhatsApp.\n11. A esta fiesta…\nA) cada uno debe llevar su propia bebida.\nB) van a ir personas que viven cerca los unos de los otros.\nno se puede ir con niños.\nTEXTO 7\nPARQUE DE ATRACCIONES\nUn lugar para pasarlo bomba en familia. Abrimos nuestras atracciones de\nagua para la temporada de verano, además desde junio hasta septiembre\nabrimos hasta las 22:30. Este año también inauguramos un nuevo\nrestaurante de comida rápida junto a la entrada.\nPrecio: adultos 15€, jóvenes de más de 10 años 12€, niños gratis.\n12. El anuncio dice que…\nA) en verano puedes trabajar en este lugar.\nB) se paga diferente dependiendo de la\nedad del cliente.\nel parque de atracciones va a abrir más\npronto de lo normal.\nTEXTO 8\nENTREVISTAS CON FAMOSOS\nPor primera vez en la historia de nuestro país vamos a tener al príncipe\nFernando en un programa de televisión. En un formato ya conocido por\nlos seguidores de nuestro programa, entrevista cara a cara. Los\nespectadores van a poder enviar sus preguntas para el príncipe por SMS\no a nuestra cuenta de Twitter.\nEl famoso presentador Ramón García va a ser el conductor de esta\nentrevista histórica. Disfruta de este momento único con tu familia el\nviernes a las 20:00.\n13. En este programa…\nA) van a repetir un programa que grabaron el año pasado.\nB) tienen un presentador que es un príncipe.\nvan a hablar con el hijo del rey.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -484,21 +484,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -519,21 +519,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -554,21 +554,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -589,21 +589,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -624,21 +624,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -659,21 +659,21 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ÁLEX"
+          "text": "ÁLEX"
         },
         {
           "key": "B",
-          "text": "B) ALBA"
+          "text": "ALBA"
         },
         {
           "key": "C",
-          "text": "C) ÍGOR"
+          "text": "ÍGOR"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.\n138",
+      "cuerpo": "TEXTOS\nA. ÁLEX\nNací en España, pero cuando tenía 15 años mi\nfamilia se mudó a Francia. Tenía amigos en\nEspaña y en Francia, cuando estaba en\nEspaña, echaba de menos a mis amigos\nfranceses y, cuando estaba en Francia, quería\nver a los españoles. Empecé a trabajar en una\ndiscoteca cuando iba a la universidad, yo vivía\nen el centro de París y la discoteca estaba a 80\nkm de mi casa, tenía que coger tres autobuses\npara ir, acababa muy cansado.\nNo sé porqué fue, quizás por haber pasado\ntantas noches en aquella discoteca, pero\nempezó a gustarme más y más salir de fiesta,\nfinalmente, dejé mis estudios y empecé mi\nnueva vida, ahora salgo de fiesta todos los días\nde la semana.\nB. ALBA\nFui al gimnasio por primera vez hace tres\naños con mi novio. Al principio no me\ngustó mucho, después de los primeros\ndías me dolía todo el cuerpo y no podía\ncasi moverme, pero poco a poco empecé a\ninteresarme. Me miraba en el espejo y\nestaba guapísima, la ropa me quedaba\ngenial y yo me sentía muy bien.\nIba al gimnasio todos los días despues de trabajar, iba incluso más que mi\nnovio. Empecé a tener muchos fans en mi cuenta de Instagram, todos me\ndecían cosas muy bonitas. Un día, me llamaron de una marca de ropa y me\nofrecieron dinero por hacerme unas fotos con unos vestidos, fue la primera\nvez que trabajé como modelo, pero no la última.\nTEXTOS\nC. ÍGOR\nYo nací y he vivido toda mi vida en España,\npero mis padres son de Rusia, por eso me\npusieron de nombre Igor. Cuando iba al\ninstituto, un amigo me regaló un libro\ndonde el protagonista tenía que escapar\nde una prisión, me encantó, fue el inicio de\nmi aventura con la lectura. Ahora soy un\nloco de los libros, tengo una colección\nincreíble.\nOtros preferían salir de fiesta, pero a mí lo\nque más me apasionaba era disfrutar de\nuna buena novela criminal. Empecé a\nescribir un blog sobre lo que leía, pensaba\nque iba a tener mucho éxito, pero no fue\nasí, mi blog casi no tiene visitas, no me\nimporta, yo continúo escribiendo porque\nes lo que me gusta.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -694,15 +694,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se podían ver películas clásicas en los cines."
+          "text": "se podían ver películas clásicas en los cines."
         },
         {
           "key": "B",
-          "text": "B) se podía entrar al cine pagando la mitad."
+          "text": "se podía entrar al cine pagando la mitad."
         },
         {
           "key": "C",
-          "text": "C) había mucha cola en las tiendas de los centros comerciales. 140 MODELO 4"
+          "text": "había mucha cola en las tiendas de los centros comerciales. 140 MODELO 4"
         }
       ],
       "type": "choice3",
@@ -729,15 +729,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los museos de otras ciudades tuvieron mucho éxito."
+          "text": "los museos de otras ciudades tuvieron mucho éxito."
         },
         {
           "key": "B",
-          "text": "B) la gente podía comprar souvenirs en los museos."
+          "text": "la gente podía comprar souvenirs en los museos."
         },
         {
           "key": "C",
-          "text": "C) los museos se podían visitar por la noche."
+          "text": "los museos se podían visitar por la noche."
         }
       ],
       "type": "choice3",
@@ -764,15 +764,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) les prohibieron entrar con niños."
+          "text": "les prohibieron entrar con niños."
         },
         {
           "key": "B",
-          "text": "B) les regalaron entradas para el cine."
+          "text": "les regalaron entradas para el cine."
         },
         {
           "key": "C",
-          "text": "C) les gustó mucho la obra."
+          "text": "les gustó mucho la obra."
         }
       ],
       "type": "choice3",
@@ -799,15 +799,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) las entradas para los conciertos eran un poco caras."
+          "text": "las entradas para los conciertos eran un poco caras."
         },
         {
           "key": "B",
-          "text": "B) los conciertos estuvieron vacíos."
+          "text": "los conciertos estuvieron vacíos."
         },
         {
           "key": "C",
-          "text": "C) los conciertos estaban organizados por una asociación juvenil."
+          "text": "los conciertos estaban organizados por una asociación juvenil."
         }
       ],
       "type": "choice3",
@@ -834,15 +834,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) conocían muy bien la ciudad."
+          "text": "conocían muy bien la ciudad."
         },
         {
           "key": "B",
-          "text": "B) participaron en un gran concurso."
+          "text": "participaron en un gran concurso."
         },
         {
           "key": "C",
-          "text": "C) eran de diferentes países."
+          "text": "eran de diferentes países."
         }
       ],
       "type": "choice3",
@@ -869,15 +869,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) están muy contentas."
+          "text": "están muy contentas."
         },
         {
           "key": "B",
-          "text": "B) quieren que esta promoción no se repita."
+          "text": "quieren que esta promoción no se repita."
         },
         {
           "key": "C",
-          "text": "C) han perdido clientes. 141"
+          "text": "han perdido clientes. 141"
         }
       ],
       "type": "choice3",
@@ -904,15 +904,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Pescado (plato de pescado)"
+          "text": "Pescado (plato de pescado)"
         },
         {
           "key": "B",
-          "text": "B) Pizza (pizza)"
+          "text": "Pizza (pizza)"
         },
         {
           "key": "C",
-          "text": "C) Hamburguesa (hamburguesa)"
+          "text": "Hamburguesa (hamburguesa)"
         }
       ],
       "type": "choice3",
@@ -940,15 +940,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Tenis (partido de tenis)"
+          "text": "Tenis (partido de tenis)"
         },
         {
           "key": "B",
-          "text": "B) Noticias (periodista con micrófono)"
+          "text": "Noticias (periodista con micrófono)"
         },
         {
           "key": "C",
-          "text": "C) Boxeo (combate de boxeo)"
+          "text": "Boxeo (combate de boxeo)"
         }
       ],
       "type": "choice3",
@@ -976,15 +976,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Concierto (concierto / fiesta con gente)"
+          "text": "Concierto (concierto / fiesta con gente)"
         },
         {
           "key": "B",
-          "text": "B) Cafetería (café con café con leche)"
+          "text": "Cafetería (café con café con leche)"
         },
         {
           "key": "C",
-          "text": "C) Playa (playa)"
+          "text": "Playa (playa)"
         }
       ],
       "type": "choice3",
@@ -1012,15 +1012,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Brazo (brazo / mano)"
+          "text": "Brazo (brazo / mano)"
         },
         {
           "key": "B",
-          "text": "B) Cabeza (cabeza)"
+          "text": "Cabeza (cabeza)"
         },
         {
           "key": "C",
-          "text": "C) Pies (pies / piernas)"
+          "text": "Pies (pies / piernas)"
         }
       ],
       "type": "choice3",
@@ -1048,15 +1048,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Tarjeta (tarjeta bancaria)"
+          "text": "Tarjeta (tarjeta bancaria)"
         },
         {
           "key": "B",
-          "text": "B) Efectivo (monedas / dinero en efectivo)"
+          "text": "Efectivo (monedas / dinero en efectivo)"
         },
         {
           "key": "C",
-          "text": "C) Cajero (cajero automático)"
+          "text": "Cajero (cajero automático)"
         }
       ],
       "type": "choice3",
@@ -1084,15 +1084,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Sol (soleado)"
+          "text": "Sol (soleado)"
         },
         {
           "key": "B",
-          "text": "B) Lluvia (lloviendo)"
+          "text": "Lluvia (lloviendo)"
         },
         {
           "key": "C",
-          "text": "C) Nieve (nevando)"
+          "text": "Nieve (nevando)"
         }
       ],
       "type": "choice3",
@@ -1120,15 +1120,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) buscan un entrenador nuevo."
+          "text": "buscan un entrenador nuevo."
         },
         {
           "key": "B",
-          "text": "B) hay que pagar por la ropa."
+          "text": "hay que pagar por la ropa."
         },
         {
           "key": "C",
-          "text": "C) los niños pueden hacer deporte en este lugar. AUDIO 2"
+          "text": "los niños pueden hacer deporte en este lugar. AUDIO 2"
         }
       ],
       "type": "choice3",
@@ -1155,15 +1155,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tiene lugar en verano."
+          "text": "tiene lugar en verano."
         },
         {
           "key": "B",
-          "text": "B) necesita de un seguro médico."
+          "text": "necesita de un seguro médico."
         },
         {
           "key": "C",
-          "text": "C) es gratuita para el ganador. 145 MODELO 4 AUDIO 3"
+          "text": "es gratuita para el ganador. 145 MODELO 4 AUDIO 3"
         }
       ],
       "type": "choice3",
@@ -1190,15 +1190,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) va a casarse este año."
+          "text": "va a casarse este año."
         },
         {
           "key": "B",
-          "text": "B) cuando era pequeño jugaba mucho con otros niños."
+          "text": "cuando era pequeño jugaba mucho con otros niños."
         },
         {
           "key": "C",
-          "text": "C) es hijo único. AUDIO 4"
+          "text": "es hijo único. AUDIO 4"
         }
       ],
       "type": "choice3",
@@ -1225,15 +1225,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) pueden ir a comer las personas vegetarianas."
+          "text": "pueden ir a comer las personas vegetarianas."
         },
         {
           "key": "B",
-          "text": "B) va a ir un famoso."
+          "text": "va a ir un famoso."
         },
         {
           "key": "C",
-          "text": "C) solo va gente que tiene prisa. AUDIO 5"
+          "text": "solo va gente que tiene prisa. AUDIO 5"
         }
       ],
       "type": "choice3",
@@ -1260,15 +1260,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se puede practicar deporte."
+          "text": "se puede practicar deporte."
         },
         {
           "key": "B",
-          "text": "B) puedes tomar bebidas alcohólicas."
+          "text": "puedes tomar bebidas alcohólicas."
         },
         {
           "key": "C",
-          "text": "C) tienen ofertas por las mañanas. AUDIO 6"
+          "text": "tienen ofertas por las mañanas. AUDIO 6"
         }
       ],
       "type": "choice3",
@@ -1295,15 +1295,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se habla de una biblioteca."
+          "text": "se habla de una biblioteca."
         },
         {
           "key": "B",
-          "text": "B) se habla de una peluquería."
+          "text": "se habla de una peluquería."
         },
         {
           "key": "C",
-          "text": "C) se habla de una piscina. 146"
+          "text": "se habla de una piscina. 146"
         }
       ],
       "type": "choice3",
@@ -1330,15 +1330,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1365,15 +1365,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1400,15 +1400,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1435,15 +1435,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1470,15 +1470,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1505,15 +1505,15 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1540,43 +1540,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1603,43 +1603,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1666,43 +1666,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1729,43 +1729,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1792,43 +1792,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1855,43 +1855,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
@@ -1918,43 +1918,43 @@ window.DELE_BANK_A2_NUEVO_M4 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla una persona muy egoísta."
+          "text": "Habla una persona muy egoísta."
         },
         {
           "key": "B",
-          "text": "B) Habla un miembro del gobierno."
+          "text": "Habla un miembro del gobierno."
         },
         {
           "key": "C",
-          "text": "C) Está buscando una pareja para ir al baile."
+          "text": "Está buscando una pareja para ir al baile."
         },
         {
           "key": "D",
-          "text": "D) Habla de una guerra."
+          "text": "Habla de una guerra."
         },
         {
           "key": "E",
-          "text": "E) En este lugar ayudan a las personas pobres."
+          "text": "En este lugar ayudan a las personas pobres."
         },
         {
           "key": "F",
-          "text": "F) Es un anuncio de una cámara."
+          "text": "Es un anuncio de una cámara."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser más alto."
+          "text": "Quiere ser más alto."
         },
         {
           "key": "H",
-          "text": "H) El lugar cierra más tarde."
+          "text": "El lugar cierra más tarde."
         },
         {
           "key": "I",
-          "text": "I) Tiene un problema con el ratón de su ordenador."
+          "text": "Tiene un problema con el ratón de su ordenador."
         },
         {
           "key": "J",
-          "text": "J) Habla sobre un artista. 148 MODELO 4"
+          "text": "Habla sobre un artista. 148 MODELO 4"
         }
       ],
       "type": "choice10",
