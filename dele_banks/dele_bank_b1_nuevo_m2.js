@@ -29,39 +29,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -87,39 +87,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -145,39 +145,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -203,39 +203,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -261,39 +261,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -319,39 +319,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes p…"
+          "text": "Mensaje:. Me ha dicho tu madre que no te encuentras muy bien, tú no te preocupes por nada, yo me encargo de recoger a los niños del colegio y de llevar a Marcos al entrenamiento de fútbol. Nos vemos esta noche."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día?…"
+          "text": "Mensaje:. Hola mi amor, ¿recuerdas los pendientes de los que te hablé el otro día? Pues ahora están de oferta. Y también he visto una pulsera preciosa que me encanta. ¿Y qué piensas sobre un anillo o un collar? De oro, claro."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan…"
+          "text": "Mensaje:. La primera vez que lo vi supe que ese chico estaba hecho para mí, es tan dulce y cariñoso que me tiene enamorada. En la primera cita me regaló unas entradas para ir al concierto de mi cantante preferido. ¿Crees que estamos yendo demasiado rápido?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a…"
+          "text": "Mensaje:. Hola, cariño. Tal y como está la situación creo que deberíamos adoptar a un bebé. Sé que la ilusión de tu vida es que formemos una familia feliz y… ¿qué mejor forma de ser felices que adoptando a una pobre criatura con problemas a la que le podemos dar una vida mejor?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de…"
+          "text": "Mensaje:. Imagino que ya te habrás enterado, pero si no te lo digo yo. A partir de mañana nadie va a ir a trabajar. No ganaremos dinero, pero eso hará pensar a los jefes. Creo que van a cambiar muchas cosas. ¡Ánimo! Juntos lo conseguiremos."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones …"
+          "text": "Mensaje:. Acaban de llamarme de la comisaría de policía. Esta noche unos ladrones han entrado por la ventana del baño y se han llevado un montón de cosas, no han dejado ni los espejos, se han llevado hasta el horno que estaba estropeado."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de …"
+          "text": "Mensaje:. Hola, soy yo de nuevo. ¿Te has pensado ya lo del voluntariado? Antes de darme una respuesta quiero que tengas en cuenta que en el Tercer Mundo la gente no ha tenido las mismas vidas que nosotros. Se merecen una oportunidad."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que …"
+          "text": "Mensaje:. Los abuelos van a estar fuera una temporada, por eso, lo mejor será que nos organicemos para ir a su casa y regar las plantas. También tendremos que ponerle comida a los peces una vez al día y limpiar antes de que vuelvan."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas …"
+          "text": "Mensaje:. Hola guapa, tú no me conoces, pero yo te sigo todos los días cuando vas al trabajo. ¿Te han dicho alguna vez que tienes unos ojos preciosos? Si no tienes planes para mañana puedo invitarte a la montaña rusa. 46"
         }
       ],
       "type": "choice9",
@@ -377,21 +377,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el rey Juan Carlos se reunirá con su familia en Mallorca."
+          "text": "el rey Juan Carlos se reunirá con su familia en Mallorca."
         },
         {
           "key": "B",
-          "text": "B) los actuales reyes van a viajar en velero."
+          "text": "los actuales reyes van a viajar en velero."
         },
         {
           "key": "C",
-          "text": "C) el palacio de verano de los reyes está en Mallorca."
+          "text": "el palacio de verano de los reyes está en Mallorca."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -411,21 +411,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) está en el extranjero."
+          "text": "está en el extranjero."
         },
         {
           "key": "B",
-          "text": "B) tiene dos hijas, Leonor y Sofía."
+          "text": "tiene dos hijas, Leonor y Sofía."
         },
         {
           "key": "C",
-          "text": "C) es el actual rey de España."
+          "text": "es el actual rey de España."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -445,21 +445,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) abandonó España el domingo."
+          "text": "abandonó España el domingo."
         },
         {
           "key": "B",
-          "text": "B) va a viajar desde Madrid con toda la familia."
+          "text": "va a viajar desde Madrid con toda la familia."
         },
         {
           "key": "C",
-          "text": "C) fue a unas tiendas el pasado miércoles."
+          "text": "fue a unas tiendas el pasado miércoles."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -479,21 +479,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha recibido visitantes importantes de otros países en los últimos años."
+          "text": "ha recibido visitantes importantes de otros países en los últimos años."
         },
         {
           "key": "B",
-          "text": "B) es el lugar donde vive el presidente del gobierno, Pedro Sánchez."
+          "text": "es el lugar donde vive el presidente del gobierno, Pedro Sánchez."
         },
         {
           "key": "C",
-          "text": "C) no tiene jardín."
+          "text": "no tiene jardín."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -513,21 +513,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se celebrará la tradicional reunión con personalidades de Mallorca."
+          "text": "se celebrará la tradicional reunión con personalidades de Mallorca."
         },
         {
           "key": "B",
-          "text": "B) se han cancelado algunos eventos."
+          "text": "se han cancelado algunos eventos."
         },
         {
           "key": "C",
-          "text": "C) los reyes participarán en la copa del Rey de vela."
+          "text": "los reyes participarán en la copa del Rey de vela."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -547,21 +547,21 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tendrán unas vacaciones privadas."
+          "text": "tendrán unas vacaciones privadas."
         },
         {
           "key": "B",
-          "text": "B) volverán a Madrid."
+          "text": "volverán a Madrid."
         },
         {
           "key": "C",
-          "text": "C) viajarán al extranjero para encontrarse con Juan Carlos."
+          "text": "viajarán al extranjero para encontrarse con Juan Carlos."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\n47\nMODELO 2\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy\n48",
+      "cuerpo": "La familia real española vive unas vacaciones atípicas\nLa familia real española vivirá este año unas atípicas vacaciones veraniegas en Marivent, su\nresidencia de verano desde hace medio siglo en la isla mediterránea de Mallorca, convertida\nahora en la casa de la reina Sofía tras la decisión del antiguo rey, Juan Carlos I, de trasladarse\na vivir a otro país por las noticias sobre su posible corrupción.\nA este palacio llegan este fin de semana los actuales reyes, Felipe VI y Letizia, para pasar\nunos días junto a sus dos hijas, Leonor y Sofía, en medio de la expectación por saber dónde\nestá Juan Carlos, padre de Felipe VI, que abandonó España el pasado domingo.\nAllí se encontrarán con la anterior reina, que quiere estar lejos de las noticias. El miércoles\nfue por primera vez de compras por las calles de Palma, la capital de las Islas Baleares.\nEl palacio de Marivent no es propiedad de la\nfamilia real española, sino que pertenece a la\nComunidad Autónoma de las Islas Baleares, que\nlo cedió en 1973 a los entonces príncipes Juan\nCarlos y Sofía. La escalera de la entrada principal\ndel edificio ha visto como cada verano iban menos\nmiembros de la familia real. Los antiguos reyes\npasaron allí sus años dorados y allí vieron cómo la\nfamilia aumentaba con los matrimonios de sus\nhijas y la llegada de los primeros nietos.\nLa fotografía tradicional que antes era símbolo de la unidad familiar fue escenario después\nde las crisis internas, la primera con el divorcio de la infanta Elena y Jaime de Marichalar, y\ndespués con el polémico juicio y entrada en prisión de Iñaki Urdangarín, marido de la infanta\nCristina, envuelto en un caso de corrupción. Los jardines del palacio fueron también un lugar\nimportante en el noviazgo de Felipe VI y Letizia.\nDurante ese medio siglo la familia real ha estado acompañada también durante sus vacaciones\npor personajes ilustres como el príncipe Carlos y Diana de Gales, los emperadores de Japón\nAkihito y Michiko, Bill y Hillary Clinton, Mijail Gorbachov, Hugo Chávez y Michele Obama.\nLa pandemia del coronavirus ha obligado a suspender el tradicional encuentro con personas\nimportantes de Mallorca, el rey solo tendrá una reunión con el presidente del gobierno, Pedro\nSánchez. Tampoco se celebrará la Copa del Rey de vela, en la que cada año participaban Juan\nCarlos I y Felipe VI.\nEste año, Felipe VI y Letizia han realizado un recorrido por otras islas del archipiélago (Ibiza,\nFormentera y Menorca), una forma de dar su apoyo al turismo, un sector fundamental que ha\nsido castigado por el virus.\nFinalizada su estancia en Mallorca, los reyes y sus hijas regresarán a Madrid donde pasarán el\nresto del verano, ya que no planean disfrutar de unos días de vacaciones privadas sin destino\nconocido públicamente tal y como ocurría otros años.\nAdaptado de: www.elpais.com.uy",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la familia real española. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -581,15 +581,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -615,15 +615,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -649,15 +649,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -683,15 +683,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -717,15 +717,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -751,15 +751,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EVA"
+          "text": "EVA"
         },
         {
           "key": "B",
-          "text": "B) BOB"
+          "text": "BOB"
         },
         {
           "key": "C",
-          "text": "C) ELI"
+          "text": "ELI"
         }
       ],
       "type": "choice3",
@@ -785,41 +785,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: E",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -839,41 +839,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -893,41 +893,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -947,41 +947,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: H",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1001,41 +1001,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1055,41 +1055,41 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
+          "text": "Hacerlo de ese modo solo resultaría en niños desorientados e inseguros, porque nunca nadie les dijo hasta dónde podían llegar"
         },
         {
           "key": "B",
-          "text": "B. sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
+          "text": "sino también, en los posibles problemas a los que se pueda enfrentar en un futuro"
         },
         {
           "key": "C",
-          "text": "C. si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
+          "text": "si se da el caso, son precisamente sus maestros quienes deben guiarles por este camino"
         },
         {
           "key": "D",
-          "text": "D. donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
+          "text": "donde los conflictos familiares se resuelvan de la manera más amigable y pacífica posible"
         },
         {
           "key": "E",
-          "text": "E. Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
+          "text": "Por ello, hoy hablamos acerca de cómo criar hijos felices y te compartimos las claves para una crianza positiva"
         },
         {
           "key": "F",
-          "text": "F. ¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
+          "text": "¿Cómo pretendemos educar niños felices y seguros si nosotros mismos no cuidamos esos aspectos de nuestra vida?"
         },
         {
           "key": "G",
-          "text": "G. para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
+          "text": "para ella, tener un hijo sin llegar a ser mayor de edad puede suponer un trauma irreparable"
         },
         {
           "key": "H",
-          "text": "H. Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
+          "text": "Parece una pregunta sencilla, pero la respuesta es más importante de lo que pensamos 53"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com\n52",
+      "cuerpo": "Cómo criar hijos felices\nLos padres somos los responsables de cuidar y dar a nuestros hijos todo lo que necesitan para\nsu desarrollo, desde su salud física hasta educación emocional. Es bien sabido que los primeros\naños de vida serán la base para su desarrollo social y emocional en el futuro, por lo que es\nsumamente importante asegurarnos de que estemos dándoles las herramientas necesarias.\n…………(19)…………...\nEl ambiente en el que se desarrollan los niños influye no sólo en su desarrollo emocional, …………\n(20)…………... Diversos estudios han concluido que crecer en un ambiente conflictivo o de\nviolencia hace que aumenten las probabilidades de tener problemas en la escuela o de caer en\nconductas de riesgo, como el alcohol y las drogas. Recordemos que el entorno en el que\ncrezcan los niños también influirá en las relaciones que tengan con otras personas, por lo que\nes importante que se desarrollen en un ambiente de respeto y cariño, …………(21)…………...,\nindependientemente de si los padres están juntos o separados.\nDebemos reconocer sus esfuerzos, ¿premiamos solo cuando hacen algo bien o elogiamos\ntambién sus esfuerzos? …………(22)…………...., podríamos hacer sin quererlo que cuando fallen les\nresulte difícil manejar la frustración. En lugar de solo remarcar sus errores, debemos elogiar\ntambién sus esfuerzos, para que así continúen intentándolo y vayan poco a poco aumentando\nsu confianza en ellos mismos.\nHay que tener límites y ser constantes. Contrario a lo que algunas personas creen, la crianza\ncon cariño o respetuosa no es equivalente a eliminar límites y dejar que los niños hagan lo que\nquieran. …………(23)…………....\nA la escuela le corresponde la educación académica, a los padres la educación emocional.\nTrabajar en ella desde que son bebés y ayudarles a gestionar sus emociones cuando son\nmayores, es algo fundamental para su sano desarrollo y su felicidad.\nY finalmente, pero no menos importante: nuestra salud mental y emocional. …………(24)……………\nSiendo madres y padres es fácil olvidarnos de nosotros mismos, pero si no nos encontramos\nbien emocionalmente, no podremos transmitir ese bienestar a nuestros hijos.\nAdaptado de: www.bebesymas.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1109,15 +1109,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el"
+          "text": "el"
         },
         {
           "key": "B",
-          "text": "B) la"
+          "text": "la"
         },
         {
           "key": "C",
-          "text": "C) al"
+          "text": "al"
         }
       ],
       "type": "choice3",
@@ -1143,15 +1143,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tema"
+          "text": "tema"
         },
         {
           "key": "B",
-          "text": "B) cosa"
+          "text": "cosa"
         },
         {
           "key": "C",
-          "text": "C) ayuda"
+          "text": "ayuda"
         }
       ],
       "type": "choice3",
@@ -1177,15 +1177,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) dinos"
+          "text": "dinos"
         },
         {
           "key": "B",
-          "text": "B) decidirían"
+          "text": "decidirían"
         },
         {
           "key": "C",
-          "text": "C) decidan"
+          "text": "decidan"
         }
       ],
       "type": "choice3",
@@ -1211,15 +1211,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) qué"
+          "text": "qué"
         },
         {
           "key": "B",
-          "text": "B) cuál"
+          "text": "cuál"
         },
         {
           "key": "C",
-          "text": "C) dónde"
+          "text": "dónde"
         }
       ],
       "type": "choice3",
@@ -1245,15 +1245,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) colabora"
+          "text": "colabora"
         },
         {
           "key": "B",
-          "text": "B) colaboró"
+          "text": "colaboró"
         },
         {
           "key": "C",
-          "text": "C) colabore"
+          "text": "colabore"
         }
       ],
       "type": "choice3",
@@ -1279,15 +1279,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) podremos"
+          "text": "podremos"
         },
         {
           "key": "B",
-          "text": "B) pondremos"
+          "text": "pondremos"
         },
         {
           "key": "C",
-          "text": "C) ponemos"
+          "text": "ponemos"
         }
       ],
       "type": "choice3",
@@ -1313,15 +1313,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Es un entrenador."
+          "text": "Es un entrenador."
         },
         {
           "key": "B",
-          "text": "B) Es un locutor."
+          "text": "Es un locutor."
         },
         {
           "key": "C",
-          "text": "C) Es un ingeniero."
+          "text": "Es un ingeniero."
         }
       ],
       "type": "choice3",
@@ -1346,15 +1346,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) El programa no funciona bien y hay que repararlo."
+          "text": "El programa no funciona bien y hay que repararlo."
         },
         {
           "key": "B",
-          "text": "B) El archivo está infectado con un virus."
+          "text": "El archivo está infectado con un virus."
         },
         {
           "key": "C",
-          "text": "C) La persona no puede adjuntar un documento al correo electrónico."
+          "text": "La persona no puede adjuntar un documento al correo electrónico."
         }
       ],
       "type": "choice3",
@@ -1379,15 +1379,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De que una persona ha matado a otra en un bar."
+          "text": "De que una persona ha matado a otra en un bar."
         },
         {
           "key": "B",
-          "text": "B) De que los médicos se retrasaron como siempre."
+          "text": "De que los médicos se retrasaron como siempre."
         },
         {
           "key": "C",
-          "text": "C) De que la comida del bar provocó una discusión."
+          "text": "De que la comida del bar provocó una discusión."
         }
       ],
       "type": "choice3",
@@ -1412,15 +1412,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De una escuela."
+          "text": "De una escuela."
         },
         {
           "key": "B",
-          "text": "B) De un banco."
+          "text": "De un banco."
         },
         {
           "key": "C",
-          "text": "C) De excursiones para jóvenes."
+          "text": "De excursiones para jóvenes."
         }
       ],
       "type": "choice3",
@@ -1445,15 +1445,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Verduras."
+          "text": "Verduras."
         },
         {
           "key": "B",
-          "text": "B) Carne."
+          "text": "Carne."
         },
         {
           "key": "C",
-          "text": "C) Pescado."
+          "text": "Pescado."
         }
       ],
       "type": "choice3",
@@ -1478,15 +1478,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De una lista de la compra."
+          "text": "De una lista de la compra."
         },
         {
           "key": "B",
-          "text": "B) Del menú de un restaurante."
+          "text": "Del menú de un restaurante."
         },
         {
           "key": "C",
-          "text": "C) De una receta."
+          "text": "De una receta."
         }
       ],
       "type": "choice3",
@@ -1511,15 +1511,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) sus hijas van a la escuela donde ella trabaja."
+          "text": "sus hijas van a la escuela donde ella trabaja."
         },
         {
           "key": "B",
-          "text": "B) trabaja en el extranjero."
+          "text": "trabaja en el extranjero."
         },
         {
           "key": "C",
-          "text": "C) no se aburre en el trabajo."
+          "text": "no se aburre en el trabajo."
         }
       ],
       "type": "choice3",
@@ -1544,15 +1544,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Con un hombre de Estados Unidos."
+          "text": "Con un hombre de Estados Unidos."
         },
         {
           "key": "B",
-          "text": "B) Con un deportista."
+          "text": "Con un deportista."
         },
         {
           "key": "C",
-          "text": "C) Con alguien que conoció hace poco tiempo."
+          "text": "Con alguien que conoció hace poco tiempo."
         }
       ],
       "type": "choice3",
@@ -1577,15 +1577,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) han pagado la casa sin la ayuda del banco."
+          "text": "han pagado la casa sin la ayuda del banco."
         },
         {
           "key": "B",
-          "text": "B) ahora vive en la casa de los padres de su marido."
+          "text": "ahora vive en la casa de los padres de su marido."
         },
         {
           "key": "C",
-          "text": "C) le encanta vivir en una casa de alquiler."
+          "text": "le encanta vivir en una casa de alquiler."
         }
       ],
       "type": "choice3",
@@ -1610,15 +1610,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tiene problemas con su rodilla."
+          "text": "tiene problemas con su rodilla."
         },
         {
           "key": "B",
-          "text": "B) desde pequeña ha querido tener un seguro médico privado."
+          "text": "desde pequeña ha querido tener un seguro médico privado."
         },
         {
           "key": "C",
-          "text": "C) piensa que en este momento tener un seguro médico podría ser bueno para su familia."
+          "text": "piensa que en este momento tener un seguro médico podría ser bueno para su familia."
         }
       ],
       "type": "choice3",
@@ -1643,15 +1643,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) siempre quiere ganar."
+          "text": "siempre quiere ganar."
         },
         {
           "key": "B",
-          "text": "B) es mejor que ella jugando al parchís."
+          "text": "es mejor que ella jugando al parchís."
         },
         {
           "key": "C",
-          "text": "C) nunca quiere jugar con los vecinos."
+          "text": "nunca quiere jugar con los vecinos."
         }
       ],
       "type": "choice3",
@@ -1676,15 +1676,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) le encanta escuchar las noticias en otras lenguas."
+          "text": "le encanta escuchar las noticias en otras lenguas."
         },
         {
           "key": "B",
-          "text": "B) le gusta mantenerse bien informada."
+          "text": "le gusta mantenerse bien informada."
         },
         {
           "key": "C",
-          "text": "C) le parece crítica la situación política actual, especialmente en su ciudad."
+          "text": "le parece crítica la situación política actual, especialmente en su ciudad."
         }
       ],
       "type": "choice3",
@@ -1709,15 +1709,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Porque no podían tener hijos."
+          "text": "Porque no podían tener hijos."
         },
         {
           "key": "B",
-          "text": "B) Por lo que han comentado sus conocidos."
+          "text": "Por lo que han comentado sus conocidos."
         },
         {
           "key": "C",
-          "text": "C) Porque la mujer pensaba que el marido era gay."
+          "text": "Porque la mujer pensaba que el marido era gay."
         }
       ],
       "type": "choice3",
@@ -1742,15 +1742,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es una persona mayor."
+          "text": "es una persona mayor."
         },
         {
           "key": "B",
-          "text": "B) concedió una entrevista a una revista de moda."
+          "text": "concedió una entrevista a una revista de moda."
         },
         {
           "key": "C",
-          "text": "C) antes era periodista."
+          "text": "antes era periodista."
         }
       ],
       "type": "choice3",
@@ -1775,15 +1775,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tuvo un problema en su cuello."
+          "text": "tuvo un problema en su cuello."
         },
         {
           "key": "B",
-          "text": "B) tuvo un problema en un pie ."
+          "text": "tuvo un problema en un pie ."
         },
         {
           "key": "C",
-          "text": "C) tuvo un problema en un brazo."
+          "text": "tuvo un problema en un brazo."
         }
       ],
       "type": "choice3",
@@ -1808,15 +1808,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Le ha tocado la lotería."
+          "text": "Le ha tocado la lotería."
         },
         {
           "key": "B",
-          "text": "B) Ha perdido su boleto de lotería."
+          "text": "Ha perdido su boleto de lotería."
         },
         {
           "key": "C",
-          "text": "C) Ha gastado todo el dinero que ganó en la lotería."
+          "text": "Ha gastado todo el dinero que ganó en la lotería."
         }
       ],
       "type": "choice3",
@@ -1841,15 +1841,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) está casado con Cristina Robles."
+          "text": "está casado con Cristina Robles."
         },
         {
           "key": "B",
-          "text": "B) avisó a Cristina de que no podría ir al evento."
+          "text": "avisó a Cristina de que no podría ir al evento."
         },
         {
           "key": "C",
-          "text": "C) tiene otra pareja secreta."
+          "text": "tiene otra pareja secreta."
         }
       ],
       "type": "choice3",
@@ -1874,15 +1874,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) va a ser juez."
+          "text": "va a ser juez."
         },
         {
           "key": "B",
-          "text": "B) es el actual alcalde de Valencia."
+          "text": "es el actual alcalde de Valencia."
         },
         {
           "key": "C",
-          "text": "C) va a ir a la cárcel."
+          "text": "va a ir a la cárcel."
         }
       ],
       "type": "choice3",
@@ -1907,39 +1907,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -1964,39 +1964,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -2021,39 +2021,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -2078,39 +2078,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -2135,39 +2135,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -2192,39 +2192,39 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Habla de una persona muy traviesa."
+          "text": "Habla de una persona muy traviesa."
         },
         {
           "key": "B",
-          "text": "B) Habla de alguien que le engañó."
+          "text": "Habla de alguien que le engañó."
         },
         {
           "key": "C",
-          "text": "C) Habla de un amigo de la infancia."
+          "text": "Habla de un amigo de la infancia."
         },
         {
           "key": "D",
-          "text": "D) Habla de un familiar que está muerto."
+          "text": "Habla de un familiar que está muerto."
         },
         {
           "key": "E",
-          "text": "E) Habla de alguien que se muda."
+          "text": "Habla de alguien que se muda."
         },
         {
           "key": "F",
-          "text": "F) Habla de una persona sincera."
+          "text": "Habla de una persona sincera."
         },
         {
           "key": "G",
-          "text": "G) Habla de una persona que se asusta mucho."
+          "text": "Habla de una persona que se asusta mucho."
         },
         {
           "key": "H",
-          "text": "H) Habla de alguien vago."
+          "text": "Habla de alguien vago."
         },
         {
           "key": "I",
-          "text": "I) Habla de un amigo que no quiere estudiar."
+          "text": "Habla de un amigo que no quiere estudiar."
         }
       ],
       "type": "choice9",
@@ -2249,15 +2249,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2282,15 +2282,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2315,15 +2315,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2348,15 +2348,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2381,15 +2381,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2414,15 +2414,15 @@ window.DELE_BANK_B1_NUEVO_M2 = {
       "options": [
         {
           "key": "A",
-          "text": "A) JUAN"
+          "text": "JUAN"
         },
         {
           "key": "B",
-          "text": "B) ELI"
+          "text": "ELI"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
