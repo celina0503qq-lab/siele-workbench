@@ -72,7 +72,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "vive con su novio. 51 MODELO 2"
+          "text": "vive con su novio."
         }
       ],
       "type": "choice3",
@@ -177,7 +177,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "abrir una pastelería. 52"
+          "text": "abrir una pastelería."
         }
       ],
       "type": "choice3",
@@ -212,7 +212,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "podemos comprar ya porque ya está abierto. 53"
+          "text": "podemos comprar ya porque ya está abierto."
         }
       ],
       "type": "choice3",
@@ -247,7 +247,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "de una nueva tienda que abre el viernes. TEXTO 3 ASISTENTE DE COMPRAS Ofrezco mis servicios para ayudarte durante tus compras, tres años de experiencia en el mundo de la moda. Gracias a mis consejos vas a vestirte con arte y un toque especial. Cobro quince euros por una hora de trabajo, diecisiete los fines de semana. Puedes contactar conmigo a través del email: modasuperguai@gmail.com 54"
+          "text": "de una nueva tienda que abre el viernes. TEXTO 3 ASISTENTE DE COMPRAS Ofrezco mis servicios para ayudarte durante tus compras, tres años de experiencia en el mundo de la moda. Gracias a mis consejos vas a vestirte con arte y un toque especial. Cobro quince euros por una hora de trabajo, diecisiete los fines de semana. Puedes contactar conmigo a través del email: modasuperguai@gmail.com"
         }
       ],
       "type": "choice3",
@@ -282,7 +282,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "quiere más dinero por trabajar los sábados y domingos. 54"
+          "text": "quiere más dinero por trabajar los sábados y domingos."
         }
       ],
       "type": "choice3",
@@ -352,7 +352,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "vende productos de higiene con un 50% 55"
+          "text": "vende productos de higiene con un 50%"
         }
       ],
       "type": "choice3",
@@ -422,7 +422,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "tienen primavera. 56"
+          "text": "tienen primavera."
         }
       ],
       "type": "choice3",
@@ -457,7 +457,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "si quieres ver conciertos que están grabados. 57"
+          "text": "si quieres ver conciertos que están grabados."
         }
       ],
       "type": "choice3",
@@ -737,7 +737,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "odia vivir en París y Barcelona. 62 MODELO 2"
+          "text": "odia vivir en París y Barcelona."
         }
       ],
       "type": "choice3",
@@ -877,7 +877,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "Pull&Bear ha ayudado a Rosalía a producir sus discos. 63"
+          "text": "Pull&Bear ha ayudado a Rosalía a producir sus discos."
         }
       ],
       "type": "choice3",
@@ -1128,7 +1128,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "tienes dolor de cabeza. AUDIO 2"
+          "text": "tienes dolor de cabeza."
         }
       ],
       "type": "choice3",
@@ -1163,7 +1163,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "vas a poder comprar productos utilizando tu ordenador. 67 MODELO 2 PREGUNTAS AUDIO 3"
+          "text": "vas a poder comprar productos utilizando tu ordenador."
         }
       ],
       "type": "choice3",
@@ -1198,7 +1198,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "abre los sábados por la tarde. AUDIO 4"
+          "text": "abre los sábados por la tarde."
         }
       ],
       "type": "choice3",
@@ -1233,7 +1233,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "hay productos de baja calidad, pero baratos. AUDIO 5"
+          "text": "hay productos de baja calidad, pero baratos."
         }
       ],
       "type": "choice3",
@@ -1268,7 +1268,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "van a tener una nueva colección de productos. AUDIO 6"
+          "text": "van a tener una nueva colección de productos."
         }
       ],
       "type": "choice3",
@@ -1303,7 +1303,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "C",
-          "text": "buscan un panadero. 68"
+          "text": "buscan un panadero."
         }
       ],
       "type": "choice3",
@@ -1501,7 +1501,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         18
       ],
       "answer": "B",
-      "prompt": "Uno de sus familiares se casó en verano. 69",
+      "prompt": "Uno de sus familiares se casó en verano.",
       "options": [
         {
           "key": "A",
@@ -1536,7 +1536,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "D",
-      "prompt": "Mensaje 1",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1576,7 +1576,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1599,7 +1599,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "A",
-      "prompt": "Mensaje 2",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1639,7 +1639,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1662,7 +1662,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "F",
-      "prompt": "Mensaje 3",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1702,7 +1702,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1725,7 +1725,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "H",
-      "prompt": "Mensaje 4",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1765,7 +1765,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1788,7 +1788,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "B",
-      "prompt": "Mensaje 5",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1828,7 +1828,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1851,7 +1851,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "J",
-      "prompt": "Mensaje 6",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1891,7 +1891,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1914,7 +1914,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         25
       ],
       "answer": "C",
-      "prompt": "Mensaje 7",
+      "prompt": "Mensaje",
       "options": [
         {
           "key": "A",
@@ -1954,7 +1954,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         },
         {
           "key": "J",
-          "text": "A este lugar van a ir personas extranjeras. 70 MODELO 2"
+          "text": "A este lugar van a ir personas extranjeras."
         }
       ],
       "type": "choice10",
@@ -1977,7 +1977,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2000,7 +2000,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         2
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "writing",
       "_v5": true,
@@ -2023,7 +2023,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 1",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2046,7 +2046,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 2",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
@@ -2069,7 +2069,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
         3
       ],
       "answer": "",
-      "prompt": "Tarea 3",
+      "prompt": "Tarea",
       "options": [],
       "type": "speaking",
       "_v5": true,
