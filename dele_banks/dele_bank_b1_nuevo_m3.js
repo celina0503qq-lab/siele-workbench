@@ -29,39 +29,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -87,39 +87,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -145,39 +145,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -203,39 +203,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -261,39 +261,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -319,39 +319,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimient…"
+          "text": "Mensaje:. Escúchame, quiero decirte que no estamos muy contentos con tu rendimiento y hemos decidido despedirte. Estamos teniendo entrevistas con varios candidatos, pronto encontraremos a alguien para sustituirte. Solo lo digo para avisarte y que no te pille por sorpresa."
         },
         {
           "key": "B",
-          "text": "B) Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida q…"
+          "text": "Mensaje:. La verdad es que no sé qué pasó, le he dicho mil veces durante su vida que no puede jugar con fuego. Yo pensaba que lo había entendido, pero parece que no. Fuimos a urgencias y allí le atendieron, ahora mismo está ingresado. Por favor, llama a tu hermana y díselo."
         },
         {
           "key": "C",
-          "text": "C) Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro …"
+          "text": "Mensaje:. Lo he consultado con mi padre y creo que deberíamos contratar un seguro médico. Yo me quedaría más tranquilo, sobre todo cada vez que salgamos del país. ¿Has mirado los precios de las aseguradoras que te dije?"
         },
         {
           "key": "D",
-          "text": "D) Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, …"
+          "text": "Mensaje:. Perdón por llamarte tan temprano, estoy teniendo problemas de estómago, me he puesto muy malo, creo que me va a ser imposible salir. Empecé anoche con diarrea y desde entonces no he podido parar de ir al baño. ¿Qué opinas? ¿Qué debo hacer?"
         },
         {
           "key": "E",
-          "text": "E) Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy bue…"
+          "text": "Mensaje:. Vi a tu primo y me sorprendí, ha cambiado un montón, ahora tiene muy buena figura. Creo que ha estado yendo al gimnasio porque tiene muchos músculos y nada de barriga. Además, estaba súper moreno, quizás se haya pasado todo el verano en la playa."
         },
         {
           "key": "F",
-          "text": "F) Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otr…"
+          "text": "Mensaje:. ¿Has pensado en lo que te comenté el otro día? Tenemos que encontrar otra solución, sabes que no puedo utilizar preservativos porque tengo una reacción alérgica. Seguro que hay alguna forma de continuar manteniendo relaciones sexuales sin tener más hijos."
         },
         {
           "key": "G",
-          "text": "G) Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un ata…"
+          "text": "Mensaje:. Perdona, lo siento mucho. No te vas a creer lo que pasa, estoy en un atasco horrible. Han puesto un semáforo nuevo cerca del puente viejo y está todo bloqueado. Además, creo que ha habido un accidente y esto ha empeorado las cosas."
         },
         {
           "key": "H",
-          "text": "H) Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la…"
+          "text": "Mensaje:. Permíteme que te hable con sinceridad. Tu problema está muy claro, es la alimentación. ¿Cómo pretendes que cambie algo si sigues teniendo esa dieta que abusa de las proteínas? Deberías empezar a informarte sobre los productos ligeros. Conozco a una persona que te puede ayudar."
         },
         {
           "key": "I",
-          "text": "I) Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo…"
+          "text": "Mensaje:. Ayer estuve en la tienda y te compré maquinillas y espuma de afeitar, lo he dejado todo en el primer cajón del mueble del baño. Si me quieres ya sabes lo que tienes que hacer. Nos vemos esta noche, un beso. 79"
         }
       ],
       "type": "choice9",
@@ -377,21 +377,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) las personas que dicen que en Hollywood no importa la edad dicen la verdad."
+          "text": "las personas que dicen que en Hollywood no importa la edad dicen la verdad."
         },
         {
           "key": "B",
-          "text": "B) el aspecto físico y la edad son muy importantes para trabajar como actriz."
+          "text": "el aspecto físico y la edad son muy importantes para trabajar como actriz."
         },
         {
           "key": "C",
-          "text": "C) después de cumplir 60 años tienes mejores contratos en Hollywood."
+          "text": "después de cumplir 60 años tienes mejores contratos en Hollywood."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -411,21 +411,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Sharon Stone está feliz con su cuerpo."
+          "text": "Sharon Stone está feliz con su cuerpo."
         },
         {
           "key": "B",
-          "text": "B) la hija de Sharon Stone tiene 20 años."
+          "text": "la hija de Sharon Stone tiene 20 años."
         },
         {
           "key": "C",
-          "text": "C) durante la cuarentena, Sharon Stone se mudó de América."
+          "text": "durante la cuarentena, Sharon Stone se mudó de América."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -445,21 +445,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) debutó como actriz con la película “Instinto básico”."
+          "text": "debutó como actriz con la película “Instinto básico”."
         },
         {
           "key": "B",
-          "text": "B) olvidó ponerse ropa interior al hacer una película."
+          "text": "olvidó ponerse ropa interior al hacer una película."
         },
         {
           "key": "C",
-          "text": "C) actuó en una película de Woody Allen en 1980."
+          "text": "actuó en una película de Woody Allen en 1980."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -479,21 +479,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) siempre da su opinión, aunque pueda resultar polémica."
+          "text": "siempre da su opinión, aunque pueda resultar polémica."
         },
         {
           "key": "B",
-          "text": "B) ha tenido varias relaciones amorosas con productores de Hollywood."
+          "text": "ha tenido varias relaciones amorosas con productores de Hollywood."
         },
         {
           "key": "C",
-          "text": "C) siempre estaba muy tranquila durante sus trabajos como actriz."
+          "text": "siempre estaba muy tranquila durante sus trabajos como actriz."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -513,21 +513,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el movimiento #MeToo fue iniciado por Sharon Stone."
+          "text": "el movimiento #MeToo fue iniciado por Sharon Stone."
         },
         {
           "key": "B",
-          "text": "B) el movimiento #MeToo mostró malos comportamientos de diferentes profesionales del cine."
+          "text": "el movimiento #MeToo mostró malos comportamientos de diferentes profesionales del cine."
         },
         {
           "key": "C",
-          "text": "C) Sharon Stone jamás tuvo una mala experiencia al actuar."
+          "text": "Sharon Stone jamás tuvo una mala experiencia al actuar."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -547,21 +547,21 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no ha continuado con su carrera profesional desde el siglo pasado."
+          "text": "no ha continuado con su carrera profesional desde el siglo pasado."
         },
         {
           "key": "B",
-          "text": "B) ha ganado en varias ocasiones el premio Óscar."
+          "text": "ha ganado en varias ocasiones el premio Óscar."
         },
         {
           "key": "C",
-          "text": "C) sigue realizando trabajos como actriz."
+          "text": "sigue realizando trabajos como actriz."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\n80\nMODELO 3\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com\n81",
+      "cuerpo": "Sharon Stone: “la apariencia física sí importa en Hollywood”\nEn tiempos de igualdad, de inclusión y de valorización de las cualidades artísticas en\nHollywood, la actriz estadounidense Sharon Stone manifestó que en la industria del cine aún\nse valora mucho a la apariencia física, la belleza y la juventud, por encima del talento. \"Quien\ndice lo contrario es un mentiroso e hipócrita\", expresó.\n\"No te das cuenta de lo mucho que la apariencia importa hasta que empiezas a desaparecer,\ncuando ya no trabajas, cuando ya no te llaman para hacer películas\", manifestó la actriz.\nRecordó que la industria del cine vende belleza\ny juventud, cosas que muchos quieren tener y\nque se satisfacen al verlo en la pantalla. Las\nhistorias son creadas para gente bonita y joven,\nintentar actuar después de los 60 años es casi\nimposible, aclaró.\nStone comentó que ya no le importa lo que otras personas digan de su cuerpo o su cara.\nTiene 62 años y se siente muy bien con su físico, que a su edad no pretende lucir como una\nchica de 20 años. Durante el tiempo de cuarentena realizaba ejercicios físicos en su casa, en\nCalifornia, EE UU, para ayudar a conservar su salud, que para ella es más importante que la\napariencia.\nAunque la carrera de Sharon Stone empezó en 1980 con “Los diarios del ron”, de Woody\nAllen, fue en 1992, con la polémica película “Instinto básico” cuando se hizo realmente\nfamosa, gracias a las escenas sensuales que protagonizaba. Se recuerda el momento cuando\nStone, sin llevar ropa interior, cruza las piernas estando sentada. Dicha escena es\nconsiderada una de las más influyentes de la historia del cine, por su carga erótica, sin llegar\na mostrar las partes íntimas de la actriz. De esa imagen ella ha querido deshacerse durante\nmucho tiempo, llegando a decir que tiene mejores trabajos en el cine, sin embargo, el público\ny los críticos la siguen recordando por esto.\nSharon Stone es una artista polémica. Algunos productores no querían trabajar con ella,\ndecían que causaba problemas. Y es que casi siempre dice lo que piensa y, cuando siente\ninjusticias, lo expresa públicamente.\nFue una de las estrellas de Hollywood que colaboró con el movimiento #MeToo, que exhibió los\nabusos laborales y sexuales a las actrices por parte de productores, realizadores y hasta de\notros actores. Contó que una vez un director le hizo sentarse en sus piernas para explicarle algo\nsobre la película. En otra ocasión, un actor le dijo durante el trabajo que quería ver sus pechos,\ny así como esas situaciones vivió muchas.\nEn 1996 fue nominada al Óscar y recibió el premio Globo de Oro por la película Casino, de\nMartin Scorsese. Su trabajo más reciente en el cine fue en 2018, “What about love”, y este año\nha presentado en la televisión el documental “El nuevo papa”.\nAdaptado de: www.eldeber.com",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Usted va a leer un texto sobre la apariencia física. Después, debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c)."
@@ -581,15 +581,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -615,15 +615,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -649,15 +649,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -683,15 +683,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -717,15 +717,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -751,15 +751,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) EMI"
+          "text": "EMI"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LUZ"
+          "text": "LUZ"
         }
       ],
       "type": "choice3",
@@ -785,41 +785,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -839,41 +839,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -893,41 +893,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -947,41 +947,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: H",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1001,41 +1001,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1055,41 +1055,41 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A. Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
+          "text": "Cuestiónalo todo, mira directamente los ingredientes y la composición nutricional para saber qué contiene realmente lo que compras"
         },
         {
           "key": "B",
-          "text": "B. Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
+          "text": "Eres el ejemplo de tus hijos, sobrinos o nietos y es importante que te vean comer cosas saludables y disfrutarlas porque entonces les será más fácil entender que eso es algo bueno."
         },
         {
           "key": "C",
-          "text": "C. Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
+          "text": "Cuando se lo comentaron dejó la dieta inmediatamente para volver a su ritmo de vida normal"
         },
         {
           "key": "D",
-          "text": "D. Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
+          "text": "Mi experiencia tras acompañar a varias personas a lo largo de esta transición es que han conseguido un mejor peso"
         },
         {
           "key": "E",
-          "text": "E. Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
+          "text": "Debido a estas enfermedades, los nutricionistas están cada vez más presentes en los medios de comunicación"
         },
         {
           "key": "F",
-          "text": "F. En todos los tipos de alimentación, hagas la dieta que hagas"
+          "text": "En todos los tipos de alimentación, hagas la dieta que hagas"
         },
         {
           "key": "G",
-          "text": "G. Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
+          "text": "Es importante que tu dieta esté bien planificada y controlada por este profesional de la salud."
         },
         {
           "key": "H",
-          "text": "H. Si estás mejorando tus hábitos no te compares con nadie 86"
+          "text": "Si estás mejorando tus hábitos no te compares con nadie 86"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: G",
-      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...\n85",
+      "cuerpo": "¿QUÉ ES COMER SANO?\nHe hablado mucho sobre la industria alimentaria, sobre no creer en los envases ni en los\nanuncios. ¿Y ahora qué? No se trata de morirse de hambre ni mucho menos, comer sano y\nequilibrado es comer mucho, pero mucho de otras cosas.\n…………(19)…………..., se han encontrado mejor, con más energía, con menos problemas\ndigestivos, mejor descanso nocturno y pelo, piel y uñas más sanas entre otros beneficios.\nPero las mayores ventajas de una vida saludable están a largo plazo ya que nos ayudan a\nprevenir enfermedades no transmisibles que, a día de hoy, se están extendiendo a gran\nvelocidad. Estas enfermedades son la diabetes, las enfermedades cardiovasculares y los\naccidentes cerebrovasculares e incluso el cáncer.\nOtra de las grandísimas ventajas de comer sano y\nfamiliarizarte con la nutrición es que serás el\nejemplo para los que te rodean, los que verán cómo\nha cambiado tu vida y cómo te sientes y lo más\nimportante… los más pequeños. …………(20)…………...\nConsumir ensalada y pollo a la plancha pensando que es algo saludable es un error, debido a\nque el consumo de carne está limitado semanalmente. …………(21)…………..., los grandes\nprotagonistas deben ser los vegetales. Básicamente, toma el volumen de medio plato de\nvegetales en la comida y en la cena y reparte a lo largo del día, como mínimo, 3 raciones de\nfrutas al día.\n…………(22)…………... Hay personas que comen realmente mal, pero que ellos lo hagan no ha de\nservirte a ti de consuelo para interpretar que lo que tú hacías no está tan mal.\nSé muy crítico con los mitos, con lo de “me han dicho que esto va mal para esto” o “de esto hay\nque comer mucho porque tiene de lo otro” o “si te tomas esto adelgazas”. Y qué decir de la\npublicidad, los envases y la industria alimentaria en general. …………(23)…………...",
       "transcript": "",
       "audio": "",
       "instrucciones": "INSTRUCCIONES: Lea el siguiente texto, del que se han extraído seis fragmentos. A continuación lea los ocho fragmentos propuestos (A-H) y decida en qué lugar del texto (19-24) hay que colocar cada uno de ellos. HAY DOS FRAGMENTOS QUE NO TIENE QUE ELEGIR."
@@ -1109,15 +1109,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) dijo"
+          "text": "dijo"
         },
         {
           "key": "B",
-          "text": "B) preguntó"
+          "text": "preguntó"
         },
         {
           "key": "C",
-          "text": "C) dije"
+          "text": "dije"
         }
       ],
       "type": "choice3",
@@ -1143,15 +1143,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) sabes"
+          "text": "sabes"
         },
         {
           "key": "B",
-          "text": "B) sabrías"
+          "text": "sabrías"
         },
         {
           "key": "C",
-          "text": "C) sepas"
+          "text": "sepas"
         }
       ],
       "type": "choice3",
@@ -1177,15 +1177,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Se"
+          "text": "Se"
         },
         {
           "key": "B",
-          "text": "B) Hay"
+          "text": "Hay"
         },
         {
           "key": "C",
-          "text": "C) Está"
+          "text": "Está"
         }
       ],
       "type": "choice3",
@@ -1211,15 +1211,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ejercito"
+          "text": "ejercito"
         },
         {
           "key": "B",
-          "text": "B) ejercicio"
+          "text": "ejercicio"
         },
         {
           "key": "C",
-          "text": "C) ejército"
+          "text": "ejército"
         }
       ],
       "type": "choice3",
@@ -1245,15 +1245,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) del"
+          "text": "del"
         },
         {
           "key": "B",
-          "text": "B) de"
+          "text": "de"
         },
         {
           "key": "C",
-          "text": "C) el"
+          "text": "el"
         }
       ],
       "type": "choice3",
@@ -1279,15 +1279,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) abramos"
+          "text": "abramos"
         },
         {
           "key": "B",
-          "text": "B) aburramos"
+          "text": "aburramos"
         },
         {
           "key": "C",
-          "text": "C) encontremos"
+          "text": "encontremos"
         }
       ],
       "type": "choice3",
@@ -1313,15 +1313,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Que su hijo hace las cosas igual que su abuelo."
+          "text": "Que su hijo hace las cosas igual que su abuelo."
         },
         {
           "key": "B",
-          "text": "B) Que su abuelo tiene mal carácter."
+          "text": "Que su abuelo tiene mal carácter."
         },
         {
           "key": "C",
-          "text": "C) Que su hijo es igual físicamente que un familiar."
+          "text": "Que su hijo es igual físicamente que un familiar."
         }
       ],
       "type": "choice3",
@@ -1346,15 +1346,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) De pie."
+          "text": "De pie."
         },
         {
           "key": "B",
-          "text": "B) Durmiendo."
+          "text": "Durmiendo."
         },
         {
           "key": "C",
-          "text": "C) Sentada."
+          "text": "Sentada."
         }
       ],
       "type": "choice3",
@@ -1379,15 +1379,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Está embarazada."
+          "text": "Está embarazada."
         },
         {
           "key": "B",
-          "text": "B) Está contenta porque va a trabajar en una oficina."
+          "text": "Está contenta porque va a trabajar en una oficina."
         },
         {
           "key": "C",
-          "text": "C) Está empezando un nuevo trabajo en una oficina."
+          "text": "Está empezando un nuevo trabajo en una oficina."
         }
       ],
       "type": "choice3",
@@ -1412,15 +1412,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Su amiga trabaja en la ambulancia."
+          "text": "Su amiga trabaja en la ambulancia."
         },
         {
           "key": "B",
-          "text": "B) Se ha hecho una herida."
+          "text": "Se ha hecho una herida."
         },
         {
           "key": "C",
-          "text": "C) Se ha caído escalando."
+          "text": "Se ha caído escalando."
         }
       ],
       "type": "choice3",
@@ -1445,15 +1445,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Que es ecologista."
+          "text": "Que es ecologista."
         },
         {
           "key": "B",
-          "text": "B) Que contamina mucho."
+          "text": "Que contamina mucho."
         },
         {
           "key": "C",
-          "text": "C) Que es virgen."
+          "text": "Que es virgen."
         }
       ],
       "type": "choice3",
@@ -1478,15 +1478,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Del clima de una región."
+          "text": "Del clima de una región."
         },
         {
           "key": "B",
-          "text": "B) De una receta."
+          "text": "De una receta."
         },
         {
           "key": "C",
-          "text": "C) De cómo cultivar."
+          "text": "De cómo cultivar."
         }
       ],
       "type": "choice3",
@@ -1511,15 +1511,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) necesita estudiar muchísimas horas antes de los exámenes."
+          "text": "necesita estudiar muchísimas horas antes de los exámenes."
         },
         {
           "key": "B",
-          "text": "B) aprueba sin problemas."
+          "text": "aprueba sin problemas."
         },
         {
           "key": "C",
-          "text": "C) es un mal estudiante."
+          "text": "es un mal estudiante."
         }
       ],
       "type": "choice3",
@@ -1544,15 +1544,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Igual que sus familiares de Argelia."
+          "text": "Igual que sus familiares de Argelia."
         },
         {
           "key": "B",
-          "text": "B) Un poco serio."
+          "text": "Un poco serio."
         },
         {
           "key": "C",
-          "text": "C) Muy moreno."
+          "text": "Muy moreno."
         }
       ],
       "type": "choice3",
@@ -1577,15 +1577,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) en su dieta tiene pocas proteínas."
+          "text": "en su dieta tiene pocas proteínas."
         },
         {
           "key": "B",
-          "text": "B) no ha seguido los consejos de sus clases de nutrición."
+          "text": "no ha seguido los consejos de sus clases de nutrición."
         },
         {
           "key": "C",
-          "text": "C) lleva una dieta equilibrada."
+          "text": "lleva una dieta equilibrada."
         }
       ],
       "type": "choice3",
@@ -1610,15 +1610,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los domingos por la mañana lee un libro sobre nutrición."
+          "text": "los domingos por la mañana lee un libro sobre nutrición."
         },
         {
           "key": "B",
-          "text": "B) tener resaca es bueno para la salud."
+          "text": "tener resaca es bueno para la salud."
         },
         {
           "key": "C",
-          "text": "C) últimamente bebe demasiado alcohol los sábados por la noche."
+          "text": "últimamente bebe demasiado alcohol los sábados por la noche."
         }
       ],
       "type": "choice3",
@@ -1643,15 +1643,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ricardo lee blogs sobre nutrición."
+          "text": "Ricardo lee blogs sobre nutrición."
         },
         {
           "key": "B",
-          "text": "B) cenar fruta es lo más sano."
+          "text": "cenar fruta es lo más sano."
         },
         {
           "key": "C",
-          "text": "C) se debe comer chorizo o lomo."
+          "text": "se debe comer chorizo o lomo."
         }
       ],
       "type": "choice3",
@@ -1676,15 +1676,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) quieren que él adelgace."
+          "text": "quieren que él adelgace."
         },
         {
           "key": "B",
-          "text": "B) quieren que sea entrenador de un equipo."
+          "text": "quieren que sea entrenador de un equipo."
         },
         {
           "key": "C",
-          "text": "C) están un poco gordos."
+          "text": "están un poco gordos."
         }
       ],
       "type": "choice3",
@@ -1709,15 +1709,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Que en diciembre se podrá comprar un nuevo programa informático."
+          "text": "Que en diciembre se podrá comprar un nuevo programa informático."
         },
         {
           "key": "B",
-          "text": "B) Que se ha descubierto la cura para una enfermedad."
+          "text": "Que se ha descubierto la cura para una enfermedad."
         },
         {
           "key": "C",
-          "text": "C) Que 95% de los científicos de Colorado está en huelga."
+          "text": "Que 95% de los científicos de Colorado está en huelga."
         }
       ],
       "type": "choice3",
@@ -1742,15 +1742,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) el día internacional del té es en primavera."
+          "text": "el día internacional del té es en primavera."
         },
         {
           "key": "B",
-          "text": "B) los expertos en té son de Inglaterra."
+          "text": "los expertos en té son de Inglaterra."
         },
         {
           "key": "C",
-          "text": "C) las infusiones son buenas para la salud."
+          "text": "las infusiones son buenas para la salud."
         }
       ],
       "type": "choice3",
@@ -1775,15 +1775,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es un militar."
+          "text": "es un militar."
         },
         {
           "key": "B",
-          "text": "B) es muy joven."
+          "text": "es muy joven."
         },
         {
           "key": "C",
-          "text": "C) volaba por primera vez."
+          "text": "volaba por primera vez."
         }
       ],
       "type": "choice3",
@@ -1808,15 +1808,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los oculistas españoles estaban en contra de realizar la conferencia."
+          "text": "los oculistas españoles estaban en contra de realizar la conferencia."
         },
         {
           "key": "B",
-          "text": "B) los organizadores del evento son los propietarios de la sala."
+          "text": "los organizadores del evento son los propietarios de la sala."
         },
         {
           "key": "C",
-          "text": "C) el año pasado hubo bastante público en la conferencia."
+          "text": "el año pasado hubo bastante público en la conferencia."
         }
       ],
       "type": "choice3",
@@ -1841,15 +1841,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha habido problemas después de la decisión del gobierno."
+          "text": "ha habido problemas después de la decisión del gobierno."
         },
         {
           "key": "B",
-          "text": "B) los niños no pueden estar sin una persona mayor de edad."
+          "text": "los niños no pueden estar sin una persona mayor de edad."
         },
         {
           "key": "C",
-          "text": "C) es obligatorio que los empleados lleven gorra."
+          "text": "es obligatorio que los empleados lleven gorra."
         }
       ],
       "type": "choice3",
@@ -1874,15 +1874,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los ganaderos han cerrado sus negocios."
+          "text": "los ganaderos han cerrado sus negocios."
         },
         {
           "key": "B",
-          "text": "B) la gente compra menos carne."
+          "text": "la gente compra menos carne."
         },
         {
           "key": "C",
-          "text": "C) el gobierno ha ofrecido ayudas económicas."
+          "text": "el gobierno ha ofrecido ayudas económicas."
         }
       ],
       "type": "choice3",
@@ -1907,39 +1907,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -1964,39 +1964,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -2021,39 +2021,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -2078,39 +2078,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -2135,39 +2135,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -2192,39 +2192,39 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Va a tomar medicinas."
+          "text": "Va a tomar medicinas."
         },
         {
           "key": "B",
-          "text": "B) No consume carne."
+          "text": "No consume carne."
         },
         {
           "key": "C",
-          "text": "C) Pasó bastante tiempo en el hospital."
+          "text": "Pasó bastante tiempo en el hospital."
         },
         {
           "key": "D",
-          "text": "D) No pudo ver a su pareja."
+          "text": "No pudo ver a su pareja."
         },
         {
           "key": "E",
-          "text": "E) Hizo un voluntariado."
+          "text": "Hizo un voluntariado."
         },
         {
           "key": "F",
-          "text": "F) Habla de una carta."
+          "text": "Habla de una carta."
         },
         {
           "key": "G",
-          "text": "G) Quiere ser deportista profesional."
+          "text": "Quiere ser deportista profesional."
         },
         {
           "key": "H",
-          "text": "H) Había muchas personas en este lugar."
+          "text": "Había muchas personas en este lugar."
         },
         {
           "key": "I",
-          "text": "I) Vive al lado de un famoso."
+          "text": "Vive al lado de un famoso."
         }
       ],
       "type": "choice9",
@@ -2249,15 +2249,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2282,15 +2282,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2315,15 +2315,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2348,15 +2348,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2381,15 +2381,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2414,15 +2414,15 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) RAFA"
+          "text": "RAFA"
         },
         {
           "key": "B",
-          "text": "B) LOLA"
+          "text": "LOLA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
