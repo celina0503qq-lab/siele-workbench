@@ -29,39 +29,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -86,39 +86,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -143,39 +143,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -200,39 +200,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -257,39 +257,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -314,39 +314,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin …"
+          "text": "Resort La Quebrada. Siete días de viaje para pasar unas magníficas vacaciones sin preocupaciones en la costa. Excursiones a caballo para visitar las principales ruinas de la zona. Seguros de viaje y visados para toda la familia incluidos en el precio del paquete turístico."
         },
         {
           "key": "B",
-          "text": "B) Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desco…"
+          "text": "Barbarroja. El crucero Barbarroja es, sin lugar a dudas, el mejor lugar para desconectar del día a día. Camarotes de primera, segunda y tercera clase con todo el equipamiento. Bufet libre para desayunar y cenar. Consulta ahora mismo nuestras ofertas para familias."
         },
         {
           "key": "C",
-          "text": "C) Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la pr…"
+          "text": "Norberg Reserve. Bienvenidos al Parque Nacional Norberg, un lugar ideal para la práctica del senderismo en un ecosistema único en el mundo. Rutas de 5, 10 y 15 kilómetros con diferentes niveles de dificultad. Prohibido hacer barbacoas y cazar en todo el recinto del parque."
         },
         {
           "key": "D",
-          "text": "D) Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respir…"
+          "text": "Lion Park. El parque de atracciones en el que no tendrás ni un segundo para respirar. Siente cómo la adrenalina fluye por tu cuerpo. Disfruta de las atracciones más impresionantes de Europa. Entrada permitida solamente a mayores de 18 años. Abierto a partir del 15 de junio."
         },
         {
           "key": "E",
-          "text": "E) Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos o…"
+          "text": "Centro cultural Leonesa. Celebramos eventos de todo tipo para escolares y grupos organizados. Nuestra especialidad son las excursiones culturales temáticas por el casco histórico de la ciudad. Ofrecemos audioguías en diferentes idiomas: ruso, polaco, francés, alemán e inglés."
         },
         {
           "key": "F",
-          "text": "F) Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visi…"
+          "text": "Visita exprés a Mallorca. Plan de viaje: aterrizamos a las 8:00 de la mañana, visitamos el centro de Palma (la capital de Mallorca) a pie durante dos horas, nos bañamos, comemos en un restaurante de tapas y por la tarde visitamos unos pueblos históricos. Despegamos a las 21:00."
         },
         {
           "key": "G",
-          "text": "G) Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos re…"
+          "text": "Fotógrafo profesional. ¿Quieres olvidarte de todo durante tu viaje y tener unos recuerdos increíbles? Déjalo en mis manos, te seguiré sin que te des cuenta durante tus vacaciones y crearé un álbum de fotos original para que sorprendas a tus amigos al volver a casa."
         },
         {
           "key": "H",
-          "text": "H) La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para…"
+          "text": "La Marina. Camping La Marina, junto al castillo del Rey Jaime. Un lugar ideal para escapadas de fin de semana. Ven y acampa con tu familia o amigos en un entorno de lo más agradable. Disponemos de piscina climatizada y SPA."
         },
         {
           "key": "I",
-          "text": "I) Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El …"
+          "text": "Club Libertad. Los ritmos cubanos han llegado a la ciudad. Nuestro instructor “El gran Martín” ofrece cursos de baile para parejas con experiencia, todos los martes y jueves. Ven ya y prepárate para la próxima competición que tendrá lugar en agosto. 13"
         }
       ],
       "type": "choice9",
@@ -371,21 +371,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) las agencias de viaje son un invento reciente."
+          "text": "las agencias de viaje son un invento reciente."
         },
         {
           "key": "B",
-          "text": "B) Thomas Cook nació y murió en el mismo siglo."
+          "text": "Thomas Cook nació y murió en el mismo siglo."
         },
         {
           "key": "C",
-          "text": "C) la forma en la que murió Thomas Cook se hizo famosa."
+          "text": "la forma en la que murió Thomas Cook se hizo famosa."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -404,21 +404,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los viajeros se desplazaban en tren."
+          "text": "los viajeros se desplazaban en tren."
         },
         {
           "key": "B",
-          "text": "B) solo podían viajar ingleses."
+          "text": "solo podían viajar ingleses."
         },
         {
           "key": "C",
-          "text": "C) había promociones especiales para religiosos."
+          "text": "había promociones especiales para religiosos."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -437,21 +437,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ferrocarriles."
+          "text": "ferrocarriles."
         },
         {
           "key": "B",
-          "text": "B) carteles."
+          "text": "carteles."
         },
         {
           "key": "C",
-          "text": "C) excursiones."
+          "text": "excursiones."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -470,21 +470,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) no quedó muy satisfecha con los resultados."
+          "text": "no quedó muy satisfecha con los resultados."
         },
         {
           "key": "B",
-          "text": "B) propuso realizar el mismo trayecto en otros transportes."
+          "text": "propuso realizar el mismo trayecto en otros transportes."
         },
         {
           "key": "C",
-          "text": "C) quiso continuar con la colaboración."
+          "text": "quiso continuar con la colaboración."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -503,21 +503,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se abrió en Londres."
+          "text": "se abrió en Londres."
         },
         {
           "key": "B",
-          "text": "B) fue inaugurada por el hijo de Thomas Cook."
+          "text": "fue inaugurada por el hijo de Thomas Cook."
         },
         {
           "key": "C",
-          "text": "C) abrió en el año 1845."
+          "text": "abrió en el año 1845."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -536,21 +536,21 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los viajeros siguen prefiriendo la agencia de Thomas Cook."
+          "text": "los viajeros siguen prefiriendo la agencia de Thomas Cook."
         },
         {
           "key": "B",
-          "text": "B) Thomas Cook decidió cerrar su agencia de viajes."
+          "text": "Thomas Cook decidió cerrar su agencia de viajes."
         },
         {
           "key": "C",
-          "text": "C) la famosa agencia de viajes sufrió una grave crisis y se arruinó."
+          "text": "la famosa agencia de viajes sufrió una grave crisis y se arruinó."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\n14\nMODELO 1\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.\n15",
+      "cuerpo": "Thomas Cook y la primera agencia de viajes de la historia\nLas agencias de viajes forman parte de nuestra vida de tal forma que, por un lado, parece\nque siempre han estado ahí, pero por otro tenemos una extraña sensación de que son un\ninvento nuevo. Pero tal vez, no lo sean tanto como imaginamos.\nLo cierto es que todo empezó de la mano de un pastor baptista cuyo nombre, Thomas Cook,\nacabó siendo famoso por todo el mundo siglos después de su muerte.\nThomas Cook (1808-1892) era un religioso inglés, al que se le recuerda por ser el fundador\nde la primera agencia de viajes de la historia, así como el inventor del concepto de turismo\nmoderno.\nTodo empezó en el año 1841, cuando convenció a la compañía ferroviaria de Midland\nCounties Railway Company para ofrecer los servicios de un tren especial entre las localidades\nde Leicester y Loughborough. El ferrocarril sería ocupado por un grupo de 500 viajeros\nseleccionado por él mismo.\nEl trayecto se convertiría en la primera excursión que se ofrecía para viajar en tren, así como\nla primera en ser publicitada en Inglaterra. Se trataba de un recorrido de unos 19 kilómetros\nque se promocionaba por medio de pequeños carteles que se colgaban por la calle.\nDespués de aquello, la compañía ferroviaria le\npropuso planificar y organizar más excursiones de\nforma permanente. Su labor como agente de viajes\nno había hecho más que empezar.\nPocos años después, comprendiendo el potencial\nque tenían aquellas excursiones, fundó la que se\nconsidera la primera agencia de viajes del mundo:\nThomas Cook & Son. Corría el año 1845. El proyecto\nfue un éxito y pronto se extendieron trayectos y\npaquetes de viajes turísticos por todo el país.\nSu primer establecimiento a pie de calle como agencia de viajes abrió sus puertas en Fleet\nStreet, en Londres, en 1865. En 1872 ya organizaban rutas alrededor del mundo.\nEn 1890, Thomas Cook & Son contaba con 1714 empleados, 84 oficinas y 85 agencias en\ndistintos lugares del mundo.\nA principios del siglo XXI seguía consolidándose como una de las compañías de viajes más\ngrandes e importantes del mundo y fue adquirida por la compañía alemana C&N Touristic\nAG.\nSin embargo, la compañía Thomas Cook, fue acumulando deudas de tal forma que su\nnegocio terminó quebrando, después de llevar a sus espaldas 178 años de recorrido\nhistórico desde aquellos primeros viajes en tren. La compañía cerró tras presentar\nsuspensión de pagos, en un suceso que dejó a muchos de sus viajeros abandonados por el\nmundo.",
       "transcript": "",
       "audio": ""
     },
@@ -569,15 +569,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -602,15 +602,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -635,15 +635,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -668,15 +668,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -701,15 +701,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -734,15 +734,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ANA"
+          "text": "ANA"
         },
         {
           "key": "B",
-          "text": "B) MAX"
+          "text": "MAX"
         },
         {
           "key": "C",
-          "text": "C) LEO"
+          "text": "LEO"
         }
       ],
       "type": "choice3",
@@ -767,41 +767,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -820,41 +820,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: F",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -873,41 +873,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -926,41 +926,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: H",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -979,41 +979,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: D",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -1032,41 +1032,41 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A. al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
+          "text": "al sobrevivir se corrió la voz y a partir de entonces la gente humilde napolitana empezó a comer los tomates con sus panes secos"
         },
         {
           "key": "B",
-          "text": "B. A partir de ese momento todos querían probar la pizza preferida de la reina"
+          "text": "A partir de ese momento todos querían probar la pizza preferida de la reina"
         },
         {
           "key": "C",
-          "text": "C. los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
+          "text": "los ingredientes disponibles en la mayoría de los hogares humildes, era un plato al alcance de la mayoría"
         },
         {
           "key": "D",
-          "text": "D. dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
+          "text": "dueño de la pizzería “Pietro il Pizzaiolo”, que hoy conocemos bajo el nombre de “Pizzeria Brandi”"
         },
         {
           "key": "E",
-          "text": "E. Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
+          "text": "Cuando volvió a su país natal, no pudo cocinar pizza nunca más"
         },
         {
           "key": "F",
-          "text": "F. Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
+          "text": "Siendo en Nápoles en el siglo XVI cuando se empezaron a consumir los tomates como alimento"
         },
         {
           "key": "G",
-          "text": "G. el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
+          "text": "el primero que le dijo esto fue un familiar lejano que viajaba a Nápoles frecuentemente"
         },
         {
           "key": "H",
-          "text": "H. separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
+          "text": "separados de los clásicos panaderos, preparando ellos mismos la masa y horneándola 20"
         }
       ],
       "type": "choice8",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es\n19",
+      "cuerpo": "LA HISTORIA DE LA PIZZA\nLa historia de la pizza está ligada al consumo del pan por parte de la humanidad. En el antiguo\nEgipto empezaron a prepararse panes con harina, agua y miel. En la antigua Grecia al pan se le\nañadía grasa, especias, ajo y cebolla. En Italia se conocía como “pizza bianca” elaborada con pan,\ngrasa, hierbas, ajo, cebolla y aceitunas, …………(19)…………..\nCon la llegada del tomate a Europa desde América, este plato dio un giro inesperado. …………\n(20)………….., mientras que en el resto de Europa no se utilizaron en la cocina hasta el siglo XVIII.\nAl principio el tomate se consideraba venenoso y solo se utilizaba en la jardinería a modo\ndecorativo, no eran un alimento, hasta que un día un campesino napolitano por su necesidad\nde comer, acompañó su pan de un tomate y le encantó, …………(21)………….. Convirtiéndose esta\ncombinación de pan con tomate en un plato muy apreciado en la región de Nápoles. Con el\npaso del tiempo, debido a su gran demanda, aparecieron los pizzeros napolitanos, …………\n(22)…………...\nEs en el siglo XVII en Italia, concretamente en Nápoles, cuando\napareció la pizza como plato popular tal y como la conocemos\nhoy en día. Era ya un plato muy popular entre la gente que se lo\nllevaba a su casa o se lo comía en la calle, apareciendo también\nvendedores ambulantes de este rico manjar.\nRaffaele Espósito, un conocido pizzero de Nápoles de aquella época, …………(23)…………..., en junio\nde 1889 fue el encargado de elaborar unas pizzas para los reyes italianos, Don Umberto I y\nDoña Margarita de Saboya. Raffaele Espósito horneó y envió a sus majestades tres pizzas\ndiferentes, la preferida de la reina fue la que le recordó por sus colores a la bandera de Italia,\npor lo que fue rebautizada por Raffaele Espósito como “Pizza Margarita”.\n…………(24)…………..., por lo que se extendió por toda Italia rápidamente convirtiéndose en el\nsímbolo gastronómico de todo el país y en un elemento unificador ya que todos, desde la reina\nhasta el más humilde campesino podían comerla. No pasó mucho tiempo para que la pizza\nfuera conocida y apreciada más allá de Italia y conquistase el mundo entero.\nAdaptado de: www.palacios.es",
       "transcript": "",
       "audio": ""
     },
@@ -1085,15 +1085,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) podré"
+          "text": "podré"
         },
         {
           "key": "B",
-          "text": "B) pude"
+          "text": "pude"
         },
         {
           "key": "C",
-          "text": "C) he podido"
+          "text": "he podido"
         }
       ],
       "type": "choice3",
@@ -1118,15 +1118,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) fuimos"
+          "text": "fuimos"
         },
         {
           "key": "B",
-          "text": "B) íbamos"
+          "text": "íbamos"
         },
         {
           "key": "C",
-          "text": "C) iremos"
+          "text": "iremos"
         }
       ],
       "type": "choice3",
@@ -1151,15 +1151,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) planta"
+          "text": "planta"
         },
         {
           "key": "B",
-          "text": "B) piso"
+          "text": "piso"
         },
         {
           "key": "C",
-          "text": "C) plaza"
+          "text": "plaza"
         }
       ],
       "type": "choice3",
@@ -1184,15 +1184,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) vamos"
+          "text": "vamos"
         },
         {
           "key": "B",
-          "text": "B) iremos"
+          "text": "iremos"
         },
         {
           "key": "C",
-          "text": "C) vayamos"
+          "text": "vayamos"
         }
       ],
       "type": "choice3",
@@ -1217,15 +1217,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) lo"
+          "text": "lo"
         },
         {
           "key": "B",
-          "text": "B) se"
+          "text": "se"
         },
         {
           "key": "C",
-          "text": "C) le"
+          "text": "le"
         }
       ],
       "type": "choice3",
@@ -1250,15 +1250,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) podría"
+          "text": "podría"
         },
         {
           "key": "B",
-          "text": "B) ponga"
+          "text": "ponga"
         },
         {
           "key": "C",
-          "text": "C) pueda"
+          "text": "pueda"
         }
       ],
       "type": "choice3",
@@ -1283,15 +1283,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) En un aeropuerto."
+          "text": "En un aeropuerto."
         },
         {
           "key": "B",
-          "text": "B) En un coche."
+          "text": "En un coche."
         },
         {
           "key": "C",
-          "text": "C) En una isla."
+          "text": "En una isla."
         }
       ],
       "type": "choice3",
@@ -1316,15 +1316,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Ha tenido una enfermedad."
+          "text": "Ha tenido una enfermedad."
         },
         {
           "key": "B",
-          "text": "B) Ha tenido un buen día."
+          "text": "Ha tenido un buen día."
         },
         {
           "key": "C",
-          "text": "C) Ha tenido un accidente de tráfico."
+          "text": "Ha tenido un accidente de tráfico."
         }
       ],
       "type": "choice3",
@@ -1349,15 +1349,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Verduras."
+          "text": "Verduras."
         },
         {
           "key": "B",
-          "text": "B) Gambas."
+          "text": "Gambas."
         },
         {
           "key": "C",
-          "text": "C) Legumbres."
+          "text": "Legumbres."
         }
       ],
       "type": "choice3",
@@ -1382,15 +1382,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) En la escuela."
+          "text": "En la escuela."
         },
         {
           "key": "B",
-          "text": "B) De un viaje."
+          "text": "De un viaje."
         },
         {
           "key": "C",
-          "text": "C) De un partido de fútbol."
+          "text": "De un partido de fútbol."
         }
       ],
       "type": "choice3",
@@ -1415,15 +1415,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Necesita dinero para comprar ropa."
+          "text": "Necesita dinero para comprar ropa."
         },
         {
           "key": "B",
-          "text": "B) No puede comprar unos billetes de avión."
+          "text": "No puede comprar unos billetes de avión."
         },
         {
           "key": "C",
-          "text": "C) Quiere utilizar el Internet de su vecino."
+          "text": "Quiere utilizar el Internet de su vecino."
         }
       ],
       "type": "choice3",
@@ -1448,15 +1448,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Está saliendo de un hotel."
+          "text": "Está saliendo de un hotel."
         },
         {
           "key": "B",
-          "text": "B) Está trabajando en un hotel."
+          "text": "Está trabajando en un hotel."
         },
         {
           "key": "C",
-          "text": "C) Está hablando por teléfono con un desconocido."
+          "text": "Está hablando por teléfono con un desconocido."
         }
       ],
       "type": "choice3",
@@ -1481,15 +1481,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) enfermaba al volver de cada viaje."
+          "text": "enfermaba al volver de cada viaje."
         },
         {
           "key": "B",
-          "text": "B) tenía miedo a volar."
+          "text": "tenía miedo a volar."
         },
         {
           "key": "C",
-          "text": "C) no era muy obediente."
+          "text": "no era muy obediente."
         }
       ],
       "type": "choice3",
@@ -1514,15 +1514,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Cuando estaba pescando tiburones con un amigo."
+          "text": "Cuando estaba pescando tiburones con un amigo."
         },
         {
           "key": "B",
-          "text": "B) Durante su viaje de novios."
+          "text": "Durante su viaje de novios."
         },
         {
           "key": "C",
-          "text": "C) Cuando estaba visitando un zoo con sus padres."
+          "text": "Cuando estaba visitando un zoo con sus padres."
         }
       ],
       "type": "choice3",
@@ -1547,15 +1547,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) su mujer no quiere que vaya a las montañas con amigos."
+          "text": "su mujer no quiere que vaya a las montañas con amigos."
         },
         {
           "key": "B",
-          "text": "B) va a las montañas solo en invierno."
+          "text": "va a las montañas solo en invierno."
         },
         {
           "key": "C",
-          "text": "C) tuvo problemas una vez por escalar borracho."
+          "text": "tuvo problemas una vez por escalar borracho."
         }
       ],
       "type": "choice3",
@@ -1580,15 +1580,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) suele cocinar en su casa."
+          "text": "suele cocinar en su casa."
         },
         {
           "key": "B",
-          "text": "B) es más vago cuando no viaja."
+          "text": "es más vago cuando no viaja."
         },
         {
           "key": "C",
-          "text": "C) viaja solo cuando tiene vacaciones en su empresa."
+          "text": "viaja solo cuando tiene vacaciones en su empresa."
         }
       ],
       "type": "choice3",
@@ -1613,15 +1613,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Su mujer se enfadó con su hijo."
+          "text": "Su mujer se enfadó con su hijo."
         },
         {
           "key": "B",
-          "text": "B) No pudo comprar billetes de avión para volver."
+          "text": "No pudo comprar billetes de avión para volver."
         },
         {
           "key": "C",
-          "text": "C) La compañía aérea perdió el equipaje de su familia."
+          "text": "La compañía aérea perdió el equipaje de su familia."
         }
       ],
       "type": "choice3",
@@ -1646,15 +1646,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) planea los viajes con más tiempo."
+          "text": "planea los viajes con más tiempo."
         },
         {
           "key": "B",
-          "text": "B) hace viajes cortos."
+          "text": "hace viajes cortos."
         },
         {
           "key": "C",
-          "text": "C) viaja casi sin equipaje."
+          "text": "viaja casi sin equipaje."
         }
       ],
       "type": "choice3",
@@ -1679,15 +1679,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tendrá más vuelos durante las Navidades que otras aerolíneas."
+          "text": "tendrá más vuelos durante las Navidades que otras aerolíneas."
         },
         {
           "key": "B",
-          "text": "B) está en el mercado desde el verano pasado."
+          "text": "está en el mercado desde el verano pasado."
         },
         {
           "key": "C",
-          "text": "C) ofrecerá descuentos para antes y después de una boda."
+          "text": "ofrecerá descuentos para antes y después de una boda."
         }
       ],
       "type": "choice3",
@@ -1712,15 +1712,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tienen miedo de la huelga."
+          "text": "tienen miedo de la huelga."
         },
         {
           "key": "B",
-          "text": "B) no quieren pagar más al gobierno."
+          "text": "no quieren pagar más al gobierno."
         },
         {
           "key": "C",
-          "text": "C) han creado un nuevo impuesto."
+          "text": "han creado un nuevo impuesto."
         }
       ],
       "type": "choice3",
@@ -1745,15 +1745,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha sido un éxito en las redes sociales."
+          "text": "ha sido un éxito en las redes sociales."
         },
         {
           "key": "B",
-          "text": "B) era en formato papel."
+          "text": "era en formato papel."
         },
         {
           "key": "C",
-          "text": "C) estaba enfocada en buscar clientes entre el público femenino."
+          "text": "estaba enfocada en buscar clientes entre el público femenino."
         }
       ],
       "type": "choice3",
@@ -1778,15 +1778,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) la tapa ganadora tenía muchas especias."
+          "text": "la tapa ganadora tenía muchas especias."
         },
         {
           "key": "B",
-          "text": "B) los dueños de los restaurantes se pelearon."
+          "text": "los dueños de los restaurantes se pelearon."
         },
         {
           "key": "C",
-          "text": "C) el restaurante Montenegro elaboró un plato con marisco."
+          "text": "el restaurante Montenegro elaboró un plato con marisco."
         }
       ],
       "type": "choice3",
@@ -1811,15 +1811,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) una fiesta en el calendario chino."
+          "text": "una fiesta en el calendario chino."
         },
         {
           "key": "B",
-          "text": "B) los problemas del gobierno chino."
+          "text": "los problemas del gobierno chino."
         },
         {
           "key": "C",
-          "text": "C) un viaje espacial."
+          "text": "un viaje espacial."
         }
       ],
       "type": "choice3",
@@ -1844,15 +1844,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los meteorólogos siempre aciertan con sus predicciones."
+          "text": "los meteorólogos siempre aciertan con sus predicciones."
         },
         {
           "key": "B",
-          "text": "B) el cielo no estará nublado durante toda la semana."
+          "text": "el cielo no estará nublado durante toda la semana."
         },
         {
           "key": "C",
-          "text": "C) lloverá cuando llegue la ola de frío."
+          "text": "lloverá cuando llegue la ola de frío."
         }
       ],
       "type": "choice3",
@@ -1877,39 +1877,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -1934,39 +1934,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -1991,39 +1991,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -2048,39 +2048,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -2105,39 +2105,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -2162,39 +2162,39 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Había mucha contaminación."
+          "text": "Había mucha contaminación."
         },
         {
           "key": "B",
-          "text": "B) Los enfermos pasan primero."
+          "text": "Los enfermos pasan primero."
         },
         {
           "key": "C",
-          "text": "C) Hay aves en este lugar."
+          "text": "Hay aves en este lugar."
         },
         {
           "key": "D",
-          "text": "D) Se pueden alquilar vehículos."
+          "text": "Se pueden alquilar vehículos."
         },
         {
           "key": "E",
-          "text": "E) No se puede llevar ropa deportiva en este lugar."
+          "text": "No se puede llevar ropa deportiva en este lugar."
         },
         {
           "key": "F",
-          "text": "F) Caía hielo del cielo."
+          "text": "Caía hielo del cielo."
         },
         {
           "key": "G",
-          "text": "G) Se puede practicar atletismo."
+          "text": "Se puede practicar atletismo."
         },
         {
           "key": "H",
-          "text": "H) Hizo un viaje de negocios."
+          "text": "Hizo un viaje de negocios."
         },
         {
           "key": "I",
-          "text": "I) Se puede practicar la natación."
+          "text": "Se puede practicar la natación."
         }
       ],
       "type": "choice9",
@@ -2219,15 +2219,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2252,15 +2252,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2285,15 +2285,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2318,15 +2318,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2351,15 +2351,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -2384,15 +2384,15 @@ window.DELE_BANK_B1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ALEX"
+          "text": "ALEX"
         },
         {
           "key": "B",
-          "text": "B) BEA"
+          "text": "BEA"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
