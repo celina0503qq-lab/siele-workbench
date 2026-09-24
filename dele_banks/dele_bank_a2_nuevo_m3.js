@@ -29,15 +29,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Alberto hizo el examen muy bien."
+          "text": "Alberto hizo el examen muy bien."
         },
         {
           "key": "B",
-          "text": "B) Alberto es el jefe de una empresa."
+          "text": "Alberto es el jefe de una empresa."
         },
         {
           "key": "C",
-          "text": "C) Alberto estudia y trabaja."
+          "text": "Alberto estudia y trabaja."
         }
       ],
       "type": "choice3",
@@ -64,15 +64,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es muy buena estudiante."
+          "text": "es muy buena estudiante."
         },
         {
           "key": "B",
-          "text": "B) es la profesora de Alberto."
+          "text": "es la profesora de Alberto."
         },
         {
           "key": "C",
-          "text": "C) va a trabajar en la empresa con Alberto. 89 MODELO 3"
+          "text": "va a trabajar en la empresa con Alberto. 89 MODELO 3"
         }
       ],
       "type": "choice3",
@@ -99,15 +99,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) vuelve el viernes después de hacer el examen."
+          "text": "vuelve el viernes después de hacer el examen."
         },
         {
           "key": "B",
-          "text": "B) quiere información sobre las preguntas del examen."
+          "text": "quiere información sobre las preguntas del examen."
         },
         {
           "key": "C",
-          "text": "C) va a hacer el examen en dos semanas."
+          "text": "va a hacer el examen en dos semanas."
         }
       ],
       "type": "choice3",
@@ -134,15 +134,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) la tiene Alberto."
+          "text": "la tiene Alberto."
         },
         {
           "key": "B",
-          "text": "B) necesitaba una reparación."
+          "text": "necesitaba una reparación."
         },
         {
           "key": "C",
-          "text": "C) es igual que la de Marcos."
+          "text": "es igual que la de Marcos."
         }
       ],
       "type": "choice3",
@@ -169,15 +169,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es el único que hay en la ciudad."
+          "text": "es el único que hay en la ciudad."
         },
         {
           "key": "B",
-          "text": "B) tiene vistas muy bonitas."
+          "text": "tiene vistas muy bonitas."
         },
         {
           "key": "C",
-          "text": "C) tiene muy buena comida. 90"
+          "text": "tiene muy buena comida. 90"
         }
       ],
       "type": "choice3",
@@ -204,21 +204,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) las dos chicas buscan un nuevo piso."
+          "text": "las dos chicas buscan un nuevo piso."
         },
         {
           "key": "B",
-          "text": "B) en el precio de la habitación está todo"
+          "text": "en el precio de la habitación está todo"
         },
         {
           "key": "C",
-          "text": "C) hay un dormitorio vacío en el piso. 91"
+          "text": "hay un dormitorio vacío en el piso. 91"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -239,21 +239,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se promociona una medicina."
+          "text": "se promociona una medicina."
         },
         {
           "key": "B",
-          "text": "B) se promocionan unos nuevos productos."
+          "text": "se promocionan unos nuevos productos."
         },
         {
           "key": "C",
-          "text": "C) se habla de unos productos para hombres. TEXTO 3 MARCELO, EL LOBO Soy Marcelo, pero todos me llaman “El lobo”, tu entrenador personal con 5 años de experiencia, puedo acompañarte gimnasio y ayudarte a conseguir los mejores resultados. Una hora de entrenamiento conmigo cuesta doce euros. Trabajo de lunes a viernes, de ocho de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona centro, no tengo vehículo propio. 92"
+          "text": "se habla de unos productos para hombres. TEXTO 3 MARCELO, EL LOBO Soy Marcelo, pero todos me llaman “El lobo”, tu entrenador personal con 5 años de experiencia, puedo acompañarte gimnasio y ayudarte a conseguir los mejores resultados. Una hora de entrenamiento conmigo cuesta doce euros. Trabajo de lunes a viernes, de ocho de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona centro, no tengo vehículo propio. 92"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -274,21 +274,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) te puede ayudar a hacer gimnasio y ayudarte a conseguir los ejercicio. mejores resultados. Una hora de entrenamiento conmigo cuesta doce"
+          "text": "te puede ayudar a hacer gimnasio y ayudarte a conseguir los ejercicio. mejores resultados. Una hora de entrenamiento conmigo cuesta doce"
         },
         {
           "key": "B",
-          "text": "B) tiene un lobo en su euros. Trabajo de lunes a viernes, de ocho gimnasio. de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona"
+          "text": "tiene un lobo en su euros. Trabajo de lunes a viernes, de ocho gimnasio. de la mañana a ocho de la noche. Solo Valencia ciudad, preferiblemente zona"
         },
         {
           "key": "C",
-          "text": "C) entrena todos los días centro, no tengo vehículo propio. ocho horas. 92 MODELO 3"
+          "text": "entrena todos los días centro, no tengo vehículo propio. ocho horas. 92 MODELO 3"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -309,21 +309,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) puedes practicar idiomas en esta empresa."
+          "text": "puedes practicar idiomas en esta empresa."
         },
         {
           "key": "B",
-          "text": "B) puedes estar medio año trabajando sin"
+          "text": "puedes estar medio año trabajando sin"
         },
         {
           "key": "C",
-          "text": "C) después de seis meses los trabajadores TEXTO 5 PROBLEMAS TÉCNICOS La página web del colegio no funciona, No sabemos que ha pasado, pero se han incluidas las notas de los estudiantes. Si sobre sus clases puede llamar a la secretaría. empresa de informática que ya está trabajando"
+          "text": "después de seis meses los trabajadores TEXTO 5 PROBLEMAS TÉCNICOS La página web del colegio no funciona, No sabemos que ha pasado, pero se han incluidas las notas de los estudiantes. Si sobre sus clases puede llamar a la secretaría. empresa de informática que ya está trabajando"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -344,21 +344,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) los estudiantes no pueden ir a clase."
+          "text": "los estudiantes no pueden ir a clase."
         },
         {
           "key": "B",
-          "text": "B) unos informáticos son los culpables del"
+          "text": "unos informáticos son los culpables del"
         },
         {
           "key": "C",
-          "text": "C) unos profesionales ya están intentando 93"
+          "text": "unos profesionales ya están intentando 93"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -379,21 +379,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) si vendes más, ganas más dinero."
+          "text": "si vendes más, ganas más dinero."
         },
         {
           "key": "B",
-          "text": "B) te ofrecen dos mil euros por trabajar con"
+          "text": "te ofrecen dos mil euros por trabajar con"
         },
         {
           "key": "C",
-          "text": "C) la empresa tiene sus propios clientes. TEXTO 7 ACADEMIA ESPAÑOLA IBERIA Aprende español con nosotros, tenemos ayudar a mejorar tu pronunciación. Disfruta al mismo tiempo que estudias tu lengua nuestros cursos de verano, llámanos atención telefónica 24h: +34 (código de teléfono)."
+          "text": "la empresa tiene sus propios clientes. TEXTO 7 ACADEMIA ESPAÑOLA IBERIA Aprende español con nosotros, tenemos ayudar a mejorar tu pronunciación. Disfruta al mismo tiempo que estudias tu lengua nuestros cursos de verano, llámanos atención telefónica 24h: +34 (código de teléfono)."
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -414,21 +414,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ofrecen"
+          "text": "ofrecen"
         },
         {
           "key": "B",
-          "text": "B) en verano profesores"
+          "text": "en verano profesores"
         },
         {
           "key": "C",
-          "text": "C) debes de teléfono. 94"
+          "text": "debes de teléfono. 94"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -449,21 +449,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) da clases privadas."
+          "text": "da clases privadas."
         },
         {
           "key": "B",
-          "text": "B) es un adolescente amante de las matemáticas."
+          "text": "es un adolescente amante de las matemáticas."
         },
         {
           "key": "C",
-          "text": "C) ha empezado a trabajar como profesor hace poco tiempo. 95"
+          "text": "ha empezado a trabajar como profesor hace poco tiempo. 95"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.\n95",
+      "cuerpo": "TEXTO 1\nSE BUSCA COMPAÑERA DE PISO\nSomos dos chicas sevillanas, muy\nsimpáticas las dos, somos estudiantes\nde medicina, estamos en nuestro\núltimo año de carrera. Nuestra\ncompañera de piso ha terminado sus\nestudios y ha dejado el piso, por eso\nestamos buscando a alguien.\nVivimos en la calle Gabriel y Galán, a diez minutos andando del centro y a\ndos paradas de autobús de la universidad. La habitación que se ha quedado\nlibre tiene unos quince metros cuadrados y balcón.Precio: 150 €/mes +\ngastos.\n6. El texto dice que…\nA) las dos chicas buscan un nuevo piso.\nB) en el precio de la habitación está todo incluido (luz, agua y gas).\nhay un dormitorio vacío en el piso.\nTEXTO 2\nDOS ESPADAS\nProductos para afeitarse de una forma más\ncómoda y elegante. Gracias a nuestros excelentes\nproductos de la más alta calidad vas a poder\npresumir de tener una barba y bigote elegante, o\nde no tenerlos, es tu decisión.\nLa empresa cuenta con más de veinte años de experiencia en el sector.\nNuestras maquinillas de afeitar no hacen daño al deslizarse por tu cara.\nRecuerda: Dos espadas, tu primer artículo de higiene personal.\n7. En este anuncio…\nA) se promociona una medicina.\nB) se promocionan unos nuevos productos.\nse habla de unos productos para hombres.\nTEXTO 3\nMARCELO, EL LOBO\nSoy Marcelo, pero todos me llaman “El 8. Marcelo…\nlobo”, tu entrenador personal con 5 años\nde experiencia, puedo acompañarte al A) te puede ayudar a hacer\ngimnasio y ayudarte a conseguir los ejercicio.\nmejores resultados. Una hora de\nentrenamiento conmigo cuesta doce B) tiene un lobo en su\neuros. Trabajo de lunes a viernes, de ocho gimnasio.\nde la mañana a ocho de la noche. Solo\nValencia ciudad, preferiblemente zona entrena todos los días\ncentro, no tengo vehículo propio. ocho horas.\nTEXTO 4\nSE BUSCA BECARIO\nBuscamos un estudiante para hacer prácticas\nen nuestra empresa durante seis meses. Es\nuna oportunidad increíble para aprender\ncómo se trabaja en una gran empresa. No\npagamos nada por las prácticas. Cuarenta\nhoras a la semana, horario flexible. Si te\ninteresa la oferta, escribe un correo\nelectrónico a la dirección:\nrecursoshumanos@atox.es\n9. El anuncio dice que…\nA) puedes practicar idiomas en esta empresa.\nB) puedes estar medio año trabajando sin ganar dinero.\ndespués de seis meses los trabajadores pagan a la empresa.\nTEXTO 5\nPROBLEMAS TÉCNICOS\nLa página web del colegio no funciona, hemos tenido problemas técnicos.\nNo sabemos que ha pasado, pero se han borrado todos los datos del curso,\nincluidas las notas de los estudiantes. Si algún alumno necesita información\nsobre sus clases puede llamar a la secretaría. Hemos contactado con una\nempresa de informática que ya está trabajando para arreglar la web.\n10. El comunicado dice que…\nA) los estudiantes no pueden ir a clase.\nB) unos informáticos son los culpables del virus de la web.\nunos profesionales ya están intentando solucionar el problema.\nTEXTO 6\nOFERTA DE TRABAJO\nSi tienes habilidades como comercial de\nzapatos, escríbenos. Te damos nuestro\ncatálogo y tú solo tienes que buscar\nclientes. Por cada producto vendido, tú te\nllevas un 20% del valor de producto. Solo\ntrabajamos con comisiones, no ofrecemos\nsueldo fijo. Algunos de nuestros\ncomerciales ya ganan más de dos mil\neuros al mes. No puedes dejar escapar\n11. El anuncio dice que…\nesta oportunidad, ¡escríbenos!\nA) si vendes más, ganas más dinero.\nB) te ofrecen dos mil euros por trabajar con ellos.\nla empresa tiene sus propios clientes.\nTEXTO 7\nACADEMIA ESPAÑOLA IBERIA\nAprende español con nosotros, tenemos profesores nativos que te van\nayudar a mejorar tu pronunciación. Disfruta de unas vacaciones en Alicante\nal mismo tiempo que estudias tu lengua favorita. Pídenos información sobre\nnuestros cursos de verano, llámanos ahora mismo a nuestra línea de\natención telefónica 24h: +34 (código de España) 965426117 (número de\nteléfono).\n12. El anuncio dice que…\nA) ofrecen cursos de varias lenguas.\nB) en verano puedes ayudar a algunos\nprofesores nativos.\ndebes marcar el prefijo antes del número\nde teléfono.\nTEXTO 8\nPROFESOR MANUEL\nMi nombre es Manuel Santos Segarra y soy profesor de la Universidad de\nGranada. Tengo 12 años de experiencia y he escrito dos libros para\nestudiantes. Ofrezco clases particulares de matemáticas para niños,\nadolescentes y adultos. Todos los niveles, también puedo ayudar con\npreparación para exámenes oficiales. Las clases tienen lugar en mi\napartamento, en el barrio de San Antón.\nPrecio: 15 euros por una hora o 20 euros por 90 minutos.\nDescuentos especiales para grupos de 3 o 4 personas.\n13. Manuel Santos Segarra…\nA) da clases privadas.\nB) es un adolescente amante de las\nmatemáticas.\nha empezado a trabajar como profesor\nhace poco tiempo.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -484,21 +484,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -519,21 +519,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -554,21 +554,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -589,21 +589,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: B",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -624,21 +624,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: A",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -659,21 +659,21 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) IVÁN"
+          "text": "IVÁN"
         },
         {
           "key": "B",
-          "text": "B) SARA"
+          "text": "SARA"
         },
         {
           "key": "C",
-          "text": "C) BEA"
+          "text": "BEA"
         }
       ],
       "type": "choice3",
       "_v5": true,
       "explanation": "Respuesta correcta: C",
-      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.\n98",
+      "cuerpo": "TEXTOS\nA. IVÁN\nEmpecé a estudiar psicología, fui dos o tres\nsemanas a clase y lo dejé, no sé qué me\npasaba en aquella época, pero no tenía\nmotivación. Mis amigos decían que tenía que\nvolver a la universidad y terminar la carrera,\npero yo no les hice caso y empecé a trabajar\nde camarero.\nHace un año, mi padre me dijo que en su empresa estaban buscando\ntrabajadores, creo que habló con el jefe antes que conmigo, porque a mí me\nofreció directamente una oferta de trabajo. Ahora somos compañeros de\ntrabajo, yo soy jefe de un departamento, algunas personas piensan que no\nestoy preparado para esto, pero yo voy a aprender rápidamente y demostrar\nque sí que lo estoy.\nB. SARA\nEmpecé a estudiar arte dramático cuando tenía 18 años, quería ser actriz. Al\npoco tiempo, descubrí que era mucho más difícil de lo que pensaba y\ncambié por completo de estudios. Hice la carrera de informática en tan solo\ntres años (normalmente, la gente necesita cinco años).\nLas empresas empezaron a llamarme, eran\nmuchísimas y yo no sabía que hacer.\nFinalmente acepté una oferta muy\ninteresante de una multinacional. Tuve que\nemigar a los Estados Unidos, fue una\ndecisión difícil, pero creo que correcta.\nAhora estoy casada y tengo un hijo de tres\nmeses. Pienso mucho en mis padres y\namigos, solo les veo una vez al año, en\nNavidades. Pero mi vida profesional ha\nsido un éxito, estoy feliz.\nC. BEA\nEl sueño de mi vida siempre ha sido\ntrabajar como redactora en un gran\nperiódico, ahora estoy muy cerca de\nconseguirlo, el lunes que viene voy a\ntener una entrevista de trabajo en el\nDiario Información. Estoy un poco\nnerviosa, pero sé que todo va a salir bien,\nme he preparado para esto toda mi vida.\nCuando era pequeña me gustaba entrevistar a mis padres, como no tenía un\nmicrófono, utilizaba plátanos. Después, cuando estudiaba en la escuela me\ngustaba escribir todo lo que pasaba en un blog en Internet, se hizo muy\npopular y casi todo el mundo lo leía. Hace dos años me mudé a Madrid, aquí\nhay muchas más oportunidades que en mi pueblo, el lunes va a ser un gran\ndía.",
       "transcript": "",
       "audio": "",
       "instrucciones": "",
@@ -694,15 +694,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) recibió un pequeño animal doméstico."
+          "text": "recibió un pequeño animal doméstico."
         },
         {
           "key": "B",
-          "text": "B) murió y les dejó regalos a sus hijos."
+          "text": "murió y les dejó regalos a sus hijos."
         },
         {
           "key": "C",
-          "text": "C) era el hermano del Marqués."
+          "text": "era el hermano del Marqués."
         }
       ],
       "type": "choice3",
@@ -729,15 +729,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) era más fuerte que el Rey."
+          "text": "era más fuerte que el Rey."
         },
         {
           "key": "B",
-          "text": "B) aprendió a hablar gracias al Rey."
+          "text": "aprendió a hablar gracias al Rey."
         },
         {
           "key": "C",
-          "text": "C) le regaló algunos animales al Rey."
+          "text": "le regaló algunos animales al Rey."
         }
       ],
       "type": "choice3",
@@ -764,15 +764,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) estaba casado con la princesa."
+          "text": "estaba casado con la princesa."
         },
         {
           "key": "B",
-          "text": "B) vivía en un palacio."
+          "text": "vivía en un palacio."
         },
         {
           "key": "C",
-          "text": "C) no tenía hijos."
+          "text": "no tenía hijos."
         }
       ],
       "type": "choice3",
@@ -799,15 +799,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) se metió en el río, aunque el agua estaba muy fría."
+          "text": "se metió en el río, aunque el agua estaba muy fría."
         },
         {
           "key": "B",
-          "text": "B) se enamoró de la princesa cuando la vio en el palacio."
+          "text": "se enamoró de la princesa cuando la vio en el palacio."
         },
         {
           "key": "C",
-          "text": "C) organizó una situación falsa y el Rey le regaló ropa elegante a Juan.. 101 MODELO 3"
+          "text": "organizó una situación falsa y el Rey le regaló ropa elegante a Juan.. 101 MODELO 3"
         }
       ],
       "type": "choice3",
@@ -834,15 +834,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) buscaba un castillo nuevo para vivir porque su palacio era pequeño."
+          "text": "buscaba un castillo nuevo para vivir porque su palacio era pequeño."
         },
         {
           "key": "B",
-          "text": "B) pensó que Juan era el Marqués de Carabás y tenía muchas tierras."
+          "text": "pensó que Juan era el Marqués de Carabás y tenía muchas tierras."
         },
         {
           "key": "C",
-          "text": "C) quería bañarse en el río con el Marqués de Carabás."
+          "text": "quería bañarse en el río con el Marqués de Carabás."
         }
       ],
       "type": "choice3",
@@ -869,15 +869,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) tenía un castillo."
+          "text": "tenía un castillo."
         },
         {
           "key": "B",
-          "text": "B) era un mentiroso y no tenía poderes mágicos."
+          "text": "era un mentiroso y no tenía poderes mágicos."
         },
         {
           "key": "C",
-          "text": "C) se quería casar con la princesa. 102"
+          "text": "se quería casar con la princesa. 102"
         }
       ],
       "type": "choice3",
@@ -904,15 +904,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Carnicería (carnicería con embutidos)"
+          "text": "Carnicería (carnicería con embutidos)"
         },
         {
           "key": "B",
-          "text": "B) Barbería (barbería / peluquería)"
+          "text": "Barbería (barbería / peluquería)"
         },
         {
           "key": "C",
-          "text": "C) Oficina (oficina con ordenador)"
+          "text": "Oficina (oficina con ordenador)"
         }
       ],
       "type": "choice3",
@@ -940,15 +940,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) 8:15"
+          "text": "8:15"
         },
         {
           "key": "B",
-          "text": "B) 8:30"
+          "text": "8:30"
         },
         {
           "key": "C",
-          "text": "C) 7:45"
+          "text": "7:45"
         }
       ],
       "type": "choice3",
@@ -976,15 +976,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Gimnasio (gimnasio con máquinas)"
+          "text": "Gimnasio (gimnasio con máquinas)"
         },
         {
           "key": "B",
-          "text": "B) Cafetería (café / cafetera)"
+          "text": "Cafetería (café / cafetera)"
         },
         {
           "key": "C",
-          "text": "C) Piscina (piscina)"
+          "text": "Piscina (piscina)"
         }
       ],
       "type": "choice3",
@@ -1012,15 +1012,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Paquete (paquete / mensajería)"
+          "text": "Paquete (paquete / mensajería)"
         },
         {
           "key": "B",
-          "text": "B) Carta (carta / correo postal)"
+          "text": "Carta (carta / correo postal)"
         },
         {
           "key": "C",
-          "text": "C) Móvil (mensaje por teléfono móvil)"
+          "text": "Móvil (mensaje por teléfono móvil)"
         }
       ],
       "type": "choice3",
@@ -1048,15 +1048,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Electricidad (corte de luz / rayo)"
+          "text": "Electricidad (corte de luz / rayo)"
         },
         {
           "key": "B",
-          "text": "B) Virus (virus informático / hacker)"
+          "text": "Virus (virus informático / hacker)"
         },
         {
           "key": "C",
-          "text": "C) Batería (móvil con batería baja)"
+          "text": "Batería (móvil con batería baja)"
         }
       ],
       "type": "choice3",
@@ -1084,15 +1084,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Nevera (frigorífico rojo)"
+          "text": "Nevera (frigorífico rojo)"
         },
         {
           "key": "B",
-          "text": "B) Ventilador (ventilador)"
+          "text": "Ventilador (ventilador)"
         },
         {
           "key": "C",
-          "text": "C) Microondas (microondas)"
+          "text": "Microondas (microondas)"
         }
       ],
       "type": "choice3",
@@ -1120,15 +1120,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) van a cambiar el lugar de la empresa."
+          "text": "van a cambiar el lugar de la empresa."
         },
         {
           "key": "B",
-          "text": "B) ha sido un buen año para el negocio."
+          "text": "ha sido un buen año para el negocio."
         },
         {
           "key": "C",
-          "text": "C) están buscando nuevos empleados. AUDIO 2"
+          "text": "están buscando nuevos empleados. AUDIO 2"
         }
       ],
       "type": "choice3",
@@ -1155,15 +1155,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) puedes aprender una lengua extranjera sin pagar."
+          "text": "puedes aprender una lengua extranjera sin pagar."
         },
         {
           "key": "B",
-          "text": "B) van a tener nuevos electrodomésticos."
+          "text": "van a tener nuevos electrodomésticos."
         },
         {
           "key": "C",
-          "text": "C) no saben que tienen un problema. 106 2 MODELO 3 AUDIO 3"
+          "text": "no saben que tienen un problema. 106 2 MODELO 3 AUDIO 3"
         }
       ],
       "type": "choice3",
@@ -1190,15 +1190,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) un profesor jubilado."
+          "text": "un profesor jubilado."
         },
         {
           "key": "B",
-          "text": "B) un estudiante que va a hacer exámenes."
+          "text": "un estudiante que va a hacer exámenes."
         },
         {
           "key": "C",
-          "text": "C) alguien que ya ha terminado sus estudios. AUDIO 4"
+          "text": "alguien que ya ha terminado sus estudios. AUDIO 4"
         }
       ],
       "type": "choice3",
@@ -1225,15 +1225,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) ha tenido problemas graves."
+          "text": "ha tenido problemas graves."
         },
         {
           "key": "B",
-          "text": "B) va a invertir dinero para crecer."
+          "text": "va a invertir dinero para crecer."
         },
         {
           "key": "C",
-          "text": "C) necesita nuevos trabajadores. AUDIO 5"
+          "text": "necesita nuevos trabajadores. AUDIO 5"
         }
       ],
       "type": "choice3",
@@ -1260,15 +1260,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) es profesora de inglés."
+          "text": "es profesora de inglés."
         },
         {
           "key": "B",
-          "text": "B) va a realizar un examen muy importante."
+          "text": "va a realizar un examen muy importante."
         },
         {
           "key": "C",
-          "text": "C) ha hecho algo que ninguna otra persona ha podido hacer. AUDIO 6"
+          "text": "ha hecho algo que ninguna otra persona ha podido hacer. AUDIO 6"
         }
       ],
       "type": "choice3",
@@ -1295,15 +1295,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) que tiene los precios más bajos del mercado."
+          "text": "que tiene los precios más bajos del mercado."
         },
         {
           "key": "B",
-          "text": "B) donde las personas que trabajan están muy contentas."
+          "text": "donde las personas que trabajan están muy contentas."
         },
         {
           "key": "C",
-          "text": "C) que ha ganado un premio internacional para sus empleados. 107"
+          "text": "que ha ganado un premio internacional para sus empleados. 107"
         }
       ],
       "type": "choice3",
@@ -1330,15 +1330,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1365,15 +1365,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1400,15 +1400,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1435,15 +1435,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1470,15 +1470,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1505,15 +1505,15 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) A"
+          "text": "A"
         },
         {
           "key": "B",
-          "text": "B) B"
+          "text": "B"
         },
         {
           "key": "C",
-          "text": "C) NINGUNO"
+          "text": "NINGUNO"
         }
       ],
       "type": "choice3",
@@ -1540,43 +1540,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1603,43 +1603,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1666,43 +1666,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1729,43 +1729,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1792,43 +1792,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1855,43 +1855,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
@@ -1918,43 +1918,43 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Los empleados van a tener una fiesta"
+          "text": "Los empleados van a tener una fiesta"
         },
         {
           "key": "B",
-          "text": "B) Un trabajador se jubila."
+          "text": "Un trabajador se jubila."
         },
         {
           "key": "C",
-          "text": "C) Llega al trabajo con retraso."
+          "text": "Llega al trabajo con retraso."
         },
         {
           "key": "D",
-          "text": "D) Van a comprar nuevos productos a mitad de precio."
+          "text": "Van a comprar nuevos productos a mitad de precio."
         },
         {
           "key": "E",
-          "text": "E) Las empleadas estuvieron enfermas"
+          "text": "Las empleadas estuvieron enfermas"
         },
         {
           "key": "F",
-          "text": "F) Van a cambiar el lugar de trabajo."
+          "text": "Van a cambiar el lugar de trabajo."
         },
         {
           "key": "G",
-          "text": "G) Llama para pedir ayuda."
+          "text": "Llama para pedir ayuda."
         },
         {
           "key": "H",
-          "text": "H) Están pensando en pedir un crédito."
+          "text": "Están pensando en pedir un crédito."
         },
         {
           "key": "I",
-          "text": "I) El profesor ha descubierto a su alumno copiando."
+          "text": "El profesor ha descubierto a su alumno copiando."
         },
         {
           "key": "J",
-          "text": "J) Pueden reparar tu coche en este lugar. 109 MODELO 3"
+          "text": "Pueden reparar tu coche en este lugar. 109 MODELO 3"
         }
       ],
       "type": "choice10",
