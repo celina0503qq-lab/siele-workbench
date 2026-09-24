@@ -11425,12 +11425,71 @@ function addError(){
   const correctAnswer = document.getElementById('errOk').value.trim();
   const note = document.getElementById('errNote').value.trim();
   if(!question){ alert('请输入题目或错误内容'); return; }
-  ST.errors.unshift({type, question, myAnswer, correctAnswer, note, date: todayStr(), reviewed: false});
+  ST.errors.unshift({type, question, myAnswer, correctAnswer, note, date: todayStr(), ts: Date.now(), reviewed: false});
   save();
   renderMain();
 }
 
+// ===== 错题删除墓碑（跨设备删除同步）=====
+// 背景：错题集合并是「只增并集」，本地删除会被云端旧数据回拉复活；用墓碑记录删除事实并随快照同步。
+function _errKeyE(e){ return (e && e.question ? e.question : '') + '_' + (e && e.date ? e.date : ''); }
+function _errMarkDeleted(e){
+  if(!e || !e.question) return;
+  if(!ST.errorDeleted) ST.errorDeleted = {};
+  ST.errorDeleted[_errKeyE(e)] = Date.now();
+  var ks = Object.keys(ST.errorDeleted);
+  if(ks.length > 500){ // 墓碑上限，保留最新 500
+    ks.sort(function(a,b){ return (ST.errorDeleted[a]||0) - (ST.errorDeleted[b]||0); });
+    for(var i=0;i<ks.length-500;i++) delete ST.errorDeleted[ks[i]];
+  }
+}
+// 合并远端墓碑（按 key 取较新 ts）→ 再按墓碑剔除本地错题；返回剔除条数
+function mergeErrorTombstones(remote){
+  if(remote && remote.errorDeleted && typeof remote.errorDeleted==='object'){
+    if(!ST.errorDeleted) ST.errorDeleted = {};
+    Object.keys(remote.errorDeleted).forEach(function(k){
+      var rv = remote.errorDeleted[k]||0, lv = ST.errorDeleted[k]||0;
+      if(rv > lv) ST.errorDeleted[k] = rv;
+    });
+  }
+  if(!ST.errorDeleted || !ST.errors || !ST.errors.length) return 0;
+  var before = ST.errors.length;
+  ST.errors = ST.errors.filter(function(e){
+    var t = ST.errorDeleted[_errKeyE(e)];
+    // 墓碑时间 >= 错题产生时间 → 已删除（老数据无 ts 视为 0，墓碑优先）；删后重新做错(新 ts)则保留
+    return !(t && t >= (e.ts || 0));
+  });
+  return before - ST.errors.length;
+}
+// 错题合并总入口（两条同步路径共用）：先合并墓碑 → 并集合并 → 裁剪 → 再按墓碑剔除
+function mergeErrorsFromRemote(remote){
+  mergeErrorTombstones(remote);
+  if(remote && Array.isArray(remote.errors) && remote.errors.length){
+    if(!ST.errors) ST.errors = [];
+    var seen = {};
+    ST.errors.forEach(function(e){ seen[_errKeyE(e)] = e; });
+    remote.errors.forEach(function(e){
+      if(!e || !e.question) return;
+      var k = _errKeyE(e);
+      if(seen[k]){ if(e.reviewed) seen[k].reviewed = true; }   // reviewed 取或
+      else { seen[k] = e; ST.errors.push(e); }
+    });
+    _errTrim();
+  }
+  mergeErrorTombstones(null); // 二次剔除：本轮合并进来的已删项
+  return ST.errors ? ST.errors.length : 0;
+}
+// 裁剪到 200 条：按 ts 保留最新，被丢弃项打墓碑（避免下次 pull 复活）
+function _errTrim(){
+  if(!ST.errors) return;
+  if(ST.errors.length <= 200) return;
+  ST.errors.sort(function(a,b){ return (a.ts||0) - (b.ts||0); });
+  var drop = ST.errors.slice(0, ST.errors.length-200);
+  drop.forEach(_errMarkDeleted);
+  ST.errors = ST.errors.slice(-200);
+}
 function deleteError(i){
+  _errMarkDeleted(ST.errors[i]); // 记录删除墓碑，随云同步传播（否则会被其他设备回拉复活）
   ST.errors.splice(i, 1);
   save();
   renderMain();
@@ -11487,6 +11546,7 @@ function autoLogQuizError(errData){
     correctAnswer: errData.correctAnswer || '',
     note: errData.explanation || '',
     date: todayStr(),
+    ts: Date.now(),
     reviewed: false
   });
   save();
@@ -13370,9 +13430,6 @@ function _injectDeleBankNuevoLevel(level, bankVar){
 }
 function _injectDeleBankNuevoA1(){ return _injectDeleBankNuevoLevel('A1','DELE_BANK_A1_NUEVO_M1'); }
 function _injectDeleBankNuevoA2(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M1'); }
-function _injectDeleBankNuevoA2M2(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M2'); }
-function _injectDeleBankNuevoA2M3(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M3'); }
-function _injectDeleBankNuevoA2M4(){ return _injectDeleBankNuevoLevel('A2','DELE_BANK_A2_NUEVO_M4'); }
 function _injectDeleBankNuevoB1(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M1'); }
 function _injectDeleBankNuevoB1M2(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M2'); }
 function _injectDeleBankNuevoB1M3(){ return _injectDeleBankNuevoLevel('B1','DELE_BANK_B1_NUEVO_M3'); }
@@ -14365,9 +14422,7 @@ function _renderDeleA1ModeloList(task, mid, items){
     // === Tarea 级别共享 instrucciones: 在原文之前单独显示 ===
     const firstInstr = group[0] && group[0].instrucciones || '';
     const sharedInstr = firstInstr.length > 20 && group.every(q => (q.instrucciones||'') === firstInstr);
-    // 口语(4)/写作(3): 说明已并入每题卡片内的折叠区(带播放键与管理员编辑按钮), 此处不重复渲染
-    const _instrInCard = (pruebaNum === 3 || pruebaNum === 4);
-    if (sharedInstr && !_instrInCard) {
+    if (sharedInstr) {
       var sharedInstrKey = window._deleLk(modeloId + '_P' + pruebaNum + '_T' + tareaNum);
       var editedInstr = window._deleAdminGetField(sharedInstrKey, 'instrucciones', firstInstr);
       h += '<div style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border:1px solid #bfdbfe;border-left:4px solid #3b82f6;border-radius:10px;padding:14px 16px;margin-bottom:10px;position:relative">'+
@@ -14822,47 +14877,12 @@ window._renderDeleA1Quiz = function(level, task, taskLabel, bank){
   }
 };
 
-// ===== 口语/写作专项: 题目音频文本 + 折叠开关 (2026-09-23) =====
-// 直接由题目数据拼出要朗读的西语文本（不解析 DOM，避免把 HTML 念出来）
-window._deleTaskAudioText = function(q){
-  var parts = [];
-  var push = function(v){ if (v && String(v).trim()) parts.push(String(v).replace(/\s+/g,' ').trim()); };
-  push(q.instrucciones);            // 题目说明（完整版）
-  push(q.cuerpo);                   // 题面材料（如收到的邮件/消息、活动通知）
-  if (Array.isArray(q.requisitos)) push(q.requisitos.join(' '));
-  if (Array.isArray(q.aspectos)) push(q.aspectos.join(' '));
-  if (Array.isArray(q.temas)) push(q.temas.join(' '));
-  if (q.formulario && Array.isArray(q.formulario.preguntas)) push(q.formulario.preguntas.map(function(p){ return p.pregunta; }).join(' '));
-  if (q.ejemplos_preguntas && typeof q.ejemplos_preguntas === 'object') {
-    Object.keys(q.ejemplos_preguntas).forEach(function(k){ if (Array.isArray(q.ejemplos_preguntas[k])) push(q.ejemplos_preguntas[k].join(' ')); });
-  }
-  if (!parts.length) push(q.prompt);   // 兜底：只有 prompt 的题
-  return parts.join('.\n');
-};
-// 显示/隐藏 题目与说明（按钮紧邻折叠容器，用 .nextElementSibling 定位最稳）
-window._deleToggleTaskText = function(btn){
-  var bar = btn && btn.closest ? btn.closest('.dele-task-audio-bar') : null;
-  var box = bar ? bar.nextElementSibling : null;
-  if (!box || !box.classList || !box.classList.contains('dele-task-hidden')) return;
-  var willShow = (box.style.display === 'none');
-  box.style.display = willShow ? '' : 'none';
-  btn.innerHTML = willShow ? '🙈 隐藏题目与说明' : '👁 显示题目与说明';
-};
-
 // ===== v5 写作/口语任务卡片渲染 =====
 function _renderDeleA1V5TaskCard(q){
   let body = '';
-  // === 口语/写作专项: 说明与题面默认隐藏 + 逐题音频播报 (2026-09-23) ===
-  // 真实考试中这两项的说明与题目以考官/录音播报形式给出, 故默认折叠
-  var _qHide = (q.prueba === 3 || q.prueba === 4);
-  var _qInstr = '';   // 题目说明（折叠）
-  var _qStem = '';    // 题面材料（折叠；答题控件仍留在 body 中保持可见）
   // instrucciones
   if (q.instrucciones) {
-    // 折叠模式下说明并入折叠区; 管理员编辑按钮也一并放进来, 否则口语/写作就没法改 instrucciones 了
-    var _qInstrKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea);
-    _qInstr += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+' '+
-      (_qHide ? _deleAdminEditBtn(_qInstrKey, 'instrucciones', true) : '')+'</div>';
+    body += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+'</div>';
   }
   // form_fill: 表单
   if (q.type === 'form_fill' && q.formulario) {
@@ -14918,7 +14938,7 @@ function _renderDeleA1V5TaskCard(q){
   // writing: 通用写作题 (A1/A2/B1/B2)
   else if (q.type === 'writing') {
     if (q.cuerpo) {
-      _qStem += '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目材料 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
+      body += '<details style="margin-top:6px;font-size:12px;color:var(--tr)"><summary style="cursor:pointer">📄 题目材料 (点击展开)</summary><div style="background:var(--bg2,#f5f5f5);padding:8px;margin-top:4px;border-radius:4px;white-space:pre-wrap;font-size:12px;line-height:1.6;max-height:300px;overflow:auto">'+esc(q.cuerpo)+'</div></details>';
     }
     if (q.rango_palabras) {
       body += '<div class="sub" style="color:var(--tr);font-size:12px;margin-top:4px">字数要求: '+esc(q.rango_palabras)+'</div>';
@@ -14963,21 +14983,6 @@ function _renderDeleA1V5TaskCard(q){
         '<span class="sub" style="color:var(--tr);font-size:11px">可修改文本后朗读</span>'+
         '</div></div></details>';
     }
-  }
-  // === 组装: 音频工具栏 + 默认折叠的「说明+题面」+ 保持可见的答题控件 ===
-  if (_qHide) {
-    var _taskTxtId = 'tasktxt_' + window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
-    window._deleTTSStore[_taskTxtId] = window._deleTaskAudioText(q);
-    var _qFolded = _qInstr + _qStem;
-    body = '<div class="dele-task-audio-bar" style="margin:6px 0;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-        '<button class="btn sm pr" onclick="_deleTTPlay(\''+esc(_taskTxtId)+'\')" style="font-size:12px">🔊 播放题目音频</button>'+
-        '<button class="btn sm ol" onclick="_deleToggleTaskText(this)" style="font-size:12px">👁 显示题目与说明</button>'+
-        '<span class="sub" style="color:var(--tr);font-size:10px">考试时说明与题目以音频播报为准</span>'+
-      '</div>'+
-      (_qFolded ? '<div class="dele-task-hidden" style="display:none">'+_qFolded+'</div>' : '')+
-      body;
-  } else {
-    body = _qInstr + body;
   }
   return '<div class="card" style="background:var(--bg2,#fafafa);padding:10px">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+
@@ -16659,17 +16664,11 @@ window.addEventListener('DOMContentLoaded', () => {
   function tryInjectNuevoA2(retries){
     if (typeof window.DELE_BANK_A2_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoA2(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoA2(retries-1);}, 80); }
   }
-  function tryInjectNuevoA2M2(retries){ if(typeof window.DELE_BANK_A2_NUEVO_M2!=='undefined'){_injectDeleBankNuevoA2M2();}else if(retries>0){setTimeout(function(){tryInjectNuevoA2M2(retries-1);},80);}}
-  function tryInjectNuevoA2M3(retries){ if(typeof window.DELE_BANK_A2_NUEVO_M3!=='undefined'){_injectDeleBankNuevoA2M3();}else if(retries>0){setTimeout(function(){tryInjectNuevoA2M3(retries-1);},80);}}
-  function tryInjectNuevoA2M4(retries){ if(typeof window.DELE_BANK_A2_NUEVO_M4!=='undefined'){_injectDeleBankNuevoA2M4();}else if(retries>0){setTimeout(function(){tryInjectNuevoA2M4(retries-1);},80);}}
   function tryInjectNuevoB1(retries){
     if (typeof window.DELE_BANK_B1_NUEVO_M1 !== 'undefined') { _injectDeleBankNuevoB1(); } else if (retries > 0) { setTimeout(function(){tryInjectNuevoB1(retries-1);}, 80); }
   }
   try{ tryInjectNuevoA1(35); }catch(e){}
   try{ tryInjectNuevoA2(35); }catch(e){}
-  try{ tryInjectNuevoA2M2(35); }catch(e){}
-  try{ tryInjectNuevoA2M3(35); }catch(e){}
-  try{ tryInjectNuevoA2M4(35); }catch(e){}
   try{ tryInjectNuevoB1(35); }catch(e){}
   function tryInjectNuevoB1M2(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M2!=='undefined'){_injectDeleBankNuevoB1M2();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M2(retries-1);},80);}}
   function tryInjectNuevoB1M3(retries){ if(typeof window.DELE_BANK_B1_NUEVO_M3!=='undefined'){_injectDeleBankNuevoB1M3();}else if(retries>0){setTimeout(function(){tryInjectNuevoB1M3(retries-1);},80);}}
@@ -16764,9 +16763,6 @@ window.addEventListener('DOMContentLoaded', () => {
 <script src="./dele_banks/dele_bank_b2_nuevo_m1.js" defer></script>
 <script src="./dele_banks/dele_bank_a1_nuevo_m1.js" defer></script>
 <script src="./dele_banks/dele_bank_a2_nuevo_m1.js" defer></script>
-<script src="./dele_banks/dele_bank_a2_nuevo_m2.js" defer></script>
-<script src="./dele_banks/dele_bank_a2_nuevo_m3.js" defer></script>
-<script src="./dele_banks/dele_bank_a2_nuevo_m4.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m1.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m2.js" defer></script>
 <script src="./dele_banks/dele_bank_b1_nuevo_m3.js" defer></script>
@@ -17223,13 +17219,8 @@ function mergeWbSnapshot(remote){
   if(remote.vocabMastery){Object.keys(remote.vocabMastery).forEach(function(es){var rm=remote.vocabMastery[es]||0,lm=ST.vocabMastery[es]||0;if(rm>lm){ST.vocabMastery[es]=rm;ST.flashMastery[es]=rm;}});}
   // 测验结果：取更长的
   if(remote.quizResults&&remote.quizResults.length>(ST.quizResults||[]).length)ST.quizResults=remote.quizResults;
-  // 错题集：question+date 去重合并，reviewed 取或（核心修复：错题不再被整体覆盖丢失）
-  if(Array.isArray(remote.errors)&&remote.errors.length){
-    ST.errors=ST.errors||[];
-    var _errSeen={};ST.errors.forEach(function(e){var k=(e.question||'')+'_'+(e.date||'');_errSeen[k]=e;});
-    remote.errors.forEach(function(e){if(!e||!e.question)return;var k=(e.question||'')+'_'+(e.date||'');if(_errSeen[k]){if(e.reviewed)_errSeen[k].reviewed=true;}else{_errSeen[k]=e;ST.errors.push(e);}});
-    if(ST.errors.length>200)ST.errors=ST.errors.slice(-200);
-  }
+  // 错题集：并集合并 + 删除墓碑（跨设备增删同步）
+  mergeErrorsFromRemote(remote);
   // 阅读进度：合并
   if(remote.readingProgress)Object.keys(remote.readingProgress).forEach(function(k){ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k];});
   if(remote.streak>ST.streak)ST.streak=remote.streak;
@@ -18150,25 +18141,8 @@ async function standaloneSync(showLog){
       });
     }
     if(remote.quizResults && remote.quizResults.length>(ST.quizResults||[]).length) ST.quizResults = remote.quizResults;
-    // 错题集合并：基于 question+date 去重，保留两端所有错题，reviewed 取或
-    if(Array.isArray(remote.errors) && remote.errors.length){
-      ST.errors=ST.errors||[];
-      var _errSeen={};
-      ST.errors.forEach(function(e){var k=(e.question||'')+'_'+(e.date||'');_errSeen[k]=e;});
-      remote.errors.forEach(function(e){
-        if(!e||!e.question)return;
-        var k=(e.question||'')+'_'+(e.date||'');
-        if(_errSeen[k]){
-          // 合并 reviewed 状态：任一端已复习则为已复习
-          if(e.reviewed)_errSeen[k].reviewed=true;
-        }else{
-          _errSeen[k]=e;
-          ST.errors.push(e);
-        }
-      });
-      // 保持最多200条
-      if(ST.errors.length>200)ST.errors=ST.errors.slice(-200);
-    }
+    // 错题集：并集合并 + 删除墓碑（同 mergeWbSnapshot，共用全局实现）
+    mergeErrorsFromRemote(remote);
     if(remote.readingProgress) Object.keys(remote.readingProgress).forEach(function(k){ ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k]; });
     if(remote.streak > ST.streak) ST.streak = remote.streak;
     if(remote.totalStudy > ST.totalStudy) ST.totalStudy = remote.totalStudy;
