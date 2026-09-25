@@ -15,12 +15,25 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-09-18 第 20 期 — 主题：火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全
-// 2) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
-// 3) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
-// 4) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
-// 5) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
+// 1) 2026-09-25 第 21 期 — 主题：银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争
+// 2) 2026-09-18 第 20 期 — 主题：火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全
+// 3) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
+// 4) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
+// 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
+// 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-09-25": {
+    date: "2026-09-25",
+    weekday: "五",
+    issue: 21,
+    theme: "银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el banco" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La biblioteca y el hábito de leer en España" },
+      { level: "B1", source: "El País", sourceUrl: "https://elpais.com/economia/2026-09-21/la-inversion-extranjera-en-espana-se-dispara-en-la-primera-mitad-del-ano-y-roza-los-12500-millones-de-euros.html", topic: "El capital extranjero impulsa la economía española" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/expres/2026-09-09/claves-sobre-la-sorprendente-decision-del-supremo-sobre-la-ley-de-nietos-a-quien-afecta-y-que-puede-pasar.html", topic: "La ley de nietos y el derecho al voto" }
+    ]
+  },
   "2026-09-18": {
     date: "2026-09-18",
     weekday: "五",
