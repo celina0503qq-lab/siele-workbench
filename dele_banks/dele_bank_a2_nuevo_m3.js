@@ -15,7 +15,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
   },
   "items": [
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 1,
@@ -50,7 +50,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 1,
@@ -85,7 +85,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 1,
@@ -120,7 +120,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 1,
@@ -155,7 +155,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 1,
@@ -190,7 +190,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -225,7 +225,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -260,7 +260,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -295,7 +295,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -330,7 +330,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -365,7 +365,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -400,7 +400,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -435,7 +435,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 2,
@@ -470,7 +470,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -505,7 +505,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -540,7 +540,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -575,7 +575,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -610,7 +610,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -645,7 +645,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 3,
@@ -680,7 +680,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -715,7 +715,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -750,7 +750,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -785,7 +785,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -820,7 +820,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -855,7 +855,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 1,
       "tarea": 4,
@@ -890,7 +890,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -926,7 +926,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -955,14 +955,14 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "HOMBRE: Cariño, ¿a qué hora sales hoy del trabajo?\nMUJER: ¿Por qué lo preguntas? ¿Quieres invitarme a cenar?\nHOMBRE: Mucho mejor, tengo entradas para ir al teatro, la obra empieza a\nlas ocho y media.\nMUJER: Pues yo acabo el trabajo hoy a las ocho menos cuarto, ¿voy en taxi al\ncentro?\nHOMBRE: No, yo voy a buscarte, te espero en el garaje de tu\nempresa.MUJER: Perfecto, hasta luego.\nHOMBRE: Adiós, guapa.\n183\nSOLUCIONES",
+      "transcript": "HOMBRE: Cariño, ¿a qué hora sales hoy del trabajo?\nMUJER: ¿Por qué lo preguntas? ¿Quieres invitarme a cenar?\nHOMBRE: Mucho mejor, tengo entradas para ir al teatro, la obra empieza a\nlas ocho y media.\nMUJER: Pues yo acabo el trabajo hoy a las ocho menos cuarto, ¿voy en taxi al\ncentro?\nHOMBRE: No, yo voy a buscarte, te espero en el garaje de tu\nempresa.MUJER: Perfecto, hasta luego.\nHOMBRE: Adiós, guapa.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": "",
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -998,7 +998,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -1027,14 +1027,14 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
-      "transcript": "HOMBRE: Tenemos que enviar la información de las facturas a la oficina de\nToledo.\nMUJER: Muy bien, ¿cómo lo hacemos? ¿les enviamos un paquete?\nHOMBRE: No hace falta, podemos enviarles una carta.\nMUJER: Vale, yo lo hago, voy a necesitar sellos.\nHOMBRE: En la oficina de Pedro hay, puedes ir y cogerlos.\nMUJER: Muchas gracias, si necesito algo más te aviso.\n184\nSOLUCIONES",
+      "transcript": "HOMBRE: Tenemos que enviar la información de las facturas a la oficina de\nToledo.\nMUJER: Muy bien, ¿cómo lo hacemos? ¿les enviamos un paquete?\nHOMBRE: No hace falta, podemos enviarles una carta.\nMUJER: Vale, yo lo hago, voy a necesitar sellos.\nHOMBRE: En la oficina de Pedro hay, puedes ir y cogerlos.\nMUJER: Muchas gracias, si necesito algo más te aviso.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": "",
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -1070,7 +1070,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 1,
@@ -1099,14 +1099,14 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "HOMBRE: Tenemos cien euros para comprar algo para los trabajadores.\n¿Qué crees que necesitáis?\nMUJER: Pues hay mucha gente que trae comida de su casa, creo que algo\npráctico para esta gente.\nHOMBRE: ¿Microondas o nevera? ¿Qué piensas que es mejor?\nMUJER: La nevera no es tan importante, creo que un microondas es mucho\nmejor.\nHOMBRE: Perfecto, pues mañana mismo lo compro y lo ponemos en la\noficina.\nMUJER: Muy bien, voy a decírselo a todos mis compañeros, seguro que se\nalegran mucho.\n185\nSOLUCIONES",
+      "transcript": "HOMBRE: Tenemos cien euros para comprar algo para los trabajadores.\n¿Qué crees que necesitáis?\nMUJER: Pues hay mucha gente que trae comida de su casa, creo que algo\npráctico para esta gente.\nHOMBRE: ¿Microondas o nevera? ¿Qué piensas que es mejor?\nMUJER: La nevera no es tan importante, creo que un microondas es mucho\nmejor.\nHOMBRE: Perfecto, pues mañana mismo lo compro y lo ponemos en la\noficina.\nMUJER: Muy bien, voy a decírselo a todos mis compañeros, seguro que se\nalegran mucho.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": "",
       "_image_options": true
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1141,7 +1141,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1176,7 +1176,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1211,7 +1211,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1240,13 +1240,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
-      "transcript": "Hoy todos los periódicos tienen la misma noticia en la portada, la gran\nempresa internacional Apol cierra sus puertas después de treinta años de\nactividad comercial. La compañía, que deja en la calle a más de mil\ntrabajadores, no ha sabido superar la crisis que atraviesa el sector\ninformático y pone fin a su actividad económica.\n186\nSOLUCIONES",
+      "transcript": "Hoy todos los periódicos tienen la misma noticia en la portada, la gran\nempresa internacional Apol cierra sus puertas después de treinta años de\nactividad comercial. La compañía, que deja en la calle a más de mil\ntrabajadores, no ha sabido superar la crisis que atraviesa el sector\ninformático y pone fin a su actividad económica.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1281,7 +1281,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 2,
@@ -1310,13 +1310,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
-      "transcript": "En nuestra sección de lugares para trabajar, vamos a hablar de Merca-mujer,\nlos supermercados de los que todo el mundo habla. Según un estudio, sus\nempleados son los más felices del país. La empresa les regala días libres por\nsu cumpleaños y los de sus familiares. Además, cada año les sube el sueldo\nun 1%.\n187\nSOLUCIONES",
+      "transcript": "En nuestra sección de lugares para trabajar, vamos a hablar de Merca-mujer,\nlos supermercados de los que todo el mundo habla. Según un estudio, sus\nempleados son los más felices del país. La empresa les regala días libres por\nsu cumpleaños y los de sus familiares. Además, cada año les sube el sueldo\nun 1%.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1345,13 +1345,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1380,13 +1380,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1415,13 +1415,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1450,13 +1450,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1485,13 +1485,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 3,
@@ -1520,13 +1520,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\n188\nSOLUCIONES\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
+      "transcript": "ANA: ¡Cuánto tiempo sin verte, Blas! ¿Qué es de tu vida? No has cambiado\nnada. Sigues igual de bajo.\nBLAS: Pues a ti te veo mucho más guapa que antes. Yo estoy trabajando con\nel que era nuestro profesor de geografía, ¿te acuerdas de él?\nANA: Sí, claro. ¡Cómo olvidarle! Era calvo y todos los días venía a clase con\ngorra.\nBLAS: Pues ahora es mi jefe, es mucho más divertido que antes, le encanta\ncontar chistes, cada vez que entro en su despacho, salgo sin poder parar de\nreírme.\nANA: Pues dale recuerdos de mi parte, dile que Ana tuvo que repetir el curso\nporque suspendió geografía.\nBLAS: Bueno, en aquella época no eras muy buena estudiante. Por cierto,\nme encanta como hueles, ¿qué colonia utilizas?\nANA: Pues creo que no me he puesto colonia ni nada, debe ser por la crema\npara la cara que utilizo, me la regaló mi novio.\nBLAS: Oh, ¿sigues saliendo con Pablo?\nANA: No, Pablo ya es historia, ahora estoy con un chico de Argentina, se\nllama David y es músico.\nBLAS: ¿Y a qué te dedicas?\nANA: Estoy buscando trabajo, pasé el verano entero trabajando de camarera\nen un bar, no me gustó nada, ahora busco algo diferente. Oye, ¿en tu\nempresa no buscan nuevos empleados?\nBLAS: Pues no lo sé, puedes pasarte el lunes y preguntar.\nANA: Muy bien, voy a hacerlo, nos vemos el lunes. ¡Adiós, Blas!\nBLAS: ¡Adiós, Ana!",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1589,7 +1589,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1652,7 +1652,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1715,7 +1715,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1772,13 +1772,13 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "Lo siento mucho, jefe. No voy a poder llegar a las ocho, he perdido el\nautobús. Estoy yendo andando, creo que voy a llegar sobre las ocho y media.\nSi llaman los clientes, Clara puede hablar con ellos.\n189\nSOLUCIONES",
+      "transcript": "Lo siento mucho, jefe. No voy a poder llegar a las ocho, he perdido el\nautobús. Estoy yendo andando, creo que voy a llegar sobre las ocho y media.\nSi llaman los clientes, Clara puede hablar con ellos.",
       "audio": "",
       "instrucciones": "",
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1841,7 +1841,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1904,7 +1904,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 2,
       "tarea": 4,
@@ -1967,7 +1967,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "rango_palabras": ""
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 3,
       "tarea": 1,
@@ -1990,7 +1990,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "modelo_essay": "Hola,\n\nNo te preocupes, la semana pasada estuve en la clase de historia y te cuento lo que hicimos. El profesor habló de la Segunda Guerra Mundial, especialmente de las causas y las consecuencias para Europa. Nos explicó los años más importantes y nos enseñó unas fotos muy interesantes.\n\nNo te perdiste nada muy difícil, pero sí debes leer las páginas ciento veinte a ciento treinta del libro para el examen. También te recomiendo que mires el documental que el profesor puso en clase, porque algunas preguntas del examen serán sobre él.\n\n¿Quieres que nos veamos un día esta semana para estudiar juntos? Yo puedo prestarte mis apuntes.\n\nUn abrazo,\nMarta"
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 3,
       "tarea": 2,
@@ -2013,7 +2013,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "modelo_essay": "Mi trabajo\n\nTrabajo en una empresa de informática desde hace tres años. Empecé como becario y, después de seis meses, me contrataron como empleado fijo. Estoy muy contento con mi trabajo.\n\nA diario llego a la oficina a las nueve de la mañana y primero reviso los correos electrónicos. Después trabajo en proyectos de desarrollo de páginas web para clientes. A veces tengo reuniones con el equipo para planificar las tareas de la semana. Salgo de trabajar a las seis de la tarde.\n\nLo que más me gusta de mi trabajo es el ambiente entre los compañeros, todos somos muy amigos y nos ayudamos mucho. También me gusta que cada proyecto sea diferente y aprendo cosas nuevas cada día. Lo que menos me gusta es que a veces tengo que trabajar los fines de semana cuando hay una entrega importante.\n\nMi jefe es una persona muy organizada y siempre nos explica bien lo que hay que hacer. Mis compañeros son jóvenes y divertidos, y a veces salimos a tomar algo después del trabajo."
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 4,
       "tarea": 1,
@@ -2036,7 +2036,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "modelo_response": "Buenas tardes. He elegido la opción uno, las redes sociales.\n\nLas redes sociales han cambiado mucho nuestra forma de comunicarnos y de relacionarnos. Hoy en día, casi todo el mundo tiene una cuenta en alguna red social, como Instagram, Twitter o Facebook. Yo también las uso a diario, principalmente para hablar con mis amigos y ver qué hacen.\n\nLas ventajas son muchas. Primero, nos permiten estar en contacto con personas que viven lejos, como familiares que están en otros países. Segundo, son una fuente de información muy rápida: te enteras de las noticias al momento. Tercero, pueden ser útiles para encontrar trabajo o para promocionar un negocio, porque llegas a muchísima gente.\n\nPero también hay desventajas importantes. La principal es que podemos perder mucho tiempo si no controlamos el uso. Mucha gente pasa horas al día mirando el móvil en lugar de hacer actividades más productivas o de hablar con la gente que tiene al lado. Además, las redes sociales pueden generar ansiedad o comparaciones negativas, porque vemos solo la parte bonita de la vida de los demás. También hay problemas de privacidad y de noticias falsas.\n\nEn mi opinión, lo importante es usar las redes con moderación y de forma consciente. Yo intento no usarlas durante las comidas ni antes de dormir, y procuro quedar con mis amigos en persona en lugar de hablar solo por chat.\n\nPara terminar, las redes sociales son una herramienta maravillosa si sabemos usarla bien, pero pueden ser perjudiciales si abusamos de ellas. Muchas gracias."
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 4,
       "tarea": 2,
@@ -2059,7 +2059,7 @@ window.DELE_BANK_A2_NUEVO_M3 = {
       "modelo_response": "Voy a describir la imagen que he seleccionado.\n\nEn la foto veo a un grupo de personas practicando yoga en un parque al aire libre. Son unas seis u ocho personas, todas con ropa deportiva de colores claros, sobre todo blancos y grises. Están sobre esterillas de yoga y hacen una postura de pie, inclinando el cuerpo hacia delante.\n\nEl parque es muy verde, con árboles altos y césped bien cuidado. La luz del sol atraviesa las hojas y crea sombras suaves en el suelo. Parece que es por la mañana temprano, porque la luz es dorada y no hay mucha gente alrededor. Al fondo se ve un banco de madera y un camino de tierra.\n\nTodas las personas parecen concentradas y relajadas. La instructora, que está al frente, corrige la postura de una de las alumnas. El ambiente es de paz y tranquilidad, muy diferente del ruido de la ciudad.\n\nEsta foto me transmite mucha calma. Me parece una escena ideal para empezar el día con energía y equilibrio. A mí me gustaría apuntarme a una clase de yoga al aire libre, porque creo que es muy bueno tanto para el cuerpo como para la mente.\n\nEn resumen, es una imagen que representa un estilo de vida saludable y en contacto con la naturaleza, algo cada vez más necesario en nuestro mundo tan acelerado."
     },
     {
-      "modelo": "nuevo_m3",
+      "modelo": "nuevo_m3_2026",
       "modelo_name": "Nuevo DELE A2 Modelo 3",
       "prueba": 4,
       "tarea": 3,
@@ -2083,4 +2083,3 @@ window.DELE_BANK_A2_NUEVO_M3 = {
     }
   ]
 };
-//（注：内容由AI生成）
