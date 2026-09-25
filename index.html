@@ -14941,8 +14941,10 @@ function _renderDeleA1V5TaskCard(q){
   if (q.instrucciones) {
     // 折叠模式下说明并入折叠区; 管理员编辑按钮也一并放进来, 否则口语/写作就没法改 instrucciones 了
     var _qInstrKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea);
-    _qInstr += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+esc(q.instrucciones)+' '+
-      (_qHide ? _deleAdminEditBtn(_qInstrKey, 'instrucciones', true) : '')+'</div>';
+    _qInstr += '<div style="margin:6px 0;font-size:13px;line-height:1.6;color:var(--fg);background:var(--bg2,#f5f5f5);padding:8px;border-radius:4px"><b>📋 题目说明:</b> '+
+      (_qHide ? _deleAdminEditBtn(_qInstrKey, 'instrucciones', true) : '')+
+      // 2026-09-25 修复: 必须包 .dele-editable-content, 否则 _deleAdminStartEdit 找不到容器(编辑按钮点了没反应)
+      '<div class="dele-editable-content" style="white-space:pre-wrap;margin-top:4px">'+esc(q.instrucciones)+'</div></div>';
   }
   // form_fill: 表单
   if (q.type === 'form_fill' && q.formulario) {
