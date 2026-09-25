@@ -200,7 +200,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         13
       ],
       "answer": "C",
-      "prompt": "",
+      "prompt": "Durante las fiestas temáticas…",
       "options": [
         {
           "key": "A",
@@ -971,7 +971,7 @@ window.DELE_BANK_A2_NUEVO_M4 = {
         1,
         6
       ],
-      "answer": "T",
+      "answer": "A",
       "prompt": "¿Dónde estuvieron ayer?",
       "options": [
         {
