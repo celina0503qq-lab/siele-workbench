@@ -1329,7 +1329,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Todo el mundo me dice que mi hijo Rafa se parece muchísimo a su abuelo\ncuando tenía su edad, he visto algunas fotos y son como dos gotas de agua. Tienen la misma\nmirada. Pero el carácter, sin duda, lo ha heredado de mí.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1362,7 +1363,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Cuando todo pasó yo estaba en una silla, al escuchar el golpe me levanté\nrápidamente y fui al garaje para ver qué había sucedido. Allí me encontré a mi hermano en el\nsuelo, se había caído de la moto.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1395,7 +1397,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Desde que estoy embarazada no me encuentro muy bien, he ido dos veces al\nhospital esta semana y por fin me han dado la baja, ya era hora. No tengo ningunas ganas de\nvolver a mi oficina, ya veremos qué haré en el futuro.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1428,7 +1431,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Ayer estaba cocinando y viendo la televisión al mismo tiempo. No sé muy bien\nqué paso, pero me hice un corte bastante grande, me mareé y mi amiga tuvo que llamar a una\nambulancia. Creo que voy a tener que cancelar mi excursión a la montaña del fin del semana,\níbamos a escalar.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1461,7 +1465,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Debemos hacer todo lo posible por reciclar y luchar contra la contaminación de\nnuestras ciudades. Si protegemos la naturaleza y conservamos el medio ambiente viviremos en\nun mundo mejor. En este momento lo que más me preocupa es el agujero en la capa de ozono.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1494,7 +1499,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Primero hay que plantar las semillas, luego poner un poco de agua y esperar a\nque salgan las raíces y las primeras hojas. Si regamos regularmente y no hace demasiado frío\ndeberían crecer y dar frutos en menos de dos años.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1527,7 +1533,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1560,7 +1567,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1593,7 +1601,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1626,7 +1635,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1659,7 +1669,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1692,7 +1703,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Hola, ¿qué tal? Mi nombre es Ricardo, pero todos me llaman Ricky. Al igual que mi hermana,\nestudio en la universidad de Sevilla, este es nuestro último año, los dos tenemos unas notas\nbastantes buenas. Me considero una persona afortunada, no necesito estudiar muchas horas\npara memorizar o aprender algo. Estoy preparándome para ser profesor de educación física,\nmis asignaturas preferidas son las que hacemos en el exterior, me encanta estar al aire libre.\nSoy español, nací en un pequeño pueblo que está cerca de Cádiz, pero tengo la piel muy oscura\ny la gente me pregunta si soy de Marruecos o de Argelia. El color de piel lo he heredado de mi\npadre, es lo único que tengo suyo, él es una persona seria y trabajadora, por el contrario, yo soy\nmás parecido a mi madre, alegre, hablador y un poco alocado.\nMe encanta la comida basura, sé que debería dar ejemplo y llevar una dieta sana, pero es que\nno puedo resistirme a estos platos pesados de carne que te dejan sin poder ni moverte del\nsofá. El año pasado tuvimos una asignatura sobre nutrición y creo que no sigo ninguna de las\nrecomendaciones que nos daba la profesora. Recuerdo un tema del libro que hablaba sobre la\ninfluencia del alcohol en el cuerpo, desde hace un mes me despierto todos los domingos con\nuna resaca horrible, esto no puede ser bueno.\nHoy en día podemos encontrar información sobre nutrición en muchísimas páginas web. Miles\nde personas te bombardean con sus recomendaciones inútiles. Lo mejor es cenar unas cerezas\no un kiwi, muchísimo más sano que tomar embutidos y fritos por la noche. Esto lo sabe todo el\nmundo, pero… ¿Quién lo hace? Otra cosa que deberíamos controlar es el azúcar, pero es que\ntodo lo que está bueno lleva azúcar.\nHace unos años sufrí un ataque al corazón, el médico dijo que es algo raro a mi edad. Desde\nentonces, mis padres y mi hermana no paran de decirme que tengo que cuidarme y perder algo\nde peso. Me lo recuerdan cada vez que nos vemos, estoy ya un poco cansado de este tema de\nconversación. Mi abuelo era entrenador de fútbol profesional, llegó a entrenar al Atlético de\nMadrid, él es el único que me entiende, me dice siempre que solo hay una vida y que en ella\ntenemos que hacer lo que el corazón nos diga.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1725,7 +1737,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1758,7 +1771,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1791,7 +1805,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1824,7 +1839,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1857,7 +1873,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1890,7 +1907,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Abrimos el informativo de hoy con una noticia esperanzadora. Un grupo de científicos de la\nUniversidad de Colorado afirma haber encontrado la vacuna contra el sida. El director del\nproyecto asegura que la vacuna tiene una efectividad del 95 % y podría estar en el mercado a\npartir del mes de diciembre.\nHoy se celebra en muchos países el día internacional del té. Lo que para muchos es un ritual\ndiario casi obligatorio, para otros es algo totalmente desconocido. Hemos hablado con varios\nexpertos en nutrición y todos coinciden en lo mismo: una manzanilla, una tila o un poleo menta\npueden tener propiedades que ayudan a nuestro organismo en el día a día.\nPreocupa el estado de salud del piloto del ejército del aire que sufrió el accidente el sábado\npasado durante el desfile del día de la Hispanidad. Su caza se estrelló en un bosque cercano a\nla base desde la que despegó. El soldado tuvo tiempo de saltar en paracaídas, sin embargo, se\nencontraba demasiado cerca del suelo y se rompió varios huesos al caer.\nLa conferencia de oculistas dará comienzo el próximo martes y durará hasta el viernes. En la\nedición anterior se llenó la sala de público que provenía de todas partes de España. Este año los\norganizadores han decidido alquilar una sala mayor para evitar los problemas de aforo y confían\nen que el evento ayude a mejorar a todos los profesionales de este sector.\nYa se pueden ver en los aeropuertos las nuevas medidas de seguridad que aprobó el gobierno\nen enero. Desde hace dos semanas es obligatorio que los menores estén acompañados por un\nadulto en todo momento y queda totalmente prohibido acceder al avión con gorra, sombrero o\ncualquier otro complemento de ropa que permita ocultar la cara. Por el momento, no se han\nproducido incidentes y todo funciona con normalidad.\nLos ganaderos de la región aseguran que, al haber disminuido la demanda de carne en el\núltimo año, las vacas no caben en las granjas. Piden ayudas al gobierno y aseguran que la\nsituación puede obligarles a cerrar sus negocios, lo que aumentará el paro en la región.\nAnuncian que las protestas empezarán la próxima semana.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -1947,7 +1965,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: H",
       "cuerpo": "",
       "transcript": "El pasado viernes estuve en la reunión de antiguos alumnos de medicina. Había\nun montón de gente. Cenamos en el restaurante del hotel Milenio, de primero comimos\nensalada de salmón y de segundo había cordero al horno. Lo mejor de todo es que, a la hora\ndel postre, pusieron seis o siete tartas en el centro de la mesa, estaban deliciosas, creo que las\nprobé todas.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2004,7 +2023,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: D",
       "cuerpo": "",
       "transcript": "Fue una pena, había quedado con novio en el gimnasio a las diez y media, pero\ncuando llegué él ya se había ido. Finalmente, estuve una hora haciendo aeróbic y después me\nrelajé en la piscina. Creo que me gusta mucho más bañarme que hacer ejercicio.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2061,7 +2081,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Después de pensarlo bien, he comprado las pastillas para la diarrea que me\nrecomendaron en el centro de salud. En algunos foros de internet leí que no eran muy buenas y\nque podían provocar dolores, pero el enfermero me aseguró que son las mejores que hay\nahora mismo en el mercado y me dijo que en esos foros se escriben muchas tonterías.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2118,7 +2139,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "No sé qué me pasa. Aunque como solamente verduras no consigo perder peso.\nEstoy empezando a pensar que mi cuerpo es así por genética y que no puedo cambiarlo. Solo\ntenemos una vida y si no la disfrutamos creo que perdemos el tiempo que tenemos, para mí\nesta dieta es un sufrimiento.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2175,7 +2197,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: F",
       "cuerpo": "",
       "transcript": "Abrí el buzón y ahí estaba, tenía el sello del hospital, cuando la miré\ndetenidamente me di cuenta de que estaba firmada por el propio doctor Casillas. Por suerte,\neran buenas noticias, no voy a tener que operarme, solo ir a una visita de control en tres\nsemanas.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2232,7 +2255,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: E",
       "cuerpo": "",
       "transcript": "Hace unos años estuve colaborando con una ONG, no me pagaban nada, pero\nme daban comida y una habitación para dormir. Me sentía muy bien haciendo mi trabajo y\nayudando a las personas que de verdad lo necesitan. Es algo que le recomiendo a todo el\nmundo, yo lo volvería a hacer.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2265,7 +2289,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2298,7 +2323,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2331,7 +2357,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2364,7 +2391,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2397,7 +2425,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
@@ -2430,7 +2459,8 @@ window.DELE_BANK_B1_NUEVO_M3 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "MUJER: Dígame, ¿quién es?\nHOMBRE: ¡Feliz cumpleaños, Lola! Soy tu primo Rafa. Mira debajo de la mesa del salón, te he\ndejado un regalito. Creo que te va a gustar.\nMUJER: ¡Oh! Son unos esquís, muchísimas gracias. Me encantan.\nHOMBRE: Mira bien, también hay un casco, debe de estar al lado.\nMUJER: Sí, ya lo veo, es precioso.\nHOMBRE: Sé que te gusta cuidarte, quería comprarte unos cosméticos, pero no sabía cuáles\nelegir, así que he optado por tu segunda pasión, los deportes de invierno.\nMUJER: Y has acertado. Pero estos esquís parecen muy buenos, te habrán costado un montón,\nte has pasado, primo.\nHOMBRE: No te preocupes, Lola. La tienda estaba de rebajas. Cuéntame qué tal fue la fiesta\nanoche.\nMUJER: Muy bien, vinieron todos mis amigos y estuvimos aquí en casa.\nHOMBRE: ¿Brindasteis con champán? A mí me encanta.\nMUJER: No, lo probé hace tiempo, pero el alcohol en general tiene un sabor muy fuerte para mí.\nSabes que yo soy más de infusiones.\nHOMBRE: Bueno, pues para llevar una vida sana te recomiendo el canal de YouTube “Sin\nazúcar”, mi novia lo sigue a diario y dice que lo encuentra muy útil.\nMUJER: Muchas gracias, lo voy a buscar ahora mismo.\nHOMBRE: Otra cosa más, los esquíes y el casco tienen garantía, si tienes cualquier problema con\nellos o ves que tienen algún defecto, dímelo, que tengo el ticket de compra en mi casa y vamos\na la tienda para hacer la reclamación.\nMUJER: Perfecto, estoy muy emocionada. Gracias de nuevo.\nHOMBRE: De nada, prima. Espero que nos veamos pronto.\nMUJER: ¡Adiós!",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Rafa (A), a Lola (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m3",
