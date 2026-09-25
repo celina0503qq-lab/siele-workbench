@@ -14477,6 +14477,10 @@ function _renderDeleA1ModeloList(task, mid, items){
 
     h += '<div class="gp">';
     for (const q of group) {
+      // 2026-09-25 修复: perQKey 必须在任何使用点之前定义。
+      // 原定义在循环体后段(旧14524行) → var 提升导致第1题 undefined(编辑按钮 key 为空)、
+      // 后续题取到上一题残留 key(按钮 key 全部错位) ⇒ 听力原文编辑保存后不生效。
+      var perQKey = window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
       const answered = !!q.answer;
       // v5 写作/口语题: 走特殊渲染 (无选择题 answer)
       if (q._v5 && (q.type === 'form_fill' || q.type === 'writing_ad' || q.type === 'writing' || q.type === 'speaking_self' || q.type === 'speaking_topic' || q.type === 'speaking_dialogue' || q.type === 'speaking')) {
@@ -14521,7 +14525,6 @@ function _renderDeleA1ModeloList(task, mid, items){
       }
       // 渲染 prompt — 加大字体, 管理员可编辑
       let promptHtml = '';
-      var perQKey = window._deleLk(q.modelo+'_P'+q.prueba+'_T'+q.tarea+'_Q'+q.q);
       if (q.prompt) {
         var editedPrompt = window._deleAdminGetField(perQKey, 'prompt', q.prompt);
         promptHtml = '<div style="margin-top:8px;font-size:14px;line-height:1.6;color:#1e293b;font-weight:600">'+
