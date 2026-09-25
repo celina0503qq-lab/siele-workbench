@@ -1329,7 +1329,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Desde que hemos cambiado de oficina lo tengo mucho más difícil por las\nmañanas, ahora trabajo en las afueras de la ciudad y tengo que levantarme a las seis de la\nmañana, ponerle comida al conejo y salir corriendo de casa.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1362,7 +1363,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Por favor, por respeto al resto de empleados, fregad después de utilizar las\ntazas, cucharillas y vasos. Por su parte, la empresa se compromete a comprar un café de mejor\ncalidad. Entre todos haremos que el día a día sea más agradable.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1395,7 +1397,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Para acceder, debes introducir tu nombre de usuario y tu contraseña en la\npágina principal y hacer clic en el botón naranja. Una vez dentro, ya podrás descargar las\nfacturas del cliente. Si necesitas ayuda ven a mi despacho.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1428,7 +1431,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Todos los padres deben recoger a sus hijos antes de las cinco de la tarde,\nespecialmente a los de menos de dos años. Las cuidadoras no pueden quedarse más tiempo\nhaciendo su trabajo del que pone en su contrato. Por favor, entended la situación.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1461,7 +1465,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Hola Pedro, me gustaría charlar contigo sobre lo que pasó el otro día en la\nfábrica. El lugar y la hora me dan igual, podemos vernos, por ejemplo, en la cafetería de la zona\nnorte a las seis de la tarde.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1494,7 +1499,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Por favor, dile al jefe que compre tres o cuatro paquetes de folios, ya casi no\nnos quedan. Y que lo haga rápido, los vamos a necesitar ahora que nos ha dicho que tenemos\nque imprimir todas las facturas.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis mensajes. Escuche cada mensaje dos veces. Después debe contestar a las preguntas (1-6). Seleccione la opción correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1527,7 +1533,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1560,7 +1567,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1593,7 +1601,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1626,7 +1635,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1659,7 +1669,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1692,7 +1703,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Me llamo Andrea, soy de Zaragoza, pero desde hace cinco años vivo en Valencia. Me mudé aquí\npor trabajo, soy científica, trabajo en un laboratorio. Mi trabajo consiste en buscar nuevas\nmedicinas y vacunas, me encanta lo que hago a pesar de que el sueldo no sea muy alto, me\nsiento útil. Me parece increíble que no se pague más a los científicos en este país, sin nuestro\ntrabajo la sociedad no avanzaría y seguiríamos sin tener soluciones para las enfermedades más\nbásicas.\nValencia no está mal, pero echo muchísimo de menos la ciudad donde nací, sobre todo porque\nallí vive casi toda mi familia. Mis padres son funcionarios, trabajan en la oficina donde la gente se\nhace el DNI, se conocieron allí hace ya más de veinticinco años y desde entonces trabajan\njuntos. Quizás no sea el lugar más romántico del mundo para conocerse, pero ellos son muy\nfelices.\nRecuerdo que durante mis estudios quería tener algo de dinero, por eso estuve trabajando en\nvarias empresas, no tengo muy buenos recuerdos de aquellos empleos. En la mayoría de los\ncasos, los jefes se aprovechaban de que los trabajadores éramos jóvenes y nos ofrecían unas\ncondiciones pésimas, me pone de muy mal humor pensar en ello. Por suerte todo aquello ya\npasó. Acabé mi carrera sin tener que pedir dinero a mis padres, me siento orgullosa de mí\nmisma.\nEn la cocina soy una persona muy específica, tengo algunas manías. Por ejemplo, me encantan\nlos huevos duros, pero nunca me como la yema, siempre hago el mismo ritual: quito la cáscara\ndel huevo, aparto la yema y me como solamente la clara. Con el aceite también soy bastante\nespecial, solo utilizo aceite de oliva, hace más de diez años que no pruebo otro. Mucha gente\nme ha dicho que el aceite de girasol es mejor para freír, pero cuando se me mete algo en la\ncabeza no hay quien me lo quite, así que seguiré haciendo mis patatas fritas con aceite de oliva.\nEn el trabajo tenemos muchísima libertad para hacer lo que queramos, eso está muy bien.\nCuando me entra el hambre, que suele ser con bastante frecuencia, puedo hacer un descanso\nde diez minutos y tomar algo. Mi jefe, que antes era una persona muy arrogante e impaciente,\núltimamente ha cambiado mucho y está de un humor increíble. La gente comenta que está\nsaliendo con una de las recepcionistas del turno de tarde y está totalmente enamorado.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una audición dos veces. Después debe contestar a las preguntas (7-12). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1725,7 +1737,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1758,7 +1771,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1791,7 +1805,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1824,7 +1839,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1857,7 +1873,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1890,7 +1907,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "Bienvenidos a “Informe semanal”. Hoy empezamos hablando de un misterio que sigue sin\nresolverse en Zaragoza. La policía todavía no ha podido encontrar a la joven Amanda Sánchez\nque lleva desaparecida desde el sábado pasado. Lo último que se sabe de Amanda es que\nestaba trabajando de canguro para una familia durante el fin de semana. Los padres de la joven\npiden ayuda a todos los vecinos de la ciudad.\nEl presidente del gobierno ha asegurado que está tratando de solucionar la situación de todos\nlos jubilados que todavía no han recibido el dinero de las ayudas que prometió en marzo del\npasado año. El presidente culpa de todo lo sucedido a la Unión Europea, pues dice que nuestro\npaís sigue esperando al pago que se nos debe de todo el trimestre pasado.\nOtro presidente pidiendo disculpas, y es que en este caso Enrique Pérez, presidente de la\nempresa eléctrica IBERLUZ, ha emitido un comunicado oficial para asegurar que repasarán y\ncorregirán todas las facturas de los últimos cinco años. Muchos clientes ya han cancelado sus\ncontratos al sentirse engañados por la empresa.\nLos alumnos de la Universidad Internacional encontrarán un campus totalmente diferente el\npróximo curso. Según palabras del rector: “se ha hecho una inversión de tres millones de euros\npara poner césped por toda la universidad y renovar la zona de la cafetería”. Las obras\nempezarán esta misma semana y está previsto que duren alrededor de un mes.\nDesde hoy mismo los jubilados ya pueden hacer uso del nuevo centro social que se encuentra\nen la calle Libertad. Este lugar cuenta con mesas de billar, una zona para jugar a los dardos e\nincluso una pequeña bolera. El acceso es totalmente gratuito con la tarjeta de la tercera edad y,\npor el momento, el centro social solamente abrirá de jueves a domingo, de nueve de la mañana\na cinco de la tarde.\nConcluimos el informativo con un consejo para nuestros espectadores. Si descargáis la\naplicación de nuestra cadena en el teléfono móvil o tableta, tendréis acceso a toda la\ninformación de actualidad en directo. Además, en la aplicación se pueden ver los programas\nantiguos y los comentarios de otros usuarios.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar seis noticias en un programa. Escuche el programa dos veces. Después debe contestar a las preguntas (13-18). Seleccione la respuesta correcta (a / b / c). Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -1947,7 +1965,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: F",
       "cuerpo": "",
       "transcript": "Estoy buscando un nuevo trabajo, escribí de nuevo mi currículum y ya he tenido\nalgunas entrevistas en empresas de logística. A todos los entrevistadores les digo lo mismo, que\nestoy disponible para incorporarme inmediatamente y que tengo vehículo propio. Tengo\nestudios y experiencia, creo que encontraré un empleo rápidamente.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2004,7 +2023,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "Ahora soy cocinero en un restaurante de comida asiática. Mi jefe me ha dicho\nque debo cortarme el pelo y afeitarme para poder continuar trabajando aquí. No me parece\njusto, pero lo voy a hacer porque no quiero quedarme en la calle, tengo que pagar el alquiler y\nnecesito mi sueldo.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2061,7 +2081,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: D",
       "cuerpo": "",
       "transcript": "Nuestro nuevo profesor de música es muy creyente, recuerdo un día que, en\nvez de darnos clase, nos llevó a todos a misa y estuvimos allí rezando durante cuarenta\nminutos. Otra vez nos llevó al Zoo para escuchar las melodías que hacen las aves. Sus clases\nson de todo menos aburridas.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2118,7 +2139,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: H",
       "cuerpo": "",
       "transcript": "Trabajé durante cinco años en el huerto de mi abuelo. Es un empleo muchísimo\nmás duro de lo que parece. Hay que levantarse todos los días a las cinco de la madrugada y,\nnormalmente, la jornada se acaba a las seis de la tarde. Además, en verano hay que regar dos\nveces al día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2175,7 +2197,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: E",
       "cuerpo": "",
       "transcript": "El otro día, al salir del trabajo, fui a tirar la basura como siempre. Tenía mi móvil\nen la mano y, cuando abrí el contenedor de reciclaje de vidrio, se me cayó el teléfono dentro,\nolía muy mal. Me metí dentro del contenedor para sacar el móvil, lo conseguí, pero me hice\ncortes en las dos manos.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2232,7 +2255,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "Un amigo mío es reportero, ahora vive y trabaja en Rabat porque hay un\nconflicto armado en la zona, es muy peligroso salir a la calle, hay soldados por todas partes y\nestá muriendo gente inocente. Mi amigo me dijo que el otro día explotó una bomba debajo de\nsu hotel.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar a seis personas que cuentan anécdotas. Escuche cada audio dos veces. Seleccione el enunciado (A-I) que corresponde a cada mensaje (del 19 al 24). Hay nueve opciones. Seleccione seis. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2265,7 +2289,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2298,7 +2323,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2331,7 +2357,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2364,7 +2391,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: A",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2397,7 +2425,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
@@ -2430,7 +2459,8 @@ window.DELE_BANK_B1_NUEVO_M4 = {
       "explanation": "Respuesta correcta: B",
       "cuerpo": "",
       "transcript": "MUJER: Buenos días, mi nombre es Mila González, llamo del banco Cantabria. ¿Podría hablar\ncon el presidente de la empresa, por favor?\nHOMBRE: Disculpe, pero en este momento está en una reunión. Yo soy Noé, su secretario. ¿En\nqué puedo ayudarle?\nMUJER: Quería simplemente comentarle que su empresa debe dinero al banco e informarle de\nque hoy es el último día que puede pagar.\nHOMBRE: Pues hoy no creo que el presidente pueda ir en persona, ya que tiene todo el día\nocupado, pero se lo diré.\nMUJER: No es necesario que venga el señor presidente en persona, puede usted mismo venir al\nbanco con el dinero. En total se deben 278 €.\nHOMBRE: Pero yo aquí no tengo acceso a la caja de la empresa, ni tampoco tengo nada suelto\nen mi cartera.\nMUJER: Por favor, informe a su jefe de que esta situación provocará una subida de los precios\nde los productos que el banco ofrece a su empresa. Si no recuerdo mal, están interesados en\nlos créditos en dólares estadounidenses.\nHOMBRE: Sí, nuestra empresa exporta principalmente a Estados Unidos y estamos\ndesarrollando allí una campaña de publicidad en medios de comunicación.\nMUJER: De acuerdo, ¿puede decirle al señor presidente que me llame cuando pueda? Quiero\nenviarle por email un documento sobre la riqueza de los estadounidenses en los últimos tres\naños, que no para de crecer.\nHOMBRE: Creo que esto le va a interesar mucho. Se lo diré. Muchas gracias por su llamada.\nMUJER: A usted, que tenga un buen día.",
-      "audio": ""
+      "audio": "",
+      "instrucciones": "Usted va a escuchar una conversación entre dos amigos. Indique si los enunciados (25-30) se refieren a Noé (A), a Mila (B) o a ninguno de los dos (C). Escuche la conversación dos veces. Marque las opciones elegidas en la Hoja de respuestas."
     },
     {
       "modelo": "nuevo_m4",
