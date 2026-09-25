@@ -13680,6 +13680,8 @@ window._deleAdminRevertEdit = function(itemKey, field){
     if (Object.keys(window._deleAdminEdits[itemKey]).length === 0) delete window._deleAdminEdits[itemKey];
     try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(window._deleAdminEdits)); }
     catch(e) {}
+    // 2026-09-25 修复: 删除也必须同步云端, 否则刷新后旧编辑又被拉回来
+    if (typeof window._deleAdminSyncToCloud === 'function') window._deleAdminSyncToCloud();
   }
   // 重新渲染
   var lvl = window._deleA1CurrentLevel || 'B1';
@@ -13958,9 +13960,12 @@ window._deleAdminFetchFromCloud = function(){
 window.addEventListener('message', function(e){
   if (e.data && e.data.type === 'siele-admin-edits-result') {
     if (e.data.edits && Object.keys(e.data.edits).length > 0) {
-      window._deleAdminEdits = e.data.edits;
-      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(e.data.edits)); } catch(x) {}
-      console.log('[AdminSync] CloudBase 拉取 ' + Object.keys(e.data.edits).length + ' 项编辑');
+      // 2026-09-25 修复: 本地优先合并(与静态 JSON 兜底逻辑保持一致),
+      // 避免云端旧数据覆盖掉尚未上云的本地编辑
+      var _mergedAdminEdits = Object.assign({}, e.data.edits, window._deleAdminEdits || {});
+      window._deleAdminEdits = _mergedAdminEdits;
+      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(_mergedAdminEdits)); } catch(x) {}
+      console.log('[AdminSync] CloudBase 拉取 ' + Object.keys(e.data.edits).length + ' 项编辑, 合并后 ' + Object.keys(_mergedAdminEdits).length + ' 项');
       window._deleAdminApplyEdits();
     }
   }
