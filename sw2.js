@@ -1,7 +1,7 @@
 /* 西语学习系统 Service Worker · network-first
    策略：始终优先拉取网络最新版本（避免浏览器缓存导致页面停留在旧版、功能缺失），
    网络失败时才回退到缓存副本（离线可用）。 */
-const CACHE = 'siele-suite-v29-2026092615';
+const CACHE = 'siele-suite-v30-2026092617';
 
 // 核心资源 - 安装时预缓存
 const CORE_ASSETS = [
