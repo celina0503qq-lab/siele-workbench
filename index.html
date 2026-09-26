@@ -16891,7 +16891,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v29-2026092615';
+    var swVer = 'v30-2026092617';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16928,7 +16928,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v29-2026092615';
+    return 'v30-2026092617';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18030,7 +18030,9 @@ window.addEventListener('storage',function(e){
   if(AU&&e.key===dataKey(AU)){ADB=lsg(dataKey(AU),ADB);hydrate();setChip(ADB.syncCfg?(syncing?'ing':'ok'):'local');}
 });
 /* 周期 & 事件触发的云同步 */
-setInterval(function(){if(AU&&ADB&&ADB.syncCfg&&!syncing)cloudSync(true);},150000);
+/* v30 live-follow：词卡页打开时 30s 跟随拉取（另一设备翻词本页 30s 内跟上）；其他页面维持 150s 节奏。busy 时由下一跳自愈，不再永久丢拍 */
+var _pollTick=0;
+setInterval(function(){if(!AU||!ADB||!ADB.syncCfg||syncing)return;_pollTick++;if((typeof currentPage!=='undefined'&&currentPage==='flash')||_pollTick%5===0)cloudSync(true);},30000);
 /* 2026-09-26 词卡同步增强：save() 派发 wb-saved → 防抖2.5s doPush ⇒ 翻词后约3.5s上云。
    doPush 内部有 SIG 签名去重（无变化直接 return），重复调用无副作用。 */
 var _wbSavePushT;
@@ -18052,7 +18054,7 @@ document.addEventListener('visibilitychange',function(){
        （hidden→push 与 visible→pull 并发，pull 通常更快）⇒ 8s 后补拉一次，
        确保拿到对方刚推的数据。syncing 防重入、pull 幂等，重复触发无副作用。 */
     clearTimeout(_visRePullT);
-    _visRePullT=setTimeout(function(){ if(AU&&ADB&&ADB.syncCfg&&!syncing)cloudSync(true); },8000);
+    _visRePullT=setTimeout(function _visRePull(){ if(!AU||!ADB||!ADB.syncCfg)return; if(syncing){clearTimeout(_visRePullT);_visRePullT=setTimeout(_visRePull,3000);return;} cloudSync(true); },8000);
   }
 });
 window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(true);});
