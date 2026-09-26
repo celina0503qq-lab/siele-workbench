@@ -16915,6 +16915,73 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
 
 
 <script>
+/* ==== SW 版本自检 L1 + 主动查新 L2（2026-09-26 新增）====
+   L1 场景：网络失败时 SW 会回退缓存副本，页面可能悄悄跑旧版；旧页面本身没有"我是旧的"意识。
+           做法：向 SW 问 CACHE 版本，与页面内联 swVer 比对，不一致 ⇒ 顶部横幅提示刷新。
+   L2 场景：只在加载时查一次新的缺陷 —— 长期开着的标签页永远发现不了新版本。
+           做法：回到前台时 + 每 30 分钟各查一次（新 SW 激活后沿现有 updatefound 逻辑自动 reload）。
+   ⚠️ 本段必须与页面内联 swVer 保持同步：SW 版本串改了，这里的提示才算有意义。 */
+(function(){
+  // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
+  function pageVer(){
+    try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
+    return 'v25-2026092202';
+  }
+  // L1：向 SW 询问其 CACHE 版本，与页面版本比对
+  window._deleSwVersionCheck=function(){
+    try{
+      if(!navigator.serviceWorker||!navigator.serviceWorker.controller)return;
+      var ch=new MessageChannel();
+      ch.port1.onmessage=function(ev){
+        try{
+          var d=ev.data||{};
+          if(d.type!=='SW_VER_RESULT'||!d.ver)return;
+          var swOnly=String(d.ver).replace(/^siele-suite-/,'');
+          var pv=pageVer();
+          if(swOnly===pv)return;                              // 一致，正常
+          if(sessionStorage.getItem('dele_sw_banner_shown')==='1')return;  // 本次会话只提示一次
+          sessionStorage.setItem('dele_sw_banner_shown','1');
+          if(document.getElementById('deleSwUpdBanner'))return;
+          var bar=document.createElement('div');
+          bar.id='deleSwUpdBanner';
+          bar.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#eff6ff;color:#1d4ed8;'+
+            'font-size:13px;padding:8px 14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.12);font-family:inherit';
+          bar.innerHTML='🆕 检测到新版本（当前页面 '+pv+' / 已发布 '+swOnly+'）　'+
+            '<button type="button" style="margin-left:8px;cursor:pointer;border:1px solid #1d4ed8;background:#fff;color:#1d4ed8;'+
+            'border-radius:6px;padding:2px 10px;font-size:13px" onclick="location.reload()">立即刷新</button>'+
+            '<button type="button" style="margin-left:6px;cursor:pointer;border:none;background:transparent;color:#64748b;font-size:15px" '+
+            'onclick="var b=document.getElementById(\'deleSwUpdBanner\');if(b)b.remove();">✕</button>';
+          (document.body||document.documentElement).appendChild(bar);
+          console.log('[sw] 版本不一致：页面 '+pv+' / SW '+swOnly);
+        }catch(e){}
+      };
+      navigator.serviceWorker.controller.postMessage({type:'SW_VER'},[ch.port2]);
+    }catch(e){}
+  };
+  // L2：主动查新
+  if(!('serviceWorker' in navigator))return;
+  function swPoke(){
+    try{
+      if(navigator.serviceWorker.getRegistrations){
+        navigator.serviceWorker.getRegistrations().then(function(regs){
+          regs.forEach(function(r){ r.update().catch(function(){}); });
+        }).catch(function(){});
+      }
+      window._deleSwVersionCheck();
+    }catch(e){}
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible')swPoke();
+  });
+  setInterval(function(){
+    if(document.visibilityState==='visible')swPoke();
+  },30*60*1000);
+  window.addEventListener('load',function(){ setTimeout(swPoke,2500); });
+})();
+</script>
+
+
+<script>
 /* ================================================================
    数据桥：学习工作台 ⇄ 后台管理系统
    - 掌握度按单词(es)双向 LWW 合并（0-3 星，两边刻度一致）
@@ -17067,6 +17134,7 @@ function setChip(st,msg){
   var map={
     nologin:['#fff7ed','#c2410c','⚠️ 未登录 · 进度仅存本机，点此登录同步'],
     local:['#f1f5f9','#475569','👤 '+(AU||'')+' · 未配置云同步，点此配置'],
+    notoken:['#fff7ed','#c2410c','⚠️ '+(AU||'')+' · 登录态缺少同步令牌，点此重新登录'],
     ok:['#ecfdf5','#047857','☁️ '+(AU||'')+' · 已同步'+(last?' '+last:'')],
     ing:['#eff6ff','#1d4ed8','🔄 '+(AU||'')+' · 同步中…'],
     err:['#fef2f2','#b91c1c','❌ 同步失败'+(msg?('：'+String(msg).slice(0,30)):'')+' · 点此查看']
@@ -17083,8 +17151,13 @@ function hydrate(){
   ADB.words.forEach(function(w){
     if(!w.es)return;
     var mir=MIR.w[w.es]||[null,0];
-    if((w.updatedAt||0)>mir[1]){
-      var m=w.mastery||0;
+    var localHas=Object.prototype.hasOwnProperty.call(ST.vocabMastery||{},w.es);
+    var m=w.mastery||0;
+    /* 2026-09-26 修复（缺失补齐）：MIR 的本意是"防止用旧的更新覆盖本地较新的值"。
+       当本机 ST.vocabMastery 根本没有这个键时，不存在覆盖风险，必须无条件采纳——
+       否则一旦 ST 曾回退成更小的快照（load 回退备份键 / 配额不足吞写 / 历史账号串号），
+       云端词条会被旧 MIR 时间戳永久挡住，再也补不回来。 */
+    if(!localHas || (w.updatedAt||0)>mir[1]){
       if((ST.vocabMastery[w.es]||0)!==m){ST.vocabMastery[w.es]=m;ST.flashMastery[w.es]=m;changed=true;}
       MIR.w[w.es]=[m,w.updatedAt||0];
     }
@@ -17440,8 +17513,12 @@ function cloudSyncErrMsg(code){
   if(code==='UNAUTHORIZED')return '登录已过期，请重新登录';
   if(code==='USER_DISABLED')return '账号已被停用';
   if(code==='PAYLOAD_TOO_LARGE')return '学习数据过大，超出单次同步上限';
-  if(code==='BRIDGE_ERROR')return '云端服务暂不可用';
+  // 2026-09-26 起：不再把四种完全不同的故障压成同一句话（曾导致排查只能靠猜）
+  if(code==='SDK_LOAD_FAILED')return '云服务组件加载失败（可能被网络/加速器拦截，请关闭代理后重试）';
+  if(code==='NET_CLIENT_ERROR')return '无法连接云端（网络超时或不可达）';
+  if(code==='BRIDGE_ERROR')return '云端服务暂不可用（桥接异常）';
   if(code==='REVISION_CONFLICT')return '云端版本冲突，已自动合并';
+  if(code==='UNKNOWN_BRIDGE_ACTION')return '不支持的同步操作';
   return code||'网络异常';
 }
 // 旧 Gist 数据一次性迁移：拉取旧云端数据合并，然后切换到云函数通道
@@ -17474,7 +17551,9 @@ async function cloudSync(silent){
   if(!AU||!ADB||syncing)return;
   // 登录即自动启用云同步，无需手动配置 token
   var token=window._deleGetSessionToken&&window._deleGetSessionToken();
-  if(!token){setChip('local');return;}
+  // 登录人存在但缺 sessionToken ⇒ 这是"登录态不完整"，不是"未配置"
+  // （旧版文案谎称"未配置云同步"，会把人引向完全无关的 Gist 面板）
+  if(!token){ setChip(AU?'notoken':'local'); return; }
   if(ADB.syncCfg&&ADB.syncCfg.provider!=='cloudbase'){await migrateLegacyGist();}
   syncing=true;setChip('ing');
   var lastErr=null;
@@ -17856,6 +17935,9 @@ window._deleStOwnerGuard=function(){
     if(prev===AU) return false;
     try{ localStorage.setItem('dele_siele_wb_v3_backup_'+prev, JSON.stringify(ST)); }catch(e){}
     try{ ST=getDefaultState(); localStorage.setItem(STORE_KEY, JSON.stringify(ST)); }catch(e){}
+    // 2026-09-26 补：重建 ST 时必须一并清掉旧账号的 MIR 镜像时间戳。
+    // 否则新账号 hydrate() 会被旧 MIR 卡住（"云端那条不比 MIR 新"），数据永远补不进来。
+    try{ localStorage.removeItem(mirKey(AU)); }catch(e){}
     localStorage.setItem(ST_OWNER_KEY, AU);
     try{ console.warn('[账号隔离] 账号切换：'+prev+' → '+AU+'；旧本机进度已备份到 dele_siele_wb_v3_backup_'+prev); }catch(e){}
     return true;
@@ -18331,6 +18413,7 @@ function openSyncSettings(){
         '<button class="btn t" onclick="standaloneSync(true)">🔄 立即同步</button>'+
         '<button class="btn ol" onclick="var self=this;self.disabled=true;createGist().then(function(g){SCFG.gistId=g.id;saveSyncCfg();var gi=document.getElementById(\'syncGistId\');if(gi)gi.value=g.id;appendSyncLog(\'✅ Gist创建: \'+g.id,\'ok\');self.disabled=false;}).catch(function(e){appendSyncLog(\'❌ 创建失败: \'+e.message,\'err\');self.disabled=false;})">📝 创建新 Gist</button>'+
         '<button class="btn ol" onclick="exportData_()">📥 导出备份</button>'+
+        '<button class="btn ol" title="把云端快照全量补齐到本机（先上传本机进度，再清镜像重载）" onclick="deleRestoreFromCloud(this)">☁️ 从云端恢复本机进度</button>'+
         '<button class="btn ol" onclick="importDataPrompt_()">📤 导入备份</button>'+
         '<button class="btn ol" onclick="if(confirm(\'⚠️ 确定清除所有本地学习数据？\\n此操作不可恢复！\\n建议先导出备份。\')){ST=getDefaultState();save();saveBackup();if(typeof renderMain===\'function\')renderMain();closeSyncSettings();}" style="color:var(--bad);border-color:var(--bad)">🗑️ 重置数据</button>'+
       '</div>'+
@@ -18342,6 +18425,45 @@ function openSyncSettings(){
   var logEl = document.getElementById('syncLog');
   if(logEl&&_syncLogLines.length>0){logEl.style.display='block';logEl.innerHTML=_syncLogLines.slice(-10).join('');}
 }
+
+/* 2026-09-26 新增：从云端恢复本机进度（修 66 卡死态）
+   顺序不可颠倒：必须先 push 把本机已有进度写进云端（顺带把 MIR 置新），
+   再清 MIR 并重载 —— 这样重载后 hydrate 只会"补缺失"，不会把本地较新的值退回旧值。 */
+window.deleRestoreFromCloud=function(btn){
+  if(!AU){alert('请先登录后再使用该功能。');return;}
+  if(!confirm('将从云端把全部学习进度补齐到本机。\n\n本机当前进度会先自动上传到云端（不会丢失），随后页面自动刷新。\n\n确定继续？'))return;
+  if(btn){btn.disabled=true;btn.textContent='⏳ 正在上传本机进度…';}
+  // 仅在"本机进度已成功上传"之后才清镜像 + 重载，保证本机较新的值不会被退回
+  function doClearMirrorAndReload(){
+    try{ localStorage.removeItem(mirKey(AU)); }catch(e){}
+    try{ sessionStorage.setItem('dele_restore_from_cloud','1'); }catch(e){}
+    location.reload();
+  }
+  function onFail(msg){
+    if(btn){btn.disabled=false;btn.textContent='☁️ 从云端恢复本机进度';}
+    alert('上传本机进度失败：'+(msg||'网络异常')+'\n请检查网络后重试；为避免数据被退回旧值，本次未执行恢复。');
+  }
+  try{
+    var payload=serializeCloud(ADB);
+    var rev=(ADB&&ADB.meta&&ADB.meta.rev)||0;
+    // 第 1 步：push（把本机进度写进云端，顺带把 MIR 置新）
+    window._deleCloudCall('push',{revision:rev,payload:payload}).then(function(push){
+      if(push&&push.ok===false){
+        if(push.code==='REVISION_CONFLICT'&&push.snapshot){
+          window._deleCloudCall('push',{revision:Number(push.snapshot.revision||0),payload:payload}).then(function(r2){
+            if(r2&&r2.ok===false)onFail(cloudSyncErrMsg(r2.code));
+            else{ ADB.meta.lastSync=Date.now();lss(dataKey(AU),ADB);doClearMirrorAndReload(); }
+          }).catch(function(e){onFail(e&&e.message);});
+          return;
+        }
+        onFail(cloudSyncErrMsg(push.code));return;
+      }
+      // 第 2 步（push 成功后）：清镜像并重载，触发 hydrate 全量补齐
+      ADB.meta.lastSync=Date.now();lss(dataKey(AU),ADB);
+      doClearMirrorAndReload();
+    }).catch(function(e){onFail(e&&e.message);});
+  }catch(e){ onFail(e&&e.message); }
+};
 
 function closeSyncSettings(){
   var overlay = _syncOverlay || document.getElementById('syncOverlay');
