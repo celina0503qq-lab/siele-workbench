@@ -1052,9 +1052,17 @@ async function doLogin(e,credentials){
     maybeMigrateLegacyData(result.username);
     // 2026-09-26 v28 修复（会话隔离回归）：credentials 路径 = 工作台经 'siele-cloud-login' 发起的登录，
     // 必须同时写工作台会话键，否则工作台 activeUser()/_deleGetSessionToken() 永远拿不到登录态 ⇒ 云同步静默失效。
-    // （面板手动登录不在此列，仍只写面板键，保持 09-26 会话隔离的设计意图。）
+    // 2026-09-27 v37 会话打通：面板手动登录也写工作台键（见下方 !credentials 分支），登录了谁整站就是谁。
     if(credentials&&window.parent&&window.parent!==window){
       lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+    }
+    // 2026-09-27 v37 会话打通：面板手动登录同样写工作台会话键；嵌入 iframe 时父页整页刷新，
+    // 工作台以新身份重新载入（云端数据按新用户拉取，v36 功能授权 flags 亦随登录重新拉取）。
+    if(!credentials){
+      lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+      if(window.parent&&window.parent!==window){
+        setTimeout(function(){try{window.parent.location.reload();}catch(e){}},400);
+      }
     }
     toast('登录成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
@@ -1285,7 +1293,11 @@ function enter(u,persist,profile){
 function doLogout(opts){
   const silent=opts&&opts.silent;
   if(!silent && !confirm('确定退出登录？本地学习数据仍会保留在此设备。'))return;
-  localStorage.removeItem(LSS);localStorage.removeItem(CLOUD_SESSION_KEY);CUR=null;DB=null;
+  localStorage.removeItem(LSS);localStorage.removeItem(CLOUD_SESSION_KEY);localStorage.removeItem(WORKBENCH_SESSION_KEY);CUR=null;DB=null;
+  // 2026-09-27 v37 会话打通：后台退出 = 整站退出，通知工作台清会话并弹登录罩（工作台侧 wbLogout）。
+  if(window.parent&&window.parent!==window){
+    try{window.parent.postMessage({type:'siele-workbench-logout'},location.origin);}catch(e){}
+  }
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.add('hide');});
   $('appView').classList.remove('on');$('mtop').style.display='none';
   $('authView').style.display='';
