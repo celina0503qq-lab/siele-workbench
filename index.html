@@ -1245,6 +1245,9 @@ function save(){
     if(!save._cnt) save._cnt=0;
     save._cnt++;
     if(save._cnt%10===0) localStorage.setItem(STORE_BACKUP_KEY, json);
+    /* 2026-09-26 词卡同步增强：通知云同步模块（wb-saved 事件）。此前翻词只写本地，
+       推送依赖「切后台/beforeunload/150s轮询」⇒ 另一设备拉取可能抢在推送前（race），或最长等150s */
+    try{document.dispatchEvent(new Event('wb-saved'));}catch(e2){}
   }catch(e){}
 }
 // 紧急备份：在关键操作后强制写备份
@@ -16888,7 +16891,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v26-2026092612';
+    var swVer = 'v27-2026092613';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16925,7 +16928,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v26-2026092612';
+    return 'v27-2026092613';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18028,6 +18031,14 @@ window.addEventListener('storage',function(e){
 });
 /* 周期 & 事件触发的云同步 */
 setInterval(function(){if(AU&&ADB&&ADB.syncCfg&&!syncing)cloudSync(true);},150000);
+/* 2026-09-26 词卡同步增强：save() 派发 wb-saved → 防抖2.5s doPush ⇒ 翻词后约3.5s上云。
+   doPush 内部有 SIG 签名去重（无变化直接 return），重复调用无副作用。 */
+var _wbSavePushT;
+document.addEventListener('wb-saved',function(){
+  if(!AU||!ADB||!ADB.syncCfg||syncing)return;
+  clearTimeout(_wbSavePushT);
+  _wbSavePushT=setTimeout(function(){try{doPush();}catch(e){}},2500);
+});
 document.addEventListener('visibilitychange',function(){
   if(!AU||!ADB||!ADB.syncCfg)return;
   if(document.hidden){
