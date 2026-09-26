@@ -16891,7 +16891,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v31-2026092618';
+    var swVer = 'v32-2026092619';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16928,7 +16928,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v31-2026092618';
+    return 'v32-2026092619';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -17411,7 +17411,21 @@ function mergeWbSnapshot(remote){
   // 错题集：并集合并 + 删除墓碑（跨设备增删同步）
   mergeErrorsFromRemote(remote);
   // 阅读进度：合并
-  if(remote.readingProgress)Object.keys(remote.readingProgress).forEach(function(k){ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k];});
+    // v32：阅读进度 per-article 合并——read 取或、quiz 缓存补空、quizAnswers 按题并集（已答保留）
+  if(remote.readingProgress&&typeof remote.readingProgress==='object'){
+    ST.readingProgress=ST.readingProgress||{};
+    Object.keys(remote.readingProgress).forEach(function(k){
+      var rv=remote.readingProgress[k];if(!rv||typeof rv!=='object')return;
+      var lv=ST.readingProgress[k];
+      if(!lv||typeof lv!=='object'){ST.readingProgress[k]=rv;return;}
+      if(rv.read)lv.read=true;
+      if(Array.isArray(rv.quiz)&&rv.quiz.length&&!Array.isArray(lv.quiz))lv.quiz=rv.quiz;
+      if(rv.quizAnswers&&typeof rv.quizAnswers==='object'){
+        lv.quizAnswers=lv.quizAnswers||{};
+        Object.keys(rv.quizAnswers).forEach(function(qk){if(lv.quizAnswers[qk]===undefined)lv.quizAnswers[qk]=rv.quizAnswers[qk];});
+      }
+    });
+  }
   if(remote.streak>ST.streak)ST.streak=remote.streak;
   if(remote.totalStudy>ST.totalStudy)ST.totalStudy=remote.totalStudy;
   _mergeGrammarDone(remote);
@@ -17455,12 +17469,20 @@ function mergeWbSnapshot(remote){
   // 周计划总览/每周目标：时间戳 LWW（本机编辑 Ts 更大则保留本地，远端更新则采用远端）——修复"编辑后刷新/跨设备被旧值覆盖"
   if(remote.weeklyPlan && typeof remote.weeklyPlan==='object' && (remote.weeklyPlanTs||0) >= (ST.weeklyPlanTs||0)){ ST.weeklyPlan = remote.weeklyPlan; ST.weeklyPlanTs = remote.weeklyPlanTs||ST.weeklyPlanTs; }
   if(remote.weeklyGoals && typeof remote.weeklyGoals==='object' && (remote.weeklyGoalsTs||0) >= (ST.weeklyGoalsTs||0)){ ST.weeklyGoals = remote.weeklyGoals; ST.weeklyGoalsTs = remote.weeklyGoalsTs||ST.weeklyGoalsTs; }
-  // 用户写作内容 writing_0~N：本地优先（本地已写保留，远端有且本地空则采用），跨设备同步作文
+  // v32：写作文本跨设备合并——本地空采纳远端；两边都写取更长（更多产出者赢）
   Object.keys(remote).forEach(function(k){
     if(k.indexOf('writing_')===0 && typeof remote[k]==='string' && remote[k].trim()){
-      if(!ST[k] || !String(ST[k]||'').trim()) ST[k] = remote[k];
+      var _lw=String(ST[k]||'').trim();
+      if(!_lw) ST[k] = remote[k];
+      else if(_lw.length < String(remote[k]).trim().length) ST[k] = remote[k];
     }
   });
+  // v32：仪表盘待办 tasks：按 text 并集合并，done 取或（跨设备勾选互通）
+  if(Array.isArray(remote.tasks)&&remote.tasks.length){
+    if(!Array.isArray(ST.tasks))ST.tasks=[];
+    var _tkSeen={};ST.tasks.forEach(function(t){if(t&&t.text)_tkSeen[t.text]=t;});
+    remote.tasks.forEach(function(t){if(!t||!t.text)return;var lt=_tkSeen[t.text];if(!lt){ST.tasks.push(t);_tkSeen[t.text]=t;}else if(t.done)lt.done=true;});
+  }
   // 做题进度 quizHistory：按题目内容唯一键并集合并（ts LWW），跨设备累计已做数 + 保留答案
   if(remote.quizHistory && typeof remote.quizHistory==='object'){
     ST.quizHistory = ST.quizHistory || {};
@@ -18036,7 +18058,7 @@ window.addEventListener('storage',function(e){
 /* 周期 & 事件触发的云同步 */
 /* v30 live-follow：词卡页打开时 30s 跟随拉取（另一设备翻词本页 30s 内跟上）；其他页面维持 150s 节奏。busy 时由下一跳自愈，不再永久丢拍 */
 var _pollTick=0;
-setInterval(function(){if(!AU||!ADB||!ADB.syncCfg||syncing)return;_pollTick++;if((typeof currentPage!=='undefined'&&(currentPage==='flash'||currentPage==='quiz'))||_pollTick%5===0)cloudSync(true);},30000); /* v31: 题库页也快跟随 */
+setInterval(function(){if(!AU||!ADB||!ADB.syncCfg||syncing)return;_pollTick++;if((typeof currentPage!=='undefined'&&(currentPage==='flash'||currentPage==='quiz'||currentPage==='errors'))||_pollTick%5===0)cloudSync(true);},30000); /* v31: 题库页也快跟随 */
 /* 2026-09-26 词卡同步增强：save() 派发 wb-saved → 防抖2.5s doPush ⇒ 翻词后约3.5s上云。
    doPush 内部有 SIG 签名去重（无变化直接 return），重复调用无副作用。 */
 var _wbSavePushT;
