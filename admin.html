@@ -1405,6 +1405,9 @@ window.addEventListener('message',function(ev){
           lResult = await callSieleAuth({action:'pushLearningSession', sessionToken: lToken,
             revision: Number((ev.data.params && ev.data.params.revision) || 0),
             payload: (ev.data.params && ev.data.params.payload) || {}});
+        } else if(lAct==='getUserFlags'){
+          // v36 用户功能授权：工作台登录用户自查 背题/DELE专项/外刊精炼 授权
+          lResult = await callSieleAuth({action:'getUserFlags', sessionToken: lToken});
         } else {
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }
@@ -2520,10 +2523,18 @@ async function renderAdminUsers(){
           actions='<button class="btn xs t" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\'active\')">启用</button>';
         }
       }
+      var userFlagsCell='<span style="font-size:11px;color:var(--soft)">管理员全量</span>';
+      if(!isAdmin){
+        userFlagsCell=USER_FLAG_DEFS.map(function(f){
+          var on=!!u[f.key];
+          return '<button class="btn xs '+(on?'t':'gh')+'" style="margin:1px 3px 1px 0" title="'+(on?'点击关闭':'点击开通')+'" onclick="adminToggleUserFlag(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\''+f.key+'\','+(!on)+')">'+f.label+(on?' ✓':' —')+'</button>';
+        }).join('');
+      }
       return '<tr>'
         +'<td style="font-weight:600">'+esc(u.username)+'</td>'
         +'<td>'+roleBadge+'</td>'
         +'<td>'+statusBadge+'</td>'
+        +'<td style="white-space:nowrap">'+userFlagsCell+'</td>'
         +'<td style="font-size:11px;color:var(--soft)">🔒 已加密</td>'
         +'<td style="font-size:11px;color:var(--soft)">'+esc(u.inviteCode||'—')+'</td>'
         +'<td style="font-size:11px;color:var(--soft)">'+fmtDT(u.createdAt)+'</td>'
@@ -2538,6 +2549,7 @@ async function renderAdminUsers(){
       +'<th style="text-align:left;padding:10px 12px">用户名</th>'
       +'<th style="text-align:left;padding:10px 12px">角色</th>'
       +'<th style="text-align:left;padding:10px 12px">状态</th>'
+      +'<th style="text-align:left;padding:10px 12px">功能授权</th>'
       +'<th style="text-align:left;padding:10px 12px">密码</th>'
       +'<th style="text-align:left;padding:10px 12px">邀请码</th>'
       +'<th style="text-align:left;padding:10px 12px">注册时间</th>'
@@ -2592,6 +2604,25 @@ async function adminToggleUserStatus(uid,username,status){
     broadcastUserStatusChange(uid, username, status);
   }catch(err){
     toast(label+'失败：'+(err.message||err),'err');
+  }
+}
+// v36 用户功能授权（背题/DELE专项/外刊精炼）：管理员在用户管理中按用户开通
+var USER_FLAG_DEFS=[
+  {key:'quizBackEnabled',label:'背题'},
+  {key:'deleSpecialEnabled',label:'专项'},
+  {key:'refinePackEnabled',label:'外刊'}
+];
+async function adminToggleUserFlag(uid,username,key,enabled){
+  var def=USER_FLAG_DEFS.find(function(f){return f.key===key;})||{label:key};
+  var ses=cloudSession();
+  var fl={}; fl[key]=enabled;
+  try{
+    var result=await callSieleAuth({action:'adminSetUserFlags',sessionToken:ses.sessionToken,uid:uid,flags:fl});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    toast(enabled?('已为「'+username+'」开通'+def.label):('已关闭「'+username+'」的'+def.label),'ok');
+    renderAdminUsers();
+  }catch(err){
+    toast('授权操作失败：'+(err.message||err),'err');
   }
 }
 async function adminRevokeTokens(uid,username){
