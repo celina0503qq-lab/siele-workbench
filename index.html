@@ -3858,6 +3858,12 @@ function renderQuiz(){
     <button class="btn sm" onclick="restartQuiz()">重新开始</button>
   </div>`;
 
+  // 题库搜索（v34：跳转式，复用语法库搜索交互与样式）
+  h += `<div class="search-wrap" style="margin-top:8px">
+    <div class="sb" style="margin-bottom:0"><input id="quizSearchInput" placeholder="🔍 搜索题目：题干/选项/解析关键词..." autocomplete="off" oninput="_quizSearch(this.value)"></div>
+    <div class="search-drop" id="quizSearchDrop"></div>
+  </div>`;
+
   h += `<div class="qb" id="quizBox"></div>`;
   return h;
 }
@@ -4047,6 +4053,90 @@ function renderQuizQuestion(){
 function typeLabel(t){ return {reading:'阅读',grammar:'语法',listening:'听力',word:'词汇'}[t]||t; }
 
 let _quizAnswered = false;
+// ===== 题库搜索（v34）：定位用 quizQuestionKey —— session 是筛选+shuffle 子集，quizIdx ≠ QDATA 索引 =====
+window._quizSearch = function(q){
+  const drop = document.getElementById('quizSearchDrop');
+  if(!drop) return;
+  q = (q || '').trim().toLowerCase();
+  if(!q){ drop.style.display = 'none'; drop.innerHTML = ''; return; }
+  const hits = [];
+  for(var i=0;i<QDATA.length;i++){
+    var it = QDATA[i];
+    var hay = ((it.q||'') + ' ' + (it.opts||[]).join(' ') + ' ' + (it.fb||'')).toLowerCase();
+    if(hay.indexOf(q) >= 0) hits.push({ idx:i, it:it });
+    if(hits.length >= 50) break;
+  }
+  if(!hits.length){
+    drop.style.display = 'block';
+    drop.innerHTML = '<div class="search-empty">未找到匹配题目' + (QDATA.length < 5000 ? '（题库仍在加载中，可稍后重试）' : '') + '</div>';
+    return;
+  }
+  drop.style.display = 'block';
+  drop.innerHTML = hits.slice(0, 20).map(function(h){
+    return '<div class="si" onclick="_quizJumpTo('+h.idx+')">'+
+      '<span class="tm l'+h.it.lvl+'" style="flex-shrink:0">'+h.it.lvl+'</span>'+
+      '<span class="st"><b>'+h.it.ex.toUpperCase()+'</b> '+typeLabel(h.it.type)+' · '+esc((h.it.q||'').slice(0,60))+'</span></div>';
+  }).join('');
+};
+window._quizJumpTo = function(qdataIdx){
+  const drop = document.getElementById('quizSearchDrop');
+  if(drop){ drop.style.display = 'none'; }
+  const target = QDATA[qdataIdx];
+  if(!target) return;
+  const key = quizQuestionKey(target);
+  let pos = _quizFindInSession(key);
+  if(pos < 0){
+    // 目标被当前筛选排除 ⇒ 联动筛选器重建 session（复用现有重建+游标/快照恢复逻辑）
+    try{
+      if(document.getElementById('qEx')) document.getElementById('qEx').value = target.ex;
+      if(document.getElementById('qLvl')) document.getElementById('qLvl').value = target.lvl;
+      if(document.getElementById('qType')) document.getElementById('qType').value = target.type;
+    }catch(e){}
+    ST.quizFilter = { ex:target.ex, lvl:target.lvl, type:target.type, order:(ST.quizFilter&&ST.quizFilter.order)||'shuffle' };
+    buildQuizSession();
+    pos = _quizFindInSession(key);
+    if(pos < 0) return;
+  }
+  ST.quizIdx = pos;
+  // 顺序模式：仅"向后跳"推进游标（v31 max-next 语义，向前跳被 max 自然挡住）
+  if(ST.quizFilter.order === 'order'){
+    if(!ST.quizOrderPos) ST.quizOrderPos = {};
+    var ok = _quizFilterKey();
+    var prev = ST.quizOrderPos[ok];
+    var fwd = Math.max(pos+1, (prev && typeof prev.next === 'number') ? prev.next : 0);
+    ST.quizOrderPos[ok] = { next: fwd, ts: Date.now() };
+  }
+  save();
+  renderQuizQuestion();
+  setTimeout(function(){
+    var box = document.getElementById('quizBox');
+    if(!box) return;
+    box.classList.remove('search-flash'); void box.offsetWidth;
+    box.classList.add('search-flash');
+    setTimeout(function(){ box.classList.remove('search-flash'); }, 1800);
+    try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+  }, 80);
+};
+function _quizFindInSession(key){
+  if(!ST.quizSession) return -1;
+  for(var i=0;i<ST.quizSession.length;i++){
+    if(quizQuestionKey(ST.quizSession[i]) === key) return i;
+  }
+  return -1;
+}
+// 题库键盘导航（v34）：←/→ 前后翻题；焦点在输入控件、弹层打开或非题库视图时不拦截
+document.addEventListener('keydown', function(e){
+  var tg = e.target;
+  if(tg && /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName)) return;
+  if(tg && tg.isContentEditable) return;
+  if(typeof _syncOverlay !== 'undefined' && _syncOverlay) return;
+  var so = document.getElementById('syncOverlay');
+  if(so && so.style.display !== 'none') return;
+  if(!document.getElementById('quizBox') || !document.getElementById('qEx')) return;
+  if(e.key === 'ArrowLeft'){ prevQuiz(); }
+  else if(e.key === 'ArrowRight'){ nextQuiz(); }
+});
+
 let _quizOpts = [];
 // 题目内容唯一键：跨设备一致（与题号无关，解决 A/B 设备题目顺序不一致问题）
 function quizQuestionKey(q){
@@ -16893,7 +16983,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v33-2026092620';
+    var swVer = 'v34-2026092622';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16930,7 +17020,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v33-2026092620';
+    return 'v34-2026092622';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
