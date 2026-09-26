@@ -3912,7 +3912,13 @@ function buildQuizSession(){
     // 顺序模式位置 = 游标 quizOrderPos[组合key].next；无游标时回退 _orderResumeIdx（第一个没做的题）
     var _okey = _quizFilterKey();
     var _opos = ST.quizOrderPos ? ST.quizOrderPos[_okey] : null;
-    ST.quizIdx = (_opos && typeof _opos.next === 'number') ? Math.min(_opos.next, ST.quizSession.length) : _orderResumeIdx(ST.quizSession);
+    if(_quizBackMode()){
+      // v37.1 背题停驻记忆：恢复该组合上次背到的位置（无记忆则从第 1 题开始）；不读不写做题游标
+      var _bpos = _quizBackPosGet(_okey);
+      ST.quizIdx = (_bpos != null) ? Math.min(_bpos, ST.quizSession.length) : 0;
+    } else {
+      ST.quizIdx = (_opos && typeof _opos.next === 'number') ? Math.min(_opos.next, ST.quizSession.length) : _orderResumeIdx(ST.quizSession);
+    }
     ST.quizScore = 0; ST.quizAnswered = 0; ST.quizQuestionState = {};
     // 不写 quizResume（位置靠游标+quizHistory，换设备也能续）
   } else {
@@ -3982,6 +3988,10 @@ function renderQuizQuestion(){
   const box = document.getElementById('quizBox');
   if(!box) return;
   if(ST.quizSession.length === 0){ box.innerHTML = '<div class="empty">没有符合条件的题目，请调整筛选条件</div>'; return; }
+  // v37.1 背题停驻记忆：背题+顺序模式下把当前浏览位写入本机游标（各筛选组合独立；做题模式零改动）
+  if(_quizBackMode() && ST.quizFilter && ST.quizFilter.order === 'order' && ST.quizIdx < ST.quizSession.length){
+    _quizBackPosSet(_quizFilterKey(), ST.quizIdx);
+  }
   if(ST.quizIdx >= ST.quizSession.length){
     if(_quizBackMode()){
       // 背题模式到末尾：不计分、不写 quizResults、不触发打卡，仅重新浏览
@@ -4247,13 +4257,38 @@ window._quizBackToggle = async function(){
       }
     }
     try{ localStorage.setItem('wb_quiz_back_mode_v1','1'); }catch(e){}
-    if(typeof toast==='function') toast('📖 背题模式已开启（不计分、不影响做题进度）','ok');
+    if(typeof toast==='function') toast('📖 背题模式已开启（不计分、不影响做题进度；各等级背题位置自动记忆）','ok');
   }
-  try{ renderMain(); }catch(e){ try{ renderQuizQuestion(); }catch(e2){} }
+  try{
+    if(ST.quizFilter && ST.quizFilter.order === 'order' && typeof resetQuiz === 'function'){ resetQuiz(); }
+    else { renderMain(); }
+  }catch(e){ try{ renderQuizQuestion(); }catch(e2){} }
 };
 window._quizBackRestart = function(){
   ST.quizIdx = 0;
   renderQuizQuestion();
+};
+
+// v37.1 背题停驻记忆：独立本机键 wb_quiz_back_pos_v1（与背题开关同策略：不进 ST、不进云同步），按筛选组合分桶。
+// 只在背题模式下读写，做题游标 quizOrderPos 零改动。
+window._quizBackPosGet = function(k){
+  try{
+    var o = JSON.parse(localStorage.getItem('wb_quiz_back_pos_v1')||'{}');
+    var v = o && o[k];
+    return (v && typeof v.next === 'number') ? v.next : null;
+  }catch(e){ return null; }
+};
+window._quizBackPosSet = function(k, idx){
+  try{
+    var o = JSON.parse(localStorage.getItem('wb_quiz_back_pos_v1')||'{}');
+    o[k] = { next: idx, ts: Date.now() };
+    var ks = Object.keys(o);
+    if(ks.length > 40){
+      ks.sort(function(a,b){ return (o[a].ts||0) - (o[b].ts||0); });
+      while(ks.length > 40) delete o[ks.shift()];
+    }
+    localStorage.setItem('wb_quiz_back_pos_v1', JSON.stringify(o));
+  }catch(e){}
 };
 
 let _quizOpts = [];
@@ -17103,7 +17138,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v37-2026092700';
+    var swVer = 'v37-2026092701';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17140,7 +17175,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v37-2026092700';
+    return 'v37-2026092701';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
