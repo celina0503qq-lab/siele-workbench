@@ -31,6 +31,17 @@ self.addEventListener('activate', e => {
   })());
 });
 
+/* 2026-09-26 新增：响应页面版本自检 —— 回传本 SW 的缓存版本，
+   供 index.html 与页面内联 swVer 比对，不一致时弹「检测到新版本」横幅。
+   ⚠️ 铁律：本文件的 CACHE 与 index.html 内联的 swVer 必须同步修改。 */
+self.addEventListener('message', e => {
+  try {
+    if (e.data && e.data.type === 'SW_VER' && e.ports && e.ports[0]) {
+      e.ports[0].postMessage({ type: 'SW_VER_RESULT', ver: CACHE });
+    }
+  } catch (err) { /* 忽略 */ }
+});
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
