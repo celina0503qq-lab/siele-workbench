@@ -1703,10 +1703,10 @@ const NAV = [
     {id:'planner', icon:'📅', label:'学习计划'},
     {id:'errors', icon:'🚨', label:'错题集'},
     {id:'reading', icon:'📰', label:'外刊阅读'},
-    {id:'refine', icon:'📚', label:'外刊精炼'},
+    {id:'refine', icon:'📚', label:'外刊精炼', reqFlag:'refinePack'},
   ]}, /* FEAT-1: 考试结构移除独立页面,并入仪表盘 */
   {s:'DELE专项', items:[
-    {id:'dele', icon:'📝', label:'DELE专项'},
+    {id:'dele', icon:'📝', label:'DELE专项', reqFlag:'deleSpecial'},
   ]},
 ];
 
@@ -1728,13 +1728,15 @@ function renderNav(){
   let isAdmin = false;
   try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && _ses.role === 'admin'); } catch(e) {}
   let h = '';
+  try{ if(typeof window._wbFlagsFetch==='function') window._wbFlagsFetch(false); }catch(e){}
   NAV.forEach(sec => {
     const visibleItems = sec.items.filter(it => !it.adminOnly || isAdmin);
     if (!visibleItems.length) return; // 整组都不可见则整组跳过
     h += `<div class="ns">${sec.s}</div>`;
     visibleItems.forEach(it => {
       const on = navOnId === it.id ? ' on' : '';
-      h += `<button class="ni${on}" onclick="go('${it.id}')"><span class="ic">${it.icon}</span>${it.label}</button>`;
+      const locked = it.reqFlag && !(typeof window._wbFlagsAllowed === 'function' && window._wbFlagsAllowed(it.reqFlag));
+      h += `<button class="ni${on}" onclick="go('${it.id}')"><span class="ic">${it.icon}</span>${it.label}${locked?' 🔒':''}</button>`;
     });
   });
   nav.innerHTML = h;
@@ -1755,6 +1757,15 @@ function go(page){
   let isAdmin = false;
   try { var _raw2 = localStorage.getItem('swa_cloud_session_v1'); var _ses2 = _raw2 ? JSON.parse(_raw2) : null; isAdmin = !!(_ses2 && _ses2.role === 'admin'); } catch(e) {}
   // DELE 专项已对所有用户开放（2026-08-11 移除 adminOnly 限制）
+  // v36 功能授权守卫：未授权页面跳回仪表盘并提示（管理员全量放行，由 _wbFlagsAllowed 内部判断）
+  try{
+    var _pg=String(page);
+    var _need=_pg==='refine'?'refinePack':(/^dele/.test(_pg)?'deleSpecial':null);
+    if(_need && typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed(_need)){
+      if(typeof toast==='function') toast('🔒 该功能未开通，请联系管理员在后台授权','err');
+      currentPage='dash'; renderNav(); renderMain(); window.scrollTo(0,0); return;
+    }
+  }catch(e){}
   currentPage = page;
   // 已登录则自动隐藏覆盖层 (P0 fix: overlay blocks all button clicks if not hidden)
   try {
@@ -1796,14 +1807,18 @@ function renderMain(){
     case 'netdisk': h += renderNetdisk(); break;
     case 'errors': h += renderErrors(); break;
     case 'reading': h += renderReading(); break;
-    case 'refine': h += renderRefine(); break;
-    case 'dele': h += renderDeleHub(); break;
+    case 'refine': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('refinePack')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderRefine(); break;
+    case 'dele': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('deleSpecial')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderDeleHub(); break;
     case 'deleA1': case 'deleA2': case 'deleB1': case 'deleB2':
-      h += renderDeleHub(currentPage.replace('dele',''));
+      h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('deleSpecial')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderDeleHub(currentPage.replace('dele',''));
       break;
     // DELE 子页面兜底: dele<level>_<task> 形式 (阅读/听力/写作/口语/全真模拟)
     default:
       if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
+        if (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('deleSpecial')) {
+          h += (typeof window._renderNoAccess==='function'?window._renderNoAccess():'');
+          break;
+        }
         var _dm = currentPage.match(/^dele(A[12]|B[12])_(.+)$/);
         if (_dm) {
           var _lvl = _dm[1], _task = _dm[2];
@@ -3855,7 +3870,7 @@ function renderQuiz(){
       <option value="word">词汇</option>
     </select>
     <button class="btn sm" id="qOrder" onclick="toggleQuizOrder()">🔀 随机</button>
-    <button class="btn sm" id="quizBackBtn" onclick="_quizBackToggle()">${_quizBackMode()?'📖 背题模式已开启（点击退出）':'🔓 背题模式'}</button>
+    <button class="btn sm" id="quizBackBtn" onclick="_quizBackToggle()">${_quizBackMode()?'📖 背题模式已开启（点击退出）':((typeof window._wbFlagsAllowed==='function'&&window._wbFlagsAllowed('quizBack'))?'🔓 背题模式':'🔒 背题模式')}</button>
     <button class="btn sm" onclick="restartQuiz()">重新开始</button>
   </div>`;
 
@@ -4168,20 +4183,69 @@ document.addEventListener('keydown', function(e){
   else if(e.key === 'ArrowRight'){ nextQuiz(); }
 });
 
-// ===== 背题模式（v35）：开关走独立 localStorage 键（不进 ST ⇒ 不进云同步快照）；浏览不写任何进度 =====
-var QUIZ_BACK_CODE = 'SIELE-BACK-2026';
+// ===== 用户功能授权（v36）：管理员在后台按用户开通 背题/DELE专项/外刊精炼；管理员角色全量放行 =====
+// 授权缓存走独立 localStorage 键 wb_menu_flags_v1（不进 ST ⇒ 不进云同步快照）；60s 节流刷新
+window._wbFlags = { quizBack:false, deleSpecial:false, refinePack:false };
+window._wbFlagsLastChk = 0;
+window._wbFlagsLoad = function(){
+  try{
+    var d = JSON.parse(localStorage.getItem('wb_menu_flags_v1')||'{}');
+    window._wbFlags.quizBack = !!d.quizBack; window._wbFlags.deleSpecial = !!d.deleSpecial; window._wbFlags.refinePack = !!d.refinePack;
+  }catch(e){}
+};
+window._wbFlagsLoad();
+window._wbIsAdmin = function(){
+  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
+};
+window._wbFlagsAllowed = function(k){
+  if(window._wbIsAdmin()) return true;
+  return !!window._wbFlags[k];
+};
+window._renderNoAccess = function(){
+  return '<div class="card" style="text-align:center;padding:40px 20px"><div style="font-size:40px">🔒</div><h3 style="margin:10px 0">功能未开通</h3><p style="color:var(--soft);font-size:13px">该功能需管理员授权后使用，请联系管理员在后台「用户管理」中为你开通。</p></div>';
+};
+window._wbFlagsFetch = async function(force){
+  var ses = null;
+  try{ ses = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+  if(!ses || !ses.sessionToken) return false;
+  var t = Date.now();
+  if(!force && t - (window._wbFlagsLastChk||0) < 60000) return true;
+  window._wbFlagsLastChk = t;
+  try{
+    if(typeof window._deleCloudCall !== 'function') return false;
+    var r = await window._deleCloudCall('getUserFlags', {sessionToken: ses.sessionToken});
+    if(!(r && r.ok)) return false;
+    var prev = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0);
+    window._wbFlags.quizBack = !!r.quizBackEnabled; window._wbFlags.deleSpecial = !!r.deleSpecialEnabled; window._wbFlags.refinePack = !!r.refinePackEnabled;
+    try{ localStorage.setItem('wb_menu_flags_v1', JSON.stringify({quizBack:window._wbFlags.quizBack?1:0, deleSpecial:window._wbFlags.deleSpecial?1:0, refinePack:window._wbFlags.refinePack?1:0})); }catch(e){}
+    var cur = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0);
+    if(cur !== prev){ // 授权变化：刷新导航（锁标）与当前页（守卫）
+      try{ renderNav(); }catch(e){}
+      try{ renderMain(); }catch(e){}
+    }
+    return true;
+  }catch(e){ return false; }
+};
+// ===== 背题模式（v36 云端授权制）：开关仍走独立 localStorage 键 wb_quiz_back_mode_v1；浏览不写任何进度 =====
 window._quizBackMode = function(){
+  if(!window._wbFlagsAllowed('quizBack')) return false;
   try{ return localStorage.getItem('wb_quiz_back_mode_v1') === '1'; }catch(e){ return false; }
 };
-window._quizBackToggle = function(){
-  if(_quizBackMode()){
+window._quizBackToggle = async function(){
+  if(window._quizBackMode()){
     try{ localStorage.removeItem('wb_quiz_back_mode_v1'); }catch(e){}
     if(typeof toast==='function') toast('📖 已退出背题模式','ok');
   }else{
-    var code = null;
-    try{ code = prompt('请输入背题授权码：'); }catch(e){}
-    if(code === null) return;
-    if(String(code).trim() !== QUIZ_BACK_CODE){ if(typeof toast==='function') toast('⚠️ 授权码不正确','err'); return; }
+    if(!window._wbIsAdmin()){
+      var ses = null;
+      try{ ses = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+      if(!ses || !ses.sessionToken){ if(typeof toast==='function') toast('🔐 背题模式需要登录后由管理员开通，请先登录','err'); return; }
+      var fetched = await window._wbFlagsFetch(true);
+      if(!fetched || !window._wbFlagsAllowed('quizBack')){
+        if(typeof toast==='function') toast('⚠️ 管理员尚未为你的账号开通背题权限，请在后台联系管理员','err');
+        return;
+      }
+    }
     try{ localStorage.setItem('wb_quiz_back_mode_v1','1'); }catch(e){}
     if(typeof toast==='function') toast('📖 背题模式已开启（不计分、不影响做题进度）','ok');
   }
@@ -14178,6 +14242,7 @@ window._deleAdminApplyEdits = function(){
   }
 };
 setTimeout(function(){ window._deleAdminFetchFromCloud(); }, 800);
+setTimeout(function(){ try{ window._wbFlagsFetch(true); }catch(e){} }, 1000);
 
 // ===== 管理员选项编辑器 (增删选项) =====
 window._deleAdminNextOptKey = function(existing){
@@ -17038,7 +17103,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v35-2026092623';
+    var swVer = 'v36-2026092700';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17075,7 +17140,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v35-2026092623';
+    return 'v36-2026092700';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18180,6 +18245,7 @@ function activate(){
   if(ADB.syncCfg)setTimeout(function(){cloudSync(true);},800);
   // 登录成功后拉取管理员编辑 (跨设备同步)
   try{if(typeof window._deleAdminFetchFromCloud==='function')setTimeout(function(){window._deleAdminFetchFromCloud();},1200);}catch(e){}
+  try{if(typeof window._wbFlagsFetch==='function')setTimeout(function(){window._wbFlagsFetch(true);},1500);}catch(e){}
   // 登录后拉取写作/口语管理员内容编辑 + 迁移用户写作数据到稳定 id 键
   try{migrateWritingKeys();}catch(e){}
   try{
