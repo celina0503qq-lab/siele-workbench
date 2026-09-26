@@ -16891,7 +16891,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v27-2026092613';
+    var swVer = 'v28-2026092614';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16928,7 +16928,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v27-2026092613';
+    return 'v28-2026092614';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18039,6 +18039,7 @@ document.addEventListener('wb-saved',function(){
   clearTimeout(_wbSavePushT);
   _wbSavePushT=setTimeout(function(){try{doPush();}catch(e){}},2500);
 });
+var _visRePullT;
 document.addEventListener('visibilitychange',function(){
   if(!AU||!ADB||!ADB.syncCfg)return;
   if(document.hidden){
@@ -18047,6 +18048,11 @@ document.addEventListener('visibilitychange',function(){
     try{cloudSync(true);}catch(e){}
   }else{
     cloudSync(true);
+    /* 2026-09-26 v28 竞态收尾：切回标签页的首次 pull 可能抢在另一设备 push 之前
+       （hidden→push 与 visible→pull 并发，pull 通常更快）⇒ 8s 后补拉一次，
+       确保拿到对方刚推的数据。syncing 防重入、pull 幂等，重复触发无副作用。 */
+    clearTimeout(_visRePullT);
+    _visRePullT=setTimeout(function(){ if(AU&&ADB&&ADB.syncCfg&&!syncing)cloudSync(true); },8000);
   }
 });
 window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(true);});
