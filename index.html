@@ -17103,7 +17103,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v36-2026092700';
+    var swVer = 'v37-2026092700';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17140,7 +17140,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v36-2026092700';
+    return 'v37-2026092700';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -17915,6 +17915,8 @@ function closeAdminPanel(){
 window.addEventListener('message',function(ev){
   if(ev.origin!==location.origin)return;
   if(ev.data&&ev.data.type==='siele-close-admin'){closeAdminPanel();activate();return;}
+  // 2026-09-27 v37 会话打通：后台管理退出登录时联动清工作台会话并弹登录罩
+  if(ev.data&&ev.data.type==='siele-workbench-logout'){wbLogout(true);return;}
   // 管理员在 admin iframe 主动推送的用户状态变更（停用/启用）——不等下一次 API 调用就立即处理。
   if(ev.data&&ev.data.type==='siele-user-status-changed'){
     var u=ev.data.username||'';
@@ -18021,6 +18023,21 @@ function handleCloudKick(message){
     pField.classList.add('invalid');
   }
 }
+
+// 2026-09-27 v37 会话打通：工作台主动退出登录（保留本机学习数据与云同步配置，仅清会话态）。
+// 触发路径：① 仪表盘「🚪 退出登录」按钮；② admin iframe 退出时经 'siele-workbench-logout' 联动（silent）。
+function wbLogout(silent){
+  if(!AU)return;
+  if(!silent&&!confirm('确定退出登录「'+AU+'」？\n本机学习数据会保留，重新登录后可继续。'))return;
+  closeAdminPanel();
+  try{localStorage.removeItem(LSS);}catch(e){}
+  try{localStorage.removeItem('swa_cloud_session_v1');}catch(e){}
+  try{localStorage.removeItem('wb_menu_flags_v1');}catch(e){}
+  AU=null;ADB=null;
+  setChip('nologin');
+  showLoginOverlay();
+}
+window.wbLogout=wbLogout;
 
 // 心跳：每 60 秒主动 ping 云端确认当前用户仍处于 active 状态。
 // 这样即使错过了 admin 的 broadcast（网络中断、BroadcastChannel 不可用等），
@@ -18144,6 +18161,7 @@ function todoCardHtml(){
       .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
     // 附加云同步入口（弹窗而非路由跳转）
     quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="云同步 · 学习数据/做题记录跨设备同步">☁️ 云同步</button>';
+    quick += '<button class="btn sm ol" onclick="wbLogout()" title="退出当前账号 · 本机学习数据保留">🚪 退出登录</button>';
     var lis=tasks.map(function(t,i){
       return '<li class="'+(t.done?'done':'')+'" style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,.06)'+(t.done?';opacity:.55':'')+'">'+
         '<input type="checkbox" '+(t.done?'checked':'')+' onchange="toggleDailyTodo('+i+')">'+
@@ -18169,6 +18187,7 @@ function todoCardHtml(){
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图'],['reading','📰','外刊'],['dele','📝','DELE']]
       .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
     quick += '<button class=\"btn sm ol\" onclick=\"openSyncSettings()\" title=\"GitHub Gist 云同步\">☁️ 云同步</button>';
+    quick += '<button class=\"btn sm ol\" onclick=\"wbLogout()\" title=\"退出当前账号\">🚪 退出登录</button>';
     return '<div class=\"g g2\"><div class=\"card\"><h3><span class=\"ic\">⚡</span>快捷操作</h3><div class=\"quick-grid\">'+quick+'</div></div></div>';
   }
 }
