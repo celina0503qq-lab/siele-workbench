@@ -5762,9 +5762,9 @@ function _bankAdminTools(){
 }
 let _sieleOralTarea=1,_sieleOralIdx=0,_sieleOralRecognition=null,_sieleOralRecording=false,_sieleOralShown=false,_sieleOralTimer=null,_sieleOralLeft=0,_sieleOralTranscript='';
 function getSieleOralItem(){var bank=getSieleOralBank()[_sieleOralTarea]||[];if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
-function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=getSieleOralBank()[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
-function randomSieleOral(){var b=getSieleOralBank()[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}var x=b[_sieleOralIdx];if(x&&x.topic){ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=x.topic;save();}_sieleOralShown=false;stopSieleOral(true);renderMain();}
-function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;save();renderMain();}}
+function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;ST.sieleOralProgressTs=Date.now();if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=getSieleOralBank()[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
+function randomSieleOral(){var b=getSieleOralBank()[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}var x=b[_sieleOralIdx];if(x&&x.topic){ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=x.topic;ST.sieleOralProgressTs=Date.now();save();}_sieleOralShown=false;stopSieleOral(true);renderMain();}
+function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;ST.sieleOralProgressTs=Date.now();save();renderMain();}}
 function playSielePrompt(){var x=getSieleOralItem();if(x)speak(x.q,null,'es');}
 function revealSielePrompt(){_sieleOralShown=true;var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.textContent=(getSieleOralItem()||{}).q||'';}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
 function startSieleTimer(sec){clearInterval(_sieleOralTimer);_sieleOralLeft=sec||60;var el=document.getElementById('soTimer');function paint(){if(el)el.textContent=String(Math.floor(_sieleOralLeft/60)).padStart(2,'0')+':'+String(_sieleOralLeft%60).padStart(2,'0');}paint();_sieleOralTimer=setInterval(function(){_sieleOralLeft--;paint();if(_sieleOralLeft<=0){clearInterval(_sieleOralTimer);if(_sieleOralRecording)stopSieleOral();}},1000);}
@@ -17164,7 +17164,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     if(rm.pomodoro&&typeof rm.pomodoro.completed==='number'&&ST.pomodoro)
@@ -17312,9 +17312,20 @@ function doPush(){
 // 导致错题集/打卡/口语评分等被另一端旧数据整体冲掉。
 function mergeWbSnapshot(remote){
   if(!remote || typeof remote!=='object') return;
-  // 词卡浏览位置：本地优先（不打断当前会话），本地为空才采用远端
-  if(['all','A1','A2','B1','B2'].indexOf(remote.flashLevel)>=0 && !ST.flashLevel) ST.flashLevel=remote.flashLevel;
-  if(typeof remote.flashCurrentWord==='string' && remote.flashCurrentWord && !ST.flashCurrentWord) ST.flashCurrentWord=remote.flashCurrentWord;
+  // 词卡浏览位置（2026-09-26 修复跨设备不同步）：改用 flashLastPositionTs 时间戳仲裁（题库 quizOrderPos 同款 ts-LWW）。
+  // 旧规则"本地优先，本地为空才采用远端"⇒ 本地学过一张卡后永不为空 ⇒ 当前单词从不跨设备同步
+  // （Chrome/Edge/手机各显示各自最后翻到的词）。现在：另一台设备更晚翻过页（.all 时间戳更新）才采纳
+  // 其当前词/等级/该级别游标；自己 push 后回拉 ts 相同不采纳 ⇒ 不打断当前会话。
+  var _rFlashTs=(remote.flashLastPositionTs&&typeof remote.flashLastPositionTs==='object')?(Number(remote.flashLastPositionTs.all)||0):0;
+  var _lFlashTs=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs.all)||0):0;
+  if(_rFlashTs>_lFlashTs && typeof remote.flashCurrentWord==='string' && remote.flashCurrentWord){
+    if(typeof remote.flashLevel==='string'&&['all','A1','A2','B1','B2','专四'].indexOf(remote.flashLevel)>=0)ST.flashLevel=remote.flashLevel;
+    ST.flashCurrentWord=remote.flashCurrentWord;
+    var _rLv=remote.flashLevel||'all';
+    if(remote.flashIdxByLevel&&typeof remote.flashIdxByLevel==='object'&&remote.flashIdxByLevel[_rLv]!==undefined){
+      ST.flashIdxByLevel=ST.flashIdxByLevel||{};ST.flashIdxByLevel[_rLv]=Number(remote.flashIdxByLevel[_rLv])||0;
+    }
+  }
   // 学习进度：逐级取 max
   if(remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
     ST.flashProgressByLevel=ST.flashProgressByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
@@ -17322,7 +17333,14 @@ function mergeWbSnapshot(remote){
   }
   if(remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
     ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
-    ['A1','A2','B1','B2','all'].forEach(function(lv){var ri=Number(remote.flashIdxByLevel[lv]||0);if(ri>(ST.flashIdxByLevel[lv]||0))ST.flashIdxByLevel[lv]=ri;});
+    // 2026-09-26：改为"该级别翻页时间戳新者赢"（per-level ts-LWW）；老数据无时间戳时保留 max 兜底
+    ['A1','A2','B1','B2','all'].forEach(function(lv){
+      var ri=Number(remote.flashIdxByLevel[lv]||0),li=Number(ST.flashIdxByLevel[lv]||0);
+      var rt=(remote.flashLastPositionTs&&typeof remote.flashLastPositionTs==='object')?(Number(remote.flashLastPositionTs[lv])||0):0;
+      var lt=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs[lv])||0):0;
+      if(rt>lt)ST.flashIdxByLevel[lv]=ri;
+      else if(rt===0&&lt===0&&ri>li)ST.flashIdxByLevel[lv]=ri;
+    });
   }
   if(remote.flashLastPositionTs && typeof remote.flashLastPositionTs==='object'){
     ST.flashLastPositionTs=ST.flashLastPositionTs||{A1:0,A2:0,B1:0,B2:0,all:0};
@@ -17374,6 +17392,11 @@ function mergeWbSnapshot(remote){
     remote.dictationErrorBank.forEach(function(e){if(e&&e.es&&!existEs[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);existEs[e.es+'_'+e.userAnswer]=true;}});
     if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
   }
+  // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
+  if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
+    ST.flashPraStats=ST.flashPraStats||{correct:0,wrong:0,streak:0,bestStreak:0};
+    ['correct','wrong','bestStreak'].forEach(function(k){var rv=Number(remote.flashPraStats[k]||0);if(rv>Number(ST.flashPraStats[k]||0))ST.flashPraStats[k]=rv;});
+  }
   // 掌握度：取 max
   if(remote.vocabMastery){Object.keys(remote.vocabMastery).forEach(function(es){var rm=remote.vocabMastery[es]||0,lm=ST.vocabMastery[es]||0;if(rm>lm){ST.vocabMastery[es]=rm;ST.flashMastery[es]=rm;}});}
   // 测验结果：取更长的
@@ -17387,7 +17410,11 @@ function mergeWbSnapshot(remote){
   _mergeGrammarDone(remote);
   if(remote.shadowScores)Object.keys(remote.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=remote.shadowScores[k];});
   if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(typeof mergeSieleOralScore==='function')mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
-  if(remote.sieleOralProgress)ST.sieleOralProgress=remote.sieleOralProgress;
+  // SIELE 口语进度游标（当前 Tarea/话题）：ts LWW（2026-09-26 修复：原先整体替换 ⇒ 两设备互覆，谁拉取晚听谁的）
+  if(remote.sieleOralProgress&&typeof remote.sieleOralProgress==='object'){
+    var _rOralTs=Number(remote.sieleOralProgressTs||0),_lOralTs=Number(ST.sieleOralProgressTs||0);
+    if(!ST.sieleOralProgress||_rOralTs>_lOralTs){ST.sieleOralProgress=remote.sieleOralProgress;if(_rOralTs)ST.sieleOralProgressTs=_rOralTs;}
+  }
   // 签到：并集去重排序
   if(Array.isArray(remote.checkIns)&&remote.checkIns.length){
     ST.checkIns=ST.checkIns||[];
