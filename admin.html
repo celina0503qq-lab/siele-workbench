@@ -691,11 +691,16 @@ const SIELE_CLOUDBASE_CONFIG={
 };
 window.__sieleCloudBaseReady=(async function(){
   try{
-    if(!window.cloudbase)throw new Error('CloudBase SDK 加载失败');
+    if(!window.cloudbase){
+      var e0=new Error('CloudBase SDK 加载失败（脚本未就绪，可能被网络或加速器拦截）');
+      e0.code='SDK_LOAD_FAILED'; throw e0;
+    }
     window.__sieleCloudBaseApp=window.cloudbase.init(SIELE_CLOUDBASE_CONFIG);
     return window.__sieleCloudBaseApp;
   }catch(error){
     console.error('CloudBase SDK initialization failed',error);
+    // 2026-09-26：给错误打显式标记，让上层能区分"组件没加载"与"网络不通"
+    if(error && !error.code) error.code='SDK_LOAD_FAILED';
     throw error;
   }
 })();
@@ -1047,11 +1052,15 @@ async function doLogin(e,credentials){
   }catch(err){
     console.error('Cloud login failed',err);
     // USER_DISABLED 已经被 callSieleAuth 拦截并触发 forceLogoutByCloud；这里只要把 code 透传给主站
-    const failCode = err && err.code==='USER_DISABLED' ? 'USER_DISABLED' : 'NETWORK_ERROR';
+    // 2026-09-26：把"组件没加载"与"网络不通"分开，否则用户永远只看到一句笼统的失败提示
+    let failCode='NETWORK_ERROR';
+    if(err&&err.code==='USER_DISABLED')failCode='USER_DISABLED';
+    else if(err&&err.code==='SDK_LOAD_FAILED')failCode='SDK_LOAD_FAILED';
     if(credentials&&window.parent&&window.parent!==window){
       window.parent.postMessage({type:'siele-login-failed',code:failCode},location.origin);
     }
     if(failCode==='NETWORK_ERROR')toast('无法连接账号服务，请检查网络或稍后再试','err');
+    else if(failCode==='SDK_LOAD_FAILED')toast('云服务组件加载失败（可能被网络或加速器拦截），请关闭代理/加速器后重试','err');
   }finally{
     if(submit){submit.disabled=false;submit.textContent='登 录';}
   }
@@ -1390,7 +1399,11 @@ window.addEventListener('message',function(ev){
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }
       } catch(e) {
-        lResult = {ok:false, code:'BRIDGE_ERROR', message: (e && e.message) || String(e)};
+        // 2026-09-26：按来源分类回传，不再把四种不同故障压成同一个码
+        var lCode='BRIDGE_ERROR';
+        if(e && e.code==='SDK_LOAD_FAILED') lCode='SDK_LOAD_FAILED';
+        else if(e && (e.name==='TimeoutError' || /timeout|timed out|network|fetch|无法连接/i.test(String(e.message||'')))) lCode='NET_CLIENT_ERROR';
+        lResult = {ok:false, code:lCode, message: (e && e.message) || String(e)};
       }
       try { window.parent.postMessage({type:'siele-learning-result', reqId: lReqId, result: lResult}, location.origin); } catch(e) {}
     })();
