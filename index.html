@@ -3855,6 +3855,7 @@ function renderQuiz(){
       <option value="word">词汇</option>
     </select>
     <button class="btn sm" id="qOrder" onclick="toggleQuizOrder()">🔀 随机</button>
+    <button class="btn sm" id="quizBackBtn" onclick="_quizBackToggle()">${_quizBackMode()?'📖 背题模式已开启（点击退出）':'🔓 背题模式'}</button>
     <button class="btn sm" onclick="restartQuiz()">重新开始</button>
   </div>`;
 
@@ -3940,6 +3941,7 @@ function resetQuiz(){
 }
 // "重新开始"：顺序模式回第 1 题；随机模式清快照重洗牌
 function restartQuiz(){
+  if(_quizBackMode()){ ST.quizIdx = 0; renderQuizQuestion(); return; } // 背题模式：不重置做题游标/快照
   if(ST.quizFilter && ST.quizFilter.order !== 'order' && ST.quizResume) delete ST.quizResume[_quizFilterKey()];
   ST.quizSession = [];
   save();
@@ -3966,6 +3968,15 @@ function renderQuizQuestion(){
   if(!box) return;
   if(ST.quizSession.length === 0){ box.innerHTML = '<div class="empty">没有符合条件的题目，请调整筛选条件</div>'; return; }
   if(ST.quizIdx >= ST.quizSession.length){
+    if(_quizBackMode()){
+      // 背题模式到末尾：不计分、不写 quizResults、不触发打卡，仅重新浏览
+      box.innerHTML = `<div style="text-align:center;padding:20px">
+        <h3 style="font-size:24px;color:var(--tr)">📖 背题浏览完成</h3>
+        <p style="font-size:14px;margin:10px 0">本轮背题不计分、不影响做题进度</p>
+        <button class="btn" onclick="_quizBackRestart()" style="margin-top:8px">再背一轮</button>
+      </div>`;
+      return;
+    }
     const pct = ST.quizAnswered > 0 ? Math.round(ST.quizScore/ST.quizAnswered*100) : 0;
     ST.quizResults.push(pct);
     if(ST.quizResults.length > 20) ST.quizResults.shift();
@@ -3987,6 +3998,30 @@ function renderQuizQuestion(){
 
   const q = ST.quizSession[ST.quizIdx];
   const letters = ['A','B','C','D'];
+  if(_quizBackMode()){
+    // 背题模式：原始顺序展示选项、正确答案标绿、解析直出；不读不写 quizQuestionState/quizHistory/得分
+    let bh = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · <span style="color:#b45309;font-weight:700">📖 背题模式</span></div>`;
+    if(q.type === 'listening'){
+      bh += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\'")}',this)">🔊 点击听音频</button></div>`;
+      bh += `<div class="qq">听音频回答问题</div>`;
+    } else {
+      bh += `<div class="qq"><span class="qes">${esc(q.q)}</span></div>`;
+      if(q.type === 'reading') bh += `<button class="spk" onclick="speak('${q.q.replace(/'/g,"\'")}',this)" style="margin:5px 0">&#128264; 朗读</button>`;
+    }
+    bh += `<div class="qo">`;
+    q.opts.forEach((o,i)=>{
+      bh += `<div class="qopt${i===q.ans?' cor':''}"><span class="L">${letters[i]}</span><span>${esc(o)}</span></div>`;
+    });
+    bh += `</div>`;
+    bh += `<div class="qfb show ok">📖 背题模式 · 正确答案：${(q.ans>=0&&q.ans<4)?letters[q.ans]:''} <b>解析：</b>${linkify(esc(q.fb))}</div>`;
+    bh += `<div class="qnav"><span class="qscore" style="color:#b45309">📖 背题中（不计分）</span>
+      <div class="qnav-btns">
+        <button class="btn sm ol" onclick="prevQuiz()" ${ST.quizIdx===0?'disabled':''}>← 上一题</button>
+        <button class="btn sm" id="nextBtn" onclick="nextQuiz()">${ST.quizIdx===ST.quizSession.length-1?'完成浏览 →':'下一题 →'}</button>
+      </div></div>`;
+    box.innerHTML = bh;
+    return;
+  }
   // 每题的选项顺序和作答结果都保存在当前测验会话中；回看不会打乱选项或重复计分。
   if(!ST.quizQuestionState) ST.quizQuestionState = {};
   let questionState = ST.quizQuestionState[ST.quizIdx];
@@ -4072,10 +4107,12 @@ window._quizSearch = function(q){
     return;
   }
   drop.style.display = 'block';
+  var _bm = _quizBackMode();
   drop.innerHTML = hits.slice(0, 20).map(function(h){
+    var _ans = (h.it.ans != null && h.it.opts && h.it.opts[h.it.ans] != null) ? '<span style="color:#059669;font-weight:700">✓ '+(['A','B','C','D'][h.it.ans]||'')+'·'+esc(h.it.opts[h.it.ans])+'</span>' : '';
     return '<div class="si" onclick="_quizJumpTo('+h.idx+')">'+
       '<span class="tm l'+h.it.lvl+'" style="flex-shrink:0">'+h.it.lvl+'</span>'+
-      '<span class="st"><b>'+h.it.ex.toUpperCase()+'</b> '+typeLabel(h.it.type)+' · '+esc((h.it.q||'').slice(0,60))+'</span></div>';
+      '<span class="st"><b>'+h.it.ex.toUpperCase()+'</b> '+typeLabel(h.it.type)+' · '+esc((h.it.q||'').slice(0,60))+(_bm?' '+_ans:'')+'</span></div>';
   }).join('');
 };
 window._quizJumpTo = function(qdataIdx){
@@ -4098,14 +4135,8 @@ window._quizJumpTo = function(qdataIdx){
     if(pos < 0) return;
   }
   ST.quizIdx = pos;
-  // 顺序模式：仅"向后跳"推进游标（v31 max-next 语义，向前跳被 max 自然挡住）
-  if(ST.quizFilter.order === 'order'){
-    if(!ST.quizOrderPos) ST.quizOrderPos = {};
-    var ok = _quizFilterKey();
-    var prev = ST.quizOrderPos[ok];
-    var fwd = Math.max(pos+1, (prev && typeof prev.next === 'number') ? prev.next : 0);
-    ST.quizOrderPos[ok] = { next: fwd, ts: Date.now() };
-  }
+  // v35 修复：搜索是"回看"不是"做题"，一律不推进 quizOrderPos 游标（顺序模式刷新后按原游标恢复位置）。
+  // 用户主动作答仍由 answerQuiz 正常推进游标。
   save();
   renderQuizQuestion();
   setTimeout(function(){
@@ -4136,6 +4167,30 @@ document.addEventListener('keydown', function(e){
   if(e.key === 'ArrowLeft'){ prevQuiz(); }
   else if(e.key === 'ArrowRight'){ nextQuiz(); }
 });
+
+// ===== 背题模式（v35）：开关走独立 localStorage 键（不进 ST ⇒ 不进云同步快照）；浏览不写任何进度 =====
+var QUIZ_BACK_CODE = 'SIELE-BACK-2026';
+window._quizBackMode = function(){
+  try{ return localStorage.getItem('wb_quiz_back_mode_v1') === '1'; }catch(e){ return false; }
+};
+window._quizBackToggle = function(){
+  if(_quizBackMode()){
+    try{ localStorage.removeItem('wb_quiz_back_mode_v1'); }catch(e){}
+    if(typeof toast==='function') toast('📖 已退出背题模式','ok');
+  }else{
+    var code = null;
+    try{ code = prompt('请输入背题授权码：'); }catch(e){}
+    if(code === null) return;
+    if(String(code).trim() !== QUIZ_BACK_CODE){ if(typeof toast==='function') toast('⚠️ 授权码不正确','err'); return; }
+    try{ localStorage.setItem('wb_quiz_back_mode_v1','1'); }catch(e){}
+    if(typeof toast==='function') toast('📖 背题模式已开启（不计分、不影响做题进度）','ok');
+  }
+  try{ renderMain(); }catch(e){ try{ renderQuizQuestion(); }catch(e2){} }
+};
+window._quizBackRestart = function(){
+  ST.quizIdx = 0;
+  renderQuizQuestion();
+};
 
 let _quizOpts = [];
 // 题目内容唯一键：跨设备一致（与题号无关，解决 A/B 设备题目顺序不一致问题）
@@ -16983,7 +17038,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v34-2026092622';
+    var swVer = 'v35-2026092623';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17020,7 +17075,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v34-2026092622';
+    return 'v35-2026092623';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
