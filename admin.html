@@ -729,7 +729,12 @@ const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true;}c
 
 // ---- 云端身份认证 ----
 // 邀请码核销、密码验证和跨设备登录均只由 CloudBase 云函数处理；本地存储不再保存或判断邀请码状态。
-const CLOUD_SESSION_KEY='swa_cloud_session_v1';
+const CLOUD_SESSION_KEY='swa_admin_session_v1';
+/* 2026-09-26 修复：本面板原先与工作台(index.html)共用同一个会话键 swa_cloud_session_v1，
+   两页同源共用 localStorage ⇒ 面板登录会把工作台的登录人整个换掉、面板登出会把工作台会话删掉，
+   导致工作台用别人的身份去同步数据。现改为：面板自己的会话写独立键；
+   面板未独立登录时，仅【只读】借用工作台的会话（绝不写入、绝不删除）。 */
+const WORKBENCH_SESSION_KEY='swa_cloud_session_v1';
 const CLOUD_AUTH_MESSAGES={
   INVALID_USERNAME:'请输入有效邮箱或 2-20 位用户名',
   WEAK_PASSWORD:'密码至少 8 位，且需同时包含字母和数字',
@@ -773,7 +778,7 @@ async function callSieleAuth(data){
   }
   return payload;
 }
-function cloudSession(){return lsGet(CLOUD_SESSION_KEY,null);}
+function cloudSession(){return lsGet(CLOUD_SESSION_KEY,null)||lsGet(WORKBENCH_SESSION_KEY,null);}
 function saveCloudSession(session){
   if(!session||!session.uid||!session.username||!session.sessionToken)return false;
   return lsSet(CLOUD_SESSION_KEY,{uid:session.uid,username:session.username,role:session.role||'learner',sessionToken:session.sessionToken,ts:Date.now()});
