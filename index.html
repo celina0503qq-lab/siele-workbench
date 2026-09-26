@@ -17843,11 +17843,31 @@ if(typeof renderDash==='function'){
   };
 }
 
+/* ---------- 账号隔离守卫（2026-09-26 新增）----------
+   ST 用的键 dele_siele_wb_v3 是【全局键】，不区分账号；而云同步的 ADB/MIR 是按账号隔离的。
+   同一浏览器换账号时，上一位用户的进度会残留在 ST 里 ⇒ 仪表盘串号。
+   做法：记录 ST 归属的账号；检测到切换时，先把旧 ST 完整备份到独立键（不会被自动清理），
+   再用默认状态重建 ST（紧随其后的 hydrate() 会从新账号的 ADB 恢复其进度）。 */
+var ST_OWNER_KEY='dele_siele_wb_v3_owner';
+window._deleStOwnerGuard=function(){
+  try{
+    var prev=localStorage.getItem(ST_OWNER_KEY);
+    if(!prev){ localStorage.setItem(ST_OWNER_KEY,AU); return false; }   // 升级后首次运行：把现有 ST 认领给当前账号
+    if(prev===AU) return false;
+    try{ localStorage.setItem('dele_siele_wb_v3_backup_'+prev, JSON.stringify(ST)); }catch(e){}
+    try{ ST=getDefaultState(); localStorage.setItem(STORE_KEY, JSON.stringify(ST)); }catch(e){}
+    localStorage.setItem(ST_OWNER_KEY, AU);
+    try{ console.warn('[账号隔离] 账号切换：'+prev+' → '+AU+'；旧本机进度已备份到 dele_siele_wb_v3_backup_'+prev); }catch(e){}
+    return true;
+  }catch(e){ return false; }
+};
+
 /* ---------- 激活 ---------- */
 function activate(){
   AU=activeUser();
   if(!AU){showLoginOverlay();setChip('nologin');return;}
   hideLoginOverlay();
+  try{ if(window._deleStOwnerGuard) window._deleStOwnerGuard(); }catch(e){}
   ADB=lsg(dataKey(AU),null);
   if(!ADB){
     showLoginOverlay();setChip('nologin');AU=null;
