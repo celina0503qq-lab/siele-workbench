@@ -11480,6 +11480,8 @@ function mergeErrorsFromRemote(remote){
     _errTrim();
   }
   mergeErrorTombstones(null); // 二次剔除：本轮合并进来的已删项
+  // v33：统一按时间排序（新在前）——并集合并会把远端新错题追加到末尾，导致两设备顺序分叉
+  if(ST.errors && ST.errors.length) ST.errors.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
   return ST.errors ? ST.errors.length : 0;
 }
 // 裁剪到 200 条：按 ts 保留最新，被丢弃项打墓碑（避免下次 pull 复活）
@@ -16891,7 +16893,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v32-2026092619';
+    var swVer = 'v33-2026092620';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -16928,7 +16930,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v32-2026092619';
+    return 'v33-2026092620';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
