@@ -1001,6 +1001,10 @@ async function doRegister(e){
       return false;
     }
     maybeMigrateLegacyData(result.username);
+    // 2026-09-26 v28 修复：iframe 内注册 = 来自工作台，同样需要回写工作台会话键
+    if(window.parent&&window.parent!==window){
+      lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+    }
     toast('注册成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
     gotoWorkbench();
@@ -1046,6 +1050,12 @@ async function doLogin(e,credentials){
       return false;
     }
     maybeMigrateLegacyData(result.username);
+    // 2026-09-26 v28 修复（会话隔离回归）：credentials 路径 = 工作台经 'siele-cloud-login' 发起的登录，
+    // 必须同时写工作台会话键，否则工作台 activeUser()/_deleGetSessionToken() 永远拿不到登录态 ⇒ 云同步静默失效。
+    // （面板手动登录不在此列，仍只写面板键，保持 09-26 会话隔离的设计意图。）
+    if(credentials&&window.parent&&window.parent!==window){
+      lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+    }
     toast('登录成功，正在进入学习工作台…','ok');
     enter(result.username,true,result);
     gotoWorkbench();
