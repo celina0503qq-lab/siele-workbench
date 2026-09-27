@@ -91,6 +91,11 @@ const INDEX_MARKERS = {
   'reqFlag':                   { min: 1,  desc: 'v36 菜单授权守卫' },
   'siele-workbench-logout':    { min: 1,  desc: 'v37 联动登出消息' },
   '20260808':                  { min: 1,  desc: '数据格式版本 _appVer（迁移依赖，不可动）' },
+
+  // ---- v39：题库管理员编辑（content_edits.quiz 增量域）----
+  '_wbApplyQuizEdits':         { min: 1,  desc: 'v39 题库编辑覆盖' },
+  '_wbQuizEditOpen':           { min: 1,  desc: 'v39 题库编辑弹窗' },
+  'wb_content_edits_quiz_v1':  { min: 1,  desc: 'v39 题库编辑本地缓存键' },
 };
 
 /**
