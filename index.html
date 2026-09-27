@@ -18,7 +18,7 @@
 
 <title>西语备考工作台 · DELE &amp; SIELE</title>
 <style>
-:root{--tr:#C0392B;--trd:#962d22;--am:#E08E0B;--aml:#F5B041;--ink:#2B2118;--soft:#6B5D4F;--line:#ECE3DA;--teal:#1F6F5C;--teall:#2E8B73;--ok:#2E7D32;--warn:#E65100;--bad:#B71C1C;--bg:#FAF6F1;--paper:#fff;--sh:0 6px 22px rgba(120,60,40,.09);--r:16px;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,sans-serif;--serif:Georgia,"Songti SC",serif;--lv1:#10b981;--lv2:#3b82f6;--lv3:#f59e0b;--lv4:#ef4444;--lvt1:#2E7D32;--lvt2:#1565C0;--lvt3:#C12A2A;--lvt4:#6A1B9A;--m-vocab:#2E7D32;--m-gram:#1565C0;--m-out:#B45309;--m-quiz:#6A1B9A}
+:root{--tr:#C0392B;--trd:#962d22;--am:#E08E0B;--aml:#F5B041;--ink:#2B2118;--soft:#6B5D4F;--line:#ECE3DA;--teal:#1F6F5C;--teall:#2E8B73;--ok:#2E7D32;--warn:#E65100;--bad:#B71C1C;--bg:#FAF6F1;--paper:#fff;--sh:0 6px 22px rgba(120,60,40,.09);--r:16px;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Roboto,"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;--serif:Georgia,"Songti SC","Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",serif;--lv1:#10b981;--lv2:#3b82f6;--lv3:#f59e0b;--lv4:#ef4444;--lvt1:#2E7D32;--lvt2:#1565C0;--lvt3:#C12A2A;--lvt4:#6A1B9A;--m-vocab:#2E7D32;--m-gram:#1565C0;--m-out:#B45309;--m-quiz:#6A1B9A}
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;font-size:15px}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}input,select,textarea{font-family:inherit}a{color:var(--tr);text-decoration:none}a:hover{text-decoration:underline}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#d8c9b1;border-radius:8px}
 .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{background:linear-gradient(180deg,#3a2418,#2b1810);color:#f3e7d3;padding:22px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--tr),var(--am));display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px;box-shadow:0 4px 12px rgba(192,57,43,.4)}.brand h1{font-size:15px;font-weight:700;color:#fff;line-height:1.2}.brand .sub{font-size:11px;color:#c9a877}.nav{margin-top:18px;display:flex;flex-direction:column;gap:2px}.ni{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:9px;color:#d9c6ad;font-size:12.5px;font-weight:500;transition:.15s;text-align:left;width:100%}.ni .ic{width:16px;text-align:center;font-size:14px}.ni .ic.dele-lv-a1,.ni .ic.dele-lv-a2,.ni .ic.dele-lv-b1,.ni .ic.dele-lv-b2{width:24px;height:18px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:0;color:#fff}.ni .ic.dele-lv-a1{background:#10b981}.ni .ic.dele-lv-a2{background:#3b82f6}.ni .ic.dele-lv-b1{background:#f59e0b}.ni .ic.dele-lv-b2{background:#ef4444}.ni:hover{background:rgba(255,255,255,.07);color:#fff}.ni.on{background:linear-gradient(90deg,rgba(192,57,43,.85),rgba(224,142,11,.7));color:#fff}.ni .bdg{font-size:9px;background:#e08e0b;color:#fff;padding:1px 5px;border-radius:8px;margin-left:auto;font-weight:700}.ns{font-size:10px;color:#8a7355;letter-spacing:1px;text-transform:uppercase;margin:12px 0 4px 8px}.main{padding:22px 28px 50px;max-width:1200px}@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:4px}.nav::-webkit-scrollbar{display:none}.nav .ni{width:auto;flex:0 0 auto;white-space:nowrap;padding:7px 10px;font-size:12px}.ns{display:none}}
 .page{display:none;animation:fade .3s ease}.page.on{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.tb{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}.tb h2{font-size:21px;font-weight:800}.tb .d{color:var(--soft);font-size:12.5px;margin-top:2px}.dp{background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:5px 13px;font-size:12px;color:var(--soft);box-shadow:var(--sh)}.g{display:grid;gap:13px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}@media(max-width:980px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}#dashQuickAnchor{align-items:stretch}#dashQuickAnchor>.card{display:flex;flex-direction:column}#dashQuickAnchor>.card>*{flex:1}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px;box-shadow:var(--sh);transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(120,60,40,.13)}.card h3{font-size:14.5px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px}.card h3 .ic{color:var(--tr)}.stat .num{font-size:26px;font-weight:800;color:var(--tr);line-height:1}.stat .num.t{color:var(--teal)}.stat .num.a{color:var(--am)}.stat .lbl{font-size:11px;color:var(--soft)}.stat .sub{font-size:10.5px;color:var(--soft);margin-top:2px}.card.stat:hover .num{transform:scale(1.08);transition:transform .2s ease}
@@ -4133,7 +4133,7 @@ window._quizSearch = function(q){
   if(!q){ drop.style.display = 'none'; drop.innerHTML = ''; return; }
   const hits = [];
   for(var i=0;i<QDATA.length;i++){
-    var it = QDATA[i];
+    var it = (typeof window._wbApplyQuizEdits==='function') ? window._wbApplyQuizEdits(QDATA[i]) : QDATA[i]; /* v40: 搜索与答案显示用编辑后内容（__okey=原始 key，_quizJumpTo 不受影响） */
     var hay = ((it.q||'') + ' ' + (it.opts||[]).join(' ') + ' ' + (it.fb||'')).toLowerCase();
     if(hay.indexOf(q) >= 0) hits.push({ idx:i, it:it });
     if(hits.length >= 50) break;
@@ -17270,7 +17270,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v39-2026092703';
+    var swVer = 'v40-2026092704';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17307,7 +17307,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v39-2026092703';
+    return 'v40-2026092704';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
