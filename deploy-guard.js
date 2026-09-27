@@ -96,6 +96,10 @@ const INDEX_MARKERS = {
   '_wbApplyQuizEdits':         { min: 1,  desc: 'v39 题库编辑覆盖' },
   '_wbQuizEditOpen':           { min: 1,  desc: 'v39 题库编辑弹窗' },
   'wb_content_edits_quiz_v1':  { min: 1,  desc: 'v39 题库编辑本地缓存键' },
+
+  // ---- v41：题库编辑留痕（__hist 内嵌审计）----
+  '_wbQuizEditHist':           { min: 1,  desc: 'v41 编辑留痕' },
+  '_wbQuizEditRestoreHist':    { min: 1,  desc: 'v41 历史版本回溯' },
 };
 
 /**
@@ -108,6 +112,7 @@ const ADMIN_MARKERS = {
   'doLogout':                  { min: 1, desc: '后台登出' },
   'CLOUD_SESSION_KEY':         { min: 1, desc: '后台独立会话键' },
   'siele-workbench-logout':    { min: 1, desc: 'v37 会话联动通知' },
+  'renderAdminQEdits':         { min: 1, desc: 'v41 题库编辑总览' },
 };
 
 /**
