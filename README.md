@@ -21,3 +21,7 @@
 - SpeechSynthesis API (语音合成)
 - Web Speech API (语音识别)
 - RSS-to-JSON API (外刊更新)
+
+## 许可 / License
+
+本项目代码与数据采用自定义许可：**允许学习与个人使用，禁止任何商业用途**。详见 [LICENSE](LICENSE)。
