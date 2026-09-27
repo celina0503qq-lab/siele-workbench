@@ -301,11 +301,16 @@ function checkServiceWorker(indexSrc) {
     info('  两者必须同步更新，否则用户会拿到旧缓存。');
   }
 
-  // 退役文件提醒
+  // 退役文件提醒（已被 .gitignore 覆盖的本地保留文件降级为 info，不再告警）
   if (fs.existsSync(FILE('sw.js'))) {
+    const gi = fs.existsSync(FILE('.gitignore')) ? fs.readFileSync(FILE('.gitignore'), 'utf8') : '';
     const old = read('sw.js');
     const oldCache = (old.match(/siele-suite-([a-z0-9-]+)/i) || [])[1] || '?';
-    warn(`sw.js 仍存在（缓存名 siele-suite-${oldCache}），已退役，建议删除`);
+    if (/^sw\.js\s*$/m.test(gi)) {
+      info(`sw.js 为本地保留的退役文件（仓库已删 + gitignore 防回加），缓存名 siele-suite-${oldCache}`);
+    } else {
+      warn(`sw.js 仍存在（缓存名 siele-suite-${oldCache}），已退役，建议删除`);
+    }
   }
 }
 
@@ -341,13 +346,18 @@ function checkDataFiles() {
     warn('词条抽样失败：' + e.message.split('\n')[0]);
   }
 
-  // 备份文件混入提醒
+  // 备份文件混入提醒（已被 .gitignore 覆盖的本地保留备份降级为 info）
   try {
     const banks = fs.readdirSync(FILE('dele_banks'));
     const backups = banks.filter(f => /_backup|\.bak/i.test(f));
     if (backups.length) {
-      warn(`dele_banks/ 含 ${backups.length} 个备份文件（建议清理或加入 .gitignore）：`);
-      backups.slice(0, 5).forEach(b => info('  · ' + b));
+      const gi = fs.existsSync(FILE('.gitignore')) ? fs.readFileSync(FILE('.gitignore'), 'utf8') : '';
+      if (/dele_banks\/\*_backup\*\.js/.test(gi)) {
+        info(`dele_banks/ 含 ${backups.length} 个本地保留备份（仓库已删 + gitignore 防回加）`);
+      } else {
+        warn(`dele_banks/ 含 ${backups.length} 个备份文件（建议清理或加入 .gitignore）：`);
+        backups.slice(0, 5).forEach(b => info('  · ' + b));
+      }
     }
   } catch (e) { /* dele_banks 不存在则忽略 */ }
 }
