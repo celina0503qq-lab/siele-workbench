@@ -430,7 +430,10 @@ async function adminListUsers(event) {
     status: user.status === "disabled" ? "disabled" : "active",
     inviteCode: user.inviteCode || "",
     createdAt: user.createdAt || null,
-    lastLoginAt: user.lastLoginAt || null
+    lastLoginAt: user.lastLoginAt || null,
+    quizBackEnabled: !!user.quizBackEnabled,
+    deleSpecialEnabled: !!user.deleSpecialEnabled,
+    refinePackEnabled: !!user.refinePackEnabled
   })).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   return response(true, "ADMIN_USERS", { users });
 }
@@ -501,6 +504,45 @@ async function adminSetUserStatus(event) {
   }
   await db.collection("security_audit").add({ type: "admin_user_status", adminUid: admin.uid, targetUid: uid, status, at: now() });
   return response(true, "USER_STATUS_UPDATED", { uid, status });
+}
+// ========================================================================
+// v36 用户功能授权：管理员按用户开通 背题模式 / DELE专项 / 外刊精炼
+// flags 白名单仅这三键，纯布尔；写 user_profiles + 失效状态缓存 + security_audit
+// ========================================================================
+const USER_FLAG_KEYS = ["quizBackEnabled", "deleSpecialEnabled", "refinePackEnabled"];
+async function adminSetUserFlags(event) {
+  const admin = await requireAdmin(event);
+  const uid = String(event.uid || "");
+  if (!uid) return response(false, "INVALID_USER");
+  const flags = event.flags && typeof event.flags === "object" ? event.flags : {};
+  const update = {};
+  for (const key of USER_FLAG_KEYS) {
+    if (Object.prototype.hasOwnProperty.call(flags, key)) update[key] = !!flags[key];
+  }
+  if (!Object.keys(update).length) return response(false, "INVALID_FLAGS");
+  const found = await db.collection("user_profiles").where({ uid }).limit(1).get();
+  if (!found.data.length) return response(false, "USER_NOT_FOUND");
+  update.flagsUpdatedAt = now();
+  await db.collection("user_profiles").doc(found.data[0]._id).update(update);
+  // 使 requireActiveSession 的 60s 状态缓存立即失效，确保下一次 getUserFlags 拿到新鲜数据
+  _invalidateUserStatus(uid);
+  await db.collection("security_audit").add({ type: "admin_user_flags", adminUid: admin.uid, targetUid: uid, flags: update, at: now() });
+  return response(true, "USER_FLAGS_UPDATED", { uid });
+}
+// 登录用户自查功能授权。注意：requireActiveSession 返回的 profile 来自 status/role 缓存（不含 flags），
+// 故这里必须对 user_profiles 直读一次。
+async function getUserFlags(event) {
+  const { session } = await requireActiveSession(event);
+  const result = await db.collection("user_profiles").where({ uid: session.uid }).limit(1).get();
+  if (!result.data.length) return response(false, "USER_NOT_FOUND");
+  const p = result.data[0];
+  const isAdmin = p.role === "admin";
+  return response(true, "USER_FLAGS", {
+    role: isAdmin ? "admin" : "learner",
+    quizBackEnabled: isAdmin || !!p.quizBackEnabled,
+    deleSpecialEnabled: isAdmin || !!p.deleSpecialEnabled,
+    refinePackEnabled: isAdmin || !!p.refinePackEnabled
+  });
 }
 async function adminRevokeUserSyncTokens(event) {
   const admin = await requireAdmin(event);
@@ -690,6 +732,8 @@ exports.main = async (event) => {
     if (action === "adminListSecurityLogs") return await adminListSecurityLogs(input);
     if (action === "adminSetUserStatus") return await adminSetUserStatus(input);
     if (action === "adminRevokeUserSyncTokens") return await adminRevokeUserSyncTokens(input);
+    if (action === "adminSetUserFlags") return await adminSetUserFlags(input);
+    if (action === "getUserFlags") return await getUserFlags(input);
     if (action === "pullLearning") return await pullLearning(input);
     if (action === "pushLearning") return await pushLearning(input);
     if (action === "pullLearningSession") return await pullLearningSession(input);
