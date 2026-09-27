@@ -14186,7 +14186,9 @@ window._deleCloudCall = function(action, params){
 };
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
-window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {}, quiz: {} };
+window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {}, quiz: {}, __audit: {v:1, log:[]} };
+// v42: 编辑留痕本地缓存（防「云端未拉回就保存」清空历史）
+try{ var _wbAuditLs = JSON.parse(localStorage.getItem('wb_content_edits_audit_v1') || 'null'); if(_wbAuditLs && _wbAuditLs.log && _wbAuditLs.log.length) window._contentEdits.__audit = _wbAuditLs; }catch(e){}
 window._contentEditsCb = {};
 // 拉取 content_edits（namespace: writing / oral），结果经 message 监听写入 _contentEdits[ns]
 window._deleFetchContentEdits = function(namespace, callback){
@@ -14196,8 +14198,111 @@ window._deleFetchContentEdits = function(namespace, callback){
 };
 // 保存 content_edits（仅管理员可写，云函数 requireAdmin 校验）
 window._deleSyncContentEdits = function(namespace, edits){
+  // v42: 保存前留痕（quiz 已有 v41 __hist；__audit 自身不记）
+  try{ if(namespace !== 'quiz' && namespace !== '__audit' && typeof window._wbAuditRecord === 'function') window._wbAuditRecord(namespace, edits); }catch(e){}
   window._delePostToBridge({type:'siele-content-edits-save', namespace: namespace, edits: edits});
 };
+
+// ===== v42: 管理员编辑留痕（全域审计，独立命名空间 content_edits.__audit）=====
+// 9 个业务域的保存都经过 _deleSyncContentEdits 唯一出口 => 在出口抓旧值快照即可全域覆盖。
+// quiz 域沿用 v41 内嵌 __hist，不在此重复；__audit 自身不记。
+window._wbAuditMax = 60;              // 最多留存条数
+window._wbAuditCap = 1400 * 1024;     // 总字节上限（云端单文档 2MiB）
+window._wbAuditBig = 256 * 1024;      // 单条快照超此值则不存全文（仅记摘要）
+window._wbAuditBytes = function(o){ try{ return JSON.stringify(o).length; }catch(e){ return 0; } };
+window._wbAuditWho = function(){
+  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1') || 'null');
+       return String((s && (s.username || s.name || s.uid)) || ''); }catch(e){ return ''; }
+};
+window._wbAuditPg = function(){ try{ return (typeof currentPage === 'string') ? currentPage : ''; }catch(e){ return ''; } };
+window._wbAuditTs = function(ts){
+  if(!ts) return '-';
+  var d = new Date(ts), p = function(n){ return String(n).padStart(2,'0'); };
+  return d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+};
+window._wbAuditId = function(){ return 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); };
+window._wbAuditGet = function(){
+  var A = window._contentEdits && window._contentEdits.__audit;
+  if(!A || !A.log){ A = {v:1, log:[]}; if(window._contentEdits) window._contentEdits.__audit = A; }
+  return A;
+};
+window._wbAuditSave = function(A){
+  try{ localStorage.setItem('wb_content_edits_audit_v1', JSON.stringify(A)); }catch(e){}
+  try{ window._delePostToBridge({type:'siele-content-edits-save', namespace:'__audit', edits:A}); }catch(e){}
+};
+window._wbAuditTrim = function(A){
+  try{
+    A.log = A.log || [];
+    while(A.log.length > window._wbAuditMax) A.log.pop();
+    while(A.log.length > 1 && window._wbAuditBytes(A) > window._wbAuditCap) A.log.pop();
+    // 兜底：单条即超限（如改动大域 oralbank）→ 摘掉全文快照只留摘要，保证绝不超 cap
+    if(window._wbAuditBytes(A) > window._wbAuditCap){
+      for(var i=0;i<A.log.length && window._wbAuditBytes(A) > window._wbAuditCap;i++){
+        if(A.log[i].before){ delete A.log[i].before; A.log[i].big = true; }
+      }
+    }
+  }catch(e){}
+  return A;
+};
+// 变更摘要（条目数变化，尽量通用）
+window._wbAuditSum = function(ns, before, after){
+  try{
+    var cnt = function(o){
+      if(o == null) return 0;
+      if(Array.isArray(o)) return o.length;
+      var ks = ['tasks','topics','list','tareas','added','deleted'];
+      for(var i=0;i<ks.length;i++){ if(Array.isArray(o[ks[i]])) return o[ks[i]].length; }
+      if(ns === 'grammar') return Object.keys(o.overrides || {}).length;
+      if(ns === 'oralbank'){ var b = o.bank || {}, t = 0; for(var k in b) t += (b[k]||[]).length; return t; }
+      if(typeof o === 'object') return Object.keys(o).length;
+      return 0;
+    };
+    var a = cnt(before), b2 = cnt(after);
+    // 用 U+2192 而非 "->"：摘要会经 esc() 渲染，ASCII 大于号会被转义成 &gt;
+    return (a === b2) ? (a + ' 条 · 内容更新') : (a + ' \u2192 ' + b2 + ' 条');
+  }catch(e){ return ''; }
+};
+// 保存前抓旧值
+window._wbAuditRecord = function(namespace, edits){
+  try{
+    var cur = (window._contentEdits || {})[namespace];
+    if(!cur) return;                                   // 首次保存无旧值可比
+    if(JSON.stringify(cur) === JSON.stringify(edits)) return;   // 无变化不记
+    var A = window._wbAuditGet();
+    var sz0 = window._wbAuditBytes(cur), sz1 = window._wbAuditBytes(edits);
+    var rec = { id: window._wbAuditId(), t: Date.now(), u: window._wbAuditWho(), ns: namespace,
+                pg: window._wbAuditPg(), sz0: sz0, sz1: sz1, sum: window._wbAuditSum(namespace, cur, edits) };
+    if(sz0 <= window._wbAuditBig) rec.before = cur; else rec.big = true;
+    A.log.unshift(rec);
+    window._wbAuditTrim(A);
+    window._wbAuditSave(A);
+  }catch(e){}
+};
+// 回滚：把某条 before 写回该域（并把「当前值」记为新一条，回滚本身也可再撤回）
+window._wbAuditRestore = function(id){
+  try{
+    var A = window._wbAuditGet(), rec = null;
+    for(var i=0;i<A.log.length;i++){ if(A.log[i].id === id){ rec = A.log[i]; break; } }
+    if(!rec || !rec.before) return false;
+    var ns = rec.ns, cur = window._contentEdits[ns];
+    var szc = window._wbAuditBytes(cur);
+    var back = { id: window._wbAuditId(), t: Date.now(), u: window._wbAuditWho(), ns: ns, pg: window._wbAuditPg(),
+                 sz0: szc, sz1: rec.sz0, sum: '\u21a9 回滚到 ' + window._wbAuditTs(rec.t) };
+    if(szc <= window._wbAuditBig) back.before = cur; else back.big = true;
+    A.log.unshift(back);
+    window._wbAuditTrim(A);
+    window._contentEdits[ns] = rec.before;
+    try{ window._delePostToBridge({type:'siele-content-edits-save', namespace: ns, edits: rec.before}); }catch(e){}
+    window._wbAuditSave(A);
+    try{
+      var mp = { grammar:'grammar', verbUsage:'vocab', verbConj:'vocab', writing:'writing', essays:'writing',
+                 oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele' };
+      if(typeof renderMain === 'function' && mp[ns] && mp[ns] === currentPage) renderMain();
+    }catch(e){}
+    return true;
+  }catch(e){ return false; }
+};
+
 // ===== v39: 题库测验管理员编辑（content_edits.quiz 增量域，仅管理员可见/可写）=====
 // 增量 key = quizQuestionKey（原始内容哈希）；覆盖字段 q/opts/ans/fb；云端走通用 getContentEdits/setContentEdits。
 try{ window._contentEdits.quiz = JSON.parse(localStorage.getItem('wb_content_edits_quiz_v1') || '{}') || {}; }catch(e){}
@@ -14408,6 +14513,17 @@ window.addEventListener('message', function(e){
       Object.keys(_ql).forEach(function(k){ var l=_ql[k], c=_qm[k]; if(!c || ((l&&l.__ts)||0) > ((c&&c.__ts)||0)) _qm[k] = l; });
       window._contentEdits.quiz = _qm;
       try{ localStorage.setItem('wb_content_edits_quiz_v1', JSON.stringify(_qm)); }catch(e2){}
+    } else if(ns === '__audit'){
+      // v42: 留痕按 id 去重取并集，任一设备都不会清掉别处的历史
+      var _ra = e.data.edits || {v:1, log:[]};
+      var _la = window._contentEdits.__audit || {v:1, log:[]};
+      var _seen = {}, _mg = [];
+      (_ra.log || []).concat(_la.log || []).forEach(function(r){ if(r && r.id && !_seen[r.id]){ _seen[r.id] = 1; _mg.push(r); } });
+      _mg.sort(function(a,b){ return (b.t||0) - (a.t||0); });
+      var _MA = {v:1, log:_mg};
+      if(typeof window._wbAuditTrim === 'function') window._wbAuditTrim(_MA);
+      window._contentEdits.__audit = _MA;
+      try{ localStorage.setItem('wb_content_edits_audit_v1', JSON.stringify(_MA)); }catch(e5){}
     } else {
       window._contentEdits[ns] = e.data.edits || {};
     }
@@ -17321,7 +17437,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v41-2026092705';
+    var swVer = 'v42-2026092706';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17358,7 +17474,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v41-2026092705';
+    return 'v42-2026092706';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18497,6 +18613,8 @@ function activate(){
       setTimeout(function(){window._deleFetchContentEdits('grammar');},2400);
       setTimeout(function(){window._deleFetchContentEdits('verbConj');},2600);
       setTimeout(function(){window._deleFetchContentEdits('quiz');},2800);
+      // v42: 编辑留痕（仅管理员拉取，避免普通用户无谓流量）
+      try{ if(typeof isContentAdmin==='function' && isContentAdmin()) setTimeout(function(){window._deleFetchContentEdits('__audit');},3000); }catch(e2){}
     }
   }catch(e){}
 }
