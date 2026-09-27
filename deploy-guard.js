@@ -123,6 +123,10 @@ const ADMIN_MARKERS = {
   'renderAdminQEdits':         { min: 1, desc: 'v41 题库编辑总览' },
   'renderAdminAudit':          { min: 1, desc: 'v42 编辑留痕总览' },
   'renderDeleEditsSection':    { min: 1, desc: 'v43 DELE 编辑分区' },
+  'showImpConfirm':            { min: 1, desc: 'v45 完整备份导入确认链路（回归锚）' },
+  '不在此备份内':              { min: 1, desc: 'v45 导出说明：后台备份不含工作台进度' },
+  '两条链路相互独立':          { min: 1, desc: 'v45 同步页双链路说明' },
+  "'mastery','diff','src','updatedAt'": { min: 1, desc: 'v45 CSV 补列' },
 };
 
 /**
