@@ -108,6 +108,8 @@ const INDEX_MARKERS = {
   '_localDateStr':             { min: 1,  desc: 'v43 本地时区日期' },
   '_qrMergePairs':             { min: 5,  desc: 'v44 测验结果并集合并' },
   'quizResultsTs':             { min: 8,  desc: 'v44 测验结果时间戳并行数组' },
+  'exportData_':               { min: 5,  desc: 'v46 快捷操作导出一级入口（onclick x2+定义+挂载+弹层）' },
+  'importDataPrompt_':         { min: 5,  desc: 'v46 快捷操作导入一级入口（onclick x2+定义+挂载+弹层）' },
 };
 
 /**
