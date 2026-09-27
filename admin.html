@@ -508,14 +508,14 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <input type="file" id="impFile" accept=".json,.csv,.txt" class="hide" onchange="handleImportFile(this.files[0]);this.value=''">
       <details class="help"><summary>CSV 格式说明</summary>
-        第一行为表头，需包含 <code>es</code>（单词）与 <code>zh</code>（释义）列，可选 <code>pos,ex,lvl,t</code>。示例：<br>
+        第一行为表头，需包含 <code>es</code>（单词）与 <code>zh</code>（释义）列，可选 <code>pos,ex,lvl,t,mastery,diff,src,updatedAt</code>（多余列自动忽略）。示例：<br>
         <code>es,zh,pos,ex,lvl</code><br><code>hola,你好,interj.,¡Hola! ¿Qué tal?,A1</code>
       </details>
       <div id="impResult"></div>
     </div>
     <div class="card">
       <h3><span class="ic">📤</span>导出备份</h3>
-      <div style="font-size:12.5px;color:var(--soft);margin-bottom:12px;line-height:1.7">备份包含：全部单词、题目、复习记录、复习计划、掌握度与设置。建议每周备份一次，文件可在任意设备重新导入。</div>
+      <div style="font-size:12.5px;color:var(--soft);margin-bottom:12px;line-height:1.7">备份包含：全部单词、题目、复习记录、复习计划、掌握度与设置。建议每周备份一次，文件可在上方导入区恢复（可选「合并」或「完全覆盖」两种模式）。<br><b>注意</b>：这里备份的是后台数据（词库/题库/复习/计划）；主站工作台的刷题正确率、连续打卡、错题集等进度不在此备份内——它们登录账号后自动云同步，也可在主站菜单「导出备份」单独导出。</div>
       <div style="display:flex;flex-direction:column;gap:9px">
         <button class="btn" onclick="exportBackup()">💾 导出完整备份（JSON）</button>
         <button class="btn a" onclick="exportWordsCSV()">📋 导出单词表（CSV，可用 Excel 打开）</button>
@@ -631,7 +631,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 
 <!-- ===== 云同步 ===== -->
 <section class="page" id="pg-sync">
-  <div class="tb"><div><h2>☁️ 云同步</h2><div class="d">跨设备同步学习进度：电脑背的单词，手机上接着复习</div></div></div>
+  <div class="tb"><div><h2>☁️ 云同步</h2><div class="d">跨设备同步学习进度：电脑背的单词，手机上接着复习。注意两条链路相互独立：主站工作台进度走「账号登录」自动云同步；后台数据走本页「独立同步令牌」同步，与登录密码不复用</div></div></div>
   <div class="card sync-status-card" style="margin-bottom:13px">
     <div class="sync-big-dot off" id="syncBigDot">☁️</div>
     <div style="flex:1;min-width:0">
@@ -1969,7 +1969,7 @@ function exportBackup(){
   toast('备份文件已下载','ok');
 }
 function exportWordsCSV(){
-  const rows=[['es','zh','pos','ex','lvl','t','mastery']].concat(DB.words.map(w=>[w.es,w.zh,w.pos,w.ex,w.lvl,w.t,w.mastery||0]));
+  const rows=[['es','zh','pos','ex','lvl','t','mastery','diff','src','updatedAt']].concat(DB.words.map(w=>[w.es,w.zh,w.pos,w.ex,w.lvl,w.t,w.mastery||0,(w.diff===undefined||w.diff===null?'':w.diff),w.src||'',w.updatedAt?fmtDT(w.updatedAt):''])); /* v45: 末尾追加 diff/src/updatedAt 三列；导入按表头名取列，新旧 CSV 双向兼容 */
   const csv='\ufeff'+rows.map(r=>r.map(c=>{c=String(c==null?'':c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c;}).join(',')).join('\r\n');
   download('西语单词表_'+todayStr()+'.csv',csv,'text/csv');
   toast('单词表 CSV 已下载','ok');
