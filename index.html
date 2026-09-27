@@ -14204,6 +14204,35 @@ try{ window._contentEdits.quiz = JSON.parse(localStorage.getItem('wb_content_edi
 window._wbQuizEditSaveLocal = function(){
   try{ localStorage.setItem('wb_content_edits_quiz_v1', JSON.stringify(window._contentEdits.quiz || {})); }catch(e){}
 };
+// v41: 编辑留痕——保存前把「改之前的值」快照前置入 __hist（首次编辑即原始题目），上限 5 版，供误改回溯
+window._wbQuizEditHist = function(prev, orig){
+  try{
+    var base = prev || orig;
+    if(!base) return [];
+    var who = '';
+    try{ var _s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); who = (_s && (_s.username || _s.name || _s.uid)) || ''; }catch(e){}
+    var snap = { t: Date.now(), u: String(who||''), q: base.q || '', opts: (base.opts||[]).slice(0,4), ans: (typeof base.ans === 'number' ? base.ans : -1), fb: base.fb || '' };
+    var h = (prev && prev.__hist) ? prev.__hist.slice(0) : [];
+    h.unshift(snap);
+    while(h.length > 5) h.pop();
+    return h;
+  }catch(e){ return []; }
+};
+// v41: 把某条历史版本载入编辑表单（点「保存并同步」才真正生效，避免误点直接覆盖）
+window._wbQuizEditRestoreHist = function(idx){
+  try{
+    var q = ST.quizSession[ST.quizIdx]; if(!q) return;
+    var e = (window._contentEdits.quiz || {})[quizQuestionKey(q)];
+    var s = e && e.__hist && e.__hist[idx];
+    if(!s) return;
+    document.getElementById('qeQ').value = s.q || '';
+    for(var i=0;i<4;i++){ var el = document.getElementById('qeO'+i); if(el) el.value = (s.opts && s.opts[i]) || ''; }
+    var rs = document.getElementsByName('qeAns');
+    for(var j=0;j<rs.length;j++){ rs[j].checked = (parseInt(rs[j].value,10) === s.ans); }
+    document.getElementById('qeFb').value = s.fb || '';
+    if(typeof toast === 'function') toast('已载入历史版本，点「保存并同步」生效','ok');
+  }catch(e){}
+};
 // 会话构建时应用编辑覆盖；q.__okey 固定原始 key（quizQuestionKey 识别后历史/游标/搜索全链路稳定）
 window._wbApplyQuizEdits = function(q){
   try{
@@ -14212,7 +14241,7 @@ window._wbApplyQuizEdits = function(q){
     var e = (window._contentEdits.quiz || {})[key];
     if(!e) return q;
     var copy = Object.assign({}, q, {__okey: key});
-    for(var f in e){ if(f !== '__ts') copy[f] = e[f]; }
+    for(var f in e){ if(f !== '__ts' && f !== '__hist') copy[f] = e[f]; } /* v41: __hist 仅审计，不覆盖题目字段 */
     return copy;
   }catch(err){ return q; }
 };
@@ -14226,6 +14255,23 @@ window._wbQuizEditOpen = function(){
     window._wbQuizEditClose();
     var letters = ['A','B','C','D'];
     var _had = !!(window._contentEdits.quiz || {})[quizQuestionKey(q)];
+    // v41: 历史版本列表（__hist，最多 5 版；越靠上越新，最后一条为最初版本）
+    var _hist = (_had && ((window._contentEdits.quiz || {})[quizQuestionKey(q)] || {}).__hist) || [];
+    var _histHtml = '';
+    if(_hist.length){
+      _histHtml = '<div style="font-size:11px;color:#888;margin:10px 0 2px">历史版本（'+_hist.length+' 条 · 越靠上越新）</div>'
+        + _hist.map(function(h,i){
+            var _d = new Date(h.t||0), _p = function(n){ return String(n).padStart(2,'0'); };
+            var _ts = _d.getFullYear()+'-'+_p(_d.getMonth()+1)+'-'+_p(_d.getDate())+' '+_p(_d.getHours())+':'+_p(_d.getMinutes());
+            var _tq = String(h.q||'');
+            return '<div style="display:flex;gap:6px;align-items:center;font-size:11px;padding:5px 8px;border:1px solid #eee;border-radius:8px;margin:3px 0">'
+              + '<span style="color:#999;white-space:nowrap">'+_ts+'</span>'
+              + '<span style="color:#666;white-space:nowrap">'+esc(h.u||'—')+'</span>'
+              + '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(_tq.length>40?_tq.slice(0,40)+'…':_tq)+'</span>'
+              + '<button class="btn sm ol" onclick="_wbQuizEditRestoreHist('+i+')" style="padding:2px 8px;font-size:11px">载入</button>'
+              + '</div>';
+          }).join('');
+    }
     var optsHtml = '';
     for(var i=0;i<4;i++){
       optsHtml += '<div style="display:flex;gap:6px;align-items:center;margin:4px 0">'
@@ -14244,6 +14290,7 @@ window._wbQuizEditOpen = function(){
       + '<div style="font-size:11px;color:#888;margin:8px 0 2px">选项（勾选正确项）</div>'+optsHtml
       + '<div style="font-size:11px;color:#888;margin:8px 0 2px">解析</div>'
       + '<textarea id="qeFb" rows="4" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:12px">'+esc(q.fb||'')+'</textarea>'
+      + _histHtml
       + '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">'
       + '<button class="btn" onclick="_wbQuizEditSave()">💾 保存并同步</button>'
       + (_had?'<button class="btn ol" onclick="_wbQuizEditRevert()">↩️ 还原原始题目</button>':'')
@@ -14262,7 +14309,11 @@ window._wbQuizEditSave = function(){
     var na = -1; var rs = document.getElementsByName('qeAns'); for(var j=0;j<rs.length;j++){ if(rs[j].checked) na = parseInt(rs[j].value,10); }
     if(na < 0){ if(typeof toast==='function') toast('请勾选正确答案','err'); return; }
     var nf = document.getElementById('qeFb').value;
+    var _prev = (window._contentEdits.quiz || {})[key] || null;
+    var _orig = null;
+    for(var _qi=0;_qi<QDATA.length;_qi++){ if(quizQuestionKey(QDATA[_qi]) === key){ _orig = QDATA[_qi]; break; } }
     var editObj = {q: nq, opts: no, ans: na, fb: nf, __ts: Date.now()};
+    editObj.__hist = window._wbQuizEditHist(_prev, _orig); /* v41: 留痕（首次编辑记原始题目） */
     window._contentEdits.quiz = window._contentEdits.quiz || {};
     window._contentEdits.quiz[key] = editObj;
     window._wbQuizEditSaveLocal();
@@ -17270,7 +17321,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v40-2026092704';
+    var swVer = 'v41-2026092705';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17307,7 +17358,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v40-2026092704';
+    return 'v41-2026092705';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
