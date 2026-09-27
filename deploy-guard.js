@@ -106,6 +106,8 @@ const INDEX_MARKERS = {
   // ---- v43：DELE 专项编辑留痕 + 时区修正 ----
   '_deleAdminEditHist':        { min: 1,  desc: 'v43 DELE 留痕' },
   '_localDateStr':             { min: 1,  desc: 'v43 本地时区日期' },
+  '_qrMergePairs':             { min: 5,  desc: 'v44 测验结果并集合并' },
+  'quizResultsTs':             { min: 8,  desc: 'v44 测验结果时间戳并行数组' },
 };
 
 /**
