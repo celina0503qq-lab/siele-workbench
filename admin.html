@@ -2523,7 +2523,7 @@ async function renderAdminSecurityLogs(type){
 // 数据源：content_edits 集合 namespace='quiz'（云函数 getContentEdits，登录用户可读）
 // 每条 edits[key] = { q, opts, ans, fb, __ts, __hist:[{t,u,q,opts,ans,fb}] }
 //   __hist 为 v41 编辑留痕：保存前把"改之前的值"前置入数组，首次编辑即原始题目，最多 5 版
-var QEDITS={edits:{},loadedAt:0,openKey:'',pending:null};
+var QEDITS={edits:{},loadedAt:0,openKey:'',pending:null,dele:{},deleOpen:''};
 async function renderAdminQEdits(){
   var el=$('adminQEditsContent');
   if(!el)return;
@@ -2537,6 +2537,11 @@ async function renderAdminQEdits(){
     var result=await callSieleAuth({action:'getContentEdits',sessionToken:ses.sessionToken,namespace:'quiz'});
     if(!result.ok)throw new Error(cloudAuthMessage(result.code));
     QEDITS.edits=result.edits||{};
+    // v43: 并行拉 DELE 专项编辑（admin_edits 集合，对象直传），失败不阻塞 quiz 区
+    try{
+      var dr=await callSieleAuth({action:'getAdminEdits',sessionToken:ses.sessionToken});
+      QEDITS.dele=(dr&&dr.ok&&dr.edits)?dr.edits:{};
+    }catch(e2){ QEDITS.dele={}; }
     QEDITS.loadedAt=Date.now();
     QEDITS.pending=null;
     renderQEditsView();
@@ -2571,7 +2576,8 @@ function renderQEditsView(){
   var keys=Object.keys(edits);
   if(!keys.length){
     el.innerHTML='<div class="empty"><span class="big">📝</span>题库暂无编辑记录<br><span style="font-size:12px;color:var(--soft)">管理员在工作台做题/背题界面点「✏️ 编辑」修改题目后，会在此处留痕</span></div>'
-      +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm t" onclick="renderAdminQEdits()">⟳ 刷新</button></div>';
+      +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm t" onclick="renderAdminQEdits()">⟳ 刷新</button></div>'
+      +renderDeleEditsSection(); /* v43: DELE 分区（quiz 空态也要显示） */
     return;
   }
   keys.sort(function(a,b){return ((edits[b]&&edits[b].__ts)||0)-((edits[a]&&edits[a].__ts)||0);});
@@ -2624,7 +2630,8 @@ function renderQEditsView(){
     +'<div class="card" style="overflow-x:auto;padding:0"><table style="width:100%;border-collapse:collapse;font-size:12.5px">'
     +'<thead><tr style="border-bottom:2px solid var(--line);text-align:left"><th style="padding:10px 12px">题目键</th><th style="padding:10px 12px">当前题干 / 变更字段</th><th style="padding:10px 12px">最近修改</th><th style="padding:10px 12px">修改人</th><th style="padding:10px 12px">版本</th><th style="padding:10px 12px">操作</th></tr></thead>'
     +'<tbody>'+rows+'</tbody></table></div>'
-    +'<div style="font-size:11.5px;color:var(--soft);margin-top:8px">「还原原始」删除该题编辑并全量回写云端；「恢复此版」把历史快照写为新当前值（当前值继续留在历史里，可再次回溯）。两处均需点击两次确认。</div>';
+    +'<div style="font-size:11.5px;color:var(--soft);margin-top:8px">「还原原始」删除该题编辑并全量回写云端；「恢复此版」把历史快照写为新当前值（当前值继续留在历史里，可再次回溯）。两处均需点击两次确认。</div>'
+    +renderDeleEditsSection(); /* v43: DELE 专项编辑分区 */
 }
 // 写回 quiz 域（全量覆盖；云函数 setContentEdits 仅管理员可写）
 async function qEditsPush(edits,okMsg){
@@ -2772,6 +2779,104 @@ function renderAuditView(){
     +'<div class="card" style="overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="color:var(--soft);text-align:left"><th style="padding:6px 8px">时间</th><th style="padding:6px 8px">操作者</th><th style="padding:6px 8px">域</th><th style="padding:6px 8px">变更</th><th style="padding:6px 8px;text-align:right">体积</th><th style="padding:6px 8px">操作</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
     +'<div style="display:flex;gap:8px;align-items:center;margin-top:12px"><button class="btn sm t" onclick="renderAdminAudit()">⟳ 刷新</button>'
     +'<span style="font-size:11.5px;color:var(--soft)">数据源：content_edits · __audit ｜ 加载于 '+auditTs(AUDIT.loadedAt)+'</span></div>';
+}
+// ============ 管理员 · DELE 专项编辑分区（v43）============
+// 数据源：admin_edits 集合（getAdminEdits/setAdminEdits，对象直传——与 content_edits 的 base64url 通道不同，勿混用）
+// 每条：{itemKey: {field: value, __ts, __hist:[{t,u,f,v|null,big?}]}}；v=null=原始内容
+function deleEditsStats(){
+  var d=QEDITS.dele||{},ks=Object.keys(d),hv=0,lastTs=0,fCnt=0;
+  ks.forEach(function(k){var e=d[k]||{};hv+=(e.__hist||[]).length;
+    Object.keys(e).forEach(function(f){ if(f!=='__ts'&&f!=='__hist')fCnt++; });
+    if((e.__ts||0)>lastTs)lastTs=e.__ts||0;});
+  return {n:ks.length,fCnt:fCnt,hv:hv,lastTs:lastTs};
+}
+function deleEditsToggle(k){QEDITS.deleOpen=(QEDITS.deleOpen===k)?'':k;QEDITS.pending=null;renderQEditsView();}
+function deleEditsPreview(v){var s=(v==null)?'':String(v);return s.length>60?s.slice(0,60)+'…':s;}
+function deleEditsAsk(act,key,field,idx){
+  var p=QEDITS.pending;
+  if(!p||p.act!==act||p.key!==key||p.field!==field||p.idx!==idx){QEDITS.pending={act:act,key:key,field:field,idx:idx};renderQEditsView();return;}
+  QEDITS.pending=null;
+  if(act==='revert')doDeleEditsRevert(key,field);
+  else doDeleEditsRestore(key,field,idx);
+}
+function doDeleEditsRevert(key,field){
+  var e=(QEDITS.dele||{})[key];if(!e||e[field]===undefined)return;
+  var ne=JSON.parse(JSON.stringify(e));
+  delete ne[field];
+  var rest=Object.keys(ne).filter(function(f){return f!=='__ts'&&f!=='__hist';});
+  if(!rest.length)delete QEDITS.dele[key];else QEDITS.dele[key]=ne;
+  deleEditsPush(QEDITS.dele,'已还原该字段为原始内容（云端已同步）');
+}
+function doDeleEditsRestore(key,field,idx){
+  var e=(QEDITS.dele||{})[key];if(!e)return;
+  var h=(e.__hist||[])[idx];if(!h)return;
+  var ne=JSON.parse(JSON.stringify(e));
+  var cur={t:Date.now(),u:(cloudSession()||{}).username||'',f:h.f};
+  cur.v=(ne[h.f]===undefined)?null:ne[h.f];
+  var hh=(ne.__hist||[]).slice(0);hh.unshift(cur);while(hh.length>5)hh.pop();
+  ne.__hist=hh;ne.__ts=Date.now();
+  if(h.v===null||h.v===undefined)delete ne[h.f];else ne[h.f]=h.v;
+  QEDITS.dele[key]=ne;
+  deleEditsPush(QEDITS.dele,'已恢复该历史版本（云端已同步）');
+}
+async function deleEditsPush(edits,okMsg){
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken){toast('登录态已失效，请重新登录','err');return false;}
+  try{
+    var r=await callSieleAuth({action:'setAdminEdits',sessionToken:ses.sessionToken,edits:edits});
+    if(r&&r.ok){QEDITS.pending=null;toast(okMsg||'已同步到云端','ok');renderAdminQEdits();return true;}
+    toast('同步失败：'+((r&&r.code)||'UNKNOWN')+' '+((r&&r.detail)||''),'err');
+    return false;
+  }catch(e){toast('同步失败：'+(e.message||e),'err');return false;}
+}
+function renderDeleEditsSection(){
+  var d=QEDITS.dele||{},ks=Object.keys(d),st=deleEditsStats();
+  var head='<div style="display:flex;gap:8px;align-items:center;margin:22px 0 10px;flex-wrap:wrap">'
+    +'<h2 style="font-size:15px;margin:0">📗 DELE 专项编辑</h2>'
+    +'<span style="font-size:11.5px;color:var(--soft)">数据源 admin_edits 集合 · '+st.n+' 条 / '+st.fCnt+' 个字段 / '+st.hv+' 版历史 · 加载于 '+qEditsTs(QEDITS.loadedAt)+'</span></div>';
+  if(!ks.length){
+    return head+'<div class="empty"><span class="big">📗</span>DELE 专项暂无编辑留痕<br><span style="font-size:12px;color:var(--soft)">工作台 DELE 专项里管理员点 ✏️ 修改题目后（v43 起），每次保存都会在此留痕；存量旧编辑会从下一次编辑起开始补记历史</span></div>';
+  }
+  var pend=QEDITS.pending;
+  ks.sort(function(a,b){return ((d[b]&&d[b].__ts)||0)-((d[a]&&d[a].__ts)||0);});
+  var rows=ks.map(function(k){
+    var e=d[k]||{};
+    var fields=Object.keys(e).filter(function(f){return f!=='__ts'&&f!=='__hist';});
+    var hn=(e.__hist||[]).length;
+    var who=(e.__hist&&e.__hist[0]&&e.__hist[0].u)||'—';
+    var isOpen=(QEDITS.deleOpen===k);
+    var fieldTags=fields.map(function(f){
+      var pv=deleEditsPreview(e[f]);
+      var rl=(pend&&pend.act==='revert'&&pend.key===k&&pend.field===f)?'⚠️ 确认':'↩';
+      return '<span style="display:inline-flex;align-items:center;gap:4px;padding:1px 6px;border-radius:6px;background:rgba(59,130,246,.1);color:#3b82f6;font-size:11px;margin:2px 4px 2px 0;max-width:320px;vertical-align:middle">'
+        +'<b>'+esc(f)+'</b><span style="color:var(--soft)">'+esc(pv)+'</span>'
+        +'<span style="cursor:pointer;user-select:none" title="还原为原始内容" onclick="deleEditsAsk(\'revert\',\''+k+'\',\''+f+'\',-1)">'+rl+'</span></span>';
+    }).join('')||'<span style="color:var(--soft)">（无字段编辑）</span>';
+    var main='<tr style="border-top:1px solid rgba(0,0,0,.06)">'
+      +'<td style="padding:9px 12px;font-family:monospace;font-size:11.5px;color:var(--soft)">'+esc(k)+'</td>'
+      +'<td style="padding:9px 12px">'+fieldTags+'</td>'
+      +'<td style="padding:9px 12px;font-size:11.5px;color:var(--soft);white-space:nowrap">'+qEditsTs(e.__ts)+'</td>'
+      +'<td style="padding:9px 12px;font-size:11.5px">'+esc(who)+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;font-weight:700">'+hn+'</td>'
+      +'<td style="padding:9px 12px;white-space:nowrap"><button class="btn xs '+(isOpen?'t':'gh')+'" onclick="deleEditsToggle(\''+k+'\')">'+(isOpen?'收起':'历史')+'</button></td></tr>';
+    if(!isOpen)return main;
+    var hist=(e.__hist||[]).map(function(h,i){
+      var vv=(h.v===null||h.v===undefined)?'<span style="color:var(--soft)">（原始内容 · 恢复将删除该字段编辑）</span>':esc(deleEditsPreview(h.v));
+      var rl=(pend&&pend.act==='hist'&&pend.key===k&&pend.field===h.f&&pend.idx===i)?'⚠️ 确认恢复':'恢复此版';
+      return '<div style="display:flex;gap:8px;align-items:center;font-size:11.5px;padding:6px 9px;border:1px solid var(--line);border-radius:8px;margin:4px 0">'
+        +'<span style="color:var(--soft);white-space:nowrap">'+qEditsTs(h.t)+'</span>'
+        +'<span style="white-space:nowrap;min-width:56px">'+esc(h.u||'—')+'</span>'
+        +'<span style="display:inline-block;padding:1px 6px;border-radius:6px;background:rgba(139,92,246,.12);color:#7c3aed;font-size:11px;white-space:nowrap">'+esc(h.f||'')+'</span>'
+        +'<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+vv+'</span>'
+        +'<button class="btn xs '+((pend&&pend.act==='hist'&&pend.key===k&&pend.field===h.f&&pend.idx===i)?'a':'gh')+'" onclick="deleEditsAsk(\'hist\',\''+k+'\',\''+(h.f||'')+'\','+i+')">'+rl+'</button></div>';
+    }).join('')||'<div style="font-size:11.5px;color:var(--soft)">（暂无历史 · v43 起的编辑才会有）</div>';
+    return main+'<tr><td colspan="6" style="padding:0 12px 12px 12px;background:rgba(0,0,0,.015)">'
+      +'<div style="font-size:11.5px;color:var(--soft);margin:8px 0 4px">历史版本（越靠上越新 · 最多 5 版 · v=原始内容 表示恢复时删除该字段编辑）</div>'+hist+'</td></tr>';
+  }).join('');
+  return head+'<div class="card" style="overflow-x:auto;padding:0"><table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+    +'<thead><tr style="border-bottom:2px solid var(--line);text-align:left"><th style="padding:10px 12px">条目键</th><th style="padding:10px 12px">已改字段 / 当前值</th><th style="padding:10px 12px">最近修改</th><th style="padding:10px 12px">修改人</th><th style="padding:10px 12px">版本</th><th style="padding:10px 12px">操作</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table></div>'
+    +'<div style="font-size:11.5px;color:var(--soft);margin-top:8px">「↩」把该字段还原为原始内容；「恢复此版」把历史快照写回该字段。均需点击两次确认，操作立即同步云端。</div>';
 }
 async function renderAdminUsers(){
   var el=$('adminUsersContent');
