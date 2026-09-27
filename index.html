@@ -17451,7 +17451,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v44-2026092708';
+    var swVer = 'v46-2026092802';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17488,7 +17488,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v44-2026092708';
+    return 'v46-2026092802';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18540,6 +18540,8 @@ function todoCardHtml(){
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图'],['reading','📰','外刊'],['dele','📝','DELE']]
       .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
     // 附加云同步入口（弹窗而非路由跳转）
+    quick += '<button class="btn sm ol" onclick="exportData_()" title="把学习进度导出为 JSON 备份文件（防丢失）">📥 导出备份</button>';
+    quick += '<button class="btn sm ol" onclick="importDataPrompt_()" title="从备份 JSON 文件恢复学习进度">📤 导入备份</button>';
     quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="云同步 · 学习数据/做题记录跨设备同步">☁️ 云同步</button>';
     quick += '<button class="btn sm ol" onclick="wbLogout()" title="退出当前账号 · 本机学习数据保留">🚪 退出登录</button>';
     var lis=tasks.map(function(t,i){
@@ -18566,6 +18568,8 @@ function todoCardHtml(){
     // 出错时仍渲染快捷操作卡，确保仪表盘不缺失
     var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图'],['reading','📰','外刊'],['dele','📝','DELE']]
       .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
+    quick += '<button class=\"btn sm ol\" onclick=\"exportData_()\" title=\"导出备份\">📥 导出备份</button>';
+    quick += '<button class=\"btn sm ol\" onclick=\"importDataPrompt_()\" title=\"导入备份\">📤 导入备份</button>';
     quick += '<button class=\"btn sm ol\" onclick=\"openSyncSettings()\" title=\"GitHub Gist 云同步\">☁️ 云同步</button>';
     quick += '<button class=\"btn sm ol\" onclick=\"wbLogout()\" title=\"退出当前账号\">🚪 退出登录</button>';
     return '<div class=\"g g2\"><div class=\"card\"><h3><span class=\"ic\">⚡</span>快捷操作</h3><div class=\"quick-grid\">'+quick+'</div></div></div>';
