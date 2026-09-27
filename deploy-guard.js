@@ -368,8 +368,8 @@ function checkKnownIssues(indexSrc) {
     }
 
     const gist = count(indexSrc, 'standaloneSyncBadge');
-    if (gist > 0) {
-      warn('仍存在废弃的 Gist 同步角标（standaloneSyncBadge），会与 wbSyncChip 冲突');
+    if (gist > 0 && indexSrc.indexOf('__WB_LEGACY_BADGE_OFF__') === -1) {
+      warn('仍存在 Gist 角标代码（standaloneSyncBadge）且 v38 U2 早退未生效, 会与 wbSyncChip 冲突');
     }
 
     if (!/Apple Color Emoji|Noto Color Emoji|Segoe UI Emoji/.test(indexSrc)) {
