@@ -620,11 +620,13 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="btn sm gh" id="tabInvitesBtn" onclick="switchAdminTab('invites')">🎫 邀请码管理</button>
     <button class="btn sm gh" id="tabSecurityBtn" onclick="switchAdminTab('security')">🔐 安全日志</button>
     <button class="btn sm gh" id="tabQEditsBtn" onclick="switchAdminTab('qedits')">📝 题库编辑</button>
+    <button class="btn sm gh" id="tabAuditBtn" onclick="switchAdminTab('audit')">🕘 编辑留痕</button>
   </div>
   <div id="adminUsersContent"></div>
   <div id="adminInvitesContent" style="display:none"></div>
   <div id="adminSecurityContent" style="display:none"></div>
   <div id="adminQEditsContent" style="display:none"></div>
+  <div id="adminAuditContent" style="display:none"></div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -2374,10 +2376,21 @@ async function revokeCloudSyncToken(id){
 
 // ============ 管理员 · 用户管理 ============
 function switchAdminTab(tab){
-  var uc=$('adminUsersContent'),ic=$('adminInvitesContent'),sc=$('adminSecurityContent'),qc=$('adminQEditsContent');
-  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn'),sb=$('tabSecurityBtn'),qb=$('tabQEditsBtn');
+  var uc=$('adminUsersContent'),ic=$('adminInvitesContent'),sc=$('adminSecurityContent'),qc=$('adminQEditsContent'),ac=$('adminAuditContent');
+  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn'),sb=$('tabSecurityBtn'),qb=$('tabQEditsBtn'),ab=$('tabAuditBtn');
+  if(ab&&tab!=='audit'){ab.style.fontWeight='400';ab.classList.add('gh');}
+  if(tab==='audit'){
+    if(uc)uc.style.display='none';if(ic)ic.style.display='none';if(sc)sc.style.display='none';if(qc)qc.style.display='none';if(ac)ac.style.display='';
+    if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
+    if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
+    if(sb){sb.style.fontWeight='400';sb.classList.add('gh');}
+    if(qb){qb.style.fontWeight='400';qb.classList.add('gh');}
+    if(ab){ab.style.fontWeight='700';ab.classList.remove('gh');}
+    renderAdminAudit();
+    return;
+  }
   if(tab==='qedits'){
-    if(uc)uc.style.display='none';if(ic)ic.style.display='none';if(sc)sc.style.display='none';if(qc)qc.style.display='';
+    if(uc)uc.style.display='none';if(ic)ic.style.display='none';if(sc)sc.style.display='none';if(ac)ac.style.display='none';if(qc)qc.style.display='';
     if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
     if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
     if(sb){sb.style.fontWeight='400';sb.classList.add('gh');}
@@ -2386,6 +2399,7 @@ function switchAdminTab(tab){
     return;
   }
   if(qc)qc.style.display='none';
+  if(ac)ac.style.display='none';
   if(qb){qb.style.fontWeight='400';qb.classList.add('gh');}
   if(tab==='users'){
     if(uc)uc.style.display='';if(ic)ic.style.display='none';if(sc)sc.style.display='none';
@@ -2663,6 +2677,101 @@ function doQEditsRestoreHist(key,idx){
   var next=Object.assign({},QEDITS.edits);
   next[key]=ne;
   qEditsPush(next,'已恢复该历史版本（云端已同步）');
+}
+// ============ 管理员 · 编辑留痕总览（v42）============
+// 数据源：content_edits 独立命名空间 __audit（与各业务域并列的独立云文档）
+// 结构：{ v:1, log:[{ id, t, u, ns, pg, sz0, sz1, sum, before?, big? }] }
+var AUDIT={log:[],loadedAt:0,pending:null};
+var AUDIT_LABEL={writing:'写作任务/范文',essays:'范文库',speakingTopics:'口语话题',oral:'口语 Tarea 模板',oralbank:'SIELE 口语题库',tareas:'考试结构五项',verbUsage:'动词用法',verbConj:'动词变位',grammar:'语法库'};
+function auditTs(ts){
+  if(!ts)return '—';
+  var d=new Date(ts),p=function(n){return String(n).padStart(2,'0');};
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+}
+function auditSize(n){
+  n=n||0;
+  return n<1024?(n+' B'):(n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(2)+' MB');
+}
+async function renderAdminAudit(){
+  var el=$('adminAuditContent');
+  if(!el)return;
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+    el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
+    return;
+  }
+  el.innerHTML='<div class="empty">正在加载编辑留痕…</div>';
+  try{
+    var result=await callSieleAuth({action:'getContentEdits',sessionToken:ses.sessionToken,namespace:'__audit'});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    AUDIT.log=(result.edits&&result.edits.log)||[];
+    AUDIT.loadedAt=Date.now();
+    AUDIT.pending=null;
+    renderAuditView();
+  }catch(err){
+    el.innerHTML='<div class="note err">无法加载编辑留痕：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminAudit()">重试</button></div>';
+  }
+}
+function auditAsk(id,ns){
+  var p=AUDIT.pending;
+  if(!p||p.id!==id){ AUDIT.pending={id:id,ns:ns}; renderAuditView(); return; }
+  AUDIT.pending=null;
+  doAuditRollback(id,ns);
+}
+async function auditSetContentEdits(ns,edits){
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken)return false;
+  var payload='';
+  try{ payload=btoa(unescape(encodeURIComponent(JSON.stringify(edits)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }catch(e){ return false; }
+  try{ var r=await callSieleAuth({action:'setContentEdits',sessionToken:ses.sessionToken,namespace:ns,edits:payload}); return !!(r&&r.ok); }catch(e){ return false; }
+}
+async function doAuditRollback(id,ns){
+  var rec=null;
+  for(var i=0;i<AUDIT.log.length;i++){ if(AUDIT.log[i].id===id){ rec=AUDIT.log[i]; break; } }
+  if(!rec||!rec.before){ toast('该记录不含完整快照，无法回滚','err'); return; }
+  if(!ns)ns=rec.ns;
+  toast('正在回滚…','ok');
+  var cur=null;
+  try{ var r0=await callSieleAuth({action:'getContentEdits',sessionToken:cloudSession().sessionToken,namespace:ns}); if(r0&&r0.ok)cur=r0.edits||null; }catch(e){}
+  var szc=0; try{ szc=JSON.stringify(cur||{}).length; }catch(e){}
+  var who=''; try{ var cs=cloudSession(); who=(cs&&(cs.username||cs.uid))||''; }catch(e){}
+  var back={ id:'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), t:Date.now(), u:who, ns:ns, pg:'admin',
+             sz0:szc, sz1:rec.sz0, sum:'\u21a9 回滚到 '+auditTs(rec.t) };
+  if(szc<=262144)back.before=cur; else back.big=true;
+  AUDIT.log.unshift(back);
+  var okA=await auditSetContentEdits(ns,rec.before);
+  var okB=await auditSetContentEdits('__audit',{v:1,log:AUDIT.log.slice(0,60)});
+  if(okA&&okB){ toast('✅ 已回滚并同步云端','ok'); renderAdminAudit(); }
+  else toast('回滚失败：'+(okA?'（审计写入失败）':'（内容写入失败）'),'err');
+}
+function renderAuditView(){
+  var el=$('adminAuditContent');if(!el)return;
+  var log=AUDIT.log||[];
+  if(!log.length){
+    el.innerHTML='<div class="empty"><span class="big">🕘</span>暂无编辑留痕<br><span style="font-size:12px;color:var(--soft)">管理员在工作台编辑写作 / 口语 / 语法 / 词库 / 范文等内容后，每次保存都会在此留痕，可一键回滚</span></div>'
+      +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm t" onclick="renderAdminAudit()">⟳ 刷新</button></div>';
+    return;
+  }
+  var rows=log.map(function(r){
+    var pend=AUDIT.pending&&AUDIT.pending.id===r.id;
+    var act=r.before
+      ? (pend?'<button class="btn xs dgr" onclick="auditAsk(\''+r.id+'\',\''+esc(r.ns)+'\')">再点一次确认</button>'
+             :'<button class="btn xs gh" onclick="auditAsk(\''+r.id+'\',\''+esc(r.ns)+'\')">↩ 回滚</button>')
+      : '<span style="color:var(--soft);font-size:11px">快照过大</span>';
+    return '<tr>'
+      +'<td style="white-space:nowrap;padding:6px 8px;border-bottom:1px solid #eef2f7">'+esc(auditTs(r.t))+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eef2f7">'+esc(r.u||'—')+'</td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eef2f7"><span style="display:inline-block;padding:1px 7px;border-radius:6px;background:rgba(139,92,246,.12);color:#7c3aed;font-size:11px">'+esc(AUDIT_LABEL[r.ns]||r.ns)+'</span></td>'
+      +'<td style="padding:6px 8px;border-bottom:1px solid #eef2f7">'+esc(r.sum||'')+'</td>'
+      +'<td style="white-space:nowrap;text-align:right;padding:6px 8px;border-bottom:1px solid #eef2f7;color:var(--soft)">'+auditSize(r.sz0)+' → '+auditSize(r.sz1)+'</td>'
+      +'<td style="white-space:nowrap;padding:6px 8px;border-bottom:1px solid #eef2f7">'+act+'</td>'
+      +'</tr>';
+  }).join('');
+  el.innerHTML=''
+    +'<div class="tb"><div><h2>🕘 编辑留痕总览</h2><div class="d">共 '+log.length+' 条 · 覆盖写作/口语/语法/词库/范文等全部管理员编辑域 · 点「↩ 回滚」把该域恢复到这次修改之前</div></div></div>'
+    +'<div class="card" style="overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="color:var(--soft);text-align:left"><th style="padding:6px 8px">时间</th><th style="padding:6px 8px">操作者</th><th style="padding:6px 8px">域</th><th style="padding:6px 8px">变更</th><th style="padding:6px 8px;text-align:right">体积</th><th style="padding:6px 8px">操作</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div style="display:flex;gap:8px;align-items:center;margin-top:12px"><button class="btn sm t" onclick="renderAdminAudit()">⟳ 刷新</button>'
+    +'<span style="font-size:11.5px;color:var(--soft)">数据源：content_edits · __audit ｜ 加载于 '+auditTs(AUDIT.loadedAt)+'</span></div>';
 }
 async function renderAdminUsers(){
   var el=$('adminUsersContent');
