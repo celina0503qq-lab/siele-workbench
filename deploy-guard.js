@@ -103,6 +103,9 @@ const INDEX_MARKERS = {
   // ---- v42：全域编辑留痕（__audit 独立命名空间）----
   '_wbAuditRecord':            { min: 1,  desc: 'v42 全域留痕抓取' },
   '_wbAuditRestore':           { min: 1,  desc: 'v42 留痕回滚' },
+  // ---- v43：DELE 专项编辑留痕 + 时区修正 ----
+  '_deleAdminEditHist':        { min: 1,  desc: 'v43 DELE 留痕' },
+  '_localDateStr':             { min: 1,  desc: 'v43 本地时区日期' },
 };
 
 /**
@@ -117,6 +120,7 @@ const ADMIN_MARKERS = {
   'siele-workbench-logout':    { min: 1, desc: 'v37 会话联动通知' },
   'renderAdminQEdits':         { min: 1, desc: 'v41 题库编辑总览' },
   'renderAdminAudit':          { min: 1, desc: 'v42 编辑留痕总览' },
+  'renderDeleEditsSection':    { min: 1, desc: 'v43 DELE 编辑分区' },
 };
 
 /**
