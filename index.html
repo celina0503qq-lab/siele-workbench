@@ -1256,7 +1256,9 @@ function saveBackup(){ try{ localStorage.setItem(STORE_BACKUP_KEY, JSON.stringif
 window.addEventListener('beforeunload', function(){ save(); saveBackup(); });
 // 每30秒自动保存（防止崩溃丢数据）
 setInterval(function(){ save(); }, 30000);
-function todayStr(){ return new Date().toISOString().slice(0,10); }
+// v43: 时区修正——原实现取 UTC 日期，中国时区每天 0-8 点把「今天」算成「昨天」（streak 误断签）
+function _localDateStr(d){ d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function todayStr(){ return _localDateStr(); }
 
 // ===== 单词背诵计数 helper =====
 /* FEAT-4: 扁平化 vocabReviewCount — 从嵌套 {A1:{},A2:{}} 改为独立 key vocabReviewCount_A1, vocabReviewCount_A2...
@@ -1337,7 +1339,7 @@ function migrateVocabReviewCount(){
 function updateStreak(){
   const t = todayStr();
   if(ST.lastStudy !== t){
-    const y = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    const y = _localDateStr(new Date(Date.now()-86400000)); /* v43: 本地时区，与 lastStudy 键口径一致 */
     if(ST.lastStudy === y) ST.streak++;
     else ST.streak = 1;
     ST.lastStudy = t; save();
@@ -5880,7 +5882,7 @@ function initPlanner(){
     const days = ['日','一','二','三','四','五','六'];
     for(let i=6;i>=0;i--){
       const d = new Date(today.getTime() - i*86400000);
-      const ds = d.toISOString().slice(0,10);
+      const ds = _localDateStr(d); /* v43: 本地时区，与 lastStudy 键口径一致 */
       const checked = ST.lastStudy === ds || (i===0 && ST.streak>0);
       hg += `<div style="text-align:center;padding:6px;border-radius:7px;cursor:pointer;${checked?'background:#e3f3ee;border:1px solid #b8dccf':'background:#f7efe4;border:1px solid var(--line)'}" onclick="checkIn('${ds}')">
         <div style="font-size:9px;color:var(--soft)">${days[d.getDay()]}</div>
@@ -13910,9 +13912,27 @@ window._deleAdminGetField = function(itemKey, field, original){
   var e = window._deleAdminEdits;
   return (e && e[itemKey] && e[itemKey][field] !== undefined) ? e[itemKey][field] : original;
 };
+// v43: DELE 专项编辑留痕——保存前把该字段「改之前的编辑值」记入 __hist（上限 5 版）。
+// v=null 表示该字段此前未被编辑过（仍是题库原始内容）⇒「恢复此版」= 删除该字段编辑。
+// 超长值（>2 万字符，如整段听力原文）降级 big 只记元数据，防 admin_edits 文档膨胀。
+window._deleAdminEditHist = function(prevRec, field, oldVal){
+  try{
+    var who = '';
+    try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); who = String((s && (s.username || s.name || s.uid)) || ''); }catch(e){}
+    var entry = { t: Date.now(), u: who, f: field };
+    if(oldVal === undefined || oldVal === null){ entry.v = null; }
+    else { var sv = String(oldVal); if(sv.length > 20000){ entry.big = true; } else { entry.v = oldVal; } }
+    var h = (prevRec && prevRec.__hist) ? prevRec.__hist.slice(0) : [];
+    h.unshift(entry);
+    while(h.length > 5) h.pop();
+    return h;
+  }catch(e){ return (prevRec && prevRec.__hist) || []; }
+};
 window._deleAdminSaveEdit = function(itemKey, field, value, callback){
   if (!window._deleAdminEdits) window._deleAdminEdits = {};
   if (!window._deleAdminEdits[itemKey]) window._deleAdminEdits[itemKey] = {};
+  // v43: 留痕（oldVal=该字段当前编辑值；未编辑过则为 null=原始内容）
+  try{ window._deleAdminEdits[itemKey].__hist = window._deleAdminEditHist(window._deleAdminEdits[itemKey], field, window._deleAdminEdits[itemKey][field]); }catch(e){}
   window._deleAdminEdits[itemKey][field] = value;
   window._deleAdminEdits[itemKey].__ts = Date.now();  // 2026-09-25: 记录编辑时间, 供多设备合并判断新旧
   try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(window._deleAdminEdits)); }
@@ -13941,7 +13961,7 @@ window._deleAdminRevertEdit = function(itemKey, field){
   if (window._deleAdminEdits && window._deleAdminEdits[itemKey]) {
     delete window._deleAdminEdits[itemKey][field];
     // __ts 是内部元数据, 不参与"是否还有编辑"的判断
-    var _restFields = Object.keys(window._deleAdminEdits[itemKey]).filter(function(f){ return f !== '__ts'; });
+    var _restFields = Object.keys(window._deleAdminEdits[itemKey]).filter(function(f){ return f !== '__ts' && f !== '__hist'; }); /* v43: __hist 是留痕不算编辑 */
     if (_restFields.length === 0) delete window._deleAdminEdits[itemKey];
     try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(window._deleAdminEdits)); }
     catch(e) {}
@@ -14458,19 +14478,7 @@ window._deleAdminSyncToCloud = function(){
 window._deleAdminFetchFromCloud = function(){
   window._deleCloudBridgeInit();
   window._delePostToBridge({type:'siele-admin-edits-fetch'});
-  // GitHub Pages 静态 JSON 兜底 (无 CloudBase 时)
-  var url = 'https://celina0503qq-lab.github.io/siele-workbench/dele_admin_edits.json';
-  fetch(url + '?t=' + Date.now(), {cache: 'no-store'}).then(function(r){
-    if (!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  }).then(function(d){
-    if (d && d.edits && Object.keys(d.edits).length > 0) {
-      var merged = Object.assign({}, d.edits, window._deleAdminEdits || {});
-      window._deleAdminEdits = merged;
-      try { localStorage.setItem('dele_admin_edits_v1', JSON.stringify(merged)); } catch(e) {}
-      window._deleAdminApplyEdits();
-    }
-  }).catch(function(e){});
+  /* v43: 移除 GitHub Pages 静态 JSON 兜底（dele_admin_edits.json 恒为空、云函数通道已稳定，省一次启动请求） */
 };
 // 接收 CloudBase 返回的编辑
 window.addEventListener('message', function(e){
@@ -14915,7 +14923,7 @@ function _renderDeleA1ModeloList(task, mid, items){
       if (!edits) return it;
       var copy = Object.assign({}, it);
       for (var f in edits) {
-        if (edits.hasOwnProperty(f) && f !== 'options') copy[f] = edits[f];
+        if (edits.hasOwnProperty(f) && f !== 'options' && f !== '__ts' && f !== '__hist') copy[f] = edits[f]; /* v43: 排除留痕元数据不进题目对象 */
       }
       if (edits.options) copy.options = edits.options;
       return copy;
@@ -14925,7 +14933,9 @@ function _renderDeleA1ModeloList(task, mid, items){
       var shKey = window._deleLk(items[i].modelo + '_P' + items[i].prueba + '_T' + items[i].tarea);
       var shEdits = window._deleAdminEdits[shKey];
       if (shEdits) {
-        items[i] = Object.assign({}, items[i], shEdits);
+        var _sh = {};
+        for (var _sf in shEdits) { if (shEdits.hasOwnProperty(_sf) && _sf !== '__ts' && _sf !== '__hist') _sh[_sf] = shEdits[_sf]; } /* v43: 排除留痕元数据 */
+        items[i] = Object.assign({}, items[i], _sh);
       }
     }
   }
@@ -17437,7 +17447,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v42-2026092706';
+    var swVer = 'v43-2026092707';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17474,7 +17484,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v42-2026092706';
+    return 'v43-2026092707';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
