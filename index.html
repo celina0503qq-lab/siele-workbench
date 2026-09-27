@@ -1091,7 +1091,7 @@ function getDefaultState(){
     accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
     vocabMastery: {}, grammarDone: {}, grammarDoneTs: {},
     quizIdx: 0, quizScore: 0, quizAnswered: 0, quizFilter: {ex:'all',lvl:'all',type:'all',order:'shuffle'},
-    quizSession: [], quizResults: [], quizQuestionState: {}, // 当前测验内每题的选项顺序与作答结果
+    quizSession: [], quizResults: [], quizResultsTs: [], quizQuestionState: {}, // v44: quizResultsTs=并行时间戳；当前测验内每题的选项顺序与作答结果
     tasks: [], plannerStart: '',
     weeklyPlan: null, weeklyGoals: null, weeklyPlanTs: 0, weeklyGoalsTs: 0, // 周计划总览/每周目标（null=用系统默认，用户编辑后覆盖；Ts 供跨设备 LWW 合并）
     streak: 0, lastStudy: '', totalStudy: 0,
@@ -4018,7 +4018,11 @@ function renderQuizQuestion(){
     }
     const pct = ST.quizAnswered > 0 ? Math.round(ST.quizScore/ST.quizAnswered*100) : 0;
     ST.quizResults.push(pct);
-    if(ST.quizResults.length > 20) ST.quizResults.shift();
+    ST.quizResultsTs = ST.quizResultsTs || []; // v44: 并行时间戳（旧数据缺 Ts 按 0 处理，跨设备按时间去重合并）
+    while(ST.quizResultsTs.length > ST.quizResults.length - 1) ST.quizResultsTs.shift(); /* v44: 预留本次 push 位 */
+    while(ST.quizResultsTs.length < ST.quizResults.length - 1) ST.quizResultsTs.unshift(0);
+    ST.quizResultsTs.push(Date.now());
+    if(ST.quizResults.length > 20){ ST.quizResults.shift(); ST.quizResultsTs.shift(); }
     saveBackup(); // 紧急备份测验结果
     save(); updateStreak();
     box.innerHTML = `<div style="text-align:center;padding:20px">
@@ -17447,7 +17451,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v43-2026092707';
+    var swVer = 'v44-2026092708';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17484,7 +17488,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v43-2026092707';
+    return 'v44-2026092708';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -17703,6 +17707,30 @@ function setChip(st,msg){
   c.title=st==='nologin'?'前往后台管理系统登录，登录后学习进度将多设备同步':'打开后台管理系统查看同步详情';
 }
 
+/* v44: quizResults 合并——两台设备各有新成绩时不再互丢（旧实现「取更长」必丢一边）。
+   数据为并行数组：quizResults(百分比数字) + quizResultsTs(时间戳,可缺省)；
+   旧数据/旧设备无 Ts ⇒ 元素按 t=0 处理，读写全兼容，平滑过渡；上限 20 条按时间取最新。 */
+window._qrMergePairs = function(lp, lt, rp, rt){
+  try{
+    lp = lp||[]; lt = lt||[]; rp = rp||[]; rt = rt||[];
+    var seen = {}, out = [];
+    function add(p, t){
+      p = Number(p)||0; t = Number(t)||0;
+      var key = t + '_' + p;
+      if(seen[key]) return;
+      seen[key] = true;
+      out.push({p:p, t:t});
+    }
+    for(var i = 0; i < lp.length; i++) add(lp[i], lt[i]);
+    for(var j = 0; j < rp.length; j++) add(rp[j], rt[j]);
+    out.sort(function(a,b){ return b.t - a.t; });
+    out = out.slice(0, 20);
+    var P = [], T = [];
+    out.forEach(function(x){ P.push(x.p); T.push(x.t); });
+    return { p: P, t: T };
+  }catch(e){ return { p: lp||[], t: lt||[] }; }
+};
+
 /* ---------- ADB → ST（吸收后台/云端的更新） ---------- */
 function hydrate(){
   if(!AU||!ADB)return;
@@ -17723,9 +17751,14 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','quizResults','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
+    /* v44: quizResults 不再随快照盲覆盖（会丢掉本机未推送的新成绩），改并集合并 */
+    if(rm.quizResults || rm.quizResultsTs){
+      var _qmH = window._qrMergePairs(ST.quizResults, ST.quizResultsTs, rm.quizResults, rm.quizResultsTs);
+      ST.quizResults = _qmH.p; ST.quizResultsTs = _qmH.t;
+    }
     if(rm.pomodoro&&typeof rm.pomodoro.completed==='number'&&ST.pomodoro)
       ST.pomodoro.completed=Math.max(ST.pomodoro.completed||0,rm.pomodoro.completed);
     MIR.wbTs=ADB.wb.ts;changed=true;
@@ -17962,8 +17995,11 @@ function mergeWbSnapshot(remote){
   }
   // 掌握度：取 max
   if(remote.vocabMastery){Object.keys(remote.vocabMastery).forEach(function(es){var rm=remote.vocabMastery[es]||0,lm=ST.vocabMastery[es]||0;if(rm>lm){ST.vocabMastery[es]=rm;ST.flashMastery[es]=rm;}});}
-  // 测验结果：取更长的
-  if(remote.quizResults&&remote.quizResults.length>(ST.quizResults||[]).length)ST.quizResults=remote.quizResults;
+  // v44: 测验结果并集合并（时间戳去重、取最新 20；兼容旧「取更长」数据），不再互丢
+  if(remote.quizResults || remote.quizResultsTs){
+    var _qmW = window._qrMergePairs(ST.quizResults, ST.quizResultsTs, remote.quizResults, remote.quizResultsTs);
+    ST.quizResults = _qmW.p; ST.quizResultsTs = _qmW.t;
+  }
   // 错题集：并集合并 + 删除墓碑（跨设备增删同步）
   mergeErrorsFromRemote(remote);
   // 阅读进度：合并
@@ -18982,7 +19018,10 @@ async function standaloneSync(showLog){
         if(rm > lm){ ST.vocabMastery[es]=rm; ST.flashMastery[es]=rm; merged++; }
       });
     }
-    if(remote.quizResults && remote.quizResults.length>(ST.quizResults||[]).length) ST.quizResults = remote.quizResults;
+    if(remote.quizResults || remote.quizResultsTs){
+      var _qmS = window._qrMergePairs(ST.quizResults, ST.quizResultsTs, remote.quizResults, remote.quizResultsTs); /* v44: 并集合并不再互丢 */
+      ST.quizResults = _qmS.p; ST.quizResultsTs = _qmS.t;
+    }
     // 错题集：并集合并 + 删除墓碑（同 mergeWbSnapshot，共用全局实现）
     mergeErrorsFromRemote(remote);
     if(remote.readingProgress) Object.keys(remote.readingProgress).forEach(function(k){ ST.readingProgress[k]=ST.readingProgress[k]||remote.readingProgress[k]; });
@@ -19128,7 +19167,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,quizResultsTs:ST.quizResultsTs||[],tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -19150,7 +19189,7 @@ function importDataPrompt_(){
         var merged=0;
         if(data.vocabMastery){Object.keys(data.vocabMastery).forEach(function(es){var m=data.vocabMastery[es]||0;if(m>(ST.vocabMastery[es]||0)){ST.vocabMastery[es]=m;ST.flashMastery[es]=m;merged++;}});}
         _mergeGrammarDone(data);
-        if(data.quizResults&&data.quizResults.length>(ST.quizResults||[]).length)ST.quizResults=data.quizResults;
+        if(data.quizResults || data.quizResultsTs){var _qmB=window._qrMergePairs(ST.quizResults,ST.quizResultsTs,data.quizResults,data.quizResultsTs);if(_qmB.p.length>(ST.quizResults||[]).length)merged++;ST.quizResults=_qmB.p;ST.quizResultsTs=_qmB.t;} /* v44: 并集合并 */
         if(data.tasks&&data.tasks.length>(ST.tasks||[]).length)ST.tasks=data.tasks;
         if(data.errors&&data.errors.length>(ST.errors||[]).length)ST.errors=data.errors;
         if(data.streak>ST.streak)ST.streak=data.streak;
