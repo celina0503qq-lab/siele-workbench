@@ -3918,7 +3918,7 @@ function buildQuizSession(){
     if(lvl !== 'all' && q.lvl !== lvl) return false;
     if(type !== 'all' && q.type !== type) return false;
     return true;
-  }).map((_,i,a) => a[i]); // copy
+  }).map(function(q){ return (typeof window._wbApplyQuizEdits==='function') ? window._wbApplyQuizEdits(q) : q; }); // copy + v39 content_edits.quiz 覆盖
   // ===== 顺序模式：原序排列，位置由游标 quizOrderPos 决定（随云同步跨设备）=====
   if(order === 'order'){
     // 顺序模式位置 = 游标 quizOrderPos[组合key].next；无游标时回退 _orderResumeIdx（第一个没做的题）
@@ -4037,7 +4037,7 @@ function renderQuizQuestion(){
   const letters = ['A','B','C','D'];
   if(_quizBackMode()){
     // 背题模式：原始顺序展示选项、正确答案标绿、解析直出；不读不写 quizQuestionState/quizHistory/得分
-    let bh = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · <span style="color:#b45309;font-weight:700">📖 背题模式</span></div>`;
+    let bh = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · <span style="color:#b45309;font-weight:700">📖 背题模式</span>${(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin())?' <button class="btn sm ol" onclick="_wbQuizEditOpen()" style="margin-left:8px;padding:2px 8px;font-size:11px">✏️ 编辑</button>':''}</div>`;
     if(q.type === 'listening'){
       bh += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\'")}',this)">🔊 点击听音频</button></div>`;
       bh += `<div class="qq">听音频回答问题</div>`;
@@ -4085,7 +4085,7 @@ function renderQuizQuestion(){
     }
   }
 
-  let h = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · 累计已做 ${ST.quizDoneTotal||0} 题${doneMark}</div>`;
+  let h = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · 累计已做 ${ST.quizDoneTotal||0} 题${doneMark}${(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin())?' <button class="btn sm ol" onclick="_wbQuizEditOpen()" style="margin-left:8px;padding:2px 8px;font-size:11px">✏️ 编辑</button>':''}</div>`;
   if(q.type === 'listening'){
     h += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\\'")}',this)">🔊 点击听音频</button></div>`;
     h += `<div class="qq">听音频回答问题</div>`;
@@ -4306,6 +4306,7 @@ window._quizBackPosSet = function(k, idx){
 let _quizOpts = [];
 // 题目内容唯一键：跨设备一致（与题号无关，解决 A/B 设备题目顺序不一致问题）
 function quizQuestionKey(q){
+  if(q && q.__okey) return q.__okey; /* v39: 会话克隆携带原始内容 key，编辑覆盖不改变做题历史/游标/搜索定位 */
   var s = (q.ex||'') + '::' + (q.type||'') + '::' + (q.q||'');
   var h = 0;
   for(var i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) | 0; }
@@ -14185,7 +14186,7 @@ window._deleCloudCall = function(action, params){
 };
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
-window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {} };
+window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {}, quiz: {} };
 window._contentEditsCb = {};
 // 拉取 content_edits（namespace: writing / oral），结果经 message 监听写入 _contentEdits[ns]
 window._deleFetchContentEdits = function(namespace, callback){
@@ -14196,6 +14197,101 @@ window._deleFetchContentEdits = function(namespace, callback){
 // 保存 content_edits（仅管理员可写，云函数 requireAdmin 校验）
 window._deleSyncContentEdits = function(namespace, edits){
   window._delePostToBridge({type:'siele-content-edits-save', namespace: namespace, edits: edits});
+};
+// ===== v39: 题库测验管理员编辑（content_edits.quiz 增量域，仅管理员可见/可写）=====
+// 增量 key = quizQuestionKey（原始内容哈希）；覆盖字段 q/opts/ans/fb；云端走通用 getContentEdits/setContentEdits。
+try{ window._contentEdits.quiz = JSON.parse(localStorage.getItem('wb_content_edits_quiz_v1') || '{}') || {}; }catch(e){}
+window._wbQuizEditSaveLocal = function(){
+  try{ localStorage.setItem('wb_content_edits_quiz_v1', JSON.stringify(window._contentEdits.quiz || {})); }catch(e){}
+};
+// 会话构建时应用编辑覆盖；q.__okey 固定原始 key（quizQuestionKey 识别后历史/游标/搜索全链路稳定）
+window._wbApplyQuizEdits = function(q){
+  try{
+    if(!q || q.__okey) return q;
+    var key = quizQuestionKey(q);
+    var e = (window._contentEdits.quiz || {})[key];
+    if(!e) return q;
+    var copy = Object.assign({}, q, {__okey: key});
+    for(var f in e){ if(f !== '__ts') copy[f] = e[f]; }
+    return copy;
+  }catch(err){ return q; }
+};
+window._wbQuizEditClose = function(){
+  var m = document.getElementById('wbQuizEditModal'); if(m) m.remove();
+};
+window._wbQuizEditOpen = function(){
+  try{
+    if(!(typeof window._deleIsAdmin === 'function' && window._deleIsAdmin())) return;
+    var q = ST.quizSession[ST.quizIdx]; if(!q) return;
+    window._wbQuizEditClose();
+    var letters = ['A','B','C','D'];
+    var _had = !!(window._contentEdits.quiz || {})[quizQuestionKey(q)];
+    var optsHtml = '';
+    for(var i=0;i<4;i++){
+      optsHtml += '<div style="display:flex;gap:6px;align-items:center;margin:4px 0">'
+        + '<span style="font-weight:800;width:16px">'+letters[i]+'</span>'
+        + '<input id="qeO'+i+'" value="'+esc((q.opts&&q.opts[i])||'').replace(/"/g,'&quot;')+'" style="flex:1;padding:7px 9px;border:1px solid #ddd;border-radius:8px;font-size:12.5px">'
+        + '<label style="font-size:11px;white-space:nowrap"><input type="radio" name="qeAns" value="'+i+'"'+(q.ans===i?' checked':'')+'> 正确</label>'
+        + '</div>';
+    }
+    var m = document.createElement('div');
+    m.id = 'wbQuizEditModal';
+    m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px';
+    m.innerHTML = '<div style="background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:86vh;overflow-y:auto;padding:16px">'
+      + '<div style="font-weight:800;font-size:14px;margin-bottom:8px">✏️ 编辑题目 <span style="color:#999;font-weight:500;font-size:11px">'+quizQuestionKey(q)+' · '+(q.lvl||'')+' · '+(q.ex||'')+'</span></div>'
+      + '<div style="font-size:11px;color:#888;margin-bottom:4px">题干</div>'
+      + '<textarea id="qeQ" rows="3" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:12.5px">'+esc(q.q||'')+'</textarea>'
+      + '<div style="font-size:11px;color:#888;margin:8px 0 2px">选项（勾选正确项）</div>'+optsHtml
+      + '<div style="font-size:11px;color:#888;margin:8px 0 2px">解析</div>'
+      + '<textarea id="qeFb" rows="4" style="width:100%;box-sizing:border-box;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:12px">'+esc(q.fb||'')+'</textarea>'
+      + '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">'
+      + '<button class="btn" onclick="_wbQuizEditSave()">💾 保存并同步</button>'
+      + (_had?'<button class="btn ol" onclick="_wbQuizEditRevert()">↩️ 还原原始题目</button>':'')
+      + '<button class="btn ol" onclick="_wbQuizEditClose()">取消</button>'
+      + '</div></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', function(ev){ if(ev.target === m) window._wbQuizEditClose(); });
+  }catch(e){}
+};
+window._wbQuizEditSave = function(){
+  try{
+    var q = ST.quizSession[ST.quizIdx]; if(!q) return;
+    var key = quizQuestionKey(q);
+    var nq = document.getElementById('qeQ').value.trim();
+    var no = []; for(var i=0;i<4;i++){ var v=document.getElementById('qeO'+i).value.trim(); if(!v){ if(typeof toast==='function') toast('选项 '+['A','B','C','D'][i]+' 不能为空','err'); return; } no.push(v); }
+    var na = -1; var rs = document.getElementsByName('qeAns'); for(var j=0;j<rs.length;j++){ if(rs[j].checked) na = parseInt(rs[j].value,10); }
+    if(na < 0){ if(typeof toast==='function') toast('请勾选正确答案','err'); return; }
+    var nf = document.getElementById('qeFb').value;
+    var editObj = {q: nq, opts: no, ans: na, fb: nf, __ts: Date.now()};
+    window._contentEdits.quiz = window._contentEdits.quiz || {};
+    window._contentEdits.quiz[key] = editObj;
+    window._wbQuizEditSaveLocal();
+    if(typeof window._deleSyncContentEdits === 'function') window._deleSyncContentEdits('quiz', window._contentEdits.quiz);
+    // 就地更新当前会话题（__okey 保持原始 key，做题历史/游标不受影响）
+    for(var f2 in editObj){ q[f2] = editObj[f2]; }
+    window._wbQuizEditClose();
+    renderQuizQuestion();
+    if(typeof toast === 'function') toast('✅ 题目已更新（云端同步中）','ok');
+  }catch(e){ if(typeof toast==='function') toast('保存失败：'+e.message,'err'); }
+};
+window._wbQuizEditRevert = function(){
+  try{
+    var q = ST.quizSession[ST.quizIdx]; if(!q) return;
+    var key = quizQuestionKey(q);
+    if(window._contentEdits.quiz) delete window._contentEdits.quiz[key];
+    window._wbQuizEditSaveLocal();
+    if(typeof window._deleSyncContentEdits === 'function') window._deleSyncContentEdits('quiz', window._contentEdits.quiz);
+    for(var i=0;i<QDATA.length;i++){
+      if(quizQuestionKey(QDATA[i]) === key){
+        var orig = QDATA[i];
+        ['ex','lvl','type','q','opts','ans','fb'].forEach(function(f){ if(f in orig) q[f] = orig[f]; });
+        break;
+      }
+    }
+    window._wbQuizEditClose();
+    renderQuizQuestion();
+    if(typeof toast === 'function') toast('↩️ 已还原为原始题目（云端同步中）','ok');
+  }catch(e){ if(typeof toast==='function') toast('还原失败：'+e.message,'err'); }
 };
 
 // 保存编辑 → 云函数 setAdminEdits (仅管理员)
@@ -14254,13 +14350,22 @@ window.addEventListener('message', function(e){
   // 管理员内容编辑结果（写作/口语）
   if (e.data && e.data.type === 'siele-content-edits-result') {
     var ns = e.data.namespace || 'writing';
-    window._contentEdits[ns] = e.data.edits || {};
+    if(ns === 'quiz'){
+      // v39: quiz 域与本地 LS 缓存按 __ts 逐条 LWW（本地较新优先），防云端拉取覆盖未同步的本地编辑
+      var _qm = Object.assign({}, e.data.edits || {});
+      var _ql = window._contentEdits.quiz || {};
+      Object.keys(_ql).forEach(function(k){ var l=_ql[k], c=_qm[k]; if(!c || ((l&&l.__ts)||0) > ((c&&c.__ts)||0)) _qm[k] = l; });
+      window._contentEdits.quiz = _qm;
+      try{ localStorage.setItem('wb_content_edits_quiz_v1', JSON.stringify(_qm)); }catch(e2){}
+    } else {
+      window._contentEdits[ns] = e.data.edits || {};
+    }
     var cb = window._contentEditsCb && window._contentEditsCb[ns];
     if (cb) { cb(e.data.edits || {}); delete window._contentEditsCb[ns]; }
     // 若当前正停留在对应页面，立即重新渲染，让用户端实时看到管理员同步的最新内容
     try {
       if (typeof currentPage === 'string' && typeof renderMain === 'function') {
-        var _pgMap = { grammar:'grammar', verbUsage:'vocab', verbConj:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele' };
+        var _pgMap = { grammar:'grammar', verbUsage:'vocab', verbConj:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele', quiz:'quiz' };
         if (_pgMap[ns] && currentPage === _pgMap[ns]) renderMain();
       }
     } catch(e) {}
@@ -17165,7 +17270,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v38-2026092702';
+    var swVer = 'v39-2026092703';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17202,7 +17307,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v38-2026092702';
+    return 'v39-2026092703';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18340,6 +18445,7 @@ function activate(){
       setTimeout(function(){window._deleFetchContentEdits('verbUsage');},2200);
       setTimeout(function(){window._deleFetchContentEdits('grammar');},2400);
       setTimeout(function(){window._deleFetchContentEdits('verbConj');},2600);
+      setTimeout(function(){window._deleFetchContentEdits('quiz');},2800);
     }
   }catch(e){}
 }
