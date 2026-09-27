@@ -619,10 +619,12 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="btn sm" id="tabUsersBtn" onclick="switchAdminTab('users')" style="font-weight:700">📊 用户列表</button>
     <button class="btn sm gh" id="tabInvitesBtn" onclick="switchAdminTab('invites')">🎫 邀请码管理</button>
     <button class="btn sm gh" id="tabSecurityBtn" onclick="switchAdminTab('security')">🔐 安全日志</button>
+    <button class="btn sm gh" id="tabQEditsBtn" onclick="switchAdminTab('qedits')">📝 题库编辑</button>
   </div>
   <div id="adminUsersContent"></div>
   <div id="adminInvitesContent" style="display:none"></div>
   <div id="adminSecurityContent" style="display:none"></div>
+  <div id="adminQEditsContent" style="display:none"></div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -2372,8 +2374,19 @@ async function revokeCloudSyncToken(id){
 
 // ============ 管理员 · 用户管理 ============
 function switchAdminTab(tab){
-  var uc=$('adminUsersContent'),ic=$('adminInvitesContent'),sc=$('adminSecurityContent');
-  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn'),sb=$('tabSecurityBtn');
+  var uc=$('adminUsersContent'),ic=$('adminInvitesContent'),sc=$('adminSecurityContent'),qc=$('adminQEditsContent');
+  var ub=$('tabUsersBtn'),ib=$('tabInvitesBtn'),sb=$('tabSecurityBtn'),qb=$('tabQEditsBtn');
+  if(tab==='qedits'){
+    if(uc)uc.style.display='none';if(ic)ic.style.display='none';if(sc)sc.style.display='none';if(qc)qc.style.display='';
+    if(ub){ub.style.fontWeight='400';ub.classList.add('gh');}
+    if(ib){ib.style.fontWeight='400';ib.classList.add('gh');}
+    if(sb){sb.style.fontWeight='400';sb.classList.add('gh');}
+    if(qb){qb.style.fontWeight='700';qb.classList.remove('gh');}
+    renderAdminQEdits();
+    return;
+  }
+  if(qc)qc.style.display='none';
+  if(qb){qb.style.fontWeight='400';qb.classList.add('gh');}
   if(tab==='users'){
     if(uc)uc.style.display='';if(ic)ic.style.display='none';if(sc)sc.style.display='none';
     if(ub){ub.style.fontWeight='700';ub.classList.remove('gh');}
@@ -2491,6 +2504,165 @@ async function renderAdminSecurityLogs(type){
   }catch(err){
     el.innerHTML=filterBar+'<div class="note err">无法加载安全日志：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminSecurityLogs()">重试</button></div>';
   }
+}
+// ============ 管理员 · 题库编辑总览（v41）============
+// 数据源：content_edits 集合 namespace='quiz'（云函数 getContentEdits，登录用户可读）
+// 每条 edits[key] = { q, opts, ans, fb, __ts, __hist:[{t,u,q,opts,ans,fb}] }
+//   __hist 为 v41 编辑留痕：保存前把"改之前的值"前置入数组，首次编辑即原始题目，最多 5 版
+var QEDITS={edits:{},loadedAt:0,openKey:'',pending:null};
+async function renderAdminQEdits(){
+  var el=$('adminQEditsContent');
+  if(!el)return;
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+    el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
+    return;
+  }
+  el.innerHTML='<div class="empty">正在加载题库编辑记录…</div>';
+  try{
+    var result=await callSieleAuth({action:'getContentEdits',sessionToken:ses.sessionToken,namespace:'quiz'});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    QEDITS.edits=result.edits||{};
+    QEDITS.loadedAt=Date.now();
+    QEDITS.pending=null;
+    renderQEditsView();
+  }catch(err){
+    el.innerHTML='<div class="note err">无法加载题库编辑记录：'+esc(err.message||err)+' <button class="btn xs gh" onclick="renderAdminQEdits()">重试</button></div>';
+  }
+}
+function qEditsTs(ts){
+  if(!ts)return '—';
+  var d=new Date(ts),p=function(n){return String(n).padStart(2,'0');};
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+}
+function qEditsDiff(e){
+  var base=(e.__hist&&e.__hist[0])||null;
+  if(!base)return '<span style="color:var(--soft)">—</span>';
+  var tags=[];
+  if((base.q||'')!==(e.q||''))tags.push('题干');
+  if(JSON.stringify(base.opts||[])!==JSON.stringify(e.opts||[]))tags.push('选项');
+  if(base.ans!==e.ans)tags.push('答案');
+  if((base.fb||'')!==(e.fb||''))tags.push('解析');
+  if(!tags.length)tags.push('微调');
+  return tags.map(function(t){return '<span style="display:inline-block;padding:1px 6px;border-radius:6px;background:rgba(139,92,246,.12);color:#7c3aed;font-size:11px;margin-right:3px">'+t+'</span>';}).join('');
+}
+function qEditsToggle(k){
+  QEDITS.openKey=(QEDITS.openKey===k)?'':k;
+  QEDITS.pending=null;
+  renderQEditsView();
+}
+function renderQEditsView(){
+  var el=$('adminQEditsContent');if(!el)return;
+  var edits=QEDITS.edits||{};
+  var keys=Object.keys(edits);
+  if(!keys.length){
+    el.innerHTML='<div class="empty"><span class="big">📝</span>题库暂无编辑记录<br><span style="font-size:12px;color:var(--soft)">管理员在工作台做题/背题界面点「✏️ 编辑」修改题目后，会在此处留痕</span></div>'
+      +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn sm t" onclick="renderAdminQEdits()">⟳ 刷新</button></div>';
+    return;
+  }
+  keys.sort(function(a,b){return ((edits[b]&&edits[b].__ts)||0)-((edits[a]&&edits[a].__ts)||0);});
+  var histTotal=0,lastTs=0;
+  keys.forEach(function(k){var e=edits[k]||{};histTotal+=((e.__hist||[]).length);if((e.__ts||0)>lastTs)lastTs=e.__ts||0;});
+  var summary='<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
+    +'<div class="card" style="flex:1;min-width:110px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:#8b5cf6">'+keys.length+'</div><div style="font-size:11px;color:var(--soft)">已编辑题目</div></div>'
+    +'<div class="card" style="flex:1;min-width:110px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--ink)">'+histTotal+'</div><div style="font-size:11px;color:var(--soft)">累计变更版本</div></div>'
+    +'<div class="card" style="flex:1;min-width:150px;text-align:center;padding:12px"><div style="font-size:14px;font-weight:800;color:var(--soft);padding-top:5px">'+qEditsTs(lastTs)+'</div><div style="font-size:11px;color:var(--soft)">最近编辑</div></div>'
+    +'</div>';
+  var pend=QEDITS.pending;
+  var rows=keys.map(function(k){
+    var e=edits[k]||{};
+    var hn=(e.__hist||[]).length;
+    var who=(e.__hist&&e.__hist[0]&&e.__hist[0].u)||'—';
+    var isOpen=(QEDITS.openKey===k);
+    var revLabel=(pend&&pend.act==='revert'&&pend.key===k)?'⚠️ 确认还原':'还原原始';
+    var main='<tr style="border-top:1px solid rgba(0,0,0,.06)">'
+      +'<td style="padding:9px 12px;font-family:monospace;font-size:11.5px;color:var(--soft)">'+esc(k)+'</td>'
+      +'<td style="padding:9px 12px;max-width:330px"><div style="font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(e.q||'')+'">'+esc(e.q||'')+'</div><div style="margin-top:3px">'+qEditsDiff(e)+'</div></td>'
+      +'<td style="padding:9px 12px;font-size:11.5px;color:var(--soft);white-space:nowrap">'+qEditsTs(e.__ts)+'</td>'
+      +'<td style="padding:9px 12px;font-size:11.5px">'+esc(who)+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;font-weight:700">'+hn+'</td>'
+      +'<td style="padding:9px 12px;white-space:nowrap">'
+        +'<button class="btn xs '+(isOpen?'t':'gh')+'" onclick="qEditsToggle(\''+k+'\')">'+(isOpen?'收起':'历史')+'</button> '
+        +'<button class="btn xs '+((pend&&pend.act==='revert'&&pend.key===k)?'a':'dgr')+'" onclick="qEditsAsk(\'revert\',\''+k+'\',-1)">'+revLabel+'</button>'
+      +'</td></tr>';
+    if(!isOpen)return main;
+    var hist=(e.__hist||[]).map(function(h,i){
+      var rl=(pend&&pend.act==='hist'&&pend.key===k&&pend.idx===i)?'⚠️ 确认恢复':'恢复此版';
+      return '<div style="display:flex;gap:8px;align-items:center;font-size:11.5px;padding:6px 9px;border:1px solid var(--line);border-radius:8px;margin:4px 0">'
+        +'<span style="color:var(--soft);white-space:nowrap">'+qEditsTs(h.t)+'</span>'
+        +'<span style="white-space:nowrap;min-width:56px">'+esc(h.u||'—')+'</span>'
+        +'<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(h.q||'')+'">'+esc(h.q||'')+'</span>'
+        +'<span style="color:var(--soft);white-space:nowrap">答案 '+((['A','B','C','D'][h.ans])||'—')+'</span>'
+        +'<button class="btn xs '+((pend&&pend.act==='hist'&&pend.key===k&&pend.idx===i)?'a':'gh')+'" onclick="qEditsAsk(\'hist\',\''+k+'\','+i+')">'+rl+'</button>'
+        +'</div>';
+    }).join('');
+    return main+'<tr><td colspan="6" style="padding:0 12px 12px 12px;background:rgba(0,0,0,.015)">'
+      +'<div style="font-size:11.5px;color:var(--soft);margin:8px 0 4px">历史版本（越靠上越新 · 第 '+hist.length+' 条为最初版本）</div>'
+      +hist
+      +'<div style="margin-top:8px;font-size:11.5px;color:var(--soft)">当前题干：'+esc((e.q||'').slice(0,80))+'</div>'
+      +'</td></tr>';
+  }).join('');
+  el.innerHTML=summary
+    +'<div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap">'
+      +'<button class="btn sm t" onclick="renderAdminQEdits()">⟳ 刷新</button>'
+      +'<span style="font-size:11.5px;color:var(--soft)">题库域（content_edits · quiz）· 加载于 '+qEditsTs(QEDITS.loadedAt)+'</span>'
+    +'</div>'
+    +'<div class="card" style="overflow-x:auto;padding:0"><table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+    +'<thead><tr style="border-bottom:2px solid var(--line);text-align:left"><th style="padding:10px 12px">题目键</th><th style="padding:10px 12px">当前题干 / 变更字段</th><th style="padding:10px 12px">最近修改</th><th style="padding:10px 12px">修改人</th><th style="padding:10px 12px">版本</th><th style="padding:10px 12px">操作</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table></div>'
+    +'<div style="font-size:11.5px;color:var(--soft);margin-top:8px">「还原原始」删除该题编辑并全量回写云端；「恢复此版」把历史快照写为新当前值（当前值继续留在历史里，可再次回溯）。两处均需点击两次确认。</div>';
+}
+// 写回 quiz 域（全量覆盖；云函数 setContentEdits 仅管理员可写）
+async function qEditsPush(edits,okMsg){
+  var ses=cloudSession();
+  if(!ses||!ses.sessionToken){toast('登录态已失效，请重新登录','err');return false;}
+  var payload='';
+  try{ payload=btoa(unescape(encodeURIComponent(JSON.stringify(edits)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }catch(e){ toast('序列化失败：'+e.message,'err'); return false; }
+  try{
+    var r=await callSieleAuth({action:'setContentEdits',sessionToken:ses.sessionToken,namespace:'quiz',edits:payload});
+    if(r&&r.ok){
+      QEDITS.edits=edits; QEDITS.loadedAt=Date.now(); QEDITS.pending=null;
+      toast(okMsg||'已同步到云端','ok');
+      renderQEditsView();
+      return true;
+    }
+    toast('同步失败：'+((r&&r.code)||'UNKNOWN')+' '+((r&&r.detail)||''),'err');
+    return false;
+  }catch(e){ toast('同步失败：'+(e.message||e),'err'); return false; }
+}
+// 两段式确认（避免在 iframe/沙箱里被原生 confirm 拦截）
+function qEditsAsk(act,key,idx){
+  var p=QEDITS.pending;
+  if(!p||p.act!==act||p.key!==key||p.idx!==idx){
+    QEDITS.pending={act:act,key:key,idx:idx};
+    renderQEditsView();
+    return;
+  }
+  QEDITS.pending=null;
+  if(act==='revert')doQEditsRevert(key);
+  else doQEditsRestoreHist(key,idx);
+}
+function doQEditsRevert(key){
+  if(!(QEDITS.edits||{})[key])return;
+  var next=Object.assign({},QEDITS.edits);
+  delete next[key];
+  qEditsPush(next,'已还原为原始题目（云端已同步）');
+}
+function doQEditsRestoreHist(key,idx){
+  var e=(QEDITS.edits||{})[key];
+  var s=e&&e.__hist&&e.__hist[idx];
+  if(!s)return;
+  var who='';
+  try{var cs=cloudSession();who=(cs&&(cs.username||cs.uid))||'';}catch(err){}
+  var ne=Object.assign({},e);
+  ne.q=s.q||''; ne.opts=(s.opts||[]).slice(0,4); ne.ans=(typeof s.ans==='number'?s.ans:-1); ne.fb=s.fb||''; ne.__ts=Date.now();
+  var h=(e.__hist||[]).slice(0);
+  h.unshift({t:Date.now(),u:who,q:e.q||'',opts:(e.opts||[]).slice(0,4),ans:(typeof e.ans==='number'?e.ans:-1),fb:e.fb||''});
+  while(h.length>5)h.pop();
+  ne.__hist=h;
+  var next=Object.assign({},QEDITS.edits);
+  next[key]=ne;
+  qEditsPush(next,'已恢复该历史版本（云端已同步）');
 }
 async function renderAdminUsers(){
   var el=$('adminUsersContent');
