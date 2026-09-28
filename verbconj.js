@@ -1,5 +1,5 @@
 // ============================================================
-// 动词变位引擎 v1.1 — 规则模板 + 高频不规则内置表（v1.1 2026-09-28: A2 将来时/条件式修复）
+// 动词变位引擎 v1.3 — 规则模板 + 高频不规则内置表（v1.3 2026-09-28: RAE 核查修正批3；v1.2: 批3 词干变化+拼写适配；v1.1: A2 将来时/条件式修复）
 // 时态 14 项: presente/indefinido/imperfecto/perfecto/pluscuamperfecto
 //   futuro/condicional/subjPresente/subjImperfecto(-ra/-se)/
 //   subjPluscuamperfecto/imperativoAf/imperativoNeg/gerundio/participio
@@ -263,6 +263,53 @@
     return verb;
   }
 
+  // ---------- 批3 (v1.2 2026-09-28): 词干变化 + 拼写适配 ----------
+  // 词干变化表: 原形(无代词) -> 变化后词干(presente 1/2/3/6 与虚拟式重读形式)
+  // 家族自动推导: 词干含 ie=e族 / 含 ue=o族 / 否则=i族
+  var STEM_CH = {
+    // e→ie (-ar)
+    pensar:'piens', acertar:'aciert', acrecentar:'acrecient', alentar:'alient', apretar:'apriet', arrendar:'arriend', asentar:'asient', atravesar:'atravies', calentar:'calient', comenzar:'comienz', confesar:'confies', denegar:'denieg', desenterrar:'desentierr', despertar:'despiert', empezar:'empiez', fregar:'frieg', helar:'hiel', merendar:'meriend', negar:'nieg', nevar:'niev', quebrar:'quiebr', recomendar:'recomiend', sembrar:'siembr', sentar:'sient', sosegar:'sosieg', temblar:'tiembl', tropezar:'tropiez',
+    // e→ie (-er)
+    atender:'atiend', ascender:'asciend', defender:'defiend', descender:'desciend', entender:'entiend', perder:'pierd', querer:'quier', verter:'viert', mantener:'mantien', obtener:'obtien', contener:'contien', retener:'retien', detener:'detien', sostener:'sostien', abstener:'abstien',
+    // e→ie (-ir)
+    adherir:'adhier', advertir:'adviert', adquirir:'adquier', convertir:'conviert', controvertir:'controviert', diferir:'difier', discernir:'disciern', hervir:'hierv', ingerir:'ingier', mentir:'mient', preferir:'prefier', referir:'refier', sentir:'sient', sugerir:'sugier',
+    // o→ue (-ar)
+    acordar:'acuerd', acostar:'acuest', almorzar:'almuerz', apostar:'apuest', avergonzar:'averg\u00fcenz', colgar:'cuelg', comprobar:'comprueb', contar:'cuent', costar:'cuest', demostrar:'demuestr', descontar:'descuent', encontrar:'encuentr', esforzar:'fuerz', mostrar:'muestr', probar:'prueb', recostar:'recuest', recordar:'recuerd', reforzar:'refuerz', renovar:'renuev', rogar:'rueg', soltar:'suelt', sonar:'suen', volar:'vuel', volcar:'vuelc',
+    // o→ue (-er/-ir)
+    cocer:'cuez', devolver:'devuelv', desenvolver:'desenvuelv', doler:'duel', morder:'muerd', oler:'huel', promover:'promuev', solar:'suel', soler:'suel', torcer:'tuerz', volver:'vuelv', dormir:'duerm', morir:'muerm',
+    // e→i (-ir)
+    'ce\u00f1ir':'ci\u00f1', competir:'compit', concebir:'concib', conseguir:'consig', corregir:'corrij', derretir:'derrit', elegir:'elij', expedir:'expid', impedir:'impid', medir:'mid', pedir:'pid', despedir:'despid', rendir:'rind', repetir:'repit', seguir:'sig', servir:'sirv', 'te\u00f1ir':'ti\u00f1', vestir:'vist',
+    // u→ue 特例
+    jugar:'jueg', erguir:'yerg'
+  };
+  // 虚拟式全 6 人称变化组: 所有 -ir 词干变化动词 + 下表例外(jugar)
+  var STEM_CH_FULL = { jugar: 1 };
+  // presente tú/él/ellos 词干覆盖: yo 与重读形式词干分离的词
+  // (-guir: g 裸/gu; -gir 软音: yo 用 j 其余 g; -cer 音位: z→c 于 e 系后缀)
+  var STEM_CH_ALT = { seguir:'sigu', conseguir:'consigu', elegir:'elig', corregir:'corrig', cocer:'cuec', torcer:'tuerc' };
+  // 全变化组虚拟式 nosotros/vosotros 词干覆盖(跟随过去式 3 人称词干; 家族推导不适用的词全显式)
+  var STEM_CH_NOS = {
+    jugar:'juegu',
+    sentir:'sint', preferir:'prefir', referir:'refir', diferir:'difir', sugerir:'sugir', ingerir:'ingir', adherir:'adhir', advertir:'advirt', convertir:'convirt', controvertir:'controvirt', mentir:'mint', hervir:'hirv', adquirir:'adquir', discernir:'discern',
+    dormir:'durm', morir:'mur', cocer:'coz', torcer:'torz', erguir:'irg'
+  };
+  // -iar/-uar 重音断裂: 显式重读词干(presente 1/2/3/6 + subj 1/2/3/6; nosotros/vosotros 恒用原词干)
+  var ACC_CH = { aliar:'al\u00ed', actuar:'act\u00fa', continuar:'contin\u00fa', desafiar:'desaf\u00ed', confiar:'conf\u00ed', criar:'cr\u00ed', evaluar:'eval\u00fa', reevaluar:'reeval\u00fa', fiar:'f\u00ed', graduar:'grad\u00fa', liar:'l\u00ed', perpetuar:'perpet\u00fa', reenviar:'reenv\u00ed', enviar:'env\u00ed', reunir:'re\u00fan', 'desconfiar':'desconf\u00ed', 'expiar':'exp\u00ed', 'mecanografiar':'mecanograf\u00ed', 'fluctuar':'fluct\u00fa', tatuar:'tat\u00fa', vaciar:'vac\u00ed', variar:'var\u00ed' };
+  // -uir 类 y 插入: presente 1/2/3/6 + subj 全 6 人称 (construyo/construya)
+  var UIR_CH = { construir:1, contribuir:1, destruir:1, incluir:1, constituir:1, influir:1, intuir:1, obstruir:1, reconstruir:1, fluir:1, sustituir:1 };
+  // -guar 类 ü: presente 全规则(apaciguo); 虚拟式全 6 人称 + 命令式 usted 系用 ü 词干 (apacigüe/averigüe)
+  var GU_CH = { 'apaciguar':'apacig\u00fc', 'averiguar':'averig\u00fc' };
+  // -ar 虚拟式/命令式 usted 系拼写适配: -car→qu / -gar→gu / -zar→c (busque/llegue/empiece)
+  // 注意后缀首字符含重音 é 也触发 (busquéis)
+  var orthAr = function (st, suf) {
+    var c0 = suf.charAt(0);
+    if (c0 === 'e' || c0 === '\u00e9') {
+      if (/c$/.test(st)) return st.slice(0, -1) + 'qu' + suf;
+      if (/g$/.test(st)) return st.slice(0, -1) + 'gu' + suf;
+      if (/z$/.test(st)) return st.slice(0, -1) + 'c' + suf;
+    }
+    return st + suf;
+  };
   // ---------- 工具 ----------
   function stemOf(verb) { return verb.slice(0, -2); }
   function endingOf(verb) { return verb.slice(-2); }
@@ -295,6 +342,12 @@
     if (!tpl) return null;
     // 模板后缀用连字符作占位标记（如 '-o'），拼接时去掉，产出真实变位（vivo 而非 viv-o）
     var glue = function (suf) { return stem + suf.replace(/^-/, ''); };
+    // B3 (v1.2): -ar 虚拟式/命令式(usted 系)拼写适配 (busque/llegue/empiece/no busques/busquéis)
+    var glueE = function (suf) {
+      suf = suf.replace(/^-/, '');
+      if (end === 'ar') return orthAr(stem, suf);
+      return stem + suf;
+    };
     // A2 修复 (v1.1 2026-09-28): futuro/condicional 用「原形/不规则词干」而非「词干」。
     // indefinido 的 -é 仍是词干+后缀（hablé 正确），勿混淆。
     var futStem = futStemOf(verb);
@@ -303,12 +356,51 @@
     var out = {};
     Object.keys(tpl).forEach(function (tk) {
       var val = tpl[tk];
-      var g = glueFor(tk);
+      var g = (tk === 'subjPresente' || tk === 'imperativoAf' || tk === 'imperativoNeg') ? glueE : glueFor(tk);
       if (Array.isArray(val)) out[tk] = val.map(g);
       else if (val && typeof val === 'object') {
         out[tk] = { ra: val.ra.map(g), se: val.se.map(g) };
       } else out[tk] = g(val);
     });
+    // B3 (v1.2): 词干变化/重音断裂/y插入 动词覆盖 presente/subjPresente/imperativo
+    var sc = STEM_CH[verb];
+    var ac = ACC_CH[verb];
+    var ui = UIR_CH[verb];
+    var gu = GU_CH[verb];
+    if (sc) {
+      var fam = sc.indexOf('ie') >= 0 ? 'e' : (sc.indexOf('ue') >= 0 ? 'o' : 'i');
+      var fullSubj = (end === 'ir') || STEM_CH_FULL[verb] === 1;
+      var nosStem = (STEM_CH_NOS[verb] || (fullSubj ? (fam === 'e' ? sc.replace('ie', 'i') : fam === 'o' ? sc.replace('ue', 'u') : sc) : stem));
+      var pS = [tpl.presente[0], tpl.presente[1], tpl.presente[2], tpl.presente[5]].map(function (s) { return s.replace(/^-/, ''); });
+      var sS = tpl.subjPresente.map(function (s) { return s.replace(/^-/, ''); });
+      var chE = STEM_CH_ALT[verb] || sc;
+      out.presente = [sc + pS[0], chE + pS[1], chE + pS[2], stem + tpl.presente[3].replace(/^-/, ''), stem + tpl.presente[4].replace(/^-/, ''), chE + pS[3]];
+      out.subjPresente = [orthAr(sc, sS[0]), orthAr(sc, sS[1]), orthAr(sc, sS[2]), orthAr(nosStem, sS[3]), orthAr(nosStem, sS[4]), orthAr(sc, sS[5])];
+      out.imperativoAf = [out.presente[1].slice(0, -1), stem + (end === 'ar' ? 'ad' : (end === 'er' ? 'ed' : 'id')), out.subjPresente[2], out.subjPresente[5]];
+      out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    } else if (ac) {
+      var pS2 = [tpl.presente[0], tpl.presente[1], tpl.presente[2], tpl.presente[5]].map(function (s) { return s.replace(/^-/, ''); });
+      var sS2 = tpl.subjPresente.map(function (s) { return s.replace(/^-/, ''); });
+      out.presente = [ac + pS2[0], ac + pS2[1], ac + pS2[2], stem + tpl.presente[3].replace(/^-/, ''), stem + tpl.presente[4].replace(/^-/, ''), ac + pS2[3]];
+      out.subjPresente = [ac + sS2[0], ac + sS2[1], ac + sS2[2], stem + sS2[3], stem + sS2[4], ac + sS2[5]];
+      out.imperativoAf = [out.presente[1].slice(0, -1), stem + (end === 'ar' ? 'ad' : (end === 'er' ? 'ed' : 'id')), out.subjPresente[2], out.subjPresente[5]];
+      out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    } else if (ui) {
+      var ys = stem + 'y', us2 = stem;
+      out.presente = [ys + 'o', ys + 'es', ys + 'e', us2 + 'imos', us2 + '\u00eds', ys + 'en'];
+      out.subjPresente = [ys + 'a', ys + 'as', ys + 'a', ys + 'amos', ys + '\u00e1is', ys + 'an'];
+      out.imperativoAf = [out.presente[1].slice(0, -1), us2 + 'id', out.subjPresente[2], out.subjPresente[5]];
+      out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    } else if (gu) {
+      var sS3 = tpl.subjPresente.map(function (s) { return s.replace(/^-/, ''); });
+      out.subjPresente = [gu + sS3[0], gu + sS3[1], gu + sS3[2], gu + sS3[3], gu + sS3[4], gu + sS3[5]];
+      out.imperativoAf = [out.presente[1].slice(0, -1), stem + (end === 'ar' ? 'ad' : (end === 'er' ? 'ed' : 'id')), out.subjPresente[2], out.subjPresente[5]];
+      out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    }
+    // P7: 规则动词否定命令式补 no 前缀 (覆盖块路径已自带 no; IRREGULAR 内置表不受此路径影响)
+    if (out.imperativoNeg && String(out.imperativoNeg[0]).indexOf('no ') !== 0) {
+      out.imperativoNeg = out.imperativoNeg.map(function (x) { return 'no ' + x; });
+    }
     return out;
   }
 
