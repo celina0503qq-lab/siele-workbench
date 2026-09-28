@@ -1222,7 +1222,6 @@ const VDATA_DELE = [
 {"t":"general","es":"acoger","pos":"v.","zh":"接待，招待； 躲避；以 为借口","ex":"La ciudad acogió a muchos refugiados.","lvl":"B1","theme":"通用词汇"},
 {"t":"general","es":"acondicionar","pos":"v.","zh":"安排；调节","ex":"Acondicionaron la sala para la conferencia.","lvl":"B1","theme":"通用词汇","rae_verified":true},
 {"t":"general","es":"acosar","pos":"v.","zh":"追赶；追逼；迫害","ex":"El periodista acosó al famoso con preguntas.","lvl":"B1","theme":"通用词汇"},
-{"t":"general","es":"actualizado","pos":"v.","zh":"更新；使适应当前情况；使跟上形势；具体说明 | 过去分词 (Participio Pasado)","ex":"La base de datos está actualizada cada mes.","lvl":"B1","theme":"通用词汇"},
 {"t":"general","es":"adelantar","pos":"v.","zh":"向前移动；加快；提 前；预支；超过；拨快(钟表) (钟表)走快；前进；进步； 提前；抢先；迎上前去；伸出","ex":"El reloj se adelantó diez minutos.","lvl":"B1","theme":"通用词汇"},
 {"t":"general","es":"adelgazar","pos":"v.","zh":"使瘦；使细；使薄；使尽可能地少；使纯净；推敲； -prnl. 消瘦，变细","ex":"Quiero adelgazar un poco este verano.","lvl":"B1","theme":"通用词汇"},
 {"t":"general","es":"adherir","pos":"v.","zh":"粘连，粘附，拥护","ex":"La etiqueta no se adhiere al cristal.","lvl":"B1","theme":"通用词汇","rae_verified":true},
