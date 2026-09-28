@@ -1,18 +1,32 @@
 ---
 name: siele-daily-refine-pack
-description: SIELE 工作台外刊精炼推送流程 v5.0 完整执行版 — 每 7 天一期（每周五，自动化 siele-v3 触发，也可手动触发）· 15 词 + 4 篇分级精读 (A1:10段5题/A2:10段5题/B1:≥18段8题/B2:≥20段8题，共26题) + Word 下载 + 在线阅读 + 原文链接，落到 GitHub Pages celina0503qq-lab.github.io/siele-workbench/articles/<date>/。硬性规范：题干/选项纯西语 + 解析标段落号、B1/B2 每段 35-50 词、B1/B2 难词 8-10 个含 ejemplo+analisis、B2 难题 ≥4/8 + B1 ≥2/8（此题考查…标签机器校验）、B1/B2 禁取材 RTVE（El País/BBC Mundo/官方专页）、内置页/独立页来源一致性、认证用 ~/.config/gh/hosts.yml oauth_token（禁明文 token/gh CLI/fine-grained PAT）、期号在线计算、HTML JSON.stringify 内联、四重验证、4 文件推送缺一不可
+description: SIELE 工作台外刊精炼推送流程 v5.2 完整执行版 — 每 7 天一期（日期取周五，自动化 siele-v3 每天 08:00 幂等自愈查岗，也可手动触发）· 15 词 + 4 篇分级精读 (A1:10段5题/A2:10段5题/B1:≥18段8题/B2:≥20段8题，共26题) + Word 下载 + 在线阅读 + 原文链接，落到 GitHub Pages celina0503qq-lab.github.io/siele-workbench/articles/<date>/。硬性规范：题干/选项纯西语 + 解析标段落号、B1/B2 每段 35-50 词、B1/B2 难词 8-10 个含 ejemplo+analisis、B2 难题 ≥4/8 + B1 ≥2/8（此题考查…标签机器校验）、B1/B2 禁取材 RTVE（El País/BBC Mundo/官方专页）、内置页/独立页来源一致性、认证用 ~/.config/gh/hosts.yml oauth_token（禁明文 token/gh CLI/fine-grained PAT）、期号在线计算、HTML JSON.stringify 内联、四重验证、4 文件推送缺一不可
 read_when:
   - 用户要求生成西语外刊精炼推送（手动触发）
-  - 自动化 (每 7 天/每周五 00:00) 推送触发
+  - 自动化 (每天 08:00 幂等漏期自愈检查) 推送触发
   - 需要把外刊内容接入 📚外刊精炼 菜单
   - 排查外刊期号错乱 / 引号语法错误 / 推送 404 / 链接失效 / 来源错误 / 段落过短 / 难词过少 / 题干中文
 ---
 
-# SIELE 外刊精炼推送 (Daily Refine Pack) v5.0 完整执行版
+# SIELE 外刊精炼推送 (Daily Refine Pack) v5.2 完整执行版
 
-> **权威源**：仓库 `.codebuddy/automation.md`（v5.0, 2026-08-29）。本 skill 是可直接执行的浓缩版，两者冲突时以 automation.md 为准。
-> **双触发**：① 自动化任务 `siele-v3`（id=5100839，cron `0 0 0 * * 5` 即每 7 天/每周五 00:00 Asia/Shanghai）② 用户手动要求「生成 X 月 X 号外刊精炼」。
+> **权威源**：仓库 `.codebuddy/automation.md`（v5.2, 2026-09-13）。本 skill 是可直接执行的浓缩版。**权威顺序：WorkBuddy 任务 prompt > automation.md > 本 SKILL**，冲突时以上一级为准。
+> **双触发**：① 自动化任务 `siele-v3`（id=5100839，cron `0 0 8 * * *` 即每天 08:00 Asia/Shanghai 做幂等漏期自愈检查）② 用户手动要求「生成 X 月 X 号外刊精炼」。
 > **仓库**：`celina0503qq-lab/siele-workbench`（GitHub Pages: `celina0503qq-lab.github.io/siele-workbench/`）。
+
+---
+
+## 〇、执行前必做：幂等漏触发自愈（v5.2，最高优先级）
+
+> **业务出刊频率**：每 7 天一期，日期取周五。**实际触发频率**：每天 08:00 一次（平台不支持「每 N 天」，故用「每天查岗 + 幂等判定」实现等效）。绝大多数日子会因幂等判定直接静默结束，这是预期行为。
+
+1. 用 GitHub API 读**线上** `refine_data.js`（加 `Cache-Control: no-cache` 绕缓存），取所有 `issue` 最大值记 `MAX_ISSUE`，最新一期日期记 `LATEST_DATE`（必为周五）。
+2. 算 `TARGET = LATEST_DATE + 7 天`（下一个应出的周五）。
+3. **幂等判定（关键，防重复推送的硬保险）**：`articles/data/<TARGET>.js` 已存在 或 `REFINE_PACKS` 已有 `date == TARGET` → **一律视为已推送，直接静默结束**，不推送、不写文件。
+4. **仅当「今天 ≥ TARGET 且产物不存在」才出刊**：期号 = `MAX_ISSUE + 1`（连续递增、不得跳号），日期 = `TARGET`（**不得挪到实际执行日**）。
+5. 推送完成后**重新读线上** `refine_data.js`，对新 `LATEST_DATE` 重复 2–4，直到 `TARGET > 今天`（一次可补多期；多期选题互不重复、避开线上已用来源）。
+6. **前置异常处理**：第 1 步读取失败（token 失效/DNS 不通/404）必须重试 ≥3 次或改 WebFetch；仍失败则**显式报告「自愈检查失败」并终止**，禁止静默结束（静默会把真实漏期误判为无需出刊）。
+7. 期号与日期**一律实时读线上计算**，禁止照抄本文档、automation.md、本地副本或上一轮对话中的数字。
 
 ---
 
@@ -50,7 +64,7 @@ read_when:
 ## 三、完整执行流程（8 步）
 
 ### 第 1 步：确认日期 / 星期 / 期号 / 主题
-- 日期 = 触发当天（`YYYY-MM-DD`）；星期中文（一~日）
+- 日期 = 最近一个周五（不是触发当天）；补推期日期 = `LATEST_DATE + 7 × (K − MAX_ISSUE)` 天（须落在周五）；星期中文（一~日）
 - **期号必须在线读线上 `refine_data.js` 最大 issue + 1**（禁止凭记忆/猜测）
 - 4 主题方向：A1 生活场景 → A2 文化/社会 → B1 经济/科技趋势（含数据引用）→ B2 深度分析/争议话题（含专家引语）
 
@@ -281,7 +295,7 @@ with zipfile.ZipFile('X.docx') as z:
 
 ## 十二、本 SKILL 与「自动化指令」的关系
 
-- **自动化任务 `siele-v3` 的 prompt**（WorkBuddy 侧）：每 7 天（每周五 00:00）自动触发时直接读取，是常规推送的执行入口
+- **自动化任务 `siele-v3` 的 prompt**（WorkBuddy 侧）：每天 08:00 触发时直接读取，是常规推送的执行入口（内含幂等自愈检查块）
 - **`.codebuddy/automation.md`**：完整权威规范（含历史版本记录），任务 prompt 引用它为权威源
-- **本 SKILL**：手动触发场景（用户直接说「生成外刊精炼」）时的执行指南，内容与 automation.md v5.0 一致
+- **本 SKILL**：手动触发场景（用户直接说「生成外刊精炼」）时的执行指南，内容与 automation.md v5.2 一致
 - 三处规则必须保持同步；更新任一版本规范后，其余两处需一并更新（本仓库 `skills/` 与本地 `~/.codebuddy/skills/` 也需同步，本地不会自动同步仓库更新，需手动复制或运行同步脚本）
