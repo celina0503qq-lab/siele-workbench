@@ -9,7 +9,9 @@ const cmd = db.command;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const PASSWORD_PEPPER = process.env.PASSWORD_PEPPER;
 const WEB_ORIGIN = process.env.WEB_ORIGIN || "https://celina0503qq-lab.github.io";
-const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 14;
+// 会话有效期 7 天（2026-09-28 由 14 天缩短，用户要求）：到期后需重新输密码登录；
+// 已签发的旧 token 不受影响（exp 编码在 token 内），新登录起按新有效期签发。
+const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 7;
 // 邀请码从环境变量 INVITE_CODES 读取（逗号分隔），避免明文泄露在公开仓库源码中。
 // 环境变量在 cloudbaserc.json 的 envVariables 里配置（该文件被 .gitignore 忽略，不入公开仓库）。
 const INVITE_CODES = new Set(
