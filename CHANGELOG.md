@@ -2,6 +2,14 @@
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v46.1] – 2026-09-28
+
+### 会话有效期 14 天 → 7 天（云函数）
+
+- `siele-auth` 的 `TOKEN_TTL_SECONDS` 由 14 天改为 7 天：登录后 7 天需重新输密码
+- 已签发的旧 token 不受影响（有效期编码在 token 内），新登录起按 7 天签发
+- 部署方式：CLI `fn deploy`（代码+配置一体，SESSION_SECRET/PASSWORD_PEPPER/邀请码等环境变量原样保留）；部署后实测 lili 登录返回 token 有效期 7.00 天
+
 ## [v46] – 2026-09-28
 
 ### 主站导出/导入备份一级入口（UX 断层修复）
