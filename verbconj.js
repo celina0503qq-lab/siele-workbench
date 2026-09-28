@@ -1,5 +1,5 @@
 // ============================================================
-// 动词变位引擎 v1 (MVP) — 规则模板 + 高频不规则内置表
+// 动词变位引擎 v1.1 — 规则模板 + 高频不规则内置表（v1.1 2026-09-28: A2 将来时/条件式修复）
 // 时态 14 项: presente/indefinido/imperfecto/perfecto/pluscuamperfecto
 //   futuro/condicional/subjPresente/subjImperfecto(-ra/-se)/
 //   subjPluscuamperfecto/imperativoAf/imperativoNeg/gerundio/participio
@@ -231,6 +231,38 @@
     }
   };
 
+  // ---------- A2 修复 (v1.1 2026-09-28): 将来时/条件式不规则词干 ----------
+  // 西语 futuro/condicional = 「原形+后缀」(hablar→hablaré / hablaría)，
+  // 不是「词干+后缀」。12 个高频不规则词干（RAE 对照）+ 常用派生族后缀匹配。
+  var FUT_STEM = {
+    tener: 'tendr', poner: 'pondr', salir: 'saldr', venir: 'vendr',
+    poder: 'podr', hacer: 'har', decir: 'dir', haber: 'habr',
+    querer: 'querr', saber: 'sabr', caber: 'cabr', valer: 'valdr'
+  };
+  // 常用派生族: mantener→mantendré / componer→compondré / intervenir→intervendré /
+  // sobresalir→sobresaldré / oponer→opondré / rehacer→reharé（前缀≥1字母生效）
+  // ⚠️ decir 族不在派生表：RAE 现行 bendeciré/maldeciré/desdeciré/predeciré 均以规则形
+  // 为第一形（仅 desdecir/predecir 认可 -diré 第二形），decir 本体走内置精校表 diré。
+  var FUT_STEM_DER = [
+    [/tener$/, 'tendr'], [/poner$/, 'pondr'], [/salir$/, 'saldr'],
+    [/venir$/, 'vendr'], [/poder$/, 'podr'], [/hacer$/, 'har'],
+    [/haber$/, 'habr'], [/querer$/, 'querr'],
+    [/saber$/, 'sabr'], [/caber$/, 'cabr'], [/valer$/, 'valdr']
+  ];
+  // 例外: 未来时保持规则原形（防御性保留；/decir$/ 已从派生表移除）
+  var FUT_REGULAR_EXCEPT = { bendecir: 1 };
+  function futStemOf(verb) {
+    if (FUT_REGULAR_EXCEPT[verb]) return verb;
+    if (Object.prototype.hasOwnProperty.call(FUT_STEM, verb)) return FUT_STEM[verb];
+    for (var i = 0; i < FUT_STEM_DER.length; i++) {
+      var re = FUT_STEM_DER[i][0];
+      if (re.test(verb) && verb.replace(re, '').length >= 1) {
+        return verb.replace(re, FUT_STEM_DER[i][1]);
+      }
+    }
+    return verb;
+  }
+
   // ---------- 工具 ----------
   function stemOf(verb) { return verb.slice(0, -2); }
   function endingOf(verb) { return verb.slice(-2); }
@@ -263,13 +295,19 @@
     if (!tpl) return null;
     // 模板后缀用连字符作占位标记（如 '-o'），拼接时去掉，产出真实变位（vivo 而非 viv-o）
     var glue = function (suf) { return stem + suf.replace(/^-/, ''); };
+    // A2 修复 (v1.1 2026-09-28): futuro/condicional 用「原形/不规则词干」而非「词干」。
+    // indefinido 的 -é 仍是词干+后缀（hablé 正确），勿混淆。
+    var futStem = futStemOf(verb);
+    var glueFut = function (suf) { return futStem + suf.replace(/^-/, ''); };
+    var glueFor = function (tk) { return (tk === 'futuro' || tk === 'condicional') ? glueFut : glue; };
     var out = {};
     Object.keys(tpl).forEach(function (tk) {
       var val = tpl[tk];
-      if (Array.isArray(val)) out[tk] = val.map(glue);
+      var g = glueFor(tk);
+      if (Array.isArray(val)) out[tk] = val.map(g);
       else if (val && typeof val === 'object') {
-        out[tk] = { ra: val.ra.map(glue), se: val.se.map(glue) };
-      } else out[tk] = glue(val);
+        out[tk] = { ra: val.ra.map(g), se: val.se.map(g) };
+      } else out[tk] = g(val);
     });
     return out;
   }
