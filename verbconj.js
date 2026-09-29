@@ -1,5 +1,5 @@
 // ============================================================
-// 动词变位引擎 v1.3 — 规则模板 + 高频不规则内置表（v1.3 2026-09-28: RAE 核查修正批3；v1.2: 批3 词干变化+拼写适配；v1.1: A2 将来时/条件式修复）
+// 动词变位引擎 v1.4 — 规则模板 + 高频不规则内置表（v1.4 2026-09-29: 批4 yo 增音族+indefinido 拼写；v1.3: RAE 核查修正批3；v1.2: 批3 词干变化；v1.1: A2 将来时修复）
 // 时态 14 项: presente/indefinido/imperfecto/perfecto/pluscuamperfecto
 //   futuro/condicional/subjPresente/subjImperfecto(-ra/-se)/
 //   subjPluscuamperfecto/imperativoAf/imperativoNeg/gerundio/participio
@@ -185,6 +185,34 @@
       gerundio: 'saliendo',
       participio: 'salido',
       tips: ["⚠️ 现在时第一人称 salgo（加 g）。","⚠️ 将来时 saldré/saldrás（加 dr-），条件式 saldría。","⚠️ 命令式 tú 是 sal（与 salir 原形同形）。","⚠️ 虚拟式现在时 salga/salgas/salga...salgan。","⚠️ 简单过去式是规则的：salí/saliste/salió。"]
+    },
+    'dar': {
+      presente: ['doy', 'das', 'da', 'damos', 'dais', 'dan'],
+      indefinido: ['di', 'diste', 'dio', 'dimos', 'disteis', 'dieron'],
+      imperfecto: ['daba', 'dabas', 'daba', 'd\u00e1bamos', 'dabais', 'daban'],
+      futuro: ['dar\u00e9', 'dar\u00e1s', 'dar\u00e1', 'daremos', 'dar\u00e9is', 'dar\u00e1n'],
+      condicional: ['dar\u00eda', 'dar\u00edas', 'dar\u00eda', 'dar\u00edamos', 'dar\u00edais', 'dar\u00edan'],
+      subjPresente: ['d\u00e9', 'des', 'd\u00e9', 'demos', 'deis', 'den'],
+      subjImperfecto: { ra: ['diera', 'dieras', 'diera', 'di\u00e9ramos', 'dierais', 'dieran'], se: ['diese', 'dieses', 'diese', 'di\u00e9semos', 'dieseis', 'diesen'] },
+      imperativoAf: ['da', 'dad', 'd\u00e9', 'den'],
+      imperativoNeg: ['no des', 'no deis', 'no d\u00e9', 'no den'],
+      gerundio: 'dando',
+      participio: 'dado',
+      tips: ["⚠️ 现在时 yo 是 doy（-oy）；tú das/él da 完全规则。","⚠️ 虚拟式现在时 dé/des/dé/demos/deis/den——单音节 dé 带重音！","⚠️ 简单过去式 di/diste/dio/dimos（dio 不写 dió ❌）。","⚠️ 命令式 tú 是 da，usted 是 dé（带重音）。"]
+    },
+    'ver': {
+      presente: ['veo', 'ves', 've', 'vemos', 'veis', 'ven'],
+      indefinido: ['vi', 'viste', 'vio', 'vimos', 'visteis', 'vieron'],
+      imperfecto: ['ve\u00eda', 've\u00edas', 've\u00eda', 've\u00edamos', 've\u00edais', 've\u00edan'],
+      futuro: ['ver\u00e9', 'ver\u00e1s', 'ver\u00e1', 'veremos', 'ver\u00e9is', 'ver\u00e1n'],
+      condicional: ['ver\u00eda', 'ver\u00edas', 'ver\u00eda', 'ver\u00edamos', 'ver\u00edais', 'ver\u00edan'],
+      subjPresente: ['vea', 'veas', 'vea', 'veamos', 've\u00e1is', 'vean'],
+      subjImperfecto: { ra: ['viera', 'vieras', 'viera', 'vi\u00e9ramos', 'vierais', 'vieran'], se: ['viese', 'vieses', 'viese', 'vi\u00e9semos', 'vieseis', 'viesen'] },
+      imperativoAf: ['ve', 'ved', 'vea', 'vean'],
+      imperativoNeg: ['no veas', 'no ve\u00e1is', 'no vea', 'no vean'],
+      gerundio: 'viendo',
+      participio: 'visto',
+      tips: ["⚠️ 过去分词是 visto（he visto），不是 vido ❌。","⚠️ 简单过去式 vi/viste/vio/vimos（vi/vio 单音节不加重音）。","⚠️ 虚拟式过去未完成 viera/viese（不是 veiera ❌）。","⚠️ 副动词 viendo。"]
     }
   };
 
@@ -280,25 +308,56 @@
     // e→i (-ir)
     'ce\u00f1ir':'ci\u00f1', competir:'compit', concebir:'concib', conseguir:'consig', corregir:'corrij', derretir:'derrit', elegir:'elij', expedir:'expid', impedir:'impid', medir:'mid', pedir:'pid', despedir:'despid', rendir:'rind', repetir:'repit', seguir:'sig', servir:'sirv', 'te\u00f1ir':'ti\u00f1', vestir:'vist',
     // u→ue 特例
-    jugar:'jueg', erguir:'yerg'
+    jugar:'jueg', erguir:'yerg',
+    // B4: -ger/-gir/-guir yo g→j 组 (subj nosotros 全 j; -guir 裸 g)
+    acoger:'acoj', coger:'coj', escoger:'escoj', proteger:'protej', recoger:'recoj', exigir:'exij', infligir:'inflij', restringir:'restrinj', surgir:'surj', resurgir:'resurj', distinguir:'disting', extinguir:'exting'
   };
   // 虚拟式全 6 人称变化组: 所有 -ir 词干变化动词 + 下表例外(jugar)
   var STEM_CH_FULL = { jugar: 1 };
   // presente tú/él/ellos 词干覆盖: yo 与重读形式词干分离的词
   // (-guir: g 裸/gu; -gir 软音: yo 用 j 其余 g; -cer 音位: z→c 于 e 系后缀)
-  var STEM_CH_ALT = { seguir:'sigu', conseguir:'consigu', elegir:'elig', corregir:'corrig', cocer:'cuec', torcer:'tuerc' };
+  var STEM_CH_ALT = { seguir:'sigu', conseguir:'consigu', elegir:'elig', corregir:'corrig', cocer:'cuec', torcer:'tuerc', acoger:'acog', coger:'cog', escoger:'escog', proteger:'proteg', recoger:'recog', exigir:'exig', infligir:'inflig', restringir:'restring', surgir:'surg', resurgir:'resurg', distinguir:'distingu', extinguir:'extingu' };
   // 全变化组虚拟式 nosotros/vosotros 词干覆盖(跟随过去式 3 人称词干; 家族推导不适用的词全显式)
   var STEM_CH_NOS = {
     jugar:'juegu',
     sentir:'sint', preferir:'prefir', referir:'refir', diferir:'difir', sugerir:'sugir', ingerir:'ingir', adherir:'adhir', advertir:'advirt', convertir:'convirt', controvertir:'controvirt', mentir:'mint', hervir:'hirv', adquirir:'adquir', discernir:'discern',
-    dormir:'durm', morir:'mur', cocer:'coz', torcer:'torz', erguir:'irg'
+    dormir:'durm', morir:'mur', cocer:'coz', torcer:'torz', erguir:'irg',
+    // B4: -ger 组 subj nosotros j (RAE: cojamos/recojamos/protejamos/acojamos/escojamos)
+    acoger:'acoj', coger:'coj', escoger:'escoj', proteger:'protej', recoger:'recoj'
   };
   // -iar/-uar 重音断裂: 显式重读词干(presente 1/2/3/6 + subj 1/2/3/6; nosotros/vosotros 恒用原词干)
   var ACC_CH = { aliar:'al\u00ed', actuar:'act\u00fa', continuar:'contin\u00fa', desafiar:'desaf\u00ed', confiar:'conf\u00ed', criar:'cr\u00ed', evaluar:'eval\u00fa', reevaluar:'reeval\u00fa', fiar:'f\u00ed', graduar:'grad\u00fa', liar:'l\u00ed', perpetuar:'perpet\u00fa', reenviar:'reenv\u00ed', enviar:'env\u00ed', reunir:'re\u00fan', 'desconfiar':'desconf\u00ed', 'expiar':'exp\u00ed', 'mecanografiar':'mecanograf\u00ed', 'fluctuar':'fluct\u00fa', tatuar:'tat\u00fa', vaciar:'vac\u00ed', variar:'var\u00ed' };
   // -uir 类 y 插入: presente 1/2/3/6 + subj 全 6 人称 (construyo/construya)
   var UIR_CH = { construir:1, contribuir:1, destruir:1, incluir:1, constituir:1, influir:1, intuir:1, obstruir:1, reconstruir:1, fluir:1, sustituir:1 };
   // -guar 类 ü: presente 全规则(apaciguo); 虚拟式全 6 人称 + 命令式 usted 系用 ü 词干 (apacigüe/averigüe)
+  // B4: 名词误入动词表的跳过 (cáncer 走 zc 规则会产出 cánczco 垃圾形)
+  var ZC_SKIP = { cancer: 1 };
   var GU_CH = { 'apaciguar':'apacig\u00fc', 'averiguar':'averig\u00fc' };
+  // B4 (v1.4 2026-09-29): yo 增音族显式覆盖 (RAE 逐词核查)
+  // yo=presente[0] 全形; t2/t3/t6=presente tú/él/ellos 覆盖; subj=subjPresente 全 6 人称词干;
+  // imp0=imperativoAf tú 覆盖; ger=gerundio 覆盖; siY=gerundio+indefinido[3,6]+subjImperfecto y 音位(ai→ay); gerY=仅 gerundio ai→ay
+  var GO_CH = {
+    // tener 族 (ie 词干已在 STEM_CH; subj 全 -eng; imp tú -tén)
+    abstener:{yo:'abstengo',subj:'absteng',imp0:'abst\u00e9n'}, contener:{yo:'contengo',subj:'conteng',imp0:'cont\u00e9n'}, detener:{yo:'detengo',subj:'deteng',imp0:'det\u00e9n'}, mantener:{yo:'mantengo',subj:'manteng',imp0:'mant\u00e9n'}, obtener:{yo:'obtengo',subj:'obteng',imp0:'obt\u00e9n'}, retener:{yo:'retengo',subj:'reteng',imp0:'ret\u00e9n'}, sostener:{yo:'sostengo',subj:'sosteng',imp0:'sost\u00e9n'},
+    // poner 族 (无词干变化; imp tú 短形 -pon; disponer/imponer/proponer/suponer 带 ó)
+    poner:{yo:'pongo',subj:'pong',imp0:'pon'}, componer:{yo:'compongo',subj:'compong',imp0:'compon'}, descomponer:{yo:'descompongo',subj:'descompong',imp0:'descompon'}, disponer:{yo:'dispongo',subj:'dispong',imp0:'disp\u00f3n'}, imponer:{yo:'impongo',subj:'impong',imp0:'imp\u00f3n'}, proponer:{yo:'propongo',subj:'propong',imp0:'prop\u00f3n'}, suponer:{yo:'supongo',subj:'supong',imp0:'sup\u00f3n'},
+    // salir 族 / venir 族 (ie 词干 + imp tú 重音短形)
+    sobresalir:{yo:'sobresalgo',subj:'sobresalg',imp0:'sobresal'},
+    convenir:{yo:'convengo',t2:'convienes',t3:'conviene',t6:'convienen',subj:'conveng',imp0:'conv\u00e9n'},
+    intervenir:{yo:'intervengo',t2:'intervienes',t3:'interviene',t6:'intervienen',subj:'interveng',imp0:'interv\u00e9n'},
+    prevenir:{yo:'prevengo',t2:'previenes',t3:'previene',t6:'previenen',subj:'preveng',imp0:'prev\u00e9n'},
+    // decir 族 (ellos i 词干; ger i 音位 bendiciendo/prediciendo)
+    bendecir:{yo:'bendigo',t2:'bendices',t3:'bendice',t6:'bendicen',subj:'bendig',ger:'bendiciendo'},
+    predecir:{yo:'predigo',t2:'predices',t3:'predice',t6:'predicen',subj:'predig',ger:'prediciendo'},
+    // valer / caber (subj 全 6 用增音词干)
+    valer:{yo:'valgo',subj:'valg'}, caber:{yo:'quepo',subj:'quep'},
+    // caer 族 (y 音位: cayendo/cayó/cayeron/cayera)
+    caer:{yo:'caigo',subj:'caig',siY:1}, decaer:{yo:'decaigo',subj:'decaig',siY:1}, recaer:{yo:'recaigo',subj:'recaig',siY:1},
+    // traer 族 (indef/subjImp 是 j 强变化→批5; 本批仅 ger y: trayendo/atrayendo)
+    traer:{yo:'traigo',subj:'traig',gerY:1}, atraer:{yo:'atraigo',subj:'atraig',gerY:1}, distraer:{yo:'distraigo',subj:'distraig',gerY:1}, extraer:{yo:'extraigo',subj:'extraig',gerY:1},
+    // -cer/-cir 例外组 (c→z 不插 c)
+    vencer:{yo:'venzo',subj:'venz'}, convencer:{yo:'convenzo',subj:'convenz'}, ejercer:{yo:'ejerzo',subj:'ejerz'}, esparcir:{yo:'esparzo',subj:'esparz'}, fruncir:{yo:'frunzo',subj:'frunz'}, resarcir:{yo:'resarzo',subj:'resarz'}
+  };
   // -ar 虚拟式/命令式 usted 系拼写适配: -car→qu / -gar→gu / -zar→c (busque/llegue/empiece)
   // 注意后缀首字符含重音 é 也触发 (busquéis)
   var orthAr = function (st, suf) {
@@ -396,6 +455,49 @@
       out.subjPresente = [gu + sS3[0], gu + sS3[1], gu + sS3[2], gu + sS3[3], gu + sS3[4], gu + sS3[5]];
       out.imperativoAf = [out.presente[1].slice(0, -1), stem + (end === 'ar' ? 'ad' : (end === 'er' ? 'ed' : 'id')), out.subjPresente[2], out.subjPresente[5]];
       out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    }
+    // B4 (v1.4): -cer/-cir yo zc 自动规则 (词干末 c→zc; 例外 c→z 组在 GO_CH)
+    var isCeCi = (end === 'er' && /cer$/.test(verb)) || (end === 'ir' && /cir$/.test(verb));
+    if (isCeCi && !STEM_CH[verb] && !IRREGULAR[verb] && !GO_CH[verb] && !ZC_SKIP[verb]) {
+      var zst = stem.slice(0, -1) + 'zc';
+      var sS4 = tpl.subjPresente.map(function (s) { return s.replace(/^-/, ''); });
+      out.presente[0] = zst + 'o';
+      out.subjPresente = sS4.map(function (s) { return zst + s; });
+      out.imperativoAf[2] = out.subjPresente[2];
+      out.imperativoAf[3] = out.subjPresente[5];
+      out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+    }
+    // B4 (v1.4): GO_CH yo 增音族覆盖
+    var gch = GO_CH[verb];
+    if (gch) {
+      if (gch.yo) out.presente[0] = gch.yo;
+      if (gch.t2) out.presente[1] = gch.t2;
+      if (gch.t3) out.presente[2] = gch.t3;
+      if (gch.t6) out.presente[5] = gch.t6;
+      if (gch.subj) {
+        var sS5 = tpl.subjPresente.map(function (s) { return s.replace(/^-/, ''); });
+        out.subjPresente = sS5.map(function (s) { return gch.subj + s; });
+        out.imperativoAf[2] = out.subjPresente[2];
+        out.imperativoAf[3] = out.subjPresente[5];
+        out.imperativoNeg = ['no ' + out.subjPresente[1], 'no ' + out.subjPresente[4], 'no ' + out.subjPresente[2], 'no ' + out.subjPresente[5]];
+      }
+      if (gch.imp0) out.imperativoAf[0] = gch.imp0;
+      else if (gch.t2) out.imperativoAf[0] = out.presente[1].slice(0, -1);
+      var ayFix = function (x) { return String(x).replace(/ai(?=[o\u00f3e\u00e9])/g, 'ay'); };
+      if (gch.ger) out.gerundio = gch.ger;
+      if (gch.siY) {
+        out.gerundio = ayFix(out.gerundio);
+        out.indefinido = [stem + '\u00ed', stem + '\u00edste', ayFix(stem + 'i\u00f3'), stem + '\u00edmos', stem + '\u00edsteis', ayFix(stem + 'ieron')];
+        out.subjImperfecto = { ra: out.subjImperfecto.ra.map(ayFix), se: out.subjImperfecto.se.map(ayFix) };
+      }
+      if (gch.gerY) out.gerundio = ayFix(out.gerundio);
+    }
+    // B4 (v1.4): -ar indefinido 1sg 拼写适配 (busqué/llegué/empecé/apacigüé)
+    if (end === 'ar') {
+      if (/c$/.test(stem)) out.indefinido[0] = stem.slice(0, -1) + 'qu\u00e9';
+      else if (/g$/.test(stem)) out.indefinido[0] = stem.slice(0, -1) + 'gu\u00e9';
+      else if (/z$/.test(stem)) out.indefinido[0] = stem.slice(0, -1) + 'c\u00e9';
+      else if (/gu$/.test(stem)) out.indefinido[0] = stem.slice(0, -2) + 'g\u00fc\u00e9';
     }
     // P7: 规则动词否定命令式补 no 前缀 (覆盖块路径已自带 no; IRREGULAR 内置表不受此路径影响)
     if (out.imperativoNeg && String(out.imperativoNeg[0]).indexOf('no ') !== 0) {
