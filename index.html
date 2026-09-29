@@ -2581,6 +2581,20 @@ function startDictationReinforcement(){
   if(!errors.length){_flashSubView='reinforce';renderMain();return;}
   startDictationTest({words:errors.map(function(x){return x.v;}),mode:'reinforce'});
 }
+function exitDictation(){
+  var chk=document.getElementById('dictAutoOffChk');
+  if(chk&&chk.checked){try{localStorage.setItem('wb_dict_auto_off_v1','1');}catch(e){}}
+  _dictationState=null;
+  var ov=document.getElementById('dictOverlay');
+  if(ov){ov.style.opacity='0';ov.style.transition='opacity .16s ease';setTimeout(function(){ov.remove();},170);}
+}
+function isDictAutoOff(){
+  try{return typeof localStorage!=='undefined'&&localStorage.getItem('wb_dict_auto_off_v1')==='1';}catch(e){return false;}
+}
+function setDictAutoOff(off){
+  try{if(off)localStorage.setItem('wb_dict_auto_off_v1','1');else localStorage.removeItem('wb_dict_auto_off_v1');}catch(e){}
+  requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
+}
 function continueFlashLearning(){
   var overlay=document.getElementById('dictOverlay');
   if(overlay){overlay.style.opacity='0';overlay.style.transition='opacity .16s ease';setTimeout(function(){overlay.remove();},170);}
@@ -2606,9 +2620,11 @@ function showDictationWord(){
     <div style="margin-top:10px"><input class="dm-input" id="dictInput" placeholder="输入西班牙语..." onkeydown="if(event.key==='Enter')checkDictation()" autofocus></div>
     <div class="dm-result" id="dictResult"></div>
     <div class="dm-actions">
+      <button class="btn sm ol" onclick="exitDictation()">退出</button>
       <button class="btn sm ol" onclick="skipDictation()">跳过</button>
       <button class="btn sm" onclick="checkDictation()">✓ 提交</button>
     </div>
+    <div style="text-align:center;margin-top:10px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" id="dictAutoOffChk"> 不喜欢这个模式？勾选并点「退出」后，本设备不再自动弹出默写</label></div>
   </div>`;
   document.body.appendChild(overlay);
   setTimeout(()=>document.getElementById('dictInput')?.focus(),200);
@@ -2830,6 +2846,7 @@ function renderFlash(){
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${ST.flashIdx+1} / ${pool.length}</div>
   </div>`;
+  h += `<div style="text-align:right;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label></div>`;
   h += renderFlashGarden();
   h += `<div class="dictation-tabs" role="tablist" aria-label="单词卡片分项">
     <button class="dictation-tab ${_flashSubView==='study'?'on':''}" role="tab" aria-selected="${_flashSubView==='study'}" onclick="setFlashSubView('study')">📚 学习卡片</button>
@@ -2999,7 +3016,7 @@ function rateFlash(level){
   updateStreak();
   save();
   deferFlashBackup();
-  const shouldDictate=ST.flashReviewSession>0&&ST.flashReviewSession%10===0;
+  const shouldDictate=ST.flashReviewSession>0&&ST.flashReviewSession%10===0&&!isDictAutoOff();
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
   if(shouldDictate)setTimeout(function(){startDictationTest({fromRecent:true});},260);
 }
@@ -17451,7 +17468,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v46-2026092802';
+    var swVer = 'v47-2026092901';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17488,7 +17505,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v46-2026092802';
+    return 'v47-2026092901';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
