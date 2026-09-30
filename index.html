@@ -14124,7 +14124,7 @@ window._deleAdminCancelEdit = function(btn){
   }
 };
 // 渲染管理员编辑按钮标签 (仅管理员可见)
-// 三重管理员检测: ①直接读session ②调用isMainAdmin ③检查username
+// 双重管理员检测: ①直接读session ②调用isMainAdmin（用户名后门已删 2026-09-30 v49）
 window._deleIsAdmin = function(){
   var isAdmin = false;
   try {
@@ -14133,12 +14133,6 @@ window._deleIsAdmin = function(){
   } catch(e) {}
   if (!isAdmin && typeof isMainAdmin === 'function') {
     try { isAdmin = isMainAdmin(); } catch(e) {}
-  }
-  if (!isAdmin) {
-    try {
-      var _raw2 = localStorage.getItem('swa_cloud_session_v1');
-      if (_raw2) { var _s2 = JSON.parse(_raw2); isAdmin = !!(_s2 && typeof _s2.username === 'string' && _s2.username.toLowerCase() === 'serena'); }
-    } catch(e) {}
   }
   return isAdmin;
 };
@@ -17468,7 +17462,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v48-2026093001';
+    var swVer = 'v49-2026093001';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17505,7 +17499,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v48-2026093001';
+    return 'v49-2026093001';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
