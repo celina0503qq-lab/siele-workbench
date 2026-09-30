@@ -1,5 +1,5 @@
 // ============================================================
-// 动词变位引擎 v1.4 — 规则模板 + 高频不规则内置表（v1.4 2026-09-29: 批4 yo 增音族+indefinido 拼写；v1.3: RAE 核查修正批3；v1.2: 批3 词干变化；v1.1: A2 将来时修复）
+// 动词变位引擎 v1.5 — 规则模板 + 高频不规则内置表（v1.5 2026-09-29: 批5 强变化过去式+不规则分词；v1.4: 批4 yo 增音族；v1.3: 批3 词干变化 RAE 核查）
 // 时态 14 项: presente/indefinido/imperfecto/perfecto/pluscuamperfecto
 //   futuro/condicional/subjPresente/subjImperfecto(-ra/-se)/
 //   subjPluscuamperfecto/imperativoAf/imperativoNeg/gerundio/participio
@@ -356,7 +356,9 @@
     // traer 族 (indef/subjImp 是 j 强变化→批5; 本批仅 ger y: trayendo/atrayendo)
     traer:{yo:'traigo',subj:'traig',gerY:1}, atraer:{yo:'atraigo',subj:'atraig',gerY:1}, distraer:{yo:'distraigo',subj:'distraig',gerY:1}, extraer:{yo:'extraigo',subj:'extraig',gerY:1},
     // -cer/-cir 例外组 (c→z 不插 c)
-    vencer:{yo:'venzo',subj:'venz'}, convencer:{yo:'convenzo',subj:'convenz'}, ejercer:{yo:'ejerzo',subj:'ejerz'}, esparcir:{yo:'esparzo',subj:'esparz'}, fruncir:{yo:'frunzo',subj:'frunz'}, resarcir:{yo:'resarzo',subj:'resarz'}
+    vencer:{yo:'venzo',subj:'venz'}, convencer:{yo:'convenzo',subj:'convenz'}, ejercer:{yo:'ejerzo',subj:'ejerz'}, esparcir:{yo:'esparzo',subj:'esparz'}, fruncir:{yo:'frunzo',subj:'frunz'}, resarcir:{yo:'resarzo',subj:'resarz'},
+    // -eer 组 (RAE: creí/creyó/creyendo/creyera; c. leer)
+    creer:{siE:1}, poseer:{siE:1}
   };
   // -ar 虚拟式/命令式 usted 系拼写适配: -car→qu / -gar→gu / -zar→c (busque/llegue/empiece)
   // 注意后缀首字符含重音 é 也触发 (busquéis)
@@ -368,6 +370,22 @@
       if (/z$/.test(st)) return st.slice(0, -1) + 'c' + suf;
     }
     return st + suf;
+  };
+  // B5 (v1.5 2026-09-29): 强变化过去式词干 (indefinido 全 6 + subjImperfecto ra/se 同词干; RAE 核查)
+  // 后缀: e/iste/o/imos/isteis/ieron (单音节无重音) + iera 系 / -iese 系
+  var STRONG_PRET = {
+    abstener:'abstuv', contener:'contuv', detener:'detuv', mantener:'mantuv', obtener:'obtuv', retener:'retuv', sostener:'sostuv',
+    poner:'pus', componer:'compus', descomponer:'descompus', disponer:'dispus', imponer:'impus', proponer:'propus', suponer:'supus',
+    convenir:'convin', intervenir:'intervin', prevenir:'previn', bendecir:'bendij', predecir:'predij',
+    traer:'traj', atraer:'atraj', distraer:'distraj', extraer:'extraj', caber:'cup', querer:'quis', andar:'anduv',
+    conducir:'conduj', deducir:'deduj', inducir:'induj', introducir:'introduj', reducir:'reduj', seducir:'seduj', traducir:'traduj'
+  };
+  // B5: 不规则过去分词 (RAE 第一形; 复合时态由 buildCompound 自动拼)
+  var PART_IRREG = {
+    poner:'puesto', componer:'compuesto', descomponer:'descompuesto', disponer:'dispuesto', imponer:'impuesto', proponer:'propuesto', suponer:'supuesto',
+    volver:'vuelto', devolver:'devuelto', desenvolver:'desenvuelto', morir:'muerto', cubrir:'cubierto', descubrir:'descubierto', describir:'descrito', suscribir:'suscrito',
+    // B5b: 元音词干分词重音 í (RAE: creído/caído/traído 系)
+    creer:'cre\u00eddo', poseer:'pose\u00eddo', caer:'ca\u00eddo', decaer:'deca\u00eddo', recaer:'reca\u00eddo', traer:'tra\u00eddo', atraer:'atra\u00eddo', distraer:'distra\u00eddo', extraer:'extra\u00eddo'
   };
   // ---------- 工具 ----------
   function stemOf(verb) { return verb.slice(0, -2); }
@@ -491,6 +509,23 @@
         out.subjImperfecto = { ra: out.subjImperfecto.ra.map(ayFix), se: out.subjImperfecto.se.map(ayFix) };
       }
       if (gch.gerY) out.gerundio = ayFix(out.gerundio);
+    }
+    // B5 (v1.5): 强变化过去式 + 不规则分词 + -eer 组
+    var sp = STRONG_PRET[verb];
+    if (sp) {
+      // B5b: -j 词干 RAE 为 trajera/trajeron (无 i); 其余词干 mantuviera/mantuvieron
+      var jEnd = sp.charAt(sp.length - 1) === 'j';
+      out.indefinido = [sp + 'e', sp + 'iste', sp + 'o', sp + 'imos', sp + 'isteis', jEnd ? sp + 'eron' : sp + 'ieron'];
+      var srA = (jEnd ? ['era', 'eras', 'era', '\u00e9ramos', 'erais', 'eran'] : ['iera', 'ieras', 'iera', 'i\u00e9ramos', 'ierais', 'ieran']).map(function (s) { return sp + s; });
+      var srS = (jEnd ? ['ese', 'eses', 'ese', '\u00e9semos', 'eseis', 'esen'] : ['iese', 'ieses', 'iese', 'i\u00e9semos', 'ieseis', 'iesen']).map(function (s) { return sp + s; });
+      out.subjImperfecto = { ra: srA, se: srS };
+    }
+    var pir = PART_IRREG[verb];
+    if (pir) out.participio = pir;
+    if (gch && gch.siE) {
+      out.gerundio = stem + 'yendo';
+      out.indefinido = [stem + '\u00ed', stem + '\u00edste', stem + 'y\u00f3', stem + '\u00edmos', stem + '\u00edsteis', stem + 'yeron'];
+      out.subjImperfecto = { ra: [stem + 'yera', stem + 'yeras', stem + 'yera', stem + 'y\u00e9ramos', stem + 'yerais', stem + 'yeran'], se: [stem + 'yese', stem + 'yeses', stem + 'yese', stem + 'y\u00e9semos', stem + 'yeseis', stem + 'yesen'] };
     }
     // B4 (v1.4): -ar indefinido 1sg 拼写适配 (busqué/llegué/empecé/apacigüé)
     if (end === 'ar') {
