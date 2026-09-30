@@ -16734,16 +16734,16 @@ function renderConjCard(v, ed){
   }
   const ovr = (m.note && typeof m.note === 'object') ? m.note : null; // 管理员逐格覆盖 {t:[...], t:{ra,se}}
   const eb = ed ? ' <span onclick="event.stopPropagation();_conjCellEdit(\''+esc(v)+'\',\'__meta__\',0)" style="cursor:pointer;font-size:12px;color:#3b82f6;opacity:.6" title="编辑要点">✏️</span>' : '';
-  const typeColor = r.irregular ? '#d85a30' : '#185fa5';
-  const typeBg = r.irregular ? '#fdf0e9' : '#e6f1fb';
+  const _it = r.irregularType || null;
+  const typeColor = _it === 'full' ? '#d85a30' : (_it === 'partial' ? '#9a6b00' : '#185fa5');
+  const typeBg = _it === 'full' ? '#fdf0e9' : (_it === 'partial' ? '#fdf6e3' : '#e6f1fb');
   let h = '<div class="card" style="margin:8px 0;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:12px" id="conj_'+esc(v).replace(/[^a-zA-Z0-9]/g,'_')+'">';
   // ===== 卡片头 =====
   h += '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:linear-gradient(90deg,'+typeBg+',transparent 60%)">';
   h += '<span style="font-size:17px;font-weight:800;font-family:var(--serif);color:'+typeColor+'">'+esc(v)+'</span>';
   h += '<span style="font-size:12px;color:var(--ink);opacity:.75">'+esc(m.zh||'')+eb+'</span>';
   if(r.pronominal) h += '<span style="font-size:10px;background:#e8f5ee;color:#0f6e56;border-radius:6px;padding:2px 7px;font-weight:600">代词式</span>';
-  if(r.irregular) h += '<span style="font-size:10px;background:'+typeBg+';color:'+typeColor+';border-radius:6px;padding:2px 7px;font-weight:600">不规则</span>';
-  else h += '<span style="font-size:10px;background:'+typeBg+';color:'+typeColor+';border-radius:6px;padding:2px 7px;font-weight:600">规则</span>';
+  h += '<span style="font-size:10px;background:'+typeBg+';color:'+typeColor+';border-radius:6px;padding:2px 7px;font-weight:600">'+(_it==='full'?'不规则':(_it==='partial'?'部分不规则':'规则'))+'</span>';
   h += '<button class="spk" style="width:26px;height:26px;font-size:11px;margin-left:auto;border-radius:8px" onclick="speak(\''+esc(v)+'\',this)">🔊</button>';
   h += ed ? '<span onclick="_conjDelVerb(\''+esc(v)+'\')" style="cursor:pointer;font-size:13px;color:#ef4444;opacity:.6;padding:2px" title="删除词条要点">✕</span>' : '';
   h += '</div>';
@@ -17468,7 +17468,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v47-2026092901';
+    var swVer = 'v48-2026093001';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17505,7 +17505,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v47-2026092901';
+    return 'v48-2026093001';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
