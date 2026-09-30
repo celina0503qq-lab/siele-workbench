@@ -1,5 +1,5 @@
 // ============================================================
-// 动词变位引擎 v1.5 — 规则模板 + 高频不规则内置表（v1.5 2026-09-29: 批5 强变化过去式+不规则分词；v1.4: 批4 yo 增音族；v1.3: 批3 词干变化 RAE 核查）
+// 动词变位引擎 v1.6 — 规则模板 + 高频不规则内置表（v1.6 2026-09-30: 批6 reír 类精校+irregularType 三态；v1.5: 批5 强变化过去式；v1.4: 批4 yo 增音族）
 // 时态 14 项: presente/indefinido/imperfecto/perfecto/pluscuamperfecto
 //   futuro/condicional/subjPresente/subjImperfecto(-ra/-se)/
 //   subjPluscuamperfecto/imperativoAf/imperativoNeg/gerundio/participio
@@ -212,7 +212,48 @@
       imperativoNeg: ['no veas', 'no ve\u00e1is', 'no vea', 'no vean'],
       gerundio: 'viendo',
       participio: 'visto',
-      tips: ["⚠️ 过去分词是 visto（he visto），不是 vido ❌。","⚠️ 简单过去式 vi/viste/vio/vimos（vi/vio 单音节不加重音）。","⚠️ 虚拟式过去未完成 viera/viese（不是 veiera ❌）。","⚠️ 副动词 viendo。"]
+      tips: ["⚠️ 过去分词是 visto（he visto），不是 vido ❌。","⚠️ 简单过去式 vi/viste/vio/vimos（vi/vio 单音节不加重音）。","⚠️ 虚拟式过去未完成 viera/viese（不是 veiera ❌）。","⚠️ 副动词 viendo。"]    },
+    're\u00edr': {
+      presente: ['r\u00edo', 'r\u00edes', 'r\u00ede', 're\u00edmos', 're\u00eds', 'r\u00eden'],
+      indefinido: ['re\u00ed', 're\u00edste', 'ri\u00f3', 're\u00edmos', 're\u00edsteis', 'rieron'],
+      imperfecto: ['re\u00eda', 're\u00edas', 're\u00eda', 're\u00edamos', 're\u00edais', 're\u00edan'],
+      futuro: ['reir\u00e9', 'reir\u00e1s', 'reir\u00e1', 'reiremos', 'reir\u00e9is', 'reir\u00e1n'],
+      condicional: ['reir\u00eda', 'reir\u00edas', 'reir\u00eda', 'reir\u00edamos', 'reir\u00edais', 'reir\u00edan'],
+      subjPresente: ['r\u00eda', 'r\u00edas', 'r\u00eda', 'riamos', 'ri\u00e1is', 'r\u00edan'],
+      subjImperfecto: { ra: ['riera', 'rieras', 'riera', 'ri\u00e9ramos', 'rierais', 'rieran'], se: ['riese', 'rieses', 'riese', 'ri\u00e9semos', 'rieseis', 'riesen'] },
+      imperativoAf: ['r\u00ede', 're\u00edd', 'r\u00eda', 'r\u00edan'],
+      imperativoNeg: ['no r\u00edas', 'no ri\u00e1is', 'no r\u00eda', 'no r\u00edan'],
+      gerundio: 'riendo',
+      participio: 're\u00eddo',
+      tips: ["⚠️ 现在时重读 í 带重音：río/ríes/ríe/ríen，nosotros/vosotros 无重音（reímos/reís）。","⚠️ 简单过去式 reí/reíste/rió…第三人称 rió 与复数 rieron 变 y！","⚠️ 虚拟式现在时 ría/rías/ría/riamos/riáis/rían。","⚠️ 副动词 riendo（不是 reiendo ❌）。","⚠️ 命令式 tú 是 ríe（带重音），usted 是 ría。"]
+    },
+    'sonre\u00edr': {
+      presente: ['sonr\u00edo', 'sonr\u00edes', 'sonr\u00ede', 'sonre\u00edmos', 'sonre\u00eds', 'sonr\u00eden'],
+      indefinido: ['sonre\u00ed', 'sonre\u00edste', 'sonri\u00f3', 'sonre\u00edmos', 'sonre\u00edsteis', 'sonrieron'],
+      imperfecto: ['sonre\u00eda', 'sonre\u00edas', 'sonre\u00eda', 'sonre\u00edamos', 'sonre\u00edais', 'sonre\u00edan'],
+      futuro: ['sonreir\u00e9', 'sonreir\u00e1s', 'sonreir\u00e1', 'sonreiremos', 'sonreir\u00e9is', 'sonreir\u00e1n'],
+      condicional: ['sonreir\u00eda', 'sonreir\u00edas', 'sonreir\u00eda', 'sonreir\u00edamos', 'sonreir\u00edais', 'sonreir\u00edan'],
+      subjPresente: ['sonr\u00eda', 'sonr\u00edas', 'sonr\u00eda', 'sonriamos', 'sonri\u00e1is', 'sonr\u00edan'],
+      subjImperfecto: { ra: ['sonriera', 'sonrieras', 'sonriera', 'sonri\u00e9ramos', 'sonrierais', 'sonrieran'], se: ['sonriese', 'sonrieses', 'sonriese', 'sonri\u00e9semos', 'sonrieseis', 'sonriesen'] },
+      imperativoAf: ['sonr\u00ede', 'sonre\u00edd', 'sonr\u00eda', 'sonr\u00edan'],
+      imperativoNeg: ['no sonr\u00edas', 'no sonri\u00e1is', 'no sonr\u00eda', 'no sonr\u00edan'],
+      gerundio: 'sonriendo',
+      participio: 'sonre\u00eddo',
+      tips: ["⚠️ 变位与 reír 完全同构（词干 son- + río 系）。","⚠️ 现在时 sonrío/sonríes/sonríe/sonríen 重读 í 带重音。","⚠️ 简单过去式 sonreí/sonreíste/sonrió…第三人称与复数变 y。","⚠️ 副动词 sonriendo。","⚠️ 命令式 tú 是 sonríe，usted 是 sonría。"]
+    },
+    'fre\u00edr': {
+      presente: ['fr\u00edo', 'fr\u00edes', 'fr\u00ede', 'fre\u00edmos', 'fre\u00eds', 'fr\u00eden'],
+      indefinido: ['fre\u00ed', 'fre\u00edste', 'fri\u00f3', 'fre\u00edmos', 'fre\u00edsteis', 'frieron'],
+      imperfecto: ['fre\u00eda', 'fre\u00edas', 'fre\u00eda', 'fre\u00edamos', 'fre\u00edais', 'fre\u00edan'],
+      futuro: ['freir\u00e9', 'freir\u00e1s', 'freir\u00e1', 'freiremos', 'freir\u00e9is', 'freir\u00e1n'],
+      condicional: ['freir\u00eda', 'freir\u00edas', 'freir\u00eda', 'freir\u00edamos', 'freir\u00edais', 'freir\u00edan'],
+      subjPresente: ['fr\u00eda', 'fr\u00edas', 'fr\u00eda', 'friamos', 'fri\u00e1is', 'fr\u00edan'],
+      subjImperfecto: { ra: ['friera', 'frieras', 'friera', 'fri\u00e9ramos', 'frierais', 'frieran'], se: ['friese', 'frieses', 'friese', 'fri\u00e9semos', 'frieseis', 'friesen'] },
+      imperativoAf: ['fr\u00ede', 'fre\u00edd', 'fr\u00eda', 'fr\u00edan'],
+      imperativoNeg: ['no fr\u00edas', 'no fri\u00e1is', 'no fr\u00eda', 'no fr\u00edan'],
+      gerundio: 'friendo',
+      participio: 'frito',
+      tips: ["⚠️ 变位与 reír 同构（frío/fríes/fríe/freímos/freís/fríen）。","⚠️ 简单过去式 freí/freíste/frió…第三人称与复数变 y（frió/frieron）。","⚠️ 过去分词第一不规则形 frito（he frito），freído 也正确。","⚠️ 副动词 friendo（不是 friiendo ❌）。","⚠️ 虚拟式 fría/frías/fría/friamos/friáis/frían。"]
     }
   };
 
@@ -395,6 +436,15 @@
     var v = stripPronoun(verb);
     return Object.prototype.hasOwnProperty.call(IRREGULAR, v);
   }
+  // B6 (v1.6): 不规则类型标记 full=完全精校 / partial=局部不规则(词干变化/yo增音/强变化/分词/拼写适配) / null=纯规则
+  function irregularTypeOf(verb) {
+    var v = stripPronoun(verb);
+    if (Object.prototype.hasOwnProperty.call(IRREGULAR, v)) return 'full';
+    if (STEM_CH[v] || GO_CH[v] || STRONG_PRET[v] || PART_IRREG[v] || ACC_CH[v] || UIR_CH[v] || GU_CH[v]) return 'partial';
+    var end = endingOf(v);
+    if ((end === 'er' && /cer$/.test(v) && !ZC_SKIP[v]) || (end === 'ir' && /cir$/.test(v))) return 'partial';
+    return null;
+  }
   // 提取代词式动词原形: dormirse -> dormir, se 前缀保留在返回的 meta
   function stripPronoun(verb) {
     var prons = ['me', 'te', 'se', 'nos', 'os'];
@@ -403,7 +453,7 @@
       if (verb.length > suf.length + 2 && verb.slice(-suf.length) === suf) {
         var core = verb.slice(0, -suf.length);
         // 只认以 ar/er/ir 结尾的原形(如 dormirse -> dormir)
-        if (/[aeiou]n?[aeiou]$/.test(core) || /(ar|er|ir)$/.test(core)) {
+        if (/[aeiou]n?[aeiou]$/.test(core) || /(ar|er|ir|\u00edr)$/.test(core)) {
           return core;
         }
       }
@@ -574,7 +624,7 @@
       if (!forms) return null;
       forms = buildCompound(forms);
     }
-    return { verb: original, core: core, pronominal: pronominal, forms: forms, irregular: isIrregular(core), source: isIrregular(core) ? 'irregular-builtin' : 'engine-regular', tips: tipsArr };
+    return { verb: original, core: core, pronominal: pronominal, forms: forms, irregular: isIrregular(core), irregularType: irregularTypeOf(core), source: isIrregular(core) ? 'irregular-builtin' : 'engine-regular', tips: tipsArr };
   }
 
   // 组装完整展示结构: [{t:{k,zh,n,dual}, cells:[...]}]
