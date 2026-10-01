@@ -110,6 +110,41 @@ async function _flushRateAudit() {
   }
 }
 
+// ========================================================================
+// v47 修复①：DB 层限流（_rate_limits 集合）—— 防多实例内存限流穿透 + 无账号爆破兜底
+//   key 形如 "reset_probe:<ip>"；窗口内计数 >= max 则拒绝。
+//   文档 { key, count, windowStart, expireAt }；读时窗口过期即重置（TTL 索引未建时也能自清理）。
+//   DB 故障时 fail-open（放行 + 日志），避免数据库抖动导致全站不可登录。
+// ========================================================================
+const DB_RATE_CONFIG = {
+  RESET_PROBE_MAX: 10,   // reset 防枚举：同 IP 15 分钟 10 次（真实用户忘密码 3-5 次足够）
+  REG_INVITE_MAX: 5,     // 注册邀请码探测：同 IP 15 分钟 5 次
+  LOGIN_FAIL_MAX: 20     // 登录失败：同 IP 15 分钟 20 次
+};
+const DB_RATE_WINDOW_MS = 15 * 60 * 1000;
+async function _dbRateGuard(key, max) {
+  try {
+    const coll = db.collection("_rate_limits");
+    const got = await coll.where({ key }).limit(1).get();
+    const t = Date.now();
+    if (!got.data.length) {
+      await coll.add({ key, count: 1, windowStart: t, expireAt: new Date(t + DB_RATE_WINDOW_MS) });
+      return { allowed: true };
+    }
+    const doc = got.data[0];
+    if (t - Number(doc.windowStart || 0) > DB_RATE_WINDOW_MS) {
+      await coll.doc(doc._id).update({ count: 1, windowStart: t, expireAt: new Date(t + DB_RATE_WINDOW_MS) });
+      return { allowed: true };
+    }
+    if (Number(doc.count || 0) >= max) return { allowed: false, retryAfterMs: Math.max(0, Number(doc.windowStart || 0) + DB_RATE_WINDOW_MS - t) };
+    await coll.doc(doc._id).update({ count: Number(doc.count || 0) + 1 });
+    return { allowed: true };
+  } catch (e) {
+    console.error("db_rate_guard_error", { key, error: e && e.message });
+    return { allowed: true }; // fail-open
+  }
+}
+
 // 模块作用域状态缓存：uid -> { status, role, checkedAt }
 // 用来在已签发 session 的高频请求里避免每次都打 DB。
 // TTL 60s；命中 USER_DISABLED 时立即失效以保证响应迅速。
@@ -217,10 +252,23 @@ async function register(event) {
   const inviteCode = normalizeInvite(event.inviteCode);
   if (!validUsername(username)) return response(false, "INVALID_USERNAME");
   if (!isStrongPassword(password)) return response(false, "WEAK_PASSWORD");
-  if (!INVITE_CODES.has(inviteCode)) return response(false, "INVALID_INVITE");
+  if (!INVITE_CODES.has(inviteCode)) {
+    // v47 修复② INVITE_GUARD：同 IP 短时间内多次输错码≠注册探测邀请码有效性
+
+    const g = await _dbRateGuard("reg_invite:" + _extractClientIp(event), DB_RATE_CONFIG.REG_INVITE_MAX);
+    if (!g.allowed) return response(false, "RATE_LIMITED", { retryAfterMs: g.retryAfterMs });
+    return response(false, "INVALID_INVITE");
+  }
   const uid = "usr_" + crypto.randomUUID().replace(/-/g, "");
   const salt = crypto.randomBytes(16).toString("base64url");
   const hash = passwordHash(password, salt);
+  // S2 追加：注册查重大小写不敏感（normalizeUsername 只 trim；DB 存量含大写用户名如 Serena，
+  //   旧精确匹配拦不住小写 serena 注册）。用 db.RegExp i 查询；查询失败不阻塞注册（事务内仍有精确匹配兜底）。
+  try {
+    const _esc = username.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const _dup = await db.collection("user_profiles").where({ username: db.RegExp({ regexp: "^" + _esc + "$", options: "i" }) }).limit(1).get();
+    if (_dup.data.length) return response(false, "USERNAME_TAKEN");
+  } catch (e) { console.error("username_dup_check_failed", e && e.message); }
   try {
     await db.runTransaction(async transaction => {
       const existing = await transaction.collection("user_profiles").where({ username }).limit(1).get();
@@ -281,6 +329,10 @@ async function login(event) {
   const candidate = passwordHash(password, user.passwordSalt);
   if (candidate.length !== user.passwordHash.length || !crypto.timingSafeEqual(Buffer.from(candidate), Buffer.from(user.passwordHash))) {
     const newLock = await _recordLoginFail(username);
+    // v47 修复①：登录失败 IP 级 DB 限流（防换账号爆破；存在账号已由 per-username 锁定覆盖）
+
+    const g = await _dbRateGuard("login_fail:" + _extractClientIp(event), DB_RATE_CONFIG.LOGIN_FAIL_MAX);
+    if (!g.allowed) return response(false, "LOCKED", { retryAfterMs: g.retryAfterMs || DB_RATE_WINDOW_MS });
     if (newLock) return response(false, "LOCKED", { retryAfterMs: Math.max(0, newLock - Date.now()) });
     return response(false, "INVALID_CREDENTIALS");
   }
@@ -351,21 +403,24 @@ async function resetPasswordWithInvite(event) {
   const inviteCode = normalizeInvite(event.inviteCode);
   if (!validUsername(username)) return response(false, "INVALID_USERNAME");
   if (!isStrongPassword(newPassword)) return response(false, "WEAK_PASSWORD");
-  if (!INVITE_CODES.has(inviteCode)) return response(false, "INVALID_INVITE");
+  // v47 修复③ 防枚举：码无效/用户不存在/码不匹配/用户停用 统一响应 PWD_INVITE_MISMATCH，
+  //   外部无法区分「邀请码是否有效」，枚举探测被切断。锁定检查前置（LOCKED 仅对真实存在的用户出现）。
+  // v47 修复② INVITE_GUARD：失败同样计数——存在用户 per-username（5 次/15 分锁定）；
+  //   不存在用户无处落计数，改用 IP 级 DB 限流（_rate_limits，10 次/15 分）。
   const resetLocked = await _getResetLock(username);
   if (resetLocked) return response(false, "LOCKED", { retryAfterMs: Math.max(0, resetLocked - Date.now()) });
   const found = await db.collection("user_profiles").where({ username }).limit(1).get();
-  if (!found.data.length) {
-    const nl = await _recordResetFail(username);
-    if (nl) return response(false, "LOCKED", { retryAfterMs: Math.max(0, nl - Date.now()) });
-    return response(false, "PWD_USER_NOT_FOUND");
-  }
-  const user = found.data[0];
-  if (user.status === "disabled") return response(false, "USER_DISABLED");
-  // 用户档案里的 inviteCode 是注册时使用的唯一标识，必须与本次输入严格匹配
-  if (normalizeInvite(user.inviteCode || "") !== inviteCode) {
-    const nl = await _recordResetFail(username);
-    if (nl) return response(false, "LOCKED", { retryAfterMs: Math.max(0, nl - Date.now()) });
+  const user = found.data.length ? found.data[0] : null;
+  const inviteOk = INVITE_CODES.has(inviteCode);
+  const inviteMatch = !!(user && normalizeInvite(user.inviteCode || "") === inviteCode);
+  if (!user || !inviteOk || !inviteMatch || user.status === "disabled") {
+    if (user) {
+      const nl = await _recordResetFail(username);
+      if (nl) return response(false, "LOCKED", { retryAfterMs: Math.max(0, nl - Date.now()) });
+    } else {
+      const g = await _dbRateGuard("reset_probe:" + _extractClientIp(event), DB_RATE_CONFIG.RESET_PROBE_MAX);
+      if (!g.allowed) return response(false, "LOCKED", { retryAfterMs: g.retryAfterMs || DB_RATE_WINDOW_MS });
+    }
     return response(false, "PWD_INVITE_MISMATCH");
   }
   const newSalt = crypto.randomBytes(16).toString("base64url");
@@ -749,6 +804,8 @@ exports.main = async (event) => {
     if (action === "resetPasswordWithInvite") return await resetPasswordWithInvite(input);
     return response(false, "UNKNOWN_ACTION");
   } catch (e) {
-    return response(false, (e && e.code) || "SERVER_ERROR", { detail: (e && e.message) || String(e) });
+    // v47 修复⑤ 回显移除：内部错误消息不再回传客户端（防 DB/环境细节泄露），仅记入函数日志
+    console.error("action_failed", { action, error: (e && e.message) || String(e) });
+    return response(false, (e && e.code) || "SERVER_ERROR");
   }
 };
