@@ -2120,13 +2120,18 @@ function renderDash(){
               <ellipse cx="62" cy="62" rx="11" ry="7" fill="#ff8a70" opacity=".55"/>
               <path d="M42 88 q4 8 10 4" stroke="#a11f16" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
               <path d="M104 84 q-4 10 -12 6" stroke="#a11f16" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+              <g id="tomatoFace">
+                <path d="M58 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                <path d="M81 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+                <ellipse cx="47" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
+                <ellipse cx="103" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
+                <path d="M67 101 q8 7 16 0" stroke="#7a1a12" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              </g>
             </g>
-            <g id="tomatoFace">
-              <path d="M58 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-              <path d="M81 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-              <ellipse cx="47" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
-              <ellipse cx="103" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
-              <path d="M67 101 q8 7 16 0" stroke="#7a1a12" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            <line id="tomatoBiteLine" x1="30" y1="116" x2="120" y2="116" stroke="#ffe3d8" stroke-width="2.5" stroke-dasharray="6 4" opacity="0"/>
+            <g id="tomatoDizzy" style="opacity:0">
+              <text x="50" y="72" font-size="17" fill="#fff" opacity=".92">✦</text>
+              <text x="96" y="90" font-size="13" fill="#ffd9d0" opacity=".92">✦</text>
             </g>
             <path d="M75 42 q-10 -16 -26 -13 q14 -2 18 8 q-14 -2 -16 6 q13 -1 15 7 q11 -7 9 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
             <path d="M76 43 q6 -14 20 -16 q-12 4 -13 12 q10 -1 11 7 q-10 -2 -14 5 q-3 -6 -4 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
@@ -2134,11 +2139,11 @@ function renderDash(){
           <div class="rt"><span class="t" id="pomoTime">25:00</span><span class="m" id="pomoMode">专注</span></div>
         </div>
         <div class="pc">
-          <button class="btn sm" id="pomoStart" onclick="pomoToggle()">▶ 开始</button>
-          <button class="btn sm ol" onclick="pomoReset()">↻ 重置</button>
-          <button class="btn sm ol" onclick="pomoSwitch()">${ST.pomodoro.mode==='work'?'休息':'专注'}</button>
+          <button class="btn sm" id="pomoStart" onclick="pomoToggle()">🍅 开始</button>
+          <button class="btn sm ol" onclick="pomoReset()">🔄 重置</button>
+          <button class="btn sm ol" onclick="pomoSwitch()">${ST.pomodoro.mode==='work'?'😴 休息':'🍅 专注'}</button>
         </div>
-        <div class="ps"><div>今日番茄<br><b id="pomoCount">${ST.pomodoro.completed}</b></div><div>总学习<br><b>${ST.totalStudy}分钟</b></div></div>
+        <div class="ps"><div>今日🍅<br><b id="pomoCount" style="color:#d63b2a">${ST.pomodoro.completed}</b></div><div>总学习<br><b>${ST.totalStudy}分钟</b></div></div>
       </div>
     </div>
     <div class="card">
@@ -2823,7 +2828,7 @@ function pomoToggle(){
           alert('休息结束，继续专注！');
         }
         save();
-        document.getElementById('pomoStart').textContent = '▶ 开始';
+        document.getElementById('pomoStart').textContent = '🍅 开始';
       }
       updatePomoDisplay();
       save();
@@ -2835,7 +2840,7 @@ function pomoReset(){
   ST.pomodoro.running = false;
   ST.pomodoro.remaining = ST.pomodoro.mode === 'work' ? 25*60 : 5*60;
   save(); updatePomoDisplay();
-  document.getElementById('pomoStart').textContent = '▶ 开始';
+  document.getElementById('pomoStart').textContent = '🍅 开始';
 }
 function pomoSwitch(){
   clearInterval(_pomoTimer);
@@ -2843,7 +2848,7 @@ function pomoSwitch(){
   ST.pomodoro.mode = ST.pomodoro.mode === 'work' ? 'break' : 'work';
   ST.pomodoro.remaining = ST.pomodoro.mode === 'work' ? 25*60 : 5*60;
   save(); updatePomoDisplay();
-  document.getElementById('pomoStart').textContent = '▶ 开始';
+  document.getElementById('pomoStart').textContent = '🍅 开始';
 }
 function updatePomoDisplay(){
   const m = Math.floor(ST.pomodoro.remaining/60);
@@ -2868,14 +2873,26 @@ function updatePomoDisplay(){
     const clipY = yTop + (yBottom - yTop) * (1 - pct);
     clipRect.setAttribute('y', clipY);
     clipRect.setAttribute('height', Math.max(0, yBottom - clipY));
+    // v59: 咬痕虚线跟随切割位置
+    const bl = document.getElementById('tomatoBiteLine');
+    if(bl){
+      if(pct > 0.02 && pct < 1){
+        const hw = Math.sqrt(Math.max(0, 38*38 - (clipY-78)*(clipY-78)));
+        bl.setAttribute('x1', 75 - hw - 2); bl.setAttribute('x2', 75 + hw + 2);
+        bl.setAttribute('y1', clipY); bl.setAttribute('y2', clipY);
+        bl.style.opacity = '0.85';
+      } else { bl.style.opacity = '0'; }
+    }
   }
   if(juice){
     // 时间归零 → 显示汁水（吃干净只剩红色汁水）
     if(pct <= 0.02){
       juice.style.opacity = '1';
       juice.style.transition = 'opacity .6s ease';
+      const dz = document.getElementById('tomatoDizzy'); if(dz) dz.style.opacity = '1';
     } else {
       juice.style.opacity = '0';
+      const dz = document.getElementById('tomatoDizzy'); if(dz) dz.style.opacity = '0';
     }
   }
   if(cEl){
@@ -17639,7 +17656,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v58-2026100104';
+    var swVer = 'v59-2026100105';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17676,7 +17693,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v58-2026100104';
+    return 'v59-2026100105';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
