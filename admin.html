@@ -435,7 +435,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 <!-- ===== 单词管理 ===== -->
 <section class="page" id="pg-words">
   <div class="tb">
-    <div><h2>📚 单词管理</h2><div class="d">用户词 <b id="wUserCount" style="color:var(--accent)">'+(DB?DB.words.length:0)+'</b> · 种子词 <b id="wSeedCount" style="color:var(--tr)">'+_vdataSeedCount+'</b> · 合计 <b id="wTotalCount" style="color:var(--ok)">'+(DB?DB.words.length+_vdataSeedCount:0)+'</b> · 掌握度点击星星即改</div></div>
+    <div><h2>📚 单词管理</h2><div class="d">用户词 <b id="wUserCount" style="color:var(--accent)">'+(DB?DB.words.length:0)+'</b> · 种子词 <b id="wSeedCount" style="color:var(--tr)">'+_vdataSeedCount+'</b> · 合计 <b id="wTotalCount" style="color:var(--ok)">'+(DB?DB.words.length+_vdataSeedCount:0)+'</b> <span style="color:var(--soft);font-weight:400">（种子词为主站推送只读，不入库、不导出）</span> · 掌握度点击星星即改</div></div>
     <div class="acts"><button class="btn sm dgr hide" id="wBatchDel" onclick="batchDelWords()">🗑 删除选中</button><button class="btn sm" onclick="openWordForm()">＋ 新增单词</button></div>
   </div>
   <div class="tabs" id="wTabs" style="display:flex;gap:6px;margin:8px 0 12px 0">
@@ -1962,8 +1962,9 @@ function download(name,content,mime){
   a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000);
 }
 function exportBackup(){
-  const payload={type:'siele-admin-backup',v:1,user:CUR,exportedAt:new Date().toISOString(),
-    data:{words:DB.words,questions:DB.questions,reviews:DB.reviews,plans:DB.plans,settings:DB.settings,trash:DB.trash}};
+  const payload={type:'siele-admin-backup',v:2,user:CUR,exportedAt:new Date().toISOString(),
+    data:{words:DB.words,questions:DB.questions,reviews:DB.reviews,plans:DB.plans,settings:DB.settings,trash:DB.trash},
+    wb:lsGet('dele_siele_wb_v3',null)}; /* v2: 打包工作台 ST（背词/刷题/连击等）；v1 旧备份无 wb 字段，导入端兼容 */
   download('西语学习备份_'+CUR+'_'+todayStr()+'.json',JSON.stringify(payload,null,1),'application/json');
   DB.meta.lastBackup=Date.now();saveDB({noSync:true});renderIO();
   toast('备份文件已下载','ok');
@@ -2012,7 +2013,7 @@ function handleImportFile(file){
         if(!items.length)throw '没有解析到有效的单词行（es 与 zh 均不能为空）';
       }else{
         const j=JSON.parse(text);
-        if(j&&j.type==='siele-admin-backup'&&j.data){IMP={kind:'backup',items:null,backup:j.data};showImpConfirm('backup',null,j);return;}
+        if(j&&j.type==='siele-admin-backup'&&j.data){IMP={kind:'backup',items:null,backup:j.data,wb:(j.wb&&typeof j.wb==='object')?j.wb:null};showImpConfirm('backup',null,j);return;} /* v2: 传递工作台 ST；v1 旧备份 wb=null 跳过恢复 */
         const arr=Array.isArray(j)?j:(j.words||j.questions||[]);
         if(!Array.isArray(arr)||!arr.length)throw 'JSON 需为备份文件或单词/题目数组';
         if(arr[0].es!==undefined&&arr[0].zh!==undefined){
@@ -2033,7 +2034,7 @@ function handleImportFile(file){
 function showImpConfirm(kind,items,backup){
   if(kind==='backup'){
     const d=backup.data;
-    $('impResult').innerHTML='<div class="note info">检测到完整备份（导出于 '+esc(backup.exportedAt||'?')+'）：单词 '+(d.words||[]).length+' · 题目 '+(d.questions||[]).length+' · 记录 '+(d.reviews||[]).length+' · 计划 '+(d.plans||[]).length+'</div>'+
+    $('impResult').innerHTML='<div class="note info">检测到完整备份（导出于 '+esc(backup.exportedAt||'?')+'）：单词 '+(d.words||[]).length+' · 题目 '+(d.questions||[]).length+' · 记录 '+(d.reviews||[]).length+' · 计划 '+(d.plans||[]).length+(backup.wb?' · <b>含工作台学习进度</b>':'')+'</div>'+
     '<div class="radio-line"><label><input type="radio" name="impMode" value="merge" checked>合并（推荐，按最近修改保留）</label><label><input type="radio" name="impMode" value="replace">完全覆盖本地数据</label></div>'+
     '<button class="btn" onclick="applyImport()">确认导入</button>';
     return;
@@ -2060,7 +2061,9 @@ function applyImport(){
       mergeData(DB,{settings:d.settings,words:d.words||[],questions:d.questions||[],reviews:d.reviews||[],plans:d.plans||[],trash:d.trash||{}});
     }
     saveDB();refreshBadges();renderDash();
-    $('impResult').innerHTML='<div class="note ok">✅ 备份导入完成！当前：单词 '+DB.words.length+' · 题目 '+DB.questions.length+' · 记录 '+DB.reviews.length+' · 计划 '+DB.plans.length+'</div>';
+    var _wbNote='';
+    if(IMP.wb&&typeof IMP.wb==='object'){try{lsSet('dele_siele_wb_v3',IMP.wb);_wbNote='<div class="note info">📦 已同时恢复工作台学习进度（背词/刷题/连击等），<b>请刷新主站页面使其生效</b>。若主站已登录，云同步会自动合并。</div>';}catch(e){}}
+    $('impResult').innerHTML='<div class="note ok">✅ 备份导入完成！当前：单词 '+DB.words.length+' · 题目 '+DB.questions.length+' · 记录 '+DB.reviews.length+' · 计划 '+DB.plans.length+'</div>'+_wbNote;
     toast('备份导入成功','ok');IMP=null;return;
   }
   let added=0,updated=0,skipped=0;
