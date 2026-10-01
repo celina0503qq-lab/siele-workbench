@@ -1779,12 +1779,12 @@ const NAV = [
   {s:'学习', items:[
     {id:'grammar', icon:'📐', label:'语法库'},
     {id:'shadow', icon:'🎤', label:'跟读训练'},
-    {id:'siele', icon:'🎯', label:'SIELE专项'},
+    {id:'siele', icon:'🎯', label:'SIELE专项', reqFlag:'sieleSpecial'},
   ]},
   {s:'练习', items:[
     {id:'quiz', icon:'✏️', label:'题库测验'},
-    {id:'writing', icon:'✍️', label:'写作练习'},
-    {id:'speaking', icon:'🗣', label:'口语话题'},
+    {id:'writing', icon:'✍️', label:'写作练习', reqFlag:'writingEnabled'},
+    {id:'speaking', icon:'🗣', label:'口语话题', reqFlag:'oralEnabled'},
   ]},
   {s:'备考', items:[
     {id:'planner', icon:'📅', label:'学习计划'},
@@ -1857,7 +1857,12 @@ function go(page){
   // v36 功能授权守卫：未授权页面跳回仪表盘并提示（管理员全量放行，由 _wbFlagsAllowed 内部判断）
   try{
     var _pg=String(page);
-    var _need=_pg==='refine'?'refinePack':(/^dele/.test(_pg)?'deleSpecial':null);
+    var _need=_pg==='refine'?'refinePack':_pg==='siele'?'sieleSpecial':_pg==='writing'?'writingEnabled':_pg==='speaking'?'oralEnabled':(/^dele/.test(_pg)?'deleSpecial':null);
+    // v57: 资料地图仅管理员可见
+    if(_pg==='netdisk' && !isAdmin){
+      if(typeof toast==='function') toast('🔒 资料地图仅管理员可见（入口已移至后台管理）','err');
+      currentPage='dash'; renderNav(); renderMain(); window.scrollTo(0,0); return;
+    }
     if(_need && typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed(_need)){
       if(typeof toast==='function') toast('🔒 该功能未开通，请联系管理员在后台授权','err');
       currentPage='dash'; renderNav(); renderMain(); window.scrollTo(0,0); return;
@@ -1897,13 +1902,13 @@ function renderMain(){
     case 'grammar': h += renderGrammar(); break;
     case 'shadow': h += renderShadow(); break;
     case 'quiz': h += renderQuiz(); break;
-    case 'writing': h += renderWriting(); break;
-    case 'speaking': h += renderSpeaking(); break;
+    case 'writing': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('writingEnabled')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderWriting(); break;
+    case 'speaking': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('oralEnabled')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderSpeaking(); break;
     case 'exam': h += renderExam(); break;
     case 'planner': h += renderPlanner(); break;
     case 'resources': h += renderResources(); break;
-    case 'siele': h += renderSiele(); break;
-    case 'netdisk': h += renderNetdisk(); break;
+    case 'siele': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('sieleSpecial')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderSiele(); break;
+    case 'netdisk': h += (function(){try{var _s=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null');return !!(_s&&_s.role==='admin');}catch(e){return false;}})() ? renderNetdisk() : (typeof window._renderNoAccess==='function'?window._renderNoAccess():''); break;
     case 'errors': h += renderErrors(); break;
     case 'reading': h += renderReading(); break;
     case 'refine': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('refinePack')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderRefine(); break;
@@ -3718,6 +3723,7 @@ function ensureShadowCat(s){
   return s;
 }
 
+var _shadowPage = 0;
 function renderShadow(){
   // 补全所有句子的 cat
   SHADOW_SENTENCES.forEach(ensureShadowCat);
@@ -3734,26 +3740,31 @@ function renderShadow(){
 
   // P2-2: 筛选器
   h += `<div class="sb" style="margin-bottom:8px">
-    <select id="shLvl" onchange="_shadowFilterLvl=this.value;renderMain()">
+          <select id="shLvl" onchange="_shadowFilterLvl=this.value;_shadowPage=0;renderMain()">
       <option value="all" ${_shadowFilterLvl==='all'?'selected':''}>全部等级</option>
       <option value="A1" ${_shadowFilterLvl==='A1'?'selected':''}>A1</option>
       <option value="A2" ${_shadowFilterLvl==='A2'?'selected':''}>A2</option>
       <option value="B1" ${_shadowFilterLvl==='B1'?'selected':''}>B1</option>
       <option value="B2" ${_shadowFilterLvl==='B2'?'selected':''}>B2</option>
     </select>
-    <select id="shCat" onchange="_shadowFilterCat=this.value;renderMain()">
+          <select id="shCat" onchange="_shadowFilterCat=this.value;_shadowPage=0;renderMain()">
       <option value="all" ${_shadowFilterCat==='all'?'selected':''}>全部主题</option>
       ${cats.map(c => `<option value="${esc(c)}" ${_shadowFilterCat===c?'selected':''}>${esc(c)}</option>`).join('')}
     </select>
     <span style="font-size:11px;color:var(--soft);align-self:center">共 ${visibleIdxs.length} 句</span>
   </div>`;
 
-  // Sentence list (filtered)
+  // v57: 分页（每页 6 条）
+  const _shPageSize = 6;
+  const _shPages = Math.max(1, Math.ceil(visibleIdxs.length / _shPageSize));
+  if(_shadowPage >= _shPages) _shadowPage = 0;
+  const _shPageItems = visibleIdxs.slice(_shadowPage * _shPageSize, (_shadowPage + 1) * _shPageSize);
+  // Sentence list (paged)
   h += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
     <div>
-      <h4 style="font-size:12px;color:var(--soft);margin-bottom:7px">选择句子（${visibleIdxs.length}/${SHADOW_SENTENCES.length}句）</h4>
+      <h4 style="font-size:12px;color:var(--soft);margin-bottom:7px">选择句子（${visibleIdxs.length}/${SHADOW_SENTENCES.length}句）· 第 ${_shadowPage+1}/${_shPages} 页</h4>
       <div class="sh-list">`;
-  visibleIdxs.forEach(i => {
+  _shPageItems.forEach(i => {
     const s = SHADOW_SENTENCES[i];
     const scRaw = ST.shadowScores[i];
     const sc = (scRaw && typeof scRaw === 'object') ? scRaw.score : scRaw;
@@ -3763,6 +3774,11 @@ function renderShadow(){
       <div class="meta">${s.lvl} · ${esc(s.cat||'')} ${sc!==undefined?'· 最高分 '+sc+'%':''}</div>
     </div>`;
   });
+  if(_shPages > 1) h += `<div style="display:flex;gap:6px;margin-top:8px">
+    <button class="btn sm" onclick="_shadowPage=Math.max(0,_shadowPage-1);renderMain()">◀ 上一页</button>
+    <span style="font-size:11px;color:var(--soft);align-self:center">第 ${_shadowPage+1}/${_shPages} 页</span>
+    <button class="btn sm" onclick="_shadowPage=Math.min(${_shPages-1},_shadowPage+1);renderMain()">下一页 ▶</button>
+  </div>`;
   h += `</div></div>`;
 
   // Practice box
@@ -4294,12 +4310,12 @@ document.addEventListener('keydown', function(e){
 
 // ===== 用户功能授权（v36）：管理员在后台按用户开通 背题/DELE专项/外刊精炼；管理员角色全量放行 =====
 // 授权缓存走独立 localStorage 键 wb_menu_flags_v1（不进 ST ⇒ 不进云同步快照）；60s 节流刷新
-window._wbFlags = { quizBack:false, deleSpecial:false, refinePack:false };
+window._wbFlags = { quizBack:false, deleSpecial:false, refinePack:false, sieleSpecial:false, writingEnabled:false, oralEnabled:false };
 window._wbFlagsLastChk = 0;
 window._wbFlagsLoad = function(){
   try{
     var d = JSON.parse(localStorage.getItem('wb_menu_flags_v1')||'{}');
-    window._wbFlags.quizBack = !!d.quizBack; window._wbFlags.deleSpecial = !!d.deleSpecial; window._wbFlags.refinePack = !!d.refinePack;
+    window._wbFlags.quizBack = !!d.quizBack; window._wbFlags.deleSpecial = !!d.deleSpecial; window._wbFlags.refinePack = !!d.refinePack; window._wbFlags.sieleSpecial = !!d.sieleSpecial; window._wbFlags.writingEnabled = !!d.writingEnabled; window._wbFlags.oralEnabled = !!d.oralEnabled;
   }catch(e){}
 };
 window._wbFlagsLoad();
@@ -4324,10 +4340,10 @@ window._wbFlagsFetch = async function(force){
     if(typeof window._deleCloudCall !== 'function') return false;
     var r = await window._deleCloudCall('getUserFlags', {sessionToken: ses.sessionToken});
     if(!(r && r.ok)) return false;
-    var prev = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0);
-    window._wbFlags.quizBack = !!r.quizBackEnabled; window._wbFlags.deleSpecial = !!r.deleSpecialEnabled; window._wbFlags.refinePack = !!r.refinePackEnabled;
-    try{ localStorage.setItem('wb_menu_flags_v1', JSON.stringify({quizBack:window._wbFlags.quizBack?1:0, deleSpecial:window._wbFlags.deleSpecial?1:0, refinePack:window._wbFlags.refinePack?1:0})); }catch(e){}
-    var cur = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0);
+    var prev = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0)+'|'+(window._wbFlags.sieleSpecial?1:0)+'|'+(window._wbFlags.writingEnabled?1:0)+'|'+(window._wbFlags.oralEnabled?1:0);
+    window._wbFlags.quizBack = !!r.quizBackEnabled; window._wbFlags.deleSpecial = !!r.deleSpecialEnabled; window._wbFlags.refinePack = !!r.refinePackEnabled; window._wbFlags.sieleSpecial = !!r.sieleSpecialEnabled; window._wbFlags.writingEnabled = !!r.writingEnabled; window._wbFlags.oralEnabled = !!r.oralEnabled;
+    try{ localStorage.setItem('wb_menu_flags_v1', JSON.stringify({quizBack:window._wbFlags.quizBack?1:0, deleSpecial:window._wbFlags.deleSpecial?1:0, refinePack:window._wbFlags.refinePack?1:0, sieleSpecial:window._wbFlags.sieleSpecial?1:0, writingEnabled:window._wbFlags.writingEnabled?1:0, oralEnabled:window._wbFlags.oralEnabled?1:0})); }catch(e){}
+    var cur = (window._wbFlags.quizBack?1:0)+'|'+(window._wbFlags.deleSpecial?1:0)+'|'+(window._wbFlags.refinePack?1:0)+'|'+(window._wbFlags.sieleSpecial?1:0)+'|'+(window._wbFlags.writingEnabled?1:0)+'|'+(window._wbFlags.oralEnabled?1:0);
     if(cur !== prev){ // 授权变化：刷新导航（锁标）与当前页（守卫）
       try{ renderNav(); }catch(e){}
       try{ renderMain(); }catch(e){}
@@ -17616,7 +17632,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v56-2026100102';
+    var swVer = 'v57-2026100103';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17653,7 +17669,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v56-2026100102';
+    return 'v57-2026100103';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18703,7 +18719,7 @@ function todoCardHtml(){
     })();
     var done=tasks.filter(function(t){return t.done;}).length;
     var pct=tasks.length?Math.round(done/tasks.length*100):0;
-    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图'],['reading','📰','外刊'],['dele','📝','DELE']]
+    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['reading','📰','外刊'],['dele','📝','DELE']]
       .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
     // 附加云同步入口（弹窗而非路由跳转）
     quick += '<button class="btn sm ol" onclick="exportData_()" title="把学习进度导出为 JSON 备份文件（防丢失）">📥 导出备份</button>';
@@ -18732,7 +18748,7 @@ function todoCardHtml(){
   }catch(e){
     console.warn('todoCardHtml error:',e);
     // 出错时仍渲染快捷操作卡，确保仪表盘不缺失
-    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['netdisk','🗺️','资料地图'],['reading','📰','外刊'],['dele','📝','DELE']]
+    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['reading','📰','外刊'],['dele','📝','DELE']]
       .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
     quick += '<button class=\"btn sm ol\" onclick=\"exportData_()\" title=\"导出备份\">📥 导出备份</button>';
     quick += '<button class=\"btn sm ol\" onclick=\"importDataPrompt_()\" title=\"导入备份\">📤 导入备份</button>';
