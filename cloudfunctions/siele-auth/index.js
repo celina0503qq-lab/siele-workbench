@@ -566,7 +566,7 @@ async function adminSetUserStatus(event) {
 // v36 用户功能授权：管理员按用户开通 背题模式 / DELE专项 / 外刊精炼
 // flags 白名单仅这三键，纯布尔；写 user_profiles + 失效状态缓存 + security_audit
 // ========================================================================
-const USER_FLAG_KEYS = ["quizBackEnabled", "deleSpecialEnabled", "refinePackEnabled"];
+const USER_FLAG_KEYS = ["quizBackEnabled", "deleSpecialEnabled", "refinePackEnabled", "sieleSpecialEnabled", "writingEnabled", "oralEnabled"]; // v57 +SIELE专项/写作/口语
 async function adminSetUserFlags(event) {
   const admin = await requireAdmin(event);
   const uid = String(event.uid || "");
@@ -598,7 +598,10 @@ async function getUserFlags(event) {
     role: isAdmin ? "admin" : "learner",
     quizBackEnabled: isAdmin || !!p.quizBackEnabled,
     deleSpecialEnabled: isAdmin || !!p.deleSpecialEnabled,
-    refinePackEnabled: isAdmin || !!p.refinePackEnabled
+    refinePackEnabled: isAdmin || !!p.refinePackEnabled,
+    sieleSpecialEnabled: isAdmin || !!p.sieleSpecialEnabled,
+    writingEnabled: isAdmin || !!p.writingEnabled,
+    oralEnabled: isAdmin || !!p.oralEnabled
   });
 }
 async function adminRevokeUserSyncTokens(event) {
