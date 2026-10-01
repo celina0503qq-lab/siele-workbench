@@ -1099,6 +1099,7 @@ function getDefaultState(){
     weeklyPlan: null, weeklyGoals: null, weeklyPlanTs: 0, weeklyGoalsTs: 0, // 周计划总览/每周目标（null=用系统默认，用户编辑后覆盖；Ts 供跨设备 LWW 合并）
     streak: 0, lastStudy: '', totalStudy: 0,
     shadowScores: {},
+    refineShadowScores: {}, // v53: 外刊跟读评分(独立留存, 键 date::lvKey::pidx)
     sieleOralScores: {},
     sieleOralProgress: {tarea:1, question:0, topic:'tecnologia'},
     pomodoro: {mode:'work', remaining: 25*60, running:false, completed:0},
@@ -3741,9 +3742,10 @@ function startRecord(btn){
   btn.className = 'rb rec';
   btn.textContent = '⏹ 停止录音';
 
+  var _recStartTs = Date.now();
   _recognition.onresult = (event) => {
     const result = event.results[0][0].transcript;
-    scoreShadow(result);
+    scoreShadow(result, (Date.now() - _recStartTs) / 1000);
   };
   _recognition.onerror = (event) => {
     _recording = false;
@@ -3753,6 +3755,7 @@ function startRecord(btn){
       alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');
     } else if(event.error === 'network'){
       alert('语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试。');
+    } else {
       alert('语音识别出错：' + event.error + '。请重试。');
     }
   };
@@ -3776,44 +3779,21 @@ function stopRecord(btn){
   btn.textContent = '🎤 开始录音';
 }
 
-function scoreShadow(recognized){
-  const target = SHADOW_SENTENCES[_shadowIdx].es.toLowerCase().replace(/[¿?¡!.,;:]/g,'');
-  const rec = recognized.toLowerCase().replace(/[¿?¡!.,;:]/g,'');
-  const targetWords = target.split(/\s+/).filter(w=>w.length>0);
-  const recWords = rec.split(/\s+/).filter(w=>w.length>0);
-
-  // Multi-dimensional scoring:
-  // 1. Word accuracy (40%): exact word matching
-  let matched = 0;
-  targetWords.forEach(w => { if(recWords.includes(w)) matched++; });
-  const wordAccuracy = targetWords.length > 0 ? Math.round(matched / targetWords.length * 100) : 0;
-
-  // 2. Fluency (25%): ratio of recognized words vs target (penalty for too few OR too many)
-  const lenRatio = Math.min(recWords.length, targetWords.length) / Math.max(recWords.length, targetWords.length || 1);
-  const fluencyScore = Math.round(lenRatio * 100);
-
-  // 3. Order similarity (15%): check if words appear in roughly correct order
-  let orderScore = 50; // base score
-  if(matched >= 2){
-    let orderMatches = 0;
-    const matchedTargetPositions = [];
-    targetWords.forEach((w,i)=>{ if(recWords.includes(w)) matchedTargetPositions.push(i); });
-    for(let i=1; i<matchedTargetPositions.length; i++){
-      if(matchedTargetPositions[i] > matchedTargetPositions[i-1]) orderMatches++;
-    }
-    orderScore = matchedTargetPositions.length > 1 ? Math.round(orderMatches/(matchedTargetPositions.length-1)*100) : 100;
-  }
-
-  // 4. Word count proximity (10%): how close the word count is
-  const countProx = Math.round((1 - Math.abs(targetWords.length - recWords.length) / Math.max(targetWords.length, 1)) * 100);
-
-  // Weighted total (P0-1: removed placeholder confScore, rebalanced 45/28/17/10)
-  let score = Math.round(wordAccuracy * 0.45 + fluencyScore * 0.28 + orderScore * 0.17 + countProx * 0.10);
-  if(score > 100) score = 100; if(score < 0) score = 0;
+function scoreShadow(recognized, elapsedSec){
+  // v53: 升级 V2 引擎(音素归一化四维: 发音35/流利度25/完整性25/语法15), 与外刊跟读同源
+  const v2 = calcScore(SHADOW_SENTENCES[_shadowIdx].es, recognized, elapsedSec || 0);
+  const score = v2.total;
+  const dims = {};
+  v2.dimensions.forEach(d => dims[d.label] = d.score);
+  const wordAccuracy = dims['发音准确度'] || 0;
+  const fluencyScore = dims['流利度'] || 0;
+  const orderScore = dims['完整性'] || 0;   // 沿用旧槽位名存完整性分(v53 维度映射)
+  const grammarScore = dims['语法准确度'] || 0;
+  const wpmDetail = (v2.dimensions[1] && v2.dimensions[1].detail) || '';
 
   // Save best score
   const prev = (ST.shadowScores[_shadowIdx] && ST.shadowScores[_shadowIdx].score) || 0;
-  if(score > prev) ST.shadowScores[_shadowIdx] = {score, wordAccuracy, fluencyScore, orderScore, date: todayStr()};
+  if(score > prev) ST.shadowScores[_shadowIdx] = {score, wordAccuracy, fluencyScore, orderScore, grammarScore, date: todayStr()};
   save(); updateStreak();
 
   // P1-1: 跟读 < 60 自动入错题集
@@ -3823,7 +3803,7 @@ function scoreShadow(recognized){
       question: (_sh && _sh.es) || ('跟读句 ' + (_shadowIdx+1)),
       myAnswer: recognized,
       correctAnswer: (_sh && _sh.es) || '',
-      note: '跟读完整度 ' + score + '% · 准确度 ' + wordAccuracy + '% · 流利度 ' + fluencyScore + '%',
+      note: '跟读 ' + score + '% · 发音 ' + wordAccuracy + '% · 流利度 ' + fluencyScore + '% · 完整性 ' + orderScore + '% · 语法 ' + grammarScore + '%',
       score: score
     });
   }
@@ -3836,22 +3816,19 @@ function scoreShadow(recognized){
   if(!res || !sc || !rt || !fb){ return; }
 
   let cls = score >= 80 ? 'h' : score >= 50 ? 'm' : 'l';
-  let msg = '';
-  if(score >= 80) msg = '¡Excelente! 跟读完整度非常高，文本匹配优秀！';
-  else if(score >= 50) msg = '¡Bien! 基本正确，注意未识别到的单词，多听原句再试。';
-  else msg = '¡Ánimo! 需要更多练习。建议先听几遍原句，慢速跟读，逐步加快。';
+  const msg = v2.grade + ' · ' + v2.feedback;
 
   sc.className = 'sc ' + cls;
   sc.textContent = score + '%';
   rt.textContent = recognized;
-  fb.innerHTML = `<b>跟读完整度：</b>${msg}<br>
+  fb.innerHTML = `<b>跟读评分：</b>${msg}<br>
     <b>目标：</b>${SHADOW_SENTENCES[_shadowIdx].es}<br>
     <b>识别：</b>${recognized}<br>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px;font-size:11px">
-      <div>📊 单词准确度：<b>${wordAccuracy}%</b></div>
-      <div>💨 流利度：<b>${fluencyScore}%</b></div>
-      <div>🔤 语序正确率：<b>${orderScore}%</b></div>
-      <div>📏 词数匹配：<b>${countProx}%</b></div>
+      <div>📊 发音准确度：<b>${wordAccuracy}%</b></div>
+      <div>💨 流利度：<b>${fluencyScore}%</b>${wpmDetail ? ' <span style="color:var(--soft)">(' + wpmDetail + ')</span>' : ''}</div>
+      <div>✅ 完整性：<b>${orderScore}%</b></div>
+      <div>📝 语法准确度：<b>${grammarScore}%</b></div>
     </div>
     ${score < 50 ? '<div style="margin-top:8px;padding:8px 10px;background:#fef9e7;border-left:3px solid var(--am);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.5">🎯 <b>发音小提示：</b>注意 r/rr 颤音、ñ 的发音、重音位置（带 tilde 的音节要重读）。建议用上方的「🐌 逐音节 0.6x」按钮听清每个音节后再跟读。</div>' : ''}
     <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
@@ -11944,10 +11921,12 @@ function renderRefine(){
     const isOn = d === currentRefineDate;
     const wd = p.weekday || '';
     datePicker += `<button type="button" class="refine-date-chip ${isOn?'on':''}" onclick="selectRefineDate('${d}')" aria-pressed="${isOn}">
-      <b>${d}</b><span>周${wd} · 第${p.issue}期</span>
+      <b>${d}${d===dates[0]?'<span style="font-size:9px;color:' + (isOn ? '#fff' : '#10b981') + ';border:1px solid currentColor;border-radius:4px;padding:0 3px;margin-left:3px;vertical-align:1px">最新</span>':''}</b><span>周${wd} · 第${p.issue}期</span>
     </button>`;
   });
   datePicker += '</div>';
+  // v53: 最新一期已过期提示(本周推送未到)
+  const staleTip = (dates[0] < todayStr()) ? '<div style="margin:8px 0;padding:8px 12px;background:#fffbeb;border:1px solid rgba(245,158,11,.35);border-radius:8px;font-size:12px;color:#92400e">ℹ️ 最新一期为 ' + dates[0] + '，若本周推送未到请检查自动化任务。</div>' : '';
 
   // Word + Article cards skeleton (data is async-loaded)
   const levels = ['A1','A2','B1','B2'];
@@ -11970,6 +11949,7 @@ function renderRefine(){
   return `<div class="tb"><div><h2>📚 外刊精炼${renderModuleAccentToggle('refine')}</h2><div class="d">每周精选外刊 · 15 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
     ${renderModuleCheckinBar ? renderModuleCheckinBar('refine','外刊精炼','📚') : ''}
     ${datePicker}
+    ${staleTip}
     ${theme}
     ${actions}
     ${levelFilter}
@@ -12703,7 +12683,7 @@ window.__refineScoreLaunch = function(lvKey, paraIdx, btn, panel, card, status, 
   var cdTimer = setInterval(function(){
     cd--;
     if(cd <= 0){ clearInterval(cdTimer); status.innerHTML = '<span style="color:#ef4444">🔴 正在录音，请朗读上方段落...</span>';
-      startScoring(lvKey, expectedText, btn, panel, card, status);
+      startScoring(lvKey, expectedText, btn, panel, card, status, selIdx);
     } else if(cdEl) { cdEl.textContent = cd; }
   }, 1000);
   window.__refineScoreCd = cdTimer;
@@ -12717,7 +12697,7 @@ window.__refineClearRecTarget = function(){
   document.querySelectorAll('.refine-para-es.refine-rec-target').forEach(function(el){ el.classList.remove('refine-rec-target'); });
 };
 
-function startScoring(lvKey, expectedText, btn, panel, card, status){
+function startScoring(lvKey, expectedText, btn, panel, card, status, selIdx){
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SpeechRecognition){
     status.innerHTML = '<span style="color:#dc2626">❌ 此浏览器不支持语音识别。请使用 Chrome 或 Edge。</span>';
@@ -12735,6 +12715,7 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   var startTime = Date.now();
   var interimText = '';
   var lastFinalTs = 0;
+  var hadError = null; // v53: onerror 标志, onend 不覆盖具体错误提示
 
   recognition.onresult = function(event){
     interimText = '';
@@ -12761,6 +12742,7 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   };
 
   recognition.onerror = function(event){
+    hadError = event.error || 'error';
     if(window.__refineStopTimer){ clearTimeout(window.__refineStopTimer); window.__refineStopTimer = null; }
     if(event.error === 'network'){
       status.innerHTML = '<span style="color:#dc2626">❌ 语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试；「🔊 听原句」发音不受影响。</span>';
@@ -12783,12 +12765,22 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
 
     var spokenText = finalTranscript.trim();
     if(spokenText.length < 3){
-      status.textContent = '⚠️ 未检测到语音。请检查麦克风权限后重试。';
+      if(!hadError) status.textContent = '⚠️ 未检测到语音。请检查麦克风权限后重试。';
       return;
     }
 
     var score = calcScore(expectedText, spokenText, elapsed);
-    renderScoreCard(lvKey, card, status, score);
+    // v53: 外刊跟读评分独立留存(按 期::级别::段落 取历史最高)
+    var prevBest = 0;
+    try{
+      var rsKey = currentRefineDate + '::' + lvKey + '::' + (selIdx == null ? 'rand' : selIdx);
+      prevBest = (ST.refineShadowScores[rsKey] && ST.refineShadowScores[rsKey].score) || 0;
+      if(score.total > prevBest){
+        ST.refineShadowScores[rsKey] = {score: score.total, date: todayStr(), dims: score.dimensions.map(function(d){ return {label: d.label, score: d.score}; })};
+        save();
+      }
+    }catch(e){}
+    renderScoreCard(lvKey, card, status, score, prevBest);
   };
 
   btn.textContent = '⏹ 停止并评分';
@@ -12981,7 +12973,7 @@ function levenshteinDistance(a, b){
   return matrix[b.length][a.length];
 }
 
-function renderScoreCard(lvKey, card, status, score){
+function renderScoreCard(lvKey, card, status, score, prevBest){
   status.textContent = '';
 
   var dimsHtml = '';
@@ -12995,7 +12987,8 @@ function renderScoreCard(lvKey, card, status, score){
   }
 
   document.getElementById('refine-score-total-' + lvKey).textContent = score.total;
-  document.getElementById('refine-score-grade-' + lvKey).innerHTML = score.grade + dimsHtml;
+  var histHtml = (prevBest > 0 && prevBest < score.total) ? '<div style="font-size:10px;color:#10b981;margin:2px 0">🏆 该段历史最高 ' + prevBest + '%（本次刷新纪录！）</div>' : ((prevBest > score.total) ? '<div style="font-size:10px;color:var(--soft);margin:2px 0">🏆 该段历史最高 ' + prevBest + '%</div>' : '');
+  document.getElementById('refine-score-grade-' + lvKey).innerHTML = histHtml + score.grade + dimsHtml;
   document.getElementById('refine-score-feedback-' + lvKey).textContent = score.feedback;
   card.classList.add('show');
   // 注入逐词分析
@@ -17533,7 +17526,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v52-2026100101';
+    var swVer = 'v53-2026100101';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17570,7 +17563,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v52-2026100101';
+    return 'v53-2026100101';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -17833,7 +17826,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     /* v44: quizResults 不再随快照盲覆盖（会丢掉本机未推送的新成绩），改并集合并 */
@@ -17862,7 +17855,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -18104,6 +18097,7 @@ function mergeWbSnapshot(remote){
   if(remote.totalStudy>ST.totalStudy)ST.totalStudy=remote.totalStudy;
   _mergeGrammarDone(remote);
   if(remote.shadowScores)Object.keys(remote.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=remote.shadowScores[k];});
+  if(remote.refineShadowScores)Object.keys(remote.refineShadowScores).forEach(function(k){if(!ST.refineShadowScores[k]||(remote.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0))ST.refineShadowScores[k]=remote.refineShadowScores[k];}); // v53
   if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(typeof mergeSieleOralScore==='function')mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
   // SIELE 口语进度游标（当前 Tarea/话题）：ts LWW（2026-09-26 修复：原先整体替换 ⇒ 两设备互覆，谁拉取晚听谁的）
   if(remote.sieleOralProgress&&typeof remote.sieleOralProgress==='object'){
@@ -18825,7 +18819,7 @@ function createGist(){
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone, grammarDoneTs: ST.grammarDoneTs,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
-    shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
+    shadowScores: ST.shadowScores, refineShadowScores: ST.refineShadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
     usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })(),
@@ -18862,7 +18856,7 @@ function pushGist(){
     dictationErrorBank: ST.dictationErrorBank,
     vocabMastery: ST.vocabMastery, flashMastery: ST.flashMastery, grammarDone: ST.grammarDone, grammarDoneTs: ST.grammarDoneTs,
     quizResults: ST.quizResults, tasks: ST.tasks, errors: ST.errors, readingProgress: ST.readingProgress,
-    shadowScores: ST.shadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
+    shadowScores: ST.shadowScores, refineShadowScores: ST.refineShadowScores, sieleOralScores: ST.sieleOralScores, sieleOralProgress: ST.sieleOralProgress,
     dailyTasks: ST.dailyTasks, dailyTodos: ST.dailyTodos, checkIns: ST.checkIns, streak: ST.streak, totalStudy: ST.totalStudy,
     examDate: ST.examDate, examType: ST.examType, targetLevel: ST.targetLevel,
     usedInvites: (function(){ try{ return JSON.parse(localStorage.getItem('_siele_used_invites_sync')||'[]'); }catch(e){return[];} })(),
@@ -19117,6 +19111,9 @@ async function standaloneSync(showLog){
     if(remote.shadowScores) Object.keys(remote.shadowScores).forEach(function(k){
       if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0)) ST.shadowScores[k]=remote.shadowScores[k];
     });
+    if(remote.refineShadowScores) Object.keys(remote.refineShadowScores).forEach(function(k){
+      if(!ST.refineShadowScores[k]||(remote.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0)) ST.refineShadowScores[k]=remote.refineShadowScores[k];
+    }); // v53
     if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
     if(remote.sieleOralProgress&&(!ST.sieleOralProgress||((remote.ts||0)>=(SCFG.lastSync||0))))ST.sieleOralProgress=remote.sieleOralProgress;
     // 合并全局已用邀请码（跨设备唯一性）
@@ -19253,7 +19250,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,quizResultsTs:ST.quizResultsTs||[],tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,quizResultsTs:ST.quizResultsTs||[],tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,refineShadowScores:ST.refineShadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -19281,6 +19278,7 @@ function importDataPrompt_(){
         if(data.streak>ST.streak)ST.streak=data.streak;
         if(data.totalStudy>ST.totalStudy)ST.totalStudy=data.totalStudy;
         if(data.shadowScores)Object.keys(data.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(data.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=data.shadowScores[k];});
+        if(data.refineShadowScores)Object.keys(data.refineShadowScores).forEach(function(k){if(!ST.refineShadowScores[k]||(data.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0))ST.refineShadowScores[k]=data.refineShadowScores[k];}); // v53
         if(data.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(data.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,data.sieleOralScores[k]);});}
         if(data.sieleOralProgress)ST.sieleOralProgress=data.sieleOralProgress;
         // 合并错词库
