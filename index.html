@@ -432,6 +432,7 @@
 <main class="main" id="main"><div id="audioBanner" class="banner"></div></main>
 </div>
 <script src="siele_oral.js"></script>
+<script src="audio/manifest.js"></script>
 <script src="grammar_data.js"></script>
 <script>
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
@@ -1468,6 +1469,30 @@ function _ttsFailBanner(){
   }
 }
 
+/* ===== T1: 预生成 TTS 音频（Tier 0）— 安卓/华为等无 TTS 引擎设备的发音兜底 ===== */
+function _ttsMp3Key(text){
+  var t = String(text).trim();
+  var h = 5381;
+  for(var i = 0; i < t.length; i++){ h = ((h << 5) + h + t.charCodeAt(i)) >>> 0; }
+  return t.length + '_' + h.toString(16);
+}
+window._ttsPlayMp3 = function(text, accent, rate){
+  try{
+    var acc = (accent === 'es') ? 'es' : 'la';
+    var mset = window.__TTS_MANIFEST && window.__TTS_MANIFEST[acc];
+    if(!mset) return null;
+    var k = _ttsMp3Key(text);
+    if(!mset[k]) return null;
+    if(window._curTtsMp3){ try{ window._curTtsMp3.pause(); }catch(e){} }
+    var a = new Audio('audio/tts/' + acc + '/' + k + '.mp3');
+    a.playbackRate = Math.min(2, Math.max(0.5, (rate || 0.92) / 0.92));
+    if('preservesPitch' in a) a.preservesPitch = true;
+    window._curTtsMp3 = a;
+    var pp = a.play();
+    if(pp && pp.catch) pp.catch(function(){});
+    return a;
+  }catch(e){ return null; }
+};
 async function speak(text, btn, accent, rate){
   if(!text) return;
   if(btn){ _currentSpeakBtn = btn; btn.classList.add('playing'); }
@@ -1479,6 +1504,15 @@ async function speak(text, btn, accent, rate){
   // 语速 (P2-4): 默认 0.92,跟读模块可传 0.7 慢速
   var playRate = (typeof rate === 'number' && rate > 0 && rate <= 2) ? rate : 0.92;
   var session = ++_ttsSession;   // 新请求作废旧降级链，避免重复发声
+
+  // Tier 0 (T1): 预生成 mp3 优先 — manifest 命中直接播，未命中走原降级链
+  var _t0 = (typeof _ttsPlayMp3 === 'function') ? _ttsPlayMp3(text, accKey, playRate) : null;
+  if(_t0){
+    _t0.onended = function(){ _ttsClearPlaying(btn, text); };
+    _t0.onerror = function(){ _ttsClearPlaying(btn, text); };
+    return;
+  }
+  if(window._curTtsMp3){ try{ window._curTtsMp3.pause(); }catch(e){} }
 
   // Tier 1: speechSynthesis（双口音通用 — 跨设备/离线/无CORS限制）
   if(window.speechSynthesis){
@@ -12527,6 +12561,13 @@ function _bindRefinePlayAll(){
         // 调用 speak + onend 续播
         const text = queue.list[queue.idx];
         queue.idx++;
+        // T1 Tier0: 预生成 mp3 优先（无 TTS 引擎设备兜底）
+        var _qau = (typeof _ttsPlayMp3 === 'function') ? _ttsPlayMp3(text, accent, rate) : null;
+        if(_qau){
+          _qau.onended = function(){ if(!window.__refineSpeakQueue || window.__refineSpeakQueue !== queue) return; setTimeout(playNext, 500); };
+          _qau.onerror = function(){ if(!window.__refineSpeakQueue || window.__refineSpeakQueue !== queue) return; setTimeout(playNext, 200); };
+          return;
+        }
         // 用 SpeechSynthesisUtterance 直接控制 onend
         try{
           if(window.speechSynthesis){
@@ -12579,6 +12620,7 @@ function _bindRefinePlayAll(){
       queue.cancel = () => {
         try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(e){}
         try{ if(window._refineQueueAudio){ window._refineQueueAudio.pause(); window._refineQueueAudio=null; } }catch(e){}
+        try{ if(window._curTtsMp3){ window._curTtsMp3.pause(); window._curTtsMp3=null; } }catch(e){}
         queue.done = true;
         btn.textContent = '▶ 通读全文';
         btn.classList.remove('playing');
@@ -17526,7 +17568,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v53-2026100101';
+    var swVer = 'v54-2026100101';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17563,7 +17605,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v53-2026100101';
+    return 'v54-2026100101';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
