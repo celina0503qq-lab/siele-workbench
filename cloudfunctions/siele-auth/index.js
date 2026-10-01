@@ -490,7 +490,10 @@ async function adminListUsers(event) {
     lastLoginAt: user.lastLoginAt || null,
     quizBackEnabled: !!user.quizBackEnabled,
     deleSpecialEnabled: !!user.deleSpecialEnabled,
-    refinePackEnabled: !!user.refinePackEnabled
+    refinePackEnabled: !!user.refinePackEnabled,
+    sieleSpecialEnabled: !!user.sieleSpecialEnabled,
+    writingEnabled: !!user.writingEnabled,
+    oralEnabled: !!user.oralEnabled
   })).sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
   return response(true, "ADMIN_USERS", { users });
 }
