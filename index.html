@@ -2943,7 +2943,7 @@ function startFlashRecord(target){
   _flashRecognition=new SR();_flashRecognition.lang='es-ES';_flashRecognition.continuous=false;_flashRecognition.interimResults=false;_flashRecording=true;_flashRecordTarget=target;
   if(btn){btn.textContent='⏹ 停止录音';btn.className='btn sm t';}
   _flashRecognition.onresult=function(event){scoreFlashPronunciation(target,event.results[0][0].transcript);};
-  _flashRecognition.onerror=function(event){if(event.error==='not-allowed')alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');else alert('语音识别出错：'+event.error+'。请重试。');};
+  _flashRecognition.onerror=function(event){if(event.error==='not-allowed')alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');else if(event.error==='network')alert('语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试；「🔊 听标准发音」不受影响。');else alert('语音识别出错：'+event.error+'。请重试。');};
   _flashRecognition.onend=function(){_flashRecording=false;if(btn)btn.textContent='🎤 开始跟读';};
   try{_flashRecognition.start();}catch(e){_flashRecording=false;if(btn)btn.textContent='🎤 开始跟读';}
 }
@@ -3670,7 +3670,8 @@ function renderShadow(){
       <div class="sh-list">`;
   visibleIdxs.forEach(i => {
     const s = SHADOW_SENTENCES[i];
-    const sc = ST.shadowScores[i];
+    const scRaw = ST.shadowScores[i];
+    const sc = (scRaw && typeof scRaw === 'object') ? scRaw.score : scRaw;
     h += `<div class="sh-item ${i===_shadowIdx?'on':''}" onclick="_shadowIdx=${i};renderMain()">
       <div class="es">${esc(s.es.slice(0,40))}${s.es.length>40?'...':''}</div>
       <div class="zh">${esc(s.zh)}</div>
@@ -3747,7 +3748,8 @@ function startRecord(btn){
     btn.textContent = '🎤 开始录音';
     if(event.error === 'not-allowed'){
       alert('麦克风权限被拒绝。请在浏览器设置中允许麦克风访问。');
-    } else {
+    } else if(event.error === 'network'){
+      alert('语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试。');
       alert('语音识别出错：' + event.error + '。请重试。');
     }
   };
@@ -11918,12 +11920,12 @@ function pickRefineDate(){
 
 function renderRefine(){
   if(!window.REFINE_PACKS){
-    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
+    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每周精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
       <div class="empty">⏳ 数据加载中…如长时间未显示，请刷新页面。</div>`;
   }
   const dates = Object.keys(window.REFINE_PACKS).sort().reverse();
   if(dates.length === 0){
-    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每日精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
+    return `<div class="tb"><div><h2>📚 外刊精炼</h2><div class="d">每周精选外刊 · 中西双语精读 · 配套词汇与阅读题</div></div></div>
       <div class="empty">📭 暂未发布精炼包，请在每日 10:30 后查看。</div>`;
   }
   if(!currentRefineDate) currentRefineDate = dates[0];
@@ -11962,7 +11964,7 @@ function renderRefine(){
     <div class="empty">⏳ 正在加载今日精读内容…</div>
   </div>`;
 
-  return `<div class="tb"><div><h2>📚 外刊精炼${renderModuleAccentToggle('refine')}</h2><div class="d">每日精选外刊 · 5 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
+  return `<div class="tb"><div><h2>📚 外刊精炼${renderModuleAccentToggle('refine')}</h2><div class="d">每周精选外刊 · 15 个高频词 + 4 篇分级精读 · Word 下载 + 在线阅读</div></div></div>
     ${renderModuleCheckinBar ? renderModuleCheckinBar('refine','外刊精炼','📚') : ''}
     ${datePicker}
     ${theme}
@@ -12018,7 +12020,7 @@ async function renderRefineBody(){
     let wordsHtml = '';
     if(words.length && !currentRefineLevel){
       wordsHtml = `<div class="refine-section" id="refine-vocab">
-        <h3>📝 今日 5 个高频词 <span style="font-size:11px;color:var(--soft);font-weight:400">· 点击 🔊 听单词发音/例句</span></h3>
+        <h3>📝 今日 15 个高频词 <span style="font-size:11px;color:var(--soft);font-weight:400">· 点击 🔊 听单词发音/例句</span></h3>
         <div class="refine-word-grid">${words.map((w,wi) => {
           const lemaId = `refine-wspk-${wi}`;
           const ejId = `refine-wspk-ej-${wi}`;
@@ -12704,10 +12706,11 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   };
 
   recognition.onerror = function(event){
-    status.innerHTML = '<span style="color:#dc2626">❌ 语音识别出错：' + esc(event.error) + '。请重试。</span>';
-    btn.classList.remove('recording');
-    window.__refineRecognition = null;
-  };
+    if(event.error === 'network'){
+      status.innerHTML = '<span style="color:#dc2626">❌ 语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试；「🔊 听原句」发音不受影响。</span>';
+    } else {
+      status.innerHTML = '<span style="color:#dc2626">❌ 语音识别出错：' + esc(event.error) + '。请重试。</span>';
+    }
 
   recognition.onend = function(){
     var elapsed = (Date.now() - startTime) / 1000;
@@ -17462,7 +17465,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v49-2026093001';
+    var swVer = 'v50-2026100101';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17499,7 +17502,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v49-2026093001';
+    return 'v50-2026100101';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
