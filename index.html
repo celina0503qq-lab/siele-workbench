@@ -2093,7 +2093,7 @@ function renderDash(){
   // Pomodoro + progress
   h += `<div class="g g2" id="dashQuickAnchor">
     <div class="card">
-      <h3><span class="ic">⏱</span>番茄钟</h3>
+      <h3><span class="ic">🍅</span>番茄钟</h3>
       <div class="pomo">
         <div class="ring">
           <svg id="tomatoSvg" width="100%" height="100%" viewBox="0 0 150 150">
@@ -2120,6 +2120,13 @@ function renderDash(){
               <ellipse cx="62" cy="62" rx="11" ry="7" fill="#ff8a70" opacity=".55"/>
               <path d="M42 88 q4 8 10 4" stroke="#a11f16" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
               <path d="M104 84 q-4 10 -12 6" stroke="#a11f16" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+            </g>
+            <g id="tomatoFace">
+              <path d="M58 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path d="M81 60 q5.5 -6 11 0" stroke="#5c120c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <ellipse cx="47" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
+              <ellipse cx="103" cy="67" rx="6" ry="3.8" fill="#ffb3a0" opacity=".8"/>
+              <path d="M67 101 q8 7 16 0" stroke="#7a1a12" stroke-width="2.6" fill="none" stroke-linecap="round"/>
             </g>
             <path d="M75 42 q-10 -16 -26 -13 q14 -2 18 8 q-14 -2 -16 6 q13 -1 15 7 q11 -7 9 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
             <path d="M76 43 q6 -14 20 -16 q-12 4 -13 12 q10 -1 11 7 q-10 -2 -14 5 q-3 -6 -4 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
@@ -17632,7 +17639,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v57-2026100103';
+    var swVer = 'v58-2026100104';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17669,7 +17676,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v57-2026100103';
+    return 'v58-2026100104';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
