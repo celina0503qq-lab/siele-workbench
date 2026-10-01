@@ -407,6 +407,9 @@
 .refine-para-row .refine-para-es .row-actions{position:absolute;top:4px;right:4px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
 .refine-para-row:hover .refine-para-es .row-actions{opacity:1}
 .refine-para-row .refine-para-es.reading{background:linear-gradient(90deg,#fff7ed,#fff);border-left:3px solid #f97316}
+.refine-para-row .refine-para-es.refine-rec-target{background:linear-gradient(90deg,#ecfdf5,#fff);border-left:3px solid #10b981}
+.refine-rec-btn{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);border:1px solid #10b981;color:#047857;font-size:11px;cursor:pointer;flex-shrink:0;transition:.15s;vertical-align:middle;line-height:1}
+.refine-rec-btn:hover{transform:scale(1.1)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
 .search-wrap{position:relative}
 .search-drop{position:absolute;top:100%;left:0;right:0;z-index:60;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);max-height:320px;overflow-y:auto;display:none;margin-top:4px}
@@ -12098,11 +12101,12 @@ async function renderRefineBody(){
             esHtml = esHtml.replace(re,'<mark title="${esc(v.m||"")}">$1</mark>');
           });
         }
-        return `<div class="refine-para-row" data-pidx="${i}">
+        return `<div class="refine-para-row" id="refp-${lvKey}-${i}" data-pidx="${i}">
           <div class="refine-para-es" data-es-paragraph>
             <span class="refine-lang-tag es">ES</span>${esHtml}
             <span class="row-actions">
               <button class="refine-speak-btn sm" data-speak-paragraph="${lvKey}-${i}" title="朗读本段">🔊</button>
+              <button class="refine-rec-btn sm" data-rec-paragraph="${lvKey}-${i}" title="跟读评分本段">🎤</button>
             </span>
           </div>
           <div class="refine-para-zh"><span class="refine-lang-tag zh">ZH</span>${esc(p.zh||'')}</div>
@@ -12113,7 +12117,7 @@ async function renderRefineBody(){
       const speakToolbar = `<div class="refine-speak-toolbar" data-speak-toolbar="${lvKey}">
         <span class="lbl">🎧 跟读模式：</span>
         <button class="play-all-btn" data-play-all="${lvKey}">▶ 通读全文</button>
-        <button class="score-btn" data-score="${lvKey}">🎤 跟读评分</button>
+        <button class="score-btn" data-score="${lvKey}">🎲 随机跟读</button>
         <span class="lbl" style="margin-left:8px">语速：</span>
         <button class="rate-btn on" data-rate="0.92" data-target="${lvKey}">1.0x</button>
         <button class="rate-btn" data-rate="0.7" data-target="${lvKey}">0.7x 慢速</button>
@@ -12470,6 +12474,29 @@ function _bindRefineParaSpeak(){
   });
 }
 
+// v52: 段落跟读评分按钮
+function _bindRefineParaRec(){
+  document.querySelectorAll('.refine-rec-btn[data-rec-paragraph]').forEach(btn => {
+    if(btn.dataset.recBound) return;
+    btn.dataset.recBound = '1';
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const key = btn.dataset.recParagraph; // "a1-3"
+      const [lvKey, idxStr] = key.split('-');
+      const idx = parseInt(idxStr, 10);
+      const panel = document.getElementById('refine-score-' + lvKey);
+      if(!panel) return;
+      const card = document.getElementById('refine-score-card-' + lvKey);
+      const status = document.getElementById('refine-score-status-' + lvKey);
+      const textEl = document.getElementById('refine-score-text-' + lvKey);
+      const scoreBtn = document.querySelector('.score-btn[data-score="' + lvKey + '"]');
+      if(!scoreBtn) return;
+      if(scoreBtn.classList.contains('recording')) return; // 已在录音, 忽略
+      window.__refineScoreLaunch(lvKey, idx, scoreBtn, panel, card, status, textEl);
+    });
+  });
+}
+
 // 全文通读
 function _bindRefinePlayAll(){
   document.querySelectorAll('[data-play-all]').forEach(btn => {
@@ -12623,46 +12650,72 @@ function _bindRefineScore(){
       const status = document.getElementById('refine-score-status-' + lvKey);
       const textEl = document.getElementById('refine-score-text-' + lvKey);
 
-      // If already recording, stop
+      // If already recording, stop (v52: 录音中→保留面板由onend出分; 倒计时中→取消收面板)
       if(btn.classList.contains('recording')){
         btn.classList.remove('recording');
-        status.textContent = '';
-        panel.classList.remove('show');
-        card.classList.remove('show');
-        if(window.__refineRecognition){ window.__refineRecognition.stop(); window.__refineRecognition = null; }
+        btn.textContent = '🎲 随机跟读';
+        if(window.__refineScoreCd){ clearInterval(window.__refineScoreCd); window.__refineScoreCd = null; }
+        if(window.__refineStopTimer){ clearTimeout(window.__refineStopTimer); window.__refineStopTimer = null; }
+        if(window.__refineRecognition){
+          window.__refineRecognition.stop();
+          window.__refineRecognition = null;
+        } else {
+          status.textContent = '';
+          panel.classList.remove('show');
+        }
+        window.__refineClearRecTarget && window.__refineClearRecTarget();
         return;
       }
 
-      // Pick a random paragraph for this level
-      var data = window.__REFINE_CACHE && window.__REFINE_CACHE[currentRefineDate];
-      if(!data) return;
-      var article = (data.ARTICLES||{})[lvKey];
-      if(!article || !article.paragraphs) return;
-      var paras = article.paragraphs.filter(function(p){ return p.es && p.es.length > 15; });
-      if(!paras.length) return;
-      var selected = paras[Math.floor(Math.random() * paras.length)];
-      var expectedText = selected.es.trim();
-
-      // Show panel with prompt
-      textEl.innerHTML = '<span class="lang-tag">ES</span>' + esc(expectedText);
-      status.innerHTML = '准备录音... <span class="countdown" id="refine-score-cd-' + lvKey + '">3</span>';
-      panel.classList.add('show');
-      card.classList.remove('show');
-      btn.classList.add('recording');
-
-      // Countdown 3-2-1 then start
-      var cd = 3;
-      var cdEl = document.getElementById('refine-score-cd-' + lvKey);
-      var cdTimer = setInterval(function(){
-        cd--;
-        if(cd <= 0){ clearInterval(cdTimer); status.innerHTML = '<span style="color:#ef4444">🔴 正在录音，请朗读上方段落...</span>';
-          startScoring(lvKey, expectedText, btn, panel, card, status);
-        } else if(cdEl) { cdEl.textContent = cd; }
-      }, 1000);
-      window.__refineScoreCd = cdTimer;
+      window.__refineScoreLaunch(lvKey, null, btn, panel, card, status, textEl);
     });
   });
 }
+
+// v52: 跟读评分统一启动(随机/点选段落共用)。paraIdx=null→随机选段; 否则指定段
+window.__refineScoreLaunch = function(lvKey, paraIdx, btn, panel, card, status, textEl){
+  var data = window.__REFINE_CACHE && window.__REFINE_CACHE[currentRefineDate];
+  if(!data) return;
+  var article = (data.ARTICLES||{})[lvKey];
+  if(!article || !article.paragraphs) return;
+  var expectedText, selIdx;
+  if(paraIdx == null){
+    var paras = article.paragraphs.filter(function(p){ return p.es && p.es.length > 15; });
+    if(!paras.length) return;
+    var selected = paras[Math.floor(Math.random() * paras.length)];
+    selIdx = article.paragraphs.indexOf(selected);
+    expectedText = selected.es.trim();
+  } else {
+    var p = (article.paragraphs||[])[paraIdx];
+    if(!p || !p.es || !p.es.trim()) return;
+    selIdx = paraIdx;
+    expectedText = p.es.trim();
+  }
+  if(!expectedText) return;
+  window.__refineSetRecTarget(lvKey, selIdx);
+  textEl.innerHTML = '<span class="lang-tag">ES</span>' + esc(expectedText);
+  status.innerHTML = '准备录音... <span class="countdown" id="refine-score-cd-' + lvKey + '">3</span>';
+  panel.classList.add('show');
+  card.classList.remove('show');
+  btn.classList.add('recording');
+  var cd = 3;
+  var cdEl = document.getElementById('refine-score-cd-' + lvKey);
+  var cdTimer = setInterval(function(){
+    cd--;
+    if(cd <= 0){ clearInterval(cdTimer); status.innerHTML = '<span style="color:#ef4444">🔴 正在录音，请朗读上方段落...</span>';
+      startScoring(lvKey, expectedText, btn, panel, card, status);
+    } else if(cdEl) { cdEl.textContent = cd; }
+  }, 1000);
+  window.__refineScoreCd = cdTimer;
+};
+window.__refineSetRecTarget = function(lvKey, idx){
+  window.__refineClearRecTarget();
+  var row = document.getElementById('refp-' + lvKey + '-' + idx);
+  if(row){ var es = row.querySelector('.refine-para-es'); if(es) es.classList.add('refine-rec-target'); }
+};
+window.__refineClearRecTarget = function(){
+  document.querySelectorAll('.refine-para-es.refine-rec-target').forEach(function(el){ el.classList.remove('refine-rec-target'); });
+};
 
 function startScoring(lvKey, expectedText, btn, panel, card, status){
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -12681,6 +12734,7 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   var finalTranscript = '';
   var startTime = Date.now();
   var interimText = '';
+  var lastFinalTs = 0;
 
   recognition.onresult = function(event){
     interimText = '';
@@ -12695,6 +12749,7 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
           if(d < bestDist){ best = r[j].transcript; bestDist = d; }
         }
         finalTranscript += ' ' + best;
+        lastFinalTs = Date.now();
       } else {
         interimText += r[0].transcript;
       }
@@ -12706,16 +12761,24 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
   };
 
   recognition.onerror = function(event){
+    if(window.__refineStopTimer){ clearTimeout(window.__refineStopTimer); window.__refineStopTimer = null; }
     if(event.error === 'network'){
       status.innerHTML = '<span style="color:#dc2626">❌ 语音服务连接失败（network）：跟读评分依赖 Google 语音服务，当前网络无法访问。请检查网络/代理后重试；「🔊 听原句」发音不受影响。</span>';
     } else {
       status.innerHTML = '<span style="color:#dc2626">❌ 语音识别出错：' + esc(event.error) + '。请重试。</span>';
     }
+    btn.classList.remove('recording');
+    btn.textContent = '🎲 随机跟读';
+    window.__refineRecognition = null;
+    window.__refineClearRecTarget && window.__refineClearRecTarget();
   };
 
   recognition.onend = function(){
-    var elapsed = (Date.now() - startTime) / 1000;
+    if(window.__refineStopTimer){ clearTimeout(window.__refineStopTimer); window.__refineStopTimer = null; }
     btn.classList.remove('recording');
+    btn.textContent = '🎲 随机跟读';
+    window.__refineClearRecTarget && window.__refineClearRecTarget();
+    var elapsed = ((lastFinalTs || Date.now()) - startTime) / 1000;
     window.__refineRecognition = null;
 
     var spokenText = finalTranscript.trim();
@@ -12727,6 +12790,9 @@ function startScoring(lvKey, expectedText, btn, panel, card, status){
     var score = calcScore(expectedText, spokenText, elapsed);
     renderScoreCard(lvKey, card, status, score);
   };
+
+  btn.textContent = '⏹ 停止并评分';
+  window.__refineStopTimer = setTimeout(function(){ try{ recognition.stop(); }catch(e){} }, 60000);
 
   recognition.start();
 }
@@ -13023,6 +13089,7 @@ function saveRefineNote(key, value){
 window.bindRefineSpeaks = function(){
   _bindRefineWordSpeak();
   _bindRefineParaSpeak();
+  _bindRefineParaRec();
   _bindRefinePlayAll();
   _bindRefineRate();
   _bindRefineScore();
@@ -17466,7 +17533,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v51-2026100101';
+    var swVer = 'v52-2026100101';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17503,7 +17570,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v51-2026100101';
+    return 'v52-2026100101';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
