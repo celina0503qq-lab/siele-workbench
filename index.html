@@ -1522,6 +1522,14 @@ async function speak(text, btn, accent, rate){
       // 必须落在用户手势的同一个同步任务里，await 之后会被系统拒绝 → 完全没声音。
       var cands = _ttsCandidates(accKey);
       var tried = [];
+      // 关键：本机一个西语语音都没有时，绝不能让系统拿默认语音（中文/英语）去念西语
+      // —— 那只会输出「英语腔读西语」，比没声音更误导人。直接走内置音频/提示，不发声。
+      if(!_ttsSpanishVoices().length){
+        clearBtn();
+        if(typeof window._ttsSpeakOnlineFallback === 'function' && window._ttsSpeakOnlineFallback(text, accKey, playRate, btn)) return;
+        _ttsNoSpanishVoiceNotice();
+        return;
+      }
       if(!cands.length){
         // 语音列表还没就绪（iOS 首次点击常见）：同步发声一次并交给系统按 lang 选，
         // 同时这次发声会触发系统加载语音列表，下次点击就能选到正确语音。
@@ -1557,16 +1565,9 @@ async function speak(text, btn, accent, rate){
         }
         try{ window.speechSynthesis.cancel(); }catch(e){}
       }
-      // 西语语音存在但都发不出声 → 最后只给 lang，交给系统兜底引擎
+      // 西语语音存在但都发不出声 → 先试内置音频；仍不行才提示（绝不交给系统默认语音念西语）
       if(session !== _ttsSession){ clearBtn(); return; }
-      var r2 = await _ttsSpeakOne(text, null, spec.lang, playRate);
-      tried.push(spec.lang + (r2.ok ? '\u2713' : '(' + r2.why + ')'));
-      if(r2.ok){
-        if(!_ttsSpanishVoices().length) _ttsNoSpanishVoiceNotice();
-        else if(accKey === 'la') _ttsLaVoiceNotice();
-        _ttsClearPlaying(btn, text);
-        return;
-      }
+      if(typeof window._ttsSpeakOnlineFallback === 'function' && window._ttsSpeakOnlineFallback(text, accKey, playRate, btn)) return;
       console.warn('[TTS] 播放失败 候选:', tried.join(' , '),
         '| 本机西语语音:', _ttsSpanishVoices().map(function(x){ return _ttsNormLang(x.lang) + '/' + x.name; }).join(' , ') || '无');
     }catch(e){ console.warn('speechSynthesis failed:', e); }
@@ -1583,9 +1584,39 @@ function _ttsNoSpanishVoiceNotice(){
     sessionStorage.setItem('tts_nospanish_warned_v1','1');
   }catch(e){}
   if(window.toast){
-    window.toast('本机没有安装西班牙语语音，系统正用默认语音念西语（所以听起来像英语）。' + _ttsInstallHint());
+    window.toast('本机没有安装西班牙语语音，系统会拿中文/英语去念西语，所以听起来像英语。' +
+      '已切换为内置西语音频；若是没收录的句子，请安装西语语音包。' + _ttsInstallHint());
   }
 }
+
+/* ---------- 在线西语发音兜底（Tier 1.5）----------
+   用途：设备无西语语音、且该句子不在内置音频库时，用在线接口取真西语音频。
+   注意：必须「无声兜底」——宁可没声音，也不能退回系统默认语音念出英语腔。 */
+window._ttsSpeakOnlineFallback = function(text, accKey, rate, btn){
+  try{
+    var q = String(text == null ? '' : text).trim();
+    if(!q || q.length > 200) return false;          // 过长文本不适合在线接口
+    var lang = (accKey === 'es') ? 'es-ES' : 'es-MX';
+    if(window._curOnlineAudio){ try{ window._curOnlineAudio.pause(); }catch(e){} }
+    var url = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob'
+            + '&tl=es&q=' + encodeURIComponent(q);
+    var a = new Audio(url);
+    a.playbackRate = Math.min(2, Math.max(0.5, (rate || 0.92) / 0.92));
+    if('preservesPitch' in a) a.preservesPitch = true;
+    window._curOnlineAudio = a;
+    var ok = false;
+    a.onplaying = function(){ ok = true; };
+    a.onended = function(){ _ttsClearPlaying(btn, text); };
+    a.onerror = function(){
+      window._curOnlineAudio = null;
+      if(!ok){ clearBtnSafe(); _ttsFailBanner(); }   // 在线也不可用 → 明确提示，不静默
+    };
+    var pp = a.play();
+    if(pp && pp.catch) pp.catch(function(){ /* onerror 已处理 */ });
+    return true;
+  }catch(e){ return false; }
+};
+function clearBtnSafe(){ try{ if(_currentSpeakBtn) _currentSpeakBtn.classList.remove('playing'); }catch(e){} }
 
 /* ---------- 语音自检（设置面板「检测本机语音」按钮调用） ---------- */
 window.ttsVoiceReport = function(){
@@ -1602,7 +1633,17 @@ window.ttsVoiceReport = function(){
   };
 };
 window.ttsTestAccent = function(a){
-  speak(a === 'es' ? 'Hola, ¿qué tal? Vale, muy bien.' : 'Hola, ¿qué onda? Bien, gracias.', null, a);
+  var acc = (a === 'es') ? 'es' : 'la';
+  var text = (acc === 'es') ? 'Hola, ¿qué tal? Vale, muy bien.' : 'Hola, ¿qué onda? Bien, gracias.';
+  // 自检面板的试听必须能真实反映「实际发音」：
+  // 有西语语音的设备走系统 TTS（可听出本机音色）；无西语语音的设备走 mp3 兜底，
+  // 避免系统拿默认语音（中文/英语）去念西语，导致自检误判成「发音是英语」。
+  var hasVoice = _ttsCandidates(acc).length > 0;
+  if(!hasVoice){
+    var played = (typeof _ttsPlayMp3 === 'function') ? _ttsPlayMp3(text, acc, 0.92) : null;
+    if(played){ _ttsClearPlaying(null, text); return; }
+  }
+  speak(text, null, acc);
 };
 window.ttsSelfCheck = function(){
   var r = window.ttsVoiceReport();
@@ -1612,12 +1653,17 @@ window.ttsSelfCheck = function(){
         return '<div style="padding:2px 0">· <b>' + v.lang + '</b> — ' + v.name +
           ' <span style="color:' + (v.local ? '#0f6e56' : '#854f0b') + '">[' + (v.local ? '本地/离线可用' : '在线语音') + ']</span></div>';
       }).join('')
-    : '<div style="color:#b71c1c">· 未检测到任何西语语音（浏览器可能尚未加载语音列表，请稍后再试）</div>';
+    : '<div style="color:#0f6e56">· 未检测到系统西语语音 → 发音自动改用<b>内置西语音频</b>（真西语音色）</div>';
   var noSpanish = !r.voices.length;
+  var mp3Ready = !!(window.__TTS_MANIFEST && window.__TTS_MANIFEST.la);
   var laVerdict = noSpanish
-    ? '<span style="color:#b71c1c">✘ 本机没有安装任何西班牙语语音</span> —— 系统会拿默认语音（中文/英语）去念西语，所以听起来像英语。' +
-      '<div style="margin-top:6px;background:#fff8e6;border:1px solid #f0dfae;border-radius:8px;padding:8px 10px;color:#7a5a12">' +
-      _ttsInstallHint() + '<br>装好后回到这里点下面两个按钮试听确认。</div>'
+    ? '<span style="color:#0f6e56">✔ 本机没有安装西班牙语语音，因此自动切换到「内置西语音频」发音</span> —— 这是真西语真人音色，不是英语。' +
+      '<div style="margin-top:6px;background:#e8f5ee;border:1px solid #b8dccf;border-radius:8px;padding:8px 10px;color:#175544">' +
+      (mp3Ready
+        ? '本机西语音频库<b>已加载</b>：跟读句子、外刊段落、词汇例句都有离线音频，直接点喇叭即可，无需安装任何语音包。<br>' +
+          '第三方朗读软件（Duoreader / 微信读书等）若想用系统语音，才需要装语音引擎：' + _ttsInstallHint()
+        : '<b>⚠ 内置西语音频库没加载到</b>（可能是缓存/网络问题）。请刷新页面重试，或检查 network 里 audio/manifest.js 是否 200。') +
+      '</div>'
     : (r.laInstalled
       ? '<span style="color:#0f6e56">✔ 已安装拉美(es-MX 等)语音，拉美模式下是真正的拉美口音</span>'
       : '<span style="color:#b71c1c">✘ 未安装拉美语音 → 拉美模式会自动改用西班牙语音播放（不会再静音）</span>' +
@@ -1642,6 +1688,7 @@ window.ttsSelfCheck = function(){
     '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">' +
       '<button onclick="ttsTestAccent(\'la\')" style="border:0;background:#e8f5ee;color:#0f6e56;border-radius:9px;padding:6px 12px;cursor:pointer;font-size:12.5px">▶ 测试拉美发音</button>' +
       '<button onclick="ttsTestAccent(\'es\')" style="border:0;background:#fdeee8;color:#9a4a2a;border-radius:9px;padding:6px 12px;cursor:pointer;font-size:12.5px">▶ 测试西班牙发音</button>' +
+      '<span style="font-size:11px;color:#6B5D4F;align-self:center">（' + (r.voices.length ? '使用本机语音' : '使用内置西语音频') + '）</span>' +
     '</div>';
   document.body.appendChild(d);
 };
