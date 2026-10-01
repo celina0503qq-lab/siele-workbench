@@ -404,6 +404,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
     <div class="ns">账户设置</div>
     <button class="ni" data-p="passwd" onclick="go('passwd')"><span class="ic">🔑</span>密码修改</button>
+    <button class="ni" onclick="window.open('index.html#netdisk','_blank')" title="管理员专属：工作台资料地图"><span class="ic">🗺️</span>资料地图</button>
     <div class="ns admin-only hide">系统管理</div>
     <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
     <div class="ns">学习</div>
@@ -3011,7 +3012,10 @@ async function adminToggleUserStatus(uid,username,status){
 var USER_FLAG_DEFS=[
   {key:'quizBackEnabled',label:'背题'},
   {key:'deleSpecialEnabled',label:'专项'},
-  {key:'refinePackEnabled',label:'外刊'}
+  {key:'refinePackEnabled',label:'外刊'},
+  {key:'sieleSpecialEnabled',label:'SIELE'},
+  {key:'writingEnabled',label:'写作'},
+  {key:'oralEnabled',label:'口语'}
 ];
 async function adminToggleUserFlag(uid,username,key,enabled){
   var def=USER_FLAG_DEFS.find(function(f){return f.key===key;})||{label:key};
