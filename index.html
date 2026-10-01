@@ -3912,6 +3912,7 @@ function scoreShadow(recognized, elapsedSec){
       <div>📝 语法准确度：<b>${grammarScore}%</b></div>
     </div>
     ${score < 50 ? '<div style="margin-top:8px;padding:8px 10px;background:#fef9e7;border-left:3px solid var(--am);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.5">🎯 <b>发音小提示：</b>注意 r/rr 颤音、ñ 的发音、重音位置（带 tilde 的音节要重读）。建议用上方的「🐌 逐音节 0.6x」按钮听清每个音节后再跟读。</div>' : ''}
+    ${v2.wordDetail || ''}
     <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn sm" onclick="nextShadowSentence()">▶ 下一句</button>
       <button class="btn sm ol" onclick="toggleRecord()">🎤 重新录音</button>
@@ -17615,7 +17616,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v54-2026100101';
+    var swVer = 'v56-2026100102';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17652,7 +17653,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v54-2026100101';
+    return 'v56-2026100102';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
