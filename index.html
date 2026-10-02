@@ -2733,7 +2733,7 @@ function resetFlashProgress(){
   var now=Date.now();
   ST.vocabMastery={};ST.flashMastery={};
   ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];
-  ST.recentlyStudiedWords=[];
+  ST.recentlyStudiedWords=[];ST.dictationPending=[];
   ST.flashReviewSession=0;
   ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
   ST.flashIdx=0;ST.flashCurrentWord='';
@@ -2746,6 +2746,7 @@ function resetFlashProgress(){
     else{ST.vocabReviewCount={};}
   }
   ST.vocabResetAt=now;
+  try{localStorage.setItem('swa_vocab_reset_floor_v1',String(now));}catch(e){}
   try{
     if(typeof MIR!=='undefined'&&MIR){MIR.w={};MIR.wbTs=0;MIR.qn=0;}
     if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=now;}});}
@@ -3197,6 +3198,10 @@ function rateFlash(level){
   ST.recentlyStudiedWords=ST.recentlyStudiedWords.filter(function(w){return w!==studiedEs;});
   ST.recentlyStudiedWords.push(studiedEs);
   if(ST.recentlyStudiedWords.length>10) ST.recentlyStudiedWords.shift();
+  // v62：本轮快照——记录自上次默写以来评过级的词（去重），触发默写后清空
+  if(!ST.dictationPending) ST.dictationPending=[];
+  ST.dictationPending=ST.dictationPending.filter(function(w){return w!==studiedEs;});
+  ST.dictationPending.push(studiedEs);
   // Persist the *next actual word* once, then defer the secondary backup so the next card can paint immediately.
   setFlashPosition(ST.flashIdx+1,pool);
   updateStreak();
@@ -3204,7 +3209,15 @@ function rateFlash(level){
   deferFlashBackup();
   const shouldDictate=ST.flashReviewSession>0&&ST.flashReviewSession%10===0&&!isDictAutoOff();
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
-  if(shouldDictate)setTimeout(function(){startDictationTest({fromRecent:true});},260);
+  if(shouldDictate){
+    // v62：本轮快照出题——默写词表 = 自上次默写以来评过级的词（打乱后出题），考后清空
+    var _vpool=(typeof VDATA!=='undefined'?VDATA:[]);
+    var _pend=(ST.dictationPending&&ST.dictationPending.length)?ST.dictationPending:(ST.recentlyStudiedWords||[]);
+    var _dw=_pend.map(function(es){var v=_vpool.find(function(x){return x&&x.es===es;});return v?{es:v.es,zh:v.zh||'',ex:v.ex||''}:null;}).filter(Boolean);
+    ST.dictationPending=[];
+    for(var _k=_dw.length-1;_k>0;_k--){var _n=Math.floor(Math.random()*(_k+1)),_t=_dw[_k];_dw[_k]=_dw[_n];_dw[_n]=_t;}
+    setTimeout(function(){if(_dw.length)startDictationTest({words:_dw});else startDictationTest({fromRecent:true});},260);
+  }
 }
 function nextFlash(alreadySaved){
   const pool=syncFlashPosition(getFlashPool());
@@ -17728,7 +17741,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v61-2026100202';
+    var swVer = 'v62-2026100203';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17765,7 +17778,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v61-2026100202';
+    return 'v62-2026100203';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18012,6 +18025,7 @@ window._qrMergePairs = function(lp, lt, rp, rt){
 function hydrate(){
   if(!AU||!ADB)return;
   var changed=false;
+  var _rzH=_vocabResetFloor();
   ADB.words.forEach(function(w){
     if(!w.es)return;
     var mir=MIR.w[w.es]||[null,0];
@@ -18021,11 +18035,17 @@ function hydrate(){
        当本机 ST.vocabMastery 根本没有这个键时，不存在覆盖风险，必须无条件采纳——
        否则一旦 ST 曾回退成更小的快照（load 回退备份键 / 配额不足吞写 / 历史账号串号），
        云端词条会被旧 MIR 时间戳永久挡住，再也补不回来。 */
-    if(!localHas || (w.updatedAt||0)>mir[1]){
+    if((!localHas || (w.updatedAt||0)>mir[1]) && !(_rzH && (w.updatedAt||0)<_rzH)){
       if((ST.vocabMastery[w.es]||0)!==m){ST.vocabMastery[w.es]=m;ST.flashMastery[w.es]=m;changed=true;}
       MIR.w[w.es]=[m,w.updatedAt||0];
     }
   });
+  if(ADB.wb&&ADB.wb.data&&_rzH&&(ADB.wb.ts||0)<_rzH){
+    // v62：重置水线——云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防 hydrate 覆盖复活
+    var _wbH=Object.assign({},ADB.wb.data);
+    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending'].forEach(function(k){delete _wbH[k];});
+    ADB.wb={ts:ADB.wb.ts,data:_wbH};
+  }
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
     ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
@@ -18179,13 +18199,19 @@ function doPush(){
 // remote: 云端 wb.data（ST 快照 flat 结构），逐字段智能合并到本地 ST。
 // 替代原先 mergeData 对 wb 的"整体覆盖"——否则谁时间戳新谁整个对象覆盖对方，
 // 导致错题集/打卡/口语评分等被另一端旧数据整体冲掉。
+// v62：重置水线本地持久化——vocabResetAt 另存独立键（不随快照/云同步走），任何合并/hydrate 前取 max，防重置标记被清
+function _vocabResetFloor(){
+  var r=Number(ST.vocabResetAt||0);
+  try{var f=Number(localStorage.getItem('swa_vocab_reset_floor_v1')||0);if(f>r)r=f;}catch(e){}
+  return r;
+}
 function mergeWbSnapshot(remote, wbTs){
   if(!remote || typeof remote!=='object') return;
-  var _rz=Number(ST.vocabResetAt||0);
+  var _rz=_vocabResetFloor();
   if(_rz&&wbTs&&Number(wbTs)<_rz){
     // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
     remote=Object.assign({},remote);
-    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel'].forEach(function(k){delete remote[k];});
+    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending'].forEach(function(k){delete remote[k];});
   }
   // 词卡浏览位置（2026-09-26 修复跨设备不同步）：改用 flashLastPositionTs 时间戳仲裁（题库 quizOrderPos 同款 ts-LWW）。
   // 旧规则"本地优先，本地为空才采用远端"⇒ 本地学过一张卡后永不为空 ⇒ 当前单词从不跨设备同步
