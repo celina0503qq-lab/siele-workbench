@@ -2727,10 +2727,8 @@ function setDictAutoOff(off){
   try{if(off)localStorage.setItem('wb_dict_auto_off_v1','1');else localStorage.removeItem('wb_dict_auto_off_v1');}catch(e){}
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
 }
-function resetFlashProgress(){
-  var msg='\u26a0\ufe0f \u5c06\u6e05\u7a7a\u5355\u8bcd\u5361\u7247\u7684\u5168\u90e8\u5b66\u4e60\u8fdb\u5ea6\uff1a\n\n\u00b7 \u638c\u63e1\u661f\u7ea7\uff08\u6210\u957f\u6811\u5f52\u96f6\uff09\n\u00b7 \u9ed8\u5199\u5bf9\u9519\u8bb0\u5f55\u4e0e\u9519\u8bcd\u5e93\n\u00b7 \u7ffb\u724c\u4f4d\u7f6e\u4e0e\u590d\u4e60\u8ba1\u6570\n\n\u4e91\u7aef\u540c\u6b65\u6570\u636e\u4e00\u5e76\u91cd\u7f6e\uff0c\u65e0\u6cd5\u6062\u590d\u3002\n\u91cd\u7f6e\u540e\u8bf7\u6682\u52ff\u5728\u5176\u4ed6\u8bbe\u5907\u6253\u5f00\u5355\u8bcd\u5361\u7247\uff08\u65e7\u8bbe\u5907\u7a0d\u540e\u540c\u6b65\u4f1a\u628a\u8fdb\u5ea6\u5199\u56de\uff09\u3002\n\n\u786e\u5b9a\u91cd\u7f6e\u5417\uff1f';
-  if(!window.confirm(msg))return;
-  var now=Date.now();
+// v63：词卡域就地清空（重置/纪元传播共用）——只动 ST 域+floor 键，MIR/ADB/云同步由调用方处理
+function _vocabWipeLocal(now){
   ST.vocabMastery={};ST.flashMastery={};
   ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];
   ST.recentlyStudiedWords=[];ST.dictationPending=[];
@@ -2747,6 +2745,12 @@ function resetFlashProgress(){
   }
   ST.vocabResetAt=now;
   try{localStorage.setItem('swa_vocab_reset_floor_v1',String(now));}catch(e){}
+}
+function resetFlashProgress(){
+  var msg='\u26a0\ufe0f \u5c06\u6e05\u7a7a\u5355\u8bcd\u5361\u7247\u7684\u5168\u90e8\u5b66\u4e60\u8fdb\u5ea6\uff1a\n\n\u00b7 \u638c\u63e1\u661f\u7ea7\uff08\u6210\u957f\u6811\u5f52\u96f6\uff09\n\u00b7 \u9ed8\u5199\u5bf9\u9519\u8bb0\u5f55\u4e0e\u9519\u8bcd\u5e93\n\u00b7 \u7ffb\u724c\u4f4d\u7f6e\u4e0e\u590d\u4e60\u8ba1\u6570\n\n\u4e91\u7aef\u540c\u6b65\u6570\u636e\u4e00\u5e76\u91cd\u7f6e\uff0c\u65e0\u6cd5\u6062\u590d\u3002\n\u91cd\u7f6e\u540e\u8bf7\u6682\u52ff\u5728\u5176\u4ed6\u8bbe\u5907\u6253\u5f00\u5355\u8bcd\u5361\u7247\uff08\u65e7\u8bbe\u5907\u7a0d\u540e\u540c\u6b65\u4f1a\u628a\u8fdb\u5ea6\u5199\u56de\uff09\u3002\n\n\u786e\u5b9a\u91cd\u7f6e\u5417\uff1f';
+  if(!window.confirm(msg))return;
+  var now=Date.now();
+  _vocabWipeLocal(now);
   try{
     if(typeof MIR!=='undefined'&&MIR){MIR.w={};MIR.wbTs=0;MIR.qn=0;}
     if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=now;}});}
@@ -17741,7 +17745,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v62-2026100203';
+    var swVer = 'v63-2026100204';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17778,7 +17782,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v62-2026100203';
+    return 'v63-2026100204';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18025,6 +18029,14 @@ window._qrMergePairs = function(lp, lt, rp, rt){
 function hydrate(){
   if(!AU||!ADB)return;
   var changed=false;
+  var _reH=(ADB.wb&&ADB.wb.data)?Number(ADB.wb.data.vocabResetAt||0):0;
+  if(_reH>_vocabResetFloor()){
+    // v63：本地快照带着更新的重置纪元 ⇒ 就地重置并采纳纪元
+    _vocabWipeLocal(_reH);
+    try{if(ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=_reH;}});}}catch(e){}
+    if(MIR){MIR.w={};MIR.wbTs=0;}
+    changed=true;
+  }
   var _rzH=_vocabResetFloor();
   ADB.words.forEach(function(w){
     if(!w.es)return;
@@ -18207,6 +18219,13 @@ function _vocabResetFloor(){
 }
 function mergeWbSnapshot(remote, wbTs){
   if(!remote || typeof remote!=='object') return;
+  // v63：对端快照带着更新的重置纪元 ⇒ 本端就地重置（否则 max/union 合并把已清数据复活）
+  var _re=Number(remote.vocabResetAt||0);
+  if(_re>_vocabResetFloor()){
+    _vocabWipeLocal(_re);
+    try{if(typeof MIR!=='undefined'&&MIR){MIR.w={};}}catch(e){}
+    try{if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=_re;}});}}catch(e){}
+  }
   var _rz=_vocabResetFloor();
   if(_rz&&wbTs&&Number(wbTs)<_rz){
     // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
