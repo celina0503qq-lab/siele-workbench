@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 1) 2026-10-02 第 22 期 — 主题：菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争
 // 1) 2026-09-25 第 21 期 — 主题：银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争
 // 2) 2026-09-18 第 20 期 — 主题：火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全
 // 3) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
@@ -22,6 +23,18 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-10-02": {
+    date: "2026-10-02",
+    weekday: "五",
+    issue: 22,
+    theme: "菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el mercado" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "El Camino de Santiago" },
+      { level: "B1", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/extremadura/tecnologia/congreso-potencial-digital-2026-reune-caceres-5-000-profesionales-liderar-innovacion-extremadura_1_13535850.html", topic: "La tecnología impulsa el empleo en España" },
+      { level: "B2", source: "elDiario.es", sourceUrl: "https://www.eldiario.es/economia/gobierno-renuncia-ley-suelo-acercar-apoyo_1_13542896.html", topic: "El decreto de vivienda y los fondos buitre" }
+    ]
+  },
   "2026-09-25": {
     date: "2026-09-25",
     weekday: "五",
@@ -310,3 +323,4 @@ window.loadRefineData = function(dateKey) {
   });
   return window.__REFINE_INFLIGHT[dateKey];
 };
+
