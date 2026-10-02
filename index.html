@@ -2635,7 +2635,7 @@ function getTreeHealth(){
   var c=0;for(var i=0;i<n;i++){if(log[i])c++;}
   var pct=Math.round(c/n*100);
   var cls=pct>=90?'bloom':(pct>=70?'lush':(pct>=50?'calm':'wilt'));
-  var label=pct>=90?'开花结果':(pct>=70?'枝叶茂盛':(pct>=50?'平稳生长':'叶子发黄'));
+  var label=pct>=90?'阳光明媚':(pct>=70?'多云转晴':(pct>=50?'阴天':'连日阴雨'));
   return {pct:pct,cls:cls,label:label};
 }
 function countRedeemPool(){
@@ -2726,6 +2726,35 @@ function isDictAutoOff(){
 function setDictAutoOff(off){
   try{if(off)localStorage.setItem('wb_dict_auto_off_v1','1');else localStorage.removeItem('wb_dict_auto_off_v1');}catch(e){}
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
+}
+function resetFlashProgress(){
+  var msg='\u26a0\ufe0f \u5c06\u6e05\u7a7a\u5355\u8bcd\u5361\u7247\u7684\u5168\u90e8\u5b66\u4e60\u8fdb\u5ea6\uff1a\n\n\u00b7 \u638c\u63e1\u661f\u7ea7\uff08\u6210\u957f\u6811\u5f52\u96f6\uff09\n\u00b7 \u9ed8\u5199\u5bf9\u9519\u8bb0\u5f55\u4e0e\u9519\u8bcd\u5e93\n\u00b7 \u7ffb\u724c\u4f4d\u7f6e\u4e0e\u590d\u4e60\u8ba1\u6570\n\n\u4e91\u7aef\u540c\u6b65\u6570\u636e\u4e00\u5e76\u91cd\u7f6e\uff0c\u65e0\u6cd5\u6062\u590d\u3002\n\u91cd\u7f6e\u540e\u8bf7\u6682\u52ff\u5728\u5176\u4ed6\u8bbe\u5907\u6253\u5f00\u5355\u8bcd\u5361\u7247\uff08\u65e7\u8bbe\u5907\u7a0d\u540e\u540c\u6b65\u4f1a\u628a\u8fdb\u5ea6\u5199\u56de\uff09\u3002\n\n\u786e\u5b9a\u91cd\u7f6e\u5417\uff1f';
+  if(!window.confirm(msg))return;
+  var now=Date.now();
+  ST.vocabMastery={};ST.flashMastery={};
+  ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];
+  ST.recentlyStudiedWords=[];
+  ST.flashReviewSession=0;
+  ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
+  ST.flashIdx=0;ST.flashCurrentWord='';
+  ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0,'专四':0};
+  ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+  var lv=['A1','A2','B1','B2','all'];
+  for(var i=0;i<lv.length;i++){var k='vocabReviewCount_'+lv[i];if(ST[k])ST[k]={};}
+  if(ST.vocabReviewCount&&typeof ST.vocabReviewCount==='object'){
+    if(ST.vocabReviewCount.A1&&typeof ST.vocabReviewCount.A1==='object'){ST.vocabReviewCount={A1:{},A2:{},B1:{},B2:{},all:{}};}
+    else{ST.vocabReviewCount={};}
+  }
+  ST.vocabResetAt=now;
+  try{
+    if(typeof MIR!=='undefined'&&MIR){MIR.w={};MIR.wbTs=0;MIR.qn=0;}
+    if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=now;}});}
+    if(typeof ADB!=='undefined'&&ADB){ADB.meta=ADB.meta||{};ADB.meta.rev=(ADB.meta.rev||0)+1;ADB.wb={ts:now,data:(typeof wbSnap==='function')?wbSnap():{}};if(typeof AU!=='undefined'&&AU&&typeof lss==='function'&&typeof dataKey==='function'){lss(dataKey(AU),ADB);if(typeof mirKey==='function')lss(mirKey(AU),MIR);}}
+  }catch(e){}
+  try{save();}catch(e){}
+  try{if(typeof cloudSync==='function'&&typeof AU!=='undefined'&&AU&&typeof ADB!=='undefined'&&ADB)setTimeout(function(){cloudSync(true);},400);}catch(e){}
+  try{toast('🌱 单词卡片学习进度已全部重置，成长树从播种开始','ok');}catch(e){}
+  try{renderMain();}catch(e){}
 }
 function continueFlashLearning(){
   var overlay=document.getElementById('dictOverlay');
@@ -3003,7 +3032,7 @@ function renderFlash(){
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${ST.flashIdx+1} / ${pool.length}</div>
   </div>`;
-  h += `<div style="text-align:right;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label></div>`;
+  h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="清空掌握星级、默写记录、错词库、翻牌位置；云端一并重置，无法恢复">↺ 重置学习进度</button></div>`;
   h += renderFlashGarden();
   h += `<div class="dictation-tabs" role="tablist" aria-label="单词卡片分项">
     <button class="dictation-tab ${_flashSubView==='study'?'on':''}" role="tab" aria-selected="${_flashSubView==='study'}" onclick="setFlashSubView('study')">📚 学习卡片</button>
@@ -17699,7 +17728,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v60-2026100201';
+    var swVer = 'v61-2026100202';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17736,7 +17765,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v60-2026100201';
+    return 'v61-2026100202';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -18150,8 +18179,14 @@ function doPush(){
 // remote: 云端 wb.data（ST 快照 flat 结构），逐字段智能合并到本地 ST。
 // 替代原先 mergeData 对 wb 的"整体覆盖"——否则谁时间戳新谁整个对象覆盖对方，
 // 导致错题集/打卡/口语评分等被另一端旧数据整体冲掉。
-function mergeWbSnapshot(remote){
+function mergeWbSnapshot(remote, wbTs){
   if(!remote || typeof remote!=='object') return;
+  var _rz=Number(ST.vocabResetAt||0);
+  if(_rz&&wbTs&&Number(wbTs)<_rz){
+    // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
+    remote=Object.assign({},remote);
+    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel'].forEach(function(k){delete remote[k];});
+  }
   // 词卡浏览位置（2026-09-26 修复跨设备不同步）：改用 flashLastPositionTs 时间戳仲裁（题库 quizOrderPos 同款 ts-LWW）。
   // 旧规则"本地优先，本地为空才采用远端"⇒ 本地学过一张卡后永不为空 ⇒ 当前单词从不跨设备同步
   // （Chrome/Edge/手机各显示各自最后翻到的词）。现在：另一台设备更晚翻过页（.all 时间戳更新）才采纳
@@ -18432,7 +18467,7 @@ async function migrateLegacyGist(){
         var rem=null;try{rem=JSON.parse(txt);}catch(e){}
         if(rem&&rem.v===1){
           mergeData(ADB,rem);
-          if(rem.wb&&rem.wb.data)mergeWbSnapshot(rem.wb.data);
+          if(rem.wb&&rem.wb.data)mergeWbSnapshot(rem.wb.data, rem.wb&&rem.wb.ts);
           ADB.wb={ts:Date.now(),data:wbSnap()};
           console.log('[Migrate] 已合并旧 Gist 云端数据');
         }
@@ -18463,14 +18498,14 @@ async function cloudSync(silent){
       if(remote&&remote.payload&&remote.payload.v===1){
         mergeData(ADB,remote.payload);
         // wb 快照字段级合并（错题/打卡/任务/评分等不整体覆盖）
-        if(remote.payload.wb&&remote.payload.wb.data)mergeWbSnapshot(remote.payload.wb.data);
+        if(remote.payload.wb&&remote.payload.wb.data)mergeWbSnapshot(remote.payload.wb.data, remote.payload.wb.ts);
         ADB.wb={ts:Date.now(),data:wbSnap()};
       }
       var revision=remote?Number(remote.revision||0):0;
       var push=await window._deleCloudCall('push',{revision:revision,payload:serializeCloud(ADB)});
       if(push&&push.ok===false&&push.code==='REVISION_CONFLICT'&&push.snapshot&&push.snapshot.payload){
         mergeData(ADB,push.snapshot.payload);
-        if(push.snapshot.payload.wb&&push.snapshot.payload.wb.data)mergeWbSnapshot(push.snapshot.payload.wb.data);
+        if(push.snapshot.payload.wb&&push.snapshot.payload.wb.data)mergeWbSnapshot(push.snapshot.payload.wb.data, push.snapshot.payload.wb.ts);
         ADB.wb={ts:Date.now(),data:wbSnap()};
         var retry=await window._deleCloudCall('push',{revision:Number(push.snapshot.revision||0),payload:serializeCloud(ADB)});
         if(!retry||retry.ok===false)throw new Error(cloudSyncErrMsg(retry&&retry.code));
