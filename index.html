@@ -243,7 +243,7 @@
 .dictation-modal .dm-score .big{font-size:36px;font-weight:800;color:var(--tr)}
 .dictation-modal .dm-actions{display:flex;gap:8px;justify-content:center;margin-top:14px}
 .dictation-modal .dm-praise{min-height:28px;text-align:center;margin-top:10px;font-weight:900;font-size:17px;color:#b45309;letter-spacing:.02em}.dictation-modal .dm-praise.show{animation:dictPraise .6s cubic-bezier(.34,1.56,.64,1) both}@keyframes dictPraise{0%{opacity:0;transform:scale(.55) rotate(-5deg)}65%{transform:scale(1.18) rotate(3deg)}100%{opacity:1;transform:scale(1)}}.dict-cheer{position:fixed;z-index:1001;pointer-events:none;font-size:30px;animation:dictCheer 1.2s cubic-bezier(.18,.75,.3,1) forwards}@keyframes dictCheer{0%{opacity:0;transform:translateY(8px) scale(.55) rotate(-12deg)}22%{opacity:1}100%{opacity:0;transform:translate(var(--x),-145px) scale(1.35) rotate(20deg)}}
-.flash-garden{display:grid;grid-template-columns:minmax(128px,180px) 1fr;align-items:center;gap:15px;background:linear-gradient(135deg,#eef8e9,#fff8e9);border:1px solid #cfe5c5;border-radius:14px;padding:12px 14px;margin:0 0 12px;overflow:hidden}.garden-stage{height:118px;display:flex;align-items:flex-end;justify-content:center;position:relative;border-radius:11px;background:radial-gradient(circle at 50% 100%,#b77945 0 22%,transparent 23%),linear-gradient(180deg,#dff3ff,#f7fff0)}.garden-stage::after{content:'';position:absolute;left:13%;right:13%;bottom:13px;height:3px;background:#865432;border-radius:50%;opacity:.7}.garden-tree{font-size:74px;line-height:1;position:relative;z-index:1;transform-origin:center bottom;animation:treeFloat 2.8s ease-in-out infinite}.garden-tree[data-stage="0"]{font-size:51px}.garden-tree[data-stage="1"]{font-size:58px}.garden-tree[data-stage="2"]{font-size:64px}.garden-tree[data-stage="3"]{font-size:69px}.garden-tree[data-stage="4"]{font-size:75px}.garden-tree[data-stage="5"]{font-size:81px}.garden-tree[data-stage="6"]{font-size:87px}.garden-tree[data-stage="7"]{font-size:93px}.garden-tree[data-stage="8"]{font-size:99px}.garden-tree[data-stage="9"]{font-size:105px}.garden-tree[data-stage="10"]{font-size:110px;filter:drop-shadow(0 5px 5px rgba(46,125,50,.18))}.garden-tree.grow{animation:treeGrow .75s cubic-bezier(.18,.9,.24,1.4) both}@keyframes treeFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}@keyframes treeGrow{0%{transform:scale(.6) rotate(-9deg)}65%{transform:scale(1.26) rotate(5deg)}100%{transform:scale(1) rotate(0)}}.garden-copy{min-width:0}.garden-copy h3{font-size:13.5px;margin:0 0 3px;color:#245c32}.garden-copy p{font-size:11.5px;color:#52614e;margin:0 0 8px}.garden-meter{height:9px;overflow:hidden;border-radius:99px;background:#d6e8d0;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}.garden-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7aaa56,#2e7d32);transition:width .55s ease}.garden-meta{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:7px;font-size:11px;color:#45624b}.garden-stage-badge{font-size:10px;font-weight:800;color:#fff;background:#4d8a43;padding:2px 8px;border-radius:99px}.dictation-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 12px}.dictation-tab{min-height:36px;padding:6px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--soft);font-size:11.5px;font-weight:700;touch-action:manipulation}.dictation-tab:hover,.dictation-tab:focus-visible{border-color:var(--teal);color:var(--teal);outline:2px solid rgba(31,111,92,.2);outline-offset:2px}.dictation-tab.on{color:#fff;background:var(--teal);border-color:var(--teal)}.dictation-review{width:100%;max-width:700px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--sh)}.dictation-review h3{font-size:15px;color:var(--teal);margin:0 0 4px}.dictation-review .sub{font-size:11.5px;color:var(--soft);margin-bottom:12px}.dictation-error-list{display:grid;gap:7px;max-height:360px;overflow:auto}.dictation-error-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 11px;background:#fff9f5;border:1px solid #f1d3c5;border-radius:9px}.dictation-error-row .word{font-weight:800;font-size:14px}.dictation-error-row .hint{font-size:11px;color:var(--soft);margin-top:1px}.dictation-error-row .stat{font-size:10.5px;color:var(--bad);margin-top:2px}.dictation-empty{text-align:center;padding:30px 12px;color:var(--soft);font-size:12px}.dictation-empty .big{font-size:44px;display:block;margin-bottom:8px}@media(max-width:560px){.flash-garden{grid-template-columns:105px 1fr;gap:10px;padding:10px}.garden-stage{height:100px}.garden-tree{font-size:65px!important}.garden-copy h3{font-size:12.5px}.dictation-error-row{grid-template-columns:1fr}.dictation-error-row .btn{justify-self:start}}
+.flash-garden{display:grid;grid-template-columns:minmax(128px,180px) 1fr;align-items:center;gap:15px;background:linear-gradient(135deg,#eef8e9,#fff8e9);border:1px solid #cfe5c5;border-radius:14px;padding:12px 14px;margin:0 0 12px;overflow:hidden}.garden-stage{height:118px;display:flex;align-items:flex-end;justify-content:center;position:relative;border-radius:11px;background:radial-gradient(circle at 50% 100%,#b77945 0 22%,transparent 23%),linear-gradient(180deg,#dff3ff,#f7fff0)}.garden-stage::after{content:'';position:absolute;left:13%;right:13%;bottom:13px;height:3px;background:#865432;border-radius:50%;opacity:.7}.garden-tree{font-size:74px;line-height:1;position:relative;z-index:1;transform-origin:center bottom;animation:treeFloat 2.8s ease-in-out infinite}.garden-tree[data-stage="0"]{font-size:51px}.garden-tree[data-stage="1"]{font-size:58px}.garden-tree[data-stage="2"]{font-size:64px}.garden-tree[data-stage="3"]{font-size:69px}.garden-tree[data-stage="4"]{font-size:75px}.garden-tree[data-stage="5"]{font-size:81px}.garden-tree[data-stage="6"]{font-size:87px}.garden-tree[data-stage="7"]{font-size:93px}.garden-tree[data-stage="8"]{font-size:99px}.garden-tree[data-stage="9"]{font-size:105px}.garden-tree[data-stage="10"]{font-size:110px;filter:drop-shadow(0 5px 5px rgba(46,125,50,.18))}.garden-tree.grow{animation:treeGrow .75s cubic-bezier(.18,.9,.24,1.4) both}@keyframes treeFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}@keyframes treeGrow{0%{transform:scale(.6) rotate(-9deg)}65%{transform:scale(1.26) rotate(5deg)}100%{transform:scale(1) rotate(0)}}.garden-copy{min-width:0}.garden-copy h3{font-size:13.5px;margin:0 0 3px;color:#245c32}.garden-copy p{font-size:11.5px;color:#52614e;margin:0 0 8px}.garden-meter{height:9px;overflow:hidden;border-radius:99px;background:#d6e8d0;box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}.garden-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7aaa56,#2e7d32);transition:width .55s ease}.garden-meta{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:7px;font-size:11px;color:#45624b}.garden-stage-badge{font-size:10px;font-weight:800;color:#fff;background:#4d8a43;padding:2px 8px;border-radius:99px}.dictation-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 12px}.dictation-tab{min-height:36px;padding:6px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--soft);font-size:11.5px;font-weight:700;touch-action:manipulation}.dictation-tab:hover,.dictation-tab:focus-visible{border-color:var(--teal);color:var(--teal);outline:2px solid rgba(31,111,92,.2);outline-offset:2px}.dictation-tab.on{color:#fff;background:var(--teal);border-color:var(--teal)}.dictation-review{width:100%;max-width:700px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--sh)}.dictation-review h3{font-size:15px;color:var(--teal);margin:0 0 4px}.dictation-review .sub{font-size:11.5px;color:var(--soft);margin-bottom:12px}.dictation-error-list{display:grid;gap:7px;max-height:360px;overflow:auto}.dictation-error-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 11px;background:#fff9f5;border:1px solid #f1d3c5;border-radius:9px}.dictation-error-row .word{font-weight:800;font-size:14px}.dictation-error-row .hint{font-size:11px;color:var(--soft);margin-top:1px}.dictation-error-row .stat{font-size:10.5px;color:var(--bad);margin-top:2px}.dictation-empty{text-align:center;padding:30px 12px;color:var(--soft);font-size:12px}.dictation-empty .big{font-size:44px;display:block;margin-bottom:8px}@media(max-width:560px){.flash-garden{grid-template-columns:105px 1fr;gap:10px;padding:10px}.garden-stage{height:100px}.garden-tree{font-size:65px!important}.garden-copy h3{font-size:12.5px}.dictation-error-row{grid-template-columns:1fr}.dictation-error-row .btn{justify-self:start}}.garden-tree.bloom::before{content:'🌸';position:absolute;top:-4px;left:-16px;font-size:22px;z-index:2;animation:treeFloat 2.8s ease-in-out infinite}.garden-tree.bloom::after{content:'🌼';position:absolute;bottom:6px;right:-14px;font-size:18px;z-index:2}.garden-tree.lush::after{content:'🍃';position:absolute;top:-10px;right:-12px;font-size:17px;z-index:2;animation:treeFloat 3.2s ease-in-out infinite}.garden-tree.wilt{filter:grayscale(.5) sepia(.28) saturate(.75) brightness(.96)}.garden-tree.wilt::after{content:'💧';position:absolute;bottom:2px;right:-10px;font-size:15px;z-index:2;opacity:.9}.garden-health{font-size:10px;font-weight:800;padding:2px 8px;border-radius:99px;border:1px solid transparent}.garden-health.bloom{color:#ad1457;background:#fce4ec;border-color:#f8bbd0}.garden-health.lush{color:#2e7d32;background:#e8f5e9;border-color:#c8e6c9}.garden-health.calm{color:#5f5e5a;background:#f1efe8;border-color:#d3d1c7}.garden-health.wilt{color:#b45309;background:#fff3e0;border-color:#ffe0b2}
 @media(prefers-reduced-motion:reduce){.garden-tree,.dictation-modal .dm-praise.show{animation:none}.dict-cheer{display:none}}
 /* ===== NEW: 复习次数标签 ===== */
 .review-badge{position:absolute;top:8px;right:8px;background:var(--tr);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;white-space:nowrap}
@@ -2601,7 +2601,7 @@ function delTask(i){ ST.tasks.splice(i,1); save(); if(typeof renderMain==='funct
 let _dictationState = null; // {words:[], idx:0, correct:0, wrong:0, currentWord:null, mode:'regular'|'reinforce'}
 let _flashSubView = 'study';
 function getDictationRecord(word){
-  return (ST.vocabDictation&&ST.vocabDictation[word]) || {correct:0,wrong:0};
+  return (ST.vocabDictation&&ST.vocabDictation[word]) || {correct:0,wrong:0,streak:0,redeemed:false};
 }
 function getDictationTotals(){
   var stats={correct:0,wrong:0,total:0,pct:0};
@@ -2628,19 +2628,49 @@ function getDictationErrors(){
   });
   return Object.values(bankMap).sort(function(a,b){return b.gap-a.gap||b.wrong-a.wrong||a.v.es.localeCompare(b.v.es);});
 }
+function getTreeHealth(){
+  var log=Array.isArray(ST.dictationLog)?ST.dictationLog:[];
+  var n=log.length;
+  if(!n)return {pct:null,cls:'calm',label:'尚未默写'};
+  var c=0;for(var i=0;i<n;i++){if(log[i])c++;}
+  var pct=Math.round(c/n*100);
+  var cls=pct>=90?'bloom':(pct>=70?'lush':(pct>=50?'calm':'wilt'));
+  var label=pct>=90?'开花结果':(pct>=70?'枝叶茂盛':(pct>=50?'平稳生长':'叶子发黄'));
+  return {pct:pct,cls:cls,label:label};
+}
+function countRedeemPool(){
+  var pool=0,pending=0;
+  Object.keys(ST.vocabDictation||{}).forEach(function(es){
+    var r=ST.vocabDictation[es]||{};
+    if((r.wrong||0)>0){pool++;if(!r.redeemed)pending++;}
+  });
+  return {pool:pool,pending:pending};
+}
 function getDictationTree(){
-  var t=getDictationTotals(), stage=Math.min(10,Math.floor(t.pct/10));
+  var pool=(typeof VDATA!=='undefined'?VDATA:[]);
+  var totalWords=pool.length||1;
+  var mastered=0;
+  pool.forEach(function(v){if(v&&v.es&&(ST.vocabMastery[v.es]||0)>=3)mastered++;});
+  var ratio=mastered/totalWords;
+  var stage=Math.min(10,Math.floor(Math.sqrt(ratio)*10.99));
+  var health=getTreeHealth();
   var icons=['🌰','🌱','🌱','🌿','🌿','🪴','🌳','🌳','🌲','🌲','🌳'];
   var names=['播种中','刚发芽','幼苗挺立','长出新叶','枝叶渐丰','小树成形','茁壮成长','枝繁叶茂','树冠饱满','开花结果','成长为大树'];
-  return {pct:t.pct,stage:stage,icon:icons[stage],name:names[stage],next:Math.min(100,(stage+1)*10),totals:t};
+  var nextCount=stage>=10?0:Math.max(1,Math.ceil(totalWords*Math.pow((stage+1)/10.99,2))-mastered);
+  return {pct:Math.round(ratio*100),stage:stage,icon:icons[stage],name:names[stage],health:health,mastered:mastered,totalWords:totalWords,nextCount:nextCount,redeem:countRedeemPool(),next:Math.min(100,(stage+1)*10)};
 }
 function renderFlashGarden(){
   var tree=getDictationTree();
-  return '<section class="flash-garden" aria-label="默写成长树">'+
-    '<div class="garden-stage"><span class="garden-tree" data-stage="'+tree.stage+'" role="img" aria-label="'+tree.name+'">'+tree.icon+'</span></div>'+
-    '<div class="garden-copy"><h3>默写成长树 · '+tree.name+'</h3><p>总默写正确率每提升 10%，小树就长大一点。</p>'+
-      '<div class="garden-meter" aria-label="默写正确率 '+tree.pct+'%"><i style="width:'+tree.pct+'%"></i></div>'+
-      '<div class="garden-meta"><span class="garden-stage-badge">'+tree.pct+'% 正确率</span><span>答对 '+tree.totals.correct+' / '+tree.totals.total+' 次</span><span>'+ (tree.pct>=100?'已长成大树':('下一阶段 '+tree.next+'%')) +'</span></div></div></section>';
+  var hl=tree.health;
+  var barPct=Math.min(100,Math.round(Math.sqrt(tree.mastered/tree.totalWords)*100));
+  var healthBadge=hl.pct==null?'<span class="garden-health calm">尚未默写</span>':('<span class="garden-health '+hl.cls+'">近100题 '+hl.pct+'% · '+hl.label+'</span>');
+  var nextInfo=tree.stage>=10?'已长成大树 🎉':('再掌握 '+tree.nextCount+' 词进下一阶');
+  var redeemInfo=tree.redeem.pending>0?('错词待救赎 '+tree.redeem.pending):('错词池 '+tree.redeem.pool);
+  return '<section class="flash-garden" aria-label="成长树">'+
+    '<div class="garden-stage"><span class="garden-tree '+hl.cls+'" data-stage="'+tree.stage+'" role="img" aria-label="'+tree.name+'">'+tree.icon+'</span></div>'+
+    '<div class="garden-copy"><h3>成长树 · '+tree.name+'</h3><p>已掌握 <b>'+tree.mastered+'</b> / '+tree.totalWords+' 词，掌握越多树越大；近段默写越准，状态越好。</p>'+
+      '<div class="garden-meter" aria-label="成长进度 '+barPct+'%"><i style="width:'+barPct+'%"></i></div>'+
+      '<div class="garden-meta"><span class="garden-stage-badge">第 '+(tree.stage+1)+' / 11 阶</span>'+healthBadge+'<span>'+redeemInfo+'</span><span>'+nextInfo+'</span></div></div></section>';
 }
 function startDictationTest(options){
   options=options||{};
@@ -2755,6 +2785,15 @@ function checkDictation(){
     ST.dictationErrorBank.push({es:w.es,zh:w.zh||'',userAnswer:ans,correctAnswer:correct,ts:Date.now()});
     if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
   }
+  if(!ST.dictationLog)ST.dictationLog=[];
+  ST.dictationLog.push(isCorrect?1:0);
+  if(ST.dictationLog.length>100)ST.dictationLog.splice(0,ST.dictationLog.length-100);
+  if(isCorrect){rec.streak=(rec.streak||0)+1;}else{rec.streak=0;}
+  if((rec.wrong||0)>0&&!rec.redeemed&&rec.streak>=3){
+    rec.redeemed=true;
+    var _dw=_dictationState.currentWord.es,_m=ST.vocabMastery[_dw]||0;
+    if(_m<3){ST.vocabMastery[_dw]=_m+1;ST.flashMastery[_dw]=_m+1;}
+  }
   ST.vocabDictation[_dictationState.currentWord.es]=rec;
   save();
   input.disabled=true;
@@ -2772,6 +2811,10 @@ function skipDictation(){
   if(!ST.vocabDictation)ST.vocabDictation={};
   var rec=ST.vocabDictation[w.es]||{correct:0,wrong:0};
   rec.wrong=(rec.wrong||0)+1;
+  if(!ST.dictationLog)ST.dictationLog=[];
+  ST.dictationLog.push(0);
+  if(ST.dictationLog.length>100)ST.dictationLog.splice(0,ST.dictationLog.length-100);
+  rec.streak=0;
   ST.vocabDictation[w.es]=rec;
   _dictationState.wrong++;
   // 累计错词入库：纳入二次巩固（标记跳过但保留原词，userAnswer 用 skip 标注）
@@ -2792,7 +2835,7 @@ function finishDictation(){
   var overlay=document.createElement('div');overlay.id='dictOverlay';overlay.className='dictation-overlay';
   var title=pct===100?'🎊 ¡Perfecto! 全部正确！':pct>=80?'🎉 ¡Excelente! 默写很稳！':'📝 默写测试完成！';
   overlay.innerHTML='<div class="dictation-modal">'+
-    '<h3>'+title+'</h3><div class="dm-score"><div class="big">'+pct+'%</div><div>答对 '+correct+'/'+total+' 题</div><div style="font-size:11px;color:var(--soft);margin-top:5px">成长树当前：'+tree.icon+' '+tree.name+' · 总正确率 '+tree.pct+'%</div></div>'+
+    '<h3>'+title+'</h3><div class="dm-score"><div class="big">'+pct+'%</div><div>答对 '+correct+'/'+total+' 题</div><div style="font-size:11px;color:var(--soft);margin-top:5px">成长树当前：'+tree.icon+' '+tree.name+' · 已掌握 '+tree.mastered+'/'+tree.totalWords+' 词'+(tree.health.pct==null?'':' · 近100题 '+tree.health.pct+'% '+tree.health.label)+'</div></div>'+
     '<div style="text-align:center;margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'+
       (state.wrong?'<button class="btn ol" onclick="document.getElementById(\'dictOverlay\').remove();_flashSubView=\'reinforce\';currentPage=\'flash\';renderNav();renderMain()">查看错词巩固</button>':'')+
       '<button class="btn" onclick="continueFlashLearning()">继续学习</button></div></div>';
@@ -3079,7 +3122,7 @@ function setFlashSubView(view){
 }
 function renderDictationReinforcement(errors){
   var totals=getDictationTotals();
-  var h='<section class="dictation-review" aria-live="polite"><h3>默写二次巩固</h3><div class="sub">把写错过的词集中复练。每次作答都会更新总正确率与成长树。</div>';
+  var h='<section class="dictation-review" aria-live="polite"><h3>默写二次巩固</h3><div class="sub">把写错过的词集中复练。答对 3 次可「救赎」错词：星级+1，直接让树长大。</div>';
   if(!errors.length){
     return h+'<div class="dictation-empty"><span class="big">🌱</span><b>目前没有待巩固错词</b><br>继续保持，新的默写错误会自动汇总到这里。</div></section>';
   }
@@ -17656,7 +17699,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v59-2026100105';
+    var swVer = 'v60-2026100201';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17693,7 +17736,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v59-2026100105';
+    return 'v60-2026100201';
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
@@ -17956,7 +17999,7 @@ function hydrate(){
   });
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     /* v44: quizResults 不再随快照盲覆盖（会丢掉本机未推送的新成绩），改并集合并 */
@@ -18155,7 +18198,8 @@ function mergeWbSnapshot(remote){
   // 听写统计：取 max
   if(remote.vocabDictation && typeof remote.vocabDictation==='object'){
     ST.vocabDictation=ST.vocabDictation||{};
-    Object.keys(remote.vocabDictation).forEach(function(es){var rr=remote.vocabDictation[es]||{},lr=ST.vocabDictation[es]||{correct:0,wrong:0};ST.vocabDictation[es]={correct:Math.max(lr.correct||0,rr.correct||0),wrong:Math.max(lr.wrong||0,rr.wrong||0)};});
+    Object.keys(remote.vocabDictation).forEach(function(es){var rr=remote.vocabDictation[es]||{},lr=ST.vocabDictation[es]||{correct:0,wrong:0};ST.vocabDictation[es]={correct:Math.max(lr.correct||0,rr.correct||0),wrong:Math.max(lr.wrong||0,rr.wrong||0),streak:Math.max(lr.streak||0,rr.streak||0),redeemed:!!(lr.redeemed||rr.redeemed)};});
+  if(Array.isArray(remote.dictationLog)&&remote.dictationLog.length>(ST.dictationLog||[]).length){ST.dictationLog=remote.dictationLog;}
   }
   // 复习计数：逐桶取 max
   if(remote.vocabReviewCount && typeof remote.vocabReviewCount==='object'){
@@ -19097,9 +19141,10 @@ async function standaloneSync(showLog){
       ST.vocabDictation=ST.vocabDictation||{};
       Object.keys(remote.vocabDictation).forEach(function(es){
         var rr=remote.vocabDictation[es]||{},lr=ST.vocabDictation[es]||{correct:0,wrong:0};
-        ST.vocabDictation[es]={correct:Math.max(lr.correct||0,rr.correct||0),wrong:Math.max(lr.wrong||0,rr.wrong||0)};
+        ST.vocabDictation[es]={correct:Math.max(lr.correct||0,rr.correct||0),wrong:Math.max(lr.wrong||0,rr.wrong||0),streak:Math.max(lr.streak||0,rr.streak||0),redeemed:!!(lr.redeemed||rr.redeemed)};
       });
     }
+    if(Array.isArray(remote.dictationLog)&&remote.dictationLog.length>(ST.dictationLog||[]).length){ST.dictationLog=remote.dictationLog;}
     // 合并 vocabReviewCount（nested {A1:{},A2:{},B1:{},B2:{},all:{}}）— 逐桶取 max，跨设备保持累计进度
     if(remote.vocabReviewCount && typeof remote.vocabReviewCount==='object'){
       ST.vocabReviewCount=ST.vocabReviewCount||{A1:{},A2:{},B1:{},B2:{},all:{}};
