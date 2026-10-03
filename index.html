@@ -1478,19 +1478,24 @@ function _ttsMp3Key(text){
 }
 window._ttsPlayMp3 = function(text, accent, rate){
   try{
-    var acc = (accent === 'es') ? 'es' : 'la';
-    var mset = window.__TTS_MANIFEST && window.__TTS_MANIFEST[acc];
-    if(!mset) return null;
     var k = _ttsMp3Key(text);
-    if(!mset[k]) return null;
-    if(window._curTtsMp3){ try{ window._curTtsMp3.pause(); }catch(e){} }
-    var a = new Audio('audio/tts/' + acc + '/' + k + '.mp3');
-    a.playbackRate = Math.min(2, Math.max(0.5, (rate || 0.92) / 0.92));
-    if('preservesPitch' in a) a.preservesPitch = true;
-    window._curTtsMp3 = a;
-    var pp = a.play();
-    if(pp && pp.catch) pp.catch(function(){});
-    return a;
+    /* v64: 预生成音频按文本随机只存单一口音（控制仓库体积）=> 首选口音未命中时回退另一口音，
+       否则「设为西语口音却碰上只有拉美音频的文本」会在无 TTS 引擎设备（微信内置浏览器等）里完全无声。 */
+    var order = (accent === 'es') ? ['es', 'la'] : ['la', 'es'];
+    for(var oi = 0; oi < order.length; oi++){
+      var acc = order[oi];
+      var mset = window.__TTS_MANIFEST && window.__TTS_MANIFEST[acc];
+      if(!mset || !mset[k]) continue;
+      if(window._curTtsMp3){ try{ window._curTtsMp3.pause(); }catch(e){} }
+      var a = new Audio('audio/tts/' + acc + '/' + k + '.mp3');
+      a.playbackRate = Math.min(2, Math.max(0.5, (rate || 0.92) / 0.92));
+      if('preservesPitch' in a) a.preservesPitch = true;
+      window._curTtsMp3 = a;
+      var pp = a.play();
+      if(pp && pp.catch) pp.catch(function(){});
+      return a;
+    }
+    return null;
   }catch(e){ return null; }
 };
 async function speak(text, btn, accent, rate){
@@ -17745,7 +17750,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v63-2026100204';
+    var swVer = 'v64-2026100301';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
