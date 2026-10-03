@@ -453,6 +453,9 @@
 <script src="audio/manifest.js"></script>
 <script src="grammar_data.js"></script>
 <script>
+/* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
+   发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
+window.swVer = 'v71-2026100307';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -500,7 +503,7 @@ const VDATA_EXTRA = [
 {"t":"general","es":"explicar","pos":"v.","zh":"解释","ex":"El profesor explicó la gramática claramente.","lvl":"A2"},
 {"t":"general","es":"decidir","pos":"v.","zh":"决定","ex":"Decidí estudiar en Madrid.","lvl":"A2"},
 {"t":"general","es":"cambiar","pos":"v.","zh":"改变/兑换","ex":"Quiero cambiar euros a yuanes.","lvl":"A2"},
-{"t":"general","es":"compartir","pos":"v.","zh":"分享","ex":"Compartimos el apartamento tres estudiantes.","lvl":"A2"},
+{"t":"general","es":"compartir","pos":"v.","zh":"分享","ex":"Compartimos el apartamento entre tres estudiantes.","lvl":"A2"},
 {"t":"general","es":"importante","pos":"adj.","zh":"重要的","ex":"Es importante practicar todos los días.","lvl":"A2"},
 {"t":"general","es":"lograr","pos":"v.","zh":"实现/达到","ex":"Logró aprobar el examen con nota alta.","lvl":"B1"},
 {"t":"general","es":"desarrollar","pos":"v.","zh":"发展","ex":"El gobierno desarrolla nuevas políticas educativas.","lvl":"B1"},
@@ -515,7 +518,7 @@ const VDATA_EXTRA = [
 {"t":"medio_ambiente","es":"medioambiente","pos":"m.","zh":"环境","ex":"Tenemos que proteger el medioambiente.","lvl":"B1"},
 {"t":"tecnologia_y_comunicacion","es":"tecnología","pos":"f.","zh":"技术","ex":"La tecnología cambia rápidamente.","lvl":"B1"},
 {"t":"sociedad_y_cultura","es":"sociedad","pos":"f.","zh":"社会","ex":"Vivimos en una sociedad globalizada.","lvl":"B1"},
-{"t":"general","es":" llevar a cabo","pos":"loc.","zh":"实施/进行","ex":"El proyecto se llevó a cabo con éxito.","lvl":"B2"},
+{"t":"general","es":"llevar a cabo","pos":"loc.","zh":"实施/进行","ex":"El proyecto se llevó a cabo con éxito.","lvl":"B2"},
 {"t":"general","es":"dar cuenta de","pos":"loc.","zh":"意识到","ex":"Se dio cuenta de su error demasiado tarde.","lvl":"B2"},
 {"t":"general","es":"tener en cuenta","pos":"loc.","zh":"考虑到","ex":"Hay que tener en cuenta todos los factores.","lvl":"B2"},
 {"t":"general","es":"poner en práctica","pos":"loc.","zh":"付诸实践","ex":"Voy a poner en práctica lo que aprendí.","lvl":"B2"},
@@ -1958,7 +1961,7 @@ function renderMain(){
       }
       break;
   }
-  main.innerHTML = h + '<footer>西语备考工作台 v5.20260927 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v71-2026100307") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -8068,7 +8071,7 @@ const QDATA_PDF = [
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "John ____ bastante bien el español, por eso no se siente inseguro al hablarlo.", "opts": ["desconoce", "encuentra", "cuida", "domina"], "ans": 3, "fb": "正确答案：D. domina"},
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "El ____ que cubre mi cama es perfecto para el invierno.", "opts": ["sillón", "perchero", "edredón", "zapatero"], "ans": 2, "fb": "正确答案：C. edredón"},
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "Voy a la ____ a comprar merluza y atún.", "opts": ["pescadería", "farmacia", "carnicería", "frutería"], "ans": 0, "fb": "正确答案：A. pescadería"},
-{"ex": "dele", "lvl": "A2", "type": "grammar", "q": "Una ____ cuenta con detalle la vida de una persona. presentación", "opts": ["biografía", "historia", "carta de", "infografía"], "ans": 0, "fb": "正确答案：A. biografía"},
+{"ex": "dele", "lvl": "A2", "type": "grammar", "q": "Una ____ cuenta con detalle la vida de una persona.", "opts": ["biografía", "historia", "carta de presentación", "infografía"], "ans": 0, "fb": "正确答案：A. biografía"},
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "En invierno me gusta dormir tapado con una ____ para no tener frío.", "opts": ["bota", "bufanda", "manta", "falda"], "ans": 2, "fb": "正确答案：C. manta"},
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "A pesar de que estuvimos hablando du- rante horas, no ____ a ninguna conclusión.", "opts": ["llegamos", "fuimos", "marchamos", "vinimos"], "ans": 0, "fb": "正确答案：A. llegamos"},
 {"ex": "dele", "lvl": "A2", "type": "grammar", "q": "Mi coche no puede pasar por esa calle tan ____ .", "opts": ["larga", "corta", "ancha", "estrecha"], "ans": 3, "fb": "正确答案：D. estrecha"},
@@ -11733,7 +11736,7 @@ var A1_DAILY_BANK = [
   ]},
   { title:'La bici del fin de semana', minutes:3, paragraphs:[
     readingParagraph('Los sábados por la mañana, mi hermano y yo sacamos las bicis. Vamos al parque que está cerca del río. El camino es llano y se puede pedalear sin cansarse mucho.','周六早上，我和哥哥把自行车推出来。我们去河边附近的公园。路很平，骑起来不太累。',[{w:'sacar',m:'拿出来'},{w:'llano/a',m:'平坦的'},{w:'pedalear',m:'蹬车'}],'por la mañana：早上。estar cerca de：靠近……。poder + 不定式：能够……。'),
-    readingParagraph('A veces llevamos algo de comer. Nos sentamos en un banco y miramos el agua. Mi hermano siempre trae más pan del que necesitamos, y después vuelven a casa con hambre.','有时我们带些吃的。我们坐在长椅上看着水面。我哥总带比我们所需更多的面包，回家时又饿了。',[{w:'banco',m:'长椅'},{w:'agua',m:'水'},{w:'hambre',m:'饥饿'}],'a veces：有时。mirar + 名词：看……。más… del que + 动词：比所需的更多。'),
+    readingParagraph('A veces llevamos algo de comer. Nos sentamos en un banco y miramos el agua. Mi hermano siempre trae más pan del que necesitamos, y después vuelve a casa con hambre.','有时我们带些吃的。我们坐在长椅上看着水面。我哥总带比我们所需更多的面包，回家时又饿了。',[{w:'banco',m:'长椅'},{w:'agua',m:'水'},{w:'hambre',m:'饥饿'}],'a veces：有时。mirar + 名词：看……。más… del que + 动词：比所需的更多。'),
     readingParagraph('Por la tarde, cuando llegamos a casa, estamos cansados pero contentos. Una ducha caliente y un vaso de leche son suficientes para sentirse nuevo otra vez.','下午回到家时，我们累但开心。一个热水澡和一杯牛奶就足以让人再次感觉焕然一新。',[{w:'ducha',m:'淋浴'},{w:'suficiente',m:'足够的'},{w:'nuevo/a',m:'新的'}],'estar + 形容词：处于状态。bastan/suficiente para + 不定式：足够做……。')
   ]}
 ];
@@ -15346,7 +15349,7 @@ function _commitDeleSubPage(level, task, html){
   if (typeof currentPage !== 'undefined') currentPage = 'dele' + level + '_' + task;
   var main = document.getElementById('main');
   if (main) main.innerHTML = '<div id="audioBanner" class="banner"></div>' + html +
-    '<footer>西语备考工作台 v5.20260927 · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+    '<footer>西语备考工作台 ' + (window.swVer||"v71-2026100307") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   if (typeof renderNav === 'function') {
     try { renderNav(); } catch (e) {}
   }
@@ -17957,7 +17960,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v70-2026100306';
+    var swVer = window.swVer || 'v71-2026100307';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -17991,10 +17994,10 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
            做法：回到前台时 + 每 30 分钟各查一次（新 SW 激活后沿现有 updatefound 逻辑自动 reload）。
    ⚠️ 本段必须与页面内联 swVer 保持同步：SW 版本串改了，这里的提示才算有意义。 */
 (function(){
-  // 页面版本：优先读内联 swVer（同页顶层 var），读不到则回退默认值
+  // 页面版本：优先读 window.swVer（v71 起在文档头部 script 注入），读不到才回退当前版本
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return 'v63-2026100204';
+    return (window.swVer||'v71-2026100307');
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
