@@ -51,8 +51,24 @@ self.addEventListener('fetch', e => {
     try {
       const fresh = await fetch(req, { cache: 'no-store' });
       if (fresh && fresh.ok) {
-        const c = await caches.open(CACHE);
-        c.put(req.url.split('?')[0], fresh.clone());
+        /* v72: 完整性校验 —— 截断的响应不落缓存（Content-Length 不符或 HTML 缺尾标记即跳过） */
+        const p0 = req.url.split('?')[0];
+        let okToCache = true;
+        try {
+          if (/(\.html|\.js|\.css)$/.test(p0) || p0.endsWith('/')) {
+            const cl = fresh.headers.get('content-length');
+            const buf = await fresh.clone().arrayBuffer();
+            if (cl && Number(cl) !== buf.byteLength) okToCache = false;
+            if (okToCache && (p0.endsWith('index.html') || p0.endsWith('admin.html'))) {
+              const tail = new TextDecoder().decode(buf.slice(-32)).trimEnd();
+              if (!tail.endsWith('</html>')) okToCache = false;
+            }
+          }
+        } catch (_e) { okToCache = false; }
+        if (okToCache) {
+          const c = await caches.open(CACHE);
+          c.put(p0, fresh.clone());
+        }
       }
       return fresh;
     } catch (err) {
