@@ -4837,7 +4837,7 @@ function renderWriting(){
   let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
   if(isContentAdmin()){
-    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
+    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><button class="btn sm ol" onclick="renderLexiconAdmin()" style="margin-left:6px">📚 评分词典</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
   }
   h += `<div class="rg">`;
   tasks.forEach((t,i) => {
@@ -5163,6 +5163,48 @@ function delWritingTask(i){
   if(!confirm('确定删除任务 '+(i+1)+'？')) return;
   _wadmTasks.splice(i,1);
   renderWritingAdmin(true);
+}
+function renderLexiconAdmin(){
+  if(!isContentAdmin()){ alert('仅管理员可管理评分词典'); return; }
+  var ed = (window._contentEdits && window._contentEdits.lexicon) || {};
+  var conn = ed.connectors || {}, subj = ed.subjunctive || {};
+  var CONN_CATS = [['addition','递进'],['cause','原因'],['consequence','结果'],['contrast','转折'],['order','顺序/总结'],['example','举例/解释']];
+  var SUBJ_CATS = [['impersonal','无人称/建议'],['wishes','愿望'],['purpose','目的'],['doubt','怀疑/否认'],['temporal_subj','时间']];
+  function rows(cats, nsKey, dictName){
+    var defs = (typeof window[dictName] === 'object' && window[dictName]) || {};
+    var saved = nsKey === 'connectors' ? conn : subj;
+    return cats.map(function(c){
+      var cur = (saved[c[0]] || []).join(', ');
+      return '<div style="margin:7px 0"><b style="font-size:11px;color:var(--tr)">'+c[1]+'</b> <span style="font-size:10px;color:var(--soft)">内置 '+(defs[c[0]]||[]).length+' 条自动生效</span><textarea data-lex="'+nsKey+'.'+c[0]+'" style="width:100%;height:42px;font-size:11px;padding:6px;border:1px solid var(--bd);border-radius:6px;margin-top:3px;resize:vertical" placeholder="追加词条, 逗号或换行分隔, 例: por contra, es decir">'+esc(cur)+'</textarea></div>';
+    }).join('');
+  }
+  var old = document.getElementById('lexiconAdminOverlay'); if(old) old.remove();
+  var ov = document.createElement('div'); ov.id = 'lexiconAdminOverlay';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px';
+  ov.innerHTML = '<div class="card" style="background:var(--bg);max-width:660px;width:100%;max-height:88vh;overflow:auto;position:relative">'
+    + '<h3>📚 评分词典管理 <button class="btn sm" style="position:absolute;right:10px;top:8px" onclick="var o=document.getElementById(\'lexiconAdminOverlay\');if(o)o.remove()">✕</button></h3>'
+    + '<div class="note" style="font-size:11px">新增词条对所有板块（写作练习/DELE写作/SIELE口语/DELE口语）的连接词与虚拟式识别即时生效；内置词典依据 RAE 分类，此处仅管理追加词条。改动走管理员留痕（可回溯）。</div>'
+    + '<div style="margin:10px 0"><b style="font-size:12px">连接词（6 类）</b>'+rows(CONN_CATS,'connectors','_WB_CONN')+'</div>'
+    + '<div style="margin:10px 0"><b style="font-size:12px">虚拟式触发词（5 类）</b>'+rows(SUBJ_CATS,'subjunctive','_WB_SUBJ')+'</div>'
+    + '<div style="display:flex;gap:8px;margin-top:10px"><button class="btn sm pr" onclick="saveLexiconAdmin()">💾 保存并同步</button><button class="btn sm" onclick="var o=document.getElementById(\'lexiconAdminOverlay\');if(o)o.remove()">取消</button></div>'
+    + '</div>';
+  document.body.appendChild(ov);
+}
+function saveLexiconAdmin(){
+  try{
+    var out = {connectors:{}, subjunctive:{}};
+    var tas = document.querySelectorAll('#lexiconAdminOverlay textarea[data-lex]');
+    for(var i=0;i<tas.length;i++){
+      var ta = tas[i], parts = ta.getAttribute('data-lex').split('.');
+      var list = ta.value.split(/[,，\n]+/).map(function(w){ return w.trim().toLowerCase(); }).filter(Boolean);
+      var uniq = []; list.forEach(function(w){ if(uniq.indexOf(w)<0) uniq.push(w); });
+      if(uniq.length) out[parts[0]][parts[1]] = uniq;
+    }
+    window._deleSyncContentEdits('lexicon', out);
+    window._contentEdits.lexicon = out;
+    var ov = document.getElementById('lexiconAdminOverlay'); if(ov) ov.remove();
+    alert('评分词典已保存并同步。新增词条即时对所有设备的四个评分板块生效。');
+  }catch(e){ alert('保存失败: ' + e.message); }
 }
 function saveWritingAdmin(){
   if(!_wadmTasks) return;
@@ -17912,7 +17954,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v68-2026100304';
+    var swVer = 'v69-2026100305';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
