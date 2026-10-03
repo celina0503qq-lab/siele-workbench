@@ -4930,7 +4930,13 @@ function saveWriting(){
   save(); updateStreak();
   // AI 批改 (使用新评分引擎)
   const tareaType = _writingIdx <= 7 ? 1 : 2;  // 前 8 个为 Tarea 1 风格, 后 6 个为 Tarea 2 风格
-  const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, tareaType) : null;
+  // v67: 字数目标/等级取任务自身配置(范文 id 匹配守卫; 管理员编辑经 getEffectiveEssay 合并)
+  const _wDef = (typeof WRITING_TASK_ESSAYS !== 'undefined') ? WRITING_TASK_ESSAYS[_writingIdx] : null;
+  const _wEff = (_wDef && _wDef.id === t.id) ? _wDef : null;
+  const _wAdmin = (typeof getEffectiveEssay === 'function' && t && t.id) ? getEffectiveEssay(t.id, _writingIdx) : null;
+  const _wTarget = (_wEff && _wEff.target_words) || (_wAdmin && _wAdmin.id === t.id && _wAdmin.target_words) || null;
+  const _wLvl = (t && t.lvl) || (_wEff && _wEff.lvl) || null;
+  const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, tareaType, _wTarget, _wLvl) : null;
   // P1-1: 写作 < 60 自动入错题集
   if(g && g.score < 60 && text.trim().length > 0){
     autoLogLowScore('writing', ['writing', _writingIdx, tareaType].join('::'), {
@@ -10840,7 +10846,7 @@ Si cada uno de nosotros hace pequeños cambios en su vida cotidiana, podremos co
     target_words:[120,150],
     text:`Estimado servicio de atención al cliente:
 
-Le escribo para expresar mi的不满 con la compra que realicé el pasado día 15 de octubre en su tienda online. Pedí un ordenador portátil y, al recibirlo, descubrí que la pantalla estaba rota y el cargador no funcionaba.
+Le escribo para expresar mi inconformidad con la compra que realicé el pasado día 15 de octubre en su tienda online. Pedí un ordenador portátil y, al recibirlo, descubrí que la pantalla estaba rota y el cargador no funcionaba.
 
 Le ruego que me devuelvan el dinero íntegro o, en su defecto, me envíen un producto nuevo en perfecto estado. Si no recibo una respuesta en los próximos siete días, me veré obligada a presentar una reclamación formal ante la oficina del consumidor.
 
@@ -11037,7 +11043,7 @@ Ana Ruiz`,
 
 // ===== SIELE WRITING EVALUATION RUBRIC (rule-based, self-grading) =====
 // 升级 #231 + #233: SIELE 4 级映射 + 西语语法模式检测
-function sieleGradeWriting(text, tarea) {
+function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
   if(!text || !text.trim()) return null;
   const t = text.trim();
   const wc = t.split(/\s+/).filter(Boolean).length;
@@ -11045,10 +11051,10 @@ function sieleGradeWriting(text, tarea) {
 
   // ===== 连接词检测 (5类) =====
   const connectors = {
-    addition:['además','asimismo','también','igualmente','incluso'],
+    addition:['además','asimismo','también','igualmente','incluso','y','ni'],
     cause:['porque','ya que','puesto que','dado que','a causa de','debido a','gracias a'],
     consequence:['por lo tanto','por tanto','por eso','por consiguiente','en consecuencia','así pues','así que','entonces'],
-    contrast:['sin embargo','no obstante','ahora bien','en cambio','por un lado','por otro lado','a pesar de','a pesar de que','aunque','incluso','de hecho','por el contrario'],
+    contrast:['pero','mas','sin embargo','no obstante','ahora bien','en cambio','por un lado','por otro lado','a pesar de','a pesar de que','aunque','incluso','de hecho','por el contrario'],
     order:['en primer lugar','para empezar','por una parte','por otra parte','primero','después','luego','a continuación','finalmente','para terminar','para concluir','en resumen','en conclusión','por último'],
     example:['por ejemplo','como','es decir','en concreto','en particular'],
   };
@@ -11056,13 +11062,13 @@ function sieleGradeWriting(text, tarea) {
   let totalConns = 0;
   let uniqueConns = 0;
   Object.keys(connectors).forEach(cat => {
-    const found = connectors[cat].filter(c => tl.includes(c));
+    const found = connectors[cat].filter(c => (c.length<=4 && /^[a-záéíóúñ]+$/i.test(c)) ? new RegExp('\\b'+c+'\\b','i').test(tl) : tl.includes(c));
     if(found.length){ connsByCat[cat] = found; totalConns += found.length; uniqueConns += new Set(found).size; }
   });
 
   // ===== 虚拟式触发器 =====
   const subjTriggers = {
-    impersonal:['es necesario','es importante','es recomendable','es fundamental','es posible','es probable','es imprescindible','conviene que','recomiendo que','sugiero que','aconsejo que'],
+    impersonal:['es necesario','es importante','es recomendable','es fundamental','es posible','es probable','es imprescindible','conviene que','recomiendo que','sugiero que','aconsejo que','ruego que','agradecería que','suplico que'],
     wishes:['ojalá','quisiera','me gustaría','desearía','ojalá que'],
     purpose:['para que','a fin de que','con el fin de que','antes de que','a menos que','a no ser que','sin que','en caso de que','con tal de que'],
     doubt:['quizás','tal vez','acaso','puede que','puede ser que','dudo que','no creo que','no pienso que'],
@@ -11129,6 +11135,10 @@ function sieleGradeWriting(text, tarea) {
   Object.keys(tenseMarkers).forEach(tense => {
     if(tenseMarkers[tense].some(m => tl.includes(m))) tensesFound.push(tense);
   });
+  if(tensesFound.indexOf('indefinido')<0){
+    const _morphHits = (tl.match(/[a-záéíóúñ]{3,}(ó|é|í|aron|aste|iste|ieron|imos)\b/g)||[]).filter(w => !/^(café|sofá|aquí|así|sí|mí|tocino)$/i.test(w));
+    if(_morphHits.length >= 2) tensesFound.push('indefinido (词形识别)');
+  }
   // 仅 B1+ 强制要求时态多样性,A1/A2 标注建议但不扣分
   if(tensesFound.length >= 2) grammarChecks.push({key:'tenses', label:`时态多样性 (${tensesFound.length}种: ${tensesFound.join('/')})`, pass:true});
   else if(wc >= 100) grammarChecks.push({key:'tenses', label:`时态多样性 (${tensesFound.length}种)`, pass:false, tip:'建议混用至少 2 种时态(现在/过去/未来/条件),体现语法多样性'});
@@ -11166,27 +11176,34 @@ function sieleGradeWriting(text, tarea) {
   else { sieleBand = 'A1'; sieleBandTarget = '基础词汇 + 1+连接'; }
 
   // ===== Length target by tarea =====
-  const target = tarea===1 ? [100,150] : [200,250];
+  const target = (targetOverride && targetOverride[0]>0 && targetOverride[1]>=targetOverride[0]) ? targetOverride : (tarea===1 ? [100,150] : [200,250]);
   const wcOk = wc >= target[0] && wc <= target[1];
 
-  // ===== 评分 (满分 100) =====
-  let s = 0;
-  // 词数 20 分
-  if(wcOk) s += 20; else {
-    const dist = Math.min(Math.abs(wc - target[0]), Math.abs(wc - target[1]));
-    s += Math.max(0, 20 - dist);
-  }
-  // 连接词多样性 25 分 (按 unique 算)
-  s += Math.min(25, uniqueConns * 4);
-  // 虚拟式 15 分
-  s += Math.min(15, subjCount * 4);
-  // 高级句型 10 分
-  s += Math.min(10, advFound.length * 4);
-  // 语法模式 20 分 (6 项, 每项 3-4 分)
+  // ===== 评分 (满分 100; v67: 字数按任务自身目标 + A1/A2 权重分档) =====
   const grammarPass = grammarChecks.filter(c => c.pass).length;
-  s += Math.min(20, grammarPass * 3.5);
-  // 基础完成 10 分 (P2-3: 空白文本 0 分)
-  s += wc > 0 ? 10 : 0;
+  const _loLvl = (lvlOverride === 'A1' || lvlOverride === 'A2');
+  let s = 0;
+  if(_loLvl){
+    // 低级别: 字数30/连接词30/语法25/基础15; 虚拟式与高级句型仅展示不计分
+    if(wcOk) s += 30; else {
+      const dist = Math.min(Math.abs(wc - target[0]), Math.abs(wc - target[1]));
+      s += Math.max(0, 30 - dist * 0.4);
+    }
+    s += Math.min(30, uniqueConns * 6);
+    s += Math.min(25, grammarPass * 4.2);
+    s += wc > 0 ? 15 : 0;
+  } else {
+    // B1/B2: 维持原权重, 字数曲线放缓
+    if(wcOk) s += 20; else {
+      const dist = Math.min(Math.abs(wc - target[0]), Math.abs(wc - target[1]));
+      s += Math.max(0, 20 - dist * 0.35);
+    }
+    s += Math.min(25, uniqueConns * 4);
+    s += Math.min(15, subjCount * 4);
+    s += Math.min(10, advFound.length * 4);
+    s += Math.min(20, grammarPass * 3.5);
+    s += wc > 0 ? 10 : 0;
+  }
   s = Math.min(100, Math.round(s));
 
   return {
@@ -17868,7 +17885,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v66-2026100302';
+    var swVer = 'v67-2026100303';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
