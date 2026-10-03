@@ -12027,6 +12027,7 @@ function renderErrors(){
   let tabs = '<div class="err-tabs">';
   types.forEach(t=>{
     const cnt = t.key==='all' ? ST.errors.length : ST.errors.filter(e=>e.type===t.key).length;
+    if(t.key!=='all' && cnt===0) return; /* v72: 空分类 tab 隐藏（如「单词错误 0」） */
     tabs += `<button class="err-tab ${ST.errorFilter===t.key?'on':''}" onclick="filterErrors('${t.key}')">${t.icon} ${t.label}<span class="cnt">${cnt}</span></button>`;
   });
   tabs += '</div>';
