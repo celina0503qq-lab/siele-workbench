@@ -422,6 +422,21 @@
 @keyframes searchFlash{0%{background:#fef3c7;box-shadow:0 0 0 3px rgba(245,158,11,.35)}100%{background:transparent;box-shadow:none}}
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
+<style id="v65fx">
+/* ===== v65 视觉动效(纯追加,不触碰既有规则) ===== */
+.btn:active{transform:scale(.96)}
+.qopt.cor{animation:v65PopOK .45s cubic-bezier(.34,1.56,.64,1)}
+.qopt.wrg{animation:v65Shake .4s}
+@keyframes v65PopOK{0%{transform:scale(1)}45%{transform:scale(1.035)}100%{transform:scale(1)}}
+@keyframes v65Shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.qfb.show{animation:v65FbIn .3s ease both}
+@keyframes v65FbIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.v65deco{position:absolute;font-style:normal;z-index:2;animation:v65Bob 2.2s ease-in-out infinite;filter:drop-shadow(0 1px 1px rgba(90,60,30,.18))}
+@keyframes v65Bob{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-4px) rotate(9deg)}}
+.v65-petal{position:absolute;top:-12px;width:7px;height:5px;border-radius:60% 40% 60% 40%;background:#ffb3d9;opacity:0;animation:v65Petal 2.8s linear infinite;z-index:3;pointer-events:none}
+@keyframes v65Petal{0%{transform:translate(0,0) rotate(0deg);opacity:0}12%{opacity:.9}100%{transform:translate(-16px,135px) rotate(330deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.v65deco,.v65-petal{display:none}.qopt.cor,.qopt.wrg,.qfb.show{animation:none}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -2669,10 +2684,12 @@ function renderFlashGarden(){
   var hl=tree.health;
   var barPct=Math.min(100,Math.round(Math.sqrt(tree.mastered/tree.totalWords)*100));
   var healthBadge=hl.pct==null?'<span class="garden-health calm">尚未默写</span>':('<span class="garden-health '+hl.cls+'">近100题 '+hl.pct+'% · '+hl.label+'</span>');
-  var nextInfo=tree.stage>=10?'已长成大树 🎉':('再掌握 '+tree.nextCount+' 词进下一阶');
+  var nextInfo=tree.stage>=10?'开花结果,已长成大树 🌸':('再掌握 '+tree.nextCount+' 词进下一阶');
   var redeemInfo=tree.redeem.pending>0?('错词待救赎 '+tree.redeem.pending):('错词池 '+tree.redeem.pool);
   return '<section class="flash-garden" aria-label="成长树">'+
-    '<div class="garden-stage"><span class="garden-tree '+hl.cls+'" data-stage="'+tree.stage+'" role="img" aria-label="'+tree.name+'">'+tree.icon+'</span></div>'+
+    '<div class="garden-stage"><span class="garden-tree '+hl.cls+'" data-stage="'+tree.stage+'" role="img" aria-label="'+tree.name+'">'+tree.icon+
+      (tree.stage>=10?'<i class="v65deco" style="top:2%;left:68%;font-size:30px">🌸</i><i class="v65deco" style="top:22%;left:8%;font-size:26px">🌸</i><i class="v65deco" style="top:38%;left:72%;font-size:28px">🍎</i><i class="v65deco" style="top:46%;left:14%;font-size:24px">🍎</i>':(tree.stage===9?'<i class="v65deco" style="top:4%;left:70%;font-size:24px">🌸</i><i class="v65deco" style="top:34%;left:10%;font-size:19px">🌸</i>':''))+
+      '</span>'+((tree.stage>=9)?'<i class="v65-petal" style="left:30%;animation-delay:0s"></i><i class="v65-petal" style="left:45%;animation-delay:.9s"></i><i class="v65-petal" style="left:60%;animation-delay:1.8s"></i>'+(tree.stage===10?'<i class="v65-petal" style="left:38%;animation-delay:.45s"></i><i class="v65-petal" style="left:52%;animation-delay:1.35s"></i><i class="v65-petal" style="left:68%;animation-delay:2.2s"></i>':''):'')+'</div>'+
     '<div class="garden-copy"><h3>成长树 · '+tree.name+'</h3><p>已掌握 <b>'+tree.mastered+'</b> / '+tree.totalWords+' 词，掌握越多树越大；近段默写越准，状态越好。</p>'+
       '<div class="garden-meter" aria-label="成长进度 '+barPct+'%"><i style="width:'+barPct+'%"></i></div>'+
       '<div class="garden-meta"><span class="garden-stage-badge">第 '+(tree.stage+1)+' / 11 阶</span>'+healthBadge+'<span>'+redeemInfo+'</span><span>'+nextInfo+'</span></div></div></section>';
@@ -3361,27 +3378,86 @@ function checkFlashAnswer(clicked, correct){
   setTimeout(()=>nextFlash(), 1400);
 }
 
-function celebrate(){
-  const emojis = ['🎉','🎊','✨','🌟','⭐','💫','🍀','🎈','🏆','💝'];
-  for(let i=0; i<14; i++){
-    setTimeout(()=>{
-      const el = document.createElement('div');
-      el.className = 'confetti';
-      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      el.style.left = (Math.random()*100) + 'vw';
-      document.body.appendChild(el);
-      setTimeout(()=>el.remove(), 1600);
-    }, i*60);
+/* ===== v65: Canvas 烟花引擎(替换 emoji confetti)。celebrate(level) 五档,无参=L1;cry()=L0。浅色主题适配:深饱和色 ===== */
+function _v65FxCtx(){
+  var c=document.getElementById('v65fx');
+  if(!c){c=document.createElement('canvas');c.id='v65fx';document.body.appendChild(c);}
+  return c;
+}
+var _v65parts=[],_v65raf=0,_v65w=0,_v65h=0;
+function _v65Fit(){
+  var c=_v65FxCtx(),dpr=Math.min(2,window.devicePixelRatio||1);
+  _v65w=window.innerWidth;_v65h=window.innerHeight;
+  c.width=_v65w*dpr;c.height=_v65h*dpr;
+  c.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+  c.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
+}
+function _v65Kick(){ if(!_v65raf){_v65Fit();_v65raf=requestAnimationFrame(_v65Loop);} }
+function _v65Rocket(tx,ty,hue,delay){
+  setTimeout(function(){_v65parts.push({k:'r',x:tx,y:_v65h+8,vx:Math.random()*.7-.35,vy:-(5+Math.random()*1.6),hue:hue});},delay||0);
+}
+function _v65Burst(x,y,hue,n,pw){
+  for(var i=0;i<n;i++){var a=i/n*6.283+(Math.random()*.4-.2),sp=(0.45+Math.random()*.55)*pw;
+    _v65parts.push({k:'p',x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,hue:hue+Math.random()*32-16,life:1,dec:.011+Math.random()*.007,sz:1.5+Math.random()*1.5});}
+}
+function _v65Confetti(n){
+  var hues=[16,35,95,150,205,340];
+  for(var i=0;i<n;i++){_v65parts.push({k:'c',x:Math.random()*_v65w,y:-20-Math.random()*40,vx:Math.random()*1.2-.6,vy:1.2+Math.random()*1.4,hue:hues[i%6],life:1,dec:.005,sz:3.5+Math.random()*3,ang:Math.random()*6.28,va:Math.random()*.36-.18});}
+}
+function _v65Loop(){
+  var c=_v65FxCtx(),ctx=c.getContext('2d');
+  ctx.clearRect(0,0,_v65w,_v65h);
+  for(var i=_v65parts.length-1;i>=0;i--){
+    var p=_v65parts[i];
+    if(p.k==='r'){p.x+=p.vx;p.y+=p.vy;p.vy+=.06;
+      ctx.fillStyle='rgba(120,110,95,.75)';ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,6.283);ctx.fill();
+      if(p.vy>=-.4){_v65Burst(p.x,p.y,p.hue,26,3.6);_v65parts.splice(i,1);}
+    }else if(p.k==='p'){p.x+=p.vx;p.y+=p.vy;p.vy+=.055;p.vx*=.985;p.life-=p.dec;
+      if(p.life>0){ctx.fillStyle='hsla('+p.hue+',82%,44%,'+p.life.toFixed(3)+')';
+        ctx.beginPath();ctx.arc(p.x,p.y,p.sz*(.4+p.life*.6),0,6.283);ctx.fill();}
+      else _v65parts.splice(i,1);
+    }else{p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.ang+=p.va;p.life-=p.dec;
+      if(p.life>0&&p.y<_v65h+20){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.ang);
+        ctx.fillStyle='hsla('+p.hue+',72%,46%,'+p.life.toFixed(3)+')';
+        ctx.fillRect(-p.sz/2,-p.sz/4,p.sz,p.sz/2);ctx.restore();}
+      else _v65parts.splice(i,1);
+    }
+  }
+  if(_v65parts.length){_v65raf=requestAnimationFrame(_v65Loop);}
+  else{_v65raf=0;ctx.clearRect(0,0,_v65w,_v65h);}
+}
+function _v65Toast(txt){
+  try{
+    var t=document.getElementById('v65toast');
+    if(!t){t=document.createElement('div');t.id='v65toast';document.body.appendChild(t);}
+    t.textContent=txt;
+    t.style.cssText='position:fixed;top:26%;left:50%;transform:translate(-50%,-50%);font-size:40px;font-weight:800;color:#c98a2b;font-family:Georgia,serif;text-shadow:0 2px 0 rgba(255,255,255,.7),0 0 30px rgba(224,166,61,.55);z-index:10000;pointer-events:none;opacity:0;transition:opacity .5s;white-space:nowrap';
+    requestAnimationFrame(function(){t.style.opacity='1';});
+    setTimeout(function(){t.style.opacity='0';},1600);
+  }catch(e){}
+}
+function celebrate(level){
+  if(level==null)level=1;
+  try{if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;}catch(e){}
+  var W=window.innerWidth,H=window.innerHeight,i;
+  if(level===0){
+    for(i=0;i<22;i++){_v65parts.push({k:'p',x:Math.random()*W,y:Math.random()*H*.35,vx:Math.random()*.8-.4,vy:.6+Math.random(),hue:210,life:1,dec:.014+Math.random()*.006,sz:1.2+Math.random()});}
+    _v65Kick();
+  }else if(level===1){_v65Rocket(W*.5,H*.42,155,0);_v65Kick();}
+  else if(level===2){_v65Rocket(W*.28,H*.4,35,0);_v65Rocket(W*.5,H*.4,35,170);_v65Rocket(W*.72,H*.4,35,340);_v65Kick();}
+  else if(level===3){
+    var h3=[155,35,205,0,300,55];
+    for(i=0;i<6;i++){_v65Rocket(W*(.14+i*.144),H*.34+Math.random()*48-24,h3[i],i*140);}
+    setTimeout(function(){_v65Confetti(36);_v65Kick();},900);
+    _v65Kick();_v65Toast('¡Perfecto!');
+  }else if(level>=4){
+    var h4=[155,35,205,0,300,55,120,180,265];
+    for(i=0;i<9;i++){_v65Rocket(W*(.1+i*.1),H*.36+Math.random()*48-24,h4[i],i*110);}
+    setTimeout(function(){_v65Confetti(70);_v65Kick();},1300);
+    _v65Kick();_v65Toast('¡Excelente!');
   }
 }
-
-function cry(){
-  const el = document.createElement('div');
-  el.className = 'cry';
-  el.textContent = '😢';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(), 1000);
-}
+function cry(){ celebrate(0); }
 
 function resetPraStats(){
   ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0};
@@ -4251,6 +4327,7 @@ function renderQuizQuestion(){
       </div>
       <button class="btn" onclick="restartQuiz()" style="margin-top:8px">再做一次</button>
     </div>`;
+    if(pct>=90)celebrate(3); else if(pct>=60)celebrate(2); /* v65: 完成页分档庆祝 */
     return;
   }
 
@@ -4593,6 +4670,7 @@ function answerQuiz(optIdx, isCorrect){
   if(isCorrect){
     opt.classList.add('cor');
     ST.quizScore++;
+    celebrate(1);
   } else {
     opt.classList.add('wrg');
     // Auto-log to error collection
@@ -4607,6 +4685,7 @@ function answerQuiz(optIdx, isCorrect){
       type: 'quiz',
       sourceKey: [q.ex||'',q.lvl||'',q.type||'',q.q||'',(q.opts||[]).join('|')].join('::')
     });
+    cry();
   }
   // Mark the correct option green
   _quizOpts.forEach((o,i) => {
@@ -17750,7 +17829,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v64-2026100301';
+    var swVer = 'v65-2026100301';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
