@@ -1494,6 +1494,9 @@ function _ttsMp3Key(text){
   for(var i = 0; i < t.length; i++){ h = ((h << 5) + h + t.charCodeAt(i)) >>> 0; }
   return t.length + '_' + h.toString(16);
 }
+window._quizSpeakListening = function(btn){
+  try{ var _qt = (btn && btn.getAttribute && btn.getAttribute('data-es')) || ''; if(_qt) speak(_qt, btn); }catch(e){}
+};
 window._ttsPlayMp3 = function(text, accent, rate){
   try{
     var k = _ttsMp3Key(text);
@@ -4372,7 +4375,7 @@ function renderQuizQuestion(){
     // 背题模式：原始顺序展示选项、正确答案标绿、解析直出；不读不写 quizQuestionState/quizHistory/得分
     let bh = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · <span style="color:#b45309;font-weight:700">📖 背题模式</span>${(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin())?' <button class="btn sm ol" onclick="_wbQuizEditOpen()" style="margin-left:8px;padding:2px 8px;font-size:11px">✏️ 编辑</button>':''}</div>`;
     if(q.type === 'listening'){
-      bh += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\'")}',this)">🔊 点击听音频</button></div>`;
+      bh += `<div style="margin:8px 0"><button class="btn" onclick="_quizSpeakListening(this)" data-es="${esc((q.q||'').replace(/^【听力】/,''))}">🔊 点击听音频</button></div>`;
       bh += `<div class="qq">听音频回答问题</div>`;
     } else {
       bh += `<div class="qq"><span class="qes">${esc(q.q)}</span></div>`;
@@ -4420,7 +4423,7 @@ function renderQuizQuestion(){
 
   let h = `<div class="qprog">第 ${ST.quizIdx+1} / ${ST.quizSession.length} 题 · ${q.ex.toUpperCase()} · <span class="tm l${q.lvl}">${q.lvl}</span> · ${typeLabel(q.type)} · 累计已做 ${ST.quizDoneTotal||0} 题${doneMark}${(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin())?' <button class="btn sm ol" onclick="_wbQuizEditOpen()" style="margin-left:8px;padding:2px 8px;font-size:11px">✏️ 编辑</button>':''}</div>`;
   if(q.type === 'listening'){
-    h += `<div style="margin:8px 0"><button class="btn" onclick="speak('${q.q.replace(/'/g,"\\'")}',this)">🔊 点击听音频</button></div>`;
+    h += `<div style="margin:8px 0"><button class="btn" onclick="_quizSpeakListening(this)" data-es="${esc((q.q||'').replace(/^【听力】/,''))}">🔊 点击听音频</button></div>`;
     h += `<div class="qq">听音频回答问题</div>`;
   } else {
     h += `<div class="qq"><span class="qes">${esc(q.q)}</span></div>`;
@@ -10888,9 +10891,9 @@ Si cada uno de nosotros hace pequeños cambios en su vida cotidiana, podremos co
     target_words:[120,150],
     text:`Estimado servicio de atención al cliente:
 
-Le escribo para expresar mi inconformidad con la compra que realicé el pasado día 15 de octubre en su tienda online. Pedí un ordenador portátil y, al recibirlo, descubrí que la pantalla estaba rota y el cargador no funcionaba.
+Le escribo para expresar mi inconformidad con la compra que realicé el pasado día 15 de octubre en su tienda. Pedí un ordenador portátil y, al recibirlo, descubrí que la pantalla estaba rota y el cargador no funcionaba. Además, el paquete llegó con casi una semana de retraso, lo que agravó el problema.
 
-Le ruego que me devuelvan el dinero íntegro o, en su defecto, me envíen un producto nuevo en perfecto estado. Si no recibo una respuesta en los próximos siete días, me veré obligada a presentar una reclamación formal ante la oficina del consumidor.
+En primer lugar, ya he llamado dos veces a su línea telefónica sin recibir una respuesta satisfactoria, por lo tanto me veo obligada a presentar esta queja por escrito. Le ruego que me devuelvan el dinero íntegro o, en su defecto, me envíen un producto nuevo en perfecto estado. A pesar de todo, confío en ustedes. Si no recibo una respuesta en los próximos siete días, me veré obligada a presentar una reclamación formal ante la oficina del consumidor.
 
 Agradezco su atención y espero una pronta solución.
 Atentamente,
@@ -10996,9 +10999,9 @@ En resumen, si dedicáis tiempo y pasión, podréis alcanzar vuestro objetivo. �
     target_words:[60,100],
     text:`Estimado señor director:
 
-Le escribo para transmitirle mi insatisfacción con la estancia en su hotel del pasado fin de semana. La habitación que reservé no correspondía con la descripción de su página web. En primer lugar, la habitación era mucho más pequeña de lo esperado y no tenía vistas al mar como se anunciaba. Además, el aire acondicionado no funcionaba correctamente y la limpieza de la ducha era deficiente.
+Le escribo para transmitirle mi insatisfacción con la estancia en su hotel el pasado fin de semana. La habitación no correspondía con la descripción de su página web: en primer lugar, era mucho más pequeña de lo esperado y no tenía vistas al mar. Además, el aire acondicionado no funcionaba y la limpieza era deficiente.
 
-Les ruego que me devuelvan el importe de la noche de alojamiento, ya que el servicio no cumplió con las expectativas prometidas. De no recibir una respuesta satisfactoria en una semana, me veré en la necesidad de reclamar la cantidad a través de la oficina de turismo.
+Les ruego que me devuelvan el importe de una noche, ya que el servicio no cumplió lo prometido. De no recibir respuesta en una semana, reclamaré a través de la oficina de turismo.
 
 Agradezco su pronta atención.
 Atentamente,
@@ -11061,13 +11064,13 @@ Para terminar, conviene recordar que la tecnología debe estar al servicio de la
     target_words:[80,120],
     text:`Estimado comité de selección:
 
-Por medio de la presente, me dirijo a ustedes con el fin de expresar mi interés en participar en el Programa Internacional de Intercambio Cultural del próximo año académico.
+Me dirijo a ustedes para expresar mi interés en participar en el Programa Internacional de Intercambio Cultural del próximo año académico.
 
-Me llamo Ana Ruiz, soy estudiante de último año de Traducción e Interpretación en la Universidad de Salamanca, y considero que mi perfil podría encajar perfectamente en los objetivos del programa. Cuento con un nivel avanzado de español (C1), inglés (C1) y francés (B2), además de experiencia previa en proyectos de voluntariado internacional.
+Me llamo Ana Ruiz, soy estudiante de último año de Traducción e Interpretación en la Universidad de Salamanca. Cuento con un nivel avanzado de español (C1), inglés (C1) y francés (B2), además de experiencia en voluntariado internacional.
 
-Me gustaría destacar mi capacidad de adaptación y mi interés genuino por conocer otras culturas. Considero que esta experiencia no solo enriquecería mi formación académica, sino que también me permitiría contribuir de manera significativa a la comunidad de acogida.
+Destaco mi capacidad de adaptación y mi interés genuino por otras culturas. Considero que esta experiencia no solo enriquecería mi formación, sino que también me permitiría contribuir a la comunidad de acogida.
 
-Quedo a su disposición para ampliar cualquier información que consideren necesaria. Agradezco de antemano la atención prestada y quedo a la espera de su respuesta.
+Para concluir, quedo a su disposición para ampliar cualquier información. Agradezco de antemano su atención. Me gustaría mucho formar parte de esta experiencia.
 
 Atentamente,
 Ana Ruiz`,
@@ -17954,7 +17957,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v69-2026100305';
+    var swVer = 'v70-2026100306';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
