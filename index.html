@@ -436,6 +436,8 @@
 .v65-petal{position:absolute;top:-12px;width:7px;height:5px;border-radius:60% 40% 60% 40%;background:#ffb3d9;opacity:0;animation:v65Petal 2.8s linear infinite;z-index:3;pointer-events:none}
 @keyframes v65Petal{0%{transform:translate(0,0) rotate(0deg);opacity:0}12%{opacity:.9}100%{transform:translate(-16px,135px) rotate(330deg);opacity:0}}
 @keyframes v65EmojiPop{0%{opacity:0;transform:scale(.3) translateY(22px)}30%{opacity:1;transform:scale(1.18) translateY(0)}70%{opacity:1;transform:scale(1) translateY(-14px)}100%{opacity:0;transform:scale(.9) translateY(-36px)}}
+.so-bar i b{transition:width .8s cubic-bezier(.22,1,.36,1)}
+.v65-grade-in{animation:v65FbIn .35s ease both}
 @media(prefers-reduced-motion:reduce){.v65deco,.v65-petal{display:none}.qopt.cor,.qopt.wrg,.qfb.show{animation:none}}
 </style>
 </head>
@@ -3429,6 +3431,24 @@ function _v65Loop(){
   else{_v65raf=0;ctx.clearRect(0,0,_v65w,_v65h);}
  }catch(e){_v65raf=0;}
 }
+function _v65GrowBars(root){
+  try{
+    var bars=(root||document).querySelectorAll('.so-bar i b[data-w]');
+    for(var i=0;i<bars.length;i++){(function(b){
+      var w=b.getAttribute('data-w');
+      requestAnimationFrame(function(){requestAnimationFrame(function(){try{b.style.width=w+'%';}catch(e){}});});
+    })(bars[i]);}
+  }catch(e){}
+}
+function _v65RollNums(root){
+  try{
+    var els=(root||document).querySelectorAll('.v65roll');
+    for(var i=0;i<els.length;i++){(function(el){
+      var v=parseInt(el.getAttribute('data-v'))||0,t0=performance.now();
+      (function tick(now){try{var t=Math.min(1,(now-t0)/800),e=1-Math.pow(1-t,3);el.textContent=Math.round(v*e);if(t<1)requestAnimationFrame(tick);}catch(e){}})(t0);
+    })(els[i]);}
+  }catch(e){}
+}
 function _v65Emoji(ch){
   try{
     if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -4921,6 +4941,7 @@ function saveWriting(){
       score: g.score
     });
   }
+  if(g){ try{ if(g.score>=90)celebrate(3); else if(g.score>=75)celebrate(2); else if(g.score>=60)celebrate(1); else celebrate(0); }catch(e){} }
   const gradeEl = document.getElementById('writingGrading');
   if(gradeEl && g){
     // 渲染连接词分类
@@ -4949,10 +4970,11 @@ function saveWriting(){
     // 等级色标
     const bandColor = {A1:'#10b981',A2:'#3b82f6',B1:'#f59e0b',B2:'#ef4444',C1:'#8b5cf6'}[g.sieleBand] || '#6b7280';
     gradeEl.style.display = 'block';
+    try{ gradeEl.classList.remove('v65-grade-in'); void gradeEl.offsetWidth; gradeEl.classList.add('v65-grade-in'); }catch(e){}
     gradeEl.innerHTML = `<div class="card" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);border-color:var(--am)">
       <h3><span class="ic">评分</span>AI 规则引擎批改</h3>
       <div style="display:flex;align-items:center;gap:18px;margin:10px 0;flex-wrap:wrap">
-        <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--tr);font-family:var(--serif)">${g.score}</div><div style="font-size:10px;color:var(--soft)">分 / 100</div></div>
+        <div style="text-align:center"><div style="font-size:32px;font-weight:800;color:var(--tr);font-family:var(--serif)"><span class="v65roll" data-v="${g.score}">${g.score}</span></div><div style="font-size:10px;color:var(--soft)">分 / 100</div></div>
         <div>
           <div style="font-size:12px;margin:2px 0"><b>字数：</b>${g.wordCount} 字 (Tarea ${tareaType} 目标 ${g.target[0]}-${g.target[1]}${g.wcOk?' ✓':' ⚠️'})</div>
           <div style="font-size:12px;margin:2px 0"><b>连接词：</b>${g.uniqueConnectorCount} 种 (共 ${g.connectorCount} 次) ${g.uniqueConnectorCount>=5?'✓ 优秀':g.uniqueConnectorCount>=3?'○ 良好':'⚠️ 建议 ≥3 种'}</div>
@@ -4973,6 +4995,7 @@ function saveWriting(){
         <b>升级到 ${g.sieleBand === 'C1' ? '保持 C1' : nextBand(g.sieleBand) + ' 需要'}:</b> ${nextBandTip(g.sieleBand, g)}
       </div>
     </div>`;
+    _v65RollNums(gradeEl);
     // 自动滚动到批改区
     setTimeout(()=>gradeEl.scrollIntoView({behavior:'smooth',block:'center'}), 100);
   } else {
@@ -6349,8 +6372,8 @@ function stopSieleOral(silent){clearInterval(_sieleOralTimer);if(_sieleOralRecog
 function normalizeOral(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zñü\s]/g,' ').replace(/\s+/g,' ').trim();}
 function finishSieleOral(){if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
 function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var links=(normalizeOral(text).match(/\b(porque|ademas|aunque|sin embargo|por eso|mientras|cuando|si|para que|en definitiva)\b/g)||[]).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();
-var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);}updateStreak();showEncouragement('siele_oral', total);}
-function oralBar(label,val){return '<div class="so-bar"><span>'+label+'</span><i><b style="width:'+val+'%"></b></i><strong>'+val+'</strong></div>';}
+var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);_v65GrowBars(box);}updateStreak();showEncouragement('siele_oral', total);}
+function oralBar(label,val){return '<div class="so-bar"><span>'+label+'</span><i><b style="width:0%" data-w="'+val+'"></b></i><strong>'+val+'</strong></div>';}
 function renderSieleScore(r,x){var improve=[];if(r.content<70)improve.push('补齐题目关键词：'+(x.keys||[]).join('、'));if(r.fluency<70)improve.push('延长回答并减少过短停顿，目标约 '+Math.max(20,Math.round((x.sec||60)*1.1))+' 词。');if(r.grammar<70)improve.push('加入 porque、aunque、por eso 等连接词，并检查过去/将来时。');if(!improve.length)improve.push('结构完整；下一次尝试加入更具体的例子和自我修正。');return '<div class="so-score"><div class="total">'+r.score+'</div><div class="so-bars">'+oralBar('内容',r.content)+oralBar('流利',r.fluency)+oralBar('词汇',r.vocab)+oralBar('语法',r.grammar)+oralBar('完成度',r.task)+'</div></div><div class="so-feedback"><b>识别：</b>'+esc(r.text||'未识别到有效西语')+'<br><b>改进：</b>'+improve.join('；')+'</div><button class="btn sm ol" style="margin-top:8px" onclick="showSieleModel()">显示范例与重点</button>';
 }
 function renderSieleHistory(saved){if(!saved)return'';var count=(saved.count!=null?saved.count:(saved.history?saved.history.length:1));var bestScore=saved.bestScore!=null?saved.bestScore:(saved.score||0);var lastDate=saved.lastDate||saved.date||'--';var history=saved.history||(saved.text?[saved]:[]);if(!count)return'';var historyList=history.slice().reverse().slice(0,10).map(function(h,i){return'<div class="so-history-item"><div class="so-history-item-head"><span class="so-history-item-num">#'+(history.length-i)+'</span><span class="so-history-item-score">'+h.score+'分</span><span class="so-history-item-date">'+esc(h.date||'--')+'</span><span class="so-history-item-wc">'+h.words+'词</span></div><div class="so-history-item-text">'+esc(h.text||'(无识别文本)')+'</div></div>';}).join('');return'<div class="so-history"><div class="so-history-bar" onclick="var d=this.nextElementSibling;d.style.display=d.style.display==\'none\'?\'block\':\'none\';this.querySelector(\'.so-history-arrow\').textContent=d.style.display===\'none\'?\'展开 ▾\':\'收起 ▴\'"><span>已练 '+count+' 次</span><span class="so-history-score">最高 '+bestScore+'分</span><span class="so-history-date">'+esc(lastDate)+'</span><span class="so-history-arrow">展开 ▾</span></div><div class="so-history-body" style="display:none">'+historyList+'</div></div>';}function showSieleModel(){var el=document.getElementById('soModel');if(el)el.classList.add('show');}
@@ -12169,6 +12192,7 @@ function autoLogLowScore(type, sourceKey, payload){
 // ===== 完成后鼓励文案 (P2-5) =====
 // 在跟读 / 写作 / 口语模块评分完成后弹出简短的鼓励提示, 按分数分级。
 function showEncouragement(type, score){
+  try{ if(score>=90)celebrate(3); else if(score>=75)celebrate(2); else if(score>=60)celebrate(1); else celebrate(0); }catch(e){}
   let emoji, title, msg, tip;
   if(score >= 90){ emoji = '🏆'; title = '太棒了！'; msg = 'SIELE 高分稳了'; tip = '挑战更高级别'; }
   else if(score >= 75){ emoji = '🎉'; title = '完成得很棒'; msg = '基础扎实, 再练几遍就是高分'; tip = '试试 1.2x 加速'; }
@@ -17844,7 +17868,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v65-2026100302';
+    var swVer = 'v66-2026100302';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
