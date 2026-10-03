@@ -5518,7 +5518,7 @@ function scoreSpeaking(text){
   // 高级特征加分
   let bonus = 0;
   if(/\b(creo|pienso|opino|considero|me parece)\b/.test(rec)) bonus += 10;
-  if(/\b(porque|ya que|dado que|puesto que)\b/.test(rec)) bonus += 8;
+  if(_wbDetect(_wbConnDict().cause, _wbNorm(rec)).length) bonus += 8;
   if(/\b(si\s+(pudiera|tuviera|fuera|viajara)|ojalá|desearía|quisiera|me gustaría)\b/.test(rec)) bonus += 12;
   const orderScore = Math.min(100, funcBase + bonus);
 
@@ -6377,7 +6377,7 @@ function startSieleOral(){var x=getSieleOralItem();if(!x)return;var SR=window.Sp
 function stopSieleOral(silent){clearInterval(_sieleOralTimer);if(_sieleOralRecognition)try{_sieleOralRecognition.stop();}catch(e){}if(_sieleOralRecording&&!silent)finishSieleOral();_sieleOralRecording=false;}
 function normalizeOral(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zñü\s]/g,' ').replace(/\s+/g,' ').trim();}
 function finishSieleOral(){if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
-function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var links=(normalizeOral(text).match(/\b(porque|ademas|aunque|sin embargo|por eso|mientras|cuando|si|para que|en definitiva)\b/g)||[]).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();
+function scoreSieleOral(text){var x=getSieleOralItem();if(!x)return;var words=normalizeOral(text).split(' ').filter(Boolean),wc=words.length,unique=new Set(words).size,expected=Math.max(12,Math.round((x.sec||60)*1.35)),contentHits=(x.keys||[]).filter(function(k){return normalizeOral(text).includes(normalizeOral(k));}).length;var content=Math.min(100,Math.round(35+65*contentHits/Math.max(1,(x.keys||[]).length))),fluency=Math.min(100,Math.round(35+65*Math.min(wc,expected)/expected)),vocab=Math.min(100,Math.round(35+65*Math.min(unique/Math.max(1,wc),.72)/.72));var _oConn=_wbConnDict(),_oAll=[];Object.keys(_oConn).forEach(function(c){_oAll=_oAll.concat(_oConn[c]);});var links=_wbDetect(_oAll,normalizeOral(text)).length;var grammar=Math.min(100,45+links*9+(wc>35?12:0)),task=Math.min(100,Math.round((content*.65)+(fluency*.35))),total=Math.round(content*.3+fluency*.25+vocab*.15+grammar*.15+task*.15);var attempt={score:total,content:content,fluency:fluency,vocab:vocab,grammar:grammar,task:task,words:wc,text:text,date:todayStr()};if(!ST.sieleOralScores)ST.sieleOralScores={};var prev=ST.sieleOralScores[x.id];var history=prev&&prev.history?prev.history.slice():[];if(prev&&!prev.history&&prev.score){history=[{score:prev.score,content:prev.content,fluency:prev.fluency,vocab:prev.vocab,grammar:prev.grammar,task:prev.task,words:prev.words,text:prev.text,date:prev.date}];}history.push(attempt);if(history.length>20)history=history.slice(-20);var bestScore=history.reduce(function(m,a){return Math.max(m,a.score);},0);ST.sieleOralScores[x.id]={bestScore:bestScore,count:history.length,lastDate:attempt.date,history:history,score:attempt.score,content:attempt.content,fluency:attempt.fluency,vocab:attempt.vocab,grammar:attempt.grammar,task:attempt.task,words:attempt.words,text:attempt.text,date:attempt.date};save();
 var box=document.getElementById('soScoreBox');if(box){box.dataset.done='1';box.innerHTML=renderSieleScore(attempt,x);_v65GrowBars(box);}updateStreak();showEncouragement('siele_oral', total);}
 function oralBar(label,val){return '<div class="so-bar"><span>'+label+'</span><i><b style="width:0%" data-w="'+val+'"></b></i><strong>'+val+'</strong></div>';}
 function renderSieleScore(r,x){var improve=[];if(r.content<70)improve.push('补齐题目关键词：'+(x.keys||[]).join('、'));if(r.fluency<70)improve.push('延长回答并减少过短停顿，目标约 '+Math.max(20,Math.round((x.sec||60)*1.1))+' 词。');if(r.grammar<70)improve.push('加入 porque、aunque、por eso 等连接词，并检查过去/将来时。');if(!improve.length)improve.push('结构完整；下一次尝试加入更具体的例子和自我修正。');return '<div class="so-score"><div class="total">'+r.score+'</div><div class="so-bars">'+oralBar('内容',r.content)+oralBar('流利',r.fluency)+oralBar('词汇',r.vocab)+oralBar('语法',r.grammar)+oralBar('完成度',r.task)+'</div></div><div class="so-feedback"><b>识别：</b>'+esc(r.text||'未识别到有效西语')+'<br><b>改进：</b>'+improve.join('；')+'</div><button class="btn sm ol" style="margin-top:8px" onclick="showSieleModel()">显示范例与重点</button>';
@@ -11043,41 +11043,71 @@ Ana Ruiz`,
 
 // ===== SIELE WRITING EVALUATION RUBRIC (rule-based, self-grading) =====
 // 升级 #231 + #233: SIELE 4 级映射 + 西语语法模式检测
+// ===== v68 共享评分核心 _wbScore（词典依据 RAE/NGLE 连接词分类）=====
+const _WB_CONN = {
+  addition:['y','ni','además','asimismo','también','igualmente','incluso','encima','es más','por añadidura','aparte','por otro lado','por otra parte','a su vez','por si fuera poco','de hecho','sobre todo','en realidad'],
+  cause:['porque','pues','ya que','puesto que','dado que','a causa de','debido a','gracias a','en vista de que','toda vez que','visto que','por cuanto','como quiera que'],
+  consequence:['por lo tanto','por tanto','por eso','por consiguiente','en consecuencia','así pues','así que','entonces','de ahí que','de modo que','de manera que','por ende','consiguientemente','por esta razón','por lo cual'],
+  contrast:['pero','mas','sin embargo','no obstante','ahora bien','en cambio','por el contrario','antes bien','empero','a pesar de','a pesar de que','pese a','pese a que','aunque','si bien','con todo','aun así','de todas formas','de todos modos','en cualquier caso','mientras que','eso sí'],
+  order:['en primer lugar','para empezar','primero','primeramente','en segundo lugar','después','luego','a continuación','finalmente','para terminar','para concluir','por último','en fin','en suma','en resumen','en síntesis','en definitiva','en resumidas cuentas','total','acto seguido','antes de nada','por un lado','por una parte'],
+  example:['por ejemplo','es decir','o sea','esto es','a saber','en otras palabras','en concreto','en particular','específicamente','tal como','como']
+};
+const _WB_SUBJ = {
+  impersonal:['es necesario','es importante','es recomendable','es fundamental','es posible','es probable','es imprescindible','es preciso que','es esencial que','hace falta que','importa que','conviene que','recomiendo que','sugiero que','aconsejo que','ruego que','agradecería que','suplico que','pido que','exijo que','propongo que'],
+  wishes:['ojalá','ojalá que','quisiera','me gustaría','desearía','deseo que','quiero que','prefiero que'],
+  purpose:['para que','a fin de que','con el fin de que','antes de que','a menos que','a no ser que','sin que','en caso de que','con tal de que'],
+  doubt:['quizás','tal vez','acaso','puede que','puede ser que','dudo que','no creo que','no pienso que','temo que'],
+  temporal_subj:['hasta que','apenas','en cuanto','antes de que']
+};
+function _wbNorm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function _wbDetect(list, normText){
+  return (list||[]).filter(function(c){
+    var n=_wbNorm(c).trim();
+    if(!n) return false;
+    try{ return new RegExp('\\b'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b').test(normText); }
+    catch(e){ return normText.indexOf(n)>=0; }
+  });
+}
+function _wbMergeAdmin(dict, nsKey){
+  try{
+    var ed = window._contentEdits && window._contentEdits.lexicon;
+    if(ed && ed[nsKey]){
+      Object.keys(ed[nsKey]).forEach(function(cat){
+        if(!dict[cat]) dict[cat]=[];
+        (ed[nsKey][cat]||[]).forEach(function(w){
+          w=String(w||'').trim().toLowerCase();
+          if(w && dict[cat].indexOf(w)<0) dict[cat].push(w);
+        });
+      });
+    }
+  }catch(e){}
+  return dict;
+}
+function _wbConnDict(){ return _wbMergeAdmin(JSON.parse(JSON.stringify(_WB_CONN)),'connectors'); }
+function _wbSubjDict(){ return _wbMergeAdmin(JSON.parse(JSON.stringify(_WB_SUBJ)),'subjunctive'); }
 function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
   if(!text || !text.trim()) return null;
   const t = text.trim();
   const wc = t.split(/\s+/).filter(Boolean).length;
   const tl = t.toLowerCase();
 
-  // ===== 连接词检测 (5类) =====
-  const connectors = {
-    addition:['además','asimismo','también','igualmente','incluso','y','ni'],
-    cause:['porque','ya que','puesto que','dado que','a causa de','debido a','gracias a'],
-    consequence:['por lo tanto','por tanto','por eso','por consiguiente','en consecuencia','así pues','así que','entonces'],
-    contrast:['pero','mas','sin embargo','no obstante','ahora bien','en cambio','por un lado','por otro lado','a pesar de','a pesar de que','aunque','incluso','de hecho','por el contrario'],
-    order:['en primer lugar','para empezar','por una parte','por otra parte','primero','después','luego','a continuación','finalmente','para terminar','para concluir','en resumen','en conclusión','por último'],
-    example:['por ejemplo','como','es decir','en concreto','en particular'],
-  };
+  // ===== 连接词检测 (v68: RAE 分类词典, 共享核心) =====
+  const connectors = _wbConnDict();
   const connsByCat = {};
   let totalConns = 0;
   let uniqueConns = 0;
+  const _normText = _wbNorm(tl);
   Object.keys(connectors).forEach(cat => {
-    const found = connectors[cat].filter(c => (c.length<=4 && /^[a-záéíóúñ]+$/i.test(c)) ? new RegExp('\\b'+c+'\\b','i').test(tl) : tl.includes(c));
+    const found = _wbDetect(connectors[cat], _normText);
     if(found.length){ connsByCat[cat] = found; totalConns += found.length; uniqueConns += new Set(found).size; }
   });
 
-  // ===== 虚拟式触发器 =====
-  const subjTriggers = {
-    impersonal:['es necesario','es importante','es recomendable','es fundamental','es posible','es probable','es imprescindible','conviene que','recomiendo que','sugiero que','aconsejo que','ruego que','agradecería que','suplico que'],
-    wishes:['ojalá','quisiera','me gustaría','desearía','ojalá que'],
-    purpose:['para que','a fin de que','con el fin de que','antes de que','a menos que','a no ser que','sin que','en caso de que','con tal de que'],
-    doubt:['quizás','tal vez','acaso','puede que','puede ser que','dudo que','no creo que','no pienso que'],
-    temporal_subj:['cuando + subj','mientras + subj','hasta que','apenas','en cuanto','antes de que'],
-  };
+  // ===== 虚拟式触发器 (v68: 共享词典, 移除 cuando/mientras + subj 误报源) =====
+  const subjTriggers = _wbSubjDict();
   const subjByCat = {};
   let subjCount = 0;
   Object.keys(subjTriggers).forEach(cat => {
-    const found = subjTriggers[cat].filter(s => tl.includes(s.split(' + ')[0]));
+    const found = _wbDetect(subjTriggers[cat], _normText);
     if(found.length){ subjByCat[cat] = found; subjCount += found.length; }
   });
 
@@ -16191,15 +16221,12 @@ window._deleCalcWritingScore = function(text, level){
   var grammarScore = g ? g.score : 70;
   
   // 维度4: 连接词多样性
-  var connectorsByLevel = {
-    A1: ['y','pero','porque','también','muy','ahora','después','antes'],
-    A2: ['porque','cuando','como','si','aunque','mientras','por eso','entonces'],
-    B1: ['sin embargo','por lo tanto','además','en cambio','no obstante','por otra parte','así que','aunque'],
-    B2: ['asimismo','no obstante','por ende','en virtud de','cabe destacar','a pesar de','dado que','en tanto que']
-  };
-  var connList = connectorsByLevel[level] || connectorsByLevel.A2;
-  var foundConn = connList.filter(function(c){return text.toLowerCase().includes(c);});
-  var connScore = Math.min(100, Math.round(foundConn.length / 3 * 100));
+  var _wbConn = _wbConnDict();
+  var _allConns = [];
+  Object.keys(_wbConn).forEach(function(c){ _allConns = _allConns.concat(_wbConn[c]); });
+  var foundConn = _wbDetect(_allConns, _wbNorm(text));
+  var _connReq = {A1:2, A2:3, B1:4, B2:5}[level] || 3;
+  var connScore = Math.min(100, Math.round(foundConn.length / _connReq * 100));
   
   // 维度5: 任务完成度 (基于字数是否达标 + 句号数)
   var sentenceCount = (text.match(/[.!?¿¡]+/g) || []).length;
@@ -17885,7 +17912,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = 'v67-2026100303';
+    var swVer = 'v68-2026100304';
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
       reg.addEventListener('updatefound', function(){
@@ -19133,6 +19160,7 @@ function activate(){
       setTimeout(function(){window._deleFetchContentEdits('grammar');},2400);
       setTimeout(function(){window._deleFetchContentEdits('verbConj');},2600);
       setTimeout(function(){window._deleFetchContentEdits('quiz');},2800);
+      setTimeout(function(){window._deleFetchContentEdits('lexicon');},2900);
       // v42: 编辑留痕（仅管理员拉取，避免普通用户无谓流量）
       try{ if(typeof isContentAdmin==='function' && isContentAdmin()) setTimeout(function(){window._deleFetchContentEdits('__audit');},3000); }catch(e2){}
     }
