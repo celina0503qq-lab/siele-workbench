@@ -3,6 +3,24 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v88.1] – 2026-10-05
+
+### QDATA_PDF 外链懒加载兜底（首次数据减负，index −33%）
+
+- 把内联的 `QDATA_PDF`（3000 题 / 617KB）拆出为外部文件 `qdata_pdf_fallback.js`（`window.QDATA_PDF`），**不再无条件 `push` 进 QDATA**
+- 4×`tryReplace{L}Quiz` 的**失败分支**（各级 REPLACE 题库重试 35×80ms≈2.8s 仍未就绪时）改为按需动态 `<script>` 加载该兜底文件，并**仅注入缺失级别**的旧题
+- 失败时弹 toast 提示：「⚠️ 网络异常：X 级题库已用旧题兜底（N 题），可刷新重试」
+- 连带修复：`renderNetdisk` 的题库计数由 `QDATA_PDF.length` 改指运行时 `QDATA.length`（外链后原引用会变 0）
+- **收益**：`index.html` **1,948,095 → 1,299,039 B（−649,056 B / −33.3%）**；正常网络下四级替换全成功 ⇒ 兜底永不加载，用户无感且省 617KB
+- 外部 `.js` 不进 SW 预缓存（保持「改数据零发版」）；swVer / SW CACHE 成对顶版 `v88.1-2026100501`
+- 验证：本地冒烟（正常=6000 / 屏蔽 quiz_b1_new.js→兜底 5250+toast）+ 线上 Pages 复验，均通过
+
+## [v88] – 2026-10-04
+
+### SIELE 五项优化（另一账号）
+
+- T2 图片压缩 −56% + 骨架屏/淡入 + 预取；画面解读 chips 金底深棕高对比；T3 中…
+
 ## [v87] – 2026-10-04
 
 ### content_edits 读取函数加固（去重合并，防云端覆盖阴影）
