@@ -2068,7 +2068,7 @@ window.DELE_BANK_B1 = {
       "_v5": true,
       "instrucciones": "Describa la imagen: personas, objetos, acciones, ambiente. Luego responda a las preguntas del examinador sobre tiempo en familia.",
       "rango_palabras": "3-5 min total",
-      "modelo_response": "He elegido hablar sobre un viaje que hicimos a Italia el año pasado. Fue una experiencia inolvidable porque pudimos visitar Roma, Florencia y Venecia. Lo que más me impresionó fue el Coliseo, porque había visto miles de fotos pero en persona es todavía más espectacular. También nos gustó mucho la gastronomía italiana, especialmente la pasta y el gelato. Aunque tuvimos algún problema con el idioma, la gente fue muy amable y nos ayudaron en todo momento. Recomiendo este viaje a todo el mundo porque Italia es un país que tiene de todo: historia, arte, buena comida y paisajes increíbles."
+      "modelo_response": "He elegido hablar sobre un viaje que hicimos a Italia el año pasado. Fue una experiencia inolvidable porque pudimos visitar Roma, Florencia y Venecia. Lo que más me impresiónó fue el Coliseo, porque había visto miles de fotos pero en persona es todavía más espectacular. También nos gustó mucho la gastronomía italiana, especialmente la pasta y el gelato. Aunque tuvimos algún problema con el idioma, la gente fue muy amable y nos ayudaron en todo momento. Recomiendo este viaje a todo el mundo porque Italia es un país que tiene de todo: historia, arte, buena comida y paisajes increíbles."
     },
     {
       "modelo": "m1",

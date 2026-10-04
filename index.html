@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v72-2026100333';
+window.swVer = 'v73-2026100401';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1973,7 +1973,7 @@ function renderMain(){
       }
       break;
   }
-  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v72-2026100333") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v73-2026100401") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -15370,7 +15370,7 @@ function _commitDeleSubPage(level, task, html){
   if (typeof currentPage !== 'undefined') currentPage = 'dele' + level + '_' + task;
   var main = document.getElementById('main');
   if (main) main.innerHTML = '<div id="audioBanner" class="banner"></div>' + html +
-    '<footer>西语备考工作台 ' + (window.swVer||"v72-2026100333") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+    '<footer>西语备考工作台 ' + (window.swVer||"v73-2026100401") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   if (typeof renderNav === 'function') {
     try { renderNav(); } catch (e) {}
   }
@@ -15422,6 +15422,17 @@ function _renderDeleA1Quiz(level, task, taskLabel, bank){
         '题库来源: '+esc((window['DELE_BANK_'+level] && window['DELE_BANK_'+level].source) || 'OCR-extracted')+
       '</div>'+
     '</div>'+
+    // v73: 全真模拟计时条
+    (task === 'mock'
+      ? '<div class="card" style="border-left:4px solid #ef4444;padding:10px 14px">'+
+          '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
+            '<span style="font-weight:700;color:#b91c1c">⏱ 全真模拟</span>'+
+            '<span id="deleMockTimer" style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums">--:--</span>'+
+            '<span class="sub" style="color:var(--tr)">官方时长约 '+(DELE_MOCK_MIN[level]||90)+' 分钟 (阅读+听力) · 刷新后计时继续</span>'+
+            '<button class="btn sm ol" onclick="_deleMockReset()" style="font-size:11px">↺ 重置</button>'+
+          '</div>'+
+        '</div>'
+      : '')+
     // 听力专项: 口音选择器 (拉丁美洲/西班牙)
     (task === 'listening' || task === 'mock'
       ? '<div class="card" style="border-left:4px solid #f59e0b;padding:8px 12px">'+
@@ -16032,9 +16043,15 @@ function _renderDeleA1V5TaskCard(q){
     body += '<div style="margin-top:8px;font-size:13px"><b>'+esc(q.formulario.titulo)+'</b></div>';
     body += '<div style="margin-top:4px;font-size:12px;color:var(--tr)">个人信息: '+esc(q.formulario.datos_personales.join(' · '))+'</div>';
     body += '<div style="margin-top:6px">';
+    var _formKey = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
+    var _fi = 0;
     for (const p of q.formulario.preguntas) {
+      var _fid = 'deleForm_' + _formKey + '_' + _fi;
+      var _saved = '';
+      try { _saved = localStorage.getItem(_fid) || ''; } catch(e) {}
       body += '<div style="margin-top:6px"><b>'+esc(p.pregunta)+'</b> <span class="sub" style="color:var(--tr);font-size:12px">('+esc(p.rango_palabras)+' 词)</span>'+
-        '<textarea placeholder="在这里用西班牙语回答..." style="width:100%;min-height:50px;margin-top:4px;padding:6px;border:1px solid var(--bd,#ddd);border-radius:4px;font-size:13px;resize:vertical"></textarea></div>';
+        '<textarea id="'+esc(_fid)+'" oninput="_deleFormAutoSave(this)" placeholder="在这里用西班牙语回答...(自动保存)" style="width:100%;min-height:50px;margin-top:4px;padding:6px;border:1px solid var(--bd,#ddd);border-radius:4px;font-size:13px;resize:vertical">'+esc(_saved)+'</textarea></div>';
+      _fi++;
     }
     body += '</div>';
   }
@@ -16045,6 +16062,11 @@ function _renderDeleA1V5TaskCard(q){
     body += '</ul>';
     body += '<div class="sub" style="color:var(--tr);font-size:12px">字数: '+esc(q.rango_palabras)+'</div>';
     body += '<textarea placeholder="Escribe aquí tu anuncio (30-40 palabras)..." style="width:100%;min-height:120px;margin-top:6px;padding:8px;border:1px solid var(--bd,#ddd);border-radius:4px;font-size:13px;resize:vertical"></textarea>';
+    // v73: 广告写作补评分入口
+    body += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+      '<button class="btn sm pr" onclick="scoreWritingFromTextarea(this)">📝 提交评分</button>'+
+      '<span class="sub" style="color:var(--tr);font-size:11px">提交后自动统计字数+AI评分</span>'+
+    '</div>';
   }
   // speaking_self: 自我介绍
   else if (q.type === 'speaking_self' && q.aspectos) {
@@ -16052,7 +16074,7 @@ function _renderDeleA1V5TaskCard(q){
     for (const a of q.aspectos) body += '<li>'+esc(a)+'</li>';
     body += '</ul>';
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 1-2 分钟 · 可准备 10 分钟后开始录音</div>';
-    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
   }
   // speaking_topic: 主题阐述
   else if (q.type === 'speaking_topic' && q.temas) {
@@ -16063,7 +16085,7 @@ function _renderDeleA1V5TaskCard(q){
     for (const s of q.sugerencias) body += '<li>'+esc(s)+'</li>';
     body += '</ul>';
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 2-3 分钟 · 可准备 10 分钟</div>';
-    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
   }
   // speaking_dialogue: 对话
   else if (q.type === 'speaking_dialogue' && q.ejemplos_preguntas) {
@@ -16076,7 +16098,7 @@ function _renderDeleA1V5TaskCard(q){
       body += '</ul>';
     }
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 3-4 分钟 · 考官实时提问</div>';
-    body += '<button class="btn pr" style="margin-top:6px">🎤 开始录音 (即将接入口语评分引擎)</button>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
   }
   // writing: 通用写作题 (A1/A2/B1/B2)
   else if (q.type === 'writing') {
@@ -16113,8 +16135,8 @@ function _renderDeleA1V5TaskCard(q){
       body += '<div class="sub" style="color:var(--tr);font-size:12px;margin-top:4px">时长: '+esc(q.rango_palabras)+'</div>';
     }
     body += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-      '<button class="btn pr" onclick="startSpeakingRecording(this)">🎤 开始录音</button>'+
-      '<span class="sub" style="color:var(--tr);font-size:11px">录音完成后自动转写+AI评分</span>'+
+      '<button class="btn pr" onclick="startSpeakingRecording(this)">🎤 开始作答</button>'+
+      '<span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>'+
     '</div>';
     // AI 口语范例 (可展开编辑)
     if (q.modelo_response) {
@@ -16386,8 +16408,119 @@ window.scoreWritingFromTextarea = function(btn){
   showEncouragement('writing', score);
 };
 window.startSpeakingRecording = function(btn){
-  if(window.toast) window.toast('🎤 录音功能即将接入...');
-  // 占位: 后续接入 MediaRecorder API
+  // v73: 展开文本作答评分 (真实录音识别等 R4 语音链路落地后接入)
+  window._deleSpeakingAnswer(btn);
+};
+// ===== v73: DELE 口语文本作答评分 + 全真模拟计时 + 表单自动保存 =====
+const DELE_MOCK_MIN = { A1: 70, A2: 95, B1: 110, B2: 110 };
+window._deleSpeakingAnswer = function(btn){
+  var host = btn.parentElement;
+  var wrap = host.querySelector('.dele-speak-answer');
+  if (wrap) { wrap.style.display = (wrap.style.display === 'none') ? '' : 'none'; return; }
+  wrap = document.createElement('div');
+  wrap.className = 'dele-speak-answer';
+  wrap.style.cssText = 'margin-top:8px';
+  wrap.innerHTML =
+    '<textarea class="dele-speak-ta" placeholder="Escribe aquí tu respuesta oral (o pega tu guión)..." style="width:100%;min-height:110px;padding:8px;border:1px solid var(--bd,#ddd);border-radius:6px;font-size:13px;resize:vertical;font-family:inherit"></textarea>'+
+    '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+      '<button class="btn sm pr" onclick="_deleSpeakingGrade(this)">📝 提交评分</button>'+
+      '<span class="sub" style="color:var(--tr);font-size:11px">口语文本评分: 词数+连接词+虚拟式+观点词</span>'+
+    '</div><div class="dele-speak-fb"></div>';
+  host.appendChild(wrap);
+};
+window._deleSpeakingGrade = function(btn){
+  var host = btn.closest ? btn.closest('.dele-speak-answer') : null;
+  if (!host) { host = btn.parentElement.parentElement; }
+  var ta = host.querySelector('.dele-speak-ta');
+  var fb = host.querySelector('.dele-speak-fb');
+  if (!ta || !fb) return;
+  var t = (ta.value||'').trim();
+  if (!t) { if (window.toast) window.toast('请先输入作答内容'); return; }
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  var r = window._deleCalcSpeakingScore(t, lvl);
+  var color = r.total >= 75 ? '#10b981' : r.total >= 60 ? '#f59e0b' : '#ef4444';
+  var h = '<div style="background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%);padding:10px;border-radius:8px;border:1px solid #bbf7d0">'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">'+
+      '<span class="pr-badge" style="background:'+color+'22;color:'+color+';font-size:14px;font-weight:700">DELE '+lvl+' 口语评分 '+r.total+'/100</span>'+
+      '<span class="sub" style="color:var(--tr)">词数: '+r.wc+' (目标 '+r.target+')</span>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-bottom:6px">';
+  r.dims.forEach(function(d){
+    var c = d.score >= 75 ? '#10b981' : d.score >= 60 ? '#f59e0b' : '#ef4444';
+    h += '<div style="background:#fff;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0">'+
+      '<div style="font-size:11px;color:var(--tr);margin-bottom:2px">'+d.label+'</div>'+
+      '<div style="display:flex;align-items:center;gap:6px">'+
+        '<div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+d.score+'%;background:'+c+'"></div></div>'+
+        '<b style="font-size:12px;color:'+c+'">'+d.score+'</b>'+
+      '</div></div>';
+  });
+  h += '</div>';
+  if (r.advice.length) h += '<div style="font-size:12px;line-height:1.7;color:#334155">'+r.advice.join('<br>')+'</div>';
+  h += '</div>';
+  fb.innerHTML = h;
+};
+window._deleCalcSpeakingScore = function(text, level){
+  var t = String(text||'').trim();
+  var wc = t.split(/\s+/).filter(Boolean).length;
+  var target = { A1:25, A2:40, B1:60, B2:80 }[level] || 40;
+  var countScore = 0;
+  if (wc >= target*0.7 && wc <= target*2) countScore = 100;
+  else if (wc >= target*0.4) countScore = 70;
+  else if (wc > 0) countScore = 30;
+  var _conn = _wbConnDict();
+  var _all = [];
+  Object.keys(_conn).forEach(function(c){ _all = _all.concat(_conn[c]); });
+  var found = _wbDetect(_all, _wbNorm(t));
+  var connReq = { A1:2, A2:3, B1:4, B2:5 }[level] || 3;
+  var connScore = Math.min(100, Math.round(found.length / connReq * 100));
+  var opScore = 0;
+  var advice = [];
+  if (/\b(creo|pienso|opino|considero|me parece|en mi opini[oó]n)\b/i.test(_wbNorm(t))) opScore += 50;
+  else advice.push('💬 加入观点词: creo que / pienso que / me parece que');
+  var _subj = _wbSubjDict();
+  var _subjAll = [];
+  Object.keys(_subj).forEach(function(c){ _subjAll = _subjAll.concat(_subj[c]); });
+  var subjHit = _wbDetect(_subjAll, _wbNorm(t));
+  opScore += Math.min(50, subjHit.length * 25);
+  if (!subjHit.length && (level === 'B1' || level === 'B2')) advice.push('⭐ B1/B2 建议加入虚拟式触发: para que / aunque / ojalá');
+  if (found.length < connReq) advice.push('🔗 再用 ' + Math.max(0, connReq - found.length) + ' 个连接词更连贯 (已用: ' + (found.slice(0,4).join(', ') || '无') + ')');
+  if (wc < target*0.7) advice.push('📏 词数不足: 建议至少 ' + Math.round(target*0.7) + ' 词 (目标 ' + target + ' 词)');
+  else if (wc > target*2) advice.push('📏 词数偏多: 建议 ' + target + ' 词左右, 口语贵在精炼');
+  if (!advice.length) advice.push('✓ 表达良好! 实考时注意语速与流利度。');
+  var total = Math.round(countScore*0.4 + connScore*0.3 + opScore*0.3);
+  total = Math.max(0, Math.min(100, total));
+  return { total: total, wc: wc, target: target,
+    dims: [
+      { label: '词数匹配', score: countScore },
+      { label: '连接词 ('+found.length+'/'+connReq+')', score: connScore },
+      { label: '观点词+虚拟式', score: opScore }
+    ],
+    advice: advice };
+};
+window._deleMockTick = function(){
+  var el = document.getElementById('deleMockTimer');
+  if (!el) return;
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  var total = (DELE_MOCK_MIN[lvl] || 90) * 60 * 1000;
+  var start = 0;
+  try { start = parseInt(localStorage.getItem('dele_mock_start_' + lvl) || '0', 10) || 0; } catch(e) {}
+  if (!start) { start = Date.now(); try { localStorage.setItem('dele_mock_start_' + lvl, String(start)); } catch(e) {} }
+  var left = total - (Date.now() - start);
+  if (left <= 0) { el.textContent = '⏰ 时间到'; el.style.color = '#dc2626'; return; }
+  var m = Math.floor(left / 60000), s2 = Math.floor((left % 60000) / 1000);
+  el.textContent = (m < 10 ? '0' : '') + m + ':' + (s2 < 10 ? '0' : '') + s2;
+  el.style.color = left < 5 * 60 * 1000 ? '#dc2626' : '#1e293b';
+};
+window._deleMockReset = function(){
+  var lvl = window._deleA1CurrentLevel || 'A1';
+  try { localStorage.removeItem('dele_mock_start_' + lvl); } catch(e) {}
+  window._deleMockTick();
+  if (window.toast) window.toast('⏱ 计时已重置 (' + lvl + ')', 'ok');
+};
+try { setInterval(function(){ try { window._deleMockTick(); } catch(e) {} }, 1000); } catch(e) {}
+window._deleFormAutoSave = function(ta){
+  if (!ta || !ta.id) return;
+  try { localStorage.setItem(ta.id, ta.value); } catch(e) {}
 };
 
 // ===== VERB USAGE DETAILS (动词用法详解) =====
@@ -17981,7 +18114,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = window.swVer || 'v72-2026100333';
+    var swVer = window.swVer || 'v73-2026100401';
     var _hadSw = !!navigator.serviceWorker.controller; /* v72: 首访无控制 SW，不自动刷新 */
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
@@ -18019,7 +18152,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读 window.swVer（v71 起在文档头部 script 注入），读不到才回退当前版本
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return (window.swVer||'v72-2026100333');
+    return (window.swVer||'v73-2026100401');
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){

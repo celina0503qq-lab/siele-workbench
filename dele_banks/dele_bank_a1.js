@@ -2222,7 +2222,7 @@ window.DELE_BANK_A1 = {
       "type": "writing",
       "_v5": true,
       "instrucciones": "根据提示填写个人基础信息表格：姓名、出生日期、国籍、职业、语言、电话。重点考察用简单词汇、短句书写基础信息。字数 15-25 词。",
-      "modelo_essay": "NOMBRE Y APELLIDO/S: María López García\nFECHA DE NACIMIENTO: 22/05/1995\nNACIONALIDAD: Española\nPROFESIÓN: Estudiante de medicina\nIDIOMAS: Español, inglés y francés\nTELÉFONO: 612 345 678\nCORREO ELECTRÓNICO: maria.lopez@email.es\nDIRECCIÓN: Calle Mayor 15, Madrid, España\n\n我提供了完整的个人信息示例。实际考试中,考生根据自己的真实信息填写即可。姓名 2 个词 + 出生日期 + 国籍 1 个词 + 职业 3 个词 + 语言 5 个词 + 电话 2 个词 + 邮箱 1 个词 + 地址 8 个词,总计约 22 词,符合 15-25 词要求。",
+      "modelo_essay": "NOMBRE Y APELLIDO/S: María López García\nFECHA DE NACIMIENTO: 22/05/1995\nNACIONALIDAD: Española\nPROFESIÓN: Estudiante de medicina\nIDIOMAS: Español, inglés y francés\nTELÉFONO: 612 345 678\nCORREO ELECTRÓNICO: maria.López@email.es\nDIRECCIÓN: Calle Mayor 15, Madrid, España\n\n我提供了完整的个人信息示例。实际考试中,考生根据自己的真实信息填写即可。姓名 2 个词 + 出生日期 + 国籍 1 个词 + 职业 3 个词 + 语言 5 个词 + 电话 2 个词 + 邮箱 1 个词 + 地址 8 个词,总计约 22 词,符合 15-25 词要求。",
       "rango_palabras": "15-25词"
     },
     {

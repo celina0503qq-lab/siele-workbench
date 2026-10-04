@@ -1310,7 +1310,7 @@ window.DELE_BANK_A2_NUEVO_M2 = {
       "_v5": true,
       "explanation": "Respuesta correcta: C",
       "cuerpo": "",
-      "transcript": "¿Eres una persona responsable? ¿Quieres trabajar en nuestra panadería?\nEnvíanos tu Currículum a la dirección de correo electrónico\nmarcosblanco@gmail.com y prepárate para la entrevista de trabajo.\nBuscamos a personas jóvenes y con energía. Horario: de siete de la mañana\na dos del mediodía.\n177",
+      "transcript": "¿Eres una persona responsable? ¿Quieres trabajar en nuestra panadería?\nEnvíaños tu Currículum a la dirección de correo electrónico\nmarcosblanco@gmail.com y prepárate para la entrevista de trabajo.\nBuscamos a personas jóvenes y con energía. Horario: de siete de la mañana\na dos del mediodía.\n177",
       "audio": "",
       "instrucciones": "Usted va a escuchar seis anuncios o fragmentos de un programa de radio y tiene que responder a seis preguntas. Cada audición se repite dos veces. Lea las preguntas (de la 7 a la 12) y seleccione la opción correcta (A, B o C). Marque las opciones elegidas en la Hoja de respuestas.",
       "rango_palabras": ""

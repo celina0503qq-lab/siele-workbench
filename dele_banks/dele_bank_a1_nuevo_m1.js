@@ -35,7 +35,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola Paco: Que tal tus vacaciones? Yo voy a ir con mi familia a la playa el proximo martes, mi novia no puede ir este ano con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, alli vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos alli casi todos los veranos. Es el primer ano que mi abuelo no va a ir con nosotros, dice que esta un poco malo y prefiere no viajar. Tengo una habitacion nueva, tienes que verla, te va a encantar, ahora tengo una mesa mas grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
+      "cuerpo": "Hola Paco: ¿Qué tal tus vacaciones? Yo voy a ir con mi familia a la playa el próximo martes, mi novia no puede ir este año con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, allí vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos allí casi todos los veranos. Es el primer año que mi abuelo no va a ir con nosotros, dice que está un poco malo y prefiere no viajar. Tengo una habitación nueva, tienes que verla, te va a encantar, ahora tengo una mesa más grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
       "explanation": "正确答案: B。"
     },
     {
@@ -53,7 +53,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Jorge va a viajar solo el proximo martes."
+          "text": "A) Jorge va a viajar solo el próximo martes."
         },
         {
           "key": "B",
@@ -66,7 +66,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola Paco: Que tal tus vacaciones? Yo voy a ir con mi familia a la playa el proximo martes, mi novia no puede ir este ano con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, alli vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos alli casi todos los veranos. Es el primer ano que mi abuelo no va a ir con nosotros, dice que esta un poco malo y prefiere no viajar. Tengo una habitacion nueva, tienes que verla, te va a encantar, ahora tengo una mesa mas grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
+      "cuerpo": "Hola Paco: ¿Qué tal tus vacaciones? Yo voy a ir con mi familia a la playa el próximo martes, mi novia no puede ir este año con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, allí vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos allí casi todos los veranos. Es el primer año que mi abuelo no va a ir con nosotros, dice que está un poco malo y prefiere no viajar. Tengo una habitación nueva, tienes que verla, te va a encantar, ahora tengo una mesa más grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
       "explanation": "正确答案: C。"
     },
     {
@@ -88,7 +88,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "B",
-          "text": "B) su cama nueva es muy comoda."
+          "text": "B) su cama nueva es muy cómoda."
         },
         {
           "key": "C",
@@ -97,7 +97,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola Paco: Que tal tus vacaciones? Yo voy a ir con mi familia a la playa el proximo martes, mi novia no puede ir este ano con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, alli vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos alli casi todos los veranos. Es el primer ano que mi abuelo no va a ir con nosotros, dice que esta un poco malo y prefiere no viajar. Tengo una habitacion nueva, tienes que verla, te va a encantar, ahora tengo una mesa mas grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
+      "cuerpo": "Hola Paco: ¿Qué tal tus vacaciones? Yo voy a ir con mi familia a la playa el próximo martes, mi novia no puede ir este año con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, allí vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos allí casi todos los veranos. Es el primer año que mi abuelo no va a ir con nosotros, dice que está un poco malo y prefiere no viajar. Tengo una habitación nueva, tienes que verla, te va a encantar, ahora tengo una mesa más grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
       "explanation": "正确答案: A。"
     },
     {
@@ -128,7 +128,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola Paco: Que tal tus vacaciones? Yo voy a ir con mi familia a la playa el proximo martes, mi novia no puede ir este ano con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, alli vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos alli casi todos los veranos. Es el primer ano que mi abuelo no va a ir con nosotros, dice que esta un poco malo y prefiere no viajar. Tengo una habitacion nueva, tienes que verla, te va a encantar, ahora tengo una mesa mas grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
+      "cuerpo": "Hola Paco: ¿Qué tal tus vacaciones? Yo voy a ir con mi familia a la playa el próximo martes, mi novia no puede ir este año con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, allí vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos allí casi todos los veranos. Es el primer año que mi abuelo no va a ir con nosotros, dice que está un poco malo y prefiere no viajar. Tengo una habitación nueva, tienes que verla, te va a encantar, ahora tengo una mesa más grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
       "explanation": "正确答案: A。"
     },
     {
@@ -150,7 +150,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "B",
-          "text": "B) avion."
+          "text": "B) avión."
         },
         {
           "key": "C",
@@ -159,7 +159,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "Hola Paco: Que tal tus vacaciones? Yo voy a ir con mi familia a la playa el proximo martes, mi novia no puede ir este ano con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, alli vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos alli casi todos los veranos. Es el primer ano que mi abuelo no va a ir con nosotros, dice que esta un poco malo y prefiere no viajar. Tengo una habitacion nueva, tienes que verla, te va a encantar, ahora tengo una mesa mas grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
+      "cuerpo": "Hola Paco: ¿Qué tal tus vacaciones? Yo voy a ir con mi familia a la playa el próximo martes, mi novia no puede ir este año con nosotros porque tiene que trabajar. Vamos a visitar diferentes lugares, primero queremos ir a Valencia, allí vamos a alquilar un coche y vamos a ir hacia el norte. A mi padre le gustan mucho las playas de Castellon y Tarragona, por eso pasamos allí casi todos los veranos. Es el primer año que mi abuelo no va a ir con nosotros, dice que está un poco malo y prefiere no viajar. Tengo una habitación nueva, tienes que verla, te va a encantar, ahora tengo una mesa más grande que antes, si vienes un dia a mi casa podemos jugar a algunos juegos. Y tu madre como esta? Sigue trabajando en el hospital? Voy a ir el domingo al centro, quedamos para tomar un cafe o para cenar? Hasta pronto, Jorge",
       "explanation": "正确答案: A。"
     },
     {
@@ -193,7 +193,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -214,7 +214,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: C。"
     },
     {
@@ -228,7 +228,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         11
       ],
       "answer": "D",
-      "prompt": "Solo puedes ir por las mananas.",
+      "prompt": "Solo puedes ir por las mañanas.",
       "options": [
         {
           "key": "A",
@@ -248,7 +248,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -269,7 +269,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: D。"
     },
     {
@@ -283,7 +283,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         11
       ],
       "answer": "A",
-      "prompt": "En este lugar puedes ver una pelicula.",
+      "prompt": "En este lugar puedes ver una película.",
       "options": [
         {
           "key": "A",
@@ -303,7 +303,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -324,7 +324,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: A。"
     },
     {
@@ -358,7 +358,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -379,7 +379,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: H。"
     },
     {
@@ -413,7 +413,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -434,7 +434,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: B。"
     },
     {
@@ -468,7 +468,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "E",
-          "text": "E) DISCOTECA FARAON"
+          "text": "E) DISCOTECA FARAÓN"
         },
         {
           "key": "F",
@@ -489,7 +489,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de ingles, frances y aleman. D. MUSEO — Abierto todos los dias de 08:00 a 12:00. E. DISCOTECA FARAON — La mejor musica con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
+      "cuerpo": "A. CINE ALBAS — Sesiones especiales STAR WARS. B. ESTOY EN PARO — Busco trabajo. Tlf: 657 291 123. C. ESCUELA DE IDIOMAS — Clases de inglés, francés y alemán. D. MUSEO — Abierto todos los días de 08:00 a 12:00. E. DISCOTECA FARAÓN — La mejor música con DJ Javi Jefe. F. NO ESCRIBIR EN LA PIZARRA. G. NO ESTOY EN CASA, TRABAJANDO EN LA OFICINA. H. VIAJE A TENERIFE — Del 29 julio al 8 agosto. Precio: 425 euros. I. VENDO COCHES Y MOTOS — Buen precio.",
       "explanation": "正确答案: E。"
     },
     {
@@ -503,7 +503,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         17
       ],
       "answer": "H",
-      "prompt": "Dos amigas de 18 anos. Una semana en una isla con musica y baile.",
+      "prompt": "Dos amigas de 18 años. Una semana en una isla con música y baile.",
       "options": [
         {
           "key": "A",
@@ -544,7 +544,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: H。"
     },
     {
@@ -599,7 +599,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: A。"
     },
     {
@@ -654,7 +654,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: F。"
     },
     {
@@ -668,7 +668,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         17
       ],
       "answer": "E",
-      "prompt": "Viajo con mi marido en invierno. Es mas barato.",
+      "prompt": "Viajo con mi marido en invierno. Es más barato.",
       "options": [
         {
           "key": "A",
@@ -709,7 +709,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: E。"
     },
     {
@@ -723,7 +723,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         17
       ],
       "answer": "B",
-      "prompt": "Abuelos con nieta de 6 anos. Algo especial para ella.",
+      "prompt": "Abuelos con nieta de 6 años. Algo especial para ella.",
       "options": [
         {
           "key": "A",
@@ -764,7 +764,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: B。"
     },
     {
@@ -819,7 +819,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice9",
       "_v5": true,
-      "cuerpo": "A. Camino de Santiago — Tres meses norte Espana. B. Disneyland — Paraiso de los ninos. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 dias hotel playa, piscina, familia. G. Pirineos — 3 dias montana, naturaleza. H. Ibiza — Fiesta 7 dias, jovenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
+      "cuerpo": "A. Camino de Santiago — Tres meses norte España. B. Disneyland — Paraíso de los niños. C. Valencia — Deportistas: correr, nadar, tenis. D. San Sebastian — Cocinero mundialmente conocido. E. Paris — Hotel con jardin. Ofertas parejas enero-febrero. F. Mallorca — 7 días hotel playa, piscina, familia. G. Pirineos — 3 días montana, naturaleza. H. Ibiza — Fiesta 7 días, jóvenes, conciertos. I. Sevilla — Visita cultural 1 dia. 25 euros.",
       "explanation": "正确答案: G。"
     },
     {
@@ -837,7 +837,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Paraiso"
+          "text": "A) Paraíso"
         },
         {
           "key": "B",
@@ -850,7 +850,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: A。"
     },
     {
@@ -868,7 +868,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Paraiso"
+          "text": "A) Paraíso"
         },
         {
           "key": "B",
@@ -881,7 +881,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: B。"
     },
     {
@@ -912,7 +912,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: C。"
     },
     {
@@ -926,7 +926,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "C",
-      "prompt": "En el hotel Paraiso...",
+      "prompt": "En el hotel Paraíso...",
       "options": [
         {
           "key": "A",
@@ -934,7 +934,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "B",
-          "text": "B) los ninos pagan menos"
+          "text": "B) los niños pagan menos"
         },
         {
           "key": "C",
@@ -943,7 +943,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: C。"
     },
     {
@@ -969,12 +969,12 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "C",
-          "text": "C) esta muy bien para ninos"
+          "text": "C) esta muy bien para niños"
         }
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: A。"
     },
     {
@@ -992,7 +992,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Paraiso"
+          "text": "A) Paraíso"
         },
         {
           "key": "B",
@@ -1005,7 +1005,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1019,11 +1019,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "B",
-      "prompt": "En verano pagas mas en el hotel:",
+      "prompt": "En verano pagas más en el hotel:",
       "options": [
         {
           "key": "A",
-          "text": "A) Paraiso"
+          "text": "A) Paraíso"
         },
         {
           "key": "B",
@@ -1036,7 +1036,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: B。"
     },
     {
@@ -1054,7 +1054,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [
         {
           "key": "A",
-          "text": "A) Paraiso"
+          "text": "A) Paraíso"
         },
         {
           "key": "B",
@@ -1067,7 +1067,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "cuerpo": "HOTEL PARAISO: Familiar. Piscina, jardines, juegos infantiles. Cerca estacion trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafeteria en recepcion. HOTEL IRIS: Jovenes 16-20 anos. Centro Madrid, cerca monumentos. Cocina compartida.",
+      "cuerpo": "HOTEL PARAÍSO: Familiar. Piscina, jardines, juegos infantiles. Cerca estación trenes. Restaurante abierto manana, tarde y noche. HOTEL MILENIO: Individuales. Zona industrial. Empresarios. Cerca aeropuerto. Cafetería en recepción. HOTEL IRIS: Jóvenes 16-20 años. Centro Madrid, cerca monumentos. Cocina compartida.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1081,7 +1081,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         5
       ],
       "answer": "C",
-      "prompt": "Conversacion 1: Que va a comer la mujer?",
+      "prompt": "Conversación 1: Que va a comer la mujer?",
       "options": [
         {
           "key": "A",
@@ -1098,7 +1098,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Camarero: Buenos dias, que va a comer? Mujer: Quiero el pescado con patatas y verduras. Camarero: Perfecto, el pescado esta muy bueno hoy.",
+      "transcript": "Camarero: Buenos días, que va a comer? Mujer: Quiero el pescado con patatas y verduras. Camarero: Perfecto, el pescado esta muy bueno hoy.",
       "explanation": "正确答案: C。"
     },
     {
@@ -1112,7 +1112,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         5
       ],
       "answer": "B",
-      "prompt": "Conversacion 2: A que se dedica el hombre?",
+      "prompt": "Conversación 2: A que se dedica el hombre?",
       "options": [
         {
           "key": "A",
@@ -1143,7 +1143,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         5
       ],
       "answer": "A",
-      "prompt": "Conversacion 3: Que quiere comprar la mujer?",
+      "prompt": "Conversación 3: Que quiere comprar la mujer?",
       "options": [
         {
           "key": "A",
@@ -1160,7 +1160,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice3",
       "_v5": true,
-      "transcript": "Mujer: Buenos dias, quiero comprar un vestido para una fiesta. Dependiente: Tenemos vestidos muy bonitos en la seccion de senoras.",
+      "transcript": "Mujer: Buenos días, quiero comprar un vestido para una fiesta. Dependiente: Tenemos vestidos muy bonitos en la sección de senoras.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1174,7 +1174,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         5
       ],
       "answer": "B",
-      "prompt": "Conversacion 4: Que cosa no tiene la mujer?",
+      "prompt": "Conversación 4: Que cosa no tiene la mujer?",
       "options": [
         {
           "key": "A",
@@ -1205,7 +1205,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         5
       ],
       "answer": "A",
-      "prompt": "Conversacion 5: Que quiere beber el chico?",
+      "prompt": "Conversación 5: Que quiere beber el chico?",
       "options": [
         {
           "key": "A",
@@ -1273,7 +1273,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Mensaje 1: La exposicion del museo esta abierta todos los dias de ocho de la manana a doce del mediodia.",
+      "transcript": "Mensaje 1: La exposición del museo esta abierta todos los días de ocho de la manana a doce del mediodia.",
       "explanation": "正确答案: D。"
     },
     {
@@ -1375,7 +1375,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Mensaje 3: Discoteca Faraon. La mejor musica con nuestro DJ Javi Jefe. Os esperamos!",
+      "transcript": "Mensaje 3: Discoteca Faraón. La mejor música con nuestro DJ Javi Jefe. Os esperamos!",
       "explanation": "正确答案: E。"
     },
     {
@@ -1477,7 +1477,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Mensaje 5: Escuela de idiomas. Clases de ingles, frances y aleman para todos los niveles.",
+      "transcript": "Mensaje 5: Escuela de idiomas. Clases de inglés, francés y alemán para todos los niveles.",
       "explanation": "正确答案: C。"
     },
     {
@@ -1491,11 +1491,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "D",
-      "prompt": "Marta: Que informacion corresponde?",
+      "prompt": "Marta: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1515,7 +1515,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1540,7 +1540,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: D。"
     },
     {
@@ -1554,11 +1554,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "C",
-      "prompt": "Pedro: Que informacion corresponde?",
+      "prompt": "Pedro: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1578,7 +1578,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1603,7 +1603,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: C。"
     },
     {
@@ -1617,11 +1617,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "J",
-      "prompt": "Juan: Que informacion corresponde?",
+      "prompt": "Juan: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1641,7 +1641,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1666,7 +1666,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: J。"
     },
     {
@@ -1680,11 +1680,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "A",
-      "prompt": "Eva: Que informacion corresponde?",
+      "prompt": "Eva: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1704,7 +1704,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1729,7 +1729,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: A。"
     },
     {
@@ -1743,11 +1743,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "B",
-      "prompt": "Carlos: Que informacion corresponde?",
+      "prompt": "Carlos: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1767,7 +1767,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1792,7 +1792,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: B。"
     },
     {
@@ -1806,11 +1806,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "G",
-      "prompt": "Cristina: Que informacion corresponde?",
+      "prompt": "Cristina: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1830,7 +1830,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1855,7 +1855,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: G。"
     },
     {
@@ -1869,11 +1869,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "H",
-      "prompt": "Roberto: Que informacion corresponde?",
+      "prompt": "Roberto: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1893,7 +1893,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1918,7 +1918,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: H。"
     },
     {
@@ -1932,11 +1932,11 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         18
       ],
       "answer": "K",
-      "prompt": "Maria: Que informacion corresponde?",
+      "prompt": "Maria: Que información corresponde?",
       "options": [
         {
           "key": "A",
-          "text": "A) Le gusta ver peliculas"
+          "text": "A) Le gusta ver películas"
         },
         {
           "key": "B",
@@ -1956,7 +1956,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         },
         {
           "key": "F",
-          "text": "F) Tiene muchos anos"
+          "text": "F) Tiene muchos años"
         },
         {
           "key": "G",
@@ -1981,7 +1981,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice11",
       "_v5": true,
-      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple anos en abril, en primavera. Pedro es de Francia, vino a Espana hace tres anos. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al futbol y al tenis. Cristina vive con su novio desde hace dos anos. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
+      "transcript": "Hoy voy a hablar de mis amigos. Marta cumple años en abril, en primavera. Pedro es de Francia, vino a España hace tres años. A Juan le encanta comprar por Internet, siempre recibe paquetes. A Eva le gusta mucho el cine, vamos juntos todos los viernes. Carlos es muy deportista, juega al fútbol y al tenis. Cristina vive con su novio desde hace dos años. Roberto tiene una tienda de frutas en el mercado. Maria es muy religiosa, va a la iglesia todos los domingos.",
       "explanation": "正确答案: K。"
     },
     {
@@ -2032,7 +2032,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: D。"
     },
     {
@@ -2046,7 +2046,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "A",
-      "prompt": "El sillon es ........",
+      "prompt": "El sillón es ........",
       "options": [
         {
           "key": "A",
@@ -2083,7 +2083,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: A。"
     },
     {
@@ -2097,7 +2097,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "G",
-      "prompt": "A Claudia le gusta ........ en el sillon.",
+      "prompt": "A Claudia le gusta ........ en el sillón.",
       "options": [
         {
           "key": "A",
@@ -2134,7 +2134,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: G。"
     },
     {
@@ -2148,7 +2148,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "F",
-      "prompt": "La habitacion de su ........ es muy grande.",
+      "prompt": "La habitación de su ........ es muy grande.",
       "options": [
         {
           "key": "A",
@@ -2185,7 +2185,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: F。"
     },
     {
@@ -2199,7 +2199,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         25
       ],
       "answer": "E",
-      "prompt": "Claudia quiere tener una ........ moderna en el bano.",
+      "prompt": "Claudia quiere tener una ........ moderna en el baño.",
       "options": [
         {
           "key": "A",
@@ -2236,7 +2236,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: E。"
     },
     {
@@ -2287,7 +2287,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: H。"
     },
     {
@@ -2338,7 +2338,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       ],
       "type": "choice8",
       "_v5": true,
-      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos anos pero es muy comodo. Claudia: Y el sillon? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillon. Es muy comodo para la siesta. Alberto: La habitacion de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el bano. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
+      "transcript": "Alberto: Claudia, que te parece el sofa nuevo? Claudia: Me gusta, pero es un poco viejo. De quien es? Alberto: Es de mi abuela. Tiene muchos años pero es muy cómodo. Claudia: Y el sillón? Es azul! Me encanta el color azul. Alberto: Si, lo compre la semana pasada. Quieres sentarte? Claudia: Si, me gusta dormir en el sillón. Es muy cómodo para la siesta. Alberto: La habitación de nuestro hijo es muy grande. Claudia: Si, quiero poner una ducha moderna en el baño. Alberto: Buena idea. Por cierto, voy a buscar un trabajo nuevo. Claudia: Y yo quiero vender tus camisetas viejas.",
       "explanation": "正确答案: C。"
     },
     {
@@ -2352,12 +2352,12 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         1
       ],
       "answer": "",
-      "prompt": "Rellenar formulario de casting para la pelicula El Salvador",
+      "prompt": "Rellenar formulario de casting para la película El Salvador",
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Rellene el formulario con su informacion personal.",
-      "modelo_essay": "Nombre: Maria Garcia. Apellidos: Garcia Lopez. Edad: 28. Correo: maria@email.es. Direccion: Calle Mayor 15, Madrid. Color de ojos: Marrones. Color de pelo: Castano. A que te dedicas?: Profesora de espanol. Que idiomas?: Espanol e ingles. Que te gusta hacer?: Leer, viajar, hacer deporte. Tienes transporte?: Si, coche.",
+      "instrucciones": "Rellene el formulario con su información personal.",
+      "modelo_essay": "Nombre: María García. Apellidos: García López. Edad: 28. Correo: maria@email.es. Dirección: Calle Mayor 15, Madrid. Color de ojos: Marrones. Color de pelo: Castaño. ¿A qué te dedicas?: Profesora de español. ¿Qué idiomas?: Español e inglés. Que te gusta hacer?: Leer, viajar, hacer deporte. Tienes transporte?: Si, coche.",
       "rango_palabras": "Formulario"
     },
     {
@@ -2375,8 +2375,8 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "options": [],
       "type": "writing",
       "_v5": true,
-      "instrucciones": "Escriba un anuncio: zona, tipo de trabajo, dias, contacto. 30-40 palabras.",
-      "modelo_essay": "Hola! Busco trabajo en Barcelona centro. Me interesa tienda de ropa o restaurante. Puedo trabajar lunes a viernes por las mananas. Escribidme a ana@email.es o llamadme al 654 321 987. Gracias!",
+      "instrucciones": "Escriba un anuncio: zona, tipo de trabajo, días, contacto. 30-40 palabras.",
+      "modelo_essay": "Hola! Busco trabajo en Barcelona centro. Me interesa tienda de ropa o restaurante. Puedo trabajar lunes a viernes por las mañanas. Escribidme a ana@email.es o llamadme al 654 321 987. Gracias!",
       "rango_palabras": "30-40"
     },
     {
@@ -2390,12 +2390,12 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         1
       ],
       "answer": "",
-      "prompt": "Presentacion personal (1-2 minutos)",
+      "prompt": "Presentación personal (1-2 minutos)",
       "options": [],
       "type": "speaking",
       "_v5": true,
       "instrucciones": "Hable sobre usted: nombre, edad, pais, estudios, trabajo.",
-      "modelo_response": "Hola, buenos dias. Me llamo Carlos y tengo 25 anos. Soy de Mexico y vivo en Madrid. Estudie Administracion de Empresas y trabajo en una oficina. Me gusta mucho el futbol y viajar. Hablo espanol y un poco de ingles. Muchas gracias."
+      "modelo_response": "Hola, buenos días. Me llamo Carlos y tengo 25 años. Soy de Mexico y vivo en Madrid. Estudie Administracion de Empresas y trabajo en una oficina. Me gusta mucho el fútbol y viajar. Hablo español y un poco de inglés. Muchas gracias."
     },
     {
       "modelo": "nuevo_m1",
@@ -2413,7 +2413,7 @@ window.DELE_BANK_A1_NUEVO_M1 = {
       "type": "speaking",
       "_v5": true,
       "instrucciones": "Describa su familia: miembros, edades, gustos.",
-      "modelo_response": "Voy a hablar de mi familia. Somos cinco: mi padre Antonio (52, banco), mi madre Elena (50, medica), mi hermana Lucia (28, arquitecta), mi hermano Pablo (16, estudiante) y yo. Todos los domingos comemos juntos en casa de mis abuelos. Mi familia es muy importante para mi."
+      "modelo_response": "Voy a hablar de mi familia. Somos cinco: mi padre Antonio (52, banco), mi madre Elena (50, médica), mi hermana Lucia (28, arquitecta), mi hermano Pablo (16, estudiante) y yo. Todos los domingos comemos juntos en casa de mis abuelos. Mi familia es muy importante para mi."
     },
     {
       "modelo": "nuevo_m1",
@@ -2426,12 +2426,12 @@ window.DELE_BANK_A1_NUEVO_M1 = {
         3
       ],
       "answer": "",
-      "prompt": "Conversacion: Aficiones y planes futuros",
+      "prompt": "Conversación: Aficiones y planes futuros",
       "options": [],
       "type": "speaking",
       "_v5": true,
       "instrucciones": "Converse sobre sus aficiones y planes.",
-      "modelo_response": "Me gusta hacer deporte. Juego al futbol dos veces por semana. Tambien me gusta leer novelas de misterio. En el futuro quiero hacer un master en marketing digital y viajar a Italia. Creo que las redes sociales son utiles pero hay que usarlas con moderacion."
+      "modelo_response": "Me gusta hacer deporte. Juego al fútbol dos veces por semana. También me gusta leer novelas de misterio. En el futuro quiero hacer un master en marketing digital y viajar a Italia. Creo que las redes sociales son utiles pero hay que usarlas con moderacion."
     }
   ]
 };
