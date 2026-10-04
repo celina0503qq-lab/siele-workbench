@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v81-2026100418';
+window.swVer = 'v82-2026100418';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6461,6 +6461,7 @@ function _bankAdminTools(){
   return '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:6px 0;padding:6px 8px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px">'+
     '<button class="btn xs pr" onclick="_bankInlineAdd()" style="font-size:11px">➕ 加题</button>'+
     '<button class="btn xs dgr" onclick="_bankInlineDel()" style="font-size:11px">✕ 删此题</button>'+
+    '<button class="btn xs dgr" onclick="_bankResetCloud()" style="font-size:11px">☁ 恢复内置题库</button>'+
     _bankEditBtn('q','题干')+
     _bankEditBtn('title','标题')+
     _bankEditBtn('model','范文')+
@@ -6468,6 +6469,19 @@ function _bankAdminTools(){
     _bankEditBtn('sec','时长')+
     '<span class="sub" style="font-size:10px;color:#64748b">就地编辑，保存后覆盖所有用户</span>'+
   '</div>';
+}
+// S9: 清除云端 oralbank 覆盖，恢复代码内置最新题库（覆盖写为 {bank:null}，双分支自动回退；审计留痕可撤销）
+window._bankResetCloud = function(){
+  if(!isContentAdmin()) return;
+  var msg = '确认清除云端 oralbank 覆盖数据？\n\n清除后所有用户立即使用代码内置最新题库（T1 32 / T2 142 / T3 73 / T4 34 / T5 34 题）。\n此操作会写入审计日志，可在内容编辑历史中撤销。';
+  if(!confirm(msg)) return;
+  try{
+    window._deleSyncContentEdits('oralbank', {bank: null});
+    window._contentEdits.oralbank = {bank: null};
+    _sieleOralIdx = 0; _sieleOralShown = false;
+    toast('已清除云端覆盖，恢复内置题库');
+    save(); renderMain();
+  }catch(e){ toast('操作失败：'+(e&&e.message||e)); }
 }
 let _sieleOralTarea=1,_sieleOralIdx=0,_sieleOralRecognition=null,_sieleOralRecording=false,_sieleOralShown=false,_sieleOralTimer=null,_sieleOralLeft=0,_sieleOralTranscript='';
 function getSieleOralItem(){var bank=getSieleOralViewBank();if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
