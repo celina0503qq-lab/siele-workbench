@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v86-2026100422';
+window.swVer = 'v87-2026100423';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -4842,8 +4842,21 @@ function migrateWritingKeys(){
 
 // 获取最终写作任务列表（管理员编辑 > 默认）
 function getWritingTasks(){
+  // v87: 去重合并（代码为基 + 云端按下标覆盖同名/追加新增），防「云端完全覆盖」导致代码新增任务丢失
   var ed = window._contentEdits && window._contentEdits.writing;
-  return (ed && ed.tasks && ed.tasks.length) ? ed.tasks : WRITING_TASKS;
+  var cloud = (ed && ed.tasks && ed.tasks.length) ? ed.tasks : null;
+  if(!cloud) return WRITING_TASKS;
+  var out = WRITING_TASKS.slice();
+  for(var i=0;i<cloud.length;i++){
+    var c = cloud[i];
+    if(!c) continue;
+    if(i < out.length){                       // 同下标：云端覆盖代码
+      out[i] = Object.assign({}, out[i], c);
+    } else {
+      out.push(c);                             // 云端更长：追加新增
+    }
+  }
+  return out;
 }
 
 // 获取某任务的范文（合并默认 + 管理员，用户范文文本优先）
@@ -10921,9 +10934,27 @@ Para terminar, es necesario prestar mucha mayor atención a otros tipos de probl
 
 // 获取最终范文库列表（管理员编辑 > 默认）
 function getWritingEssays(){
+  // v87: 去重合并（代码为基 + 云端按 id 覆盖同名/追加新增），防「云端完全覆盖」导致代码新增范文丢失
   const ed = window._contentEdits && window._contentEdits.essays;
-  if(ed && ed.list && ed.list.length) return ed.list;
-  return SIELE_WRITING_ESSAYS;
+  const cloud = (ed && ed.list && ed.list.length) ? ed.list : null;
+  if(!cloud) return SIELE_WRITING_ESSAYS;
+  const out = SIELE_WRITING_ESSAYS.slice();
+  const idx = {};
+  out.forEach(function(e, i){ if(e && e.id) idx[e.id] = i; });
+  const seen = {};
+  cloud.forEach(function(c){
+    if(!c) return;
+    const id = c.id;
+    if(id && idx[id] !== undefined && !seen[id]){   // 同 id：云端覆盖代码
+      out[idx[id]] = c; seen[id] = 1;
+    } else if(id && idx[id] !== undefined && seen[id]){
+      out.push(c);                                   // 重复 id 的额外条：追加
+    } else {
+      if(id) idx[id] = out.length;                   // 新增：追加
+      out.push(c);
+    }
+  });
+  return out;
 }
 
 // ===== 范文库管理员编辑（content_edits.essays，增删改） =====
