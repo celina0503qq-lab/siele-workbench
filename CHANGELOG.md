@@ -2,6 +2,295 @@
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+
+## [v87] – 2026-10-04
+
+### content_edits 读取函数加固（去重合并，防云端覆盖阴影）
+
+- `getWritingTasks()` 由「云端有值即完全覆盖代码」改为**按下标去重合并**（代码 `WRITING_TASKS` 为基，云端同下标字段 `Object.assign` 覆盖同名、云端更长则追加新增）
+- `getWritingEssays()` 改为**按 id 去重合并**（代码为基，云端同 id 覆盖、新 id 追加）；`getConjVerbs()` 本为合并型未动
+- 背景：云端 `content_edits` 存过快照后代码新增对登录用户不可见（oralbank 化石事故同源）；v86 已加固 speakingTopics，本版补全 writing/essays
+- swVer / SW CACHE 成对顶版 `v87-2026100423`；行为测试 8/8 通过
+
+## [v86] – 2026-10-04
+
+### speakingTopics 治理 + 读取函数加固（首例去重合并）
+
+- `SPEAKING_TOPICS` **10 → 16 条**：并入原云端 6 条真扩充（mercado / oficina / reciclaje / tecnología / encuesta de lectura / biblioteca），`essay` 字段不预置（原文为早期自动生成劣质范文）
+- `getSpeakingTopics()` 由「云端有值即完全覆盖」改为**按 topic 去重合并**（代码为基 + 云端同名覆盖 / 新增追加 + 跳过空键与垃圾键 `cf`）
+- 同步清理云端 `content_edits.speakingTopics`（17 条 2026-08-14 旧快照，含 `cf` 垃圾）与 `oral`（5 tareas，与代码逐字一致），`edits` 置 `{}` 回落静态代码 —— 全量备份后执行，非破坏性
+- swVer / SW CACHE 成对顶版 `v86-2026100422`；行为测试 3/3 通过
+
+## [v85] – 2026-10-04
+
+### 仓库品牌词清理（来源标注去品牌化）
+
+- 全仓来源标注清理 **122 处**（第三方内容自认式表述 → 中性「复习资料」）
+- ⚠️ git 历史仍含旧词（彻底清除需 force-push 重建历史）
+
+## [v84] – 2026-10-04
+
+### SIELE 口语 T2 同图题合并视图
+
+- 142 题 → **51 卡片**（29 个多题组，最大 `oficina` 一图 17 个变体）
+- 组内 A/B/C 切范文浏览
+
+## [v83] – 2026-10-04
+
+### SIELE 口语 T3 PDF 全文对标
+
+- 39 题 `esTitle` / `zhExplain` 更新为 PDF 原文 + `q` / `model` 注入 PDF 原文
+- 新增 3 题（换班级 / 取消周末计划 / 通知婚礼）
+
+## [v82] – 2026-10-04
+
+### 题库管理：一键恢复内置题库
+
+- `_bankAdminTools` 新增「☁ 恢复内置题库」按钮（admin 一键写 `edits={bank:null}`，前端双分支回退内置 `SIELE_ORAL_BANK`）
+- 修题库重音 3 处
+
+## [v81] – 2026-10-04
+
+### SIELE 口语 T2/T3 分类过滤视图 + 断链修复
+
+- 新增分类过滤视图（`_sieleOralFilter` / `getSieleOralViewBank()`）
+- 修 T2 断链 4 题（`t2-café`×3、`t2-balcón`×1）；修 id 笔误 `t2-libreria-82 → 83`
+- 修 T4/T5 topic 重音匹配；`photo_mapping.json` → 47
+
+## [v80] – 2026-10-04
+
+### SIELE 口语 T3 全量补齐 + 音频先行修复
+
+- T3 全量 73 题三件套（`SIELE_T3_META` 静态 / 云端双分支注入）
+- 音频先行修复（进题零泄露）；删重复题 `plant-care`
+
+## [v79] – 2026-10-04
+
+### SIELE 口语 T3 补缺口 + 回忆卡限域
+
+- T3 补 PDF 缺口新题 `t3-reject-offer`；删重复题 `pet-care`
+- 回忆卡限 T2；双语标题 B 布局；`genSpeakingEssay` 停用低质模板预填
+
+## [v78] – 2026-10-04
+
+### index 阅读文系统性缺失重音修复（149 处）
+
+- `READING_ARTICLES`（14 篇）+ `READING_LONGFORM`（4 篇）整数据集系统性缺重音（远超外部估计的 ~20 处）
+- 修复 **149 处**（区域限定）：词边界整词 133 处（cafe→café、dia→día、mas→más×20、tambien、educacion、America…）+ 精确短语 16 处（`esta→está` 动词 8 处 / 指示词 3 处保留；`hacia→hacía` 动词 4 处 / 介词 1 处保留；`en si mismo→en sí mismo`×3）
+- `solo`×17 按现代 RAE 不加重音（不动）；区域外残留经核实全为必须保留的代码标记
+- swVer / SW CACHE `v78-2026100406`
+
+## [v77] – 2026-10-04
+
+### SIELE 口语 S6 P0 全量修复
+
+- T2 虚拟式 **142 篇**、重音 **330 处**、主谓一致（`se aprecia→vemos` / `cabe destacar`）、T3 错字 31 处、T3 双语副题 + 连接词 25 篇 31 处
+- ⚠️ 本版发现云端 `oralbank` 化石覆盖（v73 旧库遮蔽 v74–v77 修复，登录用户不可见）
+
+## [v76] – 2026-10-04
+
+### SIELE 口语 S4：进度游标跨设备
+
+- 口语进度游标跨设备（T1–T5 按 qid、双通道 LWW 合并）；单元测试 10/10
+
+## [v75] – 2026-10-04
+
+### SIELE 口语 S3：T2 图片修复
+
+- T2 图片 404 修复（2 处带重音路径）；T2 无图题 21 → 0（16 挂图 + AI 生成 5 张）
+- 6 条占位改写；T2 主题 10 大类 + 按主题跳转
+
+## [v74] – 2026-10-04
+
+### SIELE 口语 S1+S2：数据重音 + 真实录音识别
+
+- `siele_oral.js` **180 处**重音（23 类：fotografía×119、están×69…，CRLF 493 保真）
+- DELE 口语接入真实录音识别（SpeechRecognition es-ES）
+
+## [v73] – 2026-10-04
+
+### DELE 批次 A+B
+
+- 13 个题库文件 **540 处**重音 / 人名修正（mas→más / ano→año / Lucía / María…）
+- DELE 口语文本评分 `_deleCalcSpeakingScore`、全真模拟计时条、A1 广告写作评分入口、form_fill 自动保存
+
+## [v72.1] – 2026-10-04
+
+### 测试报告 P1/P2 收尾（工程项续批）
+
+- 错题空分类 tab 隐藏
+- sw2 完整性校验（Content-Length 不符或 HTML 缺尾标记 → 不落缓存）
+
+## [v72] – 2026-10-04
+
+### 测试报告 P1 数据清洗 + P1 工程 + P2 批量
+
+- **数据清洗**：断词连字 **342** 处（全落 QDATA 区，0 代码误伤）；`basico→básico` 248 处；主题标签合并 8 对；口语范文重音 **246** 处
+- **工程**：判题文案统一 + 乱序后字母对齐；`updateStreak` 打卡日历纠偏（streak 重置口径）；`mergeWbSnapshot` 尾部定向刷新统计卡 DOM；SW 首访不 reload；同步芯片 25s 看门狗；learner 隐藏后台快捷入口
+- **P2**：考试类型下拉 DELE/SIELE；toast err 红色 + 自定义时长参数；未授权提示 5s；西班牙按钮 nowrap；T2 模板提示全角标点；README 4866→4815
+- 推送六文件（index / sw2 / siele_oral / vdata_batch2 / vdata_batch3 / README），全部 PUT 前重取线上 sha 保护
+
+## [v71] – 2026-10-03
+
+### 外部测试报告 3 个 P0 修复
+
+- **P0-1 版本自检失效**：横幅「检测到新版本」全员永动误报 —— `window.swVer` 提为文档头部单一真源，SW 注册 / `pageVer` 回退 / 页脚两处全部动态引用（发版从此只改 `window.swVer` + sw2 CACHE 两处）
+- **P0-2 题库第 1 题数据错位**：题干尾游离 `presentación` 删除；选项 `carta de` → `carta de presentación`
+- **P0-3 版本号统一**：页脚 / 自检 / 注册全归 `window.swVer`
+- 顺带修：词汇例句 `entre`、外刊 `vuelven→vuelve`（主谓一致）、词头前导空格
+
+## [v70] – 2026-10-03
+
+### 范文修复 + 听力 TTS + 口语 keys 对齐
+
+- **范文修复**：wt5 56→76 词、wt10 68→76 词、wt13 62→78 词（14 篇平均 84.1）；提分杠杆 = 每 +1 种连接词 +4 / +1 虚拟触发 +4
+- **听力 TTS 修复**：根因 = 按钮把含【听力】前缀的 `q.q` 直接传 `speak()` → mp3 key 不命中 → 华为硬闸「TTS不可用」；修法 = 按钮 `data-es` 存去前缀文本 + `_quizSpeakListening` helper；9 条现存题预生成 mp3
+- **口语 keys 对齐**：T1 9 条补模板句；T2 4 条微调（`t2-grupo` 须改 `conclusion` 字段，`model` 由 `makeT2Model` 运行时重建）
+
+## [v69] – 2026-10-03
+
+### 共享评分核心 + RAE 词典扩充 + 管理员词典管理
+
+- `_wbScore` 统一评分核心（`_WB_CONN` 102 连接词 + `_WB_SUBJ` 51 虚拟式）
+- RAE 词典扩充 + 管理员词典管理面板（`lexicon` 命名空间，零发版）
+
+## [v67–v68] – 2026-10-03
+
+### 写作评分引擎修复 + 共享评分核心
+
+- 写作评分引擎修复上线（lili 实测）；`_wbScore` 统一评分核心建立
+
+## [v66] – 2026-10-03
+
+### 写作练习 / SIELE 口语 评分动画
+
+- 写作练习与 SIELE 口语评分动画上线
+
+## [v65] – 2026-10-03
+
+### 视觉动效升级（成长树美化 + 完成仪式 + 三态反馈）
+
+- `celebrate()` / `cry()` 整函数替换为真实 Canvas 粒子引擎（火箭→爆炸→重力→衰减），五档烟花 + L2.5 救赎
+- 选项三态：选中蓝脉冲 / 正确绿弹跳 / 错误红抖动；完成页按 pct 分档（≥90 / ≥60）
+- 成长树：**emoji 本体一字不动**，仅追加第 10/11 阶树冠挂饰（🌸/🍎）+ 花瓣飘落（纯 CSS）
+- **v65b hotfix**：`<style id="v65fx">` 与 canvas 撞 id → `getContext is not a function` 致动画全灭；改 id + 全链 try-catch + 恢复大号 emoji 弹跳（L0 😢 / L1 🎉 / L2 🎊 / L3 ✨ / L4 🏆）
+
+## [v64] – 2026-10-03
+
+### 外刊 TTS 音频回填 20 期 + 跨口音回退
+
+- 08-02…09-18 共 20 期外刊段落/单词预生成 mp3（修微信内置浏览器无声：webview 无西语引擎）
+- 每文本只留一种口音（djb2 奇偶确定选 la/es），删 1509 个重复口音文件 = **−87.4 MB** → 2012 个 mp3 / 109.7 MB
+- `_ttsPlayMp3` 首选口音未命中 → 回退另一口音（跨口音回退）；swVer / CACHE `v64-2026100301`
+
+## [v63] – 2026-10-03
+
+### 重置纪元传播（根治数据复活）
+
+- `_vocabWipeLocal(now)` 提取（纯 ST 域清空 + epoch + floor 键）
+- `mergeWbSnapshot` / `hydrate` 开头加 epoch-adopt：`remote.vocabResetAt > 本端 floor` ⇒ 就地重置 + 采纳纪元（任何设备拉到新纪元自动归零，不再 max 合并保旧）
+- 根因：僵尸标签页再推旧数据 + max/union 合并规则对「清空」天然不友好
+
+## [v62] – 2026-10-03
+
+### 默写本轮快照 + 重置守卫加固
+
+- `ST.dictationPending`（本轮去重累积）：默写词表 = 自上次默写以来评过级的全部词，一字不差
+- 重置守卫加固：`_vocabResetFloor()` = max(ST.vocabResetAt, localStorage `swa_vocab_reset_floor_v1`)；**hydrate 补守卫**（v61 只护 `mergeWbSnapshot`，hydrate 白名单曾整体绕过）
+- swVer / CACHE `v62-2026100203`
+
+## [v61] – 2026-10-02
+
+### 天气徽章 + 单词卡片「重置学习进度」
+
+- 成长树健康档由植物视觉改为**天气版**（阳光明媚 / 多云转晴 / 阴天 / 连日阴雨）
+- 单词卡片新增「↺ 重置学习进度」按钮：`ST.vocabResetAt` 重置水线，`mergeWbSnapshot(remote, wbTs)` 第 2 参（3 个调用点全改），云端快照 ts 早于水线时剥离词卡域 11 字段
+
+## [v60] – 2026-10-02
+
+### 成长树 2.0（11 阶 + 健康窗 + 救赎）
+
+- 成长树 2.0 上线：11 阶、健康窗、错词救赎链路；lili 线上实测全通过（救赎端到端：`redeemed` → mastery 2→3 → 待救赎 16→15）
+
+## [v59] – 2026-10-01
+
+### 番茄钟全面可爱化
+
+- 进度动画鲜明化：「咬痕虚线」跟随切割位置移动（`tomatoBiteLine`）
+- 脸跟番茄走（`tomatoFace` 移入 clip 组）；汁水阶段 `tomatoDizzy` 星星效果；按钮 emoji 化（🍅 开始 / 🔄 重置）；计数「今日🍅」
+
+## [v58] – 2026-10-01
+
+### 番茄钟可爱化 + v57 按钮状态 bug 修复
+
+- 番茄 SVG 加「眯眯眼 + 腮红 + 微笑嘴」（避开中央时间文字区）；标题 ⏱→🍅
+- 修 v57 授权按钮不绿：`adminListUsers` 返回用户对象硬编码三键 → 映射补 `sieleSpecial` / `writing` / `oral`
+
+## [v57] – 2026-10-01
+
+### 授权制扩展 + 资料地图管理员专属 + 跟读分页
+
+- SIELE 专项 / 写作练习 / 口语话题 → 管理员授权制（云函数 `USER_FLAG_KEYS` +3 + `getUserFlags` +3 + NAV `reqFlag` + admin 勾选框）
+- 资料地图改为管理员专属（非管理员踢回仪表盘）
+- 跟读训练分页（每页 6 条 + 上/下一页 + 筛选重置页码）
+
+## [v56] – 2026-10-01
+
+### 跟读逐词分析渲染 + 后台备份补工作台进度
+
+- `scoreShadow` 追加渲染 `${v2.wordDetail || ''}`（v53 起 `calcScore` 已返回 wordDetail HTML，从未渲染）
+- 后台导出备份 payload 加 `wb` 域（`dele_siele_wb_v3`）；v:1→v:2；导入回写 + 提示刷新主站
+- S2/S3 云函数加固（755 行版重建）：`_dbRateGuard` DB 层限流、register 邀请码 IP 限流、reset 防枚举（统一 `PWD_INVITE_MISMATCH`）、login 失败 IP 限流、全局 catch 回显移除
+
+## [v55] – 2026-10-01
+
+### 修「无西语语音设备发音 = 英语腔」根因 + 自检面板说真话
+
+- 根因：`speak()` Tier 1 在无西语语音时无条件 `_ttsSpeakOne(text,null,spec.lang)` 交给系统按 lang 兜底 → 华为拿默认音色念西语
+- `speak()` Tier 1 加硬闸：无西语语音 ⇒ `_ttsNoSpanishVoiceNotice()`，绝不落到系统默认音色；新增 `_ttsSpeakOnlineFallback`（Tier 1.5 在线取真西语音频）
+- `ttsTestAccent()` 重写（如实反映真机发音路径）；自检面板文案改绿字「✔ 自动切换到内置西语音频」+ 来源标注
+
+## [v54] – 2026-10-01
+
+### T1 全流程：预生成 mp3 音频 + 前端 Tier 0 播放
+
+- `gen_tts_audio.py`（edge-tts，双口音 la=es-MX-DaliaNeural / es=es-ES-ElviraNeural）：跟读 50 句 + 外刊 2026-09-25 期 = 276 mp3 / 12.2 MB
+- `window.__TTS_MANIFEST` 外链 + `_ttsMp3Key` / `_ttsPlayMp3`（djb2 key 前后端一致）+ `speak()` Tier 0（命中 → Audio 播放）
+- 音频 277 文件 Git Data API 原子提交；swVer / CACHE `v54-2026100101`
+
+## [v50–v53] – 2026-10-01
+
+### 外刊精炼跟读评分修复（三批上线）
+
+- **v50 批 A**：P0 修复（sc 对象拼字符串、network 特判、每日/每周精选文案）
+- **v51 hotfix**：修 v50a 回归（`recognition.onerror` 闭合 `};` 丢失 → 评分永不启动）
+- **v52 批 B**：停止按钮 + `__refineScoreLaunch`（random / para 双入口）+ 段落 🎤 入口 + `lastFinalTs` 流利度口径 + 60s 强制截断
+- **v53 批 C**：`scoreShadow` 升级 V2 引擎（`calcScore` 四维 35/25/25/15）+ `ST.refineShadowScores` 独立落盘全链路 + chip「最新」角标 + `hadError` 真实错误提示
+
+## [v49] – 2026-10-01
+
+### 移除 serena 后门
+
+- `isAdmin` 前端后门（`index.html` 14140 行）删除；后端 `requireAdmin` 兜底完好
+- swVer / CACHE 顶版；终验 44/0
+
+## [v48] – 2026-09-30
+
+### 动词变位三态角标（批 6：reír 类 + 不规则类型可视化）
+
+- `verbconj` v1.6：IRREGULAR + reír / sonreír / freír 全精校（NULL 修复；freír participio=frito）；`irregularTypeOf` 三态（full 内置精校 / partial 命中覆盖表或 -cer/-cir zc 规则 / null 纯规则）；`conj()` 返回 `irregularType`
+- index v48：`renderConjCard` 三态角标——不规则（橙 #d85a30）/ 部分不规则（琥珀）/ 规则（蓝 #185fa5）
+- `stripPronoun` 支持重音 ír 结尾（reírse / freírse 代词式 NULL 存量 bug 修复）
+
+## [v47] – 2026-09-29
+
+### 单词卡片「默写退出选项」
+
+- 每学 10 词强制弹听写，加「退出」按钮 + 勾选框「不喜欢这个模式？勾选并点退出后本设备不再自动弹出」
+- 新函数 `exitDictation`（不计错 / 不入错词库 / 清 `_dictationState`）、`isDictAutoOff` / `setDictAutoOff`；`rateFlash` 触发守卫 `%10===0 && !isDictAutoOff()`
+- 偏好键 localStorage `wb_dict_auto_off_v1`（设备级，不进云同步 schema）；手动听写入口不变
+- swVer / CACHE 顶版 `v47-2026092901`
+
 ## [v46.1] – 2026-09-28
 
 ### 会话有效期 14 天 → 7 天（云函数）
