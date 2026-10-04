@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v85-2026100421';
+window.swVer = 'v86-2026100422';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5280,7 +5280,14 @@ const SPEAKING_TOPICS = [
   {lvl:'B2', cat:'辩论', topic:'¿Estás a favor o en contra del teletrabajo? Argumenta tu postura.', zh:'你支持还是反对远程工作？论证你的立场。', prep:'使用丰富连接词，准备2分钟说3-4分钟。'},
   {lvl:'B2', cat:'抽象话题', topic:'Explica un proverbio o refrán español y da ejemplos de su significado.', zh:'解释一个西班牙谚语或俗语并举例说明其含义。', prep:'如"A buen entendedor, pocas palabras bastan"。'},
   {lvl:'B2', cat:'图片描述', topic:'Describe una foto imaginaria de una calle bulliciosa de Madrid en verano.', zh:'描述一张想象中马德里夏天繁忙街道的照片。', prep:'使用está, hay, se ve, llaman la atención等结构。'},
-  {lvl:'B2', cat:'总结', topic:'Resume un artículo o noticia que hayas leído recientemente y da tu opinión.', zh:'总结你最近读过的一篇文章或新闻并发表看法。', prep:'使用el artículo trata de, según el texto, en mi opinión。'},
+  {lvl:'B2', cat:'总结', topic:'Resume un artículo o noticia que hayas leído recientemente y da tu opinión.', zh:'总结你最近读过的一篇文章或新闻并发表看法。', prep:'使用el artículo trata de, según el texto, en mi opinión。'},,
+  // ===== v86: 并入原云端扩充的 6 条高频话题（essay 不预置，运行时按需生成）=====
+  {lvl:'B1', cat:'SIELE T3', topic:'Describe una foto de un mercado tradicional español y compara las dos opciones.', zh:'描述一张西班牙传统市场的照片并比较两个选项。', prep:'TAREA3高频话题：市场、日常生活。用se ve, hay, llama la atención描述。'},
+  {lvl:'B1', cat:'SIELE T3', topic:'Describe una imagen de una oficina moderna y elige dónde preferirías trabajar.', zh:'描述一张现代办公室图片，选择你更愿意在哪工作。', prep:'TAREA3高频话题：工作环境。比较用mientras que, en cambio。'},
+  {lvl:'B2', cat:'SIELE T1', topic:'Habla durante dos minutos sobre la importancia del reciclaje en tu ciudad.', zh:'就你所在城市回收利用的重要性独白两分钟。', prep:'TAREA1高频话题。结构：开场→要点→总结。用连接词组织。'},
+  {lvl:'B2', cat:'SIELE T1', topic:'¿Crees que la tecnología mejora o empeora nuestras relaciones sociales? Argumenta.', zh:'你认为科技改善还是恶化了我们的社交关系？论证。', prep:'TAREA1高频话题。用por un lado...por otro lado结构。'},
+  {lvl:'B2', cat:'SIELE T5', topic:'Discute sobre una encuesta sobre los hábitos de lectura de los jóvenes.', zh:'就一份关于年轻人阅读习惯的调查展开讨论。', prep:'TAREA5高频话题。用según los datos, personalmente, sin embargo。'},
+  {lvl:'B2', cat:'SIELE T3', topic:'Describe una foto de una biblioteca y elige entre leer libros físicos o digitales.', zh:'描述一张图书馆照片，选择纸质书还是电子书。', prep:'TAREA3高频话题。表达偏好：prefiero... porque。'},
 ];
 
 // Additional SIELE speaking topics
@@ -5297,9 +5304,24 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
 
 // 获取最终口语话题列表（管理员编辑 > 默认）
 function getSpeakingTopics(){
+  // v86: 去重合并（代码为基 + 云端按 topic 覆盖同名/追加新增），防「云端完全覆盖」导致代码新增话题丢失
   const ed = window._contentEdits && window._contentEdits.speakingTopics;
-  if(ed && ed.topics && ed.topics.length) return ed.topics;
-  return SPEAKING_TOPICS;
+  const cloud = (ed && ed.topics && ed.topics.length) ? ed.topics : null;
+  if(!cloud) return SPEAKING_TOPICS;
+  const key = function(t){ return String((t && t.topic) || '').trim().toLowerCase(); };
+  const out = [];
+  const seen = {};
+  SPEAKING_TOPICS.forEach(function(t){ var k = key(t); seen[k] = 1; out.push(t); });
+  cloud.forEach(function(t){
+    var k = key(t);
+    if(!k || k === 'cf') return;                 // 跳过空键/垃圾数据
+    if(seen[k]){                                  // 同名：云端覆盖代码
+      for(var p=0;p<out.length;p++){ if(key(out[p]) === k){ out[p] = t; break; } }
+    } else {
+      seen[k] = 1; out.push(t);                   // 新增：追加
+    }
+  });
+  return out;
 }
 
 // ===== 口语话题管理员编辑（content_edits.speakingTopics） =====
