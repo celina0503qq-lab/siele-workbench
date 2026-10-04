@@ -353,7 +353,7 @@ function listT2Themes(){
 function jumpT2Theme(theme){
   var b = getSieleOralBank()[2] || [];
   var i = b.findIndex(function(q){ return getT2Theme(q)===theme; });
-  if(i>=0){ _sieleOralIdx = i; _sieleOralShown = false; stopSieleOral(true); toast('已跳到主题：'+theme); renderMain(); }
+  if(i>=0){ _sieleOralIdx = i; _sieleOralShown = false; stopSieleOral(true); toast('已跳到主题：'+theme); if(typeof _sieleSyncProgress==='function')_sieleSyncProgress(); save(); renderMain(); }
 }
 // 将真题回忆场景注入 SIELE_ORAL_BANK[2]（去重，现有24题不受影响）
 SIELE_T2_EXAM.forEach(function(r){

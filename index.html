@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v75-2026100403';
+window.swVer = 'v76-2026100404';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6433,9 +6433,60 @@ function _bankAdminTools(){
 }
 let _sieleOralTarea=1,_sieleOralIdx=0,_sieleOralRecognition=null,_sieleOralRecording=false,_sieleOralShown=false,_sieleOralTimer=null,_sieleOralLeft=0,_sieleOralTranscript='';
 function getSieleOralItem(){var bank=getSieleOralBank()[_sieleOralTarea]||[];if(!bank.length)return null;_sieleOralIdx=Math.max(0,Math.min(_sieleOralIdx,bank.length-1));return bank[_sieleOralIdx];}
-function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;_sieleOralIdx=0;_sieleOralShown=false;if(!ST.sieleOralProgress)ST.sieleOralProgress={};ST.sieleOralProgress.tarea=_sieleOralTarea;ST.sieleOralProgressTs=Date.now();if(_sieleOralTarea>=4&&ST.sieleOralProgress.topic){var b=getSieleOralBank()[_sieleOralTarea]||[],i=b.findIndex(function(x){return x.topic===ST.sieleOralProgress.topic;});if(i>=0)_sieleOralIdx=i;}save();renderMain();}
-function randomSieleOral(){var b=getSieleOralBank()[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}var x=b[_sieleOralIdx];if(x&&x.topic){ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=x.topic;ST.sieleOralProgressTs=Date.now();save();}_sieleOralShown=false;stopSieleOral(true);renderMain();}
-function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;ST.sieleOralProgressTs=Date.now();save();renderMain();}}
+// S4: 多 Tarea 独立记忆（byTarea），切回来能回到各自上次那题
+function _sieleSaveByTarea(){
+  ST.sieleOralProgress = ST.sieleOralProgress || {};
+  var bt = ST.sieleOralProgress.byTarea = ST.sieleOralProgress.byTarea || {};
+  var bank = getSieleOralBank()[_sieleOralTarea] || [];
+  var q = bank[_sieleOralIdx];
+  bt[_sieleOralTarea] = { qid: (q && q.id) ? q.id : null, idx: _sieleOralIdx, ts: Date.now() };
+  ST.sieleOralProgressTs = Date.now();
+}
+function _sieleRestoreIdxForTarea(n){
+  var pg = ST.sieleOralProgress; if(!pg || !pg.byTarea) return;
+  var rec = pg.byTarea[n]; if(!rec) return;
+  var bank = getSieleOralBank()[n] || []; if(!bank.length) return;
+  if (rec.qid) {
+    var i = bank.findIndex(function(x){ return x && x.id === rec.qid; });
+    if (i >= 0) { _sieleOralIdx = i; return; }
+  }
+  if (typeof rec.idx === 'number' && rec.idx >= 0) { _sieleOralIdx = Math.min(rec.idx, bank.length - 1); }
+}
+// S4: 记录当前口语进度（题 id + 索引 + tarea），跨设备/刷新可复位
+function _sieleSyncProgress(){
+  ST.sieleOralProgress = ST.sieleOralProgress || {};
+  ST.sieleOralProgress.tarea = _sieleOralTarea;
+  var bank = getSieleOralBank()[_sieleOralTarea] || [];
+  var q = bank[_sieleOralIdx];
+  if (q && q.id) ST.sieleOralProgress.qid = q.id;
+  ST.sieleOralProgress.idx = _sieleOralIdx;
+  if (q && q.topic) ST.sieleOralProgress.topic = q.topic;
+  ST.sieleOralProgressTs = Date.now();
+  if (typeof _sieleSaveByTarea === 'function') _sieleSaveByTarea();
+}
+// S4: 按已存进度把 _sieleOralIdx 复位到上次那题
+function _sieleRestoreIdx(){
+  var pg = ST.sieleOralProgress; if(!pg) return;
+  var bank = getSieleOralBank()[_sieleOralTarea] || []; if(!bank.length) return;
+  if (pg.qid) {
+    var i = bank.findIndex(function(x){ return x && x.id === pg.qid; });
+    if (i >= 0) { _sieleOralIdx = i; return; }
+  }
+  if (typeof pg.idx === 'number' && pg.idx >= 0) { _sieleOralIdx = Math.min(pg.idx, bank.length - 1); }
+}
+function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;
+  // S4: 切换 Tarea 时按已存进度复位索引（无记录则回到第 1 题）
+  _sieleOralIdx=0;_sieleOralShown=false;
+  if(!ST.sieleOralProgress)ST.sieleOralProgress={};
+  var _prevTarea=ST.sieleOralProgress.tarea;
+  ST.sieleOralProgress.tarea=_sieleOralTarea;
+  if(_prevTarea===_sieleOralTarea){ _sieleRestoreIdx(); }
+  else { // 该 Tarea 上次停留的题 id 仍保留在 progress 里时也可复位
+    if(typeof _sieleRestoreIdxForTarea==='function')_sieleRestoreIdxForTarea(_sieleOralTarea);
+  }
+  _sieleSyncProgress();save();renderMain();}
+function randomSieleOral(){var b=getSieleOralBank()[_sieleOralTarea]||[];if(b.length>1){var old=_sieleOralIdx;while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}_sieleOralShown=false;stopSieleOral(true);_sieleSyncProgress();save();renderMain();}
+function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;_sieleSyncProgress();save();renderMain();}}
 function playSielePrompt(){var x=getSieleOralItem();if(x)speak(x.q,null,'es');}
 function revealSielePrompt(){_sieleOralShown=true;var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.textContent=(getSieleOralItem()||{}).q||'';}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
 function startSieleTimer(sec){clearInterval(_sieleOralTimer);_sieleOralLeft=sec||60;var el=document.getElementById('soTimer');function paint(){if(el)el.textContent=String(Math.floor(_sieleOralLeft/60)).padStart(2,'0')+':'+String(_sieleOralLeft%60).padStart(2,'0');}paint();_sieleOralTimer=setInterval(function(){_sieleOralLeft--;paint();if(_sieleOralLeft<=0){clearInterval(_sieleOralTimer);if(_sieleOralRecording)stopSieleOral();}},1000);}
@@ -6661,12 +6712,14 @@ function prevSieleOral() {
   if (bank.length <= 1) return;
   _sieleOralIdx = (_sieleOralIdx - 1 + bank.length) % bank.length;
   _sieleOralShown = false; stopSieleOral(true); renderMain();
+  _sieleSyncProgress(); save();
 }
 function nextSieleOral() {
   var bank = getSieleOralBank()[_sieleOralTarea] || [];
   if (bank.length <= 1) return;
   _sieleOralIdx = (_sieleOralIdx + 1) % bank.length;
   _sieleOralShown = false; stopSieleOral(true); renderMain();
+  _sieleSyncProgress(); save();
 }
 
 function renderSielePhoto(x){
@@ -6683,7 +6736,7 @@ function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralBank
 
 // ===== PAGE: SIELE SPECIAL =====
 function renderSiele(){
-  if(ST.sieleOralProgress&&ST.sieleOralProgress.tarea&&!renderSiele._restored){_sieleOralTarea=ST.sieleOralProgress.tarea;renderSiele._restored=true;}
+  if(ST.sieleOralProgress&&ST.sieleOralProgress.tarea&&!renderSiele._restored){_sieleOralTarea=ST.sieleOralProgress.tarea;renderSiele._restored=true;if(typeof _sieleRestoreIdxForTarea==='function')_sieleRestoreIdxForTarea(_sieleOralTarea);else if(typeof _sieleRestoreIdx==='function')_sieleRestoreIdx();}
   let h = `<div class="tb"><div><h2>SIELE 专项训练${renderModuleAccentToggle('siele')}</h2><div class="d">口语 Tarea 1-5 · 音频先行 · 录音评分 · 答后范例 · 基于回忆版真题资料</div></div></div>`;
 
   if(isContentAdmin()){
@@ -18863,6 +18916,13 @@ function mergeWbSnapshot(remote, wbTs){
   if(remote.sieleOralProgress&&typeof remote.sieleOralProgress==='object'){
     var _rOralTs=Number(remote.sieleOralProgressTs||0),_lOralTs=Number(ST.sieleOralProgressTs||0);
     if(!ST.sieleOralProgress||_rOralTs>_lOralTs){ST.sieleOralProgress=remote.sieleOralProgress;if(_rOralTs)ST.sieleOralProgressTs=_rOralTs;}
+    // S4: byTarea 逐 Tarea 取更新的一条，避免整体覆盖丢进度
+    if(remote.sieleOralProgress&&remote.sieleOralProgress.byTarea){
+      ST.sieleOralProgress=ST.sieleOralProgress||{};
+      var _lbt=ST.sieleOralProgress.byTarea=ST.sieleOralProgress.byTarea||{};
+      var _rbt=remote.sieleOralProgress.byTarea;
+      Object.keys(_rbt).forEach(function(k){ var r=_rbt[k]||{},l=_lbt[k]||{}; if((r.ts||0)>=(l.ts||0)) _lbt[k]=r; });
+    }
   }
   // 签到：并集去重排序
   if(Array.isArray(remote.checkIns)&&remote.checkIns.length){
@@ -19885,7 +19945,16 @@ async function standaloneSync(showLog){
       if(!ST.refineShadowScores[k]||(remote.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0)) ST.refineShadowScores[k]=remote.refineShadowScores[k];
     }); // v53
     if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}
-    if(remote.sieleOralProgress&&(!ST.sieleOralProgress||((remote.ts||0)>=(SCFG.lastSync||0))))ST.sieleOralProgress=remote.sieleOralProgress;
+    if(remote.sieleOralProgress){
+      var _gR=remote.sieleOralProgress;
+      // S4: byTarea 逐条取新，避免整体覆盖导致其他 Tarea 进度丢失
+      if(_gR.byTarea){
+        ST.sieleOralProgress=ST.sieleOralProgress||{};
+        var _gL=ST.sieleOralProgress.byTarea=ST.sieleOralProgress.byTarea||{};
+        Object.keys(_gR.byTarea).forEach(function(k){var r=_gR.byTarea[k]||{},l=_gL[k]||{};if((r.ts||0)>=(l.ts||0))_gL[k]=r;});
+      }
+      if(!ST.sieleOralProgress||((remote.ts||0)>=(SCFG.lastSync||0))){ST.sieleOralProgress=Object.assign({},_gR,ST.sieleOralProgress);}
+    }
     // 合并全局已用邀请码（跨设备唯一性）
     if(Array.isArray(remote.usedInvites) && remote.usedInvites.length){
       try {
