@@ -320,12 +320,12 @@ var T2_PHOTO_MAP = {
 };
 // ===== S3: T2 场景主题分类（按图片类别归为大类，供按类型跳转选题）=====
 var T2_THEME_MAP = {
-  't2-oficina':'工作办公','t2-reunion':'工作办公','t2-bar':'工作办公','t2-libreria':'工作办公',
-  't2-aula':'学习校园','t2-biblioteca':'学习校园','t2-leer':'学习校园','t2-estudio':'学习校园','t2-pintura':'学习校园',
+  't2-oficina':'工作办公','t2-oficina-2':'工作办公','t2-oficina-3':'工作办公','t2-oficina-4':'工作办公','t2-reunion':'工作办公','t2-bar':'工作办公','t2-libreria':'工作办公',
+  't2-aula':'学习校园','t2-aula-2':'学习校园','t2-biblioteca':'学习校园','t2-leer':'学习校园','t2-estudio':'学习校园','t2-pintura':'学习校园',
   't2-comida':'餐饮聚会','t2-cafe':'餐饮聚会','t2-cumpleanos':'餐饮聚会','t2-cartas':'餐饮聚会','t2-barbacoa':'餐饮聚会',
-  't2-cocina':'家庭居家','t2-dormitorio':'家庭居家','t2-sala_estar':'家庭居家','t2-tv_cocina':'家庭居家',
+  't2-cocina':'家庭居家','t2-dormitorio':'家庭居家','t2-sala_estar':'家庭居家','t2-sala_estar-2':'家庭居家','t2-tv_cocina':'家庭居家',
   't2-bebe':'家庭居家','t2-jardin_casa':'家庭居家','t2-balcon':'家庭居家','t2-cuento':'家庭居家','t2-picnic':'家庭居家',
-  't2-escaparate':'购物服务','t2-mercado':'购物服务','t2-peluqueria':'购物服务','t2-pedido':'购物服务','t2-medico':'购物服务',
+  't2-escaparate':'购物服务','t2-escaparate-2':'购物服务','t2-mercado':'购物服务','t2-peluqueria':'购物服务','t2-pedido':'购物服务','t2-medico':'购物服务',
   't2-parque':'户外休闲','t2-playa':'户外休闲','t2-montana':'户外休闲','t2-acampar':'户外休闲',
   't2-deporte':'户外休闲','t2-jardin':'户外休闲','t2-descanso':'户外休闲',
   't2-mapa':'出行交通','t2-metro':'出行交通','t2-aeropuerto':'出行交通','t2-bici':'出行交通',
@@ -567,4 +567,40 @@ window.SIELE_T45_GROUP={
 "salud":"健康与生活方式","hf6":"健康与生活方式","hf11":"健康与生活方式",
 "hf4":"工作与社会","hf19":"工作与社会","hf9":"工作与社会","hf16":"工作与社会","hf10":"工作与社会",
 "hf3":"文化与城市生活","hf7":"文化与城市生活","hf22":"文化与城市生活","hf12":"文化与城市生活","hf13":"文化与城市生活","hf15":"文化与城市生活","hf26":"文化与城市生活"
+};
+
+// ===== v89: T2 同图超5题打散 —— 按 id 幂等重映射 photo =====
+// oficina 17→5+5+4+3，aula 10→5+5，escaparate 6→3+3，sala_estar 6→3+3；新图 6 张（800x800 q80）
+window._sieleT2PhotoRemap = function(arr){
+  if(!arr || !arr.length) return;
+  var M = window._sieleT2PhotoRemap.MAP;
+  for(var i = 0; i < arr.length; i++){
+    var p = M[arr[i] && arr[i].id];
+    if(p && arr[i].photo !== p) arr[i].photo = p;
+  }
+};
+window._sieleT2PhotoRemap.MAP = {
+  't2-oficina-reunión':'assets/images/t2-scenes/t2-oficina-2.jpg',
+  't2-oficina-35':'assets/images/t2-scenes/t2-oficina-2.jpg',
+  't2-oficina-68':'assets/images/t2-scenes/t2-oficina-2.jpg',
+  't2-oficina-71':'assets/images/t2-scenes/t2-oficina-2.jpg',
+  't2-oficina-108':'assets/images/t2-scenes/t2-oficina-2.jpg',
+  't2-oficina-9':'assets/images/t2-scenes/t2-oficina-3.jpg',
+  't2-oficina-53':'assets/images/t2-scenes/t2-oficina-3.jpg',
+  't2-oficina-89':'assets/images/t2-scenes/t2-oficina-3.jpg',
+  't2-oficina-102':'assets/images/t2-scenes/t2-oficina-3.jpg',
+  't2-oficina-93':'assets/images/t2-scenes/t2-oficina-4.jpg',
+  't2-oficina-97':'assets/images/t2-scenes/t2-oficina-4.jpg',
+  't2-oficina-101':'assets/images/t2-scenes/t2-oficina-4.jpg',
+  't2-aula-13':'assets/images/t2-scenes/t2-aula-2.jpg',
+  't2-aula-67':'assets/images/t2-scenes/t2-aula-2.jpg',
+  't2-aula-74':'assets/images/t2-scenes/t2-aula-2.jpg',
+  't2-aula-88':'assets/images/t2-scenes/t2-aula-2.jpg',
+  't2-aula-111':'assets/images/t2-scenes/t2-aula-2.jpg',
+  't2-escaparate':'assets/images/t2-scenes/t2-escaparate-2.jpg',
+  't2-escaparate-4':'assets/images/t2-scenes/t2-escaparate-2.jpg',
+  't2-escaparate-54':'assets/images/t2-scenes/t2-escaparate-2.jpg',
+  't2-sala_estar-63':'assets/images/t2-scenes/t2-sala_estar-2.jpg',
+  't2-sala_estar-65':'assets/images/t2-scenes/t2-sala_estar-2.jpg',
+  't2-sala_estar-66':'assets/images/t2-scenes/t2-sala_estar-2.jpg'
 };

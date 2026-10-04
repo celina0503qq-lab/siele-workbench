@@ -2,6 +2,7 @@
   "t2-acampar": "assets/images/t2-scenes/t2-acampar.jpg",
   "t2-aeropuerto": "assets/images/t2-scenes/t2-aeropuerto.jpg",
   "t2-aula": "assets/images/t2-scenes/t2-aula.jpg",
+  "t2-aula-2": "assets/images/t2-scenes/t2-aula-2.jpg",
   "t2-balcon": "assets/images/t2-scenes/t2-balcon.jpg",
   "t2-bar": "assets/images/t2-scenes/t2-bar.jpg",
   "t2-barbacoa": "assets/images/t2-scenes/t2-barbacoa.jpg",
@@ -20,6 +21,7 @@
   "t2-descanso": "assets/images/t2-scenes/t2-descanso.jpg",
   "t2-dormitorio": "assets/images/t2-scenes/t2-dormitorio.jpg",
   "t2-escaparate": "assets/images/t2-scenes/t2-escaparate.jpg",
+  "t2-escaparate-2": "assets/images/t2-scenes/t2-escaparate-2.jpg",
   "t2-estudio": "assets/images/t2-scenes/t2-estudio.jpg",
   "t2-fotografo": "assets/images/t2-scenes/t2-fotografo.jpg",
   "t2-guarderia": "assets/images/t2-scenes/t2-guarderia.jpg",
@@ -33,6 +35,9 @@
   "t2-metro": "assets/images/t2-scenes/t2-metro.jpg",
   "t2-montana": "assets/images/t2-scenes/t2-montana.jpg",
   "t2-oficina": "assets/images/t2-scenes/t2-oficina.jpg",
+  "t2-oficina-2": "assets/images/t2-scenes/t2-oficina-2.jpg",
+  "t2-oficina-3": "assets/images/t2-scenes/t2-oficina-3.jpg",
+  "t2-oficina-4": "assets/images/t2-scenes/t2-oficina-4.jpg",
   "t2-original": "assets/images/t2-scenes/t2-original.jpg",
   "t2-parque": "assets/images/t2-scenes/t2-parque.jpg",
   "t2-pedido": "assets/images/t2-scenes/t2-pedido.jpg",
@@ -44,6 +49,7 @@
   "t2-preguntar": "assets/images/t2-scenes/t2-preguntar.jpg",
   "t2-reunion": "assets/images/t2-scenes/t2-reunion.jpg",
   "t2-sala_estar": "assets/images/t2-scenes/t2-sala_estar.jpg",
+  "t2-sala_estar-2": "assets/images/t2-scenes/t2-sala_estar-2.jpg",
   "t2-similar": "assets/images/t2-scenes/t2-similar.jpg",
   "t2-tv_cocina": "assets/images/t2-scenes/t2-tv_cocina.jpg"
 }

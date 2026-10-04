@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v88.1-2026100501';
+window.swVer = 'v89-2026100501';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6403,9 +6403,11 @@ function getSieleOralBank(){
     var out = {};
     [1,2,3,4,5].forEach(function(n){ out[n] = ed.bank[n] ? ed.bank[n].slice() : []; });
     if(typeof window._sieleT3MetaApply==='function') window._sieleT3MetaApply(out[3]);
+    if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(out[2]);
     return out;
   }
   if(typeof window._sieleT3MetaApply==='function') window._sieleT3MetaApply(SIELE_ORAL_BANK[3]);
+  if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(SIELE_ORAL_BANK[2]);
   return SIELE_ORAL_BANK;
 }
 
