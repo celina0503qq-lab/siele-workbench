@@ -182,7 +182,7 @@ var SIELE_T2_EXAM = [
 ['t2-bar-43','Charlas en el bar','tres amigos en un bar','un bar','diversion y camaraderia','uno habla por teléfono mientras los otros dos conversan','las bebidas y los telefonos','la barra y otros clientes','son amigos que han quedado','están socializando y poniendose al día','los bares como espacio social','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','三个朋友在酒吧 一个打电话两个说话'],
 ['t2-reunión-44','Presentacion en la oficina','una mujer presentando ante cuatro colegas','una sala de reuniones','profesionalidad y atención','la mujer de pie explica mientras los demás escuchan','la presentacion y los documentos','mobiliario de oficina','son colegas en una reunión','la mujer esta presentando un proyecto','el liderazgo femenino','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','会议室 四人坐着听女士站着讲'],
 ['t2-preguntar-45','Pidiendo direcciones','una mujer mayor indicando el camino a una joven','una calle','ayuda y cortesia','la mujer mayor señala una dirección','el mapa o el teléfono','edificios y otros peatones','una desconocida ayuda a otra','la joven busca una dirección','la ayuda mutua en la ciudad','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','白发女人给年轻女性指路'],
-['t2-original-46','Escena original del examen','una escena cotidiana con personas interactuando','un entorno urbano o domestico','naturalidad y cotidianidad','personas realizando actividades cotidianas','objetos del entorno','el contexto de la escena','interaccion natural entre las personas','la escena captura un momento real','la riqueza de las situaciones cotidianas','raw','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(原图) Imagen original del examen'],
+['t2-original-46','Enfoque: las personas (原题 · 人物外形)','varias personas de edades y rasgos distintos aparecen en primer plano','un espacio publico concurrido','diversidad y naturalidad','conviene describir la edad aproximada, el pelo, la ropa y la postura de cada persona','los objetos que llevan en las manos','al fondo se intuye mas gente y edificios','parecen desconocidos que comparten el mismo espacio','es probable que esten esperando o simplemente pasando por alli','la variedad de personas refleja la vida cotidiana de la ciudad','raw','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(原题) 侧重描述人物：年龄/发型/衣着/姿态'],
 ['t2-playa-47','Comida en la playa','cuatro comensales y un camarero en un restaurante de playa','una terraza junto al mar','alegria y descanso','los clientes disfrutan mientras el camarero atiende','los platos y las bebidas','la arena y el mar','son clientes y camarero','están de vacaciones','el turismo gastronomico','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','两男两女+黑人服务员 沙滩餐厅'],
 ['t2-escaparate-48','Eligiendo ropa','dos mujeres seleccionando vaqueros','una tienda de ropa','decisión y estilo','una de ellas sostiene unos vaqueros mientras la otra opina','los vaqueros y la ropa','estanterias y otros clientes','son amigas o familiares','están eligiendo ropa nueva','las compras como actividad social','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','两个女的在选牛仔裤'],
 ['t2-oficina-49','Revision de documentos','dos mujeres en una oficina revisando un archivo','una oficina','profesionalidad','la mujer mayor explica el documento a la colega','el ordenador, el teléfono y los papeles','mobiliario de oficina','son colegas de distintos origenes','están revisando un documento importante','la colaboracion intercultural','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','白人老太太和黄皮肤女人看文件'],
@@ -205,16 +205,16 @@ var SIELE_T2_EXAM = [
 ['t2-aula-67','Levantando la mano','estudiantes participando en clase','un aula','participación y atención','los alumnos levantan la mano para responder','los libros y cuadernos','la pizarra y la profesora','son la profesora y sus alumnos','están en una clase participativa','la participación en el aula','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','教室学生举手 女老师黑衣服 三女一男'],
 ['t2-oficina-68','Reunion ejecutiva','tres profesionales reunidos en una oficina','un despacho','profesionalidad y concentracion','un hombre mayor de gris, una mujer y un joven toman notas','el ordenador, el cafe y los documentos','un cuadro y una estanteria con libros','son colegas en una reunión','están discutiendo un asunto de trabajo','el entorno profesional','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','办公室 两男一女穿西装 墙上有画'],
 ['t2-cafe-69','Cafe entre colegas','tres mujeres en una cafeteria','una cafeteria','alegria y profesionalidad','las tres mujeres sonrien mientras conversan','el cafe, los cuadernos y los telefonos','la decoracion de la cafeteria','son colegas de distintas procedencias','están haciendo una pausa para socializar','las relaciones profesionales','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','3个女人咖啡馆说话 两黑人女一金发女'],
-['t2-original-70','Escena original del examen','una escena cotidiana con personas interactuando','un entorno urbano o domestico','naturalidad y cotidianidad','personas realizando actividades cotidianas','objetos del entorno','el contexto de la escena','interaccion natural entre las personas','la escena captura un momento real','la riqueza de las situaciones cotidianas','raw','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(原图) Imagen original del examen'],
+['t2-original-70','Enfoque: el lugar (原题 · 地点空间)','una escena que permite localizar con precision el espacio representado','un interior o exterior facil de identificar por sus elementos','orden y perspectiva','conviene situar a las personas con marcadores espaciales: delante, al fondo, a la derecha','el mobiliario y los objetos que definen el lugar','los detalles arquitectonicos del fondo','las personas ocupan distintos planos del espacio','es probable que sea un lugar de paso habitual','describir bien el lugar ayuda a que el oyente lo imagine','raw','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(原题) 侧重描述地点：空间方位/家具/环境'],
 ['t2-oficina-71','Reunion en la oficina','seis personas reunidas en una oficina','una oficina','colaboracion','tres en el sofá y tres de pie, uno de ellos negro','documentos y material','mobiliario de oficina','son colegas','están en una reunión de trabajo','los equipos diversos','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','六人办公室 三人沙发三人站 有一个黑人'],
 ['t2-cocina-72','Fiesta en la cocina','ocho jóvenes comiendo y charlando en una cocina','una cocina amplia','alegria y multiculturalidad','una chica corta embutido en una mesa llena de comida','los platos, la comida y las bebidas','electrodomesticos y decoracion','son amigos de distintos paises','están celebrando una fiesta','la convivencia multicultural','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','八个年轻人在厨房 不同国家 像fiesta'],
 ['t2-aula-73','Juego didactico','cuatro o cinco niños alrededor de una mesa con un dado','un aula','aprendizaje y diversion','los niños juegan mientras la profesora les acompana','el dado, los dibujos y las tareas','decoracion del aula','son la profesora y sus alumnos','están aprendiendo jugando','el juego como metodo educativo','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','四五小朋友围桌 有骰子 有老师陪着'],
 ['t2-aula-74','Clase con tecnología','un profesor con seis estudiantes en el aula','un aula','atención y aprendizaje','el profesor habla mientras los estudiantes escuchan','los ordenadores y telefonos en la mesa del profesor','la pizarra y las ventanas','son el profesor y sus alumnos','están en una clase','la tecnología en la educación','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','老师+六学生 老师背后桌上有电脑手机'],
 ['t2-cumpleanos-75','Cumpleanos en la oficina','tres colegas celebrando un cumpleanos','un despacho','celebracion y companerismo','uno de ellos se prepara para soplar las velas','la tarta de cumpleanos','mobiliario de oficina','son compañeros de trabajo','están celebrando el cumpleanos de uno','el buen ambiente laboral','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','三男办公室 生日蛋糕 左边的要吹蜡烛'],
-['t2-similar-76','Escena similar al examen','una escena comparable a las del examen oficial','un entorno similar al de las pruebas reales','naturalidad','personas en situaciones cotidianas','elementos del entorno','el contexto general','interaccion entre las personas','la escena refleja situaciones del examen','la preparacion para describir escenas','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','跟原题很像的图'],
-['t2-similar-77','Escena similar al examen','una escena comparable a las del examen oficial','un entorno similar al de las pruebas reales','naturalidad','personas en situaciones cotidianas','elementos del entorno','el contexto general','interaccion entre las personas','la escena refleja situaciones del examen','la preparacion para describir escenas','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','跟原题很像的图'],
-['t2-similar-78','Escena similar al examen','una escena comparable a las del examen oficial','un entorno similar al de las pruebas reales','naturalidad','personas en situaciones cotidianas','elementos del entorno','el contexto general','interaccion entre las personas','la escena refleja situaciones del examen','la preparacion para describir escenas','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','跟原题很像的图'],
-['t2-similar-79','Escena similar al examen','una escena comparable a las del examen oficial','un entorno similar al de las pruebas reales','naturalidad','personas en situaciones cotidianas','elementos del entorno','el contexto general','interaccion entre las personas','la escena refleja situaciones del examen','la preparacion para describir escenas','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','跟原题很像的图'],
+['t2-similar-76','Enfoque: el ambiente (相近题 · 氛围表情)','una escena en la que destaca el estado de animo de los protagonistas','un espacio que invita a interpretar el tono de la situacion','tranquilidad, alegria o tension segun los gestos','conviene describir las expresiones faciales y el lenguaje corporal','los objetos que refuerzan el ambiente','un fondo que no distrae de la emocion principal','las miradas y sonrisas revelan la relacion entre ellos','es probable que esten disfrutando o concentrados en la tarea','la escena transmite una emocion facil de nombrar','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(相近题) 侧重描述氛围：情绪/表情/肢体语言'],
+['t2-similar-77','Enfoque: las acciones (相近题 · 动作流程)','una escena centrada en lo que hacen las personas en ese momento','un lugar cualquiera donde ocurre una accion concreta','actividad y movimiento','conviene usar el presente continuo: esta haciendo, estan preparando','los instrumentos o utensilios que usan para actuar','el contexto que explica por que hacen esa accion','la colaboracion entre las personas que actuan','es probable que la accion tenga un objetivo comun','describir la accion paso a paso demuestra dominio del presente','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(相近题) 侧重描述动作：现在进行时/流程/协作'],
+['t2-similar-78','Enfoque: la hipotesis (相近题 · 推断假设)','una escena que invita a formular hipotesis prudentes','un entorno que da pistas pero no certezas','expectacion e incertidumbre','conviene usar: parece que, quizas, probablemente, debe de ser','los indicios visuales que apoyan la hipotesis','el contexto que permite especular sin exagerar','la relacion entre las personas sugiere la situacion','es posible que la escena capture un momento previo o posterior','la hipotesis debe ser logica y estar justificada','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(相近题) 侧重推断：虚词/可能性/逻辑论证'],
+['t2-similar-79','Enfoque: la conclusion (相近题 · 总结升华)','una escena que sirve para cerrar la descripcion con una idea general','un entorno representativo de la vida diaria','serenidad y reflexion','conviene resumir lo descrito y anadir una valoracion personal','los elementos que mejor representan el tema de la imagen','el contexto que conecta la escena con la realidad','las personas como reflejo de una situacion comun','la escena puede relacionarse con nuestra propia experiencia','cerrar con una idea general demuestra madurez expresiva','similar','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','(相近题) 侧重总结：概括/个人评价/收束'],
 ['t2-fotografo-80','Sesion de fotos','un fotografo trabajando en un estudio','un estudio fotografico','creatividad y profesionalidad','el fotografo de espaldas dispara a la modelo','la camara, los focos y el equipo','el decorado del estudio','son un fotografo y su modelo','están realizando una sesion profesional','el arte de la fotografía','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','室内摄影师背对我们给模特拍照'],
 ['t2-tv_cocina-81','Programa de cocina','cinco personas sentadas frente a una cocina','un plato de televisión','profesionalidad y espectaculo','todos vestidos formalmente miran hacia la cocina','los electrodomesticos, armarios y lampara','el equipo de grabacion','son presentadores o participantes','están grabando un programa culinario','la gastronomia en televisión','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','厨房前坐五人穿正装 拍做饭节目'],
 ['t2-libreria-82','En la libreria','cuatro personas en una libreria','una libreria','curiosidad y tranquilidad','una joven lee en el sofá, una mujer con bolsa azul y un hombre','los libros, las estanterias y la bolsa','columnas y mas estanterias','son clientes','están explorando libros','las librerias como espacio cultural','recall','【锦鲤西语】2026.06.24 SIELE 口语真题回忆 Tarea 2','书店四人 沙发女生牛仔裤 蓝帆布袋女人'],
@@ -289,7 +289,7 @@ var T2_PHOTO_MAP = {
   't2-leer':'assets/images/t2-scenes/t2-leer.jpg',
   't2-libreria':'assets/images/t2-scenes/t2-libreria.jpg',
   't2-mapa':'assets/images/t2-scenes/t2-mapa.jpg',
-  't2-médico':'assets/images/t2-scenes/t2-médico.jpg',
+  't2-médico':'assets/images/t2-scenes/t2-medico.jpg',
   't2-mercado':'assets/images/t2-scenes/t2-mercado.jpg',
   't2-metro':'assets/images/t2-scenes/t2-metro.jpg',
   't2-montana':'assets/images/t2-scenes/t2-montana.jpg',
@@ -301,11 +301,60 @@ var T2_PHOTO_MAP = {
   't2-pintura':'assets/images/t2-scenes/t2-pintura.jpg',
   't2-playa':'assets/images/t2-scenes/t2-playa.jpg',
   't2-preguntar':'assets/images/t2-scenes/t2-preguntar.jpg',
-  't2-reunión':'assets/images/t2-scenes/t2-reunión.jpg',
+  't2-reunión':'assets/images/t2-scenes/t2-reunion.jpg',
   't2-sala_estar':'assets/images/t2-scenes/t2-sala_estar.jpg',
   't2-similar':'assets/images/t2-scenes/t2-similar.jpg',
-  't2-tv_cocina':'assets/images/t2-scenes/t2-tv_cocina.jpg'
+  't2-tv_cocina':'assets/images/t2-scenes/t2-tv_cocina.jpg',
+  't2-oficina-reunión':'assets/images/t2-scenes/t2-oficina.jpg',
+  't2-lago-pintura':'assets/images/t2-scenes/t2-pintura.jpg',
+  't2-mapa-parque':'assets/images/t2-scenes/t2-mapa.jpg',
+  't2-playa-restaurante':'assets/images/t2-scenes/t2-playa.jpg',
+  't2-oficina-compartida':'assets/images/t2-scenes/t2-oficina.jpg',
+  't2-cocina-jóvenes':'assets/images/t2-scenes/t2-cocina.jpg',
+  't2-picnic':'assets/images/t2-scenes/t2-picnic.jpg',
+  't2-barbacoa':'assets/images/t2-scenes/t2-barbacoa.jpg',
+  't2-cuento':'assets/images/t2-scenes/t2-cuento.jpg',
+  't2-pedido':'assets/images/t2-scenes/t2-pedido.jpg',
+  't2-estudio':'assets/images/t2-scenes/t2-estudio.jpg'
 };
+// ===== S3: T2 场景主题分类（按图片类别归为大类，供按类型跳转选题）=====
+var T2_THEME_MAP = {
+  't2-oficina':'工作办公','t2-reunion':'工作办公','t2-bar':'工作办公','t2-libreria':'工作办公',
+  't2-aula':'学习校园','t2-biblioteca':'学习校园','t2-leer':'学习校园','t2-estudio':'学习校园','t2-pintura':'学习校园',
+  't2-comida':'餐饮聚会','t2-cafe':'餐饮聚会','t2-cumpleanos':'餐饮聚会','t2-cartas':'餐饮聚会','t2-barbacoa':'餐饮聚会',
+  't2-cocina':'家庭居家','t2-dormitorio':'家庭居家','t2-sala_estar':'家庭居家','t2-tv_cocina':'家庭居家',
+  't2-bebe':'家庭居家','t2-jardin_casa':'家庭居家','t2-balcon':'家庭居家','t2-cuento':'家庭居家','t2-picnic':'家庭居家',
+  't2-escaparate':'购物服务','t2-mercado':'购物服务','t2-peluqueria':'购物服务','t2-pedido':'购物服务','t2-medico':'购物服务',
+  't2-parque':'户外休闲','t2-playa':'户外休闲','t2-montana':'户外休闲','t2-acampar':'户外休闲',
+  't2-deporte':'户外休闲','t2-jardin':'户外休闲','t2-descanso':'户外休闲',
+  't2-mapa':'出行交通','t2-metro':'出行交通','t2-aeropuerto':'出行交通','t2-bici':'出行交通',
+  't2-cruce':'出行交通','t2-preguntar':'出行交通',
+  't2-perro':'日常街景','t2-basura':'日常街景','t2-fotografo':'日常街景','t2-guarderia':'日常街景',
+  't2-original':'真题原图','t2-similar':'真题相近','sprite0':'真题原图','sprite1':'真题原图','sprite2':'真题原图','sprite3':'真题原图'
+};
+// 取得某道 T2 题的主题大类
+function getT2Theme(q){
+  if(!q) return '其他';
+  var k = String(q.id||'').replace(/-\d+$/,'');
+  var img;
+  if(typeof q.photo==='string') img = q.photo.split('/').pop().replace('.jpg','');
+  else if(typeof q.photo==='number') img = 'sprite'+q.photo;
+  else img = (typeof T2_PHOTO_MAP!=='undefined' && T2_PHOTO_MAP[k]) ? T2_PHOTO_MAP[k].split('/').pop().replace('.jpg','') : '';
+  return T2_THEME_MAP[img] || '其他';
+}
+// 列出当前 Tarea 的所有主题（按出现顺序）
+function listT2Themes(){
+  var b = getSieleOralBank()[2] || [];
+  var order = [], seen = {};
+  b.forEach(function(q){ var t = getT2Theme(q); if(!seen[t]){ seen[t]=1; order.push(t); } });
+  return order;
+}
+// 跳到某主题的第一题
+function jumpT2Theme(theme){
+  var b = getSieleOralBank()[2] || [];
+  var i = b.findIndex(function(q){ return getT2Theme(q)===theme; });
+  if(i>=0){ _sieleOralIdx = i; _sieleOralShown = false; stopSieleOral(true); toast('已跳到主题：'+theme); renderMain(); }
+}
 // 将真题回忆场景注入 SIELE_ORAL_BANK[2]（去重，现有24题不受影响）
 SIELE_T2_EXAM.forEach(function(r){
   var id = r[0];
@@ -316,6 +365,14 @@ SIELE_T2_EXAM.forEach(function(r){
   var s = {id:id, sec:120, title:r[1], photo:catPhoto, keys:['personas','primer plano','al fondo','parece','posible'], q:'Describa la fotografía de forma organizada: presente la situación, localice a las personas, explique sus acciones, haga una hipotesis prudente y cierre con una idea general.', sourceType:'real-exam', sourceDoc:r[12], hintCn:r[13], overview:r[2], place:r[3], mood:r[4], foreground:r[5], object:r[6], background:r[7], relationship:r[8], inference:r[9], conclusion:r[10]};
   s.model = makeT2Model(s);
   SIELE_ORAL_BANK[2].push(s);
+});
+
+// ===== S3: 统一为 T2 题回填图片（修复 SIELE_T2_RECALL 注入时 photo 恒为 null 的问题）=====
+// 依据 T2_PHOTO_MAP：按 id 去掉数字后缀查表；已有 photo 的题不覆盖
+SIELE_ORAL_BANK[2].forEach(function(q){
+  if(q.photo !== null && q.photo !== undefined) return;
+  var k = String(q.id||'').replace(/-\d+$/,'');
+  if(T2_PHOTO_MAP[k]) q.photo = T2_PHOTO_MAP[k];
 });
 
 const SIELE_T3_EXTRA = [
