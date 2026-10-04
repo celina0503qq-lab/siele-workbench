@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v73-2026100401';
+window.swVer = 'v74-2026100402';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1973,7 +1973,7 @@ function renderMain(){
       }
       break;
   }
-  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v73-2026100401") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v74-2026100402") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -15370,7 +15370,7 @@ function _commitDeleSubPage(level, task, html){
   if (typeof currentPage !== 'undefined') currentPage = 'dele' + level + '_' + task;
   var main = document.getElementById('main');
   if (main) main.innerHTML = '<div id="audioBanner" class="banner"></div>' + html +
-    '<footer>西语备考工作台 ' + (window.swVer||"v73-2026100401") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+    '<footer>西语备考工作台 ' + (window.swVer||"v74-2026100402") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   if (typeof renderNav === 'function') {
     try { renderNav(); } catch (e) {}
   }
@@ -16074,7 +16074,7 @@ function _renderDeleA1V5TaskCard(q){
     for (const a of q.aspectos) body += '<li>'+esc(a)+'</li>';
     body += '</ul>';
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 1-2 分钟 · 可准备 10 分钟后开始录音</div>';
-    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">🎤 真实录音识别评分</span>';
   }
   // speaking_topic: 主题阐述
   else if (q.type === 'speaking_topic' && q.temas) {
@@ -16085,7 +16085,7 @@ function _renderDeleA1V5TaskCard(q){
     for (const s of q.sugerencias) body += '<li>'+esc(s)+'</li>';
     body += '</ul>';
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 2-3 分钟 · 可准备 10 分钟</div>';
-    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">🎤 真实录音识别评分</span>';
   }
   // speaking_dialogue: 对话
   else if (q.type === 'speaking_dialogue' && q.ejemplos_preguntas) {
@@ -16098,7 +16098,7 @@ function _renderDeleA1V5TaskCard(q){
       body += '</ul>';
     }
     body += '<div class="sub" style="color:var(--tr);font-size:12px">时长: 3-4 分钟 · 考官实时提问</div>';
-    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>';
+    body += '<button class="btn pr" style="margin-top:6px" onclick="_deleSpeakingAnswer(this)">🎤 开始作答</button><span class="sub" style="color:var(--tr);font-size:11px">🎤 真实录音识别评分</span>';
   }
   // writing: 通用写作题 (A1/A2/B1/B2)
   else if (q.type === 'writing') {
@@ -16136,7 +16136,7 @@ function _renderDeleA1V5TaskCard(q){
     }
     body += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
       '<button class="btn pr" onclick="startSpeakingRecording(this)">🎤 开始作答</button>'+
-      '<span class="sub" style="color:var(--tr);font-size:11px">文本作答评分 (录音识别待接入)</span>'+
+      '<span class="sub" style="color:var(--tr);font-size:11px">🎤 真实录音识别评分</span>'+
     '</div>';
     // AI 口语范例 (可展开编辑)
     if (q.modelo_response) {
@@ -16407,9 +16407,143 @@ window.scoreWritingFromTextarea = function(btn){
   _deleSaveProgress();
   showEncouragement('writing', score);
 };
+// ===== v74 (S2): DELE 口语真实录音识别评分（复用 SIELE SpeechRecognition 链路）=====
+var _deleSpeakRec = false, _deleSpeakRecognition = null, _deleSpeakTimer = null,
+    _deleSpeakText = '', _deleSpeakBtn = null, _deleSpeakTimerEl = null;
+function _deleSpeakLvl(){ return window._deleA1CurrentLevel || 'A1'; }
+function _deleSpeakClearTimer(){
+  if(_deleSpeakTimer){ clearInterval(_deleSpeakTimer); _deleSpeakTimer = null; }
+  if(_deleSpeakTimerEl){ _deleSpeakTimerEl.textContent = ''; _deleSpeakTimerEl = null; }
+}
 window.startSpeakingRecording = function(btn){
-  // v73: 展开文本作答评分 (真实录音识别等 R4 语音链路落地后接入)
-  window._deleSpeakingAnswer(btn);
+  if(_deleSpeakRec){ window.stopDeleSpeaking(); return; }
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var lvl = _deleSpeakLvl();
+  var host = btn.parentElement;
+  var wrap = host.querySelector('.dele-speak-live');
+  if(!wrap){
+    wrap = document.createElement('div');
+    wrap.className = 'dele-speak-live';
+    wrap.style.cssText = 'margin-top:8px';
+    wrap.innerHTML = '<div class="dele-speak-status" style="font-size:12px;color:var(--soft)"></div>'+
+      '<div class="dele-speak-livebox" style="display:none;margin-top:6px;font-size:13px;line-height:1.6;color:#1e293b;min-height:20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px"></div>'+
+      '<div class="dele-speak-fb" style="margin-top:8px"></div>';
+    host.appendChild(wrap);
+  }
+  var stEl = wrap.querySelector('.dele-speak-status');
+  var liveEl = wrap.querySelector('.dele-speak-livebox');
+  var fbEl = wrap.querySelector('.dele-speak-fb');
+  if(!SR){
+    if(stEl) stEl.innerHTML = '<span style="color:var(--bad,#ef4444)">当前浏览器不支持语音识别，请使用 Chrome / Edge 并允许麦克风；也可改用下方「手动输入文本」评分。</span>';
+    window._deleSpeakingAnswer(btn);
+    return;
+  }
+  _deleSpeakBtn = btn;
+  _deleSpeakText = '';
+  _deleSpeakRecognition = new SR();
+  _deleSpeakRecognition.lang = 'es-ES';
+  _deleSpeakRecognition.continuous = true;
+  _deleSpeakRecognition.interimResults = true;
+  _deleSpeakRec = true;
+  btn.className = 'btn rd';
+  btn.textContent = '⏹ 停止并评分';
+  if(stEl) stEl.innerHTML = '<span style="color:var(--ok,#10b981)">● 正在聆听（'+lvl+'，最长 3 分钟）…</span>';
+  if(liveEl){ liveEl.style.display = 'block'; liveEl.innerHTML = '<span style="color:var(--soft)">🎙 请开始用西语作答…</span>'; }
+  if(fbEl) fbEl.innerHTML = '';
+  _deleSpeakRecognition.onresult = function(e){
+    var full = '', interim = '';
+    for(var i = 0; i < e.results.length; i++){
+      var r = e.results[i];
+      if(r.isFinal) full += r[0].transcript + ' '; else interim += r[0].transcript;
+    }
+    _deleSpeakText = full.trim();
+    if(liveEl){
+      var escT = (window.esc ? window.esc(_deleSpeakText) : _deleSpeakText);
+      var escI = (window.esc ? window.esc(interim) : interim);
+      liveEl.innerHTML = escT + (interim ? '<span style="color:var(--soft)">' + escI + '</span>' : '');
+    }
+  };
+  _deleSpeakRecognition.onend = function(){
+    if(_deleSpeakRec) window.finishDeleSpeaking();
+  };
+  _deleSpeakRecognition.onerror = function(e){
+    var err = e && e.error;
+    if(err === 'no-speech' && _deleSpeakRec){ try{ _deleSpeakRecognition.start(); }catch(x){} return; }
+    if(err === 'not-allowed' && stEl) stEl.innerHTML = '<span style="color:var(--bad,#ef4444)">麦克风权限被拒绝，请在浏览器设置中允许麦克风。</span>';
+    window.stopDeleSpeaking(true);
+  };
+  try{ _deleSpeakRecognition.start(); }catch(e){
+    _deleSpeakRec = false; btn.className = 'btn pr'; btn.textContent = '🎤 开始作答';
+  }
+  // 3 分钟上限
+  var left = 180;
+  _deleSpeakClearTimer();
+  _deleSpeakTimer = setInterval(function(){
+    left--;
+    if(stEl) stEl.innerHTML = '<span style="color:var(--ok,#10b981)">● 正在聆听… 剩余 ' + Math.floor(left/60) + ':' + String(left%60).padStart(2,'0') + '</span>';
+    if(left <= 0) window.stopDeleSpeaking();
+  }, 1000);
+};
+window.stopDeleSpeaking = function(silent){
+  _deleSpeakClearTimer();
+  if(_deleSpeakRecognition){ try{ _deleSpeakRecognition.stop(); }catch(e){} }
+  if(_deleSpeakRec && !silent) window.finishDeleSpeaking();
+  _deleSpeakRec = false;
+  if(_deleSpeakBtn){ _deleSpeakBtn.className = 'btn pr'; _deleSpeakBtn.textContent = '🎤 重新作答'; }
+};
+window.finishDeleSpeaking = function(){
+  _deleSpeakRec = false;
+  _deleSpeakClearTimer();
+  if(_deleSpeakBtn){ _deleSpeakBtn.className = 'btn pr'; _deleSpeakBtn.textContent = '🎤 重新作答'; }
+  var lvl = _deleSpeakLvl();
+  // 基于 Recording 时的按钮定位容器（避免多卡片时误伤第一个）
+  var host = _deleSpeakBtn && _deleSpeakBtn.parentElement ? _deleSpeakBtn.parentElement : null;
+  var wrap = host ? host.querySelector('.dele-speak-live') : null;
+  var liveEl = wrap ? wrap.querySelector('.dele-speak-livebox') : null;
+  var stEl = wrap ? wrap.querySelector('.dele-speak-status') : null;
+  var fbEl = wrap ? wrap.querySelector('.dele-speak-fb') : null;
+  if(stEl) stEl.innerHTML = '';
+  if(liveEl) liveEl.style.display = 'none';
+  if(!_deleSpeakText){
+    if(fbEl) fbEl.innerHTML = '<div class="note" style="color:var(--tr,#94a3b8)">未识别到语音内容，可重试或改用「手动输入文本」评分。</div>';
+    return;
+  }
+  var r = window._deleCalcSpeakingScore(_deleSpeakText, lvl);
+  if(!fbEl) return;
+  var color = r.total >= 75 ? '#10b981' : r.total >= 60 ? '#f59e0b' : '#ef4444';
+  var h = '<div style="background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%);padding:10px;border-radius:8px;border:1px solid #bbf7d0">'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">'+
+      '<span class="pr-badge" style="background:'+color+'22;color:'+color+';font-size:14px;font-weight:700">DELE '+lvl+' 口语(录音) '+r.total+'/100</span>'+
+      '<span class="sub" style="color:var(--tr)">识别词数: '+r.wc+' (目标 '+r.target+')</span>'+
+    '</div>'+
+    '<details style="margin-bottom:6px"><summary style="cursor:pointer;font-size:12px;color:var(--tr)">📝 识别原文</summary><div style="font-size:12px;line-height:1.6;color:#334155;margin-top:4px">'+ (window.esc ? window.esc(_deleSpeakText) : _deleSpeakText) +'</div></details>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-bottom:6px">';
+  r.dims.forEach(function(d){
+    var cc = d.score >= 75 ? '#10b981' : d.score >= 60 ? '#f59e0b' : '#ef4444';
+    h += '<div style="background:#fff;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0">'+
+      '<div style="font-size:11px;color:var(--tr);margin-bottom:2px">'+d.label+'</div>'+
+      '<div style="display:flex;align-items:center;gap:6px">'+
+        '<div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+d.score+'%;background:'+cc+'"></div></div>'+
+        '<b style="font-size:12px;color:'+cc+'">'+d.score+'</b>'+
+      '</div></div>';
+  });
+  h += '</div>';
+  if(r.advice.length) h += '<div style="font-size:12px;line-height:1.7;color:#334155">'+r.advice.join('<br>')+'</div>';
+  h += '</div>';
+  fbEl.innerHTML = h;
+  // 低于 60 自动入错题集（与写作一致）
+  try{
+    if(r.total < 60 && typeof autoLogLowScore === 'function'){
+      autoLogLowScore('speaking', 'dele_speaking_'+lvl, {
+        question: 'DELE '+lvl+' 口语（录音）',
+        myAnswer: _deleSpeakText.slice(0,200)+(_deleSpeakText.length>200?'…':''),
+        correctAnswer: '参考范例见题目下方',
+        note: '口语录音评分 '+r.total+' 分 · 识别词数 '+r.wc+' · '+lvl,
+        score: r.total
+      });
+    }
+  }catch(e){}
+  try{ if(typeof _deleSaveProgress === 'function') _deleSaveProgress(); }catch(e){}
 };
 // ===== v73: DELE 口语文本作答评分 + 全真模拟计时 + 表单自动保存 =====
 const DELE_MOCK_MIN = { A1: 70, A2: 95, B1: 110, B2: 110 };
@@ -18114,7 +18248,7 @@ window.addEventListener('DOMContentLoaded', () => {
 if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   window.addEventListener('load', function(){
     // 带版本号的 SW 注册：sw2.js 为新文件名，强制浏览器获取（旧 sw.js 注册被替换退役）
-    var swVer = window.swVer || 'v73-2026100401';
+    var swVer = window.swVer || 'v74-2026100402';
     var _hadSw = !!navigator.serviceWorker.controller; /* v72: 首访无控制 SW，不自动刷新 */
     navigator.serviceWorker.register('sw2.js?v='+swVer).then(function(reg){
       // SW 更新时自动刷新页面，避免旧标签页停留在旧版本
@@ -18152,7 +18286,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
   // 页面版本：优先读 window.swVer（v71 起在文档头部 script 注入），读不到才回退当前版本
   function pageVer(){
     try{ if(typeof swVer!=='undefined'&&swVer)return String(swVer); }catch(e){}
-    return (window.swVer||'v73-2026100401');
+    return (window.swVer||'v74-2026100402');
   }
   // L1：向 SW 询问其 CACHE 版本，与页面版本比对
   window._deleSwVersionCheck=function(){
