@@ -3,6 +3,16 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v92.2] – 2026-10-05
+
+### SIELE T3 双 Bloque 演练（对齐官方 EIO 考场形态）
+
+- T3 标签页新增「🎭 双 Bloque 演练」：随机组卷（2 段 × 二选一，共 4 题不重复），**连续 2 段**、每段给 2 个情境**二选一**，各含官方 3 个必做点
+- 流程：入口按钮 → Bloque 1 二选一 → 自动跳到所选情境（复用现有录音/评分/必答项核对）→「进入 Bloque 2」→ 选段 → 「完成演练」；全程可「退出演练」
+- 状态持久化 `ST.sieleT3Bloque={on,bloque,opts,chosen}`；选段时若被分类过滤挡住会自动清过滤
+- 改动：新增 `_sieleT3BloqueState/_sieleT3BloqueStart/_sieleT3BloqueExit/_sieleT3Pick/_sieleT3BloqueNext/_sieleT3BloqueHtml`；在 T3 标签页 themes 块后注入面板。**T2/T5 零改动**（改前后回归逐项一致）
+- swVer / SW CACHE 成对顶版 `v92.2-2026100523`；本地冒烟（入口/双段/选段跳题/段间推进/结束）+ 线上复验全过，无 pageerror
+
 ## [v92.1] – 2026-10-05
 
 ### SIELE 口语评分改造（官方必答项逐项核对 + 修复空录音地板）
