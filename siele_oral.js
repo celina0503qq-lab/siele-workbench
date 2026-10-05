@@ -1523,12 +1523,15 @@ Object.assign(window.SIELE_T4_LEGACY_V92,{
 "hf29":{passage:"Los videojuegos son el ocio favorito de la adolescencia española. El informe oficial sobre infancia digital detecta que el 53,5% del alumnado juega al menos una vez por semana, uno de cada cinco a diario, con una media de 7,14 horas semanales; en Primaria suben al 62,5%. El 70,2% consume juegos con contenidos violentos y uno de cada cuatro juega títulos clasificados PEGI 18. La prevalencia de un posible trastorno por uso de videojuegos se sitúa en el 1,7%. Los autores recomiendan control parental dialogado y atención a las cajas botín y las compras dentro del juego.",passageZh:"电子游戏是西班牙青少年的头号娱乐。官方《儿童数字生活报告》发现，53.5% 的学生每周至少玩一次游戏，五分之一每天都玩，周均时长 7.14 小时；小学生中这一比例升至 62.5%。70.2% 的玩家玩含暴力内容的游戏，四分之一玩 PEGI 18 分级的作品。可能出现游戏成瘾障碍的比例为 1.7%。报告作者建议采用对话式家长管控，并关注「战利品箱」与游戏内购。",source:"Informe Infancia Digital 2025（官方，原文截取）"},
 "hf30":{passage:"Comprar por internet dejó de ser excepcional para convertirse en rutina. En una década, la facturación del comercio electrónico en España se multiplicó por 5,7: pasó de 20.013 millones de euros en 2015 a más de 114.800 millones en 2025, con una media de crecimiento anual cercana al 19%. Casi 29,4 millones de personas compran en línea y el 83% lo hace desde el smartphone; el ticket medio ha bajado de 67 a 56 euros, señal de que ya se compran de todo, también el súper. Las tiendas físicas, mientras tanto, reinventan su papel como espacio de experiencia.",passageZh:"网上购物已从例外变成日常。十年间，西班牙电商营业额增长了 4.7 倍：从 2015 年的 200.13 亿欧元增至 2025 年的 1,148 亿欧元以上，年均增速接近 19%。近 2,940 万人在线购物，其中 83% 用智能手机下单；平均客单价从 67 欧降到 56 欧——什么都在网上买，连买菜也不例外。与此同时，实体店正在把自己重塑为「体验空间」。",source:"CNMC / ONTSI（原文数据截取）"}
 });
+window._sieleFixESSpacing=function(s){return String(s||'').replace(/([.!?])(?=[A-Z\u00c1\u00c9\u00cd\u00d3\u00da\u00d1])/g,'$1 ');};
 window._sieleT4V92Apply=function(bank){
  try{
   var S=window.SIELE_T4_LEGACY_V92||{},n=0;
   (bank||[]).forEach(function(q){
    var d=q&&q.topic&&S[q.topic];
    if(d&&d.passage&&!q.passage){q.passage=d.passage;q.passageZh=d.passageZh;q.passageSrc=d.source;n++;}
+   /* v92.2a: 修复存量模板拼接缺空格（…concretas.La… → …concretas. La…）；静/云双分支生效，幂等 */
+   if(q){ if(q.model) q.model=window._sieleFixESSpacing(q.model); if(q.subqs&&q.subqs.length) q.subqs.forEach(function(s){ if(s&&s.model) s.model=window._sieleFixESSpacing(s.model); }); }
   });
   return n;
  }catch(e){console.warn('[v92] T4 legacy apply 失败:',e);return 0;}
