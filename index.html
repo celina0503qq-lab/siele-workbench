@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v92.3-2026100600';
+window.swVer = 'v92.4-2026100601';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6912,7 +6912,7 @@ function _sieleMockBar(){ // 激活中：吸顶进度横条
   var done=pos>=flat.length;
   var cur=flat[Math.min(pos,flat.length-1)]||{};
   var pct=Math.round(Math.min(pos,flat.length)/flat.length*100);
-  if(done) return _sieleMockReportHtml(flat);
+  if(done){ _sieleMockSaveHistory(flat); return _sieleMockReportHtml(flat); }
   return '<div class="t45ui" style="border:2px solid #7c3aed;border-radius:12px;padding:8px 11px;margin:8px 0;background:#faf9ff">'
     +'<div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">'
     +'<b style="font-size:12px;color:#7c3aed">🎯 SIELE 模拟考试</b>'
@@ -6947,11 +6947,73 @@ function _sieleMockReportHtml(flat){
 }
 var _sieleMockPanelOpen=false;
 function toggleSieleMockPanel(){ _sieleMockPanelOpen=!_sieleMockPanelOpen; renderMain(); }
+/* ===== v92.4: 模考回忆库（每次模考留存 + 按 Tarea 强弱） ===== */
+function _sieleMockSaveHistory(flat){
+  try{
+    var m=ST.sieleMock||{}; if(!m.created || !flat || !flat.length) return;
+    ST.sieleMockHistory=ST.sieleMockHistory||[];
+    for(var x=0;x<ST.sieleMockHistory.length;x++){ if(ST.sieleMockHistory[x].created===m.created) return; }
+    var rows=[],sum=0,cnt=0,byT={};
+    flat.forEach(function(s){
+      var eid=(s.t===4)?(s.id+'#s'+s.sub):(s.id+'#a');
+      var sc=_sieleMockScoreOf(eid);
+      if(sc==null && s.t===5) sc=_sieleMockScoreOf(s.id+'#b');
+      var b=getSieleOralBank()[s.t]||[], q=null;
+      for(var j=0;j<b.length;j++){ if(b[j].id===s.id){ q=b[j]; break; } }
+      var name=q?(q.esTitle||q.title||q.id):s.id;
+      if(sc!=null){ sum+=sc; cnt++; (byT[s.t]=byT[s.t]||[]).push(sc); }
+      rows.push({t:s.t, sub:(s.sub!=null?s.sub:null), id:s.id, name:String(name).slice(0,40), score:sc});
+    });
+    var byAvg={}; Object.keys(byT).forEach(function(k){ var a=byT[k]; byAvg[k]=Math.round(a.reduce(function(p,c){return p+c;},0)/a.length); });
+    ST.sieleMockHistory.push({created:m.created, ts:m.created, tag:m.tag||'random', date:todayStr(), avg:(cnt?Math.round(sum/cnt):0), done:cnt, total:flat.length, byTarea:byAvg, steps:rows});
+    if(ST.sieleMockHistory.length>20) ST.sieleMockHistory=ST.sieleMockHistory.slice(-20);
+    save();
+    try{ console.log('[mock] 回忆库已收录，累计', ST.sieleMockHistory.length, '次'); }catch(e){}
+  }catch(e){ console.warn('[mock] 回忆库保存失败', e); }
+}
+function _sieleMockHistClear(){ try{ if(!confirm('确认清空模考回忆库？')) return; ST.sieleMockHistory=[]; save(); renderMain(); if(typeof toast==='function') toast('已清空模考回忆库','ok'); }catch(e){} }
+function _sieleMockHistHtml(){
+  try{
+    var H=(ST.sieleMockHistory||[]).slice().reverse();
+    var h='<div class="t45ui" style="border:1px solid #cbd5e1;border-radius:12px;padding:9px 12px;margin:8px 0;background:#fff">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b style="font-size:12.5px;color:#334155">📚 模考回忆库</b>'
+      +'<span><button class="btn sm ol" style="font-size:11px" onclick="window._sieleMockHistOpen=false;renderMain()">收起</button>'
+      +(H.length?'<button class="btn sm ol" style="font-size:11px;margin-left:6px" onclick="_sieleMockHistClear()">清空</button>':'')+'</span></div>';
+    if(!H.length){ return h+'<div class="sub" style="font-size:11.5px;color:#94a3b8;margin-top:6px">还没有模考记录。完成一次全真模拟后会自动收录，并给出各 Tarea 的强弱。</div></div>'; }
+    var order=['1','2','3','4','5'], agg={}, hasAny=false;
+    H.forEach(function(r){ Object.keys(r.byTarea||{}).forEach(function(t){ (agg[t]=agg[t]||[]).push(r.byTarea[t]); }); });
+    var tAvg={}; order.forEach(function(t){ if(agg[t]){ var a=agg[t]; tAvg[t]=Math.round(a.reduce(function(p,c){return p+c;},0)/a.length); hasAny=true; } });
+    if(hasAny){
+      h+='<div style="margin-top:7px"><b style="font-size:11.5px">各 Tarea 平均（全部 '+H.length+' 次）</b><div style="display:grid;gap:4px;margin-top:5px">';
+      order.forEach(function(t){ var v=tAvg[t]; if(v==null) return;
+        h+='<div style="display:flex;align-items:center;gap:7px"><span style="width:34px;font-size:11px;color:#64748b">T'+t+'</span>'
+          +'<div style="flex:1;height:9px;background:#eef2f7;border-radius:5px;overflow:hidden"><div style="width:'+v+'%;height:100%;background:'+(v>=75?'#16a34a':(v>=55?'#d97706':'#dc2626'))+'"></div></div>'
+          +'<b style="width:30px;text-align:right;font-size:11px">'+v+'</b></div>'; });
+      h+='</div>';
+      var ranked=order.filter(function(t){return tAvg[t]!=null;}).sort(function(a,b){return tAvg[a]-tAvg[b];});
+      var weakest=ranked[0], strongest=ranked[ranked.length-1];
+      if(weakest) h+='<div class="sub" style="font-size:11.5px;color:#334155;margin-top:6px">💡 相对薄弱：<b style="color:#dc2626">Tarea '+weakest+'</b>（'+tAvg[weakest]+'）'+(strongest&&strongest!==weakest?' · 相对最强：<b style="color:#16a34a">Tarea '+strongest+'</b>（'+tAvg[strongest]+'）':'')+'</div>';
+    }
+    h+='<div style="margin-top:8px;max-height:280px;overflow:auto"><table style="width:100%;border-collapse:collapse">'
+      +'<tr style="font-size:10.5px;color:#94a3b8"><th style="text-align:left;padding:3px 4px">第 N 次</th><th style="text-align:center;padding:3px 4px">均分</th><th style="text-align:left;padding:3px 4px">各 Tarea（1-5）</th></tr>';
+    H.forEach(function(r,idx){
+      var bt=r.byTarea||{};
+      var cells=order.map(function(t){ var v=bt[t]; return v==null?'<span style="color:#cbd5e1">·</span>':'<span style="color:'+(v>=75?'#16a34a':(v>=55?'#d97706':'#dc2626'))+'">'+v+'</span>'; }).join(' / ');
+      var no=H.length-idx;
+      h+='<tr style="border-top:1px solid #f1f5f9"><td style="padding:3px 4px;font-size:11px;color:#64748b;white-space:nowrap">#'+no+' '+esc(r.date||'')+'</td>'
+        +'<td style="text-align:center;font-size:12.5px;font-weight:800;color:'+(r.avg>=75?'#16a34a':(r.avg>=55?'#d97706':'#dc2626'))+'">'+r.avg+'</td>'
+        +'<td style="padding:3px 4px;font-size:11px">'+cells+' <span style="color:#94a3b8">('+r.done+'/'+r.total+' 步已答)</span></td></tr>';
+    });
+    h+='</table></div></div>';
+    return h;
+  }catch(e){ return ''; }
+}
 function _sieleMockEntryHtml(){ // 未激活：入口 + 组卷面板（随机 / 自主组题）
   var h='<div class="t45ui" style="border:1px dashed #c4b5fd;border-radius:12px;padding:8px 11px;margin:8px 0;background:#fbfaff">'
     +'<div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><b style="font-size:12px;color:#7c3aed">🎯 SIELE 全真模拟考试</b>'
     +'<button class="btn sm" style="font-size:12px;padding:4px 14px;background:#7c3aed;color:#fff;border:none;border-radius:8px" onclick="_sieleMockStartRandom()">随机抽卷开始</button>'
     +'<button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="toggleSieleMockPanel()">'+(_sieleMockPanelOpen?'收起组卷面板':'自主组题 ▾')+'</button>'
+    +'<button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="window._sieleMockHistOpen=!window._sieleMockHistOpen;renderMain()">📚 回忆库'+((ST.sieleMockHistory&&ST.sieleMockHistory.length)?' ('+ST.sieleMockHistory.length+')':'')+'</button>'
     +'<span class="sub" style="font-size:10px;color:#64748b">T1 四问 · T2 描述 · T3 两情境 · T4 材料三问 · T5 立场（跟随 T4 同题）</span></div>';
   if(_sieleMockPanelOpen){
     function sel(t){ var b=(getSieleOralBank()[t]||[]); if(t===4) b=b.filter(function(q){return q.passage;});
@@ -6964,6 +7026,7 @@ function _sieleMockEntryHtml(){ // 未激活：入口 + 组卷面板（随机 / 
       +'<label style="font-size:11px;color:#334155">Tarea 5 立场（默认随 T4 同题）<br>'+sel(5)+'</label>'
       +'</div><button class="btn sm" style="font-size:12px;padding:5px 14px;margin-top:8px;background:#7c3aed;color:#fff;border:none;border-radius:8px" onclick="_sieleMockStartCustom()">用这份卷开始 →</button>';
   }
+  if(window._sieleMockHistOpen) h+=_sieleMockHistHtml();
   return h+'</div>';
 }
 function _sieleMockStartCustom(){
