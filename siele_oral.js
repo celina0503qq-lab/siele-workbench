@@ -604,3 +604,432 @@ window._sieleT2PhotoRemap.MAP = {
   't2-sala_estar-65':'assets/images/t2-scenes/t2-sala_estar-2.jpg',
   't2-sala_estar-66':'assets/images/t2-scenes/t2-sala_estar-2.jpg'
 };
+
+
+// ===== v90: T4/T5 扩题一期（hf31-40，新 10 主题）=====
+// 数据来源：《听说读写-口语tarea4.5.pdf》，拼写/语法已修正；
+// T4 新增 subqs 三问结构（旧 q/keys/model 保留为整段兼容回退）；
+// T5 新增 stances 双立场（a=A favor / b=En contra，各含提纲+keys+范文）；
+// _sieleT45Expand 幂等展开：静态库与云端编辑快照均补齐新题（仿 _sieleT2PhotoRemap 模式）。
+window.SIELE_T45_EXP4 = window.SIELE_T45_EXP4 || [];
+window.SIELE_T45_EXP5 = window.SIELE_T45_EXP5 || [];
+window.EXP4_PUSH = function(arr){
+  arr.forEach(function(q){
+    if(!q || !q.id || !q.topic) throw new Error('EXP4 item inválido: '+JSON.stringify(q&&q.id));
+    q.model = q.model || (q.subqs||[]).map(function(s){return s.model;}).join(' ');
+    q.q = q.q || (q.subqs||[]).map(function(s){return s.q;}).join(' ');
+    if(window.SIELE_T45_EXP4.some(function(x){return x.id===q.id;})) return; // 幂等
+    window.SIELE_T45_EXP4.push(q);
+  });
+};
+window.EXP5_PUSH = function(arr){
+  arr.forEach(function(q){
+    if(!q || !q.id || !q.topic || !q.stances) throw new Error('EXP5 item inválido: '+JSON.stringify(q&&q.id));
+    q.keys = q.keys || q.stances.a.keys;
+    q.model = q.model || q.stances.a.model;
+    if(window.SIELE_T45_EXP5.some(function(x){return x.id===q.id;})) return; // 幂等
+    window.SIELE_T45_EXP5.push(q);
+  });
+};
+// ===== v90 扩题 hf31-33（自然灾害/共享经济/留学与文化适应）=====
+// 内容取自《听说读写-口语tarea4.5.pdf》，拼写与语法已修正
+EXP4_PUSH([
+{
+id:'t4-hf31', topic:'hf31', sec:60,
+title:'La solidaridad ante los desastres naturales',
+q:'¿Cree usted que donar es útil? ¿Cómo reacciona la gente de su país ante los desastres? ¿Cree que el aumento de los desastres naturales está relacionado con la influencia humana?',
+keys:['donar','solidaridad','desastre','equipo de socorro','calentamiento global'],
+subqs:[
+ {q:'¿Cree usted que donar es útil? ¿Qué otras formas de ayuda considera eficaces?',
+  keys:['donar','escasez','agua potable','ayuda','zona afectada'],
+  model:'A mi modo de ver, cuando ocurre un desastre, es muy útil donar a la zona afectada, porque muchos desastres conducen a una escasez de recursos locales, como agua potable y alimentos. En este caso, los materiales donados pueden ser de gran ayuda para los residentes. Además de donar, creo que participar como voluntario y difundir información fiable también son formas eficaces de ayudar.'},
+ {q:'¿Cómo reacciona la gente de su país ante los desastres naturales?',
+  keys:['unida','gobierno','equipo de socorro','donar voluntariamente','rescate'],
+  model:'En mi país, cuando hay un desastre, la gente de todo el país está muy unida. El gobierno y las organizaciones no gubernamentales organizan equipos de socorro, y muchas personas donan dinero y materiales voluntariamente a la zona del desastre. Además, los militares llegan a la zona lo antes posible para llevar a cabo el rescate. Esta solidaridad me parece uno de los valores más bonitos de nuestra sociedad.'},
+ {q:'Algunos relacionan el aumento de los desastres naturales con la influencia humana, ¿está de acuerdo?',
+  keys:['deforestación','combustibles fósiles','calentamiento global','relación','extremos'],
+  model:'Estoy de acuerdo con este punto de vista. A mi modo de ver, existe una gran correlación entre el aumento de los desastres naturales y el impacto de los seres humanos. Como todos sabemos, la deforestación excesiva y el uso de combustibles fósiles han causado el calentamiento global, y este ha provocado muchos fenómenos climáticos extremos. Por lo tanto, el impacto humano y el aumento de los desastres están estrechamente relacionados.'}
+]
+},
+{
+id:'t4-hf32', topic:'hf32', sec:60,
+title:'La economía compartida',
+q:'¿Qué consecuencias tiene el alquiler a corto plazo de viviendas? ¿Existen formas de economía compartida en su país? Si tuviera una vivienda para alquilar, ¿qué exigiría a sus huéspedes?',
+keys:['economía compartida','alquiler','huéspedes','vecinos','bicicletas compartidas'],
+subqs:[
+ {q:'¿Qué consecuencias tiene el alquiler a corto plazo de viviendas?',
+  keys:['molestias','vecinos','seguridad','desgaste','valor'],
+  model:'En primer lugar, el alquiler a corto plazo de viviendas puede causar molestias y afectar la vida normal de los vecinos. En segundo lugar, este tipo de vivienda tiene un gran flujo de clientes, lo que resulta difícil de gestionar y puede provocar problemas de seguridad. Finalmente, el uso frecuente de la casa acelera el desgaste de las instalaciones y reduce su valor.'},
+ {q:'¿Existen formas de economía compartida en su país? Descríbalas.',
+  keys:['bicicletas compartidas','carga','alquiler','aplicaciones','conveniente'],
+  model:'Sí, en mi país la economía compartida se ha desarrollado mucho. En primer lugar, están las bicicletas compartidas, que hacen que los desplazamientos de la gente sean muy convenientes. En segundo lugar, existe la carga compartida de baterías. Finalmente, hay muchas aplicaciones de economía compartida, por ejemplo, software para alquilar casas y coches. En general, este modelo ha cambiado nuestra vida cotidiana.'},
+ {q:'Si tuviera una vivienda para alquilar, ¿qué exigiría a sus huéspedes?',
+  keys:['limpia','ruidos','vecinos','indemnización','muebles'],
+  model:'Si tuviera una casa para alquilar, le pediría a mi inquilino que mantuviera la casa lo más limpia posible. En segundo lugar, les pediría que no molestaran a los vecinos con ruidos fuertes, sobre todo por la noche. Finalmente, si causaran daños a los muebles, debería recibir una indemnización. Creo que con estas tres reglas básicas, la convivencia sería respetuosa para todos.'}
+]
+},
+{
+id:'t4-hf33', topic:'hf33', sec:60,
+title:'Estudiar y trabajar en el extranjero',
+q:'¿Qué ventajas tiene estudiar en el extranjero? ¿Conoce algún programa de estudios en el extranjero? Si pudiera, ¿a qué país iría y por qué?',
+keys:['estudiar en el extranjero','cultura','programa','España','idioma'],
+subqs:[
+ {q:'¿Qué ventajas tiene estudiar en el extranjero?',
+  keys:['ampliar','conocimiento','cultura','estilos de vida','experiencia'],
+  model:'A mi modo de ver, hay muchos beneficios de estudiar en el extranjero. Primero, puedo ampliar mis conocimientos. En segundo lugar, puedo aprender sobre la cultura y los diferentes estilos de vida de otros países, lo que abre la mente. Finalmente, puedo adquirir experiencia a través de esta forma de aprendizaje, algo muy valioso tanto para el estudio como para la vida.'},
+ {q:'¿Conoce algún programa de estudios en el extranjero de su país? Descríbalo.',
+  keys:['programa','universidad','idioma','dos años','posgrado'],
+  model:'Sí, conozco uno de los programas de estudios en el extranjero de mi país: los estudiantes cursan los dos primeros años de universidad en China, estudiando sobre todo el idioma, y los dos últimos años en el extranjero, en un nivel más avanzado. Después de eso, pueden seguir solicitando estudios de posgrado fuera. Es un programa muy popular entre los jóvenes.'},
+ {q:'Si pudiera estudiar en el extranjero, ¿a qué país iría y por qué?',
+  keys:['España','español','ambiente lingüístico','cultura','sueño'],
+  model:'Si pudiera estudiar en el extranjero, iría a España. En primer lugar, llevo tres años estudiando español, lo que me permitiría comunicarme sin problemas allí. En segundo lugar, quiero mejorar mi español, así que necesito un buen ambiente lingüístico. Finalmente, me encanta la cultura de España desde niño y espero cumplir este sueño algún día.'}
+]
+}
+]);
+
+// ===== v90 扩题 hf34-36（转基因食品/儿童与屏幕/养老与老龄化）=====
+EXP4_PUSH([
+{
+id:'t4-hf34', topic:'hf34', sec:60,
+title:'Los alimentos transgénicos',
+q:'¿Comería usted alimentos transgénicos? ¿Qué aceptación tienen en su país? Si fuera responsable del Estado, ¿cómo trataría estas novedades?',
+keys:['transgénicos','nutrición','aceptación','seguridad','leyes'],
+subqs:[
+ {q:'¿Comería usted alimentos transgénicos?',
+  keys:['valor nutricional','sabor','precio','salud','aceptaría'],
+  model:'Sí, comería alimentos genéticamente modificados. En primer lugar, porque mejoran el valor nutricional de los alimentos. En segundo lugar, pueden hacer que los alimentos tengan mejor sabor. Finalmente, hay que tener en cuenta su bajo precio, lo que resulta muy útil para muchas familias. Claro que, antes de comerlos, quiero saber que cumplen todos los controles de seguridad.'},
+ {q:'¿Qué aceptación tienen estos alimentos en su país?',
+  keys:['baja','preocupación','seguridad','divulgación científica','tradicionales'],
+  model:'En China, la aceptación de los alimentos transgénicos es bastante baja. Primero, porque mucha gente está preocupada por su seguridad a largo plazo. En segundo lugar, existe una falta de divulgación científica: la gente no recibe información suficiente y fiable. Finalmente, como las ideas tradicionales siguen siendo dominantes, muchos consumidores prefieren los alimentos tradicionales.'},
+ {q:'Si usted fuera responsable del Estado, ¿cómo trataría esta clase de novedades?',
+  keys:['objetivamente','investigación','gestión','leyes','desarrollo saludable'],
+  model:'Si yo fuera responsable del Estado, vería estas cosas nuevas con objetividad. Primero, organizaría a profesionales para realizar investigaciones sobre su seguridad y sus beneficios. En segundo lugar, fortalecería la gestión del mercado para garantizar un desarrollo saludable. Finalmente, mejoraría las leyes correspondientes para hacer frente a los problemas que pudieran surgir durante su desarrollo.'}
+]
+},
+{
+id:'t4-hf35', topic:'hf35', sec:60,
+title:'Los niños y las pantallas',
+q:'¿Qué opina sobre el uso del móvil de los niños? Si tuviera un hijo, ¿se lo permitiría? Algunos creen que los adolescentes no deberían usarlo, ¿qué opina?',
+keys:['móvil','niños','visión','comunicación','doble filo'],
+subqs:[
+ {q:'¿Qué opina usted sobre el uso del móvil de los niños?',
+  keys:['ventajas','inconvenientes','noticias','visión','atención'],
+  model:'Desde mi punto de vista, el uso del móvil tiene tantas ventajas como inconvenientes. Por un lado, ofrece a los niños acceso a las noticias de todo el mundo, les abre los ojos y facilita la comunicación con amigos y parientes. Por otro lado, puede hacer mucho daño a la visión de los adolescentes y distraer su atención del estudio. Con todo lo dicho, es un arma de doble filo.'},
+ {q:'Si tuviera un hijo, ¿le permitiría usar el móvil?',
+  keys:['permitiría','tiempo limitado','estudio','visión','reglas'],
+  model:'Si yo tuviera un hijo, no se lo permitiría sin control. Es verdad que el móvil puede ofrecerle acceso a las noticias y facilitar la comunicación, sin embargo, puede hacer mucho daño a su visión y distraer su atención del estudio. Por eso, se lo dejaría usar con tiempo limitado y reglas claras, por ejemplo, solo después de terminar los deberes.'},
+ {q:'Algunos creen que los adolescentes no deberían usar el móvil, ¿qué opina usted?',
+  keys:['parte de razón','sin embargo','abrir los ojos','comunicación','usar adecuadamente'],
+  model:'Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo. Es verdad que el móvil puede dañar la visión de los adolescentes y distraerlos del estudio; sin embargo, también puede abrirles los ojos al mundo y facilitar la comunicación con sus amigos y familiares. Además, los padres deben enseñar a sus hijos a usar el móvil adecuadamente en lugar de prohibírselo por completo.'}
+]
+},
+{
+id:'t4-hf36', topic:'hf36', sec:60,
+title:'La vejez y la jubilación',
+q:'¿Qué le gustaría hacer cuando sea mayor? ¿Cómo es la vida de los mayores en su país? ¿Debería el Estado asumir sus gastos de salud?',
+keys:['vejez','jubilación','pensión','gobierno','gastos de salud'],
+subqs:[
+ {q:'¿Qué le gustaría hacer cuando sea mayor?',
+  keys:['ahorros','viajar','ciudad agradable','leer','pasear'],
+  model:'Cuando sea viejo, quiero llevar mis ahorros y viajar por todo el mundo, y finalmente establecerme en una ciudad con un ambiente muy agradable para pasar mi vejez allí. Allí podría leer un libro cada mañana bajo el sol y pasear por un hermoso parque ajardinado. Creo que después de muchos años de trabajo, merezco una vida tranquila y placentera.'},
+ {q:'¿Cómo es la vida de las personas mayores en su país? ¿Existen políticas para los jubilados?',
+  keys:['relajada','pensión','aumenta','seguridad médica','gratis'],
+  model:'En mi país, la vida de las personas mayores es muy tranquila, porque existen muchas políticas de bienestar para ellas. Cuando se jubilan, reciben una pensión cada mes, que además aumenta con la edad. En segundo lugar, hay políticas de seguridad médica para los jubilados. Además, tienen derecho a tomar el autobús y el metro gratis, y pueden visitar los lugares de interés sin pagar entrada.'},
+ {q:'Si pudiera aconsejar al gobierno, ¿qué sugeriría? ¿Debería el Estado asumir los gastos de salud de los mayores?',
+  keys:['centros de actividades','necesidades espirituales','pensiones','calidad de vida','asumir'],
+  model:'Creo que el Estado debería asumir al menos una parte de los gastos de salud de las personas mayores. Si tuviera la oportunidad de aconsejar al gobierno, sugeriría construir más centros de actividades para atender las necesidades espirituales de los ancianos. En segundo lugar, sugeriría aumentar el nivel de las pensiones, para que puedan vivir con mejor calidad de vida y dignidad.'}
+]
+}
+]);
+
+// ===== v90 扩题 hf37-40（幸福的定义/友谊的重要性/安乐死/纸质书与电子书）=====
+// 内容取自《听说读写-口语tarea4.5.pdf》十六、十七、三十八、三十九节，拼写与语法已修正
+EXP4_PUSH([
+{
+id:'t4-hf37', topic:'hf37', sec:60,
+title:'La felicidad: ¿qué es y cómo se mide?',
+q:'¿Cómo define usted la felicidad? ¿Cree que la felicidad es difícil de definir? ¿Por qué varía el concepto de felicidad entre países?',
+keys:['felicidad','definición','sueños','personalidad','desarrollo'],
+subqs:[
+ {q:'¿Cómo define usted la felicidad? ¿Cuál es su concepto de felicidad?',
+  keys:['definición','satisfacción','sueños','cotidiana','vida plena'],
+  model:'En mi opinión, mi definición de felicidad es tener una vida feliz y satisfactoria. Mi concepto de felicidad es muy simple: usar todos los días de mi vida para hacer lo que me gusta, esforzarme por mejorar y perseguir mis sueños. Para mí, la felicidad no es un gran objetivo lejano, sino la satisfacción de la vida cotidiana y la sensación de avanzar hacia una vida plena.'},
+ {q:'¿Cree que la felicidad es difícil de definir? ¿Por qué cada persona tiene su propia idea de felicidad?',
+  keys:['personalidad','gustos','experiencias','diferente','definir'],
+  model:'Estoy de acuerdo en que la felicidad es difícil de definir, porque la personalidad de cada persona es diferente, los gustos de todos son distintos e incluso todos tenemos experiencias diferentes. Todos estos factores hacen que cada uno defina la felicidad de manera diferente: para algunos es dinero, para otros salud o tiempo en familia. Precisamente esa diversidad hace tan interesante este tema.'},
+ {q:'¿Por qué cree que el concepto de felicidad varía entre los países?',
+  keys:['desarrollo','países desarrollados','espiritual','material','índice'],
+  model:'Las personas de diferentes países tienen diferentes definiciones de felicidad, y creo que esta situación se atribuye a los diferentes niveles de desarrollo de cada país. Por ejemplo, los habitantes de los países desarrollados se interesan más por la felicidad espiritual, mientras que los de los países en desarrollo se centran más en la vida material. Por eso los índices de felicidad varían tanto de un país a otro.'}
+]
+},
+{
+id:'t4-hf38', topic:'hf38', sec:60,
+title:'La importancia de la amistad',
+q:'¿Qué papel desempeña la amistad en su vida? ¿Cómo ha cambiado la amistad desde su infancia? ¿Qué influencia ha tenido la tecnología en la amistad?',
+keys:['amistad','compañía','apoyo','redes sociales','comunicación'],
+subqs:[
+ {q:'¿Qué papel desempeña la amistad en su vida?',
+  keys:['indispensable','compañía','apoyo','dificultades','sentido'],
+  model:'Desde mi punto de vista, la amistad es algo indispensable en nuestra vida. En primer lugar, la amistad significa compañía: los amigos nos acompañan en muchos momentos de la vida. En segundo lugar, los amigos nos apoyan y ayudan a superar las dificultades. Por último, la amistad enriquece nuestra vida y la hace más colorida y llena de sentido. Con todo lo dicho, la amistad es muy importante para todas las personas.'},
+ {q:'¿Cómo ha cambiado la amistad desde su infancia hasta la edad adulta?',
+  keys:['infancia','ingenua','simples','complejas','preciosas'],
+  model:'Creo que la amistad se vuelve muy rara y preciosa cuando crecemos. Cuando somos jóvenes, las personas son ingenuas y las amistades son muy simples: jugar juntos ya era suficiente. Sin embargo, al crecer, las personalidades se vuelven diferentes y las amistades se hacen cada vez más complejas, raras y preciosas. Por eso valoro tanto a los amigos que siguen a mi lado después de tantos años.'},
+ {q:'¿Qué transformación ha traído la tecnología moderna a la amistad? ¿Cómo es esta fenómeno en su país?',
+  keys:['redes sociales','comunicación','distancia','maduro','aproximar'],
+  model:'El desarrollo de la tecnología moderna ha traído grandes mejoras a la amistad. Por ejemplo, a través del software de chat y las redes sociales, aunque las personas estén muy separadas, pueden saber rápidamente lo que está sucediendo y comunicarse bien; sin estas tecnologías, sería muy difícil para las personas de diferentes regiones mantenerse en contacto. En mi país el uso de esta tecnología es muy maduro, y ayuda a aproximar a la gente.'}
+]
+},
+{
+id:'t4-hf39', topic:'hf39', sec:60,
+title:'La eutanasia: un debate ético',
+q:'¿Cree que el dolor insoportable lleva a algunos pacientes a perder la voluntad de vivir? ¿En qué casos podría ser legal la eutanasia? ¿Cuál es la situación en su país?',
+keys:['eutanasia','dolor','enfermedad incurable','dignidad','legal'],
+subqs:[
+ {q:'¿Cree que el dolor insoportable es una de las razones por las que muchos pacientes graves pierden la voluntad de vivir?',
+  keys:['dolor','tratamiento','sufrimiento','tortura','voluntad'],
+  model:'Estoy totalmente de acuerdo con esta opinión. Muchos pacientes pierden la voluntad de vivir porque no pueden soportar el dolor que les trae el tratamiento, un tipo de dolor que nunca antes han sufrido. Debido a la enfermedad, no solo sufren físicamente, sino que a veces ni siquiera pueden comer, lo que supone una tortura física y psicológica. Por eso, algunas personas ven en la muerte el único fin de tanto sufrimiento.'},
+ {q:'¿En qué circunstancias cree que la eutanasia podría considerarse legal?',
+  keys:['enfermedad incurable','dignidad','decisión','carga','ley'],
+  model:'Desde mi punto de vista, la eutanasia podría ser legal para las personas que tienen una enfermedad incurable y que no quieren vivir, porque, desde su perspectiva, vivir se ha convertido en una tortura. Además, para quienes las aman, el cuidado puede sentirse como una carga, lo que genera un fuerte sentimiento de culpa. Sobre todo, esas personas quieren morir con dignidad, y la ley debería respetar su decisión.'},
+ {q:'¿Cuál es la situación de la eutanasia en su país? ¿Y en otros países que conozca?',
+  keys:['controvertido','prohibida','legal','debate','España'],
+  model:'Este sigue siendo un tema muy controvertido, tanto moral como legalmente. En mi país, la eutanasia está prohibida, por lo que las personas solo pueden soportar el dolor y la enfermedad hasta el final. Sin embargo, la eutanasia es legal en España, Estados Unidos y Canadá, donde existen leyes muy estrictas para aplicarla. Creo que el debate seguirá abierto y que cada sociedad debe encontrar su propia respuesta.'}
+]
+},
+{
+id:'t4-hf40', topic:'hf40', sec:60,
+title:'El libro digital y el libro de papel',
+q:'¿Cree que el libro digital sustituirá al de papel? ¿Qué ventajas e inconvenientes ve en el libro digital? ¿Qué tipo de libro preferiría leer?',
+keys:['libro digital','papel','ecológico','conveniente','sustituir'],
+subqs:[
+ {q:'Mucha gente piensa que el libro digital sustituirá al de papel en el futuro, ¿qué opina usted?',
+  keys:['sustituir','conveniente','ecológico','permanente','propiedad intelectual'],
+  model:'Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo. Es verdad que hoy en día la gente lee cada vez más en formato digital, porque es más conveniente y ecológico. Sin embargo, el libro de papel es más permanente y favorece más la protección de los derechos de propiedad intelectual del autor original. Con todo lo dicho anteriormente, creo que en el futuro el libro digital no sustituirá al impreso; los dos convivirán.'},
+ {q:'¿Qué opina usted sobre el libro digital? Hable de sus ventajas e inconvenientes.',
+  keys:['ventajas','inconvenientes','llevar','medio ambiente','doble filo'],
+  model:'Desde mi punto de vista, el libro digital tiene tanto ventajas como inconvenientes. Por un lado, es conveniente y ecológico: es fácil de llevar y resulta favorable para la protección del medio ambiente y de los recursos naturales. Por otro lado, es menos permanente que el libro de papel y no es tan propicio para los derechos de propiedad intelectual del autor. Con todo lo dicho anteriormente, es un arma de doble filo.'},
+ {q:'Si pudiera elegir, ¿qué tipo de libro preferiría leer? ¿Por qué?',
+  keys:['elegiría','cualquier momento','deforestación','ecológico','conveniente'],
+  model:'Si pudiera elegir, leería más el libro digital. Me explico: en primer lugar, es muy conveniente, porque podría llevarlo a cualquier lugar y leerlo en cualquier momento, y así podría leer más libros al año. En segundo lugar, es muy ecológico y favorable para la protección del medio ambiente y de los recursos naturales. Por último, leer en digital es una buena medida para aliviar la deforestación. Por todo ello, preferiría el libro digital.'}
+]
+}
+]);
+
+// ===== v90 扩题 T5 双立场（hf31-40）=====
+// 立场句取自 PDF 原生 T5 题（hf32/hf33/hf35/hf39/hf40），其余按同结构自拟；范文结构遵循 PDF 技巧：
+// 表态 → 论点一 → 论点二 → 回应反方（Aunque es cierto que…）→ 结论（En definitiva…）
+EXP5_PUSH([
+{
+id:'t5-hf31', topic:'hf31', sec:240,
+title:'"Ante los desastres naturales, las donaciones personales son más eficaces que la ayuda del gobierno."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['donaciones','inmediata','solidaridad','gobierno','reconstrucción'],
+model:'Estoy de acuerdo con esta afirmación, porque la solidaridad ciudadana suele ser el primer socorro que llega.',
+stances:{
+ a:{label:'A. A favor（个人捐赠更有效）',
+  q:'Usted está DE ACUERDO: las donaciones personales son más eficaces que la ayuda del gobierno. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['donaciones','inmediata','necesidades reales','burocracia','solidaridad'],
+  outline:['① 表态复述：Estoy de acuerdo con esta afirmación, porque cuando ocurre un desastre, cada hora cuenta…','② 论点一（速度快、无中间环节）：En primer lugar, los particulares actúan de inmediato, sin trámites ni burocracia…','③ 论点二（了解真实需求）：En segundo lugar, la gente cercana a la zona sabe exactamente qué falta: agua potable, mantas, medicinas…','④ 回应反方＋结论：Aunque es cierto que el gobierno tiene más recursos… En definitiva, ambos canales deben complementarse.'],
+  model:'Estoy totalmente de acuerdo con esta afirmación. Cuando ocurre un desastre natural, cada hora cuenta, y las donaciones personales suelen llegar antes que la ayuda oficial. <span class="link">En primer lugar</span>, los particulares actúan de inmediato: en cuanto aparecen las noticias, donan dinero, alimentos, ropa o medicinas, sin trámites ni burocracia. Esa rapidez es vital, porque en los primeros días faltan cosas tan básicas como agua potable y mantas. <span class="link">En segundo lugar</span>, la gente cercana a la zona afectada conoce las necesidades reales: sabe si hace falta equipo de socorro o material escolar para los niños, y envía exactamente lo que se necesita, sin gastos intermedios. Además, donar crea un sentimiento de solidaridad que une a toda la sociedad: escuelas, empresas y familias colaboran juntas, y eso también ayuda moralmente a los damnificados, que se sienten acompañados. <span class="link">Aunque es cierto que</span> el gobierno dispone de más recursos y de una organización más profesional, su respuesta muchas veces es lenta, porque debe aprobar presupuestos y coordinar instituciones, y en una emergencia esa lentitud cuesta vidas. <span class="link">Por lo tanto</span>, pienso que las donaciones personales son más eficaces en los primeros momentos, cuando la ayuda rápida es la más valiosa. <span class="link">En definitiva</span>, lo ideal es que ambos canales se complementen: que la solidaridad ciudadana cubra las necesidades urgentes de los primeros días y que el Estado organice la reconstrucción a largo plazo. Así se salva a más personas y la zona afectada se recupera antes.'},
+ b:{label:'B. En contra（政府救援更有效）',
+  q:'Usted está EN DESACUERTO: la ayuda del gobierno es más eficaz que las donaciones personales. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['organización','profesional','logística','desorden','reconstrucción'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque la ayuda del gobierno es más organizada y profesional…','② 论点一（资源与专业）：En primer lugar, el estado dispone de equipos de rescate, militares y presupuesto…','③ 论点二（协调与持续性）：En segundo lugar, solo el gobierno puede coordinar la logística y sostener la reconstrucción…','④ 回应反方＋结论：Aunque las donaciones llegan rápido, a veces causan desorden… En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación. Aunque las donaciones personales son generosas, la ayuda del gobierno es, en conjunto, mucho más eficaz. <span class="link">En primer lugar</span>, el Estado dispone de recursos y personal profesional: equipos de rescate, militares, hospitales de campaña y presupuesto público, cosas que los ciudadanos particulares no pueden ofrecer. <span class="link">En segundo lugar</span>, solo el gobierno puede coordinar la logística a gran escala: abrir carreteras, restaurar la electricidad y el agua potable, organizar albergues y distribuir la ayuda según un plan. Además, la emergencia no termina en una semana: la reconstrucción de casas, escuelas y hospitales dura meses o años, y esa continuidad solo puede garantizarla una institución estable. <span class="link">Aunque es cierto que</span> las donaciones personales llegan muy rápido, a veces causan desorden: se acumulan productos que no hacen falta, se bloquean las carreteras y se duplican los esfuerzos, lo que dificulta el trabajo de los profesionales. También existen los riesgos de fraudes cuando la recaudación no está controlada. A esto se suma la dimensión internacional: solo los gobiernos pueden pedir y coordinar la ayuda de otros países y de las organizaciones humanitarias, negociar la entrada de material y de personal especializado, y gestionar con transparencia los millones que llegan del exterior. <span class="link">Por lo tanto</span>, sostengo que la ayuda gubernamental, por ser organizada, continua y responsable, es la más eficaz ante un desastre. <span class="link">En definitiva</span>, la mejor solución no es competir, sino combinar: los ciudadanos donan con generosidad y el Estado canaliza esa solidaridad dentro de un plan serio de rescate y reconstrucción.'}
+}
+},
+{
+id:'t5-hf32', topic:'hf32', sec:240,
+title:'"El alquiler turístico de viviendas es un ejemplo digno de promoción dentro de la economía compartida."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['economía compartida','propietarios','turismo','regulación','vecinos'],
+model:'He elegido defender esta opción porque el propietario tiene derecho a disponer de su propiedad.',
+stances:{
+ a:{label:'A. A favor（民宿值得推广）',
+  q:'Usted está DE ACUERDO: el alquiler turístico de viviendas merece promoción. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['derecho de propiedad','ingresos','auténtico','asequible','beneficio mutuo'],
+  outline:['① 表态复述：Los alojamientos turísticos son un ejemplo digno de promoción dentro de la economía colaborativa…','② 论点一（财产权＋额外收入）：En primer lugar, los propietarios tienen derecho a disponer de su patrimonio y generan ingresos adicionales…','③ 论点二（旅客受益）：En segundo lugar, los viajeros acceden a precios más competitivos y a una estancia más auténtica…','④ 回应反方＋结论：Aunque es cierto que hacen falta normas… En definitiva, con regulación razonable, es un modelo de beneficio mutuo.'],
+  model:'Estoy de acuerdo con esta afirmación: los alojamientos turísticos son un ejemplo digno de promoción dentro de la economía colaborativa. <span class="link">En primer lugar</span>, los propietarios tienen el derecho de disponer de su propia propiedad, y alquilarla a corto plazo les permite generar ingresos adicionales y aprovechar al máximo sus recursos. Para muchas familias, ese dinero suplementario ayuda a pagar la hipoteca o imprevistos, y este modelo promueve una mayor libertad y autonomía económica. <span class="link">En segundo lugar</span>, los viajeros se benefician claramente: acceden a opciones de alojamiento a precios más competitivos que los hoteles tradicionales y viven una estancia más auténtica y personalizada, porque se sumergen en la cultura local, hablan con los vecinos y establecen conexiones reales con los anfitriones. Además, este modelo fomenta un turismo más inclusivo y sostenible, ya que reparte los visitantes por barrios y pueblos pequeños donde los grandes hoteles no llegan. <span class="link">Aunque es cierto que</span> algunos propietarios evitan pagar impuestos y que los ruidos pueden molestar a los vecinos, esos problemas se resuelven con normas claras de registro, tributación y horarios, no prohibiendo el modelo. <span class="link">Por lo tanto</span>, pienso que la solución es regular, no eliminar. <span class="link">En definitiva</span>, el alquiler turístico demuestra que la colaboración y la flexibilidad conducen a beneficios mutuos: el propietario gestiona su patrimonio con libertad y el viajero disfruta de un alojamiento único y asequible. Por eso merece ser promovido como un buen ejemplo de la economía compartida.'},
+ b:{label:'B. En contra（民宿需严管）',
+  q:'Usted está EN DESACUERTO: este modelo perjudica a los vecinos y al turismo y debería estar más regulado o limitado. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['impuestos','molestias','encarecer','regulación','turismo'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque en la práctica este modelo genera muchos perjuicios…','② 论点一（不纳税＋不正当竞争）：En primer lugar, muchas viviendas turísticas no pagan impuestos, lo que perjudica al turismo y a los hoteles…','③ 论点二（扰民与房价）：En segundo lugar, el gran flujo de clientes molesta a los vecinos y encarece el alquiler residencial…','④ 回应反方＋结论：Aunque da ingresos a los propietarios… En definitiva, hay que limitarlo y regularlo.'],
+  model:'No estoy de acuerdo con esta afirmación. Por mucho que la economía compartida tenga ventajas teóricas, en la práctica el alquiler turístico de viviendas genera perjuicios que no se pueden ignorar. <span class="link">En primer lugar</span>, muchas de estas viviendas no declaran los ingresos ni pagan impuestos, lo que supone una competencia desleal para los hoteles y perjudica al desarrollo del turismo, porque las ciudades pierden recursos públicos que deberían mantener los destinos que los turistas disfrutan. <span class="link">En segundo lugar</span>, el gran flujo de clientes sin control causa molestias constantes a los vecinos: ruidos por la noche, maletas en las escaleras y basuras que no se gestionan. Además, en las ciudades más visitadas, miles de pisos se dedican al alquiler turístico y salen del mercado residencial, lo que encarece los alquileres y expulsa a los vecinos de sus propios barrios: la ciudad se convierte en un museo vacío, un decorado para turistas donde ya no vive nadie del barrio. Y cuando el modelo explota, el daño no lo paga el propietario, lo pagan los residentes de siempre. <span class="link">Aunque es cierto que</span> los propietarios tienen derecho a sacar provecho de su patrimonio y que los viajeros ganan opciones baratas, un derecho individual no puede ejercerse a costa del descanso y de la vivienda de una comunidad entera. <span class="link">Por lo tanto</span>, sostengo que este modelo solo es aceptable con registro obligatorio, pago de impuestos y límites claros. <span class="link">En definitiva</span>, no es un ejemplo digno de promoción sin condiciones, sino una actividad que exige una regulación estricta para equilibrar turismo y convivencia.'}
+}
+},
+{
+id:'t5-hf33', topic:'hf33', sec:240,
+title:'"Estudiar en el extranjero ayuda a encontrar trabajo en el futuro."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['idioma','experiencia internacional','independencia','curriculum','adaptación'],
+model:'Estoy totalmente de acuerdo con esta afirmación: la experiencia internacional abre puertas en el mercado laboral.',
+stances:{
+ a:{label:'A. A favor（留学有助就业）',
+  q:'Usted está DE ACUERDO: estudiar en el extranjero ayuda a encontrar trabajo. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['idioma','experiencia internacional','independencia','ventaja','curriculum'],
+  outline:['① 表态复述：Estoy totalmente de acuerdo con esta afirmación…','② 论点一（语言与专业能力）：En primer lugar, se domina el idioma y se aprenden métodos distintos…','③ 论点二（独立性与跨文化适应）：En segundo lugar, vivir solo en otro país desarrolla la madurez y la capacidad de adaptación…','④ 回应反方＋结论：Aunque es una inversión cara… En definitiva, es una ventaja competitiva real.'],
+  model:'Estoy totalmente de acuerdo con esta afirmación: estudiar en el extranjero es una inversión que facilita mucho encontrar trabajo en el futuro. <span class="link">En primer lugar</span>, quien estudia fuera perfecciona un idioma y conoce métodos de trabajo y de estudio distintos, algo que las empresas valoran cada vez más en un mercado globalizado. Un curriculum con formación internacional destaca inmediatamente entre cientos de candidatos similares. <span class="link">En segundo lugar</span>, la experiencia transforma la persona: vivir solo en otro país obliga a resolver problemas cotidianos, administrar el dinero y adaptarse a culturas diferentes, lo que desarrolla la independencia, la madurez y la capacidad de trabajar con gente diversa. Esas competencias humanas son justamente las que buscan los seleccionadores, y no se aprenden en un aula. Además, se construye una red de contactos internacionales que puede abrir puertas profesionales en cualquier momento. <span class="link">Aunque es cierto que</span> estudiar fuera es caro y que el título, por sí solo, no garantiza un empleo, sería injusto reducir la cuestión al diploma: lo que contrata una empresa es una persona con idiomas, autonomía y visión internacional, y ese conjunto lo da precisamente la experiencia de estudiar en el extranjero. <span class="link">Por lo tanto</span>, sostengo que, comparado con quien nunca ha salido, el estudiante internacional parte con una ventaja competitiva real. <span class="link">En definitiva</span>, más que un gasto, es una inversión en el futuro profesional, porque convierte al graduado en alguien más preparado, flexible y atractivo para el mercado de trabajo.'},
+ b:{label:'B. En contra（留学≠好工作）',
+  q:'Usted está EN DESACUERTO: estudiar en el extranjero no garantiza encontrar trabajo. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['coste','garantía','experiencia práctica','adaptación','inversión'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque un título extranjero no garantiza nada por sí solo…','② 论点一（高成本低回报）：En primer lugar, el coste es enorme y el retorno es incierto…','③ 论点二（企业更重实践）：En segundo lugar, las empresas valoran la experiencia práctica y las competencias reales…','④ 回应反方＋结论：Aunque aporta idioma y madurez… En definitiva, es una opción, no una garantía.'],
+  model:'No estoy de acuerdo con esta afirmación, o al menos no la acepto sin matices: estudiar en el extranjero puede ser una experiencia valiosa, pero no es una garantía para encontrar trabajo. <span class="link">En primer lugar</span>, el coste es enorme: matrículas, vivienda y vida diaria en otro país pueden endeudar a una familia entera, y el retorno es incierto, porque el mercado laboral cambia rápido y muchos graduados internacionales vuelven a casa y compiten por los mismos puestos que los demás, a veces con menos contactos locales. <span class="link">En segundo lugar</span>, lo que realmente contratan las empresas es la experiencia práctica: prácticas profesionales, proyectos reales, dominio de herramientas concretas. Un candidato local con dos años de experiencia suele ser más atractivo que otro con un título extranjero y un curriculum vacío. Además, algunas empresas ni siquiera reconocen ciertos títulos extranjeros, y el proceso de homologación puede tardar años, durante los cuales el graduado trabaja en algo que no tiene nada que ver con sus estudios, perdiendo justo los años más valiosos de su carrera. <span class="link">Aunque es cierto que</span> estudiar fuera mejora el idioma y la madurez personal, esas competencias también se pueden adquirir trabajando, haciendo voluntariado o cursando programas breves, sin semejante desembolso. <span class="link">Por lo tanto</span>, sostengo que estudiar en el extranjero es simplemente una opción más, no un atajo hacia el empleo. <span class="link">En definitiva</span>, lo que decide la empleabilidad es la combinación de formación, práctica y actitud; quien lo ve como una garantía automática puede llevarse una gran decepción y una deuda difícil de pagar.'}
+ }
+},
+{
+id:'t5-hf34', topic:'hf34', sec:240,
+title:'"Los alimentos transgénicos pueden ser una buena solución para el hambre en el mundo."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['alimentos transgénicos','hambre','seguridad','rendimiento','regulación'],
+model:'Esta idea tiene parte de razón, pero yo no estoy de acuerdo con presentarla como una solución.',
+stances:{
+ a:{label:'A. A favor（转基因是解决方案）',
+  q:'Usted está DE ACUERDO: los transgénicos pueden ayudar a combatir el hambre. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['rendimiento','nutrición','precio','tecnología','hambre'],
+  outline:['① 表态复述：Estoy de acuerdo, porque la tecnología agrícola puede aumentar la producción de alimentos…','② 论点一（产量与抗逆性）：En primer lugar, las semillas mejoradas rinden más y resisten sequías y plagas…','③ 论点二（营养与价格）：En segundo lugar, mejoran el valor nutricional y bajan el precio de los alimentos…','④ 回应反方＋结论：Aunque la seguridad preocupa… con estudios y regulación… En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación: los alimentos transgénicos pueden ser una herramienta muy útil contra el hambre en el mundo. <span class="link">En primer lugar</span>, la tecnología agrícola moderna aumenta claramente la producción: las semillas mejoradas rinden más, maduran antes y resisten mejor las sequías, las plagas y los suelos pobres, precisamente las condiciones de las regiones donde el hambre es más grave. Producir más alimentos en las mismas tierras es una respuesta directa a la escasez. <span class="link">En segundo lugar</span>, los alimentos transgénicos pueden mejorar el valor nutricional, por ejemplo con vitaminas añadidas que evitan enfermedades infantiles, y al ser más baratos de producir, su precio final es más bajo, lo que los hace accesibles para las familias con menos recursos. Además, el bajo costo ayuda a los pequeños agricultores, que pueden obtener cosechas más estables. <span class="link">Aunque es cierto que</span> mucha gente se preocupa por la seguridad de estos alimentos y por la falta de información científica, esa preocupación se resuelve con estudios rigurosos, etiquetado claro y leyes estrictas de control, no rechazando la tecnología en bloque. Como en toda ciencia, la solución es regular y supervisar. <span class="link">Por lo tanto</span>, sostengo que, bien regulados, los transgénicos pueden alimentar a poblaciones enteras donde la agricultura tradicional no llega. <span class="link">En definitiva</span>, frente a un problema tan grave como el hambre, no podemos descartar ninguna herramienta: la biotecnología, con transparencia y control, es una parte importante de la solución.'},
+ b:{label:'B. En contra（转基因非解决方案）',
+  q:'Usted está EN DESACUERTO: los transgénicos no son la solución al hambre. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['seguridad','biodiversidad','riesgo','distribución','dependencia'],
+  outline:['① 表态反驳：Esta idea tiene parte de razón, pero no estoy de acuerdo…','② 论点一（安全未证实＋生物多样性）：En primer lugar, sus efectos a largo plazo no están demostrados y reducen la biodiversidad…','③ 论点二（真正的根源是分配）：En segundo lugar, el hambre no nace de la falta de alimentos, sino de la guerra y la pobreza…','④ 回应反方＋结论：Aunque aumenta la producción… crea dependencia de las grandes empresas… En definitiva…'],
+  model:'Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo con ella: presentar los alimentos transgénicos como la solución al hambre me parece un error. <span class="link">En primer lugar</span>, su seguridad a largo plazo todavía no está científicamente demostrada y existe una falta de propaganda científica clara; si la gente desconfía, es porque las dudas son razonables. Además, el cultivo masivo de pocas variedades reduce la biodiversidad y daña el equilibrio del campo, y un error genético a esa escala sería muy difícil de corregir. <span class="link">En segundo lugar</span>, el hambre no nace principalmente de la falta de producción: hoy el mundo produce comida suficiente para toda la población, y sin embargo millones de personas pasan hambre por la guerra, la pobreza y la mala distribución de los recursos. Llenar el mundo de transgénicos sin arreglar la distribución solo engorda los beneficios de unas pocas empresas semilleras, a las que los agricultores acaban dependiendo, porque deben comprar semillas y productos químicos cada año. <span class="link">Aunque es cierto que</span> estas semillas rinden más y cuestan menos a corto plazo, ese aumento de producción no llega a quien más lo necesita si el problema real es político y económico. <span class="link">Por lo tanto</span>, sostengo que el hambre se combate con paz, justicia social, apoyo a los agricultores locales y una distribución más equitativa. <span class="link">En definitiva</span>, los transgénicos, en el mejor de los casos, son un instrumento secundario; presentarlos como la solución principal es mirar a otro lado.'}
+}
+},
+{
+id:'t5-hf35', topic:'hf35', sec:240,
+title:'"Para los niños de la era digital, la interacción con la alta tecnología es indispensable para su futuro."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['era digital','pantallas','competencias','límites','futuro'],
+model:'Estoy de acuerdo con esta afirmación, siempre que el uso de las pantallas sea moderado y supervisado.',
+stances:{
+ a:{label:'A. A favor（数字交互必不可少）',
+  q:'Usted está DE ACUERDO: interactuar con la tecnología es indispensable para el futuro de los niños. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['era digital','competencias digitales','recursos educativos','futuro','igualdad'],
+  outline:['① 表态复述：Estoy de acuerdo con esta afirmación porque vivimos en la era digital…','② 论点一（未来必备技能）：En primer lugar, las competencias digitales serán tan básicas como leer y escribir…','③ 论点二（教育资源与视野）：En segundo lugar, la tecnología abre un acceso enorme al conocimiento y a clases online…','④ 回应反方＋结论：Aunque el exceso daña la visión… la solución es acompañar y limitar, no prohibir. En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación: para los niños que nacen en la era digital, la interacción con la alta tecnología es, efectivamente, indispensable para su futuro. <span class="link">En primer lugar</span>, las competencias digitales ya son tan básicas como leer y escribir: en el futuro casi todos los trabajos —médicos, ingenieros, diseñadores, incluso agricultores— exigirán manejar dispositivos, programas e inteligencia artificial. Un niño que no toque la tecnología hasta la adolescencia llegará tarde a esas destrezas y tendrá menos oportunidades. <span class="link">En segundo lugar</span>, la tecnología multiplica el acceso al conocimiento: clases en línea, museos virtuales, aplicaciones para aprender idiomas o programar. Para los niños de zonas rurales o familias con menos recursos, un móvil con buenos contenidos puede ser la ventana a la misma educación que reciben los niños de las grandes ciudades, y eso es una cuestión de igualdad de oportunidades. Además, aprender a usar bien las pantallas desde pequeños, con acompañamiento, enseña autocontrol y criterio digital. <span class="link">Aunque es cierto que</span> el uso excesivo daña la visión, distrae del estudio y crea adicción, el problema no es la tecnología en sí, sino el mal uso: la solución son los límites razonables, los contenidos de calidad y la presencia de los padres, no la prohibición. <span class="link">Por lo tanto</span>, sostengo que aislar a un niño de la tecnología lo deja fuera de su propio tiempo. <span class="link">En definitiva</span>, la interacción digital, acompañada y moderada, no es un lujo ni un peligro inevitable: es la alfabetización del siglo XXI y la mejor inversión en su futuro.'},
+ b:{label:'B. En contra（童年需要限制屏幕）',
+  q:'Usted está EN DESACUERTO: la tecnología no es indispensable en la infancia y los niños deben usarla muy poco. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['visión','adicción','movimiento','límites','infancia'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque la infancia tiene necesidades más importantes…','② 论点一（健康受损）：En primer lugar, las pantallas dañan la visión, el sueño y la atención de los niños…','③ 论点二（童年真实体验）：En segundo lugar, los niños necesitan jugar al aire libre y relacionarse cara a cara…','④ 回应反方＋结论：Aunque la tecnología aporta recursos… se aprende muy rápido más tarde… En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación. Que vivamos en la era digital no significa que la alta tecnología deba ocupar el centro de la infancia. <span class="link">En primer lugar</span>, el uso frecuente de pantallas hace mucho daño a la salud de los niños: daña la visión, perjudica el sueño y fragmenta la atención, justo cuando su cerebro está aprendiendo a concentrarse. Muchos maestros ya denuncian que los alumnos llegan a clase cansados y sin capacidad de escuchar un cuento entero. <span class="link">En segundo lugar</span>, la infancia tiene necesidades más urgentes que ninguna pantalla puede sustituir: correr al aire libre, tocar objetos reales, aburrirse y crear juegos, relacionarse cara a cara con otros niños. Esas experiencias construyen el cuerpo, la imaginación y la inteligencia emocional. Y aquí está la clave: la tecnología se aprende muy rápido a cualquier edad; un adolescente puede dominar un móvil en semanas, pero la motricidad, el lenguaje y las amistades de la infancia no se recuperan después. <span class="link">Aunque es cierto que</span> hay recursos educativos magníficos y que la competencia digital será necesaria en el futuro, eso no exige una interacción temprana e intensiva: con un uso breve, guiado y limitado por los padres basta, y llegar tarde unos años no deja a nadie fuera de su época. <span class="link">Por lo tanto</span>, sostengo que lo indispensable para el futuro de un niño no es la pantalla, sino la salud, la curiosidad y la capacidad de relacionarse. <span class="link">En definitiva</span>, la tecnología debe ser una herramienta ocasional en la infancia, no el centro de ella.'}
+}
+},
+{
+id:'t5-hf36', topic:'hf36', sec:240,
+title:'"El estado debería asumir los gastos sanitarios de las personas mayores."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['gastos sanitarios','pensión','bienestar','sostenible','mayores'],
+model:'Creo que el estado debería asumir, al menos en parte, los costos de salud de las personas mayores.',
+stances:{
+ a:{label:'A. A favor（国家承担）',
+  q:'Usted está DE ACUERDO: el estado debería asumir los gastos sanitarios de los mayores. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['gastos sanitarios','pensión','derechos','bienestar','sociedad justa'],
+  outline:['① 表态复述：Estoy de acuerdo, porque la salud de los mayores no puede depender del bolsillo de cada familia…','② 论点一（养老金有限）：En primer lugar, las pensiones son bajas y los tratamientos son carísimos…','③ 论点二（权利与社会公正）：En segundo lugar, cotizaron toda la vida; garantizar su salud es un derecho y una cuestión de justicia…','④ 回应反方＋结论：Aunque el presupuesto presiona… se puede financiar con impuestos progresivos. En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación: el estado debería asumir, al menos en gran parte, los gastos sanitarios de las personas mayores. <span class="link">En primer lugar</span>, las pensiones de subsistencia son bajas y los tratamientos médicos son cada vez más caros; si la salud depende del bolsillo privado, muchos jubilados tendrán que elegir entre comprar medicinas o pagar la comida, y eso no es digno. Un sistema público que cubra sus gastos sanitarios les asegura una vejez tranquila y una mejor calidad de vida. <span class="link">En segundo lugar</span>, se trata de un derecho y de una cuestión de justicia: esas personas trabajaron y cotizaron durante décadas para construir el país, así que la sociedad les debe protección. Además, si el Estado asume el coste, también alivia la carga de las familias, que muchas veces arruinan sus ahorros cuidando a los abuelos, y reduce las desigualdades entre quienes tienen familia pudiente y quienes no. <span class="link">Aunque es cierto que</span> el envejecimiento de la población presiona mucho el presupuesto público, esa dificultad no justifica abandonar a los mayores: puede financiarse con impuestos progresivos, con la lucha contra el fraude fiscal y sobre todo invirtiendo en prevención, porque prevenir enfermedades cuesta mucho menos que tratarlas. <span class="link">Por lo tanto</span>, sostengo que asumir los gastos sanitarios de los mayores no es un gasto, sino una inversión en una sociedad justa. <span class="link">En definitiva</span>, se mide la civilización de un país, entre otras cosas, por cómo trata a sus mayores: garantizar su salud pública y accesible es el mínimo que merecen.'},
+ b:{label:'B. En contra（家庭与个人共担）',
+  q:'Usted está EN DESACUERTO: el estado no puede asumirlo todo; los gastos deben compartirse entre familia, ahorro personal y sistema público. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['presupuesto','envejecimiento','corresponsabilidad','ahorro','sostenible'],
+  outline:['① 表态反驳：No estoy de acuerdo con una responsabilidad exclusiva del estado…','② 论点一（财政不可持续）：En primer lugar, con la población envejeciendo, el gasto sería insostenible…','③ 论点二（共担更合理）：En segundo lugar, la salud es corresponsabilidad: ahorro previo, familia y sistema público…','④ 回应反方＋结论：Aunque el estado debe proteger… debe hacerlo con prioridades. En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación en su forma absoluta: el estado debería proteger a los mayores, pero no puede —ni debe— asumir por sí solo todos los gastos sanitarios. <span class="link">En primer lugar</span>, la cifra simplemente no sale: con la población envejeciendo rápidamente y menos jóvenes cotizando, hacerse cargo de toda la sanidad de los mayores hundiría las cuentas públicas y desplazaría inversiones urgentes en educación, infraestructuras o ciencia, que son justamente las que sostienen el futuro de esos mismos jubilados. <span class="link">En segundo lugar</span>, la salud en la vejez es una corresponsabilidad: quien puede ahorrar durante su vida laboral y contratar un seguro complementario debería hacerlo, y la familia, que en nuestra cultura sigue siendo muy fuerte, tiene un papel natural de apoyo. Un sistema donde todo lo paga el Estado termina degradándose, con listas de espera interminables y menos calidad para todos, incluidos los mayores más pobres. <span class="link">Aunque es cierto que</span> hay pensionistas que no pueden pagar sus tratamientos, para ellos está la red pública: el Estado debe garantizar un nivel básico y gratuito para quienes lo necesitan, con la prevención como prioridad, pero no puede sustituir el ahorro y la solidaridad familiar de quienes sí tienen recursos. <span class="link">Por lo tanto</span>, sostengo que el modelo razonable es compartido. <span class="link">En definitiva</span>, proteger a los mayores exige un equilibrio: Estado garantista con los vulnerables y corresponsables con el resto; así el sistema sigue siendo sostenible y, paradójicamente, los mayores están mejor protegidos.'}
+}
+},
+{
+id:'t5-hf37', topic:'hf37', sec:240,
+title:'"Sin dinero es imposible ser feliz."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['dinero','felicidad','necesidades','espiritual','equilibrio'],
+model:'Esta afirmación tiene parte de razón, pero no estoy totalmente de acuerdo: el dinero ayuda, pero no basta.',
+stances:{
+ a:{label:'A. A favor（钱是幸福基础）',
+  q:'Usted está DE ACUERDO: sin dinero es imposible ser feliz. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['necesidades básicas','seguridad','libertad','pobreza','salud'],
+  outline:['① 表态复述：Estoy de acuerdo, porque el dinero es la base material de una vida digna…','② 论点一（基本需求）：En primer lugar, sin dinero no hay salud, educación ni vivienda, y la pobreza es sufrimiento…','③ 论点二（安全与自由）：En segundo lugar, el dinero da seguridad y libertad de elegir cómo vivir…','④ 回应反方＋结论：Aunque la felicidad espiritual importa… es mucho más fácil encontrarla sin penurias. En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación, aunque sé que puede sonar materialista: en el mundo real, sin dinero es muy difícil ser feliz. <span class="link">En primer lugar</span>, el dinero es la base de las necesidades básicas: comida, vivienda, salud y educación. Quien no puede pagar un tratamiento médico o mantener a sus hijos no vive en paz, vive en un estado de angustia constante. La pobreza no es romántica: es sufrimiento físico y psicológico, y ninguna filosofía positiva se sostiene sobre un estómago vacío. <span class="link">En segundo lugar</span>, el dinero compra seguridad y, sobre todo, libertad: permite elegir dónde vivir, qué estudios hacer, cambiar de trabajo si las condiciones son malas, ayudar a la familia y disfrutar del tiempo libre. Esa libertad de elección es, según casi todos los estudios, uno de los pilares de la satisfacción vital. Además, buena parte de los conflictos familiares y de pareja nacen de los problemas económicos, así que tener recursos protege también las relaciones. <span class="link">Aunque es cierto que</span> hay personas ricas infelices y personas sencillas muy felices, eso no contradice la idea central: la riqueza no garantiza la felicidad, pero su ausencia casi garantiza la infelicidad. La felicidad espiritual es mucho más fácil de encontrar cuando no faltan lo básico. <span class="link">Por lo tanto</span>, sostengo que el dinero es la infraestructura de la vida buena. <span class="link">En definitiva</span>, sin dinero no se puede ser feliz plenamente; con él, tampoco automáticamente — pero al menos se tiene la puerta abierta.'},
+ b:{label:'B. En contra（幸福不由钱决定）',
+  q:'Usted está EN DESACUERTO: el dinero no es imprescindible para la felicidad. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['espiritual','relaciones','salud mental','riqueza','equilibrio'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque la felicidad no se compra…','② 论点一（精神与关系）：En primer lugar, la felicidad nace de las relaciones, la salud mental y el sentido de la vida…','③ 论点二（金钱的边际递减与副作用）：En segundo lugar, a partir de cubrir lo básico, más dinero no aumenta la felicidad y a veces destruye el equilibrio…','④ 回应反方＋结论：Aunque el dinero cubre lo básico… la felicidad depende de la actitud. En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación: reduce la felicidad, que es algo profundamente humano, a una cuestión de dinero. <span class="link">En primer lugar</span>, la felicidad nace sobre todo de las relaciones y del sentido de la vida: el cariño de la familia, las amistades, el amor, el trabajo que ayuda a otros, la salud mental. Todo eso no se compra; de hecho, las personas que persiguen solo el dinero suelen sacrificar justamente esas fuentes de bienestar y acaban solas y agotadas. <span class="link">En segundo lugar</span>, los estudios sobre el índice de felicidad muestran algo muy interesante: el dinero solo aumenta la satisfacción hasta cubrir las necesidades básicas; a partir de ahí, su efecto es cada vez más pequeño. Un país desarrollado no es automáticamente más feliz que uno en desarrollo: muchos habitantes de países ricos viven estresados, deprimidos y solos, mientras en sociedades más sencillas la gente reporta mucha satisfacción cotidiana. Además, la obsesión por la riqueza genera ansiedad, envidia y comparación constante, que son enemigas directas de la felicidad. <span class="link">Aunque es cierto que</span> sin dinero para lo básico la vida se vuelve dura, eso demuestra que el dinero evita la miseria, no que produzca la felicidad: es una condición necesaria en el mínimo, pero nunca suficiente. <span class="link">Por lo tanto</span>, sostengo que la felicidad depende de la actitud, de la salud y de los vínculos. <span class="link">En definitiva</span>, el dinero es un buen sirviente y un mal amo: ayuda a vivir, pero la vida feliz se construye con cosas que no tienen precio.'}
+}
+},
+{
+id:'t5-hf38', topic:'hf38', sec:240,
+title:'"La verdadera amistad puede nacer y mantenerse en las redes sociales."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['amistad','redes sociales','comunicación','superficial','confianza'],
+model:'Esta idea tiene parte de razón, pero yo sostengo que la amistad verdadera necesita algo más que pantallas.',
+stances:{
+ a:{label:'A. A favor（网络能诞生真友谊）',
+  q:'Usted está DE ACUERDO: la amistad verdadera puede nacer y mantenerse en línea. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['distancia','comunicación','sinceridad','comunidad','confianza'],
+  outline:['① 表态复述：Estoy de acuerdo, porque la amistad se construye con comunicación, y hoy la comunicación vive también en línea…','② 论点一（距离不再是障碍）：En primer lugar, las redes permiten mantener y crear lazos sin importar la distancia…','③ 论点二（更真诚的交流）：En segundo lugar, por escrito muchas personas se abren con más sinceridad y encuentran comunidades afines…','④ 回应反方＋结论：Aunque hay contactos superficiales… la calidad depende de las personas, no del medio. En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación: la amistad se construye con comunicación, confianza y tiempo compartido, y hoy todo eso es posible también en las redes sociales. <span class="link">En primer lugar</span>, la tecnología ha eliminado la distancia como obstáculo: gracias al software de chat y las videollamadas, personas que están a miles de kilómetros conversan a diario, se cuentan su vida y se apoyan, exactamente como hacían antes los amigos que emigraban por carta. Si el vínculo se alimentaba con palabras, ¿por qué esas palabras, escritas o habladas, harían la amistad menos verdadera? <span class="link">En segundo lugar</span>, para muchas personas el canal digital facilita una comunicación más sincera: los tímidos se expresan mejor por escrito, y las redes permiten encontrar comunidades afines —gente con la misma enfermedad rara, la misma pasión o la misma orientación— que en el barrio de uno no existen. Hay amistades profundas que nacieron en un foro de música o en un grupo de estudio y duran décadas. <span class="link">Aunque es cierto que</span> existen contactos superficiales y perfiles que muestran solo una fachada, eso habla del mal uso de la herramienta, no de la herramienta: también hay amistades vacías en el trabajo o en el gimnasio. La calidad de una amistad depende de las personas, no del medio. <span class="link">Por lo tanto</span>, sostengo que lo que define a la verdadera amistad es la sinceridad y el apoyo mutuo, no el canal físico. <span class="link">En definitiva</span>, la red es solo un puente: si dos personas se ofrecen confianza real a través de él, la amistad es tan verdadera como cualquier otra.'},
+ b:{label:'B. En contra（真友谊需要面对面）',
+  q:'Usted está EN DESACUERTO: la amistad verdadera necesita presencia, convivencia y gestos que las redes no dan. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['presencial','convivencia','superficial','fachada','gestos'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque la amistad se construye con experiencias compartidas…','② 论点一（ superficial 与 fachada）：En primer lugar, los perfiles muestran solo una fachada y los "amigos" de las redes suelen ser contactos superficiales…','③ 论点二（ convivencia y gestos）：En segundo lugar, la amistad verdadera se demuestra en los gestos: acompañar, ayudar en persona…','④ 回应反方＋结论：Aunque la red ayuda a mantener contacto… es un complemento, no un sustituto. En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación: las redes sociales pueden complementar la amistad, pero la amistad verdadera necesita algo que una pantalla no puede dar. <span class="link">En primer lugar</span>, los perfiles muestran siempre una fachada cuidada: fotos felices, opiniones calculadas. Sobre esa vitrina es muy difícil construir la confianza real, que nace de conocernos tal como somos, con nuestros silencios y nuestros días malos. Además, en las redes contamos "amigos" por cientos, pero son en su mayoría contactos superficiales: si usted publica que está triste, recibirá treinta "likes" y, quizá, una llamada — la llamada vendrá del amigo verdadero, que casi siempre es de carne y hueso. <span class="link">En segundo lugar</span>, la amistad verdadera se demuestra en gestos que exigen presencia: acompañar en un hospital, ayudarte a mudarte, sentarse a llorar o a reír cara a cara. La convivencia —comer juntos, viajar, compartir aburrimiento— es la que crea memoria común, y sin memoria común no hay amistad profunda. Un algoritmo, además, nos encierra en burbujas y nos acostumbra a conversaciones rápidas de emojis, justo lo contrario de la conversación larga y sincera donde nacen los lazos. <span class="link">Aunque es cierto que</span> la tecnología ayuda a mantener el contacto con quien está lejos, mantener no es crear: la red es un puente útil entre visitas, no el territorio de la amistad. <span class="link">Por lo tanto</span>, sostengo que puede ser un buen complemento, nunca la casa. <span class="link">En definitiva</span>, la amistad verdadera se construye con cuerpo, tiempo y presencia; las redes solo pasan por allí de vez en cuando.'}
+}
+},
+{
+id:'t5-hf39', topic:'hf39', sec:240,
+title:'"La eutanasia es una elección libre y debe ser respetada."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['eutanasia','elección libre','dignidad','sufrimiento','ley'],
+model:'Estoy totalmente de acuerdo con esta afirmación: cada persona tiene el derecho de decidir sobre su propia vida.',
+stances:{
+ a:{label:'A. A favor（应尊重自由选择）',
+  q:'Usted está DE ACUERDO: la eutanasia es una elección libre y debe ser respetada. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['elección libre','dignidad','sufrimiento','compasión','ley'],
+  outline:['① 表态复述：Estoy totalmente de acuerdo: cada persona tiene derecho a decidir sobre su propia vida, incluida su muerte…','② 论点一（免于无望的痛苦）：En primer lugar, para un enfermo terminal sin curación posible, prolongar la vida es prolongar la tortura…','③ 论点二（尊严与同情）：En segundo lugar, la eutanasia es un acto compasivo que permite morir con dignidad y alivia la carga emocional…','④ 回应反方＋结论：Aunque hay que evitar presiones y abusos… las leyes estrictas ya lo garantizan. En definitiva…'],
+  model:'Estoy totalmente de acuerdo con esta afirmación: cada persona tiene el derecho de tomar decisiones sobre los aspectos relacionados con su vida, incluida su propia muerte. <span class="link">En primer lugar</span>, para un paciente terminal con una enfermedad incurable, prolongar la existencia a cualquier precio es, muchas veces, prolongar la tortura: dolores insoportables, dependencia total, la imposibilidad de comer o incluso de hablar. Si la medicina ya no puede ofrecer cura, ¿qué sentido tiene obligar a alguien a sufrir hasta el último día? Respetar su elección es la forma más humana de cuidarlo. <span class="link">En segundo lugar</span>, la eutanasia es un acto compasivo de ayudar a morir con dignidad: los pacientes terminales que se sienten una carga para las personas que aman sufren un doble dolor, el físico y el de la culpa. Ayudar a morir con paz a una persona que sufre es mejor que mantenerla con vida cuando sabemos que la muerte ya no se puede evitar; es un gesto de amor, no de abandono. <span class="link">Aunque es cierto que</span> hay que evitar presiones y abusos —nadie debería sentirse obligado a morir por ahorrar gastos—, las leyes que la regulan en España, Canadá o Estados Unidos exigen voluntad reiterada, informes médicos independientes y plazos de reflexión, controles que demuestran que es posible legislar con rigor. <span class="link">Por lo tanto</span>, sostengo que negar esa libertad es imponer a todos la moral de unos pocos. <span class="link">En definitiva</span>, la eutanasia, bien regulada, es el último acto de libertad de una persona y debe ser respetada por la ley y por la sociedad.'},
+ b:{label:'B. En contra（生命应受保护）',
+  q:'Usted está EN DESACUERTO: la vida debe protegerse hasta el final y la eutanasia no debería legalizarse. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['proteger la vida','presión','error médico','cuidados paliativos','ética'],
+  outline:['① 表态反驳：No estoy de acuerdo, porque la primera misión de la medicina y del Estado es proteger la vida…','② 论点一（压力与滥用的风险）：En primer lugar, los enfermos débiles pueden sentirse una carga y "elegir" morir sin libertad real…','③ 论点二（诊断错误与替代方案）：En segundo lugar, existen errores médicos, y los cuidados paliativos modernos eliminan casi todo el dolor…','④ 回应反方＋结论：Aunque la compasión es legítima… ayudar a vivir es la respuesta. En definitiva…'],
+  model:'No estoy de acuerdo con esta afirmación. Comprendo profundamente el sufrimiento de los pacientes terminales, pero la eutanasia no es la respuesta que una sociedad justa debe darles. <span class="link">En primer lugar</span>, la "elección libre" rara vez lo es del todo: un enfermo débil, deprimido o con pocos recursos, que siente que es una carga económica y emocional para su familia, puede pedir morir no porque quiera, sino porque se siente obligado. Legalizar la eutanasia introduce justamente esa presión silenciosa sobre los más vulnerables: ancianos solos, discapacitados, personas pobres. <span class="link">En segundo lugar</span>, los errores médicos existen: hay diagnósticos terminales que luego se revisan y pacientes que sobreviven a su pronóstico. La eutanasia es una decisión irreversible ante una ciencia que se equivoca. Además, hoy los cuidados paliativos modernos pueden eliminar casi todo el dolor físico y acompañar psicológicamente al paciente y a su familia; la respuesta compasiva a su sufrimiento no es ayudarle a morir, sino ayudarle a vivir sus últimos meses sin dolor y con dignidad. <span class="link">Aunque es cierto que</span> cada persona tiene derecho a decidir sobre su vida, el Estado tiene también el deber de proteger la vida, sobre todo cuando quien decide está enfermo y vulnerable; una ley de eutanasia transforma ese suicidio asistido en un servicio público, y esa señal social es peligrosa. <span class="link">Por lo tanto</span>, sostengo que el esfuerzo debe ir hacia una medicina paliativa universal. <span class="link">En definitiva</span>, compasión significa acompañar al que sufre, no adelantar su muerte.'}
+}
+},
+{
+id:'t5-hf40', topic:'hf40', sec:240,
+title:'"El libro digital sustituirá al libro de papel en el futuro."',
+q:'Presente su postura, dos argumentos, un posible contraargumento y una conclusión.',
+keys:['libro digital','libro de papel','ecológico','conveniente','sustituir'],
+model:'Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo: creo que los dos formatos convivirán.',
+stances:{
+ a:{label:'A. A favor（电子书终将取代）',
+  q:'Usted está DE ACUERDO: el libro digital acabará sustituyendo al de papel. Defienda esta postura con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['conveniente','ecológico','funciones','acceso','tendencia'],
+  outline:['① 表态复述：Estoy de acuerdo, porque la tendencia ya es imparable…','② 论点一（便利与功能）：En primer lugar, un solo aparato lleva mil libros, con diccionario, ajuste de letra y notas…','③ 论点二（生态与 acceso）：En segundo lugar, es ecológico: menos papel, menos deforestación, y democratiza el acceso…','④ 回应反方＋结论：Aunque el papel tiene encanto… la tecnología y las nuevas generaciones deciden. En definitiva…'],
+  model:'Estoy de acuerdo con esta afirmación: todo indica que el libro digital sustituirá al de papel, como ya hicieron el correo electrónico con las cartas o la música en línea con los discos. <span class="link">En primer lugar</span>, la conveniencia es imbatible: un solo aparato, que cabe en el bolsillo, lleva miles de libros, y permite leer en cualquier momento y en cualquier lugar. Además, sus funciones superan con mucho al papel: puedes ajustar el tamaño de la letra, tocar una palabra y ver su diccionario, subrayar y buscar notas en segundos. Para estudiantes y lectores intensivos, es simplemente una herramienta superior. <span class="link">En segundo lugar</span>, el libro digital es más ecológico y más barato: no necesita talar árboles ni gastar agua y transporte en imprimir y distribuir millones de ejemplares, y así ayuda a aliviar la deforestación y protege los recursos naturales. También democratiza la lectura: un lector de una aldea sin librerías puede tener hoy la misma biblioteca que uno de una gran capital. Las nuevas generaciones, que ya estudian y leen en pantallas, marcarán esa tendencia. <span class="link">Aunque es cierto que</span> el papel tiene un encanto físico y es más permanente, la nostalgia no frena a la tecnología: las generaciones jóvenes no echan de menos lo que no conocieron. <span class="link">Por lo tanto</span>, sostengo que el papel se convertirá, poco a poco, en un producto de nicho. <span class="link">En definitiva</span>, por conveniencia, precio y sostenibilidad, el libro digital será el formato dominante del futuro, y el de papel, su recuerdo elegante.'},
+ b:{label:'B. En contra（两格式将共存）',
+  q:'Usted está EN DESACUERTO: el libro digital no sustituirá al impreso; los dos convivirán. Refute la afirmación con dos argumentos, responda a un contraargumento y concluya.',
+  keys:['permanente','propiedad intelectual','memoria','experiencia','convivir'],
+  outline:['① 表态反驳：Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo…','② 论点一（ permanencia y derechos）：En primer lugar, el papel es permanente y protege mejor los derechos de propiedad intelectual del autor…','③ 论点二（ lectura y emoción）：En segundo lugar, la lectura en papel es más profunda, descansa la vista y tiene valor emocional…','④ 回应反方＋结论：Aunque el digital crece… no sustituye, convive. En definitiva…'],
+  model:'Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo: creo que el libro digital crecerá mucho, pero no sustituirá al libro de papel; los dos convivirán. <span class="link">En primer lugar</span>, el libro de papel es permanente de una manera que lo digital aún no es: no depende de baterías, de plataformas ni de empresas que desaparecen. Cuando compras un libro digital, en realidad compras una licencia que puede revocarse, y eso no protege bien los derechos del autor ni los del lector; el papel sigue siendo el soporte más sólido para la propiedad intelectual y para el patrimonio cultural: una biblioteca física es una memoria que ningún formato puede borrar de golpe. <span class="link">En segundo lugar</span>, la experiencia de lectura es distinta y, para muchas personas, mejor en papel: descansa la vista, favorece la memoria y la comprensión profunda —los propios estudios lo confirman— y ofrece un valor emocional que lo digital no tiene: oler un libro nuevo, regalárselo a alguien, guardarlo con dedicatorias. Las librerías y los libros infantiles ilustrados siguen vendiéndose bien precisamente por eso. <span class="link">Aunque es cierto que</span> el digital es conveniente y ecológico y que cada vez se lee más en pantallas, el crecimiento del digital no significa la muerte del papel, igual que la televisión no mató al cine ni las fotos digitales mataron al retrato pintado. <span class="link">Por lo tanto</span>, sostengo que estamos ante una convivencia de formatos, cada uno con su terreno. <span class="link">En definitiva</span>, el futuro no será de un formato contra otro: será digital para la comodidad diaria y de papel para la lectura profunda, el coleccionismo y el cariño.'}
+}
+}
+]);
+
+
+window._sieleT45Expand = function(bank, tarea){
+  if(!bank || (tarea!==4 && tarea!==5)) return;
+  var EXP = (tarea===4) ? window.SIELE_T45_EXP4 : window.SIELE_T45_EXP5;
+  EXP.forEach(function(q){
+    if(!bank.some(function(x){return x && x.id===q.id;})) bank.push(q);
+  });
+};
+// 静态内置库展开（云端快照分支由 index.html getSieleOralBank 调用同钩子）
+// 注意：SIELE_ORAL_BANK 为 const 声明（不在 window 上），必须用裸标识符
+window._sieleT45Expand(SIELE_ORAL_BANK[4], 4);
+window._sieleT45Expand(SIELE_ORAL_BANK[5], 5);
+
+// 分组表扩展：六组 → 七组（新增「伦理与选择」）
+Object.assign(window.SIELE_T45_GROUP, {
+  'hf31':'环境与可持续','hf34':'环境与可持续',
+  'hf35':'科技与数字生活','hf40':'科技与数字生活',
+  'hf36':'健康与生活方式',
+  'hf33':'教育与学习','hf37':'教育与学习','hf38':'教育与学习',
+  'hf32':'工作与社会',
+  'hf39':'伦理与选择'
+});
