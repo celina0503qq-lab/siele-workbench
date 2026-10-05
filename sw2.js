@@ -1,7 +1,7 @@
 /* 西语学习系统 Service Worker · network-first
    策略：始终优先拉取网络最新版本（避免浏览器缓存导致页面停留在旧版、功能缺失），
    网络失败时才回退到缓存副本（离线可用）。 */
-const CACHE = 'siele-suite-v92.2-2026100523';
+const CACHE = 'siele-suite-v92.3-2026100600';
 
 // 核心资源 - 安装时预缓存
 const CORE_ASSETS = [
@@ -10,8 +10,8 @@ const CORE_ASSETS = [
   './admin.html',
   './manifest.webmanifest',
   './icon-192.png',
-  './icon-512.png',
-  './assets/images/siele-tarea2-scenes.png'
+  './icon-512.png'
+  /* v92.3: 移除 siele-tarea2-scenes.png（2.7MB）——T2 已全部改用本地小图 assets/images/t2-scenes/*.jpg */
 ];
 
 self.addEventListener('install', e => {
@@ -47,6 +47,22 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return; // 云同步等跨域请求不拦截
+  const _p0 = url.pathname;
+  /* v92.3: 静态图片「缓存优先 + 后台校验」——避免每次刷新都走网络（T2 场景图等） */
+  if (/(\.png|\.jpe?g|\.webp|\.gif|\.svg|\.ico)$/i.test(_p0) || _p0.indexOf('/assets/images/') === 0) {
+    e.respondWith((async () => {
+      const c = await caches.open(CACHE);
+      const hit = await c.match(_p0) || await c.match(req);
+      if (hit) {
+        fetch(req).then(r => { if (r && r.ok) c.put(_p0, r.clone()); }).catch(() => {});
+        return hit;
+      }
+      const fresh = await fetch(req);
+      if (fresh && fresh.ok) { try { c.put(_p0, fresh.clone()); } catch (_e) {} }
+      return fresh;
+    })());
+    return;
+  }
   e.respondWith((async () => {
     try {
       const fresh = await fetch(req, { cache: 'no-store' });
