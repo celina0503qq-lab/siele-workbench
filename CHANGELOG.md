@@ -3,6 +3,19 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v92.4] – 2026-10-06
+
+### 模考回忆库（历次留存 + 按 Tarea 强弱）
+
+- 每次全真模拟**结束时自动收录**一条记录：均分、已答步数、**各 Tarea 平均**、逐题明细（幂等：按 `ST.sieleMock.created` 去重；上限 20 次）
+- 模考入口新增「📚 回忆库 (N)」按钮 → 展开面板：
+  - **各 Tarea 平均**横向条（≥75 绿 / ≥55 橙 / <55 红）
+  - **相对薄弱 / 相对最强 Tarea** 提示（💡）
+  - 历次记录表（第 N 次、日期、均分、各 Tarea 分 1-5、已答/总步数）
+  - 「清空」按钮
+- 数据存 `ST.sieleMockHistory`（随云同步）；仅统计**本次模考期间**的作答（沿用 v92.3 的 `ts` 过滤，旧训练分不混入）
+- 新增 `_sieleMockSaveHistory / _sieleMockHistHtml / _sieleMockHistClear`；swVer / SW CACHE 成对顶版 `v92.4-2026100601`
+
 ## [v92.3] – 2026-10-06
 
 ### 修复「范文打不开」+「模考显示旧成绩/均分被污染」+ T2 图片慢
