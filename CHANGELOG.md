@@ -3,6 +3,26 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v92.6] – 2026-10-06
+
+### 口语练习记录管理 + 官方时长校正
+
+**P1 记录管理（解决“记录越攒越多、无法删除”）**
+- **最高分置顶**：每题记录卡顶部改为醒目大字行 `🏆 本题最高分 87`，次行 `已练 N 次 · 最近 日期 · 均分 X`
+- **三层删除**：
+  - **单条**：每条记录右侧 `✕`（删后**自动重算** bestScore / count / lastDate；清空则删除该题键）
+  - **本题**：记录卡底部「🗑 清空本题记录」
+  - **全部**：SIELE 口语页「🧹 口语记录管理（N 题 · 约 X KB）」→ 面板含逐题清 + 「清空全部口语记录」（二次确认）
+- 识别全文**保留**（不裁剪）
+- 新增 `_sieleDelOne / _sieleClearOne / _sieleClearAllScores / _sieleScoresToolsHtml / _sieleScoresAdminHtml`
+
+**P4 官方时长校正（据 SIELE 公开备考资料）**
+- **修复 Tarea 5 作答时长：240 秒 → 180 秒（官方 3 分钟）**
+- T1–T5 `duration` / `desc` 校正为官方节奏，并新增 `prep` 准备时间字段：`T1 prep=50s · T2 prep=150s · T3 prep=20s · T4 prep=60s · T5 prep=120s`
+- （`prep` 为数据先行，倒计时功能在 v92.7 实现）
+
+- swVer / SW CACHE 成对顶版 `v92.6-2026100603`
+
 ## [v92.5] – 2026-10-06
 
 ### 回忆库增强（总体平均分 + 各题均分 + 历次逐题详情）+ 自主组题更好用
