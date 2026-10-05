@@ -3,6 +3,16 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v92.2a] – 2026-10-05
+
+### 修复 T4 存量题范文模板拼接缺空格（30 题）
+
+- **缺陷**：T4 存量 34 题中 **30 题**的 `model` 存在句末缺空格，形如 `…medidas concretas.La mayor ventaja…`（应为 `…concretas. La…`）——由历史模板字符串拼接 `'…concretas.'+(t.ext4||'')` 造成
+- **修复**：在 `siele_oral.js` 的 `_sieleT4V92Apply(bank)` 内加**幂等空格规整** `_sieleFixESSpacing()`（`/([.!?])(?=[A-ZÁÉÍÓÚÑ])/g → '$1 '`），对 `q.model` 与各 `subq.model` 生效；**静态库与云快照双分支**均覆盖
+- **验证**：本地浏览器实测修复后 T4 全库 model 缺陷数 **30 → 0**，无 pageerror
+- ⚠️ `siele_oral.js` 是外链、**不在 SW 预缓存** ⇒ 本修复**无需顶版**（仅推该文件）
+- 备注：T4 三问结构（官方「3 个音频问题」）经实测**早已完整**——所有 44 题运行时均输出 3 个子问（显式 10 + 遗留自动拆分 34），本次不涉及结构调整
+
 ## [v92.2] – 2026-10-05
 
 ### SIELE T3 双 Bloque 演练（对齐官方 EIO 考场形态）
