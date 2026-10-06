@@ -439,6 +439,22 @@
 .so-bar i b{transition:width .8s cubic-bezier(.22,1,.36,1)}
 .v65-grade-in{animation:v65FbIn .35s ease both}
 @media(prefers-reduced-motion:reduce){.v65deco,.v65-petal{display:none}.qopt.cor,.qopt.wrg,.qfb.show{animation:none}}
+/* ===== v93.0: SIELE 口语页移动端适配（≤760px）===== */
+@media(max-width:760px){
+  #main{min-width:0}
+  .so-tabs{flex-wrap:wrap;overflow-x:visible}
+  .so-tab{min-width:0;flex:1 1 40%}
+  .so-stage{grid-template-columns:1fr}
+  .so-console,.so-side,.so-stage>*,#main section.card,#main .card{min-width:0}
+  .so-kicker,.so-meta,.so-prompt,.so-cue,.so-model,.so-history-item-text{overflow-wrap:anywhere;word-break:break-word}
+  .so-tabs{max-width:100%}
+  .so-actions .btn{flex:1 1 auto;min-width:0}
+  .so-timer{margin-left:0;flex-basis:100%;text-align:right}
+  .so-score{grid-template-columns:56px 1fr}
+  .so-score .total{width:56px;height:56px;font-size:17px;border-width:4px}
+  .so-nav{flex-wrap:wrap}
+  #main section.card{padding:10px}
+}
 </style>
 </head>
 <body>
@@ -455,7 +471,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v92.9-2026100606';
+window.swVer = 'v93.0-2026100608';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
