@@ -3,6 +3,19 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v93.0] – 2026-10-06
+
+### P5 移动端响应式（SIELE 口语页 390px 横向溢出修复）
+
+- **问题**（lili 真机实测发现）：viewport 390px 时文档实际 **634px**，横向滚动、Tarea 标签被截断
+- **根因**：`.so-tabs` 5 个 tab 各 `min-width:118px` 不可收缩（min-content ≈578）→ 作为 `#main` 内容把 **grid 轨道**撑宽（`#main` 是 `.app` grid 的 `1fr` 项，`min-width:auto`）
+- **修复**（≤760px 媒体查询）：
+  - `.so-tabs{flex-wrap:wrap}` + `.so-tab{min-width:0;flex:1 1 40%}`（换行收缩）
+  - `#main{min-width:0}`（允许 grid 项收缩）
+  - `.so-stage` 单列堆叠、长词断行（`overflow-wrap:anywhere`）、评分大圆缩小、导航换行
+- **验证**：390px 下 **T1–T5 全部 docW=390（无溢出）**；桌面 1280px 回归 **双列布局保留**（637px+307px）
+- swVer / SW CACHE 成对顶版 `v93.0-2026100608`
+
 ## [v92.9] – 2026-10-06
 
 ### 🔴 根因修复：删除记录被云端复活（v92.7/v92.8 修复均因未触达真因）
