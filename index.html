@@ -455,7 +455,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v92.7-2026100604';
+window.swVer = 'v92.8-2026100605';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6716,7 +6716,10 @@ function _sieleDelOne(itemId, idx){
     var S=ST.sieleOralScores||{}; var o=S[itemId]; if(!o) return;
     var hist=(o.history||[]).slice(); if(idx<0||idx>=hist.length) return;
     if(typeof confirm==='function' && !confirm('删除这条记录？')) return;
+    /* v92.8: 记下被删单条的键（ts||date），防止云端并集把该条并回 */
+    var _rm=(o.history||[])[idx]||{}; var _rk=String(_rm.ts||_rm.date||'');
     hist.splice(idx,1);
+    if(_rk){ ST.sieleOralScoresDel=ST.sieleOralScoresDel||{}; var _arr=ST.sieleOralScoresDel[itemId]=ST.sieleOralScoresDel[itemId]||[]; if(_arr.indexOf(_rk)<0)_arr.push(_rk); if(_arr.length>200)_arr.splice(0,_arr.length-200); }
     if(!hist.length){ delete S[itemId]; ST.sieleOralScoresTomb=ST.sieleOralScoresTomb||{}; ST.sieleOralScoresTomb[itemId]=Date.now(); }
     else{
       var best=hist.reduce(function(m,a){ return Math.max(m,(a.score||0)); },0);
@@ -6737,6 +6740,7 @@ function _sieleClearOne(itemId){
     if(ST.sieleOralScores && ST.sieleOralScores[itemId]) delete ST.sieleOralScores[itemId];
     /* v92.7: 写删除墓碑，防止云端并集合并复活 */
     ST.sieleOralScoresTomb=ST.sieleOralScoresTomb||{}; ST.sieleOralScoresTomb[itemId]=Date.now();
+    if(ST.sieleOralScoresDel) delete ST.sieleOralScoresDel[itemId]; /* v92.8: 整题已删，清空按条表 */
     save(); renderMain();
     if(typeof toast==='function') toast('已清空本题记录','ok');
   }catch(e){}
@@ -6747,7 +6751,7 @@ function _sieleClearAllScores(){
     if(!n){ if(typeof toast==='function') toast('当前没有记录','ok'); return; }
     if(typeof confirm==='function' && !confirm('确认清空全部口语练习记录？（共 '+n+' 题）此操作不可撤销')) return;
     if(typeof confirm==='function' && !confirm('再次确认：清空后所有题目历史成绩将丢失，继续？')) return;
-    ST.sieleOralScores={}; ST.sieleOralScoresTomb={}; ST.sieleOralScoresWipeAt=Date.now(); save(); renderMain();
+    ST.sieleOralScores={}; ST.sieleOralScoresTomb={}; ST.sieleOralScoresDel={}; ST.sieleOralScoresWipeAt=Date.now(); save(); renderMain();
     if(typeof toast==='function') toast('已清空全部口语记录','ok');
   }catch(e){}
 }
@@ -7678,6 +7682,16 @@ function _sieleMergeScoreTomb(remote){
       ST.sieleOralScoresTomb=ST.sieleOralScoresTomb||{};
       Object.keys(t).forEach(function(k){ var v=Number(t[k])||0; if(v > (Number(ST.sieleOralScoresTomb[k])||0)) ST.sieleOralScoresTomb[k]=v; });
     }
+    /* v92.8: 合并"按条删除表" */
+    var dd=remote.sieleOralScoresDel;
+    if(dd && typeof dd==='object'){
+      ST.sieleOralScoresDel=ST.sieleOralScoresDel||{};
+      Object.keys(dd).forEach(function(k){
+        var r=Array.isArray(dd[k])?dd[k]:[];
+        var cur=ST.sieleOralScoresDel[k]=ST.sieleOralScoresDel[k]||[];
+        r.forEach(function(x){ if(cur.indexOf(x)<0) cur.push(x); });
+      });
+    }
   }catch(e){}
 }
 function _sieleScoreEntryTs(e){
@@ -7697,10 +7711,12 @@ function mergeSieleOralScore(id, remoteEntry) {
   var localHistory = local.history || [];
   var remoteHistory = remoteEntry.history || [];
   var dateMap = {};
+  var _del=(ST.sieleOralScoresDel||{})[id]||[];
   var _keyOf=function(h){ return String((h&&(h.ts||h.date))||''); };
   localHistory.forEach(function(h) { dateMap[_keyOf(h)] = h; });
   remoteHistory.forEach(function(h) {
     var _k=_keyOf(h);
+    if(_del.indexOf(_k)>=0) return; /* v92.8: 该条已被用户删除，不并回 */
     if (!dateMap[_k]) { localHistory.push(h); dateMap[_k] = h; }
   });
   // Sort by date and cap at 20
