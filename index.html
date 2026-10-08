@@ -471,7 +471,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v93.0-2026100608';
+window.swVer = 'v93.1-2026100817';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -7709,6 +7709,54 @@ function _sieleMergeScoreTomb(remote){
       });
     }
   }catch(e){}
+  /* v93.1: 合并到对端删除凭据后，主动清理本端残留（此前只挡并回，跨设备不生效） */
+  try{ if(typeof _sieleApplyTombLocally==='function') _sieleApplyTombLocally(); }catch(e){}
+}
+/* v93.1: 跨设备删除落地——整题级时间下限（WipeAt / 整题墓碑）+ 题内逐条过滤
+   （按条删除表 / ts<=下限 / 无 ts 旧记录视为早于一切墓碑），并重算聚合。 */
+function _sieleWipeFresh(){ /* v93.1b: 水线新鲜度门——仅 30 分钟内的清空水线参与本地清理，防历史污染误清真实记录 */
+  try{ var _w=Number(ST.sieleOralScoresWipeAt)||0; return (_w && Date.now()-_w<=1800000)?_w:0; }catch(e){ return 0; }
+}
+function _sieleApplyTombLocally(){
+  try{
+    var changed=false;
+    var _keyOf=function(h){ return String((h&&(h.ts||h.date))||''); };
+    ST.sieleOralScores=ST.sieleOralScores||{};
+    var _wipe=_sieleWipeFresh();
+    var _tomb=ST.sieleOralScoresTomb||{};
+    var _del=ST.sieleOralScoresDel||{};
+    Object.keys(ST.sieleOralScores).forEach(function(id){
+      var e=ST.sieleOralScores[id]; if(!e) return;
+      var ets=_sieleScoreEntryTs(e);
+      var _floor=Math.max(_wipe, Number(_tomb[id])||0); /* 该题的时间下限 */
+      var dl=Array.isArray(_del[id])?_del[id]:[];
+      var _n0=(e.history||[]).length;
+      if(_floor){
+        if(ets && ets<=_floor){ delete ST.sieleOralScores[id]; changed=true; return; }
+        e.history=(e.history||[]).filter(function(h){
+          if(dl.indexOf(_keyOf(h))>=0) return false; /* 按条删除表命中 */
+          var hts=Number(h&&h.ts)||0;
+          if(!hts) return false;                     /* 无 ts 旧记录 ⇒ 早于一切墓碑 ⇒ 删 */
+          return hts>_floor;                         /* 晚于删除时刻的新练习才保留 */
+        });
+      } else if(dl.length && e.history && e.history.length){
+        e.history=e.history.filter(function(h){ return dl.indexOf(_keyOf(h))<0; });
+      }
+      if((e.history||[]).length!==_n0){
+        changed=true;
+        if(!e.history.length){ delete ST.sieleOralScores[id]; }
+        else{
+          e.history.sort(function(a,b){ return ((a.ts||0)-(b.ts||0)) || ((a.date||'')<(b.date||'')?-1:1); });
+          if(e.history.length>20) e.history=e.history.slice(-20);
+          var _last=e.history[e.history.length-1]||{};
+          e.bestScore=e.history.reduce(function(m,a){ return Math.max(m,a.score||0); },0);
+          e.count=e.history.length; e.lastDate=_last.date||''; e.score=_last.score||0;
+          ['content','fluency','vocab','grammar','task','words','text','date'].forEach(function(k){ e[k]=_last[k]; });
+        }
+      }
+    });
+    if(changed) save();
+  }catch(e){}
 }
 function _sieleScoreEntryTs(e){
   try{ if(!e) return 0; var h=e.history||[]; var last=h[h.length-1]||{}; return Number(e._ts)||Number(last.ts)||Number(e.ts)||0; }catch(err){ return 0; }
@@ -7718,11 +7766,38 @@ function mergeSieleOralScore(id, remoteEntry) {
   if (!remoteEntry) return;
   /* v92.7: 删除墓碑 —— 本端在 T 时刻清空过该题（或清空全部），且远端条目更旧 ⇒ 不复活 */
   try{
-    var _floor=Math.max(Number((ST.sieleOralScoresTomb||{})[id])||0, Number(ST.sieleOralScoresWipeAt)||0);
+    var _floor=Math.max(Number((ST.sieleOralScoresTomb||{})[id])||0, _sieleWipeFresh());
     if(_floor && _sieleScoreEntryTs(remoteEntry) <= _floor) return;
   }catch(e){}
   var local = ST.sieleOralScores[id];
-  if (!local) { ST.sieleOralScores[id] = remoteEntry; return; }
+  if (!local) {
+    /* v93.1: 整题直入也过滤被删条/墓碑前旧条（此前 !local 直接赋值绕过 Del 挡板 ⇒ 跨设备复活） */
+    var _e2=remoteEntry;
+    try{
+      var _dl2=(ST.sieleOralScoresDel||{})[id]||[];
+      var _fl2=Math.max(Number((ST.sieleOralScoresTomb||{})[id])||0, _sieleWipeFresh());
+      var _h0=(_e2.history||[]); var _h2=[];
+      for(var _i2=0;_i2<_h0.length;_i2++){
+        var _h=_h0[_i2];
+        if(_dl2.indexOf(String((_h&&(_h.ts||_h.date))||''))>=0) continue;
+        var _hts=Number(_h&&_h.ts)||0;
+        if(_fl2){ if(!_hts||_hts<=_fl2) continue; }
+        _h2.push(_h);
+      }
+      if(_h2.length!==_h0.length){
+        if(!_h2.length) return; /* 该题条目全被删 ⇒ 不入库 */
+        _h2.sort(function(a,b){ return ((a.ts||0)-(b.ts||0)) || ((a.date||'')<(b.date||'')?-1:1); });
+        if(_h2.length>20) _h2=_h2.slice(-20);
+        var _l2=_h2[_h2.length-1]||{};
+        _e2=Object.assign({},_e2,{history:_h2});
+        /* v93.1: 重算聚合（云端快照的 count/bestScore 是过滤前口径） */
+        _e2.bestScore=_h2.reduce(function(m,a){ return Math.max(m,a.score||0); },0);
+        _e2.count=_h2.length; _e2.lastDate=_l2.date||''; _e2.score=_l2.score||0;
+        ['content','fluency','vocab','grammar','task','words','text','date'].forEach(function(k){ _e2[k]=_l2[k]; });
+      }
+    }catch(e){}
+    ST.sieleOralScores[id]=_e2; return;
+  }
   // Merge history arrays (dedup by ts, 退化为 date)
   var localHistory = local.history || [];
   var remoteHistory = remoteEntry.history || [];
@@ -16875,6 +16950,8 @@ function wbSnap(){
     /* v92.7: 删除墓碑随推送上行，供对端合并时排除已删条目 */
     if(ST.sieleOralScoresTomb && Object.keys(ST.sieleOralScoresTomb).length) c.sieleOralScoresTomb=ST.sieleOralScoresTomb;
     if(ST.sieleOralScoresWipeAt) c.sieleOralScoresWipeAt=ST.sieleOralScoresWipeAt;
+    /* v93.1: 按条删除表随推送上行（v92.8 漏推 ⇒ 对端永远收不到删除凭据，跨设备复活） */
+    if(ST.sieleOralScoresDel && Object.keys(ST.sieleOralScoresDel).length) c.sieleOralScoresDel=ST.sieleOralScoresDel;
   }
   // DELE 做题进度（存独立 localStorage 键，随 wb 快照跨设备同步）
   try{ c.deleProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){ c.deleProgress = {}; }
