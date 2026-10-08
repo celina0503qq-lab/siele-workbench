@@ -471,7 +471,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v93.1-2026100817';
+window.swVer = 'v94.0-2026100818';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3093,18 +3093,35 @@ function setFlashPosition(index,pool){
     ST.flashLastPositionTs.all = Date.now();
   }catch(e){}
 }
+// ===== v94.0: 中西对应练习独立游标（与学习卡片翻牌游标分离；flashPraIdx 不入 hydrate 白名单，每设备独立）=====
+function _praIdxOf(pool){
+  try{
+    if(!pool || !pool.length) return 0;
+    if(typeof ST.flashPraIdx !== 'number' || ST.flashPraIdx < 0) ST.flashPraIdx = ST.flashIdx || 0; // 惰性迁移
+    if(ST.flashPraIdx >= pool.length) ST.flashPraIdx = ST.flashPraIdx % pool.length;
+    return ST.flashPraIdx;
+  }catch(e){ return 0; }
+}
+function _praSetIdx(i, pool){
+  try{
+    if(!pool || !pool.length) return;
+    ST.flashPraIdx = ((i % pool.length) + pool.length) % pool.length;
+  }catch(e){}
+}
 function changeFlashLevel(level){
   // Preserve the actual word when it exists in the requested level; otherwise use the first valid word only once.
   ST.flashLevel=level;var pool=getFlashPool();syncFlashPosition(pool);save();renderMain();
 }
 function renderFlash(){
   let pool=syncFlashPosition(getFlashPool());
-  const v = pool[ST.flashIdx];
-  const m = ST.flashMastery[v.es] || 0;
+  const _praMode = ST.flashMode==='practice'; // v94.0: 练习模式显示独立游标进度
+  const _curIdx = _praMode ? _praIdxOf(pool) : ST.flashIdx;
+  const v = pool[_curIdx];
+  const m = (v && ST.flashMastery[v.es]) || 0;
   const errors=getDictationErrors();
 
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
-    <div class="dp">进度 ${ST.flashIdx+1} / ${pool.length}</div>
+    <div class="dp">进度 ${_curIdx+1} / ${pool.length}</div>
   </div>`;
   h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="清空掌握星级、默写记录、错词库、翻牌位置；云端一并重置，无法恢复">↺ 重置学习进度</button></div>`;
   h += renderFlashGarden();
@@ -3136,7 +3153,7 @@ function renderFlash(){
 
   // Progress bar
   const masteryPct = m/3*100;
-  h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${ST.flashIdx+1}/${pool.length}</span></div>`;
+  h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_curIdx+1}/${pool.length}</span></div>`;
 
   if(ST.flashMode === 'practice'){
     return h + renderFlashPractice(pool);
@@ -3293,12 +3310,24 @@ function rateFlash(level){
   }
 }
 function nextFlash(alreadySaved){
+  if(ST.flashMode==='practice'){ // v94.0: 练习模式走独立游标，不牵动卡片
+    const _p=getFlashPool(); _praSetIdx(_praIdxOf(_p)+1,_p);
+    if(!alreadySaved)save();
+    requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
+    return;
+  }
   const pool=syncFlashPosition(getFlashPool());
   setFlashPosition(ST.flashIdx+1,pool);
   if(!alreadySaved)save();
   requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
 }
 function prevFlash(){
+  if(ST.flashMode==='practice'){ // v94.0: 练习模式走独立游标，不牵动卡片
+    const _p=getFlashPool(); _praSetIdx(_praIdxOf(_p)-1,_p);
+    save();
+    requestAnimationFrame(function(){if(currentPage==='flash')renderMain();});
+    return;
+  }
   const pool=syncFlashPosition(getFlashPool());
   setFlashPosition(ST.flashIdx-1,pool);
   save();
@@ -3308,15 +3337,16 @@ function initFlash(){}
 
 function setFlashMode(m){
   ST.flashMode=m;
-  // 翻牌与中西对应共用同一“当前词”，模式切换绝不重置为 hola。
+  // v94.0: 翻牌(flashIdx/flashCurrentWord)与中西对应(flashPraIdx)游标独立，模式切换互不重置
   syncFlashPosition(getFlashPool());
   save();
   renderMain();
 }
 
 function renderFlashPractice(pool){
-  pool=syncFlashPosition(pool||getFlashPool());
-  const v = pool[ST.flashIdx];
+  pool=pool||getFlashPool(); // v94.0: 练习渲染不再 sync 卡片游标
+  if(!pool.length) return '<div class="note">暂无词汇</div>';
+  const v = pool[_praIdxOf(pool)];
   const stats = ST.flashPraStats || {correct:0, wrong:0, streak:0, bestStreak:0};
   // Generate 4 distractors from same level + current
   const sameLvl = pool.filter(x => x.es !== v.es);
@@ -3365,7 +3395,7 @@ function renderFlashPractice(pool){
   h += `<div style="display:flex;gap:7px;margin-top:14px">
     <button class="btn sm ol" onclick="prevFlash()">← 上一题</button>
     <button class="btn sm" onclick="nextFlash()">下一题 →</button>
-    <button class="btn sm ol" onclick="resetPraStats()">🔄 重置统计</button>
+    <button class="btn sm ol" onclick="resetPraStats()">🔄 重置统计与进度</button>
     <button class="btn sm ol" onclick="speak(\`${v.es.replace(/`/g,'')}\`,this)">🔊 听发音</button>
   </div>`;
   h += `<div id="flashFeedback"></div>`;
@@ -3415,9 +3445,9 @@ function checkFlashAnswer(clicked, correct){
     disp.children[3].children[0].textContent = stats.bestStreak;
   }
   // Mark word in vocab mastery based on practice performance
-  const pool=syncFlashPosition(getFlashPool());
-  const v=pool[ST.flashIdx];
-  const cur=ST.vocabMastery[v.es]||0;
+  const pool=getFlashPool(); // v94.0: 判分取练习独立游标，不再改写卡片定位
+  const v=pool[_praIdxOf(pool)];
+  const cur=v?(ST.vocabMastery[v.es]||0):0;
   if(ok && cur < 2) ST.vocabMastery[v.es] = 2;
   if(!ok && cur < 1) ST.vocabMastery[v.es] = 1;
   save();
@@ -3540,6 +3570,7 @@ function cry(){ try{celebrate(0);}catch(e){} }
 
 function resetPraStats(){
   ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0};
+  ST.flashPraIdx = 0; // v94.0: 重置统计时同步清练习游标
   save();
   renderMain();
 }
@@ -3617,9 +3648,16 @@ function renderVocab(){
     if(!sel) return;
     const topics = [...new Set(VDATA.map(v=>v.t))];
     topics.forEach(t => { const o=document.createElement('option'); o.value=t; o.textContent=(typeof VOCAB_TOPIC_LABELS!=='undefined'&&VOCAB_TOPIC_LABELS[t])?VOCAB_TOPIC_LABELS[t]:t; sel.appendChild(o); });
-    // Set initial level filter
-    document.getElementById('vocabLvl').value = 'all';
-    _vocabPage = 1; // P2-1: 切到 vocab 页时回到第 1 页
+    // v94.0: 恢复用户筛选（等级/主题/搜索词），页码不再强制重置——修复「切等级/主题后过一会儿自动闪回」
+    try{
+      var _vs = _vocabSel || {lvl:'all', topic:'all', q:''};
+      document.getElementById('vocabLvl').value = _vs.lvl || 'all';
+      var _optOk = false;
+      for(var _oi=0; _oi<sel.options.length; _oi++){ if(sel.options[_oi].value === _vs.topic){ _optOk = true; break; } }
+      sel.value = _optOk ? _vs.topic : 'all';
+      var _vsi = document.getElementById('vocabSearch');
+      if(_vsi) _vsi.value = _vs.q || '';
+    }catch(e){}
     filterVocab();
   }, 10);
 
@@ -3627,6 +3665,7 @@ function renderVocab(){
 }
 
 let _vocabPage = 1;
+let _vocabSel = {lvl:'all', topic:'all', q:''}; // v94.0: 词汇筛选状态（会话级，不入 ST 云同步），防重渲染闪回
 const VOCAB_PAGE_SIZE = 100; // P2-1 方案B: 每页 100 条
 
 // 搜索归一化: 小写 + 去重音(输入 esta 可匹配 está, cafe 可匹配 café)
@@ -3637,6 +3676,7 @@ function filterVocab(){
   const nq = normSearch(q);
   const lvl = document.getElementById('vocabLvl')?.value || 'all';
   const topic = document.getElementById('vocabTopic')?.value || 'all';
+  try{ _vocabSel = {q:q, lvl:lvl, topic:topic}; }catch(e){} // v94.0: 记录筛选状态供重渲染恢复
   if(typeof VDATA==='undefined') return;
   let filtered = VDATA.filter(v => {
     if(lvl !== 'all'){
@@ -4896,6 +4936,15 @@ function getEffectiveEssay(taskId, idx){
   return merged;
 }
 
+// ===== v94.0: 写作任务筛选（类型/等级）——continue 式过滤保原下标 i，不影响管理员按下标合并/编辑 =====
+let _writingFilter = {grp:'all', lvl:'all'};
+function _writingGrpOf(t){
+  try{ return (t && t.grp) || (/^SIELE/i.test(String((t && t.task) || '')) ? 'SIELE' : '通用'); }catch(e){ return '通用'; }
+}
+function setWritingFilter(k, val){
+  try{ _writingFilter[k] = val; }catch(e){}
+  try{ renderMain(); }catch(e){}
+}
 function renderWriting(){
   const tasks = getWritingTasks();
   let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
@@ -4903,8 +4952,19 @@ function renderWriting(){
   if(isContentAdmin()){
     h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><button class="btn sm ol" onclick="renderLexiconAdmin()" style="margin-left:6px">📚 评分词典</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
   }
+  // v94.0: 筛选 chips（类型 = 通用/SIELE + 动态；等级动态），continue 式过滤保原下标 i
+  const _wGrps = []; tasks.forEach(t => { const g=_writingGrpOf(t); if(_wGrps.indexOf(g)<0) _wGrps.push(g); });
+  const _wLvls = []; tasks.forEach(t => { if(t && t.lvl && _wLvls.indexOf(t.lvl)<0) _wLvls.push(t.lvl); });
+  const _wGrpOrder = ['通用','SIELE'].filter(g => _wGrps.indexOf(g)>=0).concat(_wGrps.filter(g => g!=='通用' && g!=='SIELE'));
+  const _wLvlOrder = ['A1','A2','B1','B2'].filter(l => _wLvls.indexOf(l)>=0).concat(_wLvls.filter(l => ['A1','A2','B1','B2'].indexOf(l)<0));
+  const _wShown = tasks.filter(t => (_writingFilter.grp==='all' || _writingGrpOf(t)===_writingFilter.grp) && (_writingFilter.lvl==='all' || ((t && t.lvl)||'')===_writingFilter.lvl)).length;
+  const _wActive = _writingFilter.grp!=='all' || _writingFilter.lvl!=='all';
+  h += `<div class="fcb"><span style="font-size:11px;color:var(--soft)">类型：</span><button class="chip ${_writingFilter.grp==='all'?'on':''}" onclick="setWritingFilter('grp','all')">全部</button>${_wGrpOrder.map(g=>`<button class="chip ${_writingFilter.grp===g?'on':''}" onclick="setWritingFilter('grp',this.textContent)">${esc(g)}</button>`).join('')}${_wActive?`<span style="font-size:11px;color:var(--soft);margin-left:6px">显示 ${_wShown}/${tasks.length}</span>`:''}</div>`;
+  h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_writingFilter.lvl==='all'?'on':''}" onclick="setWritingFilter('lvl','all')">全部</button>${_wLvlOrder.map(l=>`<button class="chip ${_writingFilter.lvl===l?'on':''}" onclick="setWritingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
   h += `<div class="rg">`;
   tasks.forEach((t,i) => {
+    if(_writingFilter.grp!=='all' && _writingGrpOf(t)!==_writingFilter.grp) return; // v94.0: 保原下标过滤
+    if(_writingFilter.lvl!=='all' && ((t && t.lvl)||'')!==_writingFilter.lvl) return; // v94.0
     h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i})">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${i+1}</span>
       <h5>${esc((t.task||'').slice(0,50))}...${_writingEditBtn(i,'task','编辑任务描述')}</h5>
@@ -5319,7 +5379,7 @@ const SPEAKING_TOPICS = [
   {lvl:'B2', cat:'辩论', topic:'¿Estás a favor o en contra del teletrabajo? Argumenta tu postura.', zh:'你支持还是反对远程工作？论证你的立场。', prep:'使用丰富连接词，准备2分钟说3-4分钟。'},
   {lvl:'B2', cat:'抽象话题', topic:'Explica un proverbio o refrán español y da ejemplos de su significado.', zh:'解释一个西班牙谚语或俗语并举例说明其含义。', prep:'如"A buen entendedor, pocas palabras bastan"。'},
   {lvl:'B2', cat:'图片描述', topic:'Describe una foto imaginaria de una calle bulliciosa de Madrid en verano.', zh:'描述一张想象中马德里夏天繁忙街道的照片。', prep:'使用está, hay, se ve, llaman la atención等结构。'},
-  {lvl:'B2', cat:'总结', topic:'Resume un artículo o noticia que hayas leído recientemente y da tu opinión.', zh:'总结你最近读过的一篇文章或新闻并发表看法。', prep:'使用el artículo trata de, según el texto, en mi opinión。'},,
+  {lvl:'B2', cat:'总结', topic:'Resume un artículo o noticia que hayas leído recientemente y da tu opinión.', zh:'总结你最近读过的一篇文章或新闻并发表看法。', prep:'使用el artículo trata de, según el texto, en mi opinión。'},
   // ===== v86: 并入原云端扩充的 6 条高频话题（essay 不预置，运行时按需生成）=====
   {lvl:'B1', cat:'SIELE T3', topic:'Describe una foto de un mercado tradicional español y compara las dos opciones.', zh:'描述一张西班牙传统市场的照片并比较两个选项。', prep:'TAREA3高频话题：市场、日常生活。用se ve, hay, llama la atención描述。'},
   {lvl:'B1', cat:'SIELE T3', topic:'Describe una imagen de una oficina moderna y elige dónde preferirías trabajar.', zh:'描述一张现代办公室图片，选择你更愿意在哪工作。', prep:'TAREA3高频话题：工作环境。比较用mientras que, en cambio。'},
@@ -5423,6 +5483,12 @@ function saveSpeakingTopicsAdmin(){
 }
 
 
+// ===== v94.0: 口语话题筛选（等级/分类）——continue 式过滤保原下标 i，不影响管理员按 topic 合并/编辑；cat 值只读展示绝不改写 =====
+let _speakingFilter = {lvl:'all', cat:'all'};
+function setSpeakingFilter(k, val){
+  try{ _speakingFilter[k] = val; }catch(e){}
+  try{ renderMain(); }catch(e){}
+}
 function renderSpeaking(){
   const topics = getSpeakingTopics();
   let h = `<div class="tb"><div><h2>口语话题${renderModuleAccentToggle('speaking')}</h2><div class="d">${topics.length}个口语话题 · 点击发音听题目 · 录音练习</div></div></div>`;
@@ -5430,8 +5496,19 @@ function renderSpeaking(){
   if(isContentAdmin()){
     h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:10px"><button class="btn sm pr" onclick="renderSpeakingTopicsAdmin()">🔧 管理员编辑口语话题</button><span class="sub" style="margin-left:8px;font-size:11px">增删改话题，保存后所有用户可见</span></div>`;
   }
+  // v94.0: 筛选 chips（等级 + 分类动态收集）
+  const _sLvls = []; topics.forEach(t => { if(t && t.lvl && _sLvls.indexOf(t.lvl)<0) _sLvls.push(t.lvl); });
+  const _sCats = []; topics.forEach(t => { if(t && t.cat && _sCats.indexOf(t.cat)<0) _sCats.push(t.cat); });
+  const _sLvlOrder = ['A1','A2','B1','B2'].filter(l => _sLvls.indexOf(l)>=0).concat(_sLvls.filter(l => ['A1','A2','B1','B2'].indexOf(l)<0));
+  const _sShown = topics.filter(t => t && (_speakingFilter.lvl==='all' || ((t && t.lvl)||'')===_speakingFilter.lvl) && (_speakingFilter.cat==='all' || ((t && t.cat)||'')===_speakingFilter.cat)).length;
+  const _sActive = _speakingFilter.lvl!=='all' || _speakingFilter.cat!=='all';
+  h += `<div class="fcb"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_speakingFilter.lvl==='all'?'on':''}" onclick="setSpeakingFilter('lvl','all')">全部</button>${_sLvlOrder.map(l=>`<button class="chip ${_speakingFilter.lvl===l?'on':''}" onclick="setSpeakingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
+  h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">分类：</span><button class="chip ${_speakingFilter.cat==='all'?'on':''}" onclick="setSpeakingFilter('cat','all')">全部</button>${_sCats.map(c=>`<button class="chip ${_speakingFilter.cat===c?'on':''}" onclick="setSpeakingFilter('cat',this.textContent)">${esc(c)}</button>`).join('')}${_sActive?`<span style="font-size:11px;color:var(--soft);margin-left:6px">显示 ${_sShown}/${topics.length}</span>`:''}</div>`;
   h += `<div class="rg">`;
   topics.forEach((t,i) => {
+    if(!t) return; // v94.0: 防御（历史双逗号已修，兜底保留）
+    if(_speakingFilter.lvl!=='all' && ((t && t.lvl)||'')!==_speakingFilter.lvl) return; // v94.0: 保原下标过滤
+    if(_speakingFilter.cat!=='all' && ((t && t.cat)||'')!==_speakingFilter.cat) return; // v94.0
     h += `<div class="rc" onclick="selectSpeaking(${i})" id="spk_${i}">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> · ${t.cat}</span>
       <h5>${esc(t.topic.slice(0,60))}...${_topicEditBtn(i,'topic','编辑题目')}</h5>
@@ -9394,6 +9471,7 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
   if(!text || !text.trim()) return null;
   const t = text.trim();
   const wc = t.split(/\s+/).filter(Boolean).length;
+  const _hasContent = wc >= 5; // v94.0: 白送分门槛——不足 5 词视为无有效内容，语法 pass 不再白送，基础分不计
   const tl = t.toLowerCase();
 
   // ===== 连接词检测 (v68: RAE 分类词典, 共享核心) =====
@@ -9429,7 +9507,7 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
   // 1. 标点符号 (¡¿) - 仅在有疑问句/感叹句时检查,A1 自我介绍等陈述文不适用
   const hasQuestion = /[?¿]/.test(t);
   const hasExclaim = /[¡!]/.test(t);
-  if(hasQuestion || hasExclaim){
+  if(_hasContent && (hasQuestion || hasExclaim)){ // v94.0: 空内容不产语法项
     const invertedMark = /[¿¡]/.test(t) ? 1 : 0;
     if(!invertedMark) grammarChecks.push({key:'invertedPunct', label:'倒置标点 (¿? ¡!)', pass:false, tip:'西语问号感叹号要倒置: ¿Cómo estás? ¡Hola!'});
     else grammarChecks.push({key:'invertedPunct', label:'倒置标点 (¿? ¡!)', pass:true});
@@ -9450,8 +9528,10 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
     const re = new RegExp('\\bel\\s+' + w + '\\b', 'gi');
     if(re.test(t)) genderMistakes.push('el ' + w);
   });
-  if(genderMistakes.length === 0) grammarChecks.push({key:'gender', label:'名词性别', pass:true});
-  else grammarChecks.push({key:'gender', label:'名词性别', pass:false, tip:`检查: ${genderMistakes.slice(0,3).join(', ')} - 注意: problema/sistema/día 是阳性用 el`});
+  if(_hasContent){ // v94.0: 白送分门槛——空内容不送 pass
+    if(genderMistakes.length === 0) grammarChecks.push({key:'gender', label:'名词性别', pass:true});
+    else grammarChecks.push({key:'gender', label:'名词性别', pass:false, tip:`检查: ${genderMistakes.slice(0,3).join(', ')} - 注意: problema/sistema/día 是阳性用 el`});
+  }
 
   // 3. 段落结构 (至少 2 段, 即至少 1 个空行)
   const paragraphs = t.split(/\n\s*\n/).filter(p => p.trim());
@@ -9491,14 +9571,18 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
   if(/\bnumero\b/.test(tl) && !/\bnúmero de teléfono\b/.test(tl)) missingAccent.push('número');
   if(/\bcafe\b/.test(tl) && !/\bcafé con\b/.test(tl)) missingAccent.push('café');
   if(/\btambien\b/.test(tl)) missingAccent.push('también');
-  if(missingAccent.length === 0) grammarChecks.push({key:'accents', label:'重音符号', pass:true});
-  else grammarChecks.push({key:'accents', label:'重音符号', pass:false, tip:`检查重音: ${missingAccent.slice(0,3).join(', ')}`});
+  if(_hasContent){ // v94.0: 白送分门槛
+    if(missingAccent.length === 0) grammarChecks.push({key:'accents', label:'重音符号', pass:true});
+    else grammarChecks.push({key:'accents', label:'重音符号', pass:false, tip:`检查重音: ${missingAccent.slice(0,3).join(', ')}`});
+  }
 
   // 6. 首字母大写
   const sentences = t.split(/[.!?]\s+/).filter(s => s.length > 5);
   const lowerStart = sentences.filter(s => /^[a-záéíóúñ]/.test(s)).length;
-  if(lowerStart === 0) grammarChecks.push({key:'capital', label:'句首大写', pass:true});
-  else grammarChecks.push({key:'capital', label:'句首大写', pass:false, tip:`有 ${lowerStart} 句未大写开头`});
+  if(_hasContent){ // v94.0: 白送分门槛
+    if(lowerStart === 0) grammarChecks.push({key:'capital', label:'句首大写', pass:true});
+    else grammarChecks.push({key:'capital', label:'句首大写', pass:false, tip:`有 ${lowerStart} 句未大写开头`});
+  }
 
   // ===== SIELE 4 级映射 (新 #231) =====
   // 根据词数 + 高级特征判定目标等级
@@ -9526,7 +9610,7 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
     }
     s += Math.min(30, uniqueConns * 6);
     s += Math.min(25, grammarPass * 4.2);
-    s += wc > 0 ? 15 : 0;
+    s += wc >= 5 ? 15 : 0; // v94.0: 白送分门槛（>=5 词才计基础分）
   } else {
     // B1/B2: 维持原权重, 字数曲线放缓
     if(wcOk) s += 20; else {
@@ -9537,7 +9621,7 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
     s += Math.min(15, subjCount * 4);
     s += Math.min(10, advFound.length * 4);
     s += Math.min(20, grammarPass * 3.5);
-    s += wc > 0 ? 10 : 0;
+    s += wc >= 5 ? 10 : 0; // v94.0: 白送分门槛
   }
   s = Math.min(100, Math.round(s));
 
