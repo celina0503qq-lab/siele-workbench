@@ -3,6 +3,25 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v93.1] – 2026-10-08
+
+### 跨设备删除同步彻底修复（手机删除 ⇄ 电脑残留 / 电脑删除 ⇄ 手机残留）
+
+用户两轮真机实测暴露（lili 账号：手机 Edge 删 T1 记录电脑仍见；电脑删 T4 六条手机仍八条）。定位出 **v93.0 的三个缺陷**，本次全部修复：
+
+1. **删除凭据永不上云**：`wbSnap()` 推送 payload 漏带 `sieleOralScoresDel`（按条删除表）⇒ 对端永远收不到删除凭据。修复：推送侧随 `sieleOralScoresTomb` 一并上行
+2. **本端残留从不清理**：`_sieleMergeScoreTomb` 只用凭据挡"远端并回"，本端已删记录不主动清。修复：新增 `_sieleApplyTombLocally()`——整题级时间下限（墓碑/水线）+ 题内逐条过滤（Del 命中 / 无 ts 老记录 / ts≤下限）+ 聚合重算（bestScore/count/lastDate/last 八字段）
+3. **整题直入绕过过滤**（e2e 挖出）：`mergeSieleOralScore` 的 `!local` 分支直接 `ST[id]=remoteEntry`，完全绕过 Del/墓碑过滤。修复：入库前逐条过滤并重算聚合
+
+**水线 30 分钟新鲜度门（v93.1b）**：`_sieleWipeFresh()`——仅 30 分钟内的 `sieleOralScoresWipeAt` 参与本地清理，防历史污染水线误清真实做题记录；整题墓碑与按条删除表**不受门控**（删除修复主路径）。
+
+**验证**：
+- 单测 7+12 场景全 PASS（门控/墓碑/Del/聚合各维度）
+- Playwright 双设备 e2e（本地 server + 真实云函数链路）：设备 A 注入 5 题 → 设备 B 逐题删除 → 设备 A2 拉取后老条全消失、新条保留 ✅（T1–T5 全覆盖）
+- 线上字节级比对：index 1,366,766 B / blob 38fc5372ee67，12 项功能标记全 OK
+
+**上线后自愈说明**：两端各刷新一次即可——电脑端 v93.1 首次自动同步会把本地留存的删除凭据推上云，手机拉取后自动清理，无需重新删除。
+
 ## [v93.0] – 2026-10-06
 
 ### P5 移动端响应式（SIELE 口语页 390px 横向溢出修复）
