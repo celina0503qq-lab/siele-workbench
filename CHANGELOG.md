@@ -3,6 +3,19 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v94.0] – 2026-10-08
+
+### P0 体验修复批次（全板块核查后用户拍板六项）
+
+1. **词汇库筛选闪回修复**：`renderVocabPage` 末尾 `setTimeout(10)` 无条件重置等级/主题/页码（30s 同步 hydrate→renderMain 即触发）⇒ 症状「切完等级/主题过一会儿自动回初始」。修复：新增会话级 `_vocabSel` 记录筛选状态，重渲染后恢复；页码不再强制重置（`filterVocab` 自带页数钳制）。
+2. **学习卡片 ↔ 中西对应练习游标拆分**：两模式原共用 `ST.flashIdx`，练习答题会牵动卡片定位。修复：新增独立练习游标 `ST.flashPraIdx`（不入云同步白名单，每设备独立）+ `_praIdxOf/_praSetIdx`（惰性迁移/取模包裹）；`nextFlash/prevFlash` 按模式分流；练习判分/渲染不再改写卡片定位；进度显示按模式取值。
+3. **「重置统计」补清练习游标**：`resetPraStats` 同步清零 `flashPraIdx`，按钮文案改「🔄 重置统计与进度」。
+4. **写作评分白送分门槛**：仅打一个句号提交也能得约 28–34 分（gender/accents/capital 三项空文全 pass + 基础分 15/10）。修复：`_hasContent = wc>=5` 门控——不足 5 词不产语法 pass 项、不计基础分；句号提交 0 分，正常短文评分不受影响。
+5. **写作 + 口语话题筛选 UI**：写作练习加「类型（通用/SIELE）/等级」两组 chips，口语话题加「等级/分类」两组 chips。continue 式过滤**保原数组下标**，`selectWriting(i)/selectSpeaking(i)/spk_i/管理员内联编辑` 全按原 i 工作，不影响管理员编辑合并链路；cat 值只读展示绝不改写。
+6. **SPEAKING_TOPICS 双逗号修复**：数组字面量稀疏洞（`},,`）修复，消除潜在 undefined 遍历风险。
+
+验证：Playwright 三阶段 57 断言全过（管理员视角 / 普通用户视角 / lili 真登录冒烟）；index 1,374,106 B。
+
 ## [v93.1] – 2026-10-08
 
 ### 跨设备删除同步彻底修复（手机删除 ⇄ 电脑残留 / 电脑删除 ⇄ 手机残留）
