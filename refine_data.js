@@ -15,14 +15,27 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
-// 1) 2026-10-02 第 22 期 — 主题：菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争
-// 1) 2026-09-25 第 21 期 — 主题：银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争
+// 1) 2026-10-09 第 23 期 — 主题：机场出行 · 西班牙咖啡文化 · IA360 计划 · AI 监管之争
+// 2) 2026-10-02 第 22 期 — 主题：菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争
+// 3) 2026-09-25 第 21 期 — 主题：银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争
 // 2) 2026-09-18 第 20 期 — 主题：火车站出行 · 秋季开学 · 纳瓦拉高温与健康 · 人工智能网络安全
 // 3) 2026-09-11 第 19 期 — 主题：餐厅就餐 · 西班牙开学季 · 全球旅游业创纪录 · 通胀冲击民生之争
 // 4) 2026-09-04 第 18 期 — 主题：去医院看病 · 西班牙节日与传统 · 绿色氢能投资 · 房价十二年上涨之争
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-10-09": {
+    date: "2026-10-09",
+    weekday: "五",
+    issue: 23,
+    theme: "机场出行 · 西班牙咖啡文化 · IA360 计划 · AI 监管之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el aeropuerto" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "El café en España" },
+      { level: "B1", source: "Europa Press", sourceUrl: "https://www.europapress.es/economia/noticia-sanchez-anuncia-bono-600-millones-pymes-autonomos-incorporen-ia-20260921134944.html", topic: "El Plan IA360" },
+      { level: "B2", source: "Diari de Tarragona", sourceUrl: "https://www.diaridetarragona.com/economia/271173/sanchez-propone-gran-acuerdo-pais-ia-traza-hoja-ruta.html", topic: "La regulación de la IA" }
+    ]
+  },
   "2026-10-02": {
     date: "2026-10-02",
     weekday: "五",
