@@ -3,6 +3,19 @@
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 
+## [v94.2] – 2026-10-09
+
+### SIELE 专项 Tarea 4/5 补题导入（89 组复习讲义 PDF）
+- **A 层并入（20 组重合话题）**：T4 具体三问 subqs 覆盖通用模板（19 组；hf31 站内已有同源题面不覆盖）+ T5 新选项拆条 10 条（id 加 `-b` 后缀，双立场官方格式满配）。
+- **B 层新组（hf41+，59 组）**：T4 53 条（三问结构满配）+ T5 36 条（stances a/b 双立场满配）+ 占位题 4 条（hf47/hf48/hf57/hf85，仅标题不可练）；hf51→hf15、hf62→hf27 挂既有组不单建。
+- **材料**：15 组 PDF 西语原文照录（`srcKind:'pdf'`，OCR 正字法已修），其余约 30 组新闻检索 passage 留 v94.3（现 passage 为 null，不进模考池）。
+- **AI 标注体系**：官方骨架补写问/立场标 `gen:true`（三问 chips 显「✎补」/立场卡显「✎ AI」+ hover 说明）；全部范文 AI 生成，条目标 `modelSrc:'ai'`（参考答案区显「✎ AI 参考范文」徽章）。
+- **考频三档扩全**：`_sieleFreqLabel` 增 `high=⭐ 高频`、`low=💤 低频`（本批 hf59 ⭐、hf83/hf85/hf94 💤、hf24/hf8/hf27 🔥）。
+- **联动按钮隐藏**：T4/T5 互跳按钮在对侧无同 topic 时不再渲染（`_sieleRelBtnHtml`，孤立组不再误导跳转）。
+- **接入机制**：`siele_oral.js` 末尾新增 `SIELE_T45_MORE` 数据块（约 300KB）+ `_sieleT45MoreApply` 幂等钩子（静态分支自应用 + 云快照分支重放，防管理员重建对象丢字段）；占位题无 passage 自动排除出模考池；新 T4 三问满配自动进模考随机组卷。
+- 已知限制：A 层 20 组 T4 三问为覆盖式回填（管理员对这 20 组三问的自定义编辑会被重放覆盖）；新组暂归「其他」分类桶（SIELE_T45_GROUP 七大分类映射待 v94.2.1 拍板）。
+- 工具：`tmp/gen_t45_block.py`、`tmp/patch_v942.py`、`tmp/t45_data_*.json`（5 文件，校验 ALL OK）、`tmp/t45_more_block.js`。
+
 ## [v94.1] – 2026-10-09
 
 ### SIELE 专项 Tarea 1 题库补齐（127 题）+ 分类与考频
