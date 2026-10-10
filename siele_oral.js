@@ -1659,7 +1659,8 @@ window._sieleT4V92Apply=function(bank){
  * 标注体系：gen:true=官方骨架补写问/立场（UI 显 ✎）；modelSrc:'ai'=AI 生成范文（✎ AI 参考范文徽章）；
  *           srcKind:'pdf'/'news'=材料来源；passageSrc=出处；freq=super/high/low 三档考频。
  * 幂等钩子 _sieleT45MoreApply(bank,tarea)：静态库与云快照分支均可调用；云快照切片每次重放即重建（防管理员重建对象丢字段）。
- * 已知限制：A 层 T4 subqs 为覆盖式回填，管理员对这 20 组的三问自定义编辑会被重放覆盖（记入 v94.2 交接）。
+ * v94.2.1：A 层回填改空缺填充——静态分支仍覆盖（保证 v90→整理版升级），云快照分支传 safe=1，
+ *          三问与整理版不一致（管理员自定义编辑）即跳过，编辑保留。
  */
 window.SIELE_T45_MORE={
 meta:{ver:"v94.2",source:"【复习讲义】SIELE口语真题 Tarea 4/5 整理（2026-10）",gen:"AI 补写题均标 gen:true；范文均 AI 生成标 modelSrc:'ai'"},
@@ -1673,7 +1674,7 @@ window._sieleT45BuildPlaceholder=function(g){
  if(g.freq)e.freq=g.freq;
  return e;
 };
-window._sieleT45MoreApply=function(bank,tarea){
+window._sieleT45MoreApply=function(bank,tarea,safe){
  try{
   if(!bank)return 0;
   var M=window.SIELE_T45_MORE; if(!M)return 0;
@@ -1685,10 +1686,19 @@ window._sieleT45MoreApply=function(bank,tarea){
    for(var i=0;i<bank.length;i++){ if(bank[i]&&bank[i].topic===g.topic){hit=bank[i];break;} }
    if(!hit)return;
    if(tarea===4&&g.t4subqs&&g.t4subqs.length===3){
-    hit.subqs=g.t4subqs.map(function(s){var o={q:s.q,keys:(s.keys||[]).slice(),model:s.model||''};if(s.gen)o.gen=true;return o;});
-    hit.q=hit.subqs.map(function(s){return s.q;}).join(' ');
-    if(g.freq)hit.freq=g.freq;
-    n++;
+    /* v94.2.1 空缺填充：safe 模式（云快照分支）下，三问已被管理员自定义编辑（与整理版不一致）则跳过覆盖，编辑得以保留 */
+    var _skipEdit=false;
+    if(safe&&Array.isArray(hit.subqs)&&hit.subqs.length===3){
+     var _qn=g.t4subqs.map(function(s){return s.q;}).join('\n');
+     var _qc=hit.subqs.map(function(s){return s&&s.q;}).join('\n');
+     if(_qn!==_qc)_skipEdit=true;
+    }
+    if(!_skipEdit){
+     hit.subqs=g.t4subqs.map(function(s){var o={q:s.q,keys:(s.keys||[]).slice(),model:s.model||''};if(s.gen)o.gen=true;return o;});
+     hit.q=hit.subqs.map(function(s){return s.q;}).join(' ');
+     if(g.freq)hit.freq=g.freq;
+     n++;
+    }
    }
    if(tarea===5&&g.t5split&&g.t5split.stances){
     var dup=false; for(var j=0;j<bank.length;j++){ if(bank[j]&&bank[j].id===g.t5split.id){dup=true;break;} }
@@ -1746,3 +1756,24 @@ window._sieleT45BuildT5_A=function(id,topic,title,stances,freq){ return window._
  }
 }catch(e){console.warn('[v94.2] MORE static apply 失败:',e);}})();
 /* ================= /v94.2 T4/T5 补题块 ================= */
+
+/* ===== v94.2.1：B 层新组（hf41-hf100）七大分类映射 =====
+ * 55 个实体组入七大类；hf47/hf48/hf57/hf85 占位组主题未定留「其他」。
+ * 计数：工作与社会16 · 科技与数字生活10 · 健康与生活方式12 · 文化与城市生活7 · 教育与学习5 · 环境与可持续3 · 伦理与选择2
+ */
+Object.assign(window.SIELE_T45_GROUP, {
+'hf41':'环境与可持续','hf42':'工作与社会','hf43':'工作与社会','hf44':'工作与社会',
+ 'hf45':'工作与社会','hf46':'工作与社会','hf49':'科技与数字生活','hf50':'文化与城市生活',
+ 'hf52':'健康与生活方式','hf53':'健康与生活方式','hf54':'健康与生活方式','hf55':'工作与社会',
+ 'hf56':'文化与城市生活','hf58':'健康与生活方式','hf59':'文化与城市生活','hf60':'工作与社会',
+ 'hf61':'教育与学习','hf63':'科技与数字生活','hf64':'工作与社会','hf65':'环境与可持续',
+ 'hf66':'教育与学习','hf67':'工作与社会','hf68':'文化与城市生活','hf69':'教育与学习',
+ 'hf70':'教育与学习','hf71':'科技与数字生活','hf72':'健康与生活方式','hf73':'伦理与选择',
+ 'hf74':'健康与生活方式','hf75':'健康与生活方式','hf76':'健康与生活方式','hf77':'工作与社会',
+ 'hf78':'健康与生活方式','hf79':'科技与数字生活','hf80':'工作与社会','hf81':'伦理与选择',
+ 'hf82':'工作与社会','hf83':'科技与数字生活','hf84':'科技与数字生活','hf86':'文化与城市生活',
+ 'hf87':'健康与生活方式','hf88':'教育与学习','hf89':'文化与城市生活','hf90':'健康与生活方式',
+ 'hf91':'环境与可持续','hf92':'工作与社会','hf93':'健康与生活方式','hf94':'科技与数字生活',
+ 'hf95':'科技与数字生活','hf96':'科技与数字生活','hf97':'工作与社会','hf98':'科技与数字生活',
+ 'hf99':'工作与社会','hf100':'工作与社会'
+});
