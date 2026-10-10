@@ -429,22 +429,45 @@
 .news{font-size:10px;color:var(--tr);background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:1px 7px;font-weight:700;white-space:nowrap}
 .done{color:var(--gd);font-weight:800}
 .d-wrap{display:flex;gap:14px;align-items:flex-start;margin-top:12px}
-.d-side{width:210px;flex-shrink:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
-.d-side .grp{font-size:11px;font-weight:800;color:var(--soft);padding:8px 8px 4px}
-.d-side a{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:9px;font-size:12.5px;cursor:pointer;color:var(--ink);text-decoration:none;font-weight:600;margin:1px 0}
-.d-side a:hover{background:#f8fafc}
-.d-side a.on{background:#f3e8ff;color:var(--tr)}
-.d-side a .n{font-size:10.5px;color:var(--soft);font-weight:400}
-.d-main{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
-.d-thead{display:flex;padding:10px 16px;background:#f8fafc;border-bottom:1px solid var(--line);font-size:10.5px;color:var(--soft);font-weight:800;gap:10px}
+.d-side{width:218px;flex-shrink:0;background:linear-gradient(180deg,#eef2ff 0%,var(--card) 46%);border:1px solid #e0e7ff;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(79,70,229,.06)}
+.d-side .grp{font-size:11px;font-weight:800;color:#6366f1;padding:8px 8px 4px;letter-spacing:.5px}
+.d-side a{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:9px;font-size:12.5px;cursor:pointer;color:var(--ink);text-decoration:none;font-weight:600;margin:1px 0;border-left:3px solid transparent;transition:background .15s}
+.d-side a:hover{background:#eef2ff}
+.d-side a.on{background:#e0e7ff;color:#3730a3;border-left-color:#6366f1}
+.d-side a .n{font-size:10.5px;color:#94a3b8;font-weight:400;background:#f1f5f9;border-radius:8px;padding:0 7px;line-height:18px}
+.d-side a.on .n{background:#fff;color:#4f46e5;font-weight:700}
+.d-side a[data-k="base"]{border-left-color:#94a3b8}
+.d-side a[data-k="t1i"]{border-left-color:#3b82f6}
+.d-side a[data-k="t1f"]{border-left-color:#f59e0b}
+.d-side a[data-k="t2"],.d-side a[data-k="t2-城市生活"]{border-left-color:#10b981}
+.d-side a[data-k="t2-教育文化"]{border-left-color:#8b5cf6}
+.d-side a[data-k="t2-交通出行"]{border-left-color:#f97316}
+.d-side a[data-k="t2-环境与灾害"]{border-left-color:#ef4444}
+.d-side a[data-k="t2-市政服务"]{border-left-color:#14b8a6}
+.d-side a[data-k="t2-其他"]{border-left-color:#cbd5e1}
+.d-side a[data-k="done"]{border-left-color:#eab308}
+.d-main{flex:1;background:var(--card);border:1px solid #e0e7ff;border-radius:14px;overflow:hidden;min-width:0;box-shadow:0 1px 4px rgba(79,70,229,.06)}
+.d-thead{display:flex;padding:10px 16px;background:linear-gradient(90deg,#eef2ff,#f0fdfa);border-bottom:1px solid #e0e7ff;font-size:10.5px;color:#4f46e5;font-weight:800;gap:10px}
 .d-main ul{list-style:none;margin:0;padding:0}
-.d-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px dashed var(--line);cursor:pointer}
-.d-row:hover{background:#fafafa}
+.d-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px dashed #e2e8f0;border-left:4px solid #f1f5f9;cursor:pointer;transition:background .15s}
+.d-row:hover{background:#f5f7ff}
 .d-row:last-child{border-bottom:none}
+.d-row[data-c="base"]{border-left-color:#94a3b8}
+.d-row[data-c="t1i"]{border-left-color:#3b82f6}
+.d-row[data-c="t1f"]{border-left-color:#f59e0b}
+.d-row[data-c="t2"],.d-row[data-c="t2-城市生活"]{border-left-color:#10b981}
+.d-row[data-c="t2-教育文化"]{border-left-color:#8b5cf6}
+.d-row[data-c="t2-交通出行"]{border-left-color:#f97316}
+.d-row[data-c="t2-环境与灾害"]{border-left-color:#ef4444}
+.d-row[data-c="t2-市政服务"]{border-left-color:#14b8a6}
+.d-row[data-c="t2-其他"]{border-left-color:#cbd5e1}
 .d-row .tt{flex:1;font-size:13px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .d-row .tt .news{margin-left:4px}
-@media(max-width:700px){.d-wrap{flex-direction:column}.d-side{width:100%}.d-side a{display:inline-flex;width:auto;margin:2px}}
-/* ===== v94.4.2 end ===== */
+.wrec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;margin:6px 0}
+.wrec:hover{background:#f5f7ff}
+.wrec-score{font-weight:800;font-size:12px;border-radius:6px;padding:1px 8px}
+@media(max-width:700px){.d-wrap{flex-direction:column}.d-side{width:100%}.d-side a{display:inline-flex;width:auto;margin:2px;border-left:none;border-bottom:2px solid transparent}.d-side a.on{border-bottom-color:#6366f1}}
+/* ===== v94.4.2 end (v94.4.4 colored) ===== */
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
 <style id="v65fxStyle">
@@ -496,7 +519,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.4.2-202610101845';
+window.swVer='v94.4.4-202610101910';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -4986,6 +5009,8 @@ const SIELE_WRITING_BANK = [
   {id:"wt2_33",bank:1,grp:"SIELE",tarea:"T2",type:"formal",lvl:"B2",words:274,task:"SIELE Tarea 2 — Has leído el siguiente texto en el periódico local. Escribe una carta al director (125-175 palabras) exponiendo tu opinión, aportando argumentos y proponiendo soluciones. Usa un registro formal.",title:"海滩突然关闭，写信询问原因与影响",model:"Estimado diector de Mundo Ñ: Reciba un cordial saludo de mi parte. Soy una ciudadana de Barcelona y una lectora de su periódico.Me dirijo a usted para poner en su conocimiento mi inconformidad respecto al cierre de la playa,para lo que permítame expresar mi punto de vista a continuación: Desde hace mucho tiempo, esta playa ha sido un importante lugar en la que los ciudadanos pueden relajarse y divertirse, por ejemplo, aquí hacemos ejercicios al aire libre, nos paseamos con nuestras mascotas y celebramos las actividades. Además,esta playa tiene una larga historia y lleno de recuerdos de muchos ciudadanos. Por eso, una vez que se cierra, se provocará malas consecuencias. Por un lado, para los ciudadanos perderían un lugar para divertirse y relajarse, por otro lado, sería una pena para muchas turistas porque no dispondría la oportunidad de visitarla, lo que sería un duro golpe para la cultura de nuestra ciudad. Entiendo que la decisión del gobierno es para mejorar el entorno de nuestra ciudad, pero deseo que se considere bien desde la posición de los ciudadanos y adopte por una medida más satisfactoria. Por ejemplo: el gobierno podría desarrollar unas campañas educativas dirigidas a todos los ciudadanos sobre la importancia de proteger el medio ambiente.Otra mejor medida sería aumentar la partida presupuestaria y reforzar el personal para colectar las basuras de la playa. En conclusión, le agradecería mucho si usted pudiera publicar mi sugerencia con el fin de que las autoridades tengan en cuenta nuestra inconformidad al respecto. Al mismo tiempo ante esta situación, esperamos una respuesta de las autoridades locales imediada. Le doy las gracias por su atención. Un cordial saludo, Benita",passage:"Las playas de la zona sur amanecieron ayer cerradas al baño por orden municipal, un día antes del inicio del puente turístico. La administración autonómica detectó valores anómalos de contaminación residual en los análisis de calidad del agua y el consistorio izó la bandera roja como medida preventiva. Las primeras muestras apuntan a un vertido de aguas residuales, aunque también se baraja la presencia de material desconocido llegado con la marea. Los comercios y hoteles temen un golpe durísimo en plena temporada, mientras los vecinos exigen información clara y rápida. No es un caso aislado: en los últimos años se han registrado decenas de cierres por contaminación en la costa. Las autoridades prometen nuevos análisis y, si los resultados avalan la calidad del agua, la playa podría reabrir al baño en veinticuatro horas.",fuente:"Adaptado de Europa Press / CBS News / thespanisheye.com (2025): cierres temporales de playas por calidad del agua",src:"docx",tips:"题目要点：海滩突然关闭，写信询问原因与影响。报刊信（formal）：Estimado/a señor/a director/a 开头，Atentamente 结尾；结构 = 表明身份来意 → 概括材料问题 → 表明立场并给 2-3 论据 → 提出建议 → 敬语收尾。"}
 ];
 SIELE_WRITING_BANK.forEach(function(t){ WRITING_TASKS.push(t); });
+/* v94.4.3: WRITING_EXTRA 6 题与新题库重复 → 隐藏（保留对象占位，防云端 contentEdits.writing 按下标合并错位） */
+WRITING_EXTRA.forEach(function(t){ t.hidden = 1; });
 const SIELE_WRITING_TPL_GUIDES = [{"id": "tpl1", "name": "模版一 · 通用投诉/建议信", "use": "适用于绝大多数 T2：向报社/当局反映问题并提出诉求。", "points": ["称呼+身份+来意：Estimado/a señor/a director/a: Reciba un saludo cordial... Soy..., lector/a asiduo/a de su periódico.", "背景引入：Me dirijo a usted para expresar mi inconformidad con respecto a...", "论据展开：Ante todo... / Por otro lado... / Además...", "提出诉求：Por ello, solicito que... / Sería necesario que + 虚拟式", "收尾：Agradeciendo de antemano su atención, atentamente, [Nombre]"]}, {"id": "tpl2", "name": "模版二 · 现象描述+影响分析", "use": "适合 T2 材料为社会现象/新政（停车费、禁令、限流）。", "points": ["开头：Con motivo de la noticia publicada sobre..., quisiera compartir mi punto de vista.", "描述现状：En los últimos meses/tiempos, se ha observado que...", "影响两面：Por un lado..., por otro lado... / Esto conlleva que...", "建议：Propongo que se + 虚拟式 (estudie, limite, amplíe...)", "收尾：Espero que estas líneas contribuyan al debate. Atentamente."]}, {"id": "tpl3", "name": "模版三 · 观点论证型", "use": "适合 T2 需要表明立场（支持/反对）的题目。", "points": ["立场亮明：Soy de la opinión de que... / No comparto la decisión de...", "核心论据：En primer lugar... En segundo lugar... Además...", "让步反驳：Es cierto que..., sin embargo... / Aunque es verdad que..., no menos cierto es que...", "强化立场：Por lo tanto, considero imprescindible que + 虚拟式", "收尾：Quedo a su disposición para ampliar esta información. Un saludo atento."]}, {"id": "tplX", "name": "终极模版 · 万能骨架", "use": "背熟这一篇的 12 个骨架句，任何 T2 都能套。骨架句已标注高亮。", "points": ["Reciba un saludo cordial de mi parte.（万能开场）", "Me dirijo a usted para expresar mi... con respecto a...（万能来意）", "Ante todo / Por otro lado / Además（论据三连）", "Sería necesario que / Solicito que + 虚拟式（万能诉求）", "Agradeciendo de antemano su atención, se despide atentamente...（万能收尾）"]}];
 // v94.4: 写作 T2 模版骨架生成器（4 模版；s 为 {saludo,identidad,asunto,arg1,arg2,arg3,peticion,despedida,nombre}）
 function makeWritingT2Model(tpl, s){
@@ -5048,7 +5073,7 @@ function getWritingTasks(){
   // v87: 去重合并（代码为基 + 云端按下标覆盖同名/追加新增），防「云端完全覆盖」导致代码新增任务丢失
   var ed = window._contentEdits && window._contentEdits.writing;
   var cloud = (ed && ed.tasks && ed.tasks.length) ? ed.tasks : null;
-  if(!cloud) return WRITING_TASKS;
+  if(!cloud) return WRITING_TASKS.filter(function(t){ return t && !t.hidden; }); /* v94.4.3: 过滤隐藏重复题 */
   var out = WRITING_TASKS.slice();
   for(var i=0;i<cloud.length;i++){
     var c = cloud[i];
@@ -5059,7 +5084,7 @@ function getWritingTasks(){
       out.push(c);                             // 云端更长：追加新增
     }
   }
-  return out;
+  return out.filter(function(t){ return t && !t.hidden; }); /* v94.4.3: 过滤隐藏重复题 */
 }
 
 // 获取某任务的范文（合并默认 + 管理员，用户范文文本优先）
@@ -5090,6 +5115,7 @@ let _writingSieleCat = 'all';
 function setWritingSieleCat(v){ try{ _writingSieleCat = v; }catch(e){} try{ renderMain(); }catch(e2){} }
 function _wCatOf(t){
   try{
+    if(!t.bank) return 'base'; /* v94.4.3 */
     if(t.tarea === 'T1') return (t.type === 'formal') ? 't1f' : 't1i';
     if(t.tarea === 'T2'){
       for(const c in _WRITING_T2_CAT){ if(_WRITING_T2_CAT[c].indexOf(t.id) >= 0) return 't2-' + c; }
@@ -5099,7 +5125,8 @@ function _wCatOf(t){
   return 'other';
 }
 function _wCatLabel(c){
-  if(c === 'all') return '全部 SIELE';
+  if(c === 'all') return '全部题目';
+  if(c === 'base') return '📚 基础练习';
   if(c === 't1i') return '私函（informal）';
   if(c === 't1f') return '公函（formal）';
   if(c === 't2') return '报刊信 · 全部';
@@ -5110,10 +5137,11 @@ function _wCatLabel(c){
 function _writingSieleTree(tasks){
   try{
     const bank = tasks.map((t,i) => ({t, i})).filter(x => x.t && x.t.bank);
+    const base = tasks.map((t,i) => ({t, i})).filter(x => x.t && !x.t.bank && !x.t.hidden); /* v94.4.3: 基础题 */
     const lvlOk = x => (_writingFilter.lvl === 'all' || ((x.t && x.t.lvl) || '') === _writingFilter.lvl);
     const done = x => { const s = (ST.writingScores || {})[x.t.id]; return s && (s.history || []).length; };
     // 节点定义（计数考虑等级过滤；'done' 计数不受等级过滤）
-    const nodes = [{k:'all', n: bank.filter(lvlOk).length}];
+    const nodes = [{k:'all', n: tasks.filter(x => x && lvlOk({t:x})).length}, {k:'base', n: base.filter(x => lvlOk(x)).length, grp:'基础'}]; /* v94.4.3: 全部含基础 */
     const t1i = bank.filter(x => _wCatOf(x.t) === 't1i' && lvlOk(x)).length;
     const t1f = bank.filter(x => _wCatOf(x.t) === 't1f' && lvlOk(x)).length;
     if(t1i) nodes.push({k:'t1i', n:t1i});
@@ -5131,22 +5159,25 @@ function _writingSieleTree(tasks){
     let list = bank;
     if(_writingSieleCat === 'done') list = bank.filter(x => done(x));
     else if(_writingSieleCat === 't2') list = bank.filter(x => x.t.tarea === 'T2');
-    else if(_writingSieleCat === 'all') { /* 全部 */ }
+    else if(_writingSieleCat === 'base') list = base; /* v94.4.3 */
+    else if(_writingSieleCat === 'all') list = base.concat(bank); /* v94.4.3: 全部=基础+SIELE */
     else list = bank.filter(x => _wCatOf(x.t) === _writingSieleCat);
     list = list.filter(lvlOk);
     const side = nodes.map(nd =>
-      `<a class="${_writingSieleCat === nd.k ? 'on' : ''}" onclick="setWritingSieleCat('${nd.k}')" style="${nd.sub ? 'padding-left:20px;font-weight:500' : ''}"><span>${_wCatLabel(nd.k)}</span><span class="n">${nd.n}</span></a>`).join('');
+      `<a data-k="${nd.k}" class="${_writingSieleCat === nd.k ? 'on' : ''}" onclick="setWritingSieleCat('${nd.k}')" style="${nd.sub ? 'padding-left:20px;font-weight:500' : ''}"><span>${_wCatLabel(nd.k)}</span><span class="n">${nd.n}</span></a>`).join('');
     const rows = list.map(x => {
       const t = x.t, i = x.i;
       const s = (ST.writingScores || {})[t.id];
       const cnt = s ? (s.history || []).length : 0;
       const best = s ? (s.bestScore || 0) : 0;
       const st = cnt ? `<span class="done" style="font-size:11px">✓ ${cnt}次${best ? ' · ' + best + '分' : ''}</span>` : '<span style="font-size:11px;color:var(--soft)">未练</span>';
-      const tb = t.tarea === 'T2'
-        ? '<span class="badge b-t2">T2</span>'
-        : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`;
-      return `<li class="d-row" onclick="selectWriting(${i})">
-        <span class="tt">${esc(t.title || '')}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'task','编辑任务描述')}</span>
+      const tb = !t.bank
+        ? '<span class="badge b-lv">基础</span>'
+        : (t.tarea === 'T2'
+          ? '<span class="badge b-t2">T2</span>'
+          : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`);
+      return `<li class="d-row" data-c="${_wCatOf(t)}" onclick="selectWriting(${i})">
+        <span class="tt">${esc(t.title || String(t.task || '').slice(0, 26))}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'task','编辑任务描述')}</span>
         ${tb}<span class="badge b-lv">${t.lvl}</span><span class="meta" style="width:40px">${t.words || ''}</span>${st}
       </li>`;
     }).join('');
@@ -5178,9 +5209,8 @@ function renderWriting(){
   const _wLvlOrder = ['A1','A2','B1','B2'].filter(l => _wLvls.indexOf(l)>=0).concat(_wLvls.filter(l => ['A1','A2','B1','B2'].indexOf(l)<0));
   const _wShown = tasks.filter(t => (_writingFilter.grp==='all' || _writingGrpOf(t)===_writingFilter.grp) && (_writingFilter.lvl==='all' || ((t && t.lvl)||'')===_writingFilter.lvl)).length;
   const _wActive = _writingFilter.grp!=='all' || _writingFilter.lvl!=='all';
-  h += `<div class="fcb"><span style="font-size:11px;color:var(--soft)">类型：</span><button class="chip ${_writingFilter.grp==='all'?'on':''}" onclick="setWritingFilter('grp','all')">全部</button>${_wGrpOrder.map(g=>`<button class="chip ${_writingFilter.grp===g?'on':''}" onclick="setWritingFilter('grp',this.textContent)">${esc(g)}</button>`).join('')}${_wActive?`<span style="font-size:11px;color:var(--soft);margin-left:6px">显示 ${_wShown}/${tasks.length}</span>`:''}</div>`;
   h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_writingFilter.lvl==='all'?'on':''}" onclick="setWritingFilter('lvl','all')">全部</button>${_wLvlOrder.map(l=>`<button class="chip ${_writingFilter.lvl===l?'on':''}" onclick="setWritingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
-  if(_writingFilter.grp === 'SIELE'){ /* v94.4.1: 方案D 分类树+列表 */
+  if(1){ /* v94.4.3: UI 统一——始终分类树视图（基础+SIELE） */
     h += _writingSieleTree(tasks);
   } else {
   h += `<div class="rg">`;
@@ -5287,7 +5317,7 @@ function selectWriting(i){
   }
   const _wsSel = (ST.writingScores||{})[t.id];
   const _histSel = (_wsSel && _wsSel.history) ? _wsSel.history : [];
-  const _histHtml = _histSel.length ? `<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:var(--tr)">📋 我的做题记录（${_histSel.length} 次 · 最高 ${_wsSel.bestScore||0} 分）</summary><div style="margin-top:6px">${_histSel.slice().reverse().map((_hh,_hi) => { const _tsKey = String(_hh.ts||_hh.date||''); const _ri = _histSel.length-1-_hi; return `<div style="display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line);font-size:11px"><span style="color:var(--soft);min-width:118px">${esc(_hh.date||'')} ${_hh.ts?new Date(_hh.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}):''}</span><span class="tm lB1" style="font-weight:800;color:${(_hh.score||0)>=75?'var(--gd)':'var(--am)'}">${_hh.score||0}分</span><span style="color:var(--soft)">${_hh.words||0}词</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--soft)">${esc(String(_hh.text||'').slice(0,60))}</span><button class="btn sm dgr" style="padding:1px 8px;font-size:10px" onclick="_writingDelOne('${t.id}',${_ri})">删</button></div>`; }).join('')}</div></details>` : '';
+  const _histHtml = _histSel.length ? `<details style="margin-top:8px" open><summary style="cursor:pointer;font-size:12px;font-weight:800;color:var(--tr)">📋 我的做题记录（${_histSel.length} 次 · 最高 ${_wsSel.bestScore||0} 分 · 云同步）</summary><div style="margin-top:6px">${_histSel.slice().reverse().map((_hh,_hi) => { const _ri = _histSel.length-1-_hi; const _sc = _hh.score||0; const _scBg = _sc>=85?'#dcfce7;color:#15803d':(_sc>=75?'#fef9c3;color:#a16207':(_sc>=60?'#ffedd5;color:#c2410c':'#fee2e2;color:#b91c1c')); const _tm = _hh.ts?new Date(_hh.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}):''; return `<div class="wrec"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="color:var(--soft);font-size:11px;min-width:112px">📅 ${esc(_hh.date||'')}${_tm?' '+_tm:''}</span><span class="wrec-score" style="background:${_scBg.split(';')[0]};color:${_scBg.split(';')[1]}">${_sc} 分</span><span style="color:var(--soft);font-size:11px">${_hh.words||0} 词</span>${_hh.tarea?`<span class="badge b-t${_hh.tarea}" style="font-size:9px">T${_hh.tarea}</span>`:''}<span style="flex:1"></span><button class="btn sm dgr" style="padding:1px 8px;font-size:10px" onclick="_writingDelOne('${t.id}',${_ri})">删除</button></div><details style="margin-top:4px"><summary style="cursor:pointer;font-size:10.5px;color:#6366f1">查看全文</summary><pre style="white-space:pre-wrap;font-family:var(--serif);font-size:12px;line-height:1.7;margin:6px 0 0;color:var(--ink)">${esc(String(_hh.text||''))}</pre></details></div>`; }).join('')}</div></details>` : '';
   document.getElementById('writingTask').innerHTML = `<b><span class="tm l${t.lvl}">${t.lvl}</span> ${t.bank?(t.tarea==='T2'?'T2 报刊信':'T1 '+(t.type==='formal'?'公函':'私函')):'任务'}：</b>${t.bank?esc(t.title||'')+'<br>'+esc(t.task):esc(t.task)}${_passageHtml}${_histHtml}`;
   document.getElementById('writingTips').style.display = 'block';
   document.getElementById('writingTips').innerHTML = `<b>写作提示：</b>${esc(t.tips)}`;
