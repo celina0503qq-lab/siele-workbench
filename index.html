@@ -420,6 +420,31 @@
 .search-empty{padding:12px;text-align:center;color:var(--soft);font-size:12.5px}
 .search-flash{animation:searchFlash 1.6s ease}
 @keyframes searchFlash{0%{background:#fef3c7;box-shadow:0 0 0 3px rgba(245,158,11,.35)}100%{background:transparent;box-shadow:none}}
+
+/* ===== v94.4.2: 写作分类树（方案D）样式 ===== */
+.badge{display:inline-block;padding:2px 9px;border-radius:10px;font-size:10.5px;font-weight:800;line-height:1.5}
+.b-t1{background:#dcfce7;color:#15803d}
+.b-t2{background:#ede9fe;color:#6d28d9}
+.b-lv{background:#f1f5f9;color:#334155;border:1px solid var(--line)}
+.news{font-size:10px;color:var(--tr);background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:1px 7px;font-weight:700;white-space:nowrap}
+.done{color:var(--gd);font-weight:800}
+.d-wrap{display:flex;gap:14px;align-items:flex-start;margin-top:12px}
+.d-side{width:210px;flex-shrink:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.d-side .grp{font-size:11px;font-weight:800;color:var(--soft);padding:8px 8px 4px}
+.d-side a{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:9px;font-size:12.5px;cursor:pointer;color:var(--ink);text-decoration:none;font-weight:600;margin:1px 0}
+.d-side a:hover{background:#f8fafc}
+.d-side a.on{background:#f3e8ff;color:var(--tr)}
+.d-side a .n{font-size:10.5px;color:var(--soft);font-weight:400}
+.d-main{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.d-thead{display:flex;padding:10px 16px;background:#f8fafc;border-bottom:1px solid var(--line);font-size:10.5px;color:var(--soft);font-weight:800;gap:10px}
+.d-main ul{list-style:none;margin:0;padding:0}
+.d-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px dashed var(--line);cursor:pointer}
+.d-row:hover{background:#fafafa}
+.d-row:last-child{border-bottom:none}
+.d-row .tt{flex:1;font-size:13px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.d-row .tt .news{margin-left:4px}
+@media(max-width:700px){.d-wrap{flex-direction:column}.d-side{width:100%}.d-side a{display:inline-flex;width:auto;margin:2px}}
+/* ===== v94.4.2 end ===== */
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
 <style id="v65fxStyle">
@@ -471,7 +496,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.4.1-202610101827';
+window.swVer = 'v94.4.2-202610101845';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
