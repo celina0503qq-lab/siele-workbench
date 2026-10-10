@@ -467,7 +467,17 @@
 .wrec:hover{background:#f5f7ff}
 .wrec-score{font-weight:800;font-size:12px;border-radius:6px;padding:1px 8px}
 @media(max-width:700px){.d-wrap{flex-direction:column}.d-side{width:100%}.d-side a{display:inline-flex;width:auto;margin:2px;border-left:none;border-bottom:2px solid transparent}.d-side a.on{border-bottom-color:#6366f1}}
-/* ===== v94.4.2 end (v94.4.4 colored) ===== */
+/* ===== v94.5: 口语分类树 teal 主题 ===== */
+.d-wrap.sw .d-side{background:linear-gradient(180deg,#ecfdf5 0%,var(--card) 46%);border-color:#ccfbf1;box-shadow:0 1px 4px rgba(13,148,136,.08)}
+.d-wrap.sw .d-side .grp{color:#0d9488}
+.d-wrap.sw .d-side a:hover{background:#f0fdfa}
+.d-wrap.sw .d-side a.on{background:#ccfbf1;color:#115e59;border-left-color:#0d9488 !important}
+.d-wrap.sw .d-side a .n{background:#f0fdfa;color:#14b8a6}
+.d-wrap.sw .d-side a.on .n{background:#fff;color:#0d9488;font-weight:700}
+.d-wrap.sw .d-main{border-color:#ccfbf1;box-shadow:0 1px 4px rgba(13,148,136,.08)}
+.d-wrap.sw .d-thead{background:linear-gradient(90deg,#ecfdf5,#f0f9ff);color:#0f766e;border-bottom-color:#ccfbf1}
+.d-wrap.sw .d-row:hover{background:#f4fdfa}
+/* ===== v94.4.2 end (v94.4.4 colored) + v94.5 teal ===== */
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
 <style id="v65fxStyle">
@@ -519,7 +529,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer='v94.4.4-202610101910';
+window.swVer = 'v94.5-202610101933';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1189,6 +1199,8 @@ function getDefaultState(){
     sieleOralScores: {},
     writingScores: {},       /* v94.4: 写作做题记录 {id:{bestScore,count,lastDate,history:[{ts,date,score,words,text,tarea}]}} */
     writingScoresDel: {},    /* v94.4: 按条删除表 {id:[ts,...]} 防云同步并回 */
+    speakScores: {},         /* v94.5: 口语话题做题记录 {key:{bestScore,count,lastDate,history:[{ts,date,score,words,lvl,cat,text}]}} */
+    speakScoresDel: {},      /* v94.5: 按条删除表 {key:[ts,...]} 防云同步并回 */
     sieleOralProgress: {tarea:1, question:0, topic:'tecnología'},
     pomodoro: {mode:'work', remaining: 25*60, running:false, completed:0},
     errors: [],
@@ -5895,7 +5907,192 @@ function saveSpeakingTopicsAdmin(){
 }
 
 
-// ===== v94.0: 口语话题筛选（等级/分类）——continue 式过滤保原下标 i，不影响管理员按 topic 合并/编辑；cat 值只读展示绝不改写 =====
+/* ===== v94.5: 口语话题分类树（复用写作方案D机制 · teal 配色）+ 做题记录（云同步同写作） ===== */
+let _speakingTreeCat = 'all';
+function setSpeakingTreeCat(v){ try{ _speakingTreeCat = v; }catch(e){} try{ renderMain(); }catch(e2){} }
+function _speakKeyOf(t){ /* 稳定键：topic 文本 hash（管理员编辑/云端新增话题均适用，与下标无关） */
+  try{
+    const s0 = String((t && t.topic) || '').trim().toLowerCase();
+    let h = 5381; for(let i=0;i<s0.length;i++){ h = ((h<<5)+h+s0.charCodeAt(i)) & 0x7fffffff; }
+    return 'spk' + h.toString(36);
+  }catch(e){ return 'spk0'; }
+}
+function _speakIsSiele(t){ return /^SIELE\s*T\d/i.test(String((t && t.cat) || '')); }
+function _speakCatOf(t){
+  try{
+    const c = String((t && t.cat) || '');
+    if(_speakIsSiele(t)){ const m = c.match(/T(\d)/i); return 'st' + (m ? m[1] : 'x'); }
+    return 'c-' + c;
+  }catch(e){ return 'c-其他'; }
+}
+function _speakCatLabel(c){
+  if(c === 'all') return '全部题目';
+  if(c === 'done') return '⭐ 已练';
+  if(c === 'stx') return 'SIELE 其他';
+  if(c.indexOf('st') === 0) return 'SIELE · Tarea ' + c.slice(2);
+  if(c.indexOf('c-') === 0) return c.slice(2);
+  return c;
+}
+const _SPEAK_PALETTE = ['#0d9488','#f97316','#8b5cf6','#0ea5e9','#e11d48','#ca8a04','#7c3aed','#059669','#db2777','#2563eb'];
+function _speakCatColor(c){
+  try{
+    if(c === 'st1') return '#0ea5e9';
+    if(c === 'st3') return '#8b5cf6';
+    if(c === 'st5') return '#f59e0b';
+    let a = 0; for(let i=0;i<String(c).length;i++){ a += String(c).charCodeAt(i); }
+    return _SPEAK_PALETTE[a % _SPEAK_PALETTE.length];
+  }catch(e){ return '#0d9488'; }
+}
+function _speakingTree(topics){
+  try{
+    const items = topics.map((t,i) => ({t,i})).filter(x => x.t);
+    const lvlOk = x => (_speakingFilter.lvl==='all' || ((x.t&&x.t.lvl)||'')===_speakingFilter.lvl);
+    const done = x => { const sc = (ST.speakScores||{})[_speakKeyOf(x.t)]; return sc && (sc.history||[]).length; };
+    const nodes = [{k:'all', n: items.filter(lvlOk).length}];
+    const stKeys = [], themeKeys = [];
+    items.forEach(x => { const c=_speakCatOf(x.t); if(_speakIsSiele(x.t)){ if(stKeys.indexOf(c)<0) stKeys.push(c); } else { if(themeKeys.indexOf(c)<0) themeKeys.push(c); } });
+    stKeys.sort(function(a,b){ return a.slice(2)*1 - b.slice(2)*1; });
+    if(stKeys.length) nodes.push({grp:'SIELE 题型'});
+    stKeys.forEach(c => { const n = items.filter(x => _speakCatOf(x.t)===c && lvlOk(x)).length; if(n) nodes.push({k:c, n}); });
+    if(themeKeys.length) nodes.push({grp:'主题话题'});
+    themeKeys.forEach(c => { const n = items.filter(x => _speakCatOf(x.t)===c && lvlOk(x)).length; if(n) nodes.push({k:c, n, sub:1}); });
+    nodes.push({k:'done', n: items.filter(x => done(x) && lvlOk(x)).length});
+    let list = items;
+    if(_speakingTreeCat === 'done') list = items.filter(x => done(x));
+    else if(_speakingTreeCat !== 'all') list = items.filter(x => _speakCatOf(x.t) === _speakingTreeCat);
+    list = list.filter(lvlOk);
+    const side = nodes.map(nd => nd.grp
+      ? `<span class="grp">${esc(nd.grp)}</span>`
+      : `<a data-k="${nd.k}" class="${_speakingTreeCat===nd.k?'on':''}" onclick="setSpeakingTreeCat('${nd.k}')" style="${nd.sub?'padding-left:20px;font-weight:500;':''}border-left-color:${_speakCatColor(nd.k)}"><span>${_speakCatLabel(nd.k)}</span><span class="n">${nd.n}</span></a>`).join('');
+    const rows = list.map(x => {
+      const t = x.t, i = x.i;
+      const sc = (ST.speakScores||{})[_speakKeyOf(t)];
+      const cnt = sc ? (sc.history||[]).length : 0;
+      const best = sc ? (sc.bestScore||0) : 0;
+      const st = cnt ? `<span class="done" style="font-size:11px">✓ ${cnt}次${best?' · '+best+'分':''}</span>` : '<span style="font-size:11px;color:var(--soft)">未练</span>';
+      const cc = _speakCatOf(t), col = _speakCatColor(cc);
+      const tb = `<span class="badge" style="background:${col}1a;color:${col};border:1px solid ${col}55">${esc(t.cat||'')}</span>`;
+      return `<li class="d-row" data-c="${cc}" style="border-left-color:${col}" onclick="selectSpeaking(${i})">
+        <span class="tt">${esc(String(t.topic||'').slice(0,52))}${_topicEditBtn(i,'topic','编辑题目')}<span style="display:block;font-weight:400;color:var(--soft);font-size:11px;white-space:normal">${esc(t.zh||'')}</span></span>
+        ${tb}<span class="badge b-lv">${t.lvl||''}</span>${st}
+      </li>`;
+    }).join('');
+    return `<div class="d-wrap sw" style="margin-top:12px">
+      <div class="d-side">${side}</div>
+      <div class="d-main">
+        <div class="d-thead sw"><span style="flex:1">话题</span><span style="width:90px">分类</span><span style="width:38px">等级</span><span style="width:90px">状态</span></div>
+        <ul>${rows || '<li style="padding:16px;font-size:12px;color:var(--soft)">该分类下暂无话题</li>'}</ul>
+      </div>
+    </div>`;
+  }catch(e){ try{ console.warn('_speakingTree', e); }catch(e2){} return '<div class="note">分类视图加载失败</div>'; }
+}
+function _speakHistHtml(t){
+  try{
+    const _k = _speakKeyOf(t);
+    const _e = (ST.speakScores||{})[_k];
+    const _h = (_e && _e.history) ? _e.history : [];
+    if(!_h.length) return '';
+    const _cards = _h.slice().reverse().map((r, ri) => {
+      const _i = _h.length - 1 - ri;
+      const _sc = r.score||0;
+      const _bg = _sc>=80?'#dcfce7':(_sc>=55?'#fef9c3':'#fee2e2');
+      const _fg = _sc>=80?'#15803d':(_sc>=55?'#a16207':'#b91c1c');
+      const _tm = r.ts ? new Date(r.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="wrec"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span style="color:var(--soft);font-size:11px;min-width:112px">📅 ${esc(r.date||'')}${_tm?' '+_tm:''}</span><span class="wrec-score" style="background:${_bg};color:${_fg}">${_sc} 分</span><span style="color:var(--soft);font-size:11px">${r.words||0} 词</span>${r.lvl?`<span class="badge b-lv" style="font-size:9px">${esc(r.lvl)}</span>`:''}<span style="flex:1"></span><button class="btn sm dgr" style="padding:1px 8px;font-size:10px" onclick="_speakDelOne('${_k}',${_i})">删除</button></div><details style="margin-top:4px"><summary style="cursor:pointer;font-size:10.5px;color:#0d9488">查看识别全文</summary><pre style="white-space:pre-wrap;font-family:var(--serif);font-size:12px;line-height:1.7;margin:6px 0 0;color:var(--ink)">${esc(String(r.text||''))}</pre></details></div>`;
+    }).join('');
+    return `<details style="margin-top:8px" open><summary style="cursor:pointer;font-size:12px;font-weight:800;color:#0d9488">🎙 我的做题记录（${_h.length} 次 · 最高 ${_e.bestScore||0} 分 · 云同步）</summary><div style="margin-top:6px">${_cards}</div></details>`;
+  }catch(e){ try{console.warn('_speakHistHtml',e);}catch(e2){} return ''; }
+}
+function _speakDelOne(key, idx){
+  try{
+    const _e = (ST.speakScores||{})[key];
+    if(!_e || !_e.history || !_e.history[idx]) return;
+    const _h = _e.history[idx];
+    if(!confirm('确定删除这条记录吗？（'+(_h.date||'')+' · '+(_h.score||0)+'分）删除后跨设备同步。')) return;
+    const _rk = String(_h.ts || _h.date || '');
+    if(_rk){ ST.speakScoresDel = ST.speakScoresDel || {}; const _arr = ST.speakScoresDel[key] = ST.speakScoresDel[key] || []; if(_arr.indexOf(_rk)<0) _arr.push(_rk); if(_arr.length>200) _arr.splice(0,_arr.length-200); }
+    _e.history.splice(idx, 1);
+    if(!_e.history.length){ delete ST.speakScores[key]; }
+    else{
+      _e.bestScore = _e.history.reduce(function(m,a){return Math.max(m,a.score||0);},0);
+      _e.count = _e.history.length; const _l = _e.history[_e.history.length-1]||{};
+      _e.lastDate = _l.date||''; _e.score = _l.score||0;
+    }
+    save(); renderMain();
+    if(typeof toast==='function') toast('已删除该条记录','ok');
+  }catch(e){ try{console.warn('_speakDelOne',e);}catch(e2){} }
+}
+function _speakMergeScoreTomb(remote){
+  try{
+    if(!remote) return;
+    const dd = remote.speakScoresDel;
+    if(dd && typeof dd==='object'){
+      ST.speakScoresDel = ST.speakScoresDel || {};
+      Object.keys(dd).forEach(function(k){
+        const r = Array.isArray(dd[k])?dd[k]:[];
+        const cur = ST.speakScoresDel[k] = ST.speakScoresDel[k] || [];
+        r.forEach(function(x){ if(cur.indexOf(x)<0) cur.push(x); });
+      });
+    }
+  }catch(e){}
+  try{ _speakApplyDelLocally(); }catch(e){}
+}
+function _speakApplyDelLocally(){
+  try{
+    let changed = false;
+    const _del = ST.speakScoresDel || {};
+    ST.speakScores = ST.speakScores || {};
+    Object.keys(ST.speakScores).forEach(function(id){
+      const e = ST.speakScores[id]; if(!e) return;
+      const dl = Array.isArray(_del[id])?_del[id]:[];
+      if(!dl.length) return;
+      const n0 = (e.history||[]).length;
+      e.history = (e.history||[]).filter(function(h){ return dl.indexOf(String(h.ts||h.date||''))<0; });
+      if(e.history.length !== n0){
+        changed = true;
+        if(!e.history.length){ delete ST.speakScores[id]; }
+        else{
+          e.bestScore = e.history.reduce(function(m,a){return Math.max(m,a.score||0);},0);
+          e.count = e.history.length; const _l = e.history[e.history.length-1]||{};
+          e.lastDate = _l.date||''; e.score = _l.score||0;
+        }
+      }
+    });
+    if(changed) save();
+  }catch(e){}
+}
+function mergeSpeakScore(id, remoteEntry){
+  /* v94.5: 合并远端口语话题做题记录（按 ts 去重 + 删除表过滤，同写作） */
+  try{
+    if(!remoteEntry) return;
+    ST.speakScores = ST.speakScores || {};
+    const _keyOf = function(h){ return String((h&&(h.ts||h.date))||''); };
+    const _dl = (ST.speakScoresDel||{})[id] || [];
+    const local = ST.speakScores[id];
+    const rh = (remoteEntry.history||[]).filter(function(h){ return _dl.indexOf(_keyOf(h))<0; });
+    if(!local){
+      if(!rh.length) return;
+      const _e2 = Object.assign({}, remoteEntry, {history: rh.slice(-20)});
+      _e2.bestScore = rh.reduce(function(m,a){return Math.max(m,a.score||0);},0);
+      _e2.count = rh.length; const _l2 = rh[rh.length-1]||{};
+      _e2.lastDate = _l2.date||''; _e2.score = _l2.score||0;
+      ST.speakScores[id] = _e2; return;
+    }
+    const lh = local.history || [];
+    const map = {};
+    lh.forEach(function(h){ map[_keyOf(h)] = h; });
+    rh.forEach(function(h){ const k=_keyOf(h); if(!map[k]){ lh.push(h); map[k]=h; } });
+    lh.sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
+    if(lh.length>20) lh = lh.slice(-20);
+    if(!lh.length){ delete ST.speakScores[id]; return; }
+    const best = Math.max(lh.reduce(function(m,a){return Math.max(m,a.score||0);},0), local.bestScore||0, remoteEntry.bestScore||0);
+    const last = lh[lh.length-1];
+    ST.speakScores[id] = {bestScore:best, count:lh.length, lastDate:last?last.date:(local.lastDate||''),
+      history:lh, score:last?last.score:local.score};
+  }catch(e){ try{console.warn('mergeSpeakScore',e);}catch(e2){} }
+}
+/* ===== v94.5 树+记录函数 end ===== */
+// ===== v94.0: 口语话题筛选
 let _speakingFilter = {lvl:'all', cat:'all'};
 function setSpeakingFilter(k, val){
   try{ _speakingFilter[k] = val; }catch(e){}
@@ -5910,12 +6107,11 @@ function renderSpeaking(){
   }
   // v94.0: 筛选 chips（等级 + 分类动态收集）
   const _sLvls = []; topics.forEach(t => { if(t && t.lvl && _sLvls.indexOf(t.lvl)<0) _sLvls.push(t.lvl); });
-  const _sCats = []; topics.forEach(t => { if(t && t.cat && _sCats.indexOf(t.cat)<0) _sCats.push(t.cat); });
   const _sLvlOrder = ['A1','A2','B1','B2'].filter(l => _sLvls.indexOf(l)>=0).concat(_sLvls.filter(l => ['A1','A2','B1','B2'].indexOf(l)<0));
-  const _sShown = topics.filter(t => t && (_speakingFilter.lvl==='all' || ((t && t.lvl)||'')===_speakingFilter.lvl) && (_speakingFilter.cat==='all' || ((t && t.cat)||'')===_speakingFilter.cat)).length;
-  const _sActive = _speakingFilter.lvl!=='all' || _speakingFilter.cat!=='all';
   h += `<div class="fcb"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_speakingFilter.lvl==='all'?'on':''}" onclick="setSpeakingFilter('lvl','all')">全部</button>${_sLvlOrder.map(l=>`<button class="chip ${_speakingFilter.lvl===l?'on':''}" onclick="setSpeakingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
-  h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">分类：</span><button class="chip ${_speakingFilter.cat==='all'?'on':''}" onclick="setSpeakingFilter('cat','all')">全部</button>${_sCats.map(c=>`<button class="chip ${_speakingFilter.cat===c?'on':''}" onclick="setSpeakingFilter('cat',this.textContent)">${esc(c)}</button>`).join('')}${_sActive?`<span style="font-size:11px;color:var(--soft);margin-left:6px">显示 ${_sShown}/${topics.length}</span>`:''}</div>`;
+  if(1){ /* v94.5: UI 统一——分类树视图（题型+主题两组，teal 配色） */
+    h += _speakingTree(topics);
+  } else {
   h += `<div class="rg">`;
   topics.forEach((t,i) => {
     if(!t) return; // v94.0: 防御（历史双逗号已修，兜底保留）
@@ -5929,6 +6125,7 @@ function renderSpeaking(){
     </div>`;
   });
   h += `</div>`;
+  } /* v94.5: else 闭合 */
 
   h += `<div class="card" style="margin-top:14px" id="speakingArea">
     <h3><span class="ic">🗣</span>口语练习区</h3>
@@ -5989,7 +6186,7 @@ function getKeywordsForTopic(t){
 function selectSpeaking(i){
   _speakIdx = i;
   const t = getSpeakingTopics()[i];
-  document.getElementById('speakingTopic').innerHTML = `<b><span class="tm l${t.lvl}">${t.lvl}</span> ${t.cat}：</b>${esc(t.zh)}`;
+  document.getElementById('speakingTopic').innerHTML = `<b><span class="tm l${t.lvl}">${t.lvl}</span> ${t.cat}：</b>${esc(t.zh)}` + (typeof _speakHistHtml==='function' ? _speakHistHtml(t) : ''); /* v94.5: 做题记录卡片 */
   document.getElementById('speakingBox').style.display = 'block';
   document.getElementById('speakTarget').textContent = t.topic;
   document.getElementById('speakZh').textContent = t.prep;
@@ -6187,6 +6384,24 @@ function scoreSpeaking(text){
   }
   res.classList.add('show');
   updateStreak();
+  /* v94.5: 口语话题做题记录（同写作机制：全文+分数，云同步，可单条删除） */
+  try{
+    if(topic){
+      const _sk = _speakKeyOf(topic);
+      ST.speakScores = ST.speakScores || {};
+      const _se = ST.speakScores[_sk] || {history:[]};
+      _se.history = _se.history || [];
+      _se.history.push({ts:Date.now(), date:new Date().toLocaleDateString('zh-CN'), score:score, words:wc, lvl:topic.lvl||'', cat:topic.cat||'', text:String(text||'').slice(0,3000)});
+      _se.history.sort(function(a,b){return (a.ts||0)-(b.ts||0);});
+      if(_se.history.length > 20) _se.history = _se.history.slice(-20);
+      _se.bestScore = _se.history.reduce(function(m,a){return Math.max(m,a.score||0);},0);
+      _se.count = _se.history.length; const _sl = _se.history[_se.history.length-1]||{};
+      _se.lastDate = _sl.date||''; _se.score = _sl.score||0;
+      ST.speakScores[_sk] = _se;
+      save();
+      try{ if(_speakIdx >= 0) selectSpeaking(_speakIdx); }catch(_eR){} /* 刷新记录卡 */
+    }
+  }catch(_eS){ try{console.warn('speakScores', _eS);}catch(_e2){} }
 
   // P1-1: 口语 < 60 自动入错题集
   if(score < 60 && wc > 0){
@@ -17420,6 +17635,12 @@ function hydrate(){
       ST.writingScores=ST.writingScores||{};
       Object.keys(rm.writingScores).forEach(function(k){ if(typeof mergeWritingScore==='function') mergeWritingScore(k, rm.writingScores[k]); });
     }
+    /* v94.5: speakScores 逐条合并（同写作机制） */
+    if(rm.speakScores){
+      try{ if(typeof _speakMergeScoreTomb==='function') _speakMergeScoreTomb(rm); }catch(e){}
+      ST.speakScores=ST.speakScores||{};
+      Object.keys(rm.speakScores).forEach(function(k){ if(typeof mergeSpeakScore==='function') mergeSpeakScore(k, rm.speakScores[k]); });
+    }
     /* v44: quizResults 不再随快照盲覆盖（会丢掉本机未推送的新成绩），改并集合并 */
     if(rm.quizResults || rm.quizResultsTs){
       var _qmH = window._qrMergePairs(ST.quizResults, ST.quizResultsTs, rm.quizResults, rm.quizResultsTs);
@@ -17445,10 +17666,12 @@ function calcSig(){
   if(ST.sieleOralScores){Object.keys(ST.sieleOralScores).forEach(function(id){var s=ST.sieleOralScores[id];oralSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});}
   var writingSig='';
   if(ST.writingScores){Object.keys(ST.writingScores).forEach(function(id){var s=ST.writingScores[id];writingSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});} /* v94.4 */
+  var speakSig='';
+  if(ST.speakScores){Object.keys(ST.speakScores).forEach(function(id){var s=ST.speakScores[id];speakSig+=id+':'+(s.bestScore||s.score||0)+':'+(s.count||1)+';';});} /* v94.5 */
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -17494,6 +17717,17 @@ function wbSnap(){
     });
     c.writingScores=_wt;
     if(ST.writingScoresDel && Object.keys(ST.writingScoresDel).length) c.writingScoresDel=ST.writingScoresDel;
+  }
+  /* v94.5: speakScores 精简上行（history 上限 20、text 截断 2000、老条目精简） */
+  if(c.speakScores){
+    var _st={};
+    Object.keys(c.speakScores).forEach(function(id){
+      var sc=c.speakScores[id]; if(!sc) return;
+      var ch=(sc.history||[]).map(function(h,i,arr){ if(i>=arr.length-3) return h; return {ts:h.ts||0,score:h.score||0,date:h.date||'',words:h.words||0,lvl:h.lvl||'',cat:h.cat||''}; });
+      _st[id]={bestScore:sc.bestScore||0,count:sc.count||1,lastDate:sc.lastDate||'',history:ch,score:sc.score||0};
+    });
+    c.speakScores=_st;
+    if(ST.speakScoresDel && Object.keys(ST.speakScoresDel).length) c.speakScoresDel=ST.speakScoresDel;
   }
   // DELE 做题进度（存独立 localStorage 键，随 wb 快照跨设备同步）
   try{ c.deleProgress = JSON.parse(localStorage.getItem(_DELE_PROGRESS_KEY)||'{}'); }catch(e){ c.deleProgress = {}; }
@@ -17729,7 +17963,7 @@ function mergeWbSnapshot(remote, wbTs){
   _mergeGrammarDone(remote);
   if(remote.shadowScores)Object.keys(remote.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(remote.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=remote.shadowScores[k];});
   if(remote.refineShadowScores)Object.keys(remote.refineShadowScores).forEach(function(k){if(!ST.refineShadowScores[k]||(remote.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0))ST.refineShadowScores[k]=remote.refineShadowScores[k];}); // v53
-  if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(remote);if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(typeof mergeSieleOralScore==='function')mergeSieleOralScore(k,remote.sieleOralScores[k]);});}if(remote.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(remote);ST.writingScores=ST.writingScores||{};Object.keys(remote.writingScores).forEach(function(k){mergeWritingScore(k,remote.writingScores[k]);});}
+  if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(remote);if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){if(typeof mergeSieleOralScore==='function')mergeSieleOralScore(k,remote.sieleOralScores[k]);});}if(remote.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(remote);ST.writingScores=ST.writingScores||{};Object.keys(remote.writingScores).forEach(function(k){mergeWritingScore(k,remote.writingScores[k]);});}if(remote.speakScores){if(typeof _speakMergeScoreTomb==='function')_speakMergeScoreTomb(remote);ST.speakScores=ST.speakScores||{};Object.keys(remote.speakScores).forEach(function(k){mergeSpeakScore(k,remote.speakScores[k]);});}
   // SIELE 口语进度游标（当前 Tarea/话题）：ts LWW（2026-09-26 修复：原先整体替换 ⇒ 两设备互覆，谁拉取晚听谁的）
   if(remote.sieleOralProgress&&typeof remote.sieleOralProgress==='object'){
     var _rOralTs=Number(remote.sieleOralProgressTs||0),_lOralTs=Number(ST.sieleOralProgressTs||0);
@@ -18763,7 +18997,7 @@ async function standaloneSync(showLog){
     if(remote.refineShadowScores) Object.keys(remote.refineShadowScores).forEach(function(k){
       if(!ST.refineShadowScores[k]||(remote.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0)) ST.refineShadowScores[k]=remote.refineShadowScores[k];
     }); // v53
-    if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(remote);if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}if(remote.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(remote);ST.writingScores=ST.writingScores||{};Object.keys(remote.writingScores).forEach(function(k){mergeWritingScore(k,remote.writingScores[k]);});}
+    if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(remote);if(remote.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(remote.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,remote.sieleOralScores[k]);});}if(remote.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(remote);ST.writingScores=ST.writingScores||{};Object.keys(remote.writingScores).forEach(function(k){mergeWritingScore(k,remote.writingScores[k]);});}if(remote.speakScores){if(typeof _speakMergeScoreTomb==='function')_speakMergeScoreTomb(remote);ST.speakScores=ST.speakScores||{};Object.keys(remote.speakScores).forEach(function(k){mergeSpeakScore(k,remote.speakScores[k]);});}
     if(remote.sieleOralProgress){
       var _gR=remote.sieleOralProgress;
       // S4: byTarea 逐条取新，避免整体覆盖导致其他 Tarea 进度丢失
@@ -18937,7 +19171,7 @@ function importDataPrompt_(){
         if(data.totalStudy>ST.totalStudy)ST.totalStudy=data.totalStudy;
         if(data.shadowScores)Object.keys(data.shadowScores).forEach(function(k){if(!ST.shadowScores[k]||(data.shadowScores[k].score||0)>(ST.shadowScores[k].score||0))ST.shadowScores[k]=data.shadowScores[k];});
         if(data.refineShadowScores)Object.keys(data.refineShadowScores).forEach(function(k){if(!ST.refineShadowScores[k]||(data.refineShadowScores[k].score||0)>(ST.refineShadowScores[k].score||0))ST.refineShadowScores[k]=data.refineShadowScores[k];}); // v53
-        if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(data);if(data.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(data.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,data.sieleOralScores[k]);});}if(data.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(data);ST.writingScores=ST.writingScores||{};Object.keys(data.writingScores).forEach(function(k){mergeWritingScore(k,data.writingScores[k]);});}
+        if(typeof _sieleMergeScoreTomb==='function')_sieleMergeScoreTomb(data);if(data.sieleOralScores){ST.sieleOralScores=ST.sieleOralScores||{};Object.keys(data.sieleOralScores).forEach(function(k){mergeSieleOralScore(k,data.sieleOralScores[k]);});}if(data.writingScores){if(typeof _writingMergeScoreTomb==='function')_writingMergeScoreTomb(data);ST.writingScores=ST.writingScores||{};Object.keys(data.writingScores).forEach(function(k){mergeWritingScore(k,data.writingScores[k]);});}if(data.speakScores){if(typeof _speakMergeScoreTomb==='function')_speakMergeScoreTomb(data);ST.speakScores=ST.speakScores||{};Object.keys(data.speakScores).forEach(function(k){mergeSpeakScore(k,data.speakScores[k]);});}
         if(data.sieleOralProgress)ST.sieleOralProgress=data.sieleOralProgress;
         // 合并错词库
         if(Array.isArray(data.dictationErrorBank)&&data.dictationErrorBank.length){
