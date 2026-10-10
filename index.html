@@ -540,7 +540,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.5.1-202610102127';
+window.swVer = 'v94.5.2-202610102142';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -17630,9 +17630,43 @@ function hydrate(){
   }
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashIdx','flashLevel','flashCurrentWord','flashProgressByLevel','flashMode','flashPraStats','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs','flashLastPositionTs'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashProgressByLevel','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
+    /* v94.5.2: flash 系列键移出白名单改精细合并（v92.9 双路径教训——mergeWbSnapshot 已有同语义，此处补齐 hydrate 路径）
+       位置键：flashLastPositionTs.all 时间戳仲裁，远端更晚翻页才采纳其 等级/当前词/该级游标；flashIdxByLevel 前向游标（进度靠前者赢）；
+       flashIdx 扁平旧键前向 max；flashLastPositionTs 逐级 max；flashPraStats correct/wrong/bestStreak 取 max；flashMode 设备偏好保持本地。 */
+    (function(){
+      var _rT=(rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object')?(Number(rm.flashLastPositionTs.all)||0):0;
+      var _lT=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs.all)||0):0;
+      if(_rT>_lT && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord){
+        if(typeof rm.flashLevel==='string'&&['all','A1','A2','B1','B2','专四'].indexOf(rm.flashLevel)>=0)ST.flashLevel=rm.flashLevel;
+        ST.flashCurrentWord=rm.flashCurrentWord;
+        var _rLv=rm.flashLevel||'all';
+        if(rm.flashIdxByLevel&&typeof rm.flashIdxByLevel==='object'&&rm.flashIdxByLevel[_rLv]!==undefined){
+          ST.flashIdxByLevel=ST.flashIdxByLevel||{};ST.flashIdxByLevel[_rLv]=Number(rm.flashIdxByLevel[_rLv])||0;
+        }
+      }
+      if(rm.flashIdxByLevel&&typeof rm.flashIdxByLevel==='object'){
+        ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
+        ['A1','A2','B1','B2','all','专四'].forEach(function(lv){
+          var ri=Number(rm.flashIdxByLevel[lv]||0),li=Number(ST.flashIdxByLevel[lv]||0);
+          if(ri>li){
+            ST.flashIdxByLevel[lv]=ri;
+            if(lv===ST.flashLevel&&rm.flashLevel===lv&&typeof rm.flashCurrentWord==='string'&&rm.flashCurrentWord)ST.flashCurrentWord=rm.flashCurrentWord;
+          }
+        });
+      }
+      if(typeof rm.flashIdx==='number')ST.flashIdx=Math.max(Number(ST.flashIdx)||0,rm.flashIdx);
+      if(rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object'){
+        ST.flashLastPositionTs=ST.flashLastPositionTs||{A1:0,A2:0,B1:0,B2:0,all:0};
+        ['A1','A2','B1','B2','all'].forEach(function(lv){var rt=rm.flashLastPositionTs[lv]|0;if(rt>(ST.flashLastPositionTs[lv]|0))ST.flashLastPositionTs[lv]=rt;});
+      }
+      if(rm.flashPraStats&&typeof rm.flashPraStats==='object'){
+        ST.flashPraStats=ST.flashPraStats||{correct:0,wrong:0,streak:0,bestStreak:0};
+        ['correct','wrong','bestStreak'].forEach(function(k){var rv=Number(rm.flashPraStats[k]||0);if(rv>Number(ST.flashPraStats[k]||0))ST.flashPraStats[k]=rv;});
+      }
+    })();
     /* v92.9【根因】sieleOralScores 原先也在上面白名单里被**整体覆盖**，绕过 mergeSieleOralScore
        ⇒ 删除墓碑/按条删除表全部失效、删掉的记录会被云端快照复活。改为"逐条合并"。 */
     if(rm.sieleOralScores){
