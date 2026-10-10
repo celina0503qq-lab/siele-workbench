@@ -471,7 +471,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.4-202610101757';
+window.swVer = 'v94.4.1-202610101827';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5053,6 +5053,88 @@ let _writingFilter = {grp:'all', lvl:'all'};
 function _writingGrpOf(t){
   try{ return (t && t.grp) || (/^SIELE/i.test(String((t && t.task) || '')) ? 'SIELE' : '通用'); }catch(e){ return '通用'; }
 }
+/* ===== v94.4.1: SIELE 写作分类树（方案D） ===== */
+const _WRITING_T2_CAT = {
+  '城市生活': ['wt2_01','wt2_02','wt2_08','wt2_17','wt2_27','wt2_32','wt2_23','wt2_18','wt2_03'],
+  '教育文化': ['wt2_09','wt2_15','wt2_19','wt2_21','wt2_26','wt2_31'],
+  '交通出行': ['wt2_13','wt2_20','wt2_29','wt2_30','wt2_05','wt2_14'],
+  '环境与灾害': ['wt2_04','wt2_11','wt2_16','wt2_07','wt2_06','wt2_33','wt2_25','wt2_10'],
+  '市政服务': ['wt2_12','wt2_28','wt2_24','wt2_22'],
+};
+let _writingSieleCat = 'all';
+function setWritingSieleCat(v){ try{ _writingSieleCat = v; }catch(e){} try{ renderMain(); }catch(e2){} }
+function _wCatOf(t){
+  try{
+    if(t.tarea === 'T1') return (t.type === 'formal') ? 't1f' : 't1i';
+    if(t.tarea === 'T2'){
+      for(const c in _WRITING_T2_CAT){ if(_WRITING_T2_CAT[c].indexOf(t.id) >= 0) return 't2-' + c; }
+      return 't2-其他';
+    }
+  }catch(e){}
+  return 'other';
+}
+function _wCatLabel(c){
+  if(c === 'all') return '全部 SIELE';
+  if(c === 't1i') return '私函（informal）';
+  if(c === 't1f') return '公函（formal）';
+  if(c === 't2') return '报刊信 · 全部';
+  if(c === 'done') return '⭐ 已练';
+  if(c.indexOf('t2-') === 0) return '├ ' + c.slice(3);
+  return c;
+}
+function _writingSieleTree(tasks){
+  try{
+    const bank = tasks.map((t,i) => ({t, i})).filter(x => x.t && x.t.bank);
+    const lvlOk = x => (_writingFilter.lvl === 'all' || ((x.t && x.t.lvl) || '') === _writingFilter.lvl);
+    const done = x => { const s = (ST.writingScores || {})[x.t.id]; return s && (s.history || []).length; };
+    // 节点定义（计数考虑等级过滤；'done' 计数不受等级过滤）
+    const nodes = [{k:'all', n: bank.filter(lvlOk).length}];
+    const t1i = bank.filter(x => _wCatOf(x.t) === 't1i' && lvlOk(x)).length;
+    const t1f = bank.filter(x => _wCatOf(x.t) === 't1f' && lvlOk(x)).length;
+    if(t1i) nodes.push({k:'t1i', n:t1i});
+    if(t1f) nodes.push({k:'t1f', n:t1f});
+    const t2all = bank.filter(x => x.t.tarea === 'T2' && lvlOk(x)).length;
+    nodes.push({k:'t2', n:t2all, grp:'Tarea 2'});
+    Object.keys(_WRITING_T2_CAT).forEach(c => {
+      const n = bank.filter(x => _wCatOf(x.t) === ('t2-' + c) && lvlOk(x)).length;
+      if(n) nodes.push({k:'t2-' + c, n, sub:1});
+    });
+    const nOther = bank.filter(x => x.t.tarea === 'T2' && _wCatOf(x.t) === 't2-其他' && lvlOk(x)).length;
+    if(nOther) nodes.push({k:'t2-其他', n:nOther, sub:1});
+    nodes.push({k:'done', n: bank.filter(done).length});
+    // 右侧列表
+    let list = bank;
+    if(_writingSieleCat === 'done') list = bank.filter(x => done(x));
+    else if(_writingSieleCat === 't2') list = bank.filter(x => x.t.tarea === 'T2');
+    else if(_writingSieleCat === 'all') { /* 全部 */ }
+    else list = bank.filter(x => _wCatOf(x.t) === _writingSieleCat);
+    list = list.filter(lvlOk);
+    const side = nodes.map(nd =>
+      `<a class="${_writingSieleCat === nd.k ? 'on' : ''}" onclick="setWritingSieleCat('${nd.k}')" style="${nd.sub ? 'padding-left:20px;font-weight:500' : ''}"><span>${_wCatLabel(nd.k)}</span><span class="n">${nd.n}</span></a>`).join('');
+    const rows = list.map(x => {
+      const t = x.t, i = x.i;
+      const s = (ST.writingScores || {})[t.id];
+      const cnt = s ? (s.history || []).length : 0;
+      const best = s ? (s.bestScore || 0) : 0;
+      const st = cnt ? `<span class="done" style="font-size:11px">✓ ${cnt}次${best ? ' · ' + best + '分' : ''}</span>` : '<span style="font-size:11px;color:var(--soft)">未练</span>';
+      const tb = t.tarea === 'T2'
+        ? '<span class="badge b-t2">T2</span>'
+        : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`;
+      return `<li class="d-row" onclick="selectWriting(${i})">
+        <span class="tt">${esc(t.title || '')}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'task','编辑任务描述')}</span>
+        ${tb}<span class="badge b-lv">${t.lvl}</span><span class="meta" style="width:40px">${t.words || ''}</span>${st}
+      </li>`;
+    }).join('');
+    return `<div class="d-wrap" style="margin-top:12px">
+      <div class="d-side">${side}</div>
+      <div class="d-main">
+        <div class="d-thead"><span style="flex:1">题目</span><span style="width:44px">类型</span><span style="width:38px">等级</span><span style="width:44px">词数</span><span style="width:86px">状态</span></div>
+        <ul>${rows || '<li style="padding:16px;font-size:12px;color:var(--soft)">该分类下暂无题目</li>'}</ul>
+      </div>
+    </div>`;
+  }catch(e){ try{ console.warn('_writingSieleTree', e); }catch(e2){} return '<div class="note">分类视图加载失败</div>'; }
+}
+/* ===== v94.4.1 end ===== */
 function setWritingFilter(k, val){
   try{ _writingFilter[k] = val; }catch(e){}
   try{ renderMain(); }catch(e){}
@@ -5073,11 +5155,15 @@ function renderWriting(){
   const _wActive = _writingFilter.grp!=='all' || _writingFilter.lvl!=='all';
   h += `<div class="fcb"><span style="font-size:11px;color:var(--soft)">类型：</span><button class="chip ${_writingFilter.grp==='all'?'on':''}" onclick="setWritingFilter('grp','all')">全部</button>${_wGrpOrder.map(g=>`<button class="chip ${_writingFilter.grp===g?'on':''}" onclick="setWritingFilter('grp',this.textContent)">${esc(g)}</button>`).join('')}${_wActive?`<span style="font-size:11px;color:var(--soft);margin-left:6px">显示 ${_wShown}/${tasks.length}</span>`:''}</div>`;
   h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_writingFilter.lvl==='all'?'on':''}" onclick="setWritingFilter('lvl','all')">全部</button>${_wLvlOrder.map(l=>`<button class="chip ${_writingFilter.lvl===l?'on':''}" onclick="setWritingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
+  if(_writingFilter.grp === 'SIELE'){ /* v94.4.1: 方案D 分类树+列表 */
+    h += _writingSieleTree(tasks);
+  } else {
   h += `<div class="rg">`;
   tasks.forEach((t,i) => {
     if(_writingFilter.grp!=='all' && _writingGrpOf(t)!==_writingFilter.grp) return; // v94.0: 保原下标过滤
     if(_writingFilter.lvl!=='all' && ((t && t.lvl)||'')!==_writingFilter.lvl) return; // v94.0
-    if(t && t.bank){ /* v94.4: SIELE 题库网格卡片 */
+    if(_writingFilter.grp === 'SIELE' && !(t && t.bank)) return; /* v94.4.1: SIELE 视图下不渲染通用题 */
+    if(t && t.bank && _writingFilter.grp !== 'SIELE'){ /* v94.4: all 视图保留网格卡片 */
       const _ws = (ST.writingScores||{})[t.id];
       const _cnt = _ws ? (_ws.count||(_ws.history||[]).length) : 0;
       const _best = _ws ? (_ws.bestScore||0) : 0;
@@ -5098,6 +5184,7 @@ function renderWriting(){
     </div>`;
   });
   h += `</div>`;
+  } /* v94.4.1: else 结束 */
 
   /* v94.4: SIELE T2 模版指南卡 */
   if(typeof SIELE_WRITING_TPL_GUIDES !== 'undefined'){
