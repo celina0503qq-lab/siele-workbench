@@ -535,12 +535,13 @@
 <main class="main" id="main"><div id="audioBanner" class="banner"></div></main>
 </div>
 <script src="siele_oral.js"></script>
+<script src="siele_oral_ext.js"></script>
 <script src="audio/manifest.js"></script>
 <script src="grammar_data.js"></script>
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.5.2-202610102142';
+window.swVer = 'v94.6-202610110030';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5836,6 +5837,277 @@ const SPEAKING_EXTRA = [
 
 SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
 
+/* ================= v94.6 · 口语话题页新增 T4/T5 真题话题 =================
+ * 来源：window.SIELE_ORAL_EXT（外链）。cat 用 'SIELE T4'/'SIELE T5' 以自动归入分类树「SIELE 题型」组。
+ * 重叠题（含 ab）在话题页显示「双版本」徽标，点击可进 SIELE 专项切换 A/B 版。
+ */
+(function(){
+  try{
+    var E = window.SIELE_ORAL_EXT; if(!E) return;
+    var T4 = E.t4_new || [], T5 = E.t5_new || [], A4 = E.t4_ab || {}, A5 = E.t5_ab || {};
+    var add = [];
+    function zhOf(t){ return t.zh || ''; }
+    /* T4 新题：题面取首问 */
+    T4.forEach(function(it){
+      var q = String(it.qa_text||'').split(/\nP:/)[0].replace(/^P:\s*/,'').trim();
+      if(!q) q = it.title;
+      add.push({ lvl:'B2', cat:'SIELE T4', topic: it.title + ' — ' + q,
+        zh: (it.title||'') + (it.zh? (' / '+it.zh):''),
+        prep:'Tarea 4 三问问答 · 阅读材料 + 逐问作答（详见 SIELE 专项）' });
+    });
+    /* T5 新题：题面取引导句 */
+    T5.forEach(function(it){
+      var q = String(it.prompt||'').split(/\n/)[0].trim();
+      add.push({ lvl:'B2', cat:'SIELE T5', topic: (it.es_title||it.title) + (q? (' — '+q.slice(0,60)) : ''),
+        zh: (it.zh||it.title||''),
+        prep:'Tarea 5 议论文 · 立场选择 + 3 分钟独白（范文见 SIELE 专项）' });
+    });
+    /* 重叠题（AB 双版本） */
+    Object.keys(A4).forEach(function(k){
+      var it = A4[k];
+      add.push({ lvl:'B2', cat:'SIELE T4', topic: it.title + ' 〔AB 双版本〕',
+        zh: '生态/社会议题 · 真题素材版 + 题库版可选',
+        prep:'含两版范文，可在 SIELE 专项中切换（推荐 ' + (it.recommend==='B'?'题库版':'真题素材版') + '）', ab:1 });
+    });
+    Object.keys(A5).forEach(function(k){
+      var it = A5[k];
+      add.push({ lvl:'B2', cat:'SIELE T5', topic: it.title + ' 〔AB 双版本〕',
+        zh: (it.zh||'') + ' · 真题素材版 + 题库版可选',
+        prep:'含两版范文，可在 SIELE 专项中切换（推荐 ' + (it.recommend==='B'?'题库版':'真题素材版') + '）', ab:1 });
+    });
+    /* 幂等追加（按 topic 文本判重） */
+    var seen = {}; SPEAKING_TOPICS.forEach(function(t){ seen[String((t&&t.topic)||'').trim()] = 1; });
+    var n = 0;
+    add.forEach(function(t){ if(!seen[String(t.topic).trim()]){ SPEAKING_TOPICS.push(t); seen[String(t.topic).trim()] = 1; n++; } });
+    window.SPEAK_EXT_N = n;
+    console.log('[v94.6] 口语话题页新增:', n, '（T4', T4.length, 'T5', T5.length, 'AB', Object.keys(A4).length+Object.keys(A5).length, '）');
+  }catch(e){ console.warn('[v94.6] 话题页追加失败:', e); }
+})();
+
+/* ================= v94.6 · 口语真题新素材（T4/T5）+ 重叠题 AB 双版本 =================
+ * 数据源：window.SIELE_ORAL_EXT（外链 siele_oral_ext.js）
+ *   t4_ab/t5_ab : 与现有题库重叠的题，各含 verA(真题素材版)/verB(题库版) + recommend
+ *   t4_new/t5_new : 非重叠新题
+ * 设计：AB 切换只改「题面 + 范文」内容，不动评分/记录链路（题 id 稳定）。
+ * 幂等：重复调用不重复注入（按 id 判重）。
+ */
+(function(){
+  function EXT(){ return window.SIELE_ORAL_EXT || null; }
+  var _GRP = { 'SIELE T4': '工作与社会', 'SIELE T5': '伦理与选择' };
+  /* 新素材主题 -> 现有七分类，用于进 T4/T5 主题筛选 */
+  var THEME_MAP = {
+    'ecología':'环境与可持续','ecologia':'环境与可持续','medio ambiente':'环境与可持续','reciclaje':'环境与可持续',
+    'teletrabajo':'工作与社会','jornada':'工作与社会','trabajo':'工作与社会','productividad':'工作与社会',
+    'belleza':'文化与城市生活','cultura':'文化与城市生活','arte':'文化与城市生活','noticias':'文化与城市生活',
+    'tecnolog':'科技与数字生活','robot':'科技与数字生活','videojuego':'科技与数字生活','móvil':'科技与数字生活','internet':'科技与数字生活','redes':'科技与数字生活',
+    'educaci':'教育与学习','estudi':'教育与学习','clase':'教育与学习','libro':'教育与学习','lengua':'教育与学习',
+    'salud':'健康与生活方式','deporte':'健康与生活方式','estrés':'健康与生活方式','estilo':'健康与生活方式','emocion':'健康与生活方式',
+    'turismo':'环境与可持续','poblaci':'环境与可持续','vehícul':'环境与可持续','electric':'环境与可持续','energía':'环境与可持续',
+    'privacidad':'伦理与选择','seguridad':'伦理与选择','eutanasia':'伦理与选择','transgénic':'伦理与选择','consum':'伦理与选择','economía':'伦理与选择','solidaridad':'伦理与选择','vivienda':'伦理与选择','tráfico':'伦理与选择','amistad':'伦理与选择','animal':'伦理与选择','juventud':'伦理与选择','vejez':'伦理与选择','comunicación':'伦理与选择','música':'文化与城市生活','televisión':'文化与城市生活','compras':'工作与社会','e-commerce':'工作与社会','maternidad':'工作与社会','autónomo':'工作与社会','temporal':'工作与社会','profesional':'教育与学习','extranjero':'教育与学习'
+  };
+  function themeOf(title){
+    var t = String(title||'').toLowerCase();
+    for(var k in THEME_MAP){ if(t.indexOf(k) >= 0) return THEME_MAP[k]; }
+    return '其他';
+  }
+  /* 中文分类标注（用于题目 cat 显示） */
+  function zhCatOf(title){ return themeOf(title); }
+
+  /* ---- 把 AB 数据挂到已有题上（按西语题名匹配 topic/标题） ---- */
+  window._sieleABApply = function(bank, tarea){
+    var E = EXT(); if(!E || !bank) return 0;
+    var map = (tarea === 4) ? E.t4_ab : (tarea === 5) ? E.t5_ab : null;
+    if(!map) return 0;
+    var n = 0;
+    /* 预建 bankTopic(hfNN) -> key 索引，实现确定性精确匹配（v94.6 修复） */
+    var topicIdx = {};
+    for(var kk in map){
+      var bt = String(map[kk].bankTopic||'').trim();
+      if(bt) topicIdx[bt] = kk;
+    }
+    bank.forEach(function(q){
+      if(!q) return;
+      var key = null, src = map;
+      var qt = String(q.topic||'').trim();
+      var qid = String(q.id||'').trim();
+      /* ① 优先：按 bankTopic(=题库 topic 键 hfNN) 精确匹配
+       *   - T4：题库 id 为 't4-hfNN'，topic 为 'hfNN'
+       *   - T5：主条目 id 't5-hfNN' 需要覆盖；同 topic 的 '-b' 拆题(II)自带 stances.a/b，
+       *         必须排除，避免 AB 覆盖破坏其内建双立场结构（v94.6 修复） */
+      if(qt && topicIdx[qt] != null){
+        if(tarea === 5){
+          if(qid === ('t5-' + qt)) key = topicIdx[qt];
+        } else {
+          key = topicIdx[qt];
+        }
+      }
+      /* ② 兜底：按题名包含匹配（新题材无 bankTopic 时） */
+      if(key == null){
+        for(var k in src){
+          var it0 = src[k];
+          if(it0.bankTopic) continue;
+          var t1 = String(it0.title||'').toLowerCase().replace(/\s+/g,' ').trim();
+          var q1 = String(q.esTitle || q.title || q.topic || '').toLowerCase().replace(/\s+/g,' ').trim();
+          if(!t1 || !q1) continue;
+          if(q1 === t1 || q1.indexOf(t1) >= 0 || t1.indexOf(q1) >= 0){ key = k; break; }
+        }
+      }
+      if(key == null) return;
+      var it = src[key];
+      q.ab = {
+        verA: it.verA,
+        verB: it.verB,
+        recommend: it.recommend || 'A',
+        note: it.note || '',
+        key: key
+      };
+      /* B 版为题库原版时，基底字段保持原样；A 版为真题素材 */
+      if(!q.topic) q.topic = themeOf(it.title);
+      n++;
+    });
+    return n;
+  };
+
+  /* ---- 追加非重叠新题 ---- */
+  function pushNew(bank, tarea){
+    var E = EXT(); if(!E || !bank) return 0;
+    var arr = (tarea === 4) ? E.t4_new : (tarea === 5) ? E.t5_new : null;
+    if(!arr) return 0;
+    var n = 0;
+    arr.forEach(function(it, i){
+      var id = (tarea === 4 ? 'hfext4_' : 'hfext5_') + (i + 1);
+      if(bank.some(function(x){ return x && x.id === id; })) return;
+      var sec = (tarea === 4) ? 60 : 180;
+      if(tarea === 4){
+        /* T4：材料段（若有）+ 三问问答 */
+        bank.push({
+          id: id, topic: themeOf(it.title), title: it.title, esTitle: it.title,
+          zh: it.zh || '', q: it.qa_text || '', keys: [], sec: sec, model: it.qa_text || '',
+          outline: null, extsrc: '真题素材版'
+        });
+      } else {
+        /* T5：立场 A/B 结构，保持与现有 T5 一致（stances.a） */
+        var essay = it.essay || '';
+        bank.push({
+          id: id, topic: themeOf(it.title), title: tieTitle(it), esTitle: it.es_title || it.title,
+          zh: it.zh || '', q: (it.prompt || ''), keys: [], sec: sec,
+          model: essay, outline: it.zh_outline ? String(it.zh_outline).split(/\n/).filter(Boolean) : null,
+          stances: { a: { q: (it.prompt||''), keys: [], model: essay, outline: null } },
+          extsrc: '真题素材版'
+        });
+      }
+      n++;
+    });
+    return n;
+  }
+  function tieTitle(it){ return it.title || it.es_title || 'Tema'; }
+
+  /* ---- 统一入口：静态库 / 云快照 两分支均调用 ---- */
+  window._sieleOralExtApply = function(bank, tarea){
+    try{
+      if(!bank || (tarea !== 4 && tarea !== 5)) return 0;
+      var a = pushNew(bank, tarea);
+      var b = window._sieleABApply(bank, tarea);
+      /* 注册七分类映射 */
+      if(!window.SIELE_T45_GROUP) window.SIELE_T45_GROUP = {};
+      bank.forEach(function(q){
+        if(q && q.topic && q.topic !== '其他' && !window.SIELE_T45_GROUP[q.topic]) window.SIELE_T45_GROUP[q.topic] = q.topic;
+      });
+      window.SIELE_ORAL_EXT_N = (window.SIELE_ORAL_EXT_N || {});
+      window.SIELE_ORAL_EXT_N[tarea] = { added: a, ab: b };
+      return a;
+    }catch(e){ console.warn('[v94.6] oral ext apply 失败:', e); return 0; }
+  };
+
+  /* ---- 静态库立即应用 ---- */
+  try{
+    if(typeof SIELE_ORAL_BANK !== 'undefined' && SIELE_ORAL_BANK){
+      window._sieleOralExtApply(SIELE_ORAL_BANK[4], 4);
+      window._sieleOralExtApply(SIELE_ORAL_BANK[5], 5);
+      console.log('[v94.6] 静态库新素材应用:', JSON.stringify(window.SIELE_ORAL_EXT_N));
+    }
+  }catch(e){ console.warn('[v94.6] static apply 失败:', e); }
+
+  /* ---- AB 状态：按题 id 记录当前选择（默认推荐版） ---- */
+  /* 从 ST（本地存档）恢复 AB 版本选择，实现跨刷新持久化 */
+  window._sieleABSel = window._sieleABSel || ((typeof ST !== 'undefined' && ST && ST.sieleABSel && typeof ST.sieleABSel === 'object') ? ST.sieleABSel : {});
+  window._sieleABCur = function(x){
+    if(!x || !x.ab) return null;
+    /* v94.6 修复：T5 立场/子问拆分后 id 带 '#a'/'#s0' 后缀，选择状态按 baseId 存取 */
+    var _k = x.baseId || x.id;
+    var sel = window._sieleABSel[_k] || x.ab.recommend || 'A';
+    return (sel === 'B') ? 'B' : 'A';
+  };
+  window._sieleABVersion = function(x, which){
+    if(!x || !x.ab) return null;
+    return (which === 'B') ? x.ab.verB : x.ab.verA;
+  };
+  /* 取当前生效版本的关键内容（题面/范文），渲染时覆盖 */
+  window._sieleABFace = function(x){
+    if(!x || !x.ab) return null;
+    var which = window._sieleABCur(x);
+    var v = window._sieleABVersion(x, which);
+    if(!v) return null;
+    if(_sieleOralTarea === 4){
+      return { q: v.qa_text || '', model: v.qa_text || '', passage: v.passage || '', which: which, src: v.src || '' };
+    }
+    return { q: v.essay || '', model: v.essay || '', passage: v.passage || '', which: which, src: v.src || '' };
+  };
+  /* 设置选择并重绘（支持传题目对象或 id 字符串） */
+  window.setSieleAB = function(x, which){
+    var item = x;
+    if(typeof x === 'string'){
+      /* 按钮只传 id：从视图库定位题目对象 */
+      var bank = (typeof getSieleOralViewBank === 'function') ? getSieleOralViewBank() : [];
+      for(var i = 0; i < bank.length; i++){
+        var q0 = bank[i];
+        if(q0 && (q0.id === x || q0.baseId === x || (q0.id && q0.id.indexOf(x + '#') === 0))){ item = q0; break; }
+      }
+      if(!item || typeof item === 'string'){ return; }
+    }
+    if(!item || !item.ab) return;
+    var id = (item.baseId || item.id);
+    window._sieleABSel[id] = (which === 'B') ? 'B' : 'A';
+    try{ ST.sieleABSel = window._sieleABSel; if(typeof save === 'function') save(); }catch(e){}
+    if(typeof renderMain === 'function') renderMain();
+  };
+  /* AB 切换按钮组 HTML */
+  window._sieleABBarHtml = function(x){
+    if(!x || !x.ab) return '';
+    var cur = window._sieleABCur(x), rec = x.ab.recommend || 'A';
+    var va = x.ab.verA || {}, vb = x.ab.verB || {};
+    function lbl(v, w){ return (w === 'A' ? 'A版 · ' : 'B版 · ') + (v.src || (w === 'A' ? '真题素材版' : '题库版')); }
+    function btn(w){
+      var on = (cur === w) ? ' on' : '';
+      var star = (rec === w) ? ' ★推荐' : '';
+      return '<button class="so-ab-btn' + on + '" onclick="event.stopPropagation();setSieleAB(' +
+        JSON.stringify(x.baseId || x.id).replace(/"/g,'&quot;') + ',\'' + w + '\')">' + lbl(w === 'A' ? va : vb, w) + star + '</button>';
+    }
+    var note = x.ab.note ? ' <span class="so-ab-note">' + x.ab.note + '</span>' : '';
+    var recTxt = (rec === 'A' ? '推荐使用 A 版（真题素材版）' : '推荐使用 B 版（题库版）');
+    return '<div class="so-ab-bar"><span class="so-ab-title">📚 版本：</span>' + btn('A') + btn('B') +
+      '<span class="so-ab-rec">' + recTxt + '</span>' + note + '</div>';
+  };
+})();
+
+/* v94.6 样式：AB 切换按钮（teal） */
+(function(){
+  try{
+    if(document.getElementById('v946-ab-style')) return;
+    var css = '.so-ab-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 4px;padding:7px 9px;background:rgba(31,111,92,.08);border:1px solid rgba(31,111,92,.25);border-radius:9px}' +
+      '.so-ab-title{font-size:11px;font-weight:700;color:var(--teal)}' +
+      '.so-ab-btn{padding:5px 11px;border:1px solid rgba(31,111,92,.5);border-radius:999px;background:#fff;color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;line-height:1.35;transition:.15s}' +
+      '.so-ab-btn:hover{background:#e3f3ee}' +
+      '.so-ab-btn.on{background:var(--teal);border-color:var(--teal);color:#fff}' +
+      '.so-ab-rec{font-size:10px;color:#175544;background:#d9efe7;border-radius:6px;padding:2px 7px}' +
+      '.so-ab-note{font-size:10px;color:var(--soft)}' +
+      '.so-ab-tag{display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--teal);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}';
+    var st = document.createElement('style'); st.id = 'v946-ab-style'; st.textContent = css;
+    document.head.appendChild(st);
+  }catch(e){}
+})();
+
+
 // 获取最终口语话题列表（管理员编辑 > 默认）
 function getSpeakingTopics(){
   // v86: 去重合并（代码为基 + 云端按 topic 覆盖同名/追加新增），防「云端完全覆盖」导致代码新增话题丢失
@@ -7147,6 +7419,7 @@ function getSieleOralBank(){
     if(typeof window._sieleT1MetaApply==='function') window._sieleT1MetaApply(out[1]);
     if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(out[2]);
     if(typeof window._sieleT45Expand==='function'){ window._sieleT45Expand(out[4],4); window._sieleT45Expand(out[5],5); }
+    if(typeof window._sieleOralExtApply==='function'){ window._sieleOralExtApply(out[4],4); window._sieleOralExtApply(out[5],5); }
     if(typeof window._sieleT45V91Apply==='function'){ window._sieleT45V91Apply(out[4],4); window._sieleT45V91Apply(out[5],5); }
     if(typeof window._sieleT5V92Apply==='function'){ window._sieleT5V92Apply(out[5]); }
     if(typeof window._sieleT4V92Apply==='function'){ window._sieleT4V92Apply(out[4]); }
@@ -7156,6 +7429,7 @@ function getSieleOralBank(){
   if(typeof window._sieleT3MetaApply==='function') window._sieleT3MetaApply(SIELE_ORAL_BANK[3]);
   if(typeof window._sieleT1MetaApply==='function') window._sieleT1MetaApply(SIELE_ORAL_BANK[1]);
   if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(SIELE_ORAL_BANK[2]);
+  if(typeof window._sieleOralExtApply==='function'){ window._sieleOralExtApply(SIELE_ORAL_BANK[4],4); window._sieleOralExtApply(SIELE_ORAL_BANK[5],5); }
   return SIELE_ORAL_BANK;
 }
 
@@ -7546,7 +7820,41 @@ function _sieleT5PickStance(s){
   _sieleOralShown=false; stopSieleOral(true); _sieleSyncProgress(); save(); renderMain();
 }
 // 有效题对象：T4 → 当前小问；T5 → 当前立场。评分/显示/范文全链路随之切换
+/* v94.6 · AB 双版本覆盖：把当前选定版本内容注入题对象，后续 T4 子问/T5 立场逻辑照常工作 */
+function _sieleABOverride(q){
+  try{
+    if(!q || !q.ab) return q;
+    var which = (typeof window._sieleABCur === 'function') ? window._sieleABCur(q) : (q.ab.recommend || 'A');
+    var v = (which === 'B') ? q.ab.verB : q.ab.verA;
+    if(!v) return q;
+    var o = Object.assign({}, q);
+    o.abWhich = which;
+    o.abSrc = v.src || '';
+    o.passage = v.passage || '';
+    o.passageZh = v.passageZh || '';
+    o.passageSrc = v.passage_src || '';
+    if(_sieleOralTarea === 4){
+      var txt = v.qa_text || '';
+      o.q = txt;
+      o.model = txt;
+      o.keys = q.keys || [];
+      o.subqs = null;                       /* 强制按新版题面重新拆三问 */
+      o._subqsCache = null;
+      o._abTxt = txt;
+    } else {
+      var es = v.essay || '';
+      o.q = (v.prompt || es);
+      o.model = es;
+      o.outline = v.zh_outline ? String(v.zh_outline).split(/\n/).filter(Boolean) : null;
+      o.stances = { a: { q: (v.prompt||es), keys: q.keys||[], model: es, outline: o.outline } };
+      o._abTxt = es;
+    }
+    return o;
+  }catch(e){ return q; }
+}
 function _sieleEffectiveItem(q){
+  /* v94.6: AB 双版本——先按当前选择覆盖内容，再做 T4/T5 结构展开 */
+  if(q && q.ab) q = _sieleABOverride(q);
   if(!q) return q;
   // v91 模拟考：T1 按官方节奏，前 2 问 15 秒、后 2 问 30 秒
   if(_sieleOralTarea===1 && typeof _sieleMockActive==='function' && _sieleMockActive()){
@@ -8640,7 +8948,7 @@ function renderSielePhoto(x){
   var hintPart = x.hintCn ? '<p style="margin-top:6px;font-size:11px;color:var(--tr)"><b>考生回忆：</b>'+esc(x.hintCn.slice(0,200))+'</p>' : '';
   return '<aside class="so-scene-card" aria-label="回忆场景观察提示"><span>回忆题场景 · 观察提示</span><strong>'+esc(x.title||'图片描述')+'</strong><p><b>重点：</b>'+esc((x.overview||'人物、地点和动作')+'；'+(x.object||'画面细节')+'。')+'</p>'+hintPart+'<small>该题根据回忆版资料整理；练习时请围绕人物、空间、动作、氛围和谨慎推测展开。</small></aside>';
 }
-function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralViewBank();if(!x)return '<div class="so-empty">暂无题目</div>';var _mergeOn=(typeof isSieleT2Merge==='function'&&isSieleT2Merge());var variants='';if(_mergeOn&&typeof getSieleT2Groups==='function'){var _gs2=getSieleT2Groups(),_pp2=getSieleT2GroupPos(),_cg=_gs2[_pp2.gi];if(_cg&&_cg.items.length>1){variants='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;align-items:center"><span style="font-size:11px;color:var(--tr)">画面解读：</span>'+_cg.items.map(function(it,j){var q2=it[0],done=ST.sieleOralScores&&ST.sieleOralScores[q2.id];return '<button class="so-var '+(j===_pp2.vi?'on':'')+'" onclick="pickSieleT2Variant('+_pp2.gi+','+j+')"><span class="dv">'+String.fromCharCode(65+j)+'.</span> '+esc(String(q2.title||q2.id).slice(0,16))+(done?' ✓':'')+'</button>';}).join('')+'</div>';}}var saved=(function(){var s=ST.sieleOralScores&&ST.sieleOralScores[x.id];try{if(typeof _sieleMockActive==='function'&&_sieleMockActive()){var c=(ST.sieleMock&&ST.sieleMock.created)||0;if(c&&(!s||!s.ts||s.ts<c))return null;}}catch(e){}return s||null;})(); /* v92.3: 模考中不显示历史旧成绩 */var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';getSieleTareas().forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var mockui=(typeof _sieleMockActive==='function')?(_sieleMockActive()?_sieleMockBar():_sieleMockEntryHtml()):'';if(typeof _sieleScoresToolsHtml==='function'){try{mockui+=_sieleStrictBarHtml()+_sieleScoresToolsHtml();}catch(_e6){}}var _strict=_sieleIsStrict();var _prepSec=(typeof _sielePrepSecOf==='function')?_sielePrepSecOf():0;var _showPrep=(_prepSec>0 && _sielePrepPhase!=='prep');var _showSkipPrep=(_sielePrepPhase==='prep');var _showZh=(!_strict && !!x.zhExplain);var _showSwap=!_strict;var _showModel=!_strict;var _showReveal=(!_strict)||(_sieleOralTarea!==1);var themes='';var freqChips='';if((_sieleOralTarea===1||_sieleOralTarea===2||_sieleOralTarea===3)&&typeof listSieleOralCats==='function'){var _th=listSieleOralCats();if(_th.length){var _cur=getSieleOralFilterCat();themes='<div class="so-theme-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center">';themes+='<span style="font-size:11px;color:var(--tr)">'+(_sieleOralTarea===1?'按分类：':(_sieleOralTarea===2?'按场景分类：':'按情境分类：'))+'</span>';if(_cur)themes+='<button class="so-topic on" style="font-size:11px" onclick="setSieleOralFilter(null)">全部</button>';_th.forEach(function(t){themes+='<button class="so-topic '+(t===_cur?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(\''+t+'\')">'+esc(t)+'</button>';});themes+='</div>';}}if(_sieleOralTarea===1&&typeof getSieleOralBank==='function'&&typeof _sieleFreqLabel==='function'){var _fb1=getSieleOralBank()[1]||[],_fcount={},_ford=['super','high','recent'];_fb1.forEach(function(q){if(q&&q.freq)_fcount[q.freq]=(_fcount[q.freq]||0)+1;});var _fc=(_sieleOralFreqFilter&&_sieleOralFreqFilter[1])||null,_fl=_ford.filter(function(k){return _fcount[k];});if(_fl.length){freqChips='<div class="so-theme-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center"><span style="font-size:11px;color:var(--tr)">按考频：</span>';if(_fc)freqChips+='<button class="so-topic on" style="font-size:11px" onclick="setSieleOralFreqFilter(null)">全部 '+_fb1.length+'</button>';_fl.forEach(function(k){freqChips+='<button class="so-topic '+(_fc===k?'on':'')+'" style="font-size:11px" onclick="setSieleOralFreqFilter(\''+k+'\')">'+_sieleFreqLabel(k)+' '+_fcount[k]+'</button>';});freqChips+='</div>';}}if(_sieleOralTarea===3&&typeof _sieleT3BloqueHtml==='function'){themes+=_sieleT3BloqueHtml();}var mergeBtn='';if(_sieleOralTarea===2){var _gn=(typeof getSieleT2Groups==='function')?getSieleT2Groups().length:0;mergeBtn='<div style="display:flex;gap:6px;margin-top:8px;align-items:center"><span style="font-size:11px;color:var(--tr)">同图题：</span><button class="so-topic '+(_mergeOn?'on':'')+'" style="font-size:11px" onclick="toggleSieleT2Merge()">'+(_mergeOn?('🎞 同图已合并 · '+_gn+' 张图 · 点击切回逐题'):'🎞 逐题显示 · 点击合并同图')+'</button></div>';}var catList='';if(typeof getSieleOralFilterCat==='function'&&getSieleOralFilterCat()){if(_mergeOn&&typeof getSieleT2Groups==='function'){var _gs=getSieleT2Groups(),_pp=getSieleT2GroupPos();catList='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px">'+_gs.map(function(g,i){var f=g.items[0][0];return '<button class="so-topic '+(i===_pp.gi?'on':'')+'" style="font-size:11px;text-align:left" onclick="goSieleT2Group('+i+',0)">'+(i+1)+'. '+esc(String((f.title||f.id)||'').slice(0,20))+(g.items.length>1?'（'+g.items.length+'题）':'')+'</button>';}).join('')+'</div>';}else{catList='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px">'+bank.map(function(q,i){return '<button class="so-topic '+(i===_sieleOralIdx?'on':'')+'" style="font-size:11px;text-align:left" onclick="goSieleOralIndex('+i+')">'+(i+1)+'. '+esc(String((q.esTitle||q.title||q.id)||'').slice(0,24))+'</button>';}).join('')+'</div>';}}var topics='';if(_sieleOralTarea>=4){var _G45=(typeof SIELE_T45_GROUP!=='undefined')?SIELE_T45_GROUP:{};function _g45Of(q){return (q&&_G45[q.topic])||'其他';}var _b45=getSieleOralBank()[_sieleOralTarea]||[];var _forder=['教育与学习','科技与数字生活','环境与可持续','健康与生活方式','工作与社会','文化与城市生活','伦理与选择'];var _fcur=getSieleOralFilterCat();topics='<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:7px">'+_forder.map(function(g){var cnt=_b45.filter(function(q){return _g45Of(q)===g;}).length;return '<button class="so-topic '+(_fcur===g?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(\''+g+'\')">'+g+' '+cnt+'</button>';}).join('')+'<button class="so-topic '+(!_fcur?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(null)">全部 '+_b45.length+'</button></div><div style="margin-bottom:7px">'+(typeof _sieleRelBtnHtml==='function'?_sieleRelBtnHtml(x,_sieleOralTarea):'<button class="btn ol" style="font-size:12px;padding:5px 12px" onclick="_sieleT45RelClick('+(_sieleOralTarea===4?5:4)+')">'+(_sieleOralTarea===4?_sieleT45BtnLabel():'← 经验同题 (T4)')+'</button>')+(x&&x.topic?' <span class="sub" style="font-size:10px;color:#64748b">同题 '+esc(x.topic)+'</span>':'')+'</div>'+(_sieleOralTarea===4?_sieleT45ModeBar():_sieleT4T5Badge());}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+_sieleEscQ(x.q)+((x.zhExplain&&_sieleZhShown)?'<div class="so-zhexp" id="soZhExp">'+esc(x.zhExplain)+'</div>':'')+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var t45ui=((_sieleOralTarea===4)?_sieleT4PassageHtml(x):'')+_sieleT45StageUi(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+mockui+themes+freqChips+mergeBtn+catList+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+(getSieleOralFilterCat()?'（'+esc(getSieleOralFilterCat())+'）':'')+' · '+(_mergeOn&&typeof getSieleT2Groups==='function'?(function(){var a=getSieleT2GroupPos(),g=getSieleT2Groups();return '图 '+(a.gi+1)+' / '+g.length+(g[a.gi].items.length>1?'（'+g[a.gi].items.length+' 种解读）':'');})():((_sieleOralIdx+1)+' / '+bank.length))+((_sieleOralTarea===2&&typeof getT2Theme==='function')?' · <span style="color:var(--teal)">'+esc(getT2Theme(x))+'</span>':'')+'</div>'+_bankAdminTools()+'<h3>'+esc(_sieleOralTarea===3?((x.esTitle||x.q||x.title)||'Pregunta oral'):(x.title||'Pregunta oral'))+'</h3>'+(_sieleOralTarea===3&&x.title?'<div class="so-zh-sub">'+esc(x.title)+'</div>':'')+'<div class="so-meta">'+(x.cat?'<span class="so-cat">'+esc(x.cat)+'</span> · ':'')+(x.freq?'<span class="so-cat" style="color:#b45309">'+_sieleFreqLabel(x.freq)+'</span> · ':'')+esc(getSieleTareas()[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+variants+photo+t45ui+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button>'+(_showPrep?'<button class="btn ol" id="soPrepBtn" onclick="startSielePrep()">⏱ 开始准备</button>':'')+(_showSkipPrep?'<button class="btn ol" style="font-size:11px" onclick="skipSielePrep()">跳过准备，直接录音</button>':'')+(_showReveal?'<button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button>':'')+(_showModel?'<button class="btn ol" id="soModelBtn" onclick="showSieleModel()">看范例</button>':'')+(_showZh?'<button class="btn ol" id="soZhBtn" onclick="toggleSieleZh()">看中文</button>':'')+'<button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button>'+(_showSwap?'<button class="btn gh" onclick="smartSieleOral()">智能换题</button>':'')+'<span class="so-prep-hint" id="soPrepHint" style="font-size:10px;color:#7c3aed;flex-basis:100%"></span><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+_sieleLegacyHistNote(x)+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b>'+((x.modelSrc==='ai')?' <span style="font-size:10px;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:0 6px;font-weight:700">✎ AI 参考范文</span>':'')+(x.outline&&x.outline.length?_sieleOutlineHtml(x.outline):'')+'<div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← '+(_mergeOn?'上一图':'上一题')+'</button><span class="so-nav-pos">'+(_mergeOn&&typeof getSieleT2Groups==='function'?(function(){var a=getSieleT2GroupPos();return '图 '+(a.gi+1)+' / '+getSieleT2Groups().length;})():((_sieleOralIdx+1)+' / '+bank.length))+'</span><button class="btn sm" onclick="nextSieleOral()">'+(_mergeOn?'下一图':'下一题')+' →</button></div></section>';
+function renderSieleOralTrainer(){var x=getSieleOralItem(),bank=getSieleOralViewBank();if(!x)return '<div class="so-empty">暂无题目</div>';var _mergeOn=(typeof isSieleT2Merge==='function'&&isSieleT2Merge());var variants='';if(_mergeOn&&typeof getSieleT2Groups==='function'){var _gs2=getSieleT2Groups(),_pp2=getSieleT2GroupPos(),_cg=_gs2[_pp2.gi];if(_cg&&_cg.items.length>1){variants='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;align-items:center"><span style="font-size:11px;color:var(--tr)">画面解读：</span>'+_cg.items.map(function(it,j){var q2=it[0],done=ST.sieleOralScores&&ST.sieleOralScores[q2.id];return '<button class="so-var '+(j===_pp2.vi?'on':'')+'" onclick="pickSieleT2Variant('+_pp2.gi+','+j+')"><span class="dv">'+String.fromCharCode(65+j)+'.</span> '+esc(String(q2.title||q2.id).slice(0,16))+(done?' ✓':'')+'</button>';}).join('')+'</div>';}}var saved=(function(){var s=ST.sieleOralScores&&ST.sieleOralScores[x.id];try{if(typeof _sieleMockActive==='function'&&_sieleMockActive()){var c=(ST.sieleMock&&ST.sieleMock.created)||0;if(c&&(!s||!s.ts||s.ts<c))return null;}}catch(e){}return s||null;})(); /* v92.3: 模考中不显示历史旧成绩 */var tabs='<div class="so-tabs" role="tablist" aria-label="SIELE 口语任务">';getSieleTareas().forEach(function(t){tabs+='<button class="so-tab '+(_sieleOralTarea===t.num?'on':'')+'" onclick="selectSieleTarea('+t.num+')" role="tab" aria-selected="'+(_sieleOralTarea===t.num)+'"><b>Tarea '+t.num+'</b><span>'+esc(t.name.replace(/^TAREA \d · /,''))+'</span></button>';});tabs+='</div>';var mockui=(typeof _sieleMockActive==='function')?(_sieleMockActive()?_sieleMockBar():_sieleMockEntryHtml()):'';if(typeof _sieleScoresToolsHtml==='function'){try{mockui+=_sieleStrictBarHtml()+_sieleScoresToolsHtml();}catch(_e6){}}var _strict=_sieleIsStrict();var _prepSec=(typeof _sielePrepSecOf==='function')?_sielePrepSecOf():0;var _showPrep=(_prepSec>0 && _sielePrepPhase!=='prep');var _showSkipPrep=(_sielePrepPhase==='prep');var _showZh=(!_strict && !!x.zhExplain);var _showSwap=!_strict;var _showModel=!_strict;var _showReveal=(!_strict)||(_sieleOralTarea!==1);var themes='';var freqChips='';if((_sieleOralTarea===1||_sieleOralTarea===2||_sieleOralTarea===3)&&typeof listSieleOralCats==='function'){var _th=listSieleOralCats();if(_th.length){var _cur=getSieleOralFilterCat();themes='<div class="so-theme-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center">';themes+='<span style="font-size:11px;color:var(--tr)">'+(_sieleOralTarea===1?'按分类：':(_sieleOralTarea===2?'按场景分类：':'按情境分类：'))+'</span>';if(_cur)themes+='<button class="so-topic on" style="font-size:11px" onclick="setSieleOralFilter(null)">全部</button>';_th.forEach(function(t){themes+='<button class="so-topic '+(t===_cur?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(\''+t+'\')">'+esc(t)+'</button>';});themes+='</div>';}}if(_sieleOralTarea===1&&typeof getSieleOralBank==='function'&&typeof _sieleFreqLabel==='function'){var _fb1=getSieleOralBank()[1]||[],_fcount={},_ford=['super','high','recent'];_fb1.forEach(function(q){if(q&&q.freq)_fcount[q.freq]=(_fcount[q.freq]||0)+1;});var _fc=(_sieleOralFreqFilter&&_sieleOralFreqFilter[1])||null,_fl=_ford.filter(function(k){return _fcount[k];});if(_fl.length){freqChips='<div class="so-theme-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center"><span style="font-size:11px;color:var(--tr)">按考频：</span>';if(_fc)freqChips+='<button class="so-topic on" style="font-size:11px" onclick="setSieleOralFreqFilter(null)">全部 '+_fb1.length+'</button>';_fl.forEach(function(k){freqChips+='<button class="so-topic '+(_fc===k?'on':'')+'" style="font-size:11px" onclick="setSieleOralFreqFilter(\''+k+'\')">'+_sieleFreqLabel(k)+' '+_fcount[k]+'</button>';});freqChips+='</div>';}}if(_sieleOralTarea===3&&typeof _sieleT3BloqueHtml==='function'){themes+=_sieleT3BloqueHtml();}var mergeBtn='';if(_sieleOralTarea===2){var _gn=(typeof getSieleT2Groups==='function')?getSieleT2Groups().length:0;mergeBtn='<div style="display:flex;gap:6px;margin-top:8px;align-items:center"><span style="font-size:11px;color:var(--tr)">同图题：</span><button class="so-topic '+(_mergeOn?'on':'')+'" style="font-size:11px" onclick="toggleSieleT2Merge()">'+(_mergeOn?('🎞 同图已合并 · '+_gn+' 张图 · 点击切回逐题'):'🎞 逐题显示 · 点击合并同图')+'</button></div>';}var catList='';if(typeof getSieleOralFilterCat==='function'&&getSieleOralFilterCat()){if(_mergeOn&&typeof getSieleT2Groups==='function'){var _gs=getSieleT2Groups(),_pp=getSieleT2GroupPos();catList='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px">'+_gs.map(function(g,i){var f=g.items[0][0];return '<button class="so-topic '+(i===_pp.gi?'on':'')+'" style="font-size:11px;text-align:left" onclick="goSieleT2Group('+i+',0)">'+(i+1)+'. '+esc(String((f.title||f.id)||'').slice(0,20))+(g.items.length>1?'（'+g.items.length+'题）':'')+'</button>';}).join('')+'</div>';}else{catList='<div class="so-cat-list" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px">'+bank.map(function(q,i){return '<button class="so-topic '+(i===_sieleOralIdx?'on':'')+'" style="font-size:11px;text-align:left" onclick="goSieleOralIndex('+i+')">'+(i+1)+'. '+esc(String((q.esTitle||q.title||q.id)||'').slice(0,24))+'</button>';}).join('')+'</div>';}}var topics='';if(_sieleOralTarea>=4){var _G45=(typeof SIELE_T45_GROUP!=='undefined')?SIELE_T45_GROUP:{};function _g45Of(q){return (q&&_G45[q.topic])||'其他';}var _b45=getSieleOralBank()[_sieleOralTarea]||[];var _forder=['教育与学习','科技与数字生活','环境与可持续','健康与生活方式','工作与社会','文化与城市生活','伦理与选择'];var _fcur=getSieleOralFilterCat();topics='<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:7px">'+_forder.map(function(g){var cnt=_b45.filter(function(q){return _g45Of(q)===g;}).length;return '<button class="so-topic '+(_fcur===g?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(\''+g+'\')">'+g+' '+cnt+'</button>';}).join('')+'<button class="so-topic '+(!_fcur?'on':'')+'" style="font-size:11px" onclick="setSieleOralFilter(null)">全部 '+_b45.length+'</button></div><div style="margin-bottom:7px">'+(typeof _sieleRelBtnHtml==='function'?_sieleRelBtnHtml(x,_sieleOralTarea):'<button class="btn ol" style="font-size:12px;padding:5px 12px" onclick="_sieleT45RelClick('+(_sieleOralTarea===4?5:4)+')">'+(_sieleOralTarea===4?_sieleT45BtnLabel():'← 经验同题 (T4)')+'</button>')+(x&&x.topic?' <span class="sub" style="font-size:10px;color:#64748b">同题 '+esc(x.topic)+'</span>':'')+'</div>'+(_sieleOralTarea===4?_sieleT45ModeBar():_sieleT4T5Badge());}var stats=getOralPracticeStats(x.id);var statBadge='';if(stats&&stats.count>0){statBadge=' <span class="pr-badge">练过'+stats.count+'次 · '+stats.avgScore+'分</span>';}else{statBadge=' <span class="pr-badge new">新题</span>';}var prompt=_sieleOralShown?'<div id="soPrompt" class="so-question">'+_sieleEscQ(x.q)+((x.zhExplain&&_sieleZhShown)?'<div class="so-zhexp" id="soZhExp">'+esc(x.zhExplain)+'</div>':'')+'</div>':'<div id="soPrompt" class="so-hidden">题目文字已隐藏。先听录音，准备好后再主动显示。</div>';var score=saved?renderSieleScore(saved,x):'<div class="so-empty">完成录音后显示五维评分与改进建议。</div>';var photo=renderSielePhoto(x);var t45ui=((_sieleOralTarea===4)?_sieleT4PassageHtml(x):'')+_sieleT45StageUi(x);var history=saved?renderSieleHistory(saved):'';return '<section class="card" style="padding:12px">'+tabs+mockui+themes+freqChips+mergeBtn+catList+((typeof _sieleABBarHtml==='function')?_sieleABBarHtml(x):'')+'<div class="so-stage"><div class="so-console"><div class="so-kicker">Tarea '+_sieleOralTarea+(getSieleOralFilterCat()?'（'+esc(getSieleOralFilterCat())+'）':'')+' · '+(_mergeOn&&typeof getSieleT2Groups==='function'?(function(){var a=getSieleT2GroupPos(),g=getSieleT2Groups();return '图 '+(a.gi+1)+' / '+g.length+(g[a.gi].items.length>1?'（'+g[a.gi].items.length+' 种解读）':'');})():((_sieleOralIdx+1)+' / '+bank.length))+((_sieleOralTarea===2&&typeof getT2Theme==='function')?' · <span style="color:var(--teal)">'+esc(getT2Theme(x))+'</span>':'')+'</div>'+_bankAdminTools()+'<h3>'+esc(_sieleOralTarea===3?((x.esTitle||x.q||x.title)||'Pregunta oral'):(x.title||'Pregunta oral'))+(x.abSrc?'<span class="so-ab-tag">'+esc(x.abSrc)+'</span>':'')+'</h3>'+(_sieleOralTarea===3&&x.title?'<div class="so-zh-sub">'+esc(x.title)+'</div>':'')+'<div class="so-meta">'+(x.cat?'<span class="so-cat">'+esc(x.cat)+'</span> · ':'')+(x.freq?'<span class="so-cat" style="color:#b45309">'+_sieleFreqLabel(x.freq)+'</span> · ':'')+esc(getSieleTareas()[_sieleOralTarea-1].dur)+' · '+(saved?'已练 '+(saved.count||1)+' 次 · 最高 '+(saved.bestScore||saved.score)+'分':'尚未作答')+statBadge+'</div>'+variants+photo+t45ui+'<div class="so-prompt">'+prompt+'</div><div class="so-actions"><button class="btn ol" onclick="playSielePrompt()">播放题目</button>'+(_showPrep?'<button class="btn ol" id="soPrepBtn" onclick="startSielePrep()">⏱ 开始准备</button>':'')+(_showSkipPrep?'<button class="btn ol" style="font-size:11px" onclick="skipSielePrep()">跳过准备，直接录音</button>':'')+(_showReveal?'<button class="btn ol" id="soReveal" onclick="revealSielePrompt()">显示文字</button>':'')+(_showModel?'<button class="btn ol" id="soModelBtn" onclick="showSieleModel()">看范例</button>':'')+(_showZh?'<button class="btn ol" id="soZhBtn" onclick="toggleSieleZh()">看中文</button>':'')+'<button class="rb idle" id="soRecBtn" onclick="toggleSieleOralRecord()">录音回答</button>'+(_showSwap?'<button class="btn gh" onclick="smartSieleOral()">智能换题</button>':'')+'<span class="so-prep-hint" id="soPrepHint" style="font-size:10px;color:#7c3aed;flex-basis:100%"></span><span class="so-timer" id="soTimer">'+String(Math.floor(x.sec/60)).padStart(2,'0')+':'+String(x.sec%60).padStart(2,'0')+'</span></div><div class="so-recognized" id="soRecognized">识别文本将在录音时显示。</div></div><aside class="so-side">'+topics+'<div class="card so-history" id="soHistoryBox">'+history+_sieleLegacyHistNote(x)+'</div><div class="card" id="soScoreBox">'+score+'</div><div class="so-model" id="soModel"><b>参考答案 / Respuesta modelo</b>'+((x.modelSrc==='ai')?' <span style="font-size:10px;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:0 6px;font-weight:700">✎ AI 参考范文</span>':'')+(x.outline&&x.outline.length?_sieleOutlineHtml(x.outline):'')+'<div style="margin-top:7px" id="soModelText">'+(function(){captureOriginalModel(x);var um=getUserT2Model(x.id);return um||x.model;})()+'</div><div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" onclick="speak(document.getElementById(\'soModelText\').innerText,this,\'es\')">朗读范例</button><button class="btn sm" id="soCopyModelBtn" onclick="copyT2Model(document.getElementById(\'soModelText\').innerText)">复制范文</button><button class="btn sm" onclick="editT2Model(\''+x.id+'\',\''+esc(x.model||'').replace(/'/g,"\\'")+'\')">编辑范文</button></div><div id="soModelEditBox" style="display:none"></div></div><div class="note"><b>评分说明：</b>当前为浏览器端训练评分，依据内容覆盖、词数、词汇多样度、连接词和任务时长给出即时反馈；正式 SIELE 成绩仍由认证评分员判定。</div></aside></div><div class="so-source">题源：用户提供的 2026 回忆版真题、Tarea 2 场景库、Tarea 3 高频范文；训练题经整理与纠错，不冒充官方原题。</div><div class="so-nav"><button class="btn sm ol" onclick="prevSieleOral()">← '+(_mergeOn?'上一图':'上一题')+'</button><span class="so-nav-pos">'+(_mergeOn&&typeof getSieleT2Groups==='function'?(function(){var a=getSieleT2GroupPos();return '图 '+(a.gi+1)+' / '+getSieleT2Groups().length;})():((_sieleOralIdx+1)+' / '+bank.length))+'</span><button class="btn sm" onclick="nextSieleOral()">'+(_mergeOn?'下一图':'下一题')+' →</button></div></section>';
 }
 
 // ===== PAGE: SIELE SPECIAL =====
