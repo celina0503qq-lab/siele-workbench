@@ -1,3 +1,9 @@
+## v94.3（2026-10-10）T4 新闻 passage 补齐
+- 为 v94.2 B 层 38 组无阅读材料的 T4 新组挂上新闻三件套 passage/passageZh/passageSrc（srcKind:'news'），全部为真实新闻/机构报道（El País、New Scientist、文化部文化习惯调查、WorkMeter、Barlovento、Population Europe、平等部 016 数据等），80-100 词西语原文+中文对照。
+- 新增块 SIELE_T45_PASSAGES（siele_oral.js 末尾追加）：静态注入 SIELE_T45_MORE.B 各组 t4，并包一层 _sieleT45MoreApply 保证云分支 hydrate 后同样补挂。
+- 全真模考 T4 池由 15+4 组扩至 57 组（filter(q.passage) 实时生效，无需改 index 逻辑）。
+- index/sw2 仅顶版，无逻辑改动。
+
 # 更新日志 / CHANGELOG
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
