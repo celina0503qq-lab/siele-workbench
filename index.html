@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.6.1-202610121400';
+window.swVer = 'v94.6.2-202610121530';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -7872,28 +7872,54 @@ function _sieleABOverride(q){
     if(!q || !q.ab) return q;
     var which = (typeof window._sieleABCur === 'function') ? window._sieleABCur(q) : (q.ab.recommend || 'A');
     var v = (which === 'B') ? q.ab.verB : q.ab.verA;
-    if(!v) return q;
     var o = Object.assign({}, q);
     o.abWhich = which;
+    if(which === 'B' || !v){
+      /* v94.6.2: B 版=题库原版——内容字段全保留原题（含双立场/三问/passage），仅打版本标 */
+      o.abSrc = (v && v.src) || '题库版';
+      return o;
+    }
     o.abSrc = v.src || '';
-    o.passage = v.passage || '';
-    o.passageZh = v.passageZh || '';
-    o.passageSrc = v.passage_src || '';
+    var abKey = String((q.ab && q.ab.key) || '');
     if(_sieleOralTarea === 4){
-      var txt = v.qa_text || '';
-      o.q = txt;
-      o.model = txt;
-      o.keys = q.keys || [];
-      o.subqs = null;                       /* 强制按新版题面重新拆三问 */
-      o._subqsCache = null;
-      o._abTxt = txt;
+      /* v94.6.2: A 版 FIX 优先（passage + 三问），否则回退 qa_text 整段 */
+      var fx4 = (window.SIELE_ORAL_EXT_FIX_AB4 && window.SIELE_ORAL_EXT_FIX_AB4[abKey]) || null;
+      if(which !== 'B' && fx4 && fx4.subqs){
+        o.passage = fx4.passage || '';
+        o.passageZh = fx4.passageZh || '';
+        o.passageSrc = fx4.passageSrc || '';
+        o.subqs = fx4.subqs;
+        o.q = fx4.subqs.map(function(s){ return s.q; }).join(' ');
+        o.model = fx4.subqs.map(function(s){ return s.model; }).join(' ');
+        o.keys = (fx4.subqs[0].keys) || q.keys || [];
+        o._subqsCache = null;
+        o._abTxt = o.q;
+      } else {
+        var txt = v.qa_text || '';
+        o.q = txt;
+        o.model = txt;
+        o.keys = q.keys || [];
+        o.subqs = null;
+        o._subqsCache = null;
+        o._abTxt = txt;
+      }
     } else {
       var es = v.essay || '';
-      o.q = (v.prompt || es);
-      o.model = es;
-      o.outline = v.zh_outline ? String(v.zh_outline).split(/\n/).filter(Boolean) : null;
-      o.stances = { a: { q: (v.prompt||es), keys: q.keys||[], model: es, outline: o.outline } };
-      o._abTxt = es;
+      /* v94.6.2: A 版 FIX 优先（statement/outline/model 分离，中文提纲不进立场卡），否则回退 essay */
+      var fx5 = (window.SIELE_ORAL_EXT_FIX_AB5 && window.SIELE_ORAL_EXT_FIX_AB5[abKey]) || null;
+      if(which !== 'B' && fx5 && fx5.statement){
+        o.q = fx5.statement;
+        o.model = fx5.model || es;
+        o.outline = fx5.outline || null;
+        o.stances = { a: { statement: fx5.statement, keys: fx5.keys || q.keys || [], outline: fx5.outline || null, model: fx5.model || es, gen: true } };
+        o._abTxt = o.model;
+      } else {
+        o.q = (v.prompt || es);
+        o.model = es;
+        o.outline = v.zh_outline ? String(v.zh_outline).split(/\n/).filter(Boolean) : null;
+        o.stances = { a: { q: (v.prompt||es), keys: q.keys||[], model: es, outline: o.outline } };
+        o._abTxt = es;
+      }
     }
     return o;
   }catch(e){ return q; }

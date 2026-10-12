@@ -646,3 +646,187 @@ hfext5_26: {
 }
 };
 console.log('[v94.6.1] T5 FIX B (14-26) cargado');
+/* v94.6.2 · T4 AB 重叠题 A 版补齐（t4_ab key 1/2/3/7/10/12/16/20）
+ * 三问从素材 qa_text 的 P/R 整理：问题修正转录错位，回答案例修正拼写后作每问 model
+ * passage 为 AI 生成材料段（_src:'ai'）→ passageSrc 前缀「AI 生成材料」
+ */
+window.SIELE_ORAL_EXT_FIX_AB4 = {
+"1": {
+ passage:"El efecto invernadero es un fenómeno natural que se ha intensificado por la actividad humana. La quema de combustibles fósiles, la deforestación y el crecimiento demográfico elevan la concentración de gases que retienen el calor en la atmósfera. Científicos de todo el mundo advierten de que, sin medidas urgentes sobre energía y consumo, el calentamiento global provocará consecuencias irreversibles para el clima y los ecosistemas.",
+ passageZh:"温室效应本是自然现象，但人类活动使其加剧。化石燃料燃烧、森林砍伐与人口增长推高了大气中吸热气体的浓度。全球科学家警告：若不在能源与消费上采取紧急措施，全球变暖将给气候与生态系统带来不可逆的后果。",
+ passageSrc:"AI 生成材料 · 基于温室效应科普公开内容撰写",_src:"ai",
+ subqs:[
+  {q:"Para usted, ¿cuáles son los factores principales del efecto invernadero?",
+   keys:["gases","combustibles fósiles","deforestación","actividad humana","energía"],
+   model:"Para mí, existen muchos factores que causan el efecto invernadero, y la mayoría proceden de la actividad humana: el aumento demográfico, la emisión de gases de efecto invernadero y el uso excesivo de energía fósil son los principales. Además, la deforestación también es un factor clave, porque sin bosques no hay quien absorba el CO2. En definitiva, el problema no es natural, sino humano, y eso significa que también la solución está en nuestras manos."},
+  {q:"¿Cuál es el problema medioambiental más grave en su país? Explíquelo.",
+   keys:["población","presión","medio ambiente","medidas","gobierno"],
+   model:"Desde mi punto de vista, el problema más grave en mi país es la presión demográfica y del consumo: la población es enorme y está muy concentrada en las ciudades, lo que impone una carga fuerte al medio ambiente y plantea desafíos al ecosistema, desde la calidad del aire hasta los residuos. Por eso creo que el gobierno debe tomar medidas proactivas, como promover el transporte limpio, controlar las emisiones industriales y educar a la ciudadanía, para aliviar esta presión antes de que los daños se vuelvan irreversibles."},
+  {q:"Si usted fuera un experto, ¿qué haría para solucionar el cambio climático?",
+   keys:["energía renovable","solar","campañas educativas","empresas","emisión"],
+   model:"Si yo fuera experta, por un lado investigaría la energía renovable y limpia, por ejemplo la energía solar, y promovería su uso como alternativa a la energía tradicional, con ayudas para que familias y fábricas puedan mudarse. Por otro lado, desarrollaría campañas educativas dirigidas a las empresas y a los ciudadanos, para que todos asuman una conciencia medioambiental y reduzcan la emisión de gases. El cambio climático no se soluciona con una sola medida: hace falta tecnología, normas y, sobre todo, que la sociedad entera participe."}
+ ]
+},
+"2": {
+ passage:"El teletrabajo se consolidó en Europa tras la pandemia y ya forma parte del paisaje laboral de millones de trabajadores. Las empresas debaten ahora sobre el modelo ideal: algunas reclaman el regreso completo a la oficina para reforzar la supervisión y la colaboración, mientras otras apuestan por fórmulas híbridas. Los estudios apuntan a que los resultados dependen menos del lugar de trabajo que de la organización y la confianza.",
+ passageZh:"疫情后远程办公在欧洲定型，成为数百万劳动者的日常。企业正讨论理想模式：一些公司要求完全返岗以加强监督与协作，另一些则押注混合办公。多项研究指出，工作成效更多取决于组织方式与信任，而非办公地点。",
+ passageSrc:"AI 生成材料 · 基于欧洲远程办公趋势公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"Mucha gente piensa que el teletrabajo puede brindar a la empresa empleados más productivos y eficientes, ¿qué opina usted?",
+   keys:["comodidad","motivación","supervisión","productividad","equilibrio"],
+   model:"Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo. Es verdad que el teletrabajo aporta comodidad de horario y puede animar el entusiasmo y la motivación del trabajador; sin embargo, cuando uno trabaja en casa falta un proceso de supervisión, y no siempre se puede garantizar la productividad: hay quien rinde más solo, pero también quien se distrae. Por eso creo que el teletrabajo no brinda automáticamente empleados más eficientes: depende de cada persona y de cómo la empresa organice y confíe en su equipo."},
+  {q:"¿Qué opina usted sobre el teletrabajo?",
+   keys:["ventaja","inconveniente","horario","ahorro","doble filo"],
+   model:"Desde mi punto de vista, el teletrabajo tiene tanto ventajas como inconvenientes. Por un lado, significa comodidad de horario y puede animar la motivación y el entusiasmo del trabajador, además de un gran ahorro de tiempo y dinero en desplazamientos. Por otro lado, en casa falta la supervisión directa y el contacto con los compañeros, y por lo tanto no siempre se puede garantizar la productividad ni el trabajo en equipo. Con todo lo dicho, el teletrabajo me parece una espada de doble filo: una herramienta estupenda si se usa con disciplina y organización."},
+  {q:"Si usted fuera un empleado, ¿qué forma de trabajo elegiría?",
+   keys:["elegiría","híbrido","casa","oficina","equilibrio"],
+   model:"Si yo fuera empleada, elegiría un modelo híbrido. En primer lugar, trabajando algunos días desde casa puedo realizar las tareas sin desplazarme, lo que significa comodidad de horario y, por lo tanto, más entusiasmo y motivación. En segundo lugar, el teletrabajo no exige presencia en la oficina, un gran ahorro de tiempo y dinero. Pero también valoraría días de oficina, porque el contacto cara a cara ayuda a coordinar, a crear equipo y a resolver dudas en minutos. Para mí, lo mejor de los dos mundos es alternar: casa para concentrarse, oficina para colaborar."}
+ ]
+},
+"3": {
+ passage:"Los cánones de belleza cambian con las épocas y difieren entre culturas: rasgos, tallas y estilos ideales varían de un país a otro y de una década a otra. Mientras las redes sociales difunden un modelo global cada vez más parecido, crecen las voces que reivindican la diversidad de cuerpos, edades y rasgos, y varias marcas y medios han comenzado a mostrar rostros y figuras reales en sus campañas.",
+ passageZh:"审美标准随时代变化、因文化而异：理想的外貌、身材与风格在不同国家、不同年代各不相同。当社交平台传播着愈发趋同的全球审美时，呼吁多元的声音也在增长，一些品牌与媒体开始在其广告中呈现真实的面容与身材。",
+ passageSrc:"AI 生成材料 · 基于审美多样性议题公开讨论撰写",_src:"ai",
+ subqs:[
+  {q:"Según usted, ¿el estándar de belleza es igual en diferentes países?",
+   keys:["cultura","costumbre","diferente","respeto","apreciar"],
+   model:"Desde mi punto de vista, el estándar de belleza no es igual en diferentes países: cada uno tiene su propia historia, cultura y costumbre, y las características sociales y económicas también son diferentes, por lo tanto los estilos y los ideales de belleza también lo son. Lo que en un lugar se admira, en otro puede pasar desapercibido. Sin embargo, más allá de las diferencias, creo que hay que respetar todas las bellezas y aprender a apreciar la belleza exótica, porque la diversidad es precisamente lo que hace rico el mundo."},
+  {q:"Según usted, ¿qué tipo de persona es la más bella?",
+   keys:["belleza interior","simpática","tolerante","positiva","altruista"],
+   model:"Es verdad que la belleza exterior tiene su peso: una buena apariencia llama la atención al primer momento. Sin embargo, para mí importa más la belleza interior: la gente simpática, tolerante, llena de entusiasmo y que mantiene una actitud positiva ante la vida es la más bella, porque su compañía hace mejor el día de los demás. Y sobre todo admiro a las personas altruistas, que siempre están dispuestas a ayudar sin esperar nada a cambio. La piel envejece, pero la bondad y el buen carácter se quedan y crecen con los años."},
+  {q:"Si usted pudiera definir la belleza, ¿cuál sería su definición?",
+   keys:["definir","exterior","interior","cambiar","armonía"],
+   model:"Si yo pudiera definir la belleza, cambiaría el énfasis actual: prestaría menos importancia a la apariencia exterior y me fijaría más en la interior. Mi definición sería algo así: bella es la persona amable, tolerante, con entusiasmo por lo que hace y una actitud positiva hacia la vida, y en especial quien es altruista y ayuda a los demás de forma desinteresada. No digo que el aspecto no cuente, sino que debería ser lo de menos; la verdadera belleza es esa armonía entre cómo tratamos a los otros y cómo vivimos nuestro propio día."}
+ ]
+},
+"7": {
+ passage:"Las aulas europeas se han llenado de pantallas, tabletas y plataformas digitales, y la experiencia de la enseñanza a distancia ha acelerado esta transformación. Los docentes debaten ahora sobre el equilibrio: la tecnología permite explicar con recursos interactivos y corregir en línea, pero también abre la puerta a la distracción. Varios países han comenzado a formar a los profesores en herramientas digitales y a regular el uso de los móviles en clase.",
+ passageZh:"欧洲课堂中屏幕、平板与数字平台日益普及，远程教学经历加速了这一转变。教师们正讨论平衡问题：科技让讲解可借助互动资源、批改可在线完成，但也带来分心风险。多国已开始为教师提供数字工具培训，并规范课堂手机使用。",
+ passageSrc:"AI 生成材料 · 基于课堂数字化趋势公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"¿Qué opina usted sobre las tecnologías en la clase?",
+   keys:["eficiencia","enseñanza","distracción","equilibrio","doble filo"],
+   model:"Desde mi punto de vista, las tecnologías en clase tienen tanto ventajas como inconvenientes. Por un lado, la tecnología puede elevar la eficiencia del estudio y favorecer el proceso de enseñanza de los profesores: explicar con imágenes, practicar en línea, corregir al instante. Por otro lado, puede distraer la atención de los estudiantes y acabar influyendo negativamente en los resultados de los exámenes si se usa sin control. Con todo lo dicho, a mi modo de ver es una espada de doble filo: todo depende de cómo y cuánto se use."},
+  {q:"Según usted, ¿cuáles son las influencias de la tecnología en el estudio?",
+   keys:["positiva","negativa","productividad","atención","resultados"],
+   model:"Las influencias de la tecnología en el estudio son dobles. En cuanto a las positivas, eleva la productividad de los estudiantes y favorece la enseñanza: cada alumno puede avanzar a su ritmo, repetir explicaciones y acceder a recursos infinitos. Referente a las negativas, puede distraer la atención y acarrear peores resultados de examen: las notificaciones, los juegos y las redes están a un clic, y la autodisciplina de un adolescente todavía es frágil. Por eso mi conclusión es que la tecnología en el estudio funciona cuando hay reglas claras: es una herramienta poderosa, pero hay que dominarla y no dejarse dominar por ella."},
+  {q:"Si usted fuera un profesor, ¿qué tecnologías usaría?",
+   keys:["pantalla digital","clase virtual","tareas en línea","corregir","ahorro"],
+   model:"Si yo fuera profesora, en primer lugar usaría la pantalla digital en clase, porque me permite explicar los contenidos de forma más clara e interactiva, con imágenes, vídeos y ejemplos que los alumnos pueden volver a ver en casa. En segundo lugar, usaría la tecnología de la clase virtual: así mis alumnos pueden hacer las tareas en línea y yo puedo corregirlas también en línea, un gran ahorro de tiempo que además me deja estadísticas de quién necesita ayuda. Eso sí, complementaría con momentos sin pantallas, porque aprender a pensar despacio, leer en papel y discutir en grupo también es parte esencial de la educación."}
+ ]
+},
+"10": {
+ passage:"El consumo sostenible ocupa un lugar creciente en la agenda europea: varios países han implantado sistemas de depósito para envases, se prohiben los plásticos de un solo uso y las campañas públicas insisten en el reciclaje. Sin embargo, los niveles de consumo siguen creciendo y los expertos subrayan que cambiar los hábitos exige tanto información como infraestructuras cómodas para el ciudadano.",
+ passageZh:"可持续消费在欧洲议程中的分量越来越重：多国推行包装押金制、禁用一次性塑料，公共宣传持续强调回收。然而消费总量仍在增长，专家指出，改变习惯既需要宣传引导，也需要为市民提供便利的基础设施。",
+ passageSrc:"AI 生成材料 · 基于欧洲可持续消费政策公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"Mucha gente opina que será muy difícil conseguir que un número significativo de personas cambie sus hábitos de consumo cuando la industria y el marketing nos invitan a consumir continuamente, ¿qué opina usted?",
+   keys:["hábitos","campaña","educación","industria","posible"],
+   model:"Esta idea tiene parte de razón, pero no estoy totalmente de acuerdo. Es verdad que cambiar los hábitos de consumo no es nada fácil, sobre todo con la presión constante de la industria y del marketing, que nos invitan a comprar cada día. Sin embargo, podemos hacer mucho: se pueden desarrollar campañas educativas dirigidas a los ciudadanos, brindándoles un concepto correcto de consumo, y acompañarlas de medidas concretas como impuestos a los envases o facilidades para reciclar. Donde ha habido información más comodidad, los hábitos han cambiado. Cambiar es posible, pero no ocurre solo: hay que ayudar a la gente a hacerlo."},
+  {q:"En lo que respecta al reciclaje en su país, ¿qué cambios o mejoras ha notado en los últimos tiempos?",
+   keys:["gobierno","comunidad","cubo","campaña","impulsar"],
+   model:"En general, toda la sociedad se ha implicado en mejorar la situación. El gobierno ha aplicado muchas medidas para promover el reciclaje: en las comunidades residenciales se regalan cubos especiales para reciclar a cada domicilio, se han multiplicado los contenedores por colores y se desarrollan campañas educativas dirigidas a todos los ciudadanos, brindándoles un concepto correcto del consumo y del reciclaje. Además, cada vez más jóvenes han hecho del reciclaje un hábito natural. Desde mi punto de vista, serían muy necesarias estas mejoras y habría que impulsarlas todavía más, porque el camino recorrido es bueno pero queda mucho por hacer."},
+  {q:"¿Es usted partidario de sancionar a las personas que no reciclen si su ayuntamiento les proporciona un sistema adecuado para hacerlo?",
+   keys:["sanción","control","educación","raíz","equilibrio"],
+   model:"Esta postura tiene parte de razón, ahora bien, no estoy totalmente de acuerdo. Es verdad que la sanción puede controlar las acciones de la gente y promover el reciclaje a corto plazo: la multa educa rápido. Sin embargo, desde mi punto de vista no es una medida de gran escala ni de fondo: quien recicla solo por miedo deja de hacerlo cuando nadie le mira. Para solucionar el problema de raíz, haría campañas educativas que brinden el concepto del reciclaje desde la escuela y facilitaría el sistema al máximo. Por lo tanto, no soy totalmente partidaria de la sanción: la vería como último recurso, no como la estrategia principal."}
+ ]
+},
+"12": {
+ passage:"Los robots de compañía y los asistentes con inteligencia artificial se están incorporando a hospitales, residencias de mayores y hogares. Sus fabricantes destacan su capacidad para conversar, recordar rutinas y avisar en caso de emergencia, y las experiencias piloto recogen opiniones favorables de usuarios solitarios. Los expertos, sin embargo, insisten en distinguir entre la compañía útil y el vínculo humano, y piden regulación sobre los datos emocionales que estos dispositivos recogen.",
+ passageZh:"陪伴机器人与人工智能助手正进入医院、养老院与家庭。制造商强调它们能对话、记住日常习惯并在紧急时报警，试点项目也收集到独居者的正面反馈。但专家们坚持区分「有用的陪伴」与「人类情感纽带」，并呼吁就设备收集的情感数据制定监管规则。",
+ passageSrc:"AI 生成材料 · 基于陪伴机器人应用公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"¿Qué opina usted sobre los robots emocionales?",
+   keys:["compañía","soledad","comunicación","relación","doble filo"],
+   model:"Desde mi punto de vista, este tipo de robot tiene tanto ventajas como inconvenientes. Por un lado, tiene un importante uso de compañía y es favorable para aliviar la soledad y la depresión, sobre todo de las personas mayores que viven solas. Por otro lado, cuando la gente pasa demasiado tiempo con el robot, la comunicación en la vida real disminuye, lo que puede hacer daño a la relación con los amigos y parientes. Con todo lo dicho anteriormente, es una espada de doble filo: un apoyo valioso como complemento, pero peligroso si sustituye a las personas."},
+  {q:"¿Cree que los robots emocionales pueden entender las emociones de la gente?",
+   keys:["sentimiento","cerebro","simular","característica","no"],
+   model:"Desde mi punto de vista, los robots emocionales no pueden entender de verdad las emociones de la gente. Es cierto que pueden acompañarnos, reconocer nuestro tono de voz y ayudarnos a aliviar la soledad; sin embargo, la emoción es una característica especial de los seres humanos: ellos no tienen un cerebro humano ni sentimientos propios, solo programas que simulan reacciones. Cuando un robot «consuela», no siente empatía, responde con datos. Por lo tanto, a mi modo de ver, pueden detectar y imitar la emoción, pero no entenderla; y esa diferencia, al final, se nota en el vínculo."},
+  {q:"Mucha gente cree que en el futuro la gente tratará a los robots emocionales como mejores amigos, ¿qué opina usted?",
+   keys:["amistad","sustituir","comunicación","humano","futuro"],
+   model:"Esta idea tiene parte de razón, sin embargo no estoy totalmente de acuerdo. Es verdad que los robots emocionales pueden acompañarnos y ayudarnos a aliviar la soledad y la depresión, y que muchos ya les cuentan cosas que no se atreven a decir a nadie. Sin embargo, la amistad entre amigos del mundo real es algo indispensable: la conversación con pausas, el abrazo, la complicidad, la incomodidad compartida; ninguna máquina puede sustituir la comunicación entre seres humanos. Por lo tanto, creo que en el futuro el robot será un buen compañero de apoyo, pero no el mejor amigo de la gente: la amistad de verdad exige dos personas que sienten."}
+ ]
+},
+"16": {
+ passage:"La educación a distancia vivió un salto histórico durante la pandemia y hoy convive con la enseñanza presencial en universidades y academias de medio mundo. Sus plataformas ofrecen clases grabadas, tutorías en vídeo y exámenes en línea, y el número de matrículas remotas sigue creciendo. Las autoridades educativas debaten ahora sobre la calidad, la supervisión y el valor de las titulaciones obtenidas totalmente a distancia.",
+ passageZh:"远程教育在疫情期间实现历史性跨越，如今在世界各地的大学与培训机构中与线下教学并存。其平台提供录播课程、视频辅导与在线考试，远程注册人数持续增长。教育主管部门正就完全远程所获学历的质量、监督与价值展开讨论。",
+ passageSrc:"AI 生成材料 · 基于远程教育发展公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"¿Qué opina usted sobre la educación a distancia?",
+   keys:["ventaja","inconveniente","supervisión","eficiencia","doble filo"],
+   model:"Desde mi punto de vista, la educación a distancia tiene tanto ventajas como inconvenientes. Por un lado, los estudiantes pueden estudiar desde su casa sin desplazarse a la escuela, lo que supone un gran ahorro de tiempo y de dinero, y da acceso a cursos de cualquier lugar del mundo. Por otro lado, durante el proceso de estudio a los alumnos les falta supervisión, y no siempre se puede garantizar la eficiencia ni la disciplina. Con todo lo dicho anteriormente, me parece una espada de doble filo: una opción excelente para quien tiene autodisciplina, y arriesgada para quien necesita estructura y compañía."},
+  {q:"Si usted fuera un estudiante, ¿elegiría la educación a distancia?",
+   keys:["elegiría","casa","ahorro","disciplina","interacción"],
+   model:"Si yo fuera estudiante, no elegiría la educación a distancia como única forma de estudiar. Es verdad que estudiar desde casa significa un gran ahorro de tiempo y de dinero, y valoro esa flexibilidad. Sin embargo, a los estudiantes nos falta supervisión en el proceso y no siempre se puede garantizar la eficiencia; además, la universidad no es solo clases: son compañeros, debates, prácticas y vida. Por lo tanto, mi elección sería un modelo mixto: contenido y teoría en línea donde sea cómodo, pero presencialidad para lo que de verdad requiere interacción. Estudiar solo ante una pantalla, para mí, se quedaría corto."},
+  {q:"¿Qué cambios o mejoras ha notado usted en su país sobre la educación a distancia?",
+   keys:["gobierno","tecnología","profesores","sistema","impulsar"],
+   model:"En general, toda la sociedad se ha implicado en mejorar la situación. El gobierno ha aplicado muchas medidas para promover la educación a distancia: las plataformas públicas se han ampliado, y profesores y alumnos han aprendido a utilizar las nuevas tecnologías para las clases en vivo, las tareas y los exámenes. Además, los expertos se esfuerzan por completar el sistema pertinente, con normas de calidad y formación digital para los docentes. A mi modo de ver, sería muy necesario seguir impulsando estos cambios, porque la distancia ya no es un parche de emergencia, sino una vía real que, bien hecha, acerca la educación a todos."}
+ ]
+},
+"20": {
+ passage:"La protección de datos personales es hoy una de las grandes preocupaciones de los ciudadanos digitales: compras, búsquedas, redes sociales y aplicaciones recogen información constante sobre cada usuario. Normas como el reglamento europeo de protección de datos obligan a las empresas a pedir consentimiento y a proteger la información, aunque los casos de fugas y ventas de datos a terceros siguen apareciendo en las noticias.",
+ passageZh:"个人信息保护是当代数字公民最关心的问题之一：购物、搜索、社交与应用持续收集每位用户的信息。欧盟数据保护条例等法规要求企业征求同意并妥善保管信息，但数据泄露与向第三方出售数据的案件仍屡见报端。",
+ passageSrc:"AI 生成材料 · 基于数据保护议题公开报道撰写",_src:"ai",
+ subqs:[
+  {q:"¿Existen en su país algunas regulaciones para proteger la información privada de los ciudadanos?",
+   keys:["regulación","privacidad","plataforma","protección","impulsar"],
+   model:"Sí, en general la sociedad se ha implicado en mejorar la situación y existen muchas regulaciones relacionadas con este tema. Por ejemplo, hay normas que controlan los ataques a la privacidad en las plataformas de búsqueda de pareja o amigos, y también regulaciones para proteger la información privada durante los procesos de compra y venta en línea: las empresas deben pedir consentimiento y explican para qué usan los datos. Sería muy necesario seguir impulsando estas regulaciones, porque la tecnología cambia rápido y las leyes siempre van un paso detrás de las aplicaciones nuevas."},
+  {q:"Si usted fuera un usuario de Internet, ¿qué haría para proteger su privacidad?",
+   keys:["compartir","redes sociales","contraseña","conocimiento","precaución"],
+   model:"Si yo fuera usuaria de Internet, para proteger mi privacidad haría tres cosas. En primer lugar, no publicaría arbitrariamente datos personales en las redes sociales ni en internet, porque lo que sube a la red ya no se controla; esa precaución previa me parece la medida más eficaz. En segundo lugar, aprendería más sobre la importancia y la protección de la privacidad: configurar bien las aplicaciones, usar contraseñas fuertes y desconfiar de enlaces sospechosos. Y en tercer lugar, revisaría los permisos que concedo. La privacidad se protege con hábitos, no solo con leyes."},
+  {q:"Algunos dicen que quien no tiene nada que esconder no debe preocuparse por su privacidad, ¿está de acuerdo?",
+   keys:["derecho","control","datos","libertad","respeto"],
+   model:"No estoy de acuerdo con esa idea, y me parece incluso peligrosa. La privacidad no es un asunto de secretos, sino un derecho fundamental: todos tenemos derecho a controlar nuestra información personal y a decidir quién la ve, aunque no tengamos nada malo que ocultar. Nadie dejaría la puerta de su casa abierta solo porque no esconde nada. Además, los datos se usan para perfilarnos, vendernos cosas y hasta manipularnos, y una vez filtrados no se recuperan. Por eso creo que cuidar la privacidad no es esconder algo malo, sino ejercer un derecho y mantener la libertad de decidir qué compartimos."}
+ ]
+}
+};
+console.log('[v94.6.2] T4 AB FIX (8) cargado');
+/* v94.6.2 · T5 AB 重叠题 A 版补齐（t5_ab key 3/9/13/14/19/21/24）
+ * statement：素材 op1 原文或依 essay 实际立场提取；model：essay 西语主体压缩（剔除混入的中文提纲）
+ * 全部 _src:'ai' 标注（statement 3 处用素材 op1 原文亦经整理）
+ */
+window.SIELE_ORAL_EXT_FIX_AB5 = {
+"3": {
+ statement:"Los robots emocionales pueden ayudarnos en muchos aspectos, es una cosa benéfica, aunque conviene usarlos con equilibrio.",
+ keys:["robot","compañía","soledad","regulación","relación humana"],
+ outline:["Postura: parcialmente a favor","Argumento 1: ayudan de verdad (mayores, terapia)","Argumento 2: riesgos: dependencia y datos","Ejemplo: residencias con robots de compañía","Conclusión: complementar, no sustituir"],
+ model:"El tema de los robots emocionales merece una consideración cuidadosa y, desde mi punto de vista, estoy parcialmente de acuerdo con esta opinión. En primer lugar, es innegable que pueden ofrecer beneficios significativos: acompañan a personas mayores que viven solas, asisten en terapias infantiles y ayudan a aliviar la soledad y la depresión. Sirva como ejemplo las residencias donde los robots de compañía despiertan conversaciones y calma. Sin embargo, conviene la cautela: no sienten, simulan, y el exceso de uso puede debilitar las relaciones humanas reales, además de plantear dudas sobre los datos emocionales que recogen. En resumen, con regulación adecuada y uso equilibrado, pueden ser una herramienta benéfica: que complementen nuestras relaciones, pero que nunca las sustituyan."
+},
+"9": {
+ statement:"Aumentar el impuesto turístico puede ser una herramienta eficaz para resolver los problemas del turismo, siempre que se aplique con equilibrio.",
+ keys:["impuesto turístico","infraestructura","medio ambiente","equilibrio","destino"],
+ outline:["Postura: a favor con matiz","Argumento 1: el turismo usa servicios públicos","Argumento 2: financia sostenibilidad","Riesgo: impuestos altos ahuyentan","Conclusión: fiscalidad prudente y equilibrada"],
+ model:"Que deberían aumentar el impuesto turístico para resolver los problemas que provoca el turismo es un tema que merece ser explorado. Mi opinión es que los impuestos pueden ser una herramienta efectiva, pero deben aplicarse con cuidado para no obstaculizar este sector económico. En primer lugar, la industria turística se beneficia de servicios públicos: carreteras, instalaciones sanitarias y sitios culturales; la recaudación puede garantizar que el turismo contribuya a la sociedad que lo sostiene. Además, esos fondos pueden destinarse a medidas de conservación ambiental y protección del patrimonio. Sin embargo, es fundamental encontrar equilibrio: tasas excesivamente altas ahuyentarían al turista y reducirían los ingresos. En resumen, un enfoque fiscal prudente, que use los ingresos para aliviar problemas concretos como la masificación y la degradación ambiental, es clave para que la industria siga prosperando protegiendo a la vez la sociedad y el medio ambiente."
+},
+"13": {
+ statement:"Compartir nuestros datos no deja de ser un problema aunque no tengamos nada que esconder; la privacidad es un derecho de todos.",
+ keys:["privacidad","derecho","datos","control","libertad"],
+ outline:["Postura: en contra de compartir sin control","Argumento 1: la privacidad es un derecho","Argumento 2: datos = perfil y manipulación","Ejemplo: fugas y venta a terceros","Conclusión: proteger la privacidad siempre"],
+ model:"La afirmación de que «si no tienes nada que esconder, compartir tus datos no supone ningún problema» surge con frecuencia en el debate sobre la privacidad digital, y desde mi punto de vista no estoy de acuerdo. En primer lugar, la privacidad es un derecho fundamental: todos tenemos derecho a controlar nuestra información personal y a decidir cómo se utiliza; la idea de que solo quien tiene secretos oscuros debe preocuparse es simplista y peligrosa, como dejar la puerta abierta porque no escondes nada. En segundo lugar, nuestros datos se usan para perfilarnos, vendernos y hasta manipularnos, y las fugas y ventas a terceros aparecen una y otra vez en las noticias; una vez filtrados, ya no se recuperan. En conclusión, la privacidad es importante para todos, sin importar si tenemos o no algo que ocultar: protegerla es proteger nuestra identidad y nuestra libertad en un mundo digitalizado."
+},
+"14": {
+ statement:"La belleza es un concepto profundamente personal, único y subjetivo que varía de una persona a otra.",
+ keys:["belleza","subjetivo","diversidad","cultura","respeto"],
+ outline:["Postura: la belleza es subjetiva","Argumento 1: sin definición universal","Argumento 2: cultura y experiencia la moldean","Ejemplo: cánones que cambian por época y país","Conclusión: abrazar la diversidad"],
+ model:"La belleza es un concepto profundamente personal, único y subjetivo que varía de una persona a otra. No existe una definición universal: lo que una persona considera hermoso puede no serlo para otra, y esta subjetividad nace de nuestras experiencias de vida, valores, cultura y perspectivas individuales. Por una parte, los cánones cambian con las épocas y los países, lo que demuestra que la belleza no es una fórmula fija sino una mirada. Por otra, cuando aceptamos esa diversidad dejamos de competir con un modelo imposible y empezamos a apreciar rasgos, edades y estilos distintos. En definitiva, al reconocer y respetar la subjetividad de la belleza fomentamos un mundo más inclusivo y comprensivo, en el que cada persona puede sentirse hermosa a su manera única."
+},
+"19": {
+ statement:"El exceso de población puede tener un impacto irreversible en el medio ambiente.",
+ keys:["población","recursos","medio ambiente","consumo","planificación"],
+ outline:["Postura: a favor del argumento","Argumento 1: agota recursos naturales","Argumento 2: presión sobre ecosistemas","Ejemplo: agua y suelo sobreexplotados","Conclusión: educación y planificación"],
+ model:"El exceso de población realmente puede tener un impacto irreversible en el medio ambiente, y esta perspectiva merece una consideración seria. En primer lugar, el exceso de población conduce al agotamiento de los recursos: a medida que aumenta la población aumenta la demanda de agua, tierra, energía y alimentos, y la naturaleza no puede recuperarse al mismo ritmo. En segundo lugar, la presión sobre los ecosistemas crece: la sobreexplotación de la tierra y la escasez de agua dulce pueden llevar al colapso de hábitats enteros y forzar migraciones. Por eso considero que las soluciones pasan por educar, facilitar la planificación familiar y aprender a repartir y consumir de forma sostenible. En definitiva, el planeta puede acoger a todos si aprendemos a equilibrar población, consumo y naturaleza; el ajuste empieza en decisiones cotidianas que están a nuestro alcance."
+},
+"21": {
+ statement:"Aunque la educación a distancia ha avanzado mucho, no creo que sea la única opción para las universidades en el futuro.",
+ keys:["educación a distancia","flexibilidad","interacción","disciplina","presencial"],
+ outline:["Postura: en contra de la única opción","Argumento 1: no sirve igual para todos","Argumento 2: la interacción es insustituible","Ejemplo: prácticas y debates presenciales","Conclusión: futuro híbrido, no remoto"],
+ model:"Aunque la educación a distancia ha avanzado significativamente en los últimos años, no creo que sea la única opción para las universidades en el futuro. En primer lugar, ofrece flexibilidad y conveniencia, pero no es adecuada para todos los individuos ni para todas las disciplinas: hay contenidos prácticos, de laboratorio o de atención al paciente que no es posible aprenderlos completamente ante una pantalla, y hay alumnos que sin estructura y supervisión no rinden. En segundo lugar, la interacción interpersonal desempeña un papel crucial en la formación: los debates espontáneos, el trabajo en equipo y la vida del campus enseñan cosas que el vídeo no transmite. En definitiva, considero que la universidad del futuro será híbrida: la distancia como herramienta valiosa y complementaria, y la presencialidad como núcleo insustituible de la experiencia educativa."
+},
+"24": {
+ statement:"Los videojuegos no fomentan necesariamente el aislamiento de los jóvenes; todo depende de cómo se juega y cuánto.",
+ keys:["videojuegos","aislamiento","multijugador","límites","equilibrio"],
+ outline:["Postura: en contra del tópico","Argumento 1: los multijugador crean vínculos","Argumento 2: el problema es el exceso","Ejemplo: amistades y equipos en línea","Conclusión: acompañar y poner límites"],
+ model:"El argumento de que los videojuegos promueven el aislamiento de los jóvenes es común, pero creo que este punto de vista necesita un análisis más detenido. En primer lugar, los videojuegos en sí mismos no causan aislamiento: muchos tienen modos multijugador en línea que fomentan la colaboración y la competencia sanas, y crean amistades reales incluso entre continentes; para muchos jóvenes, jugar es su forma de socializar. En segundo lugar, el riesgo aparece con el exceso: horas robadas al sueño, al estudio y al deporte, y alguna dificultad para desconectar; el problema es la falta de límites, no el juego. Por eso considero que prohibir no funciona, acompañar sí: jugar con los hijos, poner horarios claros y ofrecer alternativas atractivas como el deporte o la música. En definitiva, educar sobre el juego moderado y combinarlo con otras actividades garantiza un desarrollo saludable."
+}
+};
+console.log('[v94.6.2] T5 AB FIX (7) cargado');
