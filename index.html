@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.7.2-202610121720';
+window.swVer = 'v94.7.3-202610121800';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6065,6 +6065,17 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
                 var _m = _V3[_key];
                 [_E1,_E2,_E3,_E4,_E5,_E6,_E7].forEach(function(_E){ if(_E && _E[_key]) _m += ' ' + _E[_key]; });
                 q.stances[_k].model = _m; q.stances[_k].gen = true; q.stances[_k]._v3 = true;
+              }
+            });
+          }
+          /* v94.7.3: H41 覆盖（hf41+ T5 36 题，q.id 键） */
+          var _H41 = window.SIELE_ORAL_FIX_MODEL_V3_H41, _H41E = [window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT2, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT3, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT4, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT9, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT10, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT11, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT5, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT6, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT7, window.SIELE_ORAL_FIX_MODEL_V3_H41_EXT8];
+          if(_H41 && _H41[q.id]){
+            ['a','b'].forEach(function(_k){
+              if(q.stances[_k]){
+                var _hm = (_H41[q.id] && _H41[q.id][_k]) || '';
+                _H41E.forEach(function(_L){ if(_L && _L[q.id] && _L[q.id][_k]) _hm += ' ' + _L[q.id][_k]; });
+                if(_hm){ q.stances[_k].model = _hm; q.stances[_k].gen = true; q.stances[_k]._v3 = true; }
               }
             });
           }
