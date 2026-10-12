@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.6.2-202610121530';
+window.swVer = 'v94.7-202610121520';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5903,7 +5903,7 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
     'educaci':'教育与学习','estudi':'教育与学习','clase':'教育与学习','libro':'教育与学习','lengua':'教育与学习',
     'salud':'健康与生活方式','deporte':'健康与生活方式','estrés':'健康与生活方式','estilo':'健康与生活方式','emocion':'健康与生活方式',
     'turismo':'环境与可持续','poblaci':'环境与可持续','vehícul':'环境与可持续','electric':'环境与可持续','energía':'环境与可持续',
-    'privacidad':'伦理与选择','seguridad':'伦理与选择','eutanasia':'伦理与选择','transgénic':'伦理与选择','consum':'伦理与选择','economía':'伦理与选择','solidaridad':'伦理与选择','vivienda':'伦理与选择','tráfico':'伦理与选择','amistad':'伦理与选择','animal':'伦理与选择','juventud':'伦理与选择','vejez':'伦理与选择','comunicación':'伦理与选择','música':'文化与城市生活','televisión':'文化与城市生活','compras':'工作与社会','e-commerce':'工作与社会','maternidad':'工作与社会','autónomo':'工作与社会','temporal':'工作与社会','profesional':'教育与学习','extranjero':'教育与学习'
+    'privacidad':'伦理与选择','seguridad':'伦理与选择','eutanasia':'伦理与选择','transgénic':'伦理与选择','consum':'伦理与选择','economía':'伦理与选择','solidaridad':'伦理与选择','vivienda':'伦理与选择','tráfico':'伦理与选择','amistad':'伦理与选择','animal':'伦理与选择','juventud':'伦理与选择','vejez':'伦理与选择','comunicación':'伦理与选择','música':'文化与城市生活','televisión':'文化与城市生活','compras':'工作与社会','e-commerce':'工作与社会','maternidad':'工作与社会','autónomo':'工作与社会','temporal':'工作与社会','profesional':'教育与学习','extranjero':'教育与学习','conocimiento':'教育与学习','habilidad':'教育与学习','tono':'工作与社会','voz':'工作与社会','adulto':'工作与社会','niñ':'工作与社会'
   };
   function themeOf(title){
     var t = String(title||'').toLowerCase();
@@ -5981,13 +5981,16 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
       if(bank.some(function(x){ return x && x.id === id; })) return;
       var sec = (tarea === 4) ? 60 : 180;
       var fx = (FIX && FIX[id]) ? FIX[id] : null;
+      /* v94.7: hfext 题 topic 唯一化（x4_N/x5_N），防同分类桶内 T4↔T5 错配联动；分类经 cat45 */
+      var topicKey = (tarea === 4 ? 'x4_' : 'x5_') + (i + 1);
+      var cat45 = themeOf(it.title);
       if(tarea === 4){
         /* T4：v94.6.1 FIX 优先（passage + 三问），否则回退 qa_text */
         var sqs = (fx && fx.subqs) ? fx.subqs : null;
         var qFull = sqs ? sqs.map(function(s){ return s.q; }).join(' ') : (it.qa_text || '');
         var mFull = sqs ? sqs.map(function(s){ return s.model; }).join(' ') : (it.qa_text || '');
         var item4 = {
-          id: id, topic: themeOf(it.title), title: it.title, esTitle: it.title,
+          id: id, topic: topicKey, cat45: cat45, title: it.title, esTitle: it.title,
           zh: it.zh || '', q: qFull, keys: [], sec: sec, model: mFull,
           outline: null, extsrc: '真题素材版'
         };
@@ -5998,7 +6001,7 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
         /* T5：v94.6.1 FIX 双立场（A/B 完整）优先，否则回退单立场 */
         var essay = it.essay || '';
         var item5 = {
-          id: id, topic: themeOf(it.title), title: tieTitle(it), esTitle: it.es_title || it.title,
+          id: id, topic: topicKey, cat45: cat45, title: tieTitle(it), esTitle: it.es_title || it.title,
           zh: it.zh || '', keys: [], sec: sec, extsrc: '真题素材版'
         };
         if(fx && fx.a && fx.b){
@@ -6023,6 +6026,57 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
   }
   function tieTitle(it){ return it.title || it.es_title || 'Tema'; }
 
+  /* ---- v94.7 内容质量修复（幂等，云快照/静态库两分支均生效） ---- */
+  window._sieleContentFix = function(bank, tarea){
+    try{
+      var NAMES = ['Alejandro','Lucia','Diego','Marta','Javier','Carmen','Adrian','Pilar'];
+      var _norm = function(t){ return (typeof t === 'string') ? t.replace(/ , /g, ', ').replace(/\bestan\b/g, 'está').replace(/^\s+/, '') : t; };
+      bank.forEach(function(q, qi){
+        if(!q) return;
+        if(q.model) q.model = _norm(q.model);
+        (q.subqs||[]).forEach(function(s){ if(s && s.model) s.model = _norm(s.model); });
+        if(q.stances){ ['a','b'].forEach(function(k){ var s = q.stances[k]; if(s){ if(s.model) s.model = _norm(s.model); if(s.statement) s.statement = _norm(s.statement); } }); }
+        if(q.passage) q.passage = _norm(q.passage);
+        if(tarea === 3 && q.model && q.model.indexOf('Gonzalo') >= 0){
+          q.model = q.model.replace(/\bGonzalo\b/g, NAMES[qi % NAMES.length]);
+        }
+        if(tarea === 4 && q.subqs && q.subqs.length >= 3){
+          if(!q.keys || !q.keys.length) q.keys = (q.subqs[0].keys||[]).slice();
+          if(!q.q || !String(q.q).trim()) q.q = q.subqs.map(function(s){ return s.q; }).join(' ');
+        }
+        if(tarea === 5 && q.stances){
+          var F = window.SIELE_ORAL_FIX_OUTLINE || {};
+          ['a','b'].forEach(function(k){
+            var s = q.stances[k];
+            if(s && !s.outline && F[q.id]){ s.outline = F[q.id].slice(); s.gen = true; }
+          });
+          var ST = window.SIELE_ORAL_FIX_STMT || {};
+          if(ST[q.id] && q.stances.a && q.stances.a.statement && q.stances.a.statement.length > 160){
+            q.stances.a.statement = ST[q.id];
+            if(q.q && q.q.length > 160) q.q = ST[q.id];
+          }
+          if(q.sec && q.sec !== 180) q.sec = 180;
+        }
+        if((tarea === 1 || tarea === 3) && q.model && q.keys && q.keys.length){
+          var ml = q.model.toLowerCase();
+          var miss = q.keys.filter(function(k){ return k && k.length > 3 && ml.indexOf(String(k).toLowerCase()) < 0; }).length;
+          if(miss >= Math.max(2, Math.floor(q.keys.length / 2))){
+            var keys = [];
+            var re = /<span class="key">([^<]+)<\/span>/g, m;
+            while((m = re.exec(q.model)) && keys.length < 6){ var t = m[1].trim(); if(t && keys.indexOf(t) < 0) keys.push(t); }
+            if(keys.length < 3){
+              var STOP = {para:1,como:1,pero:1,cuando:1,porque:1,aunque:1,entonces:1,tambien:1,mucho:1,muy:1,esta:1,este:1,esto:1,tengo:1,hace:1,desde:1,sobre:1,entre:1,gracias:1,buenas:1,tardes:1,llamo:1,usted:1,podria:1,quiero:1,puedo:1,verdad:1,según:1,teléfono:1};
+              var wf = {};
+              (q.model.replace(/<[^>]*>/g, ' ').toLowerCase().match(/[a-záéíóúñü]{5,}/g) || []).forEach(function(w){ if(!STOP[w]) wf[w] = (wf[w]||0) + 1; });
+              Object.keys(wf).sort(function(a,b){ return wf[b]-wf[a]; }).slice(0, 5).forEach(function(w){ if(keys.length < 6 && keys.indexOf(w) < 0) keys.push(w); });
+            }
+            if(keys.length >= 3) q.keys = keys;
+          }
+        }
+      });
+    }catch(e){ console.warn('[v94.7] content fix fail', e); }
+  };
+
   /* ---- 统一入口：静态库 / 云快照 两分支均调用 ---- */
   window._sieleOralExtApply = function(bank, tarea){
     try{
@@ -6042,11 +6096,13 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
           }
         });
       }
-      /* 注册七分类映射 */
+      /* 注册七分类映射（v94.7: hfext 题经 cat45，topic 已唯一化） */
       if(!window.SIELE_T45_GROUP) window.SIELE_T45_GROUP = {};
       bank.forEach(function(q){
-        if(q && q.topic && q.topic !== '其他' && !window.SIELE_T45_GROUP[q.topic]) window.SIELE_T45_GROUP[q.topic] = q.topic;
+        if(q && q.topic && q.topic !== '其他' && !window.SIELE_T45_GROUP[q.topic]) window.SIELE_T45_GROUP[q.topic] = q.cat45 || q.topic;
       });
+      /* v94.7: 内容质量修复（排版/重音/keys 回填/提纲补齐/人名多样化） */
+      /* v94.7: contentFix 已移至 getSieleOralBank 出口统一执行 */
       window.SIELE_ORAL_EXT_N = (window.SIELE_ORAL_EXT_N || {});
       window.SIELE_ORAL_EXT_N[tarea] = { added: a, ab: b };
       return a;
@@ -7458,12 +7514,14 @@ function getSieleOralBank(){
     if(typeof window._sieleT5V92Apply==='function'){ window._sieleT5V92Apply(out[5]); }
     if(typeof window._sieleT4V92Apply==='function'){ window._sieleT4V92Apply(out[4]); }
     if(typeof window._sieleT45MoreApply==='function'){ window._sieleT45MoreApply(out[4],4,1); window._sieleT45MoreApply(out[5],5,1); }
+    if(typeof window._sieleContentFix==='function'){ [1,2,3,4,5].forEach(function(_n){ window._sieleContentFix(out[_n], _n); }); }
     return out;
   }
   if(typeof window._sieleT3MetaApply==='function') window._sieleT3MetaApply(SIELE_ORAL_BANK[3]);
   if(typeof window._sieleT1MetaApply==='function') window._sieleT1MetaApply(SIELE_ORAL_BANK[1]);
   if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(SIELE_ORAL_BANK[2]);
   if(typeof window._sieleOralExtApply==='function'){ window._sieleOralExtApply(SIELE_ORAL_BANK[4],4); window._sieleOralExtApply(SIELE_ORAL_BANK[5],5); }
+  if(typeof window._sieleContentFix==='function'){ [1,2,3,4,5].forEach(function(_n){ window._sieleContentFix(SIELE_ORAL_BANK[_n], _n); }); }
   return SIELE_ORAL_BANK;
 }
 
@@ -8419,7 +8477,8 @@ function _sieleRelBtnHtml(x,tarea){
     var other=(getSieleOralBank()[tarea===4?5:4])||[];
     var has=false;
     for(var i=0;i<other.length;i++){ if(other[i]&&other[i].topic===x.topic){has=true;break;} }
-    if(!has) return '';
+    /* v94.7: 孤题灰标（原为隐藏按钮） */
+    if(!has) return '<button class="btn ol" disabled style="font-size:12px;padding:5px 12px;opacity:.5">'+(tarea===4?'→ 论述同题 (T5) · 本题无配对论述':'← 经验同题 (T4) · 本题无配对新闻题')+'</button>';
     /* v94.6.1: AB 题 A 版（真题素材版）不参与 T4↔T5 配对，防错配 */
     if(x.ab && typeof window._sieleABCur==='function' && window._sieleABCur(x)==='A' && x.abSrc){
       return '<button class="btn ol" disabled style="font-size:12px;padding:5px 12px;opacity:.55">'+(tarea===4?'→ 论述同题 (T5) · 切至题库版可联动':'← 经验同题 (T4) · 切至题库版可联动')+'</button>';
