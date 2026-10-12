@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.7.1-202610121605';
+window.swVer = 'v94.7.2-202610121720';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6056,12 +6056,24 @@ SPEAKING_TOPICS.push(...SPEAKING_EXTRA);
           }
         }
         if(tarea === 5 && q.stances){
-          /* v94.7.1: V2 语法升级范文覆盖（T5 a/b 双篇） */
+          /* v94.7.2: V3 扩写范文覆盖（270-320 词，优先于 V2） */
+          var _V3 = window.SIELE_ORAL_FIX_MODEL_V3, _E1 = window.SIELE_ORAL_FIX_MODEL_V3_EXT, _E2 = window.SIELE_ORAL_FIX_MODEL_V3_EXT2, _E3 = window.SIELE_ORAL_FIX_MODEL_V3_EXT3, _E4 = window.SIELE_ORAL_FIX_MODEL_V3_EXT_C, _E5 = window.SIELE_ORAL_FIX_MODEL_V3_EXT_C2, _E6 = window.SIELE_ORAL_FIX_MODEL_V3_EXT_D, _E7 = window.SIELE_ORAL_FIX_MODEL_V3_EXT_D2;
+          if(_V3){
+            ['a','b'].forEach(function(_k){
+              var _key = q.id + '-' + _k;
+              if(_V3[_key] && q.stances[_k]){
+                var _m = _V3[_key];
+                [_E1,_E2,_E3,_E4,_E5,_E6,_E7].forEach(function(_E){ if(_E && _E[_key]) _m += ' ' + _E[_key]; });
+                q.stances[_k].model = _m; q.stances[_k].gen = true; q.stances[_k]._v3 = true;
+              }
+            });
+          }
+          /* v94.7.1: V2 语法升级范文覆盖（V3 已应用则跳过） */
           var _V2T5 = [window.SIELE_ORAL_FIX_MODEL_V2, window.SIELE_ORAL_FIX_MODEL_V2_B];
           ['a','b'].forEach(function(_k){
             var _v2s = null;
             for(var _vi = 0; _vi < _V2T5.length && !_v2s; _vi++){ _v2s = _V2T5[_vi] && _V2T5[_vi][q.id + '-' + _k]; }
-            if(_v2s && q.stances[_k]){ q.stances[_k].model = _v2s; q.stances[_k].gen = true; }
+            if(_v2s && q.stances[_k] && !q.stances[_k]._v3){ q.stances[_k].model = _v2s; q.stances[_k].gen = true; }
           });
           var F = window.SIELE_ORAL_FIX_OUTLINE || {};
           ['a','b'].forEach(function(k){
@@ -7986,8 +7998,11 @@ function _sieleABOverride(q){
       /* v94.6.2: A 版 FIX 优先（statement/outline/model 分离，中文提纲不进立场卡），否则回退 essay */
       var fx5 = (window.SIELE_ORAL_EXT_FIX_AB5 && window.SIELE_ORAL_EXT_FIX_AB5[abKey]) || null;
       if(fx5){
+        var _v3ab5 = (window.SIELE_ORAL_FIX_MODEL_V3_AB5 && window.SIELE_ORAL_FIX_MODEL_V3_AB5[abKey]) || null;
+        var _v3e = (window.SIELE_ORAL_FIX_MODEL_V3_AB5_EXT && window.SIELE_ORAL_FIX_MODEL_V3_AB5_EXT[abKey]) || '';
         var _v2ab5 = (window.SIELE_ORAL_FIX_MODEL_V2_AB5 && window.SIELE_ORAL_FIX_MODEL_V2_AB5[abKey]) || null;
-        if(_v2ab5) fx5 = Object.assign({}, fx5, { model: _v2ab5 });
+        if(_v3ab5) fx5 = Object.assign({}, fx5, { model: _v3ab5 + (_v3e ? ' ' + _v3e : '') });
+        else if(_v2ab5) fx5 = Object.assign({}, fx5, { model: _v2ab5 });
       }
       if(which !== 'B' && fx5 && fx5.statement){
         o.q = fx5.statement;
