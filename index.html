@@ -573,10 +573,11 @@
 <script src="siele_oral_ext.js" defer></script>
 <script src="audio/manifest.js" defer></script>
 <script src="grammar_data.js" defer></script>
+<script src="grammar_quiz_map.js" defer></script>
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.16-202610142125';
+window.swVer = 'v94.17-202610142150';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3970,6 +3971,20 @@ window._grammarDel = function(t){
 // ===== PAGE: GRAMMAR LIBRARY =====
 function renderGrammar(){
   if(!ST.grammarDone)ST.grammarDone={};
+  /* v94.17: 语法↔题库联动——GRAMMAR_QUIZ_MAP（题库自动抽题）惰性合并进 GRAMMAR_PRACTICE。
+     手写题优先；某点题数<8 时用 map 补足（map 题带 ex/lv/tp/src，答题后联动题库已做过标记+错题集）。
+     幂等标记防重复拼接；map 未加载（defer 时序异常）时静默跳过。 */
+  try{
+    if(window.GRAMMAR_QUIZ_MAP && !window.__gqmMerged){
+      window.__gqmMerged=true;
+      Object.keys(window.GRAMMAR_QUIZ_MAP).forEach(function(t){
+        var extra=window.GRAMMAR_QUIZ_MAP[t];
+        var cur=GRAMMAR_PRACTICE[t]||[];
+        if(cur.length>=8)return;
+        GRAMMAR_PRACTICE[t]=cur.concat(extra.slice(0,8-cur.length));
+      });
+    }
+  }catch(e){}
   let h = `<div class="tb"><div><h2>语法库${renderModuleAccentToggle('grammar')}</h2><div class="d">共 ${GFLAT.length} 条语法 · 点击展开查看详情和例句 · 勾选标记已学 · 有练习题的语法点可点击练习</div></div></div>`;
   h += renderModuleCheckinBar('grammar','语法学习','📐');
 
@@ -17879,6 +17894,27 @@ function answerGrammarPractice(optIdx){
   if(!qs) return;
   const q = qs[_grammarPracticeIdx];
   const correct = optIdx === q.ans;
+  /* v94.17: 语法↔题库双向联动——题库来源的题（带 ex/lv/tp）答题后：
+     ①写 quizHistory → 题库测验自动标「✅ 已做过」并保留本次答案（游标 quizOrderPos 不动，不强推游标）；
+     ②答错 → autoLogQuizError 自动进错题集（与题库测验同 sourceKey 规则，两处同题去重互通）。
+     手写练习题（无 ex 字段）保持原行为不联动。 */
+  if(q.ex){
+    try{
+      if(!ST.quizHistory) ST.quizHistory = {};
+      ST.quizHistory[quizQuestionKey(q)] = {correct: correct, answerText: (q.opts||[])[optIdx]||'', date: todayStr(), ts: Date.now()};
+      if(!correct){
+        autoLogQuizError({
+          question: q.q || '',
+          myAnswer: (q.opts||[])[optIdx]||'',
+          correctAnswer: (q.opts||[])[q.ans]||'',
+          explanation: q.fb || '',
+          type: 'quiz',
+          sourceKey: [q.ex||'',q.lv||'',q.tp||'',q.q||'',(q.opts||[]).join('|')].join('::')
+        });
+      }
+      save();
+    }catch(_gpe){}
+  }
   // Mark options
   q.opts.forEach((o,i) => {
     const el = document.getElementById('gp_opt_'+i);
