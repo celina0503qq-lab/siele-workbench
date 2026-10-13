@@ -870,6 +870,7 @@ let DB=null;    // 当前用户数据
 const dataKey=u=>'swa_data_v1_'+u;
 function saveDB(opts){
   if(!CUR||!DB)return;
+  if(!DB.meta||typeof DB.meta!=='object')DB.meta={rev:0,lastSync:0,lastPushTs:0,lastBackup:0}; /* v94.13 防御 */
   DB.meta.rev=(DB.meta.rev||0)+1;
   lsSet(dataKey(CUR),DB);
   refreshBadges();
@@ -1279,6 +1280,10 @@ function showAuthView(){
 function enter(u,persist,profile){
   CUR=u;
   DB=lsGet(dataKey(u),null)||blankData(true);
+  /* v94.13: 云端拉回/旧版本记录可能缺 meta（saveDB/updateSyncUI 依赖），防御补齐 */
+  if(!DB.meta||typeof DB.meta!=='object')DB.meta={rev:0,lastSync:0,lastPushTs:0,lastBackup:0};
+  if(!Array.isArray(DB.plans))DB.plans=[];
+  if(!DB.settings||typeof DB.settings!=='object')DB.settings={examType:'siele',targetLevel:'B2',examDate:''};
   if(persist)lsSet(LSS,{u,ts:Date.now(),cloud:!!(profile&&profile.sessionToken)});
   $('authView').style.display='none';
   try{$('authPasswdView').classList.add('hide');}catch(_){}
@@ -1528,13 +1533,14 @@ function renderDash(){
   $('dashDate').textContent='今天是 '+d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' · '+['周日','周一','周二','周三','周四','周五','周六'][d.getDay()]+(DB.settings.examDate?' · 距考试 '+Math.max(0,Math.ceil((new Date(DB.settings.examDate)-d)/86400000))+' 天':'');
   const learned=DB.words.filter(w=>w.mastery>0).length;
   const mastered=DB.words.filter(w=>w.mastery>=3).length;
-  // v94.13: 主站学习数据快照（主站 doPush 写入 DB.wb）。后台自有词库仅 512 精选词，与主站全词库口径不同——
-  // 「已学单词」卡优先展示主站快照真实口径，避免「单词数不对」的观感；同步时间戳让滞后性可见。
+  // v94.13: 主站仪表盘汇总（主站 wbSnap 上行 c.dash），四卡与主站仪表盘完全同口径
+  const md=(DB.wb&&DB.wb.data&&DB.wb.data.dash)||null;
   const wbData=(DB.wb&&DB.wb.data)||null;
   const wbVm=wbData&&wbData.vocabMastery?wbData.vocabMastery:null;
   const wbLearned=wbVm?Object.keys(wbVm).filter(k=>wbVm[k]>0).length:null;
   const wbMastered=wbVm?Object.keys(wbVm).filter(k=>wbVm[k]>=3).length:null;
   const wbAgo=(function(){if(!DB.wb||!DB.wb.ts)return '';const m=Math.round((Date.now()-DB.wb.ts)/60000);if(m<1)return '刚刚';if(m<60)return m+' 分钟前';const h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前';})();
+  const syncTag=(DB.wb&&DB.wb.ts)?' · 同步于 '+wbAgo:'';
   $('dashDate').textContent='今天是 '+d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' · '+['周日','周一','周二','周三','周四','周五','周六'][d.getDay()]+(DB.settings.examDate?' · 距考试 '+Math.max(0,Math.ceil((new Date(DB.settings.examDate)-d)/86400000))+' 天':'')+(DB.wb&&DB.wb.ts?' · 主站数据同步于 '+wbAgo:'');
   const qDone=DB.questions.filter(q=>q.done).length;
   const qCorrect=DB.questions.filter(q=>q.done&&q.correct).length;
@@ -1544,12 +1550,17 @@ function renderDash(){
   const t7=Date.now()-7*86400000;
   const rev7=DB.reviews.filter(r=>new Date(r.date).getTime()>=t7).length;
   const minutes=DB.reviews.reduce((s,r)=>s+(+r.minutes||0),0);
-  $('dashStats').innerHTML=[
+  $('dashStats').innerHTML=(md?[
+    ['num',md.vocabLearned,'已学单词','共 '+md.vocabTotal+' 词 · 与主站一致'+syncTag],
+    ['num t',md.vocabMastered,'已掌握','三颗星掌握 · 主站口径'],
+    ['num a',md.grammarDone,'语法已学','共 '+md.grammarTotal+' 条 · 主站口径'],
+    ['num k',(md.quizAvg||0)+'<span style="font-size:14px">分</span>','测验均分','完成 '+md.quizDone+' 次 · 主站口径']
+  ]:[
     wbVm?['num',wbLearned,'已学单词（主站）','掌握 '+wbMastered+' 词 · 同步于 '+wbAgo]:['num',learned,'已学单词','共 '+DB.words.length+' 词 · '+mastered+' 词已掌握'],
     ['num t',qDone,'完成题目','正确率 '+accuracy+'% · 共 '+DB.questions.length+' 题'],
     ['num a',planPct+'<span style="font-size:14px">%</span>','计划完成率',plans.length+' 个计划'],
     ['num k',rev7,'近7天复习','累计学习 '+Math.round(minutes/60*10)/10+' 小时'+(wbVm?' · 本卡与词库为后台精选口径':'')]
-  ].map(x=>'<div class="card stat"><div class="'+x[0]+'">'+x[1]+'</div><div class="lbl">'+x[2]+'</div><div class="sub">'+x[3]+'</div></div>').join('');
+  ]).map(x=>'<div class="card stat"><div class="'+x[0]+'">'+x[1]+'</div><div class="lbl">'+x[2]+'</div><div class="sub">'+x[3]+'</div></div>').join('');
 
   // 14天柱状图
   const days=[];for(let i=13;i>=0;i--){const dd=new Date(Date.now()-i*86400000);const key=dd.getFullYear()+'-'+String(dd.getMonth()+1).padStart(2,'0')+'-'+String(dd.getDate()).padStart(2,'0');days.push({key,label:(dd.getMonth()+1)+'/'+dd.getDate(),n:DB.reviews.filter(r=>r.date===key).length});}

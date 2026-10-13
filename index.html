@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.12-202610131905';
+window.swVer = 'v94.13-202610131950';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -18502,6 +18502,17 @@ function wbSnap(){
   var c=Object.assign({},ST);
   delete c.quizSession;delete c.quizIdx;delete c.quizScore;delete c.quizAnswered;delete c.quizQuestionState;
   delete c.vocabMastery;delete c.flashMastery;
+  /* v94.13: 主站仪表盘汇总标量上行（admin 看板对齐主站口径：单词数=VDATA 全词库规模） */
+  try{
+    var _vm=ST.vocabMastery||{};var _vl=0,_vms=0;
+    Object.keys(_vm).forEach(function(k){var v=_vm[k];if(v>0)_vl++;if(v>=3)_vms++;});
+    var _qr=ST.quizResults||[];var _qs=0;
+    _qr.forEach(function(q){var n=parseFloat(String(q));if(!isNaN(n))_qs+=n;});
+    c.dash={vocabTotal:(typeof VDATA!=='undefined')?VDATA.length:0,vocabLearned:_vl,vocabMastered:_vms,
+      grammarTotal:(typeof GFLAT!=='undefined')?GFLAT.length:0,
+      grammarDone:Object.values(ST.grammarDone||{}).filter(function(v){return v;}).length,
+      quizDone:_qr.length,quizAvg:_qr.length?Math.round(_qs/_qr.length):0};
+  }catch(e){}
   c.pomodoro=Object.assign({},ST.pomodoro,{running:false});
   // Trim sieleOralScores for sync: keep full history (capped at 20) + latest attempt snapshot
   if(c.sieleOralScores){
@@ -19302,6 +19313,28 @@ window.wbToggleTask=function(i){
   if(typeof renderMain==='function')renderMain();
 };
 function escB(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+/* v94.13: 复习计划卡（后台管理系统制定，plans 随云端记录同步，此处只读展示） */
+function planCardHtml(){
+  try{
+    var plans=(ADB&&Array.isArray(ADB.plans))?ADB.plans.slice().sort(function(a,b){return (b.updatedAt||0)-(a.updatedAt||0);}):[];
+    var h='<div class="card" style="margin-bottom:18px"><h3><span class="ic">📅</span>复习计划 <span style="font-size:11px;color:var(--soft);font-weight:400">在后台管理中制定，此处同步展示</span></h3>';
+    if(plans.length){
+      var today=new Date().toISOString().slice(0,10);
+      h+=plans.slice(0,4).map(function(p){
+        var pct=Math.min(100,Math.round((p.done||0)/(p.target||1)*100));
+        var over=p.end&&p.end<today&&pct<100;
+        return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)">'+
+          '<div style="flex:1;min-width:0"><div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(p.title)+(over?' <span style="color:#C0392B;font-size:11px">已逾期</span>':'')+'</div>'+
+          '<div style="height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden"><i style="display:block;height:100%;width:'+pct+'%;background:var(--m-vocab,#2E7D32);border-radius:3px"></i></div></div>'+
+          '<div style="font-size:12px;color:var(--soft);white-space:nowrap">'+pct+'% · '+(p.done||0)+'/'+(p.target||1)+'</div></div>';
+      }).join('');
+      if(plans.length>4)h+='<div style="font-size:11px;color:var(--soft);padding-top:7px">… 共 '+plans.length+' 个计划，去后台管理查看全部</div>';
+    }else{
+      h+='<div style="font-size:12.5px;color:var(--soft);padding:6px 0">还没有复习计划。去 <b>后台管理 → 复习计划</b> 制定，会自动同步显示在这里。</div>';
+    }
+    return h+'</div>';
+  }catch(e){ return ''; }
+}
 function todoCardHtml(){
   try{
     if(typeof generateDailyTasks==='function')generateDailyTasks();
@@ -19362,6 +19395,13 @@ if(typeof renderDash==='function'){
   var _rd0=renderDash;
   renderDash=function(){
     var h=_rd0();
+    /* v94.13: 复习计划卡插在雷达之后、番茄钟区（dashQuickAnchor）之前 */
+    var ph=planCardHtml();
+    if(ph){
+      var aq=h.indexOf('<div class="g g2" id="dashQuickAnchor">');
+      if(aq>=0)h=h.slice(0,aq)+ph+h.slice(aq);
+      else h+=ph;
+    }
     var anchor='<div class="g g4"';
     var i=h.indexOf(anchor);
     if(i>=0)return h.slice(0,i)+todoCardHtml()+h.slice(i);
