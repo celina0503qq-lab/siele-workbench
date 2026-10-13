@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.17-202610142150';
+window.swVer = 'v94.18-202610140012';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -16896,33 +16896,50 @@ const GRAMMAR_PRACTICE = {
 
 };
 // Additional practice questions for expanded grammar topics
+/* v94.18 G1-G4：①修 9 处缺重音（compraría/tendré/tenía/harás/había×4/saldré/más/intentaré/tú）
+   ②Pluscuamperfecto 两组 habia×2 重复选项去重 ③全部手写题补 lv（等级徽章）+exp（详解），
+   渲染器对齐题库测验样式 */
 GRAMMAR_PRACTICE['Verbos irregulares -o→ue'] = [
-  {q:'Yo ___ hablar español.', opts:['puedo','podo','pudo','puedo'], ans:0, fb:'poder: o→ue, yo→puedo'},
-  {q:'Ella ___ ocho horas cada noche.', opts:['dorme','duerme','durme','dorme'], ans:1, fb:'dormir: o→ue, ella→duerme'},
+  {q:'Yo ___ hablar español.', opts:['puedo','podo','pudo','pueda'], ans:0, lv:'A2', fb:'poder: o→ue, yo→puedo',
+   exp:'poder 是 o→ue 词干变化动词：重读音节的 o 变 ue（poder→puedo）。「会做某事」用 poder + 动词原形：Puedo hablar español. 注意 podo/pueda 都不存在（pueda 是虚拟式，此处用陈述式）。'},
+  {q:'Ella ___ ocho horas cada noche.', opts:['duerme','dorme','durme','dormía siempre'], ans:0, lv:'A2', fb:'dormir: o→ue, ella→duerme',
+   exp:'dormir 同为 o→ue 动词：duermo/duermes/duerme…（nosotros 变位不变形：dormimos）。每晚的习惯动作用陈述式现在时 duerme。'},
 ];
 GRAMMAR_PRACTICE['Pretérito perfecto irregular'] = [
-  {q:'He ___ la puerta.', opts:['abrido','abierto','abertado','abrido'], ans:1, fb:'abrir→abierto (不规则过去分词)'},
-  {q:'Que has ___ hoy?', opts:['hacido','hacido','hecho','hechado'], ans:2, fb:'hacer→hecho (不规则过去分词)'},
+  {q:'He ___ la puerta.', opts:['abrido','abierto','abertado','abrado'], ans:1, lv:'A2', fb:'abrir→abierto (不规则过去分词)',
+   exp:'abrir 的过去分词不规则：abierto（不是 abrido）。现在完成时结构 = he/has/ha… + 分词：He abierto la puerta. 同族：cubrir→cubierto, escribir→escrito, ver→visto, decir→dicho。'},
+  {q:'¿Qué has ___ hoy?', opts:['hacido','hecho','haechado','hecido'], ans:1, lv:'A2', fb:'hacer→hecho (不规则过去分词)',
+   exp:'hacer 的过去分词为 hecho（不是 hacido）。Has hecho hoy? = 你今天做了什么？同族高频：hacer→hecho、poner→puesto、ver→visto、volver→vuelto。'},
 ];
 GRAMMAR_PRACTICE['Gerundio'] = [
-  {q:'Estoy ___ ahora.', opts:['comer','comiendo','comerando','comido'], ans:1, fb:'comer→comiendo (-er→-iendo)'},
-  {q:'Ella esta ___ un libro.', opts:['leer','leyendo','leiendo','leido'], ans:1, fb:'leer→leyendo (i→y在元音后)'},
+  {q:'Estoy ___ ahora.', opts:['comer','comiendo','comerando','comido'], ans:1, lv:'A2', fb:'comer→comiendo (-er→-iendo)',
+   exp:'estar + 副动词表正在进行：-er 动词去词尾加 -iendo（comer→comiendo）。注意不是 comerando，也不是用分词 comido（comido 表已完成状态）。'},
+  {q:'Ella está ___ un libro.', opts:['leyendo','leiendo','leyendo mucho','leído'], ans:0, lv:'A2', fb:'leer→leyendo (i→y在元音后)',
+   exp:'leer 的副动词：leer→le-iendo，元音间的 i 变 y → leyendo（正字法规则）。同理 creer→creyendo、oír→oyendo。'},
 ];
 GRAMMAR_PRACTICE['Pluscuamperfecto'] = [
-  {q:'Cuando llegue, ya ___ comido.', opts:['he','habia','hube','habia'], ans:1, fb:'过去完成时→habia comido'},
-  {q:'Ella ___ terminado antes de que yo llegara.', opts:['ha','habia','hubo','habia'], ans:1, fb:'habia terminado (过去完成时)'},
+  {q:'Cuando llegue, ya ___ comido.', opts:['he','había','hube','habría'], ans:1, lv:'B1', fb:'过去完成时→había comido',
+   exp:'过去完成时（pluscuamperfecto）= había + 过去分词，表「过去的过去」：到（将来某个时点）之前已经吃完 → 用 había comido。hube 是简单过去完成时（书面叙事专用），habría 是条件式，都不合语境。'},
+  {q:'Ella ___ terminado antes de que yo llegara.', opts:['ha','había','hubo','habrá'], ans:1, lv:'B1', fb:'había terminado (过去完成时)',
+   exp:'antes de que yo llegara（在我到达之前）锚定了「过去的过去」，所以用 había terminado。ha terminado（现在完成时）与 llegara（过去）时态冲突。'},
 ];
 GRAMMAR_PRACTICE['Subjuntivo pasado'] = [
-  {q:'Si ___ dinero, compraria un coche.', opts:['tengo','tuviera','tendre','tenia'], ans:1, fb:'虚拟式过去时→tuviera (si + 虚拟式过去 + 条件式)'},
-  {q:'Quería que lo ___ tu.', opts:['haces','hicieras','haras','hacias'], ans:1, fb:'虚拟式过去时→hicieras'},
+  {q:'Si ___ dinero, compraría un coche.', opts:['tengo','tuviera','tendré','tenía'], ans:1, lv:'B2', fb:'虚拟式过去时→tuviera (si + 虚拟式过去 + 条件式)',
+   exp:'假设句黄金结构：Si + 虚拟式过去时（tuviera），主句 + 条件式（compraría，注意重音符号）。= 与现在事实相反的假设「如果我有钱的话，我就会买辆车」。主句千万不能再用 tendré/tenía。'},
+  {q:'Quería que lo ___ tú.', opts:['haces','hicieras','harás','hacías'], ans:1, lv:'B2', fb:'虚拟式过去时→hicieras',
+   exp:'querer 过去时（quería）+ que → 从句用虚拟式过去时：hicieras（hacer 的 tú 虚拟式过去）。主句过去 + 从句未完成/同时的意愿，虚拟式必须退一步用过去时。'},
 ];
 GRAMMAR_PRACTICE['Oraciones concesivas'] = [
-  {q:'___ llueva, saldre de todas formas.', opts:['Aunque','Por','Para','Cuando'], ans:0, fb:'aunque + 虚拟式(将来不确定): Aunque llueva'},
-  {q:'Por mas que ___, no lo consigo.', opts:['intento','intente','intentare','intentaba'], ans:1, fb:'por mas que + 虚拟式: intente'},
+  {q:'___ llueva, saldré de todas formas.', opts:['Aunque','Por','Para','Cuando'], ans:0, lv:'B2', fb:'aunque + 虚拟式(将来不确定): Aunque llueva',
+   exp:'aunque + 虚拟式 = 让步且事实未知（「就算下雨」）；aunque + 陈述式 = 承认已知事实。主句 saldré 是将来计划，从句是否下雨未知 → llueva。saldré 需要重音符号。'},
+  {q:'Por más que ___, no lo consigo.', opts:['intento','intente','intentaré','intentaba siempre'], ans:1, lv:'B2', fb:'por más que + 虚拟式: intente',
+   exp:'por más que（无论怎么…）后接虚拟式表达「尚未实现的努力」：Por más que intente, no lo consigo. 若表述过去的重复事实才用陈述式 intentaba。另外 por más 的 más 必须带重音。'},
 ];
 GRAMMAR_PRACTICE['Pasiva y pasiva refleja'] = [
-  {q:'El Quijote fue ___ por Cervantes.', opts:['escrito','escribido','escribiendo','escribir'], ans:0, fb:'ser + 过去分词: fue escrito (被动语态)'},
-  {q:'___ español en España.', opts:['Hablan','Se habla','Se hablan','Es hablado'], ans:1, fb:'se + 动词: Se habla (被动反身形式)'},
+  {q:'El Quijote fue ___ por Cervantes.', opts:['escrito','escribido','escribiendo','escribir'], ans:0, lv:'B2', fb:'ser + 过去分词: fue escrito (被动语态)',
+   exp:'被动语态 = ser + 过去分词（性数一致）+ por 施动者：fue escrito por Cervantes。escribir 的分词是 escrito（不规则），不存在 escribido。'},
+  {q:'___ español en España.', opts:['Hablan','Se habla','Se hablan','Es hablado'], ans:1, lv:'B2', fb:'se + 动词: Se habla (被动反身形式)',
+   exp:'被动反身（pasiva refleja）= se + 第三单/复数动词，动词与受事单复数一致：Se habla español（说西语）。受事 español 是单数 → habla。日常/新闻里比 ser+分词更常用。'},
 ];
 // 获取最终动词用法词条（管理员编辑 > 默认）
 function getVerbUsage(){
@@ -17926,7 +17943,7 @@ function answerGrammarPractice(optIdx){
   const fb = document.getElementById('gp_fb');
   if(fb){
     fb.className = 'qfb show ' + (correct ? 'ok' : 'no');
-    fb.innerHTML = (correct ? '✓ 正确！' : '✗ 不正确。') + ' <b>解析：</b>' + esc(q.fb);
+    fb.innerHTML = (correct ? '✓ 正确！' : '✗ 不正确。') + ' <b>' + (q.exp ? '详解' : '解析') + '：</b>' + esc(q.exp || q.fb);
   }
   document.getElementById('gp_next').style.display = 'inline-flex';
 }
@@ -17953,7 +17970,7 @@ function renderGrammarPracticeHTML(){
   if(!qs || _grammarPracticeIdx >= qs.length) return '';
   const q = qs[_grammarPracticeIdx];
   const letters = ['A','B','C','D'];
-  let h = `<div style="font-size:11px;color:var(--soft);margin-bottom:6px">练习 ${_grammarPracticeIdx+1}/${qs.length} · ${esc(_grammarPracticeTopic)}</div>`;
+  let h = `<div style="font-size:11px;color:var(--soft);margin-bottom:6px">练习 ${_grammarPracticeIdx+1}/${qs.length} · ${esc(_grammarPracticeTopic)}${q.lv?` <span style="display:inline-block;background:var(--tr);color:#fff;font-size:9px;padding:1px 7px;border-radius:18px;font-weight:700;margin-left:4px;vertical-align:1px">${esc(q.lv)}</span>`:''}${q.src?` <span style="font-size:9px;color:var(--soft)">· 联动题库</span>`:''}</div>`;
   h += `<div class="qq"><span class="qes">${esc(q.q)}</span></div><div class="qo">`;
   q.opts.forEach((o,i) => {
     h += `<div class="qopt" id="gp_opt_${i}" onclick="answerGrammarPractice(${i})"><span class="L">${letters[i]}</span><span>${esc(o)}</span></div>`;
