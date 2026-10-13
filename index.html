@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.9-2026101312';
+window.swVer = 'v94.10-2026101312';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5042,32 +5042,62 @@ WRITING_EXTRA.forEach(function(t){ t.hidden = 1; });
 const SIELE_WRITING_TPL_GUIDES = [{"id": "tpl1", "name": "模版一 · 通用投诉/建议信", "use": "适用于绝大多数 T2：向报社/当局反映问题并提出诉求。", "points": ["称呼+身份+来意：Estimado/a señor/a director/a: Reciba un saludo cordial... Soy..., lector/a asiduo/a de su periódico.", "背景引入：Me dirijo a usted para expresar mi inconformidad con respecto a...", "论据展开：Ante todo... / Por otro lado... / Además...", "提出诉求：Por ello, solicito que... / Sería necesario que + 虚拟式", "收尾：Agradeciendo de antemano su atención, atentamente, [Nombre]"]}, {"id": "tpl2", "name": "模版二 · 现象描述+影响分析", "use": "适合 T2 材料为社会现象/新政（停车费、禁令、限流）。", "points": ["开头：Con motivo de la noticia publicada sobre..., quisiera compartir mi punto de vista.", "描述现状：En los últimos meses/tiempos, se ha observado que...", "影响两面：Por un lado..., por otro lado... / Esto conlleva que...", "建议：Propongo que se + 虚拟式 (estudie, limite, amplíe...)", "收尾：Espero que estas líneas contribuyan al debate. Atentamente."]}, {"id": "tpl3", "name": "模版三 · 观点论证型", "use": "适合 T2 需要表明立场（支持/反对）的题目。", "points": ["立场亮明：Soy de la opinión de que... / No comparto la decisión de...", "核心论据：En primer lugar... En segundo lugar... Además...", "让步反驳：Es cierto que..., sin embargo... / Aunque es verdad que..., no menos cierto es que...", "强化立场：Por lo tanto, considero imprescindible que + 虚拟式", "收尾：Quedo a su disposición para ampliar esta información. Un saludo atento."]}, {"id": "tplX", "name": "终极模版 · 万能骨架", "use": "背熟这一篇的 12 个骨架句，任何 T2 都能套。骨架句已标注高亮。", "points": ["Reciba un saludo cordial de mi parte.（万能开场）", "Me dirijo a usted para expresar mi... con respecto a...（万能来意）", "Ante todo / Por otro lado / Además（论据三连）", "Sería necesario que / Solicito que + 虚拟式（万能诉求）", "Agradeciendo de antemano su atención, se despide atentamente...（万能收尾）"]}];
 // v94.4: 写作 T2 模版骨架生成器（4 模版；s 为 {saludo,identidad,asunto,arg1,arg2,arg3,peticion,despedida,nombre}）
 function makeWritingT2Model(tpl, s){
+  /* v94.10 四套骨架完善：①修 tpl3 seriedad→seria ②每套加扩展槽（举例/释义/因果），
+     成品 ~160 词达 T2 B2 字数带 ③tplX 独立为 12 骨架句万能版（让步反驳+双诉求+条件收尾） */
   s = s || {};
   var g = function(k, d){ return (s[k] && String(s[k]).trim()) || d; };
+  var EX = ' <span class="link">Por ejemplo</span>, '+g('ejemplo','en mi propio barrio se ha pasado de un servicio semanal a uno casi inexistente')+'. '+
+           '<span class="link">Es decir</span>, '+g('esdecir','las palabras no se corresponden con los hechos')+'.';
   if(tpl === 'tpl2'){
     return '<span class="link">Con motivo de</span> la noticia publicada sobre <span class="key">'+g('asunto','este asunto')+'</span>, quisiera compartir mi punto de vista. '+
       'En los últimos tiempos se ha observado que '+g('arg1','la situación ha empeorado notablemente')+'. '+
+      EX+
       '<span class="key">Por un lado</span>, '+g('arg2','afecta directamente a la calidad de vida de los vecinos')+
       '; <span class="key">por otro lado</span>, '+g('arg3','genera un descontento creciente entre la ciudadanía')+'. '+
+      '<span class="link">Debido a que</span> las administraciones han tardado en reaccionar, '+g('causa','muchos ciudadanos se han visto obligados a trasladar sus quejas a la prensa')+'. '+
       '<span class="link">Propongo que</span> se estudien medidas concretas y se abra un periodo de participación ciudadana. '+
+      '<span class="key">Agradecería que</span> esta carta fuera tenida en cuenta en la próxima reunión. '+
+      '<span class="link">Cabe destacar que</span> '+g('destacable','otras ciudades ya han puesto en marcha soluciones parecidas con buenos resultados')+'. '+
       'Espero que estas líneas contribuyan al debate. Atentamente, '+g('nombre','[Nombre]')+'.';
   }
   if(tpl === 'tpl3'){
-    return 'Estimado/a señor/a director/a: <span class="key">Soy de la opinión de que</span> '+g('asunto','esta cuestión')+' merece una reflexión seriedad. '+
+    return 'Estimado/a señor/a director/a: <span class="key">Soy de la opinión de que</span> '+g('asunto','esta cuestión')+' merece una reflexión seria. '+
       '<span class="key">En primer lugar</span>, '+g('arg1','los datos demuestran que el problema es real')+
       '. <span class="key">En segundo lugar</span>, '+g('arg2','las soluciones adoptadas hasta ahora han sido insuficientes')+
-      '. <span class="key">Es cierto que</span> existen otras prioridades, <span class="key">sin embargo</span>, '+g('arg3','no podemos seguir ignorando su impacto')+'. '+
+      '. '+EX+
+      '<span class="key">Es cierto que</span> existen otras prioridades, <span class="key">sin embargo</span>, '+g('arg3','no podemos seguir ignorando su impacto')+'. '+
+      '<span class="link">Aunque</span> '+g('concesion','algunos sectores se opongan al cambio, los beneficios superarían claramente los costes')+'. '+
+      '<span class="link">Según los últimos informes</span>, '+g('dato','el número de afectados ha aumentado un treinta por ciento en solo dos años')+'. '+
       '<span class="key">Por lo tanto, considero imprescindible que</span> se tomen medidas urgentes. '+
+      '<span class="link">A fin de cuentas</span>, '+g('cierre','de lo que se trata es de elegir entre una solución tardía y una decisión valiente')+'. '+
       'Quedo a su disposición para ampliar esta información. Un saludo atento, '+g('nombre','[Nombre]')+'.';
   }
-  // tpl1 / tplX 同一骨架（tplX = 终极万能版）
+  if(tpl === 'tplX'){
+    /* 终极万能版：12 骨架句，编号分四步，任何 T2 都可逐句套用 */
+    return '<b>①开场</b> Estimado/a señor/a director/a: <span class="key">Reciba un saludo cordial de mi parte</span>. '+
+      'Soy '+g('identidad','un/a lector/a asiduo/a de su periódico')+'. '+
+      '<span class="key">Me dirijo a usted para expresar mi</span> '+g('sentimiento','inconformidad')+' <span class="key">con respecto a</span> '+g('asunto','este asunto')+'. '+
+      '<b>②论据</b> <span class="key">Ante todo</span>, '+g('arg1','la situación actual demuestra la urgencia del problema')+
+      '. '+EX+
+      '<span class="key">Por otro lado</span>, '+g('arg2','las medidas adoptadas hasta ahora no han dado resultado')+
+      '. <span class="key">Además</span>, '+g('arg3','el impacto sobre los vecinos es cada vez mayor')+'. '+
+      '<b>③让步与诉求</b> <span class="key">No quiero negar que</span> '+g('concesion','se hayan dado algunos avances aislados')+', <span class="key">no obstante</span>, resultan claramente insuficientes. '+
+      '<span class="key">Sería necesario que</span> '+g('peticion','se adoptaran medidas eficaces de inmediato')+'. '+
+      '<span class="link">Solicito también que</span> se nos mantenga informados sobre los plazos concretos. '+
+      '<b>④收尾</b> <span class="key">De no recibirse respuesta en un plazo razonable</span>, me vería en la obligación de trasladar este asunto a las autoridades competentes. '+
+      'Agradeciendo de antemano su atención, se despide atentamente, '+g('nombre','[Nombre]')+'.';
+  }
+  // tpl1 通用投诉/建议信
   return 'Estimado/a señor/a director/a: <span class="key">Reciba un saludo cordial de mi parte</span>. '+
     'Soy '+g('identidad','un/a lector/a asiduo/a de su periódico')+'. '+
     '<span class="key">Me dirijo a usted para expresar mi</span> '+g('sentimiento','inconformidad')+' <span class="key">con respecto a</span> '+g('asunto','este asunto')+'. '+
     '<span class="key">Ante todo</span>, '+g('arg1','la situación actual demuestra la urgencia del problema')+
-    '. <span class="key">Por otro lado</span>, '+g('arg2','las medidas adoptadas hasta ahora no han dado resultado')+
+    '. '+EX+
+    '<span class="key">Por otro lado</span>, '+g('arg2','las medidas adoptadas hasta ahora no han dado resultado')+
     '. <span class="key">Además</span>, '+g('arg3','el impacto sobre los vecinos es cada vez mayor')+'. '+
     '<span class="key">Sería necesario que</span> '+g('peticion','se adoptaran medidas eficaces de inmediato')+'. '+
+    '<span class="link">En calidad de</span> '+g('cargo','vecino afectado y miembro de la asociación de usuarios')+', me permito trasladarles la siguiente petición por medio de estas líneas. '+
+    '<span class="link">De mantenerse esta situación</span>, '+g('riesgo','el servicio acabará desapareciendo por completo antes de fin de año')+'. '+
     'Agradeciendo de antemano su atención, se despide atentamente, '+g('nombre','[Nombre]')+'.';
 }
 // ===== v94.4 bank end =====
