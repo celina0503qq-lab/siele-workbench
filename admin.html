@@ -1528,6 +1528,14 @@ function renderDash(){
   $('dashDate').textContent='今天是 '+d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' · '+['周日','周一','周二','周三','周四','周五','周六'][d.getDay()]+(DB.settings.examDate?' · 距考试 '+Math.max(0,Math.ceil((new Date(DB.settings.examDate)-d)/86400000))+' 天':'');
   const learned=DB.words.filter(w=>w.mastery>0).length;
   const mastered=DB.words.filter(w=>w.mastery>=3).length;
+  // v94.13: 主站学习数据快照（主站 doPush 写入 DB.wb）。后台自有词库仅 512 精选词，与主站全词库口径不同——
+  // 「已学单词」卡优先展示主站快照真实口径，避免「单词数不对」的观感；同步时间戳让滞后性可见。
+  const wbData=(DB.wb&&DB.wb.data)||null;
+  const wbVm=wbData&&wbData.vocabMastery?wbData.vocabMastery:null;
+  const wbLearned=wbVm?Object.keys(wbVm).filter(k=>wbVm[k]>0).length:null;
+  const wbMastered=wbVm?Object.keys(wbVm).filter(k=>wbVm[k]>=3).length:null;
+  const wbAgo=(function(){if(!DB.wb||!DB.wb.ts)return '';const m=Math.round((Date.now()-DB.wb.ts)/60000);if(m<1)return '刚刚';if(m<60)return m+' 分钟前';const h=Math.round(m/60);if(h<24)return h+' 小时前';return Math.round(h/24)+' 天前';})();
+  $('dashDate').textContent='今天是 '+d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' · '+['周日','周一','周二','周三','周四','周五','周六'][d.getDay()]+(DB.settings.examDate?' · 距考试 '+Math.max(0,Math.ceil((new Date(DB.settings.examDate)-d)/86400000))+' 天':'')+(DB.wb&&DB.wb.ts?' · 主站数据同步于 '+wbAgo:'');
   const qDone=DB.questions.filter(q=>q.done).length;
   const qCorrect=DB.questions.filter(q=>q.done&&q.correct).length;
   const accuracy=qDone?Math.round(qCorrect/qDone*100):0;
@@ -1537,10 +1545,10 @@ function renderDash(){
   const rev7=DB.reviews.filter(r=>new Date(r.date).getTime()>=t7).length;
   const minutes=DB.reviews.reduce((s,r)=>s+(+r.minutes||0),0);
   $('dashStats').innerHTML=[
-    ['num',learned,'已学单词','共 '+DB.words.length+' 词 · '+mastered+' 词已掌握'],
+    wbVm?['num',wbLearned,'已学单词（主站）','掌握 '+wbMastered+' 词 · 同步于 '+wbAgo]:['num',learned,'已学单词','共 '+DB.words.length+' 词 · '+mastered+' 词已掌握'],
     ['num t',qDone,'完成题目','正确率 '+accuracy+'% · 共 '+DB.questions.length+' 题'],
     ['num a',planPct+'<span style="font-size:14px">%</span>','计划完成率',plans.length+' 个计划'],
-    ['num k',rev7,'近7天复习','累计学习 '+Math.round(minutes/60*10)/10+' 小时']
+    ['num k',rev7,'近7天复习','累计学习 '+Math.round(minutes/60*10)/10+' 小时'+(wbVm?' · 本卡与词库为后台精选口径':'')]
   ].map(x=>'<div class="card stat"><div class="'+x[0]+'">'+x[1]+'</div><div class="lbl">'+x[2]+'</div><div class="sub">'+x[3]+'</div></div>').join('');
 
   // 14天柱状图
@@ -1554,7 +1562,7 @@ function renderDash(){
   let off=0;const C=2*Math.PI*48;
   $('donutSvg').innerHTML='<circle cx="60" cy="60" r="48" fill="none" stroke="#f0e6d2" stroke-width="14"/>'+seg.map(s=>{const len=s[0]/tot*C;const el='<circle cx="60" cy="60" r="48" fill="none" stroke="'+s[1]+'" stroke-width="14" stroke-dasharray="'+len+' '+(C-len)+'" stroke-dashoffset="'+(-off)+'"/>';off+=len;return el;}).join('');
   $('donutPct').textContent=Math.round(mastered/tot*100)+'%';
-  $('donutLegend').innerHTML=seg.map(s=>'<div class="li"><span class="sw" style="background:'+s[1]+'"></span>'+s[2]+' · '+s[0]+' 词</div>').join('');
+  $('donutLegend').innerHTML=seg.map(s=>'<div class="li"><span class="sw" style="background:'+s[1]+'"></span>'+s[2]+' · '+s[0]+' 词</div>').join('')+'<div style="font-size:11px;color:var(--soft);margin-top:6px">基于后台精选词库（'+DB.words.length+' 词），非主站全词库口径</div>';
 
   // 等级进度
   $('lvlBars').innerHTML=['A1','A2','B1','B2','C1'].map(l=>{
