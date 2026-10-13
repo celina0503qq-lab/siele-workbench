@@ -524,6 +524,19 @@
   .so-nav{flex-wrap:wrap}
   #main section.card{padding:10px}
 }
+/* ===== v94.13 (F3): 口语页 390px 窄屏补强（历史/范文/识别文本换行+限高，按钮不溢出）===== */
+@media(max-width:420px){
+  #main{padding:8px}
+  #main section.card{padding:8px}
+  .so-stage,.so-console,.so-side,#main .card{max-width:100%;min-width:0}
+  .so-model,.so-history,.so-recognized,.so-question,.so-prompt,.note,.so-zhexp{overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  .so-actions{flex-wrap:wrap;gap:6px}
+  .so-actions .btn,.so-actions .rb{font-size:12px;padding:6px 10px;min-width:0}
+  .so-var,.so-topic{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #soModelText,#soHistoryBox{overflow-wrap:anywhere;word-break:break-word}
+  #soRecognized{max-height:120px;overflow:auto}
+  .so-nav{gap:6px}
+}
 </style>
 </head>
 <body>
@@ -541,7 +554,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.13-202610131950';
+window.swVer = 'v94.14-202610132015';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6904,7 +6917,11 @@ function generateModelEssay(topic, userText, keywords){
   var introduction, body, conclusion;
   if(lvl==='A1'){
     introduction = 'Hola, me gustaría hablar sobre ' + esc(title) + '. Es un tema que me interesa mucho.';
-    body = 'Hay varios aspectos importantes. Primero, creo que ' + (userKeywords[0]||'es muy interesante') + ' es importante. También, ' + (userKeywords[1]||'me gusta mucho') + ' porque es bueno para la gente. Además, ' + (userKeywords[2]||'siempre pienso en esto') + ' cuando hablo con mis amigos.';
+    /* v94.13: A1 fallback 由裸词改名词短语+kwList 兜底——旧 'es muy interesante' 塞进主语槽产生病句 */
+    var _a0=userKeywords[0]||kwList[0]||'este tema';
+    var _a1=userKeywords[1]||kwList[1]||'este aspecto';
+    var _a2=userKeywords[2]||kwList[2]||'este punto';
+    body = 'Hay varios aspectos importantes. Primero, creo que ' + _a0 + ' es muy importante. También, pienso que ' + _a1 + ' es bueno para la gente. Además, cuando pienso en ' + _a2 + ', siempre me anima a seguir aprendiendo.';
     conclusion = 'En resumen, ' + esc(title) + ' es muy importante para mí.';
   } else if(lvl==='B1'){
     introduction = 'Me gustaría expresar mi opinión sobre ' + esc(title) + ', un tema que considero bastante relevante en la sociedad actual.';
@@ -8668,7 +8685,17 @@ function startSielePrep(){
     var p=_sielePrepSecOf(); if(!p) return;
     clearInterval(_sieleOralTimer); _sielePrepPhase='prep'; _sieleOralLeft=p; _sielePaintTimer();
     var b=document.getElementById('soPrepBtn'); if(b){ b.disabled=true; b.textContent='准备中…'; }
-    var h=document.getElementById('soPrepHint'); if(h) h.textContent='准备时间 '+p+' 秒：先构思结构，倒计时结束后再作答。';
+    /* v94.13: T2 准备阶段显示官方五方面检查卡（官方顺序，无考试外提示；跳过准备按钮照常可用） */
+    if(_sieleOralTarea===2 && typeof _SIELE_T2_DIMS!=='undefined'){
+      var h=document.getElementById('soPrepHint');
+      if(h){
+        var _dims='';
+        _SIELE_T2_DIMS.forEach(function(d,i){ _dims+='<span style="display:inline-block;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:2px 8px;margin:2px 4px 2px 0;font-size:11px;color:#6d28d9">'+(i+1)+'. '+esc(d.label)+'</span>'; });
+        h.innerHTML='<div style="flex-basis:100%;margin-top:4px"><b style="font-size:11px;color:#6d28d9">模拟考场 · 按官方五方面组织描述：</b>'+_dims+'</div>';
+      }
+    }else{
+      var h=document.getElementById('soPrepHint'); if(h) h.textContent='准备时间 '+p+' 秒：先构思结构，倒计时结束后再作答。';
+    }
     _sieleOralTimer=setInterval(function(){ _sieleOralLeft--; _sielePaintTimer(); if(_sieleOralLeft<=0){ clearInterval(_sieleOralTimer); _sielePrepDone(); } },1000);
   }catch(e){}
 }
@@ -18252,6 +18279,23 @@ async function wbDoLogin(e){
   setTimeout(function(){if(button&&!activeUser()){button.disabled=false;button.textContent='登 录';}},8000);
   return false;
 }
+
+/* v94.13 (F2 修复): 授权竞态兜底——admin iframe 写入 swa_cloud_session_v1 时父页 storage 事件即时感知，
+   立即刷新导航并收起登录罩，不等 postMessage/整页刷新时序 */
+window.addEventListener('storage',function(ev){
+  try{
+    if(ev.key!=='swa_cloud_session_v1'||!ev.newValue)return;
+    var s=JSON.parse(ev.newValue);
+    if(s&&s.username){
+      if(typeof renderNav==='function')try{renderNav();}catch(e){}
+      if(typeof activate==='function')try{activate();}catch(e){}
+      var ov=document.getElementById('wbLoginOverlay');
+      if(ov)ov.classList.add('hide');
+      var b=document.querySelector('#wbLoginForm button[type="submit"]');
+      if(b){b.disabled=false;b.textContent='登 录';}
+    }
+  }catch(e){}
+});
 
 function activeUser(){
   // 2026-08-16 封堵：只认云端 session（swa_cloud_session_v1），不再回退到本地旧 session（swa_session_v1）。
