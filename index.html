@@ -554,7 +554,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.14-202610132015';
+window.swVer = 'v94.15-202610142000';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -18310,7 +18310,10 @@ function serializeCloud(db){
   var seedW={},seedQ={},words=[],questions=[];
   db.words.forEach(function(w){if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   db.questions.forEach(function(q){if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),settings:db.settings,seedW:seedW,seedQ:seedQ,words:words,questions:questions,reviews:db.reviews,plans:db.plans,trash:db.trash,wb:db.wb||null};
+  return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),
+    /* v94.15: 全局重置水线随云端记录顶层上行——晚到设备 pull 时强制对齐，杜绝旧进度复活 */
+    resetEpoch:(function(){try{return _vocabResetFloor();}catch(e){return Number(ST.vocabResetAt||0);}})(),
+    settings:db.settings,seedW:seedW,seedQ:seedQ,words:words,questions:questions,reviews:db.reviews,plans:db.plans,trash:db.trash,wb:db.wb||null};
 }
 function mergeById(la,ra,trash){
   var m={};la.forEach(function(x){m[x.id]=x;});
@@ -18318,6 +18321,19 @@ function mergeById(la,ra,trash){
   return Object.values(m).filter(function(x){return !(trash[x.id]&&trash[x.id]>=(x.updatedAt||0));});
 }
 function mergeData(db,remote){
+  /* v94.15: 全局重置水线 resetEpoch（云端记录顶层）——任何 merge 前先比对。
+     云端纪元新于本端 floor ⇒ 强制清 ST 词卡域+词库镜像+ADB.words 掌握度，
+     晚到设备（离线数天后打开）也无法用本地满值进度复活旧数据。
+     不依赖 wb 快照嵌套字段（v63 的 wb.data.vocabResetAt 检查保留作双保险）。 */
+  try{
+    var _reE=Number(remote.resetEpoch||0);
+    if(_reE>_vocabResetFloor()){
+      _vocabWipeLocal(_reE);
+      try{if(typeof MIR!=='undefined'&&MIR){MIR.w={};MIR.wbTs=0;MIR.qn=0;}}catch(e){}
+      if(db&&db.words&&db.words.forEach)db.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=_reE;}});
+      try{if(db)db.wb={ts:Date.now(),data:wbSnap()};}catch(e){}
+    }
+  }catch(_reErr){}
   var trash=Object.assign({},db.trash);
   Object.entries(remote.trash||{}).forEach(function(kv){if(!trash[kv[0]]||kv[1]>trash[kv[0]])trash[kv[0]]=kv[1];});
   db.trash=trash;

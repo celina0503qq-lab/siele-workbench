@@ -2114,7 +2114,10 @@ function serializeCloud(){
   const seedW={},seedQ={},words=[],questions=[];
   DB.words.forEach(w=>{if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   DB.questions.forEach(q=>{if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null,quizzes:loadQuizData()};
+  return {v:1,ts:Date.now(),device:navigator.userAgent.slice(0,60),
+    /* v94.15: 透传全局重置水线——admin push 不带此字段会把主站写进云端的 resetEpoch 抹掉 */
+    resetEpoch:Number((DB.meta&&DB.meta.resetFloor)||0),
+    settings:DB.settings,seedW,seedQ,words,questions,reviews:DB.reviews,plans:DB.plans,trash:DB.trash,wb:DB.wb||null,quizzes:loadQuizData()};
 }
 function loadQuizData(){try{const raw=localStorage.getItem('swa_quiz_v1');return raw?JSON.parse(raw):{version:1,quizzes:{}};}catch(e){return{version:1,quizzes:{}};}}
 function saveQuizDataToLocal(data){try{localStorage.setItem('swa_quiz_v1',JSON.stringify(data));}catch(e){console.warn('saveQuizDataToLocal failed',e);}}
@@ -2149,6 +2152,17 @@ function mergeById(localArr,remoteArr,trash){
   return Object.values(map).filter(x=>!(trash[x.id]&&trash[x.id]>=(x.updatedAt||0)));
 }
 function mergeData(db,remote){
+  /* v94.15: 全局重置水线——云端 resetEpoch 新于本地 floor ⇒ 清空词库掌握度并推进 floor，
+     晚到设备/后台也无法复活旧进度；与主站 mergeData 顶层检查对称 */
+  try{
+    const re=Number(remote.resetEpoch||0);
+    if(re>Number((db.meta&&db.meta.resetFloor)||0)){
+      (db.words||[]).forEach(w=>{if(w){w.mastery=0;w.updatedAt=re;}});
+      if(!db.meta||typeof db.meta!=='object')db.meta={rev:0,lastSync:0,lastPushTs:0,lastBackup:0};
+      db.meta.resetFloor=re;
+      if(db.wb&&db.wb.data)db.wb.data.vocabResetAt=re;
+    }
+  }catch(_reE){}
   const trash=Object.assign({},db.trash);
   Object.entries(remote.trash||{}).forEach(([k,v])=>{if(!trash[k]||v>trash[k])trash[k]=v;});
   db.trash=trash;
