@@ -56,6 +56,9 @@
 
 /* ===== 错题集 ===== */
 .err-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+/* v94.16: 一级三 Tab（练习错题/词汇错题本/变位错题）与二级筛选区分 */
+.err-tabs.err-mtabs{margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.err-tabs.err-mtabs .err-tab{font-size:12.5px;padding:7px 16px}
 .err-tab{padding:6px 14px;border-radius:18px;font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--paper);color:var(--soft);transition:.15s}
 .err-tab:hover{border-color:var(--tr);color:var(--tr)}
 .err-tab.on{background:var(--tr);color:#fff;border-color:var(--tr)}
@@ -488,6 +491,24 @@
   .d-row .tt{white-space:normal}
   .wrec>div{gap:6px}
 }
+/* ===== v94.16: 手机端溢出二轮修复（≤430px 深度收窄） ===== */
+@media(max-width:430px){
+  /* 分类树：链接块缩窄防横排溢出 */
+  .d-side{padding:8px}
+  .d-side a{padding:6px 8px;font-size:12px;margin:1px}
+  .d-side a .n{font-size:10px;padding:0 5px}
+  /* 表头：定宽列压缩（写作状态86/口语分类90/状态90），gap 与 padding 收窄 */
+  .d-thead{padding:8px 10px;gap:6px}
+  .d-thead span[style*="width:86px"],.d-thead span[style*="width:90px"]{width:52px;font-size:9.5px}
+  .d-thead span[style*="width:44px"],.d-thead span[style*="width:38px"]{width:34px}
+  /* 行：padding 收窄，长题名继续 ellipsis */
+  .d-row{padding:10px;gap:6px}
+  .d-row .tt{font-size:12px}
+  /* 记录卡：日期列取消定宽、评分/徽章可换行、全文 pre 断词防溢出 */
+  .wrec{padding:6px 8px}
+  .wrec>div>span:first-child{min-width:0 !important}
+  .wrec pre{word-break:break-word;overflow-x:hidden}
+}
 /* ===== v94.4.2 end (v94.4.4 colored) + v94.5 teal + v94.5.1 mobile ===== */
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
@@ -547,14 +568,15 @@
 </aside>
 <main class="main" id="main"><div id="audioBanner" class="banner"></div></main>
 </div>
-<script src="siele_oral.js"></script>
-<script src="siele_oral_ext.js"></script>
-<script src="audio/manifest.js"></script>
-<script src="grammar_data.js"></script>
+<!-- v94.16 F4: 四个大数据脚本改 defer（1.7MB+ 同步阻塞解除）。全部引用均为运行时函数内访问，无内联顶层立即引用，defer 安全；defer 保持文档序，页面切换时必已就绪 -->
+<script src="siele_oral.js" defer></script>
+<script src="siele_oral_ext.js" defer></script>
+<script src="audio/manifest.js" defer></script>
+<script src="grammar_data.js" defer></script>
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.15-202610142000';
+window.swVer = 'v94.16-202610142125';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -11602,8 +11624,28 @@ function toast(msg, type, ms){
 }
 
 // ===== ERROR COLLECTION MODULE (错题集) =====
+// v94.16: 一级三 Tab——gen=练习错题(ST.errors 原有) / vocab=词汇错题本(v94.8 vocabErrorBank) / conj=变位错题(v94.8 conjErrorBank)
 function renderErrors(){
   if(!ST.errors) ST.errors = [];
+  if(!ST.errorMainTab) ST.errorMainTab = 'gen';
+  var _vb=(ST.vocabErrorBank&&Object.keys(ST.vocabErrorBank).length)||0;
+  var _cb=(ST.conjErrorBank&&ST.conjErrorBank.length)||0;
+  var mtabs = '<div class="err-tabs err-mtabs">'
+    + '<button class="err-tab '+(ST.errorMainTab==='gen'?'on':'')+'" onclick="switchErrorMain(\'gen\')">📝 练习错题<span class="cnt">'+ST.errors.length+'</span></button>'
+    + '<button class="err-tab '+(ST.errorMainTab==='vocab'?'on':'')+'" onclick="switchErrorMain(\'vocab\')">📕 词汇错题本<span class="cnt">'+_vb+'</span></button>'
+    + '<button class="err-tab '+(ST.errorMainTab==='conj'?'on':'')+'" onclick="switchErrorMain(\'conj\')">🔀 变位错题<span class="cnt">'+_cb+'</span></button>'
+    + '</div>';
+  if(ST.errorMainTab==='vocab'){
+    return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">词汇错题本 · 练习答错自动入池 · 答对 3 次自动出池</div></div>
+      <span class="dp">共 ${_vb} 词</span>
+    </div>${mtabs}${renderVocabErrList()}`;
+  }
+  if(ST.errorMainTab==='conj'){
+    return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">变位错题 · 默写/听写答错自动入池 · 同题答对即出池</div></div>
+      <span class="dp">共 ${_cb} 条</span>
+    </div>${mtabs}${renderConjErrList()}`;
+  }
+  /* —— gen：练习错题（原有逻辑） —— */
   if(!ST.errorFilter) ST.errorFilter = 'all';
   const types = [
     {key:'all', label:'全部', icon:'📋', color:'var(--tr)'},
@@ -11672,7 +11714,50 @@ function renderErrors(){
 
   return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">题目错误 · 作文不足 · 单词错误 分类管理</div></div>
     <span class="dp">共 ${ST.errors.length} 条 · 已掌握 ${ST.errors.filter(e=>e.reviewed).length} 条</span>
-  </div>${tabs}${renderErrorsStats()}${form}${list}`;
+  </div>${mtabs}${tabs}${renderErrorsStats()}${form}${list}`;
+}
+
+// ===== v94.16: 一级 Tab 切换 + 词汇/变位错题本页面渲染 =====
+window.switchErrorMain = function(t){
+  ST.errorMainTab = t; save();
+  try{renderMain();}catch(e){}
+};
+function renderVocabErrList(){
+  const bank = ST.vocabErrorBank || {};
+  const keys = Object.keys(bank);
+  if(!keys.length) return '<div class="empty">暂无词汇错题——中西对应练习里答错的词会自动汇总到这里。</div>';
+  let h = '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'
+    + '<button class="btn sm" onclick="startVocabErrQuiz()">开始巩固 →</button>'
+    + '<button class="btn sm ol" onclick="exportErrorBank(\'vocab\')">📤 导出</button>'
+    + '<button class="btn sm ol" style="color:var(--bad);border-color:var(--bad)" onclick="clearErrorBank(\'vocab\')">🗑 清空</button></div>'
+    + '<div class="err-item"><div style="display:flex;flex-direction:column;gap:6px">';
+  keys.slice().sort((a,b)=>(bank[b].ts||0)-(bank[a].ts||0)).forEach(es=>{
+    const e = bank[es];
+    const pr = Math.min(e.right||0,3);
+    h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap">
+      <span style="min-width:0"><b>${esc(e.es)}</b> <span style="color:var(--soft)">${esc(e.zh||'')}</span></span>
+      <span style="color:var(--soft);font-size:11px;white-space:nowrap">错 ${e.wrong||0} · 连对 ${pr}/3 <span style="display:inline-block;width:34px;height:6px;border-radius:3px;background:var(--line);vertical-align:middle;margin-left:4px;overflow:hidden"><span style="display:block;height:100%;width:${pr/3*100}%;background:var(--teal)"></span></span></span>
+    </div>`;
+  });
+  h += '</div></div><div class="note" style="margin-top:8px">💡 答对 3 次自动出池；「开始巩固」随机抽 12 词做选择题巩固。</div>';
+  return h;
+}
+function renderConjErrList(){
+  const arr = ST.conjErrorBank || [];
+  if(!arr.length) return '<div class="empty">暂无变位错题——变位默写/听写答错的题会自动汇总到这里。</div>';
+  let h = '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'
+    + '<button class="btn sm" onclick="startConjErrPractice()">重练错题 →</button>'
+    + '<button class="btn sm ol" onclick="exportErrorBank(\'conj\')">📤 导出</button>'
+    + '<button class="btn sm ol" style="color:var(--bad);border-color:var(--bad)" onclick="clearErrorBank(\'conj\')">🗑 清空</button></div>'
+    + '<div class="err-item"><div style="display:flex;flex-direction:column">';
+  arr.slice(-200).reverse().forEach(e=>{
+    h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap">
+      <span style="min-width:0"><b>${esc(e.verb)}</b> <span style="color:var(--soft)">${esc(e.label||e.tk||'')} · ${esc(e.person||'')}</span></span>
+      <span style="font-size:12px;white-space:nowrap"><span style="color:var(--bad);text-decoration:line-through">${esc(e.answer||'—')}</span> → <b style="color:var(--ok)">${esc(e.expected||'')}</b></span>
+    </div>`;
+  });
+  h += '</div></div><div class="note" style="margin-top:8px">💡 同题答对即出池；最多保留最近 200 条。</div>';
+  return h;
 }
 
 // ===== 错题集统计区（新增卡片，2026-08-20）=====
@@ -17563,7 +17648,9 @@ window.closeErrorBook = function(){ var ov=document.getElementById('errBookOverl
 window.clearErrorBank = function(which){
   if(which==='vocab'){ if(!confirm('确定清空全部词汇错题？此操作同步到所有设备。'))return; ST.vocabErrorBank={}; }
   else { if(!confirm('确定清空全部变位错题？此操作同步到所有设备。'))return; ST.conjErrorBank=[]; }
-  save();closeErrorBook();renderErrorBook();toast('已清空','');
+  save();
+  if(document.getElementById('errBookOverlay')){renderErrorBook();}else{try{renderMain();}catch(e){}}
+  toast('已清空','');
 };
 window.exportErrorBank = function(which){
   var data=which==='vocab'?ST.vocabErrorBank||{}:ST.conjErrorBank||[];
