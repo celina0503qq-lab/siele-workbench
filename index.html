@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.7.3-202610121800';
+window.swVer = 'v94.8-2026101311';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1227,6 +1227,8 @@ function getDefaultState(){
     flashIdxByLevel: {A1:0, A2:0, B1:0, B2:0, all:0},         // 各级别当前 idx (per-level 断点续背核心, 修复 BUG: 切级不再丢位置)
     vocabDictation: {},         // 单词默写记录 {esWord: {correct:0, wrong:0}}
     dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
+    vocabErrorBank: {},         // v94.8 词汇错题本 {es:{es,zh,wrong,right,ts}}，练习答对3次出池
+    conjErrorBank: [],          // v94.8 变位默写/听写错题 [{verb,tk,dual,label,person,answer,expected,ts}]
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
     recentlyStudiedWords: [],   // 最近学过的词（环形缓冲，最多10个，用于触发听写池）
     readingArticles: [],        // 外刊文章缓存
@@ -2873,7 +2875,7 @@ function setDictAutoOff(off){
 // v63：词卡域就地清空（重置/纪元传播共用）——只动 ST 域+floor 键，MIR/ADB/云同步由调用方处理
 function _vocabWipeLocal(now){
   ST.vocabMastery={};ST.flashMastery={};
-  ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];
+  ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];ST.vocabErrorBank={};
   ST.recentlyStudiedWords=[];ST.dictationPending=[];
   ST.flashReviewSession=0;
   ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
@@ -3492,11 +3494,13 @@ function checkFlashAnswer(clicked, correct){
     if(ST.flashPraStats.streak > ST.flashPraStats.bestStreak) ST.flashPraStats.bestStreak = ST.flashPraStats.streak;
     // Positive animation: confetti + dancing emojis
     celebrate();
+    try{ var _pp=getFlashPool(); var _pv=_pp[_praIdxOf(_pp)]; if(_pv&&typeof _vocabErrRight==='function')_vocabErrRight(_pv); }catch(e){}
   } else {
     ST.flashPraStats.wrong++;
     ST.flashPraStats.streak = 0;
     // Wrong animation: crying face
     cry();
+    try{ var _pp=getFlashPool(); var _pv=_pp[_praIdxOf(_pp)]; if(_pv&&typeof _vocabErrLog==='function')_vocabErrLog(_pv); }catch(e){}
   }
   save();
   // Show feedback
@@ -16888,6 +16892,7 @@ function renderVerbConjSection(){
   // 练习按钮
   h += '<div style="margin:8px 0 4px;display:flex;gap:6px;flex-wrap:wrap">';
   h += '<button class="btn sm pr" onclick="conjPractice(\'study\')">📖 顺序学习</button>';
+  h += '<button class="btn sm ol" onclick="renderErrorBook()">📕 错题本</button>';
   h += '<button class="btn sm" onclick="conjPractice(\'spell\')">✍️ 默写</button>';
   h += '<button class="btn sm" onclick="conjPractice(\'listen\')">🎧 听写</button>';
   h += '</div>';
@@ -17276,10 +17281,12 @@ window.checkConjPractice = function(){
     st.correct++;
     resultEl.className='dm-result ok';
     resultEl.innerHTML='✅ 正确！ <b>'+esc(target)+'</b>';
+    try{ if(typeof _conjErrRight==='function')_conjErrRight(st._currentTarget); }catch(e){}
   } else {
     st.wrong++;
     resultEl.className='dm-result no';
     resultEl.innerHTML='❌ 答案：<b>'+esc(target)+'</b>（你写的是：'+esc(input.value)+'）';
+    try{ if(typeof _conjErrLog==='function')_conjErrLog(st._currentTarget, input.value); }catch(e){}
   }
   // 记录最近学习（供下次选词优先）
   if(st._currentTarget && st._currentTarget.verb) conjTouchRecent(st._currentTarget.verb);
@@ -17295,6 +17302,7 @@ window.skipConjPractice = function(){
   if(resultEl && st._currentTarget){
     resultEl.className='dm-result no';
     resultEl.innerHTML='跳过 · 答案：<b>'+esc(st._currentTarget.target)+'</b>';
+    try{ if(typeof _conjErrLog==='function')_conjErrLog(st._currentTarget, '__skip__'); }catch(e){}
   }
   setTimeout(conjPracticeNext, 900);
 };
@@ -17329,6 +17337,183 @@ function finishConjPractice(){
     '<div class="dm-actions"><button class="btn sm" onclick="document.getElementById(\'conjPracticeOverlay\').remove();_conjPractice=null">完成</button></div></div>';
   document.body.appendChild(overlay);
 }
+
+
+// ===== v94.8 错题本体系（词汇练习 + 变位默写/听写） =====
+function _vocabErrLog(v){
+  if(!ST||!v||!v.es)return;
+  if(!ST.vocabErrorBank)ST.vocabErrorBank={};
+  var e=ST.vocabErrorBank[v.es]||{es:v.es,zh:v.zh||'',wrong:0,right:0,ts:0};
+  e.wrong=(e.wrong||0)+1;e.right=0;e.ts=Date.now();if(v.zh&&!e.zh)e.zh=v.zh;
+  ST.vocabErrorBank[v.es]=e;
+}
+function _vocabErrRight(v){
+  if(!ST||!v||!v.es||!ST.vocabErrorBank)return;
+  var e=ST.vocabErrorBank[v.es];
+  if(!e)return;
+  e.right=(e.right||0)+1;e.ts=Date.now();
+  if(e.right>=3)delete ST.vocabErrorBank[v.es]; // 间隔重复答对3次出池
+}
+function _conjErrLog(t, ans){
+  if(!ST||!t||!t.verb)return;
+  if(!ST.conjErrorBank)ST.conjErrorBank=[];
+  var k=function(x){return x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||'');};
+  ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&k(x)===k({verb:t.verb,tk:t.tk,dual:t.dual,person:t.person}));});
+  ST.conjErrorBank.push({verb:t.verb,tk:t.tk,dual:t.dual||'',label:t.label||'',person:t.person||'',answer:String(ans==null?'':ans),expected:t.target||'',ts:Date.now()});
+  if(ST.conjErrorBank.length>200)ST.conjErrorBank.splice(0,ST.conjErrorBank.length-200);
+}
+function _conjErrRight(t){
+  if(!ST||!t||!t.verb||!ST.conjErrorBank)return;
+  var k=t.verb+'|'+t.tk+'|'+(t.dual||'')+'|'+(t.person||'');
+  ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===k);}); // 答对即出池
+}
+/* 双路径合并（mergeWbSnapshot / hydrate 同语义调用）：词卡错题逐键并集，变位错题按键去重取新 */
+function _mergeErrorBanks(remote){
+  if(!remote||typeof remote!=='object')return;
+  if(remote.vocabErrorBank&&typeof remote.vocabErrorBank==='object'){
+    ST.vocabErrorBank=ST.vocabErrorBank||{};
+    Object.keys(remote.vocabErrorBank).forEach(function(es){
+      var rv=remote.vocabErrorBank[es];
+      if(!rv||!es)return;
+      var lv=ST.vocabErrorBank[es];
+      if(!lv){ if((rv.right||0)>=3)return; ST.vocabErrorBank[es]={es:rv.es||es,zh:rv.zh||'',wrong:rv.wrong||0,right:rv.right||0,ts:rv.ts||0}; return; }
+      lv.wrong=Math.max(lv.wrong||0,rv.wrong||0);
+      lv.right=Math.max(lv.right||0,rv.right||0);
+      lv.ts=Math.max(lv.ts||0,rv.ts||0);
+      if(!lv.zh&&rv.zh)lv.zh=rv.zh;
+      if((lv.right||0)>=3)delete ST.vocabErrorBank[es];
+    });
+  }
+  if(Array.isArray(remote.conjErrorBank)&&remote.conjErrorBank.length){
+    ST.conjErrorBank=ST.conjErrorBank||[];
+    var _cke={};
+    ST.conjErrorBank.forEach(function(e){if(e&&e.verb){var _k=e.verb+'|'+e.tk+'|'+(e.dual||'')+'|'+(e.person||'');_cke[_k]=Math.max(_cke[_k]||0,e.ts||0);}});
+    remote.conjErrorBank.forEach(function(e){
+      if(!e||!e.verb)return;
+      var _k=e.verb+'|'+e.tk+'|'+(e.dual||'')+'|'+(e.person||'');
+      if(_cke[_k]===undefined){ST.conjErrorBank.push(e);_cke[_k]=e.ts||0;}
+      else if((e.ts||0)>(_cke[_k]||0)){
+        ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===_k);});
+        ST.conjErrorBank.push(e);_cke[_k]=e.ts||0;
+      }
+    });
+    if(ST.conjErrorBank.length>200)ST.conjErrorBank.splice(0,ST.conjErrorBank.length-200);
+  }
+}
+window.renderErrorBook = function(){
+  var vb=(ST.vocabErrorBank&&Object.keys(ST.vocabErrorBank).length)||0;
+  var cb=(ST.conjErrorBank&&ST.conjErrorBank.length)||0;
+  var old=document.getElementById('errBookOverlay'); if(old)old.remove();
+  var ov=document.createElement('div');ov.id='errBookOverlay';ov.className='dictation-overlay';
+  var h='<div class="dictation-modal" style="max-width:580px;max-height:82vh;overflow-y:auto">';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div></div><button class="btn sm ol" style="font-size:10px;padding:3px 10px" onclick="closeErrorBook()">✕ 关闭</button></div>';
+  h+='<h3>📕 错题本</h3>';
+  /* —— 词汇错题 —— */
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 4px"><h4 style="margin:0">🃏 词汇错题（'+vb+'）</h4>';
+  if(vb)h+='<span><button class="btn sm" onclick="startVocabErrQuiz()">开始巩固 →</button> <button class="btn sm ol" onclick="exportErrorBank(\'vocab\')">📤 导出</button> <button class="btn sm ol" onclick="clearErrorBank(\'vocab\')">🗑 清空</button></span>';
+  h+='</div>';
+  if(vb){
+    h+='<div style="border:1px solid var(--line);border-radius:8px;max-height:200px;overflow-y:auto">';
+    Object.keys(ST.vocabErrorBank).forEach(function(es){
+      var e=ST.vocabErrorBank[es];
+      h+='<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-bottom:1px solid var(--line);font-size:12px"><span><b>'+esc(e.es)+'</b> <span style="color:var(--soft)">'+esc(e.zh||'')+'</span></span><span style="color:var(--soft);white-space:nowrap">错'+(e.wrong||0)+' · 连对'+(e.right||0)+'/3</span></div>';
+    });
+    h+='</div><div style="font-size:11px;color:var(--soft);margin-top:3px">练习答错的词自动入池 · 答对 3 次自动出池</div>';
+  } else h+='<div class="note" style="font-size:12px">暂无词汇错题——中西对应练习里答错的词会自动汇总到这里。</div>';
+  /* —— 变位错题 —— */
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:12px 0 4px"><h4 style="margin:0">🔀 变位错题（'+cb+'）</h4>';
+  if(cb)h+='<span><button class="btn sm" onclick="startConjErrPractice()">重练错题 →</button> <button class="btn sm ol" onclick="exportErrorBank(\'conj\')">📤 导出</button> <button class="btn sm ol" onclick="clearErrorBank(\'conj\')">🗑 清空</button></span>';
+  h+='</div>';
+  if(cb){
+    h+='<div style="border:1px solid var(--line);border-radius:8px;max-height:200px;overflow-y:auto">';
+    ST.conjErrorBank.slice(-50).reverse().forEach(function(e){
+      h+='<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-bottom:1px solid var(--line);font-size:12px"><span><b>'+esc(e.verb)+'</b> · '+esc(e.label||e.tk||'')+' · '+esc(e.person||'')+'</span><span style="color:var(--soft);white-space:nowrap">'+esc(e.answer||'—')+' → <b style="color:var(--tr)">'+esc(e.expected||'')+'</b></span></div>';
+    });
+    h+='</div><div style="font-size:11px;color:var(--soft);margin-top:3px">变位默写/听写答错或跳过自动入池 · 同题答对即出池（最多留 200 条）</div>';
+  } else h+='<div class="note" style="font-size:12px">暂无变位错题——变位默写/听写答错的题会自动汇总到这里。</div>';
+  h+='</div>';
+  ov.innerHTML=h;document.body.appendChild(ov);
+};
+window.closeErrorBook = function(){ var ov=document.getElementById('errBookOverlay'); if(ov)ov.remove(); };
+window.clearErrorBank = function(which){
+  if(which==='vocab'){ if(!confirm('确定清空全部词汇错题？此操作同步到所有设备。'))return; ST.vocabErrorBank={}; }
+  else { if(!confirm('确定清空全部变位错题？此操作同步到所有设备。'))return; ST.conjErrorBank=[]; }
+  save();closeErrorBook();renderErrorBook();toast('已清空','');
+};
+window.exportErrorBank = function(which){
+  var data=which==='vocab'?ST.vocabErrorBank||{}:ST.conjErrorBank||[];
+  var txt=JSON.stringify(data,null,2);
+  var blob=new Blob([txt],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=(which==='vocab'?'vocab_error_bank':'conj_error_bank')+'_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},3000);
+};
+window.startVocabErrQuiz = function(){
+  var items=Object.values(ST.vocabErrorBank||{});
+  if(!items.length){toast('暂无词汇错题','err');return;}
+  for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=items[i];items[i]=items[j];items[j]=t;}
+  items=items.slice(0,12);
+  _errQuiz={items:items,idx:0,correct:0,wrong:0};
+  closeErrorBook();showVocabErrQuiz();
+};
+var _errQuiz=null;
+window.showVocabErrQuiz = function(){
+  var st=_errQuiz;
+  if(!st)return;
+  var old=document.getElementById('errQuizOverlay');if(old)old.remove();
+  if(st.idx>=st.items.length){
+    var total=st.correct+st.wrong,pct=total?Math.round(st.correct/total*100):0;
+    var ov=document.createElement('div');ov.id='errQuizOverlay';ov.className='dictation-overlay';
+    ov.innerHTML='<div class="dictation-modal"><h3>🏁 巩固完成</h3><div style="text-align:center;padding:16px 0"><div style="font-size:36px;font-weight:800;color:var(--tr)">'+pct+'%</div><div style="color:var(--soft);font-size:12px;margin-top:4px">答对 '+st.correct+' / '+total+' · 出池 '+(ST.vocabErrorBank?Object.keys(ST.vocabErrorBank).length:'0')+' 词待巩固</div></div><div class="dm-actions"><button class="btn sm" onclick="document.getElementById(\'errQuizOverlay\').remove();_errQuiz=null;if(currentPage===\'vocab\')renderMain()">完成</button></div></div>';
+    document.body.appendChild(ov);save();return;
+  }
+  var v=st.items[st.idx];
+  var pool=typeof VDATA!=='undefined'?VDATA:[];
+  var dis=pool.filter(function(x){return x&&x.es!==v.es;});
+  var opts=[];
+  while(opts.length<3&&dis.length){
+    var idx=Math.floor(Math.random()*dis.length);
+    var cand=dis.splice(idx,1)[0];
+    if(!opts.find(function(d){return d.es===cand.es;}))opts.push(cand);
+  }
+  opts.push(v);
+  for(var i=opts.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=opts[i];opts[i]=opts[j];opts[j]=t;}
+  var ci=opts.findIndex(function(o){return o.es===v.es;});
+  var ov=document.createElement('div');ov.id='errQuizOverlay';ov.className='dictation-overlay';
+  var h='<div class="dictation-modal" style="max-width:480px">';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:var(--soft)">第 '+(st.idx+1)+'/'+st.items.length+'</span><button class="btn sm ol" style="font-size:10px;padding:3px 10px" onclick="document.getElementById(\'errQuizOverlay\').remove();_errQuiz=null">✕ 退出</button></div>';
+  h+='<h3>🛠 词汇错题巩固</h3><div class="dm-hint">答对 3 次出池 · 答错重新计数</div>';
+  h+='<div class="flash-q"><div class="zh" style="text-align:center;font-size:18px;margin:10px 0">'+esc(v.zh||v.es)+'</div><div style="text-align:center;font-size:11px;color:var(--soft)">'+esc(v.pos||'')+(v.lvl?' · '+esc(v.lvl):'')+'</div></div>';
+  h+='<div class="pra">';
+  opts.forEach(function(o,i){h+='<button data-correct="'+(i===ci?1:0)+'" onclick="_errQuizPick('+i+','+ci+')">'+esc(o.es)+'<br><span style="font-size:9px;color:var(--soft);font-weight:400">'+esc(o.pos||'')+'</span></button>';});
+  h+='</div><div class="dm-result" id="errQuizResult"></div></div>';
+  ov.innerHTML=h;document.body.appendChild(ov);
+};
+window._errQuizPick = function(clicked, correct){
+  var st=_errQuiz;if(!st)return;
+  var btns=document.querySelectorAll('#errQuizOverlay .pra button');
+  btns.forEach(function(b){b.disabled=true;});
+  var v=st.items[st.idx];
+  var ok=clicked===correct;
+  if(ok){st.correct++;_vocabErrRight(v);if(btns[correct])btns[correct].classList.add('correct');try{celebrate();}catch(e){}}
+  else{st.wrong++;_vocabErrLog(v);if(btns[clicked])btns[clicked].classList.add('wrong');if(btns[correct])btns[correct].classList.add('correct');try{cry();}catch(e){}}
+  var fb=document.getElementById('errQuizResult');
+  if(fb)fb.innerHTML=ok?'<div class="flash-feedback correct"><span class="emo">🎉</span>¡Correcto! 答对了</div>':'<div class="flash-feedback wrong"><span class="emo">😢</span>正确答案：<b>'+esc(v.es)+'</b></div>';
+  save();
+  setTimeout(function(){st.idx++;showVocabErrQuiz();},ok?900:1600);
+};
+window.startConjErrPractice = function(){
+  var verbs=[];
+  (ST.conjErrorBank||[]).forEach(function(e){if(e&&e.verb&&verbs.indexOf(e.verb)<0)verbs.push(e.verb);});
+  if(!verbs.length){toast('暂无变位错题','err');return;}
+  var items=conjBuildItems(verbs);
+  if(!items.length){toast('暂无变位数据','err');return;}
+  var shuffled=items.slice();
+  for(var i=shuffled.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=shuffled[i];shuffled[i]=shuffled[j];shuffled[j]=t;}
+  var round=shuffled.slice(0,CONJ_PRACTICE_ROUND);
+  _conjPractice={mode:'spell',items:round,idx:0,correct:0,wrong:0,totalRound:round.length};
+  closeErrorBook();showConjPractice();
+};
 
 // ===== 词汇库批量管理页 =====
 let _vuadmKeys = [];function renderVerbUsageAdmin(keep){
@@ -18120,7 +18305,7 @@ function hydrate(){
   if(ADB.wb&&ADB.wb.data&&_rzH&&(ADB.wb.ts||0)<_rzH){
     // v62：重置水线——云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防 hydrate 覆盖复活
     var _wbH=Object.assign({},ADB.wb.data);
-    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending'].forEach(function(k){delete _wbH[k];});
+    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending','vocabErrorBank'].forEach(function(k){delete _wbH[k];});
     ADB.wb={ts:ADB.wb.ts,data:_wbH};
   }
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
@@ -18162,6 +18347,8 @@ function hydrate(){
         ['correct','wrong','bestStreak'].forEach(function(k){var rv=Number(rm.flashPraStats[k]||0);if(rv>Number(ST.flashPraStats[k]||0))ST.flashPraStats[k]=rv;});
       }
     })();
+    /* v94.8: 错题本精细合并（不在白名单，防整体覆盖；与 mergeWbSnapshot 同语义） */
+    try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(rm); }catch(e){}
     /* v92.9【根因】sieleOralScores 原先也在上面白名单里被**整体覆盖**，绕过 mergeSieleOralScore
        ⇒ 删除墓碑/按条删除表全部失效、删掉的记录会被云端快照复活。改为"逐条合并"。 */
     if(rm.sieleOralScores){
@@ -18381,7 +18568,7 @@ function mergeWbSnapshot(remote, wbTs){
   if(_rz&&wbTs&&Number(wbTs)<_rz){
     // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
     remote=Object.assign({},remote);
-    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending'].forEach(function(k){delete remote[k];});
+    ['vocabDictation','dictationErrorBank','dictationLog','recentlyStudiedWords','flashReviewSession','flashLastPositionTs','flashProgressByLevel','flashIdx','flashIdxByLevel','flashCurrentWord','flashLevel','dictationPending','vocabErrorBank'].forEach(function(k){delete remote[k];});
   }
   // 词卡浏览位置（2026-09-26 修复跨设备不同步）：改用 flashLastPositionTs 时间戳仲裁（题库 quizOrderPos 同款 ts-LWW）。
   // 旧规则"本地优先，本地为空才采用远端"⇒ 本地学过一张卡后永不为空 ⇒ 当前单词从不跨设备同步
@@ -18468,6 +18655,8 @@ function mergeWbSnapshot(remote, wbTs){
     remote.dictationErrorBank.forEach(function(e){if(e&&e.es&&!existEs[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);existEs[e.es+'_'+e.userAnswer]=true;}});
     if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
   }
+  // v94.8 错题本双路径合并（词卡错题逐键并集 / 变位错题按键去重取新）
+  try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(remote); }catch(e){}
   // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
   if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
     ST.flashPraStats=ST.flashPraStats||{correct:0,wrong:0,streak:0,bestStreak:0};
