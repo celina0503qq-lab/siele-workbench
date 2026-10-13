@@ -541,7 +541,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.8-2026101311';
+window.swVer = 'v94.9-2026101312';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -7549,7 +7549,25 @@ function getSieleOralBank(){
   var ed = window._contentEdits && window._contentEdits.oralbank;
   if(ed && ed.bank && typeof ed.bank === 'object'){
     var out = {};
-    [1,2,3,4,5].forEach(function(n){ out[n] = ed.bank[n] ? ed.bank[n].slice() : []; });
+    /* v94.9 读取加固：代码内置为基 → 云端按题合并（同 topic/id 覆盖、云端新增追加、垃圾键跳过、
+       单 Tarea 缺失/为空回退内置），杜绝旧整库快照掩盖代码新增题（oralbank 化石事故同源） */
+    function _obKey(q){ return String((q && (q.topic || q.id)) || (q && q.q ? String(q.q).trim().slice(0,50) : '')).toLowerCase(); }
+    [1,2,3,4,5].forEach(function(n){
+      var code = ((typeof SIELE_ORAL_BANK!=="undefined"&&SIELE_ORAL_BANK&&SIELE_ORAL_BANK[n])||[]).slice();
+      var cl = ed.bank[n];
+      if(!cl || !cl.length){ out[n] = code; return; }
+      var idx = {}, outArr = [];
+      code.forEach(function(q){ var k=_obKey(q); if(k && idx[k]===undefined){ idx[k]=outArr.length; outArr.push(q); } else outArr.push(q); });
+      cl.forEach(function(q){
+        if(!q || typeof q!=='object') return;
+        var k=_obKey(q);
+        if(k && idx[k]!==undefined) outArr[idx[k]] = q;
+        else if(k){ idx[k]=outArr.length; outArr.push(q); }
+        /* 无键垃圾条目（无 topic/id/q）直接跳过，不污染内置库 */
+        
+      });
+      out[n] = outArr;
+    });
     if(typeof window._sieleT3MetaApply==='function') window._sieleT3MetaApply(out[3]);
     if(typeof window._sieleT1MetaApply==='function') window._sieleT1MetaApply(out[1]);
     if(typeof window._sieleT2PhotoRemap==='function') window._sieleT2PhotoRemap(out[2]);
@@ -10748,6 +10766,22 @@ function sieleGradeWriting(text, tarea, targetOverride, lvlOverride) {
     else grammarChecks.push({key:'capital', label:'句首大写', pass:false, tip:`有 ${lowerStart} 句未大写开头`});
   }
 
+  // 7. 名词化误用（v94.9 B2：物主限定词+形容词当名词用 → 应名词化，如 mi enfadado→mi enfado）
+  const NOM_MAP = {enfadado:'enfado',enfadada:'enfado',aburrido:'aburrimiento',aburrida:'aburrimiento',preocupado:'preocupación',preocupada:'preocupación',cansado:'cansancio',cansada:'cansancio',sorprendido:'sorpresa',sorprendida:'sorpresa',avergonzado:'vergüenza',avergonzada:'vergüenza'};
+  const nominalMistakes = [];
+  if(_hasContent){
+    const nomRe = /\b(mi|mis|tu|tus|su|sus|nuestro|nuestra|nuestros|nuestras|vuestro|vuestra|vuestros|vuestras)\s+(enfadad[oa]s?|aburrid[oa]s?|preocupad[oa]s?|cansad[oa]s?|sorprendid[oa]s?|avergonzad[oa]s?)\b/gi;
+    let nm;
+    while((nm = nomRe.exec(t)) !== null){
+      const adj = nm[2].toLowerCase();
+      const nom = NOM_MAP[adj] || NOM_MAP[adj.replace(/s$/,'')];
+      if(nom) nominalMistakes.push(nm[0] + ' → ' + nm[1] + ' ' + nom);
+      if(nominalMistakes.length >= 5) break;
+    }
+    if(nominalMistakes.length === 0) grammarChecks.push({key:'nominal', label:'名词化 (名物化表达)', pass:true});
+    else grammarChecks.push({key:'nominal', label:'名词化', pass:false, tip:`形容词误作名词: ${nominalMistakes.slice(0,3).join(' · ')} —— 情绪/状态表达请用名词化 (RAE: sustantivación)`});
+  }
+
   // ===== SIELE 4 级映射 (新 #231) =====
   // 根据词数 + 高级特征判定目标等级
   let sieleBand = 'A1';
@@ -11590,15 +11624,39 @@ function renderErrorsStats(){
     return `<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:84px">${t.label}</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:${pct}%;background:${t.color};border-radius:3px"></i></div><b style="width:46px;text-align:right">${n} 条 · ${pct}%</b></div>`;
   }).join('') || '<div style="font-size:11px;color:var(--soft)">暂无分类数据</div>';
 
-  // 知识点聚合：从 question 里提取高频关键词（取前3）
-  const kwCount = {};
+  // 知识点聚合 v94.9（B3）：题目自带考点标签优先 → 文本词元聚合（虚词过滤 + 易混对合并），输出「A vs B 混用 ×N」级精确表述
+  const _norm = s => String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const _STOP = new Set(['de','la','el','que','y','en','a','los','las','un','una','es','del','se','por','su','al','lo','como','mas','más','o','pero','sus','le','ha','me','si','sin','sobre','este','esta','esto','con','para','cuando','muy','hay','the','of']);
+  const PAIRS = [
+    ['por vs para', ['por','para']], ['ser vs estar', ['ser','estar']],
+    ['indefinido vs imperfecto', ['indefinido','imperfecto']],
+    ['subjuntivo vs indicativo', ['subjuntivo','indicativo']],
+    ['pretérito vs perfecto', ['preterito','perfecto']]
+  ];
+  const pairCount = {}; const kwCount = {};
   ST.errors.forEach(e=>{
-    const q = String(e.question||'');
-    ['ser','estar','por','para','subjuntivo','indefinido','imperfecto','preterito','preposición','conector','pasado','futuro','condicional','se ','pronombre','acento'].forEach(kw=>{
-      if(q.toLowerCase().includes(kw)) kwCount[kw] = (kwCount[kw]||0)+1;
+    const raw = [e.question, e.note, e.myAnswer, e.correctAnswer].filter(Boolean).join(' · ');
+    const q = _norm(raw);
+    let matched = false;
+    // ① 题目自带考点标签（tag/topic/kpoint 字段，quiz 导入时可直接携带）
+    const tag = String(e.tag || e.topic || e.kpoint || '').trim();
+    if(tag){ kwCount[tag] = (kwCount[tag]||0)+1; matched = true; }
+    // ② 易混对：同条错题同时出现一对易混词 → 计一次「A vs B」
+    PAIRS.forEach(p=>{
+      if(q.includes(p[1][0]) && q.includes(p[1][1])){ pairCount[p[0]] = (pairCount[p[0]]||0)+1; matched = true; }
+    });
+    if(matched) return;
+    // ③ 兜底：词元切分，过滤虚词/超短词，取实词词元
+    (q.match(/[a-zñ]{4,}/g)||[]).forEach(w=>{
+      if(!_STOP.has(w)) kwCount[w] = (kwCount[w]||0)+1;
     });
   });
-  const topKw = Object.entries(kwCount).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const merged = Object.entries(pairCount).map(([k,n])=>[k,n]);
+  Object.entries(kwCount).forEach(([k,n])=>{
+    const hit = merged.find(m=>m[0].includes(k) || m[0].split(' vs ').some(x=>x===k));
+    if(hit) hit[1] += n; else merged.push([k,n]);
+  });
+  const topKw = merged.sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,n])=>[k,Math.max(n,0)]);
   const kwHtml = topKw.length ? topKw.map(k=>`<span class="chip" style="background:#fdf0e9;color:#d85a30;border-color:#f3d5c3">${k[0]} ×${k[1]}</span>`).join('') : '<span style="font-size:11px;color:var(--soft)">练习后自动聚合高频知识点</span>';
 
   const reviewedPct = total ? Math.round(ST.errors.filter(e=>e.reviewed).length/total*100) : 0;
