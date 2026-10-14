@@ -3048,7 +3048,8 @@ var USER_FLAG_DEFS=[
   {key:'refinePackEnabled',label:'外刊'},
   {key:'sieleSpecialEnabled',label:'SIELE'},
   {key:'writingEnabled',label:'写作'},
-  {key:'oralEnabled',label:'口语'}
+  {key:'oralEnabled',label:'口语'},
+  {key:'asrCloudEnabled',label:'云识别'}
 ];
 async function adminToggleUserFlag(uid,username,key,enabled){
   var def=USER_FLAG_DEFS.find(function(f){return f.key===key;})||{label:key};
