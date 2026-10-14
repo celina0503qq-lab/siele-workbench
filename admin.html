@@ -1436,13 +1436,9 @@ window.addEventListener('message',function(ev){
             audioBase64: (ev.data.params && ev.data.params.audioBase64) || '',
             voiceFormat: (ev.data.params && ev.data.params.voiceFormat) || 'wav'});
         } else if(lAct==='getData'){
-          // v94.20 数据后端化：受控数据集下发（siele-data 独立函数）
-          try {
-            lResult = await window.__sieleCloudBaseApp.callFunction({name:'siele-data', data:{
-              name: (ev.data.params && ev.data.params.name) || '',
-              sessionToken: lToken
-            }});
-          } catch(eD) { lResult = {ok:false, code:'DATA_FN_ERROR', message:(eD && eD.message) || String(eD)}; }
+          // v94.20.1 数据后端化：受控数据集下发（并入 siele-auth，免平台权限配置）
+          lResult = await callSieleAuth({action:'getData', sessionToken: lToken,
+            name: (ev.data.params && ev.data.params.name) || ''});
         } else {
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }
