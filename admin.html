@@ -1438,7 +1438,7 @@ window.addEventListener('message',function(ev){
         } else if(lAct==='getData'){
           // v94.20 数据后端化：受控数据集下发（siele-data 独立函数）
           try {
-            lResult = await app.callFunction({name:'siele-data', data:{
+            lResult = await window.__sieleCloudBaseApp.callFunction({name:'siele-data', data:{
               name: (ev.data.params && ev.data.params.name) || '',
               sessionToken: lToken
             }});

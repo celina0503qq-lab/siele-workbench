@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.20-202610141830';
+window.swVer = 'v94.20.1-202610141915';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6881,7 +6881,7 @@ window._wbCloudAsrRun = async function(blob, opts){
     var wav = window._wbAsrEncodeWav(seg, 16000);
     var b64 = await window._wbAsrBlobToB64(wav);
     var r = await window._deleCloudCall('asrSentence', { audioBase64: b64, voiceFormat: 'wav' });
-    if(r && r.ok && r.data && r.data.text){ texts.push(String(r.data.text).trim()); }
+    if(r && r.ok){ texts.push(String((r.data && r.data.text) || '').trim()); }
     else{
       var code = (r && r.code) || 'ASR_ERROR';
       var msg = { ASR_DAILY_LIMIT: '今日云识别额度已用完（200 次/天）', ASR_NOT_ENABLED: '云识别未开通，请联系管理员', ASR_NOT_CONFIGURED: '服务端密钥未配置', ASR_AUDIO_TOO_LARGE: '音频过大' }[code] || ('云识别失败（' + code + '）');
@@ -6920,15 +6920,16 @@ window._wbAsrFlashCloud = function(target){
   if(btn){ btn.textContent = '⏹ 停止录音'; btn.className = 'btn sm t'; }
   _flashRecording = true;
   window._wbAsrCloudRecordStart(async function(err, blob){
+    var gb = function(){ return document.getElementById('flashRecBtn'); };
     _flashRecording = false;
-    if(err){ alert('录音失败：' + (err.message || err)); if(btn){ btn.textContent = '🎤 开始跟读'; btn.className = 'btn sm'; } return; }
-    if(btn) btn.textContent = '☁️ 识别中…';
+    if(err){ alert('录音失败：' + (err.message || err)); var b0=gb(); if(b0){ b0.textContent = '🎤 开始跟读'; b0.className = 'btn sm'; } return; }
+    var b1=gb(); if(b1) b1.textContent = '☁️ 识别中…';
     try{
       var t = await window._wbCloudAsrRun(blob, {});
       scoreFlashPronunciation(target, t);
     }catch(e){ alert(e.message); }
-    if(btn){ btn.textContent = '🎤 开始跟读'; btn.className = 'btn sm'; }
-  }, function(sec){ if(btn) btn.textContent = '⏹ 停止录音 ' + sec + 's'; }, 55);
+    var b2=gb(); if(b2){ b2.textContent = '🎤 开始跟读'; b2.className = 'btn sm'; }
+  }, function(sec){ var bb=document.getElementById('flashRecBtn'); if(bb) bb.textContent = '⏹ 停止录音 ' + sec + 's'; }, 55);
 };
 window._wbAsrSieleOralCloud = function(x){
   _sieleOralCloudMode = true; _sieleOralTranscript = ''; _sieleOralRecording = true;
@@ -6937,26 +6938,32 @@ window._wbAsrSieleOralCloud = function(x){
   if(btn){ btn.textContent = '⏹ 停止并评分（云识别）'; }
   var r = document.getElementById('soRecognized'); if(r) r.textContent = '● 录音中 0s —— 点上方按钮停止并评分';
   window._wbAsrCloudRecordStart(async function(err, blob){
+    /* v94.20.1: DOM 实时查询（renderMain 重渲染后捕获引用会脱离文档） */
+    var g = function(id){ return document.getElementById(id); };
     _sieleOralRecording = false;
     if(err){
       _sieleOralCloudMode = false; clearInterval(_sieleOralTimer);
-      if(r) r.textContent = '❌ 录音失败：' + (err.message || err);
-      if(btn){ btn.className = 'rb idle'; btn.textContent = '重新录音'; }
+      var r0=g('soRecognized'), b0=g('soRecBtn');
+      if(r0) r0.textContent = '❌ 录音失败：' + (err.message || err);
+      if(b0){ b0.className = 'rb idle'; b0.textContent = '重新录音'; }
       return;
     }
-    if(btn) btn.textContent = '☁️ 云识别中…';
-    if(r) r.textContent = '☁️ 处理录音中…（长音频自动分段）';
+    var b1=g('soRecBtn'), r1=g('soRecognized');
+    if(b1) b1.textContent = '☁️ 云识别中…';
+    if(r1) r1.textContent = '☁️ 处理录音中…（长音频自动分段）';
     try{
-      var t = await window._wbCloudAsrRun(blob, { onProgress: function(i, n){ if(r) r.textContent = '☁️ 云识别中…第 ' + i + ' / ' + n + ' 段'; } });
-      _sieleOralCloudMode = false; _sieleOralTranscript = t;
-      if(r) r.textContent = t || '（未识别到内容）';
+      var t = await window._wbCloudAsrRun(blob, { onProgress: function(i, n){ var rr=g('soRecognized'); if(rr) rr.textContent = '☁️ 云识别中…第 ' + i + ' / ' + n + ' 段'; } });
+      _sieleOralCloudMode = false; _sieleOralTranscript = t; clearInterval(_sieleOralTimer); _sieleOralRecording = false;
+      var r2=g('soRecognized'); if(r2) r2.textContent = t || '（未识别到内容）';
+      var b2=g('soRecBtn'); if(b2){ b2.className = 'rb idle'; b2.textContent = '重新录音'; }
       scoreSieleOral(t);
     }catch(e){
       _sieleOralCloudMode = false; clearInterval(_sieleOralTimer);
-      if(r) r.textContent = '❌ ' + e.message;
-      if(btn){ btn.className = 'rb idle'; btn.textContent = '重新录音'; }
+      var r3=g('soRecognized'), b3=g('soRecBtn');
+      if(r3) r3.textContent = '❌ ' + e.message;
+      if(b3){ b3.className = 'rb idle'; b3.textContent = '重新录音'; }
     }
-  }, function(sec){ if(r) r.textContent = '● 录音中 ' + sec + 's（云识别将在停止后执行）'; }, x.sec || 60);
+  }, function(sec){ var rr=document.getElementById('soRecognized'); if(rr) rr.textContent = '● 录音中 ' + sec + 's —— 点上方按钮停止并评分'; }, x.sec || 60);
 };
 function scoreSpeaking(text){
   const res = document.getElementById('speakRes');
@@ -8974,7 +8981,7 @@ function _sieleMustDo(x, norm){
   }catch(e){ return {items:[], covered:0, total:0, ratio:0}; }
 }
 
-function finishSieleOral(){if(window._sieleOralCloudMode){window._sieleOralCloudStop&&window._sieleOralCloudStop();return;}if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
+function finishSieleOral(){if(window._sieleOralCloudMode){clearInterval(_sieleOralTimer);window._sieleOralCloudStop&&window._sieleOralCloudStop();window._wbAsrCloudStop&&window._wbAsrCloudStop();return;}if(!_sieleOralRecording&&document.getElementById('soScoreBox')?.dataset.done==='1')return;_sieleOralRecording=false;clearInterval(_sieleOralTimer);var btn=document.getElementById('soRecBtn');if(btn){btn.className='rb idle';btn.textContent='重新录音';}scoreSieleOral(_sieleOralTranscript);}
 function scoreSieleOral(text){
   var x=getSieleOralItem();if(!x)return;
   var norm=normalizeOral(text);
