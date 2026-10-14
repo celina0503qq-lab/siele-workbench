@@ -1430,6 +1430,19 @@ window.addEventListener('message',function(ev){
         } else if(lAct==='getUserFlags'){
           // v36 用户功能授权：工作台登录用户自查 背题/DELE专项/外刊精炼 授权
           lResult = await callSieleAuth({action:'getUserFlags', sessionToken: lToken});
+        } else if(lAct==='asrSentence'){
+          // v94.19 R4 云识别：一句话识别转发（siele-auth asrSentence）
+          lResult = await callSieleAuth({action:'asrSentence', sessionToken: lToken,
+            audioBase64: (ev.data.params && ev.data.params.audioBase64) || '',
+            voiceFormat: (ev.data.params && ev.data.params.voiceFormat) || 'wav'});
+        } else if(lAct==='getData'){
+          // v94.20 数据后端化：受控数据集下发（siele-data 独立函数）
+          try {
+            lResult = await app.callFunction({name:'siele-data', data:{
+              name: (ev.data.params && ev.data.params.name) || '',
+              sessionToken: lToken
+            }});
+          } catch(eD) { lResult = {ok:false, code:'DATA_FN_ERROR', message:(eD && eD.message) || String(eD)}; }
         } else {
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }

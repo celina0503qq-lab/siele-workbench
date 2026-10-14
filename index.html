@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v94.19-202610141700';
+window.swVer = 'v94.20-202610141830';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6794,6 +6794,20 @@ function toggleSpeakRecord(){
   }
 }
 
+/* ===== v94.20: 数据后端化——受控数据集加载器（内存缓存，不落盘不进 SW） ===== */
+window._wbDataCache = {};
+window._wbData = {
+  require: function(name){
+    if (window._wbDataCache[name]) return Promise.resolve(window._wbDataCache[name]);
+    return window._deleCloudCall('getData', { name: name }).then(function(r){
+      if (r && r.ok && r.data){
+        window._wbDataCache[name] = r.data;
+        return r.data;
+      }
+      return Promise.reject(new Error((r && r.code) || 'DATA_ERROR'));
+    });
+  }
+};
 /* ===== v94.19 R4: 云识别引擎（腾讯云一句话识别，长音频自动分段拼接） ===== */
 window._wbAsrCloudOn = function(){ return !!(window._wbFlags && window._wbFlags.asrCloudEnabled); };
 window._wbAsrPick = function(){
@@ -6812,6 +6826,22 @@ window._wbAsrPickerHtml = function(){
   return '<div class="_wb-asr-picker" style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin:4px 0"><span style="font-size:11px;color:var(--soft)">识别引擎：</span>' + chip('google', '🎤 谷歌（浏览器）') + chip('cloud', '☁️ 腾讯云·专业') + '<span style="font-size:10px;color:var(--soft)">' + (cur === 'cloud' ? '长音频自动分段识别' : '仅 Chrome/Edge，需外网') + '</span></div>';
 };
 window._wbAsrRefreshPickers = function(){ try{ renderMain(); }catch(e){} };
+window._wbAsrBlobToB64 = function(bytes){
+  /* v94.20: FileReader 异步编码——替代主线程 String.fromCharCode 大循环（卡顿根因） */
+  return new Promise(function(resolve, reject){
+    try{
+      var blob = new Blob([bytes], { type: 'application/octet-stream' });
+      var fr = new FileReader();
+      fr.onload = function(){
+        var s = String(fr.result || '');
+        var idx = s.indexOf('base64,');
+        resolve(idx >= 0 ? s.slice(idx + 7) : '');
+      };
+      fr.onerror = function(){ reject(new Error('B64 编码失败')); };
+      fr.readAsDataURL(blob);
+    }catch(e){ reject(e); }
+  });
+};
 window._wbAsrEncodeWav = function(f32, sampleRate){
   var buf = new ArrayBuffer(44 + f32.length * 2), v = new DataView(buf);
   var ws = function(off, str){ for(var i = 0; i < str.length; i++) v.setUint8(off + i, str.charCodeAt(i)); };
@@ -6849,10 +6879,7 @@ window._wbCloudAsrRun = async function(blob, opts){
     var seg = f32.subarray(i * segSamples, Math.min((i + 1) * segSamples, f32.length));
     if(seg.length < 1600) break;
     var wav = window._wbAsrEncodeWav(seg, 16000);
-    var bin = '';
-    var CH = 0x8000;
-    for(var k = 0; k < wav.length; k += CH){ bin += String.fromCharCode.apply(null, wav.subarray(k, Math.min(k + CH, wav.length))); }
-    var b64 = btoa(bin);
+    var b64 = await window._wbAsrBlobToB64(wav);
     var r = await window._deleCloudCall('asrSentence', { audioBase64: b64, voiceFormat: 'wav' });
     if(r && r.ok && r.data && r.data.text){ texts.push(String(r.data.text).trim()); }
     else{
@@ -6880,6 +6907,7 @@ window._wbAsrCloudRecordStart = async function(onStop, onTick, maxSec){
       var blob = new Blob(chunks, { type: mr.mimeType || 'audio/webm' });
       onStop(null, blob);
     };
+    window._wbAsrCloudRecordStop = stopAll;
     var sec = 0;
     timer = setInterval(function(){ sec++; if(onTick) onTick(sec); if(maxSec && sec >= maxSec) stopAll(); }, 1000);
     window._wbAsrCloudStop = stopAll;
@@ -6906,7 +6934,8 @@ window._wbAsrSieleOralCloud = function(x){
   _sieleOralCloudMode = true; _sieleOralTranscript = ''; _sieleOralRecording = true;
   var btn = document.getElementById('soRecBtn'); if(btn){ btn.className = 'rb rec'; btn.textContent = '停止并评分'; }
   _sielePrepPhase = 'rec'; startSieleTimer(x.sec);
-  var r = document.getElementById('soRecognized'); if(r) r.textContent = '● 录音中 0s（云识别将在停止后执行）';
+  if(btn){ btn.textContent = '⏹ 停止并评分（云识别）'; }
+  var r = document.getElementById('soRecognized'); if(r) r.textContent = '● 录音中 0s —— 点上方按钮停止并评分';
   window._wbAsrCloudRecordStart(async function(err, blob){
     _sieleOralRecording = false;
     if(err){
@@ -6916,7 +6945,7 @@ window._wbAsrSieleOralCloud = function(x){
       return;
     }
     if(btn) btn.textContent = '☁️ 云识别中…';
-    if(r) r.textContent = '☁️ 云识别中…';
+    if(r) r.textContent = '☁️ 处理录音中…（长音频自动分段）';
     try{
       var t = await window._wbCloudAsrRun(blob, { onProgress: function(i, n){ if(r) r.textContent = '☁️ 云识别中…第 ' + i + ' / ' + n + ' 段'; } });
       _sieleOralCloudMode = false; _sieleOralTranscript = t;
@@ -18188,6 +18217,26 @@ window.addEventListener('DOMContentLoaded', () => {
   try{ tryInjectNuevoB1M2(35); }catch(e){}
   try{ tryInjectNuevoB1M3(35); }catch(e){}
   try{ tryInjectNuevoB1M4(35); }catch(e){}
+
+  /* v94.20: 云端数据二次注入（回调内定义，闭包可达 tryReplaceXQuiz） */
+  window._wbDataCloudInject = function(){
+    if (window._wbDataInjected) return;
+    window._wbDataInjected = true;
+    var sets = [['qdata_a1','QDATA_A1_REPLACE',tryReplaceA1Quiz],
+                ['qdata_a2','QDATA_A2_REPLACE',tryReplaceA2Quiz],
+                ['qdata_b1','QDATA_B1_REPLACE',tryReplaceB1Quiz],
+                ['qdata_b2','QDATA_B2_REPLACE',tryReplaceB2Quiz]];
+    sets.forEach(function(cfg){
+      window._wbData.require(cfg[0]).then(function(data){
+        try{
+          window[cfg[1]] = data;
+          cfg[2](0); /* 幂等重跑：先删后加 */
+          console.log('[数据后端] ' + cfg[0] + ' 云端数据已注入 ' + data.length + ' 题');
+        }catch(e){ console.warn('[数据后端] 注入失败 ' + cfg[0], e && e.message); }
+      }).catch(function(e){ console.log('[数据后端] ' + cfg[0] + ' 云端拉取失败，保持本地数据：', e && e.message); });
+    });
+  };
+  try{ window._wbDataCloudInject(); }catch(e){}
 
   // ===== B1 测验题库整体替换 (2026-09-22): 清除现有所有B1题，注入新1500题 =====
   function tryReplaceB1Quiz(retries){
