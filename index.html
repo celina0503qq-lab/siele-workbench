@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.3-202610151720';
+window.swVer = 'v95.5-202610151730';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3215,15 +3215,19 @@ function setFlashPosition(index,pool){
 function _praIdxOf(pool){
   try{
     if(!pool || !pool.length) return 0;
-    if(typeof ST.flashPraIdx !== 'number' || ST.flashPraIdx < 0) ST.flashPraIdx = ST.flashIdx || 0; // 惰性迁移
-    if(ST.flashPraIdx >= pool.length) ST.flashPraIdx = ST.flashPraIdx % pool.length;
-    return ST.flashPraIdx;
+    var _lvl = ST.flashLevel || 'all';
+    if(!ST.flashPraIdxByLevel || typeof ST.flashPraIdxByLevel !== 'object') ST.flashPraIdxByLevel = {};
+    if(typeof ST.flashPraIdxByLevel[_lvl] !== 'number' || ST.flashPraIdxByLevel[_lvl] < 0) ST.flashPraIdxByLevel[_lvl] = (ST.flashIdxByLevel && typeof ST.flashIdxByLevel[_lvl] === 'number') ? ST.flashIdxByLevel[_lvl] : 0; // v95.4 分级化：惰性迁移自该等级翻牌游标
+    if(ST.flashPraIdxByLevel[_lvl] >= pool.length) ST.flashPraIdxByLevel[_lvl] = ST.flashPraIdxByLevel[_lvl] % pool.length;
+    return ST.flashPraIdxByLevel[_lvl];
   }catch(e){ return 0; }
 }
 function _praSetIdx(i, pool){
   try{
     if(!pool || !pool.length) return;
-    ST.flashPraIdx = ((i % pool.length) + pool.length) % pool.length;
+    var _lvl = ST.flashLevel || 'all';
+    if(!ST.flashPraIdxByLevel || typeof ST.flashPraIdxByLevel !== 'object') ST.flashPraIdxByLevel = {};
+    ST.flashPraIdxByLevel[_lvl] = ((i % pool.length) + pool.length) % pool.length;
   }catch(e){}
 }
 function changeFlashLevel(level){
@@ -3234,12 +3238,15 @@ function renderFlash(){
   let pool=syncFlashPosition(getFlashPool());
   const _praMode = ST.flashMode==='practice'; // v94.0: 练习模式显示独立游标进度
   const _curIdx = _praMode ? _praIdxOf(pool) : ST.flashIdx;
+  // v95.5:「全部」池进度语义化——显示已学词数（vocabMastery>=1 计数）而非全量池断点（断点为独立游标无合计意义）
+  const _allMode = ST.flashLevel === 'all';
+  const _dispIdx = _allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1);
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
   const errors=getDictationErrors();
 
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
-    <div class="dp">进度 ${_curIdx+1} / ${pool.length}</div>
+    <div class="dp">进度 ${_dispIdx} / ${pool.length}</div>
   </div>`;
   h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="清空掌握星级、默写记录、错词库、翻牌位置；云端一并重置，无法恢复">↺ 重置学习进度</button></div>`;
   h += renderFlashGarden();
@@ -3271,7 +3278,7 @@ function renderFlash(){
 
   // Progress bar
   const masteryPct = m/3*100;
-  h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_curIdx+1}/${pool.length}</span></div>`;
+  h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_dispIdx}/${pool.length}</span></div>`;
 
   if(ST.flashMode === 'practice'){
     return h + renderFlashPractice(pool);
@@ -3691,7 +3698,7 @@ function cry(){ try{celebrate(0);}catch(e){} }
 
 function resetPraStats(){
   ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0};
-  ST.flashPraIdx = 0; // v94.0: 重置统计时同步清练习游标
+  ST.flashPraIdx = 0; ST.flashPraIdxByLevel = {}; // v95.4: 练习游标分级化，重置统计时全等级清
   save();
   renderMain();
 }
@@ -4779,6 +4786,8 @@ window._wbFlagsLoad = function(){
   }catch(e){}
 };
 window._wbFlagsLoad();
+// v95.4: 启动一次性清理历史备份键（旧游标/旧快照复活源；正式数据在主键 dele_siele_wb_v3 与云端）
+try{ Object.keys(localStorage).forEach(function(k){ if(/^dele_siele_wb_v3_(bak$|backup_)/.test(k)) { try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){}
 window._wbIsAdmin = function(){
   try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
 };
