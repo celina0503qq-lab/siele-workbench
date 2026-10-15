@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.5-202610151730';
+window.swVer = 'v95.6-202610151800';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6867,7 +6867,9 @@ window._wbAsrDecode16k = async function(blob){
   var ab = await blob.arrayBuffer();
   var AC = window.AudioContext || window.webkitAudioContext;
   var ac = new AC();
-  var buf = await ac.decodeAudioData(ab);
+  var buf = null;
+  try{ buf = await ac.decodeAudioData(ab); }catch(_de){ try{ ac.close(); }catch(e){}
+    throw new Error('录音格式解码失败（' + (window._wbAsrLastMime || '浏览器默认格式') + '）。此浏览器不支持该录音格式，请改用电脑 Chrome 浏览器使用云识别。'); }
   var ch = buf.getChannelData(0);
   if(buf.numberOfChannels > 1){
     var l = buf.getChannelData(0), r = buf.getChannelData(1);
@@ -6904,7 +6906,10 @@ window._wbCloudAsrRun = async function(blob, opts){
 window._wbAsrCloudRecordStart = async function(onStop, onTick, maxSec){
   try{
     var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    var mr = new MediaRecorder(stream);
+    var _mime = '';
+    try{ var _cands = ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/mpeg']; for(var _ci=0;_ci<_cands.length;_ci++){ if(window.MediaRecorder && MediaRecorder.isTypeSupported(_cands[_ci])){ _mime=_cands[_ci]; break; } } }catch(_me){}
+    var mr = _mime ? new MediaRecorder(stream, { mimeType: _mime }) : new MediaRecorder(stream);
+    window._wbAsrLastMime = _mime || (mr && mr.mimeType) || 'browser-default';
     var chunks = [];
     mr.ondataavailable = function(e){ if(e.data && e.data.size) chunks.push(e.data); };
     var done = false; var timer = null;
