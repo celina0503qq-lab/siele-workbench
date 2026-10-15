@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.8-202610151855';
+window.swVer = 'v95.9-202610152030';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6897,7 +6897,7 @@ window._wbCloudAsrRun = async function(blob, opts){
     if(r && r.ok){ texts.push(String((r.data && r.data.text) || '').trim()); }
     else{
       var code = (r && r.code) || 'ASR_ERROR';
-      var msg = { ASR_DAILY_LIMIT: '今日云识别额度已用完（200 次/天）', ASR_NOT_ENABLED: '云识别未开通，请联系管理员', ASR_NOT_CONFIGURED: '服务端密钥未配置', ASR_AUDIO_TOO_LARGE: '音频过大' }[code] || ('云识别失败（' + code + '）');
+      var msg = { ASR_DAILY_LIMIT: '今日云识别额度已用完（200 次/天）', ASR_NOT_ENABLED: '云识别未开通，请联系管理员', ASR_NOT_CONFIGURED: '服务端密钥未配置', ASR_AUDIO_TOO_LARGE: '音频过大', NET_CLIENT_ERROR: '无法连接云端——若开启了加速器/代理，请关闭后重试（代理会干扰国内云服务连接）' }[code] || ('云识别失败（' + code + '）');
       throw new Error(msg);
     }
   }
@@ -19449,7 +19449,7 @@ function cloudSyncErrMsg(code){
   if(code==='PAYLOAD_TOO_LARGE')return '学习数据过大，超出单次同步上限';
   // 2026-09-26 起：不再把四种完全不同的故障压成同一句话（曾导致排查只能靠猜）
   if(code==='SDK_LOAD_FAILED')return '云服务组件加载失败（可能被网络/加速器拦截，请关闭代理后重试）';
-  if(code==='NET_CLIENT_ERROR')return '无法连接云端（网络超时或不可达）';
+  if(code==='NET_CLIENT_ERROR')return '无法连接云端（网络超时或不可达）——若开启了加速器/代理，请关闭后重试（代理会干扰国内云服务连接）';
   if(code==='BRIDGE_ERROR')return '云端服务暂不可用（桥接异常）';
   if(code==='REVISION_CONFLICT')return '云端版本冲突，已自动合并';
   if(code==='UNKNOWN_BRIDGE_ACTION')return '不支持的同步操作';
