@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.1-202610151535';
+window.swVer = 'v95.2-202610151610';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -18812,7 +18812,7 @@ function hydrate(){
        位置键：flashLastPositionTs.all 时间戳仲裁，远端更晚翻页才采纳其 等级/当前词/该级游标；flashIdxByLevel 前向游标（进度靠前者赢）；
        flashIdx 扁平旧键前向 max；flashLastPositionTs 逐级 max；flashPraStats correct/wrong/bestStreak 取 max；flashMode 设备偏好保持本地。 */
     (function(){
-      var _epOk=!_rzH||(Number(rm.vocabResetAt||0)>=_rzH);
+      var _epOk=(!_rzH||(Number(rm.vocabResetAt||0)>=_rzH))&&(!_rzH||(((rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object')?(Number(rm.flashLastPositionTs.all)||0):0)>=_rzH));
       var _rT=(rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object')?(Number(rm.flashLastPositionTs.all)||0):0;
       var _lT=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs.all)||0):0;
       if(_epOk&&_rT>_lT && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord){
@@ -19073,7 +19073,7 @@ function mergeWbSnapshot(remote, wbTs){
     try{if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=_re;}});}}catch(e){}
   }
   var _rz=_vocabResetFloor();
-  var _epOkM=!_rz||(Number(remote.vocabResetAt||0)>=_rz);
+  var _epOkM=(!_rz||(Number(remote.vocabResetAt||0)>=_rz))&&(!_rz||(((remote.flashLastPositionTs&&typeof remote.flashLastPositionTs==='object')?(Number(remote.flashLastPositionTs.all)||0):0)>=_rz));
   if(_rz&&wbTs&&Number(wbTs)<_rz){
     // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
     remote=Object.assign({},remote);
