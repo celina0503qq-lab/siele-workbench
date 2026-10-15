@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95-202610142055';
+window.swVer = 'v95.1-202610151535';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2930,6 +2930,7 @@ function _vocabWipeLocal(now){
   }
   ST.vocabResetAt=now;
   try{localStorage.setItem('swa_vocab_reset_floor_v1',String(now));}catch(e){}
+  try{if(typeof ADB!=='undefined'&&ADB&&ADB.wb&&ADB.wb.data){['flashIdx','flashIdxByLevel','flashProgressByLevel','flashCurrentWord','flashLastPositionTs'].forEach(function(k){delete ADB.wb.data[k];});ADB.wb.data.vocabResetAt=now;ADB.wb.ts=now;}}catch(e){}
 }
 function resetFlashProgress(){
   var msg='\u26a0\ufe0f \u5c06\u6e05\u7a7a\u5355\u8bcd\u5361\u7247\u7684\u5168\u90e8\u5b66\u4e60\u8fdb\u5ea6\uff1a\n\n\u00b7 \u638c\u63e1\u661f\u7ea7\uff08\u6210\u957f\u6811\u5f52\u96f6\uff09\n\u00b7 \u9ed8\u5199\u5bf9\u9519\u8bb0\u5f55\u4e0e\u9519\u8bcd\u5e93\n\u00b7 \u7ffb\u724c\u4f4d\u7f6e\u4e0e\u590d\u4e60\u8ba1\u6570\n\n\u4e91\u7aef\u540c\u6b65\u6570\u636e\u4e00\u5e76\u91cd\u7f6e\uff0c\u65e0\u6cd5\u6062\u590d\u3002\n\u91cd\u7f6e\u540e\u8bf7\u6682\u52ff\u5728\u5176\u4ed6\u8bbe\u5907\u6253\u5f00\u5355\u8bcd\u5361\u7247\uff08\u65e7\u8bbe\u5907\u7a0d\u540e\u540c\u6b65\u4f1a\u628a\u8fdb\u5ea6\u5199\u56de\uff09\u3002\n\n\u786e\u5b9a\u91cd\u7f6e\u5417\uff1f';
@@ -18804,16 +18805,17 @@ function hydrate(){
   }
   if(ADB.wb&&(ADB.wb.ts||0)>(MIR.wbTs||0)){
     var rm=ADB.wb.data||{};
-    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashProgressByLevel','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs'].forEach(function(k){
+    ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
     /* v94.5.2: flash 系列键移出白名单改精细合并（v92.9 双路径教训——mergeWbSnapshot 已有同语义，此处补齐 hydrate 路径）
        位置键：flashLastPositionTs.all 时间戳仲裁，远端更晚翻页才采纳其 等级/当前词/该级游标；flashIdxByLevel 前向游标（进度靠前者赢）；
        flashIdx 扁平旧键前向 max；flashLastPositionTs 逐级 max；flashPraStats correct/wrong/bestStreak 取 max；flashMode 设备偏好保持本地。 */
     (function(){
+      var _epOk=!_rzH||(Number(rm.vocabResetAt||0)>=_rzH);
       var _rT=(rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object')?(Number(rm.flashLastPositionTs.all)||0):0;
       var _lT=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs.all)||0):0;
-      if(_rT>_lT && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord){
+      if(_epOk&&_rT>_lT && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord){
         if(typeof rm.flashLevel==='string'&&['all','A1','A2','B1','B2','专四'].indexOf(rm.flashLevel)>=0)ST.flashLevel=rm.flashLevel;
         ST.flashCurrentWord=rm.flashCurrentWord;
         var _rLv=rm.flashLevel||'all';
@@ -18821,7 +18823,7 @@ function hydrate(){
           ST.flashIdxByLevel=ST.flashIdxByLevel||{};ST.flashIdxByLevel[_rLv]=Number(rm.flashIdxByLevel[_rLv])||0;
         }
       }
-      if(rm.flashIdxByLevel&&typeof rm.flashIdxByLevel==='object'){
+      if(_epOk&&rm.flashIdxByLevel&&typeof rm.flashIdxByLevel==='object'){
         ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
         ['A1','A2','B1','B2','all','专四'].forEach(function(lv){
           var ri=Number(rm.flashIdxByLevel[lv]||0),li=Number(ST.flashIdxByLevel[lv]||0);
@@ -18831,7 +18833,8 @@ function hydrate(){
           }
         });
       }
-      if(typeof rm.flashIdx==='number')ST.flashIdx=Math.max(Number(ST.flashIdx)||0,rm.flashIdx);
+      if(_epOk&&typeof rm.flashIdx==='number')ST.flashIdx=Math.max(Number(ST.flashIdx)||0,rm.flashIdx);
+       if(_epOk&&rm.flashProgressByLevel&&typeof rm.flashProgressByLevel==='object'){ST.flashProgressByLevel=ST.flashProgressByLevel||{};['A1','A2','B1','B2','all'].forEach(function(_lvP){var _ri=Number(rm.flashProgressByLevel[_lvP]||0),_li=Number(ST.flashProgressByLevel[_lvP]||0);if(_ri>_li)ST.flashProgressByLevel[_lvP]=_ri;});}
       if(rm.flashLastPositionTs&&typeof rm.flashLastPositionTs==='object'){
         ST.flashLastPositionTs=ST.flashLastPositionTs||{A1:0,A2:0,B1:0,B2:0,all:0};
         ['A1','A2','B1','B2','all'].forEach(function(lv){var rt=rm.flashLastPositionTs[lv]|0;if(rt>(ST.flashLastPositionTs[lv]|0))ST.flashLastPositionTs[lv]=rt;});
@@ -19070,6 +19073,7 @@ function mergeWbSnapshot(remote, wbTs){
     try{if(typeof ADB!=='undefined'&&ADB&&ADB.words&&ADB.words.forEach){ADB.words.forEach(function(w){if(w&&w.mastery){w.mastery=0;w.updatedAt=_re;}});}}catch(e){}
   }
   var _rz=_vocabResetFloor();
+  var _epOkM=!_rz||(Number(remote.vocabResetAt||0)>=_rz);
   if(_rz&&wbTs&&Number(wbTs)<_rz){
     // v61 单词卡片重置水线：云端快照早于本端重置时刻 ⇒ 剥离词卡域字段，防旧进度合并复活
     remote=Object.assign({},remote);
@@ -19081,7 +19085,7 @@ function mergeWbSnapshot(remote, wbTs){
   // 其当前词/等级/该级别游标；自己 push 后回拉 ts 相同不采纳 ⇒ 不打断当前会话。
   var _rFlashTs=(remote.flashLastPositionTs&&typeof remote.flashLastPositionTs==='object')?(Number(remote.flashLastPositionTs.all)||0):0;
   var _lFlashTs=(ST.flashLastPositionTs&&typeof ST.flashLastPositionTs==='object')?(Number(ST.flashLastPositionTs.all)||0):0;
-  if(_rFlashTs>_lFlashTs && typeof remote.flashCurrentWord==='string' && remote.flashCurrentWord){
+  if(_epOkM&&_rFlashTs>_lFlashTs && typeof remote.flashCurrentWord==='string' && remote.flashCurrentWord){
     if(typeof remote.flashLevel==='string'&&['all','A1','A2','B1','B2','专四'].indexOf(remote.flashLevel)>=0)ST.flashLevel=remote.flashLevel;
     ST.flashCurrentWord=remote.flashCurrentWord;
     var _rLv=remote.flashLevel||'all';
@@ -19090,11 +19094,11 @@ function mergeWbSnapshot(remote, wbTs){
     }
   }
   // 学习进度：逐级取 max
-  if(remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
+  if(_epOkM&&remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
     ST.flashProgressByLevel=ST.flashProgressByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
     ['all','A1','A2','B1','B2'].forEach(function(lv){var rv=Number(remote.flashProgressByLevel[lv]||0);if(rv>(ST.flashProgressByLevel[lv]||0))ST.flashProgressByLevel[lv]=rv;});
   }
-  if(remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
+  if(_epOkM&&remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
     ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
     // v31：前向游标——同级别内「进度更靠前的一方直接赢」（不看 ts）。
     // 原 ts-LWW 规则缺陷：双方都在翻词 ⇒ 双方 ts 不断刷新 ⇒ 落后设备永不采纳领先设备（E2E 两次复现+用户实测）。
@@ -20087,7 +20091,7 @@ async function standaloneSync(showLog){
       syncFlashPosition(getFlashPool());
     }
     // 合并各级学习进度（跨设备续学关键）：逐级取最大值，保证 A1-A2-B1-B2-all 都保留较高进度
-    if(remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
+    if(_epOkM&&remote.flashProgressByLevel && typeof remote.flashProgressByLevel==='object'){
       ST.flashProgressByLevel=ST.flashProgressByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
       ['all','A1','A2','B1','B2'].forEach(function(lv){
         var rv=Number(remote.flashProgressByLevel[lv]||0);
@@ -20096,7 +20100,7 @@ async function standaloneSync(showLog){
       });
     }
     // 合并各等级背诵索引（per-level 断点续背核心）：逐 level 取 max(idx)，切级时回到正确位置
-    if(remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
+    if(_epOkM&&remote.flashIdxByLevel && typeof remote.flashIdxByLevel==='object'){
       ST.flashIdxByLevel=ST.flashIdxByLevel||{A1:0,A2:0,B1:0,B2:0,all:0};
       ['A1','A2','B1','B2','all'].forEach(function(lv){
         var ri=Number(remote.flashIdxByLevel[lv]||0);
