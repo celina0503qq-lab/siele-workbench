@@ -104,13 +104,13 @@
 5. **写作 + 口语话题筛选 UI**：写作练习加「类型（通用/SIELE）/等级」两组 chips，口语话题加「等级/分类」两组 chips。continue 式过滤**保原数组下标**，`selectWriting(i)/selectSpeaking(i)/spk_i/管理员内联编辑` 全按原 i 工作，不影响管理员编辑合并链路；cat 值只读展示绝不改写。
 6. **SPEAKING_TOPICS 双逗号修复**：数组字面量稀疏洞（`},,`）修复，消除潜在 undefined 遍历风险。
 
-验证：Playwright 三阶段 57 断言全过（管理员视角 / 普通用户视角 / lili 真登录冒烟）；index 1,374,106 B。
+验证：Playwright 三阶段 57 断言全过（管理员视角 / 普通用户视角 / 真登录冒烟）；index 1,374,106 B。
 
 ## [v93.1] – 2026-10-08
 
 ### 跨设备删除同步彻底修复（手机删除 ⇄ 电脑残留 / 电脑删除 ⇄ 手机残留）
 
-用户两轮真机实测暴露（lili 账号：手机 Edge 删 T1 记录电脑仍见；电脑删 T4 六条手机仍八条）。定位出 **v93.0 的三个缺陷**，本次全部修复：
+用户两轮真机实测暴露（测试账号：手机 Edge 删 T1 记录电脑仍见；电脑删 T4 六条手机仍八条）。定位出 **v93.0 的三个缺陷**，本次全部修复：
 
 1. **删除凭据永不上云**：`wbSnap()` 推送 payload 漏带 `sieleOralScoresDel`（按条删除表）⇒ 对端永远收不到删除凭据。修复：推送侧随 `sieleOralScoresTomb` 一并上行
 2. **本端残留从不清理**：`_sieleMergeScoreTomb` 只用凭据挡"远端并回"，本端已删记录不主动清。修复：新增 `_sieleApplyTombLocally()`——整题级时间下限（墓碑/水线）+ 题内逐条过滤（Del 命中 / 无 ts 老记录 / ts≤下限）+ 聚合重算（bestScore/count/lastDate/last 八字段）
@@ -129,7 +129,7 @@
 
 ### P5 移动端响应式（SIELE 口语页 390px 横向溢出修复）
 
-- **问题**（lili 真机实测发现）：viewport 390px 时文档实际 **634px**，横向滚动、Tarea 标签被截断
+- **问题**（真机实测发现）：viewport 390px 时文档实际 **634px**，横向滚动、Tarea 标签被截断
 - **根因**：`.so-tabs` 5 个 tab 各 `min-width:118px` 不可收缩（min-content ≈578）→ 作为 `#main` 内容把 **grid 轨道**撑宽（`#main` 是 `.app` grid 的 `1fr` 项，`min-width:auto`）
 - **修复**（≤760px 媒体查询）：
   - `.so-tabs{flex-wrap:wrap}` + `.so-tab{min-width:0;flex:1 1 40%}`（换行收缩）
@@ -144,7 +144,7 @@
 
 - **真根因**：云同步的 **`hydrate()`** 里有一份白名单，对 `sieleOralScores` 走 **`ST[k]=rm[k]` 整体覆盖**，**完全绕过 `mergeSieleOralScore()`** ⇒ v92.7 的删除墓碑、v92.8 的按条删除表**全部失效**；每次 hydrate 都拿云端快照覆盖本地 ⇒ 删掉的必然复活（同理，本地新注入的记录也会被云端抹掉）
 - **修复**：把 `sieleOralScores` 从 hydrate 白名单“整体赋值”中**移除**，改为调用 **`_sieleMergeScoreTomb(rm)` + 逐条 `mergeSieleOralScore`**（尊重墓碑与按条删除表）
-- **真机 end-to-end 验证（lili 账号，线上）**：注入 3 条 → **保持 3 条（不再被 hydrate 抹掉）** → 删中间 1 条 → **刷新后仍为 2 条（keys 1001/1003）**，删掉的 1002 未并回 ✅
+- **真机 end-to-end 验证（测试账号，线上）**：注入 3 条 → **保持 3 条（不再被 hydrate 抹掉）** → 删中间 1 条 → **刷新后仍为 2 条（keys 1001/1003）**，删掉的 1002 未并回 ✅
 - 备份修复：v92.8（按条删除表）仍保留，用于覆盖“单条删除”粒度
 
 ## [v92.8] – 2026-10-06
@@ -466,7 +466,7 @@
 
 ### 写作评分引擎修复 + 共享评分核心
 
-- 写作评分引擎修复上线（lili 实测）；`_wbScore` 统一评分核心建立
+- 写作评分引擎修复上线（测试账号实测）；`_wbScore` 统一评分核心建立
 
 ## [v66] – 2026-10-03
 
@@ -518,7 +518,7 @@
 
 ### 成长树 2.0（11 阶 + 健康窗 + 救赎）
 
-- 成长树 2.0 上线：11 阶、健康窗、错词救赎链路；lili 线上实测全通过（救赎端到端：`redeemed` → mastery 2→3 → 待救赎 16→15）
+- 成长树 2.0 上线：11 阶、健康窗、错词救赎链路；线上实测全通过（救赎端到端：`redeemed` → mastery 2→3 → 待救赎 16→15）
 
 ## [v59] – 2026-10-01
 
@@ -605,7 +605,7 @@
 
 - `siele-auth` 的 `TOKEN_TTL_SECONDS` 由 14 天改为 7 天：登录后 7 天需重新输密码
 - 已签发的旧 token 不受影响（有效期编码在 token 内），新登录起按 7 天签发
-- 部署方式：CLI `fn deploy`（代码+配置一体，SESSION_SECRET/PASSWORD_PEPPER/邀请码等环境变量原样保留）；部署后实测 lili 登录返回 token 有效期 7.00 天
+- 部署方式：CLI `fn deploy`（代码+配置一体，SESSION_SECRET/PASSWORD_PEPPER/邀请码等环境变量原样保留）；部署后实测测试账号登录返回 token 有效期 7.00 天
 
 ## [v46] – 2026-09-28
 
