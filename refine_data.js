@@ -24,6 +24,18 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-10-16": {
+    date: "2026-10-16",
+    weekday: "五",
+    issue: 24,
+    theme: "去健身房 · 西班牙圣诞彩票 · 电动汽车增长 · 养老金改革之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En el gimnasio" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La lotería de Navidad" },
+      { level: "B1", source: "El País", sourceUrl: "https://motor.elpais.com/coches-electricos/uno-de-cada-cuatro-coches-vendidos-en-espana-en-julio-ya-tenia-enchufe-estos-son-los-cinco-favoritos", topic: "El auge del coche eléctrico" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/economia/2026-09-22/la-ley-para-prejubilarse-sin-penalizacion-con-40-anos-cotizados-echa-a-andar-en-el-congreso.html", topic: "La reforma de las pensiones" }
+    ]
+  },
   "2026-10-09": {
     date: "2026-10-09",
     weekday: "五",
