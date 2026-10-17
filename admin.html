@@ -2971,7 +2971,9 @@ async function renderAdminUsers(){
       if(!isAdmin){
         userFlagsCell=USER_FLAG_DEFS.map(function(f){
           var on=!!u[f.key];
-          return '<button class="btn xs '+(on?'t':'gh')+'" style="margin:1px 3px 1px 0" title="'+(on?'点击关闭':'点击开通')+'" onclick="adminToggleUserFlag(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\''+f.key+'\','+(!on)+')">'+f.label+(on?' ✓':' —')+'</button>';
+          var extra='';
+          if(f.key==='asrCloudEnabled' && on && u.asrDate===(new Date().toISOString().slice(0,10))) extra=' · 今日'+(u.asrCount||0)+'/200';
+          return '<button class="btn xs '+(on?'t':'gh')+'" style="margin:1px 3px 1px 0" title="'+(on?'点击关闭':'点击开通')+'" onclick="adminToggleUserFlag(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\''+f.key+'\','+(!on)+')">'+f.label+(on?' ✓':' —')+extra+'</button>';
         }).join('');
       }
       return '<tr>'
