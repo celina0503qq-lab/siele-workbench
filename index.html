@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.11-202610171440';
+window.swVer = 'v95.12-202610171620';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2542,6 +2542,12 @@ function abilityScores(){
 }
 function renderAbilityRadar(){
   const s = abilityScores();
+  /* v95.12: 雷达机制说明——各维公式透明化 */
+  try{
+    var _exp='<div style="font-size:10.5px;color:var(--soft);margin-top:8px;line-height:1.7">📌 各维算法：<b>词汇</b>=已学词数÷总词库（学过即计入，掌握三星另计）｜<b>语法</b>=已完成语法点÷总点数｜<b>跟读</b>=跟读记录平均分｜<b>测验</b>=测验平均分｜<b>口语</b>=各题最高分平均｜<b>纠错力</b>=错题集中已掌握条数占比。数据实时取自本机学习记录并随云端同步。</div>';
+    var _old=renderAbilityRadar.toString().indexOf('_exp');
+    if(_old<0){ window._wbRadarNote=_exp; }
+  }catch(e){}
   /* v94.12: 六维——新增「纠错力」= 错题集已掌握条数/总条数（ST.errors.reviewed）；无错题数据显示 — 不计入多边形 */
   const dims = [
     { label:'词汇', color:'#10b981' },
@@ -2583,7 +2589,8 @@ function renderAbilityRadar(){
     return '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:30px;color:var(--soft)">'+d.label+'</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:'+(vals[i]==null?0:vals[i])+'%;background:'+d.color+';border-radius:3px"></i></div><b style="width:28px;text-align:right">'+(vals[i]==null?'—':vals[i])+'</b></div>';
   }).join('');
   return '<div class="card" style="margin-top:14px;border-left:4px solid var(--am)"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">六维 · 基于真实学习数据 · 练习后自动更新</span></h3>'+
-    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div></div>';
+    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div>'+
+    '<div style="font-size:10.5px;color:var(--soft);margin-top:8px;line-height:1.7">📌 各维算法：<b>词汇</b>=已学词数÷总词库｜<b>语法</b>=已完成语法点÷总点数｜<b>跟读</b>=跟读平均分｜<b>测验</b>=测验平均分｜<b>口语</b>=各题最高分平均｜<b>纠错力</b>=错题集已掌握占比。练习后实时更新并随云端同步。</div></div>';
 }
 
 // ===== FEAT-2: 日期联动待办 =====
@@ -19842,23 +19849,63 @@ function escB(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')
 function planCardHtml(){
   try{
     var plans=(ADB&&Array.isArray(ADB.plans))?ADB.plans.slice().sort(function(a,b){return (b.updatedAt||0)-(a.updatedAt||0);}):[];
-    var h='<div class="card" style="margin-bottom:18px"><h3><span class="ic">📅</span>复习计划 <span style="font-size:11px;color:var(--soft);font-weight:400">在后台管理中制定，此处同步展示</span></h3>';
+    var today=new Date().toISOString().slice(0,10);
+    var h='<div class="card" style="margin-bottom:18px"><h3><span class="ic">📅</span>复习计划 <span style="font-size:11px;color:var(--soft);font-weight:400">点「+1 打卡」记录完成一次 · 打卡后自动云同步</span> <button class="btn xs t" style="float:right" onclick="wbPlanForm()">＋ 新建计划</button></h3>';
+    h+='<div style="font-size:11px;color:var(--soft);padding:4px 0 8px">📌 怎样算复习：点「+1 打卡」= 今天完成了该计划的一次复习（如背完当日词量 / 做完一组题）。进度 = 累计打卡次数 ÷ 目标次数，逾期未达 100% 会标红提醒。</div>';
     if(plans.length){
-      var today=new Date().toISOString().slice(0,10);
-      h+=plans.slice(0,4).map(function(p){
+      h+=plans.map(function(p){
         var pct=Math.min(100,Math.round((p.done||0)/(p.target||1)*100));
         var over=p.end&&p.end<today&&pct<100;
+        var st=over?' <span style="color:#C0392B;font-size:11px">已逾期</span>':(pct>=100?' <span style="color:#2E7D32;font-size:11px">✓ 已达成</span>':'');
         return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)">'+
-          '<div style="flex:1;min-width:0"><div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(p.title)+(over?' <span style="color:#C0392B;font-size:11px">已逾期</span>':'')+'</div>'+
+          '<div style="flex:1;min-width:0"><div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(p.title)+st+'</div>'+
+          '<div style="font-size:10.5px;color:var(--soft)">'+esc(p.start||'')+' ~ '+esc(p.end||'')+'</div>'+
           '<div style="height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden"><i style="display:block;height:100%;width:'+pct+'%;background:var(--m-vocab,#2E7D32);border-radius:3px"></i></div></div>'+
-          '<div style="font-size:12px;color:var(--soft);white-space:nowrap">'+pct+'% · '+(p.done||0)+'/'+(p.target||1)+'</div></div>';
+          '<div style="font-size:12px;color:var(--soft);white-space:nowrap">'+pct+'% · '+(p.done||0)+'/'+(p.target||1)+'</div>'+
+          '<div style="white-space:nowrap;display:flex;gap:4px"><button class="btn xs t" onclick="wbPlanBump(\''+p.id+'\',1)">+1 打卡</button><button class="btn xs gh" onclick="wbPlanEdit(\''+p.id+'\')">✎</button><button class="btn xs dgr" onclick="wbPlanDel(\''+p.id+'\')">🗑</button></div></div>';
       }).join('');
-      if(plans.length>4)h+='<div style="font-size:11px;color:var(--soft);padding-top:7px">… 共 '+plans.length+' 个计划，去后台管理查看全部</div>';
     }else{
-      h+='<div style="font-size:12.5px;color:var(--soft);padding:6px 0">还没有复习计划。去 <b>后台管理 → 复习计划</b> 制定，会自动同步显示在这里。</div>';
+      h+='<div style="font-size:12.5px;color:var(--soft);padding:6px 0">还没有复习计划。点右上角 <b>＋ 新建计划</b> 开始制定（名称+目标次数+起止日期），后台管理中创建的计划也会同步显示在这里。</div>';
     }
     return h+'</div>';
   }catch(e){ return ''; }
+}
+/* v95.12: 复习计划主站 CRUD（学员自助；云端经 wb 快照同步，与后台管理双向一致） */
+function wbPlanBump(id,n){
+  try{
+    var p=ADB.plans.find(function(x){return x.id===id;}); if(!p)return;
+    p.done=Math.max(0,Math.min(p.target||1,(p.done||0)+n)); p.updatedAt=Date.now();
+    try{ ADB.meta=ADB.meta||{}; ADB.meta.rev=(ADB.meta.rev||0)+1; if(typeof lss==='function'&&typeof dataKey==='function'&&typeof AU!=='undefined'&&AU){ lss(dataKey(AU),ADB); } }catch(e){}
+    save();
+    renderMain();
+    if(p.done>=p.target) toast('🎉 计划「'+p.title+'」已达成！','ok');
+  }catch(e){ toast('操作失败：'+(e.message||e),'err'); }
+}
+function wbPlanDel(id){
+  if(!confirm('删除该复习计划？（后台管理中也会同步移除）'))return;
+  try{
+    ADB.plans=ADB.plans.filter(function(x){return x.id!==id;}); ADB.trash[id]=Date.now();
+    try{ ADB.meta=ADB.meta||{}; ADB.meta.rev=(ADB.meta.rev||0)+1; if(typeof lss==='function'&&typeof dataKey==='function'&&typeof AU!=='undefined'&&AU){ lss(dataKey(AU),ADB); } }catch(e){}
+    save(); renderMain(); toast('已删除','ok');
+  }catch(e){ toast('删除失败：'+(e.message||e),'err'); }
+}
+function wbPlanEdit(id){
+  var p=ADB.plans.find(function(x){return x.id===id;}); if(!p)return;
+  var t=prompt('修改计划名称：',p.title||''); if(t===null)return; t=t.trim(); if(!t){alert('名称不能为空');return;}
+  var tg=parseInt(prompt('目标次数：',p.target||10),10); if(isNaN(tg)||tg<1){alert('目标次数无效');return;}
+  p.title=t; p.target=tg; p.updatedAt=Date.now();
+  try{ ADB.meta=ADB.meta||{}; ADB.meta.rev=(ADB.meta.rev||0)+1; if(typeof lss==='function'&&typeof dataKey==='function'&&typeof AU!=='undefined'&&AU){ lss(dataKey(AU),ADB); } }catch(e){}
+  save(); renderMain(); toast('已更新','ok');
+}
+function wbPlanForm(){
+  var t=prompt('计划名称（如：B1 核心词二轮复习）：',''); if(t===null)return; t=t.trim(); if(!t){alert('名称不能为空');return;}
+  var tg=parseInt(prompt('目标次数（累计打卡多少次算完成）：','10'),10); if(isNaN(tg)||tg<1){alert('目标次数无效');return;}
+  var days=parseInt(prompt('周期天数（从今天算起）：','14'),10); if(isNaN(days)||days<1)days=14;
+  var now=Date.now();
+  ADB.plans.push({ id:'p'+now.toString(36)+Math.random().toString(36).slice(2,6), title:t, target:tg, done:0,
+    start:new Date(now).toISOString().slice(0,10), end:new Date(now+days*86400000).toISOString().slice(0,10), note:'', createdAt:now, updatedAt:now });
+  try{ ADB.meta=ADB.meta||{}; ADB.meta.rev=(ADB.meta.rev||0)+1; if(typeof lss==='function'&&typeof dataKey==='function'&&typeof AU!=='undefined'&&AU){ lss(dataKey(AU),ADB); } }catch(e){}
+  save(); renderMain(); toast('计划已创建，打卡进度会云同步','ok');
 }
 function todoCardHtml(){
   try{
