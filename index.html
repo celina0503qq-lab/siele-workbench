@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.10-202610171415';
+window.swVer = 'v95.11-202610171440';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -6884,6 +6884,7 @@ window._wbAsrDecode16k = async function(blob){
 window._wbCloudAsrRun = async function(blob, opts){
   opts = opts || {}; var onP = opts.onProgress || function(){};
   var f32 = await window._wbAsrDecode16k(blob);
+
   var segSamples = 16000 * 54;
   var total = Math.max(1, Math.ceil(f32.length / segSamples));
   var texts = [];
@@ -6894,7 +6895,8 @@ window._wbCloudAsrRun = async function(blob, opts){
     var wav = window._wbAsrEncodeWav(seg, 16000);
     var b64 = await window._wbAsrBlobToB64(wav);
     var r = await window._deleCloudCall('asrSentence', { audioBase64: b64, voiceFormat: 'wav' });
-    if(r && r.ok){ texts.push(String((r.data && r.data.text) || '').trim()); }
+
+    if(r && r.ok){ texts.push(String((r.data && r.data.text) || r.text || '').trim()); }
     else{
       var code = (r && r.code) || 'ASR_ERROR';
       var msg = { ASR_DAILY_LIMIT: '今日云识别额度已用完（200 次/天）', ASR_NOT_ENABLED: '云识别未开通，请联系管理员', ASR_NOT_CONFIGURED: '服务端密钥未配置', ASR_AUDIO_TOO_LARGE: '音频过大', NET_CLIENT_ERROR: '无法连接云端——若开启了加速器/代理，请关闭后重试（代理会干扰国内云服务连接）' }[code] || ('云识别失败（' + code + '）');
