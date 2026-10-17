@@ -6912,10 +6912,33 @@ window._wbAsrCloudRecordStart = async function(onStop, onTick, maxSec){
     window._wbAsrLastMime = _mime || (mr && mr.mimeType) || 'browser-default';
     var chunks = [];
     mr.ondataavailable = function(e){ if(e.data && e.data.size) chunks.push(e.data); };
+    /* v95.10: 录音音量诊断（RMS 采样）——识别空结果时区分「静音/音量过低」与「识别失败」 */
+    var vol = { peak: 0, sum: 0, n: 0 };
+    try{
+      var _ac = new (window.AudioContext || window.webkitAudioContext)();
+      var _src = _ac.createMediaStreamSource(stream);
+      var _an = _ac.createAnalyser(); _an.fftSize = 1024;
+      _src.connect(_an);
+      var _buf = new Float32Array(_an.fftSize);
+      var _volTimer = setInterval(function(){
+        try{
+          _an.getFloatTimeDomainData(_buf);
+          var sq = 0;
+          for(var i = 0; i < _buf.length; i++) sq += _buf[i] * _buf[i];
+          var rms = Math.sqrt(sq / _buf.length);
+          if(rms > vol.peak) vol.peak = rms;
+          vol.sum += rms; vol.n++;
+        }catch(_ve){}
+      }, 250);
+    }catch(_ve){ }
     var done = false; var timer = null;
     var stopAll = function(){
       if(done) return; done = true;
       clearInterval(timer);
+      try{ clearInterval(_volTimer); }catch(e){}
+      try{ if(_ac && _ac.state !== 'closed') _ac.close(); }catch(e){}
+      vol.avg = vol.n ? (vol.sum / vol.n) : 0;
+      window._wbAsrLastVol = vol;
       try{ if(mr.state !== 'inactive') mr.stop(); }catch(e){}
       try{ stream.getTracks().forEach(function(t){ t.stop(); }); }catch(e){}
     };
@@ -6970,8 +6993,16 @@ window._wbAsrSieleOralCloud = function(x){
     try{
       var t = await window._wbCloudAsrRun(blob, { onProgress: function(i, n){ var rr=g('soRecognized'); if(rr) rr.textContent = '☁️ 云识别中…第 ' + i + ' / ' + n + ' 段'; } });
       _sieleOralCloudMode = false; _sieleOralTranscript = t; clearInterval(_sieleOralTimer); _sieleOralRecording = false;
-      var r2=g('soRecognized'); if(r2) r2.textContent = t || '（未识别到内容）';
-      var b2=g('soRecBtn'); if(b2){ b2.className = 'rb idle'; b2.textContent = '重新录音'; }
+      var r2=g('soRecognized'), b2=g('soRecBtn');
+      var _vol = window._wbAsrLastVol || {};
+      if(!t && _vol.peak !== undefined && _vol.peak < 0.015){
+        /* v95.10: 录音音量诊断——峰值过低 ⇒ 麦克风/系统输入问题，而非识别失败 */
+        if(r2) r2.textContent = '⚠️ 未检测到有效语音（录音音量峰值 ' + (_vol.peak*100).toFixed(1) + '，阈值 1.5）——请检查：①浏览器麦克风权限与设备选择 ②系统输入音量 ③是否被其他应用占用麦克风，然后重新录音';
+        if(b2){ b2.className = 'rb idle'; b2.textContent = '重新录音'; }
+        return;
+      }
+      if(r2) r2.textContent = t || '（未识别到内容）';
+      if(b2){ b2.className = 'rb idle'; b2.textContent = '重新录音'; }
       scoreSieleOral(t);
     }catch(e){
       _sieleOralCloudMode = false; clearInterval(_sieleOralTimer);
