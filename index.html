@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.12-202610171620';
+window.swVer = 'v95.13-202610212245';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -19846,6 +19846,33 @@ window.wbToggleTask=function(i){
 };
 function escB(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 /* v94.13: 复习计划卡（后台管理系统制定，plans 随云端记录同步，此处只读展示） */
+window._wbAttrEsc = function(v){ return String(v==null?'':v).replace(/[&"'<>\\\r\n]/g, function(c){ return ({'&':'&amp;','"':'&quot;',"'":'&#39;','<':'&lt;','>':'&gt;','\\':'&#92;','\r':'','\n':' '})[c]; }); };
+window._wbSafePlanId = function(id){ return typeof id==='string' && /^[A-Za-z0-9_-]{1,64}$/.test(id); };
+(function(){
+  if(window._wbPlanDelegated) return; window._wbPlanDelegated = true;
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('[data-wact]') : null;
+    if(!el) return;
+    var card = el.closest('[data-plan-id]'); if(!card) return;
+    var id = card.getAttribute('data-plan-id') || '';
+    var act = el.getAttribute('data-wact');
+    try{
+      if(act==='bump') window.wbPlanBump(id, 1);
+      else if(act==='edit') window.wbPlanEdit(id);
+      else if(act==='del') window.wbPlanDel(id);
+      else if(act==='abm') window.bumpPlan(id, -1);
+      else if(act==='abp') window.bumpPlan(id, 1);
+      else if(act==='aed') window.openPlanForm(id);
+      else if(act==='adl') window.delPlan(id);
+    }catch(err){}
+  });
+  setTimeout(function(){ try{
+    console.log('[wbPlan mount] wbPlanForm typeof =', typeof wbPlanForm);
+    window.wbPlanForm = wbPlanForm; window.wbPlanBump = wbPlanBump;
+    window.wbPlanEdit = wbPlanEdit; window.wbPlanDel = wbPlanDel;
+    console.log('[wbPlan mount] OK');
+  }catch(e){ console.log('[wbPlan mount] ERR', e.message); } }, 0);
+})();
 function planCardHtml(){
   try{
     var plans=(ADB&&Array.isArray(ADB.plans))?ADB.plans.slice().sort(function(a,b){return (b.updatedAt||0)-(a.updatedAt||0);}):[];
@@ -19857,12 +19884,12 @@ function planCardHtml(){
         var pct=Math.min(100,Math.round((p.done||0)/(p.target||1)*100));
         var over=p.end&&p.end<today&&pct<100;
         var st=over?' <span style="color:#C0392B;font-size:11px">已逾期</span>':(pct>=100?' <span style="color:#2E7D32;font-size:11px">✓ 已达成</span>':'');
-        return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)">'+
+        return '<div data-plan-id="'+_wbAttrEsc(p.id)+'" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)">'+
           '<div style="flex:1;min-width:0"><div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(p.title)+st+'</div>'+
           '<div style="font-size:10.5px;color:var(--soft)">'+esc(p.start||'')+' ~ '+esc(p.end||'')+'</div>'+
           '<div style="height:6px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden"><i style="display:block;height:100%;width:'+pct+'%;background:var(--m-vocab,#2E7D32);border-radius:3px"></i></div></div>'+
           '<div style="font-size:12px;color:var(--soft);white-space:nowrap">'+pct+'% · '+(p.done||0)+'/'+(p.target||1)+'</div>'+
-          '<div style="white-space:nowrap;display:flex;gap:4px"><button class="btn xs t" onclick="wbPlanBump(\''+p.id+'\',1)">+1 打卡</button><button class="btn xs gh" onclick="wbPlanEdit(\''+p.id+'\')">✎</button><button class="btn xs dgr" onclick="wbPlanDel(\''+p.id+'\')">🗑</button></div></div>';
+          '<div style="white-space:nowrap;display:flex;gap:4px">'+(_wbSafePlanId(p.id)?'<button class="btn xs t" data-wact="bump">+1 打卡</button><button class="btn xs gh" data-wact="edit">✎</button><button class="btn xs dgr" data-wact="del">🗑</button>':'')+'</div></div>';
       }).join('');
     }else{
       h+='<div style="font-size:12.5px;color:var(--soft);padding:6px 0">还没有复习计划。点右上角 <b>＋ 新建计划</b> 开始制定（名称+目标次数+起止日期），后台管理中创建的计划也会同步显示在这里。</div>';
