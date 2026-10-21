@@ -1924,6 +1924,31 @@ function pFiltered(){
   return DB.plans.filter(p=>(P.st==='all'||planStatus(p)===P.st)&&(!kw||(p.title+' '+(p.note||'')).toLowerCase().includes(kw)));
 }
 function pJump(p,size){if(size)P.size=size;P.page=p;renderPlans();}
+window._wbAttrEsc = function(v){ return String(v==null?'':v).replace(/[&"'<>\\\r\n]/g, function(c){ return ({'&':'&amp;','"':'&quot;',"'":'&#39;','<':'&lt;','>':'&gt;','\\':'&#92;','\r':'','\n':' '})[c]; }); };
+window._wbSafePlanId = function(id){ return typeof id==='string' && /^[A-Za-z0-9_-]{1,64}$/.test(id); };
+(function(){
+  if(window._wbPlanDelegated) return; window._wbPlanDelegated = true;
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('[data-wact]') : null;
+    if(!el) return;
+    var card = el.closest('[data-plan-id]'); if(!card) return;
+    var id = card.getAttribute('data-plan-id') || '';
+    var act = el.getAttribute('data-wact');
+    try{
+      if(act==='bump') window.wbPlanBump(id, 1);
+      else if(act==='edit') window.wbPlanEdit(id);
+      else if(act==='del') window.wbPlanDel(id);
+      else if(act==='abm') window.bumpPlan(id, -1);
+      else if(act==='abp') window.bumpPlan(id, 1);
+      else if(act==='aed') window.openPlanForm(id);
+      else if(act==='adl') window.delPlan(id);
+    }catch(err){}
+  });
+  setTimeout(function(){ try{
+    window.wbPlanForm = wbPlanForm; window.wbPlanBump = wbPlanBump;
+    window.wbPlanEdit = wbPlanEdit; window.wbPlanDel = wbPlanDel;
+  }catch(e){} }, 0);
+})();
 function renderPlans(){
   if(!DB)return;
   const list=pFiltered().slice().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
@@ -1936,9 +1961,9 @@ function renderPlans(){
       '<td data-l="名称"><b>'+esc(p.title)+'</b>'+(p.note?'<div class="mut" style="font-size:11px">'+esc(p.note)+'</div>':'')+'</td>'+
       '<td data-l="周期" style="white-space:nowrap;font-size:11.5px">'+esc(p.start||'?')+' ~ '+esc(p.end||'?')+'</td>'+
       '<td data-l="进度" style="min-width:150px"><div style="display:flex;align-items:center;gap:8px"><div class="pbar" style="flex:1"><i class="t" style="width:'+pct+'%"></i></div><span style="font-size:11px;white-space:nowrap">'+(p.done||0)+'/'+p.target+'</span></div>'+
-        '<div style="display:flex;gap:5px;margin-top:4px"><button class="btn xs gh" onclick="bumpPlan(\''+p.id+'\',-1)">−1</button><button class="btn xs t" onclick="bumpPlan(\''+p.id+'\',1)">＋1 打卡</button></div></td>'+
+        '<div style="display:flex;gap:5px;margin-top:4px" data-plan-id="'+_wbAttrEsc(p.id)+'">'+(_wbSafePlanId(p.id)?'<button class="btn xs gh" data-wact="abm">−1</button><button class="btn xs t" data-wact="abp">＋1 打卡</button>':'')+'</div></td>'+
       '<td data-l="状态">'+stTag[planStatus(p)]+'</td>'+
-      '<td><div class="rowacts"><button class="btn xs gh" onclick="openPlanForm(\''+p.id+'\')">编辑</button><button class="btn xs dgr" onclick="delPlan(\''+p.id+'\')">删除</button></div></td></tr>';}).join('')
+      '<td><div class="rowacts" data-plan-id="'+_wbAttrEsc(p.id)+'">'+(_wbSafePlanId(p.id)?'<button class="btn xs gh" data-wact="aed">编辑</button><button class="btn xs dgr" data-wact="adl">删除</button>':'')+'</div></td></tr>';}).join('')
     :'<tr><td colspan="5"><div class="empty"><span class="big">📭</span>暂无复习计划</div></td></tr>')+'</tbody>';
   renderPgn($('pPgn'),total,pages,P,'pJump');
 }
