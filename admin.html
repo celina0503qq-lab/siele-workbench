@@ -3194,6 +3194,8 @@ async function transferIn(code){
     if(!r.ok)throw new Error('HTTP '+r.status);
     const j=await r.json();
     if(!j||j.type!=='siele-transfer'||!j.user||!j.account)throw new Error('传输码内容无效');
+     const _ts=Number(j.ts||0); if(!_ts)throw new Error('传输码缺少时间戳（旧版包），请让原设备升级后重新生成');
+     if(Date.now()-_ts>24*3600*1000)throw new Error('传输码已过期（有效期 24 小时），请让原设备重新生成');
     const users=lsGet(LSU,{});
     if(users[j.user]&&!confirm('本机已存在用户「'+j.user+'」，导入将与其本地数据合并，继续吗？'))return;
     users[j.user]=j.account;lsSet(LSU,users);
@@ -3202,7 +3204,8 @@ async function transferIn(code){
     else if(j.data)db=j.data;
     lsSet(dataKey(j.user),db);
     if(j.wb)lsSet('dele_siele_wb_v3',j.wb);
-    toast('✅ 迁入成功，正在进入学习工作台…','ok');
+    fetch('https://jsonblob.com/api/jsonBlob/'+encodeURIComponent(code),{method:'DELETE'}).catch(function(){});
+     toast('✅ 迁入成功，正在进入学习工作台…','ok');
     enter(j.user,true);
     gotoWorkbench();
   }catch(err){
