@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.19-202610221045';
+window.swVer = 'v95.20-202610221150';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -4709,7 +4709,7 @@ function renderQuizQuestion(){
     var _isCor = opts[questionState.selected] && opts[questionState.selected].correct;
     feedback = (_isCor ? '✓ 正确！'+(_ansTag?' 答案：'+_ansTag+' ✅':'') : '✗ 不正确。正确答案已标绿。'+(_ansTag?' 答案：'+_ansTag:'')) + (_fbRest?' <b>解析：</b>'+linkify(esc(_fbRest)):'');
   } else if(hist){
-    feedback = '<span style="color:var(--soft)">上次作答：' + (hist.correct ? '✓ 正确' : '✗ 错误') + '（本题已做过，仍可重新作答）</span>'+(_ansTag?' 答案：'+_ansTag:'') + (_fbRest?' <b>解析：</b>'+linkify(esc(_fbRest)):'');
+    feedback = '<details style="margin-top:6px"><summary style="cursor:pointer;color:var(--soft);font-size:12px">上次作答：' + (hist.correct ? '✓ 正确' : '✗ 错误') + '（本题已做过，仍可重新作答）——点击展开解析</summary><div style="margin-top:5px">'+(_ansTag?'<b>答案：</b>'+_ansTag+'<br>':'') + (_fbRest?'<b>解析：</b>'+linkify(esc(_fbRest)):'') + '</div></details>';
   }
   // BUG-3: 已做过的题(hist)也要显示解析容器（按历史对错着色）
   const _fbShowCls = questionState.answered
@@ -12011,9 +12011,7 @@ function renderErrors(){
   tabs += '</div>';
 
   // Add form
-  let form = `
-  <div class="err-add">
-    <h4>➕ 添加错题</h4>
+  let form = `<details class="err-add"><summary style="cursor:pointer;font-size:13px;font-weight:600;color:var(--tr);padding:6px 0">➕ 添加错题（点击展开表单）</summary><h4 style="display:none">添加错题</h4>
     <select id="errType">
       <option value="quiz">✏️ 题目错误</option>
       <option value="writing">✍️ 作文不足</option>
@@ -12026,7 +12024,7 @@ function renderErrors(){
     </div>
     <textarea id="errNote" placeholder="错误分析 / 知识点备注（可选）"></textarea>
     <button class="btn" onclick="addError()">添加到错题集</button>
-  </div>`;
+  </details>`;
 
   // Filter
   let filtered = ST.errorFilter==='all' ? ST.errors : ST.errors.filter(e=>e.type===ST.errorFilter);
