@@ -404,7 +404,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
     <div class="ns">账户设置</div>
     <button class="ni" data-p="passwd" onclick="go('passwd')"><span class="ic">🔑</span>密码修改</button>
-    <button class="ni" onclick="window.open('index.html#netdisk','_blank')" title="管理员专属：工作台资料地图"><span class="ic">🗺️</span>资料地图</button>
+    <button class="ni admin-only" onclick="window.open('index.html#netdisk','_blank')" title="管理员专属：工作台资料地图"><span class="ic">🗺️</span>资料地图</button>
     <div class="ns admin-only hide">系统管理</div>
     <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
     <div class="ns">学习</div>
@@ -1282,7 +1282,8 @@ function enter(u,persist,profile){
   DB=lsGet(dataKey(u),null)||blankData(true);
   /* v94.13: 云端拉回/旧版本记录可能缺 meta（saveDB/updateSyncUI 依赖），防御补齐 */
   if(!DB.meta||typeof DB.meta!=='object')DB.meta={rev:0,lastSync:0,lastPushTs:0,lastBackup:0};
-  if(!Array.isArray(DB.plans))DB.plans=[];
+  if(!Array.isArray(DB.plans))DB.plans=[];   if(!Array.isArray(DB.reviews))DB.reviews=[];
+   if(!Array.isArray(DB.questions))DB.questions=[];   if(!Array.isArray(DB.words))DB.words=[];
   if(!DB.settings||typeof DB.settings!=='object')DB.settings={examType:'siele',targetLevel:'B2',examDate:''};
   if(persist)lsSet(LSS,{u,ts:Date.now(),cloud:!!(profile&&profile.sessionToken)});
   $('authView').style.display='none';
