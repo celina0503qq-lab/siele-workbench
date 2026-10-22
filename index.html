@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.18-202610220945';
+window.swVer = 'v95.19-202610221045';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3745,6 +3745,7 @@ const VOCAB_DIALECT_PE = {
 
 function renderVocab(){
   let h = `<div class="tb"><div><h2>词汇库${renderModuleAccentToggle('vocab')}</h2><div class="d">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 个词条 · 点击单词发音 · 点击星星标记掌握度</div></div></div>`;
+  h += `<div style="font-size:10.5px;color:var(--soft);margin:-4px 0 8px">熟练度图例：<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok,#2E7D32);vertical-align:middle"></span> ★★★ 掌握　<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--am,#E08E0B);vertical-align:middle"></span> ★★ 熟悉　<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--bad,#B71C1C);vertical-align:middle"></span> ★ 初学</div>`;
   h += renderModuleCheckinBar('vocab','词汇学习','🃏');
 
   // ===== 搜索表格置顶（主功能优先）=====
@@ -3897,7 +3898,7 @@ function renderVocabRow(v){
     <td><button class="spk" style="width:24px;height:24px;font-size:11px" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
     <td class="ec" onclick="speak('${v.es.replace(/'/g,"\\'")}',this)">${esc(v.es)}</td>
     <td>${esc(v.zh)}</td>
-    <td class="pc">${v.pos}</td>
+    <td class="pcell">${v.pos}</td>
     <td><span class="tm l${v.lvl}">${v.lvl}</span>${v.tag==='专四'?' <span class="tm" style="background:#fdf3e3;color:#854f0b;border:1px solid #e8cfa0">专四</span>':''}${v.dialect?(' <span class="tm" style="background:#e8f5ee;color:#0f6e56;border:1px solid #bcdcc9">拉美</span>'+(typeof VOCAB_DIALECT_PE!=='undefined'&&VOCAB_DIALECT_PE[v.es]?' <span style="font-size:10px;color:var(--soft)" title="西班牙标准用法">🇪🇸 '+esc(VOCAB_DIALECT_PE[v.es])+'</span>':'')):''}</td>
     <td style="font-size:11px;font-style:italic;color:var(--soft)">${esc(v.ex)} <button class="spk" style="width:20px;height:20px;font-size:9px" onclick="speak('${v.ex.replace(/'/g,"\\'")}',this)">&#128264;</button></td>
     <td>${masteryHtml}</td>
@@ -4561,6 +4562,31 @@ function toggleQuizOrder(){
   resetQuiz();
 }
 
+(function(){
+  if(window._wbQuizKeys) return; window._wbQuizKeys = true;
+  document.addEventListener('keydown', function(e){
+    try{
+      if(typeof currentPage === 'undefined' || currentPage !== 'quiz') return;
+      if(typeof ST === 'undefined' || !ST.quizSession || !ST.quizSession.length) return;
+      if(ST.quizIdx >= ST.quizSession.length) return;
+      var q = ST.quizSession[ST.quizIdx];
+      if(!q || !q.opts) return;
+      var answered = (ST.quizQuestionState && ST.quizQuestionState[ST.quizIdx] && ST.quizQuestionState[ST.quizIdx].answered);
+      var tag = (e.target && e.target.tagName) || '';
+      if(tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if(!answered && e.key >= '1' && e.key <= '4'){
+        var i = parseInt(e.key, 10) - 1;
+        if(q.opts[i] !== undefined){
+          var opts = document.querySelectorAll('#quizBox .qopt');
+          if(opts[i]){ opts[i].click(); e.preventDefault(); }
+        }
+      } else if(answered && e.key === 'Enter'){
+        var nb = document.getElementById('nextBtn');
+        if(nb){ nb.click(); e.preventDefault(); }
+      }
+    }catch(err){}
+  });
+})();
 function renderQuizQuestion(){
   const box = document.getElementById('quizBox');
   if(!box) return;
@@ -19937,7 +19963,7 @@ window._wbMemoFold = function(){
 (function(){
   if(document.getElementById('wbMemoCss')) return;
   var st = document.createElement('style'); st.id = 'wbMemoCss';
-  st.textContent = '.wb-memo{margin:10px 0;padding:11px 13px;border:1.5px dashed var(--am,#E08E0B);border-radius:12px;background:#fdf8ef}'
+  st.textContent = '.pcell{color:var(--ink,#2B2118);font-size:12.5px}.wb-memo{margin:10px 0;padding:11px 13px;border:1.5px dashed var(--am,#E08E0B);border-radius:12px;background:#fdf8ef}'
     + '.wb-memo.folded .wm-ta,.wb-memo.folded .wm-foot{display:none}'
     + '.wb-memo .wm-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;gap:8px;flex-wrap:wrap}'
     + '.wb-memo .wm-head span{font-size:11px;color:var(--soft,#6B5D4F)}'
