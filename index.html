@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.15-202610222300';
+window.swVer = 'v95.16-202610220910';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -19560,8 +19560,9 @@ async function cloudSync(silent){
       return;
     }catch(e){lastErr=e;if(a<3)await new Promise(function(r){setTimeout(r,a*1500);});}
   }
-  syncing=false;try{SIG='';}catch(_sigE){} /* v31: 推送失败重置签名，下次变更会重推全部积压 */;setChip('err',lastErr&&lastErr.message);
+  syncing=false;try{SIG='';}catch(_sigE){}   if(!lastErr){ try{ window._wbSyncFailMsg=''; }catch(e){} } /* v31: 推送失败重置签名，下次变更会重推全部积压 */;setChip('err',lastErr&&lastErr.message);
   if(!silent)toast('云同步失败：'+(lastErr&&lastErr.message||'网络异常')+'（已重试3次，点右上角同步角标可重试）','err');
+     window._wbSyncFailMsg='云端数据获取失败：'+(lastErr&&lastErr.message||'网络异常')+'（已重试 3 次）';
 }
 
 /* ---------- 挂钩 save() ---------- */
@@ -20077,6 +20078,13 @@ if(typeof renderDash==='function'){
     if(j>=0)return h.slice(0,j)+todoCardHtml()+h.slice(j);
     return h+todoCardHtml();
   };
+  /* v95.15(D1): 同步失败横幅——拉取失败时仪表盘顶部明确提示，禁止假清零渲染 */
+  var _rd1=renderDash; renderDash=function(){ var h=_rd1(); try{
+    if(window._wbSyncFailMsg){
+      var mb='<div style="margin:0 0 14px;padding:11px 14px;border-radius:10px;background:#FCEBEB;border:1px solid #E24B4A;color:#791F1F;font-size:12.5px;line-height:1.6">⚠️ <b>'+window._wbSyncFailMsg+'</b><br>当前显示的是本机缓存，你的学习数据没有丢失。 <button class="btn xs t" style="margin-left:6px" onclick="cloudSync()">重试同步</button></div>';
+      h=mb+h;
+    }
+  }catch(_mbE){} return h; };
 }
 
 /* ---------- 账号隔离守卫（2026-09-26 新增）----------
