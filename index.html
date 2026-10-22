@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.28-202610222345';
+window.swVer = 'v95.29-202610222350';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -9618,7 +9618,7 @@ function renderSiele(){
   let h = `<div class="tb"><div><h2>SIELE 专项训练${renderModuleAccentToggle('siele')}</h2><div class="d">口语 Tarea 1-5 · 音频先行 · 录音评分 · 答后范例 · 基于回忆版真题资料</div></div></div>`;
 
   if(isContentAdmin()){
-    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:10px"><button class="btn sm pr" onclick="renderOralBankAdmin()">🔧 管理员编辑口语真题题库</button><span class="sub" style="margin-left:8px;font-size:11px">增删改 Tarea 1-5 题目/范例答案/关键词，保存后所有用户可见</span></div>`;
+    h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px;margin-bottom:10px"><span class="sub" style="font-size:11px">题库增删改请用每题卡片上方的管理工具条（➕加题 / ✕删题 / ✎ 编辑各字段）；完整题库编辑器待后续版本。</span></div>`;
   }
   h += renderSieleOralTrainer();
   h += `<div class="tb" style="margin-top:20px"><div><h2 style="font-size:17px">考试结构与答题工具</h2><div class="d">先练习，再查看五项任务策略和连接词</div></div></div>`;
