@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.20-202610221150';
+window.swVer = 'v95.21-202610221140';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -11978,11 +11978,12 @@ function renderErrors(){
   if(!ST.errors) ST.errors = [];
   if(!ST.errorMainTab) ST.errorMainTab = 'gen';
   var _vb=(ST.vocabErrorBank&&Object.keys(ST.vocabErrorBank).length)||0;
-  var _cb=(ST.conjErrorBank&&ST.conjErrorBank.length)||0;
+  var _cb=(ST.conjErrorBank&&ST.conjErrorBank.length)||0;   var _db=(ST.dictationErrorBank&&ST.dictationErrorBank.length)||0;;
   var mtabs = '<div class="err-tabs err-mtabs">'
     + '<button class="err-tab '+(ST.errorMainTab==='gen'?'on':'')+'" onclick="switchErrorMain(\'gen\')">📝 练习错题<span class="cnt">'+ST.errors.length+'</span></button>'
     + '<button class="err-tab '+(ST.errorMainTab==='vocab'?'on':'')+'" onclick="switchErrorMain(\'vocab\')">📕 词汇错题本<span class="cnt">'+_vb+'</span></button>'
     + '<button class="err-tab '+(ST.errorMainTab==='conj'?'on':'')+'" onclick="switchErrorMain(\'conj\')">🔀 变位错题<span class="cnt">'+_cb+'</span></button>'
+    + '<button class="err-tab '+(ST.errorMainTab==='dict'?'on':'')+'" onclick="switchErrorMain(\'dict\')">✍️ 默写错词<span class="cnt">'+_db+'</span></button>'
     + '</div>';
   if(ST.errorMainTab==='vocab'){
     return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">词汇错题本 · 练习答错自动入池 · 答对 3 次自动出池</div></div>
@@ -11993,6 +11994,11 @@ function renderErrors(){
     return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">变位错题 · 默写/听写答错自动入池 · 同题答对即出池</div></div>
       <span class="dp">共 ${_cb} 条</span>
     </div>${mtabs}${renderConjErrList()}`;
+  }
+  if(ST.errorMainTab==='dict'){
+    return `<div class="tb"><div><h2>🚨 错题集</h2><div class="d">默写错词 · 默写答错的词汇总（与「默写二次巩固」同池）</div></div>
+      <span class="dp">共 ${_db} 条</span>
+    </div>${mtabs}${renderDictErrList()}`;
   }
   /* —— gen：练习错题（原有逻辑） —— */
   if(!ST.errorFilter) ST.errorFilter = 'all';
@@ -12089,7 +12095,7 @@ function renderVocabErrList(){
   h += '</div></div><div class="note" style="margin-top:8px">💡 答对 3 次自动出池；「开始巩固」随机抽 12 词做选择题巩固。</div>';
   return h;
 }
-function renderConjErrList(){
+function renderDictErrList(){   const arr = ST.dictationErrorBank || [];   if(!arr.length) return '<div class="empty">暂无默写错词——默写/听写答错的词会自动汇总到这里（与「默写二次巩固」同池）。</div>';   let h = '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'     + '<button class="btn sm ol" onclick="exportErrorBank(\'dict\')">📤 导出</button></div>'     + '<div class="err-item"><div style="display:flex;flex-direction:column">';   arr.slice(-200).reverse().forEach(e=>{     h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap">       <span style="min-width:100px;font-weight:600;font-family:var(--serif)">${esc(e.es||'')}</span>       <span style="flex:1;min-width:120px;color:var(--soft)">${esc(e.zh||'')}</span>       <span style="color:var(--bad)">你的答案：${esc(e.userAnswer||'—')}</span>       <span style="color:var(--ok)">正确：${esc(e.correctAnswer||'—')}</span>       <span style="color:var(--soft);font-size:10.5px">${e.ts?new Date(e.ts).toLocaleDateString('zh-CN'):''}</span>     </div>`;   });   h += '</div></div>';   return h; } function renderConjErrList(){
   const arr = ST.conjErrorBank || [];
   if(!arr.length) return '<div class="empty">暂无变位错题——变位默写/听写答错的题会自动汇总到这里。</div>';
   let h = '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'
