@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.17-202610220925';
+window.swVer = 'v95.18-202610220945';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3247,7 +3247,7 @@ function renderFlash(){
   const _curIdx = _praMode ? _praIdxOf(pool) : ST.flashIdx;
   // v95.5:「全部」池进度语义化——显示已学词数（vocabMastery>=1 计数）而非全量池断点（断点为独立游标无合计意义）
   const _allMode = ST.flashLevel === 'all';
-  const _dispIdx = _allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1);
+  const _dispIdx = _allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1); /* v95.5: 全部=已学唯一词数（评价口径确认维持，各级之和方案否决——「全部」模式学词无处计入+口径与已学不一致） */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
   const errors=getDictationErrors();
@@ -18753,6 +18753,18 @@ async function wbDoLogin(e){
    立即刷新导航并收起登录罩，不等 postMessage/整页刷新时序 */
 window.addEventListener('storage',function(ev){
   try{
+    /* v95.18(G8): 后台管理写数据键（plans/meta 管理域）时主站实时同步——修复后台新增计划被主站旧内存覆盖 */
+    var _au=(typeof activeUser==='function')?activeUser():null;
+    var _dk=(_au&&typeof dataKey==='function')?dataKey(_au):null;
+    if(ev.key&&ev.key===_dk&&ev.newValue){
+      var _nd=JSON.parse(ev.newValue);
+      if(_nd&&typeof ADB!=='undefined'&&ADB){
+        if(Array.isArray(_nd.plans)) ADB.plans=_nd.plans;
+        if(_nd.meta&&typeof _nd.meta==='object') ADB.meta=_nd.meta;
+        if(typeof renderMain==='function')try{renderMain();}catch(e){}
+      }
+      return;
+    }
     if(ev.key!=='swa_cloud_session_v1'||!ev.newValue)return;
     var s=JSON.parse(ev.newValue);
     if(s&&s.username){
