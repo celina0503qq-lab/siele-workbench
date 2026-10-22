@@ -14835,7 +14835,18 @@ window._deleCloudPending = {};
 window._deleCloudCall = function(action, params){
   return new Promise(function(resolve, reject){
     var reqId = 'lc' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
-    window._deleCloudPending[reqId] = {resolve: resolve, reject: reject};
+    var _resolve = function(resp){
+      try{
+        var _code = resp && resp.code;
+        if((_code === 'SESSION_REVOKED' || _code === 'USER_DISABLED') && !window._wbKickedOnce){
+          window._wbKickedOnce = true;
+          try{ if(typeof handleCloudKick === 'function') handleCloudKick('您的登录状态已失效（密码已更改或会话被撤销），本地学习数据已保留，请重新登录。'); }catch(e){}
+          setTimeout(function(){ window._wbKickedOnce = false; }, 5000); // 5s 后恢复可触发（防连点弹窗风暴，又允许再次感知）
+        }
+      }catch(e){}
+      resolve(resp);
+    };
+    window._deleCloudPending[reqId] = {resolve: _resolve, reject: reject};
     setTimeout(function(){
       if (window._deleCloudPending[reqId]) {
         delete window._deleCloudPending[reqId];
@@ -16243,6 +16254,7 @@ function _renderDeleA1V5TaskCard(q){
     }
     body += '<div style="margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
       '<button class="btn pr" onclick="startSpeakingRecording(this)">🎤 开始作答</button>'+
+      (window._wbAsrPickerHtml?window._wbAsrPickerHtml():'')+
       '<span class="sub" style="color:var(--tr);font-size:11px">🎤 真实录音识别评分</span>'+
     '</div>';
     // AI 口语范例 (可展开编辑)
@@ -16525,6 +16537,50 @@ function _deleSpeakClearTimer(){
 }
 window.startSpeakingRecording = function(btn){
   if(_deleSpeakRec){ window.stopDeleSpeaking(); return; }
+  /* v95.13: DELE 口语接云识别（腾讯云）——与 SIELE 同链路，国内无代理可用 */
+  if(window._wbAsrPick && window._wbAsrPick()==='cloud' && window._wbAsrCloudOn && window._wbAsrCloudOn()){
+    var lvlC = _deleSpeakLvl();
+    var hostC = btn.parentElement;
+    var wrapC = hostC.querySelector('.dele-speak-live');
+    if(!wrapC){
+      wrapC = document.createElement('div');
+      wrapC.className = 'dele-speak-live';
+      wrapC.style.cssText = 'margin-top:8px';
+      wrapC.innerHTML = '<div class="dele-speak-status" style="font-size:12px;color:var(--soft)"></div>'+
+        '<div class="dele-speak-livebox" style="display:none;margin-top:6px;font-size:13px;line-height:1.6;color:#1e293b;min-height:20px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px"></div>'+
+        '<div class="dele-speak-fb" style="margin-top:8px"></div>';
+      hostC.appendChild(wrapC);
+    }
+    var stC = wrapC.querySelector('.dele-speak-status');
+    var liveC = wrapC.querySelector('.dele-speak-livebox');
+    var fbC = wrapC.querySelector('.dele-speak-fb');
+    _deleSpeakBtn = btn; _deleSpeakText = ''; _deleSpeakRec = true;
+    btn.className = 'btn rd'; btn.textContent = '⏹ 停止并评分';
+    if(stC) stC.innerHTML = '<span style="color:var(--ok,#10b981)">● 云识别录音中（'+lvlC+'，最长 3 分钟）…</span>';
+    if(liveC){ liveC.style.display='block'; liveC.innerHTML='<span style="color:var(--soft)">🎙 请开始用西语作答…</span>'; }
+    if(fbC) fbC.innerHTML = '';
+    window._wbAsrCloudRecordStart(function(err, blob){
+      _deleSpeakRec = false;
+      if(err){
+        if(stC) stC.innerHTML = '<span style="color:var(--bad,#ef4444)">录音失败：'+(err.message||err)+'</span>';
+        try{ window._deleSpeakingAnswer(btn); }catch(e){}
+        return;
+      }
+      if(stC) stC.innerHTML = '<span style="color:var(--ok,#10b981)">☁️ 云识别中…（长音频自动分段）</span>';
+      window._wbCloudAsrRun(blob, { onProgress: function(i,n){ if(stC) stC.innerHTML = '<span style="color:var(--ok,#10b981)">☁️ 云识别中…第 '+i+' / '+n+' 段</span>'; } })
+        .then(function(t){
+          _deleSpeakText = String(t||'').trim();
+          window.finishDeleSpeaking();
+        })
+        .catch(function(e){
+          if(stC) stC.innerHTML = '<span style="color:var(--bad,#ef4444)">云识别失败：'+(e.message||e)+'</span>';
+          try{ window._deleSpeakingAnswer(btn); }catch(e2){}
+        });
+    }, function(sec){
+      if(stC) stC.innerHTML = '<span style="color:var(--ok,#10b981)">● 云识别录音中 ' + sec + 's … 点「停止并评分」结束</span>';
+    }, 180);
+    return;
+  }
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   var lvl = _deleSpeakLvl();
   var host = btn.parentElement;
@@ -16577,7 +16633,8 @@ window.startSpeakingRecording = function(btn){
   _deleSpeakRecognition.onerror = function(e){
     var err = e && e.error;
     if(err === 'no-speech' && _deleSpeakRec){ try{ _deleSpeakRecognition.start(); }catch(x){} return; }
-    if(err === 'not-allowed' && stEl) stEl.innerHTML = '<span style="color:var(--bad,#ef4444)">麦克风权限被拒绝，请在浏览器设置中允许麦克风。</span>';
+    if(err === 'not-allowed' && stEl) stEl.innerHTML = '<span style="color:var(--bad,#ef4444)">麦克风权限被拒绝，请改用「手动输入文本」评分（已自动打开）。</span>';
+    if(err === 'not-allowed'){ window.stopDeleSpeaking(true); try{ window._deleSpeakingAnswer(btn); }catch(e){} return; }
     window.stopDeleSpeaking(true);
   };
   try{ _deleSpeakRecognition.start(); }catch(e){
@@ -16594,7 +16651,7 @@ window.startSpeakingRecording = function(btn){
 };
 window.stopDeleSpeaking = function(silent){
   _deleSpeakClearTimer();
-  if(_deleSpeakRecognition){ try{ _deleSpeakRecognition.stop(); }catch(e){} }
+  if(window._wbAsrCloudStop && _deleSpeakRec && _deleSpeakBtn && _deleSpeakBtn.textContent.indexOf('停止') >= 0){ try{ window._wbAsrCloudStop(); }catch(e){} }
   if(_deleSpeakRec && !silent) window.finishDeleSpeaking();
   _deleSpeakRec = false;
   if(_deleSpeakBtn){ _deleSpeakBtn.className = 'btn pr'; _deleSpeakBtn.textContent = '🎤 重新作答'; }
