@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 0) 2026-10-23 第 25 期 — 主题：去邮局 · 西班牙午睡文化 · AI与就业 · 非法旅游公寓之争
 // 1) 2026-10-09 第 23 期 — 主题：机场出行 · 西班牙咖啡文化 · IA360 计划 · AI 监管之争
 // 2) 2026-10-02 第 22 期 — 主题：菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争
 // 3) 2026-09-25 第 21 期 — 主题：银行办事 · 图书馆与文化 · 西班牙外国投资激增 · 孙辈法投票权之争
@@ -24,6 +25,19 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-10-23": {
+    date: "2026-10-23",
+    weekday: "五",
+    issue: 25,
+    theme: "去邮局 · 西班牙午睡文化 · AI与就业 · 非法旅游公寓之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la oficina de correos" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La siesta en España" },
+      { level: "B1", source: "El País", sourceUrl: "https://elpais.com/expres/2026-10-04/por-que-los-datos-desmienten-por-ahora-el-apocalipsis-laboral-de-la-inteligencia-artificial.html", topic: "La IA y el empleo" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/economia/2026-10-10/escarrer-melia-el-nuevo-gobierno-tiene-que-acabar-con-los-pisos-turisticos-ilegales.html", topic: "Los pisos turísticos ilegales" }
+    ]
+  },
+
   "2026-10-16": {
     date: "2026-10-16",
     weekday: "五",
