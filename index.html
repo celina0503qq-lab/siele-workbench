@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.31-202610232100';
+window.swVer = 'v95.32-202610232010';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3564,12 +3564,14 @@ function checkFlashAnswer(clicked, correct){
     ST.flashPraStats.correct++;
     ST.flashPraStats.streak++;
     if(ST.flashPraStats.streak > ST.flashPraStats.bestStreak) ST.flashPraStats.bestStreak = ST.flashPraStats.streak;
+    ST.flashPraStats._ts = Date.now(); /* v95.31: 统计时间戳（云合并 ts-LWW 依据，重置后旧值不再拉回） */
     // Positive animation: confetti + dancing emojis
     celebrate();
     try{ var _pp=getFlashPool(); var _pv=_pp[_praIdxOf(_pp)]; if(_pv&&typeof _vocabErrRight==='function')_vocabErrRight(_pv); }catch(e){}
   } else {
     ST.flashPraStats.wrong++;
     ST.flashPraStats.streak = 0;
+    ST.flashPraStats._ts = Date.now();
     // Wrong animation: crying face
     cry();
     try{ var _pp=getFlashPool(); var _pv=_pp[_praIdxOf(_pp)]; if(_pv&&typeof _vocabErrLog==='function')_vocabErrLog(_pv); }catch(e){}
@@ -3719,9 +3721,10 @@ function celebrate(level){
 function cry(){ try{celebrate(0);}catch(e){} }
 
 function resetPraStats(){
-  ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0};
+  ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0, _ts: Date.now()}; /* v95.31: _ts 使云端旧值（max 合并）不再拉回 */
   ST.flashPraIdx = 0; ST.flashPraIdxByLevel = {}; // v95.4: 练习游标分级化，重置统计时全等级清
   save();
+  try{ if(typeof cloudSync==='function') cloudSync(true); }catch(e){} /* v95.31: 立即上行覆盖云端，防其他设备旧快照拉回 */
   renderMain();
 }
 
@@ -12253,12 +12256,22 @@ window.switchErrorMain = function(t){
 function renderVocabErrList(){
   const bank = ST.vocabErrorBank || {};
   const keys = Object.keys(bank);
-  if(!keys.length) return '<div class="empty">暂无词汇错题——中西对应练习里答错的词会自动汇总到这里。</div>';
+  const dict = ST.dictationErrorBank || [];
+  if(!keys.length && !dict.length) return '<div class="empty">暂无词汇错题——中西对应练习答错的词、默写二次巩固的错词都会自动汇总到这里。</div>';
   let h = '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'
     + '<button class="btn sm" onclick="startVocabErrQuiz()">开始巩固 →</button>'
     + '<button class="btn sm ol" onclick="exportErrorBank(\'vocab\')">📤 导出</button>'
     + '<button class="btn sm ol" style="color:var(--bad);border-color:var(--bad)" onclick="clearErrorBank(\'vocab\')">🗑 清空</button></div>'
     + '<div class="err-item"><div style="display:flex;flex-direction:column;gap:6px">';
+  /* v95.31: 默写二次巩固错词区块（并入词汇错题本 Tab——同属词汇域） */
+  if(dict.length){
+    h += '<div class="err-item" style="margin-top:6px"><div style="font-size:12px;color:var(--tr);margin-bottom:6px">✍️ 来自「默写二次巩固」的错词（'+dict.length+'）</div>';
+    dict.slice().sort((a,b)=>(b.ts||0)-(a.ts||0)).slice(0,50).forEach(function(e){
+      h += '<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:12.5px"><span><b>'+esc(e.es||'')+'</b> <span style="color:var(--soft)">'+esc(e.zh||'')+'</span></span><span style="color:var(--bad)">✍ '+esc(e.userAnswer||'')+'</span></div>';
+    });
+    if(dict.length>50) h += '<div style="font-size:11px;color:var(--soft);padding-top:4px">… 其余 '+ (dict.length-50) +' 条见默写错词池</div>';
+    h += '</div>';
+  }
   keys.slice().sort((a,b)=>(bank[b].ts||0)-(bank[a].ts||0)).forEach(es=>{
     const e = bank[es];
     const pr = Math.min(e.right||0,3);
@@ -19310,8 +19323,9 @@ function hydrate(){
         ['A1','A2','B1','B2','all'].forEach(function(lv){var rt=rm.flashLastPositionTs[lv]|0;if(rt>(ST.flashLastPositionTs[lv]|0))ST.flashLastPositionTs[lv]=rt;});
       }
       if(rm.flashPraStats&&typeof rm.flashPraStats==='object'){
-        ST.flashPraStats=ST.flashPraStats||{correct:0,wrong:0,streak:0,bestStreak:0};
-        ['correct','wrong','bestStreak'].forEach(function(k){var rv=Number(rm.flashPraStats[k]||0);if(rv>Number(ST.flashPraStats[k]||0))ST.flashPraStats[k]=rv;});
+        /* v95.31: 改 ts-LWW——重置后本地 _ts 新，云端旧值（max 合并）不再复活 */
+        var _lTs=Number(ST.flashPraStats._ts||0), _rTs=Number(rm.flashPraStats._ts||0);
+        if(_rTs>_lTs){ ST.flashPraStats={correct:Number(rm.flashPraStats.correct||0),wrong:Number(rm.flashPraStats.wrong||0),streak:Number(rm.flashPraStats.streak||0),bestStreak:Number(rm.flashPraStats.bestStreak||0),_ts:_rTs}; }
       }
     })();
     /* v94.8: 错题本精细合并（不在白名单，防整体覆盖；与 mergeWbSnapshot 同语义） */
@@ -19627,8 +19641,9 @@ function mergeWbSnapshot(remote, wbTs){
   try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(remote); }catch(e){}
   // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
   if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
-    ST.flashPraStats=ST.flashPraStats||{correct:0,wrong:0,streak:0,bestStreak:0};
-    ['correct','wrong','bestStreak'].forEach(function(k){var rv=Number(remote.flashPraStats[k]||0);if(rv>Number(ST.flashPraStats[k]||0))ST.flashPraStats[k]=rv;});
+    /* v95.31: ts-LWW（同上） */
+    var _lTs2=Number(ST.flashPraStats._ts||0), _rTs2=Number(remote.flashPraStats._ts||0);
+    if(_rTs2>_lTs2){ ST.flashPraStats={correct:Number(remote.flashPraStats.correct||0),wrong:Number(remote.flashPraStats.wrong||0),streak:Number(remote.flashPraStats.streak||0),bestStreak:Number(remote.flashPraStats.bestStreak||0),_ts:_rTs2}; }
   }
   // 掌握度：取 max
   if(remote.vocabMastery){Object.keys(remote.vocabMastery).forEach(function(es){var rm=remote.vocabMastery[es]||0,lm=ST.vocabMastery[es]||0;if(rm>lm){ST.vocabMastery[es]=rm;ST.flashMastery[es]=rm;}});}
