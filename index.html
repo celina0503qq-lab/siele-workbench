@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.32-202610232010';
+window.swVer = 'v95.33-202610232120';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -19270,37 +19270,7 @@ function hydrate(){
     ['examDate','examType','targetLevel','examDateTs','examTypeTs','targetLevelTs','weeklyPlan','weeklyGoals','weeklyPlanTs','weeklyGoalsTs','flashPronunciation','globalAccent','vocabReviewCount','vocabDictation','flashReviewSession','recentlyStudiedWords','dictationLog','grammarDone','tasks','plannerStart','streak','lastStudy','totalStudy','shadowScores','refineShadowScores','sieleOralProgress','errors','readingProgress','errorFilter','dailyTasks','dictationErrorBank','sieleOralProgressTs'].forEach(function(k){
       if(rm[k]!==undefined)ST[k]=rm[k];
     });
-    /* v95.31: 游标合并统一走 per-level ts-LWW（旧「前向 max」会让重置前的历史大值跨设备复活——
-       旧设备 push 大值→云端被覆盖→重置设备 pull 时 max 采纳 → 「游标突然到很后面」；
-       ts 仲裁=远端该级「最后翻页时间」更新才采纳其游标，与题库 quizOrderPos 同语义） */
-    window._mergeFlashCursor = function(rm, floorTs){
-      try{
-        if(!rm || !rm.flashIdxByLevel || typeof rm.flashIdxByLevel !== 'object') return;
-        ST.flashIdxByLevel = ST.flashIdxByLevel || {A1:0,A2:0,B1:0,B2:0,all:0};
-        ST.flashLastPositionTs = ST.flashLastPositionTs || {A1:0,A2:0,B1:0,B2:0,all:0};
-        var _rmTs = rm.flashLastPositionTs || {};
-        /* v95.31：前向 max（v31 拍板语义：进度靠前者赢）+ 重置水线排除——
-           远端该级「最后翻页时间」早于本地重置时刻 ⇒ 该值来自重置前的旧会话，不参与比较（杀脏数据）；
-           从未重置（floor=0）时不排除，保持 v31 原语义。 */
-        var _floorTs = Number(floorTs||0);
-        ['A1','A2','B1','B2','all','专四'].forEach(function(lv){
-          var rt = Number(_rmTs[lv]||0);
-          if(_floorTs && rt <= _floorTs) return;  // 远端旧会话值：排除
-          var ri = Number(rm.flashIdxByLevel[lv]);
-          if(isNaN(ri)) return;
-          var li = Number(ST.flashIdxByLevel[lv]||0);
-          if(ri > li){
-            ST.flashIdxByLevel[lv] = ri;
-            if(lv===ST.flashLevel && rm.flashLevel===lv && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord) ST.flashCurrentWord=rm.flashCurrentWord;
-          }
-        });
-        // flashIdx（扁平旧键）同规则（all 级）
-        var rtAll = Number(_rmTs.all||0);
-        if(!(_floorTs && rtAll <= _floorTs) && typeof rm.flashIdx === 'number' && rm.flashIdx > (Number(ST.flashIdx)||0)) ST.flashIdx = rm.flashIdx;
-        // 逐级 ts 吸收（max）
-        ['A1','A2','B1','B2','all'].forEach(function(lv){ var rt=_rmTs[lv]|0; if(rt>(ST.flashLastPositionTs[lv]|0)) ST.flashLastPositionTs[lv]=rt; });
-      }catch(e){}
-    };
+
     /* v94.5.2: flash 系列键移出白名单改精细合并（v92.9 双路径教训——mergeWbSnapshot 已有同语义，此处补齐 hydrate 路径）
        位置键：flashLastPositionTs.all 时间戳仲裁，远端更晚翻页才采纳其 等级/当前词/该级游标；flashIdxByLevel 前向游标（进度靠前者赢）；
        flashIdx 扁平旧键前向 max；flashLastPositionTs 逐级 max；flashPraStats correct/wrong/bestStreak 取 max；flashMode 设备偏好保持本地。 */
@@ -19547,6 +19517,38 @@ function _vocabResetFloor(){
   try{var f=Number(localStorage.getItem('swa_vocab_reset_floor_v1')||0);if(f>r)r=f;}catch(e){}
   return r;
 }
+/* v95.31: 游标合并统一走 per-level ts-LWW（旧「前向 max」会让重置前的历史大值跨设备复活——
+   旧设备 push 大值→云端被覆盖→重置设备 pull 时 max 采纳 → 「游标突然到很后面」；
+   ts 仲裁=远端该级「最后翻页时间」更新才采纳其游标，与题库 quizOrderPos 同语义） */
+window._mergeFlashCursor = function(rm, floorTs){
+  try{
+    if(!rm || !rm.flashIdxByLevel || typeof rm.flashIdxByLevel !== 'object') return;
+    ST.flashIdxByLevel = ST.flashIdxByLevel || {A1:0,A2:0,B1:0,B2:0,all:0};
+    ST.flashLastPositionTs = ST.flashLastPositionTs || {A1:0,A2:0,B1:0,B2:0,all:0};
+    var _rmTs = rm.flashLastPositionTs || {};
+    /* v95.31：前向 max（v31 拍板语义：进度靠前者赢）+ 重置水线排除——
+       远端该级「最后翻页时间」早于本地重置时刻 ⇒ 该值来自重置前的旧会话，不参与比较（杀脏数据）；
+       从未重置（floor=0）时不排除，保持 v31 原语义。 */
+    var _floorTs = Number(floorTs||0);
+    ['A1','A2','B1','B2','all','专四'].forEach(function(lv){
+      var rt = Number(_rmTs[lv]||0);
+      if(_floorTs && rt <= _floorTs) return;  // 远端旧会话值：排除
+      var ri = Number(rm.flashIdxByLevel[lv]);
+      if(isNaN(ri)) return;
+      var li = Number(ST.flashIdxByLevel[lv]||0);
+      if(ri > li){
+        ST.flashIdxByLevel[lv] = ri;
+        if(lv===ST.flashLevel && rm.flashLevel===lv && typeof rm.flashCurrentWord==='string' && rm.flashCurrentWord) ST.flashCurrentWord=rm.flashCurrentWord;
+      }
+    });
+    // flashIdx（扁平旧键）同规则（all 级）
+    var rtAll = Number(_rmTs.all||0);
+    if(!(_floorTs && rtAll <= _floorTs) && typeof rm.flashIdx === 'number' && rm.flashIdx > (Number(ST.flashIdx)||0)) ST.flashIdx = rm.flashIdx;
+    // 逐级 ts 吸收（max）
+    ['A1','A2','B1','B2','all'].forEach(function(lv){ var rt=_rmTs[lv]|0; if(rt>(ST.flashLastPositionTs[lv]|0)) ST.flashLastPositionTs[lv]=rt; });
+  }catch(e){}
+};
+
 function mergeWbSnapshot(remote, wbTs){
   if(!remote || typeof remote!=='object') return;
   // v63：对端快照带着更新的重置纪元 ⇒ 本端就地重置（否则 max/union 合并把已清数据复活）
