@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.33-202610232120';
+window.swVer = 'v95.34-202610241130';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3261,11 +3261,13 @@ function renderFlash(){
   const _praMode = ST.flashMode==='practice'; // v94.0: 练习模式显示独立游标进度
   const _curIdx = _praMode ? _praIdxOf(pool) : ST.flashIdx;
   // v95.5:「全部」池进度语义化——显示已学词数（vocabMastery>=1 计数）而非全量池断点（断点为独立游标无合计意义）
+  // v95.34: 练习模式进度与翻牌彻底独立——练习始终显示练习游标（flashPraIdxByLevel），不再借用翻牌已学数（用户拍板 2026-10-24）
   const _allMode = ST.flashLevel === 'all';
-  const _dispIdx = _allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1); /* v95.5: 全部=已学唯一词数（评价口径确认维持，各级之和方案否决——「全部」模式学词无处计入+口径与已学不一致） */
+  const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1)); /* v95.34: 翻牌「全部」=已学唯一词数（评价口径维持）；练习各级=练习游标位置 */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
   const errors=getDictationErrors();
+  const _praErrN = (ST.vocabErrorBank && Object.keys(ST.vocabErrorBank).length) || 0; /* v95.34: 练习错题本入口计数 */
 
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${_dispIdx} / ${pool.length}</div>
@@ -3275,8 +3277,10 @@ function renderFlash(){
   h += `<div class="dictation-tabs" role="tablist" aria-label="单词卡片分项">
     <button class="dictation-tab ${_flashSubView==='study'?'on':''}" role="tab" aria-selected="${_flashSubView==='study'}" onclick="setFlashSubView('study')">📚 学习卡片</button>
     <button class="dictation-tab ${_flashSubView==='reinforce'?'on':''}" role="tab" aria-selected="${_flashSubView==='reinforce'}" onclick="setFlashSubView('reinforce')">🛠 默写二次巩固 <span aria-label="${errors.length} 个错词">${errors.length?'('+errors.length+')':''}</span></button>
+    <button class="dictation-tab ${_flashSubView==='praerr'?'on':''}" role="tab" aria-selected="${_flashSubView==='praerr'}" onclick="setFlashSubView('praerr')">🎯 练习错题 <span aria-label="${_praErrN} 个练习错词">${_praErrN?'('+_praErrN+')':''}</span></button>
   </div>`;
   if(_flashSubView==='reinforce') return h+renderDictationReinforcement(errors);
+  if(_flashSubView==='praerr') return h+renderPraErrorBook(); /* v95.34: 练习错题本 */
 
   // Mode toggle
   h += `<div class="mode-toggle">
@@ -3299,8 +3303,8 @@ function renderFlash(){
   h += `</div>`;
 
   // Progress bar
-  const masteryPct = m/3*100;
-  h += `<div class="fcp"><span style="font-size:11px">${m>0?'已学':'未学'}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_dispIdx}/${pool.length}</span></div>`;
+  const masteryPct = _praMode ? Math.min(100,(_curIdx+1)/Math.max(1,pool.length)*100) : m/3*100; /* v95.34: 练习模式进度条=练习游标位置，与翻牌掌握度无关 */
+  h += `<div class="fcp"><span style="font-size:11px">${_praMode?'练习':(m>0?'已学':'未学')}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_dispIdx}/${pool.length}</span></div>`;
 
   if(ST.flashMode === 'practice'){
     return h + renderFlashPractice(pool);
@@ -3385,8 +3389,30 @@ function scoreFlashPronunciation(target,recognized){
   var out=document.getElementById('flashPronResult');if(out)out.innerHTML=renderFlashPronResult({score:score,wordAccuracy:accuracy,recognized:recognized});
 }
 function setFlashSubView(view){
-  _flashSubView=view==='reinforce'?'reinforce':'study';
+  _flashSubView=(view==='reinforce'||view==='praerr')?view:'study'; /* v95.34: 新增 praerr 练习错题视图 */
   renderMain();
+}
+/* ===== v95.34: 中西对应练习错题本（vocabErrorBank 专项视图，与「默写二次巩固」并列入口；数据与错题集·词汇错题本同池） ===== */
+function renderPraErrorBook(){
+  const bank = ST.vocabErrorBank || {};
+  const keys = Object.keys(bank);
+  if(!keys.length) return '<div class="empty">暂无练习错词——中西对应练习答错的词会自动汇总到这里，练习中再答对 3 次自动出池。</div>';
+  let h = '<section class="dictation-review"><h3>🎯 练习错题本</h3><div class="sub">中西对应练习答错的词自动入池；答对 3 次自动「救赎」出池（与错题集 · 词汇错题本同池）。</div>';
+  h += '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;margin:8px 0">'
+    + '<button class="btn sm" onclick="startVocabErrQuiz()">开始巩固 →</button>'
+    + '<button class="btn sm ol" onclick="ST.errorMainTab=\'vocab\';go(\'errors\')">去错题集 →</button></div>';
+  h += '<div class="err-item"><div style="display:flex;flex-direction:column">';
+  keys.slice().sort((a,b)=>(bank[b].ts||0)-(bank[a].ts||0)).forEach(es=>{
+    const e = bank[es];
+    const pr = Math.min(e.right||0,3);
+    h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap">
+      <span style="min-width:0"><b>${esc(e.es)}</b> <span style="color:var(--soft)">${esc(e.zh||'')}</span></span>
+      <span style="display:flex;align-items:center;gap:8px;white-space:nowrap">${spkBtnHTML(e.es,getEffectiveAccent('flash'))}
+      <span style="color:var(--soft);font-size:11px">错 ${e.wrong||0} · 连对 ${pr}/3 <span style="display:inline-block;width:34px;height:6px;border-radius:3px;background:var(--line);vertical-align:middle;margin-left:4px;overflow:hidden"><span style="display:block;height:100%;width:${pr/3*100}%;background:var(--teal)"></span></span></span></span>
+    </div>`;
+  });
+  h += '</div></div></section>';
+  return h;
 }
 function renderDictationReinforcement(errors){
   var totals=getDictationTotals();
@@ -12489,7 +12515,7 @@ function autoLogQuizError(errData){
   var _lvl = _skParts[1]||'';
   var _qtype = _skParts[2]||'';
   var menu = {dele:'DELE专项', siele:'SIELE专项'}[_ex] || (_ex || '题库');
-  var section = {reading:'阅读', grammar:'语法', listening:'听力', word:'词汇'}[_qtype] || _qtype || '';
+  var section = {reading:'阅读', grammar:'语法', listening:'听力', word:'词汇', writing:'写作', speaking:'口语', oral:'口语', mock:'全真模拟'}[_qtype] || _qtype || ''; /* v95.34: 补全 DELE 板块映射 */
   ST.errors.unshift({
     id:'qe'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),
     type: 'quiz', sourceKey: sourceKey,
@@ -16131,6 +16157,7 @@ window._deleA1V5Submit = function(stateKey){
     return;
   }
   window._deleA1V5Answers[stateKey]._submitted = true;
+  if (typeof window._deleLogTaskError === 'function') window._deleLogTaskError(stateKey, window._deleA1V5Answers[stateKey].key); /* v95.34: 选择答错入错题集 */
   // 触发局部重渲染
   var lvl = window._deleA1CurrentLevel || 'A1';
   const task = window._deleA1CurrentTask || 'reading';
@@ -16164,6 +16191,47 @@ window._deleA1V5Reset = function(stateKey){
   }
 };
 
+/* ===== v95.34: DELE 专项客观题错题入集（阅读/听力选择+填空+匹配答错自动入错题集，menu=DELE专项 按板块分组） ===== */
+window._deleQByStateKey = function(stateKey){
+  try{
+    var lvl = window._deleA1CurrentLevel || 'A1';
+    var bankLvl = (typeof _deleBank !== 'undefined' && _deleBank && _deleBank[lvl]) || {};
+    var tasks = Object.keys(bankLvl);
+    for(var t=0;t<tasks.length;t++){
+      var arr = bankLvl[tasks[t]] || [];
+      for(var i=0;i<arr.length;i++){
+        var q = arr[i];
+        if(!q) continue;
+        var k = window._deleLk(q.modelo + '_P' + q.prueba + '_T' + q.tarea + '_Q' + q.q);
+        if(k === stateKey) return q;
+      }
+    }
+  }catch(e){}
+  return null;
+};
+window._deleLogTaskError = function(stateKey, userKey){
+  try{
+    if(typeof autoLogQuizError !== 'function') return;
+    var q = window._deleQByStateKey(stateKey);
+    if(!q || !q.answer) return;
+    var lvl = window._deleA1CurrentLevel || 'A1';
+    var task = window._deleA1CurrentTask || 'reading';
+    var correctKey = String(q.answer).toUpperCase();
+    var userK = String(userKey==null?'':userKey).toUpperCase();
+    if(userK === correctKey) return; // 答对不入集
+    var optText = function(k){ var o=(q.options||[]).filter(function(x){return String(x.key).toUpperCase()===String(k).toUpperCase();})[0]; return o? (k+') '+(o.text||'')) : String(k||''); };
+    var secMap = {reading:'阅读', listening:'听力', writing:'写作', speaking:'口语', mock:'全真模拟'};
+    var optsText = (q.options||[]).map(function(o){return o.key+') '+o.text;}).join(' | ');
+    autoLogQuizError({
+      sourceKey: ['dele', lvl, task, stateKey, optsText].join('::'),
+      question: (q.prompt ? ('题 '+q.q+': '+q.prompt) : ('DELE '+lvl+' '+(secMap[task]||task)+' T'+q.tarea+' 题 '+q.q)),
+      myAnswer: optText(userK) || String(userKey||'—'),
+      correctAnswer: optText(correctKey),
+      explanation: q.explanation || ''
+    });
+  }catch(e){}
+};
+
 // ===== 填空题提交/重做 =====
 window._deleA1V5FillSubmit = function(stateKey){
   var inp = document.getElementById('fill_'+stateKey);
@@ -16172,6 +16240,7 @@ window._deleA1V5FillSubmit = function(stateKey){
   if (!val) { if (window.toast) window.toast('请先输入答案'); return; }
   if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
   window._deleA1V5Answers[stateKey] = { key: val, _submitted: true };
+  if (typeof window._deleLogTaskError === 'function') window._deleLogTaskError(stateKey, val); /* v95.34: 填空答错入错题集 */
   _deleRefreshCurrentTarea();
   _deleSaveProgress();
 };
@@ -16189,6 +16258,7 @@ window._deleA1V5MatchSubmit = function(stateKey){
   if (!val) { if (window.toast) window.toast('请输入选项字母'); return; }
   if (!window._deleA1V5Answers) window._deleA1V5Answers = {};
   window._deleA1V5Answers[stateKey] = { key: val, _submitted: true };
+  if (typeof window._deleLogTaskError === 'function') window._deleLogTaskError(stateKey, val); /* v95.34: 匹配答错入错题集 */
   _deleRefreshCurrentTarea();
   _deleSaveProgress();
 };
@@ -16689,6 +16759,7 @@ window.scoreWritingFromTextarea = function(btn){
   // 写作 < 60 自动入错题集
   if(score < 60 && typeof autoLogLowScore === 'function'){
     autoLogLowScore('writing', 'dele_writing_'+level, {
+      menu: 'DELE专项', section: '写作', /* v95.34: 错题集按 DELE 板块分组标注 */
       question: 'DELE '+level+' 写作任务',
       myAnswer: text.slice(0,200)+(text.length>200?'…':''),
       correctAnswer: '参考范文见题目下方',
@@ -16872,6 +16943,7 @@ window.finishDeleSpeaking = function(){
   try{
     if(r.total < 60 && typeof autoLogLowScore === 'function'){
       autoLogLowScore('speaking', 'dele_speaking_'+lvl, {
+        menu: 'DELE专项', section: '口语', /* v95.34: 错题集按 DELE 板块分组标注 */
         question: 'DELE '+lvl+' 口语（录音）',
         myAnswer: _deleSpeakText.slice(0,200)+(_deleSpeakText.length>200?'…':''),
         correctAnswer: '参考范例见题目下方',
