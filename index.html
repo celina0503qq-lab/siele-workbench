@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.38-202610241645';
+window.swVer = 'v95.39-202610241945';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2937,6 +2937,8 @@ function setDictAutoOff(off){
 // v63：词卡域就地清空（重置/纪元传播共用）——只动 ST 域+floor 键，MIR/ADB/云同步由调用方处理
 function _vocabWipeLocal(now){
   ST.vocabMastery={};ST.flashMastery={};
+  ST.flipRated={}; /* v95.39: 翻牌评价追踪随重置清空 */
+  ST.flashCurrentWordLvl='';
   ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];ST.vocabErrorBank={};
   ST.recentlyStudiedWords=[];ST.dictationPending=[];
   ST.flashReviewSession=0;
@@ -2952,7 +2954,7 @@ function _vocabWipeLocal(now){
   }
   ST.vocabResetAt=now;
   try{localStorage.setItem('swa_vocab_reset_floor_v1',String(now));}catch(e){}
-  try{if(typeof ADB!=='undefined'&&ADB&&ADB.wb&&ADB.wb.data){['flashIdx','flashIdxByLevel','flashProgressByLevel','flashCurrentWord','flashLastPositionTs'].forEach(function(k){delete ADB.wb.data[k];});ADB.wb.data.vocabResetAt=now;ADB.wb.ts=now;}}catch(e){}
+  try{if(typeof ADB!=='undefined'&&ADB&&ADB.wb&&ADB.wb.data){['flashIdx','flashIdxByLevel','flashProgressByLevel','flashCurrentWord','flashLastPositionTs','flipRated','flashCurrentWordLvl'].forEach(function(k){delete ADB.wb.data[k];});ADB.wb.data.vocabResetAt=now;ADB.wb.ts=now;}}catch(e){}
 }
 function resetFlashProgress(){
   var msg='\u26a0\ufe0f \u5c06\u6e05\u7a7a\u5355\u8bcd\u5361\u7247\u7684\u5168\u90e8\u5b66\u4e60\u8fdb\u5ea6\uff1a\n\n\u00b7 \u638c\u63e1\u661f\u7ea7\uff08\u6210\u957f\u6811\u5f52\u96f6\uff09\n\u00b7 \u9ed8\u5199\u5bf9\u9519\u8bb0\u5f55\u4e0e\u9519\u8bcd\u5e93\n\u00b7 \u7ffb\u724c\u4f4d\u7f6e\u4e0e\u590d\u4e60\u8ba1\u6570\n\n\u4e91\u7aef\u540c\u6b65\u6570\u636e\u4e00\u5e76\u91cd\u7f6e\uff0c\u65e0\u6cd5\u6062\u590d\u3002\n\u91cd\u7f6e\u540e\u8bf7\u6682\u52ff\u5728\u5176\u4ed6\u8bbe\u5907\u6253\u5f00\u5355\u8bcd\u5361\u7247\uff08\u65e7\u8bbe\u5907\u7a0d\u540e\u540c\u6b65\u4f1a\u628a\u8fdb\u5ea6\u5199\u56de\uff09\u3002\n\n\u786e\u5b9a\u91cd\u7f6e\u5417\uff1f';
@@ -3193,10 +3195,14 @@ function getFlashPool(){
 }
 function syncFlashPosition(pool){
   pool=pool||getFlashPool();
-  // 1) 优先按已保存的当前词精确定位
+  // 1) 优先按已保存的当前词精确定位——v95.39: 仅当词所属级别与当前级别一致（池重叠时跨级不再串位：
+  //    A1/A2 学的词若也在专四池，切专四曾被定位到该词位置而非专四自己的断点，用户拍板切级=用该级断点）
   var saved=ST.flashCurrentWord||'';
-  var found=saved?pool.findIndex(function(v){return v.es===saved;}):-1;
-  if(found>=0){ST.flashIdx=found;return pool;}
+  var savedLvl=ST.flashCurrentWordLvl||'';
+  if(saved && savedLvl===ST.flashLevel){
+    var found=pool.findIndex(function(v){return v.es===saved;});
+    if(found>=0){ST.flashIdx=found;return pool;}
+  }
   // 2) 词已被移除/未保存 → 按 per-level idx 恢复 (v2.1 修复, 之前用 flashProgressByLevel 不准)
   if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel!=='object') ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0,'专四':0};
   var key = (ST.flashLevel==='all') ? 'all' : (ST.flashLevel || 'all');
@@ -3204,6 +3210,7 @@ function syncFlashPosition(pool){
   var safe = Math.max(0, Math.min(savedIdx, pool.length-1));
   ST.flashIdx = safe;
   ST.flashCurrentWord = (pool[safe]||{}).es || '';
+  ST.flashCurrentWordLvl = ST.flashLevel; /* v95.39: 记录词所属级别 */
   return pool;
 }
 function setFlashPosition(index,pool){
@@ -3263,7 +3270,8 @@ function renderFlash(){
   // v95.5:「全部」池进度语义化——显示已学词数（vocabMastery>=1 计数）而非全量池断点（断点为独立游标无合计意义）
   // v95.34: 练习模式进度与翻牌彻底独立——练习始终显示练习游标（flashPraIdxByLevel），不再借用翻牌已学数（用户拍板 2026-10-24）
   const _allMode = ST.flashLevel === 'all';
-  const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (Object.keys(ST.vocabMastery||{}).filter(function(k){return ST.vocabMastery[k]>=1;}).length) : (_curIdx+1)); /* v95.34: 翻牌「全部」=已学唯一词数（评价口径维持）；练习各级=练习游标位置 */
+  const _flipRatedN = Object.keys(ST.flipRated||{}).length; /* v95.39: 翻牌评价过的词数（练习不计入） */
+  const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (_flipRatedN) : (_curIdx+1)); /* v95.39: 翻牌「全部」=翻牌评价词数（原=已学唯一词数，被练习写入污染）；练习各级=练习游标位置 */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
   const errors=getDictationErrors();
@@ -3452,6 +3460,9 @@ function rateFlash(level){
   const v = pool[ST.flashIdx];
   ST.flashMastery[v.es] = level;
   ST.vocabMastery[v.es] = level;
+  /* v95.39: 翻牌评价追踪——「全部」进度只数翻牌评价过的词，中西对应练习不再推高翻牌进度（用户拍板） */
+  ST.flipRated = ST.flipRated || {};
+  ST.flipRated[v.es] = Date.now();
   incReviewCount(v.es);  // nested 自增 + 写入 flashLastPositionTs（断点续背用）
   if(!ST.flashReviewSession) ST.flashReviewSession=0;
   ST.flashReviewSession++;
@@ -5956,7 +5967,7 @@ function renderWritingAdmin(keep){
     }catch(e){}
   }
   const adminEssays = ed.essays || {};
-  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。<b style="color:#4f46e5">所有保存自动留痕，后台「🕘 编辑留痕」可一键撤回。</b></div>';
+  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">当前共 '+_wadmTasks.length+' 个任务——<b>覆盖菜单栏全部题目（SIELE T1/T2 题库 + 基础练习）</b>；另可在写作页底部「📚 SIELE 范文库」区点「🔧 管理员编辑范文库」管理范文条目。编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。<b style="color:#4f46e5">所有保存自动留痕，后台「🕘 编辑留痕」可一键撤回。</b></div>';
   /* v95.38: 格式完善——每任务卡片带 id/等级/标题/词数/阅读材料全字段，两列布局，范文折叠 */
   _wadmTasks.forEach(function(t,i){
     const e = adminEssays[t.id] || {};
@@ -5974,10 +5985,13 @@ function renderWritingAdmin(keep){
       + '<div style="margin:4px 0;font-size:12px"><b>任务描述：</b><textarea id="wadm_task_'+i+'" rows="4" style="width:100%;font-size:12px">'+esc(t.task||'')+'</textarea></div>'
       + '<div style="margin:4px 0;font-size:12px"><b>写作提示：</b><textarea id="wadm_tips_'+i+'" rows="4" style="width:100%;font-size:12px">'+esc(t.tips||'')+'</textarea></div>'
       + '</div>'
-      + '<details style="margin:6px 0" '+(e.text?'open':'')+'><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--tr)">📄 范文'+(eff&&eff.text?'（现有 '+String(eff.text).split(/\s+/).length+' 词）':'（空）')+'</summary>'
-      + '<textarea id="wadm_essay_'+i+'" rows="6" style="width:100%;font-size:12px;font-family:var(--serif);margin-top:5px">'+esc(e.text||'')+'</textarea></details>'
+      + '<details style="margin:6px 0" '+(e.text?'open':'')+'><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--tr)">📄 范文'+(eff&&eff.text?'（现有 '+String(eff.text).split(/\s+/).length+' 词'+(e.text?'':' · 内置默认')+'）':'（空）')+'</summary>'
+      + '<textarea id="wadm_essay_'+i+'" rows="6" style="width:100%;font-size:12px;font-family:var(--serif);margin-top:5px">'+esc((eff&&eff.text)||'')+'</textarea>'
+      + (e.text?'':'<div style="font-size:10.5px;color:var(--soft);margin-top:4px">当前显示内置默认范文——直接编辑并保存后将作为管理员版覆盖；清空保存则恢复默认。</div>')
+      + '</details>'
       + '<details style="margin:6px 0"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6366f1">📰 阅读材料（T2 报刊信原文，可选）</summary>'
-      + '<textarea id="wadm_passage_'+i+'" rows="4" style="width:100%;font-size:12px;margin-top:5px">'+esc(t.passage||'')+'</textarea></div></details>'
+      + '<textarea id="wadm_passage_'+i+'" rows="4" style="width:100%;font-size:12px;margin-top:5px">'+esc(t.passage||'')+'</textarea>'
+      + '</details>'
       + '</div>';
   });
   h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addWritingTask()">➕ 新增任务</button><button class="btn pr" onclick="saveWritingAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="closeWritingAdmin()">❌ 取消</button></div>';
@@ -19807,6 +19821,16 @@ function mergeWbSnapshot(remote, wbTs){
     ST.flashLastPositionTs=ST.flashLastPositionTs||{A1:0,A2:0,B1:0,B2:0,all:0};
     ['A1','A2','B1','B2','all'].forEach(function(lv){var rt=remote.flashLastPositionTs[lv]|0;if(rt>(ST.flashLastPositionTs[lv]|0))ST.flashLastPositionTs[lv]=rt;});
   }
+  /* v95.39: flipRated 翻牌评价追踪跨设备合并（逐词 ts-LWW；受重置水线排除——远端条目早于本地重置时刻则忽略） */
+  if(remote.flipRated && typeof remote.flipRated==='object'){
+    ST.flipRated = ST.flipRated || {};
+    var _rzFloor = (typeof window._vocabResetFloor==='function') ? window._vocabResetFloor() : 0;
+    Object.keys(remote.flipRated).forEach(function(es){
+      var rt = Number(remote.flipRated[es])||0;
+      if(_rzFloor && rt <= _rzFloor) return;
+      if(rt > (Number(ST.flipRated[es])||0)) ST.flipRated[es] = rt;
+    });
+  }
   if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
   if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
     ST.flashPronunciation=ST.flashPronunciation||{};
@@ -20990,6 +21014,16 @@ async function standaloneSync(showLog){
         var rt = remote.flashLastPositionTs[lv]|0;
         if(rt > (ST.flashLastPositionTs[lv]|0)) ST.flashLastPositionTs[lv] = rt;
       });
+      /* v95.39: flipRated 跨设备合并（逐词 ts-LWW + 重置水线排除）——与 mergeWbSnapshot 同语义 */
+      if(remote.flipRated && typeof remote.flipRated==='object'){
+        ST.flipRated = ST.flipRated || {};
+        var _rzFloor2 = (typeof window._vocabResetFloor==='function') ? window._vocabResetFloor() : 0;
+        Object.keys(remote.flipRated).forEach(function(es){
+          var rt2 = Number(remote.flipRated[es])||0;
+          if(_rzFloor2 && rt2 <= _rzFloor2) return;
+          if(rt2 > (Number(ST.flipRated[es])||0)) ST.flipRated[es] = rt2;
+        });
+      }
       // 云端位置更新时，自动将 flashLevel 切到最近活跃的 level（断点续背）
       try{
         var _bestLv='all', _bestTs=ST.flashLastPositionTs.all|0;
