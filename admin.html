@@ -2820,7 +2820,7 @@ function doQEditsRestoreHist(key,idx){
 // 数据源：content_edits 独立命名空间 __audit（与各业务域并列的独立云文档）
 // 结构：{ v:1, log:[{ id, t, u, ns, pg, sz0, sz1, sum, before?, big? }] }
 var AUDIT={log:[],loadedAt:0,pending:null};
-var AUDIT_LABEL={writing:'写作任务/范文',essays:'范文库',speakingTopics:'口语话题',oral:'口语 Tarea 模板',oralbank:'SIELE 口语题库',tareas:'考试结构五项',verbUsage:'动词用法',verbConj:'动词变位',grammar:'语法库'};
+var AUDIT_LABEL={writing:'写作任务/范文',essays:'范文库',speakingTopics:'口语话题',oral:'口语 Tarea 模板',oralbank:'SIELE 口语题库',tareas:'考试结构五项',verbUsage:'动词用法',verbConj:'动词变位',grammar:'语法库',lexicon:'评分词典',quiz:'题库测验'};
 function auditTs(ts){
   if(!ts)return '—';
   var d=new Date(ts),p=function(n){return String(n).padStart(2,'0');};

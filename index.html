@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.37-202610241400';
+window.swVer = 'v95.38-202610241645';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5382,7 +5382,7 @@ function _writingSieleTree(tasks){
           ? '<span class="badge b-t2">T2</span>'
           : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`);
       return `<li class="d-row" data-c="${_wCatOf(t)}" onclick="selectWriting(${i},true)">
-        <span class="tt">${esc(t.title || String(t.task || '').slice(0, 26))}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'task','编辑任务描述')}</span>
+        <span class="tt">${esc(t.title || String(t.task || '').slice(0, 26))}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'title','编辑标题')}${_writingEditBtn(i,'task','编辑任务描述')}${t.passage?_writingEditBtn(i,'passage','编辑阅读材料'):''}${_writingEditBtn(i,'essay','编辑范文')}</span>
         ${tb}<span class="badge b-lv">${t.lvl}</span><span class="meta" style="width:40px">${t.words || ''}</span>${st}
       </li>`;
     }).join('');
@@ -5432,8 +5432,8 @@ function renderWriting(){
         : '<span style="background:#dcfce7;color:#15803d;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:800">T1 '+(t.type==='formal'?'公函':'私函')+'</span>';
       h += `<div class="rc" onclick="selectWriting(${i},true)" style="cursor:pointer">
         <span class="cat" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="tm l${t.lvl}">${t.lvl}</span>${_tbadge}<span style="color:var(--am);font-weight:600">${t.words||''}词</span>${_cnt?`<span class="pr-badge">练过${_cnt}次${_best?' · '+_best+'分':''}</span>`:'<span class="pr-badge new">新题</span>'}</span>
-        <h5 style="margin:5px 0 3px">${esc(t.title||'')}${_ws&&(_ws.history||[]).length>1?` <span style="font-size:10px;color:var(--soft)">(${_ws.history.length}条记录)</span>`:''}${_writingEditBtn(i,'task','编辑任务描述')}</h5>
-        <p style="font-size:11px">${t.passage?'📰 <span style="color:var(--tr)">含阅读材料</span> · ':''}${esc((t.tips||'').slice(0,60))}...${_writingEditBtn(i,'tips','编辑写作提示')}</p>
+        <h5 style="margin:5px 0 3px">${esc(t.title||'')}${_ws&&(_ws.history||[]).length>1?` <span style="font-size:10px;color:var(--soft)">(${_ws.history.length}条记录)</span>`:''}${_writingEditBtn(i,'title','编辑标题')}${_writingEditBtn(i,'task','编辑任务描述')}${_writingEditBtn(i,'essay','编辑范文')}</h5>
+        <p style="font-size:11px">${t.passage?'📰 <span style="color:var(--tr)">含阅读材料</span>'+_writingEditBtn(i,'passage','编辑阅读材料')+' · ':''}${esc((t.tips||'').slice(0,60))}...${_writingEditBtn(i,'tips','编辑写作提示')}</p>
       </div>`;
       return;
     }
@@ -5939,6 +5939,7 @@ let _wadmTasks = null;
 function renderWritingAdmin(keep){
   const tasks = getWritingTasks();
   const ed = window._contentEdits.writing || {};
+  window._wadmEditing = true; /* v95.38: 编辑器打开期间挂起「内容编辑返回→renderMain」自动刷新，修复打开即闪退 */
   if(!keep){
     _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
     /* v95.36: 打开编辑器时强制拉云端最新 content_edits.writing（修复「内容不是最新版本」——
@@ -5949,30 +5950,43 @@ function renderWritingAdmin(keep){
           var fe = freshEdits || {};
           _wadmTasks = (fe.tasks && fe.tasks.length) ? fe.tasks.map(function(t){return Object.assign({},t);}) : getWritingTasks().map(function(t){return Object.assign({},t);});
           var _m=document.getElementById('main');
-          if(_m && _m.innerHTML.indexOf('管理员编辑写作任务')>=0){ renderWritingAdmin(true); toast('已同步云端最新编辑','ok'); }
+          if(_m && _m.innerHTML.indexOf('管理员编辑写作任务')>=0 && window._wadmEditing){ renderWritingAdmin(true); toast('已同步云端最新编辑','ok'); }
         });
       }
     }catch(e){}
   }
   const adminEssays = ed.essays || {};
-  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。</div>';
+  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。<b style="color:#4f46e5">所有保存自动留痕，后台「🕘 编辑留痕」可一键撤回。</b></div>';
+  /* v95.38: 格式完善——每任务卡片带 id/等级/标题/词数/阅读材料全字段，两列布局，范文折叠 */
   _wadmTasks.forEach(function(t,i){
     const e = adminEssays[t.id] || {};
-    h += '<div class="card" style="margin:10px 0">';
-    h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>任务 '+(i+1)+'</b>'
+    const eff = (typeof getEffectiveEssay==='function') ? getEffectiveEssay(t.id, i) : {};
+    h += '<div class="card" style="margin:10px 0">'
+      + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--line)">'
+      + '<b style="font-size:13px">任务 '+(i+1)+'</b>'
+      + '<span class="badge b-lv" style="font-size:10px">'+esc(t.id||('w'+i))+'</span>'
+      + (t.tarea?'<span class="badge b-t'+(t.tarea==='T2'?'2':'1')+'" style="font-size:10px">'+t.tarea+'</span>':'')
       + '<select id="wadm_lvl_'+i+'">'+['A1','A2','B1','B2'].map(function(l){return '<option '+(t.lvl===l?'selected':'')+'>'+l+'</option>';}).join('')+'</select>'
-      + '<button class="btn sm dgr" onclick="delWritingTask('+i+')">🗑 删除</button></div>';
-    h += '<div style="margin:4px 0;font-size:12px"><b>任务描述：</b><textarea id="wadm_task_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(t.task||'')+'</textarea></div>';
-    h += '<div style="margin:4px 0;font-size:12px"><b>写作提示：</b><textarea id="wadm_tips_'+i+'" rows="2" style="width:100%;font-size:12px">'+esc(t.tips||'')+'</textarea></div>';
-    h += '<div style="margin:4px 0;font-size:12px"><b>范文：</b><textarea id="wadm_essay_'+i+'" rows="5" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(e.text||'')+'</textarea></div>';
-    h += '</div>';
+      + '<input id="wadm_title_'+i+'" value="'+esc(t.title||'')+'" placeholder="标题（列表显示）" style="flex:1;min-width:140px;padding:5px 8px;font-size:12px">'
+      + '<input id="wadm_words_'+i+'" value="'+esc(t.words||'')+'" placeholder="词数" style="width:70px;padding:5px 8px;font-size:12px">'
+      + '<button class="btn sm dgr" onclick="delWritingTask('+i+')">🗑 删除</button></div>'
+      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start">'
+      + '<div style="margin:4px 0;font-size:12px"><b>任务描述：</b><textarea id="wadm_task_'+i+'" rows="4" style="width:100%;font-size:12px">'+esc(t.task||'')+'</textarea></div>'
+      + '<div style="margin:4px 0;font-size:12px"><b>写作提示：</b><textarea id="wadm_tips_'+i+'" rows="4" style="width:100%;font-size:12px">'+esc(t.tips||'')+'</textarea></div>'
+      + '</div>'
+      + '<details style="margin:6px 0" '+(e.text?'open':'')+'><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--tr)">📄 范文'+(eff&&eff.text?'（现有 '+String(eff.text).split(/\s+/).length+' 词）':'（空）')+'</summary>'
+      + '<textarea id="wadm_essay_'+i+'" rows="6" style="width:100%;font-size:12px;font-family:var(--serif);margin-top:5px">'+esc(e.text||'')+'</textarea></details>'
+      + '<details style="margin:6px 0"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6366f1">📰 阅读材料（T2 报刊信原文，可选）</summary>'
+      + '<textarea id="wadm_passage_'+i+'" rows="4" style="width:100%;font-size:12px;margin-top:5px">'+esc(t.passage||'')+'</textarea></div></details>'
+      + '</div>';
   });
-  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addWritingTask()">➕ 新增任务</button><button class="btn pr" onclick="saveWritingAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div>';
+  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addWritingTask()">➕ 新增任务</button><button class="btn pr" onclick="saveWritingAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="closeWritingAdmin()">❌ 取消</button></div>';
   h += '</div>';
   const m = document.getElementById('main');
   if(m) m.innerHTML = h;
   window.scrollTo(0,0);
 }
+window.closeWritingAdmin = function(){ window._wadmEditing=false; renderMain(); };
 function addWritingTask(){
   if(!_wadmTasks) return;
   _wadmTasks.push({id:'wt_new_'+Date.now().toString(36), lvl:'B1', task:'', tips:''});
@@ -6036,17 +6050,26 @@ function saveWritingAdmin(){
     const taskEl=document.getElementById('wadm_task_'+i);
     const tipsEl=document.getElementById('wadm_tips_'+i);
     const essayEl=document.getElementById('wadm_essay_'+i);
+    const titleEl=document.getElementById('wadm_title_'+i);
+    const wordsEl=document.getElementById('wadm_words_'+i);
+    const passageEl=document.getElementById('wadm_passage_'+i);
     const lvl = lvlEl?lvlEl.value:(t.lvl||'B1');
     const task = taskEl?taskEl.value.trim():'';
     const tips = tipsEl?tipsEl.value.trim():'';
     const essayText = essayEl?essayEl.value.trim():'';
     if(!task){ alert('任务 '+(i+1)+' 描述不能为空'); return; }
-    tasks.push({id:t.id, lvl:lvl, task:task, tips:tips});
+    /* v95.38: Object.assign 全字段保留——修复旧版保存丢 title/words/passage/type 等字段导致其他编辑回退 */
+    const nt = Object.assign({}, t, {id:t.id, lvl:lvl, task:task, tips:tips});
+    if(titleEl) nt.title = titleEl.value.trim();
+    if(wordsEl){ var _wn=wordsEl.value.trim(); nt.words = _wn?(Number(_wn)||''):''; if(!_wn) delete nt.words; }
+    if(passageEl){ var _wp=passageEl.value; if(_wp && _wp.trim()) nt.passage=_wp; else delete nt.passage; }
+    tasks.push(nt);
     if(essayText) essays[t.id] = {text: essayText};
   }
   window._deleSyncContentEdits('writing', {tasks: tasks, essays: essays});
   window._contentEdits.writing = {tasks: tasks, essays: essays};
-  toast('✅ 已保存并同步给所有用户','ok');
+  window._wadmEditing = false;
+  toast('✅ 已保存并同步给所有用户（留痕可在后台撤回）','ok');
   renderMain();
 }
 
@@ -8211,12 +8234,14 @@ function _bankAdminTools(){
     '<button class="btn xs dgr" onclick="_bankInlineDel()" style="font-size:11px">✕ 删此题</button>'+
     '<button class="btn xs dgr" onclick="_bankResetCloud()" style="font-size:11px">☁ 恢复内置题库</button>'+
     '<button class="btn xs" onclick="_bankShowHistory()" style="font-size:11px">🕘 历史</button>'+
-    '<button class="btn xs '+(window._sieleOralOverview?'t':'')+'" onclick="toggleOralOverview()" style="font-size:11px">'+(window._sieleOralOverview?'↩ 返回题目':'📋 题库总览')+'</button>'+
+    '<button class="btn xs" onclick="toggleOralOverview()" style="font-size:11px;font-weight:800;'+(window._sieleOralOverview?'background:#f59e0b;color:#fff;border:1.5px solid #b45309':'background:#4f46e5;color:#fff;border:1.5px solid #3730a3')+'">'+(window._sieleOralOverview?'↩ 返回题目':'📋 题库总览编辑')+'</button>'+
     _bankEditBtn('q','题干')+
     _bankEditBtn('title','标题')+
     _bankEditBtn('model','范文')+
     _bankEditBtn('keys','关键词')+
     _bankEditBtn('sec','时长')+
+    _bankEditBtn('cat','分类')+
+    _bankEditBtn('freq','考频')+
     '<span class="sub" style="font-size:10px;color:#64748b">编辑保存后对登录用户生效（未登录访客读内置库）；改动自动留史，可回滚</span>'+
   '</div>';
 }
@@ -8339,7 +8364,7 @@ window._oralOverviewHtml=function(){
       '<button class="btn xs gh" onclick="_ovExport()">⬇ 导出本 Tab JSON</button>'+
       '<button class="btn xs gh" onclick="_ovImport()">⬆ 导入 JSON</button>'+
       '<span style="flex:1"></span>'+
-      (pages>1?'<span>'+total+' 题 · 第 '+page+'/'+pages+' 页 </span>'+(page>1?'<button class="btn xs gh" onclick="_ovPageTo('+(page-1)+')">‹</button>':'')+Array.from({length:pages},function(_,i){var pp=i+1;if(pages<=7||Math.abs(pp-page)<=2||pp===1||pp===pages)return '<button class="btn xs '+(pp===page?'pr':'gh')+'" onclick="_ovPageTo('+pp+')" style="min-width:26px">'+pp+'</button>';if(pp===page-3||pp===page+3)return '<span style="color:var(--soft);font-size:11px">…</span>';return '';}).join('')+(page<pages?'<button class="btn xs gh" onclick="_ovPageTo('+(page+1)+')">›</button>':''):'<span>'+total+' 题</span>')+
+      (pages>1?'<span>'+total+' 题 · 第 '+page+'/'+pages+' 页 </span>'+(page>1?'<button class="btn xs" onclick="_ovPageTo('+(page-1)+')" style="background:#4f46e5;color:#fff;border:1.5px solid #3730a3;font-weight:700">‹ 上一页</button>':'')+Array.from({length:pages},function(_,i){var pp=i+1;if(pages<=9||Math.abs(pp-page)<=2||pp===1||pp===pages)return '<button class="btn xs" onclick="_ovPageTo('+pp+')" style="min-width:30px;font-weight:800;'+(pp===page?'background:#dc2626;color:#fff;border:1.5px solid #b91c1c':'background:#eef2ff;color:#4338ca;border:1.5px solid #6366f1')+'">'+pp+'</button>';if(pp===page-3||pp===page+3)return '<span style="color:var(--soft);font-size:11px;font-weight:700">…</span>';return '';}).join('')+(page<pages?'<button class="btn xs" onclick="_ovPageTo('+(page+1)+')" style="background:#4f46e5;color:#fff;border:1.5px solid #3730a3;font-weight:700">下一页 ›</button>':''):'<span>'+total+' 题</span>')+
       '</div>'+
       '<div class="note" style="margin-top:8px">改动即存云端（content_edits.oralbank）并对登录用户生效；🎙✓=题干音频已生成，🎙?=待更新。批量/删除均有留史可回滚。</div>'+
       '</section>';
@@ -10525,8 +10550,11 @@ window._topicInlineEdit = function(i, field, label){
 // 写作任务就地编辑（writing namespace）
 window._writingInlineEdit = function(i, field, label){
   var t = getWritingTasks()[i];
-  var cur = t ? (t[field]||'') : '';
-  _showEditModal(label, cur, '任务 '+(i+1), {'data-ns':'writing','data-idx':i,'data-field':field});
+  if(!t) return;
+  var cur;
+  if(field==='essay'){ var _eff = getEffectiveEssay(t.id, i); cur = (_eff && _eff.text) || ''; }
+  else cur = t[field]||'';
+  _showEditModal(label, cur, '任务 '+(i+1)+(t.id?(' · '+t.id):''), {'data-ns':'writing','data-idx':i,'data-field':field});
 };
 window._oralInlineSave = function(btn){
   var ta = document.getElementById('oralEditTA');
@@ -10543,12 +10571,23 @@ window._oralInlineSave = function(btn){
       var wi = Number(ta.getAttribute('data-idx'));
       var wfield = ta.getAttribute('data-field');
       var wtasks = getWritingTasks().map(function(t){ return Object.assign({},t); });
-      wtasks[wi][wfield] = ta.value;
-      // 保留现有 essays 编辑
-      var wed = window._contentEdits.writing || {};
-      var wessays = wed.essays || {};
-      window._deleSyncContentEdits('writing', {tasks: wtasks, essays: wessays});
-      window._contentEdits.writing = {tasks: wtasks, essays: wessays};
+      /* v95.38: 就地编辑扩字段——essay(范文)/words(词数) 特殊处理，其余字符串直写 */
+      if(wfield === 'essay'){
+        var _wid = wtasks[wi] && wtasks[wi].id;
+        if(!_wid) throw new Error('任务缺少 id，无法定位范文');
+        var wed0 = window._contentEdits.writing || {};
+        var wessays0 = wed0.essays || {};
+        wessays0[_wid] = Object.assign({}, wessays0[_wid]||{}, {text: ta.value});
+        window._deleSyncContentEdits('writing', {tasks: wtasks, essays: wessays0});
+        window._contentEdits.writing = {tasks: wtasks, essays: wessays0};
+      } else {
+        wtasks[wi][wfield] = (wfield==='words') ? ((Number(ta.value)||'')||'') : ta.value;
+        // 保留现有 essays 编辑
+        var wed = window._contentEdits.writing || {};
+        var wessays = wed.essays || {};
+        window._deleSyncContentEdits('writing', {tasks: wtasks, essays: wessays});
+        window._contentEdits.writing = {tasks: wtasks, essays: wessays};
+      }
     } else if(ns === 'oralbank'){
       var btarea = Number(ta.getAttribute('data-tarea'));
       var bidx = Number(ta.getAttribute('data-idx'));
@@ -10558,6 +10597,11 @@ window._oralInlineSave = function(btn){
       if(!bq) throw new Error('题目不存在');
       if(bfield === 'keys'){ bq.keys = ta.value.split(',').map(function(s){return s.trim();}).filter(Boolean); }
       else if(bfield === 'sec'){ bq.sec = Number(ta.value)||10; }
+      else if(bfield === 'freq'){ /* v95.38: 考频校验 super/high/recent，留空清除 */
+        var _fv = ta.value.trim().toLowerCase();
+        if(_fv && ['super','high','recent'].indexOf(_fv)<0) throw new Error('考频仅支持 super / high / recent（留空=清除）');
+        if(_fv) bq.freq=_fv; else delete bq.freq;
+      }
       else { bq[bfield] = ta.value; }
       try{ var _oldq=(getSieleOralBank()[btarea]||[])[bidx]; if(_oldq){ var _bv; if(bfield==='keys')_bv=(_oldq.keys||[]).join(', '); else if(bfield==='sec')_bv=String(_oldq.sec||''); else _bv=_oldq[bfield]||''; _bankHistPush('edit',[{tarea:btarea,idx:bidx,id:_oldq.id,field:bfield,before:_bv}]); } }catch(_he){}
       window._deleSyncContentEdits('oralbank', {bank: bank});
@@ -15490,7 +15534,8 @@ window.addEventListener('message', function(e){
     try {
       if (typeof currentPage === 'string' && typeof renderMain === 'function') {
         var _pgMap = { grammar:'grammar', verbUsage:'vocab', verbConj:'vocab', writing:'writing', essays:'writing', oral:'speaking', speakingTopics:'speaking', oralbank:'siele', tareas:'siele', quiz:'quiz' };
-        if (_pgMap[ns] && currentPage === _pgMap[ns]) renderMain();
+        /* v95.38: 管理员编辑器打开期间挂起自动 renderMain——否则写作编辑器打开→强制拉取返回→renderMain 把编辑器冲掉（闪退根因） */
+        if (_pgMap[ns] && currentPage === _pgMap[ns] && !window._wadmEditing) renderMain();
       }
     } catch(e) {}
   }
