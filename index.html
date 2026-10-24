@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.36-202610241305';
+window.swVer = 'v95.37-202610241400';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -8237,16 +8237,26 @@ window._bankResetCloud = function(){
 /* v95.36: 分页/筛选状态挂 window（消除 let 闭包作用域在任何调用路径下的隐患），_ovPageTo 加失败可见化 */
 window._sieleOralOverview=false;window._ovTab=1;window._ovSearch='';window._ovCat='';window._ovPage=1;let _ovSel={},_ovEdit=-1;window._ovPageSize=20;
 window.toggleOralOverview=function(){ window._sieleOralOverview=!window._sieleOralOverview; _ovEdit=-1; _ovSel={}; renderMain(); };
-window._ovSetTab=function(t){ window._ovTab=t; window._ovPage=1; _ovEdit=-1; renderMain(); };
-window._ovSetSearch=function(v){ window._ovSearch=v||''; window._ovPage=1; renderMain(); };
-window._ovSetCat=function(v){ window._ovCat=v||''; window._ovPage=1; renderMain(); };
+/* v95.37: 容器级重渲染——只替换总览 <section> 自身，不跑全页 renderMain。
+   真实管理员环境下 renderMain 全页链路（模考条/T2 合并/口音等）任何一环异常都会吞掉分页效果
+   （v95.36 后用户实测仍无反应而本地同构建正常），容器级替换彻底绕开。 */
+window._ovRerender=function(){
+  try{
+    var el=document.getElementById('oralOverviewSec');
+    if(el){ el.outerHTML=window._oralOverviewHtml(); return; }
+  }catch(e){}
+  try{ renderMain(); }catch(e){ if(typeof toast==='function') toast('总览刷新失败：'+(e&&e.message||e),'err'); }
+};
+window._ovSetTab=function(t){ window._ovTab=t; window._ovPage=1; _ovEdit=-1; window._ovRerender(); };
+window._ovSetSearch=function(v){ window._ovSearch=v||''; window._ovPage=1; window._ovRerender(); };
+window._ovSetCat=function(v){ window._ovCat=v||''; window._ovPage=1; window._ovRerender(); };
 window._ovPageTo=function(p){
   try{
     var list=window._ovList();
     var pages=Math.max(1,Math.ceil(list.length/window._ovPageSize));
     var np=Math.min(Math.max(1,p),pages);
     if(np===window._ovPage){ if(typeof toast==='function')toast('已在第 '+np+' 页','ok'); return; }
-    window._ovPage=np; _ovEdit=-1; renderMain();
+    window._ovPage=np; _ovEdit=-1; window._ovRerender();
   }catch(e){ if(typeof toast==='function')toast('翻页失败：'+(e&&e.message||e),'err'); }
 };
 window._ovToggleSel=function(id){ _ovSel[id]=!_ovSel[id]; renderMain(); };
@@ -8316,7 +8326,7 @@ window._oralOverviewHtml=function(){
       '<button class="btn xs gh" onclick="_ovBatchApply(\'freq\')" style="font-size:11px">批量改考频</button>'+
       '<button class="btn xs gh" onclick="_ovBatchApply(\'cat\')" style="font-size:11px">批量改分类</button>'+
       '<button class="btn xs dgr" onclick="_ovBatchDel()" style="font-size:11px">批量删除</button>'):'';
-    return '<section class="card" style="padding:12px">'+
+    return '<section class="card" style="padding:12px" id="oralOverviewSec">'+
       '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><h3 style="margin:0">📋 口语题库总览</h3>'+
       '<button class="btn xs t" onclick="toggleOralOverview()">↩ 返回题目视图</button></div>'+
       '<div class="so-tabs" role="tablist">'+tabs+'</div>'+
