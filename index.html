@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.35-202610241240';
+window.swVer = 'v95.36-202610241305';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5381,7 +5381,7 @@ function _writingSieleTree(tasks){
         : (t.tarea === 'T2'
           ? '<span class="badge b-t2">T2</span>'
           : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`);
-      return `<li class="d-row" data-c="${_wCatOf(t)}" onclick="selectWriting(${i})">
+      return `<li class="d-row" data-c="${_wCatOf(t)}" onclick="selectWriting(${i},true)">
         <span class="tt">${esc(t.title || String(t.task || '').slice(0, 26))}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'task','编辑任务描述')}</span>
         ${tb}<span class="badge b-lv">${t.lvl}</span><span class="meta" style="width:40px">${t.words || ''}</span>${st}
       </li>`;
@@ -5430,14 +5430,14 @@ function renderWriting(){
       const _tbadge = t.tarea==='T2'
         ? '<span style="background:#ede9fe;color:#6d28d9;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:800">T2 报刊信</span>'
         : '<span style="background:#dcfce7;color:#15803d;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:800">T1 '+(t.type==='formal'?'公函':'私函')+'</span>';
-      h += `<div class="rc" onclick="selectWriting(${i})" style="cursor:pointer">
+      h += `<div class="rc" onclick="selectWriting(${i},true)" style="cursor:pointer">
         <span class="cat" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="tm l${t.lvl}">${t.lvl}</span>${_tbadge}<span style="color:var(--am);font-weight:600">${t.words||''}词</span>${_cnt?`<span class="pr-badge">练过${_cnt}次${_best?' · '+_best+'分':''}</span>`:'<span class="pr-badge new">新题</span>'}</span>
         <h5 style="margin:5px 0 3px">${esc(t.title||'')}${_ws&&(_ws.history||[]).length>1?` <span style="font-size:10px;color:var(--soft)">(${_ws.history.length}条记录)</span>`:''}${_writingEditBtn(i,'task','编辑任务描述')}</h5>
         <p style="font-size:11px">${t.passage?'📰 <span style="color:var(--tr)">含阅读材料</span> · ':''}${esc((t.tips||'').slice(0,60))}...${_writingEditBtn(i,'tips','编辑写作提示')}</p>
       </div>`;
       return;
     }
-    h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i})">
+    h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i},true)">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${i+1}</span>
       <h5>${esc((t.task||'').slice(0,50))}...${_writingEditBtn(i,'task','编辑任务描述')}</h5>
       <p>${esc(t.tips||'')}${_writingEditBtn(i,'tips','编辑写作提示')}</p>
@@ -5499,6 +5499,8 @@ function renderWriting(){
     });
   }
 
+  /* v95.36: 内容编辑异步返回会重建写作页——若有已选题则恢复选题视图（计时条/任务/草稿随 selectWriting 还原），避免用户被踢回占位符 */
+  try{ if(typeof _writingIdx==='number' && _writingIdx>=0 && typeof getWritingTasks==='function' && getWritingTasks()[_writingIdx]){ setTimeout(function(){ try{ selectWriting(_writingIdx); }catch(e){} }, 0); } }catch(e){}
   return h;
 }
 
@@ -5512,7 +5514,7 @@ function speakEssay(ei){
 
 
 let _writingIdx = -1;
-function selectWriting(i){
+function selectWriting(i, fromClick){
   _writingIdx = i;
   const t = getWritingTasks()[i];
   if(!t) return;
@@ -5527,13 +5529,76 @@ function selectWriting(i){
   document.getElementById('writingTips').style.display = 'block';
   document.getElementById('writingTips').innerHTML = `<b>写作提示：</b>${esc(t.tips)}`;
   const ta = document.getElementById('writingText');
-  ta.value = ST['writing_'+(t.id||i)] || ST['writing_'+i] || '';
+  window._wCurTaskId = t.id || i; /* v95.36: 草稿快照键 */
+  ta.value = ST['writing_'+(t.id||i)] || ST['writing_'+i] || (window._wDraftMap && window._wDraftMap[t.id||i]) || '';
   countWords();
+  /* v95.36: T1/T2 官方参考时长倒计时（EIE 总 50 分钟·2 题，每题参考 25 分钟；练习模式到点不强制交卷） */
+  try{
+    if(t.tarea==='T1' || t.tarea==='T2'){ _wWritingTimerStart(t.tarea); }
+    else { _wWritingTimerStop(); }
+  }catch(e){}
+  /* v95.36: 用户点击选题后自动滚动到写作区（初始化/保存刷新不触发，避免页面跳动） */
+  if(fromClick){
+    try{
+      var _wa=document.getElementById('writingArea');
+      if(_wa && _wa.scrollIntoView) setTimeout(function(){ _wa.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
+    }catch(e){}
+  }
 }
+/* ===== v95.36: 写作倒计时（T1/T2 官方参考 25 分钟/题；先 3 分钟审题构思提示；到点仅提醒不交卷） ===== */
+window._wTimerIv=null; window._wTimerLeft=0;
+window._wWritingTimerStop=function(){
+  try{ if(window._wTimerIv){ clearInterval(window._wTimerIv); window._wTimerIv=null; } }catch(e){}
+};
+window._wWritingTimerStart=function(tarea){
+  _wWritingTimerStop();
+  window._wTimerTarea=tarea||'T1';
+  var mins=25; /* EIE 50 分钟·2 题：每题官方参考 25 分钟 */
+  window._wTimerLeft=mins*60;
+  var host=document.getElementById('writingTips');
+  if(!host) return;
+  var bar=document.createElement('div');
+  bar.id='writingTimerBar';
+  bar.style.cssText='margin-top:8px;padding:7px 10px;border:1px solid #fde68a;background:#fffbeb;border-radius:9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap';
+  bar.innerHTML='<span style="font-size:11px;color:#92400e;font-weight:700">⏱ SIELE 官方参考时长（'+tarea+'）</span>'
+    +'<b id="wTimerTxt" style="font-size:16px;font-variant-numeric:tabular-nums;color:#b45309">'+String(mins).padStart(2,'0')+':00</b>'
+    +'<span style="font-size:10.5px;color:var(--soft)">建议先花 3 分钟审题列要点再动笔</span>'
+    +'<span style="flex:1"></span>'
+    +'<button class="btn xs gh" onclick="_wWritingTimerPause()" style="font-size:10px">暂停/继续</button>'
+    +'<button class="btn xs gh" onclick="_wWritingTimerRestart('+mins+')" style="font-size:10px">重置</button>'
+    +'<span style="font-size:10px;color:var(--soft)">到点仅提醒，不强制交卷</span>';
+  host.parentNode.insertBefore(bar, host.nextSibling);
+  window._wTimerPaused=false;
+  window._wTimerIv=setInterval(function(){
+    if(window._wTimerPaused) return;
+    window._wTimerLeft--;
+    var txt=document.getElementById('wTimerTxt');
+    if(!txt){ _wWritingTimerStop(); return; }
+    var L=Math.max(0,window._wTimerLeft);
+    txt.textContent=String(Math.floor(L/60)).padStart(2,'0')+':'+String(L%60).padStart(2,'0');
+    if(L<=60) txt.style.color='#dc2626';
+    if(window._wTimerLeft<=0){
+      _wWritingTimerStop();
+      var bar2=document.getElementById('writingTimerBar');
+      if(bar2){ bar2.style.borderColor='#fca5a5'; bar2.style.background='#fef2f2'; }
+      if(txt) txt.textContent='00:00';
+      if(typeof toast==='function') toast('已到 '+tarea+' 官方参考时长（25 分钟）——练习模式不强制交卷，可继续作答','ok');
+    }
+  },1000);
+};
+window._wWritingTimerPause=function(){ if(window._wTimerLeft<=0) return; window._wTimerPaused=!window._wTimerPaused; };
+window._wWritingTimerRestart=function(){ _wWritingTimerStart(window._wTimerTarea||'T1'); };
+
 function countWords(){
-  const t = document.getElementById('writingText').value;
+  const el = document.getElementById('writingText');
+  const t = el.value;
   const n = t.trim().split(/\s+/).filter(w=>w).length;
   document.getElementById('wordCount').textContent = '字数：' + n;
+  /* v95.36: 草稿保护——内容编辑异步 re-render 重建写作区时，未保存文本可从草稿快照恢复 */
+  try{
+    window._wDraftMap = window._wDraftMap || {};
+    if(window._wCurTaskId!=null) window._wDraftMap[window._wCurTaskId] = t;
+  }catch(e){}
 }
 function saveWriting(){
   if(_writingIdx < 0){ alert('请先选择一个写作任务'); return; }
@@ -5874,7 +5939,21 @@ let _wadmTasks = null;
 function renderWritingAdmin(keep){
   const tasks = getWritingTasks();
   const ed = window._contentEdits.writing || {};
-  if(!keep) _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
+  if(!keep){
+    _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
+    /* v95.36: 打开编辑器时强制拉云端最新 content_edits.writing（修复「内容不是最新版本」——
+       登录时的一次性拉取可能落后于其他设备的最近编辑），拉回后带数据重渲染本编辑器 */
+    try{
+      if(typeof window._deleFetchContentEdits==='function' && isContentAdmin()){
+        window._deleFetchContentEdits('writing', function(freshEdits){
+          var fe = freshEdits || {};
+          _wadmTasks = (fe.tasks && fe.tasks.length) ? fe.tasks.map(function(t){return Object.assign({},t);}) : getWritingTasks().map(function(t){return Object.assign({},t);});
+          var _m=document.getElementById('main');
+          if(_m && _m.innerHTML.indexOf('管理员编辑写作任务')>=0){ renderWritingAdmin(true); toast('已同步云端最新编辑','ok'); }
+        });
+      }
+    }catch(e){}
+  }
   const adminEssays = ed.essays || {};
   let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑写作任务</h2><div class="sub" style="margin-bottom:10px">编辑任务名称/描述/范文，增删任务；保存后所有用户立即看到最新版。范文留空 = 沿用默认或待 AI 生成。若某题用户已自编辑过范文，则以用户版为准，不被覆盖。</div>';
   _wadmTasks.forEach(function(t,i){
@@ -8155,12 +8234,21 @@ window._bankResetCloud = function(){
   }catch(e){ toast('操作失败：'+(e&&e.message||e)); }
 }
 /* ===== v95.30: 集中式题库总览（管理员专用，与每题工具条并列；数据同走 content_edits.oralbank） ===== */
-window._sieleOralOverview=false;let _ovTab=1,_ovSearch='',_ovCat='',_ovPage=1,_ovSel={},_ovEdit=-1,_ovPageSize=20;
+/* v95.36: 分页/筛选状态挂 window（消除 let 闭包作用域在任何调用路径下的隐患），_ovPageTo 加失败可见化 */
+window._sieleOralOverview=false;window._ovTab=1;window._ovSearch='';window._ovCat='';window._ovPage=1;let _ovSel={},_ovEdit=-1;window._ovPageSize=20;
 window.toggleOralOverview=function(){ window._sieleOralOverview=!window._sieleOralOverview; _ovEdit=-1; _ovSel={}; renderMain(); };
-window._ovSetTab=function(t){ _ovTab=t; _ovPage=1; _ovEdit=-1; renderMain(); };
-window._ovSetSearch=function(v){ _ovSearch=v||''; _ovPage=1; renderMain(); };
-window._ovSetCat=function(v){ _ovCat=v||''; _ovPage=1; renderMain(); };
-window._ovPageTo=function(p){ _ovPage=p; _ovEdit=-1; renderMain(); };
+window._ovSetTab=function(t){ window._ovTab=t; window._ovPage=1; _ovEdit=-1; renderMain(); };
+window._ovSetSearch=function(v){ window._ovSearch=v||''; window._ovPage=1; renderMain(); };
+window._ovSetCat=function(v){ window._ovCat=v||''; window._ovPage=1; renderMain(); };
+window._ovPageTo=function(p){
+  try{
+    var list=window._ovList();
+    var pages=Math.max(1,Math.ceil(list.length/window._ovPageSize));
+    var np=Math.min(Math.max(1,p),pages);
+    if(np===window._ovPage){ if(typeof toast==='function')toast('已在第 '+np+' 页','ok'); return; }
+    window._ovPage=np; _ovEdit=-1; renderMain();
+  }catch(e){ if(typeof toast==='function')toast('翻页失败：'+(e&&e.message||e),'err'); }
+};
 window._ovToggleSel=function(id){ _ovSel[id]=!_ovSel[id]; renderMain(); };
 window._ovSelAll=function(){ var list=_ovList(); list.forEach(function(q){ _ovSel[q.id]=true; }); renderMain(); };
 window._ovSelClear=function(){ _ovSel={}; renderMain(); };
@@ -8175,33 +8263,33 @@ window._ovWriteBank=function(bank,msg){
 };
 window._ovList=function(){
   var bank=_bankEditClone();
-  var arr=bank[_ovTab]||[];
-  var kw=_ovSearch.trim().toLowerCase();
+  var arr=Array.isArray(bank[window._ovTab])?bank[window._ovTab]:[];
+  var kw=(window._ovSearch||'').trim().toLowerCase();
   return arr.filter(function(q){
     if(!q) return false;
-    if(_ovCat && (q.cat||q.topic||'')!==_ovCat) return false;
+    if(window._ovCat && (q.cat||q.topic||'')!==window._ovCat) return false;
     if(kw && ((q.id||'')+' '+(q.title||'')+' '+(q.q||'')).toLowerCase().indexOf(kw)<0) return false;
     return true;
   });
 };
 window._ovCats=function(){
   var bank=_bankEditClone(); var s={};
-  (bank[_ovTab]||[]).forEach(function(q){ var c=(q&&q.cat)||(q&&q.topic)||''; if(c)s[c]=1; });
+  (Array.isArray(bank[window._ovTab])?bank[window._ovTab]:[]).forEach(function(q){ var c=(q&&q.cat)||(q&&q.topic)||''; if(c)s[c]=1; });
   return Object.keys(s).sort();
 };
 window._oralOverviewHtml=function(){
   try{
     var bank=_bankEditClone();
-    var arr=bank[_ovTab]||[];
+    var arr=Array.isArray(bank[window._ovTab])?bank[window._ovTab]:[];
     var cats=window._ovCats();
     var all=window._ovList();
-    var total=all.length, pages=Math.max(1,Math.ceil(total/_ovPageSize));
-    var page=Math.min(_ovPage,pages);
-    var slice=all.slice((page-1)*_ovPageSize, page*_ovPageSize);
+    var total=all.length, pages=Math.max(1,Math.ceil(total/window._ovPageSize));
+    var page=Math.min(window._ovPage,pages);
+    var slice=all.slice((page-1)*window._ovPageSize, page*window._ovPageSize);
     var tabs=[1,2,3,4,5].map(function(t){
-      return '<button class="so-tab '+(_ovTab===t?'on':'')+'" onclick="_ovSetTab('+t+')"><b>T'+t+'</b><span>('+((bank[t]||[]).length)+')</span></button>';
+      return '<button class="so-tab '+(window._ovTab===t?'on':'')+'" onclick="_ovSetTab('+t+')"><b>T'+t+'</b><span>('+ (Array.isArray(bank[t])?bank[t].length:0) +')</span></button>';
     }).join('');
-    var catSel='<select onchange="_ovSetCat(this.value)" style="font-size:11px;padding:3px 6px;border:1px solid var(--line);border-radius:6px"><option value="">全部分类</option>'+cats.map(function(c){return '<option '+( _ovCat===c?'selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>';
+    var catSel='<select onchange="_ovSetCat(this.value)" style="font-size:11px;padding:3px 6px;border:1px solid var(--line);border-radius:6px"><option value="">全部分类</option>'+cats.map(function(c){return '<option '+( window._ovCat===c?'selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>';
     var rows=slice.map(function(q){
       var editing=(_ovEdit===q.id);
       var audio='';
@@ -8233,15 +8321,15 @@ window._oralOverviewHtml=function(){
       '<button class="btn xs t" onclick="toggleOralOverview()">↩ 返回题目视图</button></div>'+
       '<div class="so-tabs" role="tablist">'+tabs+'</div>'+
       '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0">'+
-      '<input value="'+esc(_ovSearch)+'" oninput="_ovSetSearch(this.value)" placeholder="搜索 id/标题/题干…" style="flex:1;min-width:160px;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:6px">'+catSel+
+      '<input value="'+esc(window._ovSearch||'')+'" oninput="_ovSetSearch(this.value)" placeholder="搜索 id/标题/题干…" style="flex:1;min-width:160px;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:6px">'+catSel+
       '<button class="btn xs gh" onclick="_ovSelAll()" style="font-size:11px">全选</button><button class="btn xs gh" onclick="_ovSelClear()" style="font-size:11px">清选</button>'+selBar+'</div>'+
       '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="text-align:left;color:var(--tr)"><th></th><th>id</th><th>标题</th><th>题干</th><th>分类</th><th>考频</th><th>音频</th><th>操作</th></tr></thead><tbody>'+(rows||'<tr><td colspan="8" style="padding:14px;color:var(--soft)">无匹配题目</td></tr>')+'</tbody></table></div>'+
       '<div style="display:flex;gap:6px;align-items:center;margin-top:10px;flex-wrap:wrap">'+
-      '<button class="btn xs pr" onclick="_ovAdd()">➕ 加题（T'+_ovTab+'）</button>'+
+      '<button class="btn xs pr" onclick="_ovAdd()">➕ 加题（T'+window._ovTab+'）</button>'+
       '<button class="btn xs gh" onclick="_ovExport()">⬇ 导出本 Tab JSON</button>'+
       '<button class="btn xs gh" onclick="_ovImport()">⬆ 导入 JSON</button>'+
       '<span style="flex:1"></span>'+
-      (pages>1?'<span>'+total+' 题 · 第 '+page+'/'+pages+' 页 </span>'+(page>1?'<button class="btn xs gh" onclick="_ovPageTo('+(page-1)+')">‹</button>':'')+'<span>'+page+'/'+pages+'</span>'+(page<pages?'<button class="btn xs gh" onclick="_ovPageTo('+(page+1)+')">›</button>':''):'<span>'+total+' 题</span>')+
+      (pages>1?'<span>'+total+' 题 · 第 '+page+'/'+pages+' 页 </span>'+(page>1?'<button class="btn xs gh" onclick="_ovPageTo('+(page-1)+')">‹</button>':'')+Array.from({length:pages},function(_,i){var pp=i+1;if(pages<=7||Math.abs(pp-page)<=2||pp===1||pp===pages)return '<button class="btn xs '+(pp===page?'pr':'gh')+'" onclick="_ovPageTo('+pp+')" style="min-width:26px">'+pp+'</button>';if(pp===page-3||pp===page+3)return '<span style="color:var(--soft);font-size:11px">…</span>';return '';}).join('')+(page<pages?'<button class="btn xs gh" onclick="_ovPageTo('+(page+1)+')">›</button>':''):'<span>'+total+' 题</span>')+
       '</div>'+
       '<div class="note" style="margin-top:8px">改动即存云端（content_edits.oralbank）并对登录用户生效；🎙✓=题干音频已生成，🎙?=待更新。批量/删除均有留史可回滚。</div>'+
       '</section>';
@@ -8249,7 +8337,7 @@ window._oralOverviewHtml=function(){
 };
 window._ovSaveRow=function(id){
   var bank=_bankEditClone();
-  var q=(bank[_ovTab]||[]).find(function(x){return x.id===id;}); if(!q)return;
+  var q=(bank[window._ovTab]||[]).find(function(x){return x.id===id;}); if(!q)return;
   var fid=function(k){ return 'ovf_'+k+'_'+String(id).replace(/[^a-zA-Z0-9]/g,''); };
   var g=function(k){ var el=document.getElementById(fid(k)); return el?el.value:null; };
   try{
@@ -8257,16 +8345,16 @@ window._ovSaveRow=function(id){
     q.keys=(g('keys')||'').split(/[,;，；]/).map(function(x){return x.trim();}).filter(Boolean);
     var sc=parseInt(g('sec'),10); if(!isNaN(sc)&&sc>0)q.sec=sc;
     q.updatedAt=Date.now();
-    window._bankHistPush('edit',[{tarea:_ovTab,idx:(bank[_ovTab]||[]).indexOf(q),id:id,field:'__ROW__',before:JSON.stringify({title:q.title,q:q.q})}]);
+    window._bankHistPush('edit',[{tarea:window._ovTab,idx:(bank[window._ovTab]||[]).indexOf(q),id:id,field:'__ROW__',before:JSON.stringify({title:q.title,q:q.q})}]);
     _ovEdit=-1; _ovWriteBank(bank,'题「'+(q.title||id)+'」已保存');
   }catch(e){ toast('保存失败：'+(e&&e.message||e),'err'); }
 };
 window._ovAdd=function(){
   var bank=_bankEditClone();
-  var defSec=(_ovTab===2?120:(_ovTab===3?90:(_ovTab===5?240:(_ovTab===4?60:12))));
-  var id='t'+_ovTab+'_new_'+Date.now().toString(36);
-  bank[_ovTab]=bank[_ovTab]||[];
-  bank[_ovTab].push({id:id, sec:defSec, q:'', keys:[], model:'', title:''});
+  var defSec=(window._ovTab===2?120:(window._ovTab===3?90:(window._ovTab===5?240:(window._ovTab===4?60:12))));
+  var id='t'+window._ovTab+'_new_'+Date.now().toString(36);
+  bank[window._ovTab]=bank[window._ovTab]||[];
+  bank[window._ovTab].push({id:id, sec:defSec, q:'', keys:[], model:'', title:''});
   window._deleSyncContentEdits('oralbank', {bank: bank});
   window._contentEdits.oralbank = {bank: bank};
   _ovEdit=id; renderMain(); toast('已添加，展开编辑内容','ok');
@@ -8275,22 +8363,22 @@ window._ovBatchApply=function(field){
   var ids=Object.keys(_ovSel).filter(function(k){return _ovSel[k];}); if(!ids.length){alert('先勾选题目');return;}
   var v=prompt(field==='freq'?'新考频（super/high/normal/recent，留空清除）：':'新分类名称：',''); if(v===null)return;
   var bank=_bankEditClone();
-  ids.forEach(function(id){ var q=(bank[_ovTab]||[]).find(function(x){return x.id===id;}); if(!q)return; if(field==='freq'){ if(v)q.freq=v; else delete q.freq; } else { q.cat=v; } });
+  ids.forEach(function(id){ var q=(bank[window._ovTab]||[]).find(function(x){return x.id===id;}); if(!q)return; if(field==='freq'){ if(v)q.freq=v; else delete q.freq; } else { q.cat=v; } });
   _ovSel={}; _ovWriteBank(bank,'批量更新 '+ids.length+' 题');
 };
 window._ovBatchDel=function(){
   var ids=Object.keys(_ovSel).filter(function(k){return _ovSel[k];}); if(!ids.length){alert('先勾选题目');return;}
   if(!confirm('确定删除选中的 '+ids.length+' 道题？（留史可回滚）'))return;
   var bank=_bankEditClone();
-  bank[_ovTab]=(bank[_ovTab]||[]).filter(function(x){return ids.indexOf(x.id)<0;});
+  bank[window._ovTab]=(bank[window._ovTab]||[]).filter(function(x){return ids.indexOf(x.id)<0;});
   _ovSel={}; _ovEdit=-1; _ovWriteBank(bank,'已删除 '+ids.length+' 题');
 };
 window._ovExport=function(){
   var bank=_bankEditClone();
-  var txt=JSON.stringify(bank[_ovTab]||[],null,1);
-  window._ovShowIO('导出 T'+_ovTab+' JSON（全选复制）', txt);
+  var txt=JSON.stringify(bank[window._ovTab]||[],null,1);
+  window._ovShowIO('导出 T'+window._ovTab+' JSON（全选复制）', txt);
 };
-window._ovImport=function(){ window._ovShowIO('导入 T'+_ovTab+' JSON（粘贴后点导入）', '', true); };
+window._ovImport=function(){ window._ovShowIO('导入 T'+window._ovTab+' JSON（粘贴后点导入）', '', true); };
 window._ovShowIO=function(title, content, isImport){
   openModal(title,
     '<textarea id="ov_io" rows="14" style="width:100%;font-size:11.5px;font-family:monospace;padding:8px;border:1px solid var(--line);border-radius:8px">'+esc(content||'')+'</textarea>'+
@@ -8304,7 +8392,7 @@ window._ovImportDo=function(){
   var bad=arr.filter(function(x){return !x||!x.id;});
   if(bad.length){ toast('有 '+bad.length+' 条缺 id 字段','err'); return; }
   var bank=_bankEditClone();
-  var cur=bank[_ovTab]=bank[_ovTab]||[];
+  var cur=bank[window._ovTab]=bank[window._ovTab]||[];
   var byId={}; cur.forEach(function(q,i){ byId[q.id]=i; });
   var added=0,updated=0;
   arr.forEach(function(q){ if(byId[q.id]!==undefined){ cur[byId[q.id]]=q; updated++; } else { cur.push(q); added++; } });
