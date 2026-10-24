@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.40-202610242300';
+window.swVer = 'v95.41-202610242340';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3269,6 +3269,8 @@ function renderFlash(){
   const _curIdx = _praMode ? _praIdxOf(pool) : ST.flashIdx;
   // v95.5:「全部」池进度语义化——显示已学词数（vocabMastery>=1 计数）而非全量池断点（断点为独立游标无合计意义）
   // v95.34: 练习模式进度与翻牌彻底独立——练习始终显示练习游标（flashPraIdxByLevel），不再借用翻牌已学数（用户拍板 2026-10-24）
+  /* v95.41: flipRated 存量回填（渲染前幂等，不依赖 remote 形态）——vocabMastery 已评而 flipRated 缺的词补 0；将来重置 floor>0 水线自动排除 */
+  try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   const _allMode = ST.flashLevel === 'all';
   const _flipRatedN = Object.keys(ST.flipRated||{}).length; /* v95.39: 翻牌评价过的词数（练习不计入） */
   const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (_flipRatedN) : (_curIdx+1)); /* v95.39: 翻牌「全部」=翻牌评价词数（原=已学唯一词数，被练习写入污染）；练习各级=练习游标位置 */
@@ -19847,6 +19849,8 @@ function mergeWbSnapshot(remote, wbTs){
       if(_rzFloor && rt <= _rzFloor) return;
       if(rt > (Number(ST.flipRated[es])||0)) ST.flipRated[es] = rt;
     });
+    /* v95.41: flipRated 存量回填——vocabMastery 已评而 flipRated 缺的词补 0（时间未知；floor=0 不排除，将来重置 floor>0 自动排除=重置语义正确），幂等 */
+    try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   }
   if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
   if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
@@ -21040,6 +21044,8 @@ async function standaloneSync(showLog){
           if(_rzFloor2 && rt2 <= _rzFloor2) return;
           if(rt2 > (Number(ST.flipRated[es])||0)) ST.flipRated[es] = rt2;
         });
+    /* v95.41: flipRated 存量回填——vocabMastery 已评而 flipRated 缺的词补 0（时间未知；floor=0 不排除，将来重置 floor>0 自动排除=重置语义正确），幂等 */
+    try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
       }
       // 云端位置更新时，自动将 flashLevel 切到最近活跃的 level（断点续背）
       try{
