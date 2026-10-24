@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.41-202610242340';
+window.swVer = 'v95.42-202610250040';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5414,9 +5414,225 @@ function setWritingFilter(k, val){
   try{ _writingFilter[k] = val; }catch(e){}
   try{ renderMain(); }catch(e){}
 }
+/* ===== v95.42: 写作考试模式（官方流程：2 任务 50 分钟、T2 二选一 30 秒选择超时自动跳转、可回退、到点自动交卷） ===== */
+window._wExamActive = false;
+window._wExamIv = null;
+window._wExamPickIv = null;
+window._wExamStart = function(){
+  try{
+    var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
+    var t1s = tasks.filter(function(t){ return t.tarea === 'T1'; });
+    var t2s = tasks.filter(function(t){ return t.tarea === 'T2'; });
+    if(!t1s.length || !t2s.length){ if(window.toast) toast('题库为空，无法组卷','err'); return; }
+    var t1 = t1s[Math.floor(Math.random()*t1s.length)];
+    var t2 = t2s[Math.floor(Math.random()*t2s.length)];
+    ST.wexam = { active: true, stage: 'setup', t1: '', t2: '', t1Idx: -1, t2Idx: -1,
+      txt1: '', txt2: '', choice: '', left: 50*60, choiceLeft: 30, startedAt: Date.now(),
+      pool1: t1s.map(function(t){ return tasks.indexOf(t); }), pool2: t2s.map(function(t){ return tasks.indexOf(t); }) };
+    window._wExamActive = true;
+    try{ _wWritingTimerStop(); }catch(e){}
+    save(); _wExamRender();
+    window._wExamTick(); /* v95.42: 启动考试主计时（此前漏启动导致永不自动交卷） */
+  }catch(e){ if(window.toast) toast('启动失败: '+String(e).slice(0,60),'err'); }
+};
+window._wExamStageName = function(){
+  var st = ST.wexam || {};
+  return st.stage === 't1' ? 'Tarea 1 · 邮件回复' : (st.stage === 'choice' ? 'Tarea 2 · 选择题型' : 'Tarea 2 · 写作');
+};
+window._wExamRender = function(){
+  var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
+
+  var st = ST.wexam;
+  var mm = String(Math.floor(st.left/60)).padStart(2,'0'), ss = String(st.left%60).padStart(2,'0');
+  var h = '<section class="card" style="padding:12px" id="wexamSec">'
+    + '<div style="position:sticky;top:0;z-index:40;background:#dc2626;color:#fff;padding:8px 12px;border-radius:8px;margin-bottom:10px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">'
+    + '<b>🎓 SIELE 写作考试</b><span id="wexStage" style="font-size:12px">'+window._wExamStageName()+'</span>'
+    + '<span id="wexClock" style="font-size:20px;font-weight:800;letter-spacing:1px">'+mm+':'+ss+'</span>'
+    + '<button class="btn sm" onclick="_wExamExit()" style="background:#fff;color:#dc2626">✖ 结束考试</button></div>'
+    + '<div style="display:flex;gap:6px;align-items:center;font-size:11px;color:var(--soft);margin-bottom:8px">'
+    + '<span class="'+(st.stage==='t1'?'pr-badge':'sub')+'">① Tarea 1 邮件回复</span>→'
+    + '<span class="'+(st.stage!=='t1'?'pr-badge':'sub')+'">② Tarea 2 二选一（议论文/正式书信）</span>'
+    + '<span class="sub">50 分钟自由分配 · 可返回修改</span></div>';
+  var charbar = '<div style="display:flex;gap:3px;flex-wrap:wrap;margin:4px 0">'
+    + ['á','é','í','ó','ú','ü','ñ','¿','¡'].map(function(c){ return '<button class="btn xs ol" onclick="_wExamInsertChar(\''+c+'\')" style="min-width:26px">'+c+'</button>'; }).join('')
+    + '</div>';
+  if(st.stage === 'setup' || st.stage === 'selfpick'){
+    var o1 = st.pool1.map(function(ix){ var t = tasks[ix]; return '<option value="'+ix+'"'+(st.t1Idx===ix?' selected':'')+'>'+esc((t.title||t.task||('T1 #'+ix)).slice(0,50))+'</option>'; }).join('');
+    var o2 = st.pool2.map(function(ix){ var t = tasks[ix]; return '<option value="'+ix+'"'+(st.t2Idx===ix?' selected':'')+'>'+esc((t.title||t.task||('T2 #'+ix)).slice(0,50))+'</option>'; }).join('');
+    h += '<div class="card" style="padding:12px;text-align:center"><b>选择组卷方式</b>'
+      + '<div style="display:flex;gap:10px;justify-content:center;margin:10px 0;flex-wrap:wrap">'
+      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamRandom()">🎲 随机组卷</button>'
+      + '<button class="btn ol" style="padding:10px 18px" onclick="_wExamToggleSelf()">📋 自选组卷</button></div>'
+      + '<div class="sub">T1 邮件回复（100-150 词）+ T2 二选一（250-300 词）· 总时长 50 分钟</div>'
+      + (st.stage === 'selfpick'
+        ? '<div style="margin-top:10px;text-align:left"><div style="margin:8px 0"><b>Tarea 1：</b><select id="wexSel1" style="padding:6px;max-width:90%">'+o1+'</select></div>'
+          + '<div style="margin:8px 0"><b>Tarea 2：</b><select id="wexSel2" style="padding:6px;max-width:90%">'+o2+'</select></div>'
+          + '<div style="display:flex;gap:8px;justify-content:center;margin-top:10px">'
+          + '<button class="btn pr" onclick="_wExamConfirmPick()">✅ 开始考试（50:00）</button></div></div>'
+        : '')
+      + '</div>';
+  }
+  if(st.stage === 't1'){
+    var t1 = (typeof getWritingTasks === 'function') ? getWritingTasks()[st.t1Idx] : null;
+    h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 1（100-150 词）</b>'
+      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t1 && (t1.prompt || t1.task)) || '')+'</div>'
+      + (t1 && t1.cuerpo ? '<div style="font-size:12px;background:#f8fafc;padding:8px;border-radius:6px;margin-top:6px;white-space:pre-wrap">'+esc(t1.cuerpo)+'</div>' : '')
+      + '</div>' + charbar
+      + '<textarea id="wexT1" rows="10" style="width:100%;font-size:14px;line-height:1.7" oninput="_wExamCount(1)">'+esc(st.txt1||'')+'</textarea>'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="sub" id="wexWc1">字数：'+String(st.txt1||'').length+'</span>'
+      + '<button class="btn pr" onclick="_wExamStage(\'choice\')">完成 Tarea 1，进入 Tarea 2 →</button></div>';
+  } else if(st.stage === 'choice'){
+    var t2 = (typeof getWritingTasks === 'function') ? getWritingTasks()[st.t2Idx] : null;
+    h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 2（250-300 词）· 先读材料</b>'
+      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.cuerpo || t2.prompt || t2.task)) || '')+'</div></div>'
+      + '<div class="card" style="padding:10px;text-align:center"><b>30 秒内选择题型（超时自动进入议论文）</b>'
+      + '<div id="wexChoiceLeft" style="font-size:22px;font-weight:800;color:#dc2626;margin:6px 0">'+st.choiceLeft+'</div>'
+      + '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'
+      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'ensayo\')">📝 议论文<br><span style="font-size:10px;font-weight:400">阐述观点+举例总结</span></button>'
+      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'carta\')">✉️ 正式书信<br><span style="font-size:10px;font-weight:400">投诉/申请/动机信</span></button>'
+      + '</div></div>';
+  } else {
+    var t2 = (typeof getWritingTasks === 'function') ? getWritingTasks()[st.t2Idx] : null;
+    var tip = st.choice === 'carta'
+      ? '正式书信：开头 Estimado señor / A quien corresponda，格式完整，禁用口语化表达。'
+      : '议论文：引入话题→明确观点→2-3 个论据→总结；多用 En primer lugar / Además / Por último。';
+    h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 2 · 你选择了'+(st.choice==='carta'?'正式书信':'议论文')+'</b>'
+      + '<div class="note" style="margin-top:6px">'+tip+'</div>'
+      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.prompt || t2.task)) || '')+'</div></div>'
+      + charbar
+      + '<textarea id="wexT2" rows="12" style="width:100%;font-size:14px;line-height:1.7" oninput="_wExamCount(2)">'+esc(st.txt2||'')+'</textarea>'
+      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="sub" id="wexWc2">字数：'+String(st.txt2||'').length+'</span>'
+      + '<button class="btn ol" onclick="_wExamStage(\'t1\')">← 返回 Tarea 1 修改</button>'
+      + '<button class="btn pr" onclick="_wExamSubmit(true)">✅ 提前交卷</button></div>';
+  }
+  h += '</section>';
+  var m = document.getElementById('main');
+  if(m) m.innerHTML = h;
+  return h;
+};
+window._wExamCount = function(n){
+  try{ var el = document.getElementById(n===1?'wexWc1':'wexWc2'); var ta = document.getElementById(n===1?'wexT1':'wexT2');
+    if(el && ta){ var v = ta.value; ST.wexam['txt'+n] = v; el.textContent = '字数：'+v.length; } }catch(e){}
+};
+window._wExamInsertChar = function(c){
+  try{ var ta = document.getElementById(ST.wexam.stage==='t1'?'wexT1':'wexT2'); if(!ta) return;
+    var st = ta.selectionStart || ta.value.length;
+    ta.value = ta.value.slice(0,st) + c + ta.value.slice(ta.selectionEnd||st);
+    ta.selectionStart = ta.selectionEnd = st + c.length; ta.focus();
+    window._wExamCount(ST.wexam.stage==='t1'?1:2);
+  }catch(e){}
+};
+window._wExamRandom = function(){
+  try{
+    ST.wexam.t1Idx = ST.wexam.pool1[Math.floor(Math.random()*ST.wexam.pool1.length)];
+    ST.wexam.t2Idx = ST.wexam.pool2[Math.floor(Math.random()*ST.wexam.pool2.length)];
+    window._wExamGo();
+  }catch(e){}
+};
+window._wExamToggleSelf = function(){
+  try{ ST.wexam.stage = (ST.wexam.stage === 'selfpick') ? 'setup' : 'selfpick'; _wExamRender(); }catch(e){}
+};
+window._wExamConfirmPick = function(){
+  try{
+    var s1 = parseInt((document.getElementById('wexSel1')||{}).value, 10);
+    var s2 = parseInt((document.getElementById('wexSel2')||{}).value, 10);
+    if(isNaN(s1) || isNaN(s2)){ if(window.toast) toast('请选择两道题','err'); return; }
+    ST.wexam.t1Idx = s1; ST.wexam.t2Idx = s2;
+    window._wExamGo();
+  }catch(e){}
+};
+window._wExamGo = function(){
+  try{
+    ST.wexam.stage = 't1'; ST.wexam.left = 50*60; ST.wexam.choiceLeft = 30;
+    var t1 = getWritingTasks()[ST.wexam.t1Idx], t2 = getWritingTasks()[ST.wexam.t2Idx];
+    ST.wexam.t1 = (t1||{}).id || ''; ST.wexam.t2 = (t2||{}).id || '';
+    ST.wexam.txt1 = ST['writing_'+ST.wexam.t1] || ''; ST.wexam.txt2 = ST['writing_'+ST.wexam.t2] || '';
+    save(); _wExamRender();
+    if(window.toast) toast('考试开始：两题共 50 分钟，自由分配；T2 有 30 秒选择时间');
+  }catch(e){}
+};
+window._wExamStage = function(sg){
+  try{
+    // 离开当前 stage 前保存文本
+    ['wexT1','wexT2'].forEach(function(id, ix){ var el = document.getElementById(id); if(el) ST.wexam['txt'+(ix+1)] = el.value; });
+    ST.wexam.stage = sg;
+    if(sg === 'choice') ST.wexam.choiceLeft = 30;
+    _wExamRender();
+  }catch(e){}
+};
+window._wExamPick = function(c){
+  try{ if(window._wExamPickIv){ clearInterval(window._wExamPickIv); window._wExamPickIv = null; }
+    ST.wexam.choice = c; window._wExamStage('t2write'); }catch(e){}
+};
+window._wExamExit = function(){
+  try{
+    if(confirm('结束考试？已写内容将保留为草稿（不计分）。')){
+      if(window._wExamIv){ clearInterval(window._wExamIv); window._wExamIv = null; }
+      if(window._wExamPickIv){ clearInterval(window._wExamPickIv); window._wExamPickIv = null; }
+      window._wExamActive = false;
+      if(ST.wexam) ST.wexam.active = false;
+      save(); _wExamRender();
+    }
+  }catch(e){}
+};
+window._wExamSubmit = function(early){
+  try{
+    ['wexT1','wexT2'].forEach(function(id, ix){ var el = document.getElementById(id); if(el) ST.wexam['txt'+(ix+1)] = el.value; });
+    if(window._wExamIv){ clearInterval(window._wExamIv); window._wExamIv = null; }
+    if(window._wExamPickIv){ clearInterval(window._wExamPickIv); window._wExamPickIv = null; }
+    window._wExamActive = false;
+    var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
+    [[st1IdxOf(), 'txt1'], [st2IdxOf(), 'txt2']].forEach(function(pair){
+      var t = tasks[pair[0]];
+      if(t) ST['writing_'+(t.id || ('x'+pair[0]))] = ST.wexam[pair[1]] || ST.wexam[pair[1]];
+    });
+    function st1IdxOf(){ return ST.wexam.t1Idx; } function st2IdxOf(){ return ST.wexam.t2Idx; }
+    ST.wexam.active = false;
+    ST.wexam.doneAt = Date.now();
+    save(); try{ if(typeof updateStreak==='function') updateStreak(); }catch(e){}
+    renderMain();
+    if(window.toast) toast((early?'已提前交卷':'考试时间到')+'：两题已自动保存，正在逐题触发 AI 批改…');
+    // 自动批改串联：切练习视图逐题 selectWriting+saveWriting
+    setTimeout(function(){
+      try{
+        selectWriting(ST.wexam.t1Idx, false);
+        document.getElementById('writingText').value = ST.wexam.txt1 || ''; countWords(); saveWriting();
+      }catch(e){}
+      setTimeout(function(){
+        try{
+          selectWriting(ST.wexam.t2Idx, false);
+          document.getElementById('writingText').value = ST.wexam.txt2 || ''; countWords(); saveWriting();
+          if(window.toast) toast('两题批改完成，成绩已入 writingScores');
+        }catch(e){}
+      }, 3000);
+    }, 400);
+  }catch(e){ if(window.toast) toast('交卷异常: '+String(e).slice(0,60),'err'); }
+};
+window._wExamTick = function(){
+  if(window._wExamIv) clearInterval(window._wExamIv);
+  window._wExamIv = setInterval(function(){
+    try{
+      var st = ST.wexam; if(!st || !st.active){ clearInterval(window._wExamIv); window._wExamIv = null; return; }
+      if(st.stage === 'setup' || st.stage === 'selfpick'){ return; }
+      st.left = Math.max(0, (st.left||0) - 1);
+      var ck = document.getElementById('wexClock');
+      if(ck) ck.textContent = String(Math.floor(st.left/60)).padStart(2,'0')+':'+String(st.left%60).padStart(2,'0');
+      if(st.stage === 'choice'){
+        st.choiceLeft = Math.max(0, (st.choiceLeft||30) - 1);
+        var cl = document.getElementById('wexChoiceLeft');
+        if(cl) cl.textContent = st.choiceLeft;
+        if(st.choiceLeft <= 0){ window._wExamPick('ensayo'); return; }
+      }
+      if(st.left <= 0){ window._wExamSubmit(false); }
+    }catch(e){}
+  }, 1000);
+};
 function renderWriting(){
+  /* v95.42: 考试模式激活时整体渲染考试视图 */
+  if(window._wExamActive && ST.wexam && ST.wexam.active){ try{ return _wExamRender(); }catch(e){ window._wExamActive = false; } }
+
   const tasks = getWritingTasks();
-  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2><div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> '+((ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button>')+'<div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
   if(isContentAdmin()){
     h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><button class="btn sm ol" onclick="renderLexiconAdmin()" style="margin-left:6px">📚 评分词典</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
@@ -5452,7 +5668,7 @@ function renderWriting(){
       return;
     }
     h += `<div class="rc" style="${i===0?'border-color:var(--tr)':''}" onclick="selectWriting(${i},true)">
-      <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${i+1}</span>
+      <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> 写作任务 ${(()=>{ var _ws=ST.writingScores&&ST.writingScores[t.id]; return (_ws&&_ws.count)?' <span class="pr-badge">练过 '+_ws.count+' 次 · 最高 '+(_ws.bestScore||0)+' 分</span>':''; })()} ${i+1}</span>
       <h5>${esc((t.task||'').slice(0,50))}...${_writingEditBtn(i,'task','编辑任务描述')}</h5>
       <p>${esc(t.tips||'')}${_writingEditBtn(i,'tips','编辑写作提示')}</p>
     </div>`;
@@ -5578,8 +5794,8 @@ window._wWritingTimerStart=function(tarea){
     +'<b id="wTimerTxt" style="font-size:16px;font-variant-numeric:tabular-nums;color:#b45309">'+String(mins).padStart(2,'0')+':00</b>'
     +'<span style="font-size:10.5px;color:var(--soft)">建议先花 3 分钟审题列要点再动笔</span>'
     +'<span style="flex:1"></span>'
-    +'<button class="btn xs gh" onclick="_wWritingTimerPause()" style="font-size:10px">暂停/继续</button>'
-    +'<button class="btn xs gh" onclick="_wWritingTimerRestart('+mins+')" style="font-size:10px">重置</button>'
+    +'<button class="btn xs pr" onclick="_wWritingTimerPause()" style="font-size:10px">⏸ 暂停/继续</button>'
+    +'<button class="btn xs ol" onclick="_wWritingTimerRestart('+mins+')" style="font-size:10px">↺ 重置</button>'
     +'<span style="font-size:10px;color:var(--soft)">到点仅提醒，不强制交卷</span>';
   host.parentNode.insertBefore(bar, host.nextSibling);
   window._wTimerPaused=false;
