@@ -219,7 +219,6 @@
 - 全真模考 T4 池由 15+4 组扩至 57 组（filter(q.passage) 实时生效，无需改 index 逻辑）。
 - index/sw2 仅顶版，无逻辑改动。
 
-格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
 ## [v94.2.1] – 2026-10-10
 
