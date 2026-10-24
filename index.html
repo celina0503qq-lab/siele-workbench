@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.39-202610241945';
+window.swVer = 'v95.40-202610242300';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5045,6 +5045,7 @@ function answerQuiz(optIdx, isCorrect){
       correctAnswer: correctOpt ? correctOpt.text : '',
       explanation: q.fb || '',
       type: 'quiz',
+      menu: '题库测验·' + (String(q.ex||'').toUpperCase() || '综合'), /* v95.40: 与 DELE 专项错题区分 */
       sourceKey: [q.ex||'',q.lvl||'',q.type||'',q.q||'',(q.opts||[]).join('|')].join('::')
     });
     cry();
@@ -12334,8 +12335,24 @@ function toast(msg, type, ms){
 
 // ===== ERROR COLLECTION MODULE (错题集) =====
 // v94.16: 一级三 Tab——gen=练习错题(ST.errors 原有) / vocab=词汇错题本(v94.8 vocabErrorBank) / conj=变位错题(v94.8 conjErrorBank)
+/* v95.40: 存量错题 menu 迁移——题库测验 DELE 分类的错题（sourceKey 第4段=题干长文本）与 DELE 专项（第4段=短 stateKey）区分，幂等 */
+window._quizErrMenuMigrate = function(){
+  try{
+    if(!ST.errors || !ST.errors.length) return;
+    var chg = 0;
+    ST.errors.forEach(function(e){
+      if(e.menu !== 'DELE专项' || !e.sourceKey) return;
+      var parts = String(e.sourceKey).split('::');
+      if(parts[0] !== 'dele') return;
+      var q4 = parts[3] || '';
+      if(q4.length > 30 || q4.indexOf(' ') >= 0){ e.menu = '题库测验·DELE'; chg++; }
+    });
+    if(chg) save();
+  }catch(e){}
+};
 function renderErrors(){
   if(!ST.errors) ST.errors = [];
+  try{ window._quizErrMenuMigrate(); }catch(e){}
   if(!ST.errorMainTab) ST.errorMainTab = 'gen';
   var _vb=(ST.vocabErrorBank&&Object.keys(ST.vocabErrorBank).length)||0;
   var _cb=(ST.conjErrorBank&&ST.conjErrorBank.length)||0;   var _db=(ST.dictationErrorBank&&ST.dictationErrorBank.length)||0;;
@@ -12670,7 +12687,7 @@ function autoLogQuizError(errData){
   var _ex = _skParts[0]||'';
   var _lvl = _skParts[1]||'';
   var _qtype = _skParts[2]||'';
-  var menu = {dele:'DELE专项', siele:'SIELE专项'}[_ex] || (_ex || '题库');
+  var menu = errData.menu || {dele:'DELE专项', siele:'SIELE专项'}[_ex] || (_ex || '题库'); /* v95.40: 题库测验来源透传前缀 */
   var section = {reading:'阅读', grammar:'语法', listening:'听力', word:'词汇', writing:'写作', speaking:'口语', oral:'口语', mock:'全真模拟'}[_qtype] || _qtype || ''; /* v95.34: 补全 DELE 板块映射 */
   ST.errors.unshift({
     id:'qe'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),
