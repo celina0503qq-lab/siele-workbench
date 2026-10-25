@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.44-202610251845';
+window.swVer = 'v95.45-202610251910';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5397,7 +5397,7 @@ function _writingSieleTree(tasks){
       const tb = !t.bank
         ? '<span class="badge b-lv">基础</span>'
         : (t.tarea === 'T2'
-          ? '<span class="badge b-t2">T2</span>'
+          ? '<span class="badge b-t2" title="SIELE Tarea 2：基于阅读材料写读者来信（报刊信）">T2 报刊信</span>'
           : `<span class="badge b-t1" ${t.type === 'formal' ? 'style="background:#fef3c7;color:#92400e"' : ''}>T1${t.type === 'formal' ? '公' : ''}</span>`);
       return `<li class="d-row" data-c="${_wCatOf(t)}" onclick="selectWriting(${i},true)">
         <span class="tt">${esc(t.title || String(t.task || '').slice(0, 26))}${t.passage ? ' <span class="news">📰</span>' : ''}${_writingEditBtn(i,'title','编辑标题')}${_writingEditBtn(i,'task','编辑任务描述')}${t.passage?_writingEditBtn(i,'passage','编辑阅读材料'):''}${_writingEditBtn(i,'essay','编辑范文')}</span>
@@ -5407,7 +5407,7 @@ function _writingSieleTree(tasks){
     return `<div class="d-wrap" style="margin-top:12px">
       <div class="d-side">${side}</div>
       <div class="d-main">
-        <div class="d-thead"><span style="flex:1">题目</span><span style="width:44px">类型</span><span style="width:38px">等级</span><span style="width:44px">词数</span><span style="width:86px">状态</span></div>
+        <div class="d-thead"><span style="flex:1">题目</span><span style="width:70px">类型</span><span style="width:38px">等级</span><span style="width:44px">词数</span><span style="width:86px">状态</span></div>
         <ul>${rows || '<li style="padding:16px;font-size:12px;color:var(--soft)">该分类下暂无题目</li>'}</ul>
       </div>
     </div>`;
@@ -5513,7 +5513,7 @@ window._wExamRender = function(){
       + '<div style="display:flex;gap:10px;justify-content:center;margin:10px 0;flex-wrap:wrap">'
       + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamRandom()">🎲 随机组卷</button>'
       + '<button class="btn ol" style="padding:10px 18px" onclick="_wExamToggleSelf()">📋 自选组卷</button></div>'
-      + '<div class="sub">T1 邮件回复（100-150 词）+ T2 二选一（250-300 词）· 总时长 50 分钟</div>'
+      + '<div class="sub">T1 邮件回复（100-150 词）+ T2 二选一（250-300 词）· 总时长 50 分钟</div>'+'<div class="note" style="text-align:left;margin-top:8px;font-size:11px">ℹ️ 官方 T2 为「基于阅读材料写读者来信（报刊信）」；本题库 T2 共 33 题均为报刊信。T2 阶段的「议论文/正式书信」为练习变体选项，用于扩展训练。</div>'
       + (st.stage === 'selfpick'
         ? '<div style="margin-top:10px;text-align:left"><div style="margin:8px 0"><b>Tarea 1：</b><select id="wexSel1" style="padding:6px;max-width:90%">'+o1+'</select></div>'
           + '<div style="margin:8px 0"><b>Tarea 2：</b><select id="wexSel2" style="padding:6px;max-width:90%">'+o2+'</select></div>'
@@ -5694,6 +5694,26 @@ function renderWriting(){
   const _wShown = tasks.filter(t => (_writingFilter.grp==='all' || _writingGrpOf(t)===_writingFilter.grp) && (_writingFilter.lvl==='all' || ((t && t.lvl)||'')===_writingFilter.lvl)).length;
   const _wActive = _writingFilter.grp!=='all' || _writingFilter.lvl!=='all';
   h += `<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">等级：</span><button class="chip ${_writingFilter.lvl==='all'?'on':''}" onclick="setWritingFilter('lvl','all')">全部</button>${_wLvlOrder.map(l=>`<button class="chip ${_writingFilter.lvl===l?'on':''}" onclick="setWritingFilter('lvl',this.textContent)">${esc(l)}</button>`).join('')}</div>`;
+  /* v95.45: 题型快捷 chips（复用树视图分类状态 _writingSieleCat，单一事实源；计数考虑当前等级过滤） */
+  try{
+    var _lvlOkC = function(t){ return _writingFilter.lvl==='all' || ((t && t.lvl)||'')===_writingFilter.lvl; };
+    var _bankC = tasks.filter(function(t){return t && t.bank && _lvlOkC(t);});
+    var _baseC = tasks.filter(function(t){return t && !t.bank && !t.hidden && _lvlOkC(t);});
+    var _cntT1i = _bankC.filter(function(t){return _wCatOf(t)==='t1i';}).length;
+    var _cntT1f = _bankC.filter(function(t){return _wCatOf(t)==='t1f';}).length;
+    var _cntT2 = _bankC.filter(function(t){return t.tarea==='T2';}).length;
+    var _cntAll = _baseC.length + _bankC.length;
+    var _chip = function(k, label, n){
+      return '<button class="chip '+(_writingSieleCat===k?'on':'')+'" onclick="setWritingSieleCat(\''+k+'\')" style="font-size:11.5px">'+label+' <span style="opacity:.65;font-size:10px">'+n+'</span></button>';
+    };
+    var _chips = _chip('all','全部', _cntAll);
+    if(_baseC.length) _chips += _chip('base','基础', _baseC.length);
+    if(_cntT1i) _chips += _chip('t1i','T1 私函', _cntT1i);
+    if(_cntT1f) _chips += _chip('t1f','T1 公函', _cntT1f);
+    if(_cntT2) _chips += _chip('t2','T2 报刊信', _cntT2);
+    _chips += _chip('done','⭐ 已练', _bankC.filter(function(t){var s=(ST.writingScores||{})[t.id];return s&&(s.history||[]).length;}).length);
+    h += '<div class="fcb" style="margin-top:4px"><span style="font-size:11px;color:var(--soft)">题型：</span>'+_chips+'</div>';
+  }catch(e){}
   if(1){ /* v94.4.3: UI 统一——始终分类树视图（基础+SIELE） */
     h += _writingSieleTree(tasks);
   } else {
