@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.56-202610260015';
+window.swVer = 'v95.57-202610260145';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3305,7 +3305,19 @@ function renderFlash(){
   /* v95.41: flipRated 存量回填（渲染前幂等，不依赖 remote 形态）——vocabMastery 已评而 flipRated 缺的词补 0；将来重置 floor>0 水线自动排除 */
   try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   const _allMode = ST.flashLevel === 'all';
-  const _flipRatedN = Object.keys(ST.flipRated||{}).filter(function(k){ return Number(ST.flipRated[k]) > 0; }).length; /* v95.47: 只数真实评价（ts>0）——排除 v95.41 回填的 0 值占位（练习写入的 vocabMastery 曾被回填污染） */
+  /* v95.57: 只数「重置水线之后」的真实翻牌评价——双保险，防云端旧条目合并漏网导致“0 学习却显示有进度” */
+  /* v95.57: _vocabResetFloor 定义在 IIFE 内，渲染作用域读不到（typeof 恒 false）——改为直接读状态 */
+  const _frFloor = (function(){
+    var r = Number(ST.vocabResetAt || 0);
+    try{ var f = Number(localStorage.getItem('swa_vocab_reset_floor_v1') || 0); if(f > r) r = f; }catch(e){}
+    return r;
+  })();
+  const _flipRatedN = Object.keys(ST.flipRated||{}).filter(function(k){
+    var _t = Number(ST.flipRated[k]) || 0;
+    if(_t <= 0) return false;
+    if(_frFloor && _t <= _frFloor) return false;
+    return true;
+  }).length; /* v95.47: 只数真实评价（ts>0）——排除 v95.41 回填的 0 值占位（练习写入的 vocabMastery 曾被回填污染） */
   const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (_flipRatedN) : (_curIdx+1)); /* v95.39: 翻牌「全部」=翻牌评价词数（原=已学唯一词数，被练习写入污染）；练习各级=练习游标位置 */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
@@ -5656,6 +5668,18 @@ window._wClearAllRecords = function(){
     Object.keys(recs).forEach(function(k){ n += ((recs[k] && recs[k].history) || []).length; });
     if(!n){ if(window.toast) toast('暂无记录','ok'); return; }
     if(!confirm('清空全部 '+n+' 条写作记录？（不影响错题集、不影响已保存的作文正文）此操作云同步，无法恢复。')) return;
+    /* v95.57: 逐条写入删除表，防止云同步把清空的记录合并回来 */
+    try{
+      ST.writingScoresDel = ST.writingScoresDel || {};
+      Object.keys(recs).forEach(function(k){
+        var _arr = ST.writingScoresDel[k] = ST.writingScoresDel[k] || [];
+        ((recs[k] && recs[k].history) || []).forEach(function(h){
+          var _key = String((h && (h.ts || h.date)) || '');
+          if(_key && _arr.indexOf(_key) < 0) _arr.push(_key);
+        });
+        if(_arr.length > 200) _arr.splice(0, _arr.length - 200);
+      });
+    }catch(e){}
     ST.writingScores = {};
     save();
     try{ if(typeof cloudSync==='function') cloudSync(true); }catch(e){}
@@ -5668,7 +5692,15 @@ window._wDelRecord = function(wid, ts){
     if(!confirm('删除这条写作记录？（不影响错题集，错题集需到「错题集」页单独删除）')) return;
     var rec = (ST.writingScores||{})[wid];
     if(!rec || !rec.history || !rec.history.length) return;
-    rec.history = rec.history.filter(function(h){ return Number(h.ts||0) !== Number(ts); });
+    /* v95.57: 必须写入删除表 writingScoresDel —— 否则云同步 pull 时远端旧记录会被合并回来（删了又出现） */
+    try{
+      ST.writingScoresDel = ST.writingScoresDel || {};
+      var _dl = ST.writingScoresDel[wid] = ST.writingScoresDel[wid] || [];
+      var _k = String(ts||'');
+      if(_dl.indexOf(_k) < 0) _dl.push(_k);
+      if(_dl.length > 200) _dl.splice(0, _dl.length - 200);
+    }catch(e){}
+    rec.history = rec.history.filter(function(h){ return String(h.ts||h.date||'') !== String(ts); });
     if(!rec.history.length){ delete ST.writingScores[wid]; }
     else {
       rec.bestScore = rec.history.reduce(function(m,a){ return Math.max(m, a.score||0); }, 0);
@@ -6539,8 +6571,10 @@ function renderWritingAdmin(keep){
       + '<textarea id="wadm_essay_'+i+'" rows="6" style="width:100%;font-size:12px;font-family:var(--serif);margin-top:5px">'+esc((eff&&eff.text)||'')+'</textarea>'
       + (e.text?'':'<div style="font-size:10.5px;color:var(--soft);margin-top:4px">当前显示内置默认范文——直接编辑并保存后将作为管理员版覆盖；清空保存则恢复默认。</div>')
       + '</details>'
-      + '<details style="margin:6px 0"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6366f1">📰 阅读材料（T2 报刊信原文，可选）</summary>'
-      + '<textarea id="wadm_passage_'+i+'" rows="4" style="width:100%;font-size:12px;margin-top:5px">'+esc(t.passage||'')+'</textarea>'
+      + '<details style="margin:6px 0"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6366f1">📰 阅读材料（T2 报刊信原文，可选）'
+      + (t.passage ? '<span style="font-weight:400;color:#64748b;font-size:11px">· 已有 '+String(t.passage).split(/\s+/).length+' 词</span>' : '<span style="font-weight:400;color:#b45309;font-size:11px">· 本题无阅读材料（T1 私函/公函/基础题通常没有）</span>')
+      + '</summary>'
+      + '<textarea id="wadm_passage_'+i+'" rows="4" placeholder="'+(t.passage?'':'本题无阅读材料，如需可在此粘贴原文')+'" style="width:100%;font-size:12px;margin-top:5px">'+esc(t.passage||'')+'</textarea>'
       + '</details>'
       + '</div>';
   });
