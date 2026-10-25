@@ -1,6 +1,13 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.65] – 2026-10-26
+### 修复 T4 音源切换失效（两种音源都播 mp3）
+- **现象**：T4 页「🎛 音源」按钮切到「在线」后，播放仍是预生成 mp3（Dalia），听不到浏览器 TTS 的机械音。
+- **根因**：v95.58 的判定写成 `(ST.oralAudioMp3 || T4默认)` —— 只要用户此前在别的板块开过全局「Dalia」，第一个条件恒为 true，T4 的 `_t4AudioOff` 开关被完全覆盖。
+- **修复**：判定改为**互斥分支** —— `_isT4 ? !ST._t4AudioOff : !!ST.oralAudioMp3`，即 T4 只看自己的开关、其他板块看全局；按钮文案与 `toggleOralAudio` 同源改用同一表达式，并补 `title` 提示当前音源。
+- 实测 8 场景矩阵全通过：T4 切在线（全局开/关）均走在线；T4 默认（全局开/关）均播 mp3；非 T4 仍按全局开关。
+
 ## [v95.64] – 2026-10-26
 ### G3 测验进度条 + 留白压缩 + 三池卡片式渲染
 - **G3 题库测验**：新增可视化进度条 `_quizProgressBarHtml`（`当前位/总数 · 百分比` + 渐变填充条，做题/背题两种模式均插入），并显示「已答 N 题，对 M」；留白压缩（`.qb` padding 18→14、`.qq` margin 3→2、`.qo` gap 6→5 / margin 10→8、`.qopt` padding 9→8、`.qfb`/`.qnav` 收紧）。
