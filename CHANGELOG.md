@@ -1,6 +1,14 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.60] – 2026-10-26
+### 云识别全覆盖 + T4 纯听化 + 错题集详细化（A+B+C）
+- **A｜跟读训练（shadow）接腾讯云识别**：录音按钮旁新增「🎙 识别：☁️ 腾讯云 / 🌐 在线」，独立偏好 `ST.shadowAsrSrc`（未设置跟随全局），逐句生效；新增 `startRecordCloud` 复用 `_wbAsrCloudRecordStart` + `_wbCloudAsrRun`，评分仍走 `scoreShadow → calcScore`（口径不变）。
+- **A｜口语话题（speaking）接腾讯云识别**：同样加音源切换（`ST.speakAsrSrc`）+ `toggleSpeakRecordCloud`，识别后仍走 `scoreSpeaking`。至此**全部 5 个录音板块**均可切换腾讯云/在线。
+- **C｜T4 三问纯听化**：严谨模式下隐藏「显示文字」（官方 T4 三问纯音频无文字）、题面显示「🎧 音频题：本问只听音频」、新增「▶ 听第 N 问」按钮、切换子问后**自动播放该问音频**；练习模式保留文字对照。
+- **B｜错题集条目详细化**：写作低分入集时补齐 `path`（菜单路径，如「写作练习 › SIELE Tarea 2 › T2 报刊信」）、`fullQuestion`（题目要求全文）、`requirements`（要求要点数组）、`essay`（参考范文，取管理员版→题库 model→通用范文库）、`passage`（阅读材料）、`title`、`words`；错题卡渲染为「🧭 面包屑 + 📋 题目要求全文 + ✅ 要求要点 + 📰 阅读材料 + 📖 参考范文对照」折叠区。
+- 修复：essay 取值误用不存在变量 `_eff`（ReferenceError 被 try 吞掉）→ 改用 `_wAdmin/_wEff`。
+
 ## [v95.59] – 2026-10-26
 ### 模考 T5 预选修复 + 外刊跟读接入腾讯云识别
 - **修复「模考进 T5 立场已被预选」**：三处叠加导致——①`_sieleMockFlat` 硬编码 `stance:'a'` ②`_sieleMockGo` 进入即调 `_sieleT5PickStance` ③`_sieleEffectiveItem` 在立场为空时直接返回原题，UI 拿不到 `stanceSel` 就回落成 A。修复：T5 步骤不再带 stance、进入时清掉该题旧选择、并新增 `_needStancePick` 标记把「未选」传给 UI（提示「先听完 T4 三问再选 Opción 1/2」）。练习模式仍默认 A。
