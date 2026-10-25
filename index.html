@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.42-202610250040';
+window.swVer = 'v95.43-202610251820';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2946,6 +2946,10 @@ function _vocabWipeLocal(now){
   ST.flashIdx=0;ST.flashCurrentWord='';
   ST.flashIdxByLevel={A1:0,A2:0,B1:0,B2:0,all:0,'专四':0};
   ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
+  /* v95.43: 重置学习进度补清翻牌练习统计（此前清单漏 flashPraStats → 答对/答错/连击/最高连击不归零）；
+     _ts 取新时间戳防 ts-LWW 合并在跨设备时把云端旧统计拉回 */
+  ST.flashPraStats={correct:0,wrong:0,streak:0,bestStreak:0,_ts:now};
+  try{ if(typeof ADB!=='undefined'&&ADB&&ADB.wb&&ADB.wb.data){ ADB.wb.data.flashPraStats={correct:0,wrong:0,streak:0,bestStreak:0,_ts:now}; } }catch(e){}
   var lv=['A1','A2','B1','B2','all'];
   for(var i=0;i<lv.length;i++){var k='vocabReviewCount_'+lv[i];if(ST[k])ST[k]={};}
   if(ST.vocabReviewCount&&typeof ST.vocabReviewCount==='object'){
@@ -5787,6 +5791,8 @@ window._wWritingTimerStart=function(tarea){
   window._wTimerLeft=mins*60;
   var host=document.getElementById('writingTips');
   if(!host) return;
+  /* v95.43 B3: 清理历史计时条——此前每次选题只清 interval 不删 DOM，导致多条累积（T1/T2 混杂、id 重复命中旧条） */
+  try{ var _olds=document.querySelectorAll('#writingTimerBar'); for(var _oi=0;_oi<_olds.length;_oi++){ _olds[_oi].remove(); } }catch(e){}
   var bar=document.createElement('div');
   bar.id='writingTimerBar';
   bar.style.cssText='margin-top:8px;padding:7px 10px;border:1px solid #fde68a;background:#fffbeb;border-radius:9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap';
@@ -6166,19 +6172,37 @@ function resetEssay(taskIdx){
 }
 // ===== 写作任务管理员编辑（content_edits.writing，保存后所有用户可见） =====
 let _wadmTasks = null;
+/* v95.43 B1: 编辑器任务列表 = 云端 tasks 与代码基线逐条合并（云端覆盖、缺失字段用基线补齐）。
+   旧实现直接拿云端原样——历史保存只含 {id,lvl,task,tips}，标题/词数/阅读材料全空（回显丢失根因）；
+   按 id 优先匹配可保留管理员删除（只渲染云端存在的条目），不会复活已删任务。 */
+function _wadmMergeTasks(){
+  var _ed = (window._contentEdits && window._contentEdits.writing) || {};
+  var cloud = (_ed.tasks && _ed.tasks.length) ? _ed.tasks : null;
+  var base = (typeof WRITING_TASKS!=='undefined') ? WRITING_TASKS.filter(function(t){return t && !t.hidden;}) : [];
+  var byId = {};
+  base.forEach(function(t,i){ if(t && t.id) byId[t.id]=t; });
+  if(!cloud) return base.map(function(t){return Object.assign({},t);});
+  var out = [];
+  for(var i=0;i<cloud.length;i++){
+    var c = cloud[i]; if(!c) continue;
+    var b = (c.id && byId[c.id]) ? byId[c.id] : (base[i]||{});
+    out.push(Object.assign({}, b, c));
+  }
+  return out;
+}
 function renderWritingAdmin(keep){
   const tasks = getWritingTasks();
   const ed = window._contentEdits.writing || {};
   window._wadmEditing = true; /* v95.38: 编辑器打开期间挂起「内容编辑返回→renderMain」自动刷新，修复打开即闪退 */
   if(!keep){
-    _wadmTasks = (ed.tasks && ed.tasks.length) ? ed.tasks.map(function(t){return Object.assign({},t);}) : tasks.map(function(t){return Object.assign({},t);});
+    _wadmTasks = _wadmMergeTasks(); /* v95.43 B1: 云端+基线合并，修复回显丢失 */
     /* v95.36: 打开编辑器时强制拉云端最新 content_edits.writing（修复「内容不是最新版本」——
        登录时的一次性拉取可能落后于其他设备的最近编辑），拉回后带数据重渲染本编辑器 */
     try{
       if(typeof window._deleFetchContentEdits==='function' && isContentAdmin()){
         window._deleFetchContentEdits('writing', function(freshEdits){
           var fe = freshEdits || {};
-          _wadmTasks = (fe.tasks && fe.tasks.length) ? fe.tasks.map(function(t){return Object.assign({},t);}) : getWritingTasks().map(function(t){return Object.assign({},t);});
+          _wadmTasks = _wadmMergeTasks(); /* v95.43 B1: 拉回后同样按合并口径重建 */
           var _m=document.getElementById('main');
           if(_m && _m.innerHTML.indexOf('管理员编辑写作任务')>=0 && window._wadmEditing){ renderWritingAdmin(true); toast('已同步云端最新编辑','ok'); }
         });
