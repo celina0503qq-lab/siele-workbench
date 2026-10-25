@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.46-202610251935';
+window.swVer = 'v95.47-202610252005';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3261,6 +3261,13 @@ function _praSetIdx(i, pool){
     var _lvl = ST.flashLevel || 'all';
     if(!ST.flashPraIdxByLevel || typeof ST.flashPraIdxByLevel !== 'object') ST.flashPraIdxByLevel = {};
     ST.flashPraIdxByLevel[_lvl] = ((i % pool.length) + pool.length) % pool.length;
+    /* v95.47: 非「全部」级别推进时同步累计 'all' 桶（用户拍板：练习「全部」游标应随练习推进；
+       此前只写当前级桶，切到全部永远停在 1） */
+    if(_lvl !== 'all'){
+      if(typeof ST.flashPraIdxByLevel['all'] !== 'number') ST.flashPraIdxByLevel['all'] = 0;
+      var _allPool = (typeof VDATA !== 'undefined') ? VDATA : pool;
+      ST.flashPraIdxByLevel['all'] = (ST.flashPraIdxByLevel['all'] + 1) % Math.max(1, _allPool.length);
+    }
   }catch(e){}
 }
 function changeFlashLevel(level){
@@ -3276,7 +3283,7 @@ function renderFlash(){
   /* v95.41: flipRated 存量回填（渲染前幂等，不依赖 remote 形态）——vocabMastery 已评而 flipRated 缺的词补 0；将来重置 floor>0 水线自动排除 */
   try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   const _allMode = ST.flashLevel === 'all';
-  const _flipRatedN = Object.keys(ST.flipRated||{}).length; /* v95.39: 翻牌评价过的词数（练习不计入） */
+  const _flipRatedN = Object.keys(ST.flipRated||{}).filter(function(k){ return Number(ST.flipRated[k]) > 0; }).length; /* v95.47: 只数真实评价（ts>0）——排除 v95.41 回填的 0 值占位（练习写入的 vocabMastery 曾被回填污染） */
   const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (_flipRatedN) : (_curIdx+1)); /* v95.39: 翻牌「全部」=翻牌评价词数（原=已学唯一词数，被练习写入污染）；练习各级=练习游标位置 */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
@@ -3639,12 +3646,8 @@ function checkFlashAnswer(clicked, correct){
     disp.children[2].children[0].textContent = stats.streak;
     disp.children[3].children[0].textContent = stats.bestStreak;
   }
-  // Mark word in vocab mastery based on practice performance
-  const pool=getFlashPool(); // v94.0: 判分取练习独立游标，不再改写卡片定位
-  const v=pool[_praIdxOf(pool)];
-  const cur=v?(ST.vocabMastery[v.es]||0):0;
-  if(ok && cur < 2) ST.vocabMastery[v.es] = 2;
-  if(!ok && cur < 1) ST.vocabMastery[v.es] = 1;
+  /* v95.47: 中西对应练习不计入「已学/已掌握/成长树」——用户拍板：练习只记答对答错统计与错题本，
+     不再写 vocabMastery（旧实现 v94.0 写入 2/1，导致仪表盘已学虚涨、翻牌全部被回填污染） */
   save();
   // Auto next after 1.4s
   setTimeout(()=>nextFlash(), 1400);
@@ -5696,7 +5699,7 @@ function renderWriting(){
   if(window._wExamActive && ST.wexam && (ST.wexam.active || ST.wexam.stage === 'result')){ try{ return _wExamRender(); }catch(e){ window._wExamActive = false; } }
 
   const tasks = getWritingTasks();
-  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> '+((ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button>')+'<div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> ${(ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button>'}<div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
   if(isContentAdmin()){
     h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><button class="btn sm ol" onclick="renderLexiconAdmin()" style="margin-left:6px">📚 评分词典</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
