@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.62-202610260400';
+window.swVer = 'v95.63-202610260525';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -7631,6 +7631,15 @@ function getKeywordsForTopic(t){
 function selectSpeaking(i){
   _speakIdx = i;
   const t = getSpeakingTopics()[i];
+  /* v95.63: 选题后自动滚动到练习区——此前点选话题后练习区在屏幕外，用户需手动下滑才看到 */
+  try{
+    setTimeout(function(){
+      var el = document.getElementById('speakingArea');
+      if(el && el.scrollIntoView){
+        try{ el.scrollIntoView({behavior:'smooth', block:'start'}); }catch(e){ el.scrollIntoView(true); }
+      }
+    }, 60);
+  }catch(e){}
   document.getElementById('speakingTopic').innerHTML = `<b><span class="tm l${t.lvl}">${t.lvl}</span> ${t.cat}：</b>${esc(t.zh)}` + (typeof _speakHistHtml==='function' ? _speakHistHtml(t) : ''); /* v94.5: 做题记录卡片 */
   document.getElementById('speakingBox').style.display = 'block';
   document.getElementById('speakTarget').textContent = t.topic;
