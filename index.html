@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.45-202610251910';
+window.swVer = 'v95.46-202610251935';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5445,6 +5445,19 @@ window._wExamStageName = function(){
   return st.stage === 't1' ? 'Tarea 1 · 邮件回复' : (st.stage === 'choice' ? 'Tarea 2 · 选择题型' : 'Tarea 2 · 写作');
 };
 window._wExamResultTab = 1;
+/* v95.46: 考试模式 T2 阅读材料卡——官方 T2 为「先读材料再写读者来信」，此前考试视图只渲染 cuerpo/task，passage 未展示（练习视图有、考试视图漏） */
+function _wExamPassageHtml(t){
+  try{
+    if(!t || !t.passage) return '';
+    var _txt = String(t.passage);
+    var _wc = _txt.trim().split(/\s+/).filter(function(w){return w;}).length;
+    return '<details open style="margin-top:8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 10px">'
+      + '<summary style="cursor:pointer;font-size:12px;font-weight:800;color:#1d4ed8">📰 阅读材料（'+_wc+' 词'+(t.words?(' · 对应范文 '+t.words+' 词'):'')+'）——先精读再用自己的话改写</summary>'
+      + '<div style="font-size:12.5px;line-height:1.75;margin-top:6px;white-space:pre-wrap;font-family:var(--serif);max-height:300px;overflow:auto">'+esc(_txt)+'</div>'
+      + (t.fuente?'<div style="font-size:10px;color:var(--soft);margin-top:5px">'+esc(t.fuente)+'</div>':'')
+      + '</details>';
+  }catch(e){ return ''; }
+}
 window._wExamSetResultTab = function(n){ window._wExamResultTab = n; try{ _wExamRender(); }catch(e){} };
 /* v95.44 B2: 交卷结果页——T1/T2 分页 Tab 各自展示批改（原实现只渲染当前题） */
 function _wExamResultHtml(st){
@@ -5534,7 +5547,8 @@ window._wExamRender = function(){
   } else if(st.stage === 'choice'){
     var t2 = (typeof getWritingTasks === 'function') ? getWritingTasks()[st.t2Idx] : null;
     h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 2（250-300 词）· 先读材料</b>'
-      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.cuerpo || t2.prompt || t2.task)) || '')+'</div></div>'
+      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.cuerpo || t2.prompt || t2.task)) || '')+'</div>'
+      + _wExamPassageHtml(t2) + '</div>'
       + '<div class="card" style="padding:10px;text-align:center"><b>30 秒内选择题型（超时自动进入议论文）</b>'
       + '<div id="wexChoiceLeft" style="font-size:22px;font-weight:800;color:#dc2626;margin:6px 0">'+st.choiceLeft+'</div>'
       + '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'
@@ -5548,7 +5562,8 @@ window._wExamRender = function(){
       : '议论文：引入话题→明确观点→2-3 个论据→总结；多用 En primer lugar / Además / Por último。';
     h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 2 · 你选择了'+(st.choice==='carta'?'正式书信':'议论文')+'</b>'
       + '<div class="note" style="margin-top:6px">'+tip+'</div>'
-      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.prompt || t2.task)) || '')+'</div></div>'
+      + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.prompt || t2.task)) || '')+'</div>'
+      + _wExamPassageHtml(t2) + '</div>'
       + charbar
       + '<textarea id="wexT2" rows="12" style="width:100%;font-size:14px;line-height:1.7" oninput="_wExamCount(2)">'+esc(st.txt2||'')+'</textarea>'
       + '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="sub" id="wexWc2">字数：'+String(st.txt2||'').length+'</span>'
