@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.51-202610252215';
+window.swVer = 'v95.52-202610252240';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -694,9 +694,9 @@ const QDATA_EXTRA = [
 // SIELE Expresión e Interacción Orales: estructura real de las cinco tareas.
 const SIELE_TAREAS = [
   {num:1, prep:50, name:"TAREA 1 · Preguntas personales", dur:"训练每题 5-10 s · 考试上限 15/30 s", desc:"听四个个人问题并录音回答；前两题为 A1，后两题要求使用过去或将来时。", tips:["先播放题目，不提前看文字","训练时每题用1-2句、5-10秒直接回答","过去题用 imperfecto，计划题用 ir a + infinitivo"], template:["Soy... y vivo en...","Cuando era niño/a...","El próximo fin de semana voy a..."]},
-  {num:2, prep:150, name:"TAREA 2 · Descripción de fotografía", dur:"2 min 30 s preparación · 2 min respuesta", desc:"从两张生活场景图片中选一张，描述人物、关系、服装、动作、情绪、地点与物品。", tips:["先总述，再按前景/背景展开","覆盖人物、动作、地点、物品五个评分点","用 parece que / puede que 做合理推测"], template:["En la imagen se ve...","En primer plano...","Al fondo...","Parece que se sienten..."]},
+  {num:2, prep:120, name:"TAREA 2 · Descripción de fotografía", dur:"2 min preparación · 2 min respuesta", desc:"从两张生活场景图片中选一张，描述人物、关系、服装、动作、情绪、地点与物品。", tips:["先总述，再按前景/背景展开","覆盖人物、动作、地点、物品五个评分点","用 parece que / puede que 做合理推测"], template:["En la imagen se ve...","En primer plano...","Al fondo...","Parece que se sienten..."]},
   {num:3, prep:20, name:"TAREA 3 · Situaciones simuladas", dur:"20 s preparación · 2 situaciones · hasta 1 min 30 s cada una", desc:"从个人与公共领域情境中各选一道，完成邀请、请求、拒绝、投诉或更改安排等口头信息。", tips:["根据对象选择 tú 或 usted","说明来意、原因、细节和解决方案","用自然结束语收尾"], template:["Te llamo para...","El motivo por el que le llamo es...","¿Qué te parece si...?","Quedo a la espera de su respuesta."]},
-  {num:4, prep:60, name:"TAREA 4 · Preguntas sobre un tema", dur:"1 min lectura · 1 min preparación · 3 respuestas de hasta 1 min", desc:"阅读一个主题材料后听三个问题，分别陈述经历、评价和建议；主题会延续到 Tarea 5。", tips:["每问先给明确立场","用例子支撑，不只下结论","记录可复用到 Tarea 5 的论点"], template:["Desde mi experiencia...","Considero que... porque...","Una medida eficaz sería..."]},
+  {num:4, prep:60, name:"TAREA 4 · Preguntas sobre un tema", dur:"1 min lectura del texto · 听 3 问（无文字）· 每问 15 s 准备 + 1 min 作答", desc:"阅读一个主题材料后听三个问题，分别陈述经历、评价和建议；主题会延续到 Tarea 5。", tips:["每问先给明确立场","用例子支撑，不只下结论","记录可复用到 Tarea 5 的论点"], template:["Desde mi experiencia...","Considero que... porque...","Una medida eficaz sería..."]},
   {num:5, prep:120, name:"TAREA 5 · Monólogo argumentativo", dur:"2 min preparación · 3 min respuesta", desc:"围绕 Tarea 4 的同一主题选择立场，组织完整的观点陈述，回应反方并总结。", tips:["结构：引入—两点论证—反方回应—结论","使用连接词和条件式/虚拟式","避免背诵腔，保留自然停顿"], template:["Me gustaría abordar el tema de...","Por una parte...","Aunque es cierto que...","En definitiva..."]}
 ];
 
