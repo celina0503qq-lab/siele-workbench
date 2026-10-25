@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.52-202610252240';
+window.swVer = 'v95.53-202610252300';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -700,6 +700,30 @@ const SIELE_TAREAS = [
   {num:5, prep:120, name:"TAREA 5 · Monólogo argumentativo", dur:"2 min preparación · 3 min respuesta", desc:"围绕 Tarea 4 的同一主题选择立场，组织完整的观点陈述，回应反方并总结。", tips:["结构：引入—两点论证—反方回应—结论","使用连接词和条件式/虚拟式","避免背诵腔，保留自然停顿"], template:["Me gustaría abordar el tema de...","Por una parte...","Aunque es cierto que...","En definitiva..."]}
 ];
 
+/* v95.53 P1-b: Tarea 3 官方域标注（p = 私人域 personal / c = 正式公共域 público）
+   用于按域组卷（Bloque 1 私人 2 选 1 + Bloque 2 公共 2 选 1）与界面标注。半自动判定，待用户抽检。 */
+const SIELE_T3_DOMAIN = {
+  't3-mascota':'p','t3-plantas':'p','t3-rechazo':'p','t3-cita':'c','t3-maleta':'c','t3-vivienda':'c',
+  't3-reject-offer':'c','t3-decline-dog':'p','t3-cena':'p','t3-boda':'p','t3-cine':'p','t3-decline-shopping':'p',
+  't3-turismo':'p','t3-vuelo':'c','t3-trabajo':'c','t3-enfermo':'p','t3-retraso':'p','t3-oculista':'c',
+  't3-lost-luggage':'c','t3-cartera':'c','t3-apartment':'c','t3-fiesta':'p','t3-sorpresa':'p','t3-excursión':'p',
+  't3-gimnasio':'c','t3-credit-card':'c','t3-sick-day':'c','t3-charity':'p','t3-exhibition':'p','t3-hotel-change':'c',
+  't3-university':'c','t3-flight-delay':'c','t3-cancel-party':'p','t3-credit-card-issue':'c','t3-cancel-interview':'c',
+  't3-return-shoes':'c','t3-airport-cancel':'p','t3-cooking-class':'c','t3-restaurant-reserve':'c','t3-party-cook':'p',
+  't3-exchange-book':'c','t3-apologize-contact':'p','t3-borrow-book':'p','t3-new-home':'p','t3-rent-house':'c',
+  't3-concert-refund':'c','t3-volunteer-elderly':'c','t3-help-move':'p','t3-library-lost':'c','t3-decline-wedding':'p',
+  't3-airport-late':'p','t3-laundry-lost':'c','t3-cancel-restaurant':'c','t3-fight-apologize':'p','t3-internet-complaint':'c',
+  't3-cancelled-flight':'c','t3-friend-no-show':'p','t3-pharmacy-advice':'c','t3-cancel-work-meeting':'c','t3-refuse-lend-book':'p',
+  't3-late-to-work':'c','t3-sell-apartment':'c','t3-rent-car':'c','t3-apply-scholarship':'c','t3-change-swimming':'c',
+  't3-pick-up-daughter':'p','t3-translate-email':'p','t3-cancel-friend':'p','t3-weekend-plan':'p','t3-borrow-house':'p',
+  't3-help-colleague':'c','t3-against-shopping':'p','t3-apply-internship':'c','t3-change-class':'c','t3-cancel-weekend':'p',
+  't3-wedding-call':'p'
+};
+window._sieleT3DomainOf = function(id){
+  var k = String(id||'').split('#')[0];
+  return (SIELE_T3_DOMAIN[k] === 'c') ? 'c' : 'p';
+};
+window._sieleT3DomainLabel = function(id){ return window._sieleT3DomainOf(id)==='c' ? '🏛 正式/公共域' : '👥 私人域'; };
 // SIELE 20 high-frequency oral topics (TAREA 3)
 
 // Logical connectors & diverse expressions (based on 逻辑连接词+口语写作常用表达)
@@ -9050,6 +9074,34 @@ function _sieleT4PickSub(i){
   _sieleOralShown=false; stopSieleOral(true); _sieleSyncProgress(); save(); renderMain();
 }
 /* ===== v92.2: T3 双 Bloque 演练（官方 EIO 形态：连续 2 段，每段二选一，各含 3 必做点）===== */
+window._sieleT3ChoIv=null; window._sieleT3ChoLeft=0;
+/* v95.53 P1-b: 官方 T3 每段 30 秒选择（超时系统自动随机分配且不可改） */
+window._sieleT3StartChoiceTimer=function(){
+  try{
+    if(window._sieleT3ChoIv){ clearInterval(window._sieleT3ChoIv); window._sieleT3ChoIv=null; }
+    var st=_sieleT3BloqueState(); if(!st.on) return;
+    if(st.chosen[st.bloque]) return; /* 已选则不倒计时 */
+    window._sieleT3ChoLeft=30;
+    var paint=function(){
+      var el=document.getElementById('t3BloqueLeft');
+      if(el) el.textContent=window._sieleT3ChoLeft+' s';
+      if(window._sieleT3ChoLeft<=10){ if(el) el.style.color='#dc2626'; }
+    };
+    paint();
+    window._sieleT3ChoIv=setInterval(function(){
+      var s2=_sieleT3BloqueState();
+      if(!s2.on || s2.chosen[s2.bloque]){ clearInterval(window._sieleT3ChoIv); window._sieleT3ChoIv=null; return; }
+      window._sieleT3ChoLeft--;
+      paint();
+      if(window._sieleT3ChoLeft<=0){
+        clearInterval(window._sieleT3ChoIv); window._sieleT3ChoIv=null;
+        if(typeof toast==='function') toast('⏰ 30 秒到：系统已随机分配本题（官方规则，不可更改）','ok');
+        try{ _sieleT3Pick(s2.bloque, 0); }catch(e){}
+      }
+    },1000);
+  }catch(e){}
+};
+window._sieleT3StopChoiceTimer=function(){ try{ if(window._sieleT3ChoIv){ clearInterval(window._sieleT3ChoIv); window._sieleT3ChoIv=null; } }catch(e){} };
 function _sieleT3BloqueState(){
   if(!ST.sieleT3Bloque || typeof ST.sieleT3Bloque!=='object') ST.sieleT3Bloque={on:false,bloque:1,opts:{},chosen:{}};
   var st=ST.sieleT3Bloque;
@@ -9062,15 +9114,20 @@ function _sieleT3BloqueStart(){
   try{
     var b=getSieleOralBank()[3]||[]; if(b.length<4){ if(typeof toast==='function') toast('T3 题量不足，无法组卷','err'); return; }
     if(typeof setSieleOralFilter==='function') setSieleOralFilter(null);
-    var pool=b.map(function(q){return q.id;}), pick=[];
-    while(pick.length<4 && pool.length){ pick.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]); }
+    /* v95.53 P1-b: 按官方域组卷——Bloque 1 = 私人域 2 选 1，Bloque 2 = 正式/公共域 2 选 1 */
+    var _all=b.map(function(q){return q.id;});
+    function _shuf(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    var _priv=_shuf(_all.filter(function(id){ return window._sieleT3DomainOf(id)!=='c'; }));
+    var _publ=_shuf(_all.filter(function(id){ return window._sieleT3DomainOf(id)==='c'; }));
+    var pick = (_priv.length>=2 && _publ.length>=2) ? [_priv[0],_priv[1],_publ[0],_publ[1]] : _shuf(_all).slice(0,4);
     ST.sieleT3Bloque={on:true,bloque:1,opts:{1:[pick[0],pick[1]],2:[pick[2],pick[3]]},chosen:{},created:Date.now()};
     save(); renderMain();
-    if(typeof toast==='function') toast('🎭 双 Bloque 演练开始 · Bloque 1 二选一','ok');
+    window._sieleT3StartChoiceTimer(); /* v95.53: 30 秒选择倒计时 */
+    if(typeof toast==='function') toast('🎭 双 Bloque 演练开始 · Bloque 1（私人域）二选一 · 30 秒','ok');
   }catch(e){ if(typeof toast==='function') toast('组卷失败：'+e.message,'err'); }
 }
 function _sieleT3BloqueExit(){
-  try{ ST.sieleT3Bloque={on:false,bloque:1,opts:{},chosen:{}}; save(); renderMain(); }catch(e){}
+  try{ window._sieleT3StopChoiceTimer(); ST.sieleT3Bloque={on:false,bloque:1,opts:{},chosen:{}}; save(); renderMain(); }catch(e){}
 }
 function _sieleT3Pick(bloque, idx){
   try{
@@ -9091,8 +9148,12 @@ function _sieleT3Pick(bloque, idx){
 function _sieleT3BloqueNext(){
   try{
     var st=_sieleT3BloqueState();
-    if(st.bloque===1){ st.bloque=2; st.chosen[2]=null; save(); renderMain(); if(typeof toast==='function') toast('进入 Bloque 2 · 二选一','ok'); }
-    else { st.on=false; save(); renderMain(); if(typeof toast==='function') toast('🎉 双 Bloque 演练完成','ok'); }
+    if(st.bloque===1){
+      st.bloque=2; st.chosen[2]=null; save(); renderMain();
+      window._sieleT3StartChoiceTimer(); /* v95.53: Bloque 2 重新 30 秒选择计时 */
+      if(typeof toast==='function') toast('进入 Bloque 2（正式/公共域）· 二选一 · 30 秒','ok');
+    }
+    else { window._sieleT3StopChoiceTimer(); st.on=false; save(); renderMain(); if(typeof toast==='function') toast('🎉 双 Bloque 演练完成','ok'); }
   }catch(e){}
 }
 function _sieleT3BloqueHtml(){
@@ -9101,7 +9162,7 @@ function _sieleT3BloqueHtml(){
     if(!st.on){
       return '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center">'
         +'<button class="btn ol" style="font-size:12px;padding:5px 12px" onclick="_sieleT3BloqueStart()">🎭 双 Bloque 演练</button>'
-        +'<span class="sub" style="font-size:10px;color:#64748b">官方形态：连续 2 段，每段二选一（各含 3 个必做点）</span></div>';
+        +'<span class="sub" style="font-size:10px;color:#64748b">官方形态：Bloque 1 私人域 2 选 1 + Bloque 2 正式/公共域 2 选 1，各 30 秒选择、20 秒准备、1.5 分钟作答</span></div>';
     }
     var cur=st.bloque, ids=st.opts[cur]||[], chosen=st.chosen[cur];
     function _card(id,idx){
@@ -9113,9 +9174,10 @@ function _sieleT3BloqueHtml(){
     }
     var h='<div class="card" style="padding:10px;margin-top:8px;border:1px dashed #c4b5fd;border-radius:12px">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">'
-      +'<b style="font-size:12.5px;color:#7c3aed">🎭 双 Bloque 演练 · Bloque '+cur+' / 2</b>'
+      +'<b style="font-size:12.5px;color:#7c3aed">🎭 Bloque '+cur+' / 2 · '+(cur===1?'👥 私人域':'🏛 正式/公共域')+'</b>'
+      +'<span id="t3BloqueLeft" style="font-size:12px;font-weight:800;color:#b45309;margin-left:6px">30 s</span>'
       +'<button class="btn sm ol" style="font-size:11px" onclick="_sieleT3BloqueExit()">退出演练</button></div>'
-      +'<div style="font-size:11px;color:#64748b;margin-bottom:6px">Seleccione una de las dos opciones · 二选一：</div>'
+      +'<div style="font-size:11px;color:#64748b;margin-bottom:6px">Seleccione una de las dos opciones · 二选一（官方 30 秒，超时自动随机）：</div>'
       +'<div style="display:flex;gap:9px;flex-wrap:wrap">'+_card(ids[0],0)+_card(ids[1],1)+'</div>';
     if(chosen){
       h+='<div style="font-size:11.5px;margin-top:8px;color:#166534">✅ 已选：'+esc(((_sieleT3Q(chosen)||{}).title)||chosen)+'　请完成本段录音作答</div>';
