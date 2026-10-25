@@ -1,6 +1,12 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.59] – 2026-10-26
+### 模考 T5 预选修复 + 外刊跟读接入腾讯云识别
+- **修复「模考进 T5 立场已被预选」**：三处叠加导致——①`_sieleMockFlat` 硬编码 `stance:'a'` ②`_sieleMockGo` 进入即调 `_sieleT5PickStance` ③`_sieleEffectiveItem` 在立场为空时直接返回原题，UI 拿不到 `stanceSel` 就回落成 A。修复：T5 步骤不再带 stance、进入时清掉该题旧选择、并新增 `_needStancePick` 标记把「未选」传给 UI（提示「先听完 T4 三问再选 Opción 1/2」）。练习模式仍默认 A。
+- **外刊跟读支持腾讯云识别**：新增 `startScoringCloud`，复用 `_wbAsrCloudRecordStart`（含音量诊断/90s 上限）+ `_wbCloudAsrRun`（14s 分段拼接）；**评测口径完全不变**——仍用识别文本 + `calcScore(expected, spoken, elapsed)` 本地打分，只替换识别环节（elapsed 取真实录音时长）。
+- **逐期逐段可切换音源**：跟读工具条新增「🎙 识别：☁️ 腾讯云 / 🌐 在线」按钮，独立偏好 `ST.refineAsrSrc`（未设置时跟随全局 `_wbAsrPick`），每次录制按当下设置生效，可随时逐段切换；云端未开通时点击会提示并保持在线。
+
 ## [v95.58] – 2026-10-26
 ### 口语 T4 逐问音频全覆盖（357 段）
 - **口径更正**：T4 音频按官方「每题 3 问」计，**119 题 × 3 = 357 段**。旧记录「101 题 / 359 段」两处都错：题数已增至 119；359 是按「问号数量」拆分（一问内可含多个问号，会多拆出 97 段）。已实测 119/119 题均可结构化拆 3 问。

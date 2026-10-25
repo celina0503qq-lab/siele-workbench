@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.58-202610260205';
+window.swVer = 'v95.59-202610260230';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -9608,6 +9608,12 @@ function _sieleEffectiveItem(q){
   }
   if(_sieleOralTarea===5 && q.stances){
     var sel=_sieleT5StanceSel(q), st=q.stances[sel];
+    /* v95.59: 模考中未选立场（sel='')时，必须把「未选」状态传给 UI——
+       否则 st 为空会直接返回原题，UI 拿不到 stanceSel 就回落成 A（用户看到「已被 AI 预选」）。 */
+    if(!st && !sel){
+      var e0=Object.assign({}, q, {stanceSel:'', baseId:q.id, _needStancePick:true});
+      return e0;
+    }
     if(st){
       // v91 官方格式：题面主句=立场宣言 statement（Opción），原任务指令作第二段
       var _q5 = st.statement ? (st.statement + (st.q? '\n'+st.q : '')) : (st.q||q.q);
@@ -9692,7 +9698,7 @@ function _sieleT45StageUi(x){ // 题面区：T4 三问 chips / T5 立场 pills
     // v91 官方格式：Opción 1 / Opción 2 双卡并列（立场宣言主显）+ No olvide 提示条
     /* v95.51 D1: 模考中不预选——stanceSel 为空表示「尚未选择」，此时不回退 A */
     var sel=(x.stanceSel!==undefined && x.stanceSel!==null) ? x.stanceSel : 'a';
-    var _needPick = (!sel && (typeof _sieleMockActive==='function' && _sieleMockActive()));
+    var _needPick = (!sel && (x._needStancePick || (typeof _sieleMockActive==='function' && _sieleMockActive())));
     var bc={a:['#059669','#ecfdf5','#065f46'],b:['#7c3aed','#f5f3ff','#4c1d95']};
     var cards=['a','b'].map(function(k){
       var st=x.stances[k]; if(!st) return '';
@@ -9783,7 +9789,8 @@ function _sieleMockFlat(){ // 展开 11 步：T1×4 / T2×1 / T3×2 / T4 三问�
     (it[3]||[]).slice(0,2).forEach(function(id){ out.push({t:3,id:id}); });
   }
   (it[4]||[]).slice(0,1).forEach(function(id){ out.push({t:4,id:id,sub:0},{t:4,id:id,sub:1},{t:4,id:id,sub:2}); });
-  (it[5]||[]).slice(0,1).forEach(function(id){ out.push({t:5,id:id,stance:'a'}); });
+  /* v95.59: T5 不再硬编码 stance——模考中由考生听完 T4 后自行选择 Opción 1/2（官方流程） */
+  (it[5]||[]).slice(0,1).forEach(function(id){ out.push({t:5,id:id}); });
   return out;
 }
 function _sieleMockGo(pos){
@@ -9821,7 +9828,16 @@ function _sieleMockGo(pos){
     if(idx<0){ toast('题目缺失，跳至下一步'); _sieleMockGo(pos+1); return; }
     _sieleOralIdx=idx; _sieleOralShown=false; _sieleZhShown=false; stopSieleOral(true);
     if(step.t===4&&typeof step.sub==='number'){ _sieleOralIdx=idx; renderMain(); try{_sieleT4PickSub(step.sub);}catch(_e4){} }
-    else if(step.t===5&&typeof _sieleT5PickStance==='function'){ renderMain(); try{_sieleT5PickStance(step.stance||'a');}catch(_e5){} }
+    /* v95.59: 模考 T5 进入时不预选立场——清掉该题的旧选择，让考生自己点 Opción 1/2
+       （此前默认 'a' 会直接渲染成已选状态，用户反馈「模考进 T5 就被 AI 插队预选」） */
+    else if(step.t===5){
+      try{
+        var _sm = window._sieleT5StanceMap = window._sieleT5StanceMap || {};
+        delete _sm[baseId];
+        delete _sm[String(step.id).split('#')[0]];
+      }catch(e){}
+      renderMain();
+    }
     else renderMain();
     save();
     toast('模拟考 · Tarea '+step.t+(step.sub!=null?('（第'+(step.sub+1)+'问）'):'')+' · 第 '+(pos+1)+'/'+flat.length+' 步','ok');
@@ -13947,6 +13963,7 @@ async function renderRefineBody(){
         <span class="lbl">🎧 跟读模式：</span>
         <button class="play-all-btn" data-play-all="${lvKey}">▶ 通读全文</button>
         <button class="score-btn" data-score="${lvKey}">🎲 随机跟读</button>
+        <button class="asr-src-btn" data-asr-src="${lvKey}" title="切换跟读识别音源：腾讯云识别（国内免代理，推荐）／在线识别（浏览器 Google Web Speech）">${_refineAsrSrcBtnLabel()}</button>
         <span class="lbl" style="margin-left:8px">语速：</span>
         <button class="rate-btn on" data-rate="0.92" data-target="${lvKey}">1.0x</button>
         <button class="rate-btn" data-rate="0.7" data-target="${lvKey}">0.7x 慢速</button>
@@ -14472,6 +14489,39 @@ function _bindRefineRate(){
   });
 }
 
+// v95.59: 外刊跟读识别音源（腾讯云 / 在线 Google）——独立偏好，逐段生效
+function _refineAsrSrcCur(){
+  if(ST && ST.refineAsrSrc) return ST.refineAsrSrc;
+  try{ return (window._wbAsrPick && window._wbAsrPick()) || 'google'; }catch(e){ return 'google'; }
+}
+function _refineAsrSrcBtnLabel(){
+  var cur = _refineAsrSrcCur();
+  if(cur === 'cloud'){
+    var on = (window._wbAsrCloudOn && window._wbAsrCloudOn());
+    return on ? '🎙 识别：☁️ 腾讯云' : '🎙 识别：在线（云端未开通）';
+  }
+  return '🎙 识别：🌐 在线';
+}
+window._toggleRefineAsrSrc = function(){
+  try{
+    var cur = _refineAsrSrcCur();
+    var next = (cur === 'cloud') ? 'google' : 'cloud';
+    if(next === 'cloud' && !(window._wbAsrCloudOn && window._wbAsrCloudOn())){
+      if(typeof toast === 'function') toast('腾讯云识别未开通（需管理员在后台开启）','err');
+      return;
+    }
+    ST.refineAsrSrc = next; save();
+    document.querySelectorAll('.asr-src-btn[data-asr-src]').forEach(function(b){ b.textContent = _refineAsrSrcBtnLabel(); });
+    if(typeof toast === 'function') toast(next === 'cloud' ? '已切换：☁️ 腾讯云识别（后续每段跟读生效）' : '已切换：🌐 在线识别（Google Web Speech）','ok');
+  }catch(e){}
+};
+function _bindRefineAsrSrc(){
+  document.querySelectorAll('.asr-src-btn[data-asr-src]').forEach(function(btn){
+    if(btn.dataset.asrBound) return;
+    btn.dataset.asrBound = '1';
+    btn.addEventListener('click', function(e){ e.stopPropagation(); window._toggleRefineAsrSrc(); });
+  });
+}
 // 跟读评分按钮
 function _bindRefineScore(){
   document.querySelectorAll('.score-btn[data-score]').forEach(btn => {
@@ -14493,7 +14543,11 @@ function _bindRefineScore(){
         btn.textContent = '🎲 随机跟读';
         if(window.__refineScoreCd){ clearInterval(window.__refineScoreCd); window.__refineScoreCd = null; }
         if(window.__refineStopTimer){ clearTimeout(window.__refineStopTimer); window.__refineStopTimer = null; }
-        if(window.__refineRecognition){
+        if(window.__refineCloudStop){
+          /* v95.59: 云识别录音中——调 stopAll 触发 onStop 继续评分 */
+          try{ window.__refineCloudStop(); }catch(e){}
+          window.__refineCloudStop = null;
+        } else if(window.__refineRecognition){
           window.__refineRecognition.stop();
           window.__refineRecognition = null;
         } else {
@@ -14554,10 +14608,78 @@ window.__refineClearRecTarget = function(){
   document.querySelectorAll('.refine-para-es.refine-rec-target').forEach(function(el){ el.classList.remove('refine-rec-target'); });
 };
 
+/* v95.59: 外刊跟读 · 腾讯云识别版本——录音 → _wbCloudAsrRun 分段识别 → 同一套 calcScore 打分 */
+function startScoringCloud(lvKey, expectedText, btn, panel, card, status, selIdx){
+  var startTime = Date.now();
+  btn.classList.add('recording');
+  btn.textContent = '⏹ 停止并评分';
+  status.innerHTML = '<span style="color:#7c3aed">☁️ 正在录音（腾讯云识别）…</span>';
+  window.__refineClearRecTarget && window.__refineClearRecTarget();
+  window.__refineSetRecTarget && window.__refineSetRecTarget(lvKey, selIdx == null ? 0 : selIdx);
+
+  /* 复用 SIELE 口语同款录音器：_wbAsrRec（含音量诊断 / 60s 上限） */
+  try{
+    window.__refineCloudStop = window._wbAsrCloudRecordStart(function(err, blob){
+      if(err){
+        btn.classList.remove('recording'); btn.textContent = '🎲 随机跟读';
+        status.innerHTML = '<span style="color:#dc2626">❌ 录音失败：' + esc(err.message || err) + '</span>';
+        return;
+      }
+      btn.textContent = '☁️ 云识别中…';
+      status.innerHTML = '<span style="color:#7c3aed">☁️ 腾讯云识别中…（长段自动分段）</span>';
+      var _elapsedSec = Math.round((Date.now() - startTime) / 1000);
+      window._wbCloudAsrRun(blob, { onProgress: function(i, n){
+        status.innerHTML = '<span style="color:#7c3aed">☁️ 腾讯云识别中…第 ' + i + ' / ' + n + ' 段</span>';
+      }}).then(function(text){
+        btn.classList.remove('recording'); btn.textContent = '🎲 随机跟读';
+        var spokenText = String(text || '').trim();
+        if(spokenText.length < 3){
+          var _vol = window._wbAsrLastVol || {};
+          if(_vol.peak !== undefined && _vol.peak < 0.015){
+            status.innerHTML = '<span style="color:#dc2626">⚠️ 未检测到有效语音（音量峰值偏低）——请检查麦克风权限/输入音量后重试</span>';
+          } else {
+            status.innerHTML = '<span style="color:#dc2626">⚠️ 未识别到内容，请重试</span>';
+          }
+          return;
+        }
+        /* 评测不变：与 Google 路径同一套 calcScore，elapsed 用真实录音时长 */
+        var score = calcScore(expectedText, spokenText, _elapsedSec);
+        var prevBest = 0;
+        try{
+          var rsKey = currentRefineDate + '::' + lvKey + '::' + (selIdx == null ? 'rand' : selIdx);
+          prevBest = (ST.refineShadowScores[rsKey] && ST.refineShadowScores[rsKey].score) || 0;
+          if(score.total > prevBest){
+            ST.refineShadowScores[rsKey] = {score: score.total, date: todayStr(), dims: score.dimensions.map(function(d){ return {label: d.label, score: d.score}; })};
+            save();
+          }
+        }catch(e){}
+        renderScoreCard(lvKey, card, status, score, prevBest);
+      }).catch(function(e){
+        btn.classList.remove('recording'); btn.textContent = '🎲 随机跟读';
+        status.innerHTML = '<span style="color:#dc2626">❌ 云识别失败：' + esc(String(e && e.message || e)) + '。可切回「🌐 在线识别」重试。</span>';
+      });
+    }, function(sec){
+      status.innerHTML = '<span style="color:#ef4444">🔴 正在录音 ' + sec + 's（腾讯云识别）—— 请朗读上方段落，说完点「停止并评分」</span>';
+    }, 90);
+  }catch(e){
+    btn.classList.remove('recording'); btn.textContent = '🎲 随机跟读';
+    status.innerHTML = '<span style="color:#dc2626">❌ 云识别启动失败：' + esc(String(e && e.message || e)) + '</span>';
+  }
+}
 function startScoring(lvKey, expectedText, btn, panel, card, status, selIdx){
+  /* v95.59: 外刊跟读支持腾讯云识别——复用全局音源选择（_wbAsrPick=cloud 且管理员开关开启）。
+     评测口径完全不变：仍用识别文本 + calcScore(expected, spoken, elapsed) 本地打分，
+     只把「识别环节」从浏览器 Google Web Speech 换成腾讯云 16k_es（国内免代理，识别更稳）。 */
+  /* v95.59: 外刊跟读独立音源偏好 ST.refineAsrSrc（'cloud'|'google'）——未设置时跟随全局 _wbAsrPick。
+     每一期/每一段录制时都读当前设置，因此可随时、逐段切换。 */
+  var _refineSrc = (ST && ST.refineAsrSrc) ? ST.refineAsrSrc : ((window._wbAsrPick && window._wbAsrPick()) || 'google');
+  var _useCloud = !!(_refineSrc === 'cloud' && window._wbAsrCloudOn && window._wbAsrCloudOn() && window._wbCloudAsrRun);
+  if(_useCloud){
+    return startScoringCloud(lvKey, expectedText, btn, panel, card, status, selIdx);
+  }
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SpeechRecognition){
-    status.innerHTML = '<span style="color:#dc2626">❌ 此浏览器不支持语音识别。请使用 Chrome 或 Edge。</span>';
+    status.innerHTML = '<span style="color:#dc2626">❌ 此浏览器不支持语音识别。请使用 Chrome 或 Edge；或在设置里把识别音源切到「☁️ 腾讯云」（需管理员开通）。</span>';
     btn.classList.remove('recording');
     return;
   }
@@ -14943,6 +15065,7 @@ window.bindRefineSpeaks = function(){
   _bindRefinePlayAll();
   _bindRefineRate();
   _bindRefineScore();
+  _bindRefineAsrSrc();  /* v95.59: 外刊跟读音源切换按钮 */
 };
 
 // Auto-bind quiz clicks + speak buttons after every body render, and restore quiz state
