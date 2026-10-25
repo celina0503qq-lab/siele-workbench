@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.43-202610251820';
+window.swVer = 'v95.44-202610251845';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5441,8 +5441,47 @@ window._wExamStart = function(){
 };
 window._wExamStageName = function(){
   var st = ST.wexam || {};
+  if(st.stage === 'result') return '考试结果 · 批改';
   return st.stage === 't1' ? 'Tarea 1 · 邮件回复' : (st.stage === 'choice' ? 'Tarea 2 · 选择题型' : 'Tarea 2 · 写作');
 };
+window._wExamResultTab = 1;
+window._wExamSetResultTab = function(n){ window._wExamResultTab = n; try{ _wExamRender(); }catch(e){} };
+/* v95.44 B2: 交卷结果页——T1/T2 分页 Tab 各自展示批改（原实现只渲染当前题） */
+function _wExamResultHtml(st){
+  var r = st.result || {};
+  var tab = window._wExamResultTab || 1;
+  var cur = (tab === 2 ? r.t2 : r.t1) || {};
+  var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
+  var idx = (tab === 2 ? st.t2Idx : st.t1Idx) || 0;
+  var t = tasks[idx] || {};
+  var txt = String(tab === 2 ? (st.txt2||'') : (st.txt1||''));
+  var wc = txt.trim() ? txt.trim().split(/\s+/).filter(function(w){return w;}).length : 0;
+  var score = cur.score || 0;
+  var sc = score>=85 ? '#15803d' : score>=75 ? '#a16207' : score>=60 ? '#c2410c' : '#b91c1c';
+  var scBg = score>=85 ? '#dcfce7' : score>=75 ? '#fef9c3' : score>=60 ? '#ffedd5' : '#fee2e2';
+  var bandColor = {A1:'#10b981',A2:'#3b82f6',B1:'#f59e0b',B2:'#ef4444',C1:'#8b5cf6'}[cur.band] || '#6b7280';
+  var tabBtn = function(n, label){
+    var on = (tab === n);
+    return '<button onclick="_wExamSetResultTab('+n+')" style="flex:1;padding:9px 10px;border-radius:9px;border:1.5px solid '+(on?'#dc2626':'#e2e8f0')+';background:'+(on?'#dc2626':'#fff')+';color:'+(on?'#fff':'#334155')+';font-weight:700;font-size:13px;cursor:pointer">'+label+'</button>';
+  };
+  var h = '<div class="card" style="padding:12px">';
+  h += '<div style="display:flex;gap:8px;margin-bottom:12px">'+tabBtn(1,'Tarea 1 批改 · '+(r.t1&&r.t1.score||0)+' 分')+tabBtn(2,'Tarea 2 批改 · '+(r.t2&&r.t2.score||0)+' 分')+'</div>';
+  h += '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px;border-radius:11px;background:'+scBg+';border:1px solid '+sc+'33">'
+    + '<div style="text-align:center"><div style="font-size:40px;font-weight:800;line-height:1;color:'+sc+';font-family:var(--serif)">'+score+'</div><div style="font-size:10px;color:#64748b;margin-top:3px">分 / 100</div></div>'
+    + '<div style="flex:1;min-width:180px;font-size:12px;line-height:1.9;color:#334155">'
+    + '<div><b>字数：</b>'+cur.words+' 词'+(cur.target?(' · 目标 '+cur.target[0]+'-'+cur.target[1]+(cur.wcOk?' ✓':' ⚠️ 字数待调整')):'')+'</div>'
+    + '<div><b>连接词：</b>'+(cur.connU||0)+' 种（共 '+(cur.conn||0)+' 次）'+(cur.connU>=5?' ✓ 优秀':(cur.connU>=3?' ○ 良好':' ⚠️ 建议 ≥3 种'))+'</div>'
+    + '<div><b>虚拟式：</b>'+(cur.subj||0)+' 处 · <b>高级句型：</b>'+(cur.adv||0)+' 个</div>'
+    + '<div><b>语法检查：</b>'+(cur.gramPass||0)+'/'+(cur.gramTotal||0)+' 通过</div>'
+    + '</div>'
+    + '<div style="text-align:center;padding:8px 14px;background:'+bandColor+';color:#fff;border-radius:9px"><div style="font-size:20px;font-weight:800">'+(cur.band||'—')+'</div><div style="font-size:10px">SIELE 等级映射</div></div>'
+    + '</div>';
+  h += '<div style="margin-top:10px;font-size:12px;color:#334155"><b>题目：</b>'+esc(String(t.title||t.task||('#'+idx)).slice(0,80))+' <span style="color:#64748b">（'+(tab===2?'Tarea 2':'Tarea 1')+' · '+(t.lvl||'')+'）</span></div>';
+  h += '<details style="margin-top:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--tr)">📄 查看我的作答全文（'+wc+' 词 · 已存入做题记录与云同步）</summary><pre style="white-space:pre-wrap;font-family:var(--serif);font-size:12.5px;line-height:1.7;margin:8px 0 0;padding:10px;background:#f8fafc;border-radius:8px;color:var(--ink)">'+esc(txt||'（无内容）')+'</pre></details>';
+  h += '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn sm ol" onclick="_wExamExit()">← 返回写作练习</button><button class="btn sm pr" onclick="_wExamStart()">🔄 再考一次</button><span class="sub" style="font-size:11px;color:var(--soft);align-self:center">两题成绩已写入做题记录（可在写作页查看历史）</span></div>';
+  h += '</div>';
+  return h;
+}
 window._wExamRender = function(){
   var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
 
@@ -5460,6 +5499,13 @@ window._wExamRender = function(){
   var charbar = '<div style="display:flex;gap:3px;flex-wrap:wrap;margin:4px 0">'
     + ['á','é','í','ó','ú','ü','ñ','¿','¡'].map(function(c){ return '<button class="btn xs ol" onclick="_wExamInsertChar(\''+c+'\')" style="min-width:26px">'+c+'</button>'; }).join('')
     + '</div>';
+  if(st.stage === 'result'){
+    h += _wExamResultHtml(st);
+    h += '</section>';
+    var _mR = document.getElementById('main');
+    if(_mR) _mR.innerHTML = h;
+    return h;
+  }
   if(st.stage === 'setup' || st.stage === 'selfpick'){
     var o1 = st.pool1.map(function(ix){ var t = tasks[ix]; return '<option value="'+ix+'"'+(st.t1Idx===ix?' selected':'')+'>'+esc((t.title||t.task||('T1 #'+ix)).slice(0,50))+'</option>'; }).join('');
     var o2 = st.pool2.map(function(ix){ var t = tasks[ix]; return '<option value="'+ix+'"'+(st.t2Idx===ix?' selected':'')+'>'+esc((t.title||t.task||('T2 #'+ix)).slice(0,50))+'</option>'; }).join('');
@@ -5570,46 +5616,45 @@ window._wExamPick = function(c){
 };
 window._wExamExit = function(){
   try{
-    if(confirm('结束考试？已写内容将保留为草稿（不计分）。')){
+    var _isResult = (ST.wexam && ST.wexam.stage === 'result');
+    if(_isResult || confirm('结束考试？已写内容将保留为草稿（不计分）。')){
       if(window._wExamIv){ clearInterval(window._wExamIv); window._wExamIv = null; }
       if(window._wExamPickIv){ clearInterval(window._wExamPickIv); window._wExamPickIv = null; }
       window._wExamActive = false;
-      if(ST.wexam) ST.wexam.active = false;
-      save(); _wExamRender();
+      if(ST.wexam){ ST.wexam.active = false; if(_isResult) ST.wexam.stage = ''; }
+      save();
+      if(typeof renderMain === 'function') renderMain(); else _wExamRender();
     }
   }catch(e){}
 };
 window._wExamSubmit = function(early){
   try{
+    /* 考试中的输入框是当前权威值；仅做一次兜底回写（不依赖后续 DOM 链路） */
     ['wexT1','wexT2'].forEach(function(id, ix){ var el = document.getElementById(id); if(el) ST.wexam['txt'+(ix+1)] = el.value; });
     if(window._wExamIv){ clearInterval(window._wExamIv); window._wExamIv = null; }
     if(window._wExamPickIv){ clearInterval(window._wExamPickIv); window._wExamPickIv = null; }
-    window._wExamActive = false;
-    var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
-    [[st1IdxOf(), 'txt1'], [st2IdxOf(), 'txt2']].forEach(function(pair){
-      var t = tasks[pair[0]];
-      if(t) ST['writing_'+(t.id || ('x'+pair[0]))] = ST.wexam[pair[1]] || ST.wexam[pair[1]];
-    });
-    function st1IdxOf(){ return ST.wexam.t1Idx; } function st2IdxOf(){ return ST.wexam.t2Idx; }
+    /* v95.44 B4: 直接以 ST 文本评分——不再「切页→写 DOM→saveWriting 读 DOM」，杜绝重渲染竞态读到空文本（0 分 1 词） */
+    var _pack = function(r){
+      var g = r && r.g;
+      return {
+        score: g ? g.score : 0, words: (r && r.words) || 0, tarea: (r && r.tareaType) || 1,
+        target: (g && g.target) || null, wcOk: !!(g && g.wcOk),
+        conn: (g && g.connectorCount) || 0, connU: (g && g.uniqueConnectorCount) || 0,
+        subj: (g && g.subjunctiveCount) || 0, adv: (g && g.advancedPatterns) ? g.advancedPatterns.length : 0,
+        gramPass: (g && g.grammarPassCount) || 0, gramTotal: (g && g.grammarChecks) ? g.grammarChecks.length : 0,
+        band: (g && g.sieleBand) || '—'
+      };
+    };
+    var r1 = window._wScoreWriting(ST.wexam.txt1 || '', ST.wexam.t1Idx);
+    var r2 = window._wScoreWriting(ST.wexam.txt2 || '', ST.wexam.t2Idx);
+    ST.wexam.result = { t1: _pack(r1), t2: _pack(r2), at: Date.now(), early: !!early };
     ST.wexam.active = false;
+    ST.wexam.stage = 'result';
     ST.wexam.doneAt = Date.now();
-    save(); try{ if(typeof updateStreak==='function') updateStreak(); }catch(e){}
-    renderMain();
-    if(window.toast) toast((early?'已提前交卷':'考试时间到')+'：两题已自动保存，正在逐题触发 AI 批改…');
-    // 自动批改串联：切练习视图逐题 selectWriting+saveWriting
-    setTimeout(function(){
-      try{
-        selectWriting(ST.wexam.t1Idx, false);
-        document.getElementById('writingText').value = ST.wexam.txt1 || ''; countWords(); saveWriting();
-      }catch(e){}
-      setTimeout(function(){
-        try{
-          selectWriting(ST.wexam.t2Idx, false);
-          document.getElementById('writingText').value = ST.wexam.txt2 || ''; countWords(); saveWriting();
-          if(window.toast) toast('两题批改完成，成绩已入 writingScores');
-        }catch(e){}
-      }, 3000);
-    }, 400);
+    window._wExamResultTab = 1;
+    try{ if(typeof updateStreak === 'function') updateStreak(); }catch(e){}
+    save(); renderMain();
+    if(window.toast) toast((early?'已提前交卷':'考试时间到')+'：T1 '+ST.wexam.result.t1.score+' 分 · T2 '+ST.wexam.result.t2.score+' 分（可分页查看批改）');
   }catch(e){ if(window.toast) toast('交卷异常: '+String(e).slice(0,60),'err'); }
 };
 window._wExamTick = function(){
@@ -5633,7 +5678,7 @@ window._wExamTick = function(){
 };
 function renderWriting(){
   /* v95.42: 考试模式激活时整体渲染考试视图 */
-  if(window._wExamActive && ST.wexam && ST.wexam.active){ try{ return _wExamRender(); }catch(e){ window._wExamActive = false; } }
+  if(window._wExamActive && ST.wexam && (ST.wexam.active || ST.wexam.stage === 'result')){ try{ return _wExamRender(); }catch(e){ window._wExamActive = false; } }
 
   const tasks = getWritingTasks();
   let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> '+((ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button>')+'<div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
@@ -5836,48 +5881,55 @@ function countWords(){
     if(window._wCurTaskId!=null) window._wDraftMap[window._wCurTaskId] = t;
   }catch(e){}
 }
-function saveWriting(){
-  if(_writingIdx < 0){ alert('请先选择一个写作任务'); return; }
-  const text = document.getElementById('writingText').value;
-  const t = getWritingTasks()[_writingIdx];
-  const wk = t && t.id ? ('writing_'+t.id) : ('writing_'+_writingIdx);
+/* v95.44 B4: 评分/记录/低分入集统一入口——输入为文本参数，不依赖 DOM。
+   交卷批改改走此入口（旧实现「切页→写 DOM→saveWriting 读 DOM」在重渲染竞态下会读到空文本 → 0 分 1 词）。 */
+window._wScoreWriting = function(text, writingIdx){
+  var tasks = (typeof getWritingTasks === 'function') ? getWritingTasks() : [];
+  var t = tasks[writingIdx] || null;
+  var wk = (t && t.id) ? ('writing_'+t.id) : ('writing_'+writingIdx);
   ST[wk] = text;
-  migrateWritingKeys();
-  save(); updateStreak();
-  // AI 批改 (使用新评分引擎)
-  const tareaType = t && t.tarea ? (t.tarea === 'T2' ? 2 : 1) : (/SIELE\s*Tarea\s*2/i.test(String(t && t.task || '')) ? 2 : (_writingIdx <= 7 ? 1 : 2)); /* v94.4: 按任务字段判定，修复下标硬编码 */
-  // v67: 字数目标/等级取任务自身配置(范文 id 匹配守卫; 管理员编辑经 getEffectiveEssay 合并)
-  const _wDef = (typeof WRITING_TASK_ESSAYS !== 'undefined') ? WRITING_TASK_ESSAYS[_writingIdx] : null;
-  const _wEff = (_wDef && _wDef.id === t.id) ? _wDef : null;
-  const _wAdmin = (typeof getEffectiveEssay === 'function' && t && t.id) ? getEffectiveEssay(t.id, _writingIdx) : null;
-  const _wTarget = (_wEff && _wEff.target_words) || (_wAdmin && _wAdmin.id === t.id && _wAdmin.target_words) || null;
-  const _wLvl = (t && t.lvl) || (_wEff && _wEff.lvl) || null;
-  const g = typeof sieleGradeWriting === 'function' ? sieleGradeWriting(text, tareaType, _wTarget, _wLvl) : null;
-  /* v94.4: 写作做题记录（同口语机制：全文+分数，云同步，可单条删除） */
+  try{ if(typeof migrateWritingKeys === 'function') migrateWritingKeys(); }catch(e){}
+  var tareaType = (t && t.tarea) ? (t.tarea === 'T2' ? 2 : 1) : (/SIELE\s*Tarea\s*2/i.test(String(t && t.task || '')) ? 2 : (writingIdx <= 7 ? 1 : 2));
+  var _wDef = (typeof WRITING_TASK_ESSAYS !== 'undefined') ? WRITING_TASK_ESSAYS[writingIdx] : null;
+  var _wEff = (_wDef && t && _wDef.id === t.id) ? _wDef : null;
+  var _wAdmin = (typeof getEffectiveEssay === 'function' && t && t.id) ? getEffectiveEssay(t.id, writingIdx) : null;
+  var _wTarget = (_wEff && _wEff.target_words) || (_wAdmin && _wAdmin.id === t.id && _wAdmin.target_words) || null;
+  var _wLvl = (t && t.lvl) || (_wEff && _wEff.lvl) || null;
+  var g = (typeof sieleGradeWriting === 'function') ? sieleGradeWriting(String(text||''), tareaType, _wTarget, _wLvl) : null;
+  var _wn = String(text||'').trim().split(/\s+/).filter(function(w){return w;}).length;
   try{
-    const _wid = (t && t.id) || ('w' + _writingIdx);
-    const _wn = text.trim().split(/\s+/).filter(w=>w).length;
+    var _wid = (t && t.id) || ('w' + writingIdx);
     ST.writingScores = ST.writingScores || {};
-    const _we = ST.writingScores[_wid] || {history:[]};
+    var _we = ST.writingScores[_wid] || {history:[]};
     _we.history = _we.history || [];
     _we.history.push({ts:Date.now(), date:new Date().toLocaleDateString('zh-CN'), score:(g?g.score:0), words:_wn, tarea:tareaType, text:String(text||'').slice(0,3000)});
     _we.history.sort(function(a,b){return (a.ts||0)-(b.ts||0);});
     if(_we.history.length > 20) _we.history = _we.history.slice(-20);
-    const _wl = _we.history[_we.history.length-1] || {};
+    var _wl = _we.history[_we.history.length-1] || {};
     _we.bestScore = _we.history.reduce(function(m,a){return Math.max(m,a.score||0);},0);
     _we.count = _we.history.length; _we.lastDate = _wl.date||''; _we.score = _wl.score||0;
     ST.writingScores[_wid] = _we;
   }catch(_eW){ try{console.warn('writingScores', _eW);}catch(_e2){} }
-  // P1-1: 写作 < 60 自动入错题集
-  if(g && g.score < 60 && text.trim().length > 0){
-    autoLogLowScore('writing', ['writing', _writingIdx, tareaType].join('::'), {
-      question: 'Tarea ' + tareaType + ' 写作任务 #' + (_writingIdx+1),
-      myAnswer: text.trim().slice(0, 200) + (text.length > 200 ? '…' : ''),
-      correctAnswer: '参考范文见"显示范文"',
-      note: '写作评分 ' + g.score + ' 分 · 字数 ' + g.wordCount + ' · 连接词 ' + g.uniqueConnectorCount + ' 种 · 语法通过 ' + g.grammarPassCount + '/' + g.grammarChecks.length,
-      score: g.score
-    });
+  if(g && g.score < 60 && String(text||'').trim().length > 0){
+    try{
+      autoLogLowScore('writing', ['writing', writingIdx, tareaType].join('::'), {
+        question: 'Tarea ' + tareaType + ' 写作任务 #' + (writingIdx+1),
+        myAnswer: String(text).trim().slice(0, 200) + (String(text).length > 200 ? '…' : ''),
+        correctAnswer: '参考范文见"显示范文"',
+        note: '写作评分 ' + g.score + ' 分 · 字数 ' + g.wordCount + ' · 连接词 ' + g.uniqueConnectorCount + ' 种 · 语法通过 ' + g.grammarPassCount + '/' + g.grammarChecks.length,
+        score: g.score
+      });
+    }catch(e){}
   }
+  try{ save(); }catch(e){}
+  return { g: g, tareaType: tareaType, words: _wn, task: t, idx: writingIdx };
+};
+function saveWriting(){
+  if(_writingIdx < 0){ alert('请先选择一个写作任务'); return; }
+  const text = document.getElementById('writingText').value;
+  const r = window._wScoreWriting(text, _writingIdx); /* v95.44: 评分/记录/低分入集统一入口 */
+  const g = r.g, tareaType = r.tareaType;
+  updateStreak();
   if(g){ try{ if(g.score>=90)celebrate(3); else if(g.score>=75)celebrate(2); else if(g.score>=60)celebrate(1); else celebrate(0); }catch(e){} }
   const gradeEl = document.getElementById('writingGrading');
   if(gradeEl && g){
