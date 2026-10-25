@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.50-202610252130';
+window.swVer = 'v95.51-202610252215';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -9224,7 +9224,12 @@ function _sieleScoresAdminHtml(){
 }
 function _sieleT5StanceSel(x){
   var m=window._sieleT5StanceMap=window._sieleT5StanceMap||{};
-  if(!m[x.id]) m[x.id]='a';
+  /* v95.51 P0-D1: 模考中不预选立场——官方要求听完 T4 三问后再基于两对立观点选一个；
+     练习模式仍默认 A 便于快速开练 */
+  if(!m[x.id]){
+    var inMock=(typeof _sieleMockActive==='function' && _sieleMockActive());
+    m[x.id] = inMock ? '' : 'a';
+  }
   return m[x.id];
 }
 function _sieleT5PickStance(s){
@@ -9307,8 +9312,10 @@ function _sieleEffectiveItem(q){
   if(q && q.ab) q = _sieleABOverride(q);
   if(!q) return q;
   // v91 模拟考：T1 按官方节奏，前 2 问 15 秒、后 2 问 30 秒
-  if(_sieleOralTarea===1 && typeof _sieleMockActive==='function' && _sieleMockActive()){
-    var _mpos=(ST&&ST.sieleMock&&typeof ST.sieleMock.pos==='number')?ST.sieleMock.pos:0;
+  /* v95.51 P0-A1: 官方节奏（前 2 问 15s、后 2 问 30s）只在【严谨模式】生效（模考自动进严谨，用户可自行关闭）；
+     练习模式保持统一时长自由练 */
+  if(_sieleOralTarea===1 && typeof _sieleIsStrict==='function' && _sieleIsStrict()){
+    var _mpos=(typeof _sieleMockActive==='function' && _sieleMockActive() && ST && ST.sieleMock && typeof ST.sieleMock.pos==='number') ? ST.sieleMock.pos : 0;
     q=Object.assign({},q,{sec:_mpos<2?15:30});
   }
   /* v92.6: Tarea 5 官方作答 3 分钟（原存量 sec:240 偏长 33%） */
@@ -9408,7 +9415,9 @@ function _sieleT45StageUi(x){ // 题面区：T4 三问 chips / T5 立场 pills
   }
   if(_sieleOralTarea===5 && x.stances){
     // v91 官方格式：Opción 1 / Opción 2 双卡并列（立场宣言主显）+ No olvide 提示条
-    var sel=x.stanceSel||'a';
+    /* v95.51 D1: 模考中不预选——stanceSel 为空表示「尚未选择」，此时不回退 A */
+    var sel=(x.stanceSel!==undefined && x.stanceSel!==null) ? x.stanceSel : 'a';
+    var _needPick = (!sel && (typeof _sieleMockActive==='function' && _sieleMockActive()));
     var bc={a:['#059669','#ecfdf5','#065f46'],b:['#7c3aed','#f5f3ff','#4c1d95']};
     var cards=['a','b'].map(function(k){
       var st=x.stances[k]; if(!st) return '';
@@ -9418,7 +9427,8 @@ function _sieleT45StageUi(x){ // 题面区：T4 三问 chips / T5 立场 pills
         +'<div style="font-size:12.5px;line-height:1.6;color:'+(on?c[2]:'#334155')+';margin-top:4px">'+esc(st.statement||st.q||'')+'</div>'
         +'</div>';
     }).join('');
-    return '<div class="t45ui" style="margin:8px 0 2px">'
+    return (_needPick ? '<div class="note" style="margin:8px 0;border-left:4px solid #f59e0b;font-size:11.5px">🎯 模考中不预设立场——请先听完 T4 三问（同一主题），再在下方 Opción 1 / Opción 2 中选择一个开始作答。</div>' : '')
+      + '<div class="t45ui" style="margin:8px 0 2px">'
       +'<div style="font-size:11px;color:var(--tr);font-weight:700;margin-bottom:5px">Seleccione una de las dos opciones · 选择一个立场（提纲 / 范文 / 评分随立场切换）：</div>'
       +'<div style="display:flex;gap:9px;flex-wrap:wrap">'+cards+'</div>'
       +'<div class="note" style="margin:8px 0 0;border-left:3px solid #7c3aed;background:#faf9ff"><b>No olvide:</b> presentar su posición al respecto → justificar su posición exponiendo sus argumentos → ejemplificar → concluir dejando clara su postura<span class="sub" style="font-size:10px;color:#64748b">（准备 2 min · 作答 3-4 min）</span></div>'
@@ -9459,15 +9469,10 @@ function _sieleMockStartRandom(){
   }catch(e){ console.warn(e); toast('组卷失败，请重试'); }
 }
 function _sieleMockStartWith(it,tag){
-  /* v92.7: 未开严谨模式时一次性提示（不强制） */
+  /* v95.51 P0-C1: 模考自动开启严谨模式（更接近真实考场）；用户仍可在模考条上点开关自行关闭，退出模考后恢复原设置 */
   try{
-    if(typeof _sieleIsStrict==='function' && !_sieleIsStrict() && !ST.sieleExamStrictHintOff){
-      var _go=false;
-      try{ _go=confirm('检测到你当前是【练习模式】。\n\n开启【严谨考试模式】后，准备时间结束会自动开始录音，更接近真实考场。\n\n确定 ＝ 开启严谨模式并开始；取消 ＝ 保持练习模式开始。'); }catch(e){}
-      if(_go){ ST.sieleExamStrict=true; }
-      else { try{ if(confirm('保持练习模式开始。以后不再提示？（确定 ＝ 不再提醒）')) ST.sieleExamStrictHintOff=true; }catch(e){} }
-      save();
-    }
+    window._sieleMockStrictPrev = (typeof _sieleIsStrict==='function') ? _sieleIsStrict() : false;
+    if(!window._sieleMockStrictPrev){ ST.sieleExamStrict=true; save(); }
   }catch(e){}
   ST.sieleMock={on:true, items:it, pos:0, tag:tag||'random', created:Date.now()};
   save(); _sieleMockPanelOpen=false; _sieleMockGo(0);
@@ -9501,7 +9506,17 @@ function _sieleMockGo(pos){
   }catch(e){ console.warn('[mock] go 失败:',e); _sieleMockExit(); }
 }
 function _sieleMockNext(){ if(_sieleMockActive()) _sieleMockGo(((ST.sieleMock&&ST.sieleMock.pos)||0)+1); }
-function _sieleMockExit(){ if(ST.sieleMock) ST.sieleMock.on=false; save(); renderMain(); toast('已退出模拟考'); }
+function _sieleMockExit(){
+  if(ST.sieleMock) ST.sieleMock.on=false;
+  /* v95.51 C1: 恢复模考前严格模式设置（模考自动开严格不影响用户日常练习偏好） */
+  try{
+    if(typeof window._sieleMockStrictPrev === 'boolean'){
+      ST.sieleExamStrict = window._sieleMockStrictPrev;
+      delete window._sieleMockStrictPrev;
+    }
+  }catch(e){}
+  save(); renderMain(); toast('已退出模拟考');
+}
 function _sieleMockScoreOf(id){ var s=ST.sieleOralScores&&ST.sieleOralScores[id]; if(!s)return null; var c=(ST.sieleMock&&ST.sieleMock.created)||0; if(c&&(!s.ts||s.ts<c))return null; return (s.score!=null?s.score:(s.bestScore||0)); } /* v92.3: 只统计本次模考期间作答，避免历史成绩污染均分 */
 function _sieleMockBar(){ // 激活中：吸顶进度横条
   var flat=_sieleMockFlat(), pos=(ST.sieleMock&&ST.sieleMock.pos)||0;
@@ -9767,7 +9782,20 @@ function selectSieleTarea(n){stopSieleOral(true);_sieleOralTarea=Number(n)||1;
 function randomSieleOral(){var b=getSieleOralViewBank();if(b.length>1){var old=_sieleOralIdx;if(typeof isSieleT2Merge==='function'&&isSieleT2Merge()&&typeof getSieleT2Groups==='function'){var gs=getSieleT2Groups(),pick;do{var g=gs[Math.floor(Math.random()*gs.length)];pick=g.items[Math.floor(Math.random()*g.items.length)];}while(pick[1]===old&&(gs.length>1||g.items.length>1));_sieleOralIdx=pick[1];}else{while(_sieleOralIdx===old)_sieleOralIdx=Math.floor(Math.random()*b.length);}}_sieleOralShown=false;stopSieleOral(true);_sieleSyncProgress();save();renderMain();}
 function chooseSieleTopic(topic){var b=getSieleOralBank()[_sieleOralTarea]||[];var i=b.findIndex(function(x){return x.topic===topic;});if(i>=0){_sieleOralIdx=i;_sieleOralShown=false;ST.sieleOralProgress=ST.sieleOralProgress||{};ST.sieleOralProgress.topic=topic;_sieleSyncProgress();save();renderMain();}}
 function toggleOralAudio(){try{ST.oralAudioMp3=!ST.oralAudioMp3;save();var b=document.getElementById('soAudioSrcBtn');if(b)b.textContent=(ST.oralAudioMp3?'🎛 音源:Dalia':'🎛 音源:在线');if(window._curTtsMp3){try{window._curTtsMp3.pause();}catch(e){}}}catch(e){}}
-function playSielePrompt(){var x=getSieleOralItem();if(x)speak(x.q,null,'es');}
+window._sielePlayCnt = {}; /* v95.51 P0-B1: 严谨模式 T1 每问最多听 2 遍（按题目 id 计数） */
+function playSielePrompt(){
+  var x=getSieleOralItem(); if(!x) return;
+  var strict=(typeof _sieleIsStrict==='function' && _sieleIsStrict());
+  var isT1=(Number(_sieleOralTarea)===1);
+  if(strict && isT1){
+    var key=String(x.id||'');
+    var n=Number(window._sielePlayCnt[key]||0);
+    if(n>=2){ if(typeof toast==='function') toast('严谨模式：本题音频最多听 2 遍（可切到练习模式自由听）','ok'); return; }
+    window._sielePlayCnt[key]=n+1;
+    try{ var b=document.querySelector('button[onclick="playSielePrompt()"]'); if(b) b.textContent='播放题目 ('+window._sielePlayCnt[key]+'/2)'; }catch(e){}
+  }
+  speak(x.q,null,'es');
+}
 function revealSielePrompt(){_sieleOralShown=true;var x=getSieleOralItem()||{};var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.innerHTML=_sieleEscQ(x.q||'')+((x.zhExplain&&_sieleZhShown)?'<div class="so-zhexp" id="soZhExp">'+esc(x.zhExplain)+'</div>':'');}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
 // ===== S10: T3 中文三级渐进 / T4T5 联动 / T2 预取 / 题库编辑历史 =====
 function toggleSieleZh(){
@@ -9863,7 +9891,15 @@ window._bankRollback=function(k){
 };
 /* ===== v92.7: 准备时间（官方节奏）+ 严谨模式 ===== */
 function _sieleIsStrict(){ return !!(ST && ST.sieleExamStrict === true); }
-function _sielePrepSecOf(){ try{ var a=(typeof getSieleTareas==='function')?getSieleTareas():(SIELE_TAREAS||[]); for(var i=0;i<a.length;i++){ if(Number(a[i].num)===Number(_sieleOralTarea)) return a[i].prep||0; } }catch(e){} return 0; }
+function _sielePrepSecOf(){
+  try{
+    /* v95.51 P0-A1: 严谨模式下 T1 无准备时间（官方 T1 直接播放四问）；练习模式保留练习节奏 */
+    if(Number(_sieleOralTarea)===1 && typeof _sieleIsStrict==='function' && _sieleIsStrict()) return 0;
+    var a=(typeof getSieleTareas==='function')?getSieleTareas():(SIELE_TAREAS||[]);
+    for(var i=0;i<a.length;i++){ if(Number(a[i].num)===Number(_sieleOralTarea)) return a[i].prep||0; }
+  }catch(e){}
+  return 0;
+}
 function _sielePaintTimer(){
   var el=document.getElementById('soTimer'); if(!el) return;
   var v=Math.max(0,_sieleOralLeft||0);
