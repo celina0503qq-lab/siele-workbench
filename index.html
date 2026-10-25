@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.60-202610260300';
+window.swVer = 'v95.61-202610260330';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -4546,7 +4546,14 @@ function scoreShadow(recognized, elapsedSec){
   // P1-1: 跟读 < 60 自动入错题集
   if(score < 60){
     const _sh = SHADOW_SENTENCES[_shadowIdx];
-    autoLogLowScore('shadow', ['shadow', _shadowIdx, _sh && _sh.topic || ''].join('::'), {
+    /* v95.61: 错题集详细化——跟读训练补 path / 中文对照 / 等级 */
+    autoLogLowScore('shadow', ['shadow', _shadowIdx, _sh && _sh.cat || ''].join('::'), {
+      path: '跟读训练 › ' + ((_sh && _sh.lvl) || '—') + ' › ' + ((_sh && _sh.cat) || '综合') + ' › 第 ' + (_shadowIdx + 1) + ' 句',
+      menu: '跟读训练',
+      section: (_sh && _sh.cat) || '跟读评分',
+      level: (_sh && _sh.lvl) || '',
+      title: String((_sh && _sh.es) || ('跟读句 ' + (_shadowIdx+1))).slice(0, 70),
+      fullQuestion: (_sh && _sh.zh) ? ('中文对照：' + _sh.zh) : '',
       question: (_sh && _sh.es) || ('跟读句 ' + (_shadowIdx+1)),
       myAnswer: recognized,
       correctAnswer: (_sh && _sh.es) || '',
@@ -8139,7 +8146,25 @@ function scoreSpeaking(text){
 
   // P1-1: 口语 < 60 自动入错题集
   if(score < 60 && wc > 0){
+    /* v95.61: 错题集详细化——口语话题补 path / 要求要点 / 参考范文 */
+    var _spEssay = '';
+    try{
+      if(topic && topic.essay) _spEssay = String(topic.essay);
+      else {
+        var _gen = (typeof generateModelEssay === 'function') ? generateModelEssay(topic, text, kw) : null;
+        if(_gen && _gen.full) _spEssay = String(_gen.full);
+      }
+    }catch(e){}
     autoLogLowScore('speaking', ['speaking', _speakIdx, topic && topic.lvl || ''].join('::'), {
+      path: '口语话题 › ' + ((topic && topic.lvl) || '—') + ' › ' + ((topic && topic.cat) || '综合') + (topic && topic.topic ? (' › ' + String(topic.topic).slice(0, 24)) : ''),
+      menu: '口语话题',
+      section: (topic && topic.cat) || '口语评分',
+      level: (topic && topic.lvl) || '',
+      title: (topic && topic.title) ? topic.title : ('口语话题 #' + (_speakIdx+1)),
+      fullQuestion: String((topic && (topic.zh || topic.title)) || ''),
+      requirements: (kw && kw.must && kw.must.length) ? kw.must.slice(0, 8) : [],
+      essay: _spEssay,
+      words: wc,
       question: (topic && topic.title) ? topic.title : ('口语话题 #' + (_speakIdx+1)),
       myAnswer: text.trim().slice(0, 200) + (text.length > 200 ? '…' : ''),
       correctAnswer: '建议: ' + (kw && kw.must ? kw.must.slice(0, 3).join(' / ') : '多覆盖关键词'),
@@ -13562,10 +13587,14 @@ function renderErrors(){
   }
   /* —— gen：练习错题（原有逻辑） —— */
   if(!ST.errorFilter) ST.errorFilter = 'all';
+  /* v95.61: 分类 Tab 补全——口语不足/跟读不足/外刊测验此前无法单独筛选 */
   const types = [
     {key:'all', label:'全部', icon:'📋', color:'var(--tr)'},
     {key:'quiz', label:'题目错误', icon:'✏️', color:'var(--tr)'},
     {key:'writing', label:'作文不足', icon:'✍️', color:'var(--am)'},
+    {key:'speaking', label:'口语不足', icon:'🗣', color:'#7c3aed'},
+    {key:'shadow', label:'跟读不足', icon:'🎤', color:'#0f766e'},
+    {key:'refineQuiz', label:'外刊测验', icon:'📰', color:'#0369a1'},
     {key:'vocab', label:'单词错误', icon:'📚', color:'var(--teal)'}
   ];
   let tabs = '<div class="err-tabs">';
@@ -13581,6 +13610,9 @@ function renderErrors(){
     <select id="errType">
       <option value="quiz">✏️ 题目错误</option>
       <option value="writing">✍️ 作文不足</option>
+      <option value="speaking">🗣 口语不足</option>
+      <option value="shadow">🎤 跟读不足</option>
+      <option value="refineQuiz">📰 外刊测验</option>
       <option value="vocab">📚 单词错误</option>
     </select>
     <input id="errQ" placeholder="题目 / 错误内容" />
@@ -13604,7 +13636,8 @@ function renderErrors(){
   } else {
     filtered.forEach((e,i)=>{
       const realIdx = ST.errors.indexOf(e);
-      const typeLabels = {quiz:'题目错误', writing:'作文不足', vocab:'单词错误'};
+      /* v95.61: 补全类型标签——此前 shadow/speaking/refineQuiz 只显示英文类型名 */
+      const typeLabels = {quiz:'题目错误', writing:'作文不足', vocab:'单词错误', speaking:'口语不足', shadow:'跟读不足', refineQuiz:'外刊测验'};
       var _crumb = e.path || [e.menu, e.section].filter(Boolean).join(' › ');
       var _reqs = Array.isArray(e.requirements) ? e.requirements : [];
       list += `<div class="err-item ${e.reviewed?'reviewed':''}">
@@ -13882,6 +13915,9 @@ function autoLogQuizError(errData){
     id:'qe'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),
     type: 'quiz', sourceKey: sourceKey,
     menu: menu, section: section, level: _lvl,
+    /* v95.61: 错题集详细化——客观题补 path 面包屑（无需范文） */
+    path: errData.path || [menu, section, _lvl].filter(Boolean).join(' › '),
+    title: errData.title || '',
     question: errData.question || '',
     myAnswer: errData.myAnswer || '',
     correctAnswer: errData.correctAnswer || '',
@@ -14374,10 +14410,25 @@ window.submitRefineQuiz = function(levelKey, qIdx){
   }
 
   // Auto-log to mistake book for wrong answers
+  /* v95.61: 修复参数错位——autoLogLowScore(type, sourceKey, payload)，此前把 payload 当 sourceKey 传，
+     导致 payload.menu 抛 TypeError 被 catch 静默吞掉，外刊测验答错**从未进入过错题集**。 */
   if(chosen !== correct && typeof autoLogLowScore === 'function'){
     try {
-      autoLogLowScore('refineQuiz', { level: levelKey.toUpperCase(), question: q.q, correct: q.opts[correct], chosen: q.opts[chosen] });
-    } catch(e){}
+      var _rqLvl = levelKey.toUpperCase();
+      var _rqIdx = (article.quiz || []).indexOf(q);
+      autoLogLowScore('refineQuiz', ['refineQuiz', currentRefineDate, levelKey, _rqIdx].join('::'), {
+        path: '外刊精炼 › ' + currentRefineDate + ' › ' + _rqLvl + ' › 测验第 ' + (_rqIdx + 1) + ' 题',
+        menu: '外刊精炼',
+        section: _rqLvl + ' 测验',
+        level: _rqLvl,
+        title: String(q.q || '').slice(0, 60),
+        question: q.q || '',
+        myAnswer: (q.opts && q.opts[chosen] != null) ? q.opts[chosen] : '',
+        correctAnswer: (q.opts && q.opts[correct] != null) ? q.opts[correct] : '',
+        note: q.fb || q.exp || '',
+        score: 0
+      });
+    } catch(e){ try{ console.warn('refineQuiz log', e); }catch(e2){} }
   }
 
   // Persist quiz answer to localStorage (swa_quiz_v1)
@@ -18236,8 +18287,33 @@ window.scoreWritingFromTextarea = function(btn){
   fb.innerHTML = html;
   // 写作 < 60 自动入错题集
   if(score < 60 && typeof autoLogLowScore === 'function'){
+    /* v95.61: 错题集详细化——DELE 写作补 path / 任务要求 / 参考范文 */
+    var _dwTask = '', _dwPrompt = '', _dwEssay = '';
+    try{
+      // 从当前按钮所在容器向上找写作区，取任务标题与提示文本
+      var _dwHost = (typeof btn !== 'undefined' && btn && btn.closest) ? btn.closest('.card') : null;
+      if(!_dwHost && typeof btn !== 'undefined' && btn) _dwHost = btn.parentElement ? btn.parentElement.parentElement : null;
+      if(_dwHost){
+        var _h4 = _dwHost.querySelector('h3, h4, b');
+        if(_h4) _dwTask = String(_h4.textContent || '').trim().slice(0, 60);
+        var _pn = _dwHost.querySelector('.note, .dele-task-prompt, p');
+        if(_pn) _dwPrompt = String(_pn.textContent || '').trim().slice(0, 600);
+      }
+      // 范文：优先取该容器内范文区文本
+      if(_dwHost){
+        var _em = _dwHost.querySelector('[data-model], .dele-model, .model-text');
+        if(_em) _dwEssay = String(_em.textContent || '').trim();
+      }
+      if(!_dwEssay && result && result.essay) _dwEssay = String(result.essay);
+    }catch(e){}
     autoLogLowScore('writing', 'dele_writing_'+level, {
-      menu: 'DELE专项', section: '写作', /* v95.34: 错题集按 DELE 板块分组标注 */
+      path: 'DELE专项 › ' + level + ' › 写作' + (_dwTask ? (' › ' + _dwTask) : ''),
+      menu: 'DELE专项', section: '写作',
+      level: level,
+      title: _dwTask || ('DELE ' + level + ' 写作任务'),
+      fullQuestion: _dwPrompt,
+      essay: _dwEssay,
+      words: (result && result.wordCount) || 0,
       question: 'DELE '+level+' 写作任务',
       myAnswer: text.slice(0,200)+(text.length>200?'…':''),
       correctAnswer: '参考范文见题目下方',
@@ -18420,8 +18496,19 @@ window.finishDeleSpeaking = function(){
   // 低于 60 自动入错题集（与写作一致）
   try{
     if(r.total < 60 && typeof autoLogLowScore === 'function'){
+      /* v95.61: 错题集详细化——DELE 口语补 path / 等级 */
+      var _dsPrompt = '';
+      try{
+        var _dsCard = (_deleSpeakBtn && _deleSpeakBtn.closest) ? _deleSpeakBtn.closest('.card') : null;
+        if(_dsCard){ var _dp = _dsCard.querySelector('.note, .dele-task-prompt, p'); if(_dp) _dsPrompt = String(_dp.textContent || '').trim().slice(0, 600); }
+      }catch(e){}
       autoLogLowScore('speaking', 'dele_speaking_'+lvl, {
-        menu: 'DELE专项', section: '口语', /* v95.34: 错题集按 DELE 板块分组标注 */
+        path: 'DELE专项 › ' + lvl + ' › 口语（录音）',
+        menu: 'DELE专项', section: '口语',
+        level: lvl,
+        title: 'DELE ' + lvl + ' 口语（录音）',
+        fullQuestion: _dsPrompt,
+        words: (r && r.wc) || 0,
         question: 'DELE '+lvl+' 口语（录音）',
         myAnswer: _deleSpeakText.slice(0,200)+(_deleSpeakText.length>200?'…':''),
         correctAnswer: '参考范例见题目下方',

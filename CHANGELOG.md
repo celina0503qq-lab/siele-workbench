@@ -1,6 +1,15 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.61] – 2026-10-26
+### 错题集扩展：全板块 path + 要点 + 范文（批 1）
+- **修复外刊测验答错从未入集（真实 BUG）**：`autoLogLowScore('refineQuiz', {...})` 少传 `sourceKey`，把 payload 当 sourceKey 传入 → `payload.menu` 抛 TypeError 被 `catch` 静默吞掉。已按正确签名补 sourceKey，并补 path/题干/选项/解析。
+- **口语话题**：入集补 `path`（口语话题 › 等级 › 分类 › 题目）、`requirements`（关键词要求，最多 8 条）、`essay`（管理员范文优先，无则生成模板）、`level/words`。
+- **跟读训练**：补 `path`（跟读训练 › 等级 › 分类 › 第 N 句）、`fullQuestion`（中文对照）、`level`。
+- **DELE 写作 / 口语**：补 `path`（DELE专项 › 等级 › 写作/口语）、任务标题、题目要求全文（从容器提取）、范文（写作）。
+- **题库测验**：`autoLogQuizError` 支持 `path`，默认按「菜单 › 板块 › 等级」生成面包屑。
+- **可用性补全**：错题类型中文标签由 3 类补到 6 类（新增 口语不足 / 跟读不足 / 外刊测验），分类 Tab 与手动添加下拉同步补全（此前这三类只能混在「全部」里显示英文类型名）。
+
 ## [v95.60] – 2026-10-26
 ### 云识别全覆盖 + T4 纯听化 + 错题集详细化（A+B+C）
 - **A｜跟读训练（shadow）接腾讯云识别**：录音按钮旁新增「🎙 识别：☁️ 腾讯云 / 🌐 在线」，独立偏好 `ST.shadowAsrSrc`（未设置跟随全局），逐句生效；新增 `startRecordCloud` 复用 `_wbAsrCloudRecordStart` + `_wbCloudAsrRun`，评分仍走 `scoreShadow → calcScore`（口径不变）。
