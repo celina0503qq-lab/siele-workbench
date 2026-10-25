@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.49-202610252100';
+window.swVer = 'v95.50-202610252130';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3291,7 +3291,7 @@ function renderFlash(){
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${_dispIdx} / ${pool.length}</div>
   </div>`;
-  h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="清空掌握星级、默写记录、错词库、翻牌位置；云端一并重置，无法恢复">↺ 重置学习进度</button></div>`;
+  h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="只清翻牌记忆：掌握星级（成长树）、默写记录、错词库、翻牌位置。不影响中西对应练习的答对/答错与练习进度">↺ 重置翻牌记忆</button></div>`;
   h += renderFlashGarden();
   h += `<div class="dictation-tabs" role="tablist" aria-label="单词卡片分项">
     <button class="dictation-tab ${_flashSubView==='study'?'on':''}" role="tab" aria-selected="${_flashSubView==='study'}" onclick="setFlashSubView('study')">📚 学习卡片</button>
@@ -5451,13 +5451,18 @@ window._wExamResultTab = 1;
 function _wExamPassageHtml(t){
   try{
     if(!t || !t.passage) return '';
-    var _txt = String(t.passage);
-    var _wc = _txt.trim().split(/\s+/).filter(function(w){return w;}).length;
-    return '<details open style="margin-top:8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 10px">'
-      + '<summary style="cursor:pointer;font-size:12px;font-weight:800;color:#1d4ed8">📰 阅读材料（'+_wc+' 词'+(t.words?(' · 对应范文 '+t.words+' 词'):'')+'）——先精读再用自己的话改写</summary>'
-      + '<div style="font-size:12.5px;line-height:1.75;margin-top:6px;white-space:pre-wrap;font-family:var(--serif);max-height:300px;overflow:auto">'+esc(_txt)+'</div>'
+    var _txt = String(t.passage).trim();
+    var _words = _txt.split(/\s+/).filter(function(w){return w;});
+    var _wc = _words.length;
+    /* v95.50: 官方 T2 材料为 50-70 词小段；题库材料是整篇长文（回忆版原文），
+       考试视图先行展示「官方风格摘要（前 ~60 词）」，长文折叠备用，避免考试节奏失真 */
+    var _short = _wc > 70 ? (_words.slice(0, 60).join(' ') + ' …') : _txt;
+    return '<div style="margin-top:8px;background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:8px 10px">'
+      + '<div style="font-size:12px;font-weight:800;color:#1d4ed8;margin-bottom:5px">📰 阅读材料 · 官方风格（50-70 词）</div>'
+      + '<div style="font-size:12.5px;line-height:1.75;white-space:pre-wrap;font-family:var(--serif)">'+esc(_short)+'</div>'
+      + (_wc > 70 ? '<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11px;color:#1d4ed8">查看完整原文（'+_wc+' 词 · 拓展精读用）</summary><div style="font-size:12px;line-height:1.7;margin-top:5px;white-space:pre-wrap;font-family:var(--serif);max-height:260px;overflow:auto">'+esc(_txt)+'</div></details>' : '')
       + (t.fuente?'<div style="font-size:10px;color:var(--soft);margin-top:5px">'+esc(t.fuente)+'</div>':'')
-      + '</details>';
+      + '</div>';
   }catch(e){ return ''; }
 }
 window._wExamSetResultTab = function(n){ window._wExamResultTab = n; try{ _wExamRender(); }catch(e){} };
@@ -5546,6 +5551,19 @@ function _wExamResultHtml(st){
   h += '</div>';
   return h;
 }
+window._wExamOpenResult = function(){
+  try{
+    if(!ST.wexam || !ST.wexam.result){
+      if(window.toast) toast('还没有考试结果——先完成一次「🎓 考试模式」交卷','ok');
+      return;
+    }
+    ST.wexam.stage = 'result';
+    window._wWritingRecordsOpen = false;
+    window._wExamActive = true;
+    window._wExamResultTab = 1;
+    renderMain();
+  }catch(e){}
+};
 window._wExamCopyEssay = function(){
   try{
     var el = document.getElementById('wexEssayText');
@@ -5578,6 +5596,7 @@ function _wWritingRecordsHtml(){
   var h = '<section class="card" style="padding:12px">'
     + '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px"><h3 style="margin:0">📊 写作记录（练习 + 模考）</h3>'
     + '<button class="btn xs t" onclick="_wWritingRecordsClose()">↩ 返回写作练习</button>'
+    + '<button class="btn xs dgr" onclick="_wClearAllRecords()">🗑 清空全部记录</button>'
     + '<span style="flex:1"></span><span class="sub" style="font-size:11px">云同步 · 每篇保留最近 20 条 · 删除记录不影响错题集（错题集在「错题集」页单独管理）</span></div>'
     + '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">'
     + '<div class="card" style="flex:1;min-width:100px;text-align:center;padding:10px"><div style="font-size:22px;font-weight:800;color:var(--ink)">'+total+'</div><div style="font-size:11px;color:var(--soft)">累计篇数</div></div>'
@@ -5606,6 +5625,20 @@ function _wWritingRecordsHtml(){
   h += '</div></section>';
   return h;
 }
+window._wClearAllRecords = function(){
+  try{
+    var recs = ST.writingScores || {};
+    var n = 0;
+    Object.keys(recs).forEach(function(k){ n += ((recs[k] && recs[k].history) || []).length; });
+    if(!n){ if(window.toast) toast('暂无记录','ok'); return; }
+    if(!confirm('清空全部 '+n+' 条写作记录？（不影响错题集、不影响已保存的作文正文）此操作云同步，无法恢复。')) return;
+    ST.writingScores = {};
+    save();
+    try{ if(typeof cloudSync==='function') cloudSync(true); }catch(e){}
+    if(window.toast) toast('已清空 '+n+' 条写作记录','ok');
+    renderMain();
+  }catch(e){ if(window.toast) toast('清空失败','err'); }
+};
 window._wDelRecord = function(wid, ts){
   try{
     if(!confirm('删除这条写作记录？（不影响错题集，错题集需到「错题集」页单独删除）')) return;
@@ -5693,11 +5726,11 @@ window._wExamRender = function(){
     h += '<div class="card" style="border-left:4px solid #dc2626;padding:10px;margin-bottom:8px"><b>📋 Tarea 2（250-300 词）· 先读材料</b>'
       + '<div style="font-size:13px;line-height:1.7;margin-top:6px">'+esc((t2 && (t2.cuerpo || t2.prompt || t2.task)) || '')+'</div>'
       + _wExamPassageHtml(t2) + '</div>'
-      + '<div class="card" style="padding:10px;text-align:center"><b>30 秒内选择题型（超时自动进入议论文）</b>'
+      + '<div class="card" style="padding:10px;text-align:center"><b>60 秒内选择一个任务（官方 1 分钟；超时自动进入议论文，不可更改）</b>'
       + '<div id="wexChoiceLeft" style="font-size:22px;font-weight:800;color:#dc2626;margin:6px 0">'+st.choiceLeft+'</div>'
       + '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'
-      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'ensayo\')">📝 议论文<br><span style="font-size:10px;font-weight:400">阐述观点+举例总结</span></button>'
-      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'carta\')">✉️ 正式书信<br><span style="font-size:10px;font-weight:400">投诉/申请/动机信</span></button>'
+      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'ensayo\')">📝 议论文（Opción A）<br><span style="font-size:10px;font-weight:400">提出主题 → 表明观点 → 论据支持 → 结论</span></button>'
+      + '<button class="btn pr" style="padding:10px 18px" onclick="_wExamPick(\'carta\')">✉️ 给报社的信（Opción B）<br><span style="font-size:10px;font-weight:400">说明问题 → 提出建议 → 期望回应</span></button>'
       + '</div></div>';
   } else {
     var t2 = (typeof getWritingTasks === 'function') ? getWritingTasks()[st.t2Idx] : null;
@@ -5752,7 +5785,7 @@ window._wExamConfirmPick = function(){
 };
 window._wExamGo = function(){
   try{
-    ST.wexam.stage = 't1'; ST.wexam.left = 50*60; ST.wexam.choiceLeft = 30;
+    ST.wexam.stage = 't1'; ST.wexam.left = 50*60; ST.wexam.choiceLeft = 60; /* v95.50: 官方 T2 选择时间 1 分钟 */
     var t1 = getWritingTasks()[ST.wexam.t1Idx], t2 = getWritingTasks()[ST.wexam.t2Idx];
     ST.wexam.t1 = (t1||{}).id || ''; ST.wexam.t2 = (t2||{}).id || '';
     ST.wexam.txt1 = ST['writing_'+ST.wexam.t1] || ''; ST.wexam.txt2 = ST['writing_'+ST.wexam.t2] || '';
@@ -5826,7 +5859,7 @@ window._wExamTick = function(){
       var ck = document.getElementById('wexClock');
       if(ck) ck.textContent = String(Math.floor(st.left/60)).padStart(2,'0')+':'+String(st.left%60).padStart(2,'0');
       if(st.stage === 'choice'){
-        st.choiceLeft = Math.max(0, (st.choiceLeft||30) - 1);
+        st.choiceLeft = Math.max(0, (st.choiceLeft||60) - 1);
         var cl = document.getElementById('wexChoiceLeft');
         if(cl) cl.textContent = st.choiceLeft;
         if(st.choiceLeft <= 0){ window._wExamPick('ensayo'); return; }
@@ -5842,7 +5875,7 @@ function renderWriting(){
   if(window._wWritingRecordsOpen){ try{ return _wWritingRecordsHtml(); }catch(e){ window._wWritingRecordsOpen = false; } }
 
   const tasks = getWritingTasks();
-  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> ${(ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button> <button class="btn sm ol" onclick="_wExamOpenRecords()">📊 写作记录</button>'}<div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
+  let h = `<div class="tb"><div><h2>写作练习${renderModuleAccentToggle('writing')}</h2> ${(ST&&ST.wexam&&ST.wexam.active)?'':'<button class="btn sm pr" onclick="_wExamStart()">🎓 考试模式</button> <button class="btn sm ol" onclick="_wExamOpenRecords()">📊 写作记录</button>'}<button class="btn sm ol" onclick="_wExamOpenResult()">📄 查看上次考试结果</button><div class="d">${tasks.length}个写作任务 · 选择题目开始练习</div></div></div>`;
   h += renderModuleCheckinBar('writing','写作练习','✍️');
   if(isContentAdmin()){
     h += `<div class="card" style="border-left:4px solid var(--tr);padding:8px 12px"><button class="btn sm pr" onclick="renderWritingAdmin()">🔧 管理员编辑写作任务</button><button class="btn sm ol" onclick="renderLexiconAdmin()" style="margin-left:6px">📚 评分词典</button><span class="sub" style="margin-left:8px;font-size:11px">编辑任务/范文/增删，保存后所有用户可见</span></div>`;
@@ -7062,7 +7095,7 @@ function _topicClone(t){ return JSON.parse(JSON.stringify(t)); }
 function renderSpeakingTopicsAdmin(keep){
   const ed = window._contentEdits.speakingTopics || {};
   if(!keep) _sadmTopics = (ed.topics && ed.topics.length) ? ed.topics.map(_topicClone) : SPEAKING_TOPICS.map(_topicClone);
-  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语话题</h2><div class="sub" style="margin-bottom:10px">增删改口语话题（等级/分类/题目/中文/提示），保存后所有用户立即看到最新版。</div>';
+  let h = '<div style="padding:6px 0"><h2>🔧 管理员编辑口语话题</h2><div class="sub" style="margin-bottom:10px">增删改口语话题（等级/分类/题目/中文/提示），保存后所有用户立即看到最新版。<b style="color:#4f46e5">口语话题题库本身不含范文</b>——「范文（可选）」留空则练习评分后只显示系统建议；手写或在「范文」框里保存后，练习评分完成时会展示你的范文。</div>';
   _sadmTopics.forEach(function(t, ti){
     h += '<div class="card" style="margin:10px 0">';
     h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>话题 '+(ti+1)+'</b>'
@@ -7072,7 +7105,7 @@ function renderSpeakingTopicsAdmin(keep){
     h += '<div style="margin:4px 0;font-size:12px"><b>题目（西语）：</b><textarea id="sadm_topic_'+ti+'" rows="2" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(t.topic||'')+'</textarea></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>中文释义：</b><input id="sadm_zh_'+ti+'" value="'+esc(t.zh||'')+'" style="width:100%"></div>';
     h += '<div style="margin:4px 0;font-size:12px"><b>准备提示：</b><textarea id="sadm_prep_'+ti+'" rows="2" style="width:100%;font-size:12px">'+esc(t.prep||'')+'</textarea></div>';
-    h += '<div style="margin:4px 0;font-size:12px"><b>范文（可选）：</b><textarea id="sadm_essay_'+ti+'" rows="4" style="width:100%;font-size:12px;font-family:var(--serif)" placeholder="手动填写范文，或点下方AI生成">'+esc(t.essay||'')+'</textarea><button class="btn xs ol" style="margin-top:4px" onclick="genSpeakingEssay('+ti+')">🤖 AI生成范文</button></div>';
+    h += '<div style="margin:4px 0;font-size:12px"><b>范文（可选）：</b><textarea id="sadm_essay_'+ti+'" rows="4" style="width:100%;font-size:12px;font-family:var(--serif)" placeholder="手动填写范文，或点下方AI生成">'+esc(t.essay||'')+'</textarea><button class="btn xs ol" style="margin-top:4px" onclick="genSpeakingEssay('+ti+')">🤖 AI生成范文（已停用）</button> <button class="btn xs pr" style="margin-top:4px" onclick="_sadmImportEssay('+ti+')">📥 从 SIELE 题库引用范文</button></div>';
     h += '</div>';
   });
   h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addSpeakingTopic()">➕ 新增话题</button><button class="btn pr" onclick="saveSpeakingTopicsAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div></div>';
@@ -7091,6 +7124,36 @@ function delSpeakingTopic(ti){
   _sadmTopics.splice(ti,1);
   renderSpeakingTopicsAdmin(true);
 }
+/* v95.50 决策2B: 从 SIELE 口语题库同类题引用范文（按分类/等级匹配，取有 model 的题目范文作底稿） */
+window._sadmImportEssay = function(ti){
+  try{
+    var cur = (_sadmTopics || [])[ti];
+    if(!cur) return;
+    var t = getSpeakingTopics()[ti] || cur;
+    var bank = (typeof getSieleOralBank === 'function') ? getSieleOralBank() : null;
+    if(!bank){ if(window.toast) toast('口语题库未加载','err'); return; }
+    var pool = [];
+    [1,2,3,4,5].forEach(function(n){ (bank[n] || []).forEach(function(q){ if(q && q.model && String(q.model).trim().length > 40) pool.push(q); }); });
+    if(!pool.length){ if(window.toast) toast('题库里没有可用范文','err'); return; }
+    var cat = String((t && (t.cat || t.topic)) || '');
+    var lvl = String((t && t.lvl) || '');
+    var scored = pool.map(function(q){
+      var sc = 0;
+      var qcat = String(q.cat || q.topic || '') + ' ' + String(q.title || '') + ' ' + String(q.esTitle || '');
+      if(cat && qcat && qcat.indexOf(cat) >= 0) sc += 5;
+      if(lvl && String(q.lvl || '') === lvl) sc += 3;
+      sc += (Number(q.sec || 0) ? 1 : 0);
+      return { q: q, sc: sc };
+    }).sort(function(a,b){ return b.sc - a.sc; });
+    var best = scored[0].q;
+    var ta = document.getElementById('sadm_essay_' + ti);
+    if(!ta){ if(window.toast) toast('编辑框未找到','err'); return; }
+    if(ta.value.trim() && !confirm('该话题已有范文内容，确定用题库范文覆盖？（可先复制保存）')) return;
+    ta.value = String(best.model).trim();
+    var src = best.title || best.esTitle || best.id || '';
+    if(window.toast) toast('已引用题库范文：' + String(src).slice(0, 20) + '（请按本题改写后保存）','ok');
+  }catch(e){ if(window.toast) toast('引用失败：' + String(e).slice(0, 40), 'err'); }
+};
 function genSpeakingEssay(ti){
   // v79: 模板范文已停用——generateModelEssay 为硬编码模板拼句（低质），预填后易被直接保存进云端
   toast('模板范文已停用，请人工撰写或留空','ok');
