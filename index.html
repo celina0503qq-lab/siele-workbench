@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.67-202610261900';
+window.swVer = 'v95.68-202610262005';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -9285,7 +9285,8 @@ window._oralOverviewHtml=function(){
     var rows=slice.map(function(q){
       var editing=(_ovEdit===q.id);
       var audio='';
-      try{ var _om=window.__ORAL_TTS_MANIFEST; audio=_om&&_om[(typeof _ttsMp3Key==='function')?_ttsMp3Key(q.q||''):'']?'🎙✓':'🎙?'; }catch(e){}
+      /* v95.68 批次 C：T4 按三问逐段判定（原来用整题干 key，T4 全被误判待更新） */
+      try{ if(typeof _oralAudioBadge==='function') audio=_oralAudioBadge(q, window._ovTab); else { var _om=window.__ORAL_TTS_MANIFEST; audio=_om&&_om[(typeof _ttsMp3Key==='function')?_ttsMp3Key(q.q||''):'']?'🎙✓':'🎙?'; } }catch(e){}
       var base='<tr'+(editing?' style="background:#f0f9ff"':'')+'>'+
         '<td><input type="checkbox" '+(_ovSel[q.id]?'checked':'')+' onchange="_ovToggleSel(\''+q.id+'\')"></td>'+
         '<td style="font-size:10.5px;color:var(--soft);max-width:120px;overflow:hidden;text-overflow:ellipsis">'+esc(q.id||'')+'</td>'+
@@ -9323,7 +9324,7 @@ window._oralOverviewHtml=function(){
       '<span style="flex:1"></span>'+
       (pages>1?'<span>'+total+' 题 · 第 '+page+'/'+pages+' 页 </span>'+(page>1?'<button class="btn xs" onclick="_ovPageTo('+(page-1)+')" style="background:#4f46e5;color:#fff;border:1.5px solid #3730a3;font-weight:700">‹ 上一页</button>':'')+Array.from({length:pages},function(_,i){var pp=i+1;if(pages<=9||Math.abs(pp-page)<=2||pp===1||pp===pages)return '<button class="btn xs" onclick="_ovPageTo('+pp+')" style="min-width:30px;font-weight:800;'+(pp===page?'background:#dc2626;color:#fff;border:1.5px solid #b91c1c':'background:#eef2ff;color:#4338ca;border:1.5px solid #6366f1')+'">'+pp+'</button>';if(pp===page-3||pp===page+3)return '<span style="color:var(--soft);font-size:11px;font-weight:700">…</span>';return '';}).join('')+(page<pages?'<button class="btn xs" onclick="_ovPageTo('+(page+1)+')" style="background:#4f46e5;color:#fff;border:1.5px solid #3730a3;font-weight:700">下一页 ›</button>':''):'<span>'+total+' 题</span>')+
       '</div>'+
-      '<div class="note" style="margin-top:8px">改动即存云端（content_edits.oralbank）并对登录用户生效；🎙✓=题干音频已生成，🎙?=待更新。批量/删除均有留史可回滚。</div>'+
+      '<div class="note" style="margin-top:8px">改动即存云端（content_edits.oralbank）并对登录用户生效；🎙✓=音频已生成，🎙◐=部分问缺（T4 三问未全命中），🎙?=待更新；T4 按三问逐段判定。批量/删除均有留史可回滚。</div>'+
       '</section>';
   }catch(e){ return '<div class="card">总览渲染失败：'+esc(e.message||e)+'</div>'; }
 };
@@ -9409,6 +9410,49 @@ function _sieleT4SplitLegacy(x){
   if(parts.length!==3) return null;
   x._subqsCache=parts.map(function(s){ return {q:s, keys:(x.keys||[]).slice(), model:x.model||'', auto:true}; });
   return x._subqsCache;
+}
+/* v95.68 批次 C：口语题库总览 / 管理员编辑器的音频状态判定。
+   此前统一用「整题干」文本算 key 去查 __ORAL_TTS_MANIFEST，而 T4 的 357 段 mp3 是按
+   「3 问逐段」文本生成的 ⇒ 整题干 key 永远查不到，T4 全部被误判为「音频待更新」。
+   本函数：T4（有 subqs 或当前在 T 页签）按三问逐个查，全命中=ok / 部分=partial / 全缺=miss。 */
+/* 独立的 T4 三问拆分（不依赖全局 _sieleOralTarea——总览/编辑器不在 T4 语境下也会调用，
+   _sieleT4SqsOf 的 legacy 分支有 tarea!==4 前置条件会返回 null，导致误判「待更新」）。
+   拆分口径与 v95.58 生成音频时一致：优先 subqs，否则按 '?' 拆且必须恰好 3 段。 */
+function _oralT4SqsStandalone(q){
+  if(!q) return null;
+  if(Array.isArray(q.subqs) && q.subqs.length) return q.subqs;
+  if(q._subqsCache) return q._subqsCache;
+  var parts = String(q.q || '').split('?').reduce(function(a, s){ s = s.trim(); if(s) a.push(s + '?'); return a; }, []);
+  if(parts.length !== 3) return null;
+  return parts.map(function(s){ return { q: s }; });
+}
+function _oralAudioState(q, tab){
+  try{
+    var om = window.__ORAL_TTS_MANIFEST;
+    if(!om || typeof _ttsMp3Key !== 'function') return 'na';
+    var t = Number(tab || (typeof window._ovTab !== 'undefined' ? window._ovTab : 0)) || 0;
+    var sqs = null;
+    if(q && Array.isArray(q.subqs) && q.subqs.length) sqs = q.subqs;
+    else if(t === 4) sqs = _oralT4SqsStandalone(q);
+    if(sqs && sqs.length){
+      var hit = 0, tot = 0;
+      for(var i = 0; i < sqs.length; i++){
+        var txt = sqs[i] && sqs[i].q;
+        if(!txt) continue;
+        tot++;
+        if(om[_ttsMp3Key(txt)]) hit++;
+      }
+      if(tot) return (hit === tot) ? 'ok' : (hit > 0 ? 'partial' : 'miss');
+    }
+    return om[_ttsMp3Key((q && q.q) || '')] ? 'ok' : 'miss';
+  }catch(e){ return 'na'; }
+}
+function _oralAudioBadge(q, tab){
+  var st = _oralAudioState(q, tab);
+  if(st === 'ok')      return '🎙✓';
+  if(st === 'partial') return '🎙◐';
+  if(st === 'na')      return '—';
+  return '🎙?';
 }
 function _sieleT4SqsOf(x){ return x ? (x.subqs || _sieleT4SplitLegacy(x)) : null; }
 function _sieleT4DoneCount(x){ // 已答问数（按评分记录推断，无需单独进度字段）
@@ -9858,11 +9902,11 @@ function _sieleScoresAdminHtml(){
 }
 function _sieleT5StanceSel(x){
   var m=window._sieleT5StanceMap=window._sieleT5StanceMap||{};
-  /* v95.51 P0-D1: 模考中不预选立场——官方要求听完 T4 三问后再基于两对立观点选一个；
-     练习模式仍默认 A 便于快速开练 */
+  /* v95.51 P0-D1: 模考中不预选立场——官方要求听完 T4 三问后再基于两对立观点选一个。
+     v95.68 批次 C: 练习模式同样不预选（用户拍板）——进入 T5 两卡都不高亮，必须先点一个
+     才出提纲/范文/评分；此前练习默认 'a' 会造成「一进来就显示 Opción 1 ✓ 已选」的误导。 */
   if(!m[x.id]){
-    var inMock=(typeof _sieleMockActive==='function' && _sieleMockActive());
-    m[x.id] = inMock ? '' : 'a';
+    m[x.id] = '';
   }
   return m[x.id];
 }
@@ -10060,8 +10104,9 @@ function _sieleT45StageUi(x){ // 题面区：T4 三问 chips / T5 立场 pills
   }
   if(_sieleOralTarea===5 && x.stances){
     // v91 官方格式：Opción 1 / Opción 2 双卡并列（立场宣言主显）+ No olvide 提示条
-    /* v95.51 D1: 模考中不预选——stanceSel 为空表示「尚未选择」，此时不回退 A */
-    var sel=(x.stanceSel!==undefined && x.stanceSel!==null) ? x.stanceSel : 'a';
+    /* v95.51 D1: 不预选——stanceSel 为空表示「尚未选择」，此时不回退 A
+       v95.68 批次 C: 练习模式同样不预选；回落值由 'a' 改为 ''（原来练习态一进来就高亮 Opción 1） */
+    var sel=(x.stanceSel!==undefined && x.stanceSel!==null) ? x.stanceSel : '';
     var _needPick = (!sel && (x._needStancePick || (typeof _sieleMockActive==='function' && _sieleMockActive())));
     var bc={a:['#059669','#ecfdf5','#065f46'],b:['#7c3aed','#f5f3ff','#4c1d95']};
     var cards=['a','b'].map(function(k){
@@ -10072,7 +10117,11 @@ function _sieleT45StageUi(x){ // 题面区：T4 三问 chips / T5 立场 pills
         +'<div style="font-size:12.5px;line-height:1.6;color:'+(on?c[2]:'#334155')+';margin-top:4px">'+esc(st.statement||st.q||'')+'</div>'
         +'</div>';
     }).join('');
-    return (_needPick ? '<div class="note" style="margin:8px 0;border-left:4px solid #f59e0b;font-size:11.5px">🎯 模考中不预设立场——请先听完 T4 三问（同一主题），再在下方 Opción 1 / Opción 2 中选择一个开始作答。</div>' : '')
+    var _mockNow = (typeof _sieleMockActive==='function' && _sieleMockActive());
+    var _pickHint = _mockNow
+      ? '🎯 模考中不预设立场——请先听完 T4 三问（同一主题），再在下方 Opción 1 / Opción 2 中选择一个开始作答。'
+      : '🎯 请先在下方 Opción 1 / Opción 2 中选择一个立场——选定后才显示该立场的论证提纲、参考范文与评分（两卡都未选时不预选）。';
+    return (_needPick ? '<div class="note" style="margin:8px 0;border-left:4px solid #f59e0b;font-size:11.5px">'+_pickHint+'</div>' : '')
       + '<div class="t45ui" style="margin:8px 0 2px">'
       +'<div style="font-size:11px;color:var(--tr);font-weight:700;margin-bottom:5px">Seleccione una de las dos opciones · 选择一个立场（提纲 / 范文 / 评分随立场切换）：</div>'
       +'<div style="display:flex;gap:9px;flex-wrap:wrap">'+cards+'</div>'
@@ -12278,7 +12327,12 @@ function renderOralAdmin(keep){
           + '<input id="oadm_qtype_'+ti+'_'+qi+'" value="'+esc(q.type||'')+'" placeholder="类型" style="width:110px;padding:4px">'
           + '<input id="oadm_qlabel_'+ti+'_'+qi+'" value="'+esc(q.label||'')+'" placeholder="题目标签" style="width:140px;padding:4px">'
           + '<button class="btn xs dgr" onclick="delOralQ('+ti+',\'questions\','+qi+')">✕ 删除</button></div>';
-        h += '<div style="margin:3px 0"><b>题目：</b>'+(function(){try{var _om=window.__ORAL_TTS_MANIFEST;if(!_om)return '<span style="font-size:10px;color:#94a3b8">[音源未接入]</span>';var _ok=!!_om[(typeof _ttsMp3Key==='function')?_ttsMp3Key(q.q||''):''];return _ok?'<span style="font-size:10px;color:#059669;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:0 6px">🎙 音频已生成</span>':'<span style="font-size:10px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:0 6px">🎙 音频待更新</span>';}catch(e){return '';}})()+'<textarea id="oadm_q_'+ti+'_'+qi+'" rows="2" style="width:100%;font-size:12px">'+esc(q.q||'')+'</textarea></div>';
+        h += '<div style="margin:3px 0"><b>题目：</b>'+(function(){try{var _om=window.__ORAL_TTS_MANIFEST;if(!_om)return '<span style="font-size:10px;color:#94a3b8">[音源未接入]</span>';
+      /* v95.68 批次 C：T4 按三问逐段判定（原来整题干 key 永远查不到 ⇒ 整卡误显示待更新） */
+      var _st=(typeof _oralAudioState==='function')?_oralAudioState(q,(ti+1)):(_om[(typeof _ttsMp3Key==='function')?_ttsMp3Key(q.q||''):'']?'ok':'miss');
+      if(_st==='ok') return '<span style="font-size:10px;color:#059669;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:0 6px">🎙 音频已生成</span>';
+      if(_st==='partial') return '<span style="font-size:10px;color:#0e7490;background:#ecfeff;border:1px solid #a5f3fc;border-radius:8px;padding:0 6px">🎙 音频部分生成（部分问缺）</span>';
+      return '<span style="font-size:10px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:0 6px">🎙 音频待更新</span>';}catch(e){return '';}})()+'<textarea id="oadm_q_'+ti+'_'+qi+'" rows="2" style="width:100%;font-size:12px">'+esc(q.q||'')+'</textarea></div>';
         h += '<div style="margin:3px 0"><b>提示（ph）：</b><input id="oadm_qph_'+ti+'_'+qi+'" value="'+esc(q.ph||'')+'" style="width:100%;padding:4px"></div>';
         h += '<div style="margin:3px 0"><b>例句（每行一条）：</b><textarea id="oadm_qex_'+ti+'_'+qi+'" rows="2" style="width:100%;font-size:12px">'+esc((q.examples||[]).join('\n'))+'</textarea></div>';
         h += '<div style="margin:3px 0"><b>范文：</b><textarea id="oadm_qm_'+ti+'_'+qi+'" rows="3" style="width:100%;font-size:12px;font-family:var(--serif)">'+esc(q.model||'')+'</textarea></div>';
