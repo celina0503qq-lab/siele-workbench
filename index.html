@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.66-202610261820';
+window.swVer = 'v95.67-202610261900';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1289,6 +1289,10 @@ function getDefaultState(){
     dictationErrorBank: [],     // 累计错词集合 [{es,zh,userAnswer,correctAnswer,ts}]
     vocabErrorBank: {},         // v94.8 词汇错题本 {es:{es,zh,wrong,right,ts}}，练习答对3次出池
     conjErrorBank: [],          // v94.8 变位默写/听写错题 [{verb,tk,dual,label,person,answer,expected,ts}]
+    /* v95.67 批次 B：错题池删除墓碑。此前出池只是 delete 条目，没有墓碑 ⇒ 合并时远端旧快照
+       （连对 2/3）会被回插，双设备互拉复活、永远卡在 2/3。结构：{key:[ts,...]} 上限 200 */
+    vocabErrorBankDel: {},      // 词汇错题出池/删除墓碑 {es:[ts,...]}
+    conjErrorBankDel: {},       // 变位错题出池/删除墓碑 {verb|tk|dual|person:[ts,...]}
     flashReviewSession: 0,      // 当前会话背诵计数（每10个触发默写）
     recentlyStudiedWords: [],   // 最近学过的词（环形缓冲，最多10个，用于触发听写池）
     readingArticles: [],        // 外刊文章缓存
@@ -2971,6 +2975,8 @@ function _vocabWipeLocal(now){
   ST.flipRated={}; /* v95.39: 翻牌评价追踪随重置清空 */
   ST.flashCurrentWordLvl='';
   ST.vocabDictation={};ST.dictationErrorBank=[];ST.dictationLog=[];ST.vocabErrorBank={};
+  /* v95.67: 重置时错题池墓碑一并清空（池已空，旧墓碑无意义且会挡住重置后新产生的错题记录） */
+  ST.vocabErrorBankDel={};ST.conjErrorBankDel={};
   ST.recentlyStudiedWords=[];ST.dictationPending=[];
   ST.flashReviewSession=0;
   ST.flashLastPositionTs={A1:0,A2:0,B1:0,B2:0,all:0};
@@ -20113,9 +20119,49 @@ function finishConjPractice(){
 
 
 // ===== v94.8 错题本体系（词汇练习 + 变位默写/听写） =====
+/* v95.67 批次 B：墓碑工具——错题池出池/删除必须留凭据，否则云同步 pull 时远端旧条目会被回插 */
+function _errTombMark(bankKey, key){
+  try{
+    if(!key) return;
+    var t = ST[bankKey] = ST[bankKey] || {};
+    var arr = t[key] = t[key] || [];
+    var now = Date.now();
+    arr.push(now);
+    if(arr.length > 200) arr.splice(0, arr.length - 200);
+  }catch(e){ try{ console.warn('[errTomb] mark 失败', e); }catch(_e){} }
+}
+function _errTombClear(bankKey, key){
+  /* 重新入池时撤销墓碑（该词又错了，属于新事实） */
+  try{ if(ST[bankKey] && key && ST[bankKey][key]) delete ST[bankKey][key]; }catch(e){}
+}
+function _errTombHas(bankKey, key, ts){
+  try{
+    var t = ST[bankKey]; if(!t || !key) return false;
+    var arr = t[key]; if(!Array.isArray(arr) || !arr.length) return false;
+    var newest = 0;
+    for(var i=0;i<arr.length;i++){ var v = Number(arr[i])||0; if(v>newest) newest = v; }
+    /* 墓碑时间晚于对端条目时间 ⇒ 说明删除发生在条目之后，对端条目已过期 */
+    return newest >= (Number(ts)||0);
+  }catch(e){ return false; }
+}
+/* 合并对端墓碑表（并集，上限 200） */
+function _errTombMerge(remote, bankKey){
+  try{
+    var rd = remote && remote[bankKey];
+    if(!rd || typeof rd !== 'object') return;
+    ST[bankKey] = ST[bankKey] || {};
+    Object.keys(rd).forEach(function(k){
+      var r = Array.isArray(rd[k]) ? rd[k] : [rd[k]];
+      var cur = ST[bankKey][k] = ST[bankKey][k] || [];
+      r.forEach(function(x){ var v = Number(x)||0; if(v && cur.indexOf(v) < 0) cur.push(v); });
+      if(cur.length > 200) cur.splice(0, cur.length - 200);
+    });
+  }catch(e){ try{ console.warn('[errTomb] merge 失败', e); }catch(_e){} }
+}
 function _vocabErrLog(v){
   if(!ST||!v||!v.es)return;
   if(!ST.vocabErrorBank)ST.vocabErrorBank={};
+  _errTombClear('vocabErrorBankDel', v.es);   /* v95.67: 重新入池 ⇒ 撤销墓碑 */
   var e=ST.vocabErrorBank[v.es]||{es:v.es,zh:v.zh||'',wrong:0,right:0,ts:0};
   e.wrong=(e.wrong||0)+1;e.right=0;e.ts=Date.now();if(v.zh&&!e.zh)e.zh=v.zh;
   ST.vocabErrorBank[v.es]=e;
@@ -20125,13 +20171,18 @@ function _vocabErrRight(v){
   var e=ST.vocabErrorBank[v.es];
   if(!e)return;
   e.right=(e.right||0)+1;e.ts=Date.now();
-  if(e.right>=3)delete ST.vocabErrorBank[v.es]; // 间隔重复答对3次出池
+  if(e.right>=3){
+    delete ST.vocabErrorBank[v.es];              // 间隔重复答对3次出池
+    _errTombMark('vocabErrorBankDel', v.es);     // v95.67: 写墓碑，防云端旧条目回插复活
+  }
 }
 function _conjErrLog(t, ans){
   if(!ST||!t||!t.verb)return;
   if(!ST.conjErrorBank)ST.conjErrorBank=[];
   var k=function(x){return x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||'');};
-  ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&k(x)===k({verb:t.verb,tk:t.tk,dual:t.dual,person:t.person}));});
+  var _k = k({verb:t.verb,tk:t.tk,dual:t.dual,person:t.person});
+  _errTombClear('conjErrorBankDel', _k);   /* v95.67: 重新入池 ⇒ 撤销墓碑 */
+  ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&k(x)===_k);});
   ST.conjErrorBank.push({verb:t.verb,tk:t.tk,dual:t.dual||'',label:t.label||'',person:t.person||'',answer:String(ans==null?'':ans),expected:t.target||'',ts:Date.now()});
   if(ST.conjErrorBank.length>200)ST.conjErrorBank.splice(0,ST.conjErrorBank.length-200);
 }
@@ -20139,22 +20190,57 @@ function _conjErrRight(t){
   if(!ST||!t||!t.verb||!ST.conjErrorBank)return;
   var k=t.verb+'|'+t.tk+'|'+(t.dual||'')+'|'+(t.person||'');
   ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===k);}); // 答对即出池
+  _errTombMark('conjErrorBankDel', k);   /* v95.67: 写墓碑，防云端旧条目回插复活 */
 }
-/* 双路径合并（mergeWbSnapshot / hydrate 同语义调用）：词卡错题逐键并集，变位错题按键去重取新 */
+/* v95.67 批次 B：模考回忆库下行合并。
+   此前上行有（wbSnap 是 ST 全量拷贝）、下行两条路径（hydrate 白名单 / mergeWbSnapshot 逐字段合并）
+   都没有这个键 ⇒ 手机即使同步成功也永远合并不进来，只能看到「还没有模考记录」。
+   语义：按 created（模考开始时刻，全局唯一）去重取并集；同一次模考保留完成度更高的那条；上限 20。 */
+function _mergeMockHistory(remote){
+  try{
+    var rr = remote && remote.sieleMockHistory;
+    if(!Array.isArray(rr) || !rr.length) return;
+    var cur = Array.isArray(ST.sieleMockHistory) ? ST.sieleMockHistory.slice() : [];
+    var byKey = {};
+    cur.forEach(function(x){ if(x && x.created) byKey[x.created] = x; });
+    rr.forEach(function(x){
+      if(!x || !x.created) return;
+      var old = byKey[x.created];
+      if(!old){ cur.push(x); byKey[x.created] = x; return; }
+      var od = Number(old.done || 0), nd = Number(x.done || 0);
+      if(nd > od){ var i = cur.indexOf(old); if(i >= 0) cur[i] = x; byKey[x.created] = x; }
+    });
+    cur.sort(function(a,b){ return (Number(a.created)||0) - (Number(b.created)||0); });
+    if(cur.length > 20) cur = cur.slice(-20);
+    ST.sieleMockHistory = cur;
+  }catch(e){ try{ console.warn('[mock] 回忆库合并失败', e); }catch(_e){} }
+}
+/* 双路径合并（mergeWbSnapshot / hydrate 同语义调用）：词卡错题逐键并集，变位错题按键去重取新
+   v95.67 批次 B：先并入对端墓碑，再按墓碑排除——否则本地已出池（已删除）的条目会被远端旧快照
+   回插，造成双设备互拉复活、永远卡在 2/3。 */
 function _mergeErrorBanks(remote){
   if(!remote||typeof remote!=='object')return;
+  _errTombMerge(remote, 'vocabErrorBankDel');
+  _errTombMerge(remote, 'conjErrorBankDel');
   if(remote.vocabErrorBank&&typeof remote.vocabErrorBank==='object'){
     ST.vocabErrorBank=ST.vocabErrorBank||{};
     Object.keys(remote.vocabErrorBank).forEach(function(es){
       var rv=remote.vocabErrorBank[es];
       if(!rv||!es)return;
+      /* v95.67: 墓碑判定——本端删除时间晚于对端条目时间 ⇒ 对端条目已作废，不复活 */
+      if(_errTombHas('vocabErrorBankDel', es, rv.ts))return;
       var lv=ST.vocabErrorBank[es];
       if(!lv){ if((rv.right||0)>=3)return; ST.vocabErrorBank[es]={es:rv.es||es,zh:rv.zh||'',wrong:rv.wrong||0,right:rv.right||0,ts:rv.ts||0}; return; }
       lv.wrong=Math.max(lv.wrong||0,rv.wrong||0);
       lv.right=Math.max(lv.right||0,rv.right||0);
       lv.ts=Math.max(lv.ts||0,rv.ts||0);
       if(!lv.zh&&rv.zh)lv.zh=rv.zh;
-      if((lv.right||0)>=3)delete ST.vocabErrorBank[es];
+      if((lv.right||0)>=3){ delete ST.vocabErrorBank[es]; _errTombMark('vocabErrorBankDel', es); }
+    });
+    /* 兜底：本端若有残留但已有更晚墓碑，一并清掉 */
+    Object.keys(ST.vocabErrorBank).forEach(function(es){
+      var lv=ST.vocabErrorBank[es];
+      if(lv && _errTombHas('vocabErrorBankDel', es, lv.ts)) delete ST.vocabErrorBank[es];
     });
   }
   if(Array.isArray(remote.conjErrorBank)&&remote.conjErrorBank.length){
@@ -20164,11 +20250,19 @@ function _mergeErrorBanks(remote){
     remote.conjErrorBank.forEach(function(e){
       if(!e||!e.verb)return;
       var _k=e.verb+'|'+e.tk+'|'+(e.dual||'')+'|'+(e.person||'');
+      /* v95.67: 墓碑判定——已答对出池的题不再被远端旧条目复活 */
+      if(_errTombHas('conjErrorBankDel', _k, e.ts))return;
       if(_cke[_k]===undefined){ST.conjErrorBank.push(e);_cke[_k]=e.ts||0;}
       else if((e.ts||0)>(_cke[_k]||0)){
         ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===_k);});
         ST.conjErrorBank.push(e);_cke[_k]=e.ts||0;
       }
+    });
+    /* 兜底清理残留 */
+    ST.conjErrorBank=ST.conjErrorBank.filter(function(x){
+      if(!x||!x.verb) return false;
+      var _k=x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||'');
+      return !_errTombHas('conjErrorBankDel', _k, x.ts);
     });
     if(ST.conjErrorBank.length>200)ST.conjErrorBank.splice(0,ST.conjErrorBank.length-200);
   }
@@ -20209,8 +20303,33 @@ window.renderErrorBook = function(){
 };
 window.closeErrorBook = function(){ var ov=document.getElementById('errBookOverlay'); if(ov)ov.remove(); };
 window.clearErrorBank = function(which){
-  if(which==='vocab'){ if(!confirm('确定清空全部词汇错题？此操作同步到所有设备。'))return; ST.vocabErrorBank={}; }
-  else { if(!confirm('确定清空全部变位错题？此操作同步到所有设备。'))return; ST.conjErrorBank=[]; }
+  /* v95.67: 清空也要逐条写墓碑，否则云端旧快照会把整池拉回来 */
+  var _now = Date.now();
+  if(which==='vocab'){
+    if(!confirm('确定清空全部词汇错题？此操作同步到所有设备。'))return;
+    try{
+      ST.vocabErrorBankDel = ST.vocabErrorBankDel || {};
+      Object.keys(ST.vocabErrorBank||{}).forEach(function(es){
+        var arr = ST.vocabErrorBankDel[es] = ST.vocabErrorBankDel[es] || [];
+        if(arr.indexOf(_now) < 0) arr.push(_now);
+        if(arr.length > 200) arr.splice(0, arr.length - 200);
+      });
+    }catch(e){ try{ console.warn('[errTomb] 清空词汇错题墓碑失败', e); }catch(_e){} }
+    ST.vocabErrorBank={};
+  } else {
+    if(!confirm('确定清空全部变位错题？此操作同步到所有设备。'))return;
+    try{
+      ST.conjErrorBankDel = ST.conjErrorBankDel || {};
+      (ST.conjErrorBank||[]).forEach(function(x){
+        if(!x||!x.verb) return;
+        var k = x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||'');
+        var arr = ST.conjErrorBankDel[k] = ST.conjErrorBankDel[k] || [];
+        if(arr.indexOf(_now) < 0) arr.push(_now);
+        if(arr.length > 200) arr.splice(0, arr.length - 200);
+      });
+    }catch(e){ try{ console.warn('[errTomb] 清空变位错题墓碑失败', e); }catch(_e){} }
+    ST.conjErrorBank=[];
+  }
   save();
   if(document.getElementById('errBookOverlay')){renderErrorBook();}else{try{renderMain();}catch(e){}}
   toast('已清空','');
@@ -21205,6 +21324,8 @@ function hydrate(){
     })();
     /* v94.8: 错题本精细合并（不在白名单，防整体覆盖；与 mergeWbSnapshot 同语义） */
     try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(rm); }catch(e){}
+    /* v95.67 批次 B：模考回忆库下行合并（此前两条路径都缺这个键 ⇒ 手机永远看不到回忆库） */
+    try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(rm); }catch(e){ try{console.warn('[mock] hydrate 合并入口异常',e);}catch(_e){} }
     /* v92.9【根因】sieleOralScores 原先也在上面白名单里被**整体覆盖**，绕过 mergeSieleOralScore
        ⇒ 删除墓碑/按条删除表全部失效、删掉的记录会被云端快照复活。改为"逐条合并"。 */
     if(rm.sieleOralScores){
@@ -21558,6 +21679,8 @@ function mergeWbSnapshot(remote, wbTs){
   }
   // v94.8 错题本双路径合并（词卡错题逐键并集 / 变位错题按键去重取新）
   try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(remote); }catch(e){}
+  // v95.67 批次 B：模考回忆库合并（同上，双路径都要覆盖，否则跨设备看不到回忆库）
+  try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(remote); }catch(e){ try{console.warn('[mock] snapshot 合并入口异常',e);}catch(_e){} }
   // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
   if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
     /* v95.31: ts-LWW（同上） */
