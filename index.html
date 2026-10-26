@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.69-202610262110';
+window.swVer = 'v95.70-202610262240';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -7340,7 +7340,10 @@ function renderSpeakingTopicsAdmin(keep){
     h += '<div style="margin:4px 0;font-size:12px"><b>范文（可选）：</b><textarea id="sadm_essay_'+ti+'" rows="4" style="width:100%;font-size:12px;font-family:var(--serif)" placeholder="手动填写范文，或点下方AI生成">'+esc(t.essay||'')+'</textarea><button class="btn xs ol" style="margin-top:4px" onclick="genSpeakingEssay('+ti+')">🤖 AI生成范文（已停用）</button> <button class="btn xs pr" style="margin-top:4px" onclick="_sadmImportEssay('+ti+')">📥 从 SIELE 题库引用范文</button></div>';
     h += '</div>';
   });
-  h += '<div style="display:flex;gap:8px;margin:12px 0"><button class="btn sm" onclick="addSpeakingTopic()">➕ 新增话题</button><button class="btn pr" onclick="saveSpeakingTopicsAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div></div>';
+  h += '<div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap"><button class="btn sm" onclick="addSpeakingTopic()">➕ 新增话题</button>'
+    + '<button class="btn sm" style="background:#0e7490;color:#fff" onclick="_sadmBatchImportEssays()" title="按等级+主题组+范文质量三重校验从 SIELE 题库自动匹配；匹配不到一律留空，绝不硬凑。会先弹出预览清单让你确认">📥 批量引用题库范文（谨慎匹配）</button>'
+    + '<button class="btn pr" onclick="saveSpeakingTopicsAdmin()">💾 保存并同步给所有用户</button><button class="btn ol" onclick="renderMain()">❌ 取消</button></div>'
+    + '<div class="note" style="margin-bottom:8px">💡 批量引用<b>只处理话题分类里明确标注了 SIELE T1-T5 的题</b>，并要求：<b>同一主题组</b> + <b>题型一致</b>（陈述型不配议论范文，反之亦然）+ <b>西语质量</b>（无中文、西语词数≥30）。分类为「个人介绍 / 日常生活 / 经历 / 比较 / 观点 / 假设 / 辩论 / 抽象话题 / 图片描述 / 总结」的话题任务意图不明确，<b>一律留空</b>（宁缺勿错配），请手动补 —— 话题行 ✏️「添加/编辑范文」可就地改单条。</div></div>';
   const m = document.getElementById('main');
   if(m) m.innerHTML = h;
   window.scrollTo(0,0);
@@ -7357,6 +7360,147 @@ function delSpeakingTopic(ti){
   renderSpeakingTopicsAdmin(true);
 }
 /* v95.50 决策2B: 从 SIELE 口语题库同类题引用范文（按分类/等级匹配，取有 model 的题目范文作底稿） */
+/* ===== v95.70 批次 E：口语话题范文批量补齐（用户拍板方案 a：从 SIELE 题库引用，宁缺勿错配）=====
+   匹配策略——三道硬门槛 + 软打分排序，任一硬门槛不过直接留空（绝不硬凑）：
+     ①等级严格相等（A1/A2/B1/B2）
+     ②主题组必须相同（双方各自归入七大主题组之一；任一方无法归类 ⇒ 淘汰）
+     ③范文质量门槛：去标签后西语词数 ≥ 60、且西语特征字符占比达标（排除中文/英文误配）
+   软打分：同主题组 +6｜题型偏好（描述/经历类话题优先 T1/T2/T3，议论类优先 T5）最高 +3｜
+          关键词共现个数 ×1（上限 5）｜范文长度更接近目标区间 +1。
+   只出「高置信度」结果；匹配不到的保持空白，等人工补。 */
+window._SPEAK_TOPIC_GROUPS = {
+  '教育学习': ['educa','escuel','estudi','universi','curso','aprend','clase','beca','profesor','alumno','formaci','carrera','nota'],
+  '科技数字': ['tecnolog','digital','internet','red social','redes','móvil','movil','telefono','teléfono','ordenador','app','online','virtual','inteligenci','robot','datos'],
+  '环境可持续': ['medioambient','ambient','ecolog','contamin','recicl','sostenib','clima','energía','energia','naturalez','agua','plástico','plastico','residuo'],
+  '健康生活': ['salud','médic','medic','ejercici','deporte','alimenta','estré','estre','sueño','duerm','dieta','hospital','fuma','sedentar','estrés'],
+  '工作社会': ['trabaj','empleo','laboral','empresa','oficina','jefe','sueldo','salario','desemple','paro','profesi','negoci','compañer','reunión','reunion','horario'],
+  '文化城市': ['cultur','música','musica','cine','películ','pelicul','libro','lectura','leer','arte','museo','ciudad','barrio','transport','viaj','turism','fiesta','tradici'],
+  '伦理选择': ['étic','etic','moral','valore','deber','justicia','solidar','voluntari','donar','donaci','caridad','mentir','mentira','honestid','respeto']
+};
+window._speakTopicGroupOf = function(txt){
+  try{
+    var low = String(txt || '').toLowerCase();
+    if(!low) return '';
+    var best = '', bestHit = 0;
+    Object.keys(window._SPEAK_TOPIC_GROUPS).forEach(function(g){
+      var hit = 0;
+      window._SPEAK_TOPIC_GROUPS[g].forEach(function(kw){ if(low.indexOf(kw) >= 0) hit++; });
+      if(hit > bestHit){ bestHit = hit; best = g; }
+    });
+    return bestHit > 0 ? best : '';
+  }catch(e){ return ''; }
+};
+/* 西语质量校验：词数 + 西语特征字符占比（排除中文/英文串误入） */
+window._essayQuality = function(txt){
+  try{
+    var t = String(txt || '').replace(/\s+/g, ' ').trim();
+    if(!t) return { ok: false, words: 0, reason: '空' };
+    var words = t.split(/[\s]+/).filter(function(w){ return /[a-záéíóúüñ]/i.test(w); });
+    var cjk = (t.match(/[\u4e00-\u9fff]/g) || []).length;
+    if(cjk > 0) return { ok: false, words: words.length, reason: '含中文' };
+    var esMarks = (t.match(/[áéíóúüñ¿¡]/gi) || []).length;
+    // 西语常见虚词命中数（弱特征，避免纯英文蒙过）
+    var fn = 0;
+    [' el ',' la ',' los ',' las ',' de ',' que ',' en ',' y ',' por ',' para ',' con ',' es ',' son ',' se ',' un ',' una '].forEach(function(w){ if((' ' + t.toLowerCase() + ' ').indexOf(w) >= 0) fn++; });
+    if(cjk > 0) return { ok: false, words: words.length, reason: '含中文' };
+    /* v95.70 实测校准：SIELE 口语题库 T1 范文词数中位数仅 35 词（P75=37），
+       原定 60 词门槛会淘汰绝大多数可用范文 ⇒ 下调到 30 词（低于 30 词基本是残句） */
+    if(words.length < 30) return { ok: false, words: words.length, reason: '词数不足 30' };
+    if(esMarks < 2 && fn < 4) return { ok: false, words: words.length, reason: '非西语特征' };
+    return { ok: true, words: words.length, reason: '' };
+  }catch(e){ return { ok: false, words: 0, reason: '校验异常' }; }
+};
+/* 为单个话题找最佳题库范文；找不到返回 null（不硬凑）。
+   ⚠️ 实测事实：SIELE 口语题库**没有 lvl 字段**（SIELE 是统一考试不分 A1-C2），
+   原方案的「等级严格相等」会让 22/22 话题全部匹配失败 ⇒ 硬门槛改为「主题组 + Tarea 锁定」。 */
+window._matchEssayForTopic = function(topic){
+  try{
+    var bank = (typeof getSieleOralBank === 'function') ? getSieleOralBank() : null;
+    if(!bank) return null;
+    var tTxt = String((topic && (topic.topic || '')) || '') + ' ' + String((topic && topic.cat) || '') + ' ' + String((topic && topic.zh) || '');
+    var tGroup = window._speakTopicGroupOf(tTxt);
+    if(!tGroup) return null;                 /* 硬门槛①：本话题无法归入七大主题组 ⇒ 留空 */
+    /* 硬门槛②：话题分类里**必须**指明 SIELE T<n>，才允许自动匹配（只在对应 Tarea 里找）。
+       未标注的通用分类（个人介绍/日常生活/经历/比较/观点/假设/辩论/抽象话题/图片描述/总结）
+       任务意图不明确，实测会把「Preséntate: nombre, edad…」错配成 T3「帮助新同事适应工作」
+       或 T5 议论范文 —— 用户拍板「宁缺勿错配」⇒ 这类一律留空，等人工补。 */
+    var _tm = String((topic && topic.cat) || '').match(/SIELE\s*T([1-5])/i);
+    if(!_tm) return null;
+    var lock = Number(_tm[1]);
+    /* 硬门槛④：题型一致性——陈述型话题（介绍/描述/经历）不得用议论型范文（T4/T5），反之亦然。
+       实测反例：话题「Preséntate: nombre, edad…」曾被匹配到 T5「弹性工作提高效率」的议论范文。 */
+    var ARGUE_RE = /discut|debate|opini|acuerdo|argument|ventaja|desventaja|debería|deberia|crees|considera|estás a favor|postura/;
+    var tArgue = ARGUE_RE.test(tTxt.toLowerCase());
+    /* 各 Tarea 的范文典型词数区间（实测中位数：T1≈35 / T2≈131 / T3≈117 / T4≈92 / T5≈103） */
+    var IDEAL = { 1: [30, 60], 2: [110, 165], 3: [80, 155], 4: [75, 110], 5: [80, 160] };
+    var cands = [];
+    [1,2,3,4,5].forEach(function(n){
+      if(lock && n !== lock) return;
+      var qArgue = (n === 4 || n === 5);
+      /* 题型一致性兜底：锁定 Tarea 时仍校验——陈述型话题不会拿到 T4/T5 议论范文 */
+      if(qArgue !== tArgue && !lock) return;
+      (bank[n] || []).forEach(function(q){
+        if(!q) return;
+        var txt = String(q.title || '') + ' ' + String(q.cat || q.topic || '') + ' ' + String(q.q || '');
+        if(window._speakTopicGroupOf(txt) !== tGroup) return;      /* 硬门槛①：主题组必须相同 */
+        var qa = window._essayQuality(q.model);
+        if(!qa.ok) return;                                        /* 硬门槛③：西语质量 */
+        var sc = 6;                                               /* 同组基础分 */
+        if(lock) sc += 3;                                          /* 来源 Tarea 已锁定 = 高置信 */
+        var hits = 0;
+        window._SPEAK_TOPIC_GROUPS[tGroup].forEach(function(kw){ if(txt.toLowerCase().indexOf(kw) >= 0) hits++; });
+        sc += Math.min(hits, 5);                                   /* 关键词共现 */
+        /* 锁定 Tarea 后主题组仍须同组（已在上方硬门槛校验），关键词共现只作排序权重 */
+        var band = IDEAL[n] || [60, 160];
+        if(qa.words >= band[0] && qa.words <= band[1]) sc += 2;     /* 词数落在该 Tarea 典型区间 */
+        cands.push({ q: q, sc: sc, words: qa.words, tarea: n, group: tGroup, locked: !!lock, hits: hits, tArgue: tArgue });
+      });
+    });
+    if(!cands.length) return null;
+    cands.sort(function(a,b){ return b.sc - a.sc || b.words - a.words; });
+    var top = cands[0];
+    /* 置信门槛：锁定 Tarea 时基础分已 9，只需命中 1 个关键词即可；
+       未锁定时基础分 6，需关键词 ≥3 或 关键词+词数区间才算可信 ⇒ 统一阈值 9。 */
+    if(top.sc < 9) return null;
+    return top;
+  }catch(e){ try{ console.warn('[essay] 匹配失败', e); }catch(_e){} return null; }
+};
+/* 批量补齐：先 dry-run 预览，用户确认后才写入编辑器草稿（仍需手动「保存并同步」落云端） */
+window._sadmBatchImportEssays = function(){
+  try{
+    if(!_sadmTopics || !_sadmTopics.length){ if(window.toast) toast('无话题可处理','err'); return; }
+    var plan = [], skipHas = 0, skipNoMatch = 0;
+    _sadmTopics.forEach(function(t, ti){
+      if(t && t.essay && String(t.essay).trim().length > 20){ skipHas++; plan.push({ ti: ti, t: t, act: 'skip-has' }); return; }
+      var hit = window._matchEssayForTopic(t);
+      if(!hit){ skipNoMatch++; plan.push({ ti: ti, t: t, act: 'skip-nomatch' }); return; }
+      plan.push({ ti: ti, t: t, act: 'fill', hit: hit });
+    });
+    var toFill = plan.filter(function(x){ return x.act === 'fill'; });
+    if(!toFill.length){
+      if(window.toast) toast('没有可高置信度匹配的话题（已有范文 '+skipHas+' 个，无匹配 '+skipNoMatch+' 个）','ok');
+      return;
+    }
+    var lines = toFill.slice(0, 40).map(function(x){
+      var src = String(x.hit.q.title || x.hit.q.id || '').slice(0, 26);
+      return '· ' + String(x.t.topic || '').slice(0, 26) + '  ←  T' + x.hit.tarea + '「' + src + '」' + x.hit.words + ' 词';
+    });
+    var more = toFill.length > 40 ? ('\n…… 另有 ' + (toFill.length - 40) + ' 条') : '';
+    var msg = '将从 SIELE 题库引用范文填充 ' + toFill.length + ' 个话题（已标注 SIELE T1-T5 + 同主题组 + 题型一致 + 西语质量，全部校验通过）。\n\n'
+      + lines.join('\n') + more
+      + '\n\n已跳过：已有范文 ' + skipHas + ' 个；未标注 Tarea 或找不到可靠来源 ' + skipNoMatch + ' 个（保持空白，需人工补）。'
+      + '\n\n确认后写入编辑器草稿，**还需点「💾 保存并同步给所有用户」才真正生效**。是否继续？';
+    if(!confirm(msg)) return;
+    var filled = 0;
+    toFill.forEach(function(x){
+      var ta = document.getElementById('sadm_essay_' + x.ti);
+      var txt = String(x.hit.q.model || '').trim();
+      if(ta){ if(!ta.value.trim()){ ta.value = txt; filled++; } }
+      else if(_sadmTopics[x.ti]){ _sadmTopics[x.ti].essay = txt; filled++; }
+    });
+    if(window.toast) toast('已填 ' + filled + ' 个话题范文（草稿）——请检查后点「保存并同步」','ok');
+  }catch(e){ if(window.toast) toast('批量引用失败：' + String(e && e.message || e).slice(0, 60), 'err'); }
+};
 window._sadmImportEssay = function(ti){
   try{
     var cur = (_sadmTopics || [])[ti];
@@ -7477,7 +7621,7 @@ function _speakingTree(topics){
       const cc = _speakCatOf(t), col = _speakCatColor(cc);
       const tb = `<span class="badge" style="background:${col}1a;color:${col};border:1px solid ${col}55">${esc(t.cat||'')}</span>`;
       return `<li class="d-row" data-c="${cc}" style="border-left-color:${col}" onclick="selectSpeaking(${i})">
-        <span class="tt">${esc(String(t.topic||'').slice(0,52))}${_topicEditBtn(i,'topic','编辑题目')}<span style="display:block;font-weight:400;color:var(--soft);font-size:11px;white-space:normal">${esc(t.zh||'')}</span></span>
+        <span class="tt">${esc(String(t.topic||'').slice(0,52))}${_topicEditBtn(i,'topic','编辑题目')}${_topicEditBtn(i,'essay',(t.essay&&String(t.essay).trim().length>20)?'编辑范文（已有）':'添加范文（暂无）')}<span style="display:block;font-weight:400;color:var(--soft);font-size:11px;white-space:normal">${esc(t.zh||'')}</span></span>
         ${tb}<span class="badge b-lv">${t.lvl||''}</span>${st}
       </li>`;
     }).join('');
@@ -7623,7 +7767,7 @@ function renderSpeaking(){
     if(_speakingFilter.cat!=='all' && ((t && t.cat)||'')!==_speakingFilter.cat) return; // v94.0
     h += `<div class="rc" onclick="selectSpeaking(${i})" id="spk_${i}">
       <span class="cat"><span class="tm l${t.lvl}">${t.lvl}</span> · ${t.cat}</span>
-      <h5>${esc(t.topic.slice(0,60))}...${_topicEditBtn(i,'topic','编辑题目')}</h5>
+      <h5>${esc(t.topic.slice(0,60))}...${_topicEditBtn(i,'topic','编辑题目')}${_topicEditBtn(i,'essay',(t.essay&&String(t.essay).trim().length>20)?'编辑范文（已有）':'添加范文（暂无）')}</h5>
       <p>${esc(t.zh)}</p>
       <p style="margin-top:4px;font-size:10px;color:var(--am)">${esc(t.prep)}${_topicEditBtn(i,'prep','编辑提示')}</p>
     </div>`;
