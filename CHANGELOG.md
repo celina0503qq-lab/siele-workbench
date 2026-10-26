@@ -1,6 +1,19 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.69] – 2026-10-26
+### 词汇「已学/已掌握」口径修复 + 中西对应练习游标跨设备同步（批次 D）
+- **问题 1 · 评了 8 个词，仪表盘「已学/已掌握」只显示 6**：
+  - **口径澄清（用户确认）**：翻牌页级别进度显示的是**游标位**（从 1 起），「全部」显示**评过词数**（从 0 起）——所以「全部 8 / A1 5 / A2 5」本身是对的，**仪表盘的 6 才是真丢了 2 个**。
+  - **根因**：仪表盘只读 `ST.vocabMastery`（≥1 星=已学、3 星=已掌握）。`rateFlash` 评级时写了 `ST.vocabMastery` 与 `flipRated`，但**没有实时写词库镜像**（`ADB.words` / `MIR.w`），掌握度上云走的是 ADB 的 seedW 通道（`wbSnap` 明确 `delete vocabMastery`）⇒ 云端收不到这次评级；而 `hydrate` 的镜像回灌条件 `(!localHas || w.updatedAt > mir[1])` 在「重置后 ADB.words 的 updatedAt=纪元 E、MIR 已清空」时会成立，把刚评的星级**覆盖回 0**。
+  - **修复 1**：评级时**立即写镜像**。因 `ADB`/`MIR` 位于数据桥 IIFE 内、`rateFlash` 在另一作用域（实测 `typeof ADB === 'undefined'`，初版直接写无效），改为在 IIFE 顶层暴露 `window._wbMirrorMastery(es, level)` 接口（0 缩进，遵守顶层挂载铁律），`rateFlash` 调用它当场落镜像 + MIR 时间戳。
+  - **修复 2**：`hydrate` 的云端掌握度改为**只升不降**——新增守卫 `if(!localHas || m > _curM)`，云端更低星级不再覆盖本地更高星级。真正的清零由重置水线 `_vocabWipeLocal` / `mergeData` 的 epoch 分支负责，不依赖此处降值。
+- **问题 2 · 中西对应练习进度跨设备不同步（手机 1/0、电脑有进度）**：
+  - **根因是双层**：①`flashPraIdx` 按 v94.0 设计**明确不入同步白名单**（每设备独立）；②更关键的是 **`calcSig` 也没纳入该键** ⇒ 练习推进后签名不变、`doPush` 直接 return，**连推送都不触发**，所以云端从来没有别的设备的练习进度。
+  - **修复（用户拍板改为跨设备同步）**：新增 `ST.flashPraIdxTs`（按级别记推进时间戳）；`_praSetIdx` 推进时写时间戳；新增顶层 `_mergePraIdx(remote)` 做 **ts-LWW 合并**（远端更晚 ⇒ 采纳远端游标，B 设备进入即拉最新并在其基础上继续，后写者成为最新数据），带**重置水线排除**（远端时间戳早于本端重置时刻则作废）；`calcSig` 纳入 `flashPraIdxByLevel` + `flashPraIdxTs`；hydrate 与 mergeWbSnapshot **两条路径各挂一次**合并；`resetPraStats` 重置时把时间戳一并推进到当下（防云端旧游标回灌）。
+- **实测**：26/26 通过（接口跨作用域可达、rateFlash 行为断言确实调用镜像接口且星级正确、ADB 缺失时安全降级、hydrate 只升不降守卫静态+运行期双验证、游标推进写时间戳、远端更晚采纳/本地更晚忽略、重置前远端不复活、calcSig 纳入、双路径挂载、wbSnap 未剔除、重置清空+时间戳推进、无 pageerror）。另回归批次 A/B/C 四套测试 74/74 全绿。
+- ⚠️ **测试环境限制（如实记录）**：e2e 环境无后台 DB，`ADB` 为 null，`hydrate` 因 `if(!AU||!ADB)return` 空转 ⇒ ADB 写入路径无法在 e2e 里跑真实数据，已用「行为断言（接口被调用）+ 静态断言（`w.mastery=lv` / 守卫表达式存在）」双重覆盖。
+
 ## [v95.68] – 2026-10-26
 ### T5 练习模式不再预选立场 + 口语总览音频列按三问口径判定（批次 C）
 - **问题 1 · T5 练习模式一进来就显示「Opción 1 ✓ 已选」**：

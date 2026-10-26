@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.68-202610262005';
+window.swVer = 'v95.69-202610262110';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1258,6 +1258,9 @@ function getDefaultState(){
     flashProgressByLevel: {A1: 0, A2: 0, B1: 0, B2: 0, all: 0},
     flashMode: 'flip',  // 'flip' 翻牌模式 | 'practice' 中西对应练习
     flashPraStats: {correct:0, wrong:0, streak:0, bestStreak:0},
+    /* v95.69 批次 D：中西对应练习游标跨设备同步（用户拍板）——按级别记最后推进时间戳，ts-LWW 仲裁：
+       B 设备进入时拉取另一设备最新进度并在此基础上继续，后写者成为最新数据。 */
+    flashPraIdxTs: {},
     globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
     accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
     vocabMastery: {}, grammarDone: {}, grammarDoneTs: {},
@@ -3303,6 +3306,11 @@ function _praSetIdx(i, pool){
       var _allPool = (typeof VDATA !== 'undefined') ? VDATA : pool;
       ST.flashPraIdxByLevel['all'] = (ST.flashPraIdxByLevel['all'] + 1) % Math.max(1, _allPool.length);
     }
+    /* v95.69 批次 D：记录推进时间戳（跨设备 ts-LWW 合并依据；后写者胜出） */
+    if(!ST.flashPraIdxTs || typeof ST.flashPraIdxTs !== 'object') ST.flashPraIdxTs = {};
+    var _tsNow = Date.now();
+    ST.flashPraIdxTs[_lvl] = _tsNow;
+    ST.flashPraIdxTs['all'] = _tsNow;
   }catch(e){}
 }
 function changeFlashLevel(level){
@@ -3540,6 +3548,11 @@ function rateFlash(level){
   /* v95.39: 翻牌评价追踪——「全部」进度只数翻牌评价过的词，中西对应练习不再推高翻牌进度（用户拍板） */
   ST.flipRated = ST.flipRated || {};
   ST.flipRated[v.es] = Date.now();
+  /* v95.69 批次 D：评级立即写词库镜像（ADB.words + MIR.w）。
+     原来只在 doPush 的批量镜像同步里写——若云同步 pull 的 hydrate 抢在 300ms 防抖窗口内跑，
+     云端旧值（重置后 mastery=0）会把本端刚评的星级覆盖回 0，表现为「评了 8 个但仪表盘只显示 6」。 */
+  try{ if(typeof window._wbMirrorMastery === 'function') window._wbMirrorMastery(v.es, level); }
+  catch(e){ try{ console.warn('[flash] 评级镜像同步失败', e); }catch(_e){} }
   incReviewCount(v.es);  // nested 自增 + 写入 flashLastPositionTs（断点续背用）
   if(!ST.flashReviewSession) ST.flashReviewSession=0;
   ST.flashReviewSession++;
@@ -3833,6 +3846,8 @@ function cry(){ try{celebrate(0);}catch(e){} }
 function resetPraStats(){
   ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0, _ts: Date.now()}; /* v95.31: _ts 使云端旧值（max 合并）不再拉回 */
   ST.flashPraIdx = 0; ST.flashPraIdxByLevel = {}; // v95.4: 练习游标分级化，重置统计时全等级清
+  /* v95.69 批次 D：游标时间戳一并推进到当下——否则云端旧游标（时间戳更晚）会把重置后的空游标覆盖回来 */
+  try{ var _rzT = Date.now(); ST.flashPraIdxTs = {all:_rzT, A1:_rzT, A2:_rzT, B1:_rzT, B2:_rzT}; }catch(e){}
   save();
   try{ if(typeof cloudSync==='function') cloudSync(true); }catch(e){} /* v95.31: 立即上行覆盖云端，防其他设备旧快照拉回 */
   renderMain();
@@ -20246,6 +20261,31 @@ function _conjErrRight(t){
   ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===k);}); // 答对即出池
   _errTombMark('conjErrorBankDel', k);   /* v95.67: 写墓碑，防云端旧条目回插复活 */
 }
+/* v95.69 批次 D：中西对应练习游标跨设备合并（ts-LWW，后写者胜出）。
+   此前 flashPraIdx 明确不入同步白名单（v94.0 设计为每设备独立），且 calcSig 也没纳入
+   ⇒ 练习推进既不推送、也无法合并，手机与电脑各显示各自进度。用户拍板改为跨设备同步：
+   B 设备进入即拉取另一设备最新进度，并在此基础上继续，成为最新数据。 */
+function _mergePraIdx(remote){
+  try{
+    if(!remote || typeof remote.flashPraIdxByLevel !== 'object' || !remote.flashPraIdxByLevel) return;
+    var rTs = (remote.flashPraIdxTs && typeof remote.flashPraIdxTs === 'object') ? remote.flashPraIdxTs : {};
+    if(!ST.flashPraIdxByLevel || typeof ST.flashPraIdxByLevel !== 'object') ST.flashPraIdxByLevel = {};
+    if(!ST.flashPraIdxTs || typeof ST.flashPraIdxTs !== 'object') ST.flashPraIdxTs = {};
+    /* 重置水线排除：远端游标早于本端重置时刻 ⇒ 视为已作废 */
+    var _rz = (typeof window._vocabResetFloor === 'function') ? (Number(window._vocabResetFloor()) || 0) : 0;
+    ['all','A1','A2','B1','B2'].forEach(function(lv){
+      var rv = remote.flashPraIdxByLevel[lv];
+      if(typeof rv !== 'number' || rv < 0) return;
+      var rt = Number(rTs[lv]) || 0;
+      if(_rz && rt && rt <= _rz) return;           /* 远端值在重置之前 ⇒ 不采纳 */
+      var lt = Number(ST.flashPraIdxTs[lv]) || 0;
+      if(rt > lt){                                  /* 远端更晚推进 ⇒ 采纳远端游标 */
+        ST.flashPraIdxByLevel[lv] = rv;
+        ST.flashPraIdxTs[lv] = rt;
+      }
+    });
+  }catch(e){ try{ console.warn('[pra] 游标合并失败', e); }catch(_e){} }
+}
 /* v95.67 批次 B：模考回忆库下行合并。
    此前上行有（wbSnap 是 ST 全量拷贝）、下行两条路径（hydrate 白名单 / mergeWbSnapshot 逐字段合并）
    都没有这个键 ⇒ 手机即使同步成功也永远合并不进来，只能看到「还没有模考记录」。
@@ -21096,6 +21136,28 @@ var mirKey=function(u){return 'swa_wb_mirror_v1_'+u;};
 
 var AU=null,ADB=null,MIR=null,SIG='',pushT=null,cloudT=null,syncing=false;
 
+/* v95.69 批次 D：向主站脚本暴露「立即写掌握度镜像」接口。
+   ADB/MIR 只在本 IIFE 内可见，而 rateFlash 在另一个作用域（typeof ADB 恒 undefined），
+   原先评级只能在 doPush 的批量同步里落镜像——若 hydrate 抢在 300ms 防抖窗口内跑，
+   云端旧值（重置后 mastery 为 0）会把刚评的星级覆盖回 0，表现为「评了 8 个但仪表盘只显示 6」。
+   本接口让评级当场落镜像，保证掌握度能随快照上行、也堵住被旧值覆盖的时间窗。
+   ⚠️ 定义必须保持在 IIFE 顶层（0 缩进），禁止移入任何函数体内（v95.31 事故教训）。 */
+window._wbMirrorMastery = function(es, level){
+  try{
+    if(!es) return false;
+    var lv = Number(level) || 0, now = Date.now();
+    var low = String(es).toLowerCase(), hit = null;
+    if(ADB && ADB.words && ADB.words.length){
+      for(var i = 0; i < ADB.words.length; i++){
+        var w = ADB.words[i];
+        if(w && String(w.es || '').toLowerCase() === low){ w.mastery = lv; w.updatedAt = now; hit = w; break; }
+      }
+    }
+    if(MIR && MIR.w){ MIR.w[es] = [lv, now]; }
+    return !!hit;
+  }catch(e){ try{ console.warn('[mirror] 写掌握度失败', e); }catch(_e){} return false; }
+};
+
 /* ---------- 登录覆盖层 ---------- */
 function showLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
@@ -21333,8 +21395,14 @@ function hydrate(){
        否则一旦 ST 曾回退成更小的快照（load 回退备份键 / 配额不足吞写 / 历史账号串号），
        云端词条会被旧 MIR 时间戳永久挡住，再也补不回来。 */
     if((!localHas || (w.updatedAt||0)>mir[1]) && !(_rzH && (w.updatedAt||0)<_rzH)){
-      if((ST.vocabMastery[w.es]||0)!==m){ST.vocabMastery[w.es]=m;ST.flashMastery[w.es]=m;changed=true;}
-      MIR.w[w.es]=[m,w.updatedAt||0];
+      /* v95.69 批次 D：云端值只升不降。镜像尚未同步时（刚评级、ADB.words 仍为重置后的 0），
+         旧逻辑会把本端刚评的星级覆盖回 0 ⇒ 仪表盘「已学」比实际评级数少。
+         真正的清零由重置水线 _vocabWipeLocal / mergeData 的 epoch 分支负责，不依赖这里降值。 */
+      var _curM = Number(ST.vocabMastery[w.es]||0);
+      if(!localHas || m > _curM){
+        if(_curM!==m){ST.vocabMastery[w.es]=m;ST.flashMastery[w.es]=m;changed=true;}
+        MIR.w[w.es]=[m,w.updatedAt||0];
+      }
     }
   });
   if(ADB.wb&&ADB.wb.data&&_rzH&&(ADB.wb.ts||0)<_rzH){
@@ -21380,6 +21448,8 @@ function hydrate(){
     try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(rm); }catch(e){}
     /* v95.67 批次 B：模考回忆库下行合并（此前两条路径都缺这个键 ⇒ 手机永远看不到回忆库） */
     try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(rm); }catch(e){ try{console.warn('[mock] hydrate 合并入口异常',e);}catch(_e){} }
+    /* v95.69 批次 D：中西对应练习游标跨设备合并 */
+    try{ if(typeof _mergePraIdx==='function') _mergePraIdx(rm); }catch(e){ try{console.warn('[pra] hydrate 合并入口异常',e);}catch(_e){} }
     /* v92.9【根因】sieleOralScores 原先也在上面白名单里被**整体覆盖**，绕过 mergeSieleOralScore
        ⇒ 删除墓碑/按条删除表全部失效、删掉的记录会被云端快照复活。改为"逐条合并"。 */
     if(rm.sieleOralScores){
@@ -21429,7 +21499,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPraIdxByLevel,ST.flashPraIdxTs,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -21735,6 +21805,8 @@ function mergeWbSnapshot(remote, wbTs){
   try{ if(typeof _mergeErrorBanks==='function') _mergeErrorBanks(remote); }catch(e){}
   // v95.67 批次 B：模考回忆库合并（同上，双路径都要覆盖，否则跨设备看不到回忆库）
   try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(remote); }catch(e){ try{console.warn('[mock] snapshot 合并入口异常',e);}catch(_e){} }
+  // v95.69 批次 D：中西对应练习游标跨设备合并（ts-LWW）
+  try{ if(typeof _mergePraIdx==='function') _mergePraIdx(remote); }catch(e){ try{console.warn('[pra] snapshot 合并入口异常',e);}catch(_e){} }
   // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
   if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
     /* v95.31: ts-LWW（同上） */
