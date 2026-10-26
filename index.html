@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.70-202610262240';
+window.swVer = 'v95.71-202610262120';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1261,6 +1261,8 @@ function getDefaultState(){
     /* v95.69 批次 D：中西对应练习游标跨设备同步（用户拍板）——按级别记最后推进时间戳，ts-LWW 仲裁：
        B 设备进入时拉取另一设备最新进度并在此基础上继续，后写者成为最新数据。 */
     flashPraIdxTs: {},
+    /* v95.71：练习「主动重置」标记——合并改为只增不减后，清零只能靠这个独立标记传播 */
+    flashPraResetAt: 0,
     globalAccent: 'la', // 全局发音口音: 'la'=拉美(es-MX) | 'es'=西班牙(es-ES)
     accentOverride: {},   /* FEAT-3: 模块级口音覆盖 {flash:'la', vocab:'es', ...} */
     vocabMastery: {}, grammarDone: {}, grammarDoneTs: {},
@@ -1272,6 +1274,9 @@ function getDefaultState(){
     shadowScores: {},
     refineShadowScores: {}, // v53: 外刊跟读评分(独立留存, 键 date::lvKey::pidx)
     sieleOralScores: {},
+    /* v95.71: 写作「上次考试结果」跨设备快照——wexam 本身含进行中状态（active/stage/left）不宜整体同步，
+       只把这个快照做下行合并，让另一台设备也能「查看上次考试结果」。 */
+    wexamLast: null,
     writingScores: {},       /* v94.4: 写作做题记录 {id:{bestScore,count,lastDate,history:[{ts,date,score,words,text,tarea}]}} */
     writingScoresDel: {},    /* v94.4: 按条删除表 {id:[ts,...]} 防云同步并回 */
     speakScores: {},         /* v94.5: 口语话题做题记录 {key:{bestScore,count,lastDate,history:[{ts,date,score,words,lvl,cat,text}]}} */
@@ -3339,15 +3344,49 @@ function renderFlash(){
     if(_frFloor && _t <= _frFloor) return false;
     return true;
   }).length; /* v95.47: 只数真实评价（ts>0）——排除 v95.41 回填的 0 值占位（练习写入的 vocabMastery 曾被回填污染） */
-  const _dispIdx = _praMode ? (_curIdx+1) : (_allMode ? (_flipRatedN) : (_curIdx+1)); /* v95.39: 翻牌「全部」=翻牌评价词数（原=已学唯一词数，被练习写入污染）；练习各级=练习游标位置 */
+  /* v95.71（用户拍板）：进度一律「已完成数」，全部从 0 起，不再 +1 显示游标位——此前未学时各级显示 1，容易误以为已学 1 个。
+     · 翻牌「全部」= 翻牌评价过的词数（flipRated 计数，本来就 0 起）
+     · 翻牌各级   = 该级已看过的词数（游标值，0 起）
+     · 练习「全部」= 累计答题数（答对+答错，直观对应「我练了几题」）
+     · 练习各级   = 该级练习游标（0 起） */
+  const _praTotalN = (function(){ try{ var _s=ST.flashPraStats||{}; return (Number(_s.correct)||0)+(Number(_s.wrong)||0); }catch(e){ return 0; } })();
+  const _dispIdx = _praMode ? (_allMode ? _praTotalN : _curIdx) : (_allMode ? (_flipRatedN) : _curIdx);
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
+  /* v95.71：查出「评过级但星级记录丢失」的词。
+     成因是 v95.69 之前的历史缺陷——评级只写 ST.vocabMastery 未写词库镜像，云同步 pull 时
+     旧值把它覆盖回 0。修复后不再新增丢失，但已丢的星级无法凭空推断，只能提示重评。 */
+  const _needRateWords = (function(){
+    try{
+      var out = [], _fr = ST.flipRated || {}, _vm = ST.vocabMastery || {};
+      var _fl = _frFloor;
+      Object.keys(_fr).forEach(function(k){
+        var t = Number(_fr[k]) || 0;
+        if(t <= 0) return;                       /* 排除 v95.41 回填的 0 值占位 */
+        if(_fl && t <= _fl) return;              /* 重置前的旧记录不算 */
+        if((Number(_vm[k]) || 0) < 1) out.push(k);
+      });
+      return out;
+    }catch(e){ return []; }
+  })();
   const errors=getDictationErrors();
   const _praErrN = (ST.vocabErrorBank && Object.keys(ST.vocabErrorBank).length) || 0; /* v95.34: 练习错题本入口计数 */
 
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
     <div class="dp">进度 ${_dispIdx} / ${pool.length}</div>
   </div>`;
+  if(_needRateWords.length){
+    h += '<div class="note" style="margin:0 0 8px;border-left:4px solid #f59e0b;background:#fffbeb;font-size:11.5px">'
+      + '⚠️ 有 <b>'+_needRateWords.length+'</b> 个词「评过级但星级记录丢失」（旧版本同步缺陷所致，现已修复、不会再丢），'
+      + '所以仪表盘「已学」比实际评级数少。重新给它们评一次级即可恢复：'
+      + '<div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center">'
+      + _needRateWords.slice(0,12).map(function(w){
+          return '<span style="background:#fff;border:1px solid #fde68a;border-radius:8px;padding:1px 8px;font-family:var(--serif)">'+esc(w)+'</span>';
+        }).join('')
+      + (_needRateWords.length>12 ? '<span class="sub">…另 '+( _needRateWords.length-12)+' 个</span>' : '')
+      + '<button class="btn xs ol" style="font-size:10.5px" onclick="_jumpToWordRate()">去重评第一个</button>'
+      + '</div></div>';
+  }
   h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 8px"><label style="font-size:11px;color:var(--soft);cursor:pointer;user-select:none"><input type="checkbox" ${isDictAutoOff()?'checked':''} onchange="setDictAutoOff(this.checked)"> 每10词自动默写（关掉后仍可在「默写二次巩固」手动开始 · 仅本设备）</label><button class="btn sm ol" style="font-size:11px;padding:4px 10px" onclick="resetFlashProgress()" title="只清翻牌记忆：掌握星级（成长树）、默写记录、错词库、翻牌位置。不影响中西对应练习的答对/答错与练习进度">↺ 重置翻牌记忆</button></div>`;
   h += renderFlashGarden();
   h += `<div class="dictation-tabs" role="tablist" aria-label="单词卡片分项">
@@ -3379,7 +3418,7 @@ function renderFlash(){
   h += `</div>`;
 
   // Progress bar
-  const masteryPct = _praMode ? Math.min(100,(_curIdx+1)/Math.max(1,pool.length)*100) : m/3*100; /* v95.34: 练习模式进度条=练习游标位置，与翻牌掌握度无关 */
+  const masteryPct = _praMode ? Math.min(100, _dispIdx/Math.max(1,pool.length)*100) : m/3*100; /* v95.34: 练习模式进度条=练习进度；v95.71: 与 _dispIdx 同源 */
   h += `<div class="fcp"><span style="font-size:11px">${_praMode?'练习':(m>0?'已学':'未学')}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_dispIdx}/${pool.length}</span></div>`;
 
   if(ST.flashMode === 'practice'){
@@ -3846,8 +3885,10 @@ function cry(){ try{celebrate(0);}catch(e){} }
 function resetPraStats(){
   ST.flashPraStats = {correct:0, wrong:0, streak:0, bestStreak:0, _ts: Date.now()}; /* v95.31: _ts 使云端旧值（max 合并）不再拉回 */
   ST.flashPraIdx = 0; ST.flashPraIdxByLevel = {}; // v95.4: 练习游标分级化，重置统计时全等级清
-  /* v95.69 批次 D：游标时间戳一并推进到当下——否则云端旧游标（时间戳更晚）会把重置后的空游标覆盖回来 */
-  try{ var _rzT = Date.now(); ST.flashPraIdxTs = {all:_rzT, A1:_rzT, A2:_rzT, B1:_rzT, B2:_rzT}; }catch(e){}
+  /* v95.69 批次 D：游标时间戳一并推进到当下——否则云端旧游标（时间戳更晚）会把重置后的空游标覆盖回来
+     v95.71：同时写独立重置标记 flashPraResetAt，作为「对端主动清零」的唯一传播依据
+     （因为合并已改为「只增不减」，不能再靠游标值本身表达清零） */
+  try{ var _rzT = Date.now(); ST.flashPraIdxTs = {all:_rzT, A1:_rzT, A2:_rzT, B1:_rzT, B2:_rzT}; ST.flashPraResetAt = _rzT; }catch(e){}
   save();
   try{ if(typeof cloudSync==='function') cloudSync(true); }catch(e){} /* v95.31: 立即上行覆盖云端，防其他设备旧快照拉回 */
   renderMain();
@@ -5739,11 +5780,57 @@ function _wExamResultHtml(st){
   h += '</div>';
   return h;
 }
+/* v95.71：把翻牌游标定位到第一个「评过级但星级丢失」的词，方便逐个重评恢复。 */
+window._jumpToWordRate = function(){
+  try{
+    var _fr = ST.flipRated || {}, _vm = ST.vocabMastery || {};
+    var _fl = (typeof window._vocabResetFloor === 'function') ? (Number(window._vocabResetFloor()) || 0) : 0;
+    var target = null;
+    Object.keys(_fr).forEach(function(k){
+      if(target) return;
+      var t = Number(_fr[k]) || 0;
+      if(t <= 0) return;
+      if(_fl && t <= _fl) return;
+      if((Number(_vm[k]) || 0) < 1) target = k;
+    });
+    if(!target){ if(window.toast) toast('没有待重评的词','ok'); return; }
+    /* 在全量池里找该词的位置（换到「全部」级并同步游标） */
+    ST.flashLevel = 'all';
+    var _all = (typeof VDATA !== 'undefined') ? VDATA : getFlashPool();
+    var _ix = -1;
+    for(var i = 0; i < _all.length; i++){ if(_all[i] && _all[i].es === target){ _ix = i; break; } }
+    if(_ix < 0){ if(window.toast) toast('该词不在当前词库中','err'); return; }
+    ST.flashMode = 'flip';
+    ST.flashIdx = _ix;
+    ST.flashCurrentWord = target;
+    if(!ST.flashIdxByLevel || typeof ST.flashIdxByLevel !== 'object') ST.flashIdxByLevel = {};
+    ST.flashIdxByLevel['all'] = _ix;
+    if(!ST.flashLastPositionTs || typeof ST.flashLastPositionTs !== 'object') ST.flashLastPositionTs = {A1:0,A2:0,B1:0,B2:0,all:0};
+    ST.flashLastPositionTs['all'] = Date.now();
+    save(); renderMain();
+    if(window.toast) toast('已定位到「'+target+'」——重新评一次级即可恢复','ok');
+  }catch(e){ if(window.toast) toast('定位失败：'+String(e && e.message || e).slice(0,50),'err'); }
+};
 window._wExamOpenResult = function(){
   try{
-    if(!ST.wexam || !ST.wexam.result){
+    /* v95.71: 本端没有结果时，回退到跨设备快照（此前只读本端 ST.wexam.result，
+       另一台设备永远提示「还没有考试结果」，因为 wexam 从未参与下行合并）。 */
+    var _r = (ST.wexam && ST.wexam.result) || (ST.wexamLast && ST.wexamLast.result) || null;
+    if(!_r){
       if(window.toast) toast('还没有考试结果——先完成一次「🎓 考试模式」交卷','ok');
       return;
+    }
+    if(!ST.wexam) ST.wexam = {};
+    if(!ST.wexam.result){
+      ST.wexam.result = _r;
+      try{
+        if(ST.wexamLast){
+          if(typeof ST.wexamLast.t1Idx === 'number') ST.wexam.t1Idx = ST.wexamLast.t1Idx;
+          if(typeof ST.wexamLast.t2Idx === 'number') ST.wexam.t2Idx = ST.wexamLast.t2Idx;
+          ST.wexam.txt1 = String(ST.wexamLast.txt1 || '');
+          ST.wexam.txt2 = String(ST.wexamLast.txt2 || '');
+        }
+      }catch(_eR){ try{ console.warn('[wexam] 快照还原失败', _eR); }catch(_e2){} }
     }
     ST.wexam.stage = 'result';
     window._wWritingRecordsOpen = false;
@@ -6048,6 +6135,12 @@ window._wExamSubmit = function(early){
     var r1 = window._wScoreWriting(ST.wexam.txt1 || '', ST.wexam.t1Idx, {src:'exam'});
     var r2 = window._wScoreWriting(ST.wexam.txt2 || '', ST.wexam.t2Idx, {src:'exam'});
     ST.wexam.result = { t1: _pack(r1), t2: _pack(r2), at: Date.now(), early: !!early };
+    /* v95.71: 同时写跨设备可同步的快照（含还原结果页所需的题目索引与作答全文） */
+    try{
+      ST.wexamLast = { t1Idx: ST.wexam.t1Idx, t2Idx: ST.wexam.t2Idx,
+        txt1: String(ST.wexam.txt1 || ''), txt2: String(ST.wexam.txt2 || ''),
+        result: ST.wexam.result, at: ST.wexam.result.at };
+    }catch(_eWL){ try{ console.warn('[wexam] 快照写入失败', _eWL); }catch(_e2){} }
     ST.wexam.active = false;
     ST.wexam.stage = 'result';
     ST.wexam.doneAt = Date.now();
@@ -20405,6 +20498,26 @@ function _conjErrRight(t){
   ST.conjErrorBank=ST.conjErrorBank.filter(function(x){return !(x&&x.verb&&(x.verb+'|'+x.tk+'|'+(x.dual||'')+'|'+(x.person||''))===k);}); // 答对即出池
   _errTombMark('conjErrorBankDel', k);   /* v95.67: 写墓碑，防云端旧条目回插复活 */
 }
+/* v95.71：写作「上次考试结果」跨设备合并（按 at 时间戳，新者胜出）。
+   此前 ST.wexam 从未参与下行合并，且 calcSig 也不含它 ⇒ 交卷后既不推送、对端也合并不进来，
+   于是「查看上次考试结果」只在做卷那台设备可见，另一台永远提示「还没有考试结果」。 */
+function _mergeWexamLast(remote){
+  try{
+    var r = remote && remote.wexamLast;
+    if(!r || !r.result) return;
+    var ra = Number(r.at) || Number(r.result.at) || 0;
+    if(!ra) return;
+    var la = Number((ST.wexamLast && ST.wexamLast.at) || 0);
+    if(ra > la){
+      ST.wexamLast = {
+        t1Idx: (typeof r.t1Idx === 'number') ? r.t1Idx : null,
+        t2Idx: (typeof r.t2Idx === 'number') ? r.t2Idx : null,
+        txt1: String(r.txt1 || ''), txt2: String(r.txt2 || ''),
+        result: r.result, at: ra
+      };
+    }
+  }catch(e){ try{ console.warn('[wexam] 考试结果合并失败', e); }catch(_e){} }
+}
 /* v95.69 批次 D：中西对应练习游标跨设备合并（ts-LWW，后写者胜出）。
    此前 flashPraIdx 明确不入同步白名单（v94.0 设计为每设备独立），且 calcSig 也没纳入
    ⇒ 练习推进既不推送、也无法合并，手机与电脑各显示各自进度。用户拍板改为跨设备同步：
@@ -20415,17 +20528,31 @@ function _mergePraIdx(remote){
     var rTs = (remote.flashPraIdxTs && typeof remote.flashPraIdxTs === 'object') ? remote.flashPraIdxTs : {};
     if(!ST.flashPraIdxByLevel || typeof ST.flashPraIdxByLevel !== 'object') ST.flashPraIdxByLevel = {};
     if(!ST.flashPraIdxTs || typeof ST.flashPraIdxTs !== 'object') ST.flashPraIdxTs = {};
-    /* 重置水线排除：远端游标早于本端重置时刻 ⇒ 视为已作废 */
+    /* v95.71 收紧：进度**只增不减**。
+       此前按 ts-LWW「远端时间戳更新就采纳」，会把更小的值也采纳进来——对端只要有一次
+       游标停在 0 而时间戳较新（如重置练习后时间戳被推平、或另一级别练过后 all 桶被写小），
+       本端辛苦累积的进度就被打回 0。实测症状：答了 8 题但「全部」显示 1。
+       现在改为：默认只采纳**更大的**游标；对端主动「重置练习」通过独立的 flashPraResetAt 传播。 */
+    /* ① 对端主动重置过（且晚于本端）⇒ 本端清空 */
+    var _rRe = Number(remote.flashPraResetAt) || 0;
+    var _lRe = Number(ST.flashPraResetAt) || 0;
+    if(_rRe > _lRe){
+      ST.flashPraResetAt = _rRe;
+      ST.flashPraIdxByLevel = {};
+      try{ var _s0 = ST.flashPraStats || {}; _s0.correct = 0; _s0.wrong = 0; _s0.streak = 0; _s0._ts = _rRe; ST.flashPraStats = _s0; }catch(e){}
+    }
+    /* ② 重置水线排除：远端游标早于本端重置时刻 ⇒ 视为已作废 */
     var _rz = (typeof window._vocabResetFloor === 'function') ? (Number(window._vocabResetFloor()) || 0) : 0;
     ['all','A1','A2','B1','B2'].forEach(function(lv){
       var rv = remote.flashPraIdxByLevel[lv];
       if(typeof rv !== 'number' || rv < 0) return;
       var rt = Number(rTs[lv]) || 0;
       if(_rz && rt && rt <= _rz) return;           /* 远端值在重置之前 ⇒ 不采纳 */
-      var lt = Number(ST.flashPraIdxTs[lv]) || 0;
-      if(rt > lt){                                  /* 远端更晚推进 ⇒ 采纳远端游标 */
+      var lv0 = Number(ST.flashPraIdxByLevel[lv]) || 0;
+      /* 只接受更大的游标（防倒退）；相等或更小一律忽略 */
+      if(rv > lv0){
         ST.flashPraIdxByLevel[lv] = rv;
-        ST.flashPraIdxTs[lv] = rt;
+        if(rt > (Number(ST.flashPraIdxTs[lv]) || 0)) ST.flashPraIdxTs[lv] = rt;
       }
     });
   }catch(e){ try{ console.warn('[pra] 游标合并失败', e); }catch(_e){} }
@@ -21594,6 +21721,8 @@ function hydrate(){
     try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(rm); }catch(e){ try{console.warn('[mock] hydrate 合并入口异常',e);}catch(_e){} }
     /* v95.69 批次 D：中西对应练习游标跨设备合并 */
     try{ if(typeof _mergePraIdx==='function') _mergePraIdx(rm); }catch(e){ try{console.warn('[pra] hydrate 合并入口异常',e);}catch(_e){} }
+    /* v95.71：写作上次考试结果跨设备合并 */
+    try{ if(typeof _mergeWexamLast==='function') _mergeWexamLast(rm); }catch(e){ try{console.warn('[wexam] hydrate 合并入口异常',e);}catch(_e){} }
     /* v92.9【根因】sieleOralScores 原先也在上面白名单里被**整体覆盖**，绕过 mergeSieleOralScore
        ⇒ 删除墓碑/按条删除表全部失效、删掉的记录会被云端快照复活。改为"逐条合并"。 */
     if(rm.sieleOralScores){
@@ -21643,7 +21772,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPraIdxByLevel,ST.flashPraIdxTs,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPraIdxByLevel,ST.flashPraIdxTs,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig,(ST.wexamLast&&ST.wexamLast.at)||0,ST.flashPraResetAt||0]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -21811,6 +21940,11 @@ function _vocabResetFloor(){
   try{var f=Number(localStorage.getItem('swa_vocab_reset_floor_v1')||0);if(f>r)r=f;}catch(e){}
   return r;
 }
+/* v95.71 修复：本函数此前**只在本 IIFE 内可见**，但全站有 4 处（含既有两处）
+   以 window._vocabResetFloor 调用，实际全部返回 undefined ⇒ 重置水线判断被静默跳过，
+   「重置前的旧游标/旧进度不得复活」这类保护形同失效。
+   现按顶层挂载铁律（0 缩进、IIFE 内顶层）暴露到 window。 */
+window._vocabResetFloor = _vocabResetFloor;
 /* v95.31: 游标合并统一走 per-level ts-LWW（旧「前向 max」会让重置前的历史大值跨设备复活——
    旧设备 push 大值→云端被覆盖→重置设备 pull 时 max 采纳 → 「游标突然到很后面」；
    ts 仲裁=远端该级「最后翻页时间」更新才采纳其游标，与题库 quizOrderPos 同语义） */
@@ -21951,6 +22085,8 @@ function mergeWbSnapshot(remote, wbTs){
   try{ if(typeof _mergeMockHistory==='function') _mergeMockHistory(remote); }catch(e){ try{console.warn('[mock] snapshot 合并入口异常',e);}catch(_e){} }
   // v95.69 批次 D：中西对应练习游标跨设备合并（ts-LWW）
   try{ if(typeof _mergePraIdx==='function') _mergePraIdx(remote); }catch(e){ try{console.warn('[pra] snapshot 合并入口异常',e);}catch(_e){} }
+  // v95.71：写作上次考试结果跨设备合并
+  try{ if(typeof _mergeWexamLast==='function') _mergeWexamLast(remote); }catch(e){ try{console.warn('[wexam] snapshot 合并入口异常',e);}catch(_e){} }
   // 默写练习统计（小树进度数据源）：correct/wrong/bestStreak 逐项取 max（2026-09-26 修复：原先不合并 ⇒ 各设备树进度不一致）
   if(remote.flashPraStats&&typeof remote.flashPraStats==='object'){
     /* v95.31: ts-LWW（同上） */
