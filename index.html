@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.71-202610262120';
+window.swVer = 'v95.72-202610271600';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -5817,7 +5817,13 @@ window._wExamOpenResult = function(){
        另一台设备永远提示「还没有考试结果」，因为 wexam 从未参与下行合并）。 */
     var _r = (ST.wexam && ST.wexam.result) || (ST.wexamLast && ST.wexamLast.result) || null;
     if(!_r){
-      if(window.toast) toast('还没有考试结果——先完成一次「🎓 考试模式」交卷','ok');
+      /* v95.72（🔴 实测：手机交卷后另一台仍提示没有结果）：给诊断信息定位断点——
+         快照缺失 = 云端没存上（旧版本交卷/推送失败）；快照存在但仍报错 = 合并/读取异常。 */
+      var _snap = ST.wexamLast;
+      var _diag = (!_snap) ? '跨设备快照：无（该设备可能仍是旧版本，或交卷后云同步未完成）'
+                           : '跨设备快照：存在（' + new Date(Number(_snap.at) || 0).toLocaleString() + '）';
+      if(window.toast) toast('还没有考试结果——先完成一次「🎓 考试模式」交卷 ｜ 诊断: ' + _diag, 'ok');
+      try{ console.warn('[wexam] 打不开结果：本端 result=', !!(ST.wexam && ST.wexam.result), ' wexamLast=', _snap); }catch(e){}
       return;
     }
     if(!ST.wexam) ST.wexam = {};
@@ -7586,10 +7592,15 @@ window._sadmBatchImportEssays = function(){
     if(!confirm(msg)) return;
     var filled = 0;
     toFill.forEach(function(x){
-      var ta = document.getElementById('sadm_essay_' + x.ti);
       var txt = String(x.hit.q.model || '').trim();
-      if(ta){ if(!ta.value.trim()){ ta.value = txt; filled++; } }
-      else if(_sadmTopics[x.ti]){ _sadmTopics[x.ti].essay = txt; filled++; }
+      /* v95.72（🔴 实测复现）：此前只写 DOM textarea、不写 _sadmTopics 数据——
+         若填充后页面发生任何重渲染（textarea 被重建），填充即丢失；
+         且保存虽从 DOM 收集，但数据层与视图层不一致属于隐患。改为双写。 */
+      if(_sadmTopics[x.ti] && !String(_sadmTopics[x.ti].essay || '').trim()){
+        _sadmTopics[x.ti].essay = txt; filled++;
+      }
+      var ta = document.getElementById('sadm_essay_' + x.ti);
+      if(ta && !ta.value.trim()){ ta.value = txt; }
     });
     if(window.toast) toast('已填 ' + filled + ' 个话题范文（草稿）——请检查后点「保存并同步」','ok');
   }catch(e){ if(window.toast) toast('批量引用失败：' + String(e && e.message || e).slice(0, 60), 'err'); }
@@ -7632,19 +7643,37 @@ function saveSpeakingTopicsAdmin(){
   const topics = [];
   for(let i=0;i<_sadmTopics.length;i++){
     const t = _sadmTopics[i];
-    const lvl=(document.getElementById('sadm_lvl_'+i)||{}).value||'B1';
-    const cat=(document.getElementById('sadm_cat_'+i)||{}).value||'';
-    const topic=(document.getElementById('sadm_topic_'+i)||{}).value.trim();
-    const zh=(document.getElementById('sadm_zh_'+i)||{}).value||'';
-    const prep=(document.getElementById('sadm_prep_'+i)||{}).value||'';
-    const essay=(document.getElementById('sadm_essay_'+i)||{}).value||'';
+    /* v95.72: 元素缺失时兜底空串（此前 .value 为 undefined 时 .trim()/.value||'' 前者直接抛错） */
+    const _g = function(id){ var el = document.getElementById(id); return (el && el.value !== undefined && el.value !== null) ? String(el.value) : ''; };
+    const lvl=_g('sadm_lvl_'+i)||'B1';
+    const cat=_g('sadm_cat_'+i);
+    const topic=_g('sadm_topic_'+i).trim();
+    const zh=_g('sadm_zh_'+i);
+    const prep=_g('sadm_prep_'+i);
+    const essay=_g('sadm_essay_'+i);
+    /* v95.72: DOM 不在时回退数据层（重渲染后 textarea 丢失，_sadmTopics 仍是权威） */
+    const _src = _sadmTopics[i] || {};
+    topics.push({lvl:lvl||_src.lvl||'B1', cat:cat||_src.cat||'', topic:topic||_src.topic||'', zh:zh||_src.zh||'', prep:prep||_src.prep||'', essay:essay||_src.essay||''});
     if(!topic){ alert('话题 '+(i+1)+' 题目不能为空'); return; }
-    topics.push({lvl:lvl, cat:cat, topic:topic, zh:zh, prep:prep, essay:essay});
   }
   window._deleSyncContentEdits('speakingTopics', {topics: topics});
   window._contentEdits.speakingTopics = {topics: topics};
   toast('✅ 已保存并同步给所有用户','ok');
   renderMain();
+  /* v95.72：3 秒后回读云端核对（此前 toast 在 post 后立即弹出，云端实际失败也无感——
+     实测症状：手机保存显示成功，另一台设备拉到的 speakingTopics 仍是旧内容）。 */
+  try{
+    setTimeout(function(){
+      if(typeof window._deleFetchContentEdits !== 'function') return;
+      window._deleFetchContentEdits('speakingTopics', function(ed){
+        try{
+          var arr = (ed && ed.topics) || [];
+          var withEssay = arr.filter(function(t){ return t && String(t.essay || '').trim().length > 20; }).length;
+          if(window.toast) toast('云端核对：共 ' + arr.length + ' 条话题，' + withEssay + ' 条已带范文' + (withEssay ? ' ✅' : ' ⚠️ 0 条——云端保存可能失败，请截图告知'), withEssay ? 'ok' : 'err');
+        }catch(e){ try{ console.warn('[essay] 云端核对失败', e); }catch(_e){} }
+      });
+    }, 3000);
+  }catch(e){}
 }
 
 
@@ -20535,7 +20564,7 @@ function _mergePraIdx(remote){
        现在改为：默认只采纳**更大的**游标；对端主动「重置练习」通过独立的 flashPraResetAt 传播。 */
     /* ① 对端主动重置过（且晚于本端）⇒ 本端清空 */
     var _rRe = Number(remote.flashPraResetAt) || 0;
-    var _lRe = Number(ST.flashPraResetAt) || 0;
+    var _lRe = Number(ST.flashPraResetAt) || 0;   /* v95.72: 提前声明，② 循环里也用它过滤远端旧档 */
     if(_rRe > _lRe){
       ST.flashPraResetAt = _rRe;
       ST.flashPraIdxByLevel = {};
@@ -20548,6 +20577,11 @@ function _mergePraIdx(remote){
       if(typeof rv !== 'number' || rv < 0) return;
       var rt = Number(rTs[lv]) || 0;
       if(_rz && rt && rt <= _rz) return;           /* 远端值在重置之前 ⇒ 不采纳 */
+      /* v95.72（🔴 实测复现）：远端该档的推进时间早于本端「练习重置」时刻 ⇒ 该档已随重制作废。
+         实测场景：本端 A1=8 → 重置 → 重新练 4 → 云同步 pull 到另一设备重置前 push 的 A1=8
+         （其时间戳早于本端 resetAt）→ 只增不减逻辑采纳 8 ⇒ A1 变 8+4=12。
+         此前的 flashPraResetAt 只处理「对端主动重置清空本端」，没有挡「对端旧档复活本端」。 */
+      if(_lRe && rt && rt <= _lRe) return;
       var lv0 = Number(ST.flashPraIdxByLevel[lv]) || 0;
       /* 只接受更大的游标（防倒退）；相等或更小一律忽略 */
       if(rv > lv0){
