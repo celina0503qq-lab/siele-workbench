@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.72-202610271600';
+window.swVer = 'v95.73-202610292100';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2159,7 +2159,9 @@ function renderMain(){
       }
       break;
   }
-  main.innerHTML = h + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  var _dsx = (typeof window._dataShortfall === 'function') ? window._dataShortfall() : { short: false, vN: 0, qN: 0 };
+  var _dsBanner = _dsx.short ? ('<div style="background:#fff7ed;border:1px solid #fdba74;color:#9a3412;padding:8px 12px;border-radius:9px;margin-bottom:10px;font-size:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b>📴 离线精简模式</b><span>题库 ' + _dsx.qN + '/6000 · 词汇 ' + _dsx.vN + '/4815 —— 登录联网后自动加载完整库</span><button class="btn xs pr" onclick="location.reload()">🔄 重新加载</button></div>') : '';
+  main.innerHTML = _dsBanner + h + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -3322,6 +3324,35 @@ function changeFlashLevel(level){
   // Preserve the actual word when it exists in the requested level; otherwise use the first valid word only once.
   ST.flashLevel=level;var pool=getFlashPool();syncFlashPosition(pool);save();renderMain();
 }
+/* v95.43: 兜底库透明化（UX-P0）——检测数据缩水（无云/弱网时题库/词汇静默降为精简兜底） */
+window._dataShortfall = function(){
+  try{
+    var vN = (typeof VDATA !== 'undefined' && Array.isArray(VDATA)) ? VDATA.length : 0;
+    var qN = (typeof QDATA !== 'undefined' && Array.isArray(QDATA)) ? QDATA.length : 0;
+    return { short: (vN < 1000 || qN < 500), vN: vN, qN: qN };
+  }catch(e){ return { short: false, vN: 0, qN: 0 }; }
+};
+/* v95.43: flipRated 按级别聚合（方案②拍板 2026-10-29）——各级进度=该级已评词数（单一事实来源，消灭游标/评价双源错位）；水线逻辑与 _flipRatedN 原实现一致 */
+window._flipRatedByLevel = function(){
+  var out = {A1:0, A2:0, B1:0, B2:0, '专四':0, all:0};
+  try{
+    var _fr = ST.flipRated || {};
+    var _frFloor = (function(){ var r = Number(ST.vocabResetAt || 0); try{ var f = Number(localStorage.getItem('swa_vocab_reset_floor_v1') || 0); if(f > r) r = f; }catch(e){} return r; })();
+    var vm = {};
+    if(typeof VDATA !== 'undefined') VDATA.forEach(function(v){ vm[v.es] = v; });
+    Object.keys(_fr).forEach(function(es){
+      var t = Number(_fr[es]) || 0;
+      if(t <= 0) return;                       /* 排除 v95.41 回填的 0 值占位 */
+      if(_frFloor && t <= _frFloor) return;    /* 重置前的旧记录不算 */
+      out.all++;
+      var v = vm[es];
+      if(!v) return;
+      if(v.tag === '专四') out['专四']++;
+      else if(out[v.lvl] !== undefined) out[v.lvl]++;
+    });
+  }catch(e){}
+  return out;
+};
 function renderFlash(){
   let pool=syncFlashPosition(getFlashPool());
   const _praMode = ST.flashMode==='practice'; // v94.0: 练习模式显示独立游标进度
@@ -3338,19 +3369,16 @@ function renderFlash(){
     try{ var f = Number(localStorage.getItem('swa_vocab_reset_floor_v1') || 0); if(f > r) r = f; }catch(e){}
     return r;
   })();
-  const _flipRatedN = Object.keys(ST.flipRated||{}).filter(function(k){
-    var _t = Number(ST.flipRated[k]) || 0;
-    if(_t <= 0) return false;
-    if(_frFloor && _t <= _frFloor) return false;
-    return true;
-  }).length; /* v95.47: 只数真实评价（ts>0）——排除 v95.41 回填的 0 值占位（练习写入的 vocabMastery 曾被回填污染） */
+  /* v95.43: 各级与全部统一改由 flipRated 按级别聚合（方案②）——水线在聚合函数内处理，_frFloor 保留供 _needRateWords 使用 */
+  const _frByLvl = window._flipRatedByLevel();
+  const _flipRatedN = _frByLvl.all;
   /* v95.71（用户拍板）：进度一律「已完成数」，全部从 0 起，不再 +1 显示游标位——此前未学时各级显示 1，容易误以为已学 1 个。
      · 翻牌「全部」= 翻牌评价过的词数（flipRated 计数，本来就 0 起）
      · 翻牌各级   = 该级已看过的词数（游标值，0 起）
      · 练习「全部」= 累计答题数（答对+答错，直观对应「我练了几题」）
      · 练习各级   = 该级练习游标（0 起） */
   const _praTotalN = (function(){ try{ var _s=ST.flashPraStats||{}; return (Number(_s.correct)||0)+(Number(_s.wrong)||0); }catch(e){ return 0; } })();
-  const _dispIdx = _praMode ? (_allMode ? _praTotalN : _curIdx) : (_allMode ? (_flipRatedN) : _curIdx);
+  const _dispIdx = _praMode ? (_allMode ? _praTotalN : _curIdx) : (_allMode ? (_flipRatedN) : (_frByLvl[ST.flashLevel] !== undefined ? _frByLvl[ST.flashLevel] : _curIdx)); /* v95.43: 翻牌各级=该级已评词数（聚合） */
   const v = pool[_curIdx];
   const m = (v && ST.flashMastery[v.es]) || 0;
   /* v95.71：查出「评过级但星级记录丢失」的词。
