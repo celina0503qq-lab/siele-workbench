@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.73-202610292100';
+window.swVer = 'v95.74-202610292130';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21536,7 +21536,15 @@ async function wbDoLogin(e){
   var frame=document.getElementById('wbAdminFrame');
   var send=function(){try{frame.contentWindow.postMessage({type:'siele-cloud-login',username:username,password:password},location.origin);}catch(err){}};
   if(frame){frame.onload=send;try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')send();}catch(err){}}
-  setTimeout(function(){if(button&&!activeUser()){button.disabled=false;button.textContent='登 录';}},8000);
+  /* v95.74: 桥未响应兜底——8s 恢复按钮+首次提示网络/代理；16s 再提示一次防漏看（不改桥协议） */
+  setTimeout(function(){
+    if(button&&!activeUser()){
+      button.disabled=false;button.textContent='登 录';
+      try{ if(window.toast) toast('账号服务连接超时——若开着加速器请关闭后重试；或检查网络','err'); }catch(e){}
+      var _pf=document.getElementById('wbLfP');
+      if(_pf){ var _pe=_pf.querySelector('.err'); if(_pe&&!_pe.textContent)_pe.textContent='连接账号服务超时（加速器开启时请关闭重试）'; _pf.classList.add('invalid'); }
+    }
+  },8000);
   return false;
 }
 
@@ -22520,6 +22528,8 @@ window.addEventListener('message',function(ev){
         else err.textContent='账号或密码错误，请检查后重试';
       }
       field.classList.add('invalid');
+      /* v95.74: 显眼化——小字之外补 toast（报告实测「无反馈」实为小字不显眼） */
+      try{ if(window.toast && err && err.textContent) toast(err.textContent,'err'); }catch(e){}
     }
   }
 });
