@@ -1005,7 +1005,14 @@ async function doRegister(e){
     const result=await callSieleAuth({action:'register',username:u,password:p,inviteCode:iv});
     if(!result.ok){
       if(result.code==='USERNAME_TAKEN')fldErr('f_ru',true,cloudAuthMessage(result.code));
-      else if(result.code==='INVALID_INVITE'||result.code==='INVITE_USED')fldErr('f_ri',true,cloudAuthMessage(result.code));
+      else if(result.code==='INVALID_INVITE'||result.code==='INVITE_USED'){
+        fldErr('f_ri',true,cloudAuthMessage(result.code));
+        /* v95.77: 邀请码无效/已用 → 通知主站弹引导弹窗（含管理员联系方式）；独立打开时 toast 提示 */
+        try{
+          if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'siele-invite-invalid'}, location.origin); }
+          else { toast('邀请码无效或已被使用，请联系管理员获取新邀请码','err'); }
+        }catch(_eInv){}
+      }
       else if(result.code==='WEAK_PASSWORD')fldErr('f_rp',true,cloudAuthMessage(result.code));
       else toast(cloudAuthMessage(result.code),'err');
       return false;

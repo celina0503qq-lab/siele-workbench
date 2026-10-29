@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.76-202610292230';
+window.swVer = 'v95.77-202610292250';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -22569,6 +22569,11 @@ window.addEventListener('message',function(ev){
       if(pErr)pErr.textContent='您的账号已被管理员停用，本地学习数据已保留。如需恢复请联系管理员。';
       pField.classList.add('invalid');
     }
+    return;
+  }
+  /* v95.77: 注册时邀请码无效/已用 → 弹引导弹窗（带管理员联系方式，用户当场可解决） */
+  if(ev.data&&ev.data.type==='siele-invite-invalid'){
+    try{ if(typeof window.showInviteGuide==='function') window.showInviteGuide('invalid'); }catch(e){}
     return;
   }
   if(ev.data&&ev.data.type==='siele-login-failed'){
