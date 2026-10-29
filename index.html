@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.74-202610292130';
+window.swVer = 'v95.75-202610292200';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21492,6 +21492,64 @@ window._wbMirrorMastery = function(es, level){
 };
 
 /* ---------- 登录覆盖层 ---------- */
+/* v95.75: 邀请制引导——联系方式由云函数 getSiteConfig 下发（不进公开仓库），未登录也可取；失败兜底文案 */
+window._inviteCfg = null;
+window.loadInviteCfg = function(cb){
+  try{
+    var cached = null;
+    try{ cached = JSON.parse(sessionStorage.getItem('wb_invite_cfg_v1') || 'null'); }catch(e){}
+    if(cached && cached.contact && (Date.now() - (cached.at||0) < 3600000)){ window._inviteCfg = cached; if(cb) cb(cached); return; }
+    if(typeof window._deleCloudCall !== 'function'){ if(cb) cb(window._inviteCfg); return; }
+    window._deleCloudCall('getSiteConfig', {}).then(function(r){
+      try{
+        if(r && r.ok){ window._inviteCfg = { contact: r.inviteContact || '', label: r.inviteLabel || '微信', at: Date.now() };
+          try{ sessionStorage.setItem('wb_invite_cfg_v1', JSON.stringify(window._inviteCfg)); }catch(e){} }
+      }catch(e){}
+      if(cb) cb(window._inviteCfg);
+    }).catch(function(){ if(cb) cb(window._inviteCfg); });
+  }catch(e){ if(cb) cb(window._inviteCfg); }
+};
+window._inviteCopyText = '你好，我想使用西语备考工作台，请发一个邀请码，谢谢！';
+window.showInviteGuide = function(reason){
+  try{
+    var old = document.getElementById('wbInviteGuide'); if(old) old.remove();
+    var cfg = window._inviteCfg || {};
+    var contact = cfg.contact || '';
+    var label = cfg.label || '微信';
+    var isInvalid = reason === 'invalid';
+    var contactHtml = contact
+      ? '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:10px;margin:10px 0;font-size:13px"><b>📱 获取方式：联系管理员</b><div style="margin-top:6px;font-size:15px;font-weight:800;color:#0369a1;user-select:all">'+label+'：'+contact+'</div></div>'
+      : '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:10px;margin:10px 0;font-size:13px"><b>📱 获取方式：联系管理员</b><div style="margin-top:4px;color:#475569">（联系方式暂不可用，请稍后重试或联系站长）</div></div>';
+    var ov = document.createElement('div');
+    ov.id = 'wbInviteGuide';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px';
+    ov.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:420px;width:100%;padding:20px;box-shadow:0 20px 55px rgba(0,0,0,.3);font-size:13px;line-height:1.65;color:#1e293b">'
+      + '<div style="font-size:17px;font-weight:800;margin-bottom:6px">🔑 本工作台为邀请制</div>'
+      + '<div>' + (isInvalid
+          ? '<b style="color:#b91c1c">该邀请码无效或已被使用。</b>请联系管理员获取新的邀请码。'
+          : '需要管理员发放的邀请码才能注册学习账号。一个邀请码仅可使用一次。') + '</div>'
+      + contactHtml
+      + '<div style="background:#f8fafc;border:1px dashed #cbd5e1;border-radius:9px;padding:9px;font-size:12px;color:#475569">💬 可直接发送：<span id="wbInviteTpl">' + window._inviteCopyText + '</span> '
+      + '<button id="wbInviteCopy" class="btn xs ol" style="margin-left:6px">一键复制</button></div>'
+      + '<div style="display:flex;gap:8px;margin-top:14px">'
+      + '<button id="wbInviteGoReg" class="btn pr" style="flex:1">我已拿到邀请码，去注册</button>'
+      + '<button id="wbInviteClose" class="btn ol" style="flex:1">关闭</button></div>'
+      + '</div>';
+    document.body.appendChild(ov);
+    document.getElementById('wbInviteClose').addEventListener('click', function(){ try{ ov.remove(); }catch(e){} });
+    document.getElementById('wbInviteGoReg').addEventListener('click', function(){ try{ ov.remove(); }catch(e){}; try{ if(window.openAdminPanel) openAdminPanel(); }catch(e){} });
+    document.getElementById('wbInviteCopy').addEventListener('click', function(){
+      try{
+        var t = window._inviteCopyText;
+        if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t); }
+        else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+        if(window.toast) toast('已复制，去微信粘贴发送即可','ok');
+      }catch(e){}
+    });
+    ov.addEventListener('click', function(e){ if(e.target === ov) ov.remove(); });
+    window.loadInviteCfg(function(){ /* 拿到配置后若联系方式区为空可重绘——简化：首次可能显示兜底文案 */ });
+  }catch(e){}
+};
 function showLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
   if(ov){ov.classList.remove('hide');return;}
@@ -21506,11 +21564,14 @@ function showLoginOverlay(){
     '<div class="fld" id="wbLfU"><label>账号</label><input id="wbLoginUser" autocomplete="username" placeholder="邮箱或用户名"></div>'+
     '<div class="fld" id="wbLfP"><label>密码</label><input id="wbLoginPass" type="password" autocomplete="current-password" placeholder="请输入密码"><span class="err">密码错误</span></div>'+
     '<button class="btn-login" type="submit">登 录</button>'+
-    '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>还没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></span></div>'+
+    '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>没有账号？<a href="javascript:void(0)" id="wbGoReg">申请邀请码 &rarr;</a></span></div>'+
+    '<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6">🔑 本工作台采用邀请制 · 邀请码由管理员发放<br>没有邀请码时请点上方「申请邀请码」查看获取方式</div>'+
     '</form></div>';
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
-  document.getElementById('wbGoReg').addEventListener('click',function(){showLoginOverlay();openAdminPanel();});
+  document.getElementById('wbGoReg').addEventListener('click',function(){showInviteGuide('entry');});
+  /* v95.75: 预拉邀请配置（异步，不阻塞登录） */
+  try{ window.loadInviteCfg(); }catch(e){}
   var fp=document.getElementById('wbForgotPwd');
   if(fp)fp.addEventListener('click',function(){showLoginOverlay();openAdminPanel('passwd');});
 }
