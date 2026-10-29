@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.80-202610292250';
+window.swVer = 'v95.81-202610292305';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -22554,6 +22554,8 @@ function openAdminPanel(targetPage){
     try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')goto();}catch(e){}
   }
 }
+/* v95.81: 暴露到 window（IIFE 私有作用域，跨作用域调用必须先挂载——铁律 3） */
+window.openAdminPanel = openAdminPanel;
 function closeAdminPanel(){
   var panel=document.getElementById('wbAdminPanel');
   if(panel)panel.classList.remove('show');
