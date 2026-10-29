@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.79-202610292235';
+window.swVer = 'v95.80-202610292250';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21537,7 +21537,11 @@ window.showInviteGuide = function(reason){
       + '</div>';
     document.body.appendChild(ov);
     document.getElementById('wbInviteClose').addEventListener('click', function(){ try{ ov.remove(); }catch(e){} });
-    document.getElementById('wbInviteGoReg').addEventListener('click', function(){ try{ ov.remove(); }catch(e){}; try{ if(window.openAdminPanel) openAdminPanel(); }catch(e){} });
+    document.getElementById('wbInviteGoReg').addEventListener('click', function(){
+      try{ ov.remove(); }catch(e){}
+      /* v95.80: 打开后台并直接切到「注册」页（此前只开面板，用户看不到跳转） */
+      try{ if(window.openAdminPanel) openAdminPanel('reg'); }catch(e){}
+    });
     document.getElementById('wbInviteCopy').addEventListener('click', function(){
       try{
         var t = window._inviteCopyText;

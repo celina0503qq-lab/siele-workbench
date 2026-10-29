@@ -1392,6 +1392,14 @@ window.addEventListener('message',function(ev){
       if(totalEl&&DB)totalEl.textContent=DB.words.length+_vdataSeedCount;
     }
   }
+  // v95.80: 主工作台「我已拿到邀请码，去注册」→ 后台直接切到注册页
+  if(ev.data&&ev.data.type==='siele-open-reg'){
+    try{
+      var _av=document.getElementById('appView');
+      if(!(_av&&_av.classList.contains('on'))){ try{ /* 未登录：登录卡片内切 tab */ }catch(e0){} }
+      authTab('reg');
+    }catch(e){ try{ console.warn('[admin] 切注册页失败', e); }catch(e2){} }
+  }
   // 主工作台"忘记密码"链接请求：在 admin 内打开密码修改页
   if(ev.data&&ev.data.type==='siele-open-passwd'){
     if($('appView')&&$('appView').classList.contains('on')){
