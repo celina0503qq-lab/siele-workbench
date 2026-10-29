@@ -1445,6 +1445,9 @@ window.addEventListener('message',function(ev){
           lResult = await callSieleAuth({action:'asrSentence', sessionToken: lToken,
             audioBase64: (ev.data.params && ev.data.params.audioBase64) || '',
             voiceFormat: (ev.data.params && ev.data.params.voiceFormat) || 'wav'});
+        } else if(lAct==='getSiteConfig'){
+          // v95.76: 站点公开配置（免 token）——邀请制引导所需联系方式（不在公开仓库）
+          lResult = await callSieleAuth({action:'getSiteConfig'});
         } else if(lAct==='getData'){
           // v94.20.1 数据后端化：受控数据集下发（并入 siele-auth，免平台权限配置）
           lResult = await callSieleAuth({action:'getData', sessionToken: lToken,
