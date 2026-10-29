@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.78-202610292220';
+window.swVer = 'v95.79-202610292235';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21570,6 +21570,21 @@ function showLoginOverlay(){
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
   document.getElementById('wbGoReg').addEventListener('click',function(){showInviteGuide('entry');});
+  /* v95.79: 双保险——事件委托（即使登录罩被重建/绑定失效，点「申请邀请码」也能唤起弹窗） */
+  try{
+    if(!window._wbInviteDelegate){
+      window._wbInviteDelegate = true;
+      document.addEventListener('click', function(ev){
+        try{
+          var t = ev.target;
+          while(t && t !== document){
+            if(t.id === 'wbGoReg'){ ev.preventDefault(); window.showInviteGuide('entry'); return; }
+            t = t.parentNode;
+          }
+        }catch(e){}
+      }, true);
+    }
+  }catch(e){}
   /* v95.75: 预拉邀请配置（异步，不阻塞登录） */
   try{ window.loadInviteCfg(); }catch(e){}
   var fp=document.getElementById('wbForgotPwd');
