@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.77-202610292250';
+window.swVer = 'v95.78-202610292220';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21522,7 +21522,7 @@ window.showInviteGuide = function(reason){
       : '<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:10px;margin:10px 0;font-size:13px"><b>📱 获取方式：联系管理员</b><div style="margin-top:4px;color:#475569">（联系方式暂不可用，请稍后重试或联系站长）</div></div>';
     var ov = document.createElement('div');
     ov.id = 'wbInviteGuide';
-    ov.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:1000000;display:flex;align-items:center;justify-content:center;padding:16px';
     ov.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:420px;width:100%;padding:20px;box-shadow:0 20px 55px rgba(0,0,0,.3);font-size:13px;line-height:1.65;color:#1e293b">'
       + '<div style="font-size:17px;font-weight:800;margin-bottom:6px">🔑 本工作台为邀请制</div>'
       + '<div>' + (isInvalid
