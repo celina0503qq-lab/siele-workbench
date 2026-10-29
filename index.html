@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.82-202610292320';
+window.swVer = 'v95.83-202610292310';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21568,8 +21568,8 @@ function showLoginOverlay(){
     '<div class="fld" id="wbLfU"><label>账号</label><input id="wbLoginUser" autocomplete="username" placeholder="邮箱或用户名"></div>'+
     '<div class="fld" id="wbLfP"><label>密码</label><input id="wbLoginPass" type="password" autocomplete="current-password" placeholder="请输入密码"><span class="err">密码错误</span></div>'+
     '<button class="btn-login" type="submit">登 录</button>'+
-    '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>没有账号？<a href="javascript:void(0)" id="wbGoReg">申请邀请码 &rarr;</a></span></div>'+
-    '<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6">🔑 本工作台采用邀请制 · 邀请码由管理员发放<br>没有邀请码时请点上方「申请邀请码」查看获取方式</div>'+
+    '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></span></div>'+
+    '<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6">🔑 本工作台采用邀请制 · 邀请码由管理员发放<br>点上方「去注册」查看邀请码获取方式</div>'+
     '</form></div>';
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
