@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 0) 2026-10-30 第 26 期 — 主题：搬家 · 西班牙问候礼仪 · 电商增长 · 能源贫困之争
 // 0) 2026-10-23 第 25 期 — 主题：去邮局 · 西班牙午睡文化 · AI与就业 · 非法旅游公寓之争
 // 1) 2026-10-09 第 23 期 — 主题：机场出行 · 西班牙咖啡文化 · IA360 计划 · AI 监管之争
 // 2) 2026-10-02 第 22 期 — 主题：菜市场购物 · 圣地亚哥朝圣之路 · 科技推动西班牙就业 · 住房法令与秃鹫基金之争
@@ -25,6 +26,18 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-10-30": {
+    date: "2026-10-30",
+    weekday: "五",
+    issue: 26,
+    theme: "搬家 · 西班牙问候礼仪 · 电商增长 · 能源贫困之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La mudanza a un piso nuevo" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Los saludos en España" },
+      { level: "B1", source: "CNMC", sourceUrl: "https://cnmc.es/sites/default/files/editor_contenidos/Notas%20de%20prensa/2025/20251003_NP_CE_I_25_eng_0.pdf", topic: "El comercio electrónico en España" },
+      { level: "B2", source: "El País", sourceUrl: "https://elpais.com/economia/2025-11-05/el-gobierno-encarga-a-ree-y-cnmc-inspeccionar-a-las-electricas-para-rebajar-el-coste-antiapagon-del-recibo-de-luz.html", topic: "La pobreza energética" }
+    ]
+  },
   "2026-10-23": {
     date: "2026-10-23",
     weekday: "五",
