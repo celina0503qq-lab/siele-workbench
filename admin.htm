@@ -3204,7 +3204,7 @@ async function genTransferCode(){
       '<div style="display:flex;gap:8px"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+code+'\').then(()=>toast(\'已复制\',\'ok\'))">📋 复制</button></div>'+
       '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「换设备登录？」→ 粘贴此码。<b>24 小时内有效</b>，含账号、学习进度与全部数据。</div>';
   }catch(err){
-    out.innerHTML='<div class="note err">生成失败：'+esc(err.message||err)+'。请检查网络后重试。</div>';
+    out.innerHTML='<div class="note err">生成失败：'+esc(err.message||err)+'</div>';
   }
 }
 function openTransferIn(){
