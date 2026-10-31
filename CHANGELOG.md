@@ -1,6 +1,13 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.85] – 2026-10-31
+### 修复 · 设备迁移传输码改走自有 CloudBase
+- 原实现把「账号+全部学习数据+同步配置」POST 到第三方 jsonblob.com，该服务现返回 403 → 「生成传输码」必失败。改为云函数 siele-auth 新增 `createTransferCode` / `consumeTransferCode`（数据只存自有 `transfer_codes` 集合）。
+- 安全强化：24 小时有效（服务端 expiresAt）+ **一次性消费**（服务端标记 usedAt）+ 生成限频 5 次/窗口 + 消费限频 10 次/窗口（防爆破）+ payload 4MB 上限。
+- admin.htm / admin.html 双文件同步（CACHE 已 bump）；搬迁应用逻辑（账号/学习数据/云端配置合并）完全保留。
+
+
 ## [v95.84] – 2026-10-31
 ### 音频 · 第 26 期 84 条精炼音频上线（补漏）
 - 10-30 出刊时生成但未进 manifest/未推送的 84 条音频（西语 47 + 拉美 37）已上传 CloudBase 云存储并补入内联音频映射（481 → 565 条）；仓库 audio/tts/es|la 同步备份。修复：此前听第 26 期精炼会回落到在线 TTS（音源不同）。

@@ -3187,12 +3187,15 @@ async function genTransferCode(){
   try{
     const users=lsGet(LSU,{});
     const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,wb:lsGet('dele_siele_wb_v3',null),ts:Date.now()};
-    const r=await fetch('https://jsonblob.com/api/jsonBlob',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if(r.status===429)throw new Error('云端请求过于频繁，请 1 分钟后重试');
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const loc=r.headers.get('Location')||'';
-    const code=loc.split('/').pop();
-    if(!code)throw new Error('未获取到传输码');
+    /* v95.85：改走自有 CloudBase（原第三方 jsonblob 已停服 403） */
+    const _ses=cloudSession();
+    if(!_ses||!_ses.sessionToken)throw new Error('登录状态失效，请重新登录后再生成');
+    const _r=await callSieleAuth({action:'createTransferCode',sessionToken:_ses.sessionToken,payload:payload});
+    if(!_r.ok){
+      const _e={RATE_LIMITED:'生成过于频繁，请稍后再试',PAYLOAD_TOO_LARGE:'学习数据过大（超过 4MB），请先清理存储空间',UNAUTHORIZED:'登录状态失效，请重新登录'};
+      throw new Error(_e[_r.code]||('生成失败（'+(_r.code||'未知错误')+'）'));
+    }
+    const code=_r.code;
     out.innerHTML='<div class="code-show" id="tcode">'+esc(code)+'</div>'+
       '<div style="display:flex;gap:8px"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+code+'\').then(()=>toast(\'已复制\',\'ok\'))">📋 复制</button></div>'+
       '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「换设备登录？」→ 粘贴此码。<b>24 小时内有效</b>，含账号、学习进度与全部数据。</div>';
@@ -3208,10 +3211,13 @@ function openTransferIn(){
 async function transferIn(code){
   toast('正在拉取数据…','info');
   try{
-    const r=await fetch('https://jsonblob.com/api/jsonBlob/'+encodeURIComponent(code));
-    if(r.status===404)throw new Error('传输码不存在或已过期（有效期24小时）');
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const j=await r.json();
+    /* v95.85：改走自有 CloudBase（免登录消费；服务端一次性标记） */
+    const _r=await callSieleAuth({action:'consumeTransferCode',code:code});
+    if(!_r.ok){
+      const _e={CODE_NOT_FOUND:'传输码不存在或已过期（有效期 24 小时）',CODE_EXPIRED:'传输码已过期（有效期 24 小时），请让原设备重新生成',CODE_USED:'该传输码已被使用过（一次性），请让原设备重新生成',RATE_LIMITED:'尝试过于频繁，请稍后再试',INVALID_CODE:'传输码格式不正确'};
+      throw new Error(_e[_r.code]||('迁入失败（'+(_r.code||'未知错误')+'）'));
+    }
+    const j=_r.payload;
     if(!j||j.type!=='siele-transfer'||!j.user||!j.account)throw new Error('传输码内容无效');
      const _ts=Number(j.ts||0); if(!_ts)throw new Error('传输码缺少时间戳（旧版包），请让原设备升级后重新生成');
      if(Date.now()-_ts>24*3600*1000)throw new Error('传输码已过期（有效期 24 小时），请让原设备重新生成');
@@ -3223,7 +3229,7 @@ async function transferIn(code){
     else if(j.data)db=j.data;
     lsSet(dataKey(j.user),db);
     if(j.wb)lsSet('dele_siele_wb_v3',j.wb);
-    fetch('https://jsonblob.com/api/jsonBlob/'+encodeURIComponent(code),{method:'DELETE'}).catch(function(){});
+    /* v95.85：服务端已标记一次性使用，无需删除远程对象 */
      toast('✅ 迁入成功，正在进入学习工作台…','ok');
     enter(j.user,true);
     gotoWorkbench();
