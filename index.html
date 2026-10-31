@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v96.0-202610311830';
+window.swVer = 'v96.1-202610311845';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2113,6 +2113,44 @@ function go(page){
 
 
 // ===== MAIN RENDERER =====
+/* v96.1：同步失败即时感知——包装桥调用（纯旁路） */
+window._syncFailCnt = 0;
+window._syncLastToastAt = 0;
+window._syncWrapBridge = function(){
+  try{
+    if(window._deleCloudCallWrapped) return;
+    if(typeof window._deleCloudCall !== 'function') return;
+    var orig = window._deleCloudCall;
+    window._deleCloudCall = function(action){
+      var args = arguments, ret;
+      try{ ret = orig.apply(this, args); }catch(e){ window._syncMarkFail(action); throw e; }
+      if(ret && typeof ret.then === 'function'){
+        return ret.then(function(r){
+          try{ (r && r.ok === false) ? window._syncMarkFail(action) : window._syncMarkOk(); }catch(e){}
+          return r;
+        }, function(err){ try{ window._syncMarkFail(action); }catch(e){} throw err; });
+      }
+      return ret;
+    };
+    window._deleCloudCallWrapped = true;
+  }catch(e){ try{ console.warn('[sync] wrap failed', e); }catch(e2){} }
+};
+window._syncMarkOk = function(){ window._syncFailCnt = 0; };
+window._syncMarkFail = function(action){
+  try{
+    if(!/^(push|pull|pullLearning|pushLearning)$/.test(String(action||''))) return;
+    window._syncFailCnt = Number(window._syncFailCnt || 0) + 1;
+    var now = Date.now(), n = window._syncFailCnt;
+    if(n >= 2 && (n === 2 || n % 3 === 0) && (now - (window._syncLastToastAt || 0) > 30000)){
+      window._syncLastToastAt = now;
+      var msg = n >= 6 ? '云同步连续失败 ' + n + ' 次。若开启了加速器/代理请关闭后重试；数据已保存在本地。'
+                       : '同步失败（第 ' + n + ' 次），已保留本地数据，正在自动重试。';
+      try{ if(window.toast) toast(msg, n >= 6 ? 'err' : 'info'); }catch(e){}
+    }
+  }catch(e){}
+};
+try{ window._syncWrapBridge(); setTimeout(function(){ try{ window._syncWrapBridge(); }catch(e){} }, 3000); }catch(e){}
+
 /* v96.0：云同步健康旁路监控——不改同步核心，按时长给两档提示（网络类/加速器类） */
 window._syncHealthBanner = null;
 window._syncHealthEval = function(){
@@ -2123,9 +2161,9 @@ window._syncHealthEval = function(){
     var last = Number((ADB.meta && (ADB.meta.lastSync || ADB.meta.lastPushTs)) || 0);
     if(!last){ window._syncHealthBanner = null; return; }
     var mins = Math.floor((Date.now() - last) / 60000);
-    if(mins >= 20){
+    if(mins >= 10){
       window._syncHealthBanner = { level:'warn', mins: mins, text: '云同步已 ' + mins + ' 分钟未成功。若开启了加速器/代理，请关闭后重试（代理会干扰国内云服务）；数据已安全保存在本地，网络恢复后会自动补同步。' };
-    } else if(mins >= 10){
+    } else if(mins >= 3){
       window._syncHealthBanner = { level:'info', mins: mins, text: '云同步已 ' + mins + ' 分钟未成功——网络可能不稳定。数据已保存在本地，稍后会自动重试。' };
     } else { window._syncHealthBanner = null; }
   }catch(e){ try{ console.warn('[sync] health eval failed', e); }catch(e2){} }
