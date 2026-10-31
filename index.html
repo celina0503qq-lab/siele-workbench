@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v96.1-202610311845';
+window.swVer = 'v96.3-202610311900';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -10532,7 +10532,17 @@ function _sieleMockStartRandom(){
     var t3 = (_p3.length>=2 && _c3.length>=2) ? [_p3[0],_p3[1],_c3[0],_c3[1]] : _sieleMockPick(3,4);
     // T4 仅从已配官方阅读材料的题中抽取（存量题 v92 补齐后自动扩展），保证模考体验完整
     /* v95.62 P3-a: T4 抽 2 个不同 topic 作为「二选一」候选（官方形态） */
-    var _b4=(getSieleOralBank()[4]||[]).filter(function(q){return q && q.id;});
+    var _b4=(getSieleOralBank()[4]||[]).filter(function(q){
+      if(!(q && q.id)) return false;
+      /* v96.3：模考只抽「严格同 topic 配对（mode=exact）」的 T4——同主题组(mode=group)不算，避免配到不相关话题 */
+      try{
+        if(typeof window._sieleT45FindPair==='function'){
+          var _pr=window._sieleT45FindPair(4,q);
+          return !!(_pr && _pr.mode==='exact');
+        }
+      }catch(e){}
+      return true;
+    });
     var _byT={}, _tk=[];
     _b4.forEach(function(q){ var tp=q.topic||('_'+q.id); if(!_byT[tp]){ _byT[tp]=[]; _tk.push(tp); } _byT[tp].push(q.id); });
     for(var _i=_tk.length-1;_i>0;_i--){ var _j=Math.floor(Math.random()*(_i+1)); var _t=_tk[_i]; _tk[_i]=_tk[_j]; _tk[_j]=_t; }
@@ -10547,11 +10557,8 @@ function _sieleMockStartRandom(){
     if(t4){
       var q4=(getSieleOralBank()[4]||[]).find(function(q){return q.id===t4;});
       var _paired = (q4 && typeof window._sieleT45PickT5For === 'function') ? window._sieleT45PickT5For(q4) : null;
-      if(!_paired){
-        var _all5 = getSieleOralBank()[5] || [];
-        _paired = _all5.length ? _all5[Math.floor(Math.random()*_all5.length)].id : null;
-      }
-      t5 = _paired;
+      /* v96.2（用户拍板）：删除随机兜底——无严格配对的 T4 不再随机配 T5（宁可不跳转/不抽该题） */
+      t5 = _paired || null;
     }
     /* v95.54 P2-a: T2 抽 2 个不同图组各 1 题（两图必须不同） */
     var _b2=getSieleOralBank()[2]||[], _gm={}, _gk=[];
