@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v96.3-202610311900';
+window.swVer = 'v96.4-202610311910';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -11098,9 +11098,10 @@ window._sieleT45PickT5For = function(q4){
 function _sieleRelBtnHtml(x,tarea){
   try{
     if(!x||!x.topic) return '';
-    /* v95.62 P3-b: 用配对解析器（同 topic → 同主题组兜底），孤立题不再灰标禁用 */
+    /* v96.4（用户拍板）：只认严格同话题（exact）——同主题组(group)也置灰，宁可不跳转也不配错话题 */
     var _pair = window._sieleT45FindPair(tarea, x);
-    if(!_pair) return '<button class="btn ol" disabled style="font-size:12px;padding:5px 12px;opacity:.5">'+(tarea===4?'→ 论述同题 (T5) · 本题无配对论述':'← 经验同题 (T4) · 本题无配对新闻题')+'</button>';
+    if(_pair && _pair.mode !== 'exact') _pair = null;
+    if(!_pair) return '<button class="btn ol" disabled style="font-size:12px;padding:5px 12px;opacity:.5">'+(tarea===4?'→ 论述同题 (T5) · 本题无同话题论述（待补）':'← 经验同题 (T4) · 本题无同话题新闻题（待补）')+'</button>';
     var _pairLabel = (tarea===4 ? '→ 论述同题 (T5)' : '← 经验同题 (T4)') + (_pair.mode==='group' ? (' · 同组「' + String(_pair.group||'').slice(0,8) + '」') : '');
     /* v94.6.1: AB 题 A 版（真题素材版）不参与 T4↔T5 配对，防错配 */
     if(x.ab && typeof window._sieleABCur==='function' && window._sieleABCur(x)==='A' && x.abSrc){
