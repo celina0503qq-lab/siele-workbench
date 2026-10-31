@@ -3189,11 +3189,6 @@ async function genTransferCode(){
     const _ses0=cloudSession();
     if(!_ses0||!_ses0.sessionToken)throw new Error('请先登录后台账号后再生成传输码（当前未登录）');
     if(typeof DB==='undefined'||!DB||!Array.isArray(DB.words))throw new Error('本地学习数据尚未加载完成，请稍候重试');
-    /* v95.88：管理员账号禁止生成传输码——传输码=整体复制该账号（含 admin 角色），避免把管理权限发给他人 */
-    const _acc=(typeof users!=='object'?null:null);
-    const _usersTbl=lsGet(LSU,{});
-    const _me=_usersTbl&&_usersTbl[CUR];
-    if(_me&&_me.role==='admin')throw new Error('管理员账号不能生成传输码（会把管理权限一并复制出去）。请用你的普通学习账号生成');
     const users=lsGet(LSU,{});
     /* v95.88：extra 补搬 6 类独立键（笔记/T2 模板与记录/每日阅读/场景打卡/题库背诵断点）——均为本机当前用户数据 */
     const _extra={};
@@ -3203,6 +3198,8 @@ async function genTransferCode(){
      ['scene_check','siele_scene_check_v1'],['scene_prompt','siele_scene_prompt_v1'],
      ['quiz_back_mode','wb_quiz_back_mode_v1'],['quiz_back_pos','wb_quiz_back_pos_v1']
     ].forEach(function(p){ try{ var v=localStorage.getItem(p[1]); if(v!=null) _extra[p[0]]=v; }catch(e){} });
+    /* v95.89：管理员账号禁止生成传输码（放在 users 声明之后，避免 TDZ） */
+    if(users&&users[CUR]&&users[CUR].role==='admin')throw new Error('管理员账号不能生成传输码（会把管理权限一并复制出去）。请用你的普通学习账号生成');
     const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,wb:lsGet('dele_siele_wb_v3',null),extra:_extra,ts:Date.now()};
     /* v95.85：改走自有 CloudBase（原第三方 jsonblob 已停服 403） */
     const _ses=cloudSession();

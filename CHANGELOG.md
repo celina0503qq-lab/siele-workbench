@@ -1,6 +1,11 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.89] – 2026-10-31
+### 修复 · 传输码生成报 TDZ 错误（v95.88 引入）
+- v95.88 的管理员拦截块插在 `const users` 声明之前且用 `typeof users` 判断——`typeof` 对未初始化的 let/const 同样抛 `ReferenceError: Cannot access 'users' before initialization`，导致管理员与普通用户全部无法生成。
+- 修复：拦截块移到 `users` 声明之后（紧贴 payload 构造），改用 `users[CUR].role` 判断；并清除两份 admin 文件中的残留块。本地双场景验证：普通用户正常进入云函数流程、管理员被正确拦截。
+
 ## [v95.88] – 2026-10-31
 ### 加固 · 传输码只搬「当前登录用户」并补齐 6 类数据
 - **禁止管理员账号生成传输码**：传输码本质是整体复制当前登录账号（含角色），原实现若管理员在自己账号下生成，会把 admin 权限一并交给他人。现在 admin 角色直接拒绝并提示改用普通学习账号。
