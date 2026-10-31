@@ -3185,6 +3185,10 @@ async function genTransferCode(){
   const out=$('transferOut');
   out.innerHTML='<div class="note info">正在生成传输码…</div>';
   try{
+    /* v95.86：前置守卫——未登录或数据未初始化时直接提示，避免 serializeCloud 读取 null */
+    const _ses0=cloudSession();
+    if(!_ses0||!_ses0.sessionToken)throw new Error('请先登录后台账号后再生成传输码（当前未登录）');
+    if(typeof DB==='undefined'||!DB||!Array.isArray(DB.words))throw new Error('本地学习数据尚未加载完成，请稍候重试');
     const users=lsGet(LSU,{});
     const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,wb:lsGet('dele_siele_wb_v3',null),ts:Date.now()};
     /* v95.85：改走自有 CloudBase（原第三方 jsonblob 已停服 403） */

@@ -1,6 +1,9 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.86] – 2026-10-31
+### 修复 · 生成传输码前置守卫（v95.85 配套）
+- 未登录或本地数据未初始化时，原代码在构造 payload 阶段就读 `DB.words` 抛错（提示为「Cannot read properties of null」）。现在先校验登录态与数据就绪，给出「请先登录后台账号后再生成传输码」等明确提示。
 ## [v95.85] – 2026-10-31
 ### 修复 · 设备迁移传输码改走自有 CloudBase
 - 原实现把「账号+全部学习数据+同步配置」POST 到第三方 jsonblob.com，该服务现返回 403 → 「生成传输码」必失败。改为云函数 siele-auth 新增 `createTransferCode` / `consumeTransferCode`（数据只存自有 `transfer_codes` 集合）。
