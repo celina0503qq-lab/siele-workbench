@@ -577,7 +577,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v95.91-202610311800';
+window.swVer = 'v96.0-202610311830';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -703,7 +703,7 @@ const SIELE_TAREAS = [
 /* v95.53 P1-b: Tarea 3 官方域标注（p = 私人域 personal / c = 正式公共域 público）
    用于按域组卷（Bloque 1 私人 2 选 1 + Bloque 2 公共 2 选 1）与界面标注。半自动判定，待用户抽检。 */
 const SIELE_T3_DOMAIN = {
-  't3-mascota':'p','t3-plantas':'p','t3-rechazo':'p','t3-cita':'c','t3-maleta':'c','t3-vivienda':'c',
+  't3-mascota':'p','t3-plantas':'p','t3-rechazo':'p','t3-cita':'c','t3-maleta':'c','t3-vivienda':'p',
   't3-reject-offer':'c','t3-decline-dog':'p','t3-cena':'p','t3-boda':'p','t3-cine':'p','t3-decline-shopping':'p',
   't3-turismo':'p','t3-vuelo':'c','t3-trabajo':'c','t3-enfermo':'p','t3-retraso':'p','t3-oculista':'c',
   't3-lost-luggage':'c','t3-cartera':'c','t3-apartment':'c','t3-fiesta':'p','t3-sorpresa':'p','t3-excursión':'p',
@@ -716,7 +716,7 @@ const SIELE_T3_DOMAIN = {
   't3-cancelled-flight':'c','t3-friend-no-show':'p','t3-pharmacy-advice':'c','t3-cancel-work-meeting':'c','t3-refuse-lend-book':'p',
   't3-late-to-work':'c','t3-sell-apartment':'c','t3-rent-car':'c','t3-apply-scholarship':'c','t3-change-swimming':'c',
   't3-pick-up-daughter':'p','t3-translate-email':'p','t3-cancel-friend':'p','t3-weekend-plan':'p','t3-borrow-house':'p',
-  't3-help-colleague':'c','t3-against-shopping':'p','t3-apply-internship':'c','t3-change-class':'c','t3-cancel-weekend':'p',
+  't3-help-colleague':'p','t3-against-shopping':'p','t3-apply-internship':'c','t3-change-class':'c','t3-cancel-weekend':'p',
   't3-wedding-call':'p'
 };
 window._sieleT3DomainOf = function(id){
@@ -2113,6 +2113,24 @@ function go(page){
 
 
 // ===== MAIN RENDERER =====
+/* v96.0：云同步健康旁路监控——不改同步核心，按时长给两档提示（网络类/加速器类） */
+window._syncHealthBanner = null;
+window._syncHealthEval = function(){
+  try{
+    if(typeof AU === 'undefined' || !AU || typeof ADB === 'undefined' || !ADB){ window._syncHealthBanner = null; return; }
+    var cfg = ADB.syncCfg;
+    if(!cfg || !(cfg.enabled || cfg.token || cfg.syncToken)){ window._syncHealthBanner = null; return; }
+    var last = Number((ADB.meta && (ADB.meta.lastSync || ADB.meta.lastPushTs)) || 0);
+    if(!last){ window._syncHealthBanner = null; return; }
+    var mins = Math.floor((Date.now() - last) / 60000);
+    if(mins >= 20){
+      window._syncHealthBanner = { level:'warn', mins: mins, text: '云同步已 ' + mins + ' 分钟未成功。若开启了加速器/代理，请关闭后重试（代理会干扰国内云服务）；数据已安全保存在本地，网络恢复后会自动补同步。' };
+    } else if(mins >= 10){
+      window._syncHealthBanner = { level:'info', mins: mins, text: '云同步已 ' + mins + ' 分钟未成功——网络可能不稳定。数据已保存在本地，稍后会自动重试。' };
+    } else { window._syncHealthBanner = null; }
+  }catch(e){ try{ console.warn('[sync] health eval failed', e); }catch(e2){} }
+};
+try{ if(!window._syncHealthIv){ window._syncHealthIv = setInterval(function(){ try{ window._syncHealthEval(); }catch(e){} }, 60000); } }catch(e){}
 function renderMain(){
   const main = document.getElementById('main');
   if(!main) return;
@@ -2161,7 +2179,16 @@ function renderMain(){
   }
   var _dsx = (typeof window._dataShortfall === 'function') ? window._dataShortfall() : { short: false, vN: 0, qN: 0 };
   var _dsBanner = _dsx.short ? ('<div style="background:#fff7ed;border:1px solid #fdba74;color:#9a3412;padding:8px 12px;border-radius:9px;margin-bottom:10px;font-size:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b>📴 离线精简模式</b><span>题库 ' + _dsx.qN + '/6000 · 词汇 ' + _dsx.vN + '/4815 —— 登录联网后自动加载完整库</span><button class="btn xs pr" onclick="location.reload()">🔄 重新加载</button></div>') : '';
-  main.innerHTML = _dsBanner + h + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  try{ window._syncHealthEval(); }catch(e){}
+  var _syncB = '';
+  try{
+    var _sb = window._syncHealthBanner;
+    if(_sb){
+      var _w = _sb.level === 'warn';
+      _syncB = '<div style="background:' + (_w ? '#fef2f2' : '#fff7ed') + ';border:1px solid ' + (_w ? '#fca5a5' : '#fdba74') + ';color:' + (_w ? '#991b1b' : '#9a3412') + ';padding:8px 12px;border-radius:9px;margin-bottom:10px;font-size:12px;line-height:1.6"><b>' + (_w ? '⚠️ 云同步异常' : '📶 网络提示') + '</b> ' + _sb.text + '</div>';
+    }
+  }catch(e){}
+  main.innerHTML = _dsBanner + _syncB + h + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
