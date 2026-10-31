@@ -510,6 +510,7 @@
   .wrec pre{word-break:break-word;overflow-x:hidden}
 }
 /* ===== v94.4.2 end (v94.4.4 colored) + v94.5 teal + v94.5.1 mobile ===== */
+.ai-badge{display:inline-block;margin-left:6px;background:#fff7ed;color:#c2410c;border:1px solid #fdba74;font-size:10px;font-weight:800;padding:1px 6px;border-radius:9px;vertical-align:middle}
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
 <style id="v65fxStyle">
@@ -577,7 +578,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v96.4-202610311910';
+window.swVer = 'v96.5-202610311925';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -9358,6 +9359,43 @@ function renderResources(){
 
 
 // ===== SIELE ORAL PRACTICE ENGINE =====
+/* v96.5：T4 四道占位题的 AI 生成内容（覆盖层——不改云端 oralbank / 静态题库，可整段移除回退） */
+window._T4_AI_OVERRIDE = {"t4-hf47": {"id": "t4-hf47", "tarea": 4, "ai": true, "q": "¿Qué experiencia tiene con este tema en su entorno? ¿Qué ventajas y problemas observa en las medidas contra la pobreza? ¿Qué medida propondría para reducir la desigualdad?", "subqs": [{"q": "¿Qué experiencia tiene con este tema en su entorno?", "keys": [], "model": "", "auto": true, "audioKey": "51_4667de4c"}, {"q": "¿Qué ventajas y problemas observa en las medidas contra la pobreza?", "keys": [], "model": "", "auto": true, "audioKey": "67_133d56cf"}, {"q": "¿Qué medida propondría para reducir la desigualdad?", "keys": [], "model": "", "auto": true, "audioKey": "51_b8fa25ae"}], "model": "[问 1 · 你的经历] Desde mi experiencia, la pobreza no siempre se ve: en mi barrio hay familias que trabajan pero no llegan a fin de mes, sobre todo por el precio del alquiler.\n\n[问 2 · 利弊评价] En cuanto a las medidas que existen, considero que la renta mínima ayuda a cubrir lo básico, aunque por sí sola no resuelve el problema: sin formación ni empleo estable, muchas personas vuelven a la misma situación. Además, la burocracia hace que algunas ayudas lleguen tarde.\n\n[问 3 · 你的建议] Una medida eficaz sería combinar la ayuda económica con cursos prácticos y con un parque de vivienda pública asequible. También es fundamental que las empresas ofrezcan contratos más estables y que las escuelas enseñen educación financiera desde edades tempranas. En definitiva, reducir la desigualdad exige un esfuerzo conjunto de las administraciones, las empresas y la sociedad civil.", "audioUrl": {"51_4667de4c": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_51_4667de4c.mp3", "67_133d56cf": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_67_133d56cf.mp3", "51_b8fa25ae": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_51_b8fa25ae.mp3"}}, "t4-hf48": {"id": "t4-hf48", "tarea": 4, "ai": true, "q": "¿Qué experiencia tiene con la desinformación en Internet? ¿Qué ventajas y problemas observa en las redes sociales como fuente de información? ¿Qué medida propondría para mejorar la fiabilidad de la información?", "subqs": [{"q": "¿Qué experiencia tiene con la desinformación en Internet?", "keys": [], "model": "", "auto": true, "audioKey": "57_e2f5b772"}, {"q": "¿Qué ventajas y problemas observa en las redes sociales como fuente de información?", "keys": [], "model": "", "auto": true, "audioKey": "83_9321b32e"}, {"q": "¿Qué medida propondría para mejorar la fiabilidad de la información?", "keys": [], "model": "", "auto": true, "audioKey": "68_e04f0641"}], "model": "[问 1 · 你的经历] Personalmente, he recibido más de una vez mensajes reenviados que resultaban ser falsos, y reconozco que al principio los creí sin comprobarlos.\n\n[问 2 · 利弊评价] Las redes sociales tienen la ventaja de informar con rapidez y de dar voz a temas que los medios tradicionales ignoran; sin embargo, el problema es que la velocidad prima sobre la verificación, y muchas noticias se comparten sin leerlas completas.\n\n[问 3 · 你的建议] Una medida que considero imprescindible es enseñar verificación de fuentes en los colegios, no como una asignatura teórica, sino con casos reales. También sería útil que las plataformas etiqueten de forma clara los contenidos no verificados. En resumen, la alfabetización mediática debería ser tan básica como aprender a leer.", "audioUrl": {"57_e2f5b772": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_57_e2f5b772.mp3", "83_9321b32e": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_83_9321b32e.mp3", "68_e04f0641": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_68_e04f0641.mp3"}}, "t4-hf57": {"id": "t4-hf57", "tarea": 4, "ai": true, "q": "¿Qué experiencia tiene con el reparto de tareas en su familia? ¿Qué ventajas y problemas observa en los cambios de los últimos años? ¿Qué medida propondría para avanzar hacia la igualdad en casa?", "subqs": [{"q": "¿Qué experiencia tiene con el reparto de tareas en su familia?", "keys": [], "model": "", "auto": true, "audioKey": "62_60356e19"}, {"q": "¿Qué ventajas y problemas observa en los cambios de los últimos años?", "keys": [], "model": "", "auto": true, "audioKey": "69_3477c23a"}, {"q": "¿Qué medida propondría para avanzar hacia la igualdad en casa?", "keys": [], "model": "", "auto": true, "audioKey": "62_91115f58"}], "model": "[问 1 · 你的经历] En mi familia, el reparto ha cambiado bastante: mis padres se reparten la cocina y la limpieza, aunque reconozco que mi madre sigue organizando la mayor parte de la logística.\n\n[问 2 · 利弊评价] Creo que los cambios de los últimos años son positivos, porque los jóvenes asumen las tareas como algo natural y no como una ayuda; sin embargo, el problema persiste en las decisiones importantes y en los permisos laborales, que muchas veces todavía se toman como si el cuidado fuera responsabilidad exclusiva de la mujer.\n\n[问 3 · 你的建议] Una medida eficaz sería ampliar y hacer obligatorio el permiso de paternidad, porque cuando los padres se implican desde el principio, el reparto se equilibra. Además, la educación en casa debería evitar frases como «esto es cosa de chicas». En mi opinión, la igualdad real empieza en la cotidianidad, no solo en las leyes.", "audioUrl": {"62_60356e19": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_62_60356e19.mp3", "69_3477c23a": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_69_3477c23a.mp3", "62_91115f58": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_62_91115f58.mp3"}}, "t4-hf85": {"id": "t4-hf85", "tarea": 4, "ai": true, "q": "¿Qué experiencia tiene con la economía colaborativa? ¿Qué ventajas y problemas observa en este modelo? ¿Qué medida propondría para regularlo mejor?", "subqs": [{"q": "¿Qué experiencia tiene con la economía colaborativa?", "keys": [], "model": "", "auto": true, "audioKey": "52_126d8ba7"}, {"q": "¿Qué ventajas y problemas observa en este modelo?", "keys": [], "model": "", "auto": true, "audioKey": "49_f8cf6422"}, {"q": "¿Qué medida propondría para regularlo mejor?", "keys": [], "model": "", "auto": true, "audioKey": "44_592836e6"}], "model": "[问 1 · 你的经历] He utilizado aplicaciones de alojamiento y de reparto, y conozco a personas que obtienen ingresos extra a través de ellas.\n\n[问 2 · 利弊评价] La ventaja es evidente: ofrecen flexibilidad y permiten ganar dinero sin horarios fijos; sin embargo, el problema es que esa flexibilidad muchas veces esconde precariedad, porque los trabajadores no tienen vacaciones, baja médica ni cotización suficiente.\n\n[问 3 · 你的建议] Una medida que considero necesaria es establecer un estatuto claro para los repartidores, con derechos mínimos y cotización obligatoria, sin eliminar la flexibilidad que hace atractivo el modelo. También sería útil que las plataformas fueran transparentes con las comisiones y los algoritmos que asignan el trabajo. En definitiva, no se trata de prohibir, sino de ordenar el sector para que la innovación no se construya sobre la falta de derechos.", "audioUrl": {"52_126d8ba7": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_52_126d8ba7.mp3", "49_f8cf6422": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_49_f8cf6422.mp3", "44_592836e6": "https://7369-siele-prod-d2g15w3ug65796f47-1462979427.tcb.qcloud.la/audio/tts/t4_44_592836e6.mp3"}}};
+/* 应用覆盖层：getSieleOralBank 结果里的同 id 题被替换（并去掉 placeholder） */
+window._sieleApplyAiOverride = function(bank){
+  try{
+    if(!bank || !window._T4_AI_OVERRIDE) return bank;
+    var ov = window._T4_AI_OVERRIDE, t4 = bank[4] || bank['4'];
+    if(!t4 || !t4.length) return bank;
+    for(var i = 0; i < t4.length; i++){
+      var q = t4[i];
+      if(q && ov[q.id]){
+        var o = ov[q.id];
+        q.q = o.q; q.subqs = o.subqs; q.model = o.model; q.ai = true;
+        delete q.placeholder;
+      }
+    }
+  }catch(e){ try{ console.warn('[t4ai] override failed', e); }catch(e2){} }
+  return bank;
+};
+try{
+  if(typeof window.getSieleOralBank === 'function' && !window._sieleOralBankWrapped){
+    var _origBank = window.getSieleOralBank;
+    window.getSieleOralBank = function(){ return window._sieleApplyAiOverride(_origBank.apply(this, arguments)); };
+    window._sieleOralBankWrapped = true;
+  }
+}catch(e){}
+/* 12 段音频 manifest（只指向 CloudBase，仓库不含 mp3） */
+(function(){
+  try{
+    var m = window.__ORAL_TTS_MANIFEST;
+    if(!m) return;
+    Object.keys(window._T4_AI_OVERRIDE).forEach(function(id){
+      var urls = window._T4_AI_OVERRIDE[id].audioUrl || {};
+      Object.keys(urls).forEach(function(k){ m[k] = urls[k]; });
+    });
+  }catch(e){}
+})();
 function getSieleOralBank(){
   var ed = window._contentEdits && window._contentEdits.oralbank;
   if(ed && ed.bank && typeof ed.bank === 'object'){
@@ -11027,7 +11065,7 @@ function playSielePrompt(){
   }
   speak(x.q,null,'es');
 }
-function revealSielePrompt(){_sieleOralShown=true;var x=getSieleOralItem()||{};var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.innerHTML=_sieleEscQ(x.q||'')+((x.zhExplain&&_sieleZhShown)?'<div class="so-zhexp" id="soZhExp">'+esc(x.zhExplain)+'</div>':'');}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
+function revealSielePrompt(){_sieleOralShown=true;var x=getSieleOralItem()||{};var box=document.getElementById('soPrompt');if(box){box.className='so-question';box.innerHTML=(x.ai?'<span class="ai-badge">🤖 AI 生成</span>':'')+_sieleEscQ(x.q||'')+((x.zhExplain&&_sieleZhShown)?'<div class="so-zhexp" id="soZhExp">'+esc(x.zhExplain)+'</div>':'');}var b=document.getElementById('soReveal');if(b)b.disabled=true;}
 // ===== S10: T3 中文三级渐进 / T4T5 联动 / T2 预取 / 题库编辑历史 =====
 function toggleSieleZh(){
   if(!_sieleOralShown) revealSielePrompt();
