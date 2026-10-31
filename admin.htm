@@ -3200,6 +3200,11 @@ async function genTransferCode(){
     ].forEach(function(p){ try{ var v=localStorage.getItem(p[1]); if(v!=null) _extra[p[0]]=v; }catch(e){} });
     /* v95.89：管理员账号禁止生成传输码（放在 users 声明之后，避免 TDZ） */
     if(users&&users[CUR]&&users[CUR].role==='admin')throw new Error('管理员账号不能生成传输码（会把管理权限一并复制出去）。请用你的普通学习账号生成');
+    /* v95.90-A：后台与主工作台必须登录同一账号（防把别的账号数据搬走） */
+    const _wbSes=(function(){ try{ return JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){ return null; } })();
+    if(!_wbSes||!_wbSes.username||_wbSes.username!==CUR){
+      throw new Error('工作台当前登录的不是这个账号（工作台：'+((_wbSes&&_wbSes.username)||'未登录')+' / 后台：'+CUR+'）。请先在工作台用同一账号登录后再生成');
+    }
     const payload={type:'siele-transfer',v:2,user:CUR,account:users[CUR],cloud:serializeCloud(),syncCfg:DB.syncCfg,wb:lsGet('dele_siele_wb_v3',null),extra:_extra,ts:Date.now()};
     /* v95.85：改走自有 CloudBase（原第三方 jsonblob 已停服 403） */
     const _ses=cloudSession();
@@ -3211,6 +3216,20 @@ async function genTransferCode(){
     }
     const code=_r.code;
     out.innerHTML='<div class="code-show" id="tcode">'+esc(code)+'</div>'+
+    /* v95.90-C：数据摘要——让人一眼核对搬的是谁的数据 */
+    (function(){
+      try{
+        var _wb=lsGet('dele_siele_wb_v3',null)||{};
+        var _c=function(o){ try{ return Object.keys(o||{}).length; }catch(e){ return 0; } };
+        var _sum='📦 本次包含：账号 '+CUR+' ｜ 已评词 '+_c(_wb.flipRated)+' ｜ 错题 '+((_wb.errors&&_wb.errors.length)||0)
+          +' ｜ 写作记录 '+_c(_wb.writingScores)+' ｜ 口语记录 '+_c(_wb.sieleOralScores);
+        var _d=document.createElement('div');
+        _d.className='note info'; _d.style.marginTop='8px';
+        _d.textContent=_sum+'（请核对是否为你的数据；如不符请勿把码给他人）';
+        var _host=document.getElementById('transferOut'); if(_host) _host.appendChild(_d);
+      }catch(eS){ try{ console.warn('[transfer] 摘要生成失败',eS); }catch(e2){} }
+    })();
+
       '<div style="display:flex;gap:8px"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+code+'\').then(()=>toast(\'已复制\',\'ok\'))">📋 复制</button></div>'+
       '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「换设备登录？」→ 粘贴此码。<b>24 小时内有效</b>，含账号、学习进度与全部数据。</div>';
   }catch(err){

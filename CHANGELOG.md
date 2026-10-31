@@ -1,6 +1,12 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v95.90] – 2026-10-31
+### 加固 · 传输码防错搬（A 会话一致性校验 + C 数据摘要）
+- **A｜后端与主工作台必须是同一账号**：生成前比对后台登录用户与主工作台会话（`swa_cloud_session_v1`），不一致直接拒绝并在错误里写明「工作台：X / 后台：Y」——修复「后台登 A、工作台登 B 时把 B 的数据搬走」。
+- **C｜生成后显示数据摘要**（自证机制）：「账号 X ｜ 已评词 N ｜ 错题 M ｜ 写作 K ｜ 口语 J（请核对是否为你的数据；如不符请勿把码给他人）」——搬错一眼可见。
+- 遗留（B，长期）：`dele_siele_wb_v3` 等仍为全局单键不分账号，根治需 ST 按 uid 分键（并入云同步重构一起做，已记入待办）。
+
 ## [v95.89] – 2026-10-31
 ### 修复 · 传输码生成报 TDZ 错误（v95.88 引入）
 - v95.88 的管理员拦截块插在 `const users` 声明之前且用 `typeof users` 判断——`typeof` 对未初始化的 let/const 同样抛 `ReferenceError: Cannot access 'users' before initialization`，导致管理员与普通用户全部无法生成。
