@@ -3216,22 +3216,20 @@ async function genTransferCode(){
     }
     const code=_r.code;
     out.innerHTML='<div class="code-show" id="tcode">'+esc(code)+'</div>'+
-    /* v95.90-C：数据摘要——让人一眼核对搬的是谁的数据 */
-    (function(){
-      try{
-        var _wb=lsGet('dele_siele_wb_v3',null)||{};
-        var _c=function(o){ try{ return Object.keys(o||{}).length; }catch(e){ return 0; } };
-        var _sum='📦 本次包含：账号 '+CUR+' ｜ 已评词 '+_c(_wb.flipRated)+' ｜ 错题 '+((_wb.errors&&_wb.errors.length)||0)
-          +' ｜ 写作记录 '+_c(_wb.writingScores)+' ｜ 口语记录 '+_c(_wb.sieleOralScores);
-        var _d=document.createElement('div');
-        _d.className='note info'; _d.style.marginTop='8px';
-        _d.textContent=_sum+'（请核对是否为你的数据；如不符请勿把码给他人）';
-        var _host=document.getElementById('transferOut'); if(_host) _host.appendChild(_d);
-      }catch(eS){ try{ console.warn('[transfer] 摘要生成失败',eS); }catch(e2){} }
-    })();
 
       '<div style="display:flex;gap:8px"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+code+'\').then(()=>toast(\'已复制\',\'ok\'))">📋 复制</button></div>'+
       '<div class="note" style="margin-top:9px">在新设备打开本系统 → 登录页点「换设备登录？」→ 粘贴此码。<b>24 小时内有效</b>，含账号、学习进度与全部数据。</div>';
+    /* v95.91：数据摘要（位置修正——必须在 innerHTML 赋值语句结束之后，否则会与字符串拼接串成 '</div>'+undefined） */
+    try{
+      var _wbS=lsGet('dele_siele_wb_v3',null)||{};
+      var _cn=function(o){ try{ return Object.keys(o||{}).length; }catch(e){ return 0; } };
+      var _sumS='📦 本次包含：账号 '+CUR+' ｜ 已评词 '+_cn(_wbS.flipRated)+' ｜ 错题 '+((_wbS.errors&&_wbS.errors.length)||0)
+        +' ｜ 写作记录 '+_cn(_wbS.writingScores)+' ｜ 口语记录 '+_cn(_wbS.sieleOralScores)
+        +'（请核对是否为你的数据；如不符请勿把码给他人）';
+      var _dS=document.createElement('div');
+      _dS.className='note info'; _dS.style.marginTop='8px'; _dS.textContent=_sumS;
+      var _hS=document.getElementById('transferOut'); if(_hS) _hS.appendChild(_dS);
+    }catch(eSS){ try{ console.warn('[transfer] 摘要生成失败',eSS); }catch(e2){} }
   }catch(err){
     out.innerHTML='<div class="note err">生成失败：'+esc(err.message||err)+'</div>';
   }
