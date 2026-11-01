@@ -393,6 +393,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
   <nav class="nav">
     <div class="ns">总览</div>
     <button class="ni on" data-p="dash" onclick="go('dash')"><span class="ic">📊</span>数据看板</button>
+  <button class="ni" data-p="mainview" onclick="go('mainview')"><span class="ic">🌐</span>主站口径</button>
     <div class="ns">内容管理</div>
     <button class="ni" data-p="words" onclick="go('words')"><span class="ic">📚</span>单词管理<span class="bdg" id="bdgWords">0</span></button>
     <button class="ni" data-p="quiz" onclick="go('quiz')"><span class="ic">✏️</span>题库管理<span class="bdg" id="bdgQuiz">0</span></button>
@@ -431,6 +432,36 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <div class="card"><h3><span class="ic">📅</span>复习计划完成率</h3><div id="planSummary"></div></div>
   </div>
   <div class="card"><h3><span class="ic">🕑</span>最近动态</h3><div id="recentList"></div></div>
+</section>
+
+<section class="page" id="pg-mainview">
+  <div class="tb"><div><h2>📊 主站口径</h2><div class="d">数据源：getData 全量词库/题库 + 主站快照增量（只读视图，不影响现有管理功能）</div></div>
+    <div><button class="btn" onclick="loadMainView(true)">🔄 刷新数据</button></div></div>
+  <div id="mvStatus" class="d" style="margin:8px 0">尚未加载——点「刷新数据」开始拉取（词库+题库共 8 个数据集）</div>
+  <div id="mvBody" style="display:none">
+    <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
+      <div class="card stat" style="text-align:center"><div class="num a" id="mvVocabTotal">-</div><div class="lbl">词汇总数（主站全库）</div></div>
+      <div class="card stat" style="text-align:center"><div class="num" id="mvLearned">-</div><div class="lbl">已学（进度>0）</div></div>
+      <div class="card stat" style="text-align:center"><div class="num" style="color:var(--ok,green)" id="mvMastered">-</div><div class="lbl">掌握（★★★）</div></div>
+      <div class="card stat" style="text-align:center"><div class="num" id="mvQuizTotal">-</div><div class="lbl">题库总数</div></div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">
+      <div class="card" style="flex:0 0 280px;text-align:center">
+        <h3><span class="ic">🎯</span>词汇掌握度分布</h3>
+        <div id="mvDonut"></div>
+        <div id="mvDonutLegend" style="text-align:left;font-size:12px;margin-top:6px"></div>
+      </div>
+      <div class="card" style="flex:1;min-width:280px">
+        <h3><span class="ic">📚</span>各等级词汇进度（主站全库口径）</h3>
+        <div id="mvLvlBars"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3><span class="ic">📝</span>题库分布（按考试）</h3>
+      <div id="mvQuizBars"></div>
+      <div id="mvQuizMeta" style="font-size:12px;color:var(--soft);margin-top:6px"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ===== 单词管理 ===== -->
@@ -843,6 +874,126 @@ function migrateLegacyToCurrent(currentUser, legacyUsers){
   return migrated;
 }
 // 登录/注册成功后调用：检测到旧本地账户数据则弹窗询问是否迁移。
+
+/* ===== v96.9：主站口径只读视图（getData 全量 + 快照增量）===== */
+window._mvCache = null;
+window._mvMasteryByEs = null;   // es -> mastery（来自快照 seedW[id]→SEED 桥 + 用户词）
+window._mvSeedDoneQ = null;     // sqId -> [done, correct, ts]
+
+window._mvTtsKeyOf = function(){ return null; };
+window._mvIdToEs = function(){
+  /* id(sw_i) -> es：优先 SEED（admin 内联），与 getData 词库顺序双保险 */
+  try{ return (typeof SEED !== 'undefined' && SEED.words) ? SEED.words.map(w => (w.es||'').toLowerCase().trim()) : null; }catch(e){ return null; }
+};
+window._mvBuildMasteryByEs = function(seedW, snapWords){
+  const byEs = {};
+  try{
+    const id2es = window._mvIdToEs() || [];
+    Object.keys(seedW || {}).forEach(function(id){
+      const m = Number((seedW[id]||[])[0]) || 0;
+      let es = id2es[Number(String(id).replace('sw',''))] || '';
+      if(!es) return;
+      const prev = byEs[es] || 0;
+      byEs[es] = Math.max(prev, m);   // 同 es 取较高（幂等合并）
+    });
+    (snapWords || []).forEach(function(w){
+      const es = (w.es||'').toLowerCase().trim(); if(!es) return;
+      byEs[es] = Math.max(byEs[es] || 0, Number(w.mastery)||0);
+    });
+  }catch(e){ try{ console.warn('[mainview] build failed', e); }catch(e2){} }
+  return byEs;
+};
+window.loadMainView = async function(force){
+  const st = document.getElementById('mvStatus'), body = document.getElementById('mvBody');
+  if(!st) return;
+  try{
+    if(window._mvCache && !force){ window.renderMainView(window._mvCache); return; }
+    st.textContent = '拉取中…（8 个数据集 + 主站快照，约 5-15 秒）';
+    const ses = cloudSession();
+    if(!ses || !ses.sessionToken){ st.textContent = '请先登录后再查看主站口径'; return; }
+    const names = ['vdata_b1','vdata_b2v','vdata_b3','vdata_dele','qdata_a1','qdata_a2','qdata_b1','qdata_b2'];
+    const results = {};
+    for(const n of names){
+      const r = await callSieleAuth({action:'getData', sessionToken: ses.sessionToken, name: n});
+      if(!r || !r.ok){ st.textContent = '拉取失败：' + n + '（' + (r && r.code || '未知') + '）'; return; }
+      results[n] = r.data || [];
+    }
+    // 词库合并（顺序：b1,b2v,b3,dele —— 与 SEED 拼装顺序一致性运行时校验）
+    const vAll = [].concat(results.vdata_b1, results.vdata_b2v, results.vdata_b3, results.vdata_dele);
+    const id2es = window._mvIdToEs() || [];
+    let mismatch = 0;
+    for(let i = 0; i < Math.min(id2es.length, vAll.length); i++){
+      if(id2es[i] && vAll[i] && (vAll[i].es||'').toLowerCase().trim() !== id2es[i]) mismatch++;
+    }
+    if(mismatch > 3) try{ console.warn('[mainview] vdata 顺序与 SEED 不一致（mismatch=' + mismatch + '），进度匹配可能偏移'); }catch(e){}
+    // 快照
+    const pull = await callSieleAuth({action:'pullLearning', sessionToken: ses.sessionToken});
+    let snap = null;
+    if(pull && pull.ok && pull.snapshot && pull.snapshot.payload) snap = pull.snapshot.payload;
+    const seedW = (snap && snap.seedW) || {};
+    const snapWords = (snap && snap.words) || [];
+    const byEs = window._mvBuildMasteryByEs(seedW, snapWords);
+    // 汇总
+    const total = vAll.length;
+    let learned = 0, mastered = 0;
+    const byLvl = {};
+    vAll.forEach(function(w){
+      const L = w.lvl || 'general';
+      if(!byLvl[L]) byLvl[L] = {t:0,l:0,m:0};
+      byLvl[L].t++;
+      const m = byEs[(w.es||'').toLowerCase().trim()] || 0;
+      if(m > 0){ learned++; byLvl[L].l++; }
+      if(m >= 3){ mastered++; byLvl[L].m++; }
+    });
+    const dist = {m3:0,m2:0,m1:0,m0:total};
+    Object.keys(byEs).forEach(function(es){ const v = byEs[es]; if(v>=3){dist.m3++;dist.m0--;} else if(v===2){dist.m2++;dist.m0--;} else if(v===1){dist.m1++;dist.m0--;} });
+    // 题库
+    const qAll = [].concat(results.qdata_a1, results.qdata_a2, results.qdata_b1, results.qdata_b2);
+    const qByEx = {};
+    qAll.forEach(function(q){ const e = q.ex || 'other'; if(!qByEx[e]) qByEx[e] = 0; qByEx[e]++; });
+    const seedQ = (snap && snap.seedQ) || {};
+    let qDone = 0; Object.keys(seedQ).forEach(function(k){ if((seedQ[k]||[])[0]) qDone++; });
+    window._mvCache = { total, learned, mastered, byLvl, dist, qAll, qByEx, qDone, qTotal: qAll.length, mismatch, at: new Date() };
+    st.textContent = '数据加载完成（' + window._mvCache.at.toLocaleTimeString() + '）' + (mismatch > 3 ? ' · ⚠️ 词库顺序校验有偏移 ' + mismatch + ' 条（进度匹配可能受影响）' : ' · 词序校验通过');
+    body.style.display = '';
+    window.renderMainView(window._mvCache);
+  }catch(e){
+    st.textContent = '加载失败：' + String(e && e.message || e).slice(0, 100);
+    try{ console.warn('[mainview]', e); }catch(e2){}
+  }
+};
+window.renderMainView = function(c){
+  try{
+    document.getElementById('mvVocabTotal').textContent = c.total;
+    document.getElementById('mvLearned').textContent = c.learned;
+    document.getElementById('mvMastered').textContent = c.mastered;
+    document.getElementById('mvQuizTotal').textContent = c.qTotal;
+    // donut（复用现有样式）
+    const R = 48, C = 2 * Math.PI * R;
+    const seg = [[c.dist.m3,'#2E7D32','★★★ 掌握'],[c.dist.m2,'#E08E0B','★★ 熟悉'],[c.dist.m1,'#C0392B','★ 初学'],[c.dist.m0,'#f0e6d2','未学']];
+    let off = 0;
+    document.getElementById('mvDonut').innerHTML =
+      '<svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="#f0e6d2" stroke-width="14"/>' +
+      seg.map(function(s){ const len = s[0]/(c.total||1)*C;
+        const el = '<circle cx="60" cy="60" r="48" fill="none" stroke="'+s[1]+'" stroke-width="14" stroke-dasharray="'+len+' '+(C-len)+'" stroke-dashoffset="'+(-off)+'"/>'; off += len; return el; }).join('') + '</svg>';
+    document.getElementById('mvDonutLegend').innerHTML = seg.map(function(s){
+      return '<div class="li"><span class="sw" style="background:'+s[1]+'"></span>'+s[2]+' · '+s[0]+' 词（'+Math.round(s[0]/(c.total||1)*100)+'%）</div>'; }).join('');
+    // 等级进度条
+    document.getElementById('mvLvlBars').innerHTML = ['A1','A2','B1','B2','C1','general'].map(function(l){
+      const d = c.byLvl[l]; if(!d || !d.t) return '';
+      const pct = Math.round(d.l/d.t*100);
+      return '<div class="prow"><div class="pl"><span><span class="tm l'+l+'">'+l+'</span></span><span class="r">'+d.l+'/'+d.t+'（'+pct+'%）</span></div><div class="pbar"><i style="width:'+pct+'%"></i></div></div>';
+    }).join('') || '<div class="empty">暂无词汇</div>';
+    // 题库分布
+    const maxQ = Math.max.apply(null, [1].concat(Object.keys(c.qByEx).map(k => c.qByEx[k])));
+    document.getElementById('mvQuizBars').innerHTML = Object.keys(c.qByEx).sort(function(a,b){ return c.qByEx[b]-c.qByEx[a]; }).map(function(e){
+      const n = c.qByEx[e], pct = Math.round(n/maxQ*100);
+      return '<div class="prow"><div class="pl"><span>'+e+'</span><span class="r">'+n+' 题</span></div><div class="pbar"><i style="width:'+pct+'%"></i></div></div>';
+    }).join('');
+    document.getElementById('mvQuizMeta').textContent = '其中做过（有状态）' + c.qDone + ' 题 · 剩余 ' + (c.qTotal - c.qDone) + ' 题未动';
+  }catch(e){ try{ console.warn('[mainview] render failed', e); }catch(e2){} }
+};
+
 function maybeMigrateLegacyData(username){
   try{
     const legacy = detectLegacyLocalData(username);
