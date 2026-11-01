@@ -578,7 +578,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.9-202611011800';
+window.swVer = 'v97.10-202611011815';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3529,7 +3529,11 @@ function renderFlash(){
 
   // Progress bar
   const masteryPct = _praMode ? Math.min(100, _dispIdx/Math.max(1,pool.length)*100) : m/3*100; /* v95.34: 练习模式进度条=练习进度；v95.71: 与 _dispIdx 同源 */
-  h += `<div class="fcp"><span style="font-size:11px">${_praMode?'练习':(m>0?'已学':'未学')}</span><div class="bar"><i style="width:${masteryPct}%"></i></div><span style="font-size:11px">${_dispIdx}/${pool.length}</span></div>`;
+  /* v97.10：等级进度条 = 已学词数/该级总数（按「掌握」立刻 +1；此前显示翻页位置 _dispIdx，按掌握不前进） */
+  var _lvlLearned = 0;
+  try{ _lvlLearned = pool.filter(function(v){ return (ST.vocabMastery[v.es]||0) >= 1; }).length; }catch(e){}
+  var _lvlPct = Math.min(100, _lvlLearned/Math.max(1,pool.length)*100);
+  h += `<div class="fcp"><span style="font-size:11px">${_praMode?'练习':'已学'}</span><div class="bar"><i style="width:${_praMode?masteryPct:_lvlPct}%"></i></div><span style="font-size:11px">${_praMode?_dispIdx:_lvlLearned}/${pool.length}</span></div>`;
 
   if(ST.flashMode === 'practice'){
     return h + renderFlashPractice(pool);
