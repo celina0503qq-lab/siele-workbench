@@ -8,7 +8,7 @@
 SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的西语外刊精读，
 内置账号体系与基于快照仲裁的跨设备同步。
 
-[![Version](https://img.shields.io/badge/version-v97.12-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v97.14-blue-flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Backend](https://img.shields.io/badge/sync-CloudBase_CloudFunctions-orange)](#同步架构)
 [![Offline](https://img.shields.io/badge/offline-first-9cf)](#离线策略)
@@ -47,27 +47,34 @@ SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的�
 学习数据以**账号级快照**存于云端，客户端与服务器之间只传输增量：
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#eef4fb','primaryBorderColor':'#4a6fa5','primaryTextColor':'#1a2a3a','lineColor':'#7a94b8','fontSize':'14px'}, 'flowchart': {'curve':'basis'}} }%%
 flowchart TB
-    subgraph CLIENT["浏览器（主站 SPA / 管理端）"]
+    subgraph CLIENT["🖥 客户端 · 主站 SPA / 管理端"]
         A["学习进度<br/>ST.vocabMastery"]
         B["后台编辑<br/>ADB.words.mastery"]
     end
-    subgraph CF["CloudBase Cloud Functions"]
+    subgraph CF["⚙ CloudBase Cloud Functions"]
         C["账号鉴权"]
         D["revision 仲裁<br/>冲突自动合并"]
         E["受控数据集下发"]
     end
-    subgraph DB[("云数据库")]
+    subgraph DB["☁ 云数据库"]
         F[("learning_snapshots<br/>学习快照 · 按账号")]
         G[("content_edits<br/>内容编辑 · 全站生效")]
         H[("sync_tokens<br/>同步凭证 · 可撤销")]
     end
-    A -->|"登录会话 pushLearning"| D
-    B -->|"syncToken pushLearning"| D
+    A -- "登录会话 pushLearning" --> D
+    B -- "syncToken pushLearning" --> D
     D --> F
-    A -->|getData| E
-    B -->|内容编辑| G
+    A -- getData --> E
+    B -- 内容编辑 --> G
     C --> H
+    classDef client fill:#eef4fb,stroke:#4a6fa5,stroke-width:1.5px
+    classDef func fill:#fdf6ec,stroke:#c8963e,stroke-width:1.5px
+    classDef store fill:#eef7ee,stroke:#3e7a4e,stroke-width:1.5px
+    class A,B client
+    class C,D,E func
+    class F,G,H store
 ```
 
 **写入路径有两条**，这是设计而非疏漏：
