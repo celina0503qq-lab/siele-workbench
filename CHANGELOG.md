@@ -1,7 +1,25 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
-## [v97.0/97.1] – 2026-11-01
+## [v97.5] – 2026-11-01
+### 修复 · 管理员进度双源合并（主站口径视图全 0 的根因）
+- 管理员的进度存在 `ADB.words.mastery` / `ADB.questions.done`（后台编辑+历史同步通道），而 wbSnap.dash 只统计主站 `ST.vocabMastery` / `ST.quizResults` → 管理员视角全 0。
+- wbSnap.dash 改为**双源合并**（同 es 取较高 mastery、题数并集）——管理员与学员两种路径的进度都正确呈现。
+
+## [v97.4] – 2026-11-01
+### 文档 · CHANGELOG 损坏重组 + README 详化 + LICENSE
+- 修复 v96.2/v96.7 补段造成的段结构破坏（v96.8/v96.3 段头截断），196 版降序完整。
+- README 重写（徽章/数据规模/功能分组/架构图/同步机制），新增 MIT License。
+
+## [v97.3] – 2026-11-01
+### 修复 · 主站口径视图：dash 缺失提示 + 题库分布按等级
+- 快照无 `wb.data.dash` 时不再显示全 0，改为明确提示「请在主站强刷并同步一次」。
+- 题库分布从「按考试」改为**按等级**；「做过」改读主站 `dash.quizDone`。
+
+## [v97.2] – 2026-11-01
+### 文档 · README 初版重写（徽章/数据规模/功能分组）+ CHANGELOG 补 v96.2/v96.7 断档
+
+## [v97.1] – 2026-11-01
 ### 修复 · 主站口径视图进度全 0 + 词库总数 4571→4815（用户实测反馈）
 - **进度全 0**：admin 内联 SEED 是旧版，与扩容后词库 id 错位 → 本地拼 id→es 桥全部失配。改为**直接读主站 wb.data.dash**（vocabLearned/vocabMastered/byLevel/masteryDist，主站算好的权威口径）；快照过旧无 dash 时回退 seedW 估算。
 - **词库总数 4571→4815**：云函数包 vdata 缺主站内联的 308 条（含 extra 8）且 4 个文件为旧版。已从主站数据源重新生成 vdata_extra/b1/b2v/b3/dele 五包并**重新部署云函数 siele-auth**；admin 拉取加 vdata_extra 并**按 es 去重**（与主站同款语义，4879→4815）。

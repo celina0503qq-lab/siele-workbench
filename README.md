@@ -4,7 +4,7 @@
 
 **DELE & SIELE 全流程备考平台 · 纯静态单页应用 · 零构建零依赖**
 
-[![Version](https://img.shields.io/badge/version-v97.4-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v97.5-blue)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-GitHub_Pages-lightgrey)](https://pages.github.com/)
 [![Backend](https://img.shields.io/badge/backend-CloudBase_CloudFunctions-orange)](#-技术架构)
 [![Offline](https://img.shields.io/badge/offline-Service_Worker-9cf)](#-技术架构)
