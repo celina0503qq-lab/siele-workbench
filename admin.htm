@@ -911,7 +911,7 @@ window.loadMainView = async function(force){
     st.textContent = '拉取中…（8 个数据集 + 主站快照，约 5-15 秒）';
     const ses = cloudSession();
     if(!ses || !ses.sessionToken){ st.textContent = '请先登录后再查看主站口径'; return; }
-    const names = ['vdata_b1','vdata_b2v','vdata_b3','vdata_dele','qdata_a1','qdata_a2','qdata_b1','qdata_b2'];
+    const names = ['vdata_extra','vdata_b1','vdata_b2v','vdata_b3','vdata_dele','qdata_a1','qdata_a2','qdata_b1','qdata_b2'];
     const results = {};
     for(const n of names){
       const r = await callSieleAuth({action:'getData', sessionToken: ses.sessionToken, name: n});
@@ -919,7 +919,7 @@ window.loadMainView = async function(force){
       results[n] = r.data || [];
     }
     // 词库合并（顺序：b1,b2v,b3,dele —— 与 SEED 拼装顺序一致性运行时校验）
-    const vAll = [].concat(results.vdata_b1, results.vdata_b2v, results.vdata_b3, results.vdata_dele);
+    const vAll = (function(){ const seen = new Set(), out = []; ['vdata_extra','vdata_b1','vdata_b2v','vdata_b3','vdata_dele'].forEach(function(n){ (results[n]||[]).forEach(function(w){ const k = (w.es||'').toLowerCase().trim(); if(!k||seen.has(k)) return; seen.add(k); out.push(w); }); }); return out; })();  /* v97.0：按 es 去重（主站同款语义，4879→4815） */
     const id2es = window._mvIdToEs() || [];
     let mismatch = 0;
     for(let i = 0; i < Math.min(id2es.length, vAll.length); i++){
@@ -930,23 +930,34 @@ window.loadMainView = async function(force){
     const pull = await callSieleAuth({action:'pullLearning', sessionToken: ses.sessionToken});
     let snap = null;
     if(pull && pull.ok && pull.snapshot && pull.snapshot.payload) snap = pull.snapshot.payload;
-    const seedW = (snap && snap.seedW) || {};
-    const snapWords = (snap && snap.words) || [];
-    const byEs = window._mvBuildMasteryByEs(seedW, snapWords);
-    // 汇总
+    /* v97.0：进度改读主站 wb.data.dash（主站算好的权威口径，不再本地拼 id→es 桥——SEED 旧版与扩容库错位导致全 0） */
+    const dash = (snap && snap.wb && snap.wb.data && snap.wb.data.dash) || null;
     const total = vAll.length;
-    let learned = 0, mastered = 0;
-    const byLvl = {};
-    vAll.forEach(function(w){
-      const L = w.lvl || 'general';
-      if(!byLvl[L]) byLvl[L] = {t:0,l:0,m:0};
-      byLvl[L].t++;
-      const m = byEs[(w.es||'').toLowerCase().trim()] || 0;
-      if(m > 0){ learned++; byLvl[L].l++; }
-      if(m >= 3){ mastered++; byLvl[L].m++; }
-    });
-    const dist = {m3:0,m2:0,m1:0,m0:total};
-    Object.keys(byEs).forEach(function(es){ const v = byEs[es]; if(v>=3){dist.m3++;dist.m0--;} else if(v===2){dist.m2++;dist.m0--;} else if(v===1){dist.m1++;dist.m0--;} });
+    let learned = 0, mastered = 0, byLvl = {}, dist = null;
+    if(dash){
+      learned = Number(dash.vocabLearned || 0);
+      mastered = Number(dash.vocabMastered || 0);
+      byLvl = dash.byLevel || {};
+      dist = dash.masteryDist || null;
+    }
+    if(!dist || !dash){
+      /* 回退：快照过旧无 dash 时，用 seedW 尽力估算 */
+      const seedW = (snap && snap.seedW) || {};
+      const byEs = window._mvBuildMasteryByEs(seedW, (snap && snap.words) || []);
+      byLvl = {};
+      vAll.forEach(function(w){
+        const L = w.lvl || 'general';
+        if(!byLvl[L]) byLvl[L] = {t:0,l:0,m:0};
+        byLvl[L].t++;
+        const m = byEs[(w.es||'').toLowerCase().trim()] || 0;
+        if(m > 0){ byLvl[L].l++; }
+        if(m >= 3){ byLvl[L].m++; }
+      });
+      let l = 0, m3 = 0;
+      Object.keys(byEs).forEach(function(es){ const v = byEs[es]; if(v>0) l++; if(v>=3) m3++; });
+      learned = learned || l; mastered = mastered || m3;
+      dist = {m3:m3, m2:0, m1:learned-m3, m0:Math.max(0,total-learned)};
+    }
     // 题库
     const qAll = [].concat(results.qdata_a1, results.qdata_a2, results.qdata_b1, results.qdata_b2);
     const qByEx = {};

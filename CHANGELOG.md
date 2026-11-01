@@ -1,6 +1,12 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.0/97.1] – 2026-11-01
+### 修复 · 主站口径视图进度全 0 + 词库总数 4571→4815（用户实测反馈）
+- **进度全 0**：admin 内联 SEED 是旧版，与扩容后词库 id 错位 → 本地拼 id→es 桥全部失配。改为**直接读主站 wb.data.dash**（vocabLearned/vocabMastered/byLevel/masteryDist，主站算好的权威口径）；快照过旧无 dash 时回退 seedW 估算。
+- **词库总数 4571→4815**：云函数包 vdata 缺主站内联的 308 条（含 extra 8）且 4 个文件为旧版。已从主站数据源重新生成 vdata_extra/b1/b2v/b3/dele 五包并**重新部署云函数 siele-auth**；admin 拉取加 vdata_extra 并**按 es 去重**（与主站同款语义，4879→4815）。
+- **题库分布**：qdata 的 ex 字段全部为 dele（无区分度）→ 分布维度改为**按等级**（A1/B1/A2/B2 各 1500）；「做过」改读 dash.quizDone。
+
 ## [v96.9] – 2026-11-01
 ### 新增 · 后台「🌐 主站口径」只读视图（进度可视化）
 - 后台侧栏新增「主站口径」：**getData 拉全量词库/题库（8 数据集，admin 不限频）+ 主站快照增量（seedW/用户词）** 组装，展示：
