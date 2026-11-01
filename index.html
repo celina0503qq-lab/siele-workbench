@@ -578,7 +578,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.7-202611011620';
+window.swVer = 'v97.8-202611011700';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1401,6 +1401,20 @@ function load(){
 }
 
 // v2 升级第二步：vdata_dele.js 加载完成后，把 __pendingVocabMigration 按 VDATA_BY_LVL 二次分桶
+/* v97.8：vdata 全部加载完成后重建等级索引（vdata_dele.js 末尾构建时 batch1-3 未加载，池残缺） */
+window._rebuildVdataByLvl = function(){
+  try{
+    if(typeof VDATA==='undefined' || typeof VDATA_BY_LVL==='undefined') return;
+    ['A1','A2','B1','B2'].forEach(function(k){ VDATA_BY_LVL[k].length = 0; });
+    VDATA.forEach(function(v){ if(v && VDATA_BY_LVL[v.lvl]) VDATA_BY_LVL[v.lvl].push(v); });
+  }catch(e){ try{ console.warn('[vdata] rebuild by lvl failed', e); }catch(e2){} }
+};
+try{
+  window._rebuildVdataByLvl();
+  document.addEventListener('DOMContentLoaded', function(){ window._rebuildVdataByLvl(); });
+  window.addEventListener('load', function(){ window._rebuildVdataByLvl(); });
+}catch(e){}
+
 function runPendingVocabMigration(){
   if(!ST || !ST.__pendingVocabMigration) return;
   try{
@@ -2495,7 +2509,8 @@ function renderDash(){
     {ico:'📚', name:'单词·按等级', rows:[
       ...['A1','A2','B1','B2'].map(lvl=>{
         // 2026-08-05 P0-P-4：改用 VDATA_BY_LVL 索引（vdata_dele.js 末尾初始化）
-        const pool = (typeof VDATA_BY_LVL!=='undefined' && VDATA_BY_LVL[lvl]) ? VDATA_BY_LVL[lvl] : (typeof VDATA!=='undefined'?VDATA:[]).filter(v=>v.lvl===lvl);
+        /* v97.8：直接从 VDATA 全量过滤——VDATA_BY_LVL 在 vdata_dele.js 末尾构建时 batch1-3 尚未加载，各等级池严重残缺（A2 仅 2 个词） */
+        const pool = (typeof VDATA!=='undefined'?VDATA:[]).filter(v=>v.lvl===lvl);
         return {
           name:`单词 ${lvl}`,
           tot: pool.length,
