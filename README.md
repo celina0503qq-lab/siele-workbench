@@ -46,16 +46,28 @@ SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的�
 
 学习数据以**账号级快照**存于云端，客户端与服务器之间只传输增量：
 
-```
-            ┌──────────────────────────┐
-            │   CloudBase Cloud Functions
-            │   auth · revision 仲裁 · 受控数据集下发
-            └────────────┬─────────────┘
-                         │
-     ┌───────────────────┼───────────────────┐
-     ▼                   ▼                   ▼
- learning_snapshots  content_edits       sync_tokens
- 学习快照(按账号)      内容编辑(全站生效)    同步凭证(可撤销)
+```mermaid
+flowchart TB
+    subgraph CLIENT["浏览器（主站 SPA / 管理端）"]
+        A["学习进度<br/>ST.vocabMastery"]
+        B["后台编辑<br/>ADB.words.mastery"]
+    end
+    subgraph CF["CloudBase Cloud Functions"]
+        C["账号鉴权"]
+        D["revision 仲裁<br/>冲突自动合并"]
+        E["受控数据集下发"]
+    end
+    subgraph DB[("云数据库")]
+        F[("learning_snapshots<br/>学习快照 · 按账号")]
+        G[("content_edits<br/>内容编辑 · 全站生效")]
+        H[("sync_tokens<br/>同步凭证 · 可撤销")]
+    end
+    A -->|"登录会话 pushLearning"| D
+    B -->|"syncToken pushLearning"| D
+    D --> F
+    A -->|getData| E
+    B -->|内容编辑| G
+    C --> H
 ```
 
 **写入路径有两条**，这是设计而非疏漏：

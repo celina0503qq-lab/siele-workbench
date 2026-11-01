@@ -1,6 +1,9 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.13] – 2026-11-01
+### 文档 · README 架构图改 mermaid（GitHub 原生渲染）
+
 ## [v97.12] – 2026-11-01
 ### 文档 · README 重写（工程风格）
 - 以设计决策视角重写：单文件应用的取舍理由、双写入路径与双源合并的同步设计、revision 仲裁与 resetEpoch 纪元、离线策略；精简徽章与 emoji。
