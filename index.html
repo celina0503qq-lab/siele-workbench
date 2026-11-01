@@ -578,7 +578,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.8-202611011700';
+window.swVer = 'v97.9-202611011800';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3348,7 +3348,8 @@ function setFlashPosition(index,pool){
   if(!pool.length)return;
   var newIdx=(index+pool.length)%pool.length;
   // 仅向前移动时累加已背数（避免来回翻页污染统计）
-  if(newIdx > ST.flashIdx && !ST.flashMastery[pool[ST.flashIdx].es]){
+  /* v97.9：去掉「当前词已评级则不计数」条件——用户按「掌握」后翻页应正常计入进度（此前按掌握七八个进度只涨 1） */
+  if(newIdx > ST.flashIdx){
     if(!ST.flashProgressByLevel) ST.flashProgressByLevel={A1:0,A2:0,B1:0,B2:0,all:0};
     var cur = pool[ST.flashIdx];
     var lvl = cur.lvl || 'all';
@@ -3693,6 +3694,8 @@ function rateFlash(level){
   const v = pool[ST.flashIdx];
   ST.flashMastery[v.es] = level;
   ST.vocabMastery[v.es] = level;
+  /* v97.9：同步 ADB.words.mastery（push 的 seedW 镜像取这份，此前不更新导致云端进度失真） */
+  try{ if(typeof ADB!=='undefined'&&ADB&&ADB.words){ var _aw=ADB.words.find(function(x){return x&&x.es===v.es;}); if(_aw){ _aw.mastery=level; _aw.updatedAt=Date.now(); } } }catch(e){}
   /* v95.39: 翻牌评价追踪——「全部」进度只数翻牌评价过的词，中西对应练习不再推高翻牌进度（用户拍板） */
   ST.flipRated = ST.flipRated || {};
   ST.flipRated[v.es] = Date.now();
