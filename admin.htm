@@ -457,7 +457,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
     </div>
     <div class="card" style="margin-top:12px">
-      <h3><span class="ic">📝</span>题库分布（按考试）</h3>
+      <h3><span class="ic">📝</span>题库分布（按等级）</h3>
       <div id="mvQuizBars"></div>
       <div id="mvQuizMeta" style="font-size:12px;color:var(--soft);margin-top:6px"></div>
     </div>
@@ -934,6 +934,13 @@ window.loadMainView = async function(force){
     const dash = (snap && snap.wb && snap.wb.data && snap.wb.data.dash) || null;
     const total = vAll.length;
     let learned = 0, mastered = 0, byLvl = {}, dist = null;
+    if(!dash){
+      window._mvDashMissing = true;
+      st.textContent = '⚠️ 主站数据尚未更新到新口径：请在主站（学习工作台）强刷到 v97.2+ 并登录同步一次，然后回来点「刷新数据」';
+      body.style.display = 'none';
+      return;
+    }
+    window._mvDashMissing = false;
     if(dash){
       learned = Number(dash.vocabLearned || 0);
       mastered = Number(dash.vocabMastered || 0);
@@ -958,13 +965,12 @@ window.loadMainView = async function(force){
       learned = learned || l; mastered = mastered || m3;
       dist = {m3:m3, m2:0, m1:learned-m3, m0:Math.max(0,total-learned)};
     }
-    // 题库
+    // 题库（v97.3：分布按等级；做过=主站 dash.quizDone）
     const qAll = [].concat(results.qdata_a1, results.qdata_a2, results.qdata_b1, results.qdata_b2);
-    const qByEx = {};
-    qAll.forEach(function(q){ const e = q.ex || 'other'; if(!qByEx[e]) qByEx[e] = 0; qByEx[e]++; });
-    const seedQ = (snap && snap.seedQ) || {};
-    let qDone = 0; Object.keys(seedQ).forEach(function(k){ if((seedQ[k]||[])[0]) qDone++; });
-    window._mvCache = { total, learned, mastered, byLvl, dist, qAll, qByEx, qDone, qTotal: qAll.length, mismatch, at: new Date() };
+    const qByLvl = {};
+    qAll.forEach(function(q){ const L = q.lvl || 'other'; if(!qByLvl[L]) qByLvl[L] = 0; qByLvl[L]++; });
+    const qDone = dash ? Number(dash.quizDone || 0) : 0;
+    window._mvCache = { total, learned, mastered, byLvl, dist, qAll, qByLvl, qDone, qTotal: qAll.length, mismatch, at: new Date() };
     st.textContent = '数据加载完成（' + window._mvCache.at.toLocaleTimeString() + '）' + (mismatch > 3 ? ' · ⚠️ 词库顺序校验有偏移 ' + mismatch + ' 条（进度匹配可能受影响）' : ' · 词序校验通过');
     body.style.display = '';
     window.renderMainView(window._mvCache);
@@ -996,10 +1002,10 @@ window.renderMainView = function(c){
       return '<div class="prow"><div class="pl"><span><span class="tm l'+l+'">'+l+'</span></span><span class="r">'+d.l+'/'+d.t+'（'+pct+'%）</span></div><div class="pbar"><i style="width:'+pct+'%"></i></div></div>';
     }).join('') || '<div class="empty">暂无词汇</div>';
     // 题库分布
-    const maxQ = Math.max.apply(null, [1].concat(Object.keys(c.qByEx).map(k => c.qByEx[k])));
-    document.getElementById('mvQuizBars').innerHTML = Object.keys(c.qByEx).sort(function(a,b){ return c.qByEx[b]-c.qByEx[a]; }).map(function(e){
-      const n = c.qByEx[e], pct = Math.round(n/maxQ*100);
-      return '<div class="prow"><div class="pl"><span>'+e+'</span><span class="r">'+n+' 题</span></div><div class="pbar"><i style="width:'+pct+'%"></i></div></div>';
+    const maxQ = Math.max.apply(null, [1].concat(Object.keys(c.qByLvl).map(k => c.qByLvl[k])));
+    document.getElementById('mvQuizBars').innerHTML = ['A1','A2','B1','B2'].map(function(L){
+      const n = c.qByLvl[L] || 0, pct = Math.round(n/maxQ*100);
+      return '<div class="prow"><div class="pl"><span><span class="tm l'+L+'">'+L+'</span></span><span class="r">'+n+' 题</span></div><div class="pbar"><i style="width:'+pct+'%"></i></div></div>';
     }).join('');
     document.getElementById('mvQuizMeta').textContent = '其中做过（有状态）' + c.qDone + ' 题 · 剩余 ' + (c.qTotal - c.qDone) + ' 题未动';
   }catch(e){ try{ console.warn('[mainview] render failed', e); }catch(e2){} }

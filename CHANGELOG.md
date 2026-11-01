@@ -1,6 +1,10 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.6] – 2026-11-01
+### 修复 · 后台 admin 补推（v97.3 改动此前遗漏上线）
+- v97.3 的后台改动（dash 缺失提示 + 题库分布按等级）因后续推送未包含 admin 文件而一直未上线——补推 admin.htm/admin.html。
+
 ## [v97.5] – 2026-11-01
 ### 修复 · 管理员进度双源合并（主站口径视图全 0 的根因）
 - 管理员的进度存在 `ADB.words.mastery` / `ADB.questions.done`（后台编辑+历史同步通道），而 wbSnap.dash 只统计主站 `ST.vocabMastery` / `ST.quizResults` → 管理员视角全 0。
