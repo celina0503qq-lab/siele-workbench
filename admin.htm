@@ -903,6 +903,27 @@ window._mvBuildMasteryByEs = function(seedW, snapWords){
   }catch(e){ try{ console.warn('[mainview] build failed', e); }catch(e2){} }
   return byEs;
 };
+/* ===== v97.7：登录态自动签发 syncToken（后台与主站统一的关键一步）=====
+   后台所有云同步（pullLearning/pushLearning/getData）凭证走 sync_tokens 表；
+   登录后自动签发并填入 syncCfg.token，用户无感；令牌可在「云同步」页撤销。 */
+window._ensureSyncToken = async function(){
+  try{
+    if(typeof DB === 'undefined' || !DB) return null;
+    DB.syncCfg = DB.syncCfg || {};
+    if(DB.syncCfg.token) return DB.syncCfg.token;
+    const ses = cloudSession();
+    if(!ses || !ses.sessionToken) return null;
+    const r = await callSieleAuth({action:'createSyncToken', sessionToken: ses.sessionToken, label:'auto:登录自动签发'});
+    if(r && r.ok && r.syncToken){
+      DB.syncCfg.provider = 'cloudbase';
+      DB.syncCfg.token = r.syncToken;
+      saveDB({noSync:true});
+      try{ toast('已自动配置云同步凭证', 'ok'); }catch(e){}
+      return r.syncToken;
+    }
+  }catch(e){ try{ console.warn('[authtoken]', e); }catch(e2){} }
+  return null;
+};
 window.loadMainView = async function(force){
   const st = document.getElementById('mvStatus'), body = document.getElementById('mvBody');
   if(!st) return;
@@ -927,7 +948,9 @@ window.loadMainView = async function(force){
     }
     if(mismatch > 3) try{ console.warn('[mainview] vdata 顺序与 SEED 不一致（mismatch=' + mismatch + '），进度匹配可能偏移'); }catch(e){}
     // 快照
-    const pull = await callSieleAuth({action:'pullLearning', sessionToken: ses.sessionToken});
+    const _tk = await window._ensureSyncToken();
+    if(!_tk){ st.textContent = '无法签发同步凭证（请确认已登录）'; return; }
+    const pull = await callSieleAuth({action:'pullLearning', syncToken: _tk});
     let snap = null;
     if(pull && pull.ok && pull.snapshot && pull.snapshot.payload) snap = pull.snapshot.payload;
     /* v97.0：进度改读主站 wb.data.dash（主站算好的权威口径，不再本地拼 id→es 桥——SEED 旧版与扩容库错位导致全 0） */
