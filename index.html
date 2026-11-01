@@ -578,7 +578,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.10-202611011815';
+window.swVer = 'v97.11-202611011640';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -3483,7 +3483,7 @@ function renderFlash(){
   const _praErrN = (ST.vocabErrorBank && Object.keys(ST.vocabErrorBank).length) || 0; /* v95.34: 练习错题本入口计数 */
 
   let h = `<div class="tb"><div><h2>单词卡片${renderModuleAccentToggle('flash')}</h2><div class="d">翻牌记忆 · 即时默写 · 错词二次巩固</div></div>
-    <div class="dp">进度 ${_dispIdx} / ${pool.length}</div>
+    <div class="dp">进度 ${(function(){ try{ return pool.filter(function(v){ return (ST.vocabMastery[v.es]||0) >= 1; }).length; }catch(e){ return _dispIdx; } })()} / ${pool.length}（已学）</div>
   </div>`;
   if(_needRateWords.length){
     h += '<div class="note" style="margin:0 0 8px;border-left:4px solid #f59e0b;background:#fffbeb;font-size:11.5px">'
