@@ -8,10 +8,10 @@
 SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的西语外刊精读，
 内置账号体系与基于快照仲裁的跨设备同步。
 
-[![Version](https://img.shields.io/badge/version-v97.14-blue-flat-square)](CHANGELOG.md)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Backend](https://img.shields.io/badge/sync-CloudBase_CloudFunctions-orange)](#同步架构)
-[![Offline](https://img.shields.io/badge/offline-first-9cf)](#离线策略)
+[![Version](https://img.shields.io/badge/version-v97.15-blue?style=flat-square)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![Backend](https://img.shields.io/badge/sync-CloudBase_CloudFunctions-orange?style=flat-square)](#同步架构)
+[![Offline](https://img.shields.io/badge/offline-first-9cf?style=flat-square)](#离线策略)
 
 <https://celina0503qq-lab.github.io/siele-workbench/>
 
@@ -19,7 +19,7 @@ SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的�
 
 ---
 
-## 为什么是单文件应用
+## 01 · 设计取舍 —— 为什么是单文件应用
 
 这个项目刻意停留在「浏览器原生」的边界内：没有框架、没有打包器、没有 node_modules。
 全部逻辑由若干按模块拆分的原生 ES 脚本组成，`index.html` 之外都是数据文件。
@@ -32,7 +32,7 @@ SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的�
 功能密度因此变得很高：学习进度、错题救赎、断点续背、默写、番茄钟、成长树，
 全部建立在同一个持久化状态对象上，由一条同步管道统一管理。
 
-## 内容规模
+## 02 · 内容规模
 
 | | 规模 | 备注 |
 |---|---:|---|
@@ -42,9 +42,9 @@ SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的�
 | 语法 | 111 | 语法点 + 专项测验 |
 | 外刊 | 周刊 | RSS 聚合 → 精读题 → 词汇卡 → 逐段跟读，自动化流水线出刊 |
 
-## 同步架构
+## 03 · 同步架构
 
-学习数据以**账号级快照**存于云端，客户端与服务器之间只传输增量：
+学习数据以**账号级快照**存于云端，客户端与服务器之间只传输增量——快照体积不随词库规模线性增长，因为在设计上**种子词库内置于代码**，云端只记录「有状态的增量」：某词的掌握度、某题的作答痕迹、用户自建的条目。
 
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#eef4fb','primaryBorderColor':'#4a6fa5','primaryTextColor':'#1a2a3a','lineColor':'#7a94b8','fontSize':'14px'}, 'flowchart': {'curve':'basis'}} }%%
@@ -93,20 +93,22 @@ flowchart TB
 **断网**：Service Worker 预缓存全部资源，同步失败时数据留在本地，
 恢复后自动补推；同步健康状态（最近成功时间、连续失败次数）在界面实时可见。
 
-## 离线策略
+## 04 · 离线策略
 
-- Service Worker 对全部资源做安装期预缓存，断网后完整可用；
-- 缓存版本与 `swVer` 绑定，发版即驱动所有客户端增量更新；
-- 音频资产（TTS 预生成）走 CDN 直链，不占缓存配额。
+- Service Worker 对全部资源做安装期预缓存——断网后完整可用，弱网下二次打开接近瞬时；
+- 缓存版本与 `swVer` 绑定——发版即驱动**所有客户端**增量更新，无「用户停留在旧版」的问题；
+- 音频资产（TTS 预生成，双口音）走 CDN 直链——不占缓存配额，也不进入版本管理。
 
-## 管理端
+## 05 · 管理端
 
-独立管理页面提供：用户与功能授权管理、词库/题库内容编辑
-（编辑经 `content_edits` 云端下发，全站即时生效）、
-数据看板（与主站仪表盘**同口径**的可视化，含各等级进度与掌握度分布）、
-设备迁移传输码签发与撤销。
+独立管理页面提供四组能力：
 
-## 本地运行
+- **用户与授权** — 账号生命周期管理、功能级授权开关（背题模式 / DELE 专项 / 外刊精炼）
+- **内容编辑** — 词库与题库在线编辑，经 `content_edits` 云端下发，全站即时生效
+- **数据看板** — 与主站仪表盘**完全同口径**的可视化：各等级进度、掌握度分布、题库完成率
+- **设备迁移** — 一次性 24h 传输码的签发、摘要自证与撤销
+
+## 06 · 本地运行
 
 ```bash
 git clone https://github.com/celina0503qq-lab/siele-workbench.git
@@ -116,11 +118,13 @@ python -m http.server 8080     # 或 npx serve .
 
 完整的云同步与管理端需要自备 CloudBase 环境并配置账号体系。
 
-## 版本
+## 07 · 版本与发布护栏
 
-变更记录见 [CHANGELOG](CHANGELOG.md) —— 自 v92.1 起逐版编号，由推送护栏强制校验
-（版本唯一性、严格降序、段头格式、与发布版本号一致性）。
+变更记录见 [CHANGELOG](CHANGELOG.md) —— 自 v92.1 起逐版编号，208+ 个版本无一遗漏。
 
-## License
+每次发布由推送护栏（`changelog_guard`）强制校验四项：版本号唯一性、严格降序、段头完整格式、
+**CHANGELOG 最新段与 `swVer` 一致**——任何一项不满足即拒绝推送。
+
+## 08 · License
 
 [MIT](LICENSE)

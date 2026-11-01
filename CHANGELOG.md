@@ -1,6 +1,10 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.15] – 2026-11-01
+### 文档 · README 精致化（编号标题 / 描述扩充 / 徽章修复）
+- 小节改「01 · 标题」杂志式编号；同步架构/离线/管理端/发布护栏四节描述扩充；徽章 flat-square 参数修复（首枚 404）。
+
 ## [v97.14] – 2026-11-01
 ### 文档 · README mermaid 语法修正 + 视觉升级
 - subgraph 不支持圆柱体形状（Parse error 修复）；架构图加主题配色（三分区着色）与贝塞尔曲线；徽章统一 flat-square。
