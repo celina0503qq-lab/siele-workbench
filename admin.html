@@ -949,7 +949,7 @@ window.loadMainView = async function(force){
       results[n] = r.data || [];
     }
     // 词库合并（顺序：b1,b2v,b3,dele —— 与 SEED 拼装顺序一致性运行时校验）
-    const vAll = (function(){ const seen = new Set(), out = []; ['vdata_extra','vdata_b1','vdata_b2v','vdata_b3','vdata_dele'].forEach(function(n){ (results[n]||[]).forEach(function(w){ const k = (w.es||'').toLowerCase().trim(); if(!k||seen.has(k)) return; seen.add(k); out.push(w); }); }); return out; })();  /* v97.0：按 es 去重（主站同款语义，4879→4815） */
+    const vAll = (function(){ const seen = new Set(), out = []; ['vdata_extra','vdata_b1','vdata_b2v','vdata_b3','vdata_dele'].forEach(function(n){ (results[n]||[]).forEach(function(w){ const k = (w.es||'').trim(); if(!k||seen.has(k)) return; seen.add(k); out.push(w);  /* v97.17: 精确 es 去重（与主站 4815 口径一致；小写归一化会多合并 87 个大小写变体并误并 el/él） */ }); }); return out; })();  /* v97.0：按 es 去重（主站同款语义，4879→4815） */
     const id2es = window._mvIdToEs() || [];
     let mismatch = 0;
     for(let i = 0; i < Math.min(id2es.length, vAll.length); i++){

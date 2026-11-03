@@ -1,6 +1,12 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.17] – 2026-11-03
+### 修复 · 主站口径视图词库 4728→4815（getData 数据包重建）
+- 根因：v97.1 的 vdata_extra 从 index 内联段「文本提取」错位（308 条 ≠ 主站真实内联 244 条，且 4 批包内容与主站批次不一致）→ 合并去重后仅 4728（缺 87 个基础词：abrigo/abuelo/baño/dormitorio…）。
+- 修复：用 playwright 导出主站**完整 VDATA（4815 完整对象）**，按真实分段长度（内联 244 / 610 / 1017 / 803 / 2141）切 5 包 → 重新部署云函数 → 合并精确去重 = **4815** ✓。
+- 同时 admin 拼接去重 key 由「小写归一化」改「精确 es」（与主站口径一致，避免误合并 el/él 等合法不同词）。
+
 ## [v97.16] – 2026-11-02
 ### 工程 · 版本号补齐（index 落后于 CHANGELOG）
 - index swVer 由 v97.13 补至最新（v97.12/97.14/97.15 为纯文档版未 bump）；README 徽章同步。
