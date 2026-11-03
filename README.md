@@ -8,7 +8,7 @@
 SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的西语外刊精读，
 内置账号体系与基于快照仲裁的跨设备同步。
 
-[![Version](https://img.shields.io/badge/version-v97.15-blue?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v97.16-blue?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Backend](https://img.shields.io/badge/sync-CloudBase_CloudFunctions-orange?style=flat-square)](#同步架构)
 [![Offline](https://img.shields.io/badge/offline-first-9cf?style=flat-square)](#离线策略)

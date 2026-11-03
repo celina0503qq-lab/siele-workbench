@@ -1,6 +1,11 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.16] – 2026-11-02
+### 工程 · 版本号补齐（index 落后于 CHANGELOG）
+- index swVer 由 v97.13 补至最新（v97.12/97.14/97.15 为纯文档版未 bump）；README 徽章同步。
+- Pages Actions 部署方案已备好（workflow 待用户在网页创建——PAT 无 workflow scope）。
+
 ## [v97.15] – 2026-11-01
 ### 文档 · README 精致化（编号标题 / 描述扩充 / 徽章修复）
 - 小节改「01 · 标题」杂志式编号；同步架构/离线/管理端/发布护栏四节描述扩充；徽章 flat-square 参数修复（首枚 404）。
