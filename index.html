@@ -589,6 +589,18 @@ body{background:var(--c-bg)}
 .main{margin:0 auto;padding:20px 24px 60px;max-width:1200px}
 
 
+
+/* ===== v97.19 移动端适配（<=900px：导航横滑 + 间距收紧；下拉 tap 触发 :hover 原生行为） ===== */
+@media (max-width: 900px){
+  .topnav{padding:0 10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .topnav .brand h1{display:none}
+  .topnav .brand .logo{width:26px;height:26px;font-size:13px}
+  .topnav .userbox{display:none}
+  .nav{gap:0;min-height:44px}
+  .nav-group>.ng-label{padding:0 10px;min-height:44px;font-size:12.5px}
+  .nav-drop{position:fixed;left:0;right:0;top:44px;min-width:0;border-radius:0 0 12px 12px;box-shadow:0 10px 24px rgba(15,23,42,.12)}
+  .main{padding:14px 12px 50px;max-width:100%}
+}
 </style>
 </head>
 <body>
