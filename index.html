@@ -511,6 +511,7 @@
 }
 /* ===== v94.4.2 end (v94.4.4 colored) + v94.5 teal + v94.5.1 mobile ===== */
 .ai-badge{display:inline-block;margin-left:6px;background:#fff7ed;color:#c2410c;border:1px solid #fdba74;font-size:10px;font-weight:800;padding:1px 6px;border-radius:9px;vertical-align:middle}
+
 </style>
 <!-- 2026-08-05 P0-P-2 性能优化：删除 CloudStudio 预览埋点（beacon_web.min.js 同步加载阻塞首屏 + 第三方上报），原文件已备份于备份目录 -->
 <style id="v65fxStyle">
@@ -559,14 +560,46 @@
   #soRecognized{max-height:120px;overflow:auto}
   .so-nav{gap:6px}
 }
+/* ===== v97.18 自研设计系统 Phase 1：顶部导航 + 下拉子菜单 ===== */
+:root{--c-accent:#C2410C;--c-line:#E7E5E4;--c-ink:#0F172A;--c-ink2:#475569;--c-ink3:#94A3B8;--c-bg:#FAFAF9}
+body{background:var(--c-bg)}
+.app{display:block}
+.side{display:none!important}
+.topnav{position:sticky;top:0;z-index:9999;background:#fff;border-bottom:1px solid var(--c-line);min-height:46px;display:flex;align-items:center;padding:0 20px;gap:4px}
+.topnav .brand{display:flex;align-items:center;gap:8px;margin-right:14px}
+.topnav .brand .logo{width:30px;height:30px;border-radius:8px;background:var(--c-accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+.topnav .brand h1{font-size:13.5px;margin:0;color:var(--c-ink);font-weight:700}
+.topnav .brand .sub{display:none}
+.nav{display:flex!important;flex-direction:row!important;align-items:center;gap:2px;min-height:46px;flex-wrap:wrap}
+.nav-group{position:relative;display:flex;align-items:center}
+.nav-group>.ng-label{padding:0 12px;min-height:46px;display:flex;align-items:center;font-size:13px;color:var(--c-ink2);cursor:pointer;user-select:none;gap:4px}
+.nav-group:hover>.ng-label{color:var(--c-ink)}
+.nav-group.on>.ng-label{color:var(--c-accent);font-weight:600;box-shadow:inset 0 -2.5px 0 var(--c-accent)}
+.nav-drop{position:absolute;top:100%;left:0;min-width:250px;background:#fff;border:1px solid var(--c-line);border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,.08);padding:6px;display:none;z-index:10000}
+.nav-group:hover .nav-drop,.nav-group.open .nav-drop{display:block}
+.nav-drop button{display:flex;align-items:center;gap:10px;width:100%;padding:7px 10px;border:0;background:none;border-radius:8px;cursor:pointer;text-align:left;font-family:inherit}
+.nav-drop button:hover{background:var(--c-bg)}
+.nav-drop .ic{width:26px;height:26px;border-radius:7px;background:#FDF0E7;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 26px}
+.nav-drop .lbl{font-size:12.5px;font-weight:600;color:var(--c-ink);line-height:1.25}
+.nav-drop .dsc{font-size:10.5px;color:var(--c-ink3);line-height:1.3}
+.nav-drop button.on .lbl{color:var(--c-accent)}
+.topnav .spacer{flex:1}
+.topnav .userbox{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--c-ink2);white-space:nowrap}
+.topnav .userbox .sync-dot{width:7px;height:7px;border-radius:50%}
+.main{margin:0 auto;padding:20px 24px 60px;max-width:1200px}
+
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="side">
-<div class="brand"><div class="logo">Ñ</div><div><h1>西语备考工作台</h1><div class="sub">DELE · SIELE · A1–B2</div></div></div>
+<!-- v97.18 自研设计系统 Phase 1：顶部导航（旧左侧栏已移除，回退见 backups/ui_shell_backup_20261104/） -->
+<header class="topnav">
+<div class="brand"><div class="logo">Ñ</div><h1>西语备考工作台</h1></div>
 <nav class="nav" id="nav"></nav>
-</aside>
+<div class="spacer"></div>
+<div class="userbox" id="topUser"></div>
+</header>
 <main class="main" id="main"><div id="audioBanner" class="banner"></div></main>
 </div>
 <!-- v94.16 F4: 四个大数据脚本改 defer（1.7MB+ 同步阻塞解除）。全部引用均为运行时函数内访问，无内联顶层立即引用，defer 安全；defer 保持文档序，页面切换时必已就绪 -->
@@ -578,7 +611,7 @@
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.16-202611022130';
+window.swVer = 'v97.18-202611042150';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2044,34 +2077,39 @@ let currentPage = 'dash';
 function renderNav(){
   const nav = document.getElementById('nav');
   if(!nav) return;
-  // 2026-08-18 安全加固：未登录时不渲染导航（与 renderMain 守卫一致，内联读取 localStorage）
+  /* v97.18 自研设计系统：顶部导航 + 下拉子菜单（NAV 数据与权限/高亮逻辑零改动；旧左侧栏渲染见 backups/ui_shell_backup_20261104/） */
   var _cs=null; try{ _cs=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
-  if(!(_cs&&_cs.username)){ nav.innerHTML = ''; return; }
-  // DELE 子页面 (dele<level>_<task>) 也高亮 'dele' 父项, 保持导航连续性（菜单重构后统一归入 DELE专项）
-  const navOnId = (typeof currentPage === 'string' && /^dele/.test(currentPage))
-    ? 'dele'
-    : currentPage;
-  // 管理员独占项的过滤逻辑（当前 NAV 中无 adminOnly 项，保留以备后续使用）
-  // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处不依赖跨块引用
-  // 直接读 localStorage 解 swa_cloud_session_v1
+  if(!(_cs&&_cs.username)){ nav.innerHTML = ''; var _tu0=document.getElementById('topUser'); if(_tu0) _tu0.innerHTML=''; return; }
+  const navOnId = (typeof currentPage === 'string' && /^dele/.test(currentPage)) ? 'dele' : currentPage;
   let isAdmin = false;
   try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && _ses.role === 'admin'); } catch(e) {}
-  let h = '';
   try{ if(typeof window._wbFlagsFetch==='function') window._wbFlagsFetch(false); }catch(e){}
+  // 顶部右侧用户区（含云同步状态点；一次性填充）
+  try{
+    var _tu = document.getElementById('topUser');
+    if(_tu && !_tu.dataset.done){
+      _tu.dataset.done = '1';
+      var _sd = '';
+      try{ var _sc = JSON.parse(localStorage.getItem('swa_sync_cfg_v1')||'null'); if(_sc&&_sc.token) _sd = '<span class="sync-dot" style="background:#15803D" title="云同步已开启"></span>'; else _sd = '<span class="sync-dot" style="background:#CBD5E1" title="云同步未开启"></span>'; }catch(e){ _sd=''; }
+      _tu.innerHTML = _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
+    }
+  }catch(e){}
+  let h = '';
   NAV.forEach(sec => {
     const visibleItems = sec.items.filter(it => !it.adminOnly || isAdmin);
-    if (!visibleItems.length) return; // 整组都不可见则整组跳过
-    h += `<div class="ns">${sec.s}</div>`;
+    if (!visibleItems.length) return;
+    const grpOn = visibleItems.some(it => navOnId === it.id) ? ' on' : '';
+    h += '<div class="nav-group'+grpOn+'"><span class="ng-label">'+sec.s+' ▾</span><div class="nav-drop">';
     visibleItems.forEach(it => {
       const on = navOnId === it.id ? ' on' : '';
       const locked = it.reqFlag && !(typeof window._wbFlagsAllowed === 'function' && window._wbFlagsAllowed(it.reqFlag));
-      h += `<button class="ni${on}" onclick="go('${it.id}')"><span class="ic">${it.icon}</span>${it.label}${locked?' 🔒':''}</button>`;
+      h += '<button class="ni'+on+'" onclick="go(\''+it.id+'\')"><span class="ic">'+it.icon+'</span><span><span class="lbl">'+it.label+'</span>'+(locked?' <span class="dsc">🔒 需管理员开启</span>':'')+'</span></button>';
     });
+    h += '</div></div>';
   });
   nav.innerHTML = h;
 }
 
-// v38 E2: 页面白名单 — go()/hash 恢复只允许已知页面 id, 未知值一律回落仪表盘(防脏 hash/注入调用)
 function _wbIsValidPage(p){
   var ok = {dash:1,flash:1,vocab:1,grammar:1,shadow:1,siele:1,quiz:1,writing:1,speaking:1,
     planner:1,errors:1,reading:1,refine:1,dele:1,exam:1,resources:1,netdisk:1,
