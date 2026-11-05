@@ -713,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.23-202611051730';
+window.swVer = 'v97.24-202611051755';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2193,10 +2193,10 @@ function renderNav(){
       _tu.dataset.done = '1';
       var _sd = '';
       try{ var _sc = JSON.parse(localStorage.getItem('swa_sync_cfg_v1')||'null'); if(_sc&&_sc.token) _sd = '<span class="sync-dot" style="background:#15803D" title="云同步已开启"></span>'; else _sd = '<span class="sync-dot" style="background:#CBD5E1" title="云同步未开启"></span>'; }catch(e){ _sd=''; }
-      _tu.innerHTML = '<button onclick="_wbLandingShow()" style="border:1px solid #E7E5E4;background:#fff;border-radius:8px;padding:5px 12px;font-size:12px;color:#475569;cursor:pointer;font-family:inherit" onmouseover="this.style.borderColor=\'#C2410C\';this.style.color=\'#C2410C\'" onmouseout="this.style.borderColor=\'#E7E5E4\';this.style.color=\'#475569\'">ℹ️ 关于 Ánimo</button>' + _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
+      _tu.innerHTML = _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
     }
   }catch(e){}
-  let h = '';
+  let h = '<button class="ni" onclick="_wbLandingShow()" style="border:none;background:none;padding:8px 13px;font-size:13.5px;font-weight:800;color:#334155;cursor:pointer;font-family:inherit" onmouseover="this.style.color=\'#C2410C\'" onmouseout="this.style.color=\'#334155\'">🏠 Inicio</button>';
   NAV.forEach(sec => {
     const visibleItems = sec.items.filter(it => !it.adminOnly || isAdmin);
     if (!visibleItems.length) return;
@@ -22003,7 +22003,7 @@ window._wbLandingRefresh = function(){
     ];
     var _brand=_ld.querySelector('.ln-brand');
     var _brandHtml=_brand?_brand.outerHTML:'<div class="ln-brand"><div class="ln-logo">Ñ</div><b>Ánimo</b><small>西语备考</small></div>';
-    var _nh=_brandHtml+'<a class="ln-lnk" onclick="_wbLandingEnter(\'dash\')" style="margin:0 14px 0 12px">Inicio</a><span class="navdiv"></span>'+
+    var _nh=_brandHtml+
       '<div class="ln-dd"><a class="mi" href="#dash">'+_menu[0][0]+' ▾</a><div class="ln-ddm">'+
       _menu[0][2].map(function(it){return '<a onclick="_wbLandingEnter(\''+it[2]+'\')">'+it[0]+' '+it[1]+'</a>';}).join('')+'</div></div>';
     for(var _mi=1;_mi<_menu.length;_mi++){
@@ -22030,14 +22030,17 @@ window._wbLandingRefresh = function(){
       var _c2=_mk.querySelectorAll('.chip');
       if(_c2[0]) _c2[0].textContent='🔥 连续 '+_streak+' 天';
       if(_c2[1]) _c2[1].textContent='⭐ 掌握 '+_mastered+' 词'; }
-    /* v97.23：门户态 Hero 强制深色渐变底——真机实测门户态背景丢失导致白字不可读 */
+    /* v97.24：门户态 Hero 回归底版设计（米白渐变+深色文字，用户审美基准） */
     var _hero=_ld.querySelector('.hero');
-    if(_hero){ _hero.style.background='linear-gradient(135deg,#7a1f12,#c0392b 45%,#e08e0b)';
-      _hero.style.color='#fff';
-      var _slog=_hero.querySelector('.hero-l h1'); if(_slog) _slog.style.color='#fff';
-      var _sub=_hero.querySelector('.sub'); if(_sub) _sub.style.color='rgba(255,255,255,.92)';
-      var _sub2=_hero.querySelector('.sub2'); if(_sub2) _sub2.style.color='rgba(255,255,255,.85)';
-      var _sd2=_hero.querySelectorAll('.sub2 b'); _sd2.forEach(function(b){ b.style.color='#fff'; }); }
+    if(_hero){ _hero.style.background='linear-gradient(160deg,#FFF7ED 0%,#FFFDF9 50%,#FFF 100%)';
+      _hero.style.color='#0F172A';
+      var _slog=_hero.querySelector('.hero-l h1'); if(_slog) _slog.style.color='#0F172A';
+      var _sem=_hero.querySelector('.hero-l h1 em'); if(_sem) _sem.style.color='#C2410C';
+      var _sub=_hero.querySelector('.sub'); if(_sub) _sub.style.color='#475569';
+      var _sub2=_hero.querySelector('.sub2'); if(_sub2) _sub2.style.color='#475569';
+      var _sd2=_hero.querySelectorAll('.sub2 b'); _sd2.forEach(function(b){ b.style.color='#0F172A'; });
+      var _hi2=_hero.querySelector('.hero-l h1').previousElementSibling;
+      if(_hi2 && _hi2.getAttribute && _hi2.getAttribute('data-hi')!==null) _hi2.style.color='#9a3412'; }
     /* AI 语音识别徽章：白底深字（对比度） */
     var _fb1=_ld.querySelector('.float-badge.fb1');
     if(_fb1){ _fb1.style.background='#fff'; _fb1.style.color='#7c2d12'; _fb1.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; }
@@ -22079,8 +22082,16 @@ window._wbLandingShow = function(){
           if(_ll) _ll.style.display='';
           if(_lr){ _lr.textContent='免费注册'; _lr.onclick=function(){ _wbLandingToLogin(); }; }
           if(_ls) _ls.textContent='免费开始学习';
-          /* v97.23：未登录态 AI 徽章同步白底深字 */
-          try{ var _fb=_ld.querySelector('.float-badge.fb1'); if(_fb){ _fb.style.background='#fff'; _fb.style.color='#7c2d12'; _fb.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; } }catch(e){}
+          /* v97.24：未登录态回归底版设计——Hero 米白底+深色文字（修 v97.20 白字偏差）+ AI 徽章白底深字 */
+          try{
+            var _hD=_ld.querySelector('.hero');
+            if(_hD){ _hD.style.background='linear-gradient(160deg,#FFF7ED 0%,#FFFDF9 50%,#FFF 100%)'; _hD.style.color='#0F172A';
+              var _h1D=_hD.querySelector('.hero-l h1'); if(_h1D) _h1D.style.color='#0F172A';
+              var _sD=_hD.querySelector('.sub'); if(_sD) _sD.style.color='#475569';
+              var _s2D=_hD.querySelector('.sub2'); if(_s2D) _s2D.style.color='#475569';
+              var _bD=_hD.querySelectorAll('.sub2 b'); _bD.forEach(function(b){ b.style.color='#0F172A'; }); }
+            var _fb=_ld.querySelector('.float-badge.fb1'); if(_fb){ _fb.style.background='#fff'; _fb.style.color='#7c2d12'; _fb.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; }
+          }catch(e){}
         }
       }catch(e){}
     }
