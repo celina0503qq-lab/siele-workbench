@@ -713,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.22-202611051645';
+window.swVer = 'v97.23-202611051730';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -22001,7 +22001,10 @@ window._wbLandingRefresh = function(){
       ['备考','planner',[['📅','学习计划','planner'],['🚨','错题集','errors'],['📰','外刊精炼','refine']]],
       ['DELE','dele',[['📝','DELE 专项','dele']]]
     ];
-    var _nh='<div class="ln-dd open"><a class="mi" href="#dash">'+_menu[0][0]+' ▾</a><div class="ln-ddm">'+
+    var _brand=_ld.querySelector('.ln-brand');
+    var _brandHtml=_brand?_brand.outerHTML:'<div class="ln-brand"><div class="ln-logo">Ñ</div><b>Ánimo</b><small>西语备考</small></div>';
+    var _nh=_brandHtml+'<a class="ln-lnk" onclick="_wbLandingEnter(\'dash\')" style="margin:0 14px 0 12px">Inicio</a><span class="navdiv"></span>'+
+      '<div class="ln-dd"><a class="mi" href="#dash">'+_menu[0][0]+' ▾</a><div class="ln-ddm">'+
       _menu[0][2].map(function(it){return '<a onclick="_wbLandingEnter(\''+it[2]+'\')">'+it[0]+' '+it[1]+'</a>';}).join('')+'</div></div>';
     for(var _mi=1;_mi<_menu.length;_mi++){
       _nh+='<div class="ln-dd"><a class="mi" href="#dash">'+_menu[_mi][0]+' ▾</a><div class="ln-ddm">'+
@@ -22027,6 +22030,17 @@ window._wbLandingRefresh = function(){
       var _c2=_mk.querySelectorAll('.chip');
       if(_c2[0]) _c2[0].textContent='🔥 连续 '+_streak+' 天';
       if(_c2[1]) _c2[1].textContent='⭐ 掌握 '+_mastered+' 词'; }
+    /* v97.23：门户态 Hero 强制深色渐变底——真机实测门户态背景丢失导致白字不可读 */
+    var _hero=_ld.querySelector('.hero');
+    if(_hero){ _hero.style.background='linear-gradient(135deg,#7a1f12,#c0392b 45%,#e08e0b)';
+      _hero.style.color='#fff';
+      var _slog=_hero.querySelector('.hero-l h1'); if(_slog) _slog.style.color='#fff';
+      var _sub=_hero.querySelector('.sub'); if(_sub) _sub.style.color='rgba(255,255,255,.92)';
+      var _sub2=_hero.querySelector('.sub2'); if(_sub2) _sub2.style.color='rgba(255,255,255,.85)';
+      var _sd2=_hero.querySelectorAll('.sub2 b'); _sd2.forEach(function(b){ b.style.color='#fff'; }); }
+    /* AI 语音识别徽章：白底深字（对比度） */
+    var _fb1=_ld.querySelector('.float-badge.fb1');
+    if(_fb1){ _fb1.style.background='#fff'; _fb1.style.color='#7c2d12'; _fb1.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; }
     /* wm 水印 → 问候 */
     var _wm2=_ld.querySelector('.wm2'); if(_wm2) _wm2.textContent='¡Hola, '+_user+'!';
     /* 登录按钮们退位（模板里残留的 lnLogin/lnReg 已被 nav innerHTML 覆盖，无需处理） */
@@ -22065,6 +22079,8 @@ window._wbLandingShow = function(){
           if(_ll) _ll.style.display='';
           if(_lr){ _lr.textContent='免费注册'; _lr.onclick=function(){ _wbLandingToLogin(); }; }
           if(_ls) _ls.textContent='免费开始学习';
+          /* v97.23：未登录态 AI 徽章同步白底深字 */
+          try{ var _fb=_ld.querySelector('.float-badge.fb1'); if(_fb){ _fb.style.background='#fff'; _fb.style.color='#7c2d12'; _fb.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; } }catch(e){}
         }
       }catch(e){}
     }
