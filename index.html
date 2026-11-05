@@ -601,6 +601,96 @@ body{background:var(--c-bg)}
   .nav-drop{position:fixed;left:0;right:0;top:44px;min-width:0;border-radius:0 0 12px 12px;box-shadow:0 10px 24px rgba(15,23,42,.12)}
   .main{padding:14px 12px 50px;max-width:100%}
 }
+
+/* ===== v97.20 未登录落地页（自研设计系统）===== */
+#wbLanding{position:fixed;inset:0;z-index:99998;overflow-y:auto;background:#fff;display:none;font-family:'Inter',system-ui,-apple-system,sans-serif;color:#0F172A}
+#wbLanding .ln-wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+#wbLanding .ln-nav{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid #F1E9E0}
+#wbLanding .ln-nav .in{display:flex;align-items:center;height:60px;gap:24px}
+#wbLanding .ln-brand{display:flex;align-items:center;gap:9px;margin-right:6px}
+#wbLanding .ln-logo{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#D9502A,#B93A16);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;box-shadow:0 3px 10px rgba(194,65,12,.28)}
+#wbLanding .ln-brand b{font-size:14px}
+#wbLanding .ln-brand small{font-size:10px;color:#94A3B8;font-weight:600;letter-spacing:.5px}
+#wbLanding a.mi{font-size:13px;color:#475569;text-decoration:none;padding:6px 2px;position:relative}
+#wbLanding a.mi:hover{color:#0F172A}
+#wbLanding .sp{flex:1}
+#wbLanding .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;font-weight:700;cursor:pointer;border:0;text-decoration:none;font-family:inherit;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s}
+#wbLanding .btn:active{transform:scale(.96)}
+#wbLanding .btn.ghost{background:#fff;border:1px solid #E7E5E4;color:#475569;font-size:13px;padding:9px 20px}
+#wbLanding .btn.ghost:hover{border-color:#C2410C;color:#C2410C;transform:translateY(-2px)}
+#wbLanding .btn.grad{background:linear-gradient(180deg,#D9502A,#B93A16);color:#fff;font-size:13px;padding:9px 22px;box-shadow:0 4px 14px rgba(194,65,12,.3)}
+#wbLanding .btn.grad:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(194,65,12,.42)}
+#wbLanding .btn.grad::after{content:'';position:absolute;top:0;left:-90%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .5s ease}
+#wbLanding .btn.grad:hover::after{left:140%}
+#wbLanding .hero{position:relative;background:linear-gradient(160deg,#FFF7ED 0%,#FFFDF9 50%,#FFF 100%);overflow:hidden}
+#wbLanding .glow{position:absolute;border-radius:50%;pointer-events:none}
+#wbLanding .g1{width:560px;height:560px;right:-140px;top:-220px;background:radial-gradient(circle,rgba(253,186,116,.32),transparent 62%)}
+#wbLanding .g2{width:460px;height:460px;left:-160px;bottom:-200px;background:radial-gradient(circle,rgba(252,165,165,.20),transparent 62%)}
+#wbLanding .wm{position:absolute;font-family:Georgia,serif;font-weight:800;color:#0F172A;opacity:.045;user-select:none;pointer-events:none;line-height:1}
+#wbLanding .wm1{font-size:150px;right:30px;bottom:-40px;font-style:italic}
+#wbLanding .hero .in{position:relative;max-width:1120px;margin:0 auto;padding:60px 24px 66px;display:flex;gap:44px;align-items:center;z-index:2}
+#wbLanding .hero-l{flex:1;min-width:0}
+#wbLanding .pill{display:inline-flex;background:#FEEDE3;color:#C2410C;font-size:12px;font-weight:700;padding:7px 15px;border-radius:999px;margin-bottom:20px;border:1px solid #FED7AA}
+#wbLanding h1{font-family:Georgia,'Songti SC',serif;font-size:44px;line-height:1.18;font-weight:800;letter-spacing:-1px;margin-bottom:18px}
+#wbLanding h1 em{font-style:italic;color:#C2410C}
+#wbLanding .sub{font-size:15px;color:#475569;line-height:1.75;margin-bottom:6px}
+#wbLanding .sub2{font-size:15px;color:#475569;margin-bottom:26px}
+#wbLanding .cta-row{display:flex;gap:12px;align-items:center}
+#wbLanding .btn.big{padding:14px 28px;font-size:14.5px;border-radius:11px}
+#wbLanding .btn.big2{padding:14px 22px;font-size:14px;border-radius:11px;background:#fff;border:1px solid #E7E5E4;color:#475569;font-weight:600}
+#wbLanding .hero-r{flex:0 0 370px;position:relative}
+#wbLanding .mock{background:rgba(255,255,255,.92);border:1px solid #F1E9E0;border-radius:20px;padding:24px;box-shadow:0 18px 44px rgba(26,29,33,.11)}
+#wbLanding .mock h4{font-size:12px;color:#9A3412;margin-bottom:15px;font-weight:700}
+#wbLanding .bar{height:8px;border-radius:4px;background:#F1E9E0;margin-bottom:15px;overflow:hidden}
+#wbLanding .bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#E05A2B,#C2410C)}
+#wbLanding .mrow{display:flex;justify-content:space-between;font-size:13px;color:#475569;margin-bottom:12px}
+#wbLanding .mrow b{color:#0F172A}
+#wbLanding .chips{display:flex;gap:8px}
+#wbLanding .chip{font-size:11.5px;font-weight:700;padding:6px 13px;border-radius:999px}
+#wbLanding .chip.o{background:#FEEDE3;color:#C2410C}
+#wbLanding .chip.b{background:#EEF2FF;color:#3B5BDB}
+#wbLanding .float-badge{position:absolute;background:rgba(255,255,255,.95);border:1px solid #F1E9E0;border-radius:999px;padding:10px 17px;font-size:12.5px;font-weight:700;box-shadow:0 10px 26px rgba(26,29,33,.12);animation:lnFloat 3.4s ease-in-out infinite;z-index:20}
+#wbLanding .fb1{top:-16px;right:8px}
+#wbLanding .fb2{bottom:-18px;left:-26px;color:#15803D;animation-delay:-1.7s}
+@keyframes lnFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(.6deg)}}
+#wbLanding .stats{border-top:1px solid #F1E9E0;border-bottom:1px solid #F1E9E0;background:#fff}
+#wbLanding .stats .in{display:flex;justify-content:space-between;padding:26px 24px}
+#wbLanding .stat{text-align:center;flex:1;border-left:1px solid #F1E9E0}
+#wbLanding .stat:first-child{border-left:0}
+#wbLanding .stat b{font-size:26px;font-weight:800;display:block}
+#wbLanding .stat span{font-size:12px;color:#94A3B8}
+#wbLanding .sec{padding:60px 0}
+#wbLanding .kicker{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#C2410C;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+#wbLanding .kicker::before{content:'';width:26px;height:2px;background:#C2410C;border-radius:2px}
+#wbLanding h2.ln-h2{font-family:Georgia,'Songti SC',serif;font-size:28px;font-weight:800;letter-spacing:-.4px}
+#wbLanding .lead{font-size:13.5px;color:#94A3B8;margin:9px 0 30px}
+#wbLanding .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+#wbLanding .fcard{background:#fff;border:1px solid #F1E9E0;border-radius:18px;padding:24px;box-shadow:0 2px 10px rgba(26,29,33,.05);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s}
+#wbLanding .fcard:hover{transform:translateY(-6px);box-shadow:0 16px 38px rgba(26,29,33,.12);border-color:#FED7AA}
+#wbLanding .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:13px;transition:.3s}
+#wbLanding .fcard:hover .ic{transform:scale(1.1) rotate(-4deg)}
+#wbLanding .fcard h3{font-size:15.5px;margin-bottom:9px}
+#wbLanding .fcard p{font-size:12.5px;color:#475569;line-height:1.7;margin-bottom:12px}
+#wbLanding .go{font-size:12.5px;color:#C2410C;font-weight:700;text-decoration:none}
+.ic1{background:#FEEDE3}.ic2{background:#EEF2FF}.ic3{background:#F0FDF4}.ic4{background:#FEF9EE}.ic5{background:#FDF2F8}.ic6{background:#ECFDF5}
+#wbLanding .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+#wbLanding .step{background:#FAFAF9;border:1px solid #F1E9E0;border-radius:16px;padding:22px;display:flex;gap:16px}
+#wbLanding .step .n{width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#D9502A,#B93A16);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 30px}
+#wbLanding .step b{font-size:13.5px;display:block;margin-bottom:5px}
+#wbLanding .step span{font-size:12px;color:#94A3B8;line-height:1.5}
+#wbLanding .dark{background:radial-gradient(ellipse at 20% 0%,rgba(194,65,12,.22),transparent 50%),#141618;padding:54px 0}
+#wbLanding .dark .in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:30px}
+#wbLanding .dark h2{font-family:Georgia,'Songti SC',serif;font-size:24px;font-weight:800;color:#fff;flex:1}
+#wbLanding .dark p{font-size:13px;color:#94A3B8;margin-top:8px}
+#wbLanding .dark .btn{padding:13px 26px;font-size:14px}
+#wbLanding .foot{padding:30px 0 38px;font-size:12px;color:#94A3B8}
+#wbLanding .foot .in{display:flex;justify-content:space-between;align-items:center}
+@media(max-width:900px){#wbLanding .hero .in{flex-direction:column;padding-top:36px}#wbLanding .hero-r{width:100%}#wbLanding h1{font-size:33px}#wbLanding .grid6,#wbLanding .steps{grid-template-columns:1fr}#wbLanding .stats .in{flex-wrap:wrap;gap:14px}#wbLanding .stat{min-width:96px}#wbLanding .dark .in{flex-direction:column}#wbLanding .wm{display:none}#wbLanding .ln-nav .in{gap:10px}#wbLanding a.mi{display:none}#wbLanding .ln-nav .in{padding:0 14px}}
+@media(prefers-reduced-motion:reduce){#wbLanding *{animation:none!important}}
+.rise{opacity:0;transform:translateY(18px);animation:lnFadeup .7s cubic-bezier(.22,1,.36,1) forwards}
+.rise.d1{animation-delay:.05s}.rise.d2{animation-delay:.15s}.rise.d3{animation-delay:.25s}.rise.d4{animation-delay:.35s}.rise.d5{animation-delay:.45s}.rise.d6{animation-delay:.55s}
+@keyframes lnFadeup{to{opacity:1;transform:none}}
+
 </style>
 </head>
 <body>
@@ -623,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.18-202611042150';
+window.swVer = 'v97.20-202611051500';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21739,7 +21829,119 @@ window.showInviteGuide = function(reason){
     window.loadInviteCfg(function(){ /* 拿到配置后若联系方式区为空可重绘——简化：首次可能显示兜底文案 */ });
   }catch(e){}
 };
+
+/* ===== v97.20 未登录落地页（自研设计系统）===== */
+window._wbInsertLanding = function(){
+  if(document.getElementById('wbLanding')) return;
+  var d = document.createElement('div');
+  d.id = 'wbLanding';
+  d.innerHTML =
+  '<div class="ln-nav"><div class="in">'+
+    '<div class="ln-brand"><div class="ln-logo">Ñ</div><b>Ánimo</b><small>西语备考</small></div>'+
+    '<a class="mi" href="#ln-feats">功能</a><span class="sp"></span>'+
+    '<button class="btn ghost" onclick="_wbLandingToLogin()">登录</button>'+
+    '<button class="btn grad" onclick="_wbLandingToLogin()">免费注册</button>'+
+  '</div></div>'+
+  '<div class="hero"><div class="glow g1"></div><div class="glow g2"></div><div class="wm wm1">espa\u00f1ol</div><div class="wm wm2">\u00a1Hola!</div><div class="in">'+
+    '<div class="hero-l">'+
+      '<span class="pill rise d1">✦ 免费使用 · 邀请制注册</span>'+
+      '<h1 class="rise d2">备考这条路，<em>Ánimo</em><br>陪你走完。</h1>'+
+      '<p class="sub rise d3">从第一个 hola，到考场上的侃侃而谈——4815 词 · 6000 题 · 口语模考，全流程都有回应。</p>'+
+      '<p class="sub2 rise d4">跟读五维评分 · 外刊每周更新 · 学习进度云端同步，<b style="color:#0F172A">Ánimo</b>，西语学习者的加油声。</p>'+
+      '<div class="cta-row rise d5">'+
+        '<button class="btn grad big" onclick="_wbLandingToLogin()">免费开始学习</button>'+
+        '<button class="btn big2" id="lnMore">看看有什么 ▾</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="hero-r rise d6">'+
+      '<div class="float-badge fb1">✨ AI 语音识别</div>'+
+      '<div class="mock"><h4>📈 学习概览 · 演示</h4>'+
+        '<div class="bar"><i style="width:64%"></i></div>'+
+        '<div class="mrow"><span>📖 单词卡片</span><b>9 / 1220</b></div>'+
+        '<div class="mrow"><span>✏️ 题库测验</span><b>267 题</b></div>'+
+        '<div class="mrow"><span>🎯 口语 T3</span><b>4.2 / 5</b></div>'+
+        '<div class="chips"><span class="chip o">🔥 连续 4 天</span><span class="chip b">目标 B2 · 78%</span></div>'+
+      '</div>'+
+      '<div class="float-badge fb2">▲ 平均提分 2.0</div>'+
+    '</div>'+
+  '</div></div>'+
+  '<div class="stats"><div class="in">'+
+    '<div class="stat"><b>4,815</b><span>分级词汇</span></div>'+
+    '<div class="stat"><b>6,000</b><span>分级题库</span></div>'+
+    '<div class="stat"><b>316</b><span>口语真题</span></div>'+
+    '<div class="stat"><b>111</b><span>语法点</span></div>'+
+    '<div class="stat"><b>26 期</b><span>外刊已更新</span></div>'+
+    '<div class="stat"><b>∞</b><span>云同步</span></div>'+
+  '</div></div>'+
+  '<div class="sec" id="ln-feats"><div class="ln-wrap">'+
+    '<div class="kicker">01 · FEATURES</div>'+
+    '<h2 class="ln-h2">一个工作台，六种武器</h2>'+
+    '<p class="lead">从词汇到真题，备考全流程都有对应的工具</p>'+
+    '<div class="grid6">'+
+      ['🃏|单词卡片|分级记忆 · 默写测试<br>记忆花园 · 拉美口音发音|ic1',
+       '🎯|SIELE 专项|口语 Tarea 1-5 官方流程<br>双话题二选一 · 计时模考|ic2',
+       '✏️|题库测验|A1-B2 各 1500 题<br>背题模式 · 错题自动归集|ic3',
+       '📰|外刊精读|每周更新西语外刊<br>精读题 · 词汇卡 · 逐段跟读|ic4',
+       '✍️|写作助手|逐题范文 · 计时练习<br>官方评分维度自评|ic5',
+       '🗣|跟读训练|五维评分 · 逐段音频<br>语音识别 · 错词巩固|ic6'].map(function(x){
+        var p = x.split('|');
+        return '<div class="fcard"><div class="ic '+p[3]+'">'+p[0]+'</div><h3>'+p[1]+'</h3><p>'+p[2]+'</p><a class="go" href="javascript:void(0)" onclick="_wbLandingToLogin()">注册使用 →</a></div>';
+      }).join('')+
+    '</div>'+
+  '</div></div>'+
+  '<div class="sec" style="padding-top:20px"><div class="ln-wrap">'+
+    '<div class="kicker">02 · GET STARTED</div>'+
+    '<h2 class="ln-h2">三步开始</h2>'+
+    '<p class="lead">30 秒创建账号，马上开始第一次学习</p>'+
+    '<div class="steps">'+
+      '<div class="step"><div class="n">1</div><div><b>创建账号</b><span>邀请码注册 · 30 秒完成</span></div></div>'+
+      '<div class="step"><div class="n">2</div><div><b>选择你的等级</b><span>A1-B2 · 按考试目标推荐</span></div></div>'+
+      '<div class="step"><div class="n">3</div><div><b>开始学习</b><span>进度云端同步 · 跨设备不丢</span></div></div>'+
+    '</div>'+
+  '</div></div>'+
+  '<div class="dark"><div class="in">'+
+    '<div style="flex:1"><h2>现在开始，让每一分钟备考都有回响。</h2><p>学习进度云端同步 · 跨设备不丢失 · 免费使用全部功能</p></div>'+
+    '<button class="btn grad" onclick="_wbLandingToLogin()">免费注册 →</button>'+
+  '</div></div>'+
+  '<div class="foot"><div class="in"><span>© 2026 Ánimo · 西语备考工作台 · MIT License · 学习数据仅存自有后端</span><span>v'+(window.swVer||'')+'</span></div></div>';
+  document.body.appendChild(d);
+  // 绑定改 inline onclick（v97.20b）
+  document.getElementById('lnMore').addEventListener('click', function(){
+    try{ document.getElementById('ln-feats').scrollIntoView({behavior:'smooth'}); }catch(e){}
+  });
+};
+window._wbLandingToLogin = function(){
+  window._wbFromLanding = true; /* v97.20b：标记来自落地页的登录意图，showLoginOverlay 不再回落落地页 */
+  try{
+    var _ld = document.getElementById('wbLanding');
+    if(_ld) _ld.style.display = 'none';
+    document.body.style.overflow = '';
+  }catch(e){}
+  try{ showLoginOverlay(); }catch(e){}
+};
+window._wbLandingShow = function(){
+  try{
+    var _ld = document.getElementById('wbLanding');
+    if(!_ld){ if(typeof window._wbInsertLanding==='function') window._wbInsertLanding(); _ld = document.getElementById('wbLanding'); }
+    if(_ld){ _ld.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+  }catch(e){}
+};
+window._wbLandingHide = function(){
+  try{ var _ld = document.getElementById('wbLanding'); if(_ld) _ld.style.display = 'none'; document.body.style.overflow = ''; }catch(e){}
+};
+
 function showLoginOverlay(){
+  /* v97.20 未登录落地页：先展示落地页（纯展示层），点「登录/免费注册」回到本表单 */
+  try{
+    if(window._wbFromLanding){ window._wbFromLanding = false; }
+    else {
+      var _ses0=null; try{ _ses0=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+      if(!(_ses0&&_ses0.username)){
+        if(typeof window._wbLandingShow==='function'){ window._wbLandingShow(); return; }
+      }
+    }
+  }catch(e){}
+  try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
   var ov=document.getElementById('wbLoginOverlay');
   if(ov){ov.classList.remove('hide');return;}
   ov=document.createElement('div');
@@ -21782,6 +21984,8 @@ function showLoginOverlay(){
 function hideLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
   if(ov)ov.classList.add('hide');
+  /* v97.20 登录成功：落地页一并隐藏 */
+  try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
 }
 async function wbDoLogin(e){
   e.preventDefault();
