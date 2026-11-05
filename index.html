@@ -713,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.20-202611051500';
+window.swVer = 'v97.22-202611051645';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21919,6 +21919,133 @@ window._wbLandingToLogin = function(){
   }catch(e){}
   try{ showLoginOverlay(); }catch(e){}
 };
+/* ===== v97.22 登录后门户态：落地页保留为登录后主页（同一张页按登录态切换） =====
+   未登录 = 原样（登录/注册按钮 + 邀请制 chip + 演示卡）
+   已登录 = 门户态（工作台下拉菜单 + 用户区 + Hero 个人数据 + 进度实时卡 + CTA 进入工作台）
+   零逻辑改动：只切换落地页 DOM 文案/按钮/下拉，不触碰任何统计变量与现有卡片。 */
+window._wbLandingRefresh = function(){
+  try{
+    var _ld = document.getElementById('wbLanding');
+    if(!_ld){ if(typeof window._wbInsertLanding==='function') window._wbInsertLanding(); _ld=document.getElementById('wbLanding'); }
+    if(!_ld) return;
+    if(!document.getElementById('lnPortalCss')){
+      var _pc=document.createElement('style'); _pc.id='lnPortalCss';
+      _pc.textContent =
+        '.ln-dd{position:relative;display:inline-block}'+
+        '.ln-ddm{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e7e5e4;border-radius:12px;'+
+        'box-shadow:0 10px 30px rgba(0,0,0,.14);padding:6px;min-width:150px;z-index:60;white-space:nowrap}'+
+        '.ln-ddm a{display:block;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#1c1917;text-decoration:none}'+
+        '.ln-ddm a:hover{background:#fef2f0;color:#C2410C}'+
+        '.ln-dd:hover .ln-ddm,.ln-dd.open .ln-ddm{display:block}'+
+        '.ln-dd.open>.mi{color:#C2410C}'+
+        '.ln-ua{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D9502A,#B93A16);color:#fff;'+
+        'display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}'+
+        '.ln-uname{font-size:13px;font-weight:800;color:#0F172A;margin:0 8px}'+
+        '.ln-lnk{font-size:13px;font-weight:700;color:#0F172A;text-decoration:none;opacity:.85;margin-left:16px}'+
+        '.ln-lnk:hover{opacity:1;color:#C2410C}';
+      document.head.appendChild(_pc);
+    }
+    var _ses=null; try{ _ses=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+    var _user=(_ses&&_ses.username)?String(_ses.username):'';
+    var _nav=_ld.querySelector('.ln-nav .in');
+    if(!_nav) return;
+    if(!window._wbLandingNavOrig) window._wbLandingNavOrig=_nav.innerHTML;
+    var _pill=_ld.querySelector('.pill'), _h1=_ld.querySelector('.hero-l h1');
+    var _ls=document.getElementById('lnStart'), _mo=document.getElementById('lnMore');
+    var _mk=_ld.querySelector('.mock');
+    if(!_user){
+      /* 未登录：恢复原始 */
+      if(window._wbLandingNavOrig) _nav.innerHTML=window._wbLandingNavOrig;
+      if(_pill) _pill.textContent='✦ 免费使用 · 邀请制注册';
+      if(_h1) _h1.innerHTML='备考这条路，<em>Ánimo</em><br>陪你走完。';
+      if(_ls){ _ls.textContent='免费开始学习'; _ls.onclick=function(){ _wbLandingToLogin(); }; }
+      if(_mo){ _mo.textContent='看看有什么 ▾'; _mo.onclick=function(){ try{ document.getElementById('ln-feats').scrollIntoView({behavior:'smooth'}); }catch(e){} }; }
+      if(_mk){ _mk.querySelector('h4').textContent='📈 学习概览 · 演示';
+        var _r=_mk.querySelector('.bar i'); if(_r) _r.style.width='64%';
+        var _rows=_mk.querySelectorAll('.mrow b');
+        if(_rows[0])_rows[0].textContent='9 / 1220'; if(_rows[1])_rows[1].textContent='267 题'; if(_rows[2])_rows[2].textContent='4.2 / 5';
+        var _ch=_mk.querySelectorAll('.chip');
+        if(_ch[0])_ch[0].textContent='🔥 连续 4 天'; if(_ch[1])_ch[1].textContent='🎯 目标 B2 · 78%'; }
+      /* wm 水印恢复 */
+      var _wm=_ld.querySelector('.wm2'); if(_wm) _wm.textContent='¡Hola!';
+      return;
+    }
+    /* ── 已登录：门户态 ── */
+    /* v97.22b：数据源修正——主站 ST 持久化在 swa_data_v1_<user>.wb.data（save 链路），不是 dele_siele_wb_v3 */
+    var _st=null;
+    try{
+      var _adb=JSON.parse(localStorage.getItem('swa_data_v1_'+_user)||'null');
+      _st=(_adb&&_adb.wb&&_adb.wb.data)?_adb.wb.data:null;
+    }catch(e){}
+    var _vm=(_st&&_st.vocabMastery)||{}, _vals=Object.keys(_vm).map(function(k){return Number(_vm[k])||0;});
+    var _learned=_vals.filter(function(x){return x>=1;}).length;
+    var _mastered=_vals.filter(function(x){return x>=3;}).length;
+    var _quiz=(_st&&_st.quizResults)?Object.keys(_st.quizResults).length:0;
+    var _gram=(_st&&_st.grammarDone)?Object.keys(_st.grammarDone).length:0;
+    var _streak=(_st&&_st.streak)||0;
+    var _pct=Math.round(_learned/4815*1000)/10;
+    /* 问候：h1 前插一行 ¡Hola */
+    if(_h1 && !_h1.getAttribute('data-hi')){
+      _h1.setAttribute('data-hi','1');
+      var _hi=document.createElement('div');
+      _hi.style.cssText='font-size:15px;font-weight:800;color:#C2410C;margin-bottom:10px;letter-spacing:.3px';
+      _hi.innerHTML='¡Hola, '+_user+'! 👋';
+      _h1.parentNode.insertBefore(_hi,_h1);
+    }
+    if(_pill) _pill.innerHTML='🔥 连续学习 '+_streak+' 天 · 已学 '+_learned+' 词 · 目标 B2';
+    /* nav → 工作台下拉 + 用户区 */
+    var _menu=[
+      ['主站','dash',[['🏠','仪表盘','dash'],['🃏','单词卡片','flash'],['📚','词汇库','vocab']]],
+      ['学习','grammar',[['📐','语法库','grammar'],['🎤','跟读训练','shadow'],['🎯','SIELE 专项','siele']]],
+      ['练习','quiz',[['✏️','题库测验','quiz'],['✍️','写作练习','writing'],['🗣','口语话题','speaking']]],
+      ['备考','planner',[['📅','学习计划','planner'],['🚨','错题集','errors'],['📰','外刊精炼','refine']]],
+      ['DELE','dele',[['📝','DELE 专项','dele']]]
+    ];
+    var _nh='<div class="ln-dd open"><a class="mi" href="#dash">'+_menu[0][0]+' ▾</a><div class="ln-ddm">'+
+      _menu[0][2].map(function(it){return '<a onclick="_wbLandingEnter(\''+it[2]+'\')">'+it[0]+' '+it[1]+'</a>';}).join('')+'</div></div>';
+    for(var _mi=1;_mi<_menu.length;_mi++){
+      _nh+='<div class="ln-dd"><a class="mi" href="#dash">'+_menu[_mi][0]+' ▾</a><div class="ln-ddm">'+
+        _menu[_mi][2].map(function(it){return '<a onclick="_wbLandingEnter(\''+it[2]+'\')">'+it[0]+' '+it[1]+'</a>';}).join('')+'</div></div>';
+    }
+    _nh+='<span class="sp"></span><a class="btn grad" href="#dash" onclick="_wbLandingEnter(\'dash\');return false;" style="padding:8px 16px">进入工作台 →</a>'+
+      '<span class="ln-ua">'+_user.charAt(0).toUpperCase()+'</span><span class="ln-uname">'+_user+'</span>'+
+      '<a class="ln-lnk" onclick="wbLogout()">退出</a>';
+    _nav.innerHTML=_nh;
+    /* CTA */
+    if(_ls){ _ls.textContent='进入工作台 →'; _ls.onclick=function(){ _wbLandingEnter('dash'); }; }
+    if(_mo){ _mo.textContent='继续上次学习 ▾'; _mo.onclick=function(){ _wbLandingEnter('flash'); }; }
+    /* dark 区按钮 */
+    var _dk=_ld.querySelector('.dark .btn.grad');
+    if(_dk){ _dk.textContent='查看今日待办 →'; _dk.onclick=function(){ _wbLandingEnter('dash'); }; }
+    /* mock → 实时数据 */
+    if(_mk){ _mk.querySelector('h4').textContent='📈 我的进度 · 实时';
+      var _r2=_mk.querySelector('.bar i'); if(_r2) _r2.style.width=Math.max(2,_pct)+'%';
+      var _r3=_mk.querySelectorAll('.mrow');
+      if(_r3[0]) _r3[0].innerHTML='<span>📖 单词卡片</span><b>'+_learned+' / 4815</b>';
+      if(_r3[1]) _r3[1].innerHTML='<span>✏️ 题库测验</span><b>'+_quiz+' 题</b>';
+      if(_r3[2]) _r3[2].innerHTML='<span>📐 语法点</span><b>'+_gram+' / 111</b>';
+      var _c2=_mk.querySelectorAll('.chip');
+      if(_c2[0]) _c2[0].textContent='🔥 连续 '+_streak+' 天';
+      if(_c2[1]) _c2[1].textContent='⭐ 掌握 '+_mastered+' 词'; }
+    /* wm 水印 → 问候 */
+    var _wm2=_ld.querySelector('.wm2'); if(_wm2) _wm2.textContent='¡Hola, '+_user+'!';
+    /* 登录按钮们退位（模板里残留的 lnLogin/lnReg 已被 nav innerHTML 覆盖，无需处理） */
+  }catch(e){ try{ console.warn('[portal] refresh 失败', e); }catch(_e){} }
+};
+window._wbLandingEnter = function(id){
+  /* v97.22b：不再设 _wbFromLanding——该标志语义是「落地页→登录表单」，残留会让
+     后续 showLoginOverlay 跳过落地页显示（实测：登出/再进门户全部失效） */
+  try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
+  try{ if(id) go(id); }catch(e){ try{ console.warn('[portal] go 失败', id); }catch(_e){} }
+};
+window._wbLandingPortalBoot = function(){
+  try{
+    var _ses=null; try{ _ses=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+    if(_ses&&_ses.username){ window._wbLandingRefresh(); window._wbLandingShow();
+      try{ if(typeof renderNav==='function') renderNav(); }catch(e){} }
+  }catch(e){}
+};
+try{ window.addEventListener('load', function(){ setTimeout(window._wbLandingPortalBoot, 400); }); }catch(e){}
 window._wbLandingShow = function(){
   try{
     var _ld = document.getElementById('wbLanding');
@@ -21950,12 +22077,18 @@ window._wbLandingHide = function(){
 function showLoginOverlay(){
   /* v97.20 未登录落地页：先展示落地页（纯展示层），点「登录/免费注册」回到本表单 */
   try{
+    var _ses1=null; try{ _ses1=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+    /* v97.22 已登录：回到门户态（不弹登录表单） */
+    if(_ses1&&_ses1.username){
+      window._wbFromLanding = false;   /* v97.22b：清残留标志 */
+      if(typeof window._wbLandingRefresh==='function') window._wbLandingRefresh();
+      if(typeof window._wbLandingShow==='function'){ window._wbLandingShow(); return; }
+    }
     if(window._wbFromLanding){ window._wbFromLanding = false; }
-    else {
-      var _ses0=null; try{ _ses0=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
-      if(!(_ses0&&_ses0.username)){
-        if(typeof window._wbLandingShow==='function'){ window._wbLandingShow(); return; }
-      }
+    else if(!(_ses1&&_ses1.username)){
+      /* v97.22b：登出/未打开时恢复落地页原始态（此前漏调 refresh，登出后停留门户内容） */
+      if(typeof window._wbLandingRefresh==='function') window._wbLandingRefresh();
+      if(typeof window._wbLandingShow==='function'){ window._wbLandingShow(); return; }
     }
   }catch(e){}
   try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
@@ -22001,8 +22134,8 @@ function showLoginOverlay(){
 function hideLoginOverlay(){
   var ov=document.getElementById('wbLoginOverlay');
   if(ov)ov.classList.add('hide');
-  /* v97.20 登录成功：落地页一并隐藏 */
-  try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
+  /* v97.22 登录成功：落地页保留为门户态（不隐藏） */
+  try{ if(typeof window._wbLandingRefresh==='function') window._wbLandingRefresh(); }catch(e){}
 }
 async function wbDoLogin(e){
   e.preventDefault();

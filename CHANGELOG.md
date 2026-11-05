@@ -1,6 +1,15 @@
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
+## [v97.22] – 2026-11-05
+### 登录后门户页 · 落地页保留为登录后主页（同一张页按登录态切换）
+- **用户拍板**：登录后落地页保留为门户——右上导航换工作台 5 组下拉（主站/学习/练习/备考/DELE），演示卡换实时个人数据，未登录访客看到的内容与 v97.20/21 完全一致（登录/注册按钮 + 邀请制 chip + 演示卡）。
+- **新增**：`_wbLandingRefresh`（按登录态分态刷新落地页 DOM）/ `_wbLandingEnter`（隐藏门户 + go 进功能页）/ `_wbLandingPortalBoot`（load 时已登录自动门户态 + 补 renderNav）。
+- **流程改造**：`hideLoginOverlay` 登录成功改为刷新门户态（不隐藏落地页）；`showLoginOverlay` 已登录分支回门户态（不弹登录表单）；登出走未登录分支自动恢复原样。
+- **数据个性化**：门户数据按登录账户动态显示（vocabMastery/quizResults/grammarDone/streak，主站 save 链路 swa_data_v1_<user>.wb.data），每账号各不相同。
+- **排查修 3**：①`_wbLandingEnter` 不设 `_wbFromLanding`（残留标志导致登出/再进门户失效）②showLoginOverlay 已登录分支清残留标志 ③PortalBoot 补 renderNav（工作台壳导航空）。
+- **本地核验（playwright 七轮）**：R1 门户渲染 9/9 ｜ R7 完整状态机 13/14（boot 门户态/真实数据卡 5学2掌2题2语法/¡Hola 问候/下拉进写作练习 reqFlag 拦截与放行双向/登出恢复未登录态/重新登录回门户/未登录访客原样）｜ 唯一 FAIL 为 admin.html refreshBadges 既有问题（A/B 对照确认：门户版 0 错误 vs 线上原版 1 错误，非本版引入）。
+
 ## [v97.21] – 2026-11-05
 ### 修复 · 落地页两处（用户真机反馈）
 - 浮动徽章文字被裁（缺 white-space:nowrap）→「✨ AI 语音识别」完整显示。
