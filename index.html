@@ -697,7 +697,7 @@ body{background:var(--c-bg)}
 <div class="app">
 <!-- v97.18 自研设计系统 Phase 1：顶部导航（旧左侧栏已移除，回退见 backups/ui_shell_backup_20261104/） -->
 <header class="topnav">
-<div class="brand"><div class="logo">Ñ</div><h1>西语备考工作台</h1></div>
+<div class="brand"><div class="logo">Ñ</div><h1>Ánimo<small style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.5px;margin-left:2px;vertical-align:baseline">西语备考</small></h1></div>
 <nav class="nav" id="nav"></nav>
 <div class="spacer"></div>
 <div class="userbox" id="topUser"></div>
@@ -713,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.24-202611051755';
+window.swVer = 'v97.25-202611051810';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2148,7 +2148,7 @@ function renderModuleAccentToggle(module){
     '</span>';
 }
 const NAV = [
-  {s:'main', items:[
+  {s:'主站', items:[
     {id:'dash', icon:'🏠', label:'仪表盘'},
     {id:'flash', icon:'🃏', label:'单词卡片'},
     {id:'vocab', icon:'📚', label:'词汇库'},
@@ -2169,7 +2169,7 @@ const NAV = [
     {id:'reading', icon:'📰', label:'外刊阅读'},
     {id:'refine', icon:'📚', label:'外刊精炼', reqFlag:'refinePack'},
   ]}, /* FEAT-1: 考试结构移除独立页面,并入仪表盘 */
-  {s:'DELE专项', items:[
+  {s:'DELE', items:[
     {id:'dele', icon:'📝', label:'DELE专项', reqFlag:'deleSpecial'},
   ]},
 ];
@@ -23081,7 +23081,7 @@ save=function(){
 };
 
 /* ---------- 导航：站内后台管理面板 ---------- */
-NAV.push({s:'系统',items:[{id:'admin',icon:'⚙️',label:'后台管理'}]});
+NAV.push({s:'系统',items:[{id:'admin',icon:'⚙️',label:'后台管理',adminOnly:true}]});
 function isMainAdmin(){
   try{var ses=lsg('swa_cloud_session_v1',null);return !!(ses&&ses.role==='admin');}catch(e){return false;}
 }
