@@ -713,7 +713,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.25-202611051810';
+window.swVer = 'v97.26-202611051830';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -21968,6 +21968,8 @@ window._wbLandingRefresh = function(){
         if(_ch[0])_ch[0].textContent='🔥 连续 4 天'; if(_ch[1])_ch[1].textContent='🎯 目标 B2 · 78%'; }
       /* wm 水印恢复 */
       var _wm=_ld.querySelector('.wm2'); if(_wm) _wm.textContent='¡Hola!';
+      /* v97.26：未登录恢复 FEATURES 原始卡区（注册使用营销态） */
+      try{ var _g0=_ld.querySelector('#ln-feats .grid6'); if(_g0 && window._wbLandingFeatsOrig) _g0.innerHTML=window._wbLandingFeatsOrig; }catch(e){}
       return;
     }
     /* ── 已登录：门户态 ── */
@@ -22044,6 +22046,34 @@ window._wbLandingRefresh = function(){
     /* AI 语音识别徽章：白底深字（对比度） */
     var _fb1=_ld.querySelector('.float-badge.fb1');
     if(_fb1){ _fb1.style.background='#fff'; _fb1.style.color='#7c2d12'; _fb1.style.boxShadow='0 3px 10px rgba(122,31,18,.35)'; }
+    /* v97.26：FEATURES 六卡 → 已登录工作台入口（默认开启直达 / 需授权拦截提示；未登录态恢复原始） */
+    var _grid=_ld.querySelector('#ln-feats .grid6');
+    if(_grid){
+      if(!window._wbLandingFeatsOrig) window._wbLandingFeatsOrig=_grid.innerHTML;
+      var _fmap=[
+        ['🃏','单词卡片','分级记忆 · 默写测试<br>记忆花园 · 拉美口音发音','ic1','flash',''],
+        ['🎯','SIELE 专项','口语 Tarea 1-5 官方流程<br>双话题二选一 · 计时模考','ic2','siele','sieleSpecial'],
+        ['✏️','题库测验','A1-B2 各 1500 题<br>背题模式 · 错题自动归集','ic3','quiz',''],
+        ['📰','外刊精读','每周更新西语外刊<br>精读题 · 词汇卡 · 逐段跟读','ic4','refine','refinePack'],
+        ['✍️','写作练习','逐题范文 · 计时练习<br>官方评分维度自评','ic5','writing','writingEnabled'],
+        ['🗣','跟读训练','五维评分 · 逐段音频<br>语音识别 · 错词巩固','ic6','shadow','']
+      ];
+      var _locked=null;
+      try{ if(typeof window._wbFlagsAllowed!=='function') window._wbFlagsAllowed=function(){return true;}; }catch(e){}
+      _grid.innerHTML=_fmap.map(function(c){
+        var _ok=true; try{ if(c[5] && !window._wbFlagsAllowed(c[5])) _ok=false; }catch(e){}
+        if(!_ok) _locked=(_locked||0)+1;
+        return '<div class="fcard" data-page="'+c[4]+'" data-flag="'+c[5]+'" style="cursor:pointer;'+(!_ok?'opacity:.55':'')+'">'+
+          '<div class="ic '+c[3]+'">'+c[0]+'</div><h3>'+c[1]+(!_ok?' <span style="font-size:10px;color:#94a3b8;font-weight:700">🔒 需管理员开启</span>':'')+'</h3><p>'+c[2]+'</p>'+
+          '<a class="go" href="javascript:void(0)" data-page="'+c[4]+'" data-flag="'+c[5]+'">'+(_ok?'进入 →':'🔒 需联系管理员开启')+'</a></div>';
+      }).join('');
+      _grid.querySelectorAll('.fcard').forEach(function(card){
+        card.addEventListener('click', function(){
+          var _pg=card.getAttribute('data-page'), _fl=card.getAttribute('data-flag')||'';
+          window._wbLandingCardClick(_pg, _fl);
+        });
+      });
+    }
     /* wm 水印 → 问候 */
     var _wm2=_ld.querySelector('.wm2'); if(_wm2) _wm2.textContent='¡Hola, '+_user+'!';
     /* 登录按钮们退位（模板里残留的 lnLogin/lnReg 已被 nav innerHTML 覆盖，无需处理） */
@@ -22055,6 +22085,16 @@ window._wbLandingEnter = function(id){
   try{ if(typeof window._wbLandingHide==='function') window._wbLandingHide(); }catch(e){}
   try{ if(id) go(id); }catch(e){ try{ console.warn('[portal] go 失败', id); }catch(_e){} }
 };
+window._wbLandingCardClick = function(page, flag){
+  var _locked = false;
+  try{ if(flag && typeof window._wbFlagsAllowed === 'function') _locked = !window._wbFlagsAllowed(flag); }catch(e){ try{ console.warn('[portal] flag check', e); }catch(_e){} }
+  if(_locked){
+    try{ if(typeof window.toast === 'function') window.toast('🔒 ' + (window.TITLES_LN[page] || '该功能') + ' 需联系管理员开启'); }catch(e){}
+    return;
+  }
+  try{ window._wbLandingEnter(page); }catch(e){ try{ console.warn('[portal] enter', e); }catch(_e){} }
+};
+window.TITLES_LN = {flash:'单词卡片', vocab:'词汇库', siele:'SIELE 专项', quiz:'题库测验', refine:'外刊精炼', writing:'写作练习', shadow:'跟读训练'};
 window._wbLandingPortalBoot = function(){
   try{
     var _ses=null; try{ _ses=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
