@@ -649,8 +649,8 @@ body{background:var(--c-bg)}
 #wbLanding .chip{font-size:11.5px;font-weight:700;padding:6px 13px;border-radius:999px}
 #wbLanding .chip.o{background:#FEEDE3;color:#C2410C}
 #wbLanding .chip.b{background:#EEF2FF;color:#3B5BDB}
-#wbLanding .float-badge{position:absolute;background:rgba(255,255,255,.95);border:1px solid #F1E9E0;border-radius:999px;padding:10px 17px;font-size:12.5px;font-weight:700;box-shadow:0 10px 26px rgba(26,29,33,.12);animation:lnFloat 3.4s ease-in-out infinite;z-index:20}
-#wbLanding .fb1{top:-16px;right:8px}
+#wbLanding .float-badge{position:absolute;white-space:nowrap;z-index:20;background:rgba(255,255,255,.95);border:1px solid #F1E9E0;border-radius:999px;padding:10px 17px;font-size:12.5px;font-weight:700;box-shadow:0 10px 26px rgba(26,29,33,.12);animation:lnFloat 3.4s ease-in-out infinite}
+#wbLanding .fb1{top:-16px;right:18px}
 #wbLanding .fb2{bottom:-18px;left:-26px;color:#15803D;animation-delay:-1.7s}
 @keyframes lnFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(.6deg)}}
 #wbLanding .stats{border-top:1px solid #F1E9E0;border-bottom:1px solid #F1E9E0;background:#fff}
@@ -2193,7 +2193,7 @@ function renderNav(){
       _tu.dataset.done = '1';
       var _sd = '';
       try{ var _sc = JSON.parse(localStorage.getItem('swa_sync_cfg_v1')||'null'); if(_sc&&_sc.token) _sd = '<span class="sync-dot" style="background:#15803D" title="云同步已开启"></span>'; else _sd = '<span class="sync-dot" style="background:#CBD5E1" title="云同步未开启"></span>'; }catch(e){ _sd=''; }
-      _tu.innerHTML = _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
+      _tu.innerHTML = '<button onclick="_wbLandingShow()" style="border:1px solid #E7E5E4;background:#fff;border-radius:8px;padding:5px 12px;font-size:12px;color:#475569;cursor:pointer;font-family:inherit" onmouseover="this.style.borderColor=\'#C2410C\';this.style.color=\'#C2410C\'" onmouseout="this.style.borderColor=\'#E7E5E4\';this.style.color=\'#475569\'">ℹ️ 关于 Ánimo</button>' + _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
     }
   }catch(e){}
   let h = '';
@@ -21839,8 +21839,8 @@ window._wbInsertLanding = function(){
   '<div class="ln-nav"><div class="in">'+
     '<div class="ln-brand"><div class="ln-logo">Ñ</div><b>Ánimo</b><small>西语备考</small></div>'+
     '<a class="mi" href="#ln-feats">功能</a><span class="sp"></span>'+
-    '<button class="btn ghost" onclick="_wbLandingToLogin()">登录</button>'+
-    '<button class="btn grad" onclick="_wbLandingToLogin()">免费注册</button>'+
+    '<button class="btn ghost" id="lnLogin" onclick="_wbLandingToLogin()">登录</button>'+
+    '<button class="btn grad" id="lnReg" onclick="_wbLandingToLogin()">免费注册</button>'+
   '</div></div>'+
   '<div class="hero"><div class="glow g1"></div><div class="glow g2"></div><div class="wm wm1">espa\u00f1ol</div><div class="wm wm2">\u00a1Hola!</div><div class="in">'+
     '<div class="hero-l">'+
@@ -21849,7 +21849,7 @@ window._wbInsertLanding = function(){
       '<p class="sub rise d3">从第一个 hola，到考场上的侃侃而谈——4815 词 · 6000 题 · 口语模考，全流程都有回应。</p>'+
       '<p class="sub2 rise d4">跟读五维评分 · 外刊每周更新 · 学习进度云端同步，<b style="color:#0F172A">Ánimo</b>，西语学习者的加油声。</p>'+
       '<div class="cta-row rise d5">'+
-        '<button class="btn grad big" onclick="_wbLandingToLogin()">免费开始学习</button>'+
+        '<button class="btn grad big" id="lnStart" onclick="_wbLandingToLogin()">免费开始学习</button>'+
         '<button class="btn big2" id="lnMore">看看有什么 ▾</button>'+
       '</div>'+
     '</div>'+
@@ -21923,7 +21923,24 @@ window._wbLandingShow = function(){
   try{
     var _ld = document.getElementById('wbLanding');
     if(!_ld){ if(typeof window._wbInsertLanding==='function') window._wbInsertLanding(); _ld = document.getElementById('wbLanding'); }
-    if(_ld){ _ld.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+    if(_ld){
+      _ld.style.display = 'block'; document.body.style.overflow = 'hidden';
+      /* 已登录时：落地页按钮切「进入工作台」 */
+      try{
+        var _sesL=null; try{ _sesL=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+        var _logged = !!(_sesL&&_sesL.username);
+        var _ll=document.getElementById('lnLogin'), _lr=document.getElementById('lnReg'), _ls=document.getElementById('lnStart');
+        if(_logged){
+          if(_ll) _ll.style.display='none';
+          if(_lr){ _lr.textContent='进入工作台'; _lr.onclick=function(){ _wbLandingHide(); }; }
+          if(_ls) _ls.textContent='继续学习 →';
+        } else {
+          if(_ll) _ll.style.display='';
+          if(_lr){ _lr.textContent='免费注册'; _lr.onclick=function(){ _wbLandingToLogin(); }; }
+          if(_ls) _ls.textContent='免费开始学习';
+        }
+      }catch(e){}
+    }
   }catch(e){}
 };
 window._wbLandingHide = function(){
