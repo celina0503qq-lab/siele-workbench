@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 0) 2026-11-06 第 27 期 — 主题：去理发店 · 西班牙 tapas 文化 · 西班牙橄榄油产业 · 最低工资上涨之争
 // 0) 2026-10-30 第 26 期 — 主题：搬家 · 西班牙问候礼仪 · 电商增长 · 能源贫困之争
 // 0) 2026-10-23 第 25 期 — 主题：去邮局 · 西班牙午睡文化 · AI与就业 · 非法旅游公寓之争
 // 1) 2026-10-09 第 23 期 — 主题：机场出行 · 西班牙咖啡文化 · IA360 计划 · AI 监管之争
@@ -26,6 +27,18 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-11-06": {
+    date: "2026-11-06",
+    weekday: "五",
+    issue: 27,
+    theme: "去理发店 · 西班牙 tapas 文化 · 西班牙橄榄油产业 · 最低工资上涨之争",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la peluquería" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "La cultura de las tapas" },
+      { level: "B1", source: "La Voz de Galicia", sourceUrl: "https://media.lavozdegalicia.es/noticia/somosagro/agricultura/2025/10/03/produccion-aceite-oliva-alcanzara-137-millones-toneladas/00031759485196270840387.htm", topic: "El aceite de oliva español" },
+      { level: "B2", source: "La Voz de Galicia", sourceUrl: "https://media.lavozdegalicia.es/noticia/economia/2025/12/11/expertos-trabajo-recomiendan-subir-salario-minimo-37-56-euros-mes/00031765447743603188723.htm", topic: "La subida del salario mínimo" }
+    ]
+  },
   "2026-10-30": {
     date: "2026-10-30",
     weekday: "五",
@@ -375,4 +388,5 @@ window.loadRefineData = function(dateKey) {
   });
   return window.__REFINE_INFLIGHT[dateKey];
 };
+
 
