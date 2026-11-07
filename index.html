@@ -739,6 +739,26 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 #dashExamCard .tbl th{color:#B45309;border-bottom:2px solid #F0DFC4;background:transparent}
 #dashExamCard .tbl td{border-bottom:1px dashed #F0E7D6;color:#44403C}
 #dashExamCard .tbl tr td:first-child{color:#9A3412;font-weight:800}
+#dashQuickAnchor>.card{display:block !important}
+#dashQuickAnchor>.card>*{flex:none !important}
+.pomo{justify-content:flex-start !important;min-height:0 !important;height:auto !important;padding:6px 0 2px}
+.checkin-cal{max-width:470px}
+.checkin-cal .day-cell{aspect-ratio:1.45;border-radius:8px;font-size:10.5px}
+.checkin-cal .day-cell.today{border-width:2px}
+#dashExamCard h3{display:flex;align-items:center;user-select:none}
+#dashExamCard h3:hover{color:#C2410C}
+#dashExamCard .xbody{margin-top:6px}
+.tb h2 em.hiname{font-style:normal}
+.radar-cute svg{width:190px !important;height:190px !important}
+.cat-grid{gap:12px}
+.pg-row .pr .pc{color:#C2410C;font-weight:900}
+.fcp .bar{height:7px;border-radius:99px;background:#F3E9D8;box-shadow:none}
+.fcp .bar i{background:linear-gradient(90deg,#E05A2B,#C2410C) !important;border-radius:99px}
+.fcp .bar i::after{display:none}
+.plan-card{background:linear-gradient(160deg,#FFFDF7,#FFF8EE) !important;border:1px solid #F1E7D8}
+.plan-card .btn.xs.t{background:linear-gradient(135deg,#E05A2B,#C2410C) !important;color:#fff !important;border:none !important;border-radius:99px !important;padding:5px 14px !important;font-weight:900 !important;box-shadow:0 3px 9px rgba(194,65,12,.25)}
+#wbQuickPicker{font-family:Inter,system-ui,sans-serif}
+#wbQuickPicker input[type=checkbox]{accent-color:#C2410C;width:15px;height:15px}
 /* ===== v98.1c 番茄钟横排 + 时间外置 ===== */
 .pomo{flex-direction:row !important;text-align:left;gap:20px;height:auto;min-height:0;justify-content:flex-start}
 .pomo .ring{width:112px;height:112px;flex:none}
@@ -802,7 +822,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.1-202611080030';
+window.swVer = 'v98.2-202611080100';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2603,7 +2623,7 @@ function renderDash(){
   const quizAvg = quizDone > 0 ? Math.round(ST.quizResults.reduce((a,b)=>a+b,0)/quizDone) : 0;
   const daysLeft = ST.examDate ? Math.ceil((new Date(ST.examDate) - new Date(todayStr())) / 86400000) : null;
 
-  let h = `<div class="tb"><div><h2>¡Hola, ${(function(){try{var _u=((JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'))||{}).username||'Amigo';return String(_u).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}catch(e){return 'Amigo';}})()}! <span style="font-size:13px;color:var(--soft);font-weight:600">学习仪表盘</span></h2><div class="d">今天是 ${new Date().toLocaleDateString('zh-CN')} · 坚持 ${ST.streak} 天</div></div>
+  let h = `<div class="tb"><div><h2 style="font-family:Georgia,'Songti SC',serif;font-size:23px;letter-spacing:.2px">¡Hola, <em class="hiname" style="font-style:normal;color:#C2410C;background:linear-gradient(180deg,transparent 64%,#FFE3CE 0);padding:0 3px;border-radius:4px">${(function(){try{var _u=((JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'))||{}).username||'Amigo';return String(_u).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}catch(e){return 'Amigo';}})()}</em>! <span style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#B8AB98;font-weight:700">· 学习仪表盘</span></h2><div class="d">今天是 ${new Date().toLocaleDateString('zh-CN')} · 坚持 ${ST.streak} 天</div></div>
     <div class="hero-c">
       <div><label>考试类型</label><select onchange="setExamType(this.value)"><option ${ST.examType==='dele'?'selected':''}>DELE</option><option ${ST.examType==='siele'?'selected':''}>SIELE</option></select></div>
       <div><label>目标等级</label><select onchange="setTargetLevel(this.value)"><option ${ST.targetLevel==='A1'?'selected':''}>A1</option><option ${ST.targetLevel==='A2'?'selected':''}>A2</option><option ${ST.targetLevel==='B1'?'selected':''}>B1</option><option ${ST.targetLevel==='B2'?'selected':''}>B2</option></select></div>
@@ -23625,7 +23645,7 @@ function planCardHtml(){
   try{
     var plans=(ADB&&Array.isArray(ADB.plans))?ADB.plans.slice().sort(function(a,b){return (b.updatedAt||0)-(a.updatedAt||0);}):[];
     var today=new Date().toISOString().slice(0,10);
-    var h='<div class="card" style="margin-bottom:18px"><h3><span class="ic">📅</span>复习计划 <span style="font-size:11px;color:var(--soft);font-weight:400">点「+1 打卡」记录完成一次 · 打卡后自动云同步</span> <button class="btn xs t" style="float:right" onclick="wbPlanForm()">＋ 新建计划</button></h3>';
+    var h='<div class="card plan-card" style="margin-bottom:18px"><h3><span class="ic">📅</span>复习计划 <span style="font-size:11px;color:var(--soft);font-weight:400">点「+1 打卡」记录完成一次 · 打卡后自动云同步</span> <button class="btn xs t" style="float:right" onclick="wbPlanForm()">＋ 新建计划</button></h3>';
     h+='<div style="font-size:11px;color:var(--soft);padding:4px 0 8px">📌 怎样算复习：点「+1 打卡」= 今天完成了该计划的一次复习（如背完当日词量 / 做完一组题）。进度 = 累计打卡次数 ÷ 目标次数，逾期未达 100% 会标红提醒。</div>';
     if(plans.length){
       h+=plans.map(function(p){
@@ -23702,7 +23722,7 @@ function todoCardHtml(){
     var pct=tasks.length?Math.round(done/tasks.length*100):0;
     /* v98.0: 快捷操作 0-6 自选（挑选池=页面跳转类14项+权限过滤；配置随账号云同步） */
     var quick = (typeof window._wbQuickRenderButtons==='function') ? window._wbQuickRenderButtons() : '';
-    quick += '<button class="btn sm ol" onclick="window._wbQuickTogglePicker()" id="wbQuickEditBtn">✏️ 编辑快捷</button>';
+
     quick += '<button class="btn sm ol" onclick="exportData_()" title="把学习进度导出为 JSON 备份文件（防丢失）">📥 导出备份</button>';
     quick += '<button class="btn sm ol" onclick="importDataPrompt_()" title="从备份 JSON 文件恢复学习进度">📤 导入备份</button>';
     quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="云同步 · 学习数据/做题记录跨设备同步">☁️ 云同步</button>';
@@ -23721,9 +23741,8 @@ function todoCardHtml(){
         (done===tasks.length&&tasks.length?'<div class="note" style="margin-top:8px"><b>🎉 今日全部完成！</b></div>':'')+
       '</div>'+
       '<div class="card">'+
-        '<h3><span class="ic">⚡</span>快捷操作<span style="margin-left:auto;font-size:10.5px;color:var(--soft);font-weight:400">0-6 个 · 点「编辑快捷」自定义</span></h3>'+
+        '<h3><span class="ic">⚡</span>快捷操作<button class="btn xs ol" id="wbQuickEditBtn" style="margin-left:auto;padding:3px 13px;font-size:11px;border-radius:99px;font-weight:800" onclick="window._wbQuickTogglePicker()">✏️ 编辑</button></h3>'+
         '<div class="quick-grid">'+quick+'</div>'+
-        '<div id="wbQuickPicker" style="display:none"></div>'+
         '<div class="note" style="margin-top:12px;font-size:11.5px">'+(AU?('👤 已登录 <b>'+escB(AU)+'</b>，背词/刷题进度自动汇入后台'+(ADB&&ADB.syncCfg?'并同步到云端 ☁️':'，可在「后台管理 → 云同步」开启跨设备同步')):'⚠️ 尚未登录：进度仅存本机。<a href="javascript:void(0)" onclick="go(\'admin\')" style="color:var(--tr);font-weight:700">去登录 →</a>')+'</div>'+
       '</div></div>';
   }catch(e){
@@ -23941,6 +23960,23 @@ window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doP
       +'</defs>';
     document.body.appendChild(d);
   }
+  window._wbExamFold=function(){
+    var c=document.getElementById('dashExamCard');
+    if(!c||c.dataset.folded)return;
+    c.dataset.folded='1';
+    var h3=c.querySelector('h3'); if(!h3)return;
+    var body=document.createElement('div');
+    body.className='xbody'; body.style.display='none';
+    while(h3.nextSibling) body.appendChild(h3.nextSibling);
+    c.appendChild(body);
+    h3.style.cursor='pointer';
+    h3.innerHTML+=' <span class="xarrow" style="margin-left:auto;color:#C8BBA8;font-weight:900">▾</span>';
+    h3.addEventListener('click',function(){
+      var open=body.style.display==='none';
+      body.style.display=open?'block':'none';
+      var a=h3.querySelector('.xarrow'); if(a)a.textContent=open?'▴':'▾';
+    });
+  };
   function wb4Stage(){
     var tEl=document.getElementById('pomoTime'),mEl=document.getElementById('pomoMode'),st=document.getElementById('wb4stage');
     if(!tEl||!st)return;
@@ -23966,6 +24002,7 @@ window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doP
     else if(f<2/3){stage='c';}
     else{stage='b';}
     if(st.getAttribute('data-stage')!==stage)st.setAttribute('data-stage',stage);
+    try{ if(typeof window._wbExamFold==='function') window._wbExamFold(); }catch(e){}
   }
   function wb4Boot(){
     wb4InjectDefs();
@@ -24021,27 +24058,38 @@ window._wbQuickRenderButtons=function(){
     return '<button class="btn sm ol" onclick="go(\''+it.id+'\')" data-wq="'+it.id+'">'+it.ic+' '+it.label+'</button>';
   }).join('');
 };
+window._wbQuickToast=function(msg,type){ try{ if(typeof toast==='function') toast(msg,type||'',3000); }catch(e){} };
 window._wbQuickTogglePicker=function(){
-  var box=document.getElementById('wbQuickPicker'); if(!box) return;
-  if(box.style.display==='block'){ box.style.display='none'; return; }
+  var box=document.getElementById('wbQuickPicker');
+  if(!box){
+    box=document.createElement('div');
+    box.id='wbQuickPicker';
+    box.style.cssText='position:fixed;inset:0;z-index:1000000;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.42)';
+    box.addEventListener('click',function(e){ if(e.target===box) window._wbQuickTogglePicker(); });
+    document.body.appendChild(box);
+  }
+  if(box.style.display==='flex'){ box.style.display='none'; return; }
   var sel=window._wbQuickGet();
   var rows=window._wbQuickPool.map(function(it){
     var ok=window._wbQuickAllowed(it), on=sel.indexOf(it.id)>=0;
-    return '<label style="display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:'+(ok?(on?'var(--tr)':'var(--ink)'):'#c9beae')+';cursor:'+(ok?'pointer':'not-allowed')+'">'
+    return '<label style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:'+(ok?(on?'#C2410C':'#1c1917'):'#c9beae')+';cursor:'+(ok?'pointer':'not-allowed')+';background:'+(on?'#FFF3E8':'#fff')+';border:1px solid '+(on?'#F3D9C8':'#eee7dc')+';border-radius:10px;padding:8px 11px">'
       +'<input type="checkbox" data-wqk="'+it.id+'"'+(on?' checked':'')+(ok?'':' disabled')+'> '+it.ic+' '+it.label+(ok?'':' 🔒')+'</label>';
   }).join('');
-  box.innerHTML='<div style="border:1px dashed var(--am);border-radius:10px;padding:10px 12px;margin-top:10px;background:#fffdf8">'
-    +'<div style="font-size:11px;font-weight:700;color:var(--tr);margin-bottom:7px">勾选快捷入口（<b id="wbQuickCnt">'+sel.length+'</b>/6）· 带锁=未获管理员授权，开启后自动出现</div>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">'+rows+'</div>'
-    +'<div style="margin-top:8px;display:flex;gap:8px"><button class="btn sm" onclick="window._wbQuickSave()">保存</button>'
-    +'<button class="btn sm ol" onclick="window._wbQuickTogglePicker()">取消</button></div></div>';
-  box.style.display='block';
+  box.innerHTML='<div style="background:#FFFDF7;border:1px solid #F1E7D8;border-radius:16px;padding:18px 20px;width:min(560px,92vw);max-height:82vh;overflow:auto;box-shadow:0 18px 50px rgba(60,30,10,.3)">'
+    +'<div style="font-size:14px;font-weight:900;color:#0F172A;margin-bottom:4px">⚡ 自定义快捷操作</div>'
+    +'<div style="font-size:11px;font-weight:700;color:#C2410C;margin-bottom:10px">已选 <b id="wbQuickCnt">'+sel.length+'</b>/6 · 带锁🔒=管理员未开通该菜单，开通后自动出现在此列表</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">'+rows+'</div>'
+    +'<div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end"><button class="btn sm ol" onclick="window._wbQuickTogglePicker()">取消</button>'
+    +'<button class="btn sm" style="background:linear-gradient(135deg,#E05A2B,#C2410C);color:#fff;border:none" onclick="window._wbQuickSave()">保存</button></div></div>';
+  box.style.display='flex';
 };
 window._wbQuickSave=function(){
   var box=document.getElementById('wbQuickPicker'); if(!box) return;
   var sel=[]; box.querySelectorAll('input[data-wqk]:checked').forEach(function(i){ sel.push(i.getAttribute('data-wqk')); });
-  if(sel.length>6){ toast('最多选 6 个','err'); return; }
-  ST.dashQuick=sel; save(); renderMain(); toast('快捷配置已保存'+(ADB&&ADB.syncCfg?'，将云同步':''),'ok');
+  if(sel.length>6){ window._wbQuickToast('最多选 6 个','err'); return; }
+  ST.dashQuick=sel; save(); renderMain();
+  box.style.display='none';
+  window._wbQuickToast('快捷配置已保存'+(ADB&&ADB.syncCfg?'，将云同步':''),'ok');
 };
 window._wbDarkFoot=function(){
   return '<div class="wb-dark"><div class="in"><div style="flex:1"><h3>现在开始，让每一分钟备考都有回响。</h3>'
