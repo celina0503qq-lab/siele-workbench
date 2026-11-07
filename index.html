@@ -759,6 +759,13 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 .plan-card .btn.xs.t{background:linear-gradient(135deg,#E05A2B,#C2410C) !important;color:#fff !important;border:none !important;border-radius:99px !important;padding:5px 14px !important;font-weight:900 !important;box-shadow:0 3px 9px rgba(194,65,12,.25)}
 #wbQuickPicker{font-family:Inter,system-ui,sans-serif}
 #wbQuickPicker input[type=checkbox]{accent-color:#C2410C;width:15px;height:15px}
+/* ===== v98.3 排版重构 ===== */
+.pomo-card .pomo{justify-content:center !important;padding:10px 0 4px}
+.pomo-card .pomo .ring{width:118px;height:118px}
+.checkin-cal{margin-left:auto;margin-right:auto}
+.g2[style*="align-items:stretch"]>.card{display:flex;flex-direction:column}
+.g2[style*="align-items:stretch"]>.card>*{flex:0 0 auto}
+.g2[style*="align-items:stretch"]>.card>.checkin-cal{flex:1 1 auto;align-content:start}
 /* ===== v98.1c 番茄钟横排 + 时间外置 ===== */
 .pomo{flex-direction:row !important;text-align:left;gap:20px;height:auto;min-height:0;justify-content:flex-start}
 .pomo .ring{width:112px;height:112px;flex:none}
@@ -822,7 +829,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.2-202611080100';
+window.swVer = 'v98.3-202611080145';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2666,12 +2673,10 @@ function renderDash(){
     <div class="card stat" style="border-left:4px solid var(--m-quiz)"><div class="num">${quizAvg}<span style="font-size:14px">分</span></div><div class="lbl">测验均分</div><div class="sub">完成 ${quizDone} 次</div></div>
   </div>`;
 
-  // 能力雷达（统计卡之后，预览版布局：统计 → 雷达 → 待办）
-  h += renderAbilityRadar();
+  // v98.3: 雷达移至学习进度右侧；番茄钟独立整行
 
-  // Pomodoro + progress
-  h += `<div class="g g2" id="dashQuickAnchor">
-    <div class="card">
+  // Pomodoro（独立整行）
+  h += `<div class="card pomo-card" id="dashQuickAnchor" style="margin-bottom:18px">
       <h3><span class="ic">🍅</span>番茄钟</h3>
       <div class="pomo">
         <div class="ring">
@@ -2736,7 +2741,9 @@ function renderDash(){
         </div>
         <div class="ps"><div>今日🍅<br><b id="pomoCount" style="color:#d63b2a">${ST.pomodoro.completed}</b></div><div>总学习<br><b>${ST.totalStudy}分钟</b></div></div>
       </div>
-    </div>
+  </div>`;
+  // v98.3: 学习进度(左) + 能力雷达(右)
+  h += `<div class="g g2" style="align-items:stretch">
     <div class="card">
       <h3><span class="ic">📊</span>学习进度</h3>`;
 
@@ -2839,7 +2846,9 @@ function renderDash(){
   })();
   <\/script>`;
 
-  h += `</div></div>`;
+  h += `</div>`;
+  h += renderAbilityRadar();
+  h += `</div>`;
 
   // 今日待办区块已由 todoCardHtml 统一渲染（见文件末尾 renderDash 包装），此处不再重复。
   // Daily check-in calendar
@@ -2853,7 +2862,8 @@ function renderDash(){
   const monthNames = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
   const dayNames = ['日','一','二','三','四','五','六'];
 
-  h += `<div class="card" style="margin-top:14px">
+  h += `<div class="g g2" style="align-items:stretch">
+    <div class="card">
     <h3><span class="ic">📅</span>每日签到 · ${monthNames[mm]}</h3>
     <div class="checkin-cal">`;
   dayNames.forEach(d=>{ h += `<div class="day-hd">${d}</div>`; });
@@ -2872,6 +2882,8 @@ function renderDash(){
       <div style="font-size:11px;color:var(--soft);margin-top:4px">本月已签到 ${checked.size} 天</div>
     </div>
   </div>`;
+  h += window._wbPlanHtmlCache || '';
+  h += `</div>`;
 
   // Check if all daily todos done → show reward /* FEAT-2: date-keyed format */
   var _ttv = (ST.dailyTodos && typeof ST.dailyTodos==='object' && !Array.isArray(ST.dailyTodos)) ? (ST.dailyTodos[todayStr()] || []) : [];
@@ -23759,13 +23771,9 @@ if(typeof renderDash==='function'){
   var _rd0=renderDash;
   renderDash=function(){
     var h=_rd0();
-    /* v94.13: 复习计划卡插在雷达之后、番茄钟区（dashQuickAnchor）之前 */
+    /* v98.3: 复习计划卡改与「每日签到」并排（缓存供 renderDash 内配对使用） */
     var ph=planCardHtml();
-    if(ph){
-      var aq=h.indexOf('<div class="g g2" id="dashQuickAnchor">');
-      if(aq>=0)h=h.slice(0,aq)+ph+h.slice(aq);
-      else h+=ph;
-    }
+    if(ph){ window._wbPlanHtmlCache=ph; }
     var anchor='<div class="g g4"';
     var i=h.indexOf(anchor);
     if(i>=0)return h.slice(0,i)+todoCardHtml()+h.slice(i);
