@@ -716,6 +716,70 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 @media(max-width:900px){.wb-dark .in{flex-direction:column;align-items:flex-start}}
 .radar-cute{background:linear-gradient(150deg,#FFF8EE,#FFFDF7);border:1px solid #F1E7D8}
 .radar-cute svg{filter:drop-shadow(0 2px 6px rgba(194,65,12,.10))}
+/* ===== v98.1 倒计时 A 卡 + 考试结构米白化 ===== */
+.cdA{background:rgba(255,255,255,.97);border:1px solid #F1E7D8;border-radius:18px;padding:22px 28px;display:flex;align-items:center;gap:22px;min-height:172px;box-shadow:0 2px 14px rgba(120,60,40,.06);position:relative;overflow:hidden}
+.cdA:before{content:'';position:absolute;right:-60px;top:-60px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,#FFF3E8,transparent 70%)}
+.cdA .tagA{display:inline-block;background:#fef2f0;color:#C2410C;border-radius:8px;padding:3px 12px;font-size:12px;font-weight:900}
+.cdA .daysA{font-size:54px;font-weight:900;color:#C2410C;line-height:1;letter-spacing:-2px;margin-top:8px}
+.cdA .daysA small{font-size:14px;font-weight:800;color:#78716c;margin-left:8px;letter-spacing:0}
+.cdA .btnsA{margin-top:16px;display:flex;gap:9px}
+.cdA .pbarA{margin-top:16px;display:flex;align-items:center;gap:9px;font-size:10.5px;font-weight:800;color:#a8a29e;max-width:280px}
+.cdA .pbarA .bar{flex:1;height:6px;border-radius:99px;background:#F3E9D8;overflow:hidden}
+.cdA .pbarA .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#E05A2B,#C2410C)}
+.cdA .cdringA{position:relative;width:128px;height:128px;flex:none;margin-left:auto}
+.cdA .cdringA svg{transform:rotate(-90deg)}
+.cdA .rcA{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cdA .rcA b{font-size:26px;font-weight:900;line-height:1}
+.cdA .rcA span{font-size:9px;font-weight:800;margin-top:3px;letter-spacing:1px}
+.cdA .btn.gh{background:#fff;color:#B93A16;border:1px solid #F3D9C8;font-weight:800}
+.cdA .btn.gh:hover{background:#FFF7EA;border-color:#E05A2B;color:#C2410C;transform:translateY(-2px)}
+@media(max-width:900px){.cdA .cdringA{display:none}.cdA{padding:18px 20px}.cdA .daysA{font-size:40px}}
+#dashExamCard{background:linear-gradient(160deg,#FFFDF7,#FFF8EE);border:1px solid #F1E7D8}
+#dashExamCard h3{color:#0F172A}
+#dashExamCard .tbl th{color:#B45309;border-bottom:2px solid #F0DFC4;background:transparent}
+#dashExamCard .tbl td{border-bottom:1px dashed #F0E7D6;color:#44403C}
+#dashExamCard .tbl tr td:first-child{color:#9A3412;font-weight:800}
+/* ===== v98.1c 番茄钟横排 + 时间外置 ===== */
+.pomo{flex-direction:row !important;text-align:left;gap:20px;height:auto;min-height:0;justify-content:flex-start}
+.pomo .ring{width:112px;height:112px;flex:none}
+.pomo .wb4meta{position:static;inset:auto;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.pomo .wb4meta .t{font-size:30px;font-weight:900;color:#0F172A;text-shadow:none;font-family:'Inter',system-ui,sans-serif;letter-spacing:-1px;line-height:1}
+.pomo .wb4meta .m{font-size:10px;color:#a8a29e;text-shadow:none;letter-spacing:1px;margin-top:5px;text-transform:uppercase;font-weight:800}
+.pomo .pc{justify-content:flex-start;margin-top:0}
+.pomo .ps{justify-content:flex-start}
+.noDateA{font-size:15px;font-weight:900;color:#B45309;margin-top:14px;display:inline-block}
+/* ===== v98.1 番茄钟四阶段 + 日历美化 ===== */
+#tomatoSvg{visibility:hidden}
+.pomo .ring{position:relative}
+.wb4stage{position:absolute;inset:0;pointer-events:none}
+.wb4stage svg.arc4{position:absolute;inset:0;transform:rotate(-90deg)}
+.wb4stage .wlayer{position:absolute;left:13%;top:13%;width:74%;height:74%;opacity:0;transform:scale(.9);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.34,1.45,.64,1)}
+.wb4stage[data-stage="a"] .wla,.wb4stage[data-stage="c"] .wlc,
+.wb4stage[data-stage="b"] .wlb,.wb4stage[data-stage="d"] .wld{opacity:1;transform:none}
+.wb4stage[data-stage="d"] .wld{animation:wbpop .6s cubic-bezier(.34,1.5,.64,1)}
+@keyframes wbpop{0%{transform:scale(.55) rotate(-16deg)}60%{transform:scale(1.08) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+.wb4stage .wburst{position:absolute;inset:0;opacity:0}
+.wb4stage[data-stage="d"] .wburst{opacity:1}
+.wb4stage .wburst i{position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,#FF7A4E 55%,#C8200F);opacity:0}
+.wb4stage[data-stage="d"] .wburst i{animation:wbsp .8s cubic-bezier(.2,.7,.3,1) forwards}
+.wb4stage[data-stage="d"] .wburst i:nth-child(1){--x:-34px;--y:-20px;animation-delay:.02s}
+.wb4stage[data-stage="d"] .wburst i:nth-child(2){--x:30px;--y:-24px;animation-delay:.06s}
+.wb4stage[data-stage="d"] .wburst i:nth-child(3){--x:-24px;--y:22px;animation-delay:.1s}
+.wb4stage[data-stage="d"] .wburst i:nth-child(4){--x:34px;--y:14px;animation-delay:.04s}
+.wb4stage[data-stage="d"] .wburst i:nth-child(5){--x:0;--y:-30px;animation-delay:.08s}
+@keyframes wbsp{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}35%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.75)}}
+.wb4meta .t{font-size:30px;font-weight:900;color:#0F172A;font-variant-numeric:tabular-nums;letter-spacing:-1px;line-height:1;display:block}
+.wb4stage[data-stage="d"] ~ * .t, .wb4meta.donest .t{color:#15803d}
+.checkin-cal .day-cell{border-radius:9px;background:#FAF3E8}
+.checkin-cal .day-cell.checked{background:#FFF1E7;color:#C2410C;box-shadow:none;font-weight:900}
+.checkin-cal .day-cell.checked::after{content:'✓';position:absolute;right:3px;top:1px;font-size:8px;color:#E05A2B}
+.checkin-cal .day-cell.today{border:2px solid #E05A2B;background:linear-gradient(135deg,#E05A2B,#C2410C);color:#fff;box-shadow:0 3px 8px rgba(194,65,12,.3)}
+.checkin-cal .day-hd{color:#B8AB98}
+.quick-grid .btn{background:#FFF7EA;border:1px solid #F3E3C8;border-radius:99px;color:#9A5B3C;font-weight:800}
+.quick-grid .btn:hover{background:#fff;border-color:#E05A2B;color:#C2410C}
 </style>
 </head>
 <body>
@@ -738,7 +802,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.0-202611070130';
+window.swVer = 'v98.1-202611080030';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2549,14 +2613,25 @@ function renderDash(){
     </div>
   </div>`;
 
-  // Hero countdown
-  h += `<div class="hero" style="margin-bottom:18px;position:relative;overflow:hidden"><span class="dashwm">SIELE<small>ÁNIMO</small></span>
-    <div class="hero-r">
-      <div>
-        <div class="tag">${ST.examType.toUpperCase()} · ${ST.targetLevel}</div>
-        ${daysLeft !== null ? `<div class="cd"><span class="big">${daysLeft}</span><span class="u">天后考试</span></div>` : `<div class="cd"><span class="big">—</span><span class="u">请设置考试日期</span></div>`}
-      </div>
-      <div class="pc"><button class="btn gh" onclick="go('flash')">开始背词</button><button class="btn gh" onclick="go('quiz')">开始测验</button></div>
+  // Hero countdown — v98.1 A 版倒计时卡（白卡+赭红大数字+描边环+SIELE 水印）
+  const _ringPct = daysLeft !== null ? Math.max(0.02, Math.min(1, daysLeft / 60)) : 0;
+  h += `<div class="cdA" style="margin-bottom:18px">
+    <span class="dashwm">SIELE<small>ÁNIMO</small></span>
+    <div style="position:relative;min-width:0">
+      <span class="tagA">${ST.examType.toUpperCase()} · ${ST.targetLevel}</span>
+      ${daysLeft !== null
+        ? `<div class="daysA">${daysLeft}<small>天后考试</small></div>`
+        : `<div class="noDateA">📅 请先设置考试日期</div>`}
+      <div class="btnsA"><button class="btn gh" onclick="go('flash')">开始背词</button><button class="btn gh" onclick="go('quiz')">开始测验</button></div>
+      <div class="pbarA"><span>备考进度</span><div class="bar"><i style="width:${daysLeft !== null ? Math.max(3, Math.round((1 - daysLeft / 60) * 100)) : 3}%"></i></div></div>
+    </div>
+    <div class="cdringA">
+      <svg width="128" height="128" viewBox="0 0 116 116">
+        <circle cx="58" cy="58" r="50" fill="none" stroke="#EBDCC2" stroke-width="10"/>
+        <circle cx="58" cy="58" r="50" fill="none" stroke="url(#wbRingFocus)" stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="314.2" stroke-dashoffset="${(314.2 * (1 - _ringPct)).toFixed(1)}"/>
+      </svg>
+      <div class="rcA"><b style="color:#C2410C">${daysLeft !== null ? daysLeft : '—'}</b><span style="color:#a8a29e">剩余天数</span></div>
     </div>
   </div>`;
 
@@ -2620,6 +2695,18 @@ function renderDash(){
             <path d="M75 42 q-10 -16 -26 -13 q14 -2 18 8 q-14 -2 -16 6 q13 -1 15 7 q11 -7 9 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
             <path d="M76 43 q6 -14 20 -16 q-12 4 -13 12 q10 -1 11 7 q-10 -2 -14 5 q-3 -6 -4 -8 Z" fill="url(#tomatoLeaf)" stroke="#1f4d22" stroke-width="1"/>
           </svg>
+          <div class="wb4stage" data-stage="a" id="wb4stage">
+            <svg class="arc4" viewBox="0 0 116 116" preserveAspectRatio="none" style="width:100%;height:100%">
+              <circle cx="58" cy="58" r="52" fill="none" stroke="#F3E9D8" stroke-width="8"/>
+              <circle class="wb4prog" cx="58" cy="58" r="52" fill="none" stroke="url(#wbRingFocus)" stroke-width="8"
+                      stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+            </svg>
+            <svg class="wlayer wla" viewBox="0 0 64 64"><use href="#wbTomA"/></svg>
+            <svg class="wlayer wlc" viewBox="0 0 64 64"><use href="#wbTomC"/></svg>
+            <svg class="wlayer wlb" viewBox="0 0 64 64"><use href="#wbTomB"/></svg>
+            <svg class="wlayer wld" viewBox="0 0 64 64"><use href="#wbTomD"/></svg>
+            <span class="wburst"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
           <div class="rt"><span class="t" id="pomoTime">25:00</span><span class="m" id="pomoMode">专注</span></div>
         </div>
         <div class="pc">
@@ -23795,6 +23882,113 @@ document.addEventListener('visibilitychange',function(){
 window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(true);});
 window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doPush();}});
 
+/* ===== v98.1 番茄钟四阶段可视化（零逻辑侵入：观测既有 #pomoTime/#pomoMode 文本） ===== */
+(function(){
+  function wb4InjectDefs(){
+    if(document.getElementById('wb98defs'))return;
+    var d=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    d.setAttribute('id','wb98defs');d.setAttribute('width','0');d.setAttribute('height','0');
+    d.style.position='absolute';
+    d.innerHTML='<defs>'
+      +'<linearGradient id="wbRingFocus" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F08A5D"/><stop offset="0.55" stop-color="#E05A2B"/><stop offset="1" stop-color="#B93A16"/></linearGradient>'
+      +'<linearGradient id="wbRingBreak" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FD3A6"/><stop offset="1" stop-color="#2F7D5B"/></linearGradient>'
+      +'<linearGradient id="wbLeafG" x1="0" y1="0" x2=".45" y2="1"><stop offset="0" stop-color="#8ECF76"/><stop offset="1" stop-color="#2A6327"/></linearGradient>'
+      +'<filter id="wbSoft" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="1.4"/></filter>'
+      +'<path id="wbBodyShape" d="M32 9C40 9 48 12.5 53 18.5C58 24.5 60 30 60 35.5C60 47 47 59 32 59C17 59 4 47 4 35.5C4 30 6 24.5 11 18.5C16 12.5 24 9 32 9Z"/>'
+      +'<g id="wbCalyx"><ellipse cx="32" cy="11.5" rx="9" ry="3" fill="#4A160A" opacity=".24" filter="url(#wbSoft)"/>'
+      +'<g fill="url(#wbLeafG)"><path d="M32 11C36 5.5 43 3.5 49 6C45.5 11.5 38.5 13 32 11Z" transform="rotate(62 32 11)"/>'
+      +'<path d="M32 11C36 5.5 43 3.5 49 6C45.5 11.5 38.5 13 32 11Z" transform="rotate(28 32 11)"/>'
+      +'<path d="M32 11C36 5.5 43 3.5 49 6C45.5 11.5 38.5 13 32 11Z" transform="rotate(-8 32 11)scale(1.06)translate(-2 -1)"/>'
+      +'<path d="M32 11C36 5.5 43 3.5 49 6C45.5 11.5 38.5 13 32 11Z" transform="rotate(-44 32 11)"/>'
+      +'<path d="M32 11C36 5.5 43 3.5 49 6C45.5 11.5 38.5 13 32 11Z" transform="rotate(-78 32 11)"/></g>'
+      +'<path d="M30.8 11.6h2.6l-.9 3.4h-.9z" fill="#427037"/></g>'
+      +'<radialGradient id="wbBA" cx="34%" cy="24%" r="84%"><stop offset="0" stop-color="#FF9068"/><stop offset="0.32" stop-color="#F04E2A"/><stop offset="0.68" stop-color="#C8200F"/><stop offset="1" stop-color="#8A0F05"/></radialGradient>'
+      +'<radialGradient id="wbBC" cx="44%" cy="60%" r="74%"><stop offset="0" stop-color="#FF8A5E"/><stop offset="0.45" stop-color="#EC4426"/><stop offset="0.85" stop-color="#B4160A"/><stop offset="1" stop-color="#8E0E05"/></radialGradient>'
+      +'<radialGradient id="wbBB" cx="33%" cy="22%" r="88%"><stop offset="0" stop-color="#FF9C74"/><stop offset="0.3" stop-color="#F4502B"/><stop offset="0.66" stop-color="#CB1F0E"/><stop offset="1" stop-color="#7E0C04"/></radialGradient>'
+      +'<radialGradient id="wbBD" cx="42%" cy="34%" r="66%"><stop offset="0" stop-color="#FF9E7B"/><stop offset="0.45" stop-color="#F1543A"/><stop offset="0.8" stop-color="#D92D18"/><stop offset="1" stop-color="#B01B0C"/></radialGradient>'
+      +'<linearGradient id="wbSA" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".92"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+      +'<linearGradient id="wbDB" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".55" stop-color="#FFD9C9" stop-opacity=".55"/><stop offset="1" stop-color="#E8603A" stop-opacity=".35"/></linearGradient>'
+      +'<linearGradient id="wbRD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8603F"/><stop offset=".5" stop-color="#C8200F"/><stop offset="1" stop-color="#8E0E05"/></linearGradient>'
+      +'<g id="wbTomA"><ellipse cx="32" cy="60.5" rx="18" ry="3.2" fill="#8A0F05" opacity=".2" filter="url(#wbSoft)"/>'
+      +'<use href="#wbBodyShape" fill="url(#wbBA)"/>'
+      +'<ellipse cx="21" cy="18" rx="11.5" ry="6.6" transform="rotate(-26 21 18)" fill="url(#wbSA)" filter="url(#wbSoft)"/>'
+      +'<circle cx="43" cy="14.5" r="2.4" fill="#fff" opacity=".5"/>'
+      +'<path d="M12 46C16 54.5 23.5 58.6 32 58.8" stroke="#FFB49B" stroke-width="2.6" fill="none" opacity=".5" stroke-linecap="round" filter="url(#wbSoft)"/>'
+      +'<use href="#wbCalyx"/></g>'
+      +'<g id="wbTomC"><ellipse cx="32" cy="60.5" rx="18" ry="3.2" fill="#8E0E05" opacity=".16" filter="url(#wbSoft)"/>'
+      +'<use href="#wbBodyShape" fill="url(#wbBC)"/>'
+      +'<ellipse cx="20.5" cy="17" rx="9.5" ry="5" transform="rotate(-24 20.5 17)" fill="#fff" opacity=".72" filter="url(#wbSoft)"/>'
+      +'<path d="M10.5 43C15 53 22.5 58.4 32 58.6" stroke="#FFD2BE" stroke-width="4" fill="none" opacity=".45" stroke-linecap="round" filter="url(#wbSoft)"/>'
+      +'<use href="#wbBodyShape" fill="none" stroke="#FFB79C" stroke-width=".9" opacity=".5"/>'
+      +'<use href="#wbCalyx"/></g>'
+      +'<g id="wbTomB"><ellipse cx="32" cy="61" rx="19" ry="3.4" fill="#7E0C04" opacity=".22" filter="url(#wbSoft)"/>'
+      +'<use href="#wbBodyShape" fill="url(#wbBB)"/>'
+      +'<ellipse cx="21" cy="17.5" rx="12" ry="7" transform="rotate(-26 21 17.5)" fill="url(#wbSA)" filter="url(#wbSoft)"/>'
+      +'<circle cx="44" cy="15" r="2.6" fill="#fff" opacity=".6"/>'
+      +'<path d="M11.5 45C15.5 54 23 58.6 32 58.8" stroke="#FFC0AA" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round" filter="url(#wbSoft)"/>'
+      +'<ellipse cx="50.5" cy="27" rx="3.6" ry="4.4" fill="url(#wbDB)" opacity=".9"/>'
+      +'<ellipse cx="16" cy="33" rx="3" ry="3.7" fill="url(#wbDB)" opacity=".85"/>'
+      +'<ellipse cx="41" cy="50" rx="2.6" ry="3.2" fill="url(#wbDB)" opacity=".8"/>'
+      +'<path d="M32 57c1.9 0 3.2 1.6 3.2 3.4 0 1.9-1.4 3.4-3.2 3.4s-3.2-1.5-3.2-3.4c0-1.8 1.3-3.4 3.2-3.4z" fill="url(#wbDB)" opacity=".8"/>'
+      +'<use href="#wbCalyx"/></g>'
+      +'<g id="wbTomD"><ellipse cx="32" cy="58" rx="25" ry="4" fill="#8E0E05" opacity=".16" filter="url(#wbSoft)"/>'
+      +'<circle cx="32" cy="32" r="26" fill="url(#wbBD)"/>'
+      +'<circle cx="32" cy="32" r="26" fill="none" stroke="url(#wbRD)" stroke-width="4.2"/>'
+      +'<circle cx="32" cy="32" r="23.6" fill="none" stroke="#FFD9C6" stroke-width=".9" opacity=".5"/>'
+      +'<g stroke="#FBBFA8" stroke-width=".7" opacity=".5" fill="none"><path d="M32 10v13"/><path d="M32 41v13"/><path d="M10 32h13"/><path d="M41 32h13"/><path d="M17 17l9 9"/><path d="M47 17l-9 9"/><path d="M17 47l9-9"/><path d="M47 47l-9-9"/></g>'
+      +'<g fill="#FCEBC8" opacity=".92"><ellipse cx="32" cy="20" rx="2.1" ry="3.1" transform="rotate(8 32 20)"/><ellipse cx="41" cy="26" rx="2.1" ry="3" transform="rotate(52 41 26)"/><ellipse cx="43" cy="37" rx="2.1" ry="3" transform="rotate(122 43 37)"/><ellipse cx="32" cy="44" rx="2.1" ry="3.1"/><ellipse cx="21" cy="38" rx="2.1" ry="3" transform="rotate(-58 21 38)"/><ellipse cx="22" cy="25" rx="2.1" ry="3" transform="rotate(-128 22 25)"/></g>'
+      +'<circle cx="42" cy="20" r="1.8" fill="#fff" opacity=".35"/></g>'
+      +'</defs>';
+    document.body.appendChild(d);
+  }
+  function wb4Stage(){
+    var tEl=document.getElementById('pomoTime'),mEl=document.getElementById('pomoMode'),st=document.getElementById('wb4stage');
+    if(!tEl||!st)return;
+    try{
+      var ringEl=st.parentNode;                      /* .pomo .ring */
+      var rtEl=ringEl.querySelector('.rt');
+      if(rtEl){ ringEl.parentNode.insertBefore(rtEl,ringEl.nextSibling); rtEl.classList.add('wb4meta'); }
+    }catch(e){}
+    var parts=(tEl.textContent||'25:00').split(':');
+    var remain=(parseInt(parts[0],10)||0)*60+(parseInt(parts[1],10)||0);
+    var isBreak=(mEl&&mEl.textContent.indexOf('休息')>=0);
+    var total=isBreak?300:1500;
+    var pct=Math.max(0,Math.min(1,remain/total)),f=1-pct;
+    var prog=st.querySelector('.wb4prog');
+    if(prog){
+      prog.setAttribute('stroke',isBreak?'url(#wbRingBreak)':'url(#wbRingFocus)');
+      prog.style.strokeDashoffset=String(326.7*(1-f));
+    }
+    var stage;
+    if(isBreak){stage='a';}
+    else if(remain<=0){stage='d';}
+    else if(f<1/3){stage='a';}
+    else if(f<2/3){stage='c';}
+    else{stage='b';}
+    if(st.getAttribute('data-stage')!==stage)st.setAttribute('data-stage',stage);
+  }
+  function wb4Boot(){
+    wb4InjectDefs();
+    try{
+      var ringEl=document.querySelector('.pomo .ring');
+      var rtEl=document.querySelector('.pomo .ring .rt');
+      if(ringEl&&rtEl&&rtEl.parentNode===ringEl){
+        ringEl.parentNode.insertBefore(rtEl,ringEl.nextSibling);
+        rtEl.classList.add('wb4meta');
+      }
+    }catch(e){}
+    var tEl=document.getElementById('pomoTime'),mEl=document.getElementById('pomoMode');
+    if(window._wb4mo){try{window._wb4mo.disconnect();}catch(e){}}
+    /* 观察整个 body（委托式）：renderMain 重渲染会替换 #pomoTime 节点，绑 body 才能免疫 */
+    var mo=new MutationObserver(wb4Stage);
+    mo.observe(document.body,{childList:true,subtree:true});
+    window._wb4mo=mo;
+    wb4Stage();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wb4Boot);
+  else setTimeout(wb4Boot,300);
+  setTimeout(wb4Boot,2000);setTimeout(wb4Boot,5000);
+})();
 /* ===== v98.0 仪表盘快捷配置（0-6 · 权限过滤 · 云同步漫游） ===== */
 window._wbQuickPool=[
   {id:'flash',ic:'🃏',label:'背单词'},{id:'quiz',ic:'✏️',label:'做测验'},{id:'grammar',ic:'📐',label:'学语法'},
