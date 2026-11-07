@@ -692,6 +692,31 @@ body{background:var(--c-bg)}
 @keyframes lnFadeup{to{opacity:1;transform:none}}
 
 </style>
+<style id="wb980skin">
+/* ===== v98.0 仪表盘新外壳皮肤（最后加载以覆盖） ===== */
+body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
+.topnav{background:rgba(255,252,246,.92);backdrop-filter:blur(6px)}
+.card{background:rgba(255,255,255,.96)}
+.card:hover{box-shadow:0 10px 30px rgba(120,60,40,.12)}
+.btn,button.btn,.chip{transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.btn:hover,button.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(120,60,40,.14)}
+.btn:active,button.btn:active{transform:translateY(1px) scale(.94)}
+.g4 .card.stat{border:1px solid #F1E7D8}
+.g4 .card.stat:nth-child(1){background:linear-gradient(150deg,#FFF6EF,#FFEFE2)}
+.g4 .card.stat:nth-child(2){background:linear-gradient(150deg,#F2FBF7,#E7F6EE)}
+.g4 .card.stat:nth-child(3){background:linear-gradient(150deg,#FFF9EC,#FFF3DA)}
+.g4 .card.stat:nth-child(4){background:linear-gradient(150deg,#F3F7FF,#E9F0FD)}
+.dashwm{position:absolute;right:16px;bottom:-14px;font-family:Georgia,'Songti SC',serif;font-weight:900;font-size:84px;letter-spacing:6px;color:rgba(194,65,12,.07);pointer-events:none;user-select:none;line-height:1}
+.dashwm small{display:block;font-size:12px;letter-spacing:10px;color:rgba(194,65,12,.10);text-align:center}
+@media(max-width:900px){.dashwm{font-size:52px;right:6px;bottom:-8px}}
+.wb-dark{background:radial-gradient(ellipse at 20% 0%,rgba(194,65,12,.22),transparent 50%),#141618;padding:44px 0;margin-top:26px}
+.wb-dark .in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:26px}
+.wb-dark h3{font-family:Georgia,'Songti SC',serif;font-size:22px;font-weight:800;color:#fff;flex:1;line-height:1.45}
+.wb-dark p{font-size:12.5px;color:#94A3B8;margin-top:7px}
+@media(max-width:900px){.wb-dark .in{flex-direction:column;align-items:flex-start}}
+.radar-cute{background:linear-gradient(150deg,#FFF8EE,#FFFDF7);border:1px solid #F1E7D8}
+.radar-cute svg{filter:drop-shadow(0 2px 6px rgba(194,65,12,.10))}
+</style>
 </head>
 <body>
 <div class="app">
@@ -713,7 +738,7 @@ body{background:var(--c-bg)}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v97.26-202611051830';
+window.swVer = 'v98.0-202611070130';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2381,7 +2406,7 @@ function renderMain(){
       _syncB = '<div style="background:' + (_w ? '#fef2f2' : '#fff7ed') + ';border:1px solid ' + (_w ? '#fca5a5' : '#fdba74') + ';color:' + (_w ? '#991b1b' : '#9a3412') + ';padding:8px 12px;border-radius:9px;margin-bottom:10px;font-size:12px;line-height:1.6"><b>' + (_w ? '⚠️ 云同步异常' : '📶 网络提示') + '</b> ' + _sb.text + '</div>';
     }
   }catch(e){}
-  main.innerHTML = _dsBanner + _syncB + h + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
+  main.innerHTML = _dsBanner + _syncB + h + (currentPage==='dash' && typeof _wbDarkFoot==='function' ? _wbDarkFoot() : '') + '<footer>西语备考工作台 ' + (window.swVer||"v75-2026100403") + ' · 数据本地存储 · 词汇/语法/题库/SIELE专项/外刊阅读/错题集/每日计划 · 整合百度网盘资料<br>¡Mucha suerte en tu examen!</footer>';
   // DELE 子页面兜底: renderMain 走 default 后, 用 _commitDeleSubPage 真正写入 DOM
   if (typeof currentPage === 'string' && /^dele(A[12]|B[12])_(reading|listening|writing|speaking|oral|mock)$/.test(currentPage)) {
     var _holder = document.getElementById('__dele_sub_holder');
@@ -2514,7 +2539,7 @@ function renderDash(){
   const quizAvg = quizDone > 0 ? Math.round(ST.quizResults.reduce((a,b)=>a+b,0)/quizDone) : 0;
   const daysLeft = ST.examDate ? Math.ceil((new Date(ST.examDate) - new Date(todayStr())) / 86400000) : null;
 
-  let h = `<div class="tb"><div><h2>¡Hola! 学习仪表盘</h2><div class="d">今天是 ${new Date().toLocaleDateString('zh-CN')} · 坚持 ${ST.streak} 天</div></div>
+  let h = `<div class="tb"><div><h2>¡Hola, ${(function(){try{var _u=((JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'))||{}).username||'Amigo';return String(_u).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}catch(e){return 'Amigo';}})()}! <span style="font-size:13px;color:var(--soft);font-weight:600">学习仪表盘</span></h2><div class="d">今天是 ${new Date().toLocaleDateString('zh-CN')} · 坚持 ${ST.streak} 天</div></div>
     <div class="hero-c">
       <div><label>考试类型</label><select onchange="setExamType(this.value)"><option ${ST.examType==='dele'?'selected':''}>DELE</option><option ${ST.examType==='siele'?'selected':''}>SIELE</option></select></div>
       <div><label>目标等级</label><select onchange="setTargetLevel(this.value)"><option ${ST.targetLevel==='A1'?'selected':''}>A1</option><option ${ST.targetLevel==='A2'?'selected':''}>A2</option><option ${ST.targetLevel==='B1'?'selected':''}>B1</option><option ${ST.targetLevel==='B2'?'selected':''}>B2</option></select></div>
@@ -2525,7 +2550,7 @@ function renderDash(){
   </div>`;
 
   // Hero countdown
-  h += `<div class="hero" style="margin-bottom:18px">
+  h += `<div class="hero" style="margin-bottom:18px;position:relative;overflow:hidden"><span class="dashwm">SIELE<small>ÁNIMO</small></span>
     <div class="hero-r">
       <div>
         <div class="tag">${ST.examType.toUpperCase()} · ${ST.targetLevel}</div>
@@ -2869,7 +2894,7 @@ function renderAbilityRadar(){
   const rows = dims.map(function(d,i){
     return '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:30px;color:var(--soft)">'+d.label+'</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:'+(vals[i]==null?0:vals[i])+'%;background:'+d.color+';border-radius:3px"></i></div><b style="width:28px;text-align:right">'+(vals[i]==null?'—':vals[i])+'</b></div>';
   }).join('');
-  return '<div class="card" style="margin-top:14px;border-left:4px solid var(--am)"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">六维 · 基于真实学习数据 · 练习后自动更新</span></h3>'+
+  return '<div class="card radar-cute" style="margin-top:14px"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">六维 · 基于真实学习数据 · 练习后自动更新</span></h3>'+
     '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div>'+
     '<div style="font-size:10.5px;color:var(--soft);margin-top:8px;line-height:1.7">📌 各维算法：<b>词汇</b>=已学词数÷总词库｜<b>语法</b>=已完成语法点÷总点数｜<b>跟读</b>=跟读平均分｜<b>测验</b>=测验平均分｜<b>口语</b>=各题最高分平均｜<b>纠错力</b>=错题集已掌握占比。练习后实时更新并随云端同步。</div></div>';
 }
@@ -22276,7 +22301,8 @@ function serializeCloud(db){
   var seedW={},seedQ={},words=[],questions=[];
   db.words.forEach(function(w){if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   db.questions.forEach(function(q){if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),
+  /* v98.0: 快捷配置随云端载荷上下行 */
+    return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),dashQuick:(Array.isArray(db.dashQuick)?db.dashQuick.slice(0,6):null),
     /* v94.15: 全局重置水线随云端记录顶层上行——晚到设备 pull 时强制对齐，杜绝旧进度复活 */
     resetEpoch:(function(){try{return _vocabResetFloor();}catch(e){return Number(ST.vocabResetAt||0);}})(),
     settings:db.settings,seedW:seedW,seedQ:seedQ,words:words,questions:questions,reviews:db.reviews,plans:db.plans,trash:db.trash,wb:db.wb||null};
@@ -22300,6 +22326,8 @@ function mergeData(db,remote){
       try{if(db)db.wb={ts:Date.now(),data:wbSnap()};}catch(e){}
     }
   }catch(_reErr){}
+  /* v98.0: 快捷配置漫游（远端有数组则采用；缺省不覆盖本地） */
+  try{ if(Array.isArray(remote.dashQuick)) db.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
   var trash=Object.assign({},db.trash);
   Object.entries(remote.trash||{}).forEach(function(kv){if(!trash[kv[0]]||kv[1]>trash[kv[0]])trash[kv[0]]=kv[1];});
   db.trash=trash;
@@ -22402,6 +22430,8 @@ window._qrMergePairs = function(lp, lt, rp, rt){
 /* ---------- ADB → ST（吸收后台/云端的更新） ---------- */
 function hydrate(){
   if(!AU||!ADB)return;
+  /* v98.0: 快捷配置漫游——本机 ADB 已有则采用（远端 pull 落到 ADB 后同样经此生效） */
+  try{ if(Array.isArray(ADB.dashQuick)) ST.dashQuick=ADB.dashQuick.slice(0,6); }catch(e){}
   var changed=false;
   var _reH=(ADB.wb&&ADB.wb.data)?Number(ADB.wb.data.vocabResetAt||0):0;
   if(_reH>_vocabResetFloor()){
@@ -22528,7 +22558,7 @@ function calcSig(){
   // 外刊精炼做题记录 + 笔记（存独立 localStorage，需纳入签名才能触发 push）
   var refineSig='';
   try{ if(typeof RefineQuizDB!=='undefined') refineSig=JSON.stringify(RefineQuizDB.load()); }catch(e){}
-  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPraIdxByLevel,ST.flashPraIdxTs,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig,(ST.wexamLast&&ST.wexamLast.at)||0,ST.flashPraResetAt||0]);
+  return JSON.stringify([ST.vocabMastery,ST.flashIdx,ST.flashLevel,ST.flashCurrentWord,ST.flashProgressByLevel,ST.flashPraIdxByLevel,ST.flashPraIdxTs,ST.flashPronunciation,ST.globalAccent,ST.vocabReviewCount,ST.vocabDictation,ST.flashReviewSession,ST.recentlyStudiedWords,ST.grammarDone,ST.grammarDoneTs,ST.errors,ST.tasks,ST.dailyTasks,ST.streak,ST.totalStudy,ST.quizResults,ST.shadowScores,ST.refineShadowScores,oralSig,ST.sieleOralProgress,ST.readingProgress,ST.examDate,ST.examType,ST.targetLevel,ST.pomodoro&&ST.pomodoro.completed,ST.dictationErrorBank,ST.refineQuizState,refineSig,ST.conjNotes,ST.conjRecent,writingSig,speakSig,(ST.wexamLast&&ST.wexamLast.at)||0,ST.flashPraResetAt||0,(Array.isArray(ST.dashQuick)?ST.dashQuick.join('|'):'')]);
 }
 function wbSnap(){
   var c=Object.assign({},ST);
@@ -22647,6 +22677,9 @@ function doPush(){
     dirty=true;
   }
   MIR.qn=qr.length;
+  /* v98.0: 快捷配置云同步（增量守卫：数组不变不 dirty，绝不影响既有字段） */
+  var _dq=Array.isArray(ST.dashQuick)?ST.dashQuick.slice(0,6):null;
+  if(_dq&&JSON.stringify(_dq)!==JSON.stringify(MIR.dq||null)){ADB.dashQuick=_dq;MIR.dq=JSON.stringify(_dq);dirty=true;}
   // Sync quiz question completion to admin DB.questions
   var qlog = ST.quizAnsweredLog || [];
   if(qlog.length > (MIR.qlogLen||0)){
@@ -22788,6 +22821,9 @@ function mergeWbSnapshot(remote, wbTs){
     /* v95.41: flipRated 存量回填——vocabMastery 已评而 flipRated 缺的词补 0（时间未知；floor=0 不排除，将来重置 floor>0 自动排除=重置语义正确），幂等 */
     try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   }
+  /* v98.0: 快捷配置跨设备漫游（mergeData 已写 ADB.dashQuick；此处同步 ST 供本次渲染） */
+  try{ if(Array.isArray(remote.dashQuick)) ST.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
+  try{ if(Array.isArray(remote.dashQuick) && typeof ADB!=='undefined' && ADB) ADB.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
   if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
   if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
     ST.flashPronunciation=ST.flashPronunciation||{};
@@ -23577,13 +23613,12 @@ function todoCardHtml(){
     })();
     var done=tasks.filter(function(t){return t.done;}).length;
     var pct=tasks.length?Math.round(done/tasks.length*100):0;
-    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['reading','📰','外刊'],['dele','📝','DELE']].filter(function(_q){return _q[0]!=='admin'||(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin());})
-      .map(function(q){return '<button class="btn sm ol" onclick="go(\''+q[0]+'\')">'+q[1]+' '+q[2]+'</button>';}).join('');
-    // 附加云同步入口（弹窗而非路由跳转）
+    /* v98.0: 快捷操作 0-6 自选（挑选池=页面跳转类14项+权限过滤；配置随账号云同步） */
+    var quick = (typeof window._wbQuickRenderButtons==='function') ? window._wbQuickRenderButtons() : '';
+    quick += '<button class="btn sm ol" onclick="window._wbQuickTogglePicker()" id="wbQuickEditBtn">✏️ 编辑快捷</button>';
     quick += '<button class="btn sm ol" onclick="exportData_()" title="把学习进度导出为 JSON 备份文件（防丢失）">📥 导出备份</button>';
     quick += '<button class="btn sm ol" onclick="importDataPrompt_()" title="从备份 JSON 文件恢复学习进度">📤 导入备份</button>';
     quick += '<button class="btn sm ol" onclick="openSyncSettings()" title="云同步 · 学习数据/做题记录跨设备同步">☁️ 云同步</button>';
-    quick += '<button class="btn sm ol" onclick="wbLogout()" title="退出当前账号 · 本机学习数据保留">🚪 退出登录</button>';
     var lis=tasks.map(function(t,i){
       return '<li class="'+(t.done?'done':'')+'" style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,.06)'+(t.done?';opacity:.55':'')+'">'+
         '<input type="checkbox" '+(t.done?'checked':'')+' onchange="toggleDailyTodo('+i+')">'+
@@ -23599,19 +23634,18 @@ function todoCardHtml(){
         (done===tasks.length&&tasks.length?'<div class="note" style="margin-top:8px"><b>🎉 今日全部完成！</b></div>':'')+
       '</div>'+
       '<div class="card">'+
-        '<h3><span class="ic">⚡</span>快捷操作</h3>'+
+        '<h3><span class="ic">⚡</span>快捷操作<span style="margin-left:auto;font-size:10.5px;color:var(--soft);font-weight:400">0-6 个 · 点「编辑快捷」自定义</span></h3>'+
         '<div class="quick-grid">'+quick+'</div>'+
+        '<div id="wbQuickPicker" style="display:none"></div>'+
         '<div class="note" style="margin-top:12px;font-size:11.5px">'+(AU?('👤 已登录 <b>'+escB(AU)+'</b>，背词/刷题进度自动汇入后台'+(ADB&&ADB.syncCfg?'并同步到云端 ☁️':'，可在「后台管理 → 云同步」开启跨设备同步')):'⚠️ 尚未登录：进度仅存本机。<a href="javascript:void(0)" onclick="go(\'admin\')" style="color:var(--tr);font-weight:700">去登录 →</a>')+'</div>'+
       '</div></div>';
   }catch(e){
     console.warn('todoCardHtml error:',e);
     // 出错时仍渲染快捷操作卡，确保仪表盘不缺失
-    var quick=[['flash','🃏','背单词'],['quiz','✏️','做测验'],['grammar','📐','学语法'],['shadow','🎤','跟读'],['errors','🚨','错题集'],['planner','📅','学习计划'],['admin','⚙️','后台管理'],['resources','🔗','资源推荐'],['reading','📰','外刊'],['dele','📝','DELE']].filter(function(_q){return _q[0]!=='admin'||(typeof window._deleIsAdmin==='function'&&window._deleIsAdmin());})
-      .map(function(q){return '<button class=\"btn sm ol\" onclick=\"go(\''+q[0]+'\')\">'+q[1]+' '+q[2]+'</button>';}).join('');
+    var quick = (typeof window._wbQuickRenderButtons==='function') ? window._wbQuickRenderButtons() : '';
     quick += '<button class=\"btn sm ol\" onclick=\"exportData_()\" title=\"导出备份\">📥 导出备份</button>';
     quick += '<button class=\"btn sm ol\" onclick=\"importDataPrompt_()\" title=\"导入备份\">📤 导入备份</button>';
-    quick += '<button class=\"btn sm ol\" onclick=\"openSyncSettings()\" title=\"GitHub Gist 云同步\">☁️ 云同步</button>';
-    quick += '<button class=\"btn sm ol\" onclick=\"wbLogout()\" title=\"退出当前账号\">🚪 退出登录</button>';
+    quick += '<button class=\"btn sm ol\" onclick=\"openSyncSettings()\" title=\"云同步\">☁️ 云同步</button>';
     return '<div class=\"g g2\"><div class=\"card\"><h3><span class=\"ic\">⚡</span>快捷操作</h3><div class=\"quick-grid\">'+quick+'</div></div></div>';
   }
 }
@@ -23761,6 +23795,65 @@ document.addEventListener('visibilitychange',function(){
 window.addEventListener('online',function(){if(AU&&ADB&&ADB.syncCfg)cloudSync(true);});
 window.addEventListener('beforeunload',function(){if(AU){clearTimeout(pushT);doPush();}});
 
+/* ===== v98.0 仪表盘快捷配置（0-6 · 权限过滤 · 云同步漫游） ===== */
+window._wbQuickPool=[
+  {id:'flash',ic:'🃏',label:'背单词'},{id:'quiz',ic:'✏️',label:'做测验'},{id:'grammar',ic:'📐',label:'学语法'},
+  {id:'shadow',ic:'🎤',label:'跟读'},{id:'errors',ic:'🚨',label:'错题集'},{id:'planner',ic:'📅',label:'学习计划'},
+  {id:'resources',ic:'🔗',label:'资源推荐'},{id:'reading',ic:'📰',label:'外刊'},{id:'dele',ic:'📝',label:'DELE',flag:'deleSpecial'},
+  {id:'siele',ic:'🎯',label:'SIELE专项',flag:'sieleSpecial'},{id:'writing',ic:'✍️',label:'写作练习',flag:'writingEnabled'},
+  {id:'speaking',ic:'🗣',label:'口语话题',flag:'oralEnabled'},{id:'refine',ic:'📚',label:'外刊精炼',flag:'refinePack'},
+  {id:'vocab',ic:'📚',label:'词汇库'}
+];
+window._wbQuickDefaults=['flash','quiz','grammar','shadow'];
+window._wbQuickAllowed=function(it){
+  try{ if(it && it.flag && typeof window._wbFlagsAllowed==='function') return window._wbFlagsAllowed(it.flag); }catch(e){}
+  return true;
+};
+window._wbQuickGet=function(){
+  var sel=Array.isArray(ST.dashQuick)?ST.dashQuick.slice(0,6):window._wbQuickDefaults.slice(0,6);
+  var out=[],seen={};
+  sel.forEach(function(k){
+    if(seen[k])return; seen[k]=1;
+    var it=window._wbQuickPool.filter(function(p){return p.id===k;})[0];
+    if(it && window._wbQuickAllowed(it)) out.push(k);
+  });
+  return out;
+};
+window._wbQuickRenderButtons=function(){
+  var sel=window._wbQuickGet();
+  if(!sel.length) return '<div style="font-size:11.5px;color:var(--soft);padding:4px 0">还没有快捷入口，点「✏️ 编辑快捷」挑几个（最多 6 个）</div>';
+  return sel.map(function(k){
+    var it=window._wbQuickPool.filter(function(p){return p.id===k;})[0];
+    return '<button class="btn sm ol" onclick="go(\''+it.id+'\')" data-wq="'+it.id+'">'+it.ic+' '+it.label+'</button>';
+  }).join('');
+};
+window._wbQuickTogglePicker=function(){
+  var box=document.getElementById('wbQuickPicker'); if(!box) return;
+  if(box.style.display==='block'){ box.style.display='none'; return; }
+  var sel=window._wbQuickGet();
+  var rows=window._wbQuickPool.map(function(it){
+    var ok=window._wbQuickAllowed(it), on=sel.indexOf(it.id)>=0;
+    return '<label style="display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:'+(ok?(on?'var(--tr)':'var(--ink)'):'#c9beae')+';cursor:'+(ok?'pointer':'not-allowed')+'">'
+      +'<input type="checkbox" data-wqk="'+it.id+'"'+(on?' checked':'')+(ok?'':' disabled')+'> '+it.ic+' '+it.label+(ok?'':' 🔒')+'</label>';
+  }).join('');
+  box.innerHTML='<div style="border:1px dashed var(--am);border-radius:10px;padding:10px 12px;margin-top:10px;background:#fffdf8">'
+    +'<div style="font-size:11px;font-weight:700;color:var(--tr);margin-bottom:7px">勾选快捷入口（<b id="wbQuickCnt">'+sel.length+'</b>/6）· 带锁=未获管理员授权，开启后自动出现</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">'+rows+'</div>'
+    +'<div style="margin-top:8px;display:flex;gap:8px"><button class="btn sm" onclick="window._wbQuickSave()">保存</button>'
+    +'<button class="btn sm ol" onclick="window._wbQuickTogglePicker()">取消</button></div></div>';
+  box.style.display='block';
+};
+window._wbQuickSave=function(){
+  var box=document.getElementById('wbQuickPicker'); if(!box) return;
+  var sel=[]; box.querySelectorAll('input[data-wqk]:checked').forEach(function(i){ sel.push(i.getAttribute('data-wqk')); });
+  if(sel.length>6){ toast('最多选 6 个','err'); return; }
+  ST.dashQuick=sel; save(); renderMain(); toast('快捷配置已保存'+(ADB&&ADB.syncCfg?'，将云同步':''),'ok');
+};
+window._wbDarkFoot=function(){
+  return '<div class="wb-dark"><div class="in"><div style="flex:1"><h3>现在开始，让每一分钟备考都有回响。</h3>'
+    +'<p>学习进度云端同步 · 跨设备不丢失 · 全部功能免费</p></div>'
+    +'<button class="btn" style="background:linear-gradient(135deg,#E05A2B,#C2410C);color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:13.5px;font-weight:800;cursor:pointer;flex:none" onclick="window.scrollTo({top:0,behavior:\'smooth\'})">回到顶部，开始今天 →</button></div></div>';
+};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',activate);else activate();
 
 /* ================================================================
