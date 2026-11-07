@@ -1,0 +1,874 @@
+window.__REFINE_DATE__ = "2026-08-24";
+window.WORDS = [
+  {
+    lema: "correo",
+    ipa: "[koˈre.o]",
+    pos: "m.",
+    significado: "邮件；邮局（信件或寄送邮件的服务与场所）",
+    ejemplo_es: "Voy a la oficina de correos para enviar un paquete a mi abuela.",
+    ejemplo_zh: "我去邮局给我奶奶寄一个包裹。",
+    tip: "<b>correo</b> = 邮件/邮局。<b>oficina de correos</b> = 邮局。<b>correo electrónico</b> = 电子邮件。<b>enviar por correo</b> = 邮寄。A1 日常生活高频词。"
+  },
+  {
+    lema: "enviar",
+    ipa: "[enˈbjaɾ]",
+    pos: "v.",
+    significado: "寄；发送（把东西从一处送到另一处）",
+    ejemplo_es: "Quiero enviar esta carta por correo ordinario, por favor.",
+    ejemplo_zh: "我想用普通邮件寄这封信。",
+    tip: "<b>enviar</b> = 寄/发送。<b>envío</b> (m.) = 寄送/包裹。<b>mandar</b> = 寄（同义词，更口语）。<b>enviar un mensaje</b> = 发信息。A1 高频动词。"
+  },
+  {
+    lema: "sello",
+    ipa: "[ˈse.ʎo]",
+    pos: "m.",
+    significado: "邮票（贴在信封上的邮资凭证）",
+    ejemplo_es: "¿Cuánto cuesta un sello para una carta dentro de España?",
+    ejemplo_zh: "一封西班牙国内的信要多少钱的邮票？",
+    tip: "<b>sello</b> = 邮票。<b>sello postal</b> = 邮票。<b>coleccionar sellos</b> = 集邮。<b>sobre</b> (m.) = 信封。A1 邮局场景词。"
+  },
+  {
+    lema: "paquete",
+    ipa: "[paˈke.te]",
+    pos: "m.",
+    significado: "包裹（打包好寄送的物品）",
+    ejemplo_es: "El paquete pesa dos kilos y lleva ropa y libros.",
+    ejemplo_zh: "这个包裹重两公斤，里面装着衣服和书。",
+    tip: "<b>paquete</b> = 包裹。<b>paquete postal</b> = 邮寄包裹。<b>pesar</b> = 称重/重（多少）。<b>buzón</b> (m.) = 邮筒/信箱。A1 邮局场景词。"
+  },
+  {
+    lema: "fiesta",
+    ipa: "[ˈfjes.ta]",
+    pos: "f.",
+    significado: "节日；聚会；庆典（庆祝活动）",
+    ejemplo_es: "En primavera, muchas ciudades españolas celebran sus fiestas con procesiones y música.",
+    ejemplo_zh: "春天，许多西班牙城市以游行和音乐来庆祝它们的节日。",
+    tip: "<b>fiesta</b> = 节日/聚会。<b>fiesta mayor</b> = 主节。<b>estar de fiesta</b> = 在过节。<b>festividad</b> = 节日。A2 文化话题核心词。"
+  },
+  {
+    lema: "procesión",
+    ipa: "[pɾo.θeˈsjon]",
+    pos: "f.",
+    significado: "游行；宗教巡游（队列行进，尤指宗教活动）",
+    ejemplo_es: "Durante la Semana Santa se celebran procesiones por las calles del centro.",
+    ejemplo_zh: "圣周期间，市中心街道上会举行宗教游行。",
+    tip: "<b>procesión</b> = 游行/宗教巡游。<b>procesionar</b> = 列队行进。<b>desfile</b> = 游行（更通用）。<b>paso</b> (m.) = 圣像。A2 文化话题词。"
+  },
+  {
+    lema: "factura",
+    ipa: "[fakˈtu.ɾa]",
+    pos: "f.",
+    significado: "账单；发票（应付款项的凭证）",
+    ejemplo_es: "La factura de la luz ha subido mucho este mes por el calor.",
+    ejemplo_zh: "这个月因为天气炎热，电费账单涨了很多。",
+    tip: "<b>factura</b> = 账单/发票。<b>factura de la luz</b> = 电费单。<b>facturar</b> = 开票/收费。<b>recibo</b> = 收据。B1 经济话题高频词。"
+  },
+  {
+    lema: "subida",
+    ipa: "[suˈβi.ða]",
+    pos: "f.",
+    significado: "上涨；上升（价格或数量的增加）",
+    ejemplo_es: "La subida del precio de la electricidad preocupa a las familias españolas.",
+    ejemplo_zh: "电价的上涨令西班牙家庭担忧。",
+    tip: "<b>subida</b> = 上涨。<b>subir</b> = 上升。<b>aumento</b> = 增加（同义）。<b>bajada</b> = 下降（反义）。B1 经济话题高频词。"
+  },
+  {
+    lema: "precio",
+    ipa: "[ˈpɾe.θjo]",
+    pos: "m.",
+    significado: "价格（商品或服务的价值）",
+    ejemplo_es: "El precio de la luz en el mercado mayorista ha alcanzado niveles muy altos.",
+    ejemplo_zh: "批发市场的电价已达到很高的水平。",
+    tip: "<b>precio</b> = 价格。<b>precio mayorista</b> = 批发价。<b>precio al consumidor</b> = 消费者价格。<b>encarecerse</b> = 涨价。B1 经济话题词。"
+  },
+  {
+    lema: "alquiler",
+    ipa: "[al.kiˈleɾ]",
+    pos: "m.",
+    significado: "租金；租赁（租用房屋所付的费用）",
+    ejemplo_es: "El alquiler de una vivienda consume casi el 40% de los ingresos de muchas familias.",
+    ejemplo_zh: "租房几乎要花掉许多家庭收入的 40%。",
+    tip: "<b>alquiler</b> = 租金/租赁。<b>alquilar</b> = 租。<b>arrendamiento</b> = 租赁（正式）。<b>inquilino</b> (m.) = 租客。B2 住房话题核心词。"
+  },
+  {
+    lema: "ingresos",
+    ipa: "[iŋˈgɾe.sos]",
+    pos: "m. pl.",
+    significado: "收入（个人或家庭获得的金钱）",
+    ejemplo_es: "Los ingresos netos de las familias no crecen al mismo ritmo que los precios.",
+    ejemplo_zh: "家庭净收入的增长速度赶不上价格。",
+    tip: "<b>ingresos</b> = 收入（复数）。<b>ingreso</b> = 收入/进入。<b>ingresos netos</b> = 净收入。<b>salario</b> = 工资。B2 经济语汇。"
+  },
+  {
+    lema: "esfuerzo",
+    ipa: "[esˈfweɾ.θo]",
+    pos: "m.",
+    significado: "努力；付出（尤指经济上的负担比例）",
+    ejemplo_es: "El esfuerzo financiero para acceder a una vivienda sigue siendo muy elevado.",
+    ejemplo_zh: "获得住房所需的经济负担仍然非常高。",
+    tip: "<b>esfuerzo</b> = 努力/付出。<b>esforzarse</b> = 努力。<b>esfuerzo financiero</b> = 经济负担（购房/租房占收入比）。<b>hacer un esfuerzo</b> = 做出努力。B2 住房话题高频词。"
+  },
+  {
+    lema: "oferta",
+    ipa: "[oˈfeɾ.ta]",
+    pos: "f.",
+    significado: "供给；报价（市场上可供应的量）",
+    ejemplo_es: "La escasez de oferta de viviendas explica la subida de los precios.",
+    ejemplo_zh: "住房供给的稀缺解释了价格上涨的原因。",
+    tip: "<b>oferta</b> = 供给/报价。<b>oferta y demanda</b> = 供求。<b>escasez de oferta</b> = 供给稀缺。<b>demanda</b> = 需求。B2 经济语汇（供求）。"
+  },
+  {
+    lema: "hipoteca",
+    ipa: "[i.poˈte.ka]",
+    pos: "f.",
+    significado: "抵押贷款；按揭（购房贷款）",
+    ejemplo_es: "Muchos jóvenes no pueden pagar ni un alquiler ni una hipoteca.",
+    ejemplo_zh: "许多年轻人既付不起租金，也付不起房贷。",
+    tip: "<b>hipoteca</b> = 按揭/抵押贷款。<b>hipotecar</b> = 抵押。<b>pedir una hipoteca</b> = 申请房贷。<b>cuota hipotecaria</b> = 月供。B2 住房话题词。"
+  },
+  {
+    lema: "vivienda",
+    ipa: "[biˈβjen.da]",
+    pos: "f.",
+    significado: "住房；住宅（供人居住的房屋）",
+    ejemplo_es: "El acceso a la vivienda se ha convertido en el principal problema social del país.",
+    ejemplo_zh: "获得住房已成为这个国家最主要的社会问题。",
+    tip: "<b>vivienda</b> = 住房。<b>vivienda de alquiler</b> = 出租房。<b>vivienda libre</b> = 自由市场房。<b>piso</b> = 公寓（口语）。B2 住房话题核心词。"
+  }
+];
+window.ARTICLES = {
+  "a1": {
+    "paragraphs": [
+      {
+        "es": "Hoy es lunes por la mañana. Ana está en la oficina de correos del barrio. Quiere enviar un paquete a su abuela, que vive en otra ciudad.",
+        "zh": "今天是星期一早上。安娜在街区的邮局里。她想给住在另一座城市的奶奶寄一个包裹。"
+      },
+      {
+        "es": "El paquete es pequeño y de color marrón. Dentro hay una bufanda, unas fotos y una caja de galletas para su abuela.",
+        "zh": "包裹不大，是棕色的。里面有一条围巾、几张照片和一盒给奶奶的饼干。"
+      },
+      {
+        "es": "—Buenos días. Quiero enviar este paquete a Sevilla, por favor —dice Ana al empleado.",
+        "zh": "—早上好。我想把这个包裹寄到塞维利亚，麻烦您—安娜对工作人员说。"
+      },
+      {
+        "es": "—Muy bien. Primero, escriba aquí la dirección del destinatario —responde el empleado con una sonrisa.",
+        "zh": "—好的。首先，请在这里写上收件人的地址—工作人员微笑着回答。"
+      },
+      {
+        "es": "Ana escribe el nombre, la calle y el código postal de su abuela en el formulario. La letra es clara y ordenada.",
+        "zh": "安娜在表格上写下奶奶的姓名、街道和邮政编码。字迹清晰而工整。"
+      },
+      {
+        "es": "—¿El paquete es urgente? —pregunta el empleado. —No, no es urgente. Puede ir por correo ordinario —contesta Ana.",
+        "zh": "—这个包裹要加急吗？—工作人员问。—不，不用加急。可以用普通邮寄—安娜回答。"
+      },
+      {
+        "es": "El empleado pone el paquete en la balanza. —Pesa un kilo y medio. Son ocho euros con sesenta céntimos.",
+        "zh": "工作人员把包裹放到秤上。—重一公斤半。一共八欧元六十欧分。"
+      },
+      {
+        "es": "Ana paga con su tarjeta. El empleado imprime una etiqueta y la pega encima del paquete. —Listo. Llegará en unos tres días.",
+        "zh": "安娜用银行卡付款。工作人员打印了一张标签，贴在包裹上面。—好了。大约三天后就能到。"
+      },
+      {
+        "es": "—Muchas gracias. ¡Hasta luego! —dice Ana contenta. Sale de la oficina y guarda el justificante en su bolso.",
+        "zh": "—非常感谢。再见！—安娜开心地说。她走出邮局，把凭证放进包里。"
+      },
+      {
+        "es": "Ahora Ana está tranquila. Su abuela recibirá el regalo muy pronto y seguro que se pondrá muy contenta.",
+        "zh": "现在安娜安心了。奶奶很快就会收到礼物，一定会非常开心。"
+      }
+    ],
+    "dele": "A1 考点：<b>陈述式现在时</b> — 全文以规则动词（enviar, escribir, pagar, imprimir）为主，含少量不规则动词（querer→quiere, poner→pone, salir→sale）。<b>直接引语</b>用破折号引导对话（—Buenos días...）。<b>祈使句</b>（escriba aquí, primero...）。<b>疑问句</b>（¿El paquete es urgente? / ¿Cuánto pesa?）。<b>自复动词</b>（se pondrá, se va）。<b>数字与价格</b>（ocho euros con sesenta céntimos, un kilo y medio）。<b>地点表达</b>（en la oficina de correos, a Sevilla）。",
+    "hardWords": [
+      {
+        "w": "paquete",
+        "m": "包裹"
+      },
+      {
+        "w": "oficina de correos",
+        "m": "邮局"
+      },
+      {
+        "w": "destinatario",
+        "m": "收件人"
+      },
+      {
+        "w": "código postal",
+        "m": "邮政编码"
+      },
+      {
+        "w": "justificante",
+        "m": "凭证；回执"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿A quién quiere enviar Ana el paquete?",
+        "opts": [
+          "A su madre.",
+          "A su abuela.",
+          "A su hermana.",
+          "A una amiga."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 1) que Ana quiere enviar un paquete “a su abuela, que vive en otra ciudad”.",
+        "zh": "原文第 1 段说安娜想给“住在另一座城市的奶奶”寄包裹，故选 B（a su abuela = 给她的奶奶）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué hay dentro del paquete?",
+        "opts": [
+          "Una bufanda, unas fotos y una caja de galletas.",
+          "Ropa de invierno y zapatos.",
+          "Libros y cuadernos.",
+          "Juguetes y caramelos."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 2) que dentro hay “una bufanda, unas fotos y una caja de galletas”.",
+        "zh": "原文第 2 段说包裹里有“一条围巾、几张照片和一盒饼干”，故选 A（una bufanda = 一条围巾）。此题考查直接定位。"
+      },
+      {
+        "q": "¿A qué ciudad quiere enviar Ana el paquete?",
+        "opts": [
+          "A Madrid.",
+          "A Barcelona.",
+          "A Sevilla.",
+          "A Valencia."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 3) que Ana quiere enviar el paquete “a Sevilla”.",
+        "zh": "原文第 3 段说安娜想把包裹“寄到塞维利亚”，故选 C（Sevilla = 塞维利亚）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Cuánto pesa el paquete y cuánto cuesta?",
+        "opts": [
+          "Pesa un kilo y cuesta cinco euros.",
+          "Pesa un kilo y medio y cuesta ocho euros con sesenta céntimos.",
+          "Pesa dos kilos y cuesta diez euros.",
+          "Pesa medio kilo y cuesta tres euros."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 7) que el paquete “pesa un kilo y medio” y cuesta “ocho euros con sesenta céntimos”.",
+        "zh": "原文第 7 段说包裹“重一公斤半”，费用“八欧元六十欧分”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Cómo paga Ana?",
+        "opts": [
+          "Con dinero en efectivo.",
+          "Con un cheque.",
+          "Con su tarjeta.",
+          "Con una transferencia."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 8) que “Ana paga con su tarjeta”.",
+        "zh": "原文第 8 段说“安娜用银行卡付款”，故选 C（con su tarjeta = 用她的卡）。此题考查直接定位。"
+      }
+    ]
+  },
+  "a2": {
+    "paragraphs": [
+      {
+        "es": "La Semana Santa es una de las celebraciones más importantes de España. Cada año, entre marzo y abril, muchas ciudades y pueblos viven estos días con gran intensidad.",
+        "zh": "圣周是西班牙最重要的节庆之一。每年三四月间，许多城市和村镇都以极大的热情度过这些日子。"
+      },
+      {
+        "es": "Durante la Semana Santa, las cofradías y hermandades organizan procesiones por las calles del centro histórico. Miles de personas salen a verlas.",
+        "zh": "圣周期间，各兄弟会与教团在市中心的街道上组织宗教游行。成千上万的人上街观看。"
+      },
+      {
+        "es": "Los nazarenos, vestidos con túnicas y capirotes, caminan en silencio llevando velas. Los pasos, que representan escenas religiosas, son llevados a hombros por los costaleros.",
+        "zh": "身披长袍、头戴尖帽的苦修士手持蜡烛默默前行。代表宗教场景的圣像由扛夫们肩扛行进。"
+      },
+      {
+        "es": "En Andalucía, ciudades como Sevilla y Málaga son especialmente famosas por sus procesiones. Allí la Semana Santa atrae a visitantes de todo el mundo.",
+        "zh": "在安达卢西亚，塞维利亚和马拉加等城市的游行尤为著名。那里的圣周吸引着来自世界各地的游客。"
+      },
+      {
+        "es": "La música también es muy importante. Las bandas tocan marchas solemnes, y el sonido de los tambores llena las calles durante horas.",
+        "zh": "音乐也非常重要。乐队演奏庄严的进行曲，鼓声连续数小时回荡在街道上。"
+      },
+      {
+        "es": "Además de las procesiones, durante estos días se comen dulces típicos como las torrijas, que se preparan con pan, leche, huevo y azúcar.",
+        "zh": "除了游行，这些天人们还会吃像“托里哈”这样的传统甜点，它是用面包、牛奶、鸡蛋和糖做成的。"
+      },
+      {
+        "es": "La Semana Santa también es un momento de reunión familiar. Muchas personas que viven fuera vuelven a sus pueblos para estar con los suyos.",
+        "zh": "圣周也是家人团聚的时刻。许多在外生活的人回到家乡，与亲人共度时光。"
+      },
+      {
+        "es": "Otras fiestas populares, como las Fallas de Valencia o los Sanfermines de Pamplona, también tienen mucha fama internacional y atraen a miles de turistas.",
+        "zh": "其他民间节日，如瓦伦西亚的法雅节或潘普洛纳的奔牛节，也同样享誉国际，吸引着成千上万的游客。"
+      },
+      {
+        "es": "Estas tradiciones son una parte esencial de la cultura española. Pasan de padres a hijos y ayudan a mantener viva la identidad de cada región.",
+        "zh": "这些传统是西班牙文化的重要组成部分。它们代代相传，帮助保持每个地区的独特身份。"
+      },
+      {
+        "es": "Si visitas España en primavera, puedes vivir estas fiestas de cerca. Es una experiencia única que no olvidarás nunca.",
+        "zh": "如果你春天来西班牙，就能近距离感受这些节日。那将是一段你永远不会忘记的独特体验。"
+      }
+    ],
+    "dele": "A2 考点：<b>简单过去时与现在时</b> — 描述节日用现在时（organizan, salen, caminan），叙述过去事件可用简单过去时。<b>无人称句</b>（se come, se prepara, se celebran）。<b>自复动词</b>（se viste, se celebra）。<b>关系从句</b>（los pasos, que representan...; personas que viven fuera）。<b>地点与时间表达</b>（en Andalucía, durante estos días, entre marzo y abril）。<b>动词 gustar 结构</b>（atrae, llena）。<b>被动含义</b>（son llevados, son especialmente famosas）。",
+    "hardWords": [
+      {
+        "w": "cofradía",
+        "m": "兄弟会；教团"
+      },
+      {
+        "w": "nazareno",
+        "m": "苦修士（圣周游行参与者）"
+      },
+      {
+        "w": "paso",
+        "m": "圣像（宗教游行中的雕像）"
+      },
+      {
+        "w": "torrija",
+        "m": "托里哈（西班牙传统甜点）"
+      },
+      {
+        "w": "costalero",
+        "m": "扛夫（肩扛圣像的人）"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Qué organizan las cofradías durante la Semana Santa?",
+        "opts": [
+          "Conciertos de música moderna.",
+          "Procesiones por las calles del centro.",
+          "Competiciones deportivas.",
+          "Mercados de artesanía."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 2) que “las cofradías y hermandades organizan procesiones por las calles del centro histórico”.",
+        "zh": "原文第 2 段说“兄弟会与教团在市中心街道上组织宗教游行”，故选 B（procesiones = 游行）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué llevan los nazarenos en las procesiones?",
+        "opts": [
+          "Banderas y flores.",
+          "Túnicas, capirotes y velas.",
+          "Instrumentos musicales.",
+          "Comida y bebida."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 3) que los nazarenos van “vestidos con túnicas y capirotes” y “llevando velas”.",
+        "zh": "原文第 3 段说苦修士“身披长袍、头戴尖帽”、“手持蜡烛”，故选 B（túnicas, capirotes y velas）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué ciudades andaluzas son especialmente famosas por sus procesiones?",
+        "opts": [
+          "Madrid y Barcelona.",
+          "Sevilla y Málaga.",
+          "Bilbao y San Sebastián.",
+          "Valencia y Zaragoza."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 4) que “ciudades como Sevilla y Málaga son especialmente famosas por sus procesiones”.",
+        "zh": "原文第 4 段说“塞维利亚和马拉加等城市”的游行尤为著名，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Con qué ingredientes se preparan las torrijas?",
+        "opts": [
+          "Con pan, leche, huevo y azúcar.",
+          "Con arroz, pescado y verduras.",
+          "Con harina, chocolate y mantequilla.",
+          "Con patatas, cebolla y aceite."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 6) que las torrijas “se preparan con pan, leche, huevo y azúcar”.",
+        "zh": "原文第 6 段说托里哈“是用面包、牛奶、鸡蛋和糖做成的”，故选 A。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué otras fiestas populares menciona el texto?",
+        "opts": [
+          "El carnaval y la Navidad.",
+          "Las Fallas de Valencia y los Sanfermines de Pamplona.",
+          "El día de Reyes y la feria.",
+          "La Nochevieja y el Año Nuevo."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 8) que “las Fallas de Valencia o los Sanfermines de Pamplona” también tienen fama internacional.",
+        "zh": "原文第 8 段提到“瓦伦西亚的法雅节或潘普洛纳的奔牛节”，故选 B。此题考查直接定位。"
+      }
+    ]
+  },
+  "b1": {
+    "paragraphs": [
+      {
+        "es": "El mes de agosto ha traído a los hogares españoles una noticia poco agradable: la factura de la luz va a subir más de un veinte por ciento respecto al mismo mes del año pasado, según el comparador de la Comisión Nacional de los Mercados y la Competencia.",
+        "zh": "八月给西班牙家庭带来了一个不太愉快的消息：根据国家市场与竞争委员会比价器的数据，电费账单将比去年同月上涨超过 20%。"
+      },
+      {
+        "es": "Para un consumidor medio con una potencia contratada de 4,4 kilovatios y un consumo anual de 3.900 kilovatios-hora, la factura de los primeros veintiún días de agosto alcanza los 61,33 euros, frente a los 50 euros del mismo periodo del año anterior.",
+        "zh": "对于合同功率 4.4 千瓦、年用电量 3900 千瓦时的普通用户而言，八月前 21 天的账单达到 61.33 欧元，而去年同期为 50 欧元。"
+      },
+      {
+        "es": "Esto supone pagar más de once euros de más en apenas tres semanas, una cifra que refleja el fuerte encarecimiento de la energía en pleno verano, cuando el calor dispara el uso del aire acondicionado en la mayor parte del país.",
+        "zh": "这意味着短短三周内就要多付 11 欧元以上，这一数字反映了盛夏时节能源的大幅涨价——此时炎热天气让全国大部分地区空调使用量激增。"
+      },
+      {
+        "es": "El precio medio diario de la electricidad en el mercado mayorista, conocido como el pool, ha superado los 124 euros por megavatio-hora durante los primeros veintitrés días de agosto, el nivel más alto desde febrero de 2023, según fuentes del sector eléctrico.",
+        "zh": "据电力行业消息人士称，八月前 23 天批发市场（即“pool”）的日均电价已超过每兆瓦时 124 欧元，为 2023 年 2 月以来最高水平。"
+      },
+      {
+        "es": "Salvo en dos jornadas, el precio medio diario se ha mantenido por encima de los cien euros por megavatio-hora, con una volatilidad muy acusada dentro de cada día que refleja el comportamiento del sistema eléctrico en las horas de más demanda.",
+        "zh": "除两天外，日均电价都维持在每兆瓦时 100 欧元以上，日内波动非常剧烈，这反映出电力系统在需求高峰时段的表现。"
+      },
+      {
+        "es": "Durante las horas centrales del día, cuando el sol está en su punto más alto, el precio de la electricidad puede caer hasta cero e incluso entrar en valores negativos gracias al fuerte aporte de las instalaciones fotovoltaicas repartidas por todo el territorio español.",
+        "zh": "在一天中阳光最充足的时段，得益于遍布西班牙各地的光伏设施的大量出力，电价可能跌至零甚至进入负值。"
+      },
+      {
+        "es": "Sin embargo, cuando cae la noche y los paneles solares dejan de producir, el sistema debe recurrir a las centrales de ciclo combinado, que queman gas natural y que trasladan a los precios el encarecimiento de este combustible, disparado por la tensión geopolítica.",
+        "zh": "然而，当夜幕降临、太阳能板停止发电时，系统不得不依赖燃烧天然气的联合循环电站，这些电站把因地缘政治紧张而飙升的天然气涨价传导到了电价上。"
+      },
+      {
+        "es": "El precio del gas natural en el mercado ibérico, el Mibgas, ha superado ya los 65 euros por megavatio-hora y sigue subiendo, presionado por la incertidumbre sobre las rutas de suministro procedentes de Oriente Próximo y por la necesidad de llenar los almacenes antes del invierno.",
+        "zh": "伊比利亚天然气市场（Mibgas）的价格已突破每兆瓦时 65 欧元并持续上涨，原因是中东供应路线的不确定性，以及冬季前需要填满储备。"
+      },
+      {
+        "es": "A todo ello se suma el encarecimiento de los derechos de emisión de dióxido de carbono, que también influyen en el precio final de la electricidad generada con combustibles fósiles, encareciendo aún más la factura de los consumidores domésticos.",
+        "zh": "此外，二氧化碳排放权的价格上涨也对化石燃料发电的最终电价产生影响，进一步推高了家庭用户的账单。"
+      },
+      {
+        "es": "El Gobierno ya tomó medidas a principios de año para proteger a los consumidores de las subidas derivadas del conflicto internacional, aprobando un real decreto que redujo el IVA de la electricidad del 21 al 10 por ciento durante los meses de mayor tensión en los mercados.",
+        "zh": "政府年初已采取措施保护消费者免受国际冲突带来的涨价影响，通过一项皇家法令，在市场最紧张的几个月里将电力的增值税从 21% 降至 10%。"
+      },
+      {
+        "es": "Sin embargo, esa rebaja del IVA expiró el 1 de junio, cuando el impuesto volvió a situarse en el 21 por ciento al moderarse la inflación, lo que ha dejado de nuevo a las familias expuestas al alza de los precios de la energía registrada este verano.",
+        "zh": "然而，这项增值税减免已于 6 月 1 日到期——随着通胀缓和，税率恢复至 21%——这使得家庭再次暴露于今年夏天能源价格的上扬之中。"
+      },
+      {
+        "es": "El Ejecutivo también aprobó una segunda norma que reduce de forma progresiva el impuesto sobre el valor de la producción de energía eléctrica, el IVPEE, que bajará del 7 al 5 por ciento este año, al 3,5 por ciento en 2027 y al 0 por ciento en 2028.",
+        "zh": "政府还通过了第二项法规，逐步下调电力生产增值税（IVPEE）：今年从 7% 降至 5%，2027 年降至 3.5%，2028 年降至 0%。"
+      },
+      {
+        "es": "Además, existe un mecanismo de salvaguarda que se activa si los precios de la energía suben más de un 15 por ciento: el IVA de la luz bajaría del 21 al 10 por ciento, y el impuesto especial de la electricidad caería del 5,1 al 0,5 por ciento.",
+        "zh": "此外，还存在一个保障机制：如果能源价格上涨超过 15%，就会自动启动——电力的增值税将从 21% 降至 10%，电力特别税将从 5.1% 降至 0.5%。"
+      },
+      {
+        "es": "De momento, ese umbral no se ha superado, por lo que la rebaja no se ha activado y los usuarios del mercado regulado tendrán que asumir en agosto un coste de la electricidad claramente superior al del verano pasado, según las estimaciones del comparador oficial.",
+        "zh": "目前，这一门槛尚未被突破，因此减税尚未启动，管制市场的用户八月将不得不承担明显高于去年夏天的电费成本，官方比价器如此估计。"
+      },
+      {
+        "es": "La tarifa regulada, denominada Precio Voluntario para el Pequeño Consumidor, cambió su fórmula de cálculo en 2024 para incluir una cesta de precios de los mercados de futuros, con el objetivo de reducir la volatilidad que sufrían los hogares acogidos a esta modalidad.",
+        "zh": "管制电价——即“小用户自愿价格”（PVPC）——于 2024 年改变了计算方式，纳入了期货市场的一篮子价格，目的是降低选择这一模式的家庭所承受的波动。"
+      },
+      {
+        "es": "Desde este año, el peso de las referencias de los mercados de futuros ha alcanzado el 55 por ciento, mientras que la influencia del precio diario del pool se reduce progresivamente, una fórmula que suaviza los picos pero que no elimina por completo las subidas.",
+        "zh": "从今年起，期货市场参考价的权重已达 55%，而现货“pool”价格的影响逐年下降。这一公式能平抑高峰，但并未完全消除涨价。"
+      },
+      {
+        "es": "Esta tarifa afecta directamente a unos ocho millones de hogares en toda España, mientras que los clientes del mercado libre dependen de las condiciones que hayan pactado con sus comercializadoras, que en muchos casos también están trasladando el alza de los costes.",
+        "zh": "这一电价直接影响全西班牙约 800 万户家庭，而自由市场用户则取决于与售电公司约定的条件——许多公司也在传导成本的上涨。"
+      },
+      {
+        "es": "Los expertos coinciden en que, mientras persista la presión sobre el gas natural y las emisiones, los precios de la electricidad seguirán altos, por lo que recomiendan a las familias revisar sus hábitos de consumo y aprovechar las horas solares, que son las más baratas del día.",
+        "zh": "专家们一致认为，只要天然气和排放的压力持续存在，电价就会保持高位，因此建议家庭审视用电习惯，并利用一天中最便宜的太阳能时段。"
+      }
+    ],
+    "dele": "B1 考点：<b>陈述式过去时与现在完成时</b>（ha traído, superó, aprobó, expiró）— 叙述已完成的事件与持续至今的结果。<b>被动与无人称结构</b>（se ha mantenido, se activa, se redujo）。<b>数据与百分比表达</b>（61,33 euros, 124 euros/MWh, 4,4 kilovatios, 20%, 15%, 55%, 800万）。<b>让步与转折</b>（Sin embargo...; aunque...; mientras que...）。<b>关系从句</b>（centrales... que queman gas; usuarios... que viven）。<b>目的从句</b>（con el objetivo de...; para...）。<b>机构与专有名词</b>（CNMC, Mibgas, PVPC, IVPEE, IVA）。<b>条件句</b>（si los precios suben más de un 15%...）。",
+    "hardWords": [
+      {
+        "w": "factura",
+        "m": "账单；发票",
+        "ejemplo": "La factura de la luz va a subir más de un veinte por ciento en agosto.",
+        "analisis": "源自拉丁语 factura（制作、加工），由动词 facere（做）派生，后引申为“应付款项的明细单”。常见搭配 pagar la factura（付账单）、factura de la luz/gas（电/气费单）、factura mensual（月账单）。语法上为阴性名词。语境义：本文特指“电费账单”。易混淆词：factura（账单）vs recibo（收据）vs cuenta（账户/账单，餐厅语境）——factura 更正式、常用于水电气等公用事业。"
+      },
+      {
+        "w": "subida",
+        "m": "上涨；上升",
+        "ejemplo": "Esa rebaja expiró, lo que ha dejado a las familias expuestas a la subida de los precios.",
+        "analisis": "由动词 subir（上升）+ 名词后缀 -ida 构成，表示动作的结果。常见搭配 subida de precios（价格上涨）、subida salarial（加薪）、subida del IVA（增值税上调）。语法上为阴性名词，注意与动词 subir（上升）区分。语境义：本文指电价的上涨。反义词为 bajada（下降）。DELE B1 经济类阅读常考 subida/aumento/encarecimiento 三个近义词的辨析：subida 最通用，aumento 偏中性，encarecimiento 特指“变贵”。"
+      },
+      {
+        "w": "encarecimiento",
+        "m": "涨价；变贵",
+        "ejemplo": "El fuerte encarecimiento de la energía en pleno verano refleja la presión sobre el gas.",
+        "analisis": "由前缀 en-（使……）+ 形容词 caro（贵的）+ 动词后缀 -ecer + 名词后缀 -miento 构成，指“价格变高的过程”。常见搭配 encarecimiento de la energía（能源涨价）、encarecimiento de los alimentos（食品涨价）。语法上为阳性名词。语境义：本文强调电价“变贵”这一动态过程。DELE B1 常考 encarecer（动词）/ encarecimiento（名词）/ caro（形容词）这一词族的构词与转换。"
+      },
+      {
+        "w": "mercado mayorista",
+        "m": "批发市场",
+        "ejemplo": "El precio medio diario en el mercado mayorista ha superado los 124 euros por megavatio-hora.",
+        "analisis": "由 mercado（市场，源自拉丁语 mercatus“集市”）+ mayorista（批发商，源自 mayor“较大的”）构成，指“大规模、面向转售而非零售的市场”。常见搭配 mercado mayorista de electricidad（电力批发市场）、precio mayorista（批发价）。语境义：本文指电力交易中发电厂与售电公司之间的“pool”市场。易混淆词：mayorista（批发）vs minorista（零售），DELE B1 常成对考查。"
+      },
+      {
+        "w": "volatilidad",
+        "m": "波动性；不稳定性",
+        "ejemplo": "El precio muestra una volatilidad muy acusada dentro de cada día.",
+        "analisis": "源自拉丁语 volatilis（会飞的、易变的），词根 volare（飞），指价格或市场剧烈、频繁变动的特性。常见搭配 volatilidad de precios（价格波动）、alta volatilidad（高波动性）、reducir la volatilidad（降低波动）。语境义：本文指电价在一天之内大幅起伏。DELE B1/B2 经济语篇高频词，常与 inestabilidad（不稳定）、fluctuación（波动）辨析。"
+      },
+      {
+        "w": "ciclo combinado",
+        "m": "联合循环（燃气发电）",
+        "ejemplo": "Por la noche el sistema recurre a las centrales de ciclo combinado, que queman gas natural.",
+        "analisis": "由 ciclo（循环，源自希腊语 kyklos“圆环”）+ combinado（结合的）构成，指“燃气轮机与蒸汽轮机联合工作的发电技术”。常见搭配 central de ciclo combinado（联合循环电站）、tecnología de ciclo combinado（联合循环技术）。语境义：本文指夜间太阳能缺位时用来发电的天然气电站。这是能源领域的专业术语，DELE B1 阅读常作为科技词汇出现。"
+      },
+      {
+        "w": "mecanismo de salvaguarda",
+        "m": "保障机制",
+        "ejemplo": "Existe un mecanismo de salvaguarda que se activa si los precios suben más de un 15 por ciento.",
+        "analisis": "由 mecanismo（机制，源自希腊语 mēkhanē“机器”）+ salvaguarda（保障，由 salvar“拯救”+ guarda“保护”构成）组成，指“为防止损害而预设的自动保护措施”。常见搭配 activar el mecanismo（启动机制）、mecanismo de protección（保护机制）。语境义：本文指政府预设的、电价涨幅超 15% 时自动减税的机制。DELE B1 政策类语篇常考其含义。"
+      },
+      {
+        "w": "umbral",
+        "m": "门槛；阈值",
+        "ejemplo": "De momento, ese umbral no se ha superado, por lo que la rebaja no se ha activado.",
+        "analisis": "源自拉丁语 liminaris，本义“门槛”（门下方横木），引申为“触发某事的临界值”。常见搭配 superar el umbral（超过门槛）、umbral de renta（收入门槛）、por debajo del umbral（低于阈值）。语法上为阳性名词。语境义：本文指“15%”这一触发减税的临界涨幅。DELE B1 常考其比喻义（非字面的“门槛”）。易混淆词：umbral（门槛/阈值）vs límite（界限）vs nivel（水平）。"
+      },
+      {
+        "w": "comercializadora",
+        "m": "售电公司；经销商",
+        "ejemplo": "Los clientes del mercado libre dependen de las condiciones pactadas con sus comercializadoras.",
+        "analisis": "由动词 comercializar（销售）+ 名词后缀 -dora（表示“做……的人/机构”）构成，指“负责销售电力的公司”。常见搭配 comercializadora de electricidad（售电公司）、cambiar de comercializadora（更换售电公司）。语法上为阴性名词。语境义：本文指向自由市场用户卖电的公司。DELE B1 能源/消费语篇常考，与 distribuidora（配电公司）辨析：comercializadora 管销售，distribuidora 管电网配送。"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿En qué porcentaje sube la factura de la luz en agosto respecto al año anterior?",
+        "opts": [
+          "Más del 10 por ciento.",
+          "Más del 15 por ciento.",
+          "Más del 20 por ciento.",
+          "Más del 50 por ciento."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 1) que la factura “va a subir más de un veinte por ciento en comparación con el mismo mes del año pasado”.",
+        "zh": "原文第 1 段说电费“将比去年同月上涨超过 20%”，故选 C。此题考查直接定位。"
+      },
+      {
+        "q": "¿Cuál es el precio medio diario de la electricidad en el mercado mayorista en agosto?",
+        "opts": [
+          "Más de 124 euros por megavatio-hora.",
+          "Unos 50 euros por megavatio-hora.",
+          "Menos de 100 euros por megavatio-hora.",
+          "Unos 200 euros por megavatio-hora."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 4) que el precio medio diario “ha superado los 124 euros por megavatio-hora”.",
+        "zh": "原文第 4 段说日均电价“已超过每兆瓦时 124 欧元”，故选 A。此题考查直接定位。"
+      },
+      {
+        "q": "¿Por qué el precio de la electricidad puede caer a cero durante las horas centrales del día?",
+        "opts": [
+          "Porque baja el consumo.",
+          "Porque las instalaciones fotovoltaicas aportan mucha energía.",
+          "Porque el gas natural se abarata.",
+          "Porque las centrales nucleares aumentan su producción."
+        ],
+        "ans": 1,
+        "es": "El párrafo 6 es una oración larga que explica que el precio “puede caer hasta cero e incluso entrar en valores negativos gracias al fuerte aporte de las instalaciones fotovoltaicas”. Hay que identificar la causa en esta estructura compleja.",
+        "zh": "原文第 6 段是一个长句，说明电价“可能跌至零甚至进入负值”，原因是“光伏设施的大量出力”。需在这复杂结构中识别原因，故选 B。此题考查长句理解。"
+      },
+      {
+        "q": "¿Qué ocurre por la noche con el precio de la electricidad?",
+        "opts": [
+          "Sube porque las centrales de ciclo combinado queman gas natural, que está caro.",
+          "Baja porque no hay consumo.",
+          "Se mantiene estable.",
+          "Desaparece el precio."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 7) que por la noche “el sistema debe recurrir a las centrales de ciclo combinado, que queman gas natural y que trasladan a los precios el encarecimiento de este combustible”.",
+        "zh": "原文第 7 段说夜间“系统不得不依赖燃烧天然气的联合循环电站”，并把天然气的涨价传导到电价上，故选 A。此题考查直接定位与因果理解。"
+      },
+      {
+        "q": "¿Qué precio ha superado el gas natural en el mercado Mibgas?",
+        "opts": [
+          "Los 40 euros por megavatio-hora.",
+          "Los 50 euros por megavatio-hora.",
+          "Los 65 euros por megavatio-hora.",
+          "Los 100 euros por megavatio-hora."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 8) que el precio del gas “ha superado ya los 65 euros por megavatio-hora”.",
+        "zh": "原文第 8 段说天然气价格“已突破每兆瓦时 65 欧元”，故选 C。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué ocurrió con la rebaja del IVA de la electricidad a principios de junio?",
+        "opts": [
+          "Se amplió hasta final de año.",
+          "Expiró y el IVA volvió al 21 por ciento.",
+          "Se redujo al 5 por ciento.",
+          "Se eliminó por completo."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 11) que “esa rebaja del IVA expiró el 1 de junio, cuando el impuesto volvió a situarse en el 21 por ciento”.",
+        "zh": "原文第 11 段说“这项增值税减免已于 6 月 1 日到期……税率恢复至 21%”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué condición activa el mecanismo de salvaguarda que reduce los impuestos de la energía?",
+        "opts": [
+          "Que los precios suban más del 15 por ciento.",
+          "Que los precios bajen del 10 por ciento.",
+          "Que el consumo aumente.",
+          "Que cambie el Gobierno."
+        ],
+        "ans": 0,
+        "es": "Hay que integrar el párrafo 13 y el párrafo 14: el primero explica que el mecanismo “se activa si los precios suben más de un 15 por ciento”, y el segundo añade que “ese umbral no se ha superado”, por lo que no se ha activado. La respuesta combina ambas informaciones.",
+        "zh": "需综合原文第 13、14 段：原文第 13 段说明机制“在能源价格上涨超过 15% 时启动”，原文第 14 段补充“这一门槛尚未被突破”。结合两者可确定条件，故选 A。此题考查跨段落综合。"
+      },
+      {
+        "q": "¿Cuál es el objetivo del cambio en la fórmula de cálculo de la tarifa regulada en 2024?",
+        "opts": [
+          "Aumentar los ingresos del Estado.",
+          "Reducir la volatilidad que sufrían los hogares.",
+          "Eliminar las energías renovables.",
+          "Subir el precio del gas."
+        ],
+        "ans": 1,
+        "es": "El párrafo 15 indica que la tarifa “cambió su fórmula de cálculo en 2024... con el objetivo de reducir la volatilidad”. Hay que inferir el propósito a partir de esta finalidad expresada explícitamente.",
+        "zh": "原文第 15 段说管制电价“于 2024 年改变计算方式……目的是降低……波动”。需从这一明确表述的目的中推断出答案，故选 B。此题考查推理判断。"
+      }
+    ]
+  },
+  "b2": {
+    "paragraphs": [
+      {
+        "es": "El esfuerzo que deben realizar las familias españolas para acceder a una vivienda en alquiler ha alcanzado el 39 por ciento de sus ingresos netos en el segundo trimestre de 2026, diez puntos por encima del 29 por ciento necesario para la compraventa, según un estudio del portal idealista.",
+        "zh": "根据房产门户网站 idealista 的一项研究，2026 年第二季度，西班牙家庭租房所需承担的经济负担已达到其净收入的 39%，比购房所需的 29% 高出 10 个百分点。"
+      },
+      {
+        "es": "El encarecimiento de los precios, derivado de la escasez de oferta, explica que el esfuerzo tanto en alquiler como en compra se mantenga en niveles muy elevados, superando en el caso del arrendamiento los umbrales que los expertos consideran razonables, fijados en torno al treinta por ciento de los ingresos.",
+        "zh": "由于供给稀缺导致的价格上涨，租房和购房的经济负担都维持在非常高的水平，其中租房已超过专家认为合理的阈值——约为收入的 30%。"
+      },
+      {
+        "es": "En el alquiler de una vivienda de dos habitaciones, nueve capitales españolas superan el límite del 30 por ciento recomendado, con Palma a la cabeza al exigir un 45 por ciento de los ingresos, seguida de Málaga con un 40 por ciento y Valencia con un 39 por ciento.",
+        "zh": "以两居室住房的租金为例，西班牙多达九座省会城市的租金超过了专家建议的 30% 上限，其中帕尔马以占家庭收入 45% 居首，马拉加 40% 次之，瓦伦西亚 39% 紧随其后。"
+      },
+      {
+        "es": "Madrid y Alicante, ambas con un 38 por ciento, y Barcelona y Segovia, con un 34 por ciento, completan las capitales más tensionadas; Santa Cruz de Tenerife y Las Palmas cierran el grupo con un 31 por ciento, muy por encima del umbral de referencia.",
+        "zh": "马德里和阿利坎特均为 38%，巴塞罗那和塞哥维亚为 34%，这些城市组成了压力最大的省会名单；圣克鲁斯-德特内里费和拉斯帕尔马斯则以 31% 垫底，但仍远高于参考阈值。"
+      },
+      {
+        "es": "En el extremo opuesto, Ciudad Real y Teruel registran la menor presión, al destinar apenas un 19 por ciento de la renta del hogar al arrendamiento, seguidas de Jaén, Cáceres, Lleida y Melilla, con un 20 por ciento, lo que evidencia una España profundamente desigual.",
+        "zh": "与之相反，雷阿尔城和特鲁埃尔压力最小，家庭收入中仅有 19% 用于支付房租，哈恩、卡塞雷斯、莱里达和梅利利亚紧随其后，比例为 20%——这凸显了西班牙在住房获取上的严重不平等。"
+      },
+      {
+        "es": "A nivel provincial, Málaga es la que impone un mayor esfuerzo a sus residentes, con un 58 por ciento de los ingresos, seguida de Baleares con un 48 por ciento, mientras que Teruel exige solo un 18 por ciento, y Palencia, Lleida, Ciudad Real y Huesca, un 21 por ciento.",
+        "zh": "从省级看，马拉加给居民带来的负担最重，占家庭收入的 58%，巴利阿里群岛以 48% 紧随其后；而另一端的特鲁埃尔仅需 18%，帕伦西亚、莱里达、雷阿尔城和韦斯卡为 21%。"
+      },
+      {
+        "es": "El portal inmobiliario atribuye este fenómeno a la escasez de oferta: la falta de viviendas disponibles empuja los precios al alza y, con ellos, el porcentaje de renta que las familias deben reservar para pagar el techo, un problema agravado en los últimos años.",
+        "zh": "该房产门户明确将这一现象归因于供给稀缺：可用房源的缺乏推高了价格，也推高了家庭为支付住所而必须预留的收入比例——这一问题近年来明显加剧。"
+      },
+      {
+        "es": "Los expertos insisten en que destinar más de un tercio de los ingresos al alquiler sitúa a los hogares en una situación de vulnerabilidad económica, ya que cualquier imprevisto, como una pérdida de empleo o una subida inesperada de precios, puede desequilibrar por completo el presupuesto familiar.",
+        "zh": "专家们强调，将收入的三分之一以上用于租房，会让家庭陷入经济脆弱的境地，因为任何意外——比如失业或物价意外上涨——都可能彻底打破家庭预算的平衡。"
+      },
+      {
+        "es": "El estudio llega en un momento de intenso debate social y político sobre la vivienda en España, donde las manifestaciones contra el precio del alquiler se han multiplicado en los últimos meses en decenas de ciudades, desde Palma hasta Las Palmas, pasando por Madrid y Barcelona.",
+        "zh": "这项研究发布之际，正值西班牙围绕住房问题展开激烈的社会与政治辩论。近几个月来，从帕尔马到拉斯帕尔马斯，再到马德里和巴塞罗那，数十座城市反对租金的抗议活动接连不断。"
+      },
+      {
+        "es": "Los colectivos sociales denuncian que la vivienda ha dejado de ser un derecho para convertirse en un bien de inversión, y reclaman medidas contundentes como la regulación de los precios del alquiler, la limitación de los pisos turísticos y el impulso decidido de la vivienda pública asequible.",
+        "zh": "社会团体谴责住房已不再是一项权利，而变成了一种投资品，并要求采取强硬措施，如规范租金价格、限制旅游公寓，以及大力推进可负担的公共住房。"
+      },
+      {
+        "es": "Frente a ellos, una parte del sector inmobiliario y numerosos propietarios advierten de que los topes de precios pueden reducir aún más la oferta, al desincentivar la puesta en alquiler de viviendas, lo que a la larga agravaría el mismo problema que se pretende resolver.",
+        "zh": "面对他们，部分房地产行业人士和众多房东警告称，价格上限可能进一步减少供给，因为会打消出租房屋的积极性，长期来看反而会加剧本欲解决的问题。"
+      },
+      {
+        "es": "El debate enfrenta así dos visiones contrapuestas: quienes priorizan la protección del inquilino y el acceso a un derecho básico, y quienes defienden la libertad de mercado y temen que la intervención pública distorsione un sector que consideran ya suficientemente regulado y tensionado por la falta de suelo.",
+        "zh": "这场辩论由此呈现出两种对立的观点：一方优先保护租客、保障基本权利的获得；另一方捍卫市场自由，担心公共干预会扭曲这个他们认为已因土地稀缺而十分紧张、且监管已足够严格的行业。"
+      },
+      {
+        "es": "Los analistas coinciden, no obstante, en un punto fundamental: sin un aumento significativo de la oferta de vivienda asequible, tanto en alquiler como en compra, resulta difícil que los precios se moderen a corto plazo, más allá de las medidas de contención que puedan aprobarse desde las administraciones.",
+        "zh": "不过，分析人士在一个基本点上达成共识：如果不大幅增加可负担住房的供给——无论是租赁还是购买——短期内价格很难趋缓，无论政府出台怎样的遏制措施。"
+      },
+      {
+        "es": "El informe de idealista pone cifras a una realidad que millones de españoles viven a diario, especialmente los jóvenes, que ven cómo sus salarios, a menudo precarios, resultan insuficientes para emanciparse y acceder a una vivienda digna sin la ayuda de sus familias.",
+        "zh": "idealista 的这份报告用数据印证了数百万西班牙人——尤其是年轻人——每天都在面对的现实：他们微薄的工资往往不足以让他们独立生活、在不依靠家庭帮助的情况下获得体面的住房。"
+      },
+      {
+        "es": "Las administraciones públicas han respondido con planes de vivienda y ayudas al alquiler, pero los expertos consideran que estas medidas, aunque necesarias, resultan insuficientes frente a la magnitud de un problema estructural que requiere reformas profundas en la fiscalidad, el urbanismo y la regulación del alquiler turístico.",
+        "zh": "公共行政部门以住房计划和租房补贴作为回应，但专家认为，这些措施虽有必要，却不足以应对这一结构性问题——它需要在税收、城市规划以及旅游租赁监管方面进行深层次的改革。"
+      },
+      {
+        "es": "Algunas voces reclaman un gran pacto de Estado por la vivienda que involucre a todas las administraciones, al sector privado y a la sociedad civil, con el objetivo de aumentar de forma sostenida la construcción de vivienda protegida y regular de manera equilibrada el mercado del alquiler.",
+        "zh": "一些声音呼吁达成一项由国家层面主导的住房大协议，让各级政府、私营部门与民间社会共同参与，目标是持续增加保障性住房的建设，并以平衡的方式规范租赁市场。"
+      },
+      {
+        "es": "Mientras tanto, la tensión en el mercado no da tregua, y cada nuevo dato confirma que el acceso a la vivienda se ha convertido, junto al desempleo, en una de las principales preocupaciones de la sociedad española, con efectos sobre la natalidad y la movilidad laboral.",
+        "zh": "与此同时，市场的紧张局势并未缓解，每一次新公布的数据都印证了住房获取问题已与失业一道，成为西班牙社会最主要的担忧之一，并对生育率和劳动力流动产生直接影响。"
+      },
+      {
+        "es": "Los sociólogos advierten de que la dificultad para emanciparse está retrasando la edad de formación de los hogares y condicionando decisiones vitales como tener hijos o cambiar de ciudad por trabajo, lo que a medio plazo puede lastrar el crecimiento económico y agravar el envejecimiento de la población.",
+        "zh": "社会学家警告称，难以独立生活正在推迟人们组建家庭的年龄，并制约着生育、为工作而迁居等重要人生决策，从中期来看可能拖累经济增长，并加剧人口老龄化。"
+      },
+      {
+        "es": "En definitiva, el 39 por ciento de esfuerzo que refleja el estudio no es solo una estadística fría, sino el síntoma de una crisis de acceso a la vivienda que cruza lo económico, lo social y lo generacional, y que exige respuestas a la altura del problema.",
+        "zh": "总之，研究中所反映的 39% 的负担比例并非只是一个冰冷的统计数字，而是住房获取危机的一个症状——这场危机横跨经济、社会与代际层面，需要与之相匹配的应对之策。"
+      },
+      {
+        "es": "El horizonte, según los especialistas, dependerá de la capacidad del país para conjugar el aumento de la oferta, la protección de los inquilinos y la estabilidad del mercado, tres objetivos que deberán abordarse a la vez para evitar que la vivienda se convierta en un privilegio inalcanzable para los jóvenes.",
+        "zh": "在专家看来，前景将取决于国家能否协调好增加供给、保护租客与市场稳定这三重目标——它们必须同时推进，才能避免住房成为年轻人无法企及的特权。"
+      }
+    ],
+    "dele": "B2 考点：<b>虚拟式与条件式</b>（resulta difícil que los precios se moderen; dependerá de...; deberán abordarse）。<b>间接引语与观点引述</b>（los expertos insisten en que...; advierten de que...; reclaman...; denuncian que...）。<b>让步与转折</b>（no obstante, sin embargo, mientras tanto, frente a ellos）。<b>被动与无人称</b>（se mantenga, se ha agravado, se han multiplicado, se pretende resolver）。<b>正式学术语体</b>（esfuerzo, arrendamiento, vulnerabilidad, precariedad, distorsionar, lastrar）。<b>观点辨析</b>（社会团体 vs 房地产业 vs 房东 vs 专家 vs 社会学家）。<b>复杂复合句</b>（关系从句 + 引语从句 + 让步从句叠加）。<b>数据引用</b>（39%, 29%, 45%, 58%, 18%, 30%, 九座省会）。",
+    "hardWords": [
+      {
+        "w": "esfuerzo",
+        "m": "努力；经济负担（占收入的比例）",
+        "ejemplo": "El esfuerzo para acceder a una vivienda ha alcanzado el 39 por ciento de los ingresos.",
+        "analisis": "由动词 esforzar（用力）+ 名词后缀 -o 构成，本义“用力、努力”，在经济/住房语境中特指“某项支出占收入的比例”（esfuerzo financiero）。常见搭配 esfuerzo financiero（经济负担）、esfuerzo de acceso（购房/租房负担）、hacer un esfuerzo（做出努力）。语境义：本文指“租房支出占家庭净收入的百分比”。DELE B2 常考其在住房/经济语篇中的专业含义，与字面义“努力”区分。"
+      },
+      {
+        "w": "arrendamiento",
+        "m": "租赁；租约",
+        "ejemplo": "El esfuerzo en arrendamiento supera los umbrales que los expertos consideran razonables.",
+        "analisis": "由动词 arrendar（出租/承租）+ 名词后缀 -miento 构成，是“租赁”的正式说法。常见搭配 contrato de arrendamiento（租赁合同）、arrendamiento urbano（城市住房租赁）、precio del arrendamiento（租金）。语法上为阳性名词。语境义：本文用正式语体指“租房”。易混淆词：arrendamiento（租赁，正式/法律语）vs alquiler（租赁，日常）vs renta（租金/收入）——DELE B2 常考三者的语体差异。"
+      },
+      {
+        "w": "escasez",
+        "m": "稀缺；匮乏",
+        "ejemplo": "El encarecimiento de los precios se deriva de la escasez de oferta.",
+        "analisis": "由形容词 escaso（稀少的）+ 名词后缀 -ez 构成，指“数量不足”。常见搭配 escasez de oferta（供给稀缺）、escasez de vivienda（住房短缺）、escasez de agua（缺水）。语法上为阴性名词。语境义：本文指“可供出租/出售的住房数量不足”，是推高房价的根本原因。DELE B2 经济语篇高频词，常与 carencia（缺乏）、falta（缺少）辨析。"
+      },
+      {
+        "w": "umbral",
+        "m": "门槛；阈值",
+        "ejemplo": "Nueve capitales superan el límite del 30 por ciento recomendado, muy por encima del umbral de referencia.",
+        "analisis": "源自拉丁语 liminaris，本义“门槛”，引申为“触发某事或判断标准的临界值”。常见搭配 umbral de referencia（参考阈值）、superar el umbral（超过阈值）、umbral de pobreza（贫困线）。语法上为阳性名词。语境义：本文指专家建议的“租金占收入 30%”这一合理界限。DELE B2 常考其比喻义，与 límite（界限）、nivel（水平）辨析。"
+      },
+      {
+        "w": "vulnerabilidad",
+        "m": "脆弱性；易受伤害",
+        "ejemplo": "Destinar más de un tercio de los ingresos al alquiler sitúa a los hogares en una situación de vulnerabilidad económica.",
+        "analisis": "由形容词 vulnerable（脆弱的）+ 名词后缀 -idad 构成，指“容易受到损害的状态”。常见搭配 vulnerabilidad económica（经济脆弱性）、situación de vulnerabilidad（脆弱处境）、vulnerabilidad social（社会脆弱性）。语法上为阴性名词。语境义：本文指家庭因租金负担过重而缺乏抵御风险的能力。DELE B2 社会议题高频词，与 fragilidad（脆弱）、precariedad（不稳定）辨析。"
+      },
+      {
+        "w": "contundente",
+        "m": "有力的；强硬的",
+        "ejemplo": "Los colectivos reclaman medidas contundentes como la regulación de los precios del alquiler.",
+        "analisis": "源自拉丁语 contundere（击打、捣碎），原义“能造成挫伤的”，引申为“有力、强硬、无可辩驳的”。常见搭配 medidas contundentes（强硬措施）、respuesta contundente（有力的回应）、argumento contundente（有力的论据）。语法上为形容词，阴阳同形。语境义：本文指社会团体要求采取“强硬”的政策措施。DELE B2 常考其引申义，与 firme（坚定的）、enérgico（有力的）辨析。"
+      },
+      {
+        "w": "desincentivar",
+        "m": "抑制积极性；打消",
+        "ejemplo": "Los topes de precios pueden desincentivar la puesta en alquiler de viviendas.",
+        "analisis": "由前缀 des-（去除、否定）+ incentivar（激励）构成，指“使失去动力、打消积极性”。常见搭配 desincentivar la inversión（抑制投资）、desincentivar el alquiler（打消出租积极性）。语法上为规则 -ar 动词。语境义：本文指价格上限可能让房东不愿出租房产。易混淆词：desincentivar（抑制积极性）vs incentivar（激励）——DELE B2 常考这对反义词及 des- 前缀的否定含义。"
+      },
+      {
+        "w": "distorsionar",
+        "m": "扭曲；使失真",
+        "ejemplo": "Temen que la intervención pública distorsione un sector ya suficientemente regulado.",
+        "analisis": "源自拉丁语 distorquere，由 dis-（分离）+ torquere（扭转）构成，指“使偏离正常状态、扭曲”。常见搭配 distorsionar el mercado（扭曲市场）、distorsionar la realidad（歪曲现实）、distorsionar la competencia（扭曲竞争）。语法上为规则 -ar 动词。语境义：本文指公共干预可能“扭曲”房地产市场的正常运作。DELE B2 常考其与 alterar（改变）、desvirtuar（使失真）的辨析。"
+      },
+      {
+        "w": "precario",
+        "m": "不稳定的；朝不保夕的",
+        "ejemplo": "Los jóvenes ven cómo sus salarios, a menudo precarios, resultan insuficientes para emanciparse.",
+        "analisis": "源自拉丁语 precarius（靠祈求获得的、不稳定的），词根 prex（祈求），指“不稳固、随时可能失去的”。常见搭配 empleo precario（不稳定就业）、salario precario（微薄/不稳定的工资）、situación precaria（朝不保夕的处境）。语法上为形容词，阴阳同形。语境义：本文指年轻人收入低且不稳定。DELE B2 社会议题常考 precariedad（名词）与 precario（形容词）的词族，及与 temporal（临时的）、inestable（不稳定的）辨析。"
+      },
+      {
+        "w": "lastrar",
+        "m": "拖累；阻碍",
+        "ejemplo": "La dificultad para emanciparse puede lastrar el crecimiento económico a medio plazo.",
+        "analisis": "源自名词 lastre（压舱物、负担），动词化后表示“像压舱物一样拖累、阻碍”。常见搭配 lastrar el crecimiento（拖累增长）、lastrar la economía（拖累经济）、lastrar el futuro（阻碍未来）。语法上为规则 -ar 动词。语境义：本文指住房问题可能“拖累”经济增长。易混淆词：lastrar（拖累，带负面含义）vs impulsar（推动）——DELE B2 常考这对反义词在议论文中的对立使用。"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Qué porcentaje de los ingresos netos destinan las familias españolas al alquiler según el estudio?",
+        "opts": [
+          "El 29 por ciento.",
+          "El 39 por ciento.",
+          "El 45 por ciento.",
+          "El 58 por ciento."
+        ],
+        "ans": 1,
+        "es": "El texto dice (párrafo 1) que el esfuerzo para alquilar “ha alcanzado el 39 por ciento de sus ingresos netos”.",
+        "zh": "原文第 1 段说租房负担“已达到净收入的 39%”，故选 B。此题考查直接定位。"
+      },
+      {
+        "q": "¿Qué capital española exige el mayor esfuerzo económico para alquilar una vivienda de dos habitaciones?",
+        "opts": [
+          "Málaga.",
+          "Valencia.",
+          "Palma.",
+          "Barcelona."
+        ],
+        "ans": 2,
+        "es": "El texto dice (párrafo 3) que “Palma” va “a la cabeza al exigir un 45 por ciento de los ingresos familiares”.",
+        "zh": "原文第 3 段说“帕尔马以占家庭收入 45% 居首”，故选 C（Palma = 帕尔马）。此题考查直接定位。"
+      },
+      {
+        "q": "¿Cuál es, según el portal idealista, la causa principal del encarecimiento de la vivienda?",
+        "opts": [
+          "La escasez de oferta.",
+          "El exceso de demanda extranjera.",
+          "La subida de impuestos.",
+          "La inflación general."
+        ],
+        "ans": 0,
+        "es": "El texto dice (párrafo 2) que “el encarecimiento de los precios, derivado de la escasez de oferta”, y el párrafo 7 lo confirma: “El portal inmobiliario atribuye este fenómeno... a la escasez de oferta”.",
+        "zh": "原文第 2 段说“由于供给稀缺导致的价格上涨”，第 7 段再次确认“该房产门户将这一现象归因于供给稀缺”，故选 A。此题考查直接定位与跨段印证。"
+      },
+      {
+        "q": "¿Qué postura defienden los propietarios y parte del sector inmobiliario frente a los topes de precios?",
+        "opts": [
+          "Que los topes de precios pueden reducir aún más la oferta.",
+          "Que los topes son la única solución.",
+          "Que no tienen ninguna opinión.",
+          "Que apoyan la vivienda pública."
+        ],
+        "ans": 0,
+        "es": "El párrafo 11 expone que los propietarios “advierten de que los topes de precios pueden reducir aún más la oferta, al desincentivar la puesta en alquiler”. Hay que identificar la postura de este actor frente a la de los colectivos sociales.",
+        "zh": "原文第 11 段指出房东“警告称价格上限可能进一步减少供给，因为会打消出租积极性”。需识别这一方与社会团体相对立的立场，故选 A。此题考查观点辨析。"
+      },
+      {
+        "q": "¿Qué efecto puede tener, según los sociólogos, la dificultad para emanciparse?",
+        "opts": [
+          "Puede retrasar la edad de formar hogares y lastrar el crecimiento económico.",
+          "Puede aumentar la natalidad.",
+          "Puede acelerar la movilidad laboral.",
+          "No tiene ningún efecto."
+        ],
+        "ans": 0,
+        "es": "El párrafo 18 es un pasaje complejo que explica que la dificultad para emanciparse “está retrasando la edad de formación de los hogares” y “puede lastrar el crecimiento económico y agravar el envejecimiento”. Hay que desentrañar esta cadena causal.",
+        "zh": "原文第 18 段是一个复杂段落，说明难以独立生活“正在推迟组建家庭的年龄”，并“可能拖累经济增长、加剧人口老龄化”。需理清这条因果链，故选 A。此题考查长句理解。"
+      },
+      {
+        "q": "Según el texto, ¿qué condición comparten los analistas como imprescindible para moderar los precios?",
+        "opts": [
+          "Aumentar significativamente la oferta de vivienda asequible.",
+          "Eliminar todas las ayudas al alquiler.",
+          "Subir los impuestos a los propietarios.",
+          "Congelar la construcción."
+        ],
+        "ans": 0,
+        "es": "El párrafo 13 señala que los analistas coinciden en que “sin un aumento significativo de la oferta de vivienda asequible... resulta difícil que los precios se moderen”. Hay que inferir la condición necesaria a partir de esta oración condicional.",
+        "zh": "原文第 13 段指出分析人士一致认为“如果不大幅增加可负担住房的供给……价格很难趋缓”。需从这一条件句中推断出必要条件，故选 A。此题考查推理判断。"
+      },
+      {
+        "q": "¿Qué visión sobre la vivienda defienden los colectivos sociales frente a la del sector inmobiliario?",
+        "opts": [
+          "Que la vivienda ha dejado de ser un derecho para convertirse en un bien de inversión.",
+          "Que la vivienda es solo un negocio sin importancia.",
+          "Que el mercado se regula solo.",
+          "Que no hace falta regular nada."
+        ],
+        "ans": 0,
+        "es": "Hay que contrastar el párrafo 10 y el párrafo 11: el primero expone que los colectivos “denuncian que la vivienda ha dejado de ser un derecho para convertirse en un bien de inversión”, mientras el segundo presenta la visión opuesta de propietarios y sector. La respuesta exige identificar la tesis de cada bando.",
+        "zh": "需对比原文第 10 段和第 11 段：原文第 10 段说社会团体“谴责住房已不再是权利，而变成了投资品”，原文第 11 段则呈现房东与行业的相反观点。需辨析双方的立场，故选 A。此题考查观点辨析。"
+      },
+      {
+        "q": "¿Qué conclusión general se puede extraer del artículo sobre la crisis de la vivienda en España?",
+        "opts": [
+          "Es un problema resuelto.",
+          "Es una crisis estructural que cruza lo económico, lo social y lo generacional, y exige reformas profundas.",
+          "Solo afecta a las grandes ciudades.",
+          "Se solucionará de forma automática."
+        ],
+        "ans": 1,
+        "es": "Hay que integrar el párrafo 1, el párrafo 5, el párrafo 15, el párrafo 16, el párrafo 18 y el párrafo 19: el estudio revela una España “profundamente desigual”, las medidas son “insuficientes” frente a un problema “estructural” que “cruza lo económico, lo social y lo generacional”, y se reclaman “reformas profundas” e incluso “un gran pacto de Estado”. La conclusión combina toda esta información.",
+        "zh": "需综合原文第 1 段、第 5 段、第 15 段、第 16 段、第 18 段和第 19 段：研究揭示西班牙住房获取“严重不平等”，现有措施对“结构性”问题“不足”，它“横跨经济、社会与代际层面”，需要“深层次改革”乃至“国家大协议”。综合这些信息才能得出答案，故选 B。此题考查跨段落综合。"
+      }
+    ]
+  }
+};

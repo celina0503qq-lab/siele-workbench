@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-28</title>
+<style>
+
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-28</h1>
+    <div class="sub">第16期 · 周五 · 药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>💊 En la farmacia</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>💃 El flamenco: más que un baile</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.europapress.es/economia/laboral-00346/noticia-cada-tres-trabajadores-abierto-cambiar-empleo-proximos-12-meses-20260825121209.html" target="_blank" rel="noopener noreferrer">🔗 Europa Press 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">18 段 · 复合句<//span>
+        <h2>📊 Uno de cada tres trabajadores está abierto a cambiar de empleo</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.europapress.es/illes-balears/noticia-gob-terraferida-piden-acabar-alquiler-turistico-no-urbanizar-suelo-rustico-respuesta-26j-20260804114838.html" target="_blank" rel="noopener noreferrer">🔗 Europa Press 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">20 段 · 议论文体<//span>
+        <h2>🏝️ Mallorca frente a la masificación turística</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-28（星期五） · 每 4 天自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-28.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== 测试持久化模块 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage 写入失败:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '✓ 正确！' : '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('确定要重做 ' + level.toUpperCase() + ' 的全部题目吗？\n历史记录将被保留。')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [{"lema":"farmacia","ipa":"[faɾˈma.θja]","pos":"f.","significado":"药店；药房（出售药品的地方）","ejemplo_es":"Por la mañana voy a la farmacia a comprar unas pastillas para el dolor de cabeza.","ejemplo_zh":"早上我去药店买一些治头痛的药片。","tip":"<b>farmacia</b> = 药店。<b>farmacéutico/a</b> = 药剂师。<b>ir a la farmacia</b> = 去药店。<b>medicamento</b> = 药品。A1 健康场景核心词。"},{"lema":"receta","ipa":"[reˈθe.ta]","pos":"f.","significado":"处方；食谱（医生开的药方）","ejemplo_es":"El médico me ha dado una receta para comprar este jarabe en la farmacia.","ejemplo_zh":"医生给我开了一张处方，让我去药店买这种糖浆。","tip":"<b>receta</b> = 处方/食谱。<b>receta médica</b> = 医疗处方。<b>recetar</b> = 开药方。<b>necesitar receta</b> = 需要处方。A1 健康场景高频词。"},{"lema":"jarabe","ipa":"[xaˈɾa.βe]","pos":"m.","significado":"糖浆（液体药品，常带甜味）","ejemplo_es":"Este jarabe es para la tos; toma una cucharada tres veces al día.","ejemplo_zh":"这种糖浆是治咳嗽的；每天服三次，每次一勺。","tip":"<b>jarabe</b> = 糖浆。<b>jarabe para la tos</b> = 止咳糖浆。<b>cucharada</b> = 一勺。<b>pastilla</b> = 药片。A1 健康场景词。"},{"lema":"flamenco","ipa":"[flaˈmeŋ.ko]","pos":"m.","significado":"弗拉门戈（西班牙安达卢西亚的传统音乐与舞蹈）","ejemplo_es":"El flamenco combina el cante, la guitarra y el baile en una expresión llena de emoción.","ejemplo_zh":"弗拉门戈把歌唱、吉他和舞蹈结合在一起，充满情感的表达。","tip":"<b>flamenco</b> = 弗拉门戈。<b>cante flamenco</b> = 弗拉门戈歌唱。<b>baile flamenco</b> = 弗拉门戈舞蹈。<b>tablao</b> = 表演场所。A2 文化话题核心词。"},{"lema":"guitarra","ipa":"[giˈta.ra]","pos":"f.","significado":"吉他（弦乐器）","ejemplo_es":"El guitarrista toca la guitarra con los dedos y acompaña el cante del artista.","ejemplo_zh":"吉他手用手指弹奏吉他，为艺术家的演唱伴奏。","tip":"<b>guitarra</b> = 吉他。<b>guitarrista</b> = 吉他手。<b>tocar la guitarra</b> = 弹吉他。<b>cuerda</b> = 弦。A2 文化话题词。"},{"lema":"ritmo","ipa":"[ˈrit.mo]","pos":"m.","significado":"节奏；韵律（音乐的速度与节拍）","ejemplo_es":"Las palmas marcan el ritmo del baile flamenco en el tablao.","ejemplo_zh":"拍手声在表演场地里为弗拉门戈舞蹈打着节奏。","tip":"<b>ritmo</b> = 节奏。<b>a ritmo de</b> = 随着……的节奏。<b>marcar el ritmo</b> = 打拍子。<b>compás</b> = 节拍（弗拉门戈术语）。A2 文化话题词。"},{"lema":"emoción","ipa":"[e.moˈθjon]","pos":"f.","significado":"情感；情绪（强烈的内心感受）","ejemplo_es":"El flamenco transmite emociones profundas como la alegría, la pena y el amor.","ejemplo_zh":"弗拉门戈传达着深刻的情感，如喜悦、忧伤与爱。","tip":"<b>emoción</b> = 情感。<b>emocionante</b> = 令人激动的。<b>sentimiento</b> = 感情。<b>transmitir emociones</b> = 传达情感。A2 文化话题高频词。"},{"lema":"rotación","ipa":"[ro.taˈθjon]","pos":"f.","significado":"流动；轮换（员工更替率）","ejemplo_es":"España lidera la rotación laboral de la Unión Europea, según los últimos informes.","ejemplo_zh":"根据最新报告，西班牙的人员流动率在欧盟名列前茅。","tip":"<b>rotación</b> = 流动/轮换。<b>rotación laboral</b> = 员工流动率。<b>rotar</b> = 轮换。<b>alta rotación</b> = 高流动率。B1 职场话题高频词。"},{"lema":"talento","ipa":"[taˈlen.to]","pos":"m.","significado":"人才；天赋（出色的能力或人才）","ejemplo_es":"Las empresas necesitan atraer y retener talento para mantener su competitividad.","ejemplo_zh":"企业需要吸引并留住人才以保持竞争力。","tip":"<b>talento</b> = 人才/天赋。<b>atraer talento</b> = 吸引人才。<b>retener el talento</b> = 留住人才。<b>talentoso</b> = 有天赋的。B1 职场话题核心词。"},{"lema":"conciliación","ipa":"[kon.θi.ljaˈθjon]","pos":"f.","significado":"平衡；调和（尤指工作与家庭生活的平衡）","ejemplo_es":"La conciliación entre la vida laboral y familiar pesa cada vez más en las decisiones de los trabajadores.","ejemplo_zh":"工作与家庭生活的平衡在劳动者的决策中越来越重要。","tip":"<b>conciliación</b> = 平衡/调和。<b>conciliar la vida laboral y familiar</b> = 兼顾工作与家庭。<b>flexibilidad</b> = 灵活性。B1 职场话题高频词。"},{"lema":"bienestar","ipa":"[bjen.esˈtaɾ]","pos":"m.","significado":"福祉；幸福感（身心良好的状态）","ejemplo_es":"La salud mental y el bienestar emocional ganan peso entre quienes buscan cambiar de empleo.","ejemplo_zh":"心理健康和情绪福祉在寻求换工作的人群中越来越受重视。","tip":"<b>bienestar</b> = 福祉/幸福。<b>estar bien</b> = 状态好。<b>bienestar emocional</b> = 情绪健康。<b>calidad de vida</b> = 生活质量。B1 职场话题词。"},{"lema":"masificación","ipa":"[ma.si.fi.kaˈθjon]","pos":"f.","significado":"过度拥挤；人满为患（大量人群聚集）","ejemplo_es":"La masificación turística satura las playas y encarece la vivienda en las islas.","ejemplo_zh":"旅游过度拥挤使海滩人满为患，也让岛上的住房价格上涨。","tip":"<b>masificación</b> = 过度拥挤。<b>masificar</b> = 使拥挤。<b>masificado</b> = 拥挤的。<b>masa</b> = 人群。B2 社会议题核心词。"},{"lema":"alquiler turístico","ipa":"[al.kiˈleɾ tuˈɾis.ti.ko]","pos":"m.","significado":"旅游租赁（面向游客的短租住房）","ejemplo_es":"Las entidades piden acabar con el alquiler turístico para recuperar viviendas para los residentes.","ejemplo_zh":"环保组织要求终结旅游租赁，把住房还给居民。","tip":"<b>alquiler turístico</b> = 旅游租赁。<b>vivienda vacacional</b> = 度假房。<b>piso turístico</b> = 旅游公寓。<b>plataforma</b> = 短租平台。B2 住房/旅游话题高频词。"},{"lema":"moratoria","ipa":"[mo.ɾaˈto.ɾja]","pos":"f.","significado":"暂停令；暂缓期（暂停某项活动的正式决定）","ejemplo_es":"Las organizaciones piden una moratoria inmediata a la construcción de nuevas piscinas.","ejemplo_zh":"环保组织要求立即暂停新建游泳池。","tip":"<b>moratoria</b> = 暂停令/暂缓期。<b>moratoria a/para</b> = 对……的暂停。<b>prohibición</b> = 禁令。<b>suspender</b> = 暂停。B2 政策语篇高频词。"},{"lema":"tensión","ipa":"[tenˈsjon]","pos":"f.","significado":"紧张；压力（关系或局面的紧绷状态）","ejemplo_es":"La tensión entre el crecimiento turístico y la vida de los residentes define el debate en Mallorca.","ejemplo_zh":"旅游增长与居民生活之间的紧张关系，构成了马略卡辩论的核心。","tip":"<b>tensión</b> = 紧张/压力。<b>zona tensionada</b> = 紧张区域（住房政策术语）。<b>tenso</b> = 紧张的。<b>aliviar la tensión</b> = 缓解紧张。B2 社会议题词。"}];
+
+const ARTICLES = {"a1":{"paragraphs":[{"es":"Hoy es miércoles por la mañana. Marta se levanta con un fuerte dolor de cabeza y un poco de fiebre.","zh":"今天是星期三早上。玛尔塔起床时头痛得厉害，还发着一点烧。"},{"es":"Su madre la mira y le dice: —No tienes buena cara, Marta. Creo que debes ir a la farmacia.","zh":"妈妈看了看她说：—玛尔塔，你脸色不太好。我觉得你应该去趟药店。"},{"es":"Marta se viste y sale de casa. La farmacia del barrio está cerca, a solo dos calles de su casa.","zh":"玛尔塔穿好衣服出了门。街区的药店很近，离她家只有两条街。"},{"es":"—Buenos días. Necesito algo para el dolor de cabeza y la fiebre, por favor —dice Marta a la farmacéutica.","zh":"—早上好。我需要一些治头痛和发烧的药，麻烦您—玛尔塔对药剂师说。"},{"es":"—¿Tiene fiebre? ¿Cuánto marca el termómetro? —pregunta la farmacéutica con atención.","zh":"—您发烧吗？体温计显示多少度？—药剂师关切地问。"},{"es":"—Esta mañana marcaba 38 grados. También tengo tos desde hace dos días —responde Marta.","zh":"—今天早上显示 38 度。而且我咳嗽已经两天了—玛尔塔回答。"},{"es":"—Entonces le recomiendo este jarabe para la tos y estas pastillas para la fiebre. Son muy eficaces.","zh":"—那我推荐这种止咳糖浆和这些退烧药片。它们非常有效。"},{"es":"—¿Necesito receta médica para estos medicamentos? —pregunta Marta. —No, no la necesita. Son de venta libre.","zh":"—这些药需要医生处方吗？—玛尔塔问。—不，不需要。它们是非处方药。"},{"es":"Marta paga veintitrés euros con cincuenta céntimos y guarda las bolsas en su mochila.","zh":"玛尔塔付了二十三欧元五十欧分，把袋子放进背包里。"},{"es":"En casa, Marta toma una cucharada de jarabe y una pastilla. Ahora se siente mejor y descansa en el sofá.","zh":"回到家里，玛尔塔喝了一勺糖浆，吃了一片药。现在她感觉好多了，在沙发上休息。"}],"dele":"A1 考点：<b>陈述式现在时</b> — 规则动词（levantarse, mirar, preguntar, pagar, descansar）与不规则动词（decir→dice, poder→puede, tener→tiene, salir→sale）。<b>自复动词</b>（se levanta, se viste, se siente）。<b>直接引语</b>用破折号（—Buenos días...）。<b>祈使句与建议</b>（debes ir, le recomiendo...）。<b>疑问句</b>（¿Tiene fiebre? ¿Cuánto marca?）。<b>数字与价格</b>（38 grados, 23,50 euros）。<b>地点表达</b>（en la farmacia, cerca, a dos calles）。","hardWords":[{"w":"farmacia","m":"药店"},{"w":"receta","m":"处方"},{"w":"termómetro","m":"体温计"},{"w":"jarabe","m":"糖浆"},{"w":"farmacéutica","m":"药剂师（女）"}],"quiz":[{"q":"¿Por qué se levanta Marta con dolor de cabeza y fiebre?","opts":["Porque durmió mal.","Porque está enferma.","Porque comió mucho.","Porque trabajó mucho."],"ans":1,"es":"El texto dice (párrafo 1) que Marta “se levanta con un fuerte dolor de cabeza y un poco de fiebre”, y su madre le dice que “debe ir a la farmacia”, lo que indica que está enferma.","zh":"原文第 1 段说玛尔塔“起床时头痛得厉害，还发着一点烧”，妈妈让她去药店，说明她生病了，故选 B。此题考查推理判断。"},{"q":"¿Qué le recomienda la farmacéutica para la tos?","opts":["Unas pastillas.","Un jarabe.","Una inyección.","Unas vitaminas."],"ans":1,"es":"El texto dice (párrafo 7) que la farmacéutica le recomienda “este jarabe para la tos y estas pastillas para la fiebre”.","zh":"原文第 7 段说药剂师推荐“这种止咳糖浆和这些退烧药片”，治咳嗽的是糖浆，故选 B。此题考查直接定位。"},{"q":"¿Qué temperatura tenía Marta por la mañana?","opts":["36 grados.","37 grados.","38 grados.","39 grados."],"ans":2,"es":"El texto dice (párrafo 6) que Marta responde: “Esta mañana marcaba 38 grados”.","zh":"原文第 6 段玛尔塔回答“今天早上显示 38 度”，故选 C。此题考查直接定位。"},{"q":"¿Necesita Marta receta médica para los medicamentos?","opts":["Sí, siempre.","No, son de venta libre.","Solo para el jarabe.","Solo para las pastillas."],"ans":1,"es":"El texto dice (párrafo 8) que la farmacéutica responde: “No, no la necesita. Son de venta libre”.","zh":"原文第 8 段药剂师回答“不，不需要。它们是非处方药”，故选 B（venta libre = 非处方）。此题考查直接定位。"},{"q":"¿Cuánto paga Marta en la farmacia?","opts":["Veinte euros.","Veintitrés euros con cincuenta céntimos.","Treinta euros.","Quince euros con veinte céntimos."],"ans":1,"es":"El texto dice (párrafo 9) que “Marta paga veintitrés euros con cincuenta céntimos”.","zh":"原文第 9 段说“玛尔塔付了二十三欧元五十欧分”，故选 B。此题考查直接定位。"}]},"a2":{"paragraphs":[{"es":"El flamenco es una de las expresiones culturales más conocidas de España, nacida en Andalucía hace más de dos siglos.","zh":"弗拉门戈是西班牙最著名的文化表现形式之一，诞生于安达卢西亚，已有两百多年历史。"},{"es":"No es solo un baile: es una combinación única de cante, guitarra, baile y palmas que transmite emociones muy profundas.","zh":"它不只是舞蹈：而是歌唱、吉他、舞蹈和拍手声的独特结合，传达着非常深刻的情感。"},{"es":"El cante es la voz del flamenco. A través de la letra, el artista expresa la alegría, la pena, el amor y la soledad.","zh":"歌唱是弗拉门戈的声音。通过歌词，艺术家表达着喜悦、忧伤、爱与孤独。"},{"es":"La guitarra acompaña al cante con melodías que cambian de ritmo. El guitarrista usa los dedos y las uñas para tocar.","zh":"吉他用变换节奏的旋律为歌唱伴奏。吉他手用手指和指甲弹奏。"},{"es":"El baile flamenco se caracteriza por el zapateado, los giros y los movimientos de brazos, siempre con mucha fuerza.","zh":"弗拉门戈舞蹈以跺脚、旋转和手臂动作为特点，总是充满力量。"},{"es":"Las palmas marcan el compás y animan a los artistas. El público también participa con gritos de ánimo como “¡olé!”.","zh":"拍手声打着节拍，为艺术家们鼓劲。观众也会用“¡olé!”这样的喝彩声参与其中。"},{"es":"En los tablaos de Sevilla, Granada y Madrid, artistas de todo el mundo ofrecen espectáculos cada noche a los turistas.","zh":"在塞维利亚、格拉纳达和马德里的弗拉门戈表演场里，来自世界各地的艺术家每晚为游客献上演出。"},{"es":"Además, el flamenco se enseña en escuelas y conservatorios, y cada año llegan estudiantes extranjeros para aprenderlo.","zh":"此外，弗拉门戈还在学校和音乐学院教授，每年都有外国学生前来学习。"},{"es":"La UNESCO declaró el flamenco Patrimonio Cultural Inmaterial de la Humanidad en 2010, un gran reconocimiento mundial.","zh":"2010 年，联合国教科文组织将弗拉门戈列为人类非物质文化遗产，这是巨大的国际认可。"},{"es":"Si viajas a España, no dejes de ver un espectáculo de flamenco. Es una experiencia que no podrás olvidar.","zh":"如果你去西班牙旅行，一定要看一场弗拉门戈表演。那将是你无法忘记的体验。"}],"dele":"A2 考点：<b>无人称与被动结构</b>（se caracteriza, se enseña, se declara）— 描述事物特征与常规行为。<b>动词 gustar 类结构</b>（transmite, acompaña, anima）。<b>副动词</b>（cambiando, siempre con mucha fuerza）。<b>关系从句</b>（que cambian de ritmo; que no podrás olvidar）。<b>时间与地点表达</b>（hace más de dos siglos, en los tablaos, cada noche）。<b>文化专有名词</b>（cante, zapateado, tablao, olé, UNESCO）。<b>祈使句</b>（no dejes de ver）。","hardWords":[{"w":"cante","m":"弗拉门戈歌唱"},{"w":"zapateado","m":"跺脚舞步"},{"w":"tablao","m":"弗拉门戈表演场所"},{"w":"compás","m":"节拍；拍子"},{"w":"patrimonio","m":"遗产；财富"}],"quiz":[{"q":"¿Dónde nació el flamenco?","opts":["En Madrid.","En Cataluña.","En Andalucía.","En el País Vasco."],"ans":2,"es":"El texto dice (párrafo 1) que el flamenco “nació en Andalucía hace más de dos siglos”.","zh":"原文第 1 段说弗拉门戈“诞生于安达卢西亚，已有两百多年历史”，故选 C。此题考查直接定位。"},{"q":"¿Qué elementos combina el flamenco?","opts":["Cante, guitarra, baile y palmas.","Piano, violín y orquesta.","Rap y electrónica.","Ópera y ballet clásico."],"ans":0,"es":"El texto dice (párrafo 2) que el flamenco es “una combinación única de cante, guitarra, baile y palmas”.","zh":"原文第 2 段说弗拉门戈是“歌唱、吉他、舞蹈和拍手声的独特结合”，故选 A。此题考查直接定位。"},{"q":"¿Qué expresa el cante flamenco a través de la letra?","opts":["La alegría, la pena, el amor y la soledad.","Solo la tristeza.","El deporte y la guerra.","La política y la economía."],"ans":0,"es":"El texto dice (párrafo 3) que el artista “expresa la alegría, la pena, el amor y la soledad”.","zh":"原文第 3 段说艺术家“表达着喜悦、忧伤、爱与孤独”，故选 A。此题考查直接定位。"},{"q":"¿Cómo participa el público en un espectáculo de flamenco?","opts":["Con palmas y gritos como “¡olé!”.","Con silencio total.","Con aplausos solo al final.","Con comida y bebida."],"ans":0,"es":"El texto dice (párrafo 6) que el público “participa con gritos de ánimo como “¡olé!”” y que las palmas animan a los artistas.","zh":"原文第 6 段说观众“用‘¡olé!’这样的喝彩声参与其中”，拍手声为艺术家鼓劲，故选 A。此题考查直接定位。"},{"q":"¿Qué reconoció la UNESCO sobre el flamenco en 2010?","opts":["Lo declaró Patrimonio Cultural Inmaterial de la Humanidad.","Lo declaró deporte olímpico.","Lo prohibió en los tablaos.","Lo convirtió en música clásica."],"ans":0,"es":"El texto dice (párrafo 9) que “la UNESCO declaró el flamenco Patrimonio Cultural Inmaterial de la Humanidad en 2010”.","zh":"原文第 9 段说“2010 年，联合国教科文组织将弗拉门戈列为人类非物质文化遗产”，故选 A。此题考查直接定位。"}]},"b1":{"paragraphs":[{"es":"Uno de cada tres trabajadores en España busca o está abierto a cambiar de empleo en los próximos doce meses, según el informe sobre intención de cambio de empleo de InfoJobs, que dibuja un mercado laboral en movimiento.","zh":"根据 InfoJobs 关于换工作意向的报告，西班牙每三名劳动者中就有一人正在寻找或愿意在未来十二个月内换工作，报告描绘了一个流动的劳动力市场。"},{"es":"El 34 por ciento de los ocupados muestra esta predisposición, y de ellos un 9 por ciento se encuentra en búsqueda activa mientras que un 25 por ciento se mantiene receptivo a nuevas oportunidades laborales, según el portal de empleo.","zh":"34% 的在职者表现出这种倾向，其中 9% 正在积极寻找，而 25% 对新工作机会持开放态度，该招聘门户表示。"},{"es":"Esta predisposición se produce en un mercado marcado por una elevada rotación, con España a la cabeza de la Unión Europea en este aspecto, lo que revela un escenario de cambio constante para empresas y trabajadores.","zh":"这种倾向出现在人员流动率很高的市场背景下，西班牙在这一指标上位居欧盟前列，这揭示了企业和劳动者面临不断变化的局面。"},{"es":"El salario continúa siendo el principal motivo para plantearse un cambio de trabajo, citado por el 48 por ciento de quienes contemplan dejar su puesto, según los datos recogidos por el informe de la plataforma.","zh":"薪资仍是考虑换工作的首要原因，48% 的考虑离职者提到这一点，该平台的报告数据如此显示。"},{"es":"No obstante, también adquieren relevancia factores relacionados con el bienestar y la satisfacción profesional, como la salud mental, señalada por el 23 por ciento, y la búsqueda de un proyecto más motivador, citada por un 22 por ciento de los encuestados.","zh":"然而，与福祉和职业满意度相关的因素也越来越重要，例如 23% 的受访者提到的心理健康，以及 22% 提到的寻找更有动力的项目。"},{"es":"La conciliación entre la vida laboral y familiar pesa para un 20 por ciento de quienes desean cambiar, el mismo porcentaje que señala un empleo con menor nivel de estrés, dos factores que han ganado peso frente a años anteriores.","zh":"20% 的想换工作者看重工作与家庭的平衡，同样比例的人提到压力更小的职位，这两个因素与往年相比权重上升。"},{"es":"La cercanía al domicilio, salir de un entorno laboral tóxico y acceder al teletrabajo son otros factores destacados que completan el retrato de las motivaciones de los trabajadores españoles, según detalla el informe de la plataforma de empleo.","zh":"住所距离近、离开有毒的工作环境和获得远程办公机会是其他突出因素，共同描绘了西班牙劳动者的动机全貌，招聘平台的报告如此详述。"},{"es":"Por edades, el 65 por ciento de los trabajadores de entre 16 y 24 años está abierto a cambiar de empleo, frente al 46 por ciento de quienes tienen entre 25 y 34 años y el 38 por ciento de los de 35 a 44 años.","zh":"按年龄段看，16 至 24 岁的劳动者中有 65% 愿意换工作，而 25 至 34 岁为 46%，35 至 44 岁为 38%。"},{"es":"El porcentaje desciende hasta el 17 por ciento entre los ocupados de 55 a 65 años, lo que confirma que la disposición a cambiar de puesto disminuye de forma clara con la edad, según los datos del estudio.","zh":"55 至 65 岁的在职者中，这一比例降至 17%，这证实了换工作的意愿随年龄增长而明显下降，研究数据如此显示。"},{"es":"Entre los más jóvenes, además, destaca la búsqueda de nuevas oportunidades profesionales: un 28 por ciento de quienes se plantean cambiar señala la posibilidad de trabajar en otro sector o dar un giro a su trayectoria.","zh":"此外，在年轻人中，寻找新职业机会尤为突出：28% 的考虑换工作者提到可能去另一个行业工作或改变职业轨迹。"},{"es":"El informe también refleja diferencias entre quienes ya buscan empleo y quienes simplemente están receptivos a nuevas ofertas, dos grupos con prioridades distintas a la hora de valorar un posible cambio profesional y laboral futuro.","zh":"报告还反映了正在找工作的人与仅对新机会持开放态度的人之间的差异，这两个群体在评估未来可能的职业与工作改变时优先级不同。"},{"es":"Entre los primeros pesa especialmente el deseo de abandonar un ambiente laboral tóxico, señalado por el 22 por ciento, y trabajar con personas inspiradoras, un factor que menciona el 12 por ciento de los encuestados en búsqueda activa.","zh":"在积极找工作的人中，离开有毒工作环境的愿望尤其重要，22% 提到这一点，而 12% 的受访者提到与有灵感的人共事。"},{"es":"En cambio, entre quienes todavía no buscan activamente adquieren mayor importancia la posibilidad de ampliar competencias, citada por el 18 por ciento, y contar con mayor flexibilidad, un factor que señala el 19 por ciento de este grupo.","zh":"相比之下，在尚未积极找工作的人中，扩展能力的机会（18% 提到）和拥有更大灵活性（19% 提到）更为重要。"},{"es":"Por comunidades autónomas, Madrid presenta la mayor predisposición al cambio, con un 37 por ciento de trabajadores abiertos a nuevas oportunidades y un 13 por ciento en búsqueda activa, según los datos regionales del informe.","zh":"按自治区看，马德里换工作的意愿最高，37% 的劳动者对新机会持开放态度，13% 在积极寻找，报告的地区数据显示。"},{"es":"Le siguen Cataluña, con un 36 por ciento, y el País Vasco, con un 35 por ciento, mientras que Andalucía y la Comunidad Valenciana se sitúan en el 34 por ciento, en línea con la media nacional.","zh":"加泰罗尼亚以 36% 紧随其后，巴斯克地区为 35%，而安达卢西亚和瓦伦西亚大区为 34%，与全国平均水平持平。"},{"es":"La directora de Comunicación y Estudios de InfoJobs, Mónica Pérez, considera que esta situación supone un reto para las empresas, que deben prestar atención no solo a la retribución, sino también a otros factores clave del empleo.","zh":"InfoJobs 传播与研究室主任莫妮卡·佩雷斯认为，这种情况对企业构成挑战，企业不仅应关注薪酬，还应关注就业的其他关键因素。"},{"es":"Según Pérez, las compañías deben cuidar las oportunidades de desarrollo, la conciliación, la salud mental y la creación de entornos laborales satisfactorios para atraer y retener talento en un mercado tan competitivo como el actual.","zh":"据佩雷斯称，企业必须重视发展机会、工作生活平衡、心理健康以及营造令人满意的工作环境，才能在当今如此竞争激烈的市场中吸引并留住人才。"},{"es":"En definitiva, el informe confirma que la fidelidad de los trabajadores ya no se compra solo con el sueldo, y que el bienestar emocional se ha convertido en una pieza clave de la ecuación laboral del país.","zh":"总之，报告证实，劳动者的忠诚已不能只用薪水买到，情绪福祉已成为这个国家职场方程式的关键一环。"}],"dele":"B1 考点：<b>数字与百分比表达</b>（34%, 48%, 65%, 46%, 38%, 17%, 28%, 22%, 12%, 18%, 19%, 37%, 36%, 35%）。<b>无人称与被动</b>（se produce, se encuentra, se plantea, se sitúan）。<b>让步与对比</b>（no obstante, en cambio, frente a, mientras que, según）。<b>关系从句</b>（quienes contemplan dejar su puesto; un factor que menciona...）。<b>引语转述</b>（considera que..., según Pérez...）。<b>条件与假设</b>（a la hora de valorar un posible cambio）。<b>专有名词与机构</b>（InfoJobs, Mónica Pérez, Unión Europea, comunidades autónomas）。","hardWords":[{"w":"rotación","m":"流动；轮换（员工更替率）","ejemplo":"Esta predisposición se produce en un mercado marcado por una elevada rotación, con España a la cabeza de la Unión Europea.","analisis":"源自拉丁语 rotatio，由动词 rotar（轮转）+ 名词后缀 -ción 构成。常见搭配 rotación laboral（员工流动率）、alta rotación（高流动率）、rotación de personal（人员轮换）。语境义：本文指劳动力市场“员工更换频繁”的现象。语法上为阴性名词。DELE B1 职场语篇常考其与 cambio（变化）、movilidad（流动性）的近义辨析。"},{"w":"predisposición","m":"倾向；意愿","ejemplo":"Madrid presenta la mayor predisposición al cambio, con un 37 por ciento de trabajadores abiertos a nuevas oportunidades.","analisis":"由前缀 pre-（预先）+ disposición（安排、意愿）构成，指“事先存在的倾向”。常见搭配 predisposición al cambio（换工作的倾向）、tener predisposición para（有……的天赋/倾向）。语境义：本文指劳动者“换工作的意愿”。语法上为阴性名词。易混淆词：predisposición（倾向）vs disposición（安排/意愿）vs actitud（态度）——DELE B1 常考前缀 pre- 的构词含义。"},{"w":"conciliación","m":"平衡；调和","ejemplo":"La conciliación entre la vida laboral y familiar pesa para un 20 por ciento de quienes desean cambiar.","analisis":"源自拉丁语 conciliatio，由动词 conciliar（调和）+ 后缀 -ción 构成，核心搭配 conciliación laboral y familiar（工作家庭平衡）。语境义：本文指“工作与家庭生活的兼顾”，是职场热点概念。语法上为阴性名词。DELE B1 常考其与 equilibrio（平衡）、flexibilidad（灵活性）的搭配关系，以及动词 conciliar 的用法（conciliar dos cosas）。"},{"w":"bienestar","m":"福祉；幸福","ejemplo":"Factores relacionados con el bienestar y la satisfacción profesional, como la salud mental, adquieren relevancia.","analisis":"由 bien（好）+ estar（状态）复合而成，字面义“处于好的状态”。常见搭配 bienestar emocional（情绪健康）、bienestar social（社会福利）、estado de bienestar（福利国家）。语境义：本文指劳动者对“身心良好状态”的重视。语法上为阳性名词。易混淆词：bienestar（幸福/福祉）vs comodidad（舒适）vs felicidad（快乐）——DELE B1 常考复合名词的构成与使用场景。"},{"w":"tóxico","m":"有毒的；恶劣的（喻指环境有害）","ejemplo":"Salir de un entorno laboral tóxico es un factor destacado entre quienes buscan activamente un cambio.","analisis":"源自希腊语 toxikon（箭毒），经拉丁语 toxicus 进入西班牙语。本义“有毒的”，引申为“有害身心健康的”，如 entorno laboral tóxico（有毒的工作环境）、relación tóxica（有害关系）。语法上为形容词，阴阳同形（tóxico/tóxica）。语境义：本文用比喻义指“令人压抑、有害的工作环境”。DELE B1/B2 常考其引申义与字面义的区别。"},{"w":"retener","m":"留住；保留","ejemplo":"Las empresas deben crear entornos satisfactorios para atraer y retener talento en un mercado competitivo.","analisis":"由前缀 re-（再次）+ tener（持有）构成，指“继续保持拥有”。常见搭配 retener el talento（留住人才）、retener información（保留信息）、retención de personal（人员保留）。语法上为不规则动词（retengo, retienes...）。语境义：本文指企业“留住员工”的能力。DELE B1 常考其与 mantener（保持）、conservar（保存）的近义辨析，以及反义词 perder（流失）。"},{"w":"competencia","m":"能力；竞争力；竞争","ejemplo":"Atraer y retener talento en un mercado tan competitivo exige cuidar el bienestar de los empleados.","analisis":"源自拉丁语 competentia（相称、能力），一词多义：可指“能力”（competencias profesionales）、也可指“竞争”（la competencia entre empresas）。常见搭配 mercado competitivo（竞争市场）、competencia profesional（职业能力）。语境义：本文用 competitive 形容“竞争激烈的市场”。语法上为阴性名词。DELE B1 常考一词多义辨析——在本语境中相关词形 competitivo（竞争的）更为活跃。"},{"w":"encuesta","m":"调查；问卷","ejemplo":"Un 22 por ciento de los encuestados cita la búsqueda de un proyecto más motivador como motivo para cambiar.","analisis":"源自法语 enquête，经西班牙语化后指“调查、问卷”。常见搭配 realizar una encuesta（开展调查）、encuesta de opinión（民意调查）、los encuestados（受访者）。语境义：本文指 InfoJobs 所做的就业意向调查。语法上为阴性名词，派生词 encuestado（受访者）常以复数形式出现。DELE B1 常考其与 estudio（研究）、informe（报告）在调查类语篇中的配合使用。"},{"w":"trayectoria","m":"轨迹；职业生涯","ejemplo":"Un 28 por ciento de quienes se plantean cambiar señala la posibilidad de dar un giro a su trayectoria.","analisis":"由名词 trayectoria（源自拉丁语 traiectus，轨迹）引申指“人生或职业的发展道路”。常见搭配 trayectoria profesional（职业生涯）、trayectoria laboral（工作经历）、dar un giro a la trayectoria（改变职业方向）。语法上为阴性名词。语境义：本文指“职业发展路径”。DELE B1 常考其与 carrera（事业）、experiencia（经验）在求职类语篇中的搭配使用。"}],"quiz":[{"q":"¿Qué porcentaje de trabajadores en España busca o está abierto a cambiar de empleo?","opts":["El 25 por ciento.","El 34 por ciento.","El 48 por ciento.","El 65 por ciento."],"ans":1,"es":"El texto dice (párrafo 1 y párrafo 2) que “uno de cada tres trabajadores” y, más adelante, que “el 34 por ciento de los ocupados muestra esta predisposición”.","zh":"原文第 1 段和第 2 段说“每三名劳动者中就有一人”，随后明确“34% 的在职者表现出这种倾向”，故选 B。此题考查直接定位。"},{"q":"¿Cuál es el principal motivo para cambiar de empleo según el informe?","opts":["La salud mental.","El salario.","El teletrabajo.","La cercanía al domicilio."],"ans":1,"es":"El texto dice (párrafo 4) que “el salario continúa siendo el principal motivo para plantearse un cambio de trabajo, citado por el 48 por ciento”.","zh":"原文第 4 段说“薪资仍是考虑换工作的首要原因，48% 提到”，故选 B。此题考查直接定位。"},{"q":"¿Qué grupo de edad muestra el mayor porcentaje de disposición a cambiar de empleo?","opts":["Los trabajadores de 16 a 24 años.","Los de 25 a 34 años.","Los de 35 a 44 años.","Los de 55 a 65 años."],"ans":0,"es":"El texto dice (párrafo 8) que “el 65 por ciento de los trabajadores de entre 16 y 24 años está abierto a cambiar de empleo”, el porcentaje más alto de todos los grupos citados.","zh":"原文第 8 段说“16 至 24 岁的劳动者中有 65% 愿意换工作”，是所列各组中最高比例，故选 A。此题考查直接定位与比较。"},{"q":"¿Qué factor pesa especialmente entre quienes están en búsqueda activa de empleo?","opts":["Ampliar competencias.","Contar con mayor flexibilidad.","Abandonar un ambiente laboral tóxico.","Trabajar cerca de casa."],"ans":2,"es":"El texto dice (párrafo 12) que “entre los primeros pesa especialmente el deseo de abandonar un ambiente laboral tóxico, señalado por el 22 por ciento”.","zh":"原文第 12 段说“在积极找工作的人中，离开有毒工作环境的愿望尤其重要，22% 提到”，故选 C。此题考查直接定位。"},{"q":"¿Qué comunidad autónoma presenta la mayor predisposición al cambio?","opts":["Cataluña.","Madrid.","El País Vasco.","Andalucía."],"ans":1,"es":"El texto dice (párrafo 14) que “Madrid presenta la mayor predisposición al cambio, con un 37 por ciento de trabajadores”.","zh":"原文第 14 段说“马德里换工作的意愿最高，37% 的劳动者”，故选 B。此题考查直接定位。"},{"q":"¿Qué concluye Mónica Pérez sobre la situación del mercado laboral?","opts":["Que el salario es lo único que importa.","Que supone un reto para las empresas, que deben cuidar también el bienestar y el desarrollo.","Que los trabajadores no quieren cambiar.","Que las empresas deben subir los sueldos sin más."],"ans":1,"es":"El párrafo 16 y el párrafo 17 exponen que Mónica Pérez “considera que esta situación supone un reto para las empresas”, que deben atender “las oportunidades de desarrollo, la conciliación, la salud mental” y no solo “la retribución”. Hay que integrar ambas ideas.","zh":"原文第 16 段和第 17 段说明莫妮卡·佩雷斯“认为这种情况对企业构成挑战”，企业应关注“发展机会、平衡、心理健康”，而非仅“薪酬”。需整合这两段观点，故选 B。此题考查跨段落综合。"},{"q":"Según el informe, ¿qué relación existe entre la edad y la disposición a cambiar de empleo?","opts":["A mayor edad, menor disposición al cambio.","A mayor edad, mayor disposición al cambio.","La edad no influye.","Solo los mayores de 55 quieren cambiar."],"ans":0,"es":"Hay que combinar el párrafo 8 y el párrafo 9: el primero da el 65% de los jóvenes de 16 a 24 años, y el segundo afirma que el porcentaje “desciende hasta el 17 por ciento entre los ocupados de 55 a 65 años”, confirmando que “disminuye con la edad”. La tendencia se infiere de ambos datos.","zh":"需结合原文第 8 段和第 9 段：原文第 8 段给出 16-24 岁的 65%，原文第 9 段说比例“降至 55-65 岁的 17%”，确认“随年龄下降”。从两组数据推断出趋势，故选 A。此题考查推理判断。"},{"q":"¿Qué diferencia existe entre quienes buscan empleo activamente y quienes solo están receptivos?","opts":["Los primeros valoran más la flexibilidad; los segundos, dejar un entorno tóxico.","Los primeros valoran más dejar un entorno tóxico; los segundos, ampliar competencias y flexibilidad.","No hay ninguna diferencia.","Los segundos valoran más el salario."],"ans":1,"es":"El párrafo 12 y el párrafo 13 presentan las dos posturas: entre quienes buscan pesa “abandonar un ambiente laboral tóxico” y trabajar con personas inspiradoras; entre los receptivos, “ampliar competencias” y “mayor flexibilidad”. La respuesta exige contrastar ambos párrafos.","zh":"原文第 12 段和第 13 段分别呈现两种立场：积极找工作者更看重“离开有毒环境”和与有灵感的人共事；持开放态度者更看重“扩展能力”和“更大灵活性”。需对比两段信息，故选 B。此题考查观点辨析。"}]},"b2":{"paragraphs":[{"es":"Las organizaciones ecologistas GOB y Terraferida han reclamado al Govern y al Consell de Mallorca que pongan fin al alquiler turístico y frenen la urbanización del suelo rústico, como respuesta a las reivindicaciones de la manifestación del 26 de julio en Palma.","zh":"环保组织 GOB 与 Terraferida 已向巴利阿里政府和马略卡议会提出要求：终结旅游租赁、遏制乡村土地的城市化，以此回应 7 月 26 日帕尔马游行的诉求。"},{"es":"La vicepresidenta del GOB, Antonina Siquier, ha señalado que la presidenta del Govern, Marga Prohens, y el presidente del Consell de Mallorca, Llorenç Galmés, son a su juicio las dos únicas personas que pueden tomar medidas contra la masificación.","zh":"GOB 副主席安东尼娜·西基耶指出，在她看来，巴利阿里政府主席玛尔加·普罗恩斯和马略卡议会主席略伦斯·加尔梅斯是仅有的两位能够针对过度拥挤采取措施的人。"},{"es":"Según las entidades convocantes, en la protesta del pasado 26 de julio participaron unas 70.000 personas, una cifra que evidencia el malestar de la sociedad balear frente a un modelo económico que consideran insostenible para las islas.","zh":"据组织方称，7 月 26 日的抗议约有 7 万人参加，这一数字证明了巴利阿里社会对被认为对群岛不可持续的经济模式的不满。"},{"es":"Entre las principales propuestas, ambas organizaciones han reclamado acabar con el alquiler turístico para recuperar viviendas destinadas al uso residencial a precios asequibles para la población local, especialmente para los jóvenes y los trabajadores de la isla.","zh":"在主要主张中，两个组织都要求终结旅游租赁，以便把住房恢复为当地居民可负担的居住用途，特别是面向岛上的年轻人和劳动者。"},{"es":"Asimismo, han pedido declarar toda Mallorca como zona de mercado residencial tensionado, una figura legal que permite a las administraciones limitar los precios de los alquileres en las áreas donde la oferta de vivienda resulta insuficiente.","zh":"此外，他们要求宣布整个马略卡为住房市场紧张区域——这是一种允许政府在住房供给不足的地区限制租金价格的法律工具。"},{"es":"Las entidades han solicitado además prohibir nuevas edificaciones residenciales en suelo rústico y decretar una moratoria inmediata a la construcción de nuevas piscinas, para frenar la presión urbanística y el consumo de agua en la isla.","zh":"他们还要求禁止在乡村土地上新建住宅建筑，并立即暂停新建游泳池，以遏制岛上的城市开发压力和水资源消耗。"},{"es":"El debate sobre la masificación turística divide a la sociedad de las islas: mientras unos defienden la diversificación económica y la protección del territorio, otros subrayan que el turismo sostiene el empleo y los ingresos de la región.","zh":"关于旅游过度拥挤的辩论让岛上社会出现分歧：有人主张经济多样化和保护领土，另一些人则强调旅游业支撑着该地区的就业与收入。"},{"es":"La presidenta del Govern, Marga Prohens, ha reconocido en varias ocasiones que la capacidad de algunas zonas de la isla ha llegado al límite, aunque también ha defendido la importancia económica de un sector que genera la mayor parte del empleo local.","zh":"巴利阿里政府主席玛尔加·普罗恩斯多次承认岛上部分地区的承载力已达极限，但她同时也捍卫了创造当地大部分就业的旅游业的重要性。"},{"es":"Por su parte, el sector turístico advierte de que restricciones generalizadas podrían poner en riesgo la estabilidad económica de todo el archipiélago, que depende de forma muy estrecha de la llegada de visitantes internacionales durante todo el año.","zh":"旅游行业则警告说，全面限制可能危及整个群岛的经济稳定，因为群岛全年都高度依赖国际游客的到来。"},{"es":"Los colectivos ecologistas insisten en que no se trata de acabar con el turismo, sino de cambiar un modelo que, en su opinión, convierte el territorio en una mera mercancía y expulsa a los residentes de sus propios pueblos.","zh":"环保团体坚持认为，问题不在于终结旅游业，而在于改变一种在他们看来把领土变成单纯商品、并把居民赶出自己家园的模式。"},{"es":"La vivienda es el centro del conflicto: el crecimiento de los alquileres turísticos ha reducido la oferta disponible para los residentes y ha disparado los precios, dificultando que los trabajadores de la isla puedan vivir cerca de sus empleos.","zh":"住房是冲突的核心：旅游租赁的增长减少了居民可用的房源，推高了价格，使岛上的劳动者难以住在工作地点附近。"},{"es":"Los datos reflejan la magnitud del problema: el precio medio de la vivienda en las Baleares se encuentra entre los más altos de España, y la presión sobre el alquiler sitúa a muchas familias en una situación de vulnerabilidad.","zh":"数据反映了问题的严重性：巴利阿里群岛的房价位居西班牙最高之列，租金压力使许多家庭陷入脆弱境地。"},{"es":"La escasez de agua agrava la situación: las organizaciones denuncian que el recurso escasea para la población mientras se consume de forma intensiva en piscinas y campos de golf vinculados a la industria turística de las islas.","zh":"缺水使局面更加恶化：环保组织谴责说，水资源对居民而言紧缺，却被与群岛旅游业相关的游泳池和高尔夫球场大量消耗。"},{"es":"El movimiento ciudadano que lidera esta protesta, conocido como Menys Turisme, Més Vida, convocó sus primeras manifestaciones en 2024 y ha ido ganando fuerza en los últimos dos años, con el apoyo de decenas de organizaciones sociales.","zh":"领导这场抗议的公民运动“少一点旅游，多一点生活”于 2024 年首次发起示威，近两年在数十个社会组织的支持下不断壮大。"},{"es":"Los expertos en turismo y urbanismo coinciden en que las soluciones deben combinar la regulación de los alquileres turísticos, la construcción de vivienda pública y la diversificación de la economía de las islas, sin depender de medidas aisladas.","zh":"旅游与城市规划专家一致认为，解决方案必须结合旅游租赁监管、公共住房建设和群岛经济多元化，而不是依赖孤立的措施。"},{"es":"Algunos analistas subrayan que la presión social ya ha empezado a producir efectos: varios municipios han aprobado normas para limitar los pisos turísticos y proteger la vivienda residencial, aunque los colectivos las consideran claramente insuficientes.","zh":"一些分析人士强调，社会压力已开始产生效果：多个市镇已通过规范旅游公寓、保护居民住房的规定，尽管环保团体认为这些明显不够。"},{"es":"Otros advierten, sin embargo, de que las medidas restrictivas pueden tener efectos no deseados, como la reducción de la oferta de alojamiento legal y el aumento de la competencia por los recursos entre las propias economías locales.","zh":"然而，也有人警告说，限制性措施可能产生意想不到的后果，例如合法住宿供给减少，以及各地方经济之间对资源的竞争加剧。"},{"es":"El caso de Mallorca se ha convertido en un símbolo del debate global sobre el turismo de masas, y sus decisiones son observadas con atención por otras regiones turísticas de Europa y del mundo que sufren problemas similares.","zh":"马略卡案例已成为全球大众旅游辩论的象征，其决策受到欧洲和世界各地面临类似问题旅游地区的密切关注。"},{"es":"En definitiva, la crisis de la masificación turística en las islas enfrenta dos lógicas difícilmente reconciliables: la del crecimiento económico a corto plazo y la de la sostenibilidad del territorio y de la vida de los residentes a largo plazo.","zh":"总之，群岛的旅游过度拥挤危机让两种难以调和的逻辑正面碰撞：短期经济增长的逻辑，与领土和居民生活长期可持续性的逻辑。"},{"es":"El futuro de Mallorca dependerá de la capacidad de las instituciones para escuchar a la calle y diseñar un modelo que equilibre la actividad turística con el derecho de los habitantes a una vivienda digna y a un territorio habitable.","zh":"马略卡的未来将取决于各机构能否倾听街头的声音，并设计出平衡旅游活动与居民享有体面住房和宜居领土权利的模式。"}],"dele":"B2 考点：<b>虚拟式与条件式</b>（dificultando que los trabajadores puedan vivir; dependerá de...; para que las administraciones limiten...）。<b>观点引述与辨析</b>（el sector advierte de que...; los colectivos insisten en que...; los expertos coinciden en que...; algunos analistas subrayan...; otros advierten...）。<b>让步与转折</b>（por su parte, sin embargo, no obstante, asimismo, en definitiva）。<b>无人称与被动</b>（se ha convertido, son observadas, se consume）。<b>学术语体</b>（reivindicación, urbanización, sostenibilidad, vulnerabilidad, reconciliable）。<b>专有名词与机构</b>（GOB, Terraferida, Menys Turisme Més Vida, Marga Prohens, Antonina Siquier, Govern, Consell）。<b>复杂复合句与数据引用</b>（70.000 personas, precio medio, escasez de agua）。","hardWords":[{"w":"masificación","m":"过度拥挤；人满为患","ejemplo":"Siquier considera que solo dos personas pueden tomar medidas contra la masificación turística de Mallorca.","analisis":"由 masa（人群，源自拉丁语 massa）+ 后缀 -ificar + -ción 构成，指“大量人群聚集造成过度拥挤”。常见搭配 masificación turística（旅游过度拥挤）、masificación urbana（城市拥挤）。语境义：本文指旅游业带来的“人满为患”。语法上为阴性名词。DELE B2 社会议题常考其与 saturación（饱和）、congestión（拥堵）的辨析，及动词 masificar。"},{"w":"reivindicación","m":"诉求；主张","ejemplo":"Las entidades han reclamado medidas como respuesta a las reivindicaciones de la manifestación del 26 de julio.","analisis":"由动词 reivindicar（主张、要求，源自拉丁语 vindicare“伸张”）+ 后缀 -ción 构成。常见搭配 reivindicaciones sociales（社会诉求）、reivindicación laboral（劳工诉求）、hacer reivindicaciones（提出诉求）。语境义：本文指游行民众提出的“政策要求”。语法上为阴性名词。DELE B2 社会/政治语篇高频词，与 demanda（要求）、exigencia（要求）辨析。"},{"w":"urbanización","m":"城市化；土地开发","ejemplo":"Piden frenar la urbanización del suelo rústico para proteger el territorio natural de la isla.","analisis":"由 urbano（城市的）+ 后缀 -izar + -ción 构成，指“把自然/乡村土地转变为城市用地的过程”。常见搭配 urbanización del suelo（土地开发）、presión urbanística（城市开发压力）、desarrollo urbanístico（城市发展）。语境义：本文指在乡村土地上进行“开发建设”。语法上为阴性名词。DELE B2 城市/环境语篇常考其与 construcción（建设）、desarrollo（发展）的搭配关系。"},{"w":"suelo rústico","m":"乡村土地；非城市用地","ejemplo":"Han pedido prohibir nuevas edificaciones residenciales en suelo rústico y proteger los paisajes.","analisis":"由 suelo（土地，源自拉丁语 solum）+ rústico（乡村的，源自拉丁语 rusticus）构成，法律术语指“未被划为城市用地的土地”。常见搭配 suelo rústico protegido（受保护乡村土地）、edificación en suelo rústico（乡村土地上的建设）。语境义：本文指环保组织要求保护的“自然乡村土地”。语法上为阳性名词。DELE B2 城市规划类语篇常见，与 suelo urbano（城市用地）相对。"},{"w":"moratoria","m":"暂停令；暂缓期","ejemplo":"Las organizaciones piden una moratoria inmediata a la construcción de nuevas piscinas en la isla.","analisis":"源自拉丁语 moratorius（使延迟的），由动词 morar（停留、延迟）派生。常见搭配 moratoria a la construcción（建设暂停令）、decretar una moratoria（颁布暂停令）、levantar la moratoria（解除暂停）。语法上为阴性名词。语境义：本文指“立即暂停新建泳池”的正式决定。DELE B2 政策语篇高频词，与 suspensión（暂停）、prohibición（禁令）辨析。"},{"w":"vulnerabilidad","m":"脆弱性；易受伤害","ejemplo":"La presión sobre el alquiler sitúa a muchas familias de las islas en una situación de vulnerabilidad.","analisis":"由形容词 vulnerable（脆弱的）+ 后缀 -idad 构成，指“容易受到伤害的状态”。常见搭配 situación de vulnerabilidad（脆弱处境）、vulnerabilidad económica（经济脆弱性）、grupo vulnerable（弱势群体）。语境义：本文指高租金使家庭“缺乏抵御风险能力”。语法上为阴性名词。DELE B2 社会议题常考其与 riesgo（风险）、inestabilidad（不稳定）的辨析。"},{"w":"sostenibilidad","m":"可持续性","ejemplo":"La lógica de la sostenibilidad del territorio choca con la del crecimiento económico a corto plazo.","analisis":"由 sostener（支撑）+ 后缀 -bilidad 构成，指“长期维持的能力”，是环保与经济议题的核心概念。常见搭配 sostenibilidad ambiental（环境可持续性）、desarrollo sostenible（可持续发展）、sostenibilidad económica（经济可持续性）。语境义：本文指“领土与居民生活长期可持续”。语法上为阴性名词。DELE B2 常考其与 desarrollo sostenible 的固定搭配及形容词 sostenible。"},{"w":"expulsar","m":"驱逐；赶出","ejemplo":"El modelo actual, en opinión de los colectivos, expulsa a los residentes de sus propios pueblos.","analisis":"源自拉丁语 expulsare，由前缀 ex-（向外）+ pulsar（推动）构成，指“把某人从某处赶走”。常见搭配 expulsar a alguien de（把某人从……赶走）、expulsión（名词，驱逐）。语法上为规则 -ar 动词。语境义：本文用引申义指“高房价把居民逼离家乡”。DELE B2 常考其与 echar（赶走）、desplazar（使迁移）的近义辨析及比喻用法。"},{"w":"reconciliable","m":"可调和的；可兼容的","ejemplo":"La crisis enfrenta dos lógicas difícilmente reconciliables: crecimiento económico y sostenibilidad.","analisis":"由前缀 re-（再）+ conciliar（调和）+ 后缀 -able（可……的）构成，指“能够相互调和的”。常见搭配 difícilmente reconciliable（难以调和的）、intereses reconciliables（可调和利益）。语境义：本文指“经济增长”与“可持续性”两种逻辑“难以兼容”。语法上为形容词，阴阳同形。DELE B2 常考其与动词 conciliar 的词族关系及否定前缀的构词。"}],"quiz":[{"q":"¿Qué han reclamado GOB y Terraferida al Govern y al Consell de Mallorca?","opts":["Poner fin al alquiler turístico y frenar la urbanización del suelo rústico.","Aumentar el número de hoteles.","Construir más campos de golf.","Prohibir las manifestaciones."],"ans":0,"es":"El texto dice (párrafo 1) que las organizaciones han reclamado “poner fin al alquiler turístico y frenen la urbanización del suelo rústico”.","zh":"原文第 1 段说这些组织要求“终结旅游租赁、遏制乡村土地的城市化”，故选 A。此题考查直接定位。"},{"q":"¿Cuántas personas participaron en la manifestación del 26 de julio según las entidades convocantes?","opts":["Unas 25.000 personas.","Unas 70.000 personas.","Unas 100.000 personas.","Unas 7.000 personas."],"ans":1,"es":"El texto dice (párrafo 3) que “en la protesta del pasado 26 de julio participaron unas 70.000 personas”.","zh":"原文第 3 段说“7 月 26 日的抗议约有 7 万人参加”，故选 B。此题考查直接定位。"},{"q":"¿Qué figura legal piden para proteger la vivienda residencial?","opts":["La zona de mercado residencial tensionado.","El suelo urbano consolidado.","La moratoria turística.","El impuesto de plusvalía."],"ans":0,"es":"El texto dice (párrafo 5) que han pedido “declarar toda Mallorca como zona de mercado residencial tensionado, una figura legal que permite limitar los precios de los alquileres”.","zh":"原文第 5 段说他们要求“宣布整个马略卡为住房市场紧张区域——一种允许限制租金价格的法律工具”，故选 A。此题考查直接定位。"},{"q":"Según el sector turístico, ¿qué riesgo conllevan las restricciones generalizadas?","opts":["Aumentar la llegada de turistas.","Poner en riesgo la estabilidad económica del archipiélago.","Bajar los precios de la vivienda.","Mejorar el medio ambiente."],"ans":1,"es":"El párrafo 9 expone la postura del sector: advierte de que “restricciones generalizadas podrían poner en riesgo la estabilidad económica de todo el archipiélago”. Hay que identificar la postura de este actor frente a la de los ecologistas.","zh":"原文第 9 段呈现旅游行业的立场：警告“全面限制可能危及整个群岛的经济稳定”。需识别这一方与环保团体对立的观点，故选 B。此题考查观点辨析。"},{"q":"¿Qué denuncian las organizaciones sobre el agua en la isla?","opts":["Que el agua escasea para la población mientras se consume en piscinas y campos de golf.","Que el agua es abundante y no hay problemas.","Que el agua solo se usa para beber.","Que el agua está contaminada por la industria."],"ans":0,"es":"El texto dice (párrafo 13) que las organizaciones denuncian que “el recurso escasea para la población mientras se consume de forma intensiva en piscinas y campos de golf”.","zh":"原文第 13 段说环保组织谴责“水资源对居民而言紧缺，却被游泳池和高尔夫球场大量消耗”，故选 A。此题考查直接定位。"},{"q":"Según los expertos en turismo y urbanismo, ¿qué deben combinar las soluciones al problema?","opts":["Solo la construcción de hoteles.","La regulación de los alquileres turísticos, la vivienda pública y la diversificación económica.","La eliminación total del turismo.","El aumento de los vuelos internacionales."],"ans":1,"es":"El párrafo 15 señala que los expertos coinciden en que las soluciones “deben combinar la regulación de los alquileres turísticos, la construcción de vivienda pública y la diversificación de la economía”. Hay que sintetizar esta lista de medidas.","zh":"原文第 15 段指出专家一致认为解决方案“必须结合旅游租赁监管、公共住房建设和经济多元化”。需综合这份措施清单，故选 B。此题考查长句理解。"},{"q":"¿Qué postura mantienen los colectivos ecologistas frente al turismo?","opts":["Quieren acabar con todo el turismo.","Quieren cambiar el modelo, no acabar con el turismo.","Defienden el crecimiento sin límites.","Apoyan la construcción de más hoteles."],"ans":1,"es":"El párrafo 10 expone que los colectivos “insisten en que no se trata de acabar con el turismo, sino de cambiar un modelo”. Hay que identificar con precisión su tesis para no confundirla con una postura radical.","zh":"原文第 10 段说明环保团体“坚持认为问题不在于终结旅游业，而在于改变模式”。需准确识别其论点，避免与激进立场混淆，故选 B。此题考查推理判断。"},{"q":"¿Qué conclusión general plantea el artículo sobre el futuro de Mallorca?","opts":["Que el futuro depende de equilibrar la actividad turística con el derecho de los habitantes a una vivienda digna y un territorio habitable.","Que el turismo desaparecerá pronto.","Que los residentes deben irse de la isla.","Que no hay solución posible."],"ans":0,"es":"Hay que integrar el párrafo 19 y el párrafo 20: el primero contrasta las dos lógicas “difícilmente reconciliables”, y el segundo concluye que el futuro “dependerá de la capacidad de las instituciones para... equilibrar la actividad turística con el derecho de los habitantes a una vivienda digna”. La respuesta combina ambos pasajes.","zh":"需综合原文第 19 段和第 20 段：原文第 19 段对比两种“难以调和”的逻辑，原文第 20 段总结未来“取决于各机构……平衡旅游活动与居民享有体面住房和宜居领土的权利”。结合两段才能得出答案，故选 A。此题考查跨段落综合。"}]}};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  // 难词清单渲染：B1/B2 有 ejemplo/analisis 时展开显示，A1/A2 及旧数据保持原样
+  const hwHtml = a.hardWords.map(h => {
+    const base = `<code>${esc(h.w)}</code>=${esc(h.m)}`;
+    if (h.ejemplo && h.analisis) {
+      return `<span class="hw-item" style="display:inline-block;margin:2px 0;padding:2px 4px;background:#fafafa;border-radius:4px;">${base}<br><span style="font-size:12px;color:#6a1b9a;">📘 ${esc(h.ejemplo)}</span><br><span style="font-size:12px;color:#555;">🔍 ${esc(h.analisis)}</span></span>`;
+    }
+    return base;
+  }).join(' · ');
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${hwHtml}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${a.quiz.length} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== 恢复已保存的答题状态 + 渲染控件 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">🔄 重做</button>' +
+    '<span class="quiz-stats">' +
+      '已答题 <b>' + historyCount + '</b> 次' +
+      (latest ? ' · 最近正确 <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">📝 笔记</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="记录你的学习笔记..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">✓ 已保存</span>';
+  section.appendChild(notesArea);
+}
+
+// 给每个 quiz 绑定交互
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// 初始化
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+</script>
+</body>
+</html>

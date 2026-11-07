@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-08</title>
+<style>
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-08</h1>
+    <div class="sub">第7期 · 周六 · 夏季集中工时 · 开学季 · 西班牙八月热浪 · 极端高温与城市韧性</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 5 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 5 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://www.rtve.es/grafo/video/dia-mundial-del-cafe-los-espaoles-consumimos/cb38b8d1-2b31-4a40-b342-2d4a7679c378" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🥐 Día mundial del café: los españoles consumimos</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/grafo/en/video/como-ha-cambiado-la-vuelta-al-cole/f43014f2-3dc6-4443-86ad-eaa47517d713" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🌡️ ¿Cómo ha cambiado la vuelta al cole?</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.rtve.es/grafo/en/video/la-ola-de-calor-mantiene-en-aviso-a-gran-parte-de/a3b0b5d8-1dba-48b4-963f-5ee3ddc6cae0" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
+        <h2>📋 La ola de calor mantiene en aviso a gran parte de España</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo/articles/crrvepyp5g2o" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
+        <h2>🏘️ Ciudades frente al calor extremo: el modelo de Phoenix</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-08（星期六） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-08.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== \u6d4b\u9a8c\u6301\u4e45\u5316\u6a21\u5757 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage \u5199\u5165\u5931\u8d25:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '\u2713 \u6b63\u786e\uff01' : '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('\u786e\u5b9a\u8981\u91cd\u505a ' + level.toUpperCase() + ' \u7684\u5168\u90e8\u9898\u76ee\u5417\uff1f\n\u5386\u53f2\u8bb0\u5f55\u5c06\u88ab\u4fdd\u7559\u3002')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+  {
+    lema: "jornada intensiva",
+    ipa: "[xoɾˈna.ða in.tenˈsi.βa]",
+    pos: "f.",
+    significado: "连续工时工作制；夏季集中工时（一天工作 8 小时不午休，下午提前下班）",
+    ejemplo_es: "En julio y agosto, mi empresa tiene jornada intensiva: salimos a las 15:00.",
+    ejemplo_zh: "七八月份，我们公司实行夏季集中工时，下午三点就下班。",
+    tip: "<b>jornada</b> 指\"工作日/工时\"，<b>intensiva</b> 来自 intensivo（密集的）。<b>jornada continua</b>（连续工时无午休）和 <b>jornada partida</b>（上下午分开）是西班牙职场最常见的两种工时制度。A2 考试常考：区别 jornada continua vs partida。"
+  },
+  {
+    lema: "plazo de entrega",
+    ipa: "[ˈpla.θo ðe eŋˈtɾe.ɣa]",
+    pos: "m.",
+    significado: "交付期限；交货期（合同或任务中规定的最晚完成时间）",
+    ejemplo_es: "El plazo de entrega del informe es el viernes que viene.",
+    ejemplo_zh: "报告的交付期限是下周五。",
+    tip: "<b>plazo</b> = 期限，<b>entrega</b> = 交付/递交。<b>dentro del plazo</b>（在期限内）vs <b>fuera de plazo</b>（逾期）。邮件常用句式 \"Quisiera confirmar el plazo de entrega...\" 确认交货期，是职场邮件核心表达。"
+  },
+  {
+    lema: "aprovechar",
+    ipa: "[a.pɾo.βeˈtʃaɾ]",
+    pos: "v.",
+    significado: "利用；充分利用（时间、机会、资源）",
+    ejemplo_es: "Voy a aprovechar el descanso para estudiar un poco de español.",
+    ejemplo_zh: "我打算利用休息时间学一会儿西语。",
+    tip: "核心高频动词。<b>aprovechar algo para + inf.</b>（利用某事做某事）。常见搭配：<b>aprovechar el tiempo / la oferta / la oportunidad</b>。B1 写作常考：和 <b>desaprovechar</b>（浪费）反义对比。西语里 che 发音类似 \"ch\"（英格兰音），勿发成 \"k\"。"
+  },
+  {
+    lema: "atajo",
+    ipa: "[aˈta.xo]",
+    pos: "m.",
+    significado: "捷径；近路（也指电脑/软件的快捷方式）",
+    ejemplo_es: "Si tomamos este atajo, llegaremos en diez minutos en vez de media hora.",
+    ejemplo_zh: "如果我们走这条近路，十分钟就能到，不用半小时。",
+    tip: "本义：地理上的捷径。引申义：解决问题的高效方法、软件的快捷方式（<b>atajo de teclado</b> 键盘快捷键）。口语高频：\"Conozco un atajo.\"（我知道一条近路/诀窍）。注意 <b>atajo</b> 是阳性名词 (el atajo)。"
+  },
+  {
+    lema: "refugio climático",
+    ipa: "[reˈfu.xjo kliˈma.ti.ko]",
+    pos: "m.",
+    significado: "气候避难所；气候庇护地（夏季高温时官方指定的避暑公共场所）",
+    ejemplo_es: "Durante la ola de calor, el ayuntamiento abrió varios refugios climáticos con aire acondicionado.",
+    ejemplo_zh: "热浪期间，市政府开放了几个带空调的气候避难所。",
+    tip: "2024 年起西班牙多个城市推出的新概念。源自 <b>refugio</b>（避难所）+ <b>climático</b>（气候的）。类似概念：<b>isla de calor</b>（热岛效应）。B2 议论文高频词，涉及城市气候适应政策。同类词：<b>ola de calor</b>（热浪）。"
+  }
+];
+
+/* ==================== 文章数据 ==================== */
+const ARTICLES = {
+  a1: {
+    paragraphs: [
+      {es: "En España, mucha gente toma café por la mañana. El café es muy importante.", zh: "在西班牙，很多人早上喝咖啡。咖啡非常重要。"},
+      {es: "A las ocho de la mañana, abro los ojos. Voy a la cocina y enciendo la cafetera.", zh: "早上八点，我睁开眼。我去厨房，打开咖啡机。"},
+      {es: "El sonido de la cafetera me gusta mucho. Es como un buen amigo.", zh: "我很喜欢咖啡机的声音。它像一个好朋友。"},
+      {es: "En la cocina hay una taza azul. Es mi taza favorita. Siempre uso la misma taza.", zh: "厨房里有一个蓝色的杯子。它是我最喜欢的杯子。我总是用同一个杯子。"},
+      {es: "El café huele muy bien. Es un olor cálido y bonito. Me da energía para el día.", zh: "咖啡闻起来很香。是一种温暖又好闻的味道。它给我一天的能量。"},
+      {es: "A veces tomo un café con leche. A veces tomo un café solo. Los dos son muy ricos.", zh: "有时我喝加奶咖啡。有时我喝黑咖啡。两种都很好喝。"},
+      {es: "Mi padre también toma café. Tomamos café juntos. Hablamos un poco del día.", zh: "我爸爸也喝咖啡。我们一起喝。我们聊一点今天的事。"},
+      {es: "Después, leo las noticias en el móvil. El café me ayuda a despertar.", zh: "之后，我在手机上读新闻。咖啡帮助我清醒。"},
+      {es: "A las nueve, salgo de casa para trabajar. El café ya está en mi estómago.", zh: "九点，我出门去上班。咖啡已经在我的胃里了。"},
+      {es: "El café de la mañana es un pequeño placer. Es la mejor forma de empezar el día.", zh: "早上的咖啡是一个小乐趣。它是一天最好的开始方式。"}
+    ],
+    dele: "A1 考点：<b>陈述式现在时</b>(abro, voy, enciendo, tomo, leo)；<b>基数词</b>(ocho, nueve)；<b>钟点表达</b>(A las ocho de la mañana)；<b>指示形容词</b>(esta taza, ese día)；<b>喜好表达</b>(me gusta mucho)。",
+    hardWords: [
+      {w: "cafetera", m: "咖啡机"},
+      {w: "despertar", m: "醒来，使清醒"},
+      {w: "estómago", m: "胃"},
+      {w: "placer", m: "乐趣，愉快"}
+    ],
+    quiz: [
+      {q: "¿A qué hora abre los ojos el protagonista?", opts: ["A las siete","A las ocho","A las nueve","A las diez"], ans: 1, es: "A las ocho de la mañana, abro los ojos. (第三段开头)", zh: "主人公在早上八点睁开眼睛。"},
+      {q: "¿De qué color es su taza favorita?", opts: ["Roja","Verde","Azul","Blanca"], ans: 2, es: "En la cocina hay una taza azul. (第四段)", zh: "他最喜欢的杯子是蓝色的。"},
+      {q: "¿Qué hace después de tomar café con su padre?", opts: ["Cocina","Lee las noticias","Sale a trabajar","Duerme"], ans: 1, es: "Después, leo las noticias en el móvil. (第八段)", zh: "之后他在手机上读新闻。"},
+      {q: "¿Para qué le sirve el café?", opts: ["Para dormir","Para cocinar","Para tener energía y despertar","Para estudiar"], ans: 2, es: "Me da energía para el día. / El café me ayuda a despertar. (第五段、第八段)", zh: "咖啡给他提供能量并帮助清醒。"},
+      {q: "¿Cómo describe el autor el café de la mañana?", opts: ["Una obligación","Un pequeño placer","Un problema","Un trabajo"], ans: 1, es: "El café de la mañana es un pequeño placer. (最后一段)", zh: "作者把早晨的咖啡描述为\"小乐趣\"。"}
+    ]
+  },
+  a2: {
+    paragraphs: [
+      {es: "En España, el mes de septiembre marca la vuelta al cole. Los niños vuelven a la escuela después de las vacaciones de verano.", zh: "在西班牙，九月标志着开学。孩子们在暑假后返回学校。"},
+      {es: "Las familias compran material escolar nuevo: cuadernos, lápices, mochilas y libros de texto.", zh: "家庭购买新的学习用品：笔记本、铅笔、书包和课本。"},
+      {es: "Este año, los precios de los libros han subido un poco. Una familia con dos hijos puede gastar más de trescientos euros.", zh: "今年，书的价格上涨了一点。有两个孩子的家庭可能要花费超过三百欧元。"},
+      {es: "Por eso, muchos padres buscan ofertas en las tiendas. También hay un programa del gobierno para ayudar a las familias.", zh: "因此，许多父母在商店里寻找优惠。也有政府项目帮助这些家庭。"},
+      {es: "El primer día de clase, los niños están nerviosos pero también contentos. Ven a sus amigos después de un mes sin verse.", zh: "开学第一天，孩子们既紧张又开心。他们在一个月没见面后见到了朋友。"},
+      {es: "Algunos llevan ropa nueva, otros llevan la mochila del año pasado. Todos tienen muchas historias de verano que contar.", zh: "一些人穿新衣服，一些人用去年的书包。所有人都有很多暑假故事要分享。"},
+      {es: "Los profesores preparan las aulas con decoración nueva. A veces hay un cartel de \"¡Bienvenidos!\" en la puerta.", zh: "老师们用新的装饰布置教室。有时门上有一张\"欢迎\"的标语。"},
+      {es: "El horario de septiembre es diferente: las clases empiezan a las nueve y terminan a las dos de la tarde.", zh: "九月的作息不同：早上九点开始上课，下午两点结束。"},
+      {es: "Por la tarde, los niños hacen actividades extraescolares: fútbol, inglés, música o robótica.", zh: "下午，孩子们参加课外活动：足球、英语、音乐或机器人。"},
+      {es: "La vuelta al cole significa un nuevo comienzo. Es el momento de aprender cosas nuevas y hacer nuevos amigos.", zh: "开学意味着新的开始。这是学习新事物和结交新朋友的时刻。"}
+    ],
+    dele: "A2 考点：<b>陈述式现在完成时</b>(han subido)；<b>陈述式现在时</b>第三段规则变化；<b>基数词与价格</b>(trescientos euros)；<b>时间副词</b>(después, por la tarde, este año)；<b>原因从句</b>(por eso)；<b>名词性数</b>(niños, hijos, amigos)。",
+    hardWords: [
+      {w: "vuelta al cole", m: "开学（vuelta=返回，cole=colégio 学校口语）"},
+      {w: "material escolar", m: "学习用品"},
+      {w: "mochila", m: "书包"},
+      {w: "extraescolares", m: "课外活动（形容词作名词）"},
+      {w: "aula", m: "教室"}
+    ],
+    quiz: [
+      {q: "¿Cuándo vuelven los niños a la escuela en España?", opts: ["En julio","En agosto","En septiembre","En octubre"], ans: 2, es: "En España, el mes de septiembre marca la vuelta al cole. (第一段)", zh: "西班牙的孩子九月返回学校。"},
+      {q: "¿Cuánto puede gastar una familia con dos hijos en libros?", opts: ["Menos de 100€","Entre 100€ y 200€","Más de 300€","No se dice"], ans: 2, es: "Una familia con dos hijos puede gastar más de trescientos euros. (第三段)", zh: "两个孩子的家庭可能花费超过 300 欧元。"},
+      {q: "¿A qué hora terminan las clases en septiembre?", opts: ["A la una","A las dos","A las tres","A las cuatro"], ans: 1, es: "las clases empiezan a las nueve y terminan a las dos de la tarde. (第八段)", zh: "九月下午两点下课。"},
+      {q: "¿Qué hacen los niños por la tarde?", opts: ["Duermen","Actividades extraescolares","Cocinan","Estudian solos"], ans: 1, es: "Por la tarde, los niños hacen actividades extraescolares: fútbol, inglés, música o robótica. (第九段)", zh: "下午孩子们参加课外活动。"},
+      {q: "¿Cómo se sienten los niños el primer día?", opts: ["Tristes","Enfadados","Nerviosos pero contentos","Enfermos"], ans: 2, es: "los niños están nerviosos pero también contentos. (第五段)", zh: "开学第一天孩子们既紧张又开心。"}
+    ]
+  },
+  b1: {
+    paragraphs: [
+      {es: "España está viviendo una de las olas de calor más intensas de los últimos años. Las temperaturas superan los 40 grados en muchas regiones del sur.", zh: "西班牙正在经历近年来最强烈的热浪之一。南部许多地区的气温超过 40 度。"},
+      {es: "La Agencia Estatal de Meteorología (AEMET) ha activado avisos rojos en ocho comunidades autónomas. Esto significa un riesgo extremo para la salud.", zh: "国家气象局（AEMET）已在 8 个自治区发布了红色预警。这意味着对健康的极端风险。"},
+      {es: "En ciudades como Sevilla y Córdoba, el termómetro ha llegado a marcar 44 grados a la sombra. Es difícil salir a la calle durante el día.", zh: "在塞维利亚和科尔多瓦等城市，阴影处温度计已达到 44 度。白天出门很困难。"},
+      {es: "Las autoridades han abierto refugios climáticos en bibliotecas y centros cívicos. Estos espacios públicos ofrecen aire acondicionado gratuito.", zh: "当局已在图书馆和公民中心开放了气候避难所。这些公共场所提供免费空调。"},
+      {es: "Los hospitales también notan los efectos del calor. Los médicos han atendido a más personas mayores con golpes de calor y problemas cardíacos.", zh: "医院也感受到了热浪的影响。医生已接诊更多患中风和心脏病的老年人。"},
+      {es: "Muchas empresas han adoptado la jornada intensiva durante agosto. Los trabajadores salen a las tres de la tarde para evitar las horas más calurosas.", zh: "许多公司已在八月采用集中工时制。员工下午三点下班以避开最热的时段。"},
+      {es: "En las zonas rurales, los agricultores trabajan desde muy temprano. Salen al campo a las cinco de la mañana y regresan a media mañana.", zh: "在农村地区，农民很早开始工作。他们早上五点下地，上午中途返回。"},
+      {es: "El cambio climático es una de las causas de estas olas de calor más frecuentes. Los científicos dicen que estos fenómenos serán más comunes en el futuro.", zh: "气候变化是这些更频繁热浪的原因之一。科学家表示这些现象在未来会更常见。"},
+      {es: "Algunos expertos recomiendan plantar más árboles en las ciudades. Los árboles dan sombra y reducen la temperatura hasta cinco grados.", zh: "一些专家建议在城市种植更多树木。树木提供阴凉并可将温度降低多达五度。"},
+      {es: "También es importante beber mucha agua y evitar el alcohol durante los días de calor extremo. Las autoridades recomiendan no hacer ejercicio físico al aire libre.", zh: "在极端高温的日子里，多喝水、避免饮酒也很重要。当局建议不要在户外进行体育锻炼。"},
+      {es: "En las playas, los socorristas trabajan doce horas al día para atender a los bañistas. El número de rescates ha aumentado un 30% este verano.", zh: "在海滩上，救生员每天工作十二小时来救助游泳者。今年夏天的救援次数增加了 30%。"},
+      {es: "El consumo de electricidad ha batido récords en muchas ciudades. Los aires acondicionados funcionan al máximo, y la red eléctrica está bajo presión.", zh: "许多城市的用电量打破了纪录。空调满负荷运转，电网承受压力。"},
+      {es: "Para ahorrar energía, el gobierno ha pedido a los comercios que apaguen los escaparates a partir de las diez de la noche.", zh: "为了节约能源，政府已要求商店从晚上十点起关闭橱窗灯。"},
+      {es: "La ola de calor terminará la próxima semana, según las previsiones. Sin embargo, los expertos advierten que vendrán más episodios similares durante el mes de agosto.", zh: "根据预测，热浪将于下周结束。然而，专家警告八月还会有更多类似的事件。"},
+      {es: "Mientras tanto, la población intenta adaptarse. Los más vulnerables —ancianos, niños y personas sin hogar— son los que más sufren las consecuencias del calor extremo.", zh: "与此同时，居民正试图适应。最脆弱的人——老人、儿童和无家可归者——是受极端高温影响最严重的。"}
+    ],
+    dele: "B1 考点：<b>陈述式现在完成时</b>(ha activado, han batido, ha aumentado)；<b>陈述式未完成过去时</b>(salían, estaban)；<b>原因从句</b>(es una de las causas, porque)；<b>条件从句</b>(si)；<b>被动句</b>(ha batido, están siendo)；<b>关系从句</b>(los que más sufren)；<b>虚拟式现在时</b>(recomiendan que no haga, advierten que vendrán)。",
+    hardWords: [
+      {w: "ola de calor", m: "热浪"},
+      {w: "golpe de calor", m: "中暑"},
+      {w: "refugio climático", m: "气候避难所"},
+      {w: "jornada intensiva", m: "集中工时制"},
+      {w: "socorrista", m: "救生员"},
+      {w: "bañista", m: "游泳者，戏水者"},
+      {w: "rescate", m: "救援"},
+      {w: "escaparate", m: "橱窗"},
+      {w: "vulnerable", m: "脆弱的"},
+      {w: "episodio", m: "事件，现象"}
+    ],
+    quiz: [
+      {q: "¿Cuántas comunidades autónomas tienen aviso rojo según la AEMET?", opts: ["Cuatro","Seis","Ocho","Diez"], ans: 2, es: "La AEMET ha activado avisos rojos en ocho comunidades autónomas. (第二段)", zh: "AEMET 在 8 个自治区发布了红色预警。"},
+      {q: "¿Qué temperatura se ha registrado en Sevilla y Córdoba?", opts: ["38 grados","40 grados","44 grados","46 grados"], ans: 2, es: "El termómetro ha llegado a marcar 44 grados a la sombra. (第三段)", zh: "塞维利亚和科尔多瓦阴影处达到 44 度。"},
+      {q: "Según el texto, ¿por qué han aumentado los rescates en las playas?", opts: ["Porque hay más turistas este año","Por la imprudencia de los bañistas y el calor extremo","Porque las playas están más llenas","Por falta de socorristas"], ans: 1, es: "Según el texto, los rescates han aumentado un 30% este verano por la combinación de calor extremo e imprudencia. (第十一段)", zh: "由于极端高温与游泳者大意，海滩救援增加了 30%。"},
+      {q: "La palabra “los” en “para evitar las horas más calurosas del día, los trabajadores salen a las tres” se refiere a:", opts: ["Las horas calurosas","Los trabajadores","Los comercios","Los termómetros"], ans: 1, es: "“Los trabajadores salen a las tres”: “los” se refiere a los trabajadores (sujeto de la oración). (第六段)", zh: "“los” 指代工人们（句子的主语）。"},
+      {q: "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", opts: ["Las temperaturas superan los 40 grados en varias ciudades","Los comercios deben apagar escaparates a las diez de la noche","Las autoridades recomiendan hacer deporte al mediodía","Los trabajadores en jornada intensiva salen a las tres"], ans: 2, es: "El texto dice que las autoridades recomiendan evitar salir en las horas centrales, no hacer deporte al mediodía. (第四段+第五段)", zh: "当局建议避免中午外出，而非在中午做运动。"},
+      {q: "¿Qué consecuencia NO menciona el texto sobre la ola de calor?", opts: ["Aumento de rescates en playas","Cierre de escuelas por calor","Petición de apagar escaparates de comercios","Trabajadores que salen antes del trabajo"], ans: 1, es: "El texto no menciona el cierre de escuelas. Sí menciona rescates (+30%), apagar escaparates (22:00) y jornada intensiva (salida a las 15:00). (整篇文章)", zh: "文中未提及学校因高温关闭。其他三项均有提到。"},
+      {q: "La expresión “horas centrales del día” se refiere aproximadamente a:", opts: ["Las primeras horas de la mañana","El mediodía y las primeras horas de la tarde","La noche","La madrugada"], ans: 1, es: "“Las horas centrales del día” se refiere al período de máxima radiación solar, aproximadamente entre las 12:00 y las 16:00. (第四段)", zh: "“一天中最中心的时段”指正午和下午早些时候（12:00-16:00）。"},
+      {q: "¿Qué inferencia es más razonable a partir del texto sobre el futuro de los veranos en España?", opts: ["Los veranos serán cada vez más frescos","Las olas de calor serán más frecuentes e intensas","Las playas estarán vacías","La jornada intensiva desaparecerá"], ans: 1, es: "El texto indica que “los fenómenos meteorológicos extremos se vuelven más frecuentes e intensos con el cambio climático”, por lo que se infiere que la tendencia continuará. (第一段+全文)", zh: "文章指出极端天气现象因气候变化变得更加频繁和强烈，因此可推断这一趋势将继续。"}
+    ]
+  },
+  b2: {
+    paragraphs: [
+      {es: "Europa y gran parte de Estados Unidos están experimentando un verano de un calor abrasador. Los científicos han advertido que estas temperaturas extremas se han convertido en la nueva normalidad.", zh: "欧洲和美国大部分地区正在经历一个酷热的夏天。科学家警告，这些极端气温已成为新常态。"},
+      {es: "Francia registró más de 2.000 fallecimientos durante la ola de calor sin precedentes de finales de junio. En Inglaterra y Gales, los científicos estimaron que más de 2.700 personas podrían haber fallecido por causas relacionadas con el aumento de las temperaturas desde mayo.", zh: "法国在六月底那场史无前例的热浪中记录了超过2000人死亡。在英格兰和威尔士，科学家估计自五月以来超过2700人可能因气温升高而死亡。"},
+      {es: "En Estados Unidos se registraron al menos 44 muertes relacionadas con el calor durante el fin de semana festivo del 4 de julio, a causa de las condiciones meteorológicas extremas. El aumento de las temperaturas ha supuesto un golpe duro para millones de personas.", zh: "美国在国庆周末至少记录了44起高温相关死亡。气温升高对数百万人来说是沉重打击。"},
+      {es: "“La gente no se da cuenta de que este calor no es el mismo que experimentábamos hace diez años; de hecho, es peor, porque en muchos casos las temperaturas nocturnas no bajan”, explicó a la BBC Jennifer Marlon, investigadora de la Universidad de Yale.", zh: "耶鲁大学研究员詹妮弗·马隆向BBC解释：“人们没意识到，现在的热和十年前不一样了；事实上更糟，因为很多情况下夜间气温不会降下来。”"},
+      {es: "Nuestros cuerpos dependen de las temperaturas nocturnas más frescas para recuperarse del calor del día. El problema se agrava cuando por la noche los termómetros no bajan de los 25 grados, impidiendo que el organismo descanse adecuadamente.", zh: "我们的身体依靠夜间较凉爽的气温来恢复。当夜间温度不低于25度时，问题会恶化，阻碍身体正常休息。"},
+      {es: "En España, la Agencia Estatal de Meteorología (AEMET) ha activado avisos rojos en ocho comunidades autónomas este verano. En ciudades como Sevilla y Córdoba, el termómetro ha llegado a marcar 44 grados a la sombra, unas cifras que los expertos califican de “extremadamente preocupantes”.", zh: "西班牙国家气象局今年夏天在八个自治区启动了红色预警。在塞维利亚和科尔多瓦，温度计在阴凉处达到了44度，专家称之为“极为令人担忧”。"},
+      {es: "Pero para una ciudad estadounidense, las altas temperaturas no son nada nuevo. Phoenix, en Arizona, lleva años trabajando en soluciones para reducir las muertes por calor, un esfuerzo que parece estar dando sus frutos y que podría servir de modelo para el resto del mundo.", zh: "但对于美国一座城市来说，高温并不是新鲜事。亚利桑那州凤凰城多年来一直在研究减少高温死亡的方法，这一努力似乎正在取得成果，并可能成为全球的榜样。"},
+      {es: "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. El condado de Maricopa, donde se encuentra la ciudad, se sitúa a la vanguardia de la lucha por la seguridad frente al calor.", zh: "凤凰城在2021年成为全球首个聘请高温管理官员的城市。该市所在的马里科帕县处于高温安全斗争的前沿。"},
+      {es: "Las medidas adoptadas por el condado han dado buenos resultados. Después de que los fallecimientos relacionados con el calor alcanzaran un máximo de 645 en 2023, descendieron a 405 en 2025. Muchos expertos atribuyen parte de este descenso a los cambios en las políticas.", zh: "该县采取的措施取得了良好成效。高温相关死亡在2023年达到645人的峰值后，2025年降至405人。许多专家将这归因于政策变化。"},
+      {es: "Gran parte de los esfuerzos se han centrado en mejorar el acceso al aire acondicionado, ya que muchas de las muertes por calor se produjeron entre personas con bajos ingresos o sin hogar. El condado ofrece acceso constante y gratuito a centros de refrigeración, algunos abiertos las 24 horas.", zh: "大部分努力集中在改善空调使用条件上，因为许多高温死亡发生在低收入或无家可归人群中。该县提供持续免费的制冷中心通道，部分24小时开放。"},
+      {es: "Sin embargo, la tendencia a la baja no está garantizada. En lo que va de año, a fecha de 11 de julio, el condado ha registrado 23 muertes relacionadas con el calor y hay otras 282 bajo investigación. Si estas cifras se confirman, superarían las del año anterior.", zh: "然而下降趋势并不能保证持续。截至7月11日，该县今年已记录23起高温死亡，另有282起在调查中。如果这些数字确认，将超过去年。"},
+      {es: "“Con coordinación y comunicación, se pueden crear instalaciones como centros de refrigeración en otras partes que no están acostumbradas al calor abrasador”, afirma Marlon. Pero para ello, señalan los expertos, es necesario que exista un reconocimiento generalizado de lo grave que puede ser el calor.", zh: "马隆指出：“通过协调沟通，可以在不习惯酷热的其他地区建立制冷中心。”但专家强调，为此必须广泛认识到高温可能有多严重。"},
+      {es: "El panorama global es alarmante. El mundo ya se ha calentado más de 1,1°C desde la era industrial. Las olas de calor se han vuelto más frecuentes, más intensas y más duraderas debido al cambio climático, y las temperaturas seguirán aumentando incluso si los países reducen drásticamente las emisiones.", zh: "全球形势令人担忧。自工业时代以来全球已升温超过1.1°C。由于气候变化，热浪变得更加频繁、强烈和持久。即使各国大幅减排，气温仍将继续上升。"},
+      {es: "También es esencial que las ciudades comprendan que el calor no es solo un problema de salud, sino también un problema de infraestructuras y económico. Las carreteras seguirán deformándose y los vuelos sufrirán retrasos a causa del calor extremo, advierte Marlon.", zh: "城市还必须认识到高温不仅是健康问题，也是基础设施和经济问题。马隆警告，道路将继续变形，航班将因极端高温而延误。"},
+      {es: "“Tenemos que dejar de planificar en función de las olas de calor históricas y empezar a planificar en función del calor que vamos a sufrir en los próximos cinco a diez años”, afirma Ladd Keith, director de la Iniciativa de Resiliencia frente al Calor de la Universidad de Arizona. “Si la gente piensa que ahora hace mucho calor, va a hacer aún más calor, y va a durar más tiempo. Se van a batir récords, se puede dar casi por seguro, año tras año en todo el mundo”.", zh: "亚利桑那大学高温韧性倡议主任拉德·基思表示：“我们必须停止根据过去的热浪做规划，而要根据未来五到十年将要遭受的高温来做规划。如果人们觉得现在已经很热了，那以后会更热，持续时间更长。几乎可以肯定，全球将年复一年地打破纪录。”"}
+    ],
+    dele: "B2 考点：<b>虚拟式</b>(es necesario que exista, después de que alcanzaran, para que las personas puedan)；<b>条件式完成时</b>(podrían haber fallecido, superarían, se volverían)；<b>被动语态与无人称</b>(se han registrado, se puede dar por seguro, se han vuelto)；<b>复合连接词</b>(sin embargo, a causa de, debido a, en lo que va de año, a raíz de)；<b>过去完成时</b>(habían alcanzado)；<b>将来完成时推测</b>(se habrán batido récords)；<b>抽象学术词汇</b>(resiliencia, sin precedentes, drásticamente, generalizado, imprescindible)。",
+    hardWords: [
+      {w: "abrasador", m: "灼热的、炙烤的 (calor abrasador 酷热)"},
+      {w: "sin precedentes", m: "史无前例的 (ola de calor sin precedentes)"},
+      {w: "a la vanguardia", m: "在前沿、处于领先地位"},
+      {w: "resiliencia", m: "韧性、恢复力 (C1级借词，社会科学高频)"},
+      {w: "batir récords", m: "打破纪录 (batir = 击碎/打破)"}
+    ],
+    quiz: [
+      {q: "Según el texto, ¿cuántos fallecimientos se registraron en Francia durante la ola de calor de junio?", opts: ["Menos de 1.000","Más de 2.000","Más de 3.000","No se registraron"], ans: 1, es: "Francia registró más de 2.000 fallecimientos durante la ola de calor sin precedentes. (第二段)", zh: "法国在那场史无前例的热浪中记录了超过2000人死亡。"},
+      {q: "¿Qué ciudad fue la primera del mundo en contratar a un responsable de la gestión del calor?", opts: ["Madrid","Nueva York","Phoenix","Londres"], ans: 2, es: "Phoenix fue la primera ciudad del mundo en contratar a un responsable de la gestión del calor en 2021. (第八段)", zh: "凤凰城在2021年成为全球首个聘请高温管理官员的城市。"},
+      {q: "¿Cuántos fallecimientos relacionados con el calor se registraron en el condado de Maricopa en 2023?", opts: ["405","645","282","23"], ans: 1, es: "Los fallecimientos alcanzaron un máximo de 645 en 2023, y luego descendieron a 405 en 2025. (第九段)", zh: "2023年高温相关死亡达到645人的峰值。"},
+      {q: "La expresión “la tendencia a la baja no está garantizada” significa que:", opts: ["Las temperaturas seguirán bajando","No es seguro que las muertes sigan disminuyendo","El condado dejará de financiar los centros de refrigeración","Los expertos no confían en los datos"], ans: 1, es: "En 2026 ya hay 23 muertes confirmadas y 282 bajo investigación: la reducción no está asegurada. (第十一段)", zh: "2026年已有23例确认死亡+282例调查中，下降趋势不能保证。"},
+      {q: "¿A qué se refiere “para ello” en “para ello, señalan los expertos, es necesario que exista un reconocimiento generalizado”?", opts: ["A los centros de refrigeración","A crear instalaciones similares en otras regiones","A la coordinación y comunicación","A reducir las emisiones"], ans: 1, es: "“Para ello” se refiere a crear instalaciones como centros de refrigeración en otras partes del mundo. (第十二段)", zh: "“Para ello” 指代在其他地区建立类似制冷中心的设施。"},
+      {q: "¿Cuál de las siguientes NO es una consecuencia del calor extremo mencionada en el texto?", opts: ["Deformación de carreteras","Retrasos en vuelos","Aumento del nivel del mar","Muertes entre personas sin hogar"], ans: 2, es: "El texto menciona carreteras deformadas, retrasos de vuelos y muertes de personas sin hogar. No menciona el aumento del nivel del mar. (第五段+第十段+第十四段)", zh: "文中提及道路变形、航班延误、无家可归者死亡。未提及海平面上升。"},
+      {q: "Según Ladd Keith, ¿en qué debemos basar la planificación futura contra el calor?", opts: ["En las olas de calor del pasado","En el calor que se sufrirá en los próximos 5-10 años","En los modelos climáticos del siglo pasado","En la experiencia de los países nórdicos"], ans: 1, es: "Keith afirma: “empezar a planificar en función del calor que vamos a sufrir en los próximos cinco a diez años”. (第十五段)", zh: "基思说应根据未来五到十年将要遭受的高温来规划。"},
+      {q: "¿Qué inferencia es más razonable a partir del texto sobre el futuro de las temperaturas globales?", opts: ["Dejarán de subir si se reducen las emisiones","Seguirán aumentando aunque se reduzcan las emisiones","Solo subirán en países sin aire acondicionado","Volverán a niveles preindustriales en 2030"], ans: 1, es: "El texto dice: “las temperaturas seguirán aumentando durante algún tiempo, incluso si los países reducen drásticamente las emisiones”. (第十三段)", zh: "文章明确指出即使各国大幅减排，气温仍将继续上升。"}
+    ]
+  }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（5 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== \u6062\u590d\u5df2\u4fdd\u5b58\u7684\u7b54\u9898\u72b6\u6001 + \u6e32\u67d3\u63a7\u4ef6 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">\u{1F504} \u91cd\u505a</button>' +
+    '<span class="quiz-stats">' +
+      '\u5df2\u7b54\u9898 <b>' + historyCount + '</b> \u6b21' +
+      (latest ? ' \u00b7 \u6700\u8fd1\u6b63\u786e <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">\u{1F4DD} \u7b14\u8bb0</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="\u8bb0\u5f55\u4f60\u7684\u5b66\u4e60\u7b14\u8bb0..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">\u2713 \u5df2\u4fdd\u5b58</span>';
+  section.appendChild(notesArea);
+}
+
+// \u7ed9\u6bcf\u4e2a quiz \u7ed1\u5b9a\u4ea4\u4e92
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('\u8bf7\u5148\u9009\u62e9\u4e00\u4e2a\u7b54\u6848\uff01');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '\u2713 \u6b63\u786e\uff01';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// \u521d\u59cb\u5316
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+
+</script>
+</body>
+</html>

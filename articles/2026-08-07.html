@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-07</title>
+<style>
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-07</h1>
+    <div class="sub">第6期 · 周五 · 夏季出行 · 酷暑天气 · 行政手续 · 农村空心化</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 5 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 5 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/a1-a2" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🥐 Viajar en España en agosto: mucho más que playa</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/tiempo/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🌡️ El calor extremo del verano español: temperaturas récord</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.rtve.es/noticias/sociedad/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
+        <h2>📋 Trámites en España: la odisea burocrática de los extranjeros</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://elpais.com/sociedad/2019/03/31/actualidad/1554022545_649884.html" target="_blank" rel="noopener noreferrer">🔗 El País 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
+        <h2>🏘️ La España vaciada: despoblación rural y repoblación</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-07（星期五） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-07.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== \u6d4b\u9a8c\u6301\u4e45\u5316\u6a21\u5757 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage \u5199\u5165\u5931\u8d25:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '\u2713 \u6b63\u786e\uff01' : '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('\u786e\u5b9a\u8981\u91cd\u505a ' + level.toUpperCase() + ' \u7684\u5168\u90e8\u9898\u76ee\u5417\uff1f\n\u5386\u53f2\u8bb0\u5f55\u5c06\u88ab\u4fdd\u7559\u3002')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+  {
+    lema: "madrugar",
+    ipa: "[ma.ðɾuˈɣaɾ]",
+    pos: "v.",
+    significado: "早起；起得很早（动词，不规则变位：madrugo/madrugas/madruga）",
+    ejemplo_es: "Para coger el AVE a las siete de la mañana, tuve que madrugar muchísimo.",
+    ejemplo_zh: "为了赶早上七点的高铁，我不得不起得特别早。",
+    tip: "西班牙特有语境：赶早班飞机(AVE/avión)经常需要 madrugar。<b>madrugada</b> = 凌晨。<b>ser muy madrugador/a</b> = 习惯早起的人。A2 听力常出现：de madrugada (凌晨时段)。"
+  },
+  {
+    lema: "bochorno",
+    ipa: "[boˈtʃoɾ.no]",
+    pos: "m.",
+    significado: "闷热；酷暑（高温高湿让人难受的天气）",
+    ejemplo_es: "Hoy hace un bochorno insoportable: 38 grados y mucha humedad.",
+    ejemplo_zh: "今天闷热得受不了：38 度还特别潮湿。",
+    tip: "和 <b>calor</b>(热) 不同，bochorno 强调 <b>闷热+潮湿</b>。<b>hace bochorno</b> 是口语高频表达。<b>bochornoso/a</b> = 令人汗颜的(原义) / 闷热的(引申义)。八月西班牙南方必用词。区别 <b>ola de calor</b>(热浪)是气象术语，bochorno 是体感描写。"
+  },
+  {
+    lema: "empadronamiento",
+    ipa: "[em.pa.ðɾo.naˈmjen.to]",
+    pos: "m.",
+    significado: "户籍登记；住家登记（在西班牙市政府注册居住地址的法律手续）",
+    ejemplo_es: "Para solicitar la tarjeta sanitaria, primero necesitas el certificado de empadronamiento.",
+    ejemplo_zh: "要申请医疗卡，首先需要户籍证明。",
+    tip: "西班牙生活必需词。<b>empadronarse</b>(登记户籍) / <b>el padrón municipal</b>(市户籍册)。<b>certificado de empadronamiento</b> 是办居留卡、医疗卡、学校注册的敲门砖，有效期通常 3 个月。B1 行政类话题必考。"
+  },
+  {
+    lema: "tramitar",
+    ipa: "[tɾa.miˈtaɾ]",
+    pos: "v.",
+    significado: "办理；处理（行政手续、文件、申请等）",
+    ejemplo_es: "Estoy tramitando la renovación del NIE. Es un proceso muy lento.",
+    ejemplo_zh: "我正在办理 NIE 续签，程序非常慢。",
+    tip: "西班牙生活高频动词。<b>tramitar + 文件</b> (办理…手续)。<b>en trámite</b> = 正在办理中。<b>trámite</b>(名词) 手续、流程。常见搭配：<b>tramitar una solicitud / la beca / el visado / la baja</b>。B1-B2 功能类写作必考（撰写申请信、申诉信）。"
+  },
+  {
+    lema: "despedida",
+    ipa: "[des.peˈði.ða]",
+    pos: "f.",
+    significado: "告别；告别派对；欢送会",
+    ejemplo_es: "Mis compañeros de trabajo me organizaron una despedida porque me mudo a otra ciudad.",
+    ejemplo_zh: "同事们为我办了欢送会，因为我要搬到另一个城市了。",
+    tip: "由动词 <b>despedirse de</b>(向…告别) 派生。<b>despedida de soltero/a</b> = 单身告别派对。<b>carta de despedida</b> = 告别信。<b>fiesta de despedida</b> = 送别会。A2-B1 听力高频：机场告别、离职告别场景。注意和 <b>despido</b>(解雇) 区别。"
+  }
+];
+
+/* ==================== 文章数据 ==================== */
+const ARTICLES = {
+  a1: {
+    paragraphs: [
+      {es: "Agosto es el mes de las vacaciones en España. Muchas familias viajan.", zh: "八月是西班牙的假期月。很多家庭出门旅行。"},
+      {es: "Los destinos favoritos son la playa, la montaña y los pueblos.", zh: "最喜欢的旅游目的地是海滩、山区和乡下村庄。"},
+      {es: "María y su familia van a la playa. Salen de casa a las seis de la mañana.", zh: "玛利亚和她的家人去海边。他们早上六点出门。"},
+      {es: "Llevan maletas, toallas, crema solar y mucha agua.", zh: "他们带着行李箱、毛巾、防晒霜和很多水。"},
+      {es: "En la playa, los niños juegan con la arena y se bañan en el mar.", zh: "在海滩上，孩子们玩沙子、在海里游泳。"},
+      {es: "El agua está fresca. Hace mucho calor fuera del agua.", zh: "水很凉快。水外面非常热。"},
+      {es: "Al mediodía, la familia come en un chiringuito junto a la playa.", zh: "中午，全家在海滩旁的餐馆吃饭。"},
+      {es: "Piden pescado frito, ensalada y gazpacho. Todo está muy rico.", zh: "他们点了炸鱼、沙拉和冷汤。都很好吃。"},
+      {es: "Por la tarde, dan un paseo por el paseo marítimo y comen un helado.", zh: "下午，他们在海滨步道散步并吃冰淇淋。"},
+      {es: "Al final del día, todos están cansados pero muy contentos. ¡Qué bien se está de vacaciones!", zh: "一天结束时，大家都很累但很开心。假期真好！"}
+    ],
+    dele: "A1 考点：<b>陈述式现在时</b>(viajan, llevan, juegan, comen, piden, dan)；<b>动词 estar+形容词</b>(está fresca, están cansados, están contentos)；<b>钟点表达</b>(a las seis)；<b>前置词</b>(a la playa, en la playa, junto a, por)。",
+    hardWords: [
+      {w: "toalla", m: "毛巾（playa常用词）"},
+      {w: "crema solar", m: "防晒霜（protección solar 防晒）"},
+      {w: "arena", m: "沙子（jugar con la arena 玩沙）"},
+      {w: "chiringuito", m: "海滩小吃店（典型西国词汇）"},
+      {w: "gazpacho", m: "西班牙冷汤（番茄、黄瓜做的夏季汤）"}
+    ],
+    quiz: [
+      {q: "¿A qué hora salen de casa María y su familia?", opts: ["A las ocho","A las seis","A las diez","A las doce"], ans: 1, es: "Salen de casa a las seis de la mañana. (第三段)", zh: "他们早上六点出门。"},
+      {q: "¿Qué llevan a la playa?", opts: ["Solo agua","Maletas, toallas y crema solar","Solo juguetes","Ropa de invierno"], ans: 1, es: "Llevan maletas, toallas, crema solar y mucha agua. (第四段)", zh: "他们带着行李箱、毛巾、防晒霜和很多水。"},
+      {q: "¿Dónde comen al mediodía?", opts: ["En casa","En un restaurante de lujo","En un chiringuito junto a la playa","No comen"], ans: 2, es: "Al mediodía, la familia come en un chiringuito junto a la playa. (第七段)", zh: "中午全家在海滩旁的餐馆吃饭。"},
+      {q: "¿Qué comen en el chiringuito?", opts: ["Pizza y pasta","Pescado frito, ensalada y gazpacho","Solo helado","Hamburguesas"], ans: 1, es: "Piden pescado frito, ensalada y gazpacho. (第八段)", zh: "他们点了炸鱼、沙拉和冷汤。"},
+      {q: "¿Está fría o caliente el agua del mar?", opts: ["Muy caliente","Fresca","Helada","Templada"], ans: 1, es: "El agua está fresca. Hace mucho calor fuera del agua. (第六段)", zh: "水很凉快。水外面非常热。"}
+    ]
+  },
+  a2: {
+    paragraphs: [
+      {es: "Este verano está siendo uno de los más calurosos de los últimos años en España.", zh: "今年夏天是西班牙近年来最炎热的夏天之一。"},
+      {es: "En muchas ciudades del sur, las temperaturas superan los 40 grados cada día.", zh: "在南方很多城市，每天气温都超过 40 度。"},
+      {es: "Las autoridades recomiendan beber mucha agua y evitar salir en las horas centrales del día.", zh: "当局建议多喝水并避免在中午时段外出。"},
+      {es: "Los ancianos y los niños son los más vulnerables al calor extremo.", zh: "老年人和儿童最容易受到极端炎热的影响。"},
+      {es: "Muchas oficinas permiten a sus empleados llevar ropa más informal en verano.", zh: "很多办公室允许员工在夏季穿得更随意。"},
+      {es: "Los ventiladores y los aparatos de aire acondicionado se agotan en las tiendas.", zh: "风扇和空调设备在商店里脱销。"},
+      {es: "Por la noche, la temperatura no baja de los 25 grados. Es difícil dormir.", zh: "晚上温度也不低于 25 度，很难入睡。"},
+      {es: "Algunas personas duermen con las ventanas abiertas y sin sábanas para aguantar el bochorno.", zh: "有些人开着窗不盖床单睡觉来忍受闷热。"},
+      {es: "Las piscinas municipales están llenas de gente desde primera hora de la mañana.", zh: "市立游泳池从一早开始就挤满了人。"},
+      {es: "Los expertos dicen que el cambio climático está haciendo los veranos más largos y calurosos.", zh: "专家表示气候变化使夏季变得更长更热。"}
+    ],
+    dele: "A2 考点：<b>estar + gerundio</b>(está siendo)；<b>比较级</b>(más calurosos, más vulnerables, más largos)；<b>不定式</b>(beber, evitar, dormir, llevar)；<b>条件句简单式</b>(si hace calor...)；<b>频度副词</b>(cada día, desde primera hora)。",
+    hardWords: [
+      {w: "caluroso", m: "炎热的（más caluroso 更热的）"},
+      {w: "vulnerable", m: "脆弱的；易受影响的"},
+      {w: "ventilador", m: "风扇（aire acondicionado 空调）"},
+      {w: "aire acondicionado", m: "空调（agotarse 脱销/售罄）"},
+      {w: "cambio climático", m: "气候变化（veranos más largos 更长的夏季）"}
+    ],
+    quiz: [
+      {q: "¿Cuántos grados se superan en muchas ciudades del sur?", opts: ["30 grados","35 grados","40 grados","50 grados"], ans: 2, es: "En muchas ciudades del sur, las temperaturas superan los 40 grados cada día. (第二段)", zh: "南方很多城市每天超过 40 度。"},
+      {q: "¿Qué recomiendan las autoridades?", opts: ["Salir más","Beber mucha agua y evitar salir al mediodía","Hacer deporte","Viajar"], ans: 1, es: "Las autoridades recomiendan beber mucha agua y evitar salir en las horas centrales. (第三段)", zh: "当局建议多喝水并避免中午外出。"},
+      {q: "¿Quiénes son los más vulnerables al calor?", opts: ["Los jóvenes","Los deportistas","Los ancianos y los niños","Los turistas"], ans: 2, es: "Los ancianos y los niños son los más vulnerables al calor extremo. (第四段)", zh: "老年人和儿童最容易受高温影响。"},
+      {q: "¿Qué se agota en las tiendas?", opts: ["Comida","Ropa","Ventiladores y aires acondicionados","Libros"], ans: 2, es: "Los ventiladores y los aparatos de aire acondicionado se agotan en las tiendas. (第六段)", zh: "风扇和空调在商店里脱销。"},
+      {q: "Según los expertos, ¿qué está pasando con los veranos?", opts: ["Son más cortos","Son iguales","Son más largos y calurosos","Son más fríos"], ans: 2, es: "Los expertos dicen que el cambio climático está haciendo los veranos más largos y calurosos. (第十段)", zh: "气候变化使夏季变得更长更热。"}
+    ]
+  },
+  b1: {
+    paragraphs: [
+      {es: "Hacer cualquier gestión administrativa en España puede convertirse en una auténtica odisea burocrática.", zh: "在西班牙办理任何行政手续都可能变成一场真正的官僚历险。"},
+      {es: "El primer paso para cualquier extranjero es obtener el NIE, el Número de Identidad de Extranjero.", zh: "对任何外国人来说，第一步就是获取 NIE——外国人身份证号码。"},
+      {es: "Sin el NIE no se puede abrir una cuenta bancaria, firmar un contrato de trabajo ni comprar un coche.", zh: "没有 NIE 就没法开户、签工作合同、买车。"},
+      {es: "Para solicitar el NIE hay que pedir cita previa en la Oficina de Extranjería. Las citas suelen tardar semanas.", zh: "要申请 NIE 需要在移民局预约。预约通常需要等好几周。"},
+      {es: "Una vez conseguido el NIE, el siguiente trámite es el empadronamiento en el ayuntamiento del municipio donde se reside.", zh: "拿到 NIE 后，下一个手续是在居住地市政府办理户籍登记。"},
+      {es: "El certificado de empadronamiento es necesario para acceder a la sanidad pública y escolarizar a los hijos.", zh: "户籍证明是享受公共医疗和孩子入学的必要条件。"},
+      {es: "Después, si se quiere trabajar por cuenta propia, hay que darse de alta como autónomo en Hacienda y la Seguridad Social.", zh: "之后，如果要做个体户，需要在税务局和社保局登记为自由职业者。"},
+      {es: "Cada paso requiere rellenar formularios, presentar fotocopias compulsadas y, a menudo, pagar tasas administrativas.", zh: "每一步都需要填表格、提交公证复印件，通常还要支付行政费用。"},
+      {es: "Muchos ciudadanos se quejan de la lentitud del sistema. 'Todo son papeles y más papeles', dice una usuaria.", zh: "很多市民抱怨系统太慢。“全是文件、文件、更多的文件”，一位用户说。"},
+      {es: "Sin embargo, en los últimos años se ha avanzado bastante en la digitalización de los trámites.", zh: "不过近年来在手续数字化方面取得了不少进展。"},
+      {es: "Ahora se pueden realizar muchas gestiones a través de la sede electrónica con certificado digital o Cl@ve.", zh: "现在很多手续可以通过电子政务平台用数字证书或 Cl@ve 系统办理。"},
+      {es: "Aun así, una encuesta reciente revela que el 60% de los ciudadanos considera la burocracia española excesivamente complicada.", zh: "尽管如此，最近一项调查显示 60% 的市民认为西班牙官僚制度过于复杂。"},
+      {es: "Las personas mayores son las más afectadas por la brecha digital, ya que muchos trámites solo se hacen por internet.", zh: "老年人受数字鸿沟影响最大，因为很多手续只能网上办理。"},
+      {es: "Algunas asociaciones ofrecen ayuda gratuita para rellenar formularios y navegar por la sede electrónica.", zh: "一些协会提供免费帮助，协助填写表格和操作电子政务平台。"},
+      {es: "A pesar de las dificultades, aprender a tramitar los papeles es una habilidad esencial para vivir en España.", zh: "尽管有困难，学会办理各种文件是在西班牙生活的一项必备技能。"}
+    ],
+    dele: "B1 考点：<b>无人称句</b>(hay que, se puede, se necesita)；<b>条件句</b>(si se quiere trabajar... hay que...)；<b>关系从句</b>(donde se reside, que revela que)；<b>被动语态</b>(se ha avanzado, se pueden realizar)；<b>连接词</b>(sin embargo, aun así, a pesar de)。",
+    hardWords: [
+      {w: "odisea", m: "漫长艰难的旅程（burocrática 官僚的）"},
+      {w: "compulsar", m: "公证（fotocopia compulsada 认证复印件）"},
+      {w: "tasa", m: "费用；费率（tasa administrativa 行政费）"},
+      {w: "digitalización", m: "数字化（sede electrónica 电子政务平台）"},
+      {w: "brecha digital", m: "数字鸿沟（personas mayores 老年人）"}
+    ],
+    quiz: [
+      {q: "¿Qué es el NIE?", opts: ["Un tipo de visado","El Número de Identidad de Extranjero","Un documento fiscal","Una tarjeta de residencia"], ans: 1, es: "El NIE es el Número de Identidad de Extranjero. (第二段)", zh: "NIE 是外国人身份证号码。"},
+      {q: "¿Para qué sirve el certificado de empadronamiento?", opts: ["Para viajar","Para acceder a la sanidad y escolarizar a los hijos","Para comprar un coche","Para abrir un bar"], ans: 1, es: "Es necesario para acceder a la sanidad pública y escolarizar a los hijos. (第六段)", zh: "是享受公共医疗和孩子入学的必要条件。"},
+      {q: "¿Qué porcentaje de ciudadanos considera la burocracia demasiado complicada?", opts: ["El 30%","El 50%","El 60%","El 80%"], ans: 2, es: "El 60% de los ciudadanos considera la burocracia española excesivamente complicada. (第十二段)", zh: "60% 的市民认为西班牙官僚制度过于复杂。"},
+      {q: "¿Quiénes son los más afectados por la brecha digital según el texto?", opts: ["Los jóvenes","Los turistas","Las personas mayores","Los empresarios"], ans: 2, es: "Las personas mayores son las más afectadas por la brecha digital. (第十三段)", zh: "老年人受数字鸿沟影响最大。"},
+      {q: "¿A qué se refiere “la odisea burocrática” en el primer párrafo?", opts: ["Un viaje por mar","La larga y complicada experiencia de hacer trámites en España","Un libro de Homero","Una reforma administrativa"], ans: 1, es: "“odisea burocrática” es una metáfora: compara los trámites administrativos con un largo y difícil viaje. (第一段)", zh: "“官僚历险”是一比喻，将行政手续比作漫长艰难的旅程。"},
+      {q: "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", opts: ["Sin NIE no se puede abrir una cuenta bancaria","El empadronamiento es necesario para escolarizar a los hijos","Todos los trámites se pueden hacer por teléfono","Darse de alta como autónomo requiere ir a Hacienda y Seguridad Social"], ans: 2, es: "El texto dice que muchos trámites solo se hacen por internet, no por teléfono. (第十三段)", zh: "文中说很多手续只能网上办理，不是电话。"},
+      {q: "¿Qué consecuencia NO menciona el texto sobre la complejidad burocrática?", opts: ["Quejas de los ciudadanos por la lentitud","La necesidad de pedir cita previa con semanas de espera","El cierre de oficinas de extranjería por falta de personal","La brecha digital que afecta a las personas mayores"], ans: 2, es: "El texto no menciona el cierre de oficinas. Sí menciona quejas, largas esperas y brecha digital. (第四段+第九段+第十三段)", zh: "文中未提及移民局因人手不足关闭。"},
+      {q: "¿Qué inferencia es más razonable sobre el futuro de los trámites en España?", opts: ["Desaparecerán todos los trámites presenciales","La digitalización avanzará pero la brecha digital seguirá siendo un problema","Los extranjeros ya no necesitarán el NIE","La burocracia se eliminará por completo"], ans: 1, es: "El texto señala avances en digitalización pero también la brecha digital que afecta a mayores. (第十段+第十三段)", zh: "文章指出数字化在进步但数字鸿沟仍影响老年人。"}
+    ]
+  },
+  b2: {
+    paragraphs: [
+      {es: "Según el Instituto Nacional de Estadística (INE), más de 4.000 municipios españoles cuentan con menos de 500 habitantes. En provincias como Soria, Teruel o Cuenca, la densidad de población es inferior a 10 habitantes por kilómetro cuadrado, comparable a Laponia o regiones de Siberia.", zh: "根据西班牙国家统计局数据，超过4000个市镇居民不足500人。在索里亚、特鲁埃尔或昆卡等省份，人口密度低于每平方公里10人，相当于拉普兰或西伯利亚地区。"},
+      {es: "“Es una emergencia nacional silenciosa que lleva décadas gestándose”, afirma Luis del Romero, geógrafo de la Universidad de Valencia y coordinador del informe anual sobre despoblación. “Cada año perdemos el equivalente a una ciudad pequeña en habitantes del medio rural”.", zh: "“这是一场酝酿了几十年的无声国家紧急状态。”瓦伦西亚大学地理学家、年度人口流失报告协调员路易斯·德尔·罗梅罗表示。“每年我们在农村地区流失的人口相当于一座小城市。”"},
+      {es: "Las causas son múltiples y están interconectadas: la mecanización del campo eliminó miles de empleos agrícolas en la segunda mitad del siglo XX, la falta de oportunidades laborales cualificadas empuja a los jóvenes a Madrid y Barcelona, y la concentración de servicios públicos en las capitales de provincia deja a los pueblos sin hospitales ni universidades.", zh: "原因多种多样且相互关联：20世纪下半叶农业机械化减少数千就业岗位，缺乏技能型工作机会推动年轻人涌向马德里和巴塞罗那，公共服务向省会集中使村镇失去医院和大学。"},
+      {es: "Las consecuencias son devastadoras: escuelas que cierran por falta de alumnos, consultorios médicos sin personal y comercios que desaparecen. “El cierre de la escuela es el golpe definitivo”, explica del Romero. “U n pueblo sin niños es un pueblo sin futuro”.", zh: "后果是毁灭性的：学校因缺少学生而关闭，诊所无人值守，商店消失。“学校关闭是致命一击，”德尔·罗梅罗解释道。“没有孩子的村庄就没有未来。”"},
+      {es: "Sin embargo, en los últimos cinco años ha surgido un movimiento de repoblación rural impulsado por el teletrabajo. Según datos de la Secretaría General para el Reto Demográfico, unas 15.000 personas se trasladaron de zonas urbanas a rurales en 2024, la cifra más alta registrada.", zh: "然而近五年来，在远程办公推动下出现了一股农村重新入住运动。根据人口挑战总秘书处的数据，2024年约有15000人从城市搬到农村地区，创下最高记录。"},
+      {es: "“La pandemia fue un catalizador”, señala Elena Manzanera, presidenta del INE. “El teletrabajo demostró que se puede trabajar para una empresa tecnológica desde un pueblo de 200 habitantes, siempre que haya conexión a internet”.", zh: "“疫情是一个催化剂，”西班牙统计局主席埃莱娜·曼萨内拉指出。“远程办公证明，只要有网络连接，就可以从200人的村庄为科技公司工作。”"},
+      {es: "Varias comunidades autónomas han lanzado programas de incentivos. Castilla y León ofrece hasta 10.000 euros por familia y alquileres desde 100 euros al mes en municipios de menos de 5.000 habitantes. Aragón ha creado una red de espacios de coworking rural financiados con fondos europeos.", zh: "几个自治区推出了激励计划。卡斯蒂利亚-莱昂为搬到5000人以下市镇的家庭提供高达10000欧元补贴和100欧元起的月租金。阿拉贡用欧盟资金创建了乡村联合办公空间网络。"},
+      {es: "No obstante, los expertos advierten que el dinero no basta. “Si no hay escuelas, centros de salud y actividades culturales, la gente no se queda”, insiste del Romero. Según una encuesta de la Federación Española de Municipios, el 68% de los nuevos pobladores rurales cita la falta de servicios como su principal preocupación.", zh: "然而专家警告，仅有金钱不够。“如果没有学校、医疗中心和文化活动，人们留不住，”德尔·罗梅罗强调。根据西班牙市镇联合会的调查，68%的新农村居民将服务缺乏列为首要关切。"},
+      {es: "El fenómeno ha dado lugar a movimientos ciudadanos como “Teruel Existe”, que logró representación parlamentaria en 2019. “Es la primera vez que la despoblación entra en el debate político nacional con esta fuerza”, afirma Tomás Guitarte, diputado de la plataforma.", zh: "这一现象催生了“特鲁埃尔存在”等市民运动，并于2019年获得议会代表权。“这是人口流失首次以如此力度进入全国政治辩论，”该平台的议员托马斯·吉塔尔特表示。"},
+      {es: "A nivel europeo, España no está sola. El 30% de la población de la UE vive en regiones que han perdido habitantes en la última década, según Eurostat. Países como Italia, Portugal y Grecia enfrentan desafíos similares, y la Comisión Europea ha destinado 8.000 millones de euros del fondo de cohesión a combatir la despoblación.", zh: "在欧洲层面，西班牙并非孤例。根据欧盟统计局数据，30%的欧盟人口生活在过去十年人口流失的地区。意大利、葡萄牙和希腊面临类似挑战，欧盟委员会已从凝聚基金中拨款80亿欧元用于对抗人口流失。"},
+      {es: "La digitalización es una de las grandes esperanzas. En 2025, el 95% de los municipios españoles tendrán acceso a fibra óptica, según el Ministerio de Transformación Digital. Sin embargo, la conectividad por sí sola no fija población. Se necesitan también políticas activas de vivienda, empleo y conciliación familiar.", zh: "数字化是最大的希望之一。根据数字化转型部的数据，2025年95%的西班牙市镇将接入光纤。然而单靠网络连接不足以固定人口。还需要积极的住房、就业和家庭协调政策。"},
+      {es: "Expertos de la OCDE han elogiado algunas iniciativas españolas pero advierten que “la lucha contra la despoblación requiere un pacto de Estado que trascienda los ciclos electorales”. Sin un compromiso sostenido de 20-30 años, alertan, las medidas puntuales tendrán un impacto limitado.", zh: "经合组织专家赞扬了西班牙的一些倡议，但警告称“对抗人口流失需要超越选举周期的国家协议”。他们警告说，如果没有持续20-30年的承诺，零散措施的影响将有限。"},
+      {es: "Asociaciones vecinales mantienen vivos los bares, las fiestas y la memoria colectiva de los pueblos. “Son el corazón de la resistencia rural”, describe del Romero. “La España vaciada no es solo un problema demográfico: es una pérdida de patrimonio cultural, lingüístico y humano”.", zh: "邻里协会维持着村庄的酒吧、节日和集体记忆。“它们是乡村抵抗的心脏，”德尔·罗梅罗描述道。“空心化的西班牙不仅是人口问题：它是文化、语言和人类遗产的损失。”"},
+      {es: "El futuro de estos territorios depende, según los expertos, de tres pilares: conectividad digital, servicios públicos de calidad y un nuevo modelo económico que aproveche los recursos endógenos como el turismo rural, la agricultura ecológica y las energías renovables.", zh: "专家认为这些地区的未来取决于三个支柱：数字连接、优质公共服务、以及利用乡村内生资源的新型经济模式——乡村旅游、生态农业和可再生能源。"},
+      {es: "“Hay motivos para el optimismo, pero también para la urgencia”, concluye Manzanera. “Los datos de 2024 muestran que la tendencia puede revertirse, pero necesitamos acelerar. Cada año que perdemos es un pueblo que desaparece del mapa”.", zh: "“有理由乐观，但也有理由紧迫，”曼萨内拉总结道。“2024年的数据表明趋势可以逆转，但我们需要加快速度。我们每失去一年，就有一座村庄从地图上消失。”"}
+    ],
+    dele: "B2 考点：<b>虚拟式</b>(es necesario que se invierta, aunque se destinen fondos, es fundamental que exista)；<b>条件式</b>(podría revertirse, sería necesario)；<b>被动语态与无人称</b>(se han lanzado programas, se necesita crear, se perderán)；<b>复合连接词</b>(sin embargo, no obstante, según, a pesar de que, siempre que)；<b>直接/间接引语</b>(afirma, señala, explica, insiste, concluye)；<b>抽象学术词汇</b>(despoblación, repoblación, endógeno, cohesión, patrimonio, demográfico)。",
+    hardWords: [
+      {w: "despoblación", m: "人口流失 (densidad de población 人口密度)"},
+      {w: "repoblación rural", m: "农村重新入住 (movimiento migratorio inverso)"},
+      {w: "retos demográficos", m: "人口挑战 (pacto de Estado 国家协议)"},
+      {w: "endógeno", m: "内生的 (recursos endógenos 内生资源)"},
+      {w: "patrimonio", m: "遗产 (patrimonio cultural 文化遗产)"}
+    ],
+    quiz: [
+      {q: "Según el INE, ¿cuántos municipios españoles tienen menos de 500 habitantes?", opts: ["Menos de 1.000","Más de 4.000","Entre 2.000 y 3.000","No hay datos"], ans: 1, es: "Más de 4.000 municipios cuentan con menos de 500 habitantes. (第一段)", zh: "超过4000个市镇居民不足500人。"},
+      {q: "¿A qué se refiere “emergencia nacional silenciosa” en el segundo párrafo?", opts: ["Una catástrofe natural","La gravedad de la despoblación rural que avanza sin generar alarma","Una crisis económica","Un problema de seguridad nacional"], ans: 1, es: "La metáfora describe la despoblación como una crisis grave que no recibe la atención urgente que merece. (第二段)", zh: "比喻人口流失是一个严重但不被紧急关注的危机。"},
+      {q: "¿Cuántas personas se trasladaron de zonas urbanas a rurales en 2024?", opts: ["Unas 5.000","Unas 15.000","Unas 50.000","No hubo traslados"], ans: 1, es: "Unas 15.000 personas se trasladaron de zonas urbanas a rurales en 2024, la cifra más alta registrada. (第六段)", zh: "2024年约15000人从城市搬到农村，创最高记录。"},
+      {q: "¿Qué porcentaje de nuevos pobladores rurales cita la falta de servicios como principal preocupación?", opts: ["El 30%","El 50%","El 68%","El 90%"], ans: 2, es: "El 68% de los nuevos pobladores cita la falta de servicios como principal preocupación. (第九段)", zh: "68%的新农村居民将服务缺乏列为首要关切。"},
+      {q: "¿Cuál de las siguientes afirmaciones es FALSA según el texto?", opts: ["Castilla y León ofrece hasta 10.000 euros por familia","El 95% de los municipios tendrá fibra óptica en 2025","La UE ha destinado 8.000 millones para combatir la despoblación","España es el único país europeo con problemas de despoblación"], ans: 3, es: "El texto afirma que Italia, Portugal y Grecia enfrentan desafíos similares. España NO es el único país. (第十一段)", zh: "意大利、葡萄牙和希腊面临类似挑战，西班牙并非唯一。"},
+      {q: "¿Qué consecuencia de la despoblación NO menciona expresamente el texto?", opts: ["Cierre de escuelas","Pérdida de patrimonio cultural","Aumento de la criminalidad rural","Desaparición de comercios"], ans: 2, es: "El texto menciona cierre de escuelas, pérdida de patrimonio y desaparición de comercios, pero no aumento de criminalidad. (第四段+第十四段)", zh: "文中未提及农村犯罪率上升。"},
+      {q: "Según la OCDE, ¿qué se necesita para combatir la despoblación?", opts: ["Más dinero europeo","Un pacto de Estado que trascienda los ciclos electorales","Cerrar los pueblos pequeños","Fomentar la emigración"], ans: 1, es: "La OCDE advierte que se requiere un pacto de Estado que trascienda los ciclos electorales. (第十三段)", zh: "经合组织警告需要超越选举周期的国家协议。"},
+      {q: "¿Qué inferencia es más razonable sobre el futuro de la España vaciada?", opts: ["Desaparecerá por completo en 10 años","La tendencia puede revertirse pero requiere políticas urgentes y sostenidas","Todos los pueblos se recuperarán automáticamente con internet","Solo las grandes ciudades sobrevivirán"], ans: 1, es: "“Los datos muestran que la tendencia puede revertirse, pero necesitamos acelerar”. (第十五段)", zh: "“趋势可以逆转，但需要加快速度。”"}
+    ]
+  }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（5 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== \u6062\u590d\u5df2\u4fdd\u5b58\u7684\u7b54\u9898\u72b6\u6001 + \u6e32\u67d3\u63a7\u4ef6 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">\u{1F504} \u91cd\u505a</button>' +
+    '<span class="quiz-stats">' +
+      '\u5df2\u7b54\u9898 <b>' + historyCount + '</b> \u6b21' +
+      (latest ? ' \u00b7 \u6700\u8fd1\u6b63\u786e <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">\u{1F4DD} \u7b14\u8bb0</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="\u8bb0\u5f55\u4f60\u7684\u5b66\u4e60\u7b14\u8bb0..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">\u2713 \u5df2\u4fdd\u5b58</span>';
+  section.appendChild(notesArea);
+}
+
+// \u7ed9\u6bcf\u4e2a quiz \u7ed1\u5b9a\u4ea4\u4e92
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('\u8bf7\u5148\u9009\u62e9\u4e00\u4e2a\u7b54\u6848\uff01');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '\u2713 \u6b63\u786e\uff01';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '\u2717 \u9519\u8bef\uff0c\u6b63\u786e\u7b54\u6848\u5df2\u9ad8\u4eae';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// \u521d\u59cb\u5316
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+
+</script>
+</body>
+</html>

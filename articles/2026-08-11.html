@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-08-11</title>
+<style>
+
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-08-11</h1>
+    <div class="sub">第9期 · 周二 · 早上日常 · 西班牙音乐节 · 远程办公与城市 · 地震与城市韧性</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🌅 La rutina de la mañana</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🎵 Los festivales de música en España: mucho más que conciertos</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://www.rtve.es/noticias/economia/" target="_blank" rel="noopener noreferrer">🔗 RTVE 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 复合句</span>
+        <h2>💻 Teletrabajo: cómo está cambiando el mapa de España</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://www.bbc.com/mundo/articles/cly5720pnz4o" target="_blank" rel="noopener noreferrer">🔗 BBC Mundo 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">15 段 · 议论文体</span>
+        <h2>🌍 El sismo de Colombia: una lección sobre resiliencia urbana</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-08-11（星期二） · 推送时间：每日 10:30 自动生成</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-08-11.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== 测试持久化模块 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage 写入失败:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '✓ 正确！' : '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('确定要重做 ' + level.toUpperCase() + ' 的全部题目吗？\n历史记录将被保留。')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [
+  {
+    "lema": "despertarse",
+    "ipa": "[des.peɾˈtaɾ.se]",
+    "pos": "v. prnl.",
+    "significado": "醒来；起床（代表早上日常起始的核心动词）",
+    "ejemplo_es": "Todos los días me despierto a las siete, pero los fines de semana duermo hasta más tarde.",
+    "ejemplo_zh": "我每天七点醒来，但周末睡到更晚。",
+    "tip": "<b>despertarse</b> 是反身动词，不规则现在时变位 e→ie：me despierto, te despiertas, se despierta。<b>despertar</b>（及物）= 叫醒某人。<b>levantarse</b> = 起床（醒后的动作）。A1 必考反身动词。"
+  },
+  {
+    "lema": "desayunar",
+    "ipa": "[de.sa.ʝuˈnaɾ]",
+    "pos": "v.",
+    "significado": "吃早餐（早上日常的重要环节）",
+    "ejemplo_es": "Siempre desayuno café con leche, tostadas con aceite de oliva y un zumo de naranja natural.",
+    "ejemplo_zh": "我早餐总是喝奶咖啡、吃油橄橄油烤面包片和一杯新鲜橙汁。",
+    "tip": "<b>desayunar</b> 是动词，<b>el desayuno</b> 是名词。西班牙早餐经典组合：<b>café con leche</b> + <b>tostadas con tomate y aceite</b>。<b>almorzar</b> = 吃午饭，<b>cenar</b> = 吃晚饭。A1 三餐词汇必考。"
+  },
+  {
+    "lema": "cepillarse los dientes",
+    "ipa": "[θe.piˈʎaɾ.se los ˈdjen.tes]",
+    "pos": "loc. v.",
+    "significado": "刷牙（早上卫生习惯）",
+    "ejemplo_es": "Después de desayunar, me cepillo los dientes durante dos minutos.",
+    "ejemplo_zh": "早餐后，我刷牙两分钟。",
+    "tip": "<b>cepillarse</b> 是反身动词。<b>cepillo de dientes</b> = 牙刷。<b>pasta de dientes</b> = 牙膏。类似反身用法：<b>lavarse las manos/la cara</b>。A1 反身动词+身体部位必考。"
+  },
+  {
+    "lema": "cartel",
+    "ipa": "[kaɾˈtel]",
+    "pos": "m.",
+    "significado": "海报；宣传海报（音乐节的宣传海报）",
+    "ejemplo_es": "El cartel del FIB de este año incluye a más de cien artistas nacionales e internacionales.",
+    "ejemplo_zh": "今年 FIB 音乐节的海报涵盖了一百多位国内外艺人。",
+    "tip": "<b>cartel</b> 在音乐节语境中指演出阵容海报，非常用法。<b>cabezas de cartel</b> = 压轴嘉宾。<b>entradas agotadas</b> = 票已售罄。<b>abono</b> = 通票。A2 文化活动场景必考。"
+  },
+  {
+    "lema": "escenario",
+    "ipa": "[es.θeˈna.ɾjo]",
+    "pos": "m.",
+    "significado": "舞台；场景（音乐节的演出舞台）",
+    "ejemplo_es": "El escenario principal del Primavera Sound se monta frente al mar, creando un ambiente único.",
+    "ejemplo_zh": "Primavera Sound 的主舞台搭在海边，营造出独特的氛围。",
+    "tip": "<b>escenario</b> 即可指舞台又可指抽象场景。<b>poner en escena</b> = 上演。<b>escenario principal</b> = 主舞台。<b>escenario alternativo</b> = 副舞台。A2-B1 文化话题。"
+  },
+  {
+    "lema": "asistente",
+    "ipa": "[a.sisˈten.te]",
+    "pos": "m./f.",
+    "significado": "参与者；观众（音乐节的参与者）",
+    "ejemplo_es": "Más de 200.000 asistentes de todo el mundo acudieron al Sónar el año pasado.",
+    "ejemplo_zh": "去年超过 20 万名来自世界各地的参与者参加了 Sónar 音乐节。",
+    "tip": "<b>asistente</b> 来自动词 <b>asistir a</b> = 参加/出席。<b>asistente</b> 也可指助理。<b>número de asistentes</b> = 参与人数。<b>asistencia masiva</b> = 大规模参与。A2 文化活动高频。"
+  },
+  {
+    "lema": "agotar",
+    "ipa": "[a.ɣoˈtaɾ]",
+    "pos": "v.",
+    "significado": "卖光；用尽（音乐节门票售罄）",
+    "ejemplo_es": "Las entradas para el FIB se agotaron en menos de dos horas tras salir a la venta.",
+    "ejemplo_zh": "FIB 音乐节的门票开售后不到两小时就售罄了。",
+    "tip": "<b>agotar</b> = 用尽/卖光。<b>agotado/a</b> = 已售罄/筋疲力尽。<b>entradas agotadas</b> = 票已售罄。<b>se me agotó la paciencia</b> = 我耐心用尽了。A2-B1 文化/情感词汇。"
+  },
+  {
+    "lema": "teletrabajo",
+    "ipa": "[te.le.tɾaˈβa.xo]",
+    "pos": "m.",
+    "significado": "远程办公；居家办公（通过网络在家或其他地点工作）",
+    "ejemplo_es": "El teletrabajo ha pasado de ser una excepción a convertirse en la norma para millones de españoles.",
+    "ejemplo_zh": "远程办公已从例外变成了数百万西班牙人的常态。",
+    "tip": "<b>teletrabajo</b> 由 <b>tele-</b>（远程）+ <b>trabajo</b> 构成。<b>trabajar en remoto</b> 同义。<b>teletrabajador/a</b> = 远程工作者。<b>trabajo presencial</b> = 现场办公。B1 职场话题核心词汇。"
+  },
+  {
+    "lema": "desplazamiento",
+    "ipa": "[des.pla.θaˈmjen.to]",
+    "pos": "m.",
+    "significado": "通勤；移动（从家到工作地点的行程）",
+    "ejemplo_es": "Gracias al teletrabajo, he eliminado dos horas de desplazamiento diario y gano calidad de vida.",
+    "ejemplo_zh": "多亏了远程办公，我消除了每天两小时的通勤时间，生活质量提高了。",
+    "tip": "<b>desplazamiento</b> 来自动词 <b>desplazarse</b>。<b>tiempo de desplazamiento</b> = 通勤时间。<b>transporte público</b> = 公共交通。<b>atasco</b> = 堵车。B1 城市生活话题必考。"
+  },
+  {
+    "lema": "descentralización",
+    "ipa": "[des.θen.tɾa.li.θaˈθjon]",
+    "pos": "f.",
+    "significado": "去中心化；分散化（从中心城区向郊区或其他城市转移）",
+    "ejemplo_es": "La descentralización que ha traído el teletrabajo está transformando el mapa urbano de España.",
+    "ejemplo_zh": "远程办公带来的去中心化正在改变西班牙的城市地图。",
+    "tip": "<b>descentralización</b> 反义词：<b>centralización</b>。<b>descentralizar</b>（动词）。<b>descentralización administrativa</b> = 行政去中心化。B1-B2 社会/城市话题常考。"
+  },
+  {
+    "lema": "brecha digital",
+    "ipa": "[ˈbɾe.tʃa di.xiˈtal]",
+    "pos": "f.",
+    "significado": "数字鸿沟（不同群体在信息技术接入和使用能力上的差距）",
+    "ejemplo_es": "Aunque el teletrabajo ofrece ventajas, también ha profundizado la brecha digital entre zonas rurales y urbanas.",
+    "ejemplo_zh": "尽管远程办公提供了优势，但也加深了农村和城市地区之间的数字鸿沟。",
+    "tip": "<b>brecha</b> = 裂缝/鸿沟。<b>brecha salarial</b> = 薪资差距。<b>brecha generacional</b> = 代沟。<b>alfabetización digital</b> = 数字素养。B2 社会议题高频词汇。"
+  },
+  {
+    "lema": "sismo",
+    "ipa": "[ˈsis.mo]",
+    "pos": "m.",
+    "significado": "地震（西语中对地震的正式称呼）",
+    "ejemplo_es": "El sismo de magnitud 7,4 sacudió la región del Pacífico colombiano en la madrugada del pasado lunes.",
+    "ejemplo_zh": "上周一凌晨，7.4 级地震袭击了哥伦比亚太平洋地区。",
+    "tip": "<b>sismo</b> 和 <b>terremoto</b> 都是地震，<b>sismo</b> 更科学学术。<b>seísmo</b> 同义。<b>temblor</b> = 轻微地震。<b>escala de Richter</b> = 里氏震级。B2 自然灾害话题必考。"
+  },
+  {
+    "lema": "réplica",
+    "ipa": "[ˈre.pli.ka]",
+    "pos": "f.",
+    "significado": "余震（主震后的较小地震）",
+    "ejemplo_es": "Tras el sismo principal, se registraron más de treinta réplicas, algunas de magnitud superior a 5,0.",
+    "ejemplo_zh": "主震后，记录到三十多次余震，其中一些震级超过 5.0。",
+    "tip": "<b>réplica</b> 在地震语境中是余震。<b>réplica</b> 也指回答/叩问（法庭用语）。<b>replicar</b> = 回复。B2 灾难报道核心词汇。"
+  },
+  {
+    "lema": "código sísmico",
+    "ipa": "[ˈko.ði.ɣo ˈsis.mi.ko]",
+    "pos": "m.",
+    "significado": "地震建筑规范（要求建筑具备抗震能力的法规）",
+    "ejemplo_es": "Colombia actualizó su código sísmico en 2010, pero muchos edificios antiguos no cumplen con la normativa vigente.",
+    "ejemplo_zh": "哥伦比亚在 2010 年更新了地震规范，但许多老旧建筑不符合现行法规。",
+    "tip": "<b>código</b> = 规范/法典。<b>código civil/penal</b> = 民法典/刑法典。<b>normativa sísmica</b> 同义。B2 建筑/法律话题。"
+  },
+  {
+    "lema": "evacuación",
+    "ipa": "[e.βa.kwaˈθjon]",
+    "pos": "f.",
+    "significado": "疏散；撤离（紧急情况下的人员转移）",
+    "ejemplo_es": "Las autoridades ordenaron la evacuación inmediata de las zonas costeras ante el riesgo de tsunami.",
+    "ejemplo_zh": "面对海啸风险，当局命令立即疏散海岸地区。",
+    "tip": "<b>evacuación</b> 来自 <b>evacuar</b>。<b>plan de evacuación</b> = 疏散计划。<b>ruta de evacuación</b> = 疏散路线。<b>simulacro de evacuación</b> = 疏散演练。B2 应急管理话题必考。"
+  }
+];
+
+const ARTICLES = {
+  "a1": {
+    "paragraphs": [
+      {
+        "es": "Son las siete de la mañana. El despertador suena y Ana abre los ojos lentamente.",
+        "zh": "早上七点了。闹钟响了，安娜慢慢地睁开眼睛。"
+      },
+      {
+        "es": "Se levanta de la cama, se pone las zapatillas y va al baño. Se lava la cara con agua fría para despertarse bien.",
+        "zh": "她从床上起来，穿上拖鞋，去了洗手间。她用冷水洗脸以彻底清醒。"
+      },
+      {
+        "es": "Después, se cepilla los dientes durante dos minutos. Usa pasta de dientes de menta y un cepillo eléctrico.",
+        "zh": "然后，她刷牙两分钟。她用薄荷牙膏和电动牙刷。"
+      },
+      {
+        "es": "A las siete y media, Ana va a la cocina. Prepara el desayuno: café con leche, tostadas con tomate y aceite de oliva, y un zumo de naranja.",
+        "zh": "七点半，安娜去厨房。她准备早餐：奶咖啡、番茄油橄橄油烤面包片和橙汁。"
+      },
+      {
+        "es": "Mientras desayuna, escucha la radio. Le gusta saber qué tiempo va a hacer hoy.",
+        "zh": "吃早餐时，她听收音机。她喜欢知道今天天气怎么样。"
+      },
+      {
+        "es": "Hoy va a hacer sol y la temperatura máxima será de 28 grados. Ana decide ponerse un vestido ligero.",
+        "zh": "今天是晴天，最高温度 28 度。安娜决定穿一件轻薄的连衣裙。"
+      },
+      {
+        "es": "Después de desayunar, recoge la mesa y lava los platos. Le gusta tener la cocina ordenada antes de salir.",
+        "zh": "早餐后，她收拾桌子并洗碟。她喜欢在出门前把厨房整理好。"
+      },
+      {
+        "es": "A las ocho y cuarto, se viste, se peina y se pone un poco de colonia. Mira su bolso: llaves, móvil, cartera y gafas de sol.",
+        "zh": "八点十五分，她穿好衣服、梳好头发、喷了点古龙水。她检查包：钥匙、手机、钱包和太阳镜。"
+      },
+      {
+        "es": "Antes de salir, le da un beso a su gato, que duerme en el sofá. \"Hasta luego, Michi.\"",
+        "zh": "出门前，她亲了一下睡在沙发上的猫。“回见啦，Michi。”"
+      },
+      {
+        "es": "Coge el ascensor y baja a la calle. Son las ocho y media. Ana camina hacia la parada del autobús con una sonrisa. Empieza un nuevo día.",
+        "zh": "她坐电梯下楼来到街上。现在是八点半。安娜微笑着走向公交站。新的一天开始了。"
+      }
+    ],
+    "dele": "陈述式现在时(suena, abre, va, prepara, desayuna, escucha, recoge, lava, mira, coge, camina)；反身动词(se levanta, se lava, se cepilla, se viste, se peina, se pone)；时间表达(son las siete, a las siete y media, a las ocho y cuarto)；前置词(de, a, en, con, hacia)；日常起居词汇(despertador, zapatillas, baño, cocina, desayuno, tostadas, ascensor, parada)。",
+    "hardWords": [
+      {
+        "w": "despertador",
+        "m": "闹钟（despertar + -dor 表示工具）"
+      },
+      {
+        "w": "zapatillas",
+        "m": "拖鞋（室内鞋，与 zapatos 皮鞋区别）"
+      },
+      {
+        "w": "ligero",
+        "m": "轻薄的（ropa ligera 轻薄衣服）"
+      },
+      {
+        "w": "colonia",
+        "m": "古龙水（与 perfume 香水区别，更清淡）"
+      },
+      {
+        "w": "ascensor",
+        "m": "电梯（拉美用 elevador）"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿A qué hora se despierta Ana?",
+        "opts": [
+          "A las seis",
+          "A las siete",
+          "A las ocho",
+          "A las siete y media"
+        ],
+        "ans": 1,
+        "es": "Párrafo 1: “Son las siete de la mañana. El despertador suena y Ana abre los ojos.”",
+        "zh": "安娜七点醒来。"
+      },
+      {
+        "q": "¿Qué desayuna Ana?",
+        "opts": [
+          "Cereales con leche",
+          "Tostadas con mermelada",
+          "Café con leche, tostadas con tomate y zumo",
+          "Solo un café"
+        ],
+        "ans": 2,
+        "es": "Párrafo 4: “Prepara el desayuno: café con leche, tostadas con tomate y aceite de oliva, y un zumo de naranja.”",
+        "zh": "安娜早餐吃奶咖啡、番茄烤面包和橙汁。"
+      },
+      {
+        "q": "¿Qué tiempo va a hacer hoy?",
+        "opts": [
+          "Va a llover",
+          "Va a hacer sol",
+          "Va a nevar",
+          "Va a hacer viento"
+        ],
+        "ans": 1,
+        "es": "Párrafo 6: “Hoy va a hacer sol y la temperatura máxima será de 28 grados.”",
+        "zh": "今天是晴天，最高温 28 度。"
+      },
+      {
+        "q": "¿Qué lleva Ana en el bolso?",
+        "opts": [
+          "Llaves, móvil, cartera y gafas de sol",
+          "Solo el móvil",
+          "Un libro y el paraguas",
+          "El ordenador portátil"
+        ],
+        "ans": 0,
+        "es": "Párrafo 8: “Mira su bolso: llaves, móvil, cartera y gafas de sol.”",
+        "zh": "安娜包里带了钥匙、手机、钱包和太阳镜。"
+      },
+      {
+        "q": "¿A qué hora sale Ana de casa?",
+        "opts": [
+          "A las siete y media",
+          "A las ocho",
+          "A las ocho y media",
+          "A las nueve"
+        ],
+        "ans": 2,
+        "es": "Párrafo 10: “Son las ocho y media. Ana camina hacia la parada del autobús.”",
+        "zh": "安娜八点半出门。"
+      }
+    ]
+  },
+  "a2": {
+    "paragraphs": [
+      {
+        "es": "Cada verano, España se convierte en el epicentro de la música en vivo. Miles de jóvenes —y no tan jóvenes— viajan de todo el mundo para asistir a sus famosos festivales.",
+        "zh": "每年夏天，西班牙都会成为现场音乐的中心。成千上万的年轻人——以及不那么年轻的人——从世界各地前来参加知名的音乐节。"
+      },
+      {
+        "es": "Uno de los más emblemáticos es el FIB (Festival Internacional de Benicàssim), que se celebra desde 1995 en la costa de Castellón. Combina música indie, pop, rock y electrónica con una playa espectacular.",
+        "zh": "其中最具标志性的之一是 FIB（贝尼卡西姆国际音乐节），自 1995 年以来在卡斯特利翁海岸举办。它将独立音乐、流行、摇滚和电子音乐与壮观的海滩相结合。"
+      },
+      {
+        "es": "El Primavera Sound, nacido en Barcelona en 2001, ha crecido hasta convertirse en uno de los festivales más prestigiosos del mundo. Su cartel ha incluido a artistas como Radiohead, Björk y Rosalía.",
+        "zh": "Primavera Sound 于 2001 年在巴塞罗那诞生，已成长为世界上最享有盛誉的音乐节之一。其海报曾包括 Radiohead、Björk 和 Rosalía 等艺人。"
+      },
+      {
+        "es": "El Sónar, que tiene lugar en Barcelona en junio, es el paraíso de los amantes de la música electrónica. Combina actuaciones de DJ con congresos de tecnología y creatividad digital.",
+        "zh": "每年六月在巴塞罗那举办的 Sónar 是电子音乐爱好者的天堂。它将 DJ 演出与技术和数字创意大会相结合。"
+      },
+      {
+        "es": "En el norte, el BBK Live de Bilbao se celebra en la cima del monte Kobetamendi, con unas vistas increíbles de la ciudad. Las entradas de 2026 se agotaron en apenas tres horas.",
+        "zh": "在北部，毕尔巴鄂的 BBK Live 在 Kobetamendi 山顶举办，可以欣赏到城市的壮丽景色。2026 年的门票仅三小时就售罄了。"
+      },
+      {
+        "es": "No todos los festivales son enormes. El Festival de la Guitarra de Córdoba, por ejemplo, ofrece conciertos de flamenco, clásica y jazz en patios y teatros históricos de la ciudad.",
+        "zh": "并非所有音乐节都规模庞大。例如科尔多瓦吉他音乐节在城市历史庭院和剧院中举办弗拉明戈、古典和爵士乐演出会。"
+      },
+      {
+        "es": "Según la Asociación de Promotores Musicales, los festivales españoles generaron más de 500 millones de euros en 2025, un 12% más que el año anterior.",
+        "zh": "据音乐推广者协会数据，2025 年西班牙音乐节创造了超过 5 亿欧元收入，比前一年增长 12%。"
+      },
+      {
+        "es": "Los festivales también han cambiado con los años. Ahora ofrecen zonas de descanso, comida gourmet, espacios sin alcohol y hasta guarderías para que las familias puedan disfrutar juntas.",
+        "zh": "音乐节这些年也发生了变化。现在提供休息区、美食餐饮、无酒精区域甚至托儿服务，让家庭能一起享受。"
+      },
+      {
+        "es": "\"Los festivales ya no son solo para veinteañeros\", explica Laura Sánchez, directora de un portal de música en directo. \"El público se ha diversificado muchísimo.\"",
+        "zh": "现场音乐门户网站总监劳拉·桑切斯解释道：“音乐节不再只是二十出头年轻人的专利了。观众已经非常多元化了。”"
+      },
+      {
+        "es": "Si visitas España en verano, un festival es una experiencia única: música, cultura, gastronomía y un ambiente que difícilmente encuentras en otro lugar.",
+        "zh": "如果你夏天来西班牙，音乐节是一种独特的体验：音乐、文化、美食和在其他地方难以找到的氛围。"
+      }
+    ],
+    "dele": "现在完成时(ha crecido, ha incluido, han cambiado, se ha diversificado)；简单过去时(se agotaron, generaron)；最高级(los más emblemáticos, el más prestigioso)；数据表达(más de 500 millones, un 12% más que)；直接引语(explica, dice)；条件句(si visitas...)。",
+    "hardWords": [
+      {
+        "w": "emblemático",
+        "m": "具有标志性的（emblema 徽章）"
+      },
+      {
+        "w": "prestigioso",
+        "m": "享有盛誉的（prestigio 声望）"
+      },
+      {
+        "w": "cartel",
+        "m": "演出阵容海报（在此语境下）"
+      },
+      {
+        "w": "actuación",
+        "m": "演出（actuar 演出的名词形式）"
+      },
+      {
+        "w": "diversificar",
+        "m": "多元化（diverso 多样的 + -ificar）"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿En qué año se celebró por primera vez el FIB?",
+        "opts": [
+          "En 1990",
+          "En 1995",
+          "En 2000",
+          "En 2001"
+        ],
+        "ans": 1,
+        "es": "Párrafo 2: “El FIB, que se celebra desde 1995 en la costa de Castellón.”",
+        "zh": "FIB 音乐节自 1995 年开始举办。"
+      },
+      {
+        "q": "¿Qué festival combina música electrónica con congresos de tecnología?",
+        "opts": [
+          "El FIB",
+          "El Primavera Sound",
+          "El Sónar",
+          "El BBK Live"
+        ],
+        "ans": 2,
+        "es": "Párrafo 4: “El Sónar combina actuaciones de DJ con congresos de tecnología y creatividad digital.”",
+        "zh": "Sónar 音乐节结合了 DJ 演出和技术大会。"
+      },
+      {
+        "q": "¿Cuánto dinero generaron los festivales en 2025?",
+        "opts": [
+          "Más de 300 millones",
+          "Más de 400 millones",
+          "Más de 500 millones",
+          "Más de 600 millones"
+        ],
+        "ans": 2,
+        "es": "Párrafo 7: “Los festivales españoles generaron más de 500 millones de euros en 2025.”",
+        "zh": "2025 年音乐节创造了超过 5 亿欧元收入。"
+      },
+      {
+        "q": "¿Qué novedad ofrecen ahora los festivales para las familias?",
+        "opts": [
+          "Entradas gratis para niños",
+          "Guarderías",
+          "Hoteles incluidos",
+          "Transporte gratuito"
+        ],
+        "ans": 1,
+        "es": "Párrafo 8: “Ofrecen hasta guarderías para que las familias puedan disfrutar juntas.”",
+        "zh": "现在音乐节提供托儿服务以便家庭共享。"
+      },
+      {
+        "q": "Según Laura Sánchez, ¿cómo ha cambiado el público de los festivales?",
+        "opts": [
+          "Es más joven",
+          "Se ha diversificado mucho",
+          "Es más pequeño",
+          "Solo asisten extranjeros"
+        ],
+        "ans": 1,
+        "es": "Párrafo 9: “El público se ha diversificado muchísimo.”",
+        "zh": "音乐节观众已经非常多元化。"
+      }
+    ]
+  },
+  "b1": {
+    "paragraphs": [
+      {
+        "es": "La pandemia de 2020 marcó un antes y un después en la forma de trabajar. Lo que empezó como una medida de emergencia sanitaria se ha consolidado como un modelo laboral permanente para millones de españoles. Según el Instituto Nacional de Estadística (INE), en 2026 el 32% de los trabajadores españoles realiza teletrabajo al menos dos días por semana, frente al 8% registrado en 2019.",
+        "zh": "2020 年的疫情标志着工作方式的分水岭。当初作为卫生紧急措施的做法已巩固为数百万西班牙人的永久性工作模式。据国家统计局（INE）数据，2026 年 32% 的西班牙工作者每周至少两天远程办公，而 2019 年这一比例仅为 8%。"
+      },
+      {
+        "es": "El teletrabajo ha transformado la geografía urbana de España. Ciudades intermedias como Cáceres, Logroño o Zamora han registrado un aumento de población por primera vez en décadas, ya que muchos profesionales han decidido abandonar las grandes urbes en busca de una mejor calidad de vida.",
+        "zh": "远程办公改变了西班牙的城市地理。卡塞雷斯、洛格罗尼奥或萨莫拉等中型城市数十年来首次录得人口增长，因为许多专业人士决定离开大城市寻求更好的生活质量。"
+      },
+      {
+        "es": "Según un estudio del Banco de España publicado en marzo de 2026, el precio de la vivienda en las capitales de provincia ha bajado un 4,3% de media, mientras que en municipios de entre 20.000 y 100.000 habitantes ha subido un 8,7%. \"Estamos asistiendo a una descentralización sin precedentes\", señala el informe.",
+        "zh": "据西班牙央行 2026 年 3 月发布的研究，省会城市房价平均下降 4.3%，而 2 万至 10 万居民的市镇房价上涨 8.7%。报告指出：“我们正在见证一场前所未有的去中心化。”"
+      },
+      {
+        "es": "Esta transformación ha reavivado el debate sobre la llamada \"España vaciada\". Municipios rurales que llevaban años perdiendo habitantes están recibiendo a nuevos vecinos atraídos por el menor coste de vida, la tranquilidad y la posibilidad de trabajar en remoto.",
+        "zh": "这一转变重新点燃了关于所谓“空心西班牙”的辩论。多年来人口流失的农村市镇正在接待新居民，他们被较低的生活成本、安宁和远程工作的可能性所吸引。"
+      },
+      {
+        "es": "Sin embargo, no todas las zonas rurales se están beneficiando por igual. \"Para que un pueblo atraiga teletrabajadores necesita, como mínimo, buena conexión a internet, servicios básicos y cierto dinamismo cultural\", explica Javier Sánchez, profesor de Geografía Económica de la Universidad Autónoma de Madrid. \"De lo contrario, la brecha digital se agranda.\"",
+        "zh": "然而，并非所有农村地区都在同等程度上受益。马德里自治大学经济地理学教授哈维尔·桑切斯解释道：“要让一个村庄吸引远程工作者，至少需要良好的网络连接、基本服务和一定的文化活力。否则，数字鸿沟只会扩大。”"
+      },
+      {
+        "es": "El teletrabajo también ha modificado los patrones de consumo. Los centros comerciales de las periferias urbanas están perdiendo visitantes, mientras que el pequeño comercio de barrio vive un renacer inesperado. La gente ya no compra cerca de la oficina, sino cerca de casa.",
+        "zh": "远程办公也改变了消费模式。城市郊区的购物中心正在流失顾客，而社区小商店则迎来意想不到的复兴。人们不再在办公室附近购物，而是在家附近。"
+      },
+      {
+        "es": "El sector inmobiliario comercial ha sido uno de los más afectados. En Madrid, la tasa de oficinas vacías ha alcanzado el 13,5% en 2026, según la consultora CBRE, el nivel más alto desde 2013. Muchas empresas han reducido sus espacios de trabajo o han adoptado modelos híbridos.",
+        "zh": "商业地产是受影响最大的行业之一。据 CBRE 咨询公司数据，马德里 2026 年办公室空置率已达 13.5%，为 2013 年以来最高水平。许多企业已缩减办公空间或采用混合办公模式。"
+      },
+      {
+        "es": "\"El modelo híbrido se ha impuesto como la fórmula de consenso\", afirma María José López, directora de Recursos Humanos de una multinacional tecnológica. \"La mayoría de nuestros empleados va a la oficina dos o tres días por semana y el resto trabaja desde casa. El rendimiento no ha bajado; al contrario, ha mejorado.\"",
+        "zh": "一家科技跨国公司的人力资源总监玛丽亚·何塞·洛佩斯表示：“混合模式已成为共识方案。我们大多数员工每周去办公室两到三天，其余时间在家工作。绩效不仅没有下降，反而提高了。”"
+      },
+      {
+        "es": "No obstante, el teletrabajo también presenta desafíos. Los sindicatos alertan sobre la difuminación de la frontera entre vida laboral y personal. Según una encuesta de CCOO, el 47% de los teletrabajadores admite trabajar más horas que cuando iba a la oficina.",
+        "zh": "然而，远程办公也带来了挑战。工会警告工作与个人生活之间界限的模糊化。据 CCOO 的一项调查，47% 的远程工作者承认比去办公室时工作更多小时。"
+      },
+      {
+        "es": "La Ley de Teletrabajo de 2021 estableció el derecho a la desconexión digital, pero su aplicación práctica sigue siendo limitada. \"La ley está bien diseñada, pero la inspección de trabajo no tiene recursos suficientes para hacerla cumplir\", denuncia el abogado laboralista Carlos Ruiz.",
+        "zh": "2021 年的远程办公法确立了数字断联权，但其实际执行仍然有限。劳动律师卡洛斯·鲁伊斯谴责道：“这部法律设计得很好，但劳动监察局没有足够的资源来执行它。”"
+      },
+      {
+        "es": "A nivel internacional, España no es un caso aislado. En Francia, el 36% de los trabajadores teletrabaja regularmente. En Italia, el gobierno ha lanzado un programa piloto para fomentar el teletrabajo en el sur del país, con incentivos fiscales para empresas y trabajadores.",
+        "zh": "在国际层面，西班牙并非个案。在法国，36% 的工作者常规性远程办公。在意大利，政府已启动一项试点计划，通过为企业和工作者提供税收激励来促进南部地区的远程办公。"
+      },
+      {
+        "es": "El impacto medioambiental también es significativo. Un estudio de la Universidad Politécnica de Cataluña estima que el teletrabajo ha reducido las emisiones de CO₂ del transporte en un 15% en las áreas metropolitanas españolas, aunque parte de ese ahorro se compensa con un mayor consumo energético en los hogares.",
+        "zh": "环境影响也很显著。加泰罗尼亚理工大学的一项研究估计，远程办公已将西班牙大都市地区的交通二氧化碳排放减少了 15%，但其中部分节约被家庭能源消耗的增加所抵消。"
+      },
+      {
+        "es": "De cara al futuro, los expertos prevén que el teletrabajo siga expandiéndose, pero de forma desigual. \"El gran reto no es tecnológico, es social\", concluye Sánchez. \"Necesitamos asegurarnos de que esta revolución no deje a nadie atrás, especialmente a los trabajadores de sectores donde el teletrabajo no es posible, como la hostelería, la sanidad o la construcción.\"",
+        "zh": "展望未来，专家预计远程办公将继续扩展，但会不均衡。桑切斯总结道：“最大的挑战不是技术层面的，而是社会层面的。我们需要确保这场变革不会让任何人掉队，特别是在餐饮、医疗或建筑等无法远程办公的行业从业者。”"
+      },
+      {
+        "es": "El transporte público también ha notado el cambio. Según el Consorcio Regional de Transportes de Madrid, el número de viajeros en hora punta ha descendido un 22% desde 2019. Las empresas de transporte han tenido que adaptar sus frecuencias y rutas a la nueva demanda, menos concentrada en las horas de entrada y salida de oficinas.",
+        "zh": "公共交通也感受到了变化。据马德里地区交通联合体数据，高峰时段乘客数自 2019 年以来下降了 22%。交通企业不得不调整班次和路线以适应新的需求，需求不再集中在办公室上下班时间。"
+      },
+      {
+        "es": "Mientras tanto, la geografía humana de España sigue dibujándose de nuevo. El mapa del país, que durante décadas se caracterizó por la concentración en las grandes ciudades y el vaciamiento del interior, podría estar entrando en una nueva era de equilibrio territorial.",
+        "zh": "与此同时，西班牙的人文地理正在重新描绘。这个数十年来以大城市集中和内陆空心化为特征的国家地图，可能正在进入一个区域均衡的新时代。"
+      }
+    ],
+    "dele": "现在完成时(ha transformado, ha reducido, ha mejorado, se ha impuesto)；简单过去时(marcó, empezó, estableció)；过去未完成时(llevaban, iba)；虚拟式现在时(para que atraiga, que no deje)；数据表达(32%, 4,3%, 8,7%, 13,5%)；直接引语(explica, afirma, denuncia, concluye)；复合句(mientras que, aunque, ya que, para que)。",
+    "hardWords": [
+      {
+        "w": "descentralización",
+        "m": "去中心化（des- + centralización）"
+      },
+      {
+        "w": "España vaciada",
+        "m": "“空心西班牙”（指人口流失的农村地区）"
+      },
+      {
+        "w": "brecha digital",
+        "m": "数字鸿沟（信息技术接入差距）"
+      },
+      {
+        "w": "difuminación",
+        "m": "模糊化（difuminar 使模糊）"
+      },
+      {
+        "w": "derecho a la desconexión digital",
+        "m": "数字断联权（下班后有权不回复工作信息）"
+      },
+      {
+        "w": "modelo híbrido",
+        "m": "混合模式（现场+远程结合）"
+      },
+      {
+        "w": "incentivo fiscal",
+        "m": "税收激励"
+      },
+      {
+        "w": "rendimiento",
+        "m": "绩效；产出"
+      },
+      {
+        "w": "vaciamiento",
+        "m": "空心化（vaciar 清空）"
+      },
+      {
+        "w": "equilibrio territorial",
+        "m": "区域均衡"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿Qué porcentaje de trabajadores españoles teletrabaja al menos dos días por semana en 2026?",
+        "opts": [
+          "El 8%",
+          "El 20%",
+          "El 32%",
+          "El 47%"
+        ],
+        "ans": 2,
+        "es": "Párrafo 1: “El 32% de los trabajadores españoles realiza teletrabajo al menos dos días por semana.”",
+        "zh": "2026 年 32% 的西班牙工作者每周至少两天远程办公。"
+      },
+      {
+        "q": "¿Cómo ha cambiado el precio de la vivienda en las capitales de provincia?",
+        "opts": [
+          "Ha subido un 8,7%",
+          "Ha bajado un 4,3%",
+          "Se ha mantenido igual",
+          "Ha subido un 4,3%"
+        ],
+        "ans": 1,
+        "es": "Párrafo 3: “El precio de la vivienda en las capitales de provincia ha bajado un 4,3% de media.”",
+        "zh": "省会城市房价平均下降了 4.3%。"
+      },
+      {
+        "q": "¿A qué se refiere “la ley está bien diseñada” en el párrafo 11?",
+        "opts": [
+          "A la Ley de Vivienda",
+          "A la Ley de Teletrabajo de 2021",
+          "A la Ley de Startups",
+          "A la Ley de Educación"
+        ],
+        "ans": 1,
+        "es": "Párrafo 11: “La Ley de Teletrabajo de 2021 estableció el derecho a la desconexión digital.”",
+        "zh": "指的是 2021 年的远程办公法。"
+      },
+      {
+        "q": "Según el contexto, ¿qué significa “difuminación de la frontera” en el párrafo 10?",
+        "opts": [
+          "Aumento de la productividad",
+          "Pérdida de claridad entre trabajo y vida personal",
+          "Mejora de la comunicación",
+          "Reducción del horario laboral"
+        ],
+        "ans": 1,
+        "es": "Párrafo 10: “La difuminación de la frontera entre vida laboral y personal.”",
+        "zh": "指工作和个人生活之间界限的模糊化。"
+      },
+      {
+        "q": "¿Cuál de las siguientes afirmaciones es FALSA?",
+        "opts": [
+          "El teletrabajo ha reducido las emisiones de CO₂ del transporte en un 15%",
+          "La tasa de oficinas vacías en Madrid es del 13,5%",
+          "El teletrabajo ha eliminado por completo la necesidad de oficinas",
+          "El 47% de los teletrabajadores trabaja más horas que antes"
+        ],
+        "ans": 2,
+        "es": "El texto menciona que muchas empresas han reducido espacios, pero no que se haya eliminado por completo la necesidad de oficinas.",
+        "zh": "文章并未说远程办公完全消除了办公室需求，只说空置率升高。"
+      },
+      {
+        "q": "¿Qué medida NO menciona el texto como respuesta al teletrabajo?",
+        "opts": [
+          "Incentivos fiscales en Italia para fomentar el teletrabajo en el sur",
+          "Prohibición del teletrabajo en el sector público",
+          "Ley de Teletrabajo en España con derecho a la desconexión",
+          "Programas para atraer teletrabajadores a zonas rurales"
+        ],
+        "ans": 1,
+        "es": "El texto no menciona ninguna prohibición del teletrabajo en el sector público.",
+        "zh": "文章没有提到禁止公共部门远程办公。"
+      },
+      {
+        "q": "Según el profesor Sánchez, ¿qué necesita un pueblo para atraer teletrabajadores?",
+        "opts": [
+          "Solo buena conexión a internet",
+          "Buena conexión, servicios básicos y dinamismo cultural",
+          "Grandes centros comerciales",
+          "Proximidad a una gran ciudad"
+        ],
+        "ans": 1,
+        "es": "Párrafo 5: “Necesita buena conexión a internet, servicios básicos y cierto dinamismo cultural.”",
+        "zh": "需要良好网络、基本服务和文化活力。"
+      },
+      {
+        "q": "¿Cuál es la idea principal del texto?",
+        "opts": [
+          "El teletrabajo solo tiene efectos negativos",
+          "El teletrabajo está transformando profundamente la geografía urbana y la sociedad española",
+          "El teletrabajo es una moda pasajera",
+          "España es el único país con teletrabajo"
+        ],
+        "ans": 1,
+        "es": "El texto aborda los múltiples impactos del teletrabajo en la geografía, economía y sociedad española.",
+        "zh": "文章主旨是远程办公正在深刻改变西班牙的城市地理和社会。"
+      }
+    ]
+  },
+  "b2": {
+    "paragraphs": [
+      {
+        "es": "En la madrugada del 10 de agosto de 2026, un sismo de magnitud 7,4 en la escala de Richter sacudió la región del Pacífico colombiano. El epicentro se localizó a 45 kilómetros al oeste de Tumaco, en el departamento de Nariño, a una profundidad de 28 kilómetros, según el Servicio Geológico Colombiano (SGC). El temblor se sintió en al menos seis países, incluidos Ecuador, Panamá y Perú.",
+        "zh": "2026 年 8 月 10 日凌晨，一场里氏 7.4 级地震袭击了哥伦比亚太平洋地区。据哥伦比亚地质调查局（SGC）数据，震中位于纳里尼奥省图马科以西 45 公里处，震源深度 28 公里。至少六个国家有震感，包括厄瓜多尔、巴拿马和秘鲁。"
+      },
+      {
+        "es": "Según la Unidad Nacional para la Gestión del Riesgo de Desastres (UNGRD), el sismo causó la muerte de al menos 47 personas y dejó más de 320 heridos en las primeras 48 horas. Las zonas más afectadas fueron los municipios costeros de Tumaco, Francisco Pizarro y Mosquera, donde decenas de edificaciones colapsaron total o parcialmente.",
+        "zh": "据国家灾害风险管理局（UNGRD）数据，地震在首个 48 小时内导致至少 47 人死亡、超过 320 人受伤。受影响最严重的是海岸城镇图马科、弗朗西斯科·皮萨罗和莫斯克拉，数十幢建筑全部或部分倒塌。"
+      },
+      {
+        "es": "\"Colombia es un país de alto riesgo sísmico, pero seguimos construyendo como si no lo fuera\", declaró el doctor Armando Espinosa, director del Observatorio Sismológico del Suroccidente. \"Este sismo ha puesto en evidencia las debilidades estructurales de nuestro modelo de desarrollo urbano.\"",
+        "zh": "西南地震观测站主任阿曼多·埃斯皮诺萨博士声明：“哥伦比亚是一个高地震风险国家，但我们继续像不是那样来建造。这次地震暴露了我们城市发展模式的结构性弱点。”"
+      },
+      {
+        "es": "La normativa sísmica colombiana, actualizada por última vez en 2010 con la Norma NSR-10, exige que las edificaciones nuevas cumplan estrictos requisitos de resistencia. Sin embargo, según la Sociedad Colombiana de Ingenieros, aproximadamente el 60% de las construcciones en las zonas afectadas fueron levantadas antes de la entrada en vigor de dicha norma.",
+        "zh": "哥伦比亚地震规范最后一次更新于 2010 年的 NSR-10 标准，要求新建筑符合严格的抗震要求。然而，据哥伦比亚工程师协会数据，受灾地区约 60% 的建筑在该规范生效前就已建成。"
+      },
+      {
+        "es": "Tras el sismo principal, se registraron más de 35 réplicas, seis de ellas de magnitud superior a 5,0. El Instituto Colombiano de Geología y Minería advirtió que las réplicas podrían continuar durante semanas, lo que aumenta el riesgo de colapsos adicionales en estructuras ya debilitadas.",
+        "zh": "主震后记录到超过 35 次余震，其中六次震级超过 5.0。哥伦比亚地质与矿业研究所警告称余震可能持续数周，这增加了已受损结构进一步倒塌的风险。"
+      },
+      {
+        "es": "La respuesta de emergencia fue inmediata pero insuficiente. Equipos de rescate de la Defensa Civil, la Cruz Roja Colombiana y bomberos voluntarios trabajaron contrarreloj para buscar sobrevivientes entre los escombros. Sin embargo, las lluvias torrenciales que siguieron al sismo dificultaron las labores de rescate y aumentaron el riesgo de deslizamientos de tierra.",
+        "zh": "紧急响应迅速但不足。民防部队、哥伦比亚红十字会和志愿消防员的救援队争分夺秒地在废墟中搜寻幸存者。然而，地震后的暴雨增加了救援难度和山体滑坡风险。"
+      },
+      {
+        "es": "El presidente colombiano declaró el estado de emergencia nacional y activó el Fondo Nacional de Gestión del Riesgo con una dotación inicial de 500.000 millones de pesos (aproximadamente 115 millones de euros). Además, solicitó ayuda internacional a través del mecanismo de las Naciones Unidas.",
+        "zh": "哥伦比亚总统宣布全国紧急状态，并启动国家风险管理基金，初始拨款 5000 亿比索（约 1.15 亿欧元）。此外，还通过联合国机制请求国际援助。"
+      },
+      {
+        "es": "A nivel internacional, el sismo reavivó el debate sobre la resiliencia urbana en regiones sísmicamente activas. Japón, país referente en prevención sísmica, invierte anualmente el equivalente al 1,2% de su PIB en infraestructura antisísmica y simulacros de evacuación. Colombia, en contraste, destina menos del 0,3%.",
+        "zh": "在国际层面，地震重新引发了关于地震活跃地区城市韧性的辩论。日本是地震预防的标杆国家，每年投入相当于 GDP 的 1.2% 用于抗震基础设施和疏散演练。相比之下，哥伦比亚的投入不到 0.3%。"
+      },
+      {
+        "es": "La profesora Claudia Martínez, experta en gestión de riesgos de la Universidad de los Andes, subrayó la dimensión social del desastre: \"Los más afectados son siempre los más pobres. Viven en viviendas precarias, en zonas de alto riesgo, sin acceso a seguros ni ahorros. La resiliencia urbana no es solo una cuestión de ingeniería, es una cuestión de justicia social.\"",
+        "zh": "安第斯大学风险管理专家克劳迪娅·马丁内斯教授强调了灾难的社会维度：“受影响最大的始终是最贫穷的人。他们住在简陋的住房里，位于高风险地区，没有保险或储蓄。城市韧性不仅是工程问题，更是社会正义问题。”"
+      },
+      {
+        "es": "Chile, otro país sudamericano con alta actividad sísmica, ofrece un modelo de referencia. Tras el terremoto de magnitud 8,8 de 2010, el país reforzó drásticamente su código sísmico, creó un sistema de alerta temprana y estableció protocolos de evacuación obligatorios. Desde entonces, ningún sismo de gran magnitud ha causado más de un centenar de víctimas.",
+        "zh": "智利是另一个地震活动频繁的南美国家，提供了参考模式。 2010 年 8.8 级地震后，该国大幅加强了地震规范、创建了预警系统并建立了强制性疏散协议。自此以后，任何大规模地震的遇难人数都未超过一百人。"
+      },
+      {
+        "es": "El doctor Kenji Nakamura, sismólogo de la Universidad de Tokio que ha colaborado con gobiernos latinoamericanos, señaló en una entrevista: \"La tecnología existe. Los conocimientos existen. Lo que falta en muchos países es voluntad política para invertir en prevención antes de que ocurra la catástrofe. Cada dólar invertido en prevención ahorra entre cuatro y siete dólares en reconstrucción.\"",
+        "zh": "东京大学地震学家中村健二博士曾与拉美各国政府合作，他在采访中指出：“技术是现成的。知识是现成的。许多国家缺乏的是在灾难发生前投资预防的政治意志。每投入一美元用于预防，可以节省四到七美元的重建费用。”"
+      },
+      {
+        "es": "Las autoridades colombianas han anunciado la creación de una comisión técnica para revisar y actualizar el código sísmico nacional. El objetivo es incorporar las lecciones aprendidas de este sismo y establecer requisitos más exigentes, especialmente para edificios públicos como escuelas y hospitales.",
+        "zh": "哥伦比亚当局已宣布成立一个技术委员会，负责审查和更新国家地震规范。目标是纳入本次地震的教训，制定更严格的要求，尤其针对学校和医院等公共建筑。"
+      },
+      {
+        "es": "No obstante, los expertos advierten que actualizar el código no es suficiente. \"El verdadero desafío no es escribir una nueva norma, sino hacerla cumplir\", afirmó Espinosa. \"En muchas regiones, la construcción informal representa más del 40% del parque inmobiliario. Esas viviendas no pasan por ningún control técnico.\"",
+        "zh": "然而，专家警告仅更新规范是不够的。埃斯皮诺萨表示：“真正的挑战不是写一套新规范，而是使其得到执行。在许多地区，非正规建筑占房地产总量的 40% 以上。这些住房没有经过任何技术审查。”"
+      },
+      {
+        "es": "La comunidad internacional ha respondido con solidaridad. La Unión Europea activó el Mecanismo de Protección Civil y envió un equipo de 80 expertos en búsqueda y rescate urbano. Estados Unidos, México y Brasil también ofrecieron asistencia técnica y humanitaria.",
+        "zh": "国际社会以团结精神回应。欧盟启动了民事保护机制，派遣了一支 80 名城市搜救专家队伍。美国、墨西哥和巴西也提供了技术和人道主义援助。"
+      },
+      {
+        "es": "\"Cada terremoto es una oportunidad para aprender y mejorar\", reflexionó la doctora Martínez. \"Pero no podemos permitirnos aprender solo cuando hay víctimas. La prevención debe ser una política de Estado, no una reacción a la tragedia.\" La pregunta que queda en el aire es si esta vez, por fin, las lecciones serán aprendidas.",
+        "zh": "马丁内斯博士反思道：“每一次地震都是学习和改进的机会。但我们不能只在有受害者时才学习。预防必须是一项国家政策，而不是对悲剧的反应。”悬而未决的问题是，这一次，教训是否终于会被吸取。"
+      }
+    ],
+    "dele": "简单过去时(sacudió, causó, declaró, activó, anunciaron)；过去未完成时(eran, representaba, pasaban)；虚拟式过去未完成时(fuera, ocurriera)；现在完成时(ha puesto en evidencia, ha respondido, han anunciado)；过去完成时(habían sido levantadas)；条件句(que podrían continuar, que dificultaron)；直接引语(declaró, subrayó, señaló, afirmó, reflexionó)；学术词汇(normativa sísmica, resiliencia urbana, simulacro de evacuación, infraestructura antisísmica, parque inmobiliario)。",
+    "hardWords": [
+      {
+        "w": "sismo",
+        "m": "地震（正式科学用语，同 terremoto）"
+      },
+      {
+        "w": "réplica",
+        "m": "余震（主震后的较小地震）"
+      },
+      {
+        "w": "normativa sísmica",
+        "m": "地震建筑规范（也称 código sísmico）"
+      },
+      {
+        "w": "resiliencia urbana",
+        "m": "城市韧性（城市承受和恢复灾难的能力）"
+      },
+      {
+        "w": "escombros",
+        "m": "废墟；瓦砾（建筑倒塌后的碎片）"
+      },
+      {
+        "w": "deslizamiento de tierra",
+        "m": "山体滑坡（地震常见次生灾害）"
+      },
+      {
+        "w": "simulacro de evacuación",
+        "m": "疏散演练（模拟紧急疏散的练习）"
+      },
+      {
+        "w": "infraestructura antisísmica",
+        "m": "抗震基础设施"
+      },
+      {
+        "w": "parque inmobiliario",
+        "m": "房地产总量（某地区所有建筑的总称）"
+      },
+      {
+        "w": "construcción informal",
+        "m": "非正规建筑（没有官方审批和技术监督）"
+      }
+    ],
+    "quiz": [
+      {
+        "q": "¿De qué magnitud fue el sismo que sacudió la región del Pacífico colombiano?",
+        "opts": [
+          "De 6,8",
+          "De 7,2",
+          "De 7,4",
+          "De 8,0"
+        ],
+        "ans": 2,
+        "es": "Párrafo 1: “Un sismo de magnitud 7,4 en la escala de Richter sacudió la región del Pacífico colombiano.”",
+        "zh": "地震震级为 7.4。"
+      },
+      {
+        "q": "¿Cuántas víctimas mortales causó el sismo en las primeras 48 horas según la UNGRD?",
+        "opts": [
+          "Al menos 25",
+          "Al menos 47",
+          "Al menos 80",
+          "Al menos 120"
+        ],
+        "ans": 1,
+        "es": "Párrafo 2: “El sismo causó la muerte de al menos 47 personas en las primeras 48 horas.”",
+        "zh": "首个 48 小时内至少 47 人死亡。"
+      },
+      {
+        "q": "¿A qué se refiere “dicha norma” en el párrafo 4?",
+        "opts": [
+          "A la Ley de Emergencia Nacional",
+          "A la Norma NSR-10 de 2010",
+          "A la Constitución colombiana",
+          "Al reglamento de bomberos"
+        ],
+        "ans": 1,
+        "es": "Párrafo 4: “La normativa sísmica colombiana, actualizada por última vez en 2010 con la Norma NSR-10.”",
+        "zh": "“该规范”指的是 2010 年的 NSR-10 地震规范。"
+      },
+      {
+        "q": "Según el contexto del párrafo 8, ¿qué significa “resiliencia urbana”?",
+        "opts": [
+          "El crecimiento económico de las ciudades",
+          "La capacidad de las ciudades para resistir y recuperarse de desastres",
+          "La belleza arquitectónica de una ciudad",
+          "La densidad de población urbana"
+        ],
+        "ans": 1,
+        "es": "Párrafo 8: el contexto discute inversión en infraestructura antisísmica y simulacros.",
+        "zh": "城市韧性指城市承受和从灾难中恢复的能力。"
+      },
+      {
+        "q": "¿Cuál de las siguientes afirmaciones es FALSA?",
+        "opts": [
+          "El 60% de las construcciones afectadas se levantaron antes de la norma NSR-10",
+          "Chile reforzó su código sísmico tras el terremoto de 2010",
+          "Japón invierte el 1,2% de su PIB en prevención sísmica",
+          "Colombia invierte más del 1% de su PIB en infraestructura antisísmica"
+        ],
+        "ans": 3,
+        "es": "Párrafo 8: “Colombia, en contraste, destina menos del 0,3%.”",
+        "zh": "哥伦比亚投入不到 GDP 的 0.3%，而非超过 1%。"
+      },
+      {
+        "q": "¿Qué factor NO se menciona como agravante de la situación tras el sismo?",
+        "opts": [
+          "Las réplicas sísmicas",
+          "Las lluvias torrenciales",
+          "Una epidemia de cólera",
+          "El riesgo de deslizamientos de tierra"
+        ],
+        "ans": 2,
+        "es": "El texto no menciona ninguna epidemia de cólera tras el sismo.",
+        "zh": "文章没有提到地震后爆发霍乱疫情。"
+      },
+      {
+        "q": "Según el doctor Nakamura, ¿cuánto se ahorra en reconstrucción por cada dólar invertido en prevención?",
+        "opts": [
+          "Entre 1 y 2 dólares",
+          "Entre 2 y 3 dólares",
+          "Entre 4 y 7 dólares",
+          "Entre 8 y 10 dólares"
+        ],
+        "ans": 2,
+        "es": "Párrafo 11: “Cada dólar invertido en prevención ahorra entre cuatro y siete dólares en reconstrucción.”",
+        "zh": "每投入一美元预防可节省 4-7 美元重建费用。"
+      },
+      {
+        "q": "¿Cuál es la idea principal del texto?",
+        "opts": [
+          "Colombia debe copiar exactamente el modelo japonés",
+          "La prevención y la resiliencia urbana requieren inversión, voluntad política y justicia social",
+          "Los terremotos son impredecibles y no se puede hacer nada",
+          "La ayuda internacional es la única solución viable"
+        ],
+        "ans": 1,
+        "es": "El texto argumenta que la resiliencia urbana requiere una combinación de inversión, voluntad política y equidad social.",
+        "zh": "文章主旨是预防和城市韧性需要投资、政治意志和社会正义的结合。"
+      }
+    ]
+  }
+};
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${a.hardWords.map(h => `<code>${esc(h.w)}</code>=${esc(h.m)}`).join(' · ')}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${a.quiz.length} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== 恢复已保存的答题状态 + 渲染控件 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">🔄 重做</button>' +
+    '<span class="quiz-stats">' +
+      '已答题 <b>' + historyCount + '</b> 次' +
+      (latest ? ' · 最近正确 <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">📝 笔记</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="记录你的学习笔记..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">✓ 已保存</span>';
+  section.appendChild(notesArea);
+}
+
+// 给每个 quiz 绑定交互
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// 初始化
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+</script>
+</body>
+</html>

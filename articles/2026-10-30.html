@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西语学习每日推送 · 2026-10-30</title>
+<style>
+
+
+
+
+
+  :root {
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --brand: #c0392b;
+    --brand-soft: #fff5f3;
+    --a1: #2e7d32;
+    --a2: #1565c0;
+    --b1: #c12a2a;
+    --b2: #6a1b9a;
+    --highlight: #e07a1f;
+    --highlight-bg: #fff3e0;
+    --es-bg: #f0f6fc;
+    --zh-bg: #fefcf5;
+    --es-ink: #1b496b;
+    --zh-ink: #2a2a2a;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* === Top bar === */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: #fff;
+    padding: 14px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .topbar h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 1px; }
+  .topbar .sub { font-size: 13px; opacity: .9; }
+  /* === Layout === */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .toc {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .toc h2 { margin: 0 0 12px; font-size: 16px; color: var(--brand); }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .toc a {
+    display: block; padding: 8px 12px;
+    background: #f8f9fb; border-radius: 6px;
+    text-decoration: none; color: var(--ink);
+    border-left: 3px solid var(--a1);
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .toc a:hover { background: var(--brand-soft); transform: translateX(2px); }
+  .toc a[data-level="A2"] { border-left-color: var(--a2); }
+  .toc a[data-level="B1"] { border-left-color: var(--b1); }
+  .toc a[data-level="B2"] { border-left-color: var(--b2); }
+  /* === Vocab cards === */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .vocab-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--brand);
+    transition: transform .2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); }
+  .vocab-card .lema { font-size: 22px; font-weight: 700; color: var(--brand); margin-bottom: 2px; }
+  .vocab-card .ipa { font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif; color: var(--muted); font-size: 14px; }
+  .vocab-card .pos { display: inline-block; padding: 1px 8px; background: #eef; color: #456; border-radius: 4px; font-size: 12px; margin: 6px 0; }
+  .vocab-card .def { font-size: 14px; margin: 8px 0; color: var(--ink); }
+  .vocab-card .ex { background: var(--es-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; margin: 6px 0; color: var(--es-ink); }
+  .vocab-card .ex-zh { background: var(--zh-bg); border-radius: 6px; padding: 8px 12px; font-size: 13.5px; color: var(--zh-ink); }
+  .vocab-card .tip {
+    margin-top: 8px; padding: 8px 12px;
+    background: linear-gradient(90deg, #fff8e1, #fffbf0);
+    border-left: 3px solid var(--highlight);
+    font-size: 13px; color: #5d4037;
+    border-radius: 0 6px 6px 0;
+  }
+  .vocab-card .tip b { color: var(--highlight); }
+  /* === Article blocks === */
+  .article {
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .article header {
+    padding: 18px 24px;
+    background: linear-gradient(90deg, var(--brand-soft) 0%, #fff 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .article header .level-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .article header .level-tag.A1 { background: var(--a1); }
+  .article header .level-tag.A2 { background: var(--a2); }
+  .article header .level-tag.B1 { background: var(--b1); }
+  .article header .level-tag.B2 { background: var(--b2); }
+  .article header h2 { margin: 8px 0 4px; font-size: 20px; color: var(--ink); }
+  .article header .meta { font-size: 13px; color: var(--muted); }
+  .article header .meta a {
+    color: var(--brand); text-decoration: none; margin-left: 6px;
+  }
+  .article header .meta a:hover { text-decoration: underline; }
+  .article header .source-cta {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #fff !important; font-weight: 700; font-size: 12px;
+    padding: 5px 12px; border-radius: 6px; text-decoration: none !important;
+    margin: 4px 0 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    transition: transform .15s, box-shadow .15s;
+    margin-left: 0 !important;
+  }
+  .article header .source-cta:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); text-decoration: none !important; }
+  .article header .source-cta.A1 { background: var(--a1); }
+  .article header .source-cta.A2 { background: var(--a2); }
+  .article header .source-cta.B1 { background: var(--b1); }
+  .article header .source-cta.B2 { background: var(--b2); }
+  /* === Bilingual paragraphs === */
+  .bilingual { padding: 18px 24px; }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .para .es, .para .zh {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .para .es {
+    background: var(--es-bg);
+    color: var(--es-ink);
+    border-left: 3px solid #5b8db8;
+  }
+  .para .zh {
+    background: var(--zh-bg);
+    color: var(--zh-ink);
+    border-left: 3px solid #d4a155;
+  }
+  .para .lang-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 6px;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+  .lang-tag.es-tag { background: #5b8db8; }
+  .lang-tag.zh-tag { background: #d4a155; }
+  .hl {
+    color: var(--highlight);
+    font-weight: 700;
+    background: var(--highlight-bg);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .hl::after {
+    content: " ✦";
+    font-size: 11px;
+    vertical-align: super;
+    color: var(--highlight);
+  }
+  /* === DELE考点 box === */
+  .dele-points {
+    margin: 18px 24px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #f3e5f5, #fff);
+    border-left: 4px solid #8e24aa;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  .dele-points b { color: #6a1b9a; }
+  .dele-points ul { margin: 6px 0 0; padding-left: 20px; }
+  .dele-points li { margin: 2px 0; }
+  /* === Quiz section === */
+  .quiz-section {
+    margin: 20px 24px;
+    padding: 18px;
+    background: #fafbfc;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .quiz-section h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--brand);
+  }
+  .quiz-item {
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .quiz-item .q-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-opts { list-style: none; padding: 0; margin: 8px 0; }
+  .quiz-opts li {
+    padding: 6px 12px;
+    margin: 4px 0;
+    background: #f8f9fb;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all .15s;
+  }
+  .quiz-opts li:hover { background: var(--brand-soft); }
+  .quiz-opts li.correct {
+    background: #d1fae5;
+    border-color: var(--correct);
+    color: #065f46;
+    font-weight: 600;
+  }
+  .quiz-opts li.wrong {
+    background: #fee2e2;
+    border-color: var(--wrong);
+    color: #991b1b;
+  }
+  .quiz-opts li.disabled { pointer-events: none; }
+  .quiz-explain {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #fef3c7, #fff);
+    border-left: 3px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    display: none;
+  }
+  .quiz-explain.show { display: block; }
+  .quiz-explain .zh-explain { color: var(--zh-ink); margin-top: 6px; }
+  .quiz-explain b { color: #b45309; }
+  .quiz-submit {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .quiz-submit:hover { background: #a93226; }
+  .quiz-submit:disabled {
+    background: #cbd5e1; cursor: not-allowed;
+  }
+  .quiz-score {
+    margin-top: 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: none;
+  }
+  .quiz-score.show { display: inline-block; }
+  .quiz-score.full { background: #d1fae5; color: #065f46; }
+  .quiz-score.partial { background: #fef3c7; color: #92400e; }
+  .quiz-score.zero { background: #fee2e2; color: #991b1b; }
+  /* === Article nav links === */
+  .jump-links {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .jump-links h3 { margin: 0 0 10px; font-size: 15px; color: var(--brand); }
+  .jump-links a {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 5px 12px;
+    background: #eef2ff;
+    color: #4338ca;
+    text-decoration: none;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+  .jump-links a:hover { background: #c7d2fe; }
+  /* === Footer === */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  /* === Mobile === */
+  @media (max-width: 720px) {
+    .para { grid-template-columns: 1fr; }
+    .topbar h1 { font-size: 17px; }
+    .wrap { padding: 12px; }
+    .article header, .bilingual, .dele-points, .quiz-section { padding-left: 14px; padding-right: 14px; }
+  }
+
+
+
+
+
+
+/* === Quiz 持久化控件 === */
+.quiz-controls{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.quiz-reset-btn{padding:6px 14px;background:#fff;color:var(--brand);border:1px solid var(--brand);border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-reset-btn:hover{background:var(--brand);color:#fff}
+.quiz-stats{font-size:11.5px;color:var(--muted)}
+.quiz-stats b{color:var(--brand)}
+.quiz-notes-btn{padding:6px 14px;background:#fff;color:#7c3aed;border:1px solid #7c3aed;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}
+.quiz-notes-btn:hover{background:#7c3aed;color:#fff}
+.quiz-notes-area{display:none;width:100%;margin-top:8px}
+.quiz-notes-area.show{display:block}
+.quiz-notes-area textarea{width:100%;min-height:60px;padding:8px 10px;border:1px solid #d4c4fc;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;background:#fafaff;color:var(--ink);line-height:1.6}
+.quiz-notes-saved{display:none;font-size:10px;color:#10b981;margin-top:4px}
+.quiz-notes-saved.show{display:inline-block}
+.quiz-section>h3{display:flex;align-items:center;gap:10px}
+
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>📚 西语学习每日推送 · 2026-10-30</h1>
+    <div class="sub">第26期 · 周五 · 搬家 · 西班牙问候礼仪 · 电商增长 · 能源贫困之争</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ===== 目录 ===== -->
+    <div class="toc" id="toc">
+      <h2>📑 本日内容概览</h2>
+      <div class="toc-grid">
+        <a href="#vocab">🗂️ 15 个高频词</a>
+        <a href="#a1">🟢 A1 精读</a>
+        <a href="#a1-quiz">🟢 A1 阅读题</a>
+        <a href="#a2">🔵 A2 精读</a>
+        <a href="#a2-quiz">🔵 A2 阅读题</a>
+        <a href="#b1">🔴 B1 精读</a>
+        <a href="#b1-quiz">🔴 B1 阅读题</a>
+        <a href="#b2">🟣 B2 精读</a>
+        <a href="#b2-quiz">🟣 B2 阅读题</a>
+      </div>
+    </div>
+
+    <!-- ===== 快速跳转 ===== -->
+    <div class="jump-links">
+      <h3>🔗 快速跳转</h3>
+      <a href="#vocab"># 词汇</a>
+      <a href="#a1"># A1 阅读</a><a href="#a1-quiz"># A1 习题</a>
+      <a href="#a2"># A2 阅读</a><a href="#a2-quiz"># A2 习题</a>
+      <a href="#b1"># B1 阅读</a><a href="#b1-quiz"># B1 习题</a>
+      <a href="#b2"># B2 阅读</a><a href="#b2-quiz"># B2 习题</a>
+    </div>
+
+    <!-- ===== 词汇卡片 ===== -->
+    <section id="vocab">
+      <h2 style="color:var(--brand);margin-bottom:12px">🗂️ 今日 15 个高频词</h2>
+      <div class="vocab-grid" id="vocabGrid"><!-- JS 注入 --></div>
+    </section>
+
+    <!-- ============== A1 文章 ============== -->
+    <article class="article" id="a1">
+      <header>
+        <span class="level-tag A1">A1</span>
+        <a class="source-cta A1" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>🏠 La mudanza a un piso nuevo</h2>
+        <div class="meta">精读 · 难度 ★☆☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a1-content"></div>
+      <div class="dele-points" id="a1-dele"></div>
+      <div class="quiz-section" id="a1-quiz"></div>
+    </article>
+    <!-- ============== A2 文章 ============== -->
+    <article class="article" id="a2">
+      <header>
+        <span class="level-tag A2">A2</span>
+        <a class="source-cta A2" href="https://deleahora.com/actividades/comprension-de-lectura" target="_blank" rel="noopener noreferrer">🔗 DELE Ahora 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">10 段 · 基础语法</span>
+        <h2>👋 Los saludos en España</h2>
+        <div class="meta">精读 · 难度 ★★☆☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="a2-content"></div>
+      <div class="dele-points" id="a2-dele"></div>
+      <div class="quiz-section" id="a2-quiz"></div>
+    </article>
+    <!-- ============== B1 文章 ============== -->
+    <article class="article" id="b1">
+      <header>
+        <span class="level-tag B1">B1</span>
+        <a class="source-cta B1" href="https://cnmc.es/sites/default/files/editor_contenidos/Notas%20de%20prensa/2025/20251003_NP_CE_I_25_eng_0.pdf" target="_blank" rel="noopener noreferrer">🔗 CNMC 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">18 段 · 复合句</span>
+        <h2>🛒 El comercio electrónico en España</h2>
+        <div class="meta">精读 · 难度 ★★★☆ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b1-content"></div>
+      <div class="dele-points" id="b1-dele"></div>
+      <div class="quiz-section" id="b1-quiz"></div>
+    </article>
+    <!-- ============== B2 文章 ============== -->
+    <article class="article" id="b2">
+      <header>
+        <span class="level-tag B2">B2</span>
+        <a class="source-cta B2" href="https://elpais.com/economia/2025-11-05/el-gobierno-encarga-a-ree-y-cnmc-inspeccionar-a-las-electricas-para-rebajar-el-coste-antiapagon-del-recibo-de-luz.html" target="_blank" rel="noopener noreferrer">🔗 El País 原文 ↗</a>
+        <span style="color:var(--muted);font-size:13px;">20 段 · 议论文体</span>
+        <h2>⚡ La pobreza energética</h2>
+        <div class="meta">精读 · 难度 ★★★★ · <a href="#toc">返回目录</a></div>
+      </header>
+      <div class="bilingual" id="b2-content"></div>
+      <div class="dele-points" id="b2-dele"></div>
+      <div class="quiz-section" id="b2-quiz"></div>
+    </article>
+
+    <div class="footer">
+      <p>📅 推送日期：2026-10-30（星期五）</p>
+      <p>本推送由西语 SIELE 备考工作台自动生成 · 适配 DELE A1-B2 / SIELE 备考</p>
+      <p>配套 Word 版：articles/2026-10-30.docx</p>
+    </div>
+  </div>
+
+<script>
+
+// ========== 测试持久化模块 ==========
+const QuizData = {
+  STORAGE_KEY: 'swa_quiz_v1',
+
+  load() {
+    try {
+      const raw = localStorage.getItem(this.STORAGE_KEY);
+      if (!raw) return { version: 1, updatedAt: null, quizzes: {} };
+      const data = JSON.parse(raw);
+      if (!data.version) data.version = 1;
+      if (!data.quizzes) data.quizzes = {};
+      return data;
+    } catch (e) { return { version: 1, updatedAt: null, quizzes: {} }; }
+  },
+
+  save(data) {
+    try {
+      data.updatedAt = new Date().toISOString();
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (e) { console.warn('localStorage 写入失败:', e); return false; }
+  },
+
+  getDate() {
+    const m = document.title.match(/(\d{4}-\d{2}-\d{2})/);
+    return m ? m[1] : null;
+  },
+
+  getRecord(date, level) {
+    const data = this.load();
+    return data.quizzes?.[date]?.[level] || null;
+  },
+
+  getLatestAttempt(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts?.length ? record.attempts[0] : null;
+  },
+
+  getHistory(date, level) {
+    const record = this.getRecord(date, level);
+    return record?.attempts || [];
+  },
+
+  _sessionCache: {},
+
+  recordAnswer(level, idx, chosen, isCorrect) {
+    const date = this.getDate();
+    if (!date) return;
+    if (!this._sessionCache[date]) this._sessionCache[date] = {};
+    if (!this._sessionCache[date][level]) {
+      const totalQ = ARTICLES[level].quiz.length;
+      this._sessionCache[date][level] = {
+        answers: new Array(totalQ).fill(null).map(() => ({ chosen: null, correct: null }))
+      };
+    }
+    this._sessionCache[date][level].answers[idx] = { chosen, correct: isCorrect };
+    this._persistSession(date, level);
+  },
+
+  _persistSession(date, level) {
+    const data = this.load();
+    const cache = this._sessionCache[date]?.[level];
+    if (!cache) return;
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    const attemptId = cache._attemptId || ('t_' + Date.now());
+    cache._attemptId = attemptId;
+    const attempt = {
+      id: attemptId,
+      timestamp: new Date().toISOString(),
+      answers: cache.answers.slice(),
+      score: cache.answers.filter(a => a.correct === true).length,
+      completed: cache.answers.every(a => a.chosen !== null)
+    };
+    const record = data.quizzes[date][level];
+    const existingIdx = record.attempts.findIndex(a => a.id === attemptId);
+    if (existingIdx >= 0) {
+      record.attempts[existingIdx] = attempt;
+    } else {
+      record.attempts.unshift(attempt);
+    }
+    this.save(data);
+  },
+
+  restoreQuizUI(date, level) {
+    const attempt = this.getLatestAttempt(date, level);
+    if (!attempt) return false;
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      if (idx >= attempt.answers.length) return;
+      const ans = attempt.answers[idx];
+      if (ans.chosen === null) return;
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach((li, j) => {
+        li.classList.add('disabled');
+        const correctAns = ARTICLES[level].quiz[idx].ans;
+        if (j === correctAns) li.classList.add('correct');
+        if (j === ans.chosen && j !== correctAns) li.classList.add('wrong');
+      });
+      if (explain) explain.classList.add('show');
+      if (scoreEl) {
+        scoreEl.textContent = ans.correct ? '✓ 正确！' : '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show ' + (ans.correct ? 'full' : 'zero');
+      }
+    });
+    return true;
+  },
+
+  doResetQuiz(level) {
+    if (!confirm('确定要重做 ' + level.toUpperCase() + ' 的全部题目吗？\n历史记录将被保留。')) return;
+    const date = this.getDate();
+    if (this._sessionCache[date]) delete this._sessionCache[date][level];
+    const quizItems = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+    quizItems.forEach((item, idx) => {
+      const opts = item.querySelectorAll('.quiz-opts li');
+      const explain = document.getElementById(level + '-explain-' + idx);
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      opts.forEach(li => {
+        li.classList.remove('disabled', 'correct', 'wrong', 'selected');
+      });
+      if (explain) explain.classList.remove('show');
+      if (scoreEl) { scoreEl.textContent = ''; scoreEl.className = 'quiz-score'; }
+    });
+    bindQuizInteraction(level);
+    renderQuizControls(level);
+  },
+
+  toggleNotes(level) {
+    const date = this.getDate();
+    const area = document.getElementById(level + '-notes-area');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!area) return;
+    const isShowing = area.classList.toggle('show');
+    if (isShowing) {
+      const record = this.getRecord(date, level);
+      const ta = area.querySelector('textarea');
+      if (ta) ta.value = record?.notes || '';
+      ta.focus();
+    }
+  },
+
+  saveNotes(level) {
+    const date = this.getDate();
+    const ta = document.querySelector('#' + level + '-notes-area textarea');
+    const saved = document.getElementById(level + '-notes-saved');
+    if (!ta) return;
+    const text = ta.value;
+    const data = this.load();
+    if (!data.quizzes[date]) data.quizzes[date] = {};
+    if (!data.quizzes[date][level]) {
+      data.quizzes[date][level] = { totalQuestions: ARTICLES[level].quiz.length, attempts: [], notes: '' };
+    }
+    data.quizzes[date][level].notes = text;
+    this.save(data);
+    if (saved) { saved.classList.add('show'); setTimeout(() => saved.classList.remove('show'), 2000); }
+  }
+};
+
+/* ==================== 词汇数据 ==================== */
+const WORDS = [{"lema":"mudanza","ipa":"[muˈðan.θa]","pos":"f.","significado":"搬家（把家具和物品搬到新住所）","ejemplo_es":"La mudanza fue larga, pero al final todo quedó en la casa nueva.","ejemplo_zh":"搬家很累，但最后所有东西都安置到了新家。","tip":"<b>mudanza</b> = 搬家。<b>mudarse</b> = 搬家（动词）。<b>caja</b> = 纸箱。<b>camioneta</b> = 小货车。<b>embalar</b> = 打包。A1 生活词。"},{"lema":"caja","ipa":"[ˈka.xa]","pos":"f.","significado":"纸箱；盒子（用来装物品的容器）","ejemplo_es":"Pongo los libros y la ropa dentro de cajas de cartón.","ejemplo_zh":"我把书和衣服装进纸板箱里。","tip":"<b>caja</b> = 纸箱/盒子。<b>caja de cartón</b> = 纸板箱。<b>embalar</b> = 打包。<b>desembalar</b> = 拆包。A1 生活词。"},{"lema":"embalar","ipa":"[em.baˈlaɾ]","pos":"v.","significado":"打包；装箱（把物品包好准备搬运或寄送）","ejemplo_es":"Antes de la mudanza, embalamos los platos con cuidado.","ejemplo_zh":"搬家前，我们小心地把盘子打包好。","tip":"<b>embalar</b> = 打包。<b>desembalar</b> = 拆包。<b>envolver</b> = 包裹。<b>cinta adhesiva</b> = 胶带。A1 生活动词。"},{"lema":"saludo","ipa":"[saˈlu.ðo]","pos":"m.","significado":"问候；招呼（见面时表达礼貌的动作或话语）","ejemplo_es":"En España, el saludo entre amigos incluye a menudo dos besos en las mejillas.","ejemplo_zh":"在西班牙，朋友之间的问候常常包括亲吻两下脸颊。","tip":"<b>saludo</b> = 问候。<b>saludar</b> = 打招呼。<b>despedirse</b> = 道别。<b>apretón de manos</b> = 握手。A2 文化词。"},{"lema":"beso","ipa":"[ˈbe.so]","pos":"m.","significado":"吻；贴面礼（西班牙人见面时的问候方式）","ejemplo_es":"Las mujeres españolas se saludan con dos besos, uno en cada mejilla.","ejemplo_zh":"西班牙女性见面时互相亲吻两下，每边脸颊各一下。","tip":"<b>beso</b> = 吻。<b>mejilla</b> = 脸颊。<b>dos besos</b> = 贴面礼两下。<b>dar un beso</b> = 亲一下。A2 文化词。"},{"lema":"comercio electrónico","ipa":"[koˈmeɾ.θjo e.lekˈtɾo.ni.ko]","pos":"m.","significado":"电子商务（通过互联网买卖商品和服务）","ejemplo_es":"El comercio electrónico crece cada año y cambia los hábitos de compra.","ejemplo_zh":"电子商务逐年增长，改变着人们的购物习惯。","tip":"<b>comercio electrónico</b> = 电商。<b>venta online</b> = 线上销售。<b>e-commerce</b> = 电商（英语）。<b>tienda online</b> = 网店。B1 经济词。"},{"lema":"facturación","ipa":"[fak.tu.ɾaˈθjon]","pos":"f.","significado":"营业额；销售额（企业销售商品获得的总收入）","ejemplo_es":"La facturación del comercio online superó los cien mil millones de euros.","ejemplo_zh":"线上商务的营业额超过了一千亿欧元。","tip":"<b>facturación</b> = 营业额。<b>facturar</b> = 开票/实现营业额。<b>ingresos</b> = 收入。<b>volumen de negocio</b> = 业务量。B1 经济词。"},{"lema":"transacción","ipa":"[tɾan.sakˈθjon]","pos":"f.","significado":"交易（买卖双方完成的商业活动）","ejemplo_es":"Cada año se registran millones de transacciones en las tiendas online.","ejemplo_zh":"每年网店都会记录数百万笔交易。","tip":"<b>transacción</b> = 交易。<b>pago</b> = 支付。<b>compra</b> = 购买。<b>devolución</b> = 退货。B1 经济词。"},{"lema":"hábito de consumo","ipa":"[ˈa.βi.to ðe konˈsu.mo]","pos":"m.","significado":"消费习惯（人们购物的方式和偏好）","ejemplo_es":"Los hábitos de consumo cambian con la llegada de las nuevas tecnologías.","ejemplo_zh":"随着新技术的到来，消费习惯正在改变。","tip":"<b>hábito de consumo</b> = 消费习惯。<b>consumidor</b> = 消费者。<b>consumo</b> = 消费。<b>pauta</b> = 模式。B1 经济词。"},{"lema":"pobreza energética","ipa":"[poˈβɾe.θa e.neɾˈxe.ti.ka]","pos":"f.","significado":"能源贫困（难以负担供暖、用电等基本能源）","ejemplo_es":"La subida de la luz agrava la pobreza energética de muchas familias.","ejemplo_zh":"电价上涨加剧了许多家庭的能源贫困。","tip":"<b>pobreza energética</b> = 能源贫困。<b>factura de la luz</b> = 电费单。<b>suministro</b> = 供应。<b>vulnerable</b> = 弱势的。B2 社会词。"},{"lema":"factura de la luz","ipa":"[fakˈtu.ɾa ðe la ˈluθ]","pos":"f.","significado":"电费账单（用户需缴纳的电费）","ejemplo_es":"La factura de la luz ha subido casi un diez por ciento en un año.","ejemplo_zh":"电费账单在一年内上涨了近百分之十。","tip":"<b>factura de la luz</b> = 电费单。<b>recibo</b> = 账单。<b>consumo</b> = 用电量。<b>tarifa</b> = 电价。B2 社会词。"},{"lema":"suministro","ipa":"[su.miˈnis.tɾo]","pos":"m.","significado":"供应；供给（向用户提供能源、水等）","ejemplo_es":"El suministro eléctrico es esencial para la vida de los hogares.","ejemplo_zh":"电力供应对家庭生活至关重要。","tip":"<b>suministro</b> = 供应。<b>suministrar</b> = 供应（动词）。<b>corte</b> = 中断。<b>red eléctrica</b> = 电网。B2 社会词。"},{"lema":"bono social","ipa":"[ˈbo.no soˈθjal]","pos":"m.","significado":"社会补贴（政府给弱势群体的优惠）","ejemplo_es":"El bono social descuenta parte de la factura a las familias vulnerables.","ejemplo_zh":"社会补贴为弱势家庭减免部分电费。","tip":"<b>bono social</b> = 社会补贴。<b>descuento</b> = 折扣。<b>beneficiario</b> = 受益人。<b>prestación</b> = 补助。B2 社会词。"},{"lema":"red eléctrica","ipa":"[ˈreð eˈlek.tɾi.ka]","pos":"f.","significado":"电网（输送和分配电力的系统）","ejemplo_es":"La red eléctrica necesita inversiones para garantizar su estabilidad.","ejemplo_zh":"电网需要投资来保证其稳定性。","tip":"<b>red eléctrica</b> = 电网。<b>apagón</b> = 停电。<b>tendido</b> = 线路。<b>operador</b> = 运营商。B2 社会词。"},{"lema":"transición energética","ipa":"[tɾan.siˈθjon e.neɾˈxe.ti.ka]","pos":"f.","significado":"能源转型（从化石能源转向清洁能源）","ejemplo_es":"La transición energética debe ser justa para no castigar a los más pobres.","ejemplo_zh":"能源转型必须公平，不能惩罚最贫困的人群。","tip":"<b>transición energética</b> = 能源转型。<b>renovable</b> = 可再生能源。<b>descarbonizar</b> = 去碳。<b>verde</b> = 绿色。B2 社会词。"}]
+
+const ARTICLES = {"a1":{"paragraphs":[{"es":"Hoy es sábado y la familia Ruiz se muda a un piso nuevo.","zh":"今天是星期六，鲁伊斯一家要搬进新公寓。"},{"es":"Por la mañana, Pablo y Ana embalan los libros y la ropa en cajas de cartón.","zh":"早上，巴勃罗和安娜把书和衣服装进纸板箱里。"},{"es":"Los niños ponen sus juguetes en una mochila grande y cierran las cajas con cinta.","zh":"孩子们把玩具装进一个大背包，并用胶带封好箱子。"},{"es":"A las diez llega una camioneta blanca que alquilaron para el transporte.","zh":"十点钟，一辆他们租来搬运的白色小货车到了。"},{"es":"El conductor, un hombre amable, ayuda a subir las cajas al vehículo.","zh":"司机是位友善的男士，帮忙把箱子搬上车。"},{"es":"El piso nuevo está en la tercera planta, cerca de un parque y una escuela.","zh":"新公寓在三楼，靠近一个公园和一所学校。"},{"es":"Pablo y Ana suben las cajas en el ascensor, una por una, con mucho cuidado.","zh":"巴勃罗和安娜小心翼翼地用电梯把箱子一箱箱搬上去。"},{"es":"Por la tarde, colocan los muebles: el sofá en el salón y la mesa en la cocina.","zh":"下午，他们摆放家具：沙发放在客厅，桌子放在厨房。"},{"es":"La abuela llega con un pastel de chocolate para celebrar el primer día en casa.","zh":"奶奶带着一个巧克力蛋糕到来，庆祝在新家的第一天。"},{"es":"Al final del día, todos están cansados pero contentos en su hogar nuevo.","zh":"一天结束时，大家都很累，但在新家里很开心。"}],"dele":"A1 考点：<b>陈述式现在时</b>（se muda/embalan/ponen/llega/ayuda）描述一次搬家；<b>不规则动词</b>（estar→están、traer→trae）；<b>地点介词</b>（en/a/de/cerca de）；<b>时间表达</b>（por la mañana / a las diez / por la tarde）；<b>常用搬家词汇</b>（caja/embalar/camioneta/ascensor/muebles）。","hardWords":[{"w":"mudanza","m":"搬家"},{"w":"embalar","m":"打包；装箱"},{"w":"camioneta","m":"小货车"},{"w":"ascensor","m":"电梯"},{"w":"muebles","m":"家具"}],"quiz":[{"q":"¿Qué hace la familia Ruiz el sábado?","opts":["Va de vacaciones","Se muda a un piso nuevo","Celebra un cumpleaños","Va al cine"],"ans":1,"es":"El párrafo 1 dice: \"la familia Ruiz se muda a un piso nuevo\". La respuesta correcta es B.","zh":"第 1 段说：\"la familia Ruiz se muda a un piso nuevo\"（鲁伊斯一家搬进新公寓），故选 B。"},{"q":"¿Qué embalan Pablo y Ana en cajas de cartón?","opts":["Los platos y los vasos","Los libros y la ropa","Los juguetes y los zapatos","La comida y el agua"],"ans":1,"es":"El párrafo 2 dice: \"embalan los libros y la ropa en cajas de cartón\". La respuesta correcta es B.","zh":"第 2 段说：\"embalan los libros y la ropa en cajas de cartón\"（把书和衣服装进纸板箱），故选 B。"},{"q":"¿Qué vehículo alquilaron para el transporte?","opts":["Un camión grande","Una camioneta blanca","Un coche rojo","Una furgoneta azul"],"ans":1,"es":"El párrafo 4 dice: \"llega una camioneta blanca que alquilaron\". La respuesta correcta es B.","zh":"第 4 段说：\"llega una camioneta blanca que alquilaron\"（他们租的白色小货车到了），故选 B。"},{"q":"¿En qué planta está el piso nuevo?","opts":["En la primera","En la segunda","En la tercera","En la cuarta"],"ans":2,"es":"El párrafo 6 dice: \"El piso nuevo está en la tercera planta\". La respuesta correcta es C.","zh":"第 6 段说：\"El piso nuevo está en la tercera planta\"（新公寓在三楼），故选 C。"},{"q":"¿Qué trae la abuela para celebrar?","opts":["Una tarta de chocolate","Una paella","Un ramo de flores","Una botella de vino"],"ans":0,"es":"El párrafo 9 dice: \"La abuela trae una tarta de chocolate\". La respuesta correcta es A.","zh":"第 9 段说：\"La abuela trae una tarta de chocolate\"（奶奶带来一个巧克力蛋糕），故选 A。"}]},"a2":{"paragraphs":[{"es":"En España, la forma de saludar dice mucho sobre la relación entre dos personas.","zh":"在西班牙，问候的方式很能说明两个人之间的关系。"},{"es":"Las mujeres suelen saludarse con dos besos, uno en cada mejilla, incluso si no se conocen mucho.","zh":"女性之间通常以贴面两下、每边脸颊各一下的方式问候，即使彼此并不很熟。"},{"es":"Entre los hombres, lo habitual es darse la mano, aunque los amigos cercanos también se abrazan.","zh":"男性之间通常是握手，不过亲密的朋友也会拥抱。"},{"es":"Cuando un hombre saluda a una mujer, la costumbre es darle dos besos, empezando por la mejilla derecha.","zh":"当男性问候女性时，习惯是贴面两下，从右脸颊开始。"},{"es":"En el trabajo, el saludo es más formal: se estrecha la mano y se usa el tratamiento de usted.","zh":"在工作场合，问候更正式：握手并使用 usted 的尊称。"},{"es":"Entre los jóvenes, el trato de tú es inmediato, incluso con personas que acaban de conocer.","zh":"在年轻人之间，用 tú 相称是即刻的，即使对刚认识的人也如此。"},{"es":"Estos dos besos no son un beso real, sino un gesto en el que las mejillas se tocan ligeramente.","zh":"这两下亲吻并不是真正的吻，而是一个让脸颊轻轻相触的动作。"},{"es":"Los extranjeros a veces se sienten confusos, porque no saben si deben besar, abrazar o dar la mano.","zh":"外国人有时会感到困惑，因为不知道应该亲吻、拥抱还是握手。"},{"es":"Al despedirse, se repite el mismo saludo: dos besos o un apretón de manos, según la confianza.","zh":"道别时，会重复同样的问候：根据熟悉程度，贴面两下或握一次手。"},{"es":"Así, el saludo español refleja una cultura cálida, cercana y muy expresiva en el trato diario.","zh":"就这样，西班牙式问候反映了一种在日常交往中热情、亲近且富有表现力的文化。"}],"dele":"A2 考点：<b>一般现在时</b>（saludan/se dan/se estrecha/refleja）描述社会习惯；<b>代词式动词</b>（saludarse/darse/abrazarse/despedirse）；<b>频率与习惯表达</b>（suelen / lo habitual / la costumbre / a veces）；<b>连词</b>（aunque / incluso / según / así）；<b>社会礼仪词汇</b>（saludo/beso/mejilla/trato/apretón de manos）。","hardWords":[{"w":"saludo","m":"问候；招呼"},{"w":"beso","m":"吻；贴面礼"},{"w":"mejilla","m":"脸颊"},{"w":"apretón de manos","m":"握手"},{"w":"trato de usted","m":"以 usted 相称（尊称）"}],"quiz":[{"q":"¿Cómo se saludan las mujeres españolas habitualmente?","opts":["Con un apretón de manos","Con dos besos, uno en cada mejilla","Con una inclinación","Sin tocarse"],"ans":1,"es":"El párrafo 2 dice: \"Las mujeres suelen saludarse con dos besos, uno en cada mejilla\". La respuesta correcta es B.","zh":"第 2 段说：\"Las mujeres suelen saludarse con dos besos, uno en cada mejilla\"（女性通常贴面两下，每边脸颊各一下），故选 B。"},{"q":"¿Qué hacen los hombres españoles al saludarse?","opts":["Se dan dos besos siempre","Se dan la mano, y los amigos cercanos se abrazan","Se inclinan","No se saludan"],"ans":1,"es":"El párrafo 3 dice: \"lo habitual es darse la mano, aunque los amigos cercanos también se abrazan\". La respuesta correcta es B.","zh":"第 3 段说：\"lo habitual es darse la mano, aunque los amigos cercanos también se abrazan\"（通常是握手，亲密朋友也拥抱），故选 B。"},{"q":"¿Por qué mejilla se empieza al dar los dos besos?","opts":["Por la izquierda","Por la derecha","Es indiferente","Por la frente"],"ans":1,"es":"El párrafo 4 dice: \"empezando por la mejilla derecha\". La respuesta correcta es B.","zh":"第 4 段说：\"empezando por la mejilla derecha\"（从右脸颊开始），故选 B。"},{"q":"¿Cómo es el saludo en el trabajo según el texto?","opts":["Muy informal, con besos","Más formal, con la mano y el tratamiento de usted","No hay saludo","Con un abrazo fuerte"],"ans":1,"es":"El párrafo 5 dice: \"el saludo es más formal: se estrecha la mano y se usa el tratamiento de usted\". La respuesta correcta es B.","zh":"第 5 段说：\"el saludo es más formal: se estrecha la mano y se usa el tratamiento de usted\"（问候更正式：握手并使用 usted 尊称），故选 B。"},{"q":"¿Por qué se sienten confusos los extranjeros a veces?","opts":["Porque no entienden el idioma","Porque no saben si besar, abrazar o dar la mano","Porque no les gusta saludar","Porque el saludo es muy largo"],"ans":1,"es":"El párrafo 8 dice: \"no saben si deben besar, abrazar o dar la mano\". La respuesta correcta es B.","zh":"第 8 段说：\"no saben si deben besar, abrazar o dar la mano\"（不知道应该亲吻、拥抱还是握手），故选 B。"}]},"b1":{"paragraphs":[{"es":"El comercio electrónico en España alcanzó en 2025 una facturación de 114.800 millones de euros, según la CNMC. Este resultado implica un aumento del veinte coma seis por ciento frente al año previo, un ritmo que confirma la madurez del sector digital.","zh":"根据国家市场与竞争委员会（CNMC）的数据，西班牙电子商务在 2025 年实现了 1148 亿欧元的营业额。这一结果意味着较前一年增长了 20.6%，这样的增速印证了数字行业的成熟。"},{"es":"El dato consolida a España como uno de los mercados digitales más dinámicos de Europa. El comercio electrónico representa ya el seis coma cuarenta y cinco por ciento del producto interior bruto, lo que demuestra que la venta por internet se ha convertido en un pilar de la economía.","zh":"这一数据巩固了西班牙作为欧洲最具活力的数字市场之一的地位。电子商务已占国内生产总值的 6.45%，这表明线上销售已成为经济的支柱。"},{"es":"Dentro de este crecimiento, el segmento de empresa a consumidor, conocido como B2C, facturó 108.700 millones de euros, un catorce por ciento más que el año anterior. La compra directa de los ciudadanos a través de internet explica la mayor parte del avance total del comercio online en el país.","zh":"在这一增长中，企业面向消费者（B2C）板块的营业额达到 1087 亿欧元，同比增长 14%。公民直接通过网络购物解释了该国线上商务总增长的大部分。"},{"es":"Los analistas destacan que el número de compradores online no deja de aumentar. Millones de españoles incorporan el canal digital a su rutina diaria, desde la compra de ropa y alimentación hasta la contratación de viajes y servicios financieros, un abanico cada vez más amplio de productos.","zh":"分析人士强调，网购人数持续增长。数百万西班牙人把数字渠道融入日常生活，从购买服装和食品，到预订旅行和金融服务，商品种类越来越广泛。"},{"es":"El móvil se ha convertido en la puerta de entrada principal al comercio electrónico. La mayoría de las transacciones se realizan ya desde el teléfono inteligente, un cambio que obliga a las tiendas a diseñar aplicaciones y páginas web rápidas, sencillas y adaptadas a la pantalla pequeña.","zh":"手机已成为电子商务的主要入口。如今大多数交易都在智能手机上完成，这一变化迫使商家设计快速、简洁、适配小屏的应用和网页。"},{"es":"Las tarjetas bancarias siguen siendo el método de pago preferido por los consumidores españoles, seguidas de las plataformas de pago intermediarias como PayPal o Bizum. La seguridad y la rapidez resultan decisivas a la hora de completar una compra, según las encuestas realizadas por el propio organismo regulador.","zh":"银行卡仍是西班牙消费者首选的支付方式，其次是 PayPal 或 Bizum 等中间支付平台。据监管机构所做的调查，安全性和快捷性在完成购买时至关重要。"},{"es":"El comercio transfronterizo también avanza con fuerza. Cada vez más españoles compran en tiendas de otros países europeos, atraídos por precios más bajos o por productos difíciles de encontrar en el mercado nacional, un fenómeno que intensifica la competencia entre los vendedores de toda la Unión Europea.","zh":"跨境电商也强劲增长。越来越多的西班牙人在其他欧洲国家的商店购物，被更低的价格或国内市场难以找到的商品所吸引，这一现象加剧了整个欧盟卖家之间的竞争。"},{"es":"Los grandes almacenes y las cadenas de moda lideran el ranking de ventas online en España, seguidos por los supermercados y las agencias de viajes. Sin embargo, las pequeñas y medianas empresas están ganando terreno gracias a su presencia en los grandes mercados digitales internacionales.","zh":"大型百货商店和时尚连锁品牌领跑西班牙线上销售排行榜，其次是超市和旅行社。然而，中小企业凭借在大型国际数字市场上的存在，正在逐步扩大份额。"},{"es":"La digitalización de las pymes es una de las asignaturas pendientes del tejido empresarial español. Muchas pequeñas empresas todavía no venden por internet o lo hacen de forma limitada, perdiendo la oportunidad de llegar a millones de clientes que hoy compran exclusivamente a través del canal digital.","zh":"中小企业数字化是西班牙企业结构中的薄弱环节之一。许多小企业仍不在网上销售或销售规模有限，错失了触达如今只在数字渠道购物的数百万客户的机会。"},{"es":"Para cerrar esta brecha, el Gobierno y las cámaras de comercio impulsan programas de formación y ayudas económicas destinadas a acompañar a los pequeños comercios en su salto al mundo digital. El objetivo es que ningún negocio quede excluido de una revolución que avanza a gran velocidad.","zh":"为了弥合这一差距，政府和商会推动培训计划和经济援助，帮助小商户迈入数字世界。目标是让任何企业都不被这场高速推进的变革排除在外。"},{"es":"La logística se ha convertido en el corazón del comercio electrónico. La entrega rápida y gratuita es una de las principales razones por las que los consumidores eligen comprar por internet, y las empresas invierten miles de millones en almacenes automatizados y redes de reparto cada vez más eficientes.","zh":"物流已成为电子商务的核心。快速免费送货是消费者选择网购的主要原因之一，企业投入数十亿资金建设自动化仓库和日益高效的配送网络。"},{"es":"El auge del comercio online plantea, no obstante, importantes retos medioambientales. El aumento de los envíos y de las devoluciones genera más emisiones y más residuos de embalaje, un problema que empuja a las empresas a buscar alternativas más sostenibles para reducir su huella ecológica.","zh":"然而，线上商务的兴起带来了重大的环境挑战。配送和退货的增加产生了更多排放和更多包装废弃物，这一问题促使企业寻找更可持续的替代方案，以减少生态足迹。"},{"es":"Las devoluciones constituyen uno de los grandes desafíos del sector textil online. Algunas tiendas registran tasas de devolución superiores al treinta por ciento, ya que los clientes no pueden probarse la ropa antes de comprarla, un coste logístico y ambiental que las marcas intentan reducir con nuevas tecnologías.","zh":"退货是在线服装行业的一大挑战。一些商店的退货率超过 30%，因为顾客在购买前无法试穿，品牌正试图用新技术来降低这一物流和环境成本。"},{"es":"La inteligencia artificial está transformando la experiencia de compra en internet. Los sistemas de recomendación personalizada, los asistentes virtuales y la búsqueda por imágenes ayudan a los consumidores a encontrar lo que buscan con mayor rapidez, aumentando así las posibilidades de que completen una compra.","zh":"人工智能正在改变网上购物体验。个性化推荐系统、虚拟助手和图像搜索帮助消费者更快找到所需商品，从而提高了他们完成购买的可能性。"},{"es":"Los expertos coinciden en que el comercio electrónico seguirá creciendo en los próximos años, aunque a un ritmo algo más moderado. La madurez del mercado, el envejecimiento de la población y la competencia entre plataformas dibujan un escenario de crecimiento estable pero menos explosivo que el de la década anterior.","zh":"专家一致认为，电子商务未来几年将继续增长，尽管增速会有所放缓。市场的成熟、人口老龄化以及平台之间的竞争，勾勒出一个稳定增长但不如过去十年那样爆发式增长的图景。"},{"es":"El reto para el comercio tradicional es evidente: adaptarse o quedarse atrás. Las tiendas físicas que han sabido combinar su presencia en la calle con una estrategia digital sólida son las que mejor resisten, mientras que las que ignoran internet pierden clientes de forma progresiva e imparable.","zh":"传统商业面临的挑战显而易见：要么适应，要么落后。懂得把实体门店与扎实的数字战略结合起来的实体店最能抵御冲击，而忽视互联网的商店则在不可阻挡地逐渐流失客户。"},{"es":"La convivencia entre el comercio físico y el online no tiene por qué ser un juego de suma cero. Muchos consumidores combinan ambos canales, informándose en internet antes de acudir a la tienda o recogiendo en el establecimiento lo que han comprado previamente desde el móvil.","zh":"实体商业与线上商业的共存未必是零和博弈。许多消费者将两个渠道结合使用：先在网上了解信息再去店里，或到门店取回之前在手机上购买的商品。"},{"es":"En definitiva, el comercio electrónico español ha demostrado una vitalidad extraordinaria y se ha instalado en el centro de la vida económica del país. Su futuro dependerá de la capacidad de empresas, administraciones y consumidores para aprovechar sus ventajas y gestionar, al mismo tiempo, sus riesgos.","zh":"总之，西班牙电子商务展现出了非凡的活力，并已深入国家经济生活的中心。它的未来将取决于企业、行政部门和消费者能否在利用其优势的同时管理好其风险。"}],"dele":"B1 考点：<b>过去时与现在完成时</b>（cerró/facturó/ha dejado）叙述经济数据；<b>百分比与数量表达</b>（veinte coma seis por ciento / 114.800 millones）；<b>被动与无人称</b>（se ha convertido / se realizan / se ha instalado）；<b>关系从句</b>（que supone / que demuestra / que ignoran）；<b>让步与转折</b>（no obstante / sin embargo / mientras que / en definitiva）。","hardWords":[{"w":"facturación","m":"营业额；销售额","ejemplo":"El comercio electrónico cerró el año con una facturación de 114.800 millones de euros.","analisis":"名词 facturación 源自动词 facturar（开票、实现营业额），在经济语境中指企业通过销售获得的总收入。常见搭配 facturación anual（年营业额）、aumentar la facturación（提高营业额）。区别于 factura（发票/账单），facturación 强调的是「营业额」这一总量概念，是经济新闻的高频词。"},{"w":"transacción","m":"交易","ejemplo":"La mayoría de las transacciones se realizan ya desde el teléfono inteligente.","analisis":"名词 transacción 指买卖双方之间完成的商业活动，源自拉丁语 trans（跨越）+ actio（行动）。在电商语境中特指「线上交易」。常见搭配 realizar una transacción（完成交易）、transacción bancaria（银行交易）。与 compra（购买）、operación（操作/交易）近义，但 transacción 更强调「完成的商业行为」。"},{"w":"comercio electrónico","m":"电子商务","ejemplo":"El comercio electrónico representa ya el seis coma cuarenta y cinco por ciento del producto interior bruto.","analisis":"固定词组 comercio（商业）+ electrónico（电子的），指通过互联网买卖商品和服务的活动，常缩写为 e-commerce（英语借词）。相关表达：tienda online（网店）、venta por internet（网上销售）、comercio digital（数字商务）。是当代经济与科技文本的核心术语。"},{"w":"canal digital","m":"数字渠道","ejemplo":"Millones de españoles incorporan el canal digital a su rutina diaria.","analisis":"canal（渠道）+ digital（数字的），指通过互联网进行销售或沟通的途径。在商业语境中与 canal físico（实体渠道）相对。常见搭配：incorporar el canal digital（纳入数字渠道）、vender por el canal digital（通过数字渠道销售）。理解 canal 的「渠道」义是关键，区别于「运河」本义。"},{"w":"comercio transfronterizo","m":"跨境贸易","ejemplo":"El comercio transfronterizo avanza con fuerza entre los consumidores españoles.","analisis":"transfronterizo 由前缀 trans-（跨越）+ frontera（国境）+ 后缀 -izo 构成，指「跨越国境的」。comercio transfronterizo 即跨境电商，指消费者在本国之外的国家购物。词根 trans- 表示「穿越」，同类词有 transnacional（跨国的）、transatlántico（跨大西洋的）。"},{"w":"tejido empresarial","m":"企业结构；商业生态","ejemplo":"La digitalización de las pymes es una de las asignaturas pendientes del tejido empresarial español.","analisis":"tejido 本义为「织物」，引申为「结构、组织」，tejido empresarial 指一个国家或地区的企业整体结构。常见搭配：fortalecer el tejido empresarial（强化企业结构）、tejido productivo（生产结构）。是典型的隐喻用法，DELE B1/B2 常考对引申义的理解。"},{"w":"asignatura pendiente","m":"未完成的功课；待解决的问题","ejemplo":"La digitalización de las pymes es una asignatura pendiente del tejido empresarial.","analisis":"字面义为「未通过的科目」，是西语中常用的比喻表达，引申为「尚未解决、亟待处理的问题」。常见搭配：ser una asignatura pendiente（是待解决的问题）、tener asignaturas pendientes（有未竟之事）。理解其比喻义而非字面义，是阅读理解的关键考点。"},{"w":"brecha","m":"差距；鸿沟","ejemplo":"El Gobierno impulsa programas de formación para cerrar esta brecha digital.","analisis":"名词 brecha 本义为「裂缝、缺口」，引申为「差距、鸿沟」。常见搭配：brecha digital（数字鸿沟）、cerrar la brecha（弥合差距）、brecha salarial（薪酬差距）。是社会与经济议题的高频词，常与 cerrar（弥合）或 ampliar（扩大）连用。"},{"w":"devolución","m":"退货；退还","ejemplo":"Algunas tiendas registran tasas de devolución superiores al treinta por ciento.","analisis":"名词 devolución 源自动词 devolver（归还、退回），在电商语境中指「退货」。常见搭配：política de devolución（退货政策）、devolución gratuita（免费退货）、solicitar una devolución（申请退货）。与 reembolso（退款）相关但不同：devolución 指退回商品，reembolso 指退回款项。"},{"w":"huella ecológica","m":"生态足迹；环境足迹","ejemplo":"Las empresas buscan alternativas más sostenibles para reducir su huella ecológica.","analisis":"huella（足迹）+ ecológica（生态的），指人类活动对环境造成的影响。常见搭配：reducir la huella ecológica（减少生态足迹）、huella de carbono（碳足迹）。是环境议题的核心术语，理解 huella 的「足迹」引申为「影响」是关键。"}],"quiz":[{"q":"¿Cuál fue la facturación del comercio electrónico en España en 2025?","opts":["108.700 millones de euros","114.800 millones de euros","120.000 millones de euros","95.000 millones de euros"],"ans":1,"es":"El párrafo 1 dice: \"una facturación de 114.800 millones de euros\". La respuesta correcta es B.","zh":"第 1 段说：\"una facturación de 114.800 millones de euros\"（营业额 1148 亿欧元），故选 B。108.700 是 B2C 板块的数字。"},{"q":"¿Qué porcentaje del PIB representa el comercio electrónico en España?","opts":["El 6,45%","El 14%","El 20,6%","El 30%"],"ans":0,"es":"El párrafo 2 dice: \"el seis coma cuarenta y cinco por ciento del producto interior bruto\". La respuesta correcta es A.","zh":"第 2 段说：\"el seis coma cuarenta y cinco por ciento del producto interior bruto\"（占 GDP 的 6.45%），故选 A。20,6% 是增速，14% 是 B2C 增速。"},{"q":"¿Cuál es el principal dispositivo para comprar online según el texto?","opts":["El ordenador de sobremesa","El teléfono inteligente","La tablet","El portátil"],"ans":1,"es":"El párrafo 5 dice: \"El móvil se ha convertido en la puerta de entrada principal\" y \"la mayoría de las transacciones se realizan desde el teléfono inteligente\". La respuesta correcta es B.","zh":"第 5 段说：\"El móvil se ha convertido en la puerta de entrada principal\"（手机已成为主要入口），故选 B。"},{"q":"¿Qué método de pago prefieren los consumidores españoles?","opts":["El pago en efectivo","Las tarjetas bancarias","Las criptomonedas","La transferencia"],"ans":1,"es":"El párrafo 6 dice: \"Las tarjetas bancarias siguen siendo el método de pago preferido\". La respuesta correcta es B.","zh":"第 6 段说：\"Las tarjetas bancarias siguen siendo el método de pago preferido\"（银行卡仍是首选支付方式），故选 B。"},{"q":"¿Qué problema medioambiental plantea el auge del comercio online?","opts":["La falta de tiendas físicas","Más emisiones y residuos de embalaje","El aumento del desempleo","La escasez de productos"],"ans":1,"es":"El párrafo 12 dice: \"El aumento de los envíos y de las devoluciones genera más emisiones y más residuos de embalaje\". La respuesta correcta es B.","zh":"第 12 段说：\"genera más emisiones y más residuos de embalaje\"（产生更多排放和包装废弃物），故选 B。"},{"q":"¿Por qué las devoluciones son un desafío para el sector textil online?","opts":["Porque la ropa es muy barata","Porque los clientes no pueden probarse la ropa antes de comprarla","Porque no hay tallas","Porque el envío es gratuito"],"ans":1,"es":"El párrafo 13 dice: \"los clientes no pueden probarse la ropa antes de comprarla\". La respuesta correcta es B.","zh":"第 13 段说：\"los clientes no pueden probarse la ropa antes de comprarla\"（顾客购买前无法试穿），故选 B。"},{"q":"¿Qué relación existe entre el comercio físico y el online, según el texto?","opts":["El online sustituye por completo al físico","Ambos conviven y muchos consumidores los combinan","El físico siempre supera al online","No tienen ninguna relación"],"ans":1,"es":"El párrafo 17 dice: \"La convivencia entre el comercio físico y el online no tiene por qué ser un juego de suma cero. Muchos consumidores combinan ambos canales\". La respuesta correcta es B.","zh":"第 17 段说：\"La convivencia... no tiene por qué ser un juego de suma cero. Muchos consumidores combinan ambos canales\"（两者共存，许多消费者结合使用两个渠道），故选 B。此题考查观点辨析。"},{"q":"¿Qué conclusión general se extrae sobre el futuro del comercio electrónico?","opts":["Desaparecerá en pocos años","Seguirá creciendo pero a un ritmo más moderado","Solo crecerá en las grandes ciudades","Dejará de ser relevante para la economía"],"ans":1,"es":"Los párrafos 15 y 18 coinciden: \"seguirá creciendo... a un ritmo algo más moderado\" y su futuro \"dependerá de la capacidad de empresas, administraciones y consumidores\". La respuesta correcta es B.","zh":"第 15 段说：\"seguirá creciendo... a un ritmo algo más moderado\"（将继续增长但增速放缓），第 18 段总结未来取决于各方能力，故选 B。此题考查跨段落综合。"}]},"b2":{"paragraphs":[{"es":"España ha pasado de tener una de las electricidades más baratas de Europa a encabezar, en 2025, la lista de facturas más caras de la Unión. Según Eurostat, el precio que pagan los hogares creció casi un diez por ciento en un año, muy por encima de la media comunitaria.","zh":"西班牙已从欧洲电价最便宜的国家之一，变成 2025 年欧盟电费账单最贵的国家之一。根据欧盟统计局的数据，家庭支付的价格一年内上涨了近 10%，远高于欧盟平均水平。"},{"es":"La factura media de la luz alcanzó en octubre de 2025 los 84,40 euros al mes, frente a los 71,70 euros del año anterior. Esta subida de más de doce euros es el mayor incremento anual registrado desde la crisis inflacionaria que desencadenó la guerra de Ucrania.","zh":"2025 年 10 月，平均电费达到每月 84.40 欧元，而前一年为 71.70 欧元。这超过 12 欧元的涨幅，是自乌克兰战争引发通胀危机以来最大的年度增幅。"},{"es":"Varios factores explican este encarecimiento. El primero es el fin de las rebajas fiscales que el Gobierno aplicó en 2023 y 2024 para mitigar la inflación. Desde enero de 2025, el impuesto sobre el valor añadido de la electricidad volvió a subir del diez al veintiuno por ciento.","zh":"有几个因素可以解释这一涨价。首先是政府为缓解通胀而在 2023 和 2024 年实施的税收减免的结束。自 2025 年 1 月起，电力的增值税从 10% 重新上调至 21%。"},{"es":"El segundo factor tiene que ver con la red. Tras el gran apagón de abril de 2025, el operador del sistema, Red Eléctrica, activó medidas extraordinarias para reforzar la estabilidad del suministro. El coste de estos mecanismos se ha trasladado, en parte, al recibo de los consumidores.","zh":"第二个因素与电网有关。2025 年 4 月大停电后，系统运营商西班牙电网公司启动了加强供电稳定性的特殊措施。这些机制的成本部分转嫁到了消费者的账单上。"},{"es":"La combinación de ambos factores ha convertido a España en una excepción dentro del continente. Mientras la factura media subía con fuerza, en la mayoría de los Estados miembros bajaba o se mantenía estable. Francia registró un descenso del seis por ciento, y Alemania una caída del dos y medio.","zh":"这两个因素叠加，使西班牙成为欧洲大陆上的一个例外。在该国账单大幅上涨的同时，大多数成员国的账单却在下降或保持稳定。法国下降了 6%，德国下降了 2.5%。"},{"es":"Las organizaciones de consumidores han alzado la voz con contundencia. La Organización de Consumidores y Usuarios recuerda que la electricidad es un bien de primera necesidad y reclama que se grave con un tipo reducido, del diez o incluso del cinco por ciento, en lugar del veintiuno por ciento actual.","zh":"消费者组织强烈发声。消费者与用户组织提醒说，电力是基本生活必需品，要求按 10% 甚至 5% 的优惠税率征税，而不是现行的 21%。"},{"es":"El impacto social de esta subida no es uniforme, sino que golpea con especial dureza a los hogares más vulnerables. Millones de familias con rentas bajas destinan una parte creciente de sus ingresos a pagar la luz, un fenómeno que los expertos denominan pobreza energética.","zh":"这次涨价的社会影响并不均衡，而是特别沉重地打击了最弱势的家庭。数百万低收入家庭把越来越多的收入用于支付电费，专家称这一现象为「能源贫困」。"},{"es":"Para paliar esta situación existe el bono social eléctrico, un descuento sobre la factura dirigido a los consumidores vulnerables. El problema, denuncian las asociaciones, es que muchas personas que tendrían derecho a esta ayuda no la solicitan, bien por desconocimiento, bien por la complejidad de los trámites administrativos.","zh":"为缓解这一状况，设有「社会电力补贴」，即面向弱势消费者的电费折扣。各协会谴责说，问题在于许多本有权获得这项援助的人并没有申请，原因要么是不知情，要么是行政手续过于复杂。"},{"es":"La pobreza energética tiene consecuencias que van más allá de la economía doméstica. Numerosos estudios relacionan la imposibilidad de calentar o iluminar adecuadamente la vivienda con problemas de salud física y mental, con el fracaso escolar de los niños y con un mayor aislamiento social de las personas mayores.","zh":"能源贫困的后果超越了家庭经济范畴。大量研究把无法充分取暖或照明的住房与身心健康问题、儿童学业失败以及老年人更严重的社会孤立联系起来。"},{"es":"El debate sobre la energía se cruza además con la transición ecológica. España aspira a liderar la descarbonización con sus recursos renovables, pero los expertos advierten de que debe ser justa. Si los costes recaen sobre los más pobres, se corre el riesgo de generar rechazo social hacia esas políticas.","zh":"能源问题的讨论还与生态转型交织在一起。西班牙凭借可再生资源，立志引领去碳化进程，但专家警告说这一转型必须公平。如果成本落在最贫困者身上，就可能引发社会对这些政策的抵制。"},{"es":"La cuestión nuclear ocupa un lugar central en este debate. El Gobierno ha decidido prolongar la vida de las centrales nucleares, convencido de que garantizan precios más bajos y un suministro estable. La fundación Fedea calcula que su cierre subiría la electricidad hasta un cincuenta y ocho por ciento.","zh":"核能问题在这场辩论中占据核心位置。政府已决定延长核电站的寿命，因为确信它们能保证更低的价格和稳定的供应。Fedea 基金会估算，关闭核能可能导致电价上涨高达 58%。"},{"es":"No todos comparten ese optimismo nuclear. Las organizaciones ecologistas recuerdan los riesgos de esta tecnología y reclaman un calendario claro de cierre, acompañado de una apuesta decidida por las renovables y el almacenamiento. El choque entre ambas visiones mantiene abierta una herida política que se arrastra desde hace décadas.","zh":"并非所有人都认同这种对核能的乐观。环保组织提醒人们注意这项技术的风险，要求制定明确的关闭时间表，同时坚定地押注可再生能源和储能。两种观点的冲突维持着一道延续数十年的政治裂痕。"},{"es":"Los economistas señalan que la solución no puede limitarse a bajar impuestos de forma puntual. Es necesario, defienden, reformar el mercado eléctrico para reducir la dependencia del gas, invertir en redes de distribución y fomentar el autoconsumo, de modo que los hogares produzcan parte de su propia energía.","zh":"经济学家指出，解决方案不能仅限于临时减税。他们认为，必须改革电力市场以减少对天然气的依赖，投资配电网络，并鼓励自发自用，让家庭生产一部分自己的能源。"},{"es":"El autoconsumo fotovoltaico se presenta como una de las vías más prometedoras para combatir la pobreza energética. Instalar paneles solares en las viviendas permite a las familias reducir su factura y blindarse frente a las subidas, aunque la inversión inicial sigue siendo una barrera para quienes menos recursos tienen.","zh":"光伏自发自用被视为对抗能源贫困最有前景的途径之一。在住宅安装太阳能板能让家庭减少电费、抵御涨价，尽管初期投资对资源最少的人来说仍是一道障碍。"},{"es":"La Comisión Europea también se ha sumado al debate. Su presidenta ha instado a los líderes europeos a reducir los impuestos sobre la electricidad para facilitar la transición energética, reconociendo que unos precios elevados desincentivan la adopción de tecnologías limpias como la bomba de calor o el coche eléctrico.","zh":"欧盟委员会也加入了这场讨论。其主席敦促欧洲领导人降低电力税以促进能源转型，并承认高昂的价格会抑制热泵或电动汽车等清洁技术的普及。"},{"es":"En España, la subida de la luz se ha convertido en un asunto de primera línea política. La oposición acusa al Gobierno de no haber previsto el impacto del fin de las rebajas fiscales, mientras que el Ejecutivo defiende que la protección a los vulnerables se ha reforzado.","zh":"在西班牙，电价上涨已成为头号政治议题。反对党指责政府未能预见税收减免结束的影响，而政府则辩称，对弱势群体的保护已得到加强。"},{"es":"Los datos de la pobreza energética invitan, en cualquier caso, a la reflexión. Miles de hogares españoles reconocen no poder mantener una temperatura adecuada en su vivienda durante el invierno, una cifra que las oenegés consideran inaceptable para un país que figura entre las principales economías de la zona euro.","zh":"无论如何，能源贫困的数据都发人深省。数千西班牙家庭承认冬季无法在住宅中维持适宜的温度，非政府组织认为，对于一个位列欧元区主要经济体的国家来说，这一数字是不可接受的。"},{"es":"El reto de fondo consiste en conciliar tres objetivos que a menudo entran en tensión: garantizar precios asequibles, avanzar en la descarbonización y asegurar la estabilidad del suministro. No se trata de elegir entre ellos, advierten los analistas, sino de encontrar un equilibrio que permita avanzar en las tres direcciones.","zh":"根本挑战在于协调三个常常相互冲突的目标：确保价格可负担、推进去碳化、保障供应稳定。分析人士提醒，问题不在于取舍，而在于找到能同时推进三个方向的平衡点。"},{"es":"La experiencia española demuestra que la política energética no es un asunto meramente técnico, sino profundamente social. Cada decisión sobre impuestos, centrales o redes tiene consecuencias directas sobre la vida de millones de personas, y especialmente sobre quienes menos capacidad tienen de absorber una subida inesperada de los precios.","zh":"西班牙的经验表明，能源政策绝非纯粹的技术问题，而是深刻的社会问题。每一项关于税收、电厂或电网的决定，都直接影响数百万人的生活，尤其是那些最没有能力承受价格意外上涨的人。"},{"es":"En definitiva, la batalla contra la pobreza energética se ha convertido en una prueba de madurez para el modelo español. Si el país consigue hacer compatible la transición verde con la protección de los más débiles, habrá encontrado una fórmula que otros Estados europeos observan con atención.","zh":"总之，对抗能源贫困已成为对西班牙经济和社会模式成熟度的一次考验。如果这个国家能让绿色转型与保护最弱势群体并行不悖，它就将找到一种其他欧洲国家密切关注和借鉴的解决方案。"}],"dele":"B2 考点：<b>现在完成时与过去时对比</b>（ha pasado / alcanzó / creció / registró）叙述演变；<b>被动与无人称</b>（se ha trasladado / se ha convertido / se ha sumado）；<b>虚拟式</b>（para que los hogares puedan / es necesario que）；<b>让步与转折</b>（sin embargo / en cualquier caso / mientras que / en definitiva）；<b>条件与目的</b>（si los costes recaen / de modo que / para combatir）；<b>高级社会词汇</b>（pobreza energética / descarbonización / autoconsumo / vulnerables）。","hardWords":[{"w":"pobreza energética","m":"能源贫困","ejemplo":"Millones de familias con rentas bajas caen en una situación de pobreza energética.","analisis":"pobreza（贫困）+ energética（能源的），指家庭难以负担维持基本生活所需的能源（供暖、照明、用电）的状况。是近年社会政策领域的核心概念。常见搭配：combatir la pobreza energética（对抗能源贫困）、situación de pobreza energética（能源贫困状况）。区别于 pobreza（贫困）的一般概念，它特指能源维度的匮乏。"},{"w":"factura de la luz","m":"电费账单","ejemplo":"La factura media de la luz alcanzó los 84,40 euros al mes por hogar.","analisis":"口语化表达，factura（账单）+ de la luz（电），指用户需要缴纳的电费。luz 本义为「光」，在西语口语中常代指「电」（如 pagar la luz = 交电费）。与 recibo de la luz（电费单）同义。理解 luz 的「电」这一转义是关键，DELE 常考口语表达。"},{"w":"suministro","m":"供应；供给","ejemplo":"El operador activó medidas para reforzar la estabilidad del suministro eléctrico.","analisis":"名词 suministro 源自动词 suministrar（供应、提供），指向用户提供能源、水、气等服务。常见搭配：suministro eléctrico（电力供应）、corte de suministro（中断供应）、garantizar el suministro（保障供应）。在能源语境中是高频词，理解其「供应」义即可。"},{"w":"encarecimiento","m":"涨价；价格上升","ejemplo":"Varios factores explican este encarecimiento de la electricidad.","analisis":"名词 encarecimiento 源自动词 encarecer（使变贵），由 en-（使）+ caro（贵）+ -cimiento 构成，指价格上涨的过程。常见搭配：encarecimiento de la energía（能源涨价）、encarecimiento de la vida（生活成本上升）。反义词为 abaratamiento（降价）。是经济新闻高频词。"},{"w":"apagón","m":"停电；大停电","ejemplo":"Tras el gran apagón que sufrió España en abril, el operador activó medidas extraordinarias.","analisis":"名词 apagón 源自动词 apagar（熄灭、关闭），指突然的大规模停电。常见搭配：apagón general（全面停电）、sufrir un apagón（遭遇停电）、apagón eléctrico（电力中断）。与 corte de luz（停电）近义，但 apagón 多指大规模、突发性的停电事故。"},{"w":"bono social","m":"社会补贴","ejemplo":"El bono social eléctrico ofrece un descuento sobre la factura a los consumidores vulnerables.","analisis":"bono（补贴券、津贴）+ social（社会的），指政府为弱势群体提供的优惠或补贴。文中指 bono social eléctrico（社会电力补贴），即对电费的减免。常见搭配：solicitar el bono social（申请社会补贴）、beneficiario del bono social（补贴受益人）。是西班牙社会福利制度的专有名词。"},{"w":"vulnerable","m":"弱势的；脆弱的","ejemplo":"El descuento está dirigido a los consumidores vulnerables con rentas bajas.","analisis":"形容词 vulnerable 指「易受伤害的、缺乏保障的」。在社会政策语境中，consumidores vulnerables（弱势消费者）、hogares vulnerables（弱势家庭）是高频搭配。名词为 vulnerabilidad（弱势、脆弱性）。常与 proteger（保护）、afectar（影响）连用，是 B2 社会议题核心词汇。"},{"w":"descarbonización","m":"去碳化；脱碳","ejemplo":"España aspira a liderar la descarbonización gracias a sus recursos renovables.","analisis":"名词 descarbonización 由前缀 des-（去除）+ carbono（碳）+ -ización 构成，指减少或消除二氧化碳排放的过程，是应对气候变化的核心概念。常见搭配：proceso de descarbonización（去碳进程）、objetivos de descarbonización（脱碳目标）。理解构词（des- + carbono）即可掌握。"},{"w":"autoconsumo","m":"自发自用","ejemplo":"El autoconsumo fotovoltaico permite a las familias reducir su factura eléctrica.","analisis":"名词 autoconsumo 由前缀 auto-（自身）+ consumo（消费）构成，指家庭或企业自行生产并消费能源（尤指太阳能）。常见搭配：autoconsumo fotovoltaico（光伏自发自用）、instalación de autoconsumo（自发自用装置）。是能源转型议题的高频新词，前缀 auto- 表「自己」。"},{"w":"desincentivar","m":"抑制；使失去动力","ejemplo":"Unos precios elevados desincentivan la adopción de tecnologías limpias.","analisis":"动词 desincentivar 由前缀 des-（否定）+ incentivar（激励）构成，意为「抑制、打消积极性」。常见搭配：desincentivar la inversión（抑制投资）、desincentivar el consumo（抑制消费）。反义词为 incentivar（激励）、fomentar（促进）。掌握 des- 前缀的否定义有助于理解整组反义词。"}],"quiz":[{"q":"¿Cuánto creció el precio de la electricidad para los hogares españoles en 2025?","opts":["Casi un cinco por ciento","Casi un diez por ciento","Casi un veinte por ciento","Casi un cincuenta por ciento"],"ans":1,"es":"El párrafo 1 dice: \"creció casi un diez por ciento en un solo año\". La respuesta correcta es B.","zh":"第 1 段说：\"creció casi un diez por ciento en un solo año\"（一年内上涨近 10%），故选 B。"},{"q":"¿Cuál era la factura media de la luz en octubre de 2025?","opts":["71,70 euros","84,40 euros","95,70 euros","120 euros"],"ans":1,"es":"El párrafo 2 dice: \"alcanzó en octubre de 2025 los 84,40 euros\". La respuesta correcta es B.","zh":"第 2 段说：\"alcanzó en octubre de 2025 los 84,40 euros\"（2025 年 10 月达到 84.40 欧元），故选 B。71,70 是前一年数字。"},{"q":"¿Qué cambio fiscal explica parte del encarecimiento según el texto?","opts":["La subida del IVA del 10% al 21%","La bajada del IVA al 5%","La eliminación de todos los impuestos","Un nuevo impuesto al gas"],"ans":0,"es":"El párrafo 3 dice: \"el impuesto sobre el valor añadido de la electricidad volvió a subir del diez al veintiuno por ciento\". La respuesta correcta es A.","zh":"第 3 段说：\"el impuesto sobre el valor añadido... volvió a subir del diez al veintiuno por ciento\"（增值税从 10% 上调至 21%），故选 A。"},{"q":"¿Qué consecuencias tiene la pobreza energética, según el texto?","opts":["Solo problemas económicos","Problemas de salud, fracaso escolar y aislamiento social","Ninguna consecuencia relevante","Únicamente incomodidad temporal"],"ans":1,"es":"El párrafo 9 dice: \"problemas de salud física y mental, fracaso escolar... y aislamiento social\". La respuesta correcta es B.","zh":"第 9 段说：\"problemas de salud... fracaso escolar... aislamiento social\"（健康问题、学业失败和社会孤立），故选 B。此题考查细节归纳。"},{"q":"¿Qué aumento de precio provocaría el cierre nuclear según Fedea?","opts":["Del 10%","Del 25%","Del 58%","Del 100%"],"ans":2,"es":"El párrafo 11 dice: \"un aumento del precio de la electricidad de hasta el cincuenta y ocho por ciento\". La respuesta correcta es C.","zh":"第 11 段说：\"un aumento del precio de la electricidad de hasta el cincuenta y ocho por ciento\"（电价上涨高达 58%），故选 C。"},{"q":"¿Por qué el bono social no llega a todos los que lo necesitan?","opts":["Porque es muy caro","Por desconocimiento o por la complejidad de los trámites","Porque solo existe en Madrid","Porque no hay fondos suficientes"],"ans":1,"es":"El párrafo 8 dice: \"no la solicitan, bien por desconocimiento, bien por la complejidad de los trámites\". La respuesta correcta es B.","zh":"第 8 段说：\"no la solicitan, bien por desconocimiento, bien por la complejidad de los trámites\"（不申请，要么因不知情，要么因手续复杂），故选 B。此题考查因果辨析。"},{"q":"¿Qué postura defienden los economistas sobre la solución al problema?","opts":["Solo bajar impuestos de forma puntual","Reformar el mercado eléctrico y fomentar el autoconsumo","Aumentar el precio del gas","Cerrar todas las centrales nucleares de inmediato"],"ans":1,"es":"El párrafo 13 dice: \"reformar el diseño del mercado eléctrico... invertir en redes... y fomentar el autoconsumo\". La respuesta correcta es B.","zh":"第 13 段说：\"reformar el diseño del mercado eléctrico... invertir en redes... fomentar el autoconsumo\"（改革电力市场、投资电网、鼓励自发自用），故选 B。此题考查观点辨析。"},{"q":"¿Cuál es el reto de fondo que plantea el texto en su conclusión?","opts":["Elegir entre precios bajos o descarbonización","Conciliar precios asequibles, descarbonización y estabilidad del suministro","Renunciar a la transición ecológica","Privatizar el sistema eléctrico"],"ans":1,"es":"El párrafo 18 dice: \"conciliar tres objetivos... precios asequibles, descarbonización y estabilidad del suministro\", y el párrafo 20 añade que se trata de \"hacer compatible la transición verde con la protección de los más débiles\". La respuesta correcta es B.","zh":"第 18 段说：\"conciliar tres objetivos... precios asequibles, descarbonización y estabilidad del suministro\"（协调三个目标：可负担价格、去碳化、供应稳定），第 20 段补充要「让绿色转型与保护最弱势群体并行」，故选 B。此题考查跨段落综合。"}]}}
+
+/* ==================== 渲染函数 ==================== */
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = WORDS.map(w => `
+    <div class="vocab-card">
+      <div class="lema">${esc(w.lema)}</div>
+      <div class="ipa">${esc(w.ipa)}</div>
+      <span class="pos">${esc(w.pos)}</span>
+      <div class="def"><b>释义：</b>${esc(w.significado)}</div>
+      <div class="ex">📘 <b>例句：</b>${esc(w.ejemplo_es)}</div>
+      <div class="ex-zh">📖 <b>翻译：</b>${esc(w.ejemplo_zh)}</div>
+      <div class="tip">💡 <b>记忆提示：</b>${w.tip}</div>
+    </div>
+  `).join('');
+}
+
+function renderArticle(key) {
+  const a = ARTICLES[key];
+  const content = document.getElementById(`${key}-content`);
+  content.innerHTML = a.paragraphs.map((p, i) => `
+    <div class="para">
+      <div class="es"><span class="lang-tag es-tag">ES</span>${highlightWords(p.es, a.hardWords)}</div>
+      <div class="zh"><span class="lang-tag zh-tag">ZH</span>${esc(p.zh)}</div>
+    </div>
+  `).join('');
+
+  // 考点
+  const dele = document.getElementById(`${key}-dele`);
+  // 难词清单渲染：B1/B2 有 ejemplo/analisis 时展开显示，A1/A2 及旧数据保持原样
+  const hwHtml = a.hardWords.map(h => {
+    const base = `<code>${esc(h.w)}</code>=${esc(h.m)}`;
+    if (h.ejemplo && h.analisis) {
+      return `<span class="hw-item" style="display:inline-block;margin:2px 0;padding:2px 4px;background:#fafafa;border-radius:4px;">${base}<br><span style="font-size:12px;color:#6a1b9a;">📘 ${esc(h.ejemplo)}</span><br><span style="font-size:12px;color:#555;">🔍 ${esc(h.analisis)}</span></span>`;
+    }
+    return base;
+  }).join(' · ');
+  dele.innerHTML = `<b>🎯 DELE 考点：</b>${a.dele}<br><b>📌 难词清单：</b>${hwHtml}`;
+
+  // Quiz
+  const quiz = document.getElementById(`${key}-quiz`);
+  quiz.innerHTML = `<h3>📝 阅读理解题（${a.quiz.length} 题）</h3>` + a.quiz.map((q, i) => `
+    <div class="quiz-item" data-idx="${i}">
+      <div class="q-title">第 ${i+1} 题：${esc(q.q)}</div>
+      <ul class="quiz-opts">
+        ${q.opts.map((o, j) => `<li data-opt="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</li>`).join('')}
+      </ul>
+      <button class="quiz-submit" onclick="checkQuiz('${key}', ${i})">提交</button>
+      <span class="quiz-score" id="${key}-score-${i}"></span>
+      <div class="quiz-explain" id="${key}-explain-${i}">
+        <div><b>🇪🇸 西语解析：</b>${esc(q.es)}</div>
+        <div class="zh-explain"><b>🇨🇳 中文解析：</b>${esc(q.zh)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function highlightWords(text, words) {
+  let out = esc(text);
+  words.forEach(h => {
+    const re = new RegExp('\\b' + h.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    out = out.replace(re, m => `<span class="hl" title="${esc(h.m)}">${m}</span>`);
+  });
+  return out;
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// 初始化
+renderVocab();
+['a1','a2','b1','b2'].forEach(renderArticle);
+// ===== 恢复已保存的答题状态 + 渲染控件 =====
+const currentDate = QuizData.getDate();
+['a1','a2','b1','b2'].forEach(level => {
+  QuizData.restoreQuizUI(currentDate, level);
+  renderQuizControls(level);
+});
+
+function renderQuizControls(level) {
+  const section = document.getElementById(level + '-quiz');
+  if (!section) return;
+  const oldCtrl = section.querySelector('.quiz-controls');
+  if (oldCtrl) oldCtrl.remove();
+  const oldNotes = section.querySelector('.quiz-notes-area');
+  if (oldNotes) oldNotes.remove();
+
+  const date = QuizData.getDate();
+  const record = QuizData.getRecord(date, level);
+  const latest = QuizData.getLatestAttempt(date, level);
+  const historyCount = record?.attempts?.length || 0;
+  const totalQ = ARTICLES[level].quiz.length;
+
+  const controls = document.createElement('div');
+  controls.className = 'quiz-controls';
+  controls.innerHTML =
+    '<button class="quiz-reset-btn" onclick="QuizData.doResetQuiz(\'' + level + '\')">🔄 重做</button>' +
+    '<span class="quiz-stats">' +
+      '已答题 <b>' + historyCount + '</b> 次' +
+      (latest ? ' · 最近正确 <b>' + latest.score + '/' + totalQ + '</b>' : '') +
+    '</span>' +
+    '<button class="quiz-notes-btn" onclick="QuizData.toggleNotes(\'' + level + '\')">📝 笔记</button>';
+  const h3 = section.querySelector('h3');
+  if (h3) {
+    h3.after(controls);
+  } else {
+    section.insertBefore(controls, section.firstChild);
+  }
+
+  const notesArea = document.createElement('div');
+  notesArea.className = 'quiz-notes-area';
+  notesArea.id = level + '-notes-area';
+  notesArea.innerHTML =
+    '<textarea placeholder="记录你的学习笔记..." oninput="QuizData.saveNotes(\'' + level + '\')">' + esc(record?.notes || '') + '</textarea>' +
+    '<span class="quiz-notes-saved" id="' + level + '-notes-saved">✓ 已保存</span>';
+  section.appendChild(notesArea);
+}
+
+// 给每个 quiz 绑定交互
+function bindQuizInteraction(level) {
+  const items = document.querySelectorAll('#' + level + '-quiz .quiz-item');
+  items.forEach((item, idx) => {
+    const submit = item.querySelector('.quiz-submit');
+    const opts = item.querySelectorAll('.quiz-opts li');
+    let chosen = -1;
+    opts.forEach((li, j) => {
+      const newLi = li.cloneNode(true);
+      li.parentNode.replaceChild(newLi, li);
+    });
+    const freshOpts = item.querySelectorAll('.quiz-opts li');
+    freshOpts.forEach((li, j) => {
+      li.addEventListener('click', () => {
+        if (li.classList.contains('disabled')) return;
+        freshOpts.forEach(o => o.classList.remove('selected'));
+        li.classList.add('selected');
+        chosen = j;
+      });
+    });
+    submit.onclick = () => {
+      if (chosen === -1) {
+        alert('请先选择一个答案！');
+        return;
+      }
+      const q = ARTICLES[level].quiz[idx];
+      freshOpts.forEach((li, j) => {
+        li.classList.add('disabled');
+        if (j === q.ans) li.classList.add('correct');
+        if (j === chosen && j !== q.ans) li.classList.add('wrong');
+      });
+      const explain = document.getElementById(level + '-explain-' + idx);
+      explain.classList.add('show');
+      const scoreEl = document.getElementById(level + '-score-' + idx);
+      if (chosen === q.ans) {
+        scoreEl.textContent = '✓ 正确！';
+        scoreEl.className = 'quiz-score show full';
+      } else {
+        scoreEl.textContent = '✗ 错误，正确答案已高亮';
+        scoreEl.className = 'quiz-score show zero';
+      }
+      QuizData.recordAnswer(level, idx, chosen, chosen === q.ans);
+    };
+  });
+}
+
+// 初始化
+['a1','a2','b1','b2'].forEach(bindQuizInteraction);
+</script>
+</body>
+</html>
+

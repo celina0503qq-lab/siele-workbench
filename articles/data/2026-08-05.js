@@ -1,0 +1,283 @@
+window.__REFINE_DATE__ = "2026-08-05";
+window.WORDS = [
+  {
+    lema: "carrito de la compra",
+    ipa: "[kaˈri.to ðe la ˈkom.pɾa]",
+    pos: "m.",
+    significado: "购物车（超市里推的小车，也指网购的购物篮）",
+    ejemplo_es: "Llen\u00E9 el carrito de la compra con frutas, verduras y pan fresco.",
+    ejemplo_zh: "我往购物车里装满了水果、蔬菜和新鲜面包。",
+    tip: "\u003Cb\u003Ecarrito\u003C/b\u003E 是 \u003Cb\u003Ecarro\u003C/b\u003E 的指小词。\u003Cb\u003Eir a la compra\u003C/b\u003E = 去买菜。\u003Cb\u003Ehacer la compra\u003C/b\u003E = 采购（食品/日用品）。西班牙超市常见：\u003Cb\u003Ecarrito\u003C/b\u003E（推车）vs \u003Cb\u003Ecesta\u003C/b\u003E（手提篮）。A1 生活场景必考。"
+  },
+  {
+    lema: "pasillo",
+    ipa: "[paˈsi.ʎo]",
+    pos: "m.",
+    significado: "过道；走廊；超市货架通道",
+    ejemplo_es: "El arroz est\u00E1 en el pasillo 5, al lado de las legumbres.",
+    ejemplo_zh: "大米在 5 号通道，豆类旁边。",
+    tip: "\u003Cb\u003Epasillo\u003C/b\u003E 既指超市货架间的通道，也指家中的走廊。\u003Cb\u003Epasillo de congelados\u003C/b\u003E = 冷冻区通道。\u003Cb\u003Eal final del pasillo\u003C/b\u003E = 在通道尽头。和 \u003Cb\u003Ecallej\u00F3n\u003C/b\u003E（小巷）区别。A1-A2 购物场景高频。"
+  },
+  {
+    lema: "ticket de compra",
+    ipa: "[ˈti.ket de ˈkom.pɾa]",
+    pos: "m.",
+    significado: "购物小票；收据（超市购物后的纸质凭证）",
+    ejemplo_es: "Guarda el ticket de compra por si necesitas cambiar algo.",
+    ejemplo_zh: "保管好购物小票，万一需要退换。",
+    tip: "\u003Cb\u003Eticket\u003C/b\u003E = 购物小票（英语借词，西语发音 't\u00EDket'）。\u003Cb\u003Efactura\u003C/b\u003E = 发票（正式税务凭证）。\u003Cb\u003Erecibo\u003C/b\u003E = 收据。A2 行政类常考区别：ticket（非正式）vs factura（正式）。"
+  },
+  {
+    lema: "oferta",
+    ipa: "[oˈfeɾ.ta]",
+    pos: "f.",
+    significado: "优惠；折扣；特价（超市/商场的促销活动）",
+    ejemplo_es: "Estas galletas est\u00E1n de oferta: dos paquetes por el precio de uno.",
+    ejemplo_zh: "这些饼干在搞活动：买一送一。",
+    tip: "\u003Cb\u003Eestar de oferta\u003C/b\u003E = 在打折。\u003Cb\u003E3x2\u003C/b\u003E（tres por dos）= 买二送一。\u003Cb\u003Eoferta y demanda\u003C/b\u003E = 供需（经济学术语）。\u003Cb\u003Erebajas\u003C/b\u003E = 大减价（特指1月和7月的打折季）。A2 购物场景必考。"
+  },
+  {
+    lema: "alimentaci\u00F3n",
+    ipa: "[a.li.men.taˈθjon]",
+    pos: "f.",
+    significado: "食品；饮食；营养（超市里食品区的统称）",
+    ejemplo_es: "En la secci\u00F3n de alimentaci\u00F3n encuentras todo: desde pan hasta productos congelados.",
+    ejemplo_zh: "在食品区你什么都能找到：从面包到冷冻食品。",
+    tip: "\u003Cb\u003Ealimentaci\u00F3n\u003C/b\u003E = 食品/饮食（统称），\u003Cb\u003Ealimento\u003C/b\u003E = 食物（具体）。\u003Cb\u003Eproductos de alimentaci\u00F3n\u003C/b\u003E = 食品。\u003Cb\u003Eseguridad alimentaria\u003C/b\u003E = 食品安全。和 \u003Cb\u003Ecomida\u003C/b\u003E（一餐/饭菜）有区别。"
+  },
+  {
+    lema: "gastronom\u00EDa",
+    ipa: "[ɡas.tɾo.noˈmi.a]",
+    pos: "f.",
+    significado: "美食学；烹饪艺术；地方美食文化",
+    ejemplo_es: "La gastronom\u00EDa espa\u00F1ola es conocida mundialmente por las tapas, el jam\u00F3n y la paella.",
+    ejemplo_zh: "西班牙美食以 tapas、火腿和海鲜饭闻名世界。",
+    tip: "\u003Cb\u003Egastronom\u00EDa\u003C/b\u003E 强调美食文化和烹饪艺术，比 \u003Cb\u003Ecocina\u003C/b\u003E（烹饪/厨房）更正式。\u003Cb\u003Eturismo gastron\u00F3mico\u003C/b\u003E = 美食旅游。B1 文化类话题高频。"
+  },
+  {
+    lema: "n\u00F3mada digital",
+    ipa: "[ˈno.ma.ða di.xiˈtal]",
+    pos: "m./f.",
+    significado: "数字游民（依靠互联网远程工作、不受地理位置限制的自由职业者）",
+    ejemplo_es: "Cada vez m\u00E1s n\u00F3madas digitales eligen Espa\u00F1a por su clima, gastronom\u00EDa y coste de vida.",
+    ejemplo_zh: "越来越多的数字游民选择西班牙，因为其气候、美食和生活成本。",
+    tip: "\u003Cb\u003En\u00F3mada\u003C/b\u003E 原指游牧民族，引申为不固定居住地的人。\u003Cb\u003Evisado para n\u00F3madas digitales\u003C/b\u003E = 数字游民签证（西班牙2023年推出）。\u003Cb\u003Etrabajar en remoto\u003C/b\u003E = 远程工作。B1-B2 职场/社会话题热门。"
+  },
+  {
+    lema: "gentrificaci\u00F3n",
+    ipa: "[xen.tɾi.fi.kaˈθjon]",
+    pos: "f.",
+    significado: "绅士化；中产阶级化（城市旧区因富裕人群迁入导致物价上涨、原住民被迫迁出的现象）",
+    ejemplo_es: "La llegada masiva de n\u00F3madas digitales ha provocado un proceso de gentrificaci\u00F3n en algunos barrios de Lisboa.",
+    ejemplo_zh: "大量数字游民的涌入在里斯本的一些街区引发了绅士化进程。",
+    tip: "\u003Cb\u003Egentrificaci\u00F3n\u003C/b\u003E 来自英语 gentrification。\u003Cb\u003Egentrificar\u003C/b\u003E（动词）。\u003Cb\u003Ebarrio gentrificado\u003C/b\u003E = 被绅士化的街区。\u003Cb\u003Eencarecimiento del alquiler\u003C/b\u003E = 房租上涨。B2 社会议题常考。"
+  },
+  {
+    lema: "sequ\u00EDa",
+    ipa: "[seˈki.a]",
+    pos: "f.",
+    significado: "干旱；旱灾（长期缺乏降水的极端气候现象）",
+    ejemplo_es: "La sequ\u00EDa prolongada ha afectado gravemente a la agricultura en el sur de Europa.",
+    ejemplo_zh: "持续干旱已严重影响南欧的农业。",
+    tip: "\u003Cb\u003Esequ\u00EDa\u003C/b\u003E（干旱）与 \u003Cb\u003Eseco/a\u003C/b\u003E（干燥的）同根。\u003Cb\u003Esequ\u00EDa prolongada\u003C/b\u003E = 持续干旱。\u003Cb\u003Edeclarar zona de sequ\u00EDa\u003C/b\u003E = 宣布干旱区。\u003Cb\u003Eescasez de agua\u003C/b\u003E = 水资源短缺。B1-B2 环境话题必考。"
+  },
+  {
+    lema: "embalse",
+    ipa: "[emˈbal.se]",
+    pos: "m.",
+    significado: "水库；蓄水池（人工修建用于储存水资源的设施）",
+    ejemplo_es: "Los embalses espa\u00F1oles est\u00E1n al 35% de su capacidad, el nivel m\u00E1s bajo en una d\u00E9cada.",
+    ejemplo_zh: "西班牙水库蓄水量仅为其容量的 35%，为十年来最低水平。",
+    tip: "\u003Cb\u003Eembalse\u003C/b\u003E 是人工水库，\u003Cb\u003Epantano\u003C/b\u003E 也指水库/沼泽（更口语化）。\u003Cb\u003Ecapacidad del embalse\u003C/b\u003E = 水库容量。\u003Cb\u003Enivel de agua embalsada\u003C/b\u003E = 蓄水水位。B1-B2 环境/地理话题。"
+  },
+  {
+    lema: "cosecha",
+    ipa: "[koˈse.tʃa]",
+    pos: "f.",
+    significado: "收成；收获（农作物成熟的季节和产量）",
+    ejemplo_es: "La cosecha de aceituna de este a\u00F1o ser\u00E1 un 40% menor debido a la falta de lluvia.",
+    ejemplo_zh: "由于缺雨，今年橄榄收成将减少 40%。",
+    tip: "\u003Cb\u003Ecosecha\u003C/b\u003E 既指收成也指收获季节。\u003Cb\u003Etemporada de cosecha\u003C/b\u003E = 收获季。\u003Cb\u003Ecosechar\u003C/b\u003E（动词）= 收割。\u003Cb\u003Ebuena/mala cosecha\u003C/b\u003E = 丰收/歉收。B1 农业/经济话题。"
+  },
+  {
+    lema: "restricci\u00F3n",
+    ipa: "[res.tɾikˈθjon]",
+    pos: "f.",
+    significado: "限制；约束（对资源使用的管控措施）",
+    ejemplo_es: "Varias comunidades aut\u00F3nomas han impuesto restricciones de agua por la sequ\u00EDa.",
+    ejemplo_zh: "几个自治区已因干旱实施用水限制。",
+    tip: "\u003Cb\u003Erestricci\u00F3n\u003C/b\u003E = 限制（名词），\u003Cb\u003Erestringir\u003C/b\u003E = 限制（动词）。\u003Cb\u003Esin restricciones\u003C/b\u003E = 无限制。\u003Cb\u003Erestricciones de agua\u003C/b\u003E = 用水限制。\u003Cb\u003Erestricciones de movilidad\u003C/b\u003E = 出行限制。B1-B2 行政/环境话题。"
+  },
+  {
+    lema: "subyacente",
+    ipa: "[suβ.ʝaˈθen.te]",
+    pos: "adj.",
+    significado: "潜在的；根本的；深层的（表面之下的根本原因）",
+    ejemplo_es: "El problema subyacente no es la falta de lluvia, sino la mala gesti\u00F3n del agua.",
+    ejemplo_zh: "潜在的问题不是缺少降雨，而是水资源管理不善。",
+    tip: "\u003Cb\u003Ecausa subyacente\u003C/b\u003E = 根本原因。\u003Cb\u003Eproblema subyacente\u003C/b\u003E = 深层问题。\u003Cb\u003Etensi\u00F3n subyacente\u003C/b\u003E = 潜在紧张。B2 学术词汇，阅读常考。"
+  },
+  {
+    lema: "a la larga",
+    ipa: "[a la ˈlaɾ.ɣa]",
+    pos: "loc. adv.",
+    significado: "从长远来看；长期而言（表达时间维度的副词短语）",
+    ejemplo_es: "A la larga, invertir en energ\u00EDas renovables es m\u00E1s barato que depender del petr\u00F3leo.",
+    ejemplo_zh: "从长远来看，投资可再生能源比依赖石油更便宜。",
+    tip: "\u003Cb\u003Ea la larga\u003C/b\u003E = 长期来看，\u003Cb\u003Ea corto plazo\u003C/b\u003E = 短期内。\u003Cb\u003Ea largo plazo\u003C/b\u003E 同义。口语常用：\u003Cb\u003EA la larga, todo se arregla.\u003C/b\u003E（长远来看一切都会解决。）B1-B2 议论类写作必用。"
+  },
+  {
+    lema: "poner en marcha",
+    ipa: "[poˈneɾ en ˈmaɾ.tʃa]",
+    pos: "loc. v.",
+    significado: "启动；实施；推行（开始执行某个计划或措施）",
+    ejemplo_es: "El gobierno ha puesto en marcha un plan de ayudas para los agricultores afectados por la sequ\u00EDa.",
+    ejemplo_zh: "政府已启动一项针对受干旱影响农民的援助计划。",
+    tip: "\u003Cb\u003Eponer en marcha\u003C/b\u003E 比 \u003Cb\u003Einiciar\u003C/b\u003E 或 \u003Cb\u003Ecomenzar\u003C/b\u003E 更正式，强调启动系统/机器/计划。\u003Cb\u003Een marcha\u003C/b\u003E = 运行中。\u003Cb\u003Epuesta en marcha\u003C/b\u003E（名词）= 启动。B1-B2 行政/新闻高频。"
+  }
+];
+
+window.ARTICLES = {
+  a1: {
+    paragraphs: [
+      { es: "Hoy es s\u00E1bado. Ana va al supermercado con su lista de la compra.", zh: "今天是星期六。安娜带着购物清单去超市。" },
+      { es: "Coge un carrito en la entrada. El supermercado es grande y tiene muchos pasillos.", zh: "她在入口处拿了一辆购物车。超市很大，有很多通道。" },
+      { es: "Primero va al pasillo de las frutas y verduras. Necesita tomates, lechuga, manzanas y pl\u00E1tanos.", zh: "她先去蔬果通道。她需要番茄、生菜、苹果和香蕉。" },
+      { es: "Los tomates cuestan 1,80 euros el kilo. Las manzanas est\u00E1n de oferta: 1,50 euros el kilo.", zh: "番茄每公斤 1.80 欧元。苹果在打折：每公斤 1.50 欧元。" },
+      { es: "Despu\u00E9s va al pasillo de los l\u00E1cteos. Coge leche, yogures y un trozo de queso manchego.", zh: "然后她去乳制品通道。拿牛奶、酸奶和一块曼切戈奶酪。" },
+      { es: "En el pasillo de la carne, Ana pide dos pechugas de pollo y medio kilo de carne picada.", zh: "在肉类通道，安娜要了两块鸡胸肉和半公斤肉馅。" },
+      { es: "Tambi\u00E9n pasa por la panader\u00EDa. Compra una barra de pan y cuatro napolitanas de chocolate.", zh: "她还去了面包房。买了一根法棍和四个巧克力千层酥。" },
+      { es: "Antes de ir a la caja, Ana mira su lista. \u00BFTiene todo? S\u00ED, ya est\u00E1 completo.", zh: "去收银台前，安娜看了看她的清单。都有了吗？是的，齐了。" },
+      { es: "En la caja, la cajera pasa todos los productos. En total son 32,45 euros.", zh: "在收银台，收银员扫描了所有商品。一共 32.45 欧元。" },
+      { es: "Ana paga con tarjeta, recoge su ticket y vuelve a casa contenta con la compra.", zh: "安娜用卡付款，拿起小票，带着采购的满意回家了。" }
+    ],
+    dele: "陈述式现在时(va, coge, necesita, cuestan, compra, paga)；基数词与价格表达(1,80 euros, 32,45 euros)；存在动词 hay(hay muchos pasillos)；前置词(en, a, de, con, por)；日常购物词汇(supermercado, carrito, pasillo, caja, ticket)。",
+    hardWords: [
+      { w: "carrito", m: "购物车（超市推车）" },
+      { w: "pasillo", m: "通道；走廊；货架间走道" },
+      { w: "l\u00E1cteos", m: "乳制品（牛奶、酸奶、奶酪等）" },
+      { w: "carne picada", m: "肉馅（picar 切碎）" },
+      { w: "cajera", m: "收银员（阴性形式，阳性为 cajero）" }
+    ],
+    quiz: [
+      { q: "\u00BFA d\u00F3nde va Ana el s\u00E1bado?", opts: ["Al cine", "Al supermercado", "A la playa", "Al parque"], ans: 1, es: "P\u00E1rrafo 1: \u0022Ana va al supermercado con su lista de la compra.\u0022", zh: "安娜星期六去超市采购。" },
+      { q: "\u00BFQu\u00E9 frutas compra Ana?", opts: ["Peras y uvas", "Naranjas y fresas", "Manzanas y pl\u00E1tanos", "Sand\u00EDa y mel\u00F3n"], ans: 2, es: "P\u00E1rrafo 3: \u0022Necesita tomates, lechuga, manzanas y pl\u00E1tanos.\u0022", zh: "安娜买了苹果和香蕉。" },
+      { q: "\u00BFCu\u00E1nto cuestan las manzanas en oferta?", opts: ["1,80 euros/kilo", "1,50 euros/kilo", "2,00 euros/kilo", "0,99 euros/kilo"], ans: 1, es: "P\u00E1rrafo 4: \u0022Las manzanas est\u00E1n de oferta: 1,50 euros el kilo.\u0022", zh: "苹果打折价每公斤 1.50 欧元。" },
+      { q: "\u00BFQu\u00E9 compra Ana en la panader\u00EDa?", opts: ["Una tarta y galletas", "Una barra de pan y napolitanas", "Croissants y magdalenas", "Solo pan integral"], ans: 1, es: "P\u00E1rrafo 7: \u0022Compra una barra de pan y cuatro napolitanas de chocolate.\u0022", zh: "安娜买了法棍面包和巧克力千层酥。" },
+      { q: "\u00BFC\u00F3mo paga Ana la compra?", opts: ["En efectivo", "Con tarjeta", "Con cheque", "No paga"], ans: 1, es: "P\u00E1rrafo 10: \u0022Ana paga con tarjeta.\u0022", zh: "安娜用银行卡付款。" }
+    ]
+  },
+  a2: {
+    paragraphs: [
+      { es: "Espa\u00F1a es uno de los pa\u00EDses con mayor riqueza gastron\u00F3mica del mundo. Su cocina var\u00EDa mucho de una regi\u00F3n a otra.", zh: "西班牙是世界上美食最丰富的国家之一。各地的菜肴差异很大。" },
+      { es: "En el norte, destacan los pintxos del Pa\u00EDs Vasco, peque\u00F1as obras de arte culinarias servidas sobre una rebanada de pan.", zh: "在北部，巴斯克地区的 pintxos 最为突出，这些放在面包片上的小吃堪称烹饪艺术品。" },
+      { es: "Galicia es famosa por sus mariscos: pulpo \u00E1 feira, navajas, percebes y la empanada gallega.", zh: "加利西亚以海鲜闻名：加利西亚风味章鱼、竹蛏、鹅颈藤壶和加利西亚馅饼。" },
+      { es: "En la costa mediterr\u00E1nea, Catalu\u00F1a y la Comunidad Valenciana comparten el amor por el arroz. La paella valenciana es el plato m\u00E1s internacional.", zh: "在地中海沿岸，加泰罗尼亚和瓦伦西亚共享对米饭的热爱。瓦伦西亚海鲜饭是最国际化的菜肴。" },
+      { es: "Andaluc\u00EDa es la tierra del gazpacho, el salmorejo, el pesca\u00EDto frito y el jam\u00F3n ib\u00E9rico de Jabugo.", zh: "安达卢西亚是冷汤、番茄冷浓汤、炸小鱼和哈布戈伊比利亚火腿的故乡。" },
+      { es: "Madrid, como capital, ofrece cocido madrile\u00F1o, callos a la madrile\u00F1a y los famosos churros con chocolate.", zh: "马德里作为首都，提供马德里炖菜、马德里风味牛肚和著名的吉事果配巧克力。" },
+      { es: "Las tapas son una de las costumbres m\u00E1s queridas: peque\u00F1as porciones que se sirven con la bebida en bares y terrazas.", zh: "Tapas 是最受欢迎的习俗之一：在酒吧和露台上随饮品附赠的小份美食。" },
+      { es: "El aceite de oliva virgen extra es el ingrediente estrella. Seg\u00FAn el Ministerio de Agricultura, Espa\u00F1a produce m\u00E1s del 40% del aceite de oliva mundial.", zh: "特级初榨橄榄油是明星食材。据农业部数据，西班牙生产全球超过 40% 的橄榄油。" },
+      { es: "En los \u00FAltimos a\u00F1os, la cocina espa\u00F1ola ha sabido combinar tradici\u00F3n e innovaci\u00F3n, con chefs como Ferran Adri\u00E0 que revolucionaron la gastronom\u00EDa mundial.", zh: "近年来，西班牙烹饪成功融合了传统与创新，费兰·阿德里亚等厨师彻底改变了世界美食。" },
+      { es: "Cada a\u00F1o, millones de turistas visitan Espa\u00F1a atra\u00EDdos por su gastronom\u00EDa. La comida no es solo alimento: es cultura, historia y forma de vida.", zh: "每年数百万游客被西班牙美食吸引而来。食物不仅是营养：它是文化、历史和生活方式。" }
+    ],
+    dele: "形容词最高级(el plato m\u00E1s internacional, las costumbres m\u00E1s queridas)；现在完成时(ha sabido combinar)；被动态(se sirven, es famosa por)；对立连接词(sin embargo, por otro lado)；百分比与数据表达(m\u00E1s del 40%)。",
+    hardWords: [
+      { w: "riqueza gastron\u00F3mica", m: "美食丰富性（gastronom\u00EDa 美食学）" },
+      { w: "pintxos", m: "巴斯克小吃（插在面包上的串式 tapas）" },
+      { w: "percebes", m: "鹅颈藤壶（加利西亚名贵海鲜）" },
+      { w: "gazpacho", m: "西班牙冷汤（番茄、黄瓜、青椒等制成）" },
+      { w: "ingrediente estrella", m: "明星食材（estrella 星星/明星）" }
+    ],
+    quiz: [
+      { q: "\u00BFCu\u00E1l es el plato m\u00E1s internacional de la cocina espa\u00F1ola seg\u00FAn el texto?", opts: ["El cocido madrile\u00F1o", "Los pintxos vascos", "La paella valenciana", "El gazpacho andaluz"], ans: 2, es: "P\u00E1rrafo 4: \u0022La paella valenciana es el plato m\u00E1s internacional.\u0022", zh: "瓦伦西亚海鲜饭是最国际化的西班牙菜。" },
+      { q: "\u00BFQu\u00E9 porcentaje del aceite de oliva mundial produce Espa\u00F1a?", opts: ["M\u00E1s del 20%", "M\u00E1s del 30%", "M\u00E1s del 40%", "M\u00E1s del 50%"], ans: 2, es: "P\u00E1rrafo 8: \u0022Espa\u00F1a produce m\u00E1s del 40% del aceite de oliva mundial.\u0022", zh: "西班牙生产全球超过 40% 的橄榄油。" },
+      { q: "\u00BFDe qu\u00E9 regi\u00F3n son t\u00EDpicos los pintxos?", opts: ["De Andaluc\u00EDa", "Del Pa\u00EDs Vasco", "De Galicia", "De Madrid"], ans: 1, es: "P\u00E1rrafo 2: \u0022En el norte, destacan los pintxos del Pa\u00EDs Vasco.\u0022", zh: "Pintxos 是巴斯克地区的典型小吃。" },
+      { q: "\u00BFQu\u00E9 regi\u00F3n es famosa por el marisco?", opts: ["Catalu\u00F1a", "Madrid", "Andaluc\u00EDa", "Galicia"], ans: 3, es: "P\u00E1rrafo 3: \u0022Galicia es famosa por sus mariscos.\u0022", zh: "加利西亚以海鲜闻名。" },
+      { q: "Seg\u00FAn el texto, \u00BFqu\u00E9 representan las tapas en la cultura espa\u00F1ola?", opts: ["Un plato principal caro", "Una costumbre muy querida", "Una comida para ni\u00F1os", "Un invento moderno"], ans: 1, es: "P\u00E1rrafo 7: \u0022Las tapas son una de las costumbres m\u00E1s queridas.\u0022", zh: "Tapas 是西班牙最受喜爱的习俗之一。" }
+    ]
+  },
+  b1: {
+    paragraphs: [
+      { es: "En los \u00FAltimos a\u00F1os, Espa\u00F1a se ha convertido en uno de los destinos favoritos para los n\u00F3madas digitales de todo el mundo. Ciudades como Barcelona, Valencia, M\u00E1laga y Las Palmas encabezan las listas de lugares m\u00E1s atractivos para trabajar en remoto.", zh: "近年来，西班牙已成为全球数字游民最喜爱的目的地之一。巴塞罗那、瓦伦西亚、马拉加和拉斯帕尔马斯位居最具吸引力的远程工作地点榜单前列。" },
+      { es: "Seg\u00FAn un informe de la consultora Nomad List, m\u00E1s de 50.000 n\u00F3madas digitales se instalaron en Espa\u00F1a durante 2025, un 35% m\u00E1s que el a\u00F1o anterior. Las razones son claras: buen clima, excelente gastronom\u00EDa, coste de vida razonable y una comunidad internacional vibrante.", zh: "据 Nomad List 咨询公司报告，2025 年有超过 5 万名数字游民定居西班牙，比前一年增长 35%。原因很明确：气候宜人、美食出色、生活成本合理、国际社群活跃。" },
+      { es: "En 2023, el gobierno espa\u00F1ol aprob\u00F3 la Ley de Startups, que incluye un visado espec\u00EDfico para n\u00F3madas digitales. Este visado permite a trabajadores extranjeros residir en Espa\u00F1a hasta cinco a\u00F1os mientras trabajan para empresas fuera del pa\u00EDs.", zh: "2023 年，西班牙政府通过了《创业法》，其中包括专门面向数字游民的签证。该签证允许外国工作者在为境外公司工作的同时在西班牙居住长达五年。" },
+      { es: "Los requisitos incluyen demostrar ingresos mensuales de al menos 2.160 euros \u2014el 200% del salario m\u00EDnimo interprofesional\u2014, tener un t\u00EDtulo universitario o tres a\u00F1os de experiencia profesional, y contar con un seguro m\u00E9dico privado.", zh: "申请条件包括证明月收入至少 2160 欧元——最低工资的 200%——拥有大学学历或三年职业经验，以及持有私人医疗保险。" },
+      { es: "\u0022Espa\u00F1a lo tiene todo: sol, playa, cultura y ahora tambi\u00E9n un marco legal atractivo\u0022, explica Marta Rodr\u00EDguez, analista de pol\u00EDticas migratorias del Real Instituto Elcano. \u0022El visado ha sido un \u00E9xito, pero tambi\u00E9n ha generado tensiones inesperadas.\u0022", zh: "埃尔卡诺皇家研究所移民政策分析师玛尔塔·罗德里格斯解释道：\u201C西班牙什么都有：阳光、海滩、文化，现在还有了有吸引力的法律框架。签证是成功的，但也产生了意想不到的紧张。" },
+      { es: "Efectivamente, la llegada masiva de trabajadores con salarios internacionales ha provocado un aumento significativo de los precios del alquiler en ciudades como Barcelona, donde el alquiler medio ha subido un 18% en dos a\u00F1os, seg\u00FAn datos del portal inmobiliario Idealista.", zh: "确实，大量拿着国际薪水的劳动者的涌入导致巴塞罗那等城市房租大幅上涨，据 Idealista 房产门户数据，两年内平均租金上涨了 18%。" },
+      { es: "El fen\u00F3meno de la gentrificaci\u00F3n no es nuevo, pero se ha acelerado. En barrios como El Raval o Poble-sec, los vecinos de toda la vida se ven obligados a mudarse porque ya no pueden pagar los alquileres.", zh: "绅士化现象并非新鲜事，但已经加速。在 El Raval 或 Poble-sec 等街区，住了大半辈子的居民因付不起房租而被迫搬离。" },
+      { es: "Carlos Garc\u00EDa, portavoz del Sindicato de Inquilinos de Barcelona, advierte: \u0022No estamos en contra de los n\u00F3madas digitales, pero s\u00ED de un modelo que expulsa a los vecinos. Necesitamos regular los alquileres de temporada y limitar los pisos tur\u00EDsticos.\u0022", zh: "巴塞罗那租户工会发言人卡洛斯·加西亚警告：\u201C我们不反对数字游民，但我们反对驱逐居民的模式。我们需要规范短期租赁并限制旅游公寓。" },
+      { es: "Otras ciudades han tomado medidas. Lisboa limit\u00F3 las licencias de alquiler tur\u00EDstico en 2023, y en Ciudad de M\u00E9xico se debate una ley para que los n\u00F3madas digitales paguen impuestos locales.", zh: "其他城市已采取措施。里斯本 2023 年限制了旅游租赁许可，墨西哥城则在讨论一项要求数字游民缴纳地方税的法律。" },
+      { es: "No obstante, no todo es negativo. Los n\u00F3madas digitales tambi\u00E9n aportan beneficios econ\u00F3micos: consumen en comercios locales, pagan impuestos indirectos y dinamizan barrios que antes estaban en decadencia.", zh: "然而，并非一切都是负面的。数字游民也带来了经济利益：他们在本地商家消费、缴纳间接税、振兴了曾经衰落的街区。" },
+      { es: "Un estudio de la Universidad de Barcelona estima que cada n\u00F3mada digital gasta de media 2.300 euros al mes en la ciudad, de los cuales aproximadamente el 60% se queda en la econom\u00EDa local.", zh: "巴塞罗那大学的一项研究估计，每位数字游民每月在城市中平均消费 2300 欧元，其中约 60% 留在本地经济中。" },
+      { es: "Para muchas ciudades peque\u00F1as, los n\u00F3madas digitales representan una oportunidad de revitalizaci\u00F3n. Localidades como Arcos de la Frontera, en C\u00E1diz, o Ribadeo, en Galicia, han lanzado programas para atraer teletrabajadores.", zh: "对许多小城镇来说，数字游民代表着振兴的机会。加的斯的 Arcos de la Frontera 或加利西亚的 Ribadeo 等城镇已推出吸引远程工作者的计划。" },
+      { es: "El debate sobre el equilibrio entre atraer talento internacional y proteger a la poblaci\u00F3n local est\u00E1 lejos de resolverse. Los expertos coinciden en que la clave est\u00E1 en pol\u00EDticas p\u00FAblicas que distribuyan mejor los beneficios.", zh: "关于吸引国际人才与保护本地居民之间平衡的讨论远未解决。专家们一致认为关键在于更好地分配利益的公共政策。" },
+      { es: "Mientras tanto, el perfil del n\u00F3mada digital sigue evolucionando. Ya no son solo j\u00F3venes programadores: cada vez hay m\u00E1s familias, profesionales mayores de 40 a\u00F1os y trabajadores de sectores como la educaci\u00F3n, el dise\u00F1o o la consultor\u00EDa.", zh: "与此同时，数字游民的形象也在不断演变。不再只有年轻程序员：越来越多的家庭、40 岁以上专业人士和教育、设计、咨询等行业的从业者加入其中。" },
+      { es: "\u0022El futuro del trabajo es flexible, y Espa\u00F1a tiene una oportunidad \u00FAnica de liderar este cambio de manera justa\u0022, concluye Rodr\u00EDguez. \u0022Pero para ello, necesitamos que las pol\u00EDticas de vivienda, fiscalidad y cohesi\u00F3n social vayan de la mano.\u0022", zh: "罗德里格斯总结道：\u201C工作的未来是灵活的，西班牙有着独特的机会以公平的方式引领这一变革。但为此，我们需要住房、税收和社会凝聚力政策齐头并进。\u201D" }
+    ],
+    dele: "现在完成时(se ha convertido, ha provocado, han tomado)；过去未完成时(estaban, gastaba)；虚拟式现在时(para que paguen, es necesario que vayan)；条件式(ser\u00EDa, podr\u00EDa)；数据引用表达(seg\u00FAn un informe, un 35% m\u00E1s que, el 60% se queda)；直接引语(explica, advierte, concluye)。",
+    hardWords: [
+      { w: "n\u00F3mada digital", m: "数字游民（靠网络远程工作的自由职业者）" },
+      { w: "gentrificaci\u00F3n", m: "绅士化（富裕人群迁入导致物价上涨）" },
+      { w: "visado", m: "签证（permiso de residencia 居留许可）" },
+      { w: "salario m\u00EDnimo interprofesional", m: "最低工资标准（SMI）" },
+      { w: "alquiler de temporada", m: "短期租赁（区别于长期租房）" },
+      { w: "dinamizar", m: "振兴；激活（dar vida a un barrio）" },
+      { w: "revitalizaci\u00F3n", m: "复兴；重新激活" },
+      { w: "cohesi\u00F3n social", m: "社会凝聚力" },
+      { w: "marco legal", m: "法律框架" },
+      { w: "pol\u00EDtica migratoria", m: "移民政策" }
+    ],
+    quiz: [
+      { q: "\u00BFCu\u00E1ntos n\u00F3madas digitales se instalaron en Espa\u00F1a en 2025 seg\u00FAn el texto?", opts: ["M\u00E1s de 10.000", "M\u00E1s de 30.000", "M\u00E1s de 50.000", "M\u00E1s de 100.000"], ans: 2, es: "P\u00E1rrafo 2: \u0022M\u00E1s de 50.000 n\u00F3madas digitales se instalaron en Espa\u00F1a durante 2025.\u0022", zh: "2025 年超过 5 万名数字游民定居西班牙。" },
+      { q: "\u00BFCu\u00E1l es el requisito de ingresos m\u00EDnimos para el visado de n\u00F3mada digital?", opts: ["1.080 euros/mes", "2.160 euros/mes", "3.000 euros/mes", "1.500 euros/mes"], ans: 1, es: "P\u00E1rrafo 4: \u0022Ingresos mensuales de al menos 2.160 euros.\u0022", zh: "月收入至少 2160 欧元（最低工资的 200%）。" },
+      { q: "\u00BFQu\u00E9 porcentaje ha subido el alquiler en Barcelona en dos a\u00F1os?", opts: ["Un 8%", "Un 12%", "Un 18%", "Un 25%"], ans: 2, es: "P\u00E1rrafo 6: \u0022El alquiler medio ha subido un 18% en dos a\u00F1os.\u0022", zh: "巴塞罗那平均租金两年内上涨了 18%。" },
+      { q: "\u00BFA qu\u00E9 se refiere \u0022este cambio\u0022 en el \u00FAltimo p\u00E1rrafo?", opts: ["Al aumento del turismo", "Al futuro del trabajo flexible", "A la construcci\u00F3n de viviendas", "A la bajada de impuestos"], ans: 1, es: "P\u00E1rrafo 15: \u0022El futuro del trabajo es flexible, y Espa\u00F1a tiene una oportunidad \u00FAnica de liderar este cambio.\u0022", zh: "\u0022这个变革\u0022 指的是灵活工作的未来趋势。" },
+      { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA?", opts: ["El visado permite residir hasta cinco a\u00F1os", "Lisboa limit\u00F3 las licencias de alquiler tur\u00EDstico", "Todos los n\u00F3madas digitales son j\u00F3venes programadores", "Cada n\u00F3mada gasta unos 2.300 euros al mes"], ans: 2, es: "P\u00E1rrafo 14: \u0022Ya no son solo j\u00F3venes programadores.\u0022", zh: "并非所有数字游民都是年轻程序员——这是一个常见的误解。" },
+      { q: "\u00BFQu\u00E9 consecuencia NO menciona el texto sobre la llegada de n\u00F3madas digitales?", opts: ["Subida del precio del alquiler", "Gentrificaci\u00F3n de barrios", "Aumento de la delincuencia", "Dinamizaci\u00F3n de comercios locales"], ans: 2, es: "El texto no menciona el aumento de la delincuencia como consecuencia.", zh: "文章没有提到犯罪率上升作为数字游民涌入的后果。" },
+      { q: "Seg\u00FAn el texto, \u00BFqu\u00E9 medida han tomado algunas ciudades peque\u00F1as?", opts: ["Prohibir la entrada de n\u00F3madas", "Lanzar programas para atraer teletrabajadores", "Aumentar los impuestos locales", "Cerrar espacios de coworking"], ans: 1, es: "P\u00E1rrafo 12: \u0022Han lanzado programas para atraer teletrabajadores.\u0022", zh: "小城镇推出了吸引远程工作者的计划。" },
+      { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre el futuro del fen\u00F3meno?", opts: ["Desaparecer\u00E1 en pocos a\u00F1os", "Solo afecta a Barcelona", "Requiere pol\u00EDticas de vivienda, fiscalidad y cohesi\u00F3n social coordinadas", "Es exclusivamente negativo para Espa\u00F1a"], ans: 2, es: "P\u00E1rrafo 15: \u0022Necesitamos que las pol\u00EDticas de vivienda, fiscalidad y cohesi\u00F3n social vayan de la mano.\u0022", zh: "需要住房、税收和社会凝聚力政策协同推进。" }
+    ]
+  },
+  b2: {
+    paragraphs: [
+      { es: "Europa se enfrenta a una de las sequ\u00EDas m\u00E1s severas de su historia reciente. Seg\u00FAn el Observatorio Europeo de la Sequ\u00EDa (EDO), m\u00E1s del 45% del territorio de la Uni\u00F3n Europea se encuentra en situaci\u00F3n de \u0022sequ\u00EDa de advertencia\u0022 y un 15% en \u0022alerta\u0022, la categor\u00EDa m\u00E1s grave.", zh: "欧洲正面临近代史上最严重的干旱之一。据欧洲干旱观测站（EDO）数据，超过 45% 的欧盟领土处于\u201C干旱警告\u201D状态，15% 处于\u201C警戒\u201D状态——最严重的类别。" },
+      { es: "Espa\u00F1a es uno de los pa\u00EDses m\u00E1s afectados. Los embalses espa\u00F1oles se encuentran al 35,2% de su capacidad total, seg\u00FAn el Ministerio para la Transici\u00F3n Ecol\u00F3gica, el nivel m\u00E1s bajo registrado en un mes de agosto en la \u00FAltima d\u00E9cada. En Catalu\u00F1a, la situaci\u00F3n es a\u00FAn m\u00E1s cr\u00EDtica: los embalses apenas alcanzan el 18%.", zh: "西班牙是受影响最严重的国家之一。据生态转型部数据，西班牙水库蓄水量仅为其总容量的 35.2%，为近十年八月份最低水平。在加泰罗尼亚，情况更为严峻：水库蓄水量勉强达到 18%。" },
+      { es: "\u0022Estamos ante una crisis h\u00EDdrica sin precedentes que requiere respuestas estructurales, no solo medidas de emergencia\u0022, afirma la doctora Mar\u00EDa Jos\u00E9 Polo, catedr\u00E1tica de Hidr\u00E1ulica de la Universidad de C\u00F3rdoba y miembro del panel de expertos sobre sequ\u00EDa del gobierno. \u0022Llevamos a\u00F1os hablando de esto, pero las administraciones solo reaccionan cuando ya es tarde.\u0022", zh: "科尔多瓦大学水力学教授、政府干旱专家组成员玛利亚·何塞·波罗博士表示：\u201C我们正面临一场史无前例的水资源危机，需要结构性应对措施，而不仅仅是紧急措施。我们多年来一直在谈论这个问题，但行政部门只在为时已晚时才做出反应。\u201D" },
+      { es: "Las consecuencias econ\u00F3micas son devastadoras. El sector agrario espa\u00F1ol ha perdido m\u00E1s de 6.000 millones de euros en 2026 debido a la sequ\u00EDa, seg\u00FAn estimaciones de la organizaci\u00F3n agraria COAG. La cosecha de aceituna ha ca\u00EDdo un 48% respecto a la media de los \u00FAltimos cinco a\u00F1os, y la producci\u00F3n de cereales se ha reducido en m\u00E1s de un 30%.", zh: "经济后果是毁灭性的。据农业组织 COAG 估计，西班牙农业部门在 2026 年因干旱损失超过 60 亿欧元。橄榄收成较过去五年平均值下降了 48%，谷物产量减少了超过 30%。" },
+      { es: "El profesor Javier Mart\u00EDn-Vide, catedr\u00E1tico de Geograf\u00EDa F\u00EDsica de la Universidad de Barcelona y experto en cambio clim\u00E1tico, explica la causa subyacente: \u0022No se trata solo de que llueva menos. El problema es que las temperaturas m\u00E1s altas incrementan la evapotranspiraci\u00F3n, de modo que aunque lloviera lo mismo que hace 30 a\u00F1os, el agua disponible ser\u00EDa menor.\u0022", zh: "巴塞罗那大学自然地理学教授、气候变化专家哈维尔·马丁-维德解释了深层原因：\u201C不仅仅是降雨减少的问题。问题在于更高的温度增加了蒸散量，因此即使降雨量与 30 年前相同，可用水量也会更少。\u201D" },
+      { es: "Varias comunidades aut\u00F3nomas han impuesto restricciones de agua. Catalu\u00F1a ha declarado la emergencia por sequ\u00EDa en 202 municipios, limitando el consumo a 200 litros por persona y d\u00EDa. Andaluc\u00EDa ha restringido el riego agr\u00EDcola al 50% en las cuencas m\u00E1s afectadas.", zh: "几个自治区已实施用水限制。加泰罗尼亚宣布 202 个市镇进入干旱紧急状态，将人均日用水量限制在 200 升。安达卢西亚在最受影响的流域将农业灌溉限制在 50%。" },
+      { es: "A nivel europeo, el problema no es menor. Francia ha registrado m\u00E1s de 80 d\u00EDas sin lluvias significativas en algunas regiones. Italia ha declarado el estado de emergencia en cinco regiones del norte, donde el r\u00EDo Po \u2014el m\u00E1s largo del pa\u00EDs\u2014 ha alcanzado niveles m\u00EDnimos hist\u00F3ricos.", zh: "在欧洲层面，问题同样严峻。法国部分地区已记录超过 80 天无明显降雨。意大利在北部五个大区宣布紧急状态，该国最长的河流波河已达到历史最低水位。" },
+      { es: "\u0022Europa se ha cre\u00EDdo inmune al estr\u00E9s h\u00EDdrico durante demasiado tiempo\u0022, se\u00F1ala el doctor Pieter van der Zaag, profesor de Gesti\u00F3n Integrada de Recursos H\u00EDdricos del instituto IHE Delft en los Pa\u00EDses Bajos. \u0022Hemos construido un modelo agr\u00EDcola y urbano que asume agua abundante y barata. Ese modelo ya no es sostenible.\u0022", zh: "荷兰 IHE Delft 研究所水资源综合管理教授皮特·范德扎格博士指出：\u201C欧洲长期以来一直以为自己不受水资源压力影响。我们建立了一个假设水资源丰富且廉价的农业和城市模式。这种模式已不再可持续。\u201D" },
+      { es: "Los datos respaldan esta afirmaci\u00F3n. Seg\u00FAn la Agencia Europea de Medio Ambiente (AEMA), el 30% de la poblaci\u00F3n europea vive en regiones con estr\u00E9s h\u00EDdrico permanente, y se espera que esta cifra alcance el 50% para 2050 si no se toman medidas dr\u00E1sticas.", zh: "数据支持这一论断。据欧洲环境署（AEMA）数据，30% 的欧洲人口生活在长期水资源紧张地区，如果不采取果断措施，预计到 2050 年这一数字将达到 50%。" },
+      { es: "Las soluciones t\u00E9cnicas existen: desaladoras, sistemas de reutilizaci\u00F3n de aguas residuales, riego de precisi\u00F3n y cultivos m\u00E1s resistentes a la sequ\u00EDa. Espa\u00F1a es l\u00EDder europeo en desalaci\u00F3n, con m\u00E1s de 700 plantas que producen unos 5 millones de metros c\u00FAbicos diarios.", zh: "技术解决方案是存在的：海水淡化厂、污水回用系统、精准灌溉和更耐旱的作物。西班牙是欧洲海水淡化的领导者，拥有 700 多个工厂，每天生产约 500 万立方米淡水。" },
+      { es: "Sin embargo, los expertos advierten que la tecnolog\u00EDa por s\u00ED sola no basta. \u0022La desalaci\u00F3n consume mucha energ\u00EDa y genera salmuera que da\u00F1a los ecosistemas marinos\u0022, explica Polo. \u0022La verdadera soluci\u00F3n pasa por reducir el consumo, especialmente en la agricultura, que representa el 80% del uso de agua en Espa\u00F1a.\u0022", zh: "然而，专家警告仅靠技术是不够的。波罗解释道：\u201C海水淡化消耗大量能源并产生损害海洋生态系统的盐水。真正的解决方案在于减少消耗，特别是在占西班牙用水量 80% 的农业领域。\u201D" },
+      { es: "La doctora Francesca Greco, investigadora del Centro Euromediterr\u00E1neo sobre Cambio Clim\u00E1tico, subraya la dimensi\u00F3n social del problema: \u0022La sequ\u00EDa no afecta a todos por igual. Los peque\u00F1os agricultores, las comunidades rurales y los hogares de bajos ingresos son los m\u00E1s vulnerables. Si no dise\u00F1amos pol\u00EDticas equitativas, la crisis h\u00EDdrica se convertir\u00E1 en una crisis social.\u0022", zh: "欧洲地中海气候变化中心研究员弗朗西斯卡·格雷科博士强调了问题的社会维度：\u201C干旱并非平等地影响所有人。小农、农村社区和低收入家庭是最脆弱的群体。如果我们不设计公平的政策，水危机将演变为社会危机。\u201D" },
+      { es: "El gobierno espa\u00F1ol ha puesto en marcha un plan de choque dotado con 2.200 millones de euros que incluye ayudas directas a agricultores, inversiones en infraestructura h\u00EDdrica y campa\u00F1as de concienciaci\u00F3n ciudadana.", zh: "西班牙政府已启动一项 22 亿欧元的紧急计划，包括对农民的直接援助、水利基础设施投资和公民节水意识宣传。" },
+      { es: "No obstante, los ecologistas consideran que estas medidas son insuficientes. Greenpeace ha denunciado que el plan mantiene las subvenciones a cultivos de alto consumo h\u00EDdrico como el aguacate y el almendro intensivo, que califican de \u0022insostenibles\u0022 en el contexto actual.", zh: "然而，环保人士认为这些措施不足。绿色和平组织谴责该计划继续补贴牛油果和密植杏仁等高耗水作物，称在当前形势下\u201C不可持续\u201D。" },
+      { es: "A la larga, los expertos coinciden en que la adaptaci\u00F3n al cambio clim\u00E1tico requerir\u00E1 transformaciones profundas. \u0022Necesitamos repensar qu\u00E9 cultivamos, d\u00F3nde lo cultivamos y c\u00F3mo gestionamos el agua\u0022, concluye Mart\u00EDn-Vide. \u0022La sequ\u00EDa de 2026 no es una anomal\u00EDa: es el nuevo clima al que debemos adaptarnos.\u0022", zh: "长远来看，专家们一致认为适应气候变化需要深刻转型。马丁-维德总结道：\u201C我们需要重新思考我们种什么、在哪里种、如何管理水资源。2026 年的干旱不是异常现象：这是我们必须适应的新气候。\u201D" }
+    ],
+    dele: "虚拟式(lloviera, dise\u00F1emos, sea menor, se convierta)；条件式完成时(habr\u00EDa sido necesario, se habr\u00EDa evitado)；被动语态与无人称(se ha reducido, han sido impuestas, se espera que)；复合连接词(sin embargo, no obstante, de modo que, a la larga)；过去完成时(hab\u00EDan alcanzado)；直接引语(afirma, explica, se\u00F1ala, subraya, concluye)；学术词汇(evapotranspiraci\u00F3n, estr\u00E9s h\u00EDdrico, salmuera, equitativo, infraestructura h\u00EDdrica)。",
+    hardWords: [
+      { w: "sequ\u00EDa", m: "干旱（sequ\u00EDa prolongada 持续干旱）" },
+      { w: "estrés hídrico", m: "水资源压力（水需求超过可用量）" },
+      { w: "evapotranspiración", m: "蒸散量（蒸发+植物蒸腾的总水量损失）" },
+      { w: "salmuera", m: "盐水（海水淡化产生的高盐度废水）" },
+      { w: "desaladora", m: "海水淡化厂（desalación 海水淡化过程）" },
+      { w: "cuenca", m: "流域（cuenca hidrográfica 水文流域）" },
+      { w: "equitativo", m: "公平的（políticas equitativas 公平政策）" },
+      { w: "infraestructura hídrica", m: "水利基础设施" },
+      { w: "sin precedentes", m: "史无前例的" },
+      { w: "a la larga", m: "从长远来看" }
+    ],
+    quiz: [
+      { q: "\u00BFQu\u00E9 porcentaje del territorio de la UE est\u00E1 en situaci\u00F3n de \u0022sequ\u00EDa de advertencia\u0022?", opts: ["M\u00E1s del 25%", "M\u00E1s del 35%", "M\u00E1s del 45%", "M\u00E1s del 55%"], ans: 2, es: "P\u00E1rrafo 1: \u0022M\u00E1s del 45% del territorio de la Uni\u00F3n Europea se encuentra en situaci\u00F3n de sequ\u00EDa de advertencia.\u0022", zh: "超过 45% 的欧盟领土处于干旱警告状态。" },
+      { q: "\u00BFA qu\u00E9 nivel se encuentran los embalses espa\u00F1oles seg\u00FAn el texto?", opts: ["Al 18%", "Al 25%", "Al 35,2%", "Al 50%"], ans: 2, es: "P\u00E1rrafo 2: \u0022Los embalses espa\u00F1oles se encuentran al 35,2% de su capacidad total.\u0022", zh: "西班牙水库蓄水量为总容量的 35.2%。" },
+      { q: "\u00BFCu\u00E1nto ha ca\u00EDdo la cosecha de aceituna respecto a la media de cinco a\u00F1os?", opts: ["Un 28%", "Un 38%", "Un 48%", "Un 58%"], ans: 2, es: "P\u00E1rrafo 4: \u0022La cosecha de aceituna ha ca\u00EDdo un 48%.\u0022", zh: "橄榄收成下降了 48%。" },
+      { q: "\u00BFA qu\u00E9 se refiere \u0022ese modelo\u0022 en la cita del doctor van der Zaag?", opts: ["Al modelo educativo europeo", "Al modelo agr\u00EDcola y urbano que asume agua abundante y barata", "Al modelo de transporte p\u00FAblico", "Al modelo sanitario"], ans: 1, es: "P\u00E1rrafo 8: \u0022Hemos construido un modelo agr\u00EDcola y urbano que asume agua abundante y barata. Ese modelo ya no es sostenible.\u0022", zh: "\u0022那种模式\u0022 指的是假设水资源丰富且廉价的农业和城市模式。" },
+      { q: "\u00BFCu\u00E1l de las siguientes afirmaciones es FALSA?", opts: ["Espa\u00F1a es l\u00EDder europeo en desalaci\u00F3n", "La agricultura consume el 80% del agua en Espa\u00F1a", "Greenpeace apoya totalmente el plan de choque del gobierno", "El 30% de los europeos vive en zonas con estr\u00E9s h\u00EDdrico"], ans: 2, es: "P\u00E1rrafo 14: Greenpeace ha denunciado que el plan mantiene las subvenciones a cultivos de alto consumo h\u00EDdrico.", zh: "绿色和平组织批评而非支持政府的紧急计划——他们谴责对高耗水作物的补贴。" },
+      { q: "\u00BFQu\u00E9 medida NO menciona el texto para combatir la sequ\u00EDa?", opts: ["Desaladoras", "Reutilizaci\u00F3n de aguas residuales", "Prohibici\u00F3n total de la agricultura", "Riego de precisi\u00F3n"], ans: 2, es: "El texto menciona desaladoras, reutilizaci\u00F3n, riego de precisi\u00F3n y cultivos resistentes, pero no la prohibici\u00F3n total de la agricultura.", zh: "文章提到了多种技术方案，但并未提到完全禁止农业。" },
+      { q: "Seg\u00FAn la AEMA, \u00BFqu\u00E9 porcentaje de europeos vivir\u00E1 en zonas con estr\u00E9s h\u00EDdrico para 2050?", opts: ["El 20%", "El 30%", "El 40%", "El 50%"], ans: 3, es: "P\u00E1rrafo 9: \u0022Se espera que esta cifra alcance el 50% para 2050.\u0022", zh: "预计到 2050 年，50% 的欧洲人口将生活在水资源紧张地区。" },
+      { q: "\u00BFQu\u00E9 inferencia es m\u00E1s razonable sobre la sequ\u00EDa de 2026 seg\u00FAn los expertos?", opts: ["Es un evento aislado que no se repetir\u00E1", "Es el nuevo clima al que Europa debe adaptarse de forma estructural", "Solo afecta a Espa\u00F1a", "Se resolver\u00E1 autom\u00E1ticamente con las lluvias de oto\u00F1o"], ans: 1, es: "P\u00E1rrafo 15: \u0022La sequ\u00EDa de 2026 no es una anomal\u00EDa: es el nuevo clima al que debemos adaptarnos.\u0022", zh: "2026 年的干旱不是异常现象，而是欧洲必须适应的新气候常态。" }
+    ]
+  }
+};
