@@ -805,8 +805,55 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 .checkin-cal .day-cell.checked::after{content:'✓';position:absolute;right:3px;top:1px;font-size:8px;color:#E05A2B}
 .checkin-cal .day-cell.today{border:2px solid #E05A2B;background:linear-gradient(135deg,#E05A2B,#C2410C);color:#fff;box-shadow:0 3px 8px rgba(194,65,12,.3)}
 .checkin-cal .day-hd{color:#B8AB98}
-.quick-grid .btn{background:#FFF7EA;border:1px solid #F3E3C8;border-radius:99px;color:#9A5B3C;font-weight:800}
-.quick-grid .btn:hover{background:#fff;border-color:#E05A2B;color:#C2410C}
+.quick-grid .btn{background:#fff;border:1.5px solid #F1E7D8;border-radius:12px;color:#44403C;font-weight:700;box-shadow:0 2px 7px rgba(120,60,40,.06)}
+.quick-grid .btn:hover{background:#fff;border-color:#E05A2B;color:#C2410C;transform:translateY(-2px);box-shadow:0 6px 14px rgba(194,65,12,.13)}
+/* ===== v98.4 排版五项：进度细条 / 雷达填充 / 签到居中 ===== */
+.wb98cgrid .pg-row .pl .tm{font-size:9.5px;padding:1px 6px}
+.wb98cgrid .pg-row .pr{white-space:nowrap}
+@media(max-width:700px){.wb98cgrid{grid-template-columns:1fr !important}}
+.g2[style*="align-items:stretch"]>.card>.checkin-cal{align-content:center}
+.checkin-cal{max-width:520px}
+/* ===== v98.4b 真机移动端修复（Serena 反馈 11-09）===== */
+/* ① 门户 nav「进入工作台→」竖排挤压：禁换行+禁收缩，小屏收敛用户名 */
+@media(max-width:900px){
+  #wbLanding .ln-nav .in{gap:8px}
+  #wbLanding .ln-nav .in .btn.grad{white-space:nowrap;flex:none;padding:7px 12px;font-size:12.5px}
+  #wbLanding .ln-ua{flex:none}
+  #wbLanding .ln-uname{max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #wbLanding .ln-lnk{margin-left:8px;flex:none}
+  /* ② 番茄钟手机回退纵向（row 横排在 390px 溢出裁切） */
+  .pomo{flex-direction:column !important;align-items:center;text-align:center;gap:12px}
+  .pomo .pc,.pomo .ps{justify-content:center}
+  .pomo .wb4meta{align-items:center !important}
+}
+@media(max-width:480px){
+  #wbLanding .ln-brand small{display:none}
+  #wbLanding .ln-uname{max-width:56px;font-size:12px}
+  #wbLanding .ln-nav .in .btn.grad{font-size:12px;padding:6px 10px}
+}
+/* ③ 手机签到月历：格子加高填满卡宽，压缩留白（margin:auto 在 flex 子项上收缩宽度，须显式 width:100%） */
+@media(max-width:700px){
+  .checkin-cal{max-width:100%;width:100%;margin-left:0;margin-right:0}
+  .checkin-cal .day-cell{aspect-ratio:1.1;font-size:12px;border-radius:9px}
+  .checkin-cal .day-hd{font-size:10px}
+}
+/* ===== v98.4c 仪表盘 UI 二轮美化（13:22 用户反馈）===== */
+/* 统计四卡：去左侧竖条描边 → 右上角可爱 emoji 悬浮装饰 */
+.wbstat{position:relative;overflow:hidden;border:1px solid #F1E7D8 !important}
+.wbstat .wse{position:absolute;right:12px;top:8px;font-size:30px;opacity:.45;pointer-events:none;line-height:1}
+/* 桌面签到月历同样被 margin:auto 收缩——强制填满卡宽（13:38 用户反馈） */
+.g2[style*="align-items:stretch"]>.card>.checkin-cal{width:100%}
+/* 快捷卡内「已登录」提示条：去左橙条 → 虚线暖边居中胶囊条 */
+.wb-login-tip{background:linear-gradient(135deg,#FFF8EC,#FFFDF7);border:1px dashed #F0DFC4;border-radius:12px;padding:10px 14px;color:#8A6A4F;text-align:center}
+.wb-login-tip b{color:#C2410C}
+/* 学习进度圆点 */
+.wbdot{width:8px;height:8px;border-radius:50%;flex:none;box-shadow:0 0 0 3px rgba(120,60,40,.06)}
+/* 番茄钟三按钮：统一大胶囊（开始=渐变主按钮，重置/休息=米白暖边） */
+.pomo .pc{gap:9px}
+.pomo .pc .btn{min-width:78px;justify-content:center;border-radius:13px;padding:10px 14px;font-weight:800;font-size:12.5px;box-shadow:0 3px 10px rgba(194,65,12,.20)}
+.pomo .pc .btn.ol{background:#FFFDF9;border:1.5px solid #F0E1CC;color:#8A6A4F;box-shadow:0 2px 6px rgba(120,60,40,.08)}
+.pomo .pc .btn.ol:hover{border-color:#E05A2B;color:#C2410C;background:#FFF7EA}
+.radar-cute svg{width:200px !important;height:200px !important}
 </style>
 </head>
 <body>
@@ -829,7 +876,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.3-202611080145';
+window.swVer = 'v98.4-202611091255';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2601,17 +2648,18 @@ function renderStreakBanner(){
   const statusColor = isCheckedToday ? 'var(--ok)' : 'var(--soft)';
   const statusLabel = isCheckedToday ? '今日已打卡' : '今日未打卡';
   const btnHtml = isCheckedToday
-    ? '<button class="btn sm ol" disabled style="opacity:.55;cursor:not-allowed">今日已签到</button>'
-    : '<button class="btn" onclick="doCheckIn();renderMain()">今日打卡</button>';
-  return '<div class="streak-banner" style="background:linear-gradient(135deg,#fff8ec 0%,#fff 100%);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:var(--sh)">'
-       + '<div style="display:flex;align-items:baseline;gap:6px;min-width:160px;color:' + accent + '">'
-       +   streakIcon
-       +   '<span style="font-size:36px;font-weight:800;color:' + accent + ';line-height:1;font-family:var(--serif)">' + streak + '</span>'
-       +   '<span style="font-size:13px;color:var(--soft)">天连续学习</span>'
+    ? '<button class="btn sm ol" disabled style="border-radius:99px;opacity:.6;cursor:not-allowed;background:#FFFDF9">今日已签到</button>'
+    : '<button class="btn" style="border-radius:99px;padding:11px 24px;font-weight:800;box-shadow:0 4px 12px rgba(194,65,12,.28)" onclick="doCheckIn();renderMain()">今日打卡</button>';
+  /* v98.4c: 打卡条幅美化——图标圆形徽章 + 暖橙渐变底 + 胶囊按钮 */
+  return '<div class="streak-banner" style="background:linear-gradient(120deg,#FFF6EA 0%,#FFFDF7 55%,#fff 100%);border:1px solid #F1E7D8;border-radius:16px;padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;box-shadow:0 4px 16px rgba(120,60,40,.07);position:relative;overflow:hidden">'
+       + '<div style="display:flex;align-items:center;gap:11px;min-width:170px">'
+       +   '<span style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FFF1E0,#FFE3C8);display:inline-flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px #F3DCC0;flex:none">'+streakIcon+'</span>'
+       +   '<span style="font-size:34px;font-weight:800;color:' + accent + ';line-height:1;font-family:var(--serif)">' + streak + '</span>'
+       +   '<span style="font-size:12px;color:#8A6A4F;font-weight:700;line-height:1.3">天连续<br>学习</span>'
        + '</div>'
        + '<div style="flex:1;min-width:180px">'
-       +   '<div style="font-size:14px;font-weight:700;color:var(--ink)">' + msg + '</div>'
-       +   '<div style="font-size:12px;color:' + statusColor + ';margin-top:2px;display:flex;align-items:center;gap:4px">' + statusIcon + '<span>' + statusLabel + ' · ' + todosTxt + ' 待办完成</span></div>'
+       +   '<div style="font-size:14.5px;font-weight:800;color:var(--ink)">' + msg + '</div>'
+       +   '<div style="font-size:12px;color:' + statusColor + ';margin-top:3px;display:flex;align-items:center;gap:4px">' + statusIcon + '<span>' + statusLabel + ' · ' + todosTxt + ' 待办完成</span></div>'
        + '</div>'
        + btnHtml
        + '</div>';
@@ -2667,10 +2715,10 @@ function renderDash(){
 
   // Stats
   h += `<div class="g g4" style="margin-bottom:18px">
-    <div class="card stat" style="border-left:4px solid var(--m-vocab)"><div class="num">${learned}</div><div class="lbl">已学单词</div><div class="sub">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 词</div></div>
-    <div class="card stat" style="border-left:4px solid var(--m-vocab)"><div class="num t">${mastered}</div><div class="lbl">已掌握</div><div class="sub">三颗星掌握</div></div>
-    <div class="card stat" style="border-left:4px solid var(--m-gram)"><div class="num a">${grammarDoneCount}</div><div class="lbl">语法已学</div><div class="sub">共 ${GFLAT.length} 条</div></div>
-    <div class="card stat" style="border-left:4px solid var(--m-quiz)"><div class="num">${quizAvg}<span style="font-size:14px">分</span></div><div class="lbl">测验均分</div><div class="sub">完成 ${quizDone} 次</div></div>
+    <div class="card stat wbstat"><span class="wse">📖</span><div class="num">${learned}</div><div class="lbl">已学单词</div><div class="sub">共 ${typeof VDATA!=='undefined'?VDATA.length:553} 词</div></div>
+    <div class="card stat wbstat"><span class="wse">✨</span><div class="num t">${mastered}</div><div class="lbl">已掌握</div><div class="sub">三颗星掌握</div></div>
+    <div class="card stat wbstat"><span class="wse">📐</span><div class="num a">${grammarDoneCount}</div><div class="lbl">语法已学</div><div class="sub">共 ${GFLAT.length} 条</div></div>
+    <div class="card stat wbstat"><span class="wse">🎯</span><div class="num">${quizAvg}<span style="font-size:14px">分</span></div><div class="lbl">测验均分</div><div class="sub">完成 ${quizDone} 次</div></div>
   </div>`;
 
   // v98.3: 雷达移至学习进度右侧；番茄钟独立整行
@@ -2780,7 +2828,7 @@ function renderDash(){
     </svg>
     <div class="ctr"><div class="big" id="overallNum">0%</div><div class="sm">综合完成度</div></div>
     </div>
-    <div style="flex:1;font-size:11px;color:var(--soft);line-height:1.6">已学单词 ${vocabDone} / 语法 ${grammarDoneN} / 跟读 ${shadowDoneN}<br>测验 ${quizDoneN} 次 · 番茄 ${pomodoroDoneN} 个</div>
+    <div style="flex:1;font-size:11px;color:var(--soft);line-height:1.6">已学单词 ${vocabDone} · 语法 ${grammarDoneN} · 跟读 ${shadowDoneN}<br>测验 ${quizDoneN} 次 · 番茄 ${pomodoroDoneN} 个</div>
   </div>`;
 
   // Per-category progress bars
@@ -2808,19 +2856,24 @@ function renderDash(){
     ]}
   ];
 
-  cats.forEach((cat,ci)=>{
-    h += `<div style="margin-bottom:${ci===0?'10px':'0'};padding-top:${ci>0?'10px':'0'};${ci>0?'border-top:1px dashed var(--line)':''}">
-      <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px"><span class="pg-emoji">${cat.ico}</span>${cat.name}</div>
-      <div class="cat-grid">`;
-    cat.rows.forEach(row=>{
-      const pct = row.tot > 0 ? Math.min(100, Math.round(row.done/row.tot*100)) : 0;
-      h += `<div class="pg-cat" style="margin-bottom:8px">
-        <div class="pg-row"><span class="pl"><span class="tm ${row.tag}">${row.name.replace('单词 ','')}</span></span><span class="pr">${row.done}/${row.tot} <span class="pc">${pct}%</span></span></div>
-        <div class="fcp"><div class="bar"><i data-target="${pct}" style="width:0%"></i></div></div>
-      </div>`;
-    });
-    h += `</div></div>`;
+  /* v98.4c: 学习进度再美化——彩色圆点+名称+数字右对齐+7px 渐变细条（替代突兀的色块标签） */
+  const wbDots={lA1:'#10b981',lA2:'#3b82f6',lB1:'#f59e0b',lB2:'#ef4444',tot:'#8b5cf6',gra:'#1565C0',shd:'#0ea5e9',qz:'#6A1B9A',pmd:'#E05A2B',tsk:'#2E7D32'};
+  const flat = [];
+  cats.forEach(cat=>cat.rows.forEach(row=>flat.push(row)));
+  h += `<div class="cat-grid wb98cgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:9px 20px">`;
+  flat.forEach(row=>{
+    const pct = row.tot > 0 ? Math.min(100, Math.round(row.done/row.tot*100)) : 0;
+    h += `<div class="pg-cat" style="margin:0">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px">
+        <span class="wbdot" style="background:${wbDots[row.tag]||'#C2410C'}"></span>
+        <span style="font-size:11.5px;font-weight:700;color:#44403C;flex:1">${row.name.replace('单词 ','')}</span>
+        <span style="font-size:10px;color:#a8a29e;font-weight:600;white-space:nowrap">${row.done}/${row.tot}</span>
+        <b style="font-size:11px;color:#C2410C;width:36px;text-align:right;white-space:nowrap">${pct}%</b>
+      </div>
+      <div class="fcp"><div class="bar" style="height:7px"><i data-target="${pct}" style="width:0%"></i></div></div>
+    </div>`;
   });
+  h += `</div>`;
 
   // Animations: start from 0 after DOM ready
   h += `<script>
@@ -2899,7 +2952,7 @@ function renderDash(){
   }
 
   /* FEAT-1: 考试结构卡片并入仪表盘 (第11张快捷卡片) */
-  h += `<div class="card" id="dashExamCard" style="margin-top:14px;border-left:4px solid var(--tr)">
+  h += `<div class="card" id="dashExamCard" style="margin-top:14px">
     <h3><span class="ic">📋</span>考试结构 · DELE & SIELE</h3>
     <div class="g g2" style="margin-top:8px">
       <div>
@@ -2983,7 +3036,9 @@ function renderAbilityRadar(){
     { label:'纠错', color:'#0ea5e9' }
   ];
   const vals = [s.vocab, s.gram, s.shadow, s.quiz, s.oral, s.corr];
-  const cx=100, cy=95, R=62;
+  /* v98.4c: 六维可爱悬浮小图标（用户要求找回）——白底圆徽悬浮在各维顶点 */
+  const icons = ['📙','🧩','🎧','🎯','🗣️','🛡️'];
+  const cx=100, cy=98, R=52;
   function pt(i, r){
     const ang = -Math.PI/2 + i*2*Math.PI/6;
     return (cx + r*Math.cos(ang)).toFixed(1) + ',' + (cy + r*Math.sin(ang)).toFixed(1);
@@ -3003,19 +3058,25 @@ function renderAbilityRadar(){
   for(let i=0;i<6;i++) dataPts.push(pt(i, R*Math.max(0.05, Math.min(1, (vals[i]==null?0:vals[i])/100))));
   let labels = '';
   for(let i=0;i<6;i++){
-    const p = pt(i, R+16).split(',');
-    labels += '<text x="'+p[0]+'" y="'+p[1]+'" font-size="10" fill="#8c7e76" text-anchor="middle" dominant-baseline="middle">'+dims[i].label+' '+(vals[i]==null?'—':vals[i])+'</text>';
+    const p = pt(i, R+39).split(',');
+    labels += '<text x="'+p[0]+'" y="'+p[1]+'" font-size="9.5" fill="#8c7e76" text-anchor="middle" dominant-baseline="middle">'+dims[i].label+' '+(vals[i]==null?'—':vals[i])+'</text>';
   }
-  const radarSvg = '<svg viewBox="0 0 200 200" style="width:150px;height:150px;flex-shrink:0">'+
+  let badges = '';
+  for(let i=0;i<6;i++){
+    const p = pt(i, R+14).split(',');
+    badges += '<g><circle cx="'+p[0]+'" cy="'+p[1]+'" r="10.5" fill="#fff" stroke="#F1E7D8" stroke-width="1.5" style="filter:drop-shadow(0 2px 3px rgba(194,65,12,.20))"/>'
+      +'<text x="'+p[0]+'" y="'+(Number(p[1])+0.5)+'" font-size="10.5" text-anchor="middle" dominant-baseline="central">'+icons[i]+'</text></g>';
+  }
+  const radarSvg = '<svg viewBox="0 0 200 200" style="width:170px;height:170px;flex-shrink:0">'+
     grid+axes+
     '<polygon points="'+dataPts.join(' ')+'" fill="rgba(192,57,43,.18)" stroke="#C0392B" stroke-width="2"/>'+
-    labels+'</svg>';
+    labels+badges+'</svg>';
   const rows = dims.map(function(d,i){
-    return '<div style="display:flex;align-items:center;gap:6px;margin:3px 0;font-size:11px"><span style="width:30px;color:var(--soft)">'+d.label+'</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:'+(vals[i]==null?0:vals[i])+'%;background:'+d.color+';border-radius:3px"></i></div><b style="width:28px;text-align:right">'+(vals[i]==null?'—':vals[i])+'</b></div>';
+    return '<div style="display:flex;align-items:center;gap:6px;margin:4px 0;font-size:11px"><span style="width:47px;flex:none;white-space:nowrap;color:var(--soft)">'+icons[i]+' '+d.label+'</span><div style="flex:1;height:6px;background:#f1e8da;border-radius:3px;overflow:hidden"><i style="display:block;height:100%;width:'+(vals[i]==null?0:vals[i])+'%;background:'+d.color+';border-radius:3px"></i></div><b style="width:28px;text-align:right">'+(vals[i]==null?'—':vals[i])+'</b></div>';
   }).join('');
-  return '<div class="card radar-cute" style="margin-top:14px"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">六维 · 基于真实学习数据 · 练习后自动更新</span></h3>'+
-    '<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div>'+
-    '<div style="font-size:10.5px;color:var(--soft);margin-top:8px;line-height:1.7">📌 各维算法：<b>词汇</b>=已学词数÷总词库｜<b>语法</b>=已完成语法点÷总点数｜<b>跟读</b>=跟读平均分｜<b>测验</b>=测验平均分｜<b>口语</b>=各题最高分平均｜<b>纠错力</b>=错题集已掌握占比。练习后实时更新并随云端同步。</div></div>';
+  return '<div class="card radar-cute" style="margin-top:14px;display:flex;flex-direction:column"><h3>📡 能力雷达 <span class="sub" style="font-size:10.5px;color:var(--soft)">六维 · 基于真实学习数据</span></h3>'+
+    '<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;min-height:0"><div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px">'+rows+'</div>'+radarSvg+'</div>'+
+    '<div style="font-size:10px;color:#b0a396;margin-top:6px;line-height:1.5">📌 算法：词汇=已学÷总库 · 语法=完成÷总点 · 跟读/测验/口语=均分 · 纠错=错题已掌握占比</div></div>';
 }
 
 // ===== FEAT-2: 日期联动待办 =====
@@ -22420,8 +22481,8 @@ function serializeCloud(db){
   var seedW={},seedQ={},words=[],questions=[];
   db.words.forEach(function(w){if(w.src==='seed'){if(w.mastery||w.updatedAt)seedW[w.id]=[w.mastery||0,w.updatedAt||0];}else words.push(w);});
   db.questions.forEach(function(q){if(q.src==='seed'){if(q.done||q.updatedAt)seedQ[q.id]=[q.done?1:0,q.correct?1:0,q.updatedAt||0];}else questions.push(q);});
-  /* v98.0: 快捷配置随云端载荷上下行 */
-    return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),dashQuick:(Array.isArray(db.dashQuick)?db.dashQuick.slice(0,6):null),
+  /* v98.0: 快捷配置随云端载荷上下行（v98.4: 附编辑时刻 ts 供跨端仲裁） */
+    return {v:1,ts:Date.now(),device:'wb/'+navigator.userAgent.slice(0,50),dashQuick:(Array.isArray(db.dashQuick)?db.dashQuick.slice(0,6):null),dashQuickTs:(typeof db.dashQuickTs==='number'?db.dashQuickTs:0),
     /* v94.15: 全局重置水线随云端记录顶层上行——晚到设备 pull 时强制对齐，杜绝旧进度复活 */
     resetEpoch:(function(){try{return _vocabResetFloor();}catch(e){return Number(ST.vocabResetAt||0);}})(),
     settings:db.settings,seedW:seedW,seedQ:seedQ,words:words,questions:questions,reviews:db.reviews,plans:db.plans,trash:db.trash,wb:db.wb||null};
@@ -22445,8 +22506,15 @@ function mergeData(db,remote){
       try{if(db)db.wb={ts:Date.now(),data:wbSnap()};}catch(e){}
     }
   }catch(_reErr){}
-  /* v98.0: 快捷配置漫游（远端有数组则采用；缺省不覆盖本地） */
-  try{ if(Array.isArray(remote.dashQuick)) db.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
+  /* v98.0→v98.4: 快捷配置漫游——dashQuickTs 时间戳仲裁（晚写者胜；远端无 ts 仅本地也无 ts 才采纳，防旧值覆盖本地新编辑） */
+  try{
+    var _rqt=Number(remote.dashQuickTs||0);
+    var _lqt=(typeof window!=='undefined'&&window._wbQuickTsFloor)?window._wbQuickTsFloor():Number(db.dashQuickTs||0);
+    if(Array.isArray(remote.dashQuick) && (_rqt>_lqt || (!_rqt&&!_lqt))){
+      db.dashQuick=remote.dashQuick.slice(0,6);
+      if(_rqt>_lqt) db.dashQuickTs=_rqt;
+    }
+  }catch(e){}
   var trash=Object.assign({},db.trash);
   Object.entries(remote.trash||{}).forEach(function(kv){if(!trash[kv[0]]||kv[1]>trash[kv[0]])trash[kv[0]]=kv[1];});
   db.trash=trash;
@@ -22549,8 +22617,15 @@ window._qrMergePairs = function(lp, lt, rp, rt){
 /* ---------- ADB → ST（吸收后台/云端的更新） ---------- */
 function hydrate(){
   if(!AU||!ADB)return;
-  /* v98.0: 快捷配置漫游——本机 ADB 已有则采用（远端 pull 落到 ADB 后同样经此生效） */
-  try{ if(Array.isArray(ADB.dashQuick)) ST.dashQuick=ADB.dashQuick.slice(0,6); }catch(e){}
+  /* v98.0→v98.4: 快捷配置漫游——本机 ADB 已有则采用；dashQuickTs 仲裁：本地编辑更新（水线 ts 更晚）时不回退 */
+  try{
+    var _aqt=Number(ADB.dashQuickTs||0);
+    var _stt=(typeof window!=='undefined'&&window._wbQuickTsFloor)?window._wbQuickTsFloor():Number(ST.dashQuickTs||0);
+    if(Array.isArray(ADB.dashQuick) && (_aqt>_stt || (!_aqt&&!_stt))){
+      ST.dashQuick=ADB.dashQuick.slice(0,6);
+      if(_aqt>_stt) ST.dashQuickTs=_aqt;
+    }
+  }catch(e){}
   var changed=false;
   var _reH=(ADB.wb&&ADB.wb.data)?Number(ADB.wb.data.vocabResetAt||0):0;
   if(_reH>_vocabResetFloor()){
@@ -22799,6 +22874,8 @@ function doPush(){
   /* v98.0: 快捷配置云同步（增量守卫：数组不变不 dirty，绝不影响既有字段） */
   var _dq=Array.isArray(ST.dashQuick)?ST.dashQuick.slice(0,6):null;
   if(_dq&&JSON.stringify(_dq)!==JSON.stringify(MIR.dq||null)){ADB.dashQuick=_dq;MIR.dq=JSON.stringify(_dq);dirty=true;}
+  /* v98.4: 编辑时刻 ts 镜像到 ADB（serializeCloud 上行；不影响 dirty 判定；v98.4b 用水线 max 值） */
+  try{ ADB.dashQuickTs=(typeof window._wbQuickTsFloor==='function')?window._wbQuickTsFloor():(typeof ST.dashQuickTs==='number'?ST.dashQuickTs:0); }catch(e){}
   // Sync quiz question completion to admin DB.questions
   var qlog = ST.quizAnsweredLog || [];
   if(qlog.length > (MIR.qlogLen||0)){
@@ -22940,9 +23017,16 @@ function mergeWbSnapshot(remote, wbTs){
     /* v95.41: flipRated 存量回填——vocabMastery 已评而 flipRated 缺的词补 0（时间未知；floor=0 不排除，将来重置 floor>0 自动排除=重置语义正确），幂等 */
     try{ if(ST.vocabMastery && typeof ST.vocabMastery==='object'){ ST.flipRated = ST.flipRated || {}; Object.keys(ST.vocabMastery).forEach(function(es){ if(ST.vocabMastery[es] && !(es in ST.flipRated)) ST.flipRated[es] = 0; }); } }catch(e){}
   }
-  /* v98.0: 快捷配置跨设备漫游（mergeData 已写 ADB.dashQuick；此处同步 ST 供本次渲染） */
-  try{ if(Array.isArray(remote.dashQuick)) ST.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
-  try{ if(Array.isArray(remote.dashQuick) && typeof ADB!=='undefined' && ADB) ADB.dashQuick=remote.dashQuick.slice(0,6); }catch(e){}
+  /* v98.0→v98.4: 快捷配置跨设备漫游——dashQuickTs 仲裁（远端更晚才采纳，防本地编辑被云同步覆盖回去；v98.4b 用水线 max） */
+  try{
+    var _rqt2=Number(remote.dashQuickTs||0);
+    var _lqt2=(typeof window!=='undefined'&&window._wbQuickTsFloor)?window._wbQuickTsFloor():Number(ST.dashQuickTs||0);
+    if(Array.isArray(remote.dashQuick) && (_rqt2>_lqt2 || (!_rqt2&&!_lqt2))){
+      ST.dashQuick=remote.dashQuick.slice(0,6);
+      if(typeof ADB!=='undefined'&&ADB) ADB.dashQuick=remote.dashQuick.slice(0,6);
+      if(_rqt2>_lqt2) ST.dashQuickTs=_rqt2;
+    }
+  }catch(e){}
   if(typeof remote.flashReviewSession==='number')ST.flashReviewSession=Math.max(ST.flashReviewSession||0,remote.flashReviewSession);
   if(remote.flashPronunciation&&typeof remote.flashPronunciation==='object'){
     ST.flashPronunciation=ST.flashPronunciation||{};
@@ -23746,7 +23830,7 @@ function todoCardHtml(){
         '</li>';
     }).join('');
     return '<div class="g g2" style="margin-bottom:18px">'+
-      '<div class="card" style="border-left:4px solid var(--tr)">'+
+      '<div class="card">'+
         '<h3><span class="ic">📋</span>今日待办<span style="margin-left:auto;font-size:11px;color:var(--soft);font-weight:400">'+done+'/'+tasks.length+' · '+pct+'% · 点文字可编辑</span></h3>'+
         '<div class="fcp" style="margin-bottom:8px"><div class="bar"><i style="width:'+pct+'%"></i></div></div>'+
         (tasks.length?('<ul style="list-style:none;margin:0;padding:0;max-height:220px;overflow:auto">'+lis+'</ul>'):'<div style="font-size:12px;color:var(--soft)">暂无任务，去「学习计划」设置备考起始日即可自动生成每日任务</div>')+
@@ -23755,7 +23839,7 @@ function todoCardHtml(){
       '<div class="card">'+
         '<h3><span class="ic">⚡</span>快捷操作<button class="btn xs ol" id="wbQuickEditBtn" style="margin-left:auto;padding:3px 13px;font-size:11px;border-radius:99px;font-weight:800" onclick="window._wbQuickTogglePicker()">✏️ 编辑</button></h3>'+
         '<div class="quick-grid">'+quick+'</div>'+
-        '<div class="note" style="margin-top:12px;font-size:11.5px">'+(AU?('👤 已登录 <b>'+escB(AU)+'</b>，背词/刷题进度自动汇入后台'+(ADB&&ADB.syncCfg?'并同步到云端 ☁️':'，可在「后台管理 → 云同步」开启跨设备同步')):'⚠️ 尚未登录：进度仅存本机。<a href="javascript:void(0)" onclick="go(\'admin\')" style="color:var(--tr);font-weight:700">去登录 →</a>')+'</div>'+
+        '<div class="wb-login-tip" style="margin-top:12px;font-size:11.5px">'+(AU?('👤 已登录 <b>'+escB(AU)+'</b>，背词/刷题进度自动汇入后台'+(ADB&&ADB.syncCfg?'并同步到云端 ☁️':'，可在「后台管理 → 云同步」开启跨设备同步')):'⚠️ 尚未登录：进度仅存本机。<a href="javascript:void(0)" onclick="go(\'admin\')" style="color:var(--tr);font-weight:700">去登录 →</a>')+'</div>'+
       '</div></div>';
   }catch(e){
     console.warn('todoCardHtml error:',e);
@@ -24067,6 +24151,12 @@ window._wbQuickRenderButtons=function(){
   }).join('');
 };
 window._wbQuickToast=function(msg,type){ try{ if(typeof toast==='function') toast(msg,type||'',3000); }catch(e){} };
+/* v98.4b: dashQuickTs 水线 = max(ST 值, 独立键)——任何仲裁点都用它，快照覆盖不丢 */
+window._wbQuickTsFloor=function(){
+  var t=(typeof ST!=='undefined'&&ST)?Number(ST.dashQuickTs||0):0;
+  try{ var f=Number(localStorage.getItem('swa_dashquick_ts_v1')||0); if(f>t)t=f; }catch(e){}
+  return t;
+};
 window._wbQuickTogglePicker=function(){
   var box=document.getElementById('wbQuickPicker');
   if(!box){
@@ -24095,7 +24185,12 @@ window._wbQuickSave=function(){
   var box=document.getElementById('wbQuickPicker'); if(!box) return;
   var sel=[]; box.querySelectorAll('input[data-wqk]:checked').forEach(function(i){ sel.push(i.getAttribute('data-wqk')); });
   if(sel.length>6){ window._wbQuickToast('最多选 6 个','err'); return; }
-  ST.dashQuick=sel; save(); renderMain();
+  ST.dashQuick=sel;
+  /* v98.4: 编辑时刻时间戳——云同步仲裁依据（晚写者胜，防本地编辑被远端旧值覆盖回去）。
+     v98.4b: 另存独立 localStorage 水线键（学 vocabResetFloor）——快照键被远端旧载荷整体覆盖时 ts 不丢 */
+  ST.dashQuickTs=Date.now();
+  try{ localStorage.setItem('swa_dashquick_ts_v1',String(ST.dashQuickTs)); }catch(e){}
+  save(); renderMain();
   box.style.display='none';
   window._wbQuickToast('快捷配置已保存'+(ADB&&ADB.syncCfg?'，将云同步':''),'ok');
 };
