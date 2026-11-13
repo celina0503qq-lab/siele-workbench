@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 0) 2026-11-13 第 28 期 — 主题：去服装店买衣服 · 跨年夜十二颗葡萄 · 西班牙葡萄酒出口 · 出生率与高龄生育
 // 0) 2026-11-06 第 27 期 — 主题：去理发店 · 西班牙 tapas 文化 · 西班牙橄榄油产业 · 最低工资上涨之争
 // 0) 2026-10-30 第 26 期 — 主题：搬家 · 西班牙问候礼仪 · 电商增长 · 能源贫困之争
 // 0) 2026-10-23 第 25 期 — 主题：去邮局 · 西班牙午睡文化 · AI与就业 · 非法旅游公寓之争
@@ -27,6 +28,19 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-11-13": {
+    date: "2026-11-13",
+    weekday: "五",
+    issue: 28,
+    theme: "去服装店买衣服 · 跨年夜十二颗葡萄 · 西班牙葡萄酒出口 · 出生率与高龄生育",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la tienda de ropa" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Las doce uvas de Nochevieja" },
+      { level: "B1", source: "Moneda Única", sourceUrl: "https://www.monedaunica.net/2026/05/las-exportaciones-de-vino-moderan-su-ritmo-en-el-inicio-de-2026/", topic: "Las exportaciones de vino español" },
+      { level: "B2", source: "Diario en Positivo", sourceUrl: "https://www.diarioenpositivo.com/sociedad/rocio-madre-primeriza-44-anos-mis-circunstancias-habian-impedido/20260904103940090451.amp.html", topic: "La natalidad y la maternidad tardía en España" }
+    ]
+  },
+
   "2026-11-06": {
     date: "2026-11-06",
     weekday: "五",
