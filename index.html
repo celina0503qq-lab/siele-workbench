@@ -876,7 +876,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.7-202611212057';
+window.swVer = 'v98.8-202611220001';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -1751,7 +1751,16 @@ function save(){
     /* 2026-09-26 词卡同步增强：通知云同步模块（wb-saved 事件）。此前翻词只写本地，
        推送依赖「切后台/beforeunload/150s轮询」⇒ 另一设备拉取可能抢在推送前（race），或最长等150s */
     try{document.dispatchEvent(new Event('wb-saved'));}catch(e2){}
-  }catch(e){}
+  }catch(e){
+    /* R-01修复：保存失败不再静默吞掉——留标记并节流提示（60秒最多一次），避免用户以为已存其实丢失 */
+    try{
+      window._wbSaveFailed=true; window._wbSaveFailTs=Date.now();
+      if(!save._warnTs || Date.now()-save._warnTs>60000){
+        save._warnTs=Date.now();
+        if(typeof toast==='function') toast('⚠️ 学习记录本地保存失败（浏览器存储空间可能已满），请尽快在「系统」里导出备份','err');
+      }
+    }catch(e2){}
+  }
 }
 // 紧急备份：在关键操作后强制写备份
 function saveBackup(){ try{ localStorage.setItem(STORE_BACKUP_KEY, JSON.stringify(ST)); }catch(e){} }
@@ -5572,7 +5581,7 @@ window._wbFlagsLoad = function(){
 };
 window._wbFlagsLoad();
 // v95.4: 启动一次性清理历史备份键（旧游标/旧快照复活源；正式数据在主键 dele_siele_wb_v3 与云端）
-try{ Object.keys(localStorage).forEach(function(k){ if(/^dele_siele_wb_v3_(bak$|backup_)/.test(k)) { try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){}
+try{ Object.keys(localStorage).forEach(function(k){ if(/^dele_siele_wb_v3_backup_/.test(k)) { try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){} /* R-39修复：原正则 bak$ 把现行备份键 dele_siele_wb_v3_bak 一并误删，现只清旧时间戳备份 backup_ 系列 */
 window._wbIsAdmin = function(){
   try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
 };
@@ -24693,7 +24702,7 @@ function closeSyncSettings(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(_syncOverlay||document.getElementById('syncOverlay')))closeSyncSettings();});
 
 function exportData_(){
-  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,quizResultsTs:ST.quizResultsTs||[],tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,refineShadowScores:ST.refineShadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel},null,2);
+  var data = JSON.stringify({v:3,ts:Date.now(),flashIdx:ST.flashIdx,flashLevel:ST.flashLevel,flashCurrentWord:ST.flashCurrentWord,flashIdxByLevel:ST.flashIdxByLevel,flashProgressByLevel:ST.flashProgressByLevel,flashPronunciation:ST.flashPronunciation,globalAccent:ST.globalAccent,vocabDictation:ST.vocabDictation,vocabReviewCount:ST.vocabReviewCount,flashLastPositionTs:ST.flashLastPositionTs,vocabMastery:ST.vocabMastery,flashMastery:ST.flashMastery,flashReviewSession:ST.flashReviewSession,grammarDone:ST.grammarDone,quizResults:ST.quizResults,quizResultsTs:ST.quizResultsTs||[],tasks:ST.tasks,errors:ST.errors,readingProgress:ST.readingProgress,shadowScores:ST.shadowScores,refineShadowScores:ST.refineShadowScores,sieleOralScores:ST.sieleOralScores,sieleOralProgress:ST.sieleOralProgress,dictationErrorBank:ST.dictationErrorBank,dailyTasks:ST.dailyTasks,dailyTodos:ST.dailyTodos,checkIns:ST.checkIns,streak:ST.streak,totalStudy:ST.totalStudy,examDate:ST.examDate,examType:ST.examType,targetLevel:ST.targetLevel,writingScores:ST.writingScores,speakScores:ST.speakScores,vocabErrorBank:ST.vocabErrorBank,conjErrorBank:ST.conjErrorBank,quizHistory:ST.quizHistory||{},sieleMockHistory:ST.sieleMockHistory||[]},null,2); /* R-02修复：补齐原白名单缺失的6类学习记录 */
   var blob = new Blob([data],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -24733,6 +24742,46 @@ function importDataPrompt_(){
             if(e&&e.es&&!iexist[e.es+'_'+e.userAnswer]){ST.dictationErrorBank.push(e);iexist[e.es+'_'+e.userAnswer]=true;}
           });
           if(ST.dictationErrorBank.length>200)ST.dictationErrorBank.splice(0,ST.dictationErrorBank.length-200);
+        }
+        /* R-02修复：导入合并导出新增的4类（原导入侧缺失） */
+        if(data.vocabErrorBank && typeof data.vocabErrorBank==='object'){
+          ST.vocabErrorBank=ST.vocabErrorBank||{}; ST.vocabErrorBankDel=ST.vocabErrorBankDel||{};
+          Object.keys(data.vocabErrorBank).forEach(function(es){
+            var ent=data.vocabErrorBank[es]; if(!ent) return;
+            var del=ST.vocabErrorBankDel[es]||[]; var maxDel=del.length?Math.max.apply(null,del):0;
+            if(maxDel && (ent.ts||0)<=maxDel) return; /* 已删除（墓碑更晚）不复活 */
+            var cur=ST.vocabErrorBank[es];
+            if(!cur || (ent.ts||0)>=(cur.ts||0)) ST.vocabErrorBank[es]=ent;
+          });
+        }
+        if(Array.isArray(data.conjErrorBank) && data.conjErrorBank.length){
+          ST.conjErrorBank=ST.conjErrorBank||[]; ST.conjErrorBankDel=ST.conjErrorBankDel||{};
+          var cexist={};
+          ST.conjErrorBank.forEach(function(e){ if(e) cexist[e.verb+'|'+e.tk+'|'+e.dual+'|'+e.person]=true; });
+          data.conjErrorBank.forEach(function(e){
+            if(!e||!e.verb) return;
+            var key=e.verb+'|'+e.tk+'|'+e.dual+'|'+e.person;
+            var del=ST.conjErrorBankDel[key]||[]; var maxDel=del.length?Math.max.apply(null,del):0;
+            if(maxDel && (e.ts||0)<=maxDel) return;
+            if(!cexist[key]){ ST.conjErrorBank.push(e); cexist[key]=true; }
+          });
+        }
+        if(data.quizHistory && typeof data.quizHistory==='object'){
+          ST.quizHistory=ST.quizHistory||{};
+          Object.keys(data.quizHistory).forEach(function(k){
+            var ent=data.quizHistory[k]; if(!ent) return;
+            var cur=ST.quizHistory[k];
+            if(!cur || (ent.ts||0)>=(cur.ts||0)) ST.quizHistory[k]=ent;
+          });
+          ST.quizDoneTotal=Object.keys(ST.quizHistory).length;
+        }
+        if(Array.isArray(data.sieleMockHistory) && data.sieleMockHistory.length){
+          ST.sieleMockHistory=ST.sieleMockHistory||[];
+          var mexist={};
+          ST.sieleMockHistory.forEach(function(m){ if(m) mexist[m.created]=true; });
+          data.sieleMockHistory.forEach(function(m){ if(m && !mexist[m.created]){ ST.sieleMockHistory.push(m); mexist[m.created]=true; } });
+          ST.sieleMockHistory.sort(function(a,b){return (a.created||0)-(b.created||0);});
+          if(ST.sieleMockHistory.length>20) ST.sieleMockHistory=ST.sieleMockHistory.slice(-20);
         }
         // 合并每级背诵索引（per-level 断点续背）
         if(data.flashIdxByLevel && typeof data.flashIdxByLevel==='object'){
