@@ -134,18 +134,19 @@
     if (!bar) {
       bar = document.createElement('div');
       bar.id = 'guestBar';
-      bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99990;background:linear-gradient(90deg,#3a2418,#5a3620);color:#f5e9d6;font-size:12px;padding:6px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:0 2px 10px rgba(0,0,0,.25)';
+      bar.style.cssText = 'position:sticky;top:0;z-index:99990;background:linear-gradient(90deg,#3a2418,#5a3620);color:#f5e9d6;font-size:12px;padding:6px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:0 2px 10px rgba(0,0,0,.25)';
       bar.innerHTML =
-        '<b>👀 游客模式</b><span id="guestBarQuota"></span><span style="flex:1"></span>' +
+        '<b>👀 游客模式</b><span id="guestBarQuota" style="color:#ffe1a8"></span><span style="flex:1"></span>' +
         '<a href="javascript:void(0)" id="guestBarReg" style="color:#ffd98a;font-weight:700;text-decoration:none">免费注册 →</a>' +
         '<a href="javascript:void(0)" id="guestBarExit" style="color:#d8c4aa;text-decoration:none">退出游客</a>';
-      document.body.appendChild(bar);
+      document.body.insertBefore(bar, document.body.firstChild);
       document.getElementById('guestBarReg').addEventListener('click', guestGoLogin);
       document.getElementById('guestBarExit').addEventListener('click', function () { exitGuest(); });
     }
     var q = document.getElementById('guestBarQuota');
     if (q) {
-      q.textContent = '今日剩余：单词卡 ' + remaining('cards') + ' · 题库 ' + remaining('quiz') + ' · 跟读 ' + remaining('shadow') + ' · 外刊 ' + remaining('refine') + '（进度只存本机）';
+      var n = function (f) { return '<b style="color:#fff;font-weight:800">' + remaining(f) + '</b>'; };
+      q.innerHTML = '今日剩余：单词卡 ' + n('cards') + ' · 题库 ' + n('quiz') + ' · 跟读 ' + n('shadow') + ' · 外刊 ' + n('refine') + '（进度只存本机）';
     }
   }
 
@@ -168,6 +169,7 @@
     if (hasRealSession()) return false;
     var r = ensureRec();
     r.active = true; saveRec(r);
+    window.__guestActive = true; // 渲染层游客开关（renderNav/renderMain 的无会话拦截据此放行）
     applyGuestFlags();
     try { if (typeof window._wbLandingHide === 'function') window._wbLandingHide(); } catch (e) {}
     var ld = document.getElementById('wbLanding'); if (ld) ld.style.display = 'none';
@@ -182,12 +184,14 @@
   function exitGuest() {
     var r = ensureRec();
     r.active = false; saveRec(r);
+    window.__guestActive = false;
     restoreFlags();
     renderBanner();
     try { location.reload(); } catch (e) {}
   }
   function guestGoLogin() {
     window._guestLoginIntent = Date.now();
+    window.__guestActive = false;
     var r = loadRec(); if (r) { r.active = false; saveRec(r); }
     restoreFlags();
     renderBanner();
