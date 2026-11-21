@@ -876,7 +876,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.4-202611091255';
+window.swVer = 'v98.5-202611211127';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2344,7 +2344,7 @@ function renderNav(){
   if(!nav) return;
   /* v97.18 自研设计系统：顶部导航 + 下拉子菜单（NAV 数据与权限/高亮逻辑零改动；旧左侧栏渲染见 backups/ui_shell_backup_20261104/） */
   var _cs=null; try{ _cs=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
-  if(!(_cs&&_cs.username)){ nav.innerHTML = ''; var _tu0=document.getElementById('topUser'); if(_tu0) _tu0.innerHTML=''; return; }
+  if(!(_cs&&_cs.username) && !window.__guestActive){ nav.innerHTML = ''; var _tu0=document.getElementById('topUser'); if(_tu0) _tu0.innerHTML=''; return; }
   const navOnId = (typeof currentPage === 'string' && /^dele/.test(currentPage)) ? 'dele' : currentPage;
   let isAdmin = false;
   try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && _ses.role === 'admin'); } catch(e) {}
@@ -2356,7 +2356,7 @@ function renderNav(){
       _tu.dataset.done = '1';
       var _sd = '';
       try{ var _sc = JSON.parse(localStorage.getItem('swa_sync_cfg_v1')||'null'); if(_sc&&_sc.token) _sd = '<span class="sync-dot" style="background:#15803D" title="云同步已开启"></span>'; else _sd = '<span class="sync-dot" style="background:#CBD5E1" title="云同步未开启"></span>'; }catch(e){ _sd=''; }
-      _tu.innerHTML = _sd + '<span>'+String(_cs.username).slice(0,12)+'</span>';
+      _tu.innerHTML = _sd + '<span>'+String((_cs&&_cs.username)||'游客').slice(0,12)+'</span>';
     }
   }catch(e){}
   let h = '<button class="ni" onclick="_wbLandingShow()" style="border:none;background:none;padding:8px 13px;font-size:13.5px;font-weight:800;color:#334155;cursor:pointer;font-family:inherit" onmouseover="this.style.color=\'#C2410C\'" onmouseout="this.style.color=\'#334155\'">🏠 Inicio</button>';
@@ -2494,7 +2494,7 @@ function renderMain(){
   // 防止初始 DOM / 动态渲染被爬虫或访客读取（登录罩仅视觉遮挡，DOM 层面也要隔离）
   // 注：不能调 activeUser()（它在更后位置的其他 <script> 块 IIFE 内，跨块不可见），此处内联读取 localStorage
   var _cs=null; try{ _cs=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
-  if(!(_cs&&_cs.username)){ main.innerHTML = '<div id="audioBanner" class="banner"></div>'; return; }
+  if(!(_cs&&_cs.username) && !window.__guestActive){ main.innerHTML = '<div id="audioBanner" class="banner"></div>'; return; }
   let h = '<div id="audioBanner" class="banner"></div>';
   switch(currentPage){
     case 'dash': h += renderDash(); break;
@@ -24837,5 +24837,5 @@ window.importDataPrompt_ = importDataPrompt_;
 })();
 
 </script>
-<div id="wbSyncChip" title="打开后台管理系统查看同步详情" aria-live="polite" style="position: fixed; bottom: 14px; right: 14px; z-index: 99999; font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 22px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.18) 0px 4px 16px; user-select: none; display: flex; align-items: center; gap: 6px; font-family: inherit; transition: 0.25s; max-width: 70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgb(239, 246, 255); color: rgb(29, 78, 216);">🔄 正在读取同步状态…</div></body>
+<div id="wbSyncChip" title="打开后台管理系统查看同步详情" aria-live="polite" style="position: fixed; bottom: 14px; right: 14px; z-index: 99999; font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 22px; cursor: pointer; box-shadow: rgba(0, 0, 0, 0.18) 0px 4px 16px; user-select: none; display: flex; align-items: center; gap: 6px; font-family: inherit; transition: 0.25s; max-width: 70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: rgb(239, 246, 255); color: rgb(29, 78, 216);">🔄 正在读取同步状态…</div><script src="guest-mode.js"></script></body>
 </html>
