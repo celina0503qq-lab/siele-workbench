@@ -145,7 +145,7 @@
     }
     var q = document.getElementById('guestBarQuota');
     if (q) {
-      var n = function (f) { return '<b style="color:#fff;font-weight:800">' + remaining(f) + '</b>'; };
+      var n = function (f) { return '<b style="background:rgba(255,255,255,.93);color:#3a2418;font-weight:800;border-radius:6px;padding:0 6px;margin:0 1px">' + remaining(f) + '</b>'; };
       q.innerHTML = '今日剩余：单词卡 ' + n('cards') + ' · 题库 ' + n('quiz') + ' · 跟读 ' + n('shadow') + ' · 外刊 ' + n('refine') + '（进度只存本机）';
     }
   }
@@ -234,6 +234,18 @@
       }
     } catch (e) {}
   }, true);
+
+  // 游客版「未开通」页（原版文案是给学员的「联系管理员开通」，游客不适用）
+  var origNoAccess = window._renderNoAccess;
+  if (typeof origNoAccess === 'function') {
+    window._renderNoAccess = function () {
+      if (isActive()) {
+        return '<div class="card" style="text-align:center;padding:40px 20px"><div style="font-size:40px">🔒</div><h3 style="margin:10px 0">游客试用未包含此功能</h3><p style="color:var(--soft);font-size:13px;line-height:1.8">写作、口语、SIELE/DELE 专项等完整功能只对注册用户开放。<br>注册免费，注册后可联系管理员为你开通。</p><button class="btn" style="margin-top:10px" onclick="window._guestGoLogin&&window._guestGoLogin()">免费注册 / 登录</button></div>';
+      }
+      return origNoAccess.apply(this, arguments);
+    };
+  }
+  window._guestGoLogin = guestGoLogin;
 
   /* ---------- 计数钩子（包原函数，非游客直通） ---------- */
   function wrapCount(fnName, feature) {
