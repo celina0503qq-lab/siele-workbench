@@ -1,3 +1,7 @@
+## [v98.6] – 2026-11-21
+
+- 落地页 hero 右栏新增宣传视频（AI 生成、Aria 西语旁白、双语字幕），演示卡顺位其下；视频文件 hero-ai.mp4 随版入仓。
+
 # 更新日志 / CHANGELOG
 > 格式参考 [Keep a Changelog](https://keepachangelog.com/)；日期为 2026 年。所有版本号以页脚与 `swVer`（Service Worker 缓存版本）为准。
 
