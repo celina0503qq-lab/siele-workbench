@@ -259,6 +259,52 @@
   }
   window._guestGoLogin = guestGoLogin;
 
+  /* 导航守卫补丁：go() 内置守卫对未授权页只弹「请管理员开通」提示并弹回仪表盘，
+   * 游客改为展示游客版拦截页（与 renderMain 内的 _renderNoAccess 游客文案一致）。
+   * 页→开关映射与 go() 原守卫保持一致。 */
+  function guestPageNeed(page) {
+    var pg = String(page);
+    if (pg === 'refine') return 'refinePack';
+    if (pg === 'siele') return 'sieleSpecial';
+    if (pg === 'writing') return 'writingEnabled';
+    if (pg === 'speaking') return 'oralEnabled';
+    if (/^dele/.test(pg)) return 'deleSpecial';
+    return null;
+  }
+  var origGo = window.go;
+  if (typeof origGo === 'function') {
+    window.go = function (page) {
+      if (isActive()) {
+        var need = guestPageNeed(page);
+        if (need && !policyFor(ensureRec().guestId).flags[need]) {
+          var r = origGo.call(this, 'dash');
+          var m = document.getElementById('main');
+          if (m) m.innerHTML = window._renderNoAccess();
+          try { history.replaceState(null, '', '#' + String(page)); } catch (e) {}
+          try { window.scrollTo(0, 0); } catch (e) {}
+          return r;
+        }
+      }
+      return origGo.apply(this, arguments);
+    };
+  }
+  /* 游客态导航里把「需管理员开启」字样换成「游客未包含」（原字样是给学员的） */
+  var origRenderNav = window.renderNav;
+  if (typeof origRenderNav === 'function') {
+    window.renderNav = function () {
+      var r = origRenderNav.apply(this, arguments);
+      if (isActive()) {
+        try {
+          var nav = document.getElementById('nav');
+          if (nav && nav.innerHTML.indexOf('需管理员开启') >= 0) {
+            nav.innerHTML = nav.innerHTML.split('需管理员开启').join('游客未包含');
+          }
+        } catch (e) {}
+      }
+      return r;
+    };
+  }
+
   /* ---------- 计数钩子（包原函数，非游客直通） ---------- */
   function wrapCount(fnName, feature) {
     var orig = window[fnName];
