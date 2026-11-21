@@ -26,11 +26,12 @@
         deleSpecial: false,
         sieleSpecial: false,
         refinePack: true,
+        sieleSpecial: true, // 2026-11-21 站长加定：SIELE 专项开试用（每 Tarea 每天 1 题，组卷禁用）
         writingEnabled: false,
         oralEnabled: false,
         asrCloudEnabled: false
       },
-      quotas: { cards: 50, quiz: 10, shadow: 10, refine: 1 } // 每日上限
+      quotas: { cards: 50, quiz: 10, shadow: 10, refine: 1, sielePerTarea: 1 } // 每日上限；sielePerTarea = SIELE 每种 Tarea 每天可录音评分的题数
     },
     overrides: {} // { guestId: { flags:{...}, quotas:{...} } } —— 二期由后台下发
   };
@@ -60,10 +61,11 @@
     var r = loadRec();
     var now = Date.now();
     if (!r) {
-      r = { guestId: newGuestId(), firstSeen: now, lastSeen: now, active: false, day: todayStr(), counters: {}, countedDates: {} };
+      r = { guestId: newGuestId(), firstSeen: now, lastSeen: now, active: false, day: todayStr(), counters: {}, countedDates: {}, keyed: {} };
     }
     r.lastSeen = now;
-    if (r.day !== todayStr()) { r.day = todayStr(); r.counters = {}; r.countedDates = {}; }
+    if (r.day !== todayStr()) { r.day = todayStr(); r.counters = {}; r.countedDates = {}; r.keyed = {}; }
+    if (!r.keyed) r.keyed = {};
     saveRec(r);
     return r;
   }
@@ -103,12 +105,22 @@
     renderBanner();
     return true;
   }
+  /* 分键计数（如 SIELE 每种 Tarea 各自计数）：key 任意字符串，cap 为每日上限 */
+  function consumeKey(key, cap, wallLabel) {
+    if (!isActive()) return true;
+    var r = ensureRec();
+    if ((r.keyed[key] || 0) >= cap) { showWall(null, wallLabel); return false; }
+    r.keyed[key] = (r.keyed[key] || 0) + 1;
+    saveRec(r);
+    renderBanner();
+    return true;
+  }
   /* 内容取数统一口：一期本地直通（内容随页面发布）；二期在此换云端试用包 */
   function guestContent(feature) { return true; }
 
   /* ---------- 额度墙 ---------- */
-  function showWall(feature) {
-    var label = FEATURE_LABEL[feature] || '该功能';
+  function showWall(feature, labelOverride) {
+    var label = labelOverride || FEATURE_LABEL[feature] || '该功能';
     var old = document.getElementById('guestWall');
     if (old) old.remove();
     var d = document.createElement('div');
@@ -146,7 +158,7 @@
     var q = document.getElementById('guestBarQuota');
     if (q) {
       var n = function (f) { return '<b style="background:rgba(255,255,255,.93);color:#3a2418;font-weight:800;border-radius:6px;padding:0 6px;margin:0 1px">' + remaining(f) + '</b>'; };
-      q.innerHTML = '今日剩余：单词卡 ' + n('cards') + ' · 题库 ' + n('quiz') + ' · 跟读 ' + n('shadow') + ' · 外刊 ' + n('refine') + '（进度只存本机）';
+      q.innerHTML = '今日剩余：单词卡 ' + n('cards') + ' · 题库 ' + n('quiz') + ' · 跟读 ' + n('shadow') + ' · 外刊 ' + n('refine') + ' · SIELE 每 Tarea 日限 1 题（进度只存本机）';
     }
   }
 
@@ -290,6 +302,71 @@
     };
   }
 
+  /* ---------- SIELE 专项试用（2026-11-21 站长加定） ----------
+   * 每种 Tarea 每天可录音评分 1 题（在开始录音时按 Tarea 分键计数）；
+   * 组卷/模考对游客禁用（入口卡换锁定卡 + 启动函数兜底拦截）。 */
+  function sieleTareaNum() {
+    try { return (typeof _sieleOralTarea !== 'undefined' && _sieleOralTarea) ? Number(_sieleOralTarea) : 0; } catch (e) { return 0; }
+  }
+  function sieleGate() {
+    var r = ensureRec();
+    var cap = policyFor(r.guestId).quotas.sielePerTarea;
+    if (typeof cap !== 'number') cap = 1;
+    return consumeKey('siele:T' + sieleTareaNum(), cap, 'SIELE Tarea ' + (sieleTareaNum() || ''));
+  }
+  var origStartSieleOral = window.startSieleOral;
+  if (typeof origStartSieleOral === 'function') {
+    window.startSieleOral = function () {
+      if (isActive() && !sieleGate()) return undefined;
+      return origStartSieleOral.apply(this, arguments);
+    };
+  }
+  var origAsrSieleCloud = window._wbAsrSieleOralCloud;
+  if (typeof origAsrSieleCloud === 'function') {
+    window._wbAsrSieleOralCloud = function () {
+      if (isActive() && !sieleGate()) return undefined;
+      return origAsrSieleCloud.apply(this, arguments);
+    };
+  }
+  var origMockEntry = window._sieleMockEntryHtml;
+  if (typeof origMockEntry === 'function') {
+    window._sieleMockEntryHtml = function () {
+      if (isActive()) {
+        return '<div class="card" style="padding:12px;text-align:center;margin-bottom:10px"><b>🧩 组卷 / 全真模考</b><div style="font-size:12px;color:var(--soft);margin:6px 0">组卷模考是注册用户功能。游客可以逐个 Tarea 试用（每种 Tarea 每天 1 题）。</div><button class="btn sm pr" onclick="window._guestGoLogin&&window._guestGoLogin()">免费注册 / 登录</button></div>';
+      }
+      return origMockEntry.apply(this, arguments);
+    };
+  }
+  ['_sieleMockStartRandom', '_sieleMockStartCustom', 'toggleSieleMockPanel'].forEach(function (fn) {
+    var orig = window[fn];
+    if (typeof orig === 'function') {
+      window[fn] = function () {
+        if (isActive()) { showLocked('组卷模考是注册用户功能', '游客可以逐个 Tarea 试用（每种 Tarea 每天 1 题）；<br>组卷、全真模考与完整题库请注册后使用。'); return undefined; }
+        return orig.apply(this, arguments);
+      };
+    }
+  });
+
+  /* 通用「注册功能」锁定卡（非额度类拦截，如组卷模考） */
+  function showLocked(title, msg) {
+    var old = document.getElementById('guestWall');
+    if (old) old.remove();
+    var d = document.createElement('div');
+    d.id = 'guestWall';
+    d.style.cssText = 'position:fixed;inset:0;z-index:999990;background:rgba(20,12,6,.45);display:flex;align-items:center;justify-content:center;padding:20px';
+    d.innerHTML =
+      '<div style="background:#fffdf8;border-radius:16px;max-width:340px;width:100%;padding:26px 22px;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.25)">' +
+      '<div style="font-size:34px">🔒</div>' +
+      '<h3 style="margin:8px 0 6px;font-size:17px">' + title + '</h3>' +
+      '<p style="font-size:13px;color:#8a7a68;line-height:1.7;margin:0 0 16px">' + msg + '</p>' +
+      '<button id="guestWallReg" style="display:block;width:100%;padding:11px;border:0;border-radius:10px;background:linear-gradient(135deg,#c0392b,#e08e0b);color:#fff;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:9px">免费注册 / 登录</button>' +
+      '<button id="guestWallOk" style="display:block;width:100%;padding:10px;border:1px solid #e5ddd2;border-radius:10px;background:#fff;color:#6b5d4f;font-size:13px;cursor:pointer">知道了</button>' +
+      '</div>';
+    document.body.appendChild(d);
+    document.getElementById('guestWallOk').addEventListener('click', function () { d.remove(); });
+    document.getElementById('guestWallReg').addEventListener('click', function () { d.remove(); guestGoLogin(); });
+  }
+
   /* ---------- 入口按钮注入 ---------- */
   function makeGuestBtn(big) {
     var b = document.createElement('button');
@@ -331,6 +408,7 @@
     exit: exitGuest,
     isActive: isActive,
     consume: consume,
+    consumeKey: consumeKey,
     remaining: remaining,
     content: guestContent,
     record: function () { return loadRec(); },
