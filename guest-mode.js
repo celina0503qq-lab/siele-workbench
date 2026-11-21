@@ -252,7 +252,7 @@
   if (typeof origNoAccess === 'function') {
     window._renderNoAccess = function () {
       if (isActive()) {
-        return '<div class="card" style="text-align:center;padding:40px 20px"><div style="font-size:40px">🔒</div><h3 style="margin:10px 0">游客试用未包含此功能</h3><p style="color:var(--soft);font-size:13px;line-height:1.8">写作、口语、SIELE/DELE 专项等完整功能只对注册用户开放。<br>注册免费，注册后可联系管理员为你开通。</p><button class="btn" style="margin-top:10px" onclick="window._guestGoLogin&&window._guestGoLogin()">免费注册 / 登录</button></div>';
+        return '<div class="card" style="text-align:center;padding:40px 20px"><div style="font-size:40px">🔒</div><h3 style="margin:10px 0;text-align:center">游客试用未包含此功能</h3><p style="color:var(--soft);font-size:13px;line-height:1.8">写作、口语、SIELE/DELE 专项等完整功能只对注册用户开放。<br>注册免费，注册后可联系管理员为你开通。</p><button class="btn" style="margin-top:10px" onclick="window._guestGoLogin&&window._guestGoLogin()">免费注册 / 登录</button></div>';
       }
       return origNoAccess.apply(this, arguments);
     };
