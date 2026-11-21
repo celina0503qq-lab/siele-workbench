@@ -428,6 +428,7 @@
   function injectButtons() {
     try {
       var landing = document.getElementById('wbLanding');
+      if (hasRealSession()) { document.querySelectorAll('.guest-enter-btn').forEach(function (b) { b.remove(); }); return; }
       if (landing && !landing.querySelector('.guest-enter-btn')) {
         var nav = landing.querySelector('.ln-nav .in') || landing.querySelector('.ln-wrap');
         if (nav) nav.appendChild(makeGuestBtn(false));

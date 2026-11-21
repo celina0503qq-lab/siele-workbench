@@ -876,7 +876,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.6-202611211959';
+window.swVer = 'v98.7-202611212057';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2359,7 +2359,7 @@ function renderNav(){
       _tu.innerHTML = _sd + '<span>'+String((_cs&&_cs.username)||'游客').slice(0,12)+'</span>';
     }
   }catch(e){}
-  let h = '<button class="ni" onclick="_wbLandingShow()" style="border:none;background:none;padding:8px 13px;font-size:13.5px;font-weight:800;color:#334155;cursor:pointer;font-family:inherit" onmouseover="this.style.color=\'#C2410C\'" onmouseout="this.style.color=\'#334155\'">🏠 Inicio</button>';
+  let h = '<button class="ni" onclick="_wbLandingShowNav()" style="border:none;background:none;padding:8px 13px;font-size:13.5px;font-weight:800;color:#334155;cursor:pointer;font-family:inherit" onmouseover="this.style.color=\'#C2410C\'" onmouseout="this.style.color=\'#334155\'">🏠 Inicio</button>';
   NAV.forEach(sec => {
     const visibleItems = sec.items.filter(it => !it.adminOnly || isAdmin);
     if (!visibleItems.length) return;
@@ -22225,7 +22225,7 @@ window._wbLandingRefresh = function(){
     _nav.innerHTML=_nh;
     /* CTA */
     if(_ls){ _ls.textContent='进入工作台 →'; _ls.onclick=function(){ _wbLandingEnter('dash'); }; }
-    if(_mo){ _mo.textContent='继续上次学习 ▾'; _mo.onclick=function(){ _wbLandingEnter('flash'); }; }
+    if(_mo){ _mo.textContent='继续上次学习 →'; _mo.onclick=function(){ _wbLandingEnter('flash'); }; }
     /* dark 区按钮 */
     var _dk=_ld.querySelector('.dark .btn.grad');
     if(_dk){ _dk.textContent='查看今日待办 →'; _dk.onclick=function(){ _wbLandingEnter('dash'); }; }
@@ -22310,6 +22310,7 @@ window._wbLandingPortalBoot = function(){
   }catch(e){}
 };
 try{ window.addEventListener('load', function(){ setTimeout(window._wbLandingPortalBoot, 400); }); }catch(e){}
+window._wbLandingShowNav = function(){ window._wbLandingShow(); try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} };
 window._wbLandingShow = function(){
   try{
     var _ld = document.getElementById('wbLanding');
