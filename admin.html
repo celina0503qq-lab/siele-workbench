@@ -2515,76 +2515,6 @@ const PROVIDERS={
     fields:[['token','CloudBase 同步令牌（创建后仅显示一次）']],
     help:'<ol><li>先在上方「CloudBase 独立同步令牌」创建一个令牌</li><li>立即复制并保存在密码管理器或安全位置</li><li>粘贴到此处并保存；其他设备使用同一令牌即可同步</li><li>设备丢失时，在上方列表撤销令牌即可立即断开该设备</li></ol>'
   },
-  gitee:{
-    name:'Gitee 代码片段',desc:'国内访问快，免费，推荐',rec:true,
-    fields:[['token','私人令牌（勾选 gists 权限）'],['gistId','已有同步ID（换设备时填写，可留空）']],
-    help:'<ol><li>注册/登录 <a href="https://gitee.com" target="_blank">gitee.com</a></li><li>头像 → 设置 → 安全设置 → <b>私人令牌</b> → 生成新令牌，勾选 <code>gists</code></li><li>复制令牌粘贴到上方 → 保存并测试</li><li>其他设备：填同一令牌 + 下方「同步ID」即可接续</li></ol>',
-    async create(cfg,content){
-      const r=await fetch('https://gitee.com/api/v5/gists',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_token:cfg.token,files:{[SYNC_FILE]:{content}},description:'西语学习后台管理系统 · 云同步数据',public:false})});
-      if(!r.ok)throw new Error('创建失败 HTTP '+r.status+(r.status===401?'（令牌无效）':''));
-      return (await r.json()).id;
-    },
-    async push(cfg,content){
-      const r=await fetch('https://gitee.com/api/v5/gists/'+cfg.gistId,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_token:cfg.token,files:{[SYNC_FILE]:{content}}})});
-      if(!r.ok)throw new Error('上传失败 HTTP '+r.status);
-    },
-    async pull(cfg){
-      const r=await fetch('https://gitee.com/api/v5/gists/'+cfg.gistId+'?access_token='+encodeURIComponent(cfg.token));
-      if(r.status===404)return null;
-      if(!r.ok)throw new Error('拉取失败 HTTP '+r.status);
-      const j=await r.json();const f=j.files&&j.files[SYNC_FILE];
-      return f?f.content:null;
-    }
-  },
-  github:{
-    name:'GitHub Gist',desc:'全球通用，免费',rec:false,
-    fields:[['token','Personal Access Token（必须有 Gists 读写权限）'],['gistId','已有同步ID（可留空）']],
-    help:'<ol><li>若使用 classic token：登录 <a href="https://github.com/settings/tokens/new" target="_blank">github.com</a> → Settings → Developer settings → Tokens (classic)</li><li>生成时勾选 <code>gist</code>；若用 fine-grained token，必须启用 Gists 的读写权限</li><li>粘贴令牌 → 保存并测试；已有云端数据时请同时填原来的同步 ID</li></ol>',
-    hdr(cfg){return {'Authorization':'Bearer '+cfg.token,'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};},
-    async fail(r,action){
-      if(r.ok)return;
-      let detail='';try{const body=await r.clone().json();detail=body&&body.message?body.message:'';}catch(e){}
-      const hint=r.status===401?'令牌无效、已过期，或浏览器保存的令牌不完整':r.status===403?'令牌缺少 Gists 读写权限，或 GitHub 临时限制了请求':r.status===404?'同步 ID 不存在、无权访问，或令牌属于另一个 GitHub 账号':r.status===422?'同步数据校验失败，请检查同步 ID 是否正确':'';
-      throw new Error(action+' HTTP '+r.status+(hint?'：'+hint:'')+(detail?'（'+detail+'）':''));
-    },
-    async create(cfg,content){
-      const r=await fetch('https://api.github.com/gists',{method:'POST',headers:this.hdr(cfg),body:JSON.stringify({files:{[SYNC_FILE]:{content}},description:'西语学习后台云同步',public:false})});
-      await this.fail(r,'创建');
-      return (await r.json()).id;
-    },
-    async push(cfg,content){
-      const r=await fetch('https://api.github.com/gists/'+cfg.gistId,{method:'PATCH',headers:this.hdr(cfg),body:JSON.stringify({files:{[SYNC_FILE]:{content}}})});
-      await this.fail(r,'上传');
-    },
-    async pull(cfg){
-      const r=await fetch('https://api.github.com/gists/'+cfg.gistId,{headers:this.hdr(cfg)});
-      await this.fail(r,'拉取');
-      const j=await r.json();const f=j.files&&j.files[SYNC_FILE];
-      if(!f)return null;
-      if(f.truncated){const rr=await fetch(f.raw_url);if(!rr.ok)throw new Error('下载同步文件 HTTP '+rr.status);return await rr.text();}
-      return f.content;
-    }
-  },
-  jsonbin:{
-    name:'JSONBin.io',desc:'免费额度，配置最简单',rec:false,
-    fields:[['token','X-Master-Key（注册后在 API Keys 页面复制）'],['gistId','已有 Bin ID（可留空）']],
-    help:'<ol><li>注册 <a href="https://jsonbin.io" target="_blank">jsonbin.io</a>（可用邮箱注册）</li><li>Dashboard → <b>API Keys</b> → 复制 Master Key</li><li>粘贴到上方 → 保存并测试</li></ol>',
-    async create(cfg,content){
-      const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'X-Master-Key':cfg.token,'Content-Type':'application/json','X-Bin-Name':'siele-admin-sync','X-Bin-Private':'true'},body:content});
-      if(!r.ok)throw new Error('创建失败 HTTP '+r.status);
-      return (await r.json()).metadata.id;
-    },
-    async push(cfg,content){
-      const r=await fetch('https://api.jsonbin.io/v3/b/'+cfg.gistId,{method:'PUT',headers:{'X-Master-Key':cfg.token,'Content-Type':'application/json'},body:content});
-      if(!r.ok)throw new Error('上传失败 HTTP '+r.status);
-    },
-    async pull(cfg){
-      const r=await fetch('https://api.jsonbin.io/v3/b/'+cfg.gistId+'/latest',{headers:{'X-Master-Key':cfg.token}});
-      if(r.status===404)return null;
-      if(!r.ok)throw new Error('拉取失败 HTTP '+r.status);
-      return JSON.stringify((await r.json()).record);
-    }
-  }
 };
 
 function setSyncState(st,msg){
@@ -2607,6 +2537,7 @@ async function syncNow(silent){
   if(!DB)return;
   if(!DB.syncCfg){if(!silent){go('sync');toast('请先在下方配置云端存储','info');}return;}
   const cfg=DB.syncCfg,prov=PROVIDERS[cfg.provider];
+  if(cfg.provider!=='cloudbase'){setSyncState('err','旧同步服务已下线，请在同步页改用腾讯云 CloudBase');if(!silent)go('sync');return;}
   if(!prov){setSyncState('err','未知云端配置，请重新选择服务并保存');return;}
   if(!String(cfg.token||'').trim()){setSyncState('err','令牌为空，请重新粘贴后保存并测试');if(!silent)go('sync');return;}
   if(cfg.provider==='cloudbase')return syncCloudBaseNow(cfg,silent);
@@ -2682,6 +2613,7 @@ let selProvider=null;
 function renderSyncPage(){
   // 只在首次进入同步页时采用已保存的 Provider；之后用户点击的选择必须保留，不能被旧配置重置。
   if(!selProvider)selProvider=DB.syncCfg?DB.syncCfg.provider:'cloudbase';
+  if(!PROVIDERS[selProvider])selProvider='cloudbase'; /* 阶段A：旧服务商配置自动落到 CloudBase */
   $('providerGrid').innerHTML=Object.entries(PROVIDERS).map(([k,p])=>
     '<div class="provider'+(selProvider===k?' on':'')+'" onclick="pickProvider(\''+k+'\')"><div class="pn">'+p.name+'</div><div class="pd">'+p.desc+'</div>'+(p.rec?'<span class="rec">推荐</span>':'')+'</div>').join('');
   renderProviderForm();
@@ -3400,7 +3332,7 @@ function pickProvider(k){
 }
 function renderProviderForm(){
   const el=$('providerForm');
-  if(!selProvider){el.innerHTML='<div class="note">👆 点击上方选择一种云端存储。三种都是免费服务，只需注册一次、粘贴一个令牌。</div>';return;}
+  if(!selProvider||!PROVIDERS[selProvider]){el.innerHTML='<div class="note">👆 云同步统一走腾讯云 CloudBase（与账号体系同源），点击上方卡片填写同步令牌即可。</div>';return;}
   const p=PROVIDERS[selProvider],cfg=DB.syncCfg&&DB.syncCfg.provider===selProvider?DB.syncCfg:{};
   el.innerHTML=p.fields.map((f,i)=>'<div class="fld"><label>'+f[1]+(i===0?' <span class="req">*</span>':'')+'</label><input id="pf_'+f[0]+'" value="'+esc(cfg[f[0]]||'')+'" placeholder="'+(i===0?'必填':'留空则自动新建')+'" autocomplete="off"></div>').join('')+
   '<details class="help"><summary>如何获取令牌？（点击展开教程）</summary>'+p.help+'</details>'+
@@ -3431,11 +3363,11 @@ function renderSyncDetail(){
   const el=$('syncDetail');if(!el)return;
   const c=DB.syncCfg;
   el.innerHTML=c?
-    '<div class="kv"><span class="k">云端</span><span class="v">'+PROVIDERS[c.provider].name+'</span></div>'+
+    '<div class="kv"><span class="k">云端</span><span class="v">'+(PROVIDERS[c.provider]?PROVIDERS[c.provider].name:'旧同步服务（已下线）')+'</span></div>'+
     '<div class="kv"><span class="k">同步标识</span><span class="v" style="font-family:monospace;font-size:11px;max-width:60%;word-break:break-all">'+esc(c.provider==='cloudbase'?'CloudBase 独立同步令牌':(c.gistId||'（首次同步时自动创建）'))+'</span></div>'+
     '<div class="kv"><span class="k">上次同步</span><span class="v">'+fmtDT(DB.meta.lastSync)+'</span></div>'+
     '<div class="kv"><span class="k">同步内容</span><span class="v">'+DB.words.length+' 词 · '+DB.questions.length+' 题 · '+DB.reviews.length+' 记录 · '+DB.plans.length+' 计划</span></div>'+
-    '<div class="note" style="margin-top:10px">📱 <b>在手机上使用：</b>用手机浏览器打开本系统网址 → 注册/登录任意账号 → 云同步页选择同一云端，填入<b>同一令牌</b>和上方的<b>同步ID</b> → 立即同步，即可接续电脑进度。</div>'
+    '<div class="note" style="margin-top:10px">📱 <b>在手机上使用：</b>用手机浏览器打开本系统网址 → 注册/登录任意账号 → 云同步页选择腾讯云 CloudBase，填入<b>同一同步令牌</b> → 立即同步，即可接续电脑进度。</div>'
     :'<div class="empty" style="padding:14px"><span class="big">🔌</span>尚未配置云端<br><span style="font-size:11px">配置后这里会显示同步详情</span></div>';
 }
 
