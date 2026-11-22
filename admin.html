@@ -1660,6 +1660,10 @@ window.addEventListener('message',function(ev){
           // v94.20.1 数据后端化：受控数据集下发（并入 siele-auth，免平台权限配置）
           lResult = await callSieleAuth({action:'getData', sessionToken: lToken,
             name: (ev.data.params && ev.data.params.name) || ''});
+        } else if(lAct==='getDataBundle'){
+          // 阶段B 数据包下发（2026-11-22）：登录用户拉取 content_bundles，供主站 SWR 加载器后台刷新缓存
+          lResult = await callSieleAuth({action:'getDataBundle', sessionToken: lToken,
+            key: (ev.data.params && ev.data.params.key) || ''});
         } else {
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }
