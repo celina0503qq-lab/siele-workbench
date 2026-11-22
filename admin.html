@@ -405,6 +405,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="ni" data-p="sync" onclick="go('sync')"><span class="ic">☁️</span>云同步</button>
     <div class="ns">账户设置</div>
     <button class="ni" data-p="passwd" onclick="go('passwd')"><span class="ic">🔑</span>密码修改</button>
+    <button class="ni" data-p="emailbind" onclick="go('emailbind')"><span class="ic">📧</span>邮箱绑定</button>
     <button class="ni admin-only" onclick="window.open('index.html#netdisk','_blank')" title="管理员专属：工作台资料地图"><span class="ic">🗺️</span>资料地图</button>
     <div class="ns admin-only hide">系统管理</div>
     <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
@@ -647,6 +648,45 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
+<!-- ===== 邮箱绑定 ===== -->
+<section class="page" id="pg-emailbind">
+  <div class="tb">
+    <div><h2>📧 邮箱绑定</h2><div class="d">给当前账号绑定邮箱，可用于邮箱登录与找回密码。一个邮箱只能绑一个账号。</div></div>
+    <div class="acts"><button class="btn sm ol" onclick="go('dash')">‹ 返回数据看板</button></div>
+  </div>
+
+  <div class="card" style="margin-bottom:13px">
+    <h3><span class="ic">📮</span>当前绑定状态</h3>
+    <div id="ebState" style="font-size:13px;line-height:1.7;color:var(--soft)">正在读取…</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="ic">✉️</span><span id="ebFormTitle">绑定邮箱</span></h3>
+    <div style="font-size:12px;color:var(--soft);line-height:1.65;margin-bottom:12px">输入邮箱后点「发送验证码」，验证码 10 分钟内有效。换绑邮箱时需要多输一遍当前账号密码，且换绑成功后所有设备都要重新登录。</div>
+    <form id="formEmailBind" onsubmit="return doConfirmEmailBind(event)">
+      <div class="fld" id="f_eb_email">
+        <label>邮箱 <span class="req">*</span></label>
+        <input id="ebEmail" type="email" autocomplete="email" placeholder="例如 name@qq.com" maxlength="120">
+        <div class="err-msg">邮箱格式不正确</div>
+      </div>
+      <div class="fld" id="f_eb_code">
+        <label>验证码 <span class="req">*</span></label>
+        <div style="display:flex;gap:8px">
+          <input id="ebCode" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="6 位数字验证码" maxlength="6" style="flex:1">
+          <button class="btn sm" type="button" id="ebSendBtn" onclick="doSendEmailCode()">发送验证码</button>
+        </div>
+        <div class="err-msg">验证码不正确</div>
+      </div>
+      <div class="fld" id="f_eb_pwd" style="display:none">
+        <label>当前账号密码（换绑验证） <span class="req">*</span></label>
+        <input id="ebPwd" type="password" autocomplete="current-password" placeholder="请输入当前密码" maxlength="32">
+        <div class="err-msg">当前密码不正确</div>
+      </div>
+      <button class="btn" type="submit" id="ebSubmit">✅ 确认绑定</button>
+    </form>
+  </div>
+</section>
+
 <!-- ===== 用户管理（仅管理员） ===== -->
 <section class="page" id="pg-users">
   <div class="tb">
@@ -802,7 +842,21 @@ const CLOUD_AUTH_MESSAGES={
   PWD_USER_DISABLED:'该账号已被管理员停用，无法修改密码',
   PWD_SAME_AS_OLD:'新密码不能与当前密码相同',
   PASSWORD_CHANGED:'密码已成功修改，请用新密码重新登录',
-  PASSWORD_RESET:'密码已通过邀请码重置，请用新密码重新登录'
+  PASSWORD_RESET:'密码已通过邀请码重置，请用新密码重新登录',
+  // 邮箱绑定相关（函数批 A 件，2026-11-23）
+  EMAIL_CODE_SENT:'验证码已发送到该邮箱，10 分钟内有效',
+  EMAIL_BOUND:'邮箱绑定成功',
+  EMAIL_REBOUND:'邮箱已换绑成功，所有设备需要重新登录',
+  INVALID_EMAIL:'邮箱格式不正确',
+  EMAIL_ALREADY_BOUND:'该邮箱就是你当前绑定的邮箱',
+  EMAIL_TAKEN:'该邮箱已被其他账号绑定',
+  INVALID_CODE:'请输入 6 位数字验证码',
+  NO_PENDING_CODE:'还没有发送验证码，请先点「发送验证码」',
+  CODE_EXPIRED:'验证码已过期或尝试次数过多，请重新发送',
+  CODE_MISMATCH:'验证码不正确，请重新输入',
+  REBIND_PASSWORD_MISMATCH:'当前密码不正确，请重新输入',
+  EMAIL_VERIFY_FAILED:'验证码校验失败，请稍后重试',
+  EMAIL_BIND_FAILED:'绑定失败，请稍后重试'
 };
 // 本地密码强度校验（与云函数 isStrongPassword 一致）：≥8 位且同时包含字母和数字
 function isStrongPwd(p){ return typeof p==='string' && p.length>=8 && /[A-Za-z]/.test(p) && /\d/.test(p); }
@@ -1342,6 +1396,79 @@ async function doChangePwdWithOld(e){
   return false;
 }
 
+// ---- 邮箱绑定（函数批 A 件前端入口，2026-11-23） ----
+var _ebBound=false,_ebTimer=null;
+async function renderEmailBindPage(){
+  const st=$('ebState');if(st)st.textContent='正在读取…';
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){if(st)st.textContent='登录状态已过期，请重新登录。';return;}
+    const r=await callSieleAuth({action:'getMyEmail',sessionToken:ses.sessionToken});
+    if(!r.ok){if(st)st.textContent='读取失败：'+cloudAuthMessage(r.code);return;}
+    _ebBound=!!r.bound;
+    if(st)st.innerHTML=r.bound?('已绑定邮箱：<b>'+esc(r.emailMasked||'')+'</b>（如需更换，在下方填写新邮箱）'):'尚未绑定邮箱。绑定后可用邮箱找回密码，也是以后账号迁移的凭据之一。';
+    var t=$('ebFormTitle');if(t)t.textContent=r.bound?'更换绑定邮箱':'绑定邮箱';
+    var pw=$('f_eb_pwd');if(pw)pw.style.display=r.bound?'':'none';
+    var sb=$('ebSubmit');if(sb)sb.textContent=r.bound?'✅ 确认换绑':'✅ 确认绑定';
+  }catch(e){ if(st)st.textContent='无法连接账号服务，请检查网络或稍后再试'; }
+}
+async function doSendEmailCode(){
+  const email=($('ebEmail').value||'').trim();
+  if(!fldErr('f_eb_email',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确'))return;
+  const btn=$('ebSendBtn');if(btn)btn.disabled=true;
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');if(btn)btn.disabled=false;return;}
+    const r=await callSieleAuth({action:'requestEmailBindCode',sessionToken:ses.sessionToken,email:email});
+    if(!r.ok){toast(cloudAuthMessage(r.code),'err');if(btn)btn.disabled=false;return;}
+    toast(cloudAuthMessage('EMAIL_CODE_SENT'),'ok');
+    var left=60;
+    if(btn)btn.textContent='重新发送（'+left+'s）';
+    if(_ebTimer)clearInterval(_ebTimer);
+    _ebTimer=setInterval(function(){left--;if(left<=0){clearInterval(_ebTimer);_ebTimer=null;if(btn){btn.disabled=false;btn.textContent='发送验证码';}}else if(btn){btn.textContent='重新发送（'+left+'s）';}},1000);
+  }catch(e){toast('无法连接账号服务，请检查网络或稍后再试','err');if(btn)btn.disabled=false;}
+}
+async function doConfirmEmailBind(e){
+  e.preventDefault();
+  const email=($('ebEmail').value||'').trim();
+  const code=($('ebCode').value||'').trim();
+  let ok=fldErr('f_eb_email',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确');
+  ok=fldErr('f_eb_code',!/^\d{6}$/.test(code),'请输入 6 位数字验证码')&&ok;
+  let pwd='';
+  if(_ebBound){pwd=$('ebPwd').value||'';ok=fldErr('f_eb_pwd',!pwd,'换绑需要输入当前账号密码')&&ok;}
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在验证…';}
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');return false;}
+    const data={action:'confirmEmailBind',sessionToken:ses.sessionToken,code:code};
+    if(_ebBound)data.password=pwd;
+    const r=await callSieleAuth(data);
+    if(!r.ok){
+      if(r.code==='REBIND_PASSWORD_MISMATCH')fldErr('f_eb_pwd',true,cloudAuthMessage(r.code));
+      else if(r.code==='CODE_MISMATCH'||r.code==='CODE_EXPIRED'||r.code==='INVALID_CODE'||r.code==='NO_PENDING_CODE')fldErr('f_eb_code',true,cloudAuthMessage(r.code));
+      else if(r.code==='EMAIL_TAKEN'||r.code==='EMAIL_ALREADY_BOUND')fldErr('f_eb_email',true,cloudAuthMessage(r.code));
+      else toast(cloudAuthMessage(r.code),'err');
+      return false;
+    }
+    $('ebCode').value='';if($('ebPwd'))$('ebPwd').value='';
+    if(r.code==='EMAIL_REBOUND'){
+      toast(cloudAuthMessage('EMAIL_REBOUND'),'ok');
+      setTimeout(function(){doLogout({silent:true});},1400);
+    }else{
+      toast(cloudAuthMessage('EMAIL_BOUND'),'ok');
+      renderEmailBindPage();
+    }
+  }catch(err){
+    if(err&&err.code==='UNAUTHORIZED')toast(cloudAuthMessage('UNAUTHORIZED'),'err');
+    else toast('无法连接账号服务，请检查网络或稍后再试','err');
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent=_ebBound?'✅ 确认换绑':'✅ 确认绑定';}
+  }
+  return false;
+}
+
 // ---- 密码重置（未登录态：邀请码验证，独立视图） ----
 async function doResetPwdWithInviteAnon(e){
   e.preventDefault();
@@ -1558,6 +1685,7 @@ function go(p){
   if(p==='sync')renderSyncPage();
   if(p==='users')switchAdminTab('users');
   if(p==='passwd')renderPasswdPage();
+  if(p==='emailbind')renderEmailBindPage();
   window.scrollTo({top:0});
 }
 function renderPasswdPage(){
