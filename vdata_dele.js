@@ -19,7 +19,7 @@
 //   medio_ambiente = 环境与生态 (20词)
 //   general = 通用词汇 (1640词)
 
-const VDATA_DELE = [
+const VDATA_DELE = (window.__BUNDLE_VOCAB&&window.__BUNDLE_VOCAB.VDATA_DELE)||[
 {"t":"general","es":"acontecimiento","pos":"s.","zh":"事件；大事","ex":"Su boda fue un gran acontecimiento.","lvl":"A2","theme":"通用词汇","rae_verified":true},
 {"t":"general","es":"acordar","pos":"v.","zh":"商定；决定；使协调；提醒； 协调； 记得；想起；达成协议","ex":"Los jefes acordaron un nuevo horario.","lvl":"A2","theme":"通用词汇"},
 {"t":"vida_diaria_y_hogar","es":"acostarse","pos":"v. prnl.","zh":"卧床","ex":"Me acuesto todas las noches a las once.","lvl":"A1","theme":"日常生活与家居"},

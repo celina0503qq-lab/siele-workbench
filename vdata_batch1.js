@@ -1,7 +1,7 @@
 // ===== 生词本导入 第1批 (2026-08-17) 共630词 =====
 // 来源: IMA 生词本_20260810_2125.pdf → 清洗去重(与 VDATA/VDATA_DELE 对照) → 语义例句生成
 // 等级: 按 CEFR 自动分级 (A1/A2/B1/B2); 例句由 AI 逐词生成(语义贴合+语法校验)
-const VDATA_BATCH1 = [
+const VDATA_BATCH1 = (window.__BUNDLE_VOCAB&&window.__BUNDLE_VOCAB.VDATA_BATCH1)||[
 {"t": "trabajo", "es": "trabajar", "pos": "v.", "zh": "劳动；工作；努力；(机器等)运转；(工厂生产；耕作；加工；学习；精工制作；经营(某种商品)；办理；(工厂)生产", "ex": "Mi padre trabaja en una oficina desde hace diez años.", "lvl": "A1"},
 {"t": "general", "es": "dormir", "pos": "v.", "zh": "睡觉；过夜；休眠；使人睡；麻醉；睡着；(肢体)麻木", "ex": "Normalmente duermo ocho horas todas las noches.", "lvl": "A1"},
 {"t": "general", "es": "abandonar", "pos": "v.", "zh": "抛弃；放开；弃置不用；不理不顾；自暴自弃；不修边幅", "ex": "El dueño abandonó al perro en la calle.", "lvl": "B1"},

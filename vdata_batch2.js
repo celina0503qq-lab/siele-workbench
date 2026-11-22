@@ -2,7 +2,7 @@
 // 来源: DELE B2 词表 → 清洗(拼音剥离·重音修复·错词形) → AI语义例句生成
 // 等级: 按 CEFR 自动分级 (A1/A2/B1/B2); 例句由 AI 逐词生成(语义贴合+语法校验)
 // 备注: 原表 src_no 455-504 段部分词缺失待补
-const VDATA_BATCH2 = [
+const VDATA_BATCH2 = (window.__BUNDLE_VOCAB&&window.__BUNDLE_VOCAB.VDATA_BATCH2)||[
 {"t":"tiempo_y_naturaleza","es":"a mediados de","pos":"loc. prep.","zh":"中旬；中叶","ex":"Llegaremos a mediados de julio para las vacaciones.","lvl":"B1"},
 {"t":"general","es":"a no ser que","pos":"loc.","zh":"conj. 除非","ex":"No saldré a no ser que me llames antes de las seis.","lvl":"B2"},
 {"t":"general","es":"a pesar de","pos":"loc.","zh":"prep. 尽管；虽然","ex":"A pesar de la lluvia, salimos a pasear.","lvl":"B1"},
