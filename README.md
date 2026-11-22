@@ -8,7 +8,7 @@
 SIELE 口语五 Tarea 官方流程模拟、写作训练与每周自动更新的西语外刊精读，
 内置账号体系与基于快照仲裁的跨设备同步。
 
-[![Version](https://img.shields.io/badge/version-v97.16-blue?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v98.10-blue?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Backend](https://img.shields.io/badge/sync-CloudBase_CloudFunctions-orange?style=flat-square)](#同步架构)
 [![Offline](https://img.shields.io/badge/offline-first-9cf?style=flat-square)](#离线策略)
@@ -62,11 +62,13 @@ flowchart TB
         F[("learning_snapshots<br/>学习快照 · 按账号")]
         G[("content_edits<br/>内容编辑 · 全站生效")]
         H[("sync_tokens<br/>同步凭证 · 可撤销")]
+        I[("content_bundles<br/>内容数据包 · 版本化下发")]
     end
     A -- "登录会话 pushLearning" --> D
     B -- "syncToken pushLearning" --> D
     D --> F
     A -- getData --> E
+    E -- getDataBundle --> I
     B -- 内容编辑 --> G
     C --> H
     classDef client fill:#eef4fb,stroke:#4a6fa5,stroke-width:1.5px
@@ -74,7 +76,7 @@ flowchart TB
     classDef store fill:#eef7ee,stroke:#3e7a4e,stroke-width:1.5px
     class A,B client
     class C,D,E func
-    class F,G,H store
+    class F,G,H,I store
 ```
 
 **写入路径有两条**，这是设计而非疏漏：
@@ -90,25 +92,45 @@ flowchart TB
 合并语义按字段类型分级——计数取较大值、集合取并集、
 时间戳字段取最新——并以 `resetEpoch` 纪元机制防止「重置后被旧设备复活」。
 
+**内容数据包通道**：种子内容（语法、词汇等静态数据集）经 `content_bundles` 版本化下发——
+管理员以 `adminUpdateBundle` 上架（写入留审计），登录用户以 `getDataBundle` 拉取，
+客户端采用 SWR 策略（缓存优先、后台刷新、失败回落内置文件），
+使内容更新逐步脱离发版周期（进展见下一节）。
+
 **断网**：Service Worker 预缓存全部资源，同步失败时数据留在本地，
 恢复后自动补推；同步健康状态（最近成功时间、连续失败次数）在界面实时可见。
 
-## 04 · 离线策略
+## 04 · 后端化进展
+
+内容数据正从「仓库内置」迁移到「云端数据包」，双通道并行、逐集切换：
+
+| 数据集 | 状态 |
+|---|---|
+| 语法（111 点）＋语法测验映射（103 点 / 715 题） | 已上架云端数据包，SWR 加载器接入中 |
+| 词汇（4,815 词） | 已上架云端数据包，SWR 加载器接入中 |
+| 口语题库（316 题） | 排队 |
+| 分级题库（约 6,000 题） | 排队 |
+| 外刊精读 | 按期拆包，专项设计中 |
+
+切换纪律：新通道稳定运行并经全量校验后，才撤下对应的内置文件；
+迁移期间两条通道任一可用即不影响学习。
+
+## 05 · 离线策略
 
 - Service Worker 对全部资源做安装期预缓存——断网后完整可用，弱网下二次打开接近瞬时；
 - 缓存版本与 `swVer` 绑定——发版即驱动**所有客户端**增量更新，无「用户停留在旧版」的问题；
 - 音频资产（TTS 预生成，双口音）走 CDN 直链——不占缓存配额，也不进入版本管理。
 
-## 05 · 管理端
+## 06 · 管理端
 
 独立管理页面提供四组能力：
 
-- **用户与授权** — 账号生命周期管理、功能级授权开关（背题模式 / DELE 专项 / 外刊精炼）
+- **用户与授权** — 账号生命周期管理、功能级授权开关（背题模式 / DELE 专项 / 外刊精炼）；三层角色（站长 / 管理员 / 学员），站长可在用户列表点身份授/收管理员，支持 24 小时 / 7 天临时授权、到期自动回落，全程审计留痕
 - **内容编辑** — 词库与题库在线编辑，经 `content_edits` 云端下发，全站即时生效
 - **数据看板** — 与主站仪表盘**完全同口径**的可视化：各等级进度、掌握度分布、题库完成率
 - **设备迁移** — 一次性 24h 传输码的签发、摘要自证与撤销
 
-## 06 · 本地运行
+## 07 · 本地运行
 
 ```bash
 git clone https://github.com/celina0503qq-lab/siele-workbench.git
@@ -118,13 +140,13 @@ python -m http.server 8080     # 或 npx serve .
 
 完整的云同步与管理端需要自备 CloudBase 环境并配置账号体系。
 
-## 07 · 版本与发布护栏
+## 08 · 版本与发布护栏
 
-变更记录见 [CHANGELOG](CHANGELOG.md) —— 自 v92.1 起逐版编号，208+ 个版本无一遗漏。
+变更记录见 [CHANGELOG](CHANGELOG.md) —— 自 v92.1 起逐版编号至今。
 
 每次发布由推送护栏（`changelog_guard`）强制校验四项：版本号唯一性、严格降序、段头完整格式、
 **CHANGELOG 最新段与 `swVer` 一致**——任何一项不满足即拒绝推送。
 
-## 08 · License
+## 09 · License
 
 [MIT](LICENSE)

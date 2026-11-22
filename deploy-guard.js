@@ -422,6 +422,26 @@ function checkKnownIssues(indexSrc) {
 // 主流程
 // ============================================================
 
+function checkChangelog(indexSrc) {
+  head('CHANGELOG 结构');
+  let src;
+  try { src = fs.readFileSync(path.join(ROOT, 'CHANGELOG.md'), 'utf8'); }
+  catch (e) { bad('CHANGELOG.md 读取失败'); return; }
+  // 7a) 标题必须在文件第一行（防新段插到标题之上，2026-11-22 事故补）
+  const firstLine = (src.split('\n')[0] || '').trim();
+  if (firstLine === '# 更新日志 / CHANGELOG') ok('CHANGELOG 标题位于文件首行');
+  else bad(`CHANGELOG 标题不在首行（首行是「${firstLine.slice(0, 40)}」）——新段应插在标题之下`);
+  // 7b) 最新版本段与 index.html 的 swVer 一致
+  const topVer = src.match(/## \[v(\d+\.\d+)\]/);
+  const swMatch = indexSrc && indexSrc.match(/swVer\s*=\s*['"]v?(\d+\.\d+)/);
+  if (topVer && swMatch) {
+    if (topVer[1] === swMatch[1]) ok(`CHANGELOG 最新段 v${topVer[1]} 与 swVer 一致`);
+    else bad(`CHANGELOG 最新段 v${topVer[1]} 与 swVer v${swMatch[1]} 不一致`);
+  } else {
+    bad('CHANGELOG 最新版本段或 swVer 解析失败');
+  }
+}
+
 function main() {
   console.log(`\n${C.bold}🔍 deploy-guard v2.0 — 推送前完整性校验${C.reset}`);
   console.log(`${C.dim}   目录: ${ROOT}${STRICT ? '  [严格模式]' : ''}${C.reset}`);
@@ -432,6 +452,7 @@ function main() {
   checkFile('admin.html', ADMIN_MARKERS, '后台管理');
   checkCloudFunction();
   checkServiceWorker(indexSrc);
+  checkChangelog(indexSrc);
   checkDataFiles();
   checkKnownIssues(indexSrc);
 
