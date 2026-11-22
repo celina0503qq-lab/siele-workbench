@@ -102,6 +102,7 @@
     var r = ensureRec();
     r.counters[feature] = (r.counters[feature] || 0) + 1;
     saveRec(r);
+    reportUsage(feature);
     renderBanner();
     return true;
   }
@@ -112,11 +113,68 @@
     if ((r.keyed[key] || 0) >= cap) { showWall(null, wallLabel); return false; }
     r.keyed[key] = (r.keyed[key] || 0) + 1;
     saveRec(r);
+    if (String(key).indexOf('siele:') === 0) reportUsage('sielePerTarea');
     renderBanner();
     return true;
   }
   /* 内容取数统一口：一期本地直通（内容随页面发布）；二期在此换云端试用包 */
   function guestContent(feature) { return true; }
+
+  /* ---------- 二期：云端策略同步 + 用量上报（2026-11-22 函数批配套） ----------
+   * 策略：进入游客模式时经桥拉 getGuestPolicy；成功才覆盖 global.quotas 并置
+   * window.__GUEST_AUDIO_CLOUD（TTS 云开关读取点）；失败/超时保持内置默认
+   * （评审裁定：拉取失败回落内置默认值，不用旧缓存策略）。
+   * 上报：consume 成功后按 kind 累积，20 秒批量 flush 一次 guestReportUsage；
+   * 纯观测用途，失败一律静默，绝不影响游客功能。 */
+  var _policySynced = false;
+  function syncPolicyFromCloud() {
+    if (_policySynced) return;
+    _policySynced = true;
+    try {
+      if (typeof window._deleCloudCall !== 'function') return;
+      window._deleCloudCall('getGuestPolicy', {}).then(function (resp) {
+        try {
+          if (!resp || !resp.ok || !resp.limits) return;
+          var q = window.GUEST_POLICY.global.quotas;
+          ['cards', 'quiz', 'shadow', 'refine', 'sielePerTarea'].forEach(function (k) {
+            var v = Number(resp.limits[k]);
+            if (isFinite(v) && v >= -1) q[k] = Math.floor(v);
+          });
+          window.__GUEST_AUDIO_CLOUD = resp.guestAudioCloud === true;
+          try { renderBanner(); } catch (e) {}
+        } catch (e) {}
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  var _usageBuf = {};
+  var _usageTimer = null;
+  function reportUsage(kind) {
+    _usageBuf[kind] = (_usageBuf[kind] || 0) + 1;
+    if (_usageTimer) return;
+    _usageTimer = setTimeout(flushUsage, 20000);
+  }
+  function flushUsage() {
+    _usageTimer = null;
+    var buf = _usageBuf; _usageBuf = {};
+    try {
+      if (typeof window._deleCloudCall !== 'function') return;
+      var r = loadRec(); var anon = r ? r.guestId : '';
+      Object.keys(buf).forEach(function (kind) {
+        try {
+          var p = window._deleCloudCall('guestReportUsage', { kind: kind, n: buf[kind], anon: anon });
+          if (p && p.catch) p.catch(function () {});
+        } catch (e) {}
+      });
+    } catch (e) {}
+  }
+  try {
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden' && Object.keys(_usageBuf).length) {
+        if (_usageTimer) { clearTimeout(_usageTimer); _usageTimer = null; }
+        flushUsage();
+      }
+    });
+  } catch (e) {}
 
   /* ---------- 额度墙 ---------- */
   function showWall(feature, labelOverride) {
@@ -182,6 +240,7 @@
     var r = ensureRec();
     r.active = true; saveRec(r);
     window.__guestActive = true; // 渲染层游客开关（renderNav/renderMain 的无会话拦截据此放行）
+    syncPolicyFromCloud();
     applyGuestFlags();
     try { if (typeof window._wbLandingHide === 'function') window._wbLandingHide(); } catch (e) {}
     var ld = document.getElementById('wbLanding'); if (ld) ld.style.display = 'none';
@@ -462,8 +521,8 @@
     policy: function () { var r = ensureRec(); return policyFor(r.guestId); },
     api: {
       guestStart: function () { var r = ensureRec(); return { ok: true, guestId: r.guestId, firstSeen: r.firstSeen }; },
-      guestSyncPolicy: function () { return { ok: true, policy: window.GUEST_POLICY }; },
-      guestReportUsage: function () { var r = ensureRec(); return { ok: true, day: r.day, counters: r.counters, lastSeen: r.lastSeen }; }
+      guestSyncPolicy: function () { syncPolicyFromCloud(); return { ok: true, policy: window.GUEST_POLICY }; },
+      guestReportUsage: function () { flushUsage(); var r = ensureRec(); return { ok: true, day: r.day, counters: r.counters, lastSeen: r.lastSeen }; }
     }
   };
 

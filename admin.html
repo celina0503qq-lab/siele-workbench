@@ -1664,6 +1664,20 @@ window.addEventListener('message',function(ev){
           // 阶段B 数据包下发（2026-11-22）：登录用户拉取 content_bundles，供主站 SWR 加载器后台刷新缓存
           lResult = await callSieleAuth({action:'getDataBundle', sessionToken: lToken,
             key: (ev.data.params && ev.data.params.key) || ''});
+        } else if(lAct==='getGuestBundle'){
+          // 游客层数据包公开读（2026-11-22 函数批配套）：免 token，白名单与限流在云函数侧
+          lResult = await callSieleAuth({action:'getGuestBundle',
+            key: (ev.data.params && ev.data.params.key) || '',
+            knownUpdatedAt: (ev.data.params && ev.data.params.knownUpdatedAt) || ''});
+        } else if(lAct==='getGuestPolicy'){
+          // 游客二期策略下发（2026-11-22 函数批配套）：免 token
+          lResult = await callSieleAuth({action:'getGuestPolicy'});
+        } else if(lAct==='guestReportUsage'){
+          // 游客二期用量上报（2026-11-22 函数批配套）：免 token，纯观测
+          lResult = await callSieleAuth({action:'guestReportUsage',
+            kind: (ev.data.params && ev.data.params.kind) || '',
+            n: Number((ev.data.params && ev.data.params.n) || 1),
+            anon: (ev.data.params && ev.data.params.anon) || ''});
         } else {
           lResult = {ok:false, code:'UNKNOWN_BRIDGE_ACTION'};
         }

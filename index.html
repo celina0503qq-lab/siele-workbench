@@ -880,7 +880,12 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 (function(){try{
   function load(key){
     try{
-      var raw=localStorage.getItem('siele_bundle_v1_'+key); if(!raw) return null;
+      var raw=localStorage.getItem('siele_bundle_v1_'+key);
+      if(!raw && !localStorage.getItem('swa_cloud_session_v1')){
+        /* 无登录会话时回落游客缓存（与登录缓存分开存，登录后以登录包为准） */
+        raw=localStorage.getItem('siele_guest_bundle_v1_'+key);
+      }
+      if(!raw) return null;
       var ent=JSON.parse(raw); if(!ent||typeof ent.data!=='string'||!ent.data) return null;
       return JSON.parse(ent.data);
     }catch(e){ return null; }
@@ -903,7 +908,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.13-202611221825';
+window.swVer = 'v98.14-202611230031';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -17759,7 +17764,24 @@ window._deleCloudCall = function(action, params){
 window._wbBundleRefresh = function(){
   try{
     if(typeof window._deleCloudCall !== 'function') return;
-    if(!(window._deleGetSessionToken && window._deleGetSessionToken())) return;
+    if(!(window._deleGetSessionToken && window._deleGetSessionToken())){
+      /* 游客分支（2026-11-22 函数批配套）：无会话且游客模式激活时走 getGuestBundle 公开读，
+         带 knownUpdatedAt 让服务端未变更校验（不计次）；游客缓存独立 key，不与登录缓存混存。 */
+      if(!window.__guestActive) return;
+      ['grammar','grammar_quiz_map','vocab'].forEach(function(key){
+        var lsKey = 'siele_guest_bundle_v1_' + key;
+        var cur = null;
+        try{ cur = JSON.parse(localStorage.getItem(lsKey) || 'null'); }catch(e){}
+        window._deleCloudCall('getGuestBundle', {key: key, knownUpdatedAt: (cur && cur.updatedAt) || ''}).then(function(resp){
+          try{
+            if(!resp || !resp.ok || typeof resp.data !== 'string' || !resp.data) return;
+            if(cur && cur.updatedAt && resp.updatedAt && String(cur.updatedAt) === String(resp.updatedAt)) return;
+            try{ localStorage.setItem(lsKey, JSON.stringify({ updatedAt: resp.updatedAt || '', data: resp.data })); }catch(e){}
+          }catch(e){}
+        }).catch(function(){});
+      });
+      return;
+    }
     ['grammar','grammar_quiz_map','vocab'].forEach(function(key){
       window._deleCloudCall('getDataBundle', {key: key}).then(function(resp){
         try{
