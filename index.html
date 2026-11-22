@@ -871,12 +871,23 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script src="siele_oral.js" defer></script>
 <script src="siele_oral_ext.js" defer></script>
 <script src="audio/manifest.js" defer></script>
+<script>
+/* ===== 阶段B SWR 加载器·缓存预置（2026-11-22）=====
+   同步读 localStorage 数据包缓存，命中则暂存 window.__BUNDLE_*，供 grammar_data.js / grammar_quiz_map.js
+   的包裹层优先取用；无缓存/未登录/解析异常一律静默，数据文件自动回落原字面量（双通道保险）。 */
+(function(){try{
+  var raw=localStorage.getItem('siele_bundle_cache_v1'); if(!raw) return;
+  var c=JSON.parse(raw); if(!c) return;
+  if(c.grammar&&c.grammar.data){ try{ window.__BUNDLE_GRAMMAR=JSON.parse(c.grammar.data); }catch(e){} }
+  if(c.grammar_quiz_map&&c.grammar_quiz_map.data){ try{ window.__BUNDLE_GRAMMAR_QUIZ_MAP=JSON.parse(c.grammar_quiz_map.data); }catch(e){} }
+}catch(e){}})();
+</script>
 <script src="grammar_data.js" defer></script>
 <script src="grammar_quiz_map.js" defer></script>
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.10-202611221211';
+window.swVer = 'v98.11-202611221806';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -17725,6 +17736,31 @@ window._deleCloudCall = function(action, params){
     window._delePostToBridge({type:'siele-learning-request', reqId: reqId, action: action, params: params || {}});
   });
 };
+
+// ===== 阶段B SWR 加载器·后台刷新（2026-11-22）=====
+// 登录态下经桥拉取云端数据包：updatedAt 与本地缓存不同才写入缓存，下次打开生效（本次不动已构建数据）。
+// 未登录/游客/拉取失败一律静默——本地文件与缓存兜底，绝不影响页面功能。
+window._wbBundleRefresh = function(){
+  try{
+    if(typeof window._deleCloudCall !== 'function') return;
+    if(!(window._deleGetSessionToken && window._deleGetSessionToken())) return;
+    ['grammar','grammar_quiz_map'].forEach(function(key){
+      window._deleCloudCall('getDataBundle', {key: key}).then(function(resp){
+        try{
+          if(!resp || !resp.ok || typeof resp.data !== 'string' || !resp.data) return;
+          var raw = localStorage.getItem('siele_bundle_cache_v1');
+          var c = raw ? JSON.parse(raw) : {};
+          if(!c || typeof c !== 'object') c = {};
+          var cur = c[key];
+          if(cur && cur.updatedAt && resp.updatedAt && String(cur.updatedAt) === String(resp.updatedAt)) return;
+          c[key] = { updatedAt: resp.updatedAt || '', data: resp.data };
+          try{ localStorage.setItem('siele_bundle_cache_v1', JSON.stringify(c)); }catch(e){}
+        }catch(e){}
+      }).catch(function(){});
+    });
+  }catch(e){}
+};
+window.addEventListener('load', function(){ setTimeout(function(){ try{ window._wbBundleRefresh(); }catch(e){} }, 3000); });
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
 window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {}, quiz: {}, __audit: {v:1, log:[]} };
