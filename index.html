@@ -876,7 +876,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.9-202611221204';
+window.swVer = 'v98.10-202611221211';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -2372,7 +2372,7 @@ function renderNav(){
   if(!(_cs&&_cs.username) && !window.__guestActive){ nav.innerHTML = ''; var _tu0=document.getElementById('topUser'); if(_tu0) _tu0.innerHTML=''; return; }
   const navOnId = (typeof currentPage === 'string' && /^dele/.test(currentPage)) ? 'dele' : currentPage;
   let isAdmin = false;
-  try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && _ses.role === 'admin'); } catch(e) {}
+  try { var _raw = localStorage.getItem('swa_cloud_session_v1'); var _ses = _raw ? JSON.parse(_raw) : null; isAdmin = !!(_ses && (_ses.role === 'admin' || _ses.role === 'owner')); } catch(e) {}
   try{ if(typeof window._wbFlagsFetch==='function') window._wbFlagsFetch(false); }catch(e){}
   // 顶部右侧用户区（含云同步状态点；一次性填充）
   try{
@@ -2422,7 +2422,7 @@ function go(page){
   // 管理员独占页面: 非管理员被踢回仪表盘 + 提示
   // 注: isMainAdmin()/lsg() 在文件更后位置的 <script> 块 IIFE 内部, 此处直接读 localStorage
   let isAdmin = false;
-  try { var _raw2 = localStorage.getItem('swa_cloud_session_v1'); var _ses2 = _raw2 ? JSON.parse(_raw2) : null; isAdmin = !!(_ses2 && _ses2.role === 'admin'); } catch(e) {}
+  try { var _raw2 = localStorage.getItem('swa_cloud_session_v1'); var _ses2 = _raw2 ? JSON.parse(_raw2) : null; isAdmin = !!(_ses2 && (_ses2.role === 'admin' || _ses2.role === 'owner')); } catch(e) {}
   // DELE 专项已对所有用户开放（2026-08-11 移除 adminOnly 限制）
   // v36 功能授权守卫：未授权页面跳回仪表盘并提示（管理员全量放行，由 _wbFlagsAllowed 内部判断）
   try{
@@ -2534,7 +2534,7 @@ function renderMain(){
     case 'planner': h += renderPlanner(); break;
     case 'resources': h += renderResources(); break;
     case 'siele': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('sieleSpecial')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderSiele(); break;
-    case 'netdisk': h += (function(){try{var _s=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null');return !!(_s&&_s.role==='admin');}catch(e){return false;}})() ? renderNetdisk() : (typeof window._renderNoAccess==='function'?window._renderNoAccess():''); break;
+    case 'netdisk': h += (function(){try{var _s=JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null');return !!(_s&&(_s.role==='admin'||_s.role==='owner'));}catch(e){return false;}})() ? renderNetdisk() : (typeof window._renderNoAccess==='function'?window._renderNoAccess():''); break;
     case 'errors': h += renderErrors(); break;
     case 'reading': h += renderReading(); break;
     case 'refine': h += (typeof window._wbFlagsAllowed==='function' && !window._wbFlagsAllowed('refinePack')) ? (typeof window._renderNoAccess==='function'?window._renderNoAccess():'') : renderRefine(); break;
@@ -5599,7 +5599,7 @@ window._wbFlagsLoad();
 // v95.4: 启动一次性清理历史备份键（旧游标/旧快照复活源；正式数据在主键 dele_siele_wb_v3 与云端）
 try{ Object.keys(localStorage).forEach(function(k){ if(/^dele_siele_wb_v3_backup_/.test(k)) { try{ localStorage.removeItem(k); }catch(e){} } }); }catch(e){} /* R-39修复：原正则 bak$ 把现行备份键 dele_siele_wb_v3_bak 一并误删，现只清旧时间戳备份 backup_ 系列 */
 window._wbIsAdmin = function(){
-  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
+  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && (s.role === 'admin' || s.role === 'owner')); }catch(e){ return false; }
 };
 window._wbFlagsAllowed = function(k){
   if(window._wbIsAdmin()) return true;
@@ -5989,7 +5989,7 @@ WRITING_TASKS.forEach(function(t, i){ if(!t.id) t.id = 'wt' + i; });
 
 // 全局管理员检测（写作/口语模块在 IIFE 外，不能引用 IIFE 内的 isMainAdmin）
 function isContentAdmin(){
-  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && s.role === 'admin'); }catch(e){ return false; }
+  try{ var s = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); return !!(s && (s.role === 'admin' || s.role === 'owner')); }catch(e){ return false; }
 }
 
 // 用户写作数据迁移：旧按索引键 writing_0~13 / writing_essay_edit_0~13 → 新按 id 键
@@ -17624,7 +17624,7 @@ window._deleIsAdmin = function(){
   var isAdmin = false;
   try {
     var _raw = localStorage.getItem('swa_cloud_session_v1');
-    if (_raw) { var _s = JSON.parse(_raw); isAdmin = !!(_s && _s.role === 'admin'); }
+    if (_raw) { var _s = JSON.parse(_raw); isAdmin = !!(_s && (_s.role === 'admin' || _s.role === 'owner')); }
   } catch(e) {}
   if (!isAdmin && typeof isMainAdmin === 'function') {
     try { isAdmin = isMainAdmin(); } catch(e) {}
@@ -23390,7 +23390,7 @@ save=function(){
 /* ---------- 导航：站内后台管理面板 ---------- */
 NAV.push({s:'系统',items:[{id:'admin',icon:'⚙️',label:'后台管理',adminOnly:true}]});
 function isMainAdmin(){
-  try{var ses=lsg('swa_cloud_session_v1',null);return !!(ses&&ses.role==='admin');}catch(e){return false;}
+  try{var ses=lsg('swa_cloud_session_v1',null);return !!(ses&&(ses.role==='admin'||ses.role==='owner'));}catch(e){return false;}
 }
 function refreshAdminNav(){
   var systemGroup=NAV.find(function(group){return group.s==='系统';});

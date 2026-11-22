@@ -829,6 +829,8 @@ async function callSieleAuth(data){
   return payload;
 }
 function cloudSession(){return lsGet(CLOUD_SESSION_KEY,null)||lsGet(WORKBENCH_SESSION_KEY,null);}
+function cloudIsAdminSes(ses){return !!(ses&&(ses.role==='admin'||ses.role==='owner'));}
+function cloudIsOwnerSes(ses){return !!(ses&&ses.role==='owner');}
 function saveCloudSession(session){
   if(!session||!session.uid||!session.username||!session.sessionToken)return false;
   return lsSet(CLOUD_SESSION_KEY,{uid:session.uid,username:session.username,role:session.role||'learner',sessionToken:session.sessionToken,ts:Date.now()});
@@ -1446,7 +1448,7 @@ function renderPwdHistory(){
   try{const s=cloudSession();cu=(s&&s.username)||'';role=(s&&s.role)||'';}catch(_){}
   // 未登录：不显示任何记录（登录页/重置页不可窥探他人操作）
   if(!cu){el.innerHTML='<div style="color:var(--soft)">登录后可查看与本账号相关的密码修改记录。</div>';return;}
-  const isAdmin=(role==='admin');
+  const isAdmin=(role==='admin'||role==='owner');
   // 普通用户：仅显示 user 字段等于当前登录者的记录；管理员可见全部
   const visible=isAdmin?arr:arr.filter(function(x){return x.user===cu;});
   if(!visible.length){el.innerHTML='<div style="color:var(--soft)">暂无与本账号相关的记录。</div>';return;}
@@ -1504,7 +1506,7 @@ function enter(u,persist,profile){
   refreshBadges();renderAll();updateSyncUI();
   // 管理员专属导航：仅 role===admin 时显示
   var isAdmin=false;
-  try{var cs=cloudSession();isAdmin=!!(cs&&cs.role==='admin');}catch(e){}
+  try{var cs=cloudSession();isAdmin=!!(cs&&(cs.role==='admin'||cs.role==='owner'));}catch(e){}
   document.querySelectorAll('.admin-only').forEach(function(el){el.classList.toggle('hide',!isAdmin);});
   if(DB.syncCfg)setTimeout(()=>syncNow(true),600);
 }
@@ -1839,7 +1841,7 @@ var _dashCloudUsers=null;
 async function _dashEnsureUsers(){
   if(_dashCloudUsers) return _dashCloudUsers;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin') throw new Error('仅管理员可加载用户列表');
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)) throw new Error('仅管理员可加载用户列表');
   var result=await callSieleAuth({action:'adminListUsers',sessionToken:ses.sessionToken});
   if(!result.ok) throw new Error(cloudAuthMessage(result.code));
   _dashCloudUsers=result.users||(result.data&&result.data.users)||[];
@@ -1851,7 +1853,7 @@ async function populateLearnerSel(){
     var users=await _dashEnsureUsers();
     var opts='<option value="">— 选择用户 —</option>';
     var me=cloudSession()?cloudSession().username:'';
-    users.forEach(function(u){ opts+='<option value="'+esc(u.username)+'"'+(u.username===_dashCloudUser?' selected':'')+'>'+esc(u.username)+(u.username===me?'（我）':'')+(u.role==='admin'?' · 管理员':'')+'</option>'; });
+    users.forEach(function(u){ opts+='<option value="'+esc(u.username)+'"'+(u.username===_dashCloudUser?' selected':'')+'>'+esc(u.username)+(u.username===me?'（我）':'')+(u.role==='owner'?' · 最高管理员':u.role==='admin'?' · 管理员':'')+'</option>'; });
     sel.innerHTML=opts;
     _dashCloudUser=sel.value;
   }catch(e){ sel.innerHTML='<option value="">用户列表加载失败</option>'; }
@@ -1862,7 +1864,7 @@ async function loadLearnerDash(){
   if(!sel.value){ if(meta)meta.textContent='请先选择用户'; return; }
   _dashCloudUser=sel.value;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){ if(meta)meta.textContent='仅管理员会话可加载'; return; }
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){ if(meta)meta.textContent='仅管理员会话可加载'; return; }
   box.innerHTML='<div class="empty" style="grid-column:1/-1">正在加载 '+esc(sel.value)+' 的云端快照…</div>';
   if(meta)meta.textContent='';
   try{
@@ -2706,7 +2708,7 @@ async function renderAdminInvites(){
   var el=$('adminInvitesContent');
   if(!el)return;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){
     el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
     return;
   }
@@ -2758,7 +2760,7 @@ async function renderAdminSecurityLogs(type){
   var el=$('adminSecurityContent');
   if(!el)return;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){
     el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
     return;
   }
@@ -2809,7 +2811,7 @@ async function renderAdminQEdits(){
   var el=$('adminQEditsContent');
   if(!el)return;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){
     el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
     return;
   }
@@ -2984,7 +2986,7 @@ async function renderAdminAudit(){
   var el=$('adminAuditContent');
   if(!el)return;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){
     el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
     return;
   }
@@ -3163,7 +3165,7 @@ async function renderAdminUsers(){
   var el=$('adminUsersContent');
   if(!el)return;
   var ses=cloudSession();
-  if(!ses||!ses.sessionToken||ses.role!=='admin'){
+  if(!ses||!ses.sessionToken||!cloudIsAdminSes(ses)){
     el.innerHTML='<div class="note err">仅管理员可访问此页面。</div>';
     return;
   }
@@ -3179,7 +3181,7 @@ async function renderAdminUsers(){
     }
     // 统计栏
     var activeCount=users.filter(function(u){return u.status==='active';}).length;
-    var adminCount=users.filter(function(u){return u.role==='admin';}).length;
+    var adminCount=users.filter(function(u){return u.role==='admin'||u.role==='owner';}).length;
     var summaryHtml='<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
       +'<div class="card" style="flex:1;min-width:120px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--ink)">'+users.length+'</div><div style="font-size:11px;color:var(--soft)">总用户</div></div>'
       +'<div class="card" style="flex:1;min-width:120px;text-align:center;padding:12px"><div style="font-size:24px;font-weight:800;color:var(--tr)">'+activeCount+'</div><div style="font-size:11px;color:var(--soft)">活跃</div></div>'
@@ -3187,13 +3189,17 @@ async function renderAdminUsers(){
       +'</div>';
     // 用户表格
     var rows=users.map(function(u){
-      var isAdmin=u.role==='admin';
+      var isAdmin=(u.role==='admin'||u.role==='owner');
+      var isOwner=(u.role==='owner');
       var isActive=u.status==='active';
-      var roleBadge=isAdmin?'<span style="color:#8b5cf6;font-weight:700">管理员</span>':'<span style="color:var(--soft)">学习者</span>';
+      var roleBadge=isOwner?'<span style="color:#d97706;font-weight:700">最高管理员</span>':(isAdmin?'<span style="color:#8b5cf6;font-weight:700">管理员</span>'+(u.roleExpiresAt?'<div style="font-size:10px;color:var(--soft)">临时 · 至 '+fmtDT(u.roleExpiresAt)+'</div>':''):'<span style="color:var(--soft)">学习者</span>');
       var statusBadge=isActive?'<span style="color:var(--tr);font-weight:600">● 正常</span>':'<span style="color:var(--bad);font-weight:600">● 已停用</span>';
       var actions='';
-      if(isAdmin){
-        actions='<span style="color:var(--soft);font-size:11px">管理员账户</span>';
+      var viewerIsOwner=cloudIsOwnerSes(ses);
+      if(isOwner){
+        actions='<span style="color:var(--soft);font-size:11px">最高管理员</span>';
+      }else if(isAdmin){
+        actions=viewerIsOwner?'<button class="btn xs dgr" onclick="adminDemoteUser(\''+esc(u.uid)+'\',\''+esc(u.username)+'\')">降为学员</button>':'<span style="color:var(--soft);font-size:11px">管理员账户</span>';
       }else{
         if(isActive){
           actions='<button class="btn xs dgr" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\'disabled\')">停用</button> '
@@ -3201,6 +3207,7 @@ async function renderAdminUsers(){
         }else{
           actions='<button class="btn xs t" onclick="adminToggleUserStatus(\''+esc(u.uid)+'\',\''+esc(u.username)+'\',\'active\')">启用</button>';
         }
+        if(viewerIsOwner) actions+=' <button class="btn xs t" onclick="adminPromoteMenu(this,\''+esc(u.uid)+'\',\''+esc(u.username)+'\')">设为管理员 ▾</button>';
       }
       var userFlagsCell='<span style="font-size:11px;color:var(--soft)">管理员全量</span>';
       if(!isAdmin){
@@ -3286,6 +3293,46 @@ async function adminToggleUserStatus(uid,username,status){
   }catch(err){
     toast(label+'失败：'+(err.message||err),'err');
   }
+}
+// 角色三层（2026-11-22）：站长在用户列表点身份提/降管理员。按钮仅 owner 会话可见，云函数 requireOwner 兜底。
+var _roleMenuTarget=null;
+async function adminSetUserRole(uid,username,role,durationHours){
+  var ses=cloudSession();
+  try{
+    var result=await callSieleAuth({action:'adminSetUserRole',sessionToken:ses.sessionToken,uid:uid,role:role,durationHours:durationHours||0});
+    if(!result.ok)throw new Error(cloudAuthMessage(result.code));
+    toast(role==='admin'?'已设为管理员':'已降为学员','ok');
+    renderAdminUsers();
+  }catch(err){
+    toast('改身份失败：'+(err.message||err),'err');
+  }
+}
+function adminDemoteUser(uid,username){
+  if(!confirm('确定把 '+username+' 降为学员？\n\n降级后其管理员权限立即失效，须重新登录。'))return;
+  adminSetUserRole(uid,username,'learner',0);
+}
+function adminPromoteMenu(btn,uid,username){
+  closeAdminRoleMenu();
+  _roleMenuTarget={uid:uid,username:username};
+  var menu=document.createElement('div');
+  menu.id='adminRoleMenu';
+  menu.style.cssText='position:absolute;z-index:9999;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:6px;min-width:180px';
+  menu.innerHTML='<div style="font-size:11px;color:var(--soft);padding:4px 8px">设为管理员（选择时长）</div>'
+    +'<button class="btn xs gh" style="display:block;width:100%;text-align:left;margin:2px 0" onclick="adminPromotePick(0)">长期管理员</button>'
+    +'<button class="btn xs gh" style="display:block;width:100%;text-align:left;margin:2px 0" onclick="adminPromotePick(168)">临时 · 7 天</button>'
+    +'<button class="btn xs gh" style="display:block;width:100%;text-align:left;margin:2px 0" onclick="adminPromotePick(24)">临时 · 24 小时</button>';
+  document.body.appendChild(menu);
+  var r=btn.getBoundingClientRect();
+  menu.style.left=(window.scrollX+r.left)+'px';
+  menu.style.top=(window.scrollY+r.bottom+4)+'px';
+  setTimeout(function(){document.addEventListener('click',closeAdminRoleMenu,{once:true});},0);
+}
+function closeAdminRoleMenu(){var m=document.getElementById('adminRoleMenu');if(m)m.remove();}
+function adminPromotePick(hours){
+  var t=_roleMenuTarget;closeAdminRoleMenu();if(!t)return;
+  var label=hours===0?'长期管理员':(hours===168?'临时管理员（7 天）':'临时管理员（24 小时）');
+  if(!confirm('确定把 '+t.username+' 设为'+label+'？\n\n对方重新登录后新身份生效。'))return;
+  adminSetUserRole(t.uid,t.username,'admin',hours);
 }
 // v36 用户功能授权（背题/DELE专项/外刊精炼）：管理员在用户管理中按用户开通
 var USER_FLAG_DEFS=[
