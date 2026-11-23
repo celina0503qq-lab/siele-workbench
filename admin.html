@@ -335,7 +335,6 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <button class="btn blk t" type="submit">注册账号</button>
       <div class="hint" style="font-size:11px;color:var(--soft);margin-top:8px;text-align:center">注册后自动登录 · 首次注册需邀请码</div>
-      <div class="hint" style="font-size:11px;margin-top:4px;text-align:center"><a href="javascript:void(0)" id="regModeToggle" onclick="toggleRegMode()" style="color:var(--soft)">旧版注册（过渡期）→</a></div>
     </form>
     <div style="margin-top:14px;border-top:1px dashed var(--line);padding-top:12px">
       <button class="btn blk gh" type="button" onclick="openTransferIn()">📲 换设备登录？点此用传输码迁入账号</button>
@@ -1575,15 +1574,8 @@ async function doClaimSubmit(e){
     return false;
   }catch(err){ toast('无法连接账号服务，请检查网络或稍后再试','err'); return false; }
 }
-// ---- 平台注册（新用户） ----
+// ---- 平台注册（新用户；v98.20 起为唯一注册方式，旧版注册入口已下线，doRegister 仅留作回滚备件） ----
 var _regVerificationId='';
-function toggleRegMode(){
-  window.__regLegacy=!window.__regLegacy;
-  var legacy=!!window.__regLegacy;
-  $('f_re').classList.toggle('hide',legacy);
-  $('f_rc').classList.toggle('hide',legacy);
-  var t=$('regModeToggle'); if(t)t.textContent=legacy?'新版注册（平台账号）→':'旧版注册（过渡期）→';
-}
 async function doSendRegCode(){
   const email=($('regEmail').value||'').trim();
   if(!fldErr('f_re',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确'))return;
@@ -1598,7 +1590,6 @@ async function doSendRegCode(){
 }
 async function doRegisterEntry(e){
   e.preventDefault();
-  if(window.__regLegacy) return doRegister(e);
   const u=$('regUser').value.trim(),p=$('regPass').value,p2=$('regPass2').value,iv=$('regInvite').value.trim().toUpperCase();
   const email=($('regEmail').value||'').trim(),code=($('regCode').value||'').trim();
   const isEmail=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(u);
