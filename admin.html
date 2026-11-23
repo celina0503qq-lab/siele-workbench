@@ -340,10 +340,10 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       <button class="btn blk gh" type="button" onclick="openTransferIn()">📲 换设备登录？点此用传输码迁入账号</button>
     </div>
     <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:space-between">
-      <button class="btn-link" type="button" id="btnForgotPwdLogin" onclick="openPwdResetFromLogin()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">🔑 忘记密码？用邀请码重置</button>
+      <button class="btn-link" type="button" id="btnForgotPwdLogin" onclick="openPwdResetFromLogin()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">🔑 忘记密码？点此重置</button>
     </div>
     <div style="margin-top:10px"><button class="btn blk gh" type="button" onclick="returnToWorkbench()">🏠 先去学习工作台逛逛（未登录时进度仅存本机）</button></div>
-    <div class="auth-foot">🔒 本系统需要邀请码才能注册<br>账号与邀请码状态由云端安全保存，可在任意设备用账号密码登录<br>学习进度仍可在「云同步」中配置独立同步令牌，不复用登录密码<br>忘记密码？已登录用户可在后台「密码修改」入口用原密码或邀请码重置</div>
+    <div class="auth-foot">🔒 本系统需要邀请码才能注册<br>账号与邀请码状态由云端安全保存，可在任意设备用账号密码登录<br>学习进度仍可在「云同步」中配置独立同步令牌，不复用登录密码<br>忘记密码？已登录用户可在后台「密码修改」入口用原密码、邀请码或绑定邮箱验证码重置</div>
   </div>
 </div>
 
@@ -411,14 +411,50 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 <div class="auth-wrap hide" id="authPasswdView">
   <div class="auth-card" style="max-width:520px">
     <div class="auth-logo">Ñ</div>
-    <h1>忘记密码？用邀请码重置</h1>
-    <div class="sub">无需登录，使用「注册时」的用户名 + 邀请码即可重置密码</div>
+    <h1>忘记密码？重置密码</h1>
+    <div class="sub">无需登录，两种方式任选其一：绑定邮箱验证码，或注册时的邀请码</div>
+
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn gh" type="button" id="aprModeEmailBtn" onclick="showAprMode('email')" style="flex:1">📧 绑定邮箱验证码</button>
+      <button class="btn gh" type="button" id="aprModeInviteBtn" onclick="showAprMode('invite')" style="flex:1">🔑 邀请码</button>
+    </div>
 
     <div style="background:#fffaef;border:1px solid #f5a62333;border-radius:9px;padding:10px 12px;margin:14px 0;font-size:12px;line-height:1.7;color:#5a4a26">
       <b>安全说明：</b>重置后该账号在所有设备上的登录态将立即失效，下次登录请使用新密码。
       <br>密码至少 <b>6 位</b>，建议字母 + 数字 + 符号组合。
     </div>
 
+    <div id="aprEmailWrap">
+    <form id="formResetPwdEmailAnon" onsubmit="return doResetPwdWithEmailAnon(event)">
+      <div class="fld" id="f_aer_email">
+        <label>绑定邮箱 <span class="req">*</span></label>
+        <input id="aerEmail" autocomplete="email" placeholder="账号绑定的邮箱" maxlength="80">
+        <div class="err-msg">请输入有效邮箱</div>
+      </div>
+      <div class="fld" id="f_aer_code">
+        <label>邮箱验证码 <span class="req">*</span></label>
+        <div style="display:flex;gap:8px">
+          <input id="aerCode" autocomplete="one-time-code" placeholder="6 位验证码" maxlength="6" style="flex:1">
+          <button class="btn gh" type="button" id="aerSendBtn" onclick="doSendResetCodeAnon()">发送验证码</button>
+        </div>
+        <div class="err-msg">请输入 6 位验证码</div>
+      </div>
+      <div class="fld" id="f_aer_new1">
+        <label>新密码 <span class="req">*</span></label>
+        <input id="aerNewPwd1" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+        <div class="err-msg">新密码至少 8 位，且需同时包含字母和数字</div>
+      </div>
+      <div class="fld" id="f_aer_new2">
+        <label>确认新密码 <span class="req">*</span></label>
+        <input id="aerNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
+        <div class="err-msg">两次输入的密码不一致</div>
+      </div>
+      <button class="btn blk t" type="submit">验证并重置密码</button>
+      <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:10px;line-height:1.6">验证码会发送到该账号绑定的邮箱。没绑邮箱的账号请用「邀请码」方式。<b>重置后请到登录页用新密码登录</b>。</div>
+    </form>
+    </div>
+
+    <div id="aprInviteWrap" class="hide">
     <form id="formResetPwdInviteAnon" onsubmit="return doResetPwdWithInviteAnon(event)">
       <div class="fld" id="f_apr_user">
         <label>用户名 <span class="req">*</span></label>
@@ -443,13 +479,14 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       <button class="btn blk t" type="submit">验证并重置密码</button>
       <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:10px;line-height:1.6">验证通过后会立即清空该账号所有设备的登录态。<b>重置后请到登录页用新密码登录</b>。</div>
     </form>
+    </div>
 
     <div style="margin-top:16px;border-top:1px dashed var(--line);padding-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between">
       <button class="btn-link" type="button" onclick="showAuthView()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">← 返回登录</button>
       <button class="btn-link" type="button" onclick="returnToWorkbench()" style="background:none;border:0;color:var(--soft);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">先去学习工作台逛逛</button>
     </div>
 
-    <div class="auth-foot">本功能由 siele-auth 云函数验证身份，不依赖本机登录态。<br>所有密码操作均通过邀请码 + 用户名双重验证，安全等级与登录一致。</div>
+    <div class="auth-foot">本功能由 siele-auth 云函数验证身份，不依赖本机登录态。<br>邮箱方式验绑定邮箱验证码，邀请码方式验用户名 + 邀请码，安全等级与登录一致。</div>
   </div>
 </div>
 
@@ -646,7 +683,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
 <!-- ===== 密码修改 ===== -->
 <section class="page" id="pg-passwd">
   <div class="tb">
-    <div><h2>🔑 密码修改</h2><div class="d">修改当前账号登录密码。提供「原密码验证」与「邀请码验证」两种方式，任选其一即可。</div></div>
+    <div><h2>🔑 密码修改</h2><div class="d">修改当前账号登录密码。提供「原密码验证」「邀请码验证」「绑定邮箱验证码」三种方式，任选其一即可。</div></div>
     <div class="acts"><button class="btn sm ol" onclick="go('dash')">‹ 返回数据看板</button></div>
   </div>
 
@@ -714,6 +751,34 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
         </div>
         <button class="btn blk t" type="submit">验证并重置密码</button>
         <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">验证通过后，账号在所有设备的登录态将失效，<b>下次登录请使用新密码</b>。</div>
+      </form>
+    </div>
+
+    <!-- 方式三：绑定邮箱验证码 -->
+    <div class="card" style="display:flex;flex-direction:column">
+      <h3><span class="ic">📧</span>方式三：用绑定邮箱验证码修改</h3>
+      <div style="font-size:12px;color:var(--soft);line-height:1.65;margin-bottom:12px">向当前账号绑定的邮箱发送验证码，验码后设置新密码。<span id="peBoundState">正在读取绑定状态…</span></div>
+      <form id="formChangePwdEmail" onsubmit="return doChangePwdWithEmail(event)">
+        <div class="fld" id="f_pe_code">
+          <label>邮箱验证码 <span class="req">*</span></label>
+          <div style="display:flex;gap:8px">
+            <input id="peCode" autocomplete="one-time-code" placeholder="6 位验证码" maxlength="6" style="flex:1">
+            <button class="btn gh" type="button" id="peSendBtn" onclick="doSendResetCodeAuth()">发送验证码</button>
+          </div>
+          <div class="err-msg">请输入 6 位验证码</div>
+        </div>
+        <div class="fld" id="f_pe_new1">
+          <label>新密码 <span class="req">*</span></label>
+          <input id="peNewPwd1" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+          <div class="err-msg">新密码至少 8 位，且需同时包含字母和数字</div>
+        </div>
+        <div class="fld" id="f_pe_new2">
+          <label>确认新密码 <span class="req">*</span></label>
+          <input id="peNewPwd2" type="password" autocomplete="new-password" placeholder="再次输入新密码" maxlength="32">
+          <div class="err-msg">两次输入的密码不一致</div>
+        </div>
+        <button class="btn blk" type="submit">✅ 提交修改</button>
+        <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">修改成功后会自动退出当前登录，需要用新密码重新进入。未绑邮箱请先到「邮箱绑定」页绑定。</div>
       </form>
     </div>
   </div>
@@ -933,6 +998,12 @@ const CLOUD_AUTH_MESSAGES={
   REBIND_PASSWORD_MISMATCH:'当前密码不正确，请重新输入',
   EMAIL_VERIFY_FAILED:'验证码校验失败，请稍后重试',
   EMAIL_BIND_FAILED:'绑定失败，请稍后重试',
+  // 邮箱验证码找回密码（fnbatch-r7，2026-11-23）
+  RESET_CODE_SENT:'若该邮箱已绑定账号，验证码已发送，10 分钟内有效',
+  EMAIL_NOT_BOUND:'当前账号尚未绑定邮箱，请先到「邮箱绑定」页绑定',
+  RESEND_TOO_SOON:'发送太频繁，请 1 分钟后再试',
+  EMAIL_DAILY_LIMIT:'该邮箱今日验证码发送次数已达上限，请明天再试',
+  EMAIL_SEND_FAILED:'验证码发送失败，请稍后重试',
   // 平台迁移相关（阶段 C 第 3 步，2026-11-23）
   PLATFORM_NOT_CLAIMED:'该平台账号尚未认领站内账号',
   PLATFORM_TOKEN_INVALID:'平台登录已过期，请重新登录',
@@ -1725,6 +1796,63 @@ async function doChangePwdWithOld(e){
   return false;
 }
 
+// ---- 密码修改（方式三：绑定邮箱验证码，v98.22/fnbatch-r7） ----
+async function renderPasswdEmailState(){
+  const st=$('peBoundState'); if(!st)return;
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){st.textContent='登录状态已过期，请重新登录。';return;}
+    const r=await callSieleAuth({action:'getMyEmail',sessionToken:ses.sessionToken});
+    if(r&&r.ok&&r.bound)st.innerHTML='当前绑定邮箱：<b>'+esc(r.emailMasked||'')+'</b>，验证码将发送到该邮箱。';
+    else st.innerHTML='当前账号尚未绑定邮箱，请先到「邮箱绑定」页绑定后再使用本方式。';
+  }catch(e){ st.textContent='绑定状态读取失败，请稍后重试。'; }
+}
+async function doSendResetCodeAuth(){
+  const ses=cloudSession();
+  if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');return;}
+  const btn=$('peSendBtn'); if(btn)btn.disabled=true;
+  try{
+    const r=await callSieleAuth({action:'requestPasswordResetCodeAuth',sessionToken:ses.sessionToken});
+    if(!r.ok){ toast(cloudAuthMessage(r.code),'err'); if(btn)btn.disabled=false; return; }
+    toast('验证码已发送到你的绑定邮箱，10 分钟内有效','ok');
+    if(btn)_startSendCountdown(btn);
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); if(btn)btn.disabled=false; }
+}
+async function doChangePwdWithEmail(e){
+  e.preventDefault();
+  const code=($('peCode').value||'').trim(),newP=$('peNewPwd1').value,newP2=$('peNewPwd2').value;
+  let ok=fldErr('f_pe_code',!/^\d{6}$/.test(code),'请输入 6 位验证码');
+  ok=fldErr('f_pe_new1',!isStrongPwd(newP),'新密码至少 8 位，且需同时包含字母和数字')&&ok;
+  ok=fldErr('f_pe_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在验证…';}
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');return false;}
+    const result=await callSieleAuth({action:'confirmPasswordResetAuth',sessionToken:ses.sessionToken,code:code,newPassword:newP});
+    if(!result.ok){
+      if(result.code==='CODE_MISMATCH'||result.code==='NO_PENDING_CODE'||result.code==='CODE_EXPIRED'||result.code==='INVALID_CODE')fldErr('f_pe_code',true,cloudAuthMessage(result.code));
+      else if(result.code==='WEAK_PASSWORD')fldErr('f_pe_new1',true,cloudAuthMessage(result.code));
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    var _chgUser='';
+    try{var _cs=cloudSession();_chgUser=(_cs&&_cs.username)||'';}catch(_){}
+    try{lsDel(CLOUD_SESSION_KEY);}catch(_){}
+    addPwdHistoryEntry('✅ 已通过绑定邮箱验证码修改成功', _chgUser);
+    toast(cloudAuthMessage('PASSWORD_CHANGED'),'ok');
+    $('peCode').value='';$('peNewPwd1').value='';$('peNewPwd2').value='';
+    setTimeout(function(){doLogout({silent:true});},1200);
+    return false;
+  }catch(err){
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+    return false;
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='✅ 提交修改';}
+  }
+}
+
 // ---- 邮箱绑定（函数批 A 件前端入口，2026-11-23） ----
 var _ebBound=false,_ebTimer=null;
 async function renderEmailBindPage(){
@@ -1933,7 +2061,61 @@ function showAuthPasswdView(){
   try{$('appView').classList.remove('on');}catch(_){}
   try{$('mtop').style.display='none';}catch(_){}
   try{$('authPasswdView').classList.remove('hide');}catch(_){}
-  setTimeout(function(){try{$('aprUser').focus();}catch(_){}},120);
+  showAprMode('email');
+  setTimeout(function(){try{$('aerEmail').focus();}catch(_){}},120);
+}
+
+// 未登录重置：邮箱/邀请码方式切换（v98.22）
+function showAprMode(mode){
+  var email=mode!=='invite';
+  var ew=$('aprEmailWrap'),iw=$('aprInviteWrap');
+  if(ew)ew.classList.toggle('hide',!email);
+  if(iw)iw.classList.toggle('hide',email);
+  var eb=$('aprModeEmailBtn'),ib=$('aprModeInviteBtn');
+  if(eb){eb.style.background=email?'#c0392b':'';eb.style.color=email?'#fff':'';}
+  if(ib){ib.style.background=!email?'#c0392b':'';ib.style.color=!email?'#fff':'';}
+}
+async function doSendResetCodeAnon(){
+  const email=($('aerEmail').value||'').trim();
+  if(!fldErr('f_aer_email',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确'))return;
+  const btn=$('aerSendBtn'); if(btn)btn.disabled=true;
+  try{
+    const r=await callSieleAuth({action:'requestPasswordResetByEmail',email:email});
+    if(!r.ok){ toast(cloudAuthMessage(r.code),'err'); if(btn)btn.disabled=false; return; }
+    toast(cloudAuthMessage('RESET_CODE_SENT'),'ok');
+    if(btn)_startSendCountdown(btn);
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); if(btn)btn.disabled=false; }
+}
+async function doResetPwdWithEmailAnon(e){
+  e.preventDefault();
+  const email=($('aerEmail').value||'').trim(),code=($('aerCode').value||'').trim(),newP=$('aerNewPwd1').value,newP2=$('aerNewPwd2').value;
+  let ok=fldErr('f_aer_email',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确');
+  ok=fldErr('f_aer_code',!/^\d{6}$/.test(code),'请输入 6 位验证码')&&ok;
+  ok=fldErr('f_aer_new1',!isStrongPwd(newP),'新密码至少 8 位，且需同时包含字母和数字')&&ok;
+  ok=fldErr('f_aer_new2',newP!==newP2,'两次输入的密码不一致')&&ok;
+  if(!ok)return false;
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在验证…';}
+  try{
+    const result=await callSieleAuth({action:'confirmPasswordResetByEmail',email:email,code:code,newPassword:newP});
+    if(!result.ok){
+      if(result.code==='CODE_MISMATCH'||result.code==='NO_PENDING_CODE'||result.code==='CODE_EXPIRED'||result.code==='INVALID_CODE')fldErr('f_aer_code',true,cloudAuthMessage(result.code));
+      else if(result.code==='WEAK_PASSWORD')fldErr('f_aer_new1',true,cloudAuthMessage(result.code));
+      else if(result.code==='RATE_LIMITED')toast('尝试太频繁，请稍后再试','err');
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    addPwdHistoryEntry('✓ 未登录态已通过邮箱验证码重置成功（邮箱：'+email+'）', email);
+    toast('密码已重置，请用新密码重新登录','ok');
+    $('aerCode').value='';$('aerNewPwd1').value='';$('aerNewPwd2').value='';
+    setTimeout(function(){ showAuthView(); },1200);
+    return false;
+  }catch(err){
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+    return false;
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='验证并重置密码';}
+  }
 }
 
 // 从密码重置视图返回登录视图
@@ -2013,7 +2195,7 @@ function go(p){
   if(p==='io')renderIO();
   if(p==='sync')renderSyncPage();
   if(p==='users')switchAdminTab('users');
-  if(p==='passwd')renderPasswdPage();
+  if(p==='passwd'){renderPasswdPage();renderPasswdEmailState();}
   if(p==='emailbind')renderEmailBindPage();
   window.scrollTo({top:0});
 }
