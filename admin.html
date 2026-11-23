@@ -522,6 +522,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     <button class="ni admin-only" onclick="window.open('index.html#netdisk','_blank')" title="管理员专属：工作台资料地图"><span class="ic">🗺️</span>资料地图</button>
     <div class="ns admin-only hide">系统管理</div>
     <button class="ni admin-only hide" data-p="users" onclick="go('users')"><span class="ic">👥</span>用户管理</button>
+    <button class="ni admin-only hide" data-p="guest" onclick="go('guest')"><span class="ic">👀</span>游客数据</button>
     <div class="ns">学习</div>
     <button class="ni" onclick="returnToWorkbench()"><span class="ic">🏠</span>进入学习工作台</button>
   </nav>
@@ -849,6 +850,42 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
   <div id="adminSecurityContent" style="display:none"></div>
   <div id="adminQEditsContent" style="display:none"></div>
   <div id="adminAuditContent" style="display:none"></div>
+</section>
+
+<!-- ===== 游客数据（仅管理员，v98.23） ===== -->
+<section class="page" id="pg-guest">
+  <div class="tb">
+    <div><h2>👀 游客数据</h2><div class="d">游客是匿名试用、没有账号，所以不在「用户管理」名单里。这里看游客用量，并管理游客每日限额。</div></div>
+    <div class="acts"><button class="btn sm ol" onclick="renderGuestPage()">↻ 刷新</button></div>
+  </div>
+
+  <div class="g g3" style="margin-bottom:13px">
+    <div class="card" style="text-align:center"><div style="font-size:12px;color:var(--soft)">今日游客（设备数）</div><div id="gsTodayVisitors" style="font-size:30px;font-weight:800;margin-top:4px">–</div></div>
+    <div class="card" style="text-align:center"><div style="font-size:12px;color:var(--soft)">今日功能使用（总次数）</div><div id="gsTodayTotal" style="font-size:30px;font-weight:800;margin-top:4px">–</div></div>
+    <div class="card" style="text-align:center"><div style="font-size:12px;color:var(--soft)">今日数据包拉取（次）</div><div id="gsTodayBundle" style="font-size:30px;font-weight:800;margin-top:4px">–</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:13px">
+    <h3><span class="ic">📈</span>近 14 天用量</h3>
+    <div class="tblwrap"><div class="tscroll"><table class="vt" id="gsTable"><tbody><tr><td>正在读取…</td></tr></tbody></table></div></div>
+    <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">游客数＝当天来过的不同设备数（匿名统计，不含任何个人信息）；其余为各功能当天被使用的次数；数据包拉取＝游客端下载语法/词汇数据包的次数（括号内为不同网络数）。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="ic">🎚️</span>游客每日限额</h3>
+    <form id="formGuestPolicy" onsubmit="return doSaveGuestPolicy(event)">
+      <div class="g g2">
+        <div class="fld"><label>单词卡评级（次/天）</label><input id="gl_cards" type="number" min="0" max="100000" step="1"></div>
+        <div class="fld"><label>题库答题（次/天）</label><input id="gl_quiz" type="number" min="0" max="100000" step="1"></div>
+        <div class="fld"><label>跟读评分（次/天）</label><input id="gl_shadow" type="number" min="0" max="100000" step="1"></div>
+        <div class="fld"><label>外刊精炼（期/天）</label><input id="gl_refine" type="number" min="0" max="100000" step="1"></div>
+        <div class="fld"><label>SIELE 每种 Tarea 录音评分（次/天）</label><input id="gl_sielePerTarea" type="number" min="0" max="100000" step="1"></div>
+        <div class="fld"><label>游客云端音频</label><label style="display:flex;gap:8px;align-items:center;font-weight:400;padding-top:8px"><input id="gl_audio" type="checkbox" style="width:auto"> 允许游客使用云端语音服务</label></div>
+      </div>
+      <button class="btn blk" type="submit" style="margin-top:6px">保存设置</button>
+      <div class="hint" style="font-size:11.5px;color:var(--soft);margin-top:8px;line-height:1.6">填 0 表示关闭该项游客功能。保存后对新打开的游客页面生效。</div>
+    </form>
+  </div>
 </section>
 
 <!-- ===== 云同步 ===== -->
@@ -2196,6 +2233,7 @@ function go(p){
   if(p==='sync')renderSyncPage();
   if(p==='users')switchAdminTab('users');
   if(p==='passwd'){renderPasswdPage();renderPasswdEmailState();}
+  if(p==='guest')renderGuestPage();
   if(p==='emailbind')renderEmailBindPage();
   window.scrollTo({top:0});
 }
@@ -3077,6 +3115,61 @@ function applyImport(){
   saveDB();refreshBadges();
   $('impResult').innerHTML='<div class="note ok">✅ 导入完成：新增 '+added+' 条，覆盖 '+updated+' 条，跳过 '+skipped+' 条。</div>';
   toast('导入完成','ok');IMP=null;
+}
+
+// ================= 游客数据（仅管理员，v98.23/fnbatch-r8） =================
+const GS_KINDS=[['cards','单词卡'],['quiz','题库答题'],['shadow','跟读评分'],['refine','外刊精炼'],['sielePerTarea','SIELE 录音']];
+async function renderGuestPage(){
+  const tbl=$('gsTable');
+  try{
+    const ses=cloudSession();
+    if(!ses||!ses.sessionToken){if(tbl)tbl.innerHTML='<tbody><tr><td>登录状态已过期，请重新登录。</td></tr></tbody>';return;}
+    const r=await callSieleAuth({action:'getGuestStats',sessionToken:ses.sessionToken,days:14});
+    if(!r.ok){if(tbl)tbl.innerHTML='<tbody><tr><td>读取失败：'+esc(cloudAuthMessage(r.code))+'</td></tr></tbody>';return;}
+    const days=r.days||[];
+    const t=days[0]||{counts:{},visitors:0,bundleDownloads:0,bundleIps:0};
+    let tot=0; GS_KINDS.forEach(function(kv){ tot+=Number((t.counts||{})[kv[0]]||0); });
+    if($('gsTodayVisitors'))$('gsTodayVisitors').textContent=t.visitors||0;
+    if($('gsTodayTotal'))$('gsTodayTotal').textContent=tot;
+    if($('gsTodayBundle'))$('gsTodayBundle').textContent=t.bundleDownloads||0;
+    let h='<thead><tr><th>日期</th><th>游客数</th>';
+    GS_KINDS.forEach(function(kv){ h+='<th>'+kv[1]+'</th>'; });
+    h+='<th>数据包拉取</th></tr></thead><tbody>';
+    days.forEach(function(d){
+      h+='<tr><td>'+esc(d.day)+'</td><td>'+(d.visitors||0)+'</td>';
+      GS_KINDS.forEach(function(kv){ h+='<td>'+Number((d.counts||{})[kv[0]]||0)+'</td>'; });
+      h+='<td>'+(d.bundleDownloads||0)+'（'+(d.bundleIps||0)+'）</td></tr>';
+    });
+    if(tbl)tbl.innerHTML=h+'</tbody>';
+    const lim=(r.policy&&r.policy.limits)||{};
+    GS_KINDS.forEach(function(kv){ const el=$('gl_'+kv[0]); if(el&&lim[kv[0]]!==undefined)el.value=lim[kv[0]]; });
+    const ac=$('gl_audio'); if(ac)ac.checked=!!(r.policy&&r.policy.guestAudioCloud);
+  }catch(e){ if(tbl)tbl.innerHTML='<tbody><tr><td>读取失败，请检查网络后重试。</td></tr></tbody>'; }
+}
+async function doSaveGuestPolicy(e){
+  e.preventDefault();
+  const ses=cloudSession();
+  if(!ses||!ses.sessionToken){toast(cloudAuthMessage('UNAUTHORIZED'),'err');return false;}
+  const limits={}; let bad=false;
+  GS_KINDS.forEach(function(kv){
+    const v=Math.floor(Number(($('gl_'+kv[0])||{}).value));
+    if(!Number.isFinite(v)||v<0||v>100000)bad=true; else limits[kv[0]]=v;
+  });
+  if(bad){toast('限额必须是 0 到 100000 之间的整数','err');return false;}
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在保存…';}
+  try{
+    const r=await callSieleAuth({action:'setGuestPolicy',sessionToken:ses.sessionToken,policy:{limits:limits,guestAudioCloud:!!($('gl_audio')&&$('gl_audio').checked)}});
+    if(!r.ok){toast(cloudAuthMessage(r.code),'err');return false;}
+    toast('游客限额已保存','ok');
+    renderGuestPage();
+    return false;
+  }catch(err){
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+    return false;
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='保存设置';}
+  }
 }
 
 // ================= 云同步引擎 =================
