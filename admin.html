@@ -2078,6 +2078,9 @@ window.addEventListener('message',function(ev){
         } else if(lAct==='getUserFlags'){
           // v36 用户功能授权：工作台登录用户自查 背题/DELE专项/外刊精炼 授权
           lResult = await callSieleAuth({action:'getUserFlags', sessionToken: lToken});
+        } else if(lAct==='checkStatus'){
+          // v98.18 身份自愈：工作台开页核对云端有效身份（临时管理员到期按函数侧有效身份回落）
+          lResult = await callSieleAuth({action:'checkStatus', sessionToken: lToken});
         } else if(lAct==='asrSentence'){
           // v94.19 R4 云识别：一句话识别转发（siele-auth asrSentence）
           lResult = await callSieleAuth({action:'asrSentence', sessionToken: lToken,

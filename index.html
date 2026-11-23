@@ -908,7 +908,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.17-202611230852';
+window.swVer = 'v98.18-202611230912';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -17797,6 +17797,28 @@ window._wbBundleRefresh = function(){
   }catch(e){}
 };
 window.addEventListener('load', function(){ setTimeout(function(){ try{ window._wbBundleRefresh(); }catch(e){} }, 3000); });
+
+// ===== v98.18 身份自愈：开页向云端核对有效身份，刷新本机会话 role 并重渲染导航 =====
+// 本机会话里的 role 是登录那一刻存下的，升/降级与临时管理员到期都不会自动更新，
+// 导航的管理员入口按它显隐——曾出现站长被旧会话误藏入口、靠重登才恢复。开页静默核对一次即可自愈。
+window._wbRoleRefresh = function(){
+  try{
+    var ses = null; try{ ses = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+    if(!ses || !ses.sessionToken) return;
+    if(typeof window._deleCloudCall !== 'function') return;
+    window._deleCloudCall('checkStatus', {}).then(function(resp){
+      try{
+        if(!resp || !resp.ok || !resp.role) return;
+        var cur = null; try{ cur = JSON.parse(localStorage.getItem('swa_cloud_session_v1')||'null'); }catch(e){}
+        if(!cur || !cur.sessionToken || cur.role === resp.role) return;
+        cur.role = resp.role;
+        try{ localStorage.setItem('swa_cloud_session_v1', JSON.stringify(cur)); }catch(e){ return; }
+        if(typeof renderNav === 'function') renderNav();
+      }catch(e){}
+    }).catch(function(){});
+  }catch(e){}
+};
+window.addEventListener('load', function(){ setTimeout(function(){ try{ window._wbRoleRefresh(); }catch(e){} }, 2500); });
 
 // ===== 管理员内容编辑（写作练习 / SIELE 口语，content_edits 集合，按 namespace） =====
 window._contentEdits = { writing: {tasks: null, essays: {}}, oral: {}, essays: {}, speakingTopics: {}, tareas: {}, oralbank: {}, verbUsage: {}, grammar: {}, verbConj: {}, quiz: {}, __audit: {v:1, log:[]} };
