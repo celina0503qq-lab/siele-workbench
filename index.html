@@ -908,7 +908,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.18-202611230912';
+window.swVer = 'v98.19-202611230922';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -22501,7 +22501,7 @@ function showLoginOverlay(){
     '<button class="btn-login" type="submit">登 录</button>'+
     '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></span></div>'+
     '<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6">🔑 本工作台采用邀请制 · 邀请码由管理员发放<br>点上方「去注册」查看邀请码获取方式</div>'+
-    '<div style="margin-top:8px;text-align:center;font-size:12px"><a href="javascript:void(0)" id="wbGoClaim" style="color:#94a3b8">老账号迁移 / 认领平台账号 &rarr;</a></div>'+
+    '<div style="margin-top:12px"><a href="javascript:void(0)" id="wbGoClaim" style="display:block;text-align:center;padding:11px;border:1.5px solid #c0392b;border-radius:12px;color:#c0392b;font-size:14.5px;font-weight:700;text-decoration:none;background:#fff7f2">🔁 老账号迁移 / 认领平台账号</a></div>'+
     '</form></div>';
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
