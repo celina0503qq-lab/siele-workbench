@@ -908,7 +908,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.15-202611230036';
+window.swVer = 'v98.16-202611230215';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -22479,10 +22479,18 @@ function showLoginOverlay(){
     '<button class="btn-login" type="submit">登 录</button>'+
     '<div class="links" style="display:flex;justify-content:space-between"><span><a href="javascript:void(0)" id="wbForgotPwd">忘记密码？</a></span><span>没有账号？<a href="javascript:void(0)" id="wbGoReg">去注册 &rarr;</a></span></div>'+
     '<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0;font-size:11px;color:#94a3b8;text-align:center;line-height:1.6">🔑 本工作台采用邀请制 · 邀请码由管理员发放<br>点上方「去注册」查看邀请码获取方式</div>'+
+    '<div style="margin-top:8px;text-align:center;font-size:12px"><a href="javascript:void(0)" id="wbGoClaim" style="color:#94a3b8">老账号迁移 / 认领平台账号 &rarr;</a></div>'+
     '</form></div>';
   document.body.appendChild(ov);
   document.getElementById('wbLoginForm').addEventListener('submit',wbDoLogin);
   document.getElementById('wbGoReg').addEventListener('click',function(){showInviteGuide('entry');});
+  var _gc=document.getElementById('wbGoClaim');
+  if(_gc)_gc.addEventListener('click',function(){
+    openAdminPanel();
+    var frame=document.getElementById('wbAdminFrame');
+    var send=function(){try{frame.contentWindow.postMessage({type:'siele-cloud-open-claim'},location.origin);}catch(err){}};
+    if(frame){frame.onload=send;try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')send();}catch(err){}}
+  });
   /* v95.79: 双保险——事件委托（即使登录罩被重建/绑定失效，点「申请邀请码」也能唤起弹窗） */
   try{
     if(!window._wbInviteDelegate){
@@ -22536,6 +22544,56 @@ async function wbDoLogin(e){
       if(_pf){ var _pe=_pf.querySelector('.err'); if(_pe&&!_pe.textContent)_pe.textContent='连接账号服务超时（加速器开启时请关闭重试）'; _pf.classList.add('invalid'); }
     }
   },8000);
+  return false;
+}
+
+/* 阶段 C 第 3 步（2026-11-23）：平台登录未认领 → 认领视图（老用户名+老密码，经后台桥调 claimAccount） */
+function showClaimView(platformEmail){
+  var ov=document.getElementById('wbLoginOverlay');
+  if(!ov){ showLoginOverlay(); ov=document.getElementById('wbLoginOverlay'); }
+  if(!ov)return;
+  ov.classList.remove('hide');
+  var card=ov.querySelector('.wb-login-card');
+  if(!card)return;
+  var escE=String(platformEmail||'').replace(/[<>&"]/g,'');
+  card.innerHTML='<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#e08e0b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:28px;margin:0 auto 12px;box-shadow:0 6px 18px rgba(192,57,43,.4)">&Ntilde;</div>'+
+    '<h1>认领你的账号</h1>'+
+    '<div class="sub">平台账号'+(escE?('（'+escE+'）'):'')+'尚未认领站内账号<br>输入老账号的用户名和密码完成认领，学习数据一条不动</div>'+
+    '<form id="wbClaimForm">'+
+    '<div class="fld" id="wbCfU"><label>老账号用户名</label><input id="wbClaimUser" autocomplete="username" placeholder="你在工作台的用户名"></div>'+
+    '<div class="fld" id="wbCfP"><label>老账号密码</label><input id="wbClaimPass" type="password" autocomplete="current-password" placeholder="请输入老账号密码"><span class="err">老账号密码不正确</span></div>'+
+    '<button class="btn-login" type="submit">确认认领</button>'+
+    '<div style="margin-top:10px;font-size:11px;color:#94a3b8;line-height:1.6;text-align:center">认领须知：平台邮箱会自动绑定到你的账号；<br>若账号未绑邮箱，忘记密码只能联系站长重置。</div>'+
+    '<div class="links" style="margin-top:10px;text-align:center"><a href="javascript:void(0)" id="wbClaimBack">&larr; 返回登录</a></div>'+
+    '</form>';
+  document.getElementById('wbClaimForm').addEventListener('submit',wbDoClaim);
+  document.getElementById('wbClaimBack').addEventListener('click',function(){ location.reload(); });
+}
+function wbDoClaim(e){
+  e.preventDefault();
+  var username=(document.getElementById('wbClaimUser').value||'').trim();
+  var password = document.getElementById('wbClaimPass').value||'';
+  var fU=document.getElementById('wbCfU'),fP=document.getElementById('wbCfP');
+  fU&&fU.classList.remove('invalid');fP&&fP.classList.remove('invalid');
+  if(!username||!password){
+    if(!username&&fU)fU.classList.add('invalid');
+    if(!password&&fP){fP.querySelector('.err').textContent='请输入老账号密码';fP.classList.add('invalid');}
+    return false;
+  }
+  var token=window.__wbClaimToken||'';
+  if(!token){ try{ if(window.toast)toast('平台登录已过期，请重新登录','err'); }catch(e2){} return false; }
+  var button=document.querySelector('#wbClaimForm button[type="submit"]');
+  if(button){button.disabled=true;button.textContent='正在认领…';}
+  openAdminPanel();
+  var frame=document.getElementById('wbAdminFrame');
+  var send=function(){try{frame.contentWindow.postMessage({type:'siele-cloud-claim',platformAccessToken:token,username:username,password:password},location.origin);}catch(err){}};
+  if(frame){frame.onload=send;try{if(frame.contentDocument&&frame.contentDocument.readyState==='complete')send();}catch(err){}}
+  setTimeout(function(){
+    if(button&&!activeUser()){
+      button.disabled=false;button.textContent='确认认领';
+      try{ if(window.toast) toast('认领请求超时，请重试','err'); }catch(e2){}
+    }
+  },10000);
   return false;
 }
 
@@ -23568,6 +23626,40 @@ window.addEventListener('message',function(ev){
       /* v95.74: 显眼化——小字之外补 toast（报告实测「无反馈」实为小字不显眼） */
       try{ if(window.toast && err && err.textContent) toast(err.textContent,'err'); }catch(e){}
     }
+  }
+  /* 阶段 C 第 3 步（2026-11-23）：平台登录未认领 → 弹认领视图；认领结果回执 */
+  if(ev.data&&ev.data.type==='siele-claim-needed'){
+    window.__wbClaimToken=ev.data.platformAccessToken||'';
+    try{ showClaimView(ev.data.platformEmail||''); }catch(e){}
+    return;
+  }
+  if(ev.data&&ev.data.type==='siele-claim-failed'){
+    var _cf=document.getElementById('wbClaimForm');
+    var _btn=_cf?_cf.querySelector('button[type="submit"]'):null;
+    if(_btn){_btn.disabled=false;_btn.textContent='确认认领';}
+    var _pf=document.getElementById('wbCfP');
+    if(_pf){
+      var _pe=_pf.querySelector('.err');
+      if(_pe){
+        if(ev.data.code==='INVALID_CREDENTIALS')_pe.textContent='老账号用户名或密码不正确';
+        else if(ev.data.code==='ALREADY_CLAIMED')_pe.textContent='该账号已经认领过，请直接登录';
+        else if(ev.data.code==='PLATFORM_UID_TAKEN')_pe.textContent='该平台账号已绑定其他站内账号';
+        else if(ev.data.code==='LOCKED')_pe.textContent='尝试次数过多，请稍后再试';
+        else if(ev.data.code==='STORAGE_FULL')_pe.textContent='本地存储空间不足，请清理后重试';
+        else _pe.textContent='认领失败，请稍后重试';
+      }
+      _pf.classList.add('invalid');
+      try{ if(window.toast && _pe) toast(_pe.textContent,'err'); }catch(e){}
+    }
+    return;
+  }
+  if(ev.data&&ev.data.type==='siele-claim-done'){
+    if(ev.data.emailBound===false){
+      try{ if(window.toast) toast('认领成功。提醒：账号未绑邮箱，忘记密码只能联系站长重置，可到后台「邮箱绑定」页补绑','info'); }catch(e){}
+    }else{
+      try{ if(window.toast) toast('认领成功，平台邮箱已自动绑定','ok'); }catch(e){}
+    }
+    return;
   }
 });
 

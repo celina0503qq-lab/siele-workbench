@@ -283,7 +283,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       <button id="tabLogin" class="on" onclick="authTab('login')">登 录</button>
       <button id="tabReg" onclick="authTab('reg')">注 册</button>
     </div>
-    <form id="loginForm" onsubmit="return doLogin(event)">
+    <form id="loginForm" onsubmit="return doLoginEntry(event)">
       <div class="fld" id="f_lu">
         <label>邮箱 / 用户名 <span class="req">*</span></label>
         <input id="loginUser" autocomplete="username" placeholder="邮箱或用户名" maxlength="50">
@@ -296,7 +296,10 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <button class="btn blk" type="submit">登录并进入工作台</button>
     </form>
-    <form id="regForm" class="hide" onsubmit="return doRegister(event)">
+    <div style="margin-top:8px;text-align:center">
+      <button class="btn-link" type="button" onclick="openClaimView('create')" style="background:none;border:0;color:var(--soft);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">🔁 老用户账号迁移 / 认领</button>
+    </div>
+    <form id="regForm" class="hide" onsubmit="return doRegisterEntry(event)">
       <div class="fld" id="f_ri">
         <label>邀请码 <span class="req">*</span></label>
         <input id="regInvite" autocomplete="off" placeholder="请输入邀请码" maxlength="50">
@@ -306,6 +309,19 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
         <label>邮箱 / 用户名 <span class="req">*</span></label>
         <input id="regUser" autocomplete="username" placeholder="邮箱或2-20位字母/数字" maxlength="50">
         <div class="err-msg">请输入有效邮箱或2-20位用户名</div>
+      </div>
+      <div class="fld" id="f_re">
+        <label>邮箱 <span class="req">*</span></label>
+        <input id="regEmail" autocomplete="email" placeholder="用于登录与找回密码" maxlength="80">
+        <div class="err-msg">请输入有效邮箱</div>
+      </div>
+      <div class="fld" id="f_rc">
+        <label>邮箱验证码 <span class="req">*</span></label>
+        <div style="display:flex;gap:8px">
+          <input id="regCode" autocomplete="one-time-code" placeholder="6 位验证码" maxlength="6" style="flex:1">
+          <button class="btn gh" type="button" id="regSendBtn" onclick="doSendRegCode()">发送验证码</button>
+        </div>
+        <div class="err-msg">请输入 6 位验证码</div>
       </div>
       <div class="fld" id="f_rp">
         <label>密码 <span class="req">*</span></label>
@@ -319,6 +335,7 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
       </div>
       <button class="btn blk t" type="submit">注册账号</button>
       <div class="hint" style="font-size:11px;color:var(--soft);margin-top:8px;text-align:center">注册后自动登录 · 首次注册需邀请码</div>
+      <div class="hint" style="font-size:11px;margin-top:4px;text-align:center"><a href="javascript:void(0)" id="regModeToggle" onclick="toggleRegMode()" style="color:var(--soft)">旧版注册（过渡期）→</a></div>
     </form>
     <div style="margin-top:14px;border-top:1px dashed var(--line);padding-top:12px">
       <button class="btn blk gh" type="button" onclick="openTransferIn()">📲 换设备登录？点此用传输码迁入账号</button>
@@ -328,6 +345,52 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
     </div>
     <div style="margin-top:10px"><button class="btn blk gh" type="button" onclick="returnToWorkbench()">🏠 先去学习工作台逛逛（未登录时进度仅存本机）</button></div>
     <div class="auth-foot">🔒 本系统需要邀请码才能注册<br>账号与邀请码状态由云端安全保存，可在任意设备用账号密码登录<br>学习进度仍可在「云同步」中配置独立同步令牌，不复用登录密码<br>忘记密码？已登录用户可在后台「密码修改」入口用原密码或邀请码重置</div>
+  </div>
+</div>
+
+<!-- ============ 账号迁移认领（阶段 C 第 3 步，2026-11-23） ============ -->
+<div class="auth-wrap hide" id="claimView">
+  <div class="auth-card">
+    <div class="auth-logo">Ñ</div>
+    <h1>账号迁移认领</h1>
+    <div class="sub">把老账号与平台账号绑定，学习数据一条不动</div>
+    <div id="claimStepCreate">
+      <div class="fld" id="f_ce">
+        <label>邮箱 <span class="req">*</span></label>
+        <input id="claimEmail" autocomplete="email" placeholder="用于登录与找回密码" maxlength="80">
+        <div class="err-msg">请输入有效邮箱</div>
+      </div>
+      <div class="fld" id="f_cc">
+        <label>邮箱验证码 <span class="req">*</span></label>
+        <div style="display:flex;gap:8px">
+          <input id="claimCode" autocomplete="one-time-code" placeholder="6 位验证码" maxlength="6" style="flex:1">
+          <button class="btn gh" type="button" id="claimSendBtn" onclick="doSendClaimCode()">发送验证码</button>
+        </div>
+        <div class="err-msg">请输入 6 位验证码</div>
+      </div>
+      <div class="fld" id="f_cp">
+        <label>设置平台密码 <span class="req">*</span></label>
+        <input id="claimNewPass" type="password" autocomplete="new-password" placeholder="至少 8 位，含字母和数字" maxlength="32">
+        <div class="err-msg">密码至少 8 位，且需同时包含字母和数字</div>
+      </div>
+      <button class="btn blk" type="button" onclick="doClaimCreatePlatform()">创建平台账号，下一步</button>
+      <div class="hint" style="font-size:11px;color:var(--soft);margin-top:8px;text-align:center">已有平台账号？请先用平台账号登录，未认领时会自动进入认领</div>
+    </div>
+    <form id="claimForm" class="hide" onsubmit="return doClaimSubmit(event)">
+      <div class="fld" id="f_cu">
+        <label>老账号用户名 <span class="req">*</span></label>
+        <input id="claimUser" autocomplete="username" placeholder="你在工作台的用户名" maxlength="50">
+        <div class="err-msg">请输入老账号用户名</div>
+      </div>
+      <div class="fld" id="f_cpw">
+        <label>老账号密码 <span class="req">*</span></label>
+        <input id="claimPass" type="password" autocomplete="current-password" placeholder="请输入老账号密码" maxlength="32">
+        <div class="err-msg">老账号密码不正确</div>
+      </div>
+      <div class="hint" style="font-size:11px;color:var(--soft);margin:6px 0 10px;line-height:1.6">认领须知：平台邮箱会自动绑定到你的账号；若账号未绑邮箱，忘记密码只能联系站长重置。</div>
+      <button class="btn blk t" type="submit">确认认领</button>
+    </form>
+    <div style="margin-top:10px;text-align:center"><button class="btn-link" type="button" onclick="closeClaimView()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">← 返回登录</button></div>
   </div>
 </div>
 
@@ -856,7 +919,12 @@ const CLOUD_AUTH_MESSAGES={
   CODE_MISMATCH:'验证码不正确，请重新输入',
   REBIND_PASSWORD_MISMATCH:'当前密码不正确，请重新输入',
   EMAIL_VERIFY_FAILED:'验证码校验失败，请稍后重试',
-  EMAIL_BIND_FAILED:'绑定失败，请稍后重试'
+  EMAIL_BIND_FAILED:'绑定失败，请稍后重试',
+  // 平台迁移相关（阶段 C 第 3 步，2026-11-23）
+  PLATFORM_NOT_CLAIMED:'该平台账号尚未认领站内账号',
+  PLATFORM_TOKEN_INVALID:'平台登录已过期，请重新登录',
+  PLATFORM_UID_TAKEN:'该平台账号已绑定其他站内账号，请直接登录',
+  ALREADY_CLAIMED:'该站内账号已经认领过，请直接登录'
 };
 // 本地密码强度校验（与云函数 isStrongPassword 一致）：≥8 位且同时包含字母和数字
 function isStrongPwd(p){ return typeof p==='string' && p.length>=8 && /[A-Za-z]/.test(p) && /\d/.test(p); }
@@ -1350,6 +1418,240 @@ async function doLogin(e,credentials){
     else if(failCode==='SDK_LOAD_FAILED')toast('云服务组件加载失败（可能被网络或加速器拦截），请关闭代理/加速器后重试','err');
   }finally{
     if(submit){submit.disabled=false;submit.textContent='登 录';}
+  }
+  return false;
+}
+
+// ---- 平台账号通道（阶段 C 第 3 步，2026-11-23）----
+// 平台 REST 直调（网关 auth API，publishable key 为公开值）；登录先走平台、未迁移用户自动回落老通道（过渡期）。
+var PLATFORM_GATEWAY='https://'+SIELE_CLOUDBASE_CONFIG.env+'.api.tcloudbasegateway.com/auth/v1';
+async function platformApi(path,body){
+  var res=await fetch(PLATFORM_GATEWAY+path,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+SIELE_CLOUDBASE_CONFIG.accessKey},body:JSON.stringify(body||{})});
+  var data={}; try{ data=await res.json(); }catch(e){}
+  return {status:res.status,body:data};
+}
+async function platformSignInToken(identifier,password){
+  var r=await platformApi('/signin',{username:identifier,password:password});
+  if(r.status===200&&r.body&&r.body.access_token)return r.body.access_token;
+  return null;
+}
+// 登录成功收尾（与 doLogin 成功路径同款处理，平台通道专用，避免改动 doLogin 本体）
+function _applyLoginSuccess(result,credentials){
+  if(!postLoginLocalPrepare(result)){
+    toast('本地存储空间不足，登录数据写入失败。请在「存储空间管理」中清理后重新登录','err');
+    return false;
+  }
+  maybeMigrateLegacyData(result.username);
+  if(credentials&&window.parent&&window.parent!==window){
+    lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+  }
+  if(!credentials){
+    lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+    if(window.parent&&window.parent!==window){
+      setTimeout(function(){try{window.parent.location.reload();}catch(e){}},400);
+    }
+  }
+  toast('登录成功，正在进入学习工作台…','ok');
+  enter(result.username,true,result);
+  gotoWorkbench();
+  return true;
+}
+async function doLoginEntry(e,credentials){
+  if(e&&e.preventDefault)e.preventDefault();
+  const u=credentials&&credentials.username!=null?String(credentials.username).trim():$('loginUser').value.trim();
+  const p=credentials&&credentials.password!=null?String(credentials.password):$('loginPass').value;
+  let ok=fldErr('f_lu',!u);ok=fldErr('f_lp',!p)&&ok;
+  if(!ok)return false;
+  const submit=e&&e.currentTarget?e.currentTarget.querySelector('button[type="submit"]'):null;
+  if(submit){submit.disabled=true;submit.textContent='正在登录…';}
+  try{
+    let token=null;
+    try{ token=await platformSignInToken(u,p); }catch(_netErr){ token=null; }
+    if(token){
+      const result=await callSieleAuth({action:'platformLogin',platformAccessToken:token});
+      if(result.ok){ _applyLoginSuccess(result,credentials); return false; }
+      if(result.code==='PLATFORM_NOT_CLAIMED'){
+        window.__pendingPlatformToken=token;
+        window.__pendingPlatformEmail=result.platformEmail||'';
+        if(credentials&&window.parent&&window.parent!==window){
+          window.parent.postMessage({type:'siele-claim-needed',platformAccessToken:token,platformEmail:result.platformEmail||''},location.origin);
+        }else{
+          openClaimView('bind');
+          toast('这个平台账号还没认领站内账号，请完成认领','info');
+        }
+        return false;
+      }
+      if(result.code==='USER_DISABLED'){
+        if(credentials&&window.parent&&window.parent!==window){ window.parent.postMessage({type:'siele-login-failed',code:'USER_DISABLED'},location.origin); }
+        toast(cloudAuthMessage('USER_DISABLED'),'err');
+        return false;
+      }
+      toast(cloudAuthMessage(result.code),'err');
+      if(credentials&&window.parent&&window.parent!==window){ window.parent.postMessage({type:'siele-login-failed',code:result.code||'LOGIN_FAILED'},location.origin); }
+      return false;
+    }
+    /* 平台无此账号或密码不符 → 回落老通道（过渡期 14 天） */
+    return doLogin(e,credentials);
+  }catch(err){
+    console.error('Platform login failed',err);
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+    if(credentials&&window.parent&&window.parent!==window){ window.parent.postMessage({type:'siele-login-failed',code:'NETWORK_ERROR'},location.origin); }
+    return false;
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='登 录';}
+  }
+}
+// ---- 账号迁移认领 ----
+var _claimVerificationId='';
+function openClaimView(mode){
+  $('authView').classList.add('hide');
+  var pv=$('authPasswdView'); if(pv)pv.classList.add('hide');
+  $('claimView').classList.remove('hide');
+  var bind=mode==='bind'&&!!window.__pendingPlatformToken;
+  $('claimStepCreate').classList.toggle('hide',bind);
+  $('claimForm').classList.toggle('hide',!bind);
+}
+function closeClaimView(){
+  $('claimView').classList.add('hide');
+  $('authView').classList.remove('hide');
+  authTab('login');
+}
+function _startSendCountdown(btn){
+  let n=60; btn.disabled=true; btn.textContent=n+' 秒后重发';
+  var t=setInterval(()=>{ n--; if(n<=0){ clearInterval(t); btn.disabled=false; btn.textContent='发送验证码'; } else { btn.textContent=n+' 秒后重发'; } },1000);
+}
+async function doSendClaimCode(){
+  const email=($('claimEmail').value||'').trim();
+  if(!fldErr('f_ce',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确'))return;
+  const btn=$('claimSendBtn'); if(btn)btn.disabled=true;
+  try{
+    const r=await platformApi('/verification',{email:email,type:'EMAIL'});
+    if(!r.body||!r.body.verification_id){ toast('验证码发送失败，请稍后重试','err'); if(btn)btn.disabled=false; return; }
+    _claimVerificationId=r.body.verification_id;
+    toast('验证码已发送到该邮箱，10 分钟内有效','ok');
+    if(btn)_startSendCountdown(btn);
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); if(btn)btn.disabled=false; }
+}
+async function doClaimCreatePlatform(){
+  const email=($('claimEmail').value||'').trim(),code=($('claimCode').value||'').trim(),np=$('claimNewPass').value;
+  let ok=fldErr('f_ce',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确');
+  ok=fldErr('f_cc',!/^\d{6}$/.test(code),'请输入 6 位验证码')&&ok;
+  ok=fldErr('f_cp',!isStrongPwd(np),'密码至少 8 位，且需同时包含字母和数字')&&ok;
+  if(!ok)return;
+  if(!_claimVerificationId){ toast('请先点「发送验证码」获取邮箱验证码','err'); return; }
+  try{
+    const v=await platformApi('/verification/verify',{verification_id:_claimVerificationId,verification_code:code});
+    if(!v.body||!v.body.verification_token){ fldErr('f_cc',true,'验证码不正确，请重新输入'); return; }
+    const su=await platformApi('/signup',{email:email,password:np,verification_token:v.body.verification_token});
+    if(!su.body||!su.body.access_token){ toast('平台账号创建失败：'+((su.body&&(su.body.error_description||su.body.error))||'请稍后重试'),'err'); return; }
+    window.__pendingPlatformToken=su.body.access_token;
+    window.__pendingPlatformEmail=email;
+    $('claimStepCreate').classList.add('hide');
+    $('claimForm').classList.remove('hide');
+    toast('平台账号已创建，请再验证你的老账号','ok');
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); }
+}
+async function doClaimSubmit(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  const u=($('claimUser').value||'').trim(),p=$('claimPass').value;
+  let ok=fldErr('f_cu',!u,'请输入老账号用户名'); ok=fldErr('f_cpw',!p,'请输入老账号密码')&&ok;
+  if(!ok)return false;
+  const token=window.__pendingPlatformToken;
+  if(!token){ toast('平台登录已过期，请重新登录','err'); closeClaimView(); return false; }
+  try{
+    const result=await callSieleAuth({action:'claimAccount',platformAccessToken:token,username:u,password:p});
+    if(!result.ok){
+      if(result.code==='INVALID_CREDENTIALS')fldErr('f_cpw',true,'老账号用户名或密码不正确');
+      else if(result.code==='ALREADY_CLAIMED')toast('该账号已经认领过，请直接登录','info');
+      else if(result.code==='PLATFORM_UID_TAKEN')toast('该平台账号已绑定其他站内账号','err');
+      else if(result.code==='LOCKED')toast('尝试次数过多，请稍后再试','err');
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    window.__pendingPlatformToken=null;
+    if(result.emailBound===false)toast('认领成功。提醒：账号未绑邮箱，忘记密码只能联系站长重置，可到后台「邮箱绑定」页补绑','info');
+    else toast('认领成功，平台邮箱已自动绑定','ok');
+    _applyLoginSuccess(result,null);
+    return false;
+  }catch(err){ toast('无法连接账号服务，请检查网络或稍后再试','err'); return false; }
+}
+// ---- 平台注册（新用户） ----
+var _regVerificationId='';
+function toggleRegMode(){
+  window.__regLegacy=!window.__regLegacy;
+  var legacy=!!window.__regLegacy;
+  $('f_re').classList.toggle('hide',legacy);
+  $('f_rc').classList.toggle('hide',legacy);
+  var t=$('regModeToggle'); if(t)t.textContent=legacy?'新版注册（平台账号）→':'旧版注册（过渡期）→';
+}
+async function doSendRegCode(){
+  const email=($('regEmail').value||'').trim();
+  if(!fldErr('f_re',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'邮箱格式不正确'))return;
+  const btn=$('regSendBtn'); if(btn)btn.disabled=true;
+  try{
+    const r=await platformApi('/verification',{email:email,type:'EMAIL'});
+    if(!r.body||!r.body.verification_id){ toast('验证码发送失败，请稍后重试','err'); if(btn)btn.disabled=false; return; }
+    _regVerificationId=r.body.verification_id;
+    toast('验证码已发送到该邮箱，10 分钟内有效','ok');
+    if(btn)_startSendCountdown(btn);
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); if(btn)btn.disabled=false; }
+}
+async function doRegisterEntry(e){
+  e.preventDefault();
+  if(window.__regLegacy) return doRegister(e);
+  const u=$('regUser').value.trim(),p=$('regPass').value,p2=$('regPass2').value,iv=$('regInvite').value.trim().toUpperCase();
+  const email=($('regEmail').value||'').trim(),code=($('regCode').value||'').trim();
+  const isEmail=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(u);
+  const isUser=/^[\w\u4e00-\u9fa5]{2,20}$/.test(u);
+  let ok=fldErr('f_ri',!iv,'请输入邀请码');
+  ok=fldErr('f_ru',!(isEmail||isUser),'请输入有效邮箱或 2-20 位用户名')&&ok;
+  ok=fldErr('f_re',!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),'请输入有效邮箱')&&ok;
+  ok=fldErr('f_rc',!/^\d{6}$/.test(code),'请输入 6 位验证码')&&ok;
+  ok=fldErr('f_rp',!isStrongPwd(p),'密码至少 8 位，且需同时包含字母和数字')&&ok;
+  ok=fldErr('f_rp2',p!==p2)&&ok;
+  if(!ok)return false;
+  if(!_regVerificationId){ toast('请先点「发送验证码」获取邮箱验证码','err'); return false; }
+  const submit=e.currentTarget.querySelector('button[type="submit"]');
+  if(submit){submit.disabled=true;submit.textContent='正在安全注册…';}
+  try{
+    const v=await platformApi('/verification/verify',{verification_id:_regVerificationId,verification_code:code});
+    if(!v.body||!v.body.verification_token){ fldErr('f_rc',true,'验证码不正确，请重新输入'); return false; }
+    const body={email:email,password:p,verification_token:v.body.verification_token};
+    if(/^[a-z][0-9a-z_-]{5,24}$/.test(u))body.username=u;
+    const su=await platformApi('/signup',body);
+    if(!su.body||!su.body.access_token){ toast('平台账号创建失败：'+((su.body&&(su.body.error_description||su.body.error))||'请稍后重试'),'err'); return false; }
+    const result=await callSieleAuth({action:'platformRegister',platformAccessToken:su.body.access_token,username:u,inviteCode:iv});
+    if(!result.ok){
+      if(result.code==='USERNAME_TAKEN')fldErr('f_ru',true,cloudAuthMessage(result.code));
+      else if(result.code==='EMAIL_TAKEN')fldErr('f_re',true,'该邮箱已绑定站内账号，请直接登录或走账号认领');
+      else if(result.code==='PLATFORM_UID_TAKEN')toast('该平台账号已注册过站内账号，请直接登录','info');
+      else if(result.code==='INVALID_INVITE'||result.code==='INVITE_USED'){
+        fldErr('f_ri',true,cloudAuthMessage(result.code));
+        try{
+          if(window.parent&&window.parent!==window){ window.parent.postMessage({type:'siele-invite-invalid'}, location.origin); }
+          else { toast('邀请码无效或已被使用，请联系管理员获取新邀请码','err'); }
+        }catch(_eInv){}
+      }
+      else if(result.code==='WEAK_PASSWORD')fldErr('f_rp',true,cloudAuthMessage(result.code));
+      else toast(cloudAuthMessage(result.code),'err');
+      return false;
+    }
+    if(!postLoginLocalPrepare(result)){
+      toast('本地存储空间不足，注册数据写入失败。请在「存储空间管理」中清理后重试','err');
+      return false;
+    }
+    maybeMigrateLegacyData(result.username);
+    if(window.parent&&window.parent!==window){
+      lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+    }
+    toast('注册成功，正在进入学习工作台…','ok');
+    enter(result.username,true,result);
+    gotoWorkbench();
+  }catch(err){
+    console.error('Platform registration failed',err);
+    toast('无法连接账号服务，请检查网络或稍后再试','err');
+  }finally{
+    if(submit){submit.disabled=false;submit.textContent='注册账号';}
   }
   return false;
 }
@@ -3697,9 +3999,34 @@ async function transferIn(code){
       })();
       return;
     }
+    if(ev.data.type==='siele-cloud-open-claim'){
+      openClaimView('create');
+      return;
+    }
+    if(ev.data.type==='siele-cloud-claim'){
+      (async function(){
+        try{
+          var result=await callSieleAuth({action:'claimAccount',platformAccessToken:ev.data.platformAccessToken,username:ev.data.username,password:ev.data.password});
+          if(!result.ok){
+            window.parent.postMessage({type:'siele-claim-failed',code:result.code||'CLAIM_FAILED'},location.origin);
+            return;
+          }
+          if(!postLoginLocalPrepare(result)){
+            window.parent.postMessage({type:'siele-claim-failed',code:'STORAGE_FULL'},location.origin);
+            return;
+          }
+          maybeMigrateLegacyData(result.username);
+          lsSet(WORKBENCH_SESSION_KEY,{uid:result.uid,username:result.username,role:result.role||'learner',sessionToken:result.sessionToken,ts:Date.now()});
+          window.parent.postMessage({type:'siele-claim-done',emailBound:!!result.emailBound,username:result.username},location.origin);
+        }catch(err){
+          if(window.parent&&window.parent!==window)window.parent.postMessage({type:'siele-claim-failed',code:'NETWORK_ERROR'},location.origin);
+        }
+      })();
+      return;
+    }
     if(ev.data.type!=='siele-cloud-login')return;
     authTab('login');
-    doLogin(null,{username:ev.data.username,password:ev.data.password});
+    doLoginEntry(null,{username:ev.data.username,password:ev.data.password});
   });
   // 跨标签页感知：学习工作台写入数据后，后台自动刷新
   window.addEventListener('storage',e=>{
