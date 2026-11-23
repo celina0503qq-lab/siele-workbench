@@ -901,6 +901,34 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
     for(var k in L){ if(!Array.isArray(v[k])||v[k].length!==L[k]){ ok=false; break; } }
     if(ok) window.__BUNDLE_VOCAB=v;
   }
+  /* 口语包（阶段B 第三包，2026-11-23）：整包校验——分 Tarea 条数/总题数/T2 model 已生成/passages 主题数/topics 条数/ext 键/T1 重复 id 恰 2/FNV 校验和，任一不符整包不用，回落外链文件原数据 */
+  var o=load('siele_oral');
+  if(o&&o.meta&&o.meta.schemaVersion===1&&o.bank&&o.ext&&o.passages&&o.topics20){
+    var OL=[129,142,76,101,90], ook=true, otot=0;
+    for(var on=1; on<=5; on++){ if(!Array.isArray(o.bank[on])||o.bank[on].length!==OL[on-1]){ ook=false; break; } otot+=o.bank[on].length; }
+    if(ook&&otot!==538) ook=false;
+    if(ook&&Object.keys(o.passages).length!==38) ook=false;
+    if(ook&&(!Array.isArray(o.topics20)||o.topics20.length!==20)) ook=false;
+    if(ook&&(!o.ext.t4_ab||!o.ext.t5_ab)) ook=false;
+    if(ook){ for(var oi=0; oi<o.bank[2].length; oi++){ var oq=o.bank[2][oi]; if(!oq||typeof oq.model!=='string'||!oq.model){ ook=false; break; } } }
+    if(ook){ var oc={}, odup=0; o.bank[1].forEach(function(q){ var id=q&&q.id; if(id){ if(oc[id]) odup++; oc[id]=1; } }); if(odup!==2) ook=false; }
+    if(ook){ var oh=0x811c9dc5, os=JSON.stringify({bank:o.bank,ext:o.ext,passages:o.passages,topics20:o.topics20}); for(var oj=0; oj<os.length; oj++){ oh^=os.charCodeAt(oj); oh=Math.imul(oh,0x01000193)>>>0; } if(('0000000'+oh.toString(16)).slice(-8)!==o.meta.sourceHash) ook=false; }
+    if(ook) window.__BUNDLE_ORAL=o;
+  }
+  /* 口语灌入：DOMContentLoaded 时（defer 的 siele_oral*.js 已执行完）把包数据原地灌入既有全局对象——各 Tarea 数组清空重填、SIELE_ORAL_EXT 原地换内容、SIELE_TOPICS_20 原地重填；下游变换与全部直接引用零改动。passages 的 operative 副本在 siele_oral.js 闭包内（与包内数据同源）不替换。灌入为同步原子块，无包/校验不过则不执行、文件原数据即兜底 */
+  var oralInject=function(){
+    try{
+      var b=window.__BUNDLE_ORAL; if(!b) return;
+      if(typeof SIELE_ORAL_BANK==='undefined'||!SIELE_ORAL_BANK) return;
+      [1,2,3,4,5].forEach(function(n){ var a=SIELE_ORAL_BANK[n]; a.length=0; b.bank[n].forEach(function(q){ a.push(q); }); });
+      var E=window.SIELE_ORAL_EXT||(window.SIELE_ORAL_EXT={});
+      Object.keys(E).forEach(function(k){ delete E[k]; });
+      Object.keys(b.ext).forEach(function(k){ E[k]=b.ext[k]; });
+      if(typeof SIELE_TOPICS_20!=='undefined'&&Array.isArray(SIELE_TOPICS_20)){ SIELE_TOPICS_20.length=0; b.topics20.forEach(function(t){ SIELE_TOPICS_20.push(t); }); }
+      window.__ORAL_FROM_BUNDLE=true;
+    }catch(e){}
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', oralInject); else oralInject();
 }catch(e){}})();
 </script>
 <script src="grammar_data.js" defer></script>
@@ -908,7 +936,7 @@ body{background:linear-gradient(160deg,#FFF3E4 0%,#FFFDF6 42%,#FFF 100%) fixed}
 <script>
 /* ===== 版本单一真源（v71 起）：window.swVer 为全站唯一版本号，页脚/版本自检/SW 注册均引用它；
    发版时只改此处 + sw2.js CACHE 两处（页脚为动态注入无需再改）===== */
-window.swVer = 'v98.23-202611231308';
+window.swVer = 'v98.24-202611231758';
 /* ===== 自清理模式：URL 带 ?reset=1 时卸载全部 Service Worker + 清缓存 + 刷新
    用途：PWA/Edge 中 F12 不可用或页面卡在旧版时，访问 ?reset=1 一键修复（无需 DevTools）===== */
 (function(){
@@ -17782,7 +17810,7 @@ window._wbBundleRefresh = function(){
       });
       return;
     }
-    ['grammar','grammar_quiz_map','vocab'].forEach(function(key){
+    ['grammar','grammar_quiz_map','vocab','siele_oral'].forEach(function(key){
       window._deleCloudCall('getDataBundle', {key: key}).then(function(resp){
         try{
           if(!resp || !resp.ok || typeof resp.data !== 'string' || !resp.data) return;
