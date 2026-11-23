@@ -373,7 +373,21 @@ footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-si
         <div class="err-msg">密码至少 8 位，且需同时包含字母和数字</div>
       </div>
       <button class="btn blk" type="button" onclick="doClaimCreatePlatform()">创建平台账号，下一步</button>
-      <div class="hint" style="font-size:11px;color:var(--soft);margin-top:8px;text-align:center">已有平台账号？请先用平台账号登录，未认领时会自动进入认领</div>
+      <div style="margin-top:10px;text-align:center"><button class="btn-link" type="button" onclick="showClaimSignin()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">已有平台账号？直接登录继续认领 →</button></div>
+    </div>
+    <div id="claimStepSignin" class="hide">
+      <div class="fld" id="f_csu">
+        <label>平台邮箱 / 用户名 <span class="req">*</span></label>
+        <input id="claimSiUser" autocomplete="username" placeholder="平台账号的邮箱或用户名" maxlength="80">
+        <div class="err-msg">请输入平台账号</div>
+      </div>
+      <div class="fld" id="f_csp">
+        <label>平台密码 <span class="req">*</span></label>
+        <input id="claimSiPass" type="password" autocomplete="current-password" placeholder="平台账号的密码" maxlength="32">
+        <div class="err-msg">平台账号或密码不正确</div>
+      </div>
+      <button class="btn blk" type="button" onclick="doClaimSignin()">登录平台账号，下一步</button>
+      <div style="margin-top:10px;text-align:center"><button class="btn-link" type="button" onclick="showClaimCreate()" style="background:none;border:0;color:var(--brand,#c8553d);font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline">还没有平台账号？新建一个 →</button></div>
     </div>
     <form id="claimForm" class="hide" onsubmit="return doClaimSubmit(event)">
       <div class="fld" id="f_cu">
@@ -1508,6 +1522,7 @@ function openClaimView(mode){
   $('claimView').classList.remove('hide');
   var bind=mode==='bind'&&!!window.__pendingPlatformToken;
   $('claimStepCreate').classList.toggle('hide',bind);
+  var cs=$('claimStepSignin'); if(cs)cs.classList.add('hide');
   $('claimForm').classList.toggle('hide',!bind);
 }
 function closeClaimView(){
@@ -1548,6 +1563,27 @@ async function doClaimCreatePlatform(){
     $('claimStepCreate').classList.add('hide');
     $('claimForm').classList.remove('hide');
     toast('平台账号已创建，请再验证你的老账号','ok');
+  }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); }
+}
+function showClaimSignin(){ $('claimStepCreate').classList.add('hide'); $('claimStepSignin').classList.remove('hide'); }
+function showClaimCreate(){ $('claimStepSignin').classList.add('hide'); $('claimStepCreate').classList.remove('hide'); }
+async function doClaimSignin(){
+  const u=($('claimSiUser').value||'').trim(),p=$('claimSiPass').value;
+  let ok=fldErr('f_csu',!u,'请输入平台账号'); ok=fldErr('f_csp',!p,'请输入平台密码')&&ok;
+  if(!ok)return;
+  try{
+    const tok=await platformSignInToken(u,p);
+    if(!tok){ fldErr('f_csp',true,'平台账号或密码不正确'); return; }
+    window.__pendingPlatformToken=tok;
+    window.__pendingPlatformEmail='';
+    try{
+      const res=await fetch(PLATFORM_GATEWAY+'/user/me',{method:'GET',headers:{'Authorization':'Bearer '+tok}});
+      const me=await res.json();
+      if(me&&me.email)window.__pendingPlatformEmail=me.email;
+    }catch(e){}
+    $('claimStepSignin').classList.add('hide');
+    $('claimForm').classList.remove('hide');
+    toast('平台账号已登录，请再验证你的老账号','ok');
   }catch(e){ toast('无法连接账号服务，请检查网络或稍后再试','err'); }
 }
 async function doClaimSubmit(e){
