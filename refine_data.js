@@ -15,6 +15,7 @@
  *   4. 在下方 REFINE_PACKS 增加 <date> 键，并填入 source / sourceUrl
  * ============================================================ */
 
+// 0) 2026-11-27 第 30 期 — 主题：去图书馆借书 · 西班牙三王节 · 西班牙海水淡化 · 西班牙骑手法与配送员权益
 // 0) 2026-11-20 第 29 期 — 主题：在家做晚餐 · 圣诞彩票落在拉巴涅萨 · 建筑节能改造与热泵 · 西班牙远程办公的法律边界
 // 0) 2026-11-13 第 28 期 — 主题：去服装店买衣服 · 跨年夜十二颗葡萄 · 西班牙葡萄酒出口 · 出生率与高龄生育
 // 0) 2026-11-06 第 27 期 — 主题：去理发店 · 西班牙 tapas 文化 · 西班牙橄榄油产业 · 最低工资上涨之争
@@ -29,6 +30,19 @@
 // 5) 2026-09-02 第 17 期 — 主题：超市购物 · 图书馆与阅读文化 · 极端高温冲击欧洲经济 · 大学可负担住房与机会平等
 // 6) 2026-08-28 第 16 期 — 主题：药店买药 · 弗拉门戈文化 · 就业流动趋势 · 马略卡过度旅游争议
 window.REFINE_PACKS = {
+  "2026-11-27": {
+    date: "2026-11-27",
+    weekday: "五",
+    issue: 30,
+    theme: "去图书馆借书 · 西班牙三王节 · 西班牙海水淡化 · 西班牙骑手法与配送员权益",
+    sources: [
+      { level: "A1", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "En la biblioteca de Marta" },
+      { level: "A2", source: "DELE Ahora", sourceUrl: "https://deleahora.com/actividades/comprension-de-lectura", topic: "Los Reyes Magos en España" },
+      { level: "B1", source: "ACUAMED", sourceUrl: "https://www.acuamed.es/actuaciones/desaladora-en-balerma-campo-de-dalias/", topic: "La desalación de agua de mar en España" },
+      { level: "B2", source: "El HuffPost", sourceUrl: "https://www.huffingtonpost.es/economia/uber-eats-suma-glovo-renuncia-repartidores-autonomos-evitar-problemas-legales-f202601.html", topic: "La Ley Rider y los derechos de los repartidores" }
+    ]
+  },
+
   "2026-11-20": {
     date: "2026-11-20",
     weekday: "五",
